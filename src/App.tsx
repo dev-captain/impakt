@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     setColorMode("dark");
-  }, []);
+  }, [setColorMode]);
   return (
     <Container spacing={0} p={0} minW="full">
       <div id="impakt-games">

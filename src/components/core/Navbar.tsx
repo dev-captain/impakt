@@ -80,7 +80,7 @@ const Navbar = () => {
     if (hide) {
       onClose();
     }
-  }, [hide]);
+  }, [hide, onClose]);
 
   return (
     <Box pos="absolute" zIndex="100" w="full">
