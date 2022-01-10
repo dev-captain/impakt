@@ -1,6 +1,6 @@
-import { Box, Spacer, VStack } from '@chakra-ui/react';
-import Navbar from 'components/core/Navbar';
-import React from 'react';
+import { Box, Spacer, VStack } from "@chakra-ui/react";
+import Navbar from "components/core/Navbar";
+import React from "react";
 
 type HeroLayoutProps = {
   bgImage?: string;
@@ -9,17 +9,27 @@ type HeroLayoutProps = {
   showNavbar?: boolean;
   addSpacer?: boolean;
   children: React.ReactNode;
-  align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
-  justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
+  align?:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around";
+  justify?:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around";
 };
 
 const HeroLayout = ({
   bgImage,
   children,
   spacing = 4,
-  align = 'center',
-  bgColor = 'rgba(40,42,45)',
-  justify = 'center',
+  align = "center",
+  bgColor = "rgba(40,42,45)",
+  justify = "center",
   showNavbar = false,
   addSpacer = false,
 }: HeroLayoutProps) => {
@@ -34,7 +44,7 @@ const HeroLayout = ({
         backgroundSize="cover"
         backgroundImage={bgImage}
         backgroundColor={bgColor}
-        paddingTop={showNavbar ? '120px' : '0px'}
+        paddingTop={showNavbar ? "120px" : "0px"}
       >
         {children}
         {addSpacer && <Spacer h={spacing} />}

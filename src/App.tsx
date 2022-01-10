@@ -8,13 +8,17 @@ import HowToSignUpHero from "components/ui/home/HowToSignupHero";
 import NFTMarketPlaceHero from "components/ui/home/NFTMarketPlaceHero";
 import { useColorMode } from "@chakra-ui/react";
 import { useEffect } from "react";
+import CountdownHero from "components/ui/home/CountdownHero/index";
+import dayjs from "dayjs";
 
 const App = () => {
   const { setColorMode } = useColorMode();
+  const date = dayjs().add(245, "day").toDate();
 
   useEffect(() => {
     setColorMode("dark");
   }, [setColorMode]);
+
   return (
     <Container spacing={0} p={0} minW="full">
       <div id="impakt-games">
@@ -44,6 +48,8 @@ const App = () => {
       <div id="nft-marketplace">
         <NFTMarketPlaceHero />
       </div>
+
+      <CountdownHero date={date} />
     </Container>
   );
 };
