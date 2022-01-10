@@ -1,6 +1,6 @@
-import { HStack } from "@chakra-ui/react";
-import { memo } from "react";
-import SocialIcon from "./SocialIcon";
+import { HStack } from '@chakra-ui/react';
+import { memo } from 'react';
+import SocialIcon from './SocialIcon';
 
 const SocialMediasArea = () => {
   return (

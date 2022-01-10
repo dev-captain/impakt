@@ -1,7 +1,7 @@
-import { ThemeOverride, extendTheme, theme as base } from "@chakra-ui/react";
+import { ThemeOverride, extendTheme, theme as base } from '@chakra-ui/react';
 
 const theme: ThemeOverride = {
-  initialColorMode: "dark",
+  initialColorMode: 'dark',
   useSystemColorMode: false,
   colors: {
     brand: {},
@@ -12,14 +12,14 @@ const theme: ThemeOverride = {
   },
   textStyles: {
     counterNumber: {
-      fontFamily: "Source Sans Pro",
-      fontWeight: "300",
-      fontSize: { base: "7xl", md: "9xl" },
+      fontFamily: 'Source Sans Pro',
+      fontWeight: '300',
+      fontSize: { base: '7xl', md: '9xl' },
     },
     counterText: {
-      fontFamily: "Source Sans Pro",
-      fontSize: { base: "xl", md: "4xl" },
-      opacity: "0.7",
+      fontFamily: 'Source Sans Pro',
+      fontSize: { base: 'xl', md: '4xl' },
+      opacity: '0.7',
     },
   },
   components: {},

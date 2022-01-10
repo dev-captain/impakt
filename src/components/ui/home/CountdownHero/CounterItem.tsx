@@ -1,6 +1,11 @@
-import { GridItem, VStack, Text } from "@chakra-ui/react";
+import { GridItem, VStack, Text } from '@chakra-ui/react';
 
-const CounterItem = ({ value, title }: { value: number; title: string }) => {
+type CounterItemProps = {
+  value: number;
+  title: string;
+};
+
+const CounterItem = ({ value, title }: CounterItemProps) => {
   const colSpan = {
     base: 4,
     md: 2,
@@ -10,8 +15,8 @@ const CounterItem = ({ value, title }: { value: number; title: string }) => {
   return (
     <GridItem colSpan={colSpan}>
       <VStack>
-        <Text textStyle={"counterNumber"}>{value}</Text>
-        <Text textStyle={"counterText"}>{title}</Text>
+        <Text textStyle="counterNumber">{value}</Text>
+        <Text textStyle="counterText">{title}</Text>
       </VStack>
     </GridItem>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 const useCountdown = (targetDate: Date) => {
   const [countdown, setCountdown] = useState(0);
@@ -11,10 +11,10 @@ const useCountdown = (targetDate: Date) => {
 
   useEffect(() => {
     const diff = targetDate.getTime() - Date.now();
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
     countdownRef.current = {
       days,

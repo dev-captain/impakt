@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import {
   Box,
   Collapse,
@@ -11,10 +11,10 @@ import {
   useDisclosure,
   VStack,
   Link,
-} from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import Logo from "./Logo";
-import GradientButton from "./GradientButton";
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import Logo from './Logo';
+import GradientButton from './GradientButton';
 
 const SelectedNavbarLinkBorder = () => {
   return (
@@ -54,11 +54,7 @@ const NavbarLinkItem = ({
   return (
     <VStack justifyContent="center" h="100px" onClick={onClose}>
       <Link href={href}>
-        <Text
-          fontSize="md"
-          color={isActive ? "white" : "rgba(255,255,255, 0.3)"}
-          pos="relative"
-        >
+        <Text fontSize="md" color={isActive ? 'white' : 'rgba(255,255,255, 0.3)'} pos="relative">
           {title}
         </Text>
       </Link>
@@ -98,7 +94,7 @@ const Navbar = () => {
         <HStack w="full" justify="space-between">
           <Logo />
           <HStack
-            display={["none", "none", "none", "flex"]}
+            display={['none', 'none', 'none', 'flex']}
             spacing={[0, 0, 3, 5, 8, 12]}
             justify="flex-end"
           >
@@ -109,19 +105,13 @@ const Navbar = () => {
             <GradientButton title="Sign in" icon="ProfileUser" />
           </HStack>
           <HStack
-            flex={{ base: 1, md: "auto" }}
-            display={["flex", "flex", "flex", "none"]}
+            flex={{ base: 1, md: 'auto' }}
+            display={['flex', 'flex', 'flex', 'none']}
             justify="flex-end"
           >
             <IconButton
               onClick={onToggle}
-              icon={
-                isOpen ? (
-                  <CloseIcon w={3} h={3} />
-                ) : (
-                  <HamburgerIcon w={5} h={5} />
-                )
-              }
+              icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
               variant="ghost"
               aria-label="Toggle Navigation"
             />
@@ -130,26 +120,10 @@ const Navbar = () => {
       </Flex>
       <Collapse in={isOpen} animateOpacity>
         <VStack spacing={0} bg="blackAlpha.900" paddingBottom={8}>
-          <NavbarLinkItem
-            title="Impakt Games"
-            isActive
-            hide
-            href="#"
-            onClose={onClose}
-          />
+          <NavbarLinkItem title="Impakt Games" isActive hide href="#" onClose={onClose} />
           <NavbarLinkItem title="Tokenomics" hide href="#" onClose={onClose} />
-          <NavbarLinkItem
-            title="Roadmap"
-            hide
-            href="#motion-capture"
-            onClose={onClose}
-          />
-          <NavbarLinkItem
-            title="NFT Marketplace"
-            hide
-            href="#nft-marketplace"
-            onClose={onClose}
-          />
+          <NavbarLinkItem title="Roadmap" hide href="#motion-capture" onClose={onClose} />
+          <NavbarLinkItem title="NFT Marketplace" hide href="#nft-marketplace" onClose={onClose} />
           <GradientButton title="Sign in" icon="ProfileUser" />
         </VStack>
       </Collapse>

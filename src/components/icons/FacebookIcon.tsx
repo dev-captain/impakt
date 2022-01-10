@@ -1,14 +1,8 @@
-import * as React from "react";
-import { SVGProps } from "react";
+import * as React from 'react';
+import { SVGProps } from 'react';
 
 const FacebookIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    width={20}
-    height={20}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+  <svg width={20} height={20} fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"

@@ -1,6 +1,6 @@
-import { Center } from "@chakra-ui/react";
-import Icons from "components/icons";
-import { memo } from "react";
+import { Center } from '@chakra-ui/react';
+import Icons from 'components/icons';
+import { memo } from 'react';
 
 const SocialIcon = ({ name }: { name: string }) => {
   const Icon = Icons?.[name];
@@ -8,7 +8,7 @@ const SocialIcon = ({ name }: { name: string }) => {
   return (
     <Center
       backgroundColor={{
-        base: "blackAlpha.800",
+        base: 'blackAlpha.800',
       }}
       w="40px"
       h="40px"
