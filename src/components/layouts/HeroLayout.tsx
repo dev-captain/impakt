@@ -8,6 +8,8 @@ type HeroLayoutProps = {
   spacing?: number;
   showNavbar?: boolean;
   addSpacer?: boolean;
+  hideBlur?: boolean;
+  pos?: string;
   children: React.ReactNode;
   align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
@@ -22,9 +24,12 @@ const HeroLayout = ({
   justify = 'center',
   showNavbar = false,
   addSpacer = false,
+  hideBlur = false,
+  pos,
 }: HeroLayoutProps) => {
   return (
-    <Box minH="100vh">
+    // @ts-ignore
+    <Box minH="100vh" filter={hideBlur ? '' : 'blur(20px)'} overflowY="unset" pos={pos} w="full">
       {showNavbar && <Navbar />}
       <VStack
         minH="100vh"

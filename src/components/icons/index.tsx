@@ -9,6 +9,7 @@ import Facebook from './FacebookIcon';
 import Google from './GoogleIcon';
 import Apple from './AppleIcon';
 import Twitter from './TwitterIcon';
+import Discord from './DiscordIcon';
 
 const Icons: { [key in string]: any } = {
   ProfileUser,
@@ -22,6 +23,7 @@ const Icons: { [key in string]: any } = {
   Google,
   Apple,
   Twitter,
+  Discord,
 };
 
 export default Icons;
