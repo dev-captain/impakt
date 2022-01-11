@@ -1,10 +1,10 @@
-import { Box, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { Box, GridItem, HStack, Image, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
 
 const MotionCaptureHero = () => {
   return (
-    <HeroLayout>
+    <HeroLayout hideBlur>
       <SimpleGrid columns={2} justifyContent="center" alignItems="center">
         <GridItem display={{ base: 'none', md: 'flex' }}>
           <Image src="assets/images/motion-capture.png" />
@@ -19,13 +19,20 @@ const MotionCaptureHero = () => {
             textAlign={{ base: 'center', md: 'left' }}
             alignItems={{ base: 'center', md: 'flex-start' }}
           >
-            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px">
+            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="300">
               Motion capture
             </Text>
             <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
               technology
             </Text>
-            <Text fontSize="20px" lineHeight="32px" paddingTop={4} opacity="0.62" maxW="440px">
+            <Text
+              fontSize="20px"
+              lineHeight="32px"
+              paddingTop={4}
+              opacity="0.62"
+              maxW="440px"
+              fontWeight="400"
+            >
               Do some exercises with your friends and participate in exciting competitions
             </Text>
           </VStack>
@@ -62,6 +69,7 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
     <Box bgColor="#1F2024" borderRadius={20} position="relative" overflow="hidden">
       <VStack align="flex-start" maxW="240px" minH="200px" maxH="250px" justify="center" p={7}>
         <Icon />
+        <Spacer />
         <Text>{title}</Text>
         <Box
           w="220px"
