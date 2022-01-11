@@ -9,7 +9,7 @@ const SubscribeArea = () => {
   return (
     <VStack paddingTop={16}>
       <Text fontSize="xl" zIndex={2} paddingBottom={4}>
-        Join our mailing list and find out first when around stuffs happens!
+        Join our mailing list and find out first when around &#34;stuffs&#34; happens!
       </Text>
       <SimpleGrid
         zIndex={2}
