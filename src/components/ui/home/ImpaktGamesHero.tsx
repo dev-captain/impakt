@@ -22,6 +22,7 @@ const ImpaktGamesHero = () => {
       spacing={10}
       justify="center"
       align="space-around"
+      hideBlur
       bgImage={backgroundImage}
     >
       <SimpleGrid
@@ -29,7 +30,7 @@ const ImpaktGamesHero = () => {
         alignItems="center"
         justifyContent="center"
         px={[4, 8, 12, 16, 40]}
-        pr={[4, 8, 12, 16, 30]}
+        pr={[4, 8, 12, 16, 40, 0]}
       >
         <GridItem
           colSpan={{
@@ -44,22 +45,22 @@ const ImpaktGamesHero = () => {
             }}
           >
             <BurnToEarnCard />
-            <VStack align="flex-start" paddingY="32px" spacing={4}>
+            <VStack align={{ base: 'center', md: 'flex-start' }} paddingY="36px" spacing={4}>
               <Heading
-                fontWeight="extrabold"
+                fontWeight="900"
                 fontSize={{ base: '75px', md: '120px' }}
                 lineHeight={{ base: '80px', md: '120px' }}
                 textAlign={{ base: 'center', md: 'left' }}
               >
                 Impakt
-                <Text fontSize={{ base: '75px', md: '120px' }} fontWeight="extrabold">
+                <Text fontSize={{ base: '75px', md: '120px' }} fontWeight="900">
                   games
                 </Text>
               </Heading>
               <Text
                 opacity={0.6}
                 fontSize={{ base: '18px', md: '20px' }}
-                paddingTop={{ base: '16px', md: '32px' }}
+                paddingTop={{ base: '16px', md: '16px' }}
                 textAlign={{ base: 'center', md: 'left' }}
               >
                 Connect together and have a fun while
@@ -70,7 +71,10 @@ const ImpaktGamesHero = () => {
             <Button
               px="80px"
               py="32px"
-              borderRadius="10px"
+              borderRadius="20px"
+              fontSize="16px"
+              lineHeight="24px"
+              fontWeight="600"
               bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
             >
               Get started

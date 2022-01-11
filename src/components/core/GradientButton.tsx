@@ -22,7 +22,7 @@ const GradientButton = ({
     >
       <HStack spacing={2} alignItems="center" justifyContent="center">
         {Icon && <Icon />}
-        <Text>{title}</Text>
+        <Text color="white">{title}</Text>
       </HStack>
     </Button>
   );

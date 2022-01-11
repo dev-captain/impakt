@@ -3,21 +3,31 @@ import Icons from 'components/icons';
 
 const BurnToEarnCard = () => {
   return (
-    <Box bgColor="#1F2024" borderRadius={10} maxW="400px" overflow="hidden" position="relative">
-      <Container px={8} py={3}>
+    <Box bgColor="#1F2024" borderRadius={30} maxW="400px" overflow="hidden" position="relative">
+      <Container pr={10} py={5}>
         <HStack>
           <GradientGroup />
           <AspectRatio ratio={1} w={['80px', '80px', '100px']}>
             <Image zIndex={2} borderRadius="16px" src="assets/images/burntoearn.png" />
           </AspectRatio>
-          <VStack align="flex-start">
+          <VStack align="flex-start" paddingLeft="16px">
             <VStack align="flex-start">
-              <Text>Burn to earn! </Text>
-              <Text>Let’s start with us be happy </Text>
+              <Text fontWeight="600" fontSize="16px">
+                Burn to earn!
+              </Text>
+              <Text fontWeight="400" fontSize="14px">
+                Let’s start with us be happy
+              </Text>
             </VStack>
             <HStack align="center" justify="center">
               <Icons.Play />
-              <Text fontSize="md" fontWeight="semibold" color="red">
+              <Text
+                zIndex={100}
+                fontWeight="600"
+                bgClip="text"
+                fontSize="14px"
+                bgGradient="linear(to-r, #DC143C, #B22222)"
+              >
                 Play video
               </Text>
             </HStack>
