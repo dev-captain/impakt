@@ -24,7 +24,13 @@ const ImpaktGamesHero = () => {
       align="space-around"
       bgImage={backgroundImage}
     >
-      <SimpleGrid columns={3} alignItems="center" justifyContent="center" px={[4, 8, 12, 16, 40]}>
+      <SimpleGrid
+        columns={3}
+        alignItems="center"
+        justifyContent="center"
+        px={[4, 8, 12, 16, 40]}
+        pr={[4, 8, 12, 16, 30]}
+      >
         <GridItem
           colSpan={{
             base: 3,

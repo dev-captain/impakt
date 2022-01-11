@@ -7,8 +7,8 @@ const SubscribeArea = () => {
   const { sendData, loading } = useNewsletter();
 
   return (
-    <VStack paddingTop={16}>
-      <Text fontSize="xl" zIndex={2} paddingBottom={4}>
+    <VStack paddingTop={8}>
+      <Text fontSize="xl" zIndex={2} paddingBottom={4} textAlign="center" px={4}>
         Join our mailing list and find out first when around &#34;stuffs&#34; happens!
       </Text>
       <SimpleGrid

@@ -8,17 +8,18 @@ import CounterItem from './CounterItem';
 
 const CountdownHero = ({ date }: { date: Date }) => {
   const countdown = useCountdown(date);
+  const items = ['days', 'hours', 'minutes', 'seconds'];
 
   return (
     <HeroLayout hideBlur pos="absolute">
-      <VStack pos="absolute" top={{ base: 4, md: 16 }}>
+      <VStack pos="absolute" top={{ base: 4, md: 16 }} zIndex={100}>
         <SocialMediasArea />
       </VStack>
-      <SimpleGrid columns={4} columnGap={16} rowGap={4} zIndex={2} paddingTop={8}>
-        <CounterItem value={countdown.days} title="days" />
-        <CounterItem value={countdown.hours} title="hours" />
-        <CounterItem value={countdown.minutes} title="minutes" />
-        <CounterItem value={countdown.seconds} title="seconds" />
+      <SimpleGrid columns={4} columnGap={16} rowGap={4} zIndex={2} paddingTop={24}>
+        {items.map((item) => (
+          // @ts-ignore
+          <CounterItem value={countdown?.[item]} title={item} key={item} />
+        ))}
       </SimpleGrid>
       <SubscribeArea />
     </HeroLayout>
