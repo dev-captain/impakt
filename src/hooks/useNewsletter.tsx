@@ -16,6 +16,16 @@ const useNewsletter = () => {
   const toast = useToast();
 
   const sendData = async (data: Newsletter) => {
+    if (!data.email) {
+      toast({
+        description: 'You have to type your email.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+
+      return;
+    }
     setLoading(true);
     setError(null);
     setIsSuccessful(false);
