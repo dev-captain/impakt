@@ -15,10 +15,7 @@ const SingleTeamCard = () => {
       base: '20px',
       lg: '220px',
     },
-    py: {
-      base: '20px',
-      md: '180px',
-    },
+    py: [20, 90, 90, 130, 130, 230],
   };
 
   return (
@@ -55,10 +52,19 @@ const SingleTeamCard = () => {
         <HStack>
           <SimpleGrid columns={2} columnGap={4} rowGap={4}>
             <GridItem colSpan={gridItemColSpan}>
-              <FeatureCard isActive image="second-hero-feature-card1.png" />
+              <FeatureCard
+                isActive
+                image="second-hero-feature-card1.png"
+                title="Single & team"
+                subtitle="games"
+              />
             </GridItem>
             <GridItem colSpan={gridItemColSpan}>
-              <FeatureCard image="second-hero-yoga.png" />
+              <FeatureCard
+                image="second-hero-yoga.png"
+                title="Experiencing"
+                subtitle="gamified fitness"
+              />
             </GridItem>
           </SimpleGrid>
         </HStack>
@@ -68,6 +74,6 @@ const SingleTeamCard = () => {
 };
 
 const bgImage =
-  "linear-gradient(90deg, #1F2024 18.46%, rgba(31, 32, 36, 0) 63.94%), url('assets/images/second-hero-bg.png')";
+  "linear-gradient(90deg, #1F2024 0%, rgba(31, 32, 36, 0) 63.94%), url('assets/images/second-hero-bg.png')";
 
 export default SingleTeamCard;

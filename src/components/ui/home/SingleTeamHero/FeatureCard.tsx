@@ -1,22 +1,26 @@
-import { Text, VStack, HStack, AspectRatio, Image, Box } from '@chakra-ui/react';
+import { Text, VStack, HStack, Image, Box } from '@chakra-ui/react';
 
 const FeatureCard = ({
   isActive,
   image,
   isFull = false,
+  title,
+  subtitle,
 }: {
   isActive?: boolean;
   image: string;
   isFull?: boolean;
+  title: string;
+  subtitle: string;
 }) => {
   return (
     <HStack
-      backgroundColor={isActive ? 'blackAlpha.700' : 'blackAlpha.500'}
-      spacing="32px"
+      backgroundColor={isActive ? 'rgba(31, 32, 36, 0.8)' : 'rgba(31, 32, 36, 0.6)'}
       padding="16px"
       paddingRight="80px"
       borderRadius={8}
       position="relative"
+      maxWidth="300px"
     >
       <VStack p={0} m={0} spacing={0}>
         <Box
@@ -43,15 +47,13 @@ const FeatureCard = ({
           borderColor="whiteAlpha.400"
         />
       </VStack>
-      <AspectRatio ratio={1} w="76px" opacity={isActive ? 1 : 0.3}>
-        <Image src={`assets/images/${image}`} borderRadius={8} />
-      </AspectRatio>
-      <VStack alignItems="flex-start">
-        <Text fontSize="md" opacity={isActive ? 1 : 0.2} fontWeight="light">
-          Single & team
+      <Image src={`assets/images/${image}`} borderRadius={8} maxW="76px" />
+      <VStack alignItems="flex-start" pl="8px">
+        <Text fontSize="md" opacity={isActive ? 1 : 0.2} fontWeight="light" w="140px">
+          {title}
         </Text>
         <Text fontSize="md" fontWeight="bold" opacity={isActive ? 1 : 0.2}>
-          games
+          {subtitle}
         </Text>
       </VStack>
     </HStack>

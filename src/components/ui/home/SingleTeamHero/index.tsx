@@ -4,8 +4,8 @@ import SingleTeamCard from './SingleTeamCard';
 
 const SingleTeamHero = () => {
   return (
-    <HeroLayout>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
+    <HeroLayout hideBlur>
+      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 32 }}>
         <SingleTeamCard />
       </VStack>
     </HeroLayout>
