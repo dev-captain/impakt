@@ -35,12 +35,11 @@ const BurnToEarnHero = () => {
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>
               <Text fontSize="56px" lineHeight="60px" fontWeight="300">
-                Burn to
+                Burn and
                 <Text fontWeight="700">earn!</Text>
               </Text>
               <Text fontSize="20px" opacity="0.6" maxW="340px">
-                Fight to a friend anyway where he is and get NFTs! Run with a friend anyway where he
-                is and get NFTs!
+                Connect ANYTIME with ANYONE, ANYWHERE, workout, battle and earn tokens and NFTs!
               </Text>
             </VStack>
           </VStack>

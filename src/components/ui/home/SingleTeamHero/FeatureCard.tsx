@@ -15,7 +15,7 @@ const FeatureCard = ({
 }) => {
   return (
     <HStack
-      backgroundColor={isActive ? 'rgba(31, 32, 36, 0.8)' : 'rgba(31, 32, 36, 0.6)'}
+      backgroundColor={isActive ? 'blackAlpha.500' : 'blackAlpha.300'}
       padding="16px"
       paddingRight="80px"
       borderRadius={8}

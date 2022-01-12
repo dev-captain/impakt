@@ -102,7 +102,7 @@ const Navbar = () => {
             <NavbarLinkItem title="Tokenomics" href="#" />
             <NavbarLinkItem title="Roadmap" href="#motion-capture" />
             <NavbarLinkItem title="NFT Marketplace" href="#nft-marketplace" />
-            <GradientButton title="Sign in" icon="ProfileUser" />
+            <GradientButton title="Sign In" icon="ProfileUser" />
           </HStack>
           <HStack
             flex={{ base: 1, md: 'auto' }}

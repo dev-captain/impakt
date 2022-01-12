@@ -20,10 +20,10 @@ const MotionCaptureHero = () => {
             alignItems={{ base: 'center', md: 'flex-start' }}
           >
             <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="300">
-              Motion capture
+              Motion Capture
             </Text>
             <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
-              technology
+              Technology
             </Text>
             <Text
               fontSize="20px"
@@ -33,7 +33,7 @@ const MotionCaptureHero = () => {
               maxW="440px"
               fontWeight="400"
             >
-              Do some exercises with your friends and participate in exciting competitions
+              Workout with your friends and battle in competitions.
             </Text>
           </VStack>
           <HStack spacing="20px" justify={{ base: 'center', md: 'flex-start' }} paddingTop="64px">
@@ -52,7 +52,7 @@ const MotionCaptureHero = () => {
                   md: 1,
                 }}
               >
-                <MotionCard title="Ultra-precise recognition gestures & activities" />
+                <MotionCard title="Highly accurate tracking of your movements" />
               </GridItem>
             </SimpleGrid>
           </HStack>

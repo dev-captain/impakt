@@ -42,11 +42,11 @@ const SingleTeamCard = () => {
       <VStack align="flex-start" spacing={{ base: '20px', md: '120px' }} zIndex={1}>
         <VStack align="flex-start" spacing={8}>
           <Text fontSize="56px" lineHeight="60px">
-            Single & team
-            <Text fontWeight="700">games</Text>
+            Single & Team
+            <Text fontWeight="700">Games</Text>
           </Text>
           <Text fontSize="20px" fontWeight="400" opacity="0.6" maxW="440px">
-            Connect together and have a fun while experiencing gamified fitness
+            Challenge yourself in match made games or play with your friends.
           </Text>
         </VStack>
         <HStack>
@@ -55,15 +55,15 @@ const SingleTeamCard = () => {
               <FeatureCard
                 isActive
                 image="second-hero-feature-card1.png"
-                title="Single & team"
-                subtitle="games"
+                title="Single & Team"
+                subtitle="Ranked Games"
               />
             </GridItem>
             <GridItem colSpan={gridItemColSpan}>
               <FeatureCard
                 image="second-hero-yoga.png"
-                title="Experiencing"
-                subtitle="gamified fitness"
+                title="Team Games"
+                subtitle="Gamified Fitness"
               />
             </GridItem>
           </SimpleGrid>

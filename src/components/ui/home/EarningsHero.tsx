@@ -20,10 +20,10 @@ const EarningsHero = () => {
             alignItems={{ base: 'center', md: 'flex-start' }}
           >
             <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
-              Earnings
+              Earn
             </Text>
             <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px">
-              tokens and NFTs
+              Tokens and NFTs
             </Text>
             <Spacer h="80px" />
             <Text fontSize="20px" lineHeight="32px" opacity="0.6" maxW="380px">
@@ -39,7 +39,7 @@ const EarningsHero = () => {
                   md: 1,
                 }}
               >
-                <EarnTokenCard isVrGlass title="Earning in-Game rewards & cryptocurrencies" />
+                <EarnTokenCard isVrGlass title="Earn in-game rewards and crypto" />
               </GridItem>
               <GridItem
                 colSpan={{
@@ -47,7 +47,7 @@ const EarningsHero = () => {
                   md: 1,
                 }}
               >
-                <EarnTokenCard title="Buying & Selling NFTs" />
+                <EarnTokenCard title="Trade NFTs" />
               </GridItem>
             </SimpleGrid>
           </HStack>

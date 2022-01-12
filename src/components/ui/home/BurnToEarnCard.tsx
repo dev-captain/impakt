@@ -13,7 +13,7 @@ const BurnToEarnCard = () => {
           <VStack align="flex-start" paddingLeft="16px">
             <VStack align="flex-start">
               <Text fontWeight="600" fontSize="16px">
-                Burn to earn!
+                Burn and Earn!
               </Text>
               <Text fontWeight="400" fontSize="14px">
                 Let’s start with us be happy

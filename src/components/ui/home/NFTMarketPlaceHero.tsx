@@ -29,7 +29,7 @@ const NFTMarketPlaceHero = () => {
                   fontWeight="700"
                   paddingLeft={2}
                 >
-                  marketplace
+                  Marketplace
                 </Text>
               </Flex>
               <Text
@@ -37,10 +37,9 @@ const NFTMarketPlaceHero = () => {
                 lineHeight="32px"
                 opacity="0.62"
                 paddingBottom="38px"
-                maxW="400px"
+                maxW="440px"
               >
-                Online marketplace where artists sell their non-fungible art and where buyers can
-                get them using cryptocurrency
+                Trade your NFTs and improve your in-game earnings.
               </Text>
               <Button
                 px="64px"

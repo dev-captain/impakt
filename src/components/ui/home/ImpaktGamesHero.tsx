@@ -54,7 +54,7 @@ const ImpaktGamesHero = () => {
               >
                 Impakt
                 <Text fontSize={{ base: '75px', md: '120px' }} fontWeight="900">
-                  games
+                  Games
                 </Text>
               </Heading>
               <Text
@@ -63,7 +63,7 @@ const ImpaktGamesHero = () => {
                 paddingTop={{ base: '16px', md: '16px' }}
                 textAlign={{ base: 'center', md: 'left' }}
               >
-                Connect together and have a fun while
+                Connect together and have fun while
                 <br />
                 experiencing gamified fitness
               </Text>

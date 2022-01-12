@@ -52,8 +52,7 @@ const HowToSignUpHero = () => {
                 </Text>
               </HStack>
               <Text zIndex={2} opacity="0.6" fontSize="20px">
-                Join using Google, Apple or Facebook accounts, or register an account using the
-                standard form with email, login and password!
+                Join with your Google, Apple, Facebook accounts, or register with your email.
               </Text>
               <Button
                 px="64px"
@@ -61,7 +60,7 @@ const HowToSignUpHero = () => {
                 borderRadius="10px"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               >
-                Sign up
+                Sign Up
               </Button>
               <VStack
                 pos="absolute"
