@@ -22,7 +22,6 @@ const ImpaktGamesHero = () => {
       spacing={10}
       justify="center"
       align="space-around"
-      hideBlur
       bgImage={backgroundImage}
     >
       <SimpleGrid
