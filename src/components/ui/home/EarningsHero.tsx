@@ -4,7 +4,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 
 const EarningsHero = () => {
   return (
-    <HeroLayout>
+    <HeroLayout hideBlur>
       <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={20}>
         <GridItem display={{ base: 'none', md: 'flex' }}>
           <Image src="assets/images/earning-token-hero.png" maxH="600px" r />

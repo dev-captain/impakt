@@ -20,7 +20,7 @@ const BurnToEarnHero = () => {
   };
 
   return (
-    <HeroLayout>
+    <HeroLayout hideBlur>
       <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           w="full"
@@ -34,7 +34,7 @@ const BurnToEarnHero = () => {
         >
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>
-              <Text fontSize="56px" lineHeight="60px">
+              <Text fontSize="56px" lineHeight="60px" fontWeight="300">
                 Burn to
                 <Text fontWeight="700">earn!</Text>
               </Text>
