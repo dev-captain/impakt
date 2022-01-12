@@ -3,7 +3,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 
 const NFTMarketPlaceHero = () => {
   return (
-    <HeroLayout>
+    <HeroLayout hideBlur>
       <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={20}>
           <GridItem display={{ base: 'none', md: 'flex' }}>
