@@ -27,7 +27,7 @@ const EarningsHero = () => {
             </Text>
             <Spacer h="80px" />
             <Text fontSize="20px" lineHeight="32px" opacity="0.6" maxW="380px">
-              We will be happy to cooperate with us and get great benefits{' '}
+              Capitalize on your fitness routine.
             </Text>
           </VStack>
           <Spacer h="80px" />

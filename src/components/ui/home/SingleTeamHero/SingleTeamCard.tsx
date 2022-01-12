@@ -62,8 +62,8 @@ const SingleTeamCard = () => {
             <GridItem colSpan={gridItemColSpan}>
               <FeatureCard
                 image="second-hero-yoga.png"
-                title="Team Games"
-                subtitle="Gamified Fitness"
+                title="Tournaments"
+                subtitle="Battle Royale or Brackets"
               />
             </GridItem>
           </SimpleGrid>
