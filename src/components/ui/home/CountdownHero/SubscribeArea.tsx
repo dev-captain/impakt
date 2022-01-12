@@ -9,16 +9,17 @@ const SubscribeArea = () => {
   return (
     <VStack paddingTop={8}>
       <Text fontSize="xl" zIndex={2} paddingBottom={4} textAlign="center" px={4}>
-        Join our mailing list and find out first when around &#34;stuffs&#34; happens!
+        Join our mailing list and find out first when &#34;stuffs&#34; happens!
       </Text>
       <SimpleGrid
         zIndex={2}
         spacing={0}
         columns={3}
         rowGap={2}
-        h={100}
+        h={120}
         w={{ base: 'full', md: 'fit-content' }}
         px={{ base: 10, sm: 100, md: 0 }}
+        paddingBottom={4}
       >
         <GridItem colSpan={{ base: 3, md: 2 }}>
           <Input
