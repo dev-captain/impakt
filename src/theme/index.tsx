@@ -15,6 +15,7 @@ const theme: ThemeOverride = {
       fontFamily: 'Source Sans Pro',
       fontWeight: '300',
       fontSize: { base: '7xl', md: '9xl' },
+      lineHeight: '120px',
     },
     counterText: {
       fontFamily: 'Source Sans Pro',
