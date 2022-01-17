@@ -3,7 +3,7 @@ import FeatureCard from './FeatureCard';
 
 const SingleTeamCard = () => {
   const gridItemColSpan = {
-    base: 2,
+    base: 1,
     md: 1,
   };
   const vStackSomeProps = {
@@ -33,15 +33,15 @@ const SingleTeamCard = () => {
         w="967px"
         h="472px"
         left="-30%"
+        zIndex={0}
         top="-204px"
         opacity={0.4}
-        background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
         pos="absolute"
-        zIndex={0}
+        background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
       />
       <VStack align="flex-start" spacing={{ base: '20px', md: '120px' }} zIndex={1}>
         <VStack align="flex-start" spacing={8}>
-          <Text fontSize="56px" lineHeight="60px">
+          <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="60px">
             Single & Team
             <Text fontWeight="700">Games</Text>
           </Text>
@@ -52,19 +52,10 @@ const SingleTeamCard = () => {
         <HStack>
           <SimpleGrid columns={2} columnGap={4} rowGap={4}>
             <GridItem colSpan={gridItemColSpan}>
-              <FeatureCard
-                isActive
-                image="second-hero-feature-card1.png"
-                title="Single & Team"
-                subtitle="Ranked Games"
-              />
+              <FeatureCard isActive image="second-hero-feature-card1.png" title="Ranked" />
             </GridItem>
             <GridItem colSpan={gridItemColSpan}>
-              <FeatureCard
-                image="second-hero-yoga.png"
-                title="Tournaments"
-                subtitle="Battle Royale or Brackets"
-              />
+              <FeatureCard image="second-hero-yoga.png" title="Team" />
             </GridItem>
           </SimpleGrid>
         </HStack>
