@@ -22,6 +22,12 @@ const theme: ThemeOverride = {
       fontSize: { base: 'xl', md: '4xl' },
       opacity: '0.7',
     },
+    TitleBold72: {
+      fontWeight: '900',
+      fontFamily: `Poppins ,${base.fonts?.heading}`,
+      fontSize: { base: '72px', md: '120px' },
+      lineHeight: { base: '80px', md: '120px' },
+    },
   },
   components: {},
 };

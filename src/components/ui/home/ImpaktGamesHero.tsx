@@ -1,15 +1,8 @@
-import {
-  Text,
-  VStack,
-  SimpleGrid,
-  Image,
-  Stack,
-  GridItem,
-  Button,
-  Heading,
-} from '@chakra-ui/react';
+import { Text, VStack, SimpleGrid, Image, Stack, GridItem, Button, HStack } from '@chakra-ui/react';
+import GradientCard from 'components/core/GradientCard';
+import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
-import BurnToEarnCard from 'components/ui/home/BurnToEarnCard';
+import { memo } from 'react';
 
 const backgroundImage =
   "linear-gradient(180deg, rgba(0, 0, 0, 0.7) 20%, #282A2E 110%), url('assets/images/firstherobg.jpeg')";
@@ -26,17 +19,17 @@ const ImpaktGamesHero = () => {
       bgImage={backgroundImage}
     >
       <SimpleGrid
-        columns={3}
+        columns={4}
         alignItems="center"
         justifyContent="center"
-        px={[4, 8, 12, 16, 40]}
-        pr={[4, 8, 12, 16, 40, 0]}
+        columnGap={{ base: '0px', md: '200px' }}
       >
         <GridItem
           colSpan={{
-            base: 3,
+            base: 4,
             md: 2,
           }}
+          px={[4, 8, 12, 16, 40]}
         >
           <Stack
             align={{
@@ -44,49 +37,81 @@ const ImpaktGamesHero = () => {
               md: 'flex-start',
             }}
           >
-            <BurnToEarnCard />
-            <VStack align={{ base: 'center', md: 'flex-start' }} paddingY="36px" spacing={4}>
-              <Heading
-                fontWeight="900"
-                fontSize={{ base: '75px', md: '120px' }}
-                lineHeight={{ base: '80px', md: '120px' }}
-                textAlign={{ base: 'center', md: 'left' }}
-              >
+            <GradientCard
+              maxW="full"
+              title="Burn and Earn!"
+              minW={{ base: 'full', md: '400px' }}
+              image="assets/images/burntoearn.png"
+              subtitle="Let’s start with us be happy"
+              // @ts-ignore
+              ThirdComponent={memo(() => (
+                <HStack align="center" justify="center">
+                  <Icons.Play />
+                  <Text
+                    zIndex={100}
+                    fontWeight="600"
+                    bgClip="text"
+                    fontSize="14px"
+                    bgGradient="linear(to-r, #DC143C, #B22222)"
+                  >
+                    Play video
+                  </Text>
+                </HStack>
+              ))}
+            />
+            <VStack align={{ base: 'left', md: 'flex-start' }} paddingY="36px" spacing={4}>
+              <Text textStyle="TitleBold72" textAlign="left">
                 Impakt
-                <Text fontSize={{ base: '75px', md: '120px' }} fontWeight="900">
-                  Games
-                </Text>
-              </Heading>
+                <Text textStyle="TitleBold72">Games</Text>
+              </Text>
               <Text
                 opacity={0.6}
                 fontSize={{ base: '18px', md: '20px' }}
                 paddingTop={{ base: '16px', md: '16px' }}
-                textAlign={{ base: 'center', md: 'left' }}
+                textAlign={{ base: 'left', md: 'left' }}
               >
                 Connect together and have fun while
                 <br />
                 experiencing gamified fitness
               </Text>
             </VStack>
-            <Button
-              px="80px"
-              py="32px"
-              borderRadius="20px"
-              fontSize="16px"
-              lineHeight="24px"
-              fontWeight="600"
-              bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-            >
-              Get started
-            </Button>
+            <VStack spacing="24px">
+              <Image
+                maxW="320px"
+                objectFit="contain"
+                src="assets/images/macbook-mobile.png"
+                display={{ base: 'flex', md: 'none' }}
+              />
+              <Button
+                px="80px"
+                py="32px"
+                borderRadius="20px"
+                fontSize="16px"
+                lineHeight="24px"
+                fontWeight="600"
+                w={{ base: 'fit-content', md: 'auto' }}
+                bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+              >
+                Get started
+              </Button>
+            </VStack>
           </Stack>
         </GridItem>
         <GridItem
           alignItems="flex-end"
-          justifyContent="space-around"
+          justifyContent="flex-end"
           display={{ base: 'none', md: 'flex' }}
+          colSpan={{
+            base: 3,
+            md: 2,
+          }}
         >
-          <Image w={400} src="assets/images/iphone13.png" />
+          <Image
+            w="fit-content"
+            h="fit-content"
+            objectFit="cover"
+            src="assets/images/macbook.png"
+          />
         </GridItem>
       </SimpleGrid>
     </HeroLayout>

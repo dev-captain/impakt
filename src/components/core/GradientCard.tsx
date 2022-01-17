@@ -4,14 +4,26 @@ type GradientCardProps = {
   title: string;
   image: string;
   subtitle: string;
+  maxW?: string;
+  minW?: string | any;
+  // eslint-disable-next-line no-undef
+  ThirdComponent?: () => JSX.Element;
 };
 
-const GradientCard = ({ title, subtitle, image }: GradientCardProps) => {
+const GradientCard = ({
+  title,
+  subtitle,
+  image,
+  ThirdComponent,
+  maxW = '352px',
+  minW = 'auto',
+}: GradientCardProps) => {
   return (
     <HStack
       p={0}
       w="full"
-      maxW="352px"
+      minW={minW}
+      maxW={maxW}
       maxH="120px"
       paddingY="20px"
       align="center"
@@ -32,6 +44,7 @@ const GradientCard = ({ title, subtitle, image }: GradientCardProps) => {
         <Text fontSize="14px" lineHeight="20px" fontWeight="400">
           {subtitle}
         </Text>
+        {ThirdComponent && <ThirdComponent />}
       </VStack>
       <GradientEllipse2 />
     </HStack>

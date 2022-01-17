@@ -17,9 +17,9 @@ const GradientButton = ({
       size="lg"
       px="3rem"
       py="2rem"
+      minW="160px"
       borderRadius="20px"
-      minW="240px"
-      bgGradient={bgGradient || 'linear(to-b, rgba(54, 54, 57, 1), rgba(34, 34, 38, 1))'}
+      bgGradient={bgGradient || 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)'}
     >
       <HStack spacing={2} alignItems="center" justifyContent="center">
         {Icon && <Icon />}
