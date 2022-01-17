@@ -4,16 +4,19 @@ import Icons from 'components/icons';
 const GradientButton = ({
   title,
   icon,
+  w = 'auto',
   bgGradient,
 }: {
   title: string;
   icon?: string;
+  w?: string | any;
   bgGradient?: string;
 }) => {
   const Icon = icon ? Icons?.[icon] : undefined;
 
   return (
     <Button
+      w={w}
       size="lg"
       px="3rem"
       py="2rem"

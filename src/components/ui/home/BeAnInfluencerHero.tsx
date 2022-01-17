@@ -3,8 +3,8 @@ import GradientCard from 'components/core/GradientCard';
 import HeroLayout from 'components/layouts/HeroLayout';
 
 const commonProps: any = {
-  textAlign: { base: 'center', md: 'left' },
-  alignItems: { base: 'center', md: 'flex-start' },
+  textAlign: { base: 'left', md: 'left' },
+  alignItems: { base: 'left', md: 'flex-start' },
 };
 
 const BeAnInfluencerHero = () => {
@@ -22,24 +22,34 @@ const BeAnInfluencerHero = () => {
           >
             <VStack spacing="48px" align="flex-start">
               <VStack spacing="36px" {...commonProps}>
-                <Text
-                  display="flex"
-                  fontSize="56px"
-                  lineHeight="60px"
-                  flexDir={{ base: 'column', md: 'row' }}
-                >
-                  <Text minW="180px">Be an</Text>
-                  <Text fontSize="56px" fontWeight="700" lineHeight="60px" marginRight={4}>
+                <Text display="flex" lineHeight="60px" fontSize={{ base: '40px', md: '56px' }}>
+                  <Text minW={{ base: '110px', md: '180px' }}>Be an</Text>
+                  <Text
+                    fontSize={{ base: '40px', md: '56px' }}
+                    fontWeight="700"
+                    lineHeight="60px"
+                    marginLeft={{
+                      base: '5px',
+                      md: 0,
+                    }}
+                  >
                     influencer
                   </Text>
                 </Text>
+
                 <Text fontSize="20px" lineHeight="32px" opacity="0.6" maxW="380px">
                   And host single or team competitions rewarding NFT members!
                 </Text>
+                <Image
+                  maxH="600px"
+                  d={{ base: 'flex', md: 'none' }}
+                  src="assets/images/be-an-influencer.png"
+                />
               </VStack>
               <GradientCard
                 title="Baloon Pump"
                 subtitle="Competition game"
+                maxW={{ base: 'full', md: null }}
                 image="assets/images/baloon-pump.png"
               />
             </VStack>

@@ -17,6 +17,7 @@ import {
   PartnerAndInvestorHero,
   JoinUsHero,
 } from 'components/ui/home';
+
 import { useEffect } from 'react';
 
 const App = () => {
@@ -31,9 +32,11 @@ const App = () => {
       <div id="impakt-games">
         <ImpaktGamesHero />
       </div>
+
       <div id="single-team">
         <SingleTeamHero />
       </div>
+
       <div id="motion-capture">
         <MotionCaptureHero />
       </div>
@@ -77,6 +80,7 @@ const App = () => {
       <div id="road-map">
         <RoadMapHero />
       </div>
+
       <div id="join-us">
         <JoinUsHero />
       </div>

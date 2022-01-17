@@ -5,9 +5,15 @@ import HeroLayout from 'components/layouts/HeroLayout';
 const EarningsHero = () => {
   return (
     <HeroLayout hideBlur>
-      <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={20}>
+      <SimpleGrid
+        columns={2}
+        justifyContent="center"
+        alignItems="center"
+        columnGap={20}
+        px={{ base: '16px', md: 0 }}
+      >
         <GridItem display={{ base: 'none', md: 'flex' }}>
-          <Image src="assets/images/earning-token-hero.png" maxH="600px" r />
+          <Image src="assets/images/earning-token-hero.png" maxH="600px" />
         </GridItem>
         <GridItem
           colSpan={{
@@ -15,10 +21,7 @@ const EarningsHero = () => {
             md: 1,
           }}
         >
-          <VStack
-            textAlign={{ base: 'center', md: 'left' }}
-            alignItems={{ base: 'center', md: 'flex-start' }}
-          >
+          <VStack textAlign="left" alignItems="flex-start">
             <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
               Earn
             </Text>
@@ -29,13 +32,18 @@ const EarningsHero = () => {
             <Text fontSize="20px" lineHeight="32px" opacity="0.6" maxW="380px">
               Capitalize on your fitness routine.
             </Text>
+            <Image
+              src="assets/images/earning-token-hero.png"
+              maxH="600px"
+              d={{ base: 'flex', md: 'none' }}
+            />
           </VStack>
           <Spacer h="80px" />
           <HStack spacing="20px" justify={{ base: 'center', md: 'flex-start' }}>
             <SimpleGrid columns={2} columnGap={4} rowGap={4}>
               <GridItem
                 colSpan={{
-                  base: 2,
+                  base: 1,
                   md: 1,
                 }}
               >
@@ -43,7 +51,7 @@ const EarningsHero = () => {
               </GridItem>
               <GridItem
                 colSpan={{
-                  base: 2,
+                  base: 1,
                   md: 1,
                 }}
               >
@@ -65,26 +73,26 @@ const EarnTokenCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: strin
   return (
     <Box bgColor="#1F2024" borderRadius={20} position="relative" overflow="hidden">
       <VStack
-        align="flex-start"
-        maxW="240px"
-        minH="200px"
-        maxH="250px"
-        justify="flex-start"
         p={7}
+        maxW="240px"
+        minH="210px"
+        maxH="250px"
         spacing="32px"
+        align="flex-start"
+        justify="flex-start"
       >
         <Icon />
-        <Text>{title}</Text>
+        <Text fontSize={{ base: '14px', md: '16px' }}>{title}</Text>
         <Box
           w="220px"
           h="196px"
           left="-70px"
           top="-100px"
           opacity={0.49}
-          background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
           pos="absolute"
           zIndex={1}
           filter="blur(64px);"
+          background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
         />
         <Box
           w="220px"
@@ -92,10 +100,10 @@ const EarnTokenCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: strin
           left="93px"
           top="100px"
           opacity={0.49}
-          background="radial-gradient(50% 50% at 50% 50%, rgba(72, 123, 253, 1) 10%, rgba(184, 50, 108, 0) 100%)"
           pos="absolute"
           zIndex={1}
           filter="blur(64px);"
+          background="radial-gradient(50% 50% at 50% 50%, rgba(72, 123, 253, 1) 10%, rgba(184, 50, 108, 0) 100%)"
         />
       </VStack>
     </Box>

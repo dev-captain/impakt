@@ -1,11 +1,10 @@
-import { Box, GridItem, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react';
-import SmallLogo from 'components/core/SmallLogo';
+import { Box, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 
 const PartnerAndInvestorHero = () => {
   const colSpan = {
-    base: 8,
-    sm: 8,
+    base: 4,
+    sm: 4,
     md: 4,
     xl: 2,
   };
@@ -13,12 +12,20 @@ const PartnerAndInvestorHero = () => {
   return (
     <HeroLayout hideBlur>
       <VStack spacing="120px" py={10}>
-        <VStack spacing="36px">
+        <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }}>
           <HStack spacing={5}>
-            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="300">
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '44px', md: '60px' }}
+              fontWeight="300"
+            >
               Our
             </Text>
-            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '44px', md: '60px' }}
+              fontWeight="700"
+            >
               Partners
             </Text>
           </HStack>
@@ -30,12 +37,20 @@ const PartnerAndInvestorHero = () => {
             ))}
           </SimpleGrid>
         </VStack>
-        <VStack spacing="36px">
+        <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }}>
           <HStack spacing={5}>
-            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="300">
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '44px', md: '60px' }}
+              fontWeight="300"
+            >
               Our
             </Text>
-            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '44px', md: '60px' }}
+              fontWeight="700"
+            >
               Investor
             </Text>
           </HStack>
@@ -60,16 +75,16 @@ const CompanyCard = () => {
   return (
     <VStack
       p={0}
-      minW="282px"
-      minH="156px"
       align="center"
       justify="center"
       bgColor="#1F2024"
       overflow="hidden"
       position="relative"
       borderRadius="28px"
+      minW={{ base: '160px', md: '282px' }}
+      minH={{ base: '100px', md: '156px' }}
     >
-      <SmallLogo />
+      <Image src="assets/images/logo.png" />
       <GradientEllipse />
       <GradientEllipse1 />
     </VStack>

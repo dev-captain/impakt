@@ -6,7 +6,7 @@ const TokenomicsHero = () => {
     <HeroLayout hideBlur>
       <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={14}>
-          <GridItem display={{ base: 'none', md: 'flex' }}>
+          <GridItem display={{ base: 'none', md: 'flex' }} colSpan={{ base: 2, md: 1 }}>
             <Image src="assets/images/tokenomics-hero.png" />
           </GridItem>
           <GridItem
@@ -16,18 +16,18 @@ const TokenomicsHero = () => {
             }}
           >
             <VStack
-              textAlign={{ base: 'center', md: 'left' }}
-              alignItems={{ base: 'center', md: 'flex-start' }}
+              textAlign={{ base: 'left', md: 'left' }}
+              alignItems={{ base: 'left', md: 'flex-start' }}
               spacing="36px"
             >
-              <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
+              <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="60px" fontWeight="700">
                 Tokenomics
               </Text>
+              <GridItem display={{ base: 'flex', md: 'none' }} colSpan={{ base: 2, md: 1 }}>
+                <Image src="assets/images/tokenomics-hero.png" />
+              </GridItem>
               <TokenomicsStatisticCard />
             </VStack>
-          </GridItem>
-          <GridItem display={{ base: 'flex', md: 'none' }} colSpan={2}>
-            <Image src="assets/images/tokenomics-hero.png" />
           </GridItem>
         </SimpleGrid>
       </VStack>

@@ -4,7 +4,7 @@ type GradientCardProps = {
   title: string;
   image: string;
   subtitle: string;
-  maxW?: string;
+  maxW?: string | any;
   minW?: string | any;
   // eslint-disable-next-line no-undef
   ThirdComponent?: () => JSX.Element;

@@ -3,26 +3,28 @@ import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 
 const commonProps: any = {
-  textAlign: { base: 'center', md: 'left' },
-  alignItems: { base: 'center', md: 'flex-start' },
+  textAlign: { base: 'left', md: 'left' },
+  alignItems: { base: 'left', md: 'flex-start' },
 };
 
 const JoinAndCollectHero = () => {
   return (
     <HeroLayout hideBlur>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
+      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }} align="flex-start">
         <SimpleGrid
-          columns={5}
-          justifyContent="center"
-          alignItems="center"
+          columns={4}
+          w="full"
+          justifyContent="flex-start"
+          alignItems="flex-start"
           columnGap={{
             base: '4',
             sm: '8',
-            md: '12',
+            md: '8',
             xl: '20',
           }}
+          px={{ base: '16px', md: 0 }}
         >
-          <GridItem display={{ base: 'none', md: 'flex' }} zIndex={1} colSpan={3}>
+          <GridItem display={{ base: 'none', md: 'flex' }} zIndex={1} colSpan={2} w="full">
             <HStack
               bg='linear-gradient(89.4deg, #1F2024 1.43%, rgba(31, 32, 36, 0) 37.28%), url("assets/images/join-and-collect-hero.png")'
               borderRadius="28px"
@@ -42,27 +44,52 @@ const JoinAndCollectHero = () => {
           </GridItem>
           <GridItem
             colSpan={{
-              base: 5,
+              base: 4,
               md: 2,
             }}
             zIndex={2}
             {...commonProps}
           >
-            <VStack spacing="52px" align={{ base: 'center', md: 'flex-start' }}>
-              <VStack spacing="8px" {...commonProps}>
-                <Text
-                  fontSize={{ base: '56px', md: '52px', xl: '56px' }}
-                  lineHeight="60px"
-                  fontWeight="300"
-                >
-                  Join and
-                  <Text>collect your</Text>
-                  <Text fontWeight="700" paddingTop={2}>
-                    NFT collection!
+            <VStack spacing="52px" align={{ base: 'center', md: 'flex-start' }} w="full">
+              <VStack
+                w="full"
+                {...commonProps}
+                spacing={{ base: '32px', md: '8px' }}
+                alignItems={{ base: 'flex-start', md: 'flex-start' }}
+              >
+                <VStack alignItems="flex-start">
+                  <Text
+                    fontWeight="300"
+                    lineHeight={{ base: '44px', md: '60px' }}
+                    fontSize={{ base: '40px', md: '52px', xl: '56px' }}
+                  >
+                    Join and
+                    <Text>collect your</Text>
+                    <Text fontWeight="700" paddingTop={2}>
+                      NFT collection!
+                    </Text>
                   </Text>
-                </Text>
+                </VStack>
+                <HStack
+                  d={{ base: 'flex', md: 'none' }}
+                  bg='linear-gradient(89.4deg, #1F2024 1.43%, rgba(31, 32, 36, 0) 37.28%), url("assets/images/join-and-collect-hero.png")'
+                  borderRadius="28px"
+                  position="relative"
+                  overflow="hidden"
+                  bgSize="cover"
+                  w="full"
+                >
+                  <GradientEllipse />
+                  <Box
+                    bg="linear-gradient(90deg, rgba(31, 32, 36, 0.784) 50%, rgba(31, 32, 36, 0.7124) 63.01%, rgba(31, 32, 36, 0.608) 72.58%, rgba(31, 32, 36, 0) 100%)"
+                    borderRadius="28px"
+                    w="full"
+                    minH="220px"
+                  />
+                </HStack>
               </VStack>
               <GradientButton
+                w={{ base: 'full', md: 'auto' }}
                 title="NFT marketplace"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               />

@@ -3,8 +3,8 @@ import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 
 const commonProps: any = {
-  textAlign: { base: 'center', md: 'left' },
-  alignItems: { base: 'center', md: 'flex-start' },
+  textAlign: { base: 'left', md: 'left' },
+  alignItems: { base: 'left', md: 'flex-start' },
 };
 
 const JoinUsHero = () => {
@@ -13,8 +13,8 @@ const JoinUsHero = () => {
       <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           columns={5}
-          justifyContent="center"
-          alignItems="center"
+          justifyContent={{ base: 'flex-start', md: 'center' }}
+          alignItems={{ base: 'flex-start', md: 'center' }}
           columnGap={{
             base: '4',
             sm: '8',
@@ -30,20 +30,33 @@ const JoinUsHero = () => {
             zIndex={2}
             {...commonProps}
           >
-            <VStack spacing="52px" align={{ base: 'center', md: 'flex-start' }}>
+            <VStack spacing="52px" align="flex-start">
               <VStack spacing="36px" {...commonProps}>
-                <Text display="flex" fontSize="56px" lineHeight="60px" flexDir="row">
+                <Text
+                  display="flex"
+                  fontSize={{ base: '40px', md: '56px' }}
+                  lineHeight={{ base: '44px', md: '60px' }}
+                  flexDir="row"
+                  fontWeight="700"
+                >
                   <Text>Join</Text>
-                  <Text fontSize="56px" fontWeight="700" lineHeight="60px" marginLeft="8px">
+                  <Text
+                    fontSize={{ base: '40px', md: '56px' }}
+                    fontWeight="300"
+                    lineHeight={{ base: '44px', md: '60px' }}
+                    marginLeft="8px"
+                  >
                     us
                   </Text>
                 </Text>
                 <Text fontSize="20px" fontWeight="400" lineHeight="32px" opacity="0.6">
                   And do fitness with your friends! Be successful!
                 </Text>
+                <Image src="assets/images/joinus-hero.png" display={{ base: 'flex', md: 'none' }} />
               </VStack>
               <GradientButton
                 title="Get started"
+                w={{ base: 'full', md: 'auto' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               />
             </VStack>

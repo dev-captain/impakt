@@ -34,9 +34,9 @@ const GradientEllipse1 = () => {
 
 export default () => {
   return (
-    <>
+    <Box d={{ md: 'flex', base: 'none' }}>
       <GradientEllipse />
       <GradientEllipse1 />
-    </>
+    </Box>
   );
 };

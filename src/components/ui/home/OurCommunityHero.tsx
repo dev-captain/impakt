@@ -41,18 +41,36 @@ const OurCommunityHero = () => {
             left={0}
             zIndex={2}
           />
-          <VStack zIndex={2} align="flex-start" spacing="80px">
-            <VStack align="flex-start" spacing="36px">
-              <Text fontSize="56px" lineHeight="60px" fontWeight="300">
+          <VStack zIndex={2} align="flex-start" spacing={{ base: '16px', md: '40px', xl: '80px' }}>
+            <VStack align="flex-start" spacing="40px">
+              <Text
+                fontSize={{ base: '40px', md: '56px' }}
+                lineHeight={{ base: '44px', md: '60px' }}
+                fontWeight="300"
+              >
                 Our
                 <Text fontWeight="700">community</Text>
               </Text>
-              <Text fontSize="20px" opacity="0.6" maxW="400px" fontWeight="400">
-                Join and participate in sports marathons remotely while earning NFT!
-              </Text>
+              <VStack spacing="16px">
+                <Center
+                  w="80px"
+                  h="80px"
+                  zIndex={3}
+                  borderRadius="40px"
+                  alignSelf="center"
+                  d={{ base: 'flex', md: 'none' }}
+                  bgColor={{ base: 'whiteAlpha.300' }}
+                >
+                  <Icons.WhitePlay />
+                </Center>
+                <Text fontSize="20px" opacity="0.6" maxW="400px" fontWeight="400">
+                  Join and participate in sports marathons remotely while earning NFT!
+                </Text>
+              </VStack>
             </VStack>
             <GradientButton
               title="Get started"
+              w={{ base: 'full', md: 'auto' }}
               bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
             />
           </VStack>
@@ -64,6 +82,7 @@ const OurCommunityHero = () => {
             alignSelf="center"
             position="absolute"
             zIndex={3}
+            d={{ base: 'none', md: 'flex' }}
             left={['30%', '50%', '50%', '50%']}
           >
             <Icons.WhitePlay />

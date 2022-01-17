@@ -39,43 +39,43 @@ const HowToSignUpHero = () => {
             maxW="500px"
           >
             <VStack align="flex-start" spacing={10}>
-              <HStack zIndex={1}>
-                <Text fontSize={{ base: '32px', sm: '50px', md: '56px' }} lineHeight="60px">
-                  How to
-                </Text>
-                <Text
-                  fontSize={{ base: '32px', sm: '50px', md: '56px' }}
-                  fontWeight="700"
-                  lineHeight="60px"
+              <VStack spacing="24px">
+                <HStack
+                  w="full"
+                  zIndex={1}
+                  align="flex-start"
+                  justify="flex-start"
+                  spacing={{ base: 0, md: 4 }}
+                  flexDir={{ base: 'column', md: 'row' }}
                 >
-                  sign up
+                  <Text
+                    lineHeight={{ base: '44px', md: '60px' }}
+                    fontSize={{ base: '40px', sm: '50px', md: '56px' }}
+                  >
+                    How to
+                  </Text>
+                  <Text
+                    fontWeight="700"
+                    lineHeight="60px"
+                    fontSize={{ base: '40px', sm: '50px', md: '56px' }}
+                  >
+                    sign up
+                  </Text>
+                </HStack>
+                <Text zIndex={2} opacity="0.6" fontSize={{ base: '14px', md: '20px' }}>
+                  Join with your Google, Apple, Facebook accounts, or register with your email.
                 </Text>
-              </HStack>
-              <Text zIndex={2} opacity="0.6" fontSize="20px">
-                Join with your Google, Apple, Facebook accounts, or register with your email.
-              </Text>
+              </VStack>
+              <SocialIcons forMobile />
               <Button
                 px="64px"
                 py="32px"
                 borderRadius="10px"
+                w={{ base: 'full', md: 'auto' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               >
                 Sign Up
               </Button>
-              <VStack
-                pos="absolute"
-                right={{
-                  base: 10,
-                  md: 20,
-                  xl: 190,
-                }}
-                zIndex={1}
-                paddingTop={{ base: 8, md: 0 }}
-              >
-                <SocialIcon name="Facebook" />
-                <SocialIcon name="Google" />
-                <SocialIcon name="Apple" />
-              </VStack>
             </VStack>
           </VStack>
           <Box
@@ -88,9 +88,36 @@ const HowToSignUpHero = () => {
             pos="absolute"
             zIndex={0}
           />
+          <SocialIcons />
         </HStack>
       </VStack>
     </HeroLayout>
+  );
+};
+
+const SocialIcons = ({ forMobile }: { forMobile?: boolean }) => {
+  const StackComponent = forMobile ? HStack : VStack;
+
+  return (
+    <StackComponent
+      right={{
+        base: 10,
+        md: 20,
+        xl: 190,
+      }}
+      zIndex={1}
+      align="center"
+      justify="center"
+      spacing="16px"
+      flexDir={forMobile ? 'row' : 'column'}
+      pos={forMobile ? 'inherit' : 'absolute'}
+      paddingTop={{ base: forMobile ? 0 : 8, md: 0 }}
+      display={{ base: forMobile ? 'flex' : 'none', md: forMobile ? 'none' : 'flex' }}
+    >
+      <SocialIcon name="Facebook" />
+      <SocialIcon name="Google" />
+      <SocialIcon name="Apple" />
+    </StackComponent>
   );
 };
 
@@ -98,12 +125,7 @@ const SocialIcon = ({ name }: { name: string }) => {
   const Icon = Icons?.[name];
 
   return (
-    <Center
-      backgroundColor={{ base: 'blackAlpha.700', md: 'whiteAlpha.300', xl: 'blackAlpha.400' }}
-      w="40px"
-      h="40px"
-      borderRadius="8px"
-    >
+    <Center backgroundColor="blackAlpha.400" w="40px" h="40px" borderRadius="8px" p={0}>
       {Icon && <Icon />}
     </Center>
   );

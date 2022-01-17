@@ -5,7 +5,7 @@ import useWindowSize from './useWindowSize';
 const useHorizontalScroll = () => {
   const [scrollStatus, setScrollStatus] = useState<'left' | 'right' | 'mid'>('right');
   const windowSize = useWindowSize();
-  const width = windowSize.width > 320 ? 320 : windowSize.width;
+  const width = windowSize.width > 300 ? 320 : windowSize.width;
   const widthRef = useRef(0);
 
   const moveLeft = (ref: React.LegacyRef<HTMLDivElement> | undefined) => {
