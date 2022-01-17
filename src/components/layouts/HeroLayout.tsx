@@ -20,7 +20,7 @@ const HeroLayout = ({
   children,
   spacing = 4,
   align = 'center',
-  bgColor = 'rgba(40,42,45)',
+  bgColor = '#282a2d',
   justify = 'center',
   showNavbar = false,
   addSpacer = false,

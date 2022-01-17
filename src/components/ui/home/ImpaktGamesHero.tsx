@@ -19,6 +19,7 @@ const ImpaktGamesHero = () => {
     <HeroLayout
       showNavbar
       addSpacer
+      hideBlur
       spacing={10}
       justify="center"
       align="space-around"

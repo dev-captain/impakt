@@ -13,8 +13,8 @@ import {
   Link,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import Logo from './Logo';
 import GradientButton from './GradientButton';
+import SmallLogo from './SmallLogo';
 
 const SelectedNavbarLinkBorder = () => {
   return (
@@ -92,7 +92,7 @@ const Navbar = () => {
         alignItems="center"
       >
         <HStack w="full" justify="space-between">
-          <Logo />
+          <SmallLogo />
           <HStack
             display={['none', 'none', 'none', 'flex']}
             spacing={[0, 0, 3, 5, 8, 12]}

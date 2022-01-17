@@ -1,35 +1,39 @@
 import { Container } from '@chakra-ui/layout';
-import ImpaktGamesHero from 'components/ui/home/ImpaktGamesHero';
-// import SingleTeamHero from 'components/ui/home/SingleTeamHero';
-// import MotionCaptureHero from 'components/ui/home/MotionCaptureHero';
-// import BurnToEarnHero from 'components/ui/home/BurnToEarnHero';
-// import EarningsHero from 'components/ui/home/EarningsHero';
-// import HowToSignUpHero from 'components/ui/home/HowToSignupHero';
-// import NFTMarketPlaceHero from 'components/ui/home/NFTMarketPlaceHero';
 import { useColorMode } from '@chakra-ui/react';
+import {
+  RoadMapHero,
+  Footer,
+  ImpaktGamesHero,
+  SingleTeamHero,
+  MotionCaptureHero,
+  BurnToEarnHero,
+  EarningsHero,
+  HowToSignUpHero,
+  NFTMarketPlaceHero,
+  BeAnInfluencerHero,
+  JoinAndCollectHero,
+  OurCommunityHero,
+  TokenomicsHero,
+  PartnerAndInvestorHero,
+  JoinUsHero,
+} from 'components/ui/home';
 import { useEffect } from 'react';
-import CountdownHero from 'components/ui/home/CountdownHero/index';
-import dayjs from 'dayjs';
 
 const App = () => {
   const { setColorMode } = useColorMode();
-  const date = dayjs('2022-01-22 12:00').toDate();
 
   useEffect(() => {
     setColorMode('dark');
   }, [setColorMode]);
 
   return (
-    <Container spacing={0} p={0} minW="full">
-      <CountdownHero date={date} />
+    <Container spacing={0} p={0} minW="full" m={0}>
       <div id="impakt-games">
         <ImpaktGamesHero />
       </div>
-
-      {/* <div id="single-team">
+      <div id="single-team">
         <SingleTeamHero />
       </div>
-
       <div id="motion-capture">
         <MotionCaptureHero />
       </div>
@@ -48,7 +52,35 @@ const App = () => {
 
       <div id="nft-marketplace">
         <NFTMarketPlaceHero />
-      </div> */}
+      </div>
+
+      <div id="be-an-influencer">
+        <BeAnInfluencerHero />
+      </div>
+
+      <div id="join-and-collect">
+        <JoinAndCollectHero />
+      </div>
+
+      <div id="our-community-hero">
+        <OurCommunityHero />
+      </div>
+
+      <div id="tokenomics">
+        <TokenomicsHero />
+      </div>
+
+      <div id="partner-and-investor">
+        <PartnerAndInvestorHero />
+      </div>
+
+      <div id="road-map">
+        <RoadMapHero />
+      </div>
+      <div id="join-us">
+        <JoinUsHero />
+      </div>
+      <Footer />
     </Container>
   );
 };

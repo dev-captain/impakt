@@ -10,6 +10,9 @@ import Google from './GoogleIcon';
 import Apple from './AppleIcon';
 import Twitter from './TwitterIcon';
 import Discord from './DiscordIcon';
+import SmallTwitter from './SmallTwitterIcon';
+import LeftArrow from './LeftArrowIcon';
+import RightArrow from './RightArrowIcon';
 
 const Icons: { [key in string]: any } = {
   ProfileUser,
@@ -24,6 +27,9 @@ const Icons: { [key in string]: any } = {
   Apple,
   Twitter,
   Discord,
+  LeftArrow,
+  RightArrow,
+  SmallTwitter,
 };
 
 export default Icons;
