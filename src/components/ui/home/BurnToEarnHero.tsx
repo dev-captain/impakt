@@ -34,27 +34,21 @@ const BurnToEarnHero = () => {
         >
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>
-              <Text fontSize="56px" lineHeight="60px" fontWeight="300">
+              <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="60px" fontWeight="300">
                 Burn and
                 <Text fontWeight="700">earn!</Text>
               </Text>
-              <Text fontSize="20px" opacity="0.6" maxW="340px">
+              <Play forMobile />
+              <Text
+                opacity="0.6"
+                fontSize={{ base: '14px', md: '20px' }}
+                maxW={{ base: '204px', md: '340px' }}
+              >
                 Connect ANYTIME with ANYONE, ANYWHERE, workout, battle and earn tokens and NFTs!
               </Text>
             </VStack>
           </VStack>
-          <Center
-            w="80px"
-            h="80px"
-            borderRadius="40px"
-            bgColor={{ base: 'black', md: 'whiteAlpha.300' }}
-            alignSelf="center"
-            position="absolute"
-            zIndex={2}
-            left={['30%', '50%', '50%', '50%']}
-          >
-            <Icons.WhitePlay />
-          </Center>
+          <Play />
           <Box
             w="967px"
             h="472px"
@@ -75,3 +69,20 @@ export default BurnToEarnHero;
 
 const bgImage =
   "linear-gradient(90deg, #1F2024 18.46%, rgba(31, 32, 36, 0) 63.94%), url('assets/images/burn-to-earn-hero.png')";
+
+const Play = ({ forMobile }: { forMobile?: boolean }) => (
+  <Center
+    w="80px"
+    h="80px"
+    zIndex={2}
+    borderRadius="40px"
+    alignSelf="center"
+    bgColor="whiteAlpha.400"
+    left={['30%', '50%', '50%', '50%']}
+    boxShadow="4px 4px 10px rgba(0, 0, 0, 0.12)"
+    position={forMobile ? 'initial' : 'absolute'}
+    d={{ base: forMobile ? 'flex' : 'none', md: forMobile ? 'none' : 'flex' }}
+  >
+    <Icons.WhitePlay />
+  </Center>
+);
