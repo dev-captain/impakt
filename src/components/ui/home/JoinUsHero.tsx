@@ -49,7 +49,7 @@ const JoinUsHero = () => {
             </VStack>
           </GridItem>
           <GridItem display={{ base: 'none', md: 'flex' }} zIndex={1} colSpan={3}>
-            <Image src="assets/images/join-us-hero.png" />
+            <Image src="assets/images/joinus-hero.png" />
           </GridItem>
         </SimpleGrid>
       </VStack>
