@@ -5,7 +5,12 @@ import HeroLayout from 'components/layouts/HeroLayout';
 const MotionCaptureHero = () => {
   return (
     <HeroLayout hideBlur>
-      <SimpleGrid columns={2} justifyContent="center" alignItems="center">
+      <SimpleGrid
+        columns={2}
+        justifyContent="center"
+        alignItems="center"
+        px={{ base: '16px', md: 0 }}
+      >
         <GridItem display={{ base: 'none', md: 'flex' }}>
           <Image src="assets/images/motion-capture.png" />
         </GridItem>
@@ -15,14 +20,19 @@ const MotionCaptureHero = () => {
             md: 1,
           }}
         >
-          <VStack
-            textAlign={{ base: 'center', md: 'left' }}
-            alignItems={{ base: 'center', md: 'flex-start' }}
-          >
-            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="300">
+          <VStack textAlign="left" alignItems={{ base: 'left', md: 'flex-start' }}>
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '56px', md: '60px' }}
+              fontWeight="300"
+            >
               Motion Capture
             </Text>
-            <Text fontSize={{ base: '48px', md: '56px' }} lineHeight="60px" fontWeight="700">
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '56px', md: '60px' }}
+              fontWeight="700"
+            >
               Technology
             </Text>
             <Text
@@ -40,7 +50,7 @@ const MotionCaptureHero = () => {
             <SimpleGrid columns={2} columnGap={4} rowGap={4}>
               <GridItem
                 colSpan={{
-                  base: 2,
+                  base: 1,
                   md: 1,
                 }}
               >
@@ -48,7 +58,7 @@ const MotionCaptureHero = () => {
               </GridItem>
               <GridItem
                 colSpan={{
-                  base: 2,
+                  base: 1,
                   md: 1,
                 }}
               >
@@ -67,10 +77,12 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
 
   return (
     <Box bgColor="#1F2024" borderRadius={20} position="relative" overflow="hidden">
-      <VStack align="flex-start" maxW="240px" minH="200px" maxH="250px" justify="center" p={7}>
+      <VStack align="flex-start" maxW="240px" minH="180px" maxH="250px" justify="center" p={7}>
         <Icon />
         <Spacer />
-        <Text>{title}</Text>
+        <Text fontSize={{ base: '14px', md: '16px' }} lineHeight="20px">
+          {title}
+        </Text>
         <Box
           w="220px"
           h="196px"
@@ -97,9 +109,5 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
     </Box>
   );
 };
-
-// background: radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%);
-// opacity: 0.49;
-// filter: blur(94px);
 
 export default MotionCaptureHero;
