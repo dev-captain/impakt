@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { RoadMapData } from 'data';
+import { layoutPadding } from 'theme';
 import RoadMapItem from './RoadMapItem';
 import RoadMapBackground from './RoadmapBackground';
 import SliderControls from './SliderControls';
@@ -14,7 +15,7 @@ const RoadMapHero = () => {
       <VStack
         w="full"
         spacing="36px"
-        px={[8, 8, 12, 16, 40]}
+        px={layoutPadding}
         py={{ base: 16, md: 0 }}
         p={{ base: 0, md: 8 }}
       >

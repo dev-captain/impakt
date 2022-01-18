@@ -32,4 +32,11 @@ const theme: ThemeOverride = {
   components: {},
 };
 
+export const layoutPadding = {
+  base: '16px',
+  md: '48px',
+  xl: '120px',
+  '2xl': '240px',
+};
+
 export default extendTheme(theme);

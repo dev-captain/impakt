@@ -2,6 +2,7 @@ import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const OurCommunityHero = () => {
   const vStackSomeProps = {
@@ -22,7 +23,7 @@ const OurCommunityHero = () => {
 
   return (
     <HeroLayout hideBlur>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
+      <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           w="full"
           maxH="622px"

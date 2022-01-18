@@ -1,13 +1,14 @@
 import { Box, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const TokenomicsHero = () => {
   return (
     <HeroLayout hideBlur>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
-        <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={14}>
+      <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
+        <SimpleGrid columns={2} w="full" justifyContent="center" alignItems="center" columnGap={4}>
           <GridItem display={{ base: 'none', md: 'flex' }} colSpan={{ base: 2, md: 1 }}>
-            <Image src="assets/images/tokenomics-hero.png" />
+            <Image src="assets/images/tokenomics-hero.png" maxH="600px" />
           </GridItem>
           <GridItem
             colSpan={{
@@ -16,11 +17,16 @@ const TokenomicsHero = () => {
             }}
           >
             <VStack
-              textAlign={{ base: 'left', md: 'left' }}
-              alignItems={{ base: 'left', md: 'flex-start' }}
               spacing="36px"
+              textAlign="left"
+              alignItems={{ base: 'center', md: 'flex-start' }}
             >
-              <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="60px" fontWeight="700">
+              <Text
+                fontSize={{ base: '40px', md: '56px' }}
+                lineHeight="60px"
+                fontWeight="700"
+                alignSelf={{ base: 'flex-start', md: 'auto' }}
+              >
                 Tokenomics
               </Text>
               <GridItem display={{ base: 'flex', md: 'none' }} colSpan={{ base: 2, md: 1 }}>

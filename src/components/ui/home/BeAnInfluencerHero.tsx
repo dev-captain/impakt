@@ -1,6 +1,7 @@
 import { GridItem, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import GradientCard from 'components/core/GradientCard';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const commonProps: any = {
   textAlign: { base: 'left', md: 'left' },
@@ -10,7 +11,7 @@ const commonProps: any = {
 const BeAnInfluencerHero = () => {
   return (
     <HeroLayout hideBlur>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
+      <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={20}>
           <GridItem
             colSpan={{
@@ -22,10 +23,10 @@ const BeAnInfluencerHero = () => {
           >
             <VStack spacing="48px" align="flex-start">
               <VStack spacing="36px" {...commonProps}>
-                <Text display="flex" lineHeight="60px" fontSize={{ base: '40px', md: '56px' }}>
+                <Text display="flex" lineHeight="60px" fontSize={{ base: '36px', md: '56px' }}>
                   <Text minW={{ base: '110px', md: '180px' }}>Be an</Text>
                   <Text
-                    fontSize={{ base: '40px', md: '56px' }}
+                    fontSize={{ base: '36px', md: '56px' }}
                     fontWeight="700"
                     lineHeight="60px"
                     marginLeft={{
@@ -49,7 +50,7 @@ const BeAnInfluencerHero = () => {
               <GradientCard
                 title="Baloon Pump"
                 subtitle="Competition game"
-                maxW={{ base: 'full', md: null }}
+                maxW={{ base: 'full', md: '352px' }}
                 image="assets/images/baloon-pump.png"
               />
             </VStack>

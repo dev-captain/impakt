@@ -1,5 +1,6 @@
 import { VStack, Text, SimpleGrid, GridItem, HStack, Image } from '@chakra-ui/react';
 import Icons from 'components/icons';
+import { layoutPadding } from 'theme';
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
       <VStack
         w="full"
         bgColor="#1F2024"
-        px={[4, 8, 12, 16, 40]}
+        px={layoutPadding}
         py={{ base: 16, md: 0 }}
         h="100%"
         d={{ base: 'none', md: 'flex' }}

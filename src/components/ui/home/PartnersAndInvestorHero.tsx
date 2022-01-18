@@ -1,18 +1,20 @@
 import { Box, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const PartnerAndInvestorHero = () => {
   const colSpan = {
-    base: 4,
+    base: 6,
     sm: 4,
     md: 4,
-    xl: 2,
+    xl: 3,
+    '2xl': 3,
   };
 
   return (
     <HeroLayout hideBlur>
-      <VStack spacing="120px" py={10}>
-        <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }}>
+      <VStack spacing="120px" py={10} px={layoutPadding} w="full">
+        <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack spacing={5}>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
@@ -29,7 +31,7 @@ const PartnerAndInvestorHero = () => {
               Partners
             </Text>
           </HStack>
-          <SimpleGrid columns={8} columnGap="24px" rowGap="24px">
+          <SimpleGrid columns={12} columnGap="24px" rowGap="24px">
             {CompanyData.map(() => (
               <GridItem colSpan={colSpan}>
                 <CompanyCard />
@@ -37,7 +39,7 @@ const PartnerAndInvestorHero = () => {
             ))}
           </SimpleGrid>
         </VStack>
-        <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }}>
+        <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack spacing={5}>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
@@ -54,7 +56,7 @@ const PartnerAndInvestorHero = () => {
               Investor
             </Text>
           </HStack>
-          <SimpleGrid columns={8} columnGap="24px" rowGap="24px">
+          <SimpleGrid columns={12} columnGap="24px" rowGap="24px">
             {CompanyData.map(() => (
               <GridItem colSpan={colSpan}>
                 <CompanyCard />
@@ -81,7 +83,7 @@ const CompanyCard = () => {
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      minW={{ base: '160px', md: '282px' }}
+      minW={{ base: '140px', md: '220px', xl: '250px' }}
       minH={{ base: '100px', md: '156px' }}
     >
       <Image src="assets/images/logo.png" />

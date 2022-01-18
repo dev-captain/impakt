@@ -1,16 +1,12 @@
 import { Box, GridItem, HStack, Image, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const MotionCaptureHero = () => {
   return (
     <HeroLayout hideBlur>
-      <SimpleGrid
-        columns={2}
-        justifyContent="center"
-        alignItems="center"
-        px={{ base: '16px', md: 0 }}
-      >
+      <SimpleGrid columns={2} justifyContent="center" alignItems="center" px={layoutPadding}>
         <GridItem display={{ base: 'none', md: 'flex' }}>
           <Image src="assets/images/motion-capture.png" />
         </GridItem>
@@ -77,7 +73,14 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
 
   return (
     <Box bgColor="#1F2024" borderRadius={20} position="relative" overflow="hidden">
-      <VStack align="flex-start" maxW="240px" minH="180px" maxH="250px" justify="center" p={7}>
+      <VStack
+        align="flex-start"
+        maxW="240px"
+        minH={{ base: '210px', xl: '180px' }}
+        maxH="250px"
+        justify="center"
+        p={7}
+      >
         <Icon />
         <Spacer />
         <Text fontSize={{ base: '14px', md: '16px' }} lineHeight="20px">

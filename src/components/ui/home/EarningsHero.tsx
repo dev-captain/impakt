@@ -1,16 +1,18 @@
 import { Box, GridItem, HStack, Image, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const EarningsHero = () => {
   return (
     <HeroLayout hideBlur>
       <SimpleGrid
+        w="full"
         columns={2}
-        justifyContent="center"
-        alignItems="center"
         columnGap={20}
-        px={{ base: '16px', md: 0 }}
+        px={layoutPadding}
+        alignItems="center"
+        justifyContent="center"
       >
         <GridItem display={{ base: 'none', md: 'flex' }}>
           <Image src="assets/images/earning-token-hero.png" maxH="600px" />
@@ -75,11 +77,11 @@ const EarnTokenCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: strin
       <VStack
         p={7}
         maxW="240px"
-        minH="210px"
         maxH="250px"
         spacing="32px"
         align="flex-start"
         justify="flex-start"
+        minH={{ base: '220px' }}
       >
         <Icon />
         <Text fontSize={{ base: '14px', md: '16px' }}>{title}</Text>

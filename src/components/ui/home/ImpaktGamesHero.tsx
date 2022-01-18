@@ -3,6 +3,7 @@ import GradientCard from 'components/core/GradientCard';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { memo } from 'react';
+import { layoutPadding } from 'theme';
 
 const backgroundImage =
   "linear-gradient(180deg, rgba(0, 0, 0, 0.7) 20%, #282A2E 110%), url('assets/images/firstherobg.jpeg')";
@@ -29,7 +30,7 @@ const ImpaktGamesHero = () => {
             base: 4,
             md: 2,
           }}
-          px={[4, 8, 12, 16, 40]}
+          px={layoutPadding}
         >
           <Stack
             align={{
@@ -38,8 +39,8 @@ const ImpaktGamesHero = () => {
             }}
           >
             <GradientCard
-              maxW="full"
               title="Burn and Earn!"
+              maxW={{ base: 'full', md: '352px' }}
               minW={{ base: 'full', md: '400px' }}
               image="assets/images/burntoearn.png"
               subtitle="Let’s start with us be happy"

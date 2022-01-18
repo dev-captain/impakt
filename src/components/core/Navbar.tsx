@@ -81,7 +81,12 @@ const Navbar = () => {
   return (
     <Box pos="absolute" zIndex="100" w="full">
       <Flex
-        px={[4, 8, 12, 16, 40]}
+        px={{
+          base: '16px',
+          md: '48px',
+          xl: '120px',
+          '2xl': '240px',
+        }}
         h="100px"
         overflow="hidden"
         position="relative"

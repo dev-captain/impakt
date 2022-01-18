@@ -1,6 +1,7 @@
 import { GridItem, SimpleGrid, Text, VStack, Image } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const commonProps: any = {
   textAlign: { base: 'left', md: 'left' },
@@ -10,7 +11,7 @@ const commonProps: any = {
 const JoinUsHero = () => {
   return (
     <HeroLayout hideBlur>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
+      <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           columns={5}
           justifyContent={{ base: 'flex-start', md: 'center' }}

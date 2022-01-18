@@ -1,6 +1,7 @@
 import { Box, Button, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const HowToSignUpHero = () => {
   const vStackSomeProps = {
@@ -21,7 +22,7 @@ const HowToSignUpHero = () => {
 
   return (
     <HeroLayout hideBlur>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
+      <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           w="full"
           bgSize="cover"

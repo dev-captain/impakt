@@ -1,10 +1,11 @@
 import { Button, Flex, GridItem, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { layoutPadding } from 'theme';
 
 const NFTMarketPlaceHero = () => {
   return (
     <HeroLayout hideBlur>
-      <VStack px={[4, 8, 12, 16, 40]} w="full" py={{ base: 16, md: 0 }}>
+      <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           columns={2}
           justifyContent="center"
