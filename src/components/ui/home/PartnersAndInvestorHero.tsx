@@ -6,7 +6,7 @@ const PartnerAndInvestorHero = () => {
   const colSpan = {
     base: 6,
     sm: 4,
-    md: 4,
+    md: 3,
     xl: 3,
     '2xl': 3,
   };
@@ -31,9 +31,9 @@ const PartnerAndInvestorHero = () => {
               Partners
             </Text>
           </HStack>
-          <SimpleGrid columns={12} columnGap="24px" rowGap="24px">
+          <SimpleGrid columns={12} columnGap="24px" rowGap={{ base: '24px', xl: '46px' }} w="full">
             {CompanyData.map(() => (
-              <GridItem colSpan={colSpan}>
+              <GridItem colSpan={colSpan} w="full">
                 <CompanyCard />
               </GridItem>
             ))}
@@ -42,23 +42,23 @@ const PartnerAndInvestorHero = () => {
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack spacing={5}>
             <Text
+              fontWeight="300"
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '44px', md: '60px' }}
-              fontWeight="300"
             >
               Our
             </Text>
             <Text
+              fontWeight="700"
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '44px', md: '60px' }}
-              fontWeight="700"
             >
               Investor
             </Text>
           </HStack>
-          <SimpleGrid columns={12} columnGap="24px" rowGap="24px">
+          <SimpleGrid columns={12} columnGap="24px" rowGap={{ base: '24px', xl: '46px' }} w="full">
             {CompanyData.map(() => (
-              <GridItem colSpan={colSpan}>
+              <GridItem colSpan={colSpan} w="full">
                 <CompanyCard />
               </GridItem>
             ))}
@@ -76,15 +76,15 @@ const CompanyData = [1, 2, 3, 4, 5, 6, 7, 8];
 const CompanyCard = () => {
   return (
     <VStack
-      p={0}
+      w="full"
       align="center"
       justify="center"
       bgColor="#1F2024"
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      minW={{ base: '140px', md: '220px', xl: '250px' }}
       minH={{ base: '100px', md: '156px' }}
+      maxW={{ base: '160px', md: '220px', xl: '350px' }}
     >
       <Image src="assets/images/logo.png" />
       <GradientEllipse />
