@@ -13,6 +13,7 @@ import {
   Link,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { layoutPadding } from 'theme';
 import GradientButton from './GradientButton';
 import SmallLogo from './SmallLogo';
 
@@ -80,23 +81,23 @@ const Navbar = () => {
 
   return (
     <Box pos="absolute" zIndex="100" w="full">
+      {isOpen && <Gradient />}
       <Flex
-        px={{
-          base: '16px',
-          md: '48px',
-          xl: '120px',
-          '2xl': '240px',
-        }}
         h="100px"
         overflow="hidden"
         position="relative"
-        bg="blackAlpha.500"
         color="rgba(255,255,255, 0.3)"
         minW="full"
         flexDir="row"
         alignItems="center"
+        bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'transparent'}
       >
-        <HStack w="full" justify="space-between">
+        <HStack
+          w="full"
+          justify="space-between"
+          bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'blackAlpha.500'}
+          px={layoutPadding}
+        >
           <SmallLogo />
           <HStack
             display={['none', 'none', 'none', 'flex']}
@@ -107,16 +108,33 @@ const Navbar = () => {
             <NavbarLinkItem title="Tokenomics" href="#" />
             <NavbarLinkItem title="Roadmap" href="#motion-capture" />
             <NavbarLinkItem title="NFT Marketplace" href="#nft-marketplace" />
-            <GradientButton title="Sign In" icon="ProfileUser" />
           </HStack>
           <HStack
             flex={{ base: 1, md: 'auto' }}
             display={['flex', 'flex', 'flex', 'none']}
             justify="flex-end"
+            align="center"
+            spacing="44px"
           >
+            {!isOpen && (
+              <GradientButton
+                title="Sign In"
+                icon="ProfileUser"
+                minW="120px"
+                px="21px"
+                radius="24px"
+              />
+            )}
+
             <IconButton
               onClick={onToggle}
-              icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
+              icon={
+                isOpen ? (
+                  <CloseIcon w={3} h={3} color="#FD4857" boxSize="24px" />
+                ) : (
+                  <HamburgerIcon w={5} h={5} color="#FD4857" boxSize="32px" />
+                )
+              }
               variant="ghost"
               aria-label="Toggle Navigation"
             />
@@ -124,12 +142,12 @@ const Navbar = () => {
         </HStack>
       </Flex>
       <Collapse in={isOpen} animateOpacity>
-        <VStack spacing={0} bg="blackAlpha.900" paddingBottom={8}>
+        <VStack spacing={0} paddingBottom={8} bg="rgba(31, 32, 36, 1)" h="100vh">
           <NavbarLinkItem title="Impakt Games" isActive hide href="#" onClose={onClose} />
           <NavbarLinkItem title="Tokenomics" hide href="#" onClose={onClose} />
           <NavbarLinkItem title="Roadmap" hide href="#motion-capture" onClose={onClose} />
+          <NavbarLinkItem title="How to sign up" hide href="#motion-capture" onClose={onClose} />
           <NavbarLinkItem title="NFT Marketplace" hide href="#nft-marketplace" onClose={onClose} />
-          <GradientButton title="Sign in" icon="ProfileUser" />
         </VStack>
       </Collapse>
     </Box>
@@ -137,3 +155,18 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const Gradient = () => {
+  return (
+    <Box
+      zIndex={10}
+      bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
+      opacity="0.4"
+      pos="absolute"
+      w="967px"
+      h="472px"
+      left="-637px"
+      top="-314px"
+    />
+  );
+};

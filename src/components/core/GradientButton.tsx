@@ -6,11 +6,19 @@ const GradientButton = ({
   icon,
   w = 'auto',
   bgGradient,
+  py,
+  px,
+  minW,
+  radius,
 }: {
   title: string;
   icon?: string;
   w?: string | any;
   bgGradient?: string;
+  px?: string;
+  py?: string;
+  radius?: string;
+  minW?: string;
 }) => {
   const Icon = icon ? Icons?.[icon] : undefined;
 
@@ -18,10 +26,10 @@ const GradientButton = ({
     <Button
       w={w}
       size="lg"
-      px="3rem"
-      py="2rem"
-      minW="160px"
-      borderRadius="20px"
+      px={px || '3rem'}
+      py={py || '2rem'}
+      minW={minW || '160px'}
+      borderRadius={radius || '20px'}
       bgGradient={bgGradient || 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)'}
     >
       <HStack spacing={2} alignItems="center" justifyContent="center">
