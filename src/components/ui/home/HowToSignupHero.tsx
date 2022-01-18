@@ -127,7 +127,7 @@ const SocialIcon = ({ name }: { name: string }) => {
 
   return (
     <Center backgroundColor="blackAlpha.400" w="40px" h="40px" borderRadius="8px" p={0}>
-      {Icon && <Icon />}
+      <VStack w="full">{Icon && <Icon />}</VStack>
     </Center>
   );
 };
