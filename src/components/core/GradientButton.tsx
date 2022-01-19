@@ -11,6 +11,8 @@ const GradientButton = ({
   minW,
   radius,
   d,
+  disabled,
+  onClick,
 }: {
   title: string;
   icon?: string;
@@ -21,6 +23,8 @@ const GradientButton = ({
   radius?: string;
   minW?: string;
   d?: any;
+  disabled?: boolean;
+  onClick?: () => void;
 }) => {
   const Icon = icon ? Icons?.[icon] : undefined;
 
@@ -29,8 +33,10 @@ const GradientButton = ({
       w={w}
       d={d}
       size="lg"
+      onClick={onClick}
       px={px || '3rem'}
       py={py || '2rem'}
+      disabled={disabled}
       minW={minW || '160px'}
       borderRadius={radius || '20px'}
       bgGradient={bgGradient || 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)'}
