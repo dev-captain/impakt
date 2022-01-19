@@ -90,14 +90,23 @@ const Navbar = () => {
         minW="full"
         flexDir="row"
         alignItems="center"
-        bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'transparent'}
+        bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'blackAlpha.500'}
       >
-        <HStack
-          w="full"
-          justify="space-between"
-          bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'blackAlpha.500'}
-          px={layoutPadding}
-        >
+        <HStack w="full" justify="space-between" px={layoutPadding}>
+          <IconButton
+            zIndex={100}
+            display={['flex', 'flex', 'flex', 'none']}
+            onClick={onToggle}
+            icon={
+              isOpen ? (
+                <CloseIcon w={3} h={3} color="#FD4857" boxSize="24px" />
+              ) : (
+                <HamburgerIcon w={5} h={5} color="#FD4857" boxSize="32px" />
+              )
+            }
+            variant="ghost"
+            aria-label="Toggle Navigation"
+          />
           <SmallLogo />
           <HStack
             display={['none', 'none', 'none', 'flex']}
@@ -107,7 +116,15 @@ const Navbar = () => {
             <NavbarLinkItem title="Impakt Games" isActive href="#" />
             <NavbarLinkItem title="Tokenomics" href="#" />
             <NavbarLinkItem title="Roadmap" href="#motion-capture" />
+            <NavbarLinkItem title="How to sign up" href="#motion-capture" />
             <NavbarLinkItem title="NFT Marketplace" href="#nft-marketplace" />
+            <GradientButton
+              title="Sign In"
+              icon="ProfileUser"
+              minW="160px"
+              px="21px"
+              radius="24px"
+            />
           </HStack>
           <HStack
             flex={{ base: 1, md: 'auto' }}
@@ -125,19 +142,6 @@ const Navbar = () => {
                 radius="24px"
               />
             )}
-
-            <IconButton
-              onClick={onToggle}
-              icon={
-                isOpen ? (
-                  <CloseIcon w={3} h={3} color="#FD4857" boxSize="24px" />
-                ) : (
-                  <HamburgerIcon w={5} h={5} color="#FD4857" boxSize="32px" />
-                )
-              }
-              variant="ghost"
-              aria-label="Toggle Navigation"
-            />
           </HStack>
         </HStack>
       </Flex>
