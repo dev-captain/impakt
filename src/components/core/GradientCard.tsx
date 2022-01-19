@@ -6,6 +6,7 @@ type GradientCardProps = {
   subtitle: string;
   maxW?: string | any;
   minW?: string | any;
+  d?: any;
   // eslint-disable-next-line no-undef
   ThirdComponent?: () => JSX.Element;
 };
@@ -14,6 +15,7 @@ const GradientCard = ({
   title,
   subtitle,
   image,
+  d,
   ThirdComponent,
   maxW = '352px',
   minW = 'auto',
@@ -33,6 +35,7 @@ const GradientCard = ({
       position="relative"
       overflow="hidden"
       spacing="16px"
+      d={d || 'flex'}
       bgColor="rgba(31, 32, 36, 1)"
     >
       <GradientEllipse />

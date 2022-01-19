@@ -23,7 +23,7 @@ const ImpaktGamesHero = () => {
         columns={4}
         alignItems="center"
         justifyContent="center"
-        columnGap={{ base: '0px', md: '200px' }}
+        columnGap={{ base: '0px', md: '100px', xl: '200px' }}
       >
         <GridItem
           colSpan={{
@@ -35,15 +35,15 @@ const ImpaktGamesHero = () => {
           <Stack
             align={{
               base: 'center',
-              md: 'flex-start',
+              sm: 'flex-start',
             }}
           >
             <GradientCard
               title="Burn and Earn!"
-              maxW={{ base: 'full', md: '352px' }}
-              minW={{ base: 'full', md: '400px' }}
               image="assets/images/burntoearn.png"
               subtitle="Let’s start with us be happy"
+              maxW={{ base: 'full', sm: '328px', md: '352px' }}
+              minW={{ base: 'full', sm: '328px', md: '400px' }}
               // @ts-ignore
               ThirdComponent={memo(() => (
                 <HStack align="center" justify="center">
@@ -60,48 +60,57 @@ const ImpaktGamesHero = () => {
                 </HStack>
               ))}
             />
-            <VStack align={{ base: 'left', md: 'flex-start' }} paddingY="36px" spacing={4}>
+            <VStack
+              align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
+              paddingY={{ base: '0px', sm: '8px', md: '36px' }}
+              spacing={{ base: '16px', md: '0px', xl: '16px' }}
+            >
               <Text textStyle="TitleBold72" textAlign="left">
                 Impakt
                 <Text textStyle="TitleBold72">Games</Text>
               </Text>
               <Text
                 opacity={0.6}
+                textAlign="left"
                 fontSize={{ base: '18px', md: '20px' }}
-                paddingTop={{ base: '16px', md: '16px' }}
-                textAlign={{ base: 'left', md: 'left' }}
+                paddingTop={{ base: '0px', sm: '0px', md: '16px' }}
               >
                 Connect together and have fun while
                 <br />
                 experiencing gamified fitness
               </Text>
             </VStack>
-            <VStack spacing="24px">
+            <VStack spacing={{ base: '24px', sm: '24px', md: 0, xl: '24px' }} align="flex-start">
               <Image
                 maxW="320px"
                 objectFit="contain"
                 src="assets/images/macbook-mobile.png"
-                display={{ base: 'flex', md: 'none' }}
+                display={{ base: 'flex', sm: 'none' }}
               />
               <Button
                 px="80px"
                 py="32px"
-                borderRadius="20px"
                 fontSize="16px"
                 lineHeight="24px"
                 fontWeight="600"
-                w={{ base: 'fit-content', md: 'auto' }}
+                borderRadius="20px"
+                w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               >
                 Get started
               </Button>
+              <Image
+                objectFit="contain"
+                src="assets/images/macbook-tablet.png"
+                display={{ base: 'none', sm: 'flex', md: 'none' }}
+              />
             </VStack>
           </Stack>
         </GridItem>
         <GridItem
           alignItems="flex-end"
           justifyContent="flex-end"
-          display={{ base: 'none', md: 'flex' }}
+          display={{ base: 'none', xl: 'flex' }}
           colSpan={{
             base: 3,
             md: 2,
@@ -113,6 +122,15 @@ const ImpaktGamesHero = () => {
             objectFit="cover"
             src="assets/images/macbook.png"
           />
+        </GridItem>
+        <GridItem
+          display={{ base: 'none', sm: 'none', md: 'flex', xl: 'none' }}
+          colSpan={{
+            base: 3,
+            md: 2,
+          }}
+        >
+          <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
         </GridItem>
       </SimpleGrid>
     </HeroLayout>

@@ -28,11 +28,17 @@ const HeroLayout = ({
   pos,
 }: HeroLayoutProps) => {
   return (
-    // @ts-ignore
-    <Box minH="100vh" filter={hideBlur ? '' : 'blur(20px)'} overflowY="unset" pos={pos} w="full">
+    <Box
+      minH={{ base: 'auto', xl: '100vh' }}
+      filter={hideBlur ? '' : 'blur(20px)'}
+      overflowY="unset"
+      // @ts-ignore
+      pos={pos}
+      w="full"
+    >
       {showNavbar && <Navbar />}
       <VStack
-        minH="100vh"
+        minH={{ base: 'auto', xl: '100vh' }}
         minW="full"
         align={align}
         justify={justify}
@@ -40,6 +46,7 @@ const HeroLayout = ({
         backgroundImage={bgImage}
         backgroundColor={bgColor}
         paddingTop={showNavbar ? '120px' : '0px'}
+        paddingBottom={{ base: '60px', md: '120px', xl: 'auto' }}
       >
         {children}
         {addSpacer && <Spacer h={spacing} />}

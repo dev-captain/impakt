@@ -1,4 +1,4 @@
-import { Box, GridItem, HStack, Image, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Box, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
@@ -6,62 +6,71 @@ import { layoutPadding } from 'theme';
 const MotionCaptureHero = () => {
   return (
     <HeroLayout hideBlur>
-      <SimpleGrid columns={2} justifyContent="center" alignItems="center" px={layoutPadding}>
-        <GridItem display={{ base: 'none', md: 'flex' }}>
+      <SimpleGrid
+        columns={2}
+        justifyContent="center"
+        alignItems="center"
+        px={layoutPadding}
+        w={{ base: 'full', xl: 'auto' }}
+      >
+        <GridItem display={{ base: 'none', xl: 'flex' }}>
           <Image src="assets/images/motion-capture.png" />
         </GridItem>
         <GridItem
           colSpan={{
             base: 2,
-            md: 1,
+            md: 2,
+            xl: 1,
           }}
         >
-          <VStack textAlign="left" alignItems={{ base: 'left', md: 'flex-start' }}>
-            <Text
-              fontSize={{ base: '40px', md: '56px' }}
-              lineHeight={{ base: '56px', md: '60px' }}
-              fontWeight="300"
-            >
-              Motion Capture
-            </Text>
-            <Text
-              fontSize={{ base: '40px', md: '56px' }}
-              lineHeight={{ base: '56px', md: '60px' }}
-              fontWeight="700"
-            >
-              Technology
-            </Text>
-            <Text
-              fontSize="20px"
-              lineHeight="32px"
-              paddingTop={4}
-              opacity="0.62"
-              maxW="440px"
-              fontWeight="400"
-            >
-              Workout with your friends and battle in competitions.
-            </Text>
+          <VStack align="flex-start" spacing="40px">
+            <VStack textAlign="left" alignItems="flex-start">
+              <Text
+                fontSize={{ base: '40px', md: '56px' }}
+                lineHeight={{ base: '56px', md: '60px' }}
+                fontWeight="300"
+              >
+                Motion Capture
+              </Text>
+              <Text
+                fontSize={{ base: '40px', md: '56px' }}
+                lineHeight={{ base: '56px', md: '60px' }}
+                fontWeight="700"
+              >
+                Technology
+              </Text>
+              <Text
+                fontSize="20px"
+                lineHeight="32px"
+                paddingTop={4}
+                opacity="0.62"
+                maxW="440px"
+                fontWeight="400"
+              >
+                Workout with your friends and battle in competitions.
+              </Text>
+            </VStack>
+            <HStack spacing="20px" justify={{ base: 'center', sm: 'flex-start', md: 'flex-start' }}>
+              <SimpleGrid columns={2} columnGap={4} rowGap={4}>
+                <GridItem
+                  colSpan={{
+                    base: 1,
+                    md: 1,
+                  }}
+                >
+                  <MotionCard title="No VR needed, just a camera on your device" isVrGlass />
+                </GridItem>
+                <GridItem
+                  colSpan={{
+                    base: 1,
+                    md: 1,
+                  }}
+                >
+                  <MotionCard title="Highly accurate tracking of your movements" />
+                </GridItem>
+              </SimpleGrid>
+            </HStack>
           </VStack>
-          <HStack spacing="20px" justify={{ base: 'center', md: 'flex-start' }} paddingTop="64px">
-            <SimpleGrid columns={2} columnGap={4} rowGap={4}>
-              <GridItem
-                colSpan={{
-                  base: 1,
-                  md: 1,
-                }}
-              >
-                <MotionCard title="No VR needed, just a camera on your device" isVrGlass />
-              </GridItem>
-              <GridItem
-                colSpan={{
-                  base: 1,
-                  md: 1,
-                }}
-              >
-                <MotionCard title="Highly accurate tracking of your movements" />
-              </GridItem>
-            </SimpleGrid>
-          </HStack>
         </GridItem>
       </SimpleGrid>
     </HeroLayout>
@@ -80,9 +89,9 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
         maxH="250px"
         justify="center"
         p={7}
+        spacing="32px"
       >
         <Icon />
-        <Spacer />
         <Text fontSize={{ base: '14px', md: '16px' }} lineHeight="20px">
           {title}
         </Text>

@@ -12,10 +12,17 @@ const SingleTeamCard = () => {
       md: '28px',
     },
     px: {
-      base: '20px',
-      lg: '220px',
+      sm: '32px',
+      md: '40px',
+      xl: '120px',
+      base: '16px',
     },
-    py: [20, 90, 90, 130, 130, 230],
+    py: {
+      base: '16px',
+      md: '32px',
+      xl: '100px',
+      '2xl': '230px',
+    },
   };
 
   return (
@@ -39,7 +46,7 @@ const SingleTeamCard = () => {
         pos="absolute"
         background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
       />
-      <VStack align="flex-start" spacing={{ base: '20px', md: '120px' }} zIndex={1}>
+      <VStack align="flex-start" spacing={{ base: '20px', md: '80px', xl: '120px' }} zIndex={1}>
         <VStack align="flex-start" spacing={8}>
           <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="60px">
             Single & Team

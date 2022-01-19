@@ -34,6 +34,31 @@ const EarningsHero = () => {
             <Text fontSize="20px" lineHeight="32px" opacity="0.6" maxW="380px">
               Capitalize on your fitness routine.
             </Text>
+            <VStack
+              spacing="20px"
+              justify={{ base: 'center', md: 'flex-start' }}
+              d={{ base: 'none', sm: 'flex', md: 'none' }}
+            >
+              <Spacer h="80px" />
+              <SimpleGrid columns={2} columnGap={4} rowGap={4}>
+                <GridItem
+                  colSpan={{
+                    base: 1,
+                    md: 1,
+                  }}
+                >
+                  <EarnTokenCard isVrGlass title="Earn in-game rewards and crypto" />
+                </GridItem>
+                <GridItem
+                  colSpan={{
+                    base: 1,
+                    md: 1,
+                  }}
+                >
+                  <EarnTokenCard title="Trade NFTs" />
+                </GridItem>
+              </SimpleGrid>
+            </VStack>
             <Image
               src="assets/images/earning-token-hero.png"
               maxH="600px"
@@ -41,7 +66,11 @@ const EarningsHero = () => {
             />
           </VStack>
           <Spacer h="80px" />
-          <HStack spacing="20px" justify={{ base: 'center', md: 'flex-start' }}>
+          <HStack
+            spacing="20px"
+            justify={{ base: 'center', md: 'flex-start' }}
+            d={{ base: 'flex', sm: 'none', md: 'flex' }}
+          >
             <SimpleGrid columns={2} columnGap={4} rowGap={4}>
               <GridItem
                 colSpan={{
@@ -81,7 +110,7 @@ const EarnTokenCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: strin
         spacing="32px"
         align="flex-start"
         justify="flex-start"
-        minH={{ base: '220px' }}
+        minH={{ base: '220px', sm: '170px', md: '220px' }}
       >
         <Icon />
         <Text fontSize={{ base: '14px', md: '16px' }}>{title}</Text>

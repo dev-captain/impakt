@@ -8,8 +8,8 @@ const NFTMarketPlaceHero = () => {
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           columns={2}
-          justifyContent="center"
           alignItems="center"
+          justifyContent="center"
           columnGap={{ base: 4, md: 8 }}
         >
           <GridItem display={{ base: 'none', md: 'flex' }}>
@@ -53,18 +53,23 @@ const NFTMarketPlaceHero = () => {
               </Text>
               <Image
                 src="assets/images/nft-market-place.png"
-                d={{ base: 'flex', md: 'none' }}
+                d={{ base: 'flex', sm: 'none', md: 'none' }}
                 paddingBottom="30px"
               />
               <Button
                 px="64px"
                 py="32px"
                 borderRadius="10px"
-                w={{ base: 'full', md: 'auto' }}
+                w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               >
                 Get Started
               </Button>
+              <Image
+                src="assets/images/nft-market-place.png"
+                d={{ base: 'none', sm: 'flex', md: 'none' }}
+                paddingBottom="30px"
+              />
             </VStack>
           </GridItem>
         </SimpleGrid>

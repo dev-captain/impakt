@@ -25,8 +25,8 @@ const theme: ThemeOverride = {
     TitleBold72: {
       fontWeight: '900',
       fontFamily: `Poppins ,${base.fonts?.heading}`,
-      fontSize: { base: '72px', md: '120px' },
-      lineHeight: { base: '80px', md: '120px' },
+      fontSize: { base: '72px', sm: '120px', md: '98px', xl: '120px' },
+      lineHeight: { base: '80px', sm: '120px', md: '98px', xl: '120px' },
     },
   },
   components: {},

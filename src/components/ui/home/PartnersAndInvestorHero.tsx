@@ -5,7 +5,7 @@ import { layoutPadding } from 'theme';
 const PartnerAndInvestorHero = () => {
   const colSpan = {
     base: 6,
-    sm: 4,
+    sm: 6,
     md: 3,
     xl: 3,
     '2xl': 3,
@@ -31,7 +31,12 @@ const PartnerAndInvestorHero = () => {
               Partners
             </Text>
           </HStack>
-          <SimpleGrid columns={12} columnGap="24px" rowGap={{ base: '24px', xl: '46px' }} w="full">
+          <SimpleGrid
+            w="full"
+            columns={12}
+            columnGap={{ base: '8px', sm: '16px', md: '24px' }}
+            rowGap={{ base: '8px', sm: '16px', md: '24px', xl: '46px' }}
+          >
             {CompanyData.map(() => (
               <GridItem colSpan={colSpan} w="full">
                 <CompanyCard />
@@ -56,7 +61,12 @@ const PartnerAndInvestorHero = () => {
               Investor
             </Text>
           </HStack>
-          <SimpleGrid columns={12} columnGap="24px" rowGap={{ base: '24px', xl: '46px' }} w="full">
+          <SimpleGrid
+            w="full"
+            columns={12}
+            columnGap={{ base: '8px', sm: '16px', md: '24px' }}
+            rowGap={{ base: '8px', sm: '16px', md: '24px', xl: '46px' }}
+          >
             {CompanyData.map(() => (
               <GridItem colSpan={colSpan} w="full">
                 <CompanyCard />
@@ -83,8 +93,8 @@ const CompanyCard = () => {
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      minH={{ base: '100px', md: '156px' }}
-      maxW={{ base: '160px', md: '220px', xl: '350px' }}
+      minH={{ base: '80px', sm: '150px', md: '156px' }}
+      maxW={{ base: '160px', sm: '270px', md: '220px', xl: '350px' }}
     >
       <Image src="assets/images/logo.png" />
       <GradientEllipse />

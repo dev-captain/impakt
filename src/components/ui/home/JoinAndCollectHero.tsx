@@ -26,22 +26,42 @@ const JoinAndCollectHero = () => {
           px={{ base: '16px', md: 0 }}
         >
           <GridItem display={{ base: 'none', md: 'flex' }} zIndex={1} colSpan={2} w="full">
-            <HStack
-              bg='linear-gradient(89.4deg, #1F2024 1.43%, rgba(31, 32, 36, 0) 37.28%), url("assets/images/join-and-collect-hero.png")'
-              borderRadius="28px"
-              position="relative"
-              overflow="hidden"
-              bgSize="cover"
-            >
-              <GradientEllipse />
-              <Box
-                bg="linear-gradient(90deg, rgba(31, 32, 36, 0.784) 50%, rgba(31, 32, 36, 0.7124) 63.01%, rgba(31, 32, 36, 0.608) 72.58%, rgba(31, 32, 36, 0) 100%)"
-                borderRadius="28px"
-                w="full"
-                minH="400px"
-                minW="600px"
-              />
-            </HStack>
+            <CardBg />
+          </GridItem>
+          <GridItem
+            w="full"
+            zIndex={1}
+            colSpan={4}
+            display={{ base: 'none', sm: 'flex', md: 'none' }}
+          >
+            <CardBg>
+              <VStack
+                alignItems="flex-start"
+                px="40px"
+                py="48px"
+                w="500px"
+                spacing="140px"
+                zIndex={2}
+              >
+                <Text
+                  color="white"
+                  fontWeight="400"
+                  lineHeight={{ base: '44px', md: '60px' }}
+                  fontSize={{ base: '40px', md: '52px', xl: '56px' }}
+                >
+                  Join and
+                  <Text>collect your</Text>
+                  <Text fontWeight="700" paddingTop={2}>
+                    NFT collection!
+                  </Text>
+                </Text>
+                <GradientButton
+                  title="NFT marketplace"
+                  w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
+                  bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                />
+              </VStack>
+            </CardBg>
           </GridItem>
           <GridItem
             colSpan={{
@@ -58,7 +78,7 @@ const JoinAndCollectHero = () => {
                 spacing={{ base: '32px', md: '8px' }}
                 alignItems={{ base: 'flex-start', md: 'flex-start' }}
               >
-                <VStack alignItems="flex-start">
+                <VStack alignItems="flex-start" d={{ base: 'flex', sm: 'none', md: 'flex' }}>
                   <Text
                     fontWeight="300"
                     lineHeight={{ base: '44px', md: '60px' }}
@@ -72,7 +92,7 @@ const JoinAndCollectHero = () => {
                   </Text>
                 </VStack>
                 <HStack
-                  d={{ base: 'flex', md: 'none' }}
+                  d={{ base: 'flex', sm: 'none' }}
                   bg='linear-gradient(89.4deg, #1F2024 1.43%, rgba(31, 32, 36, 0) 37.28%), url("assets/images/join-and-collect-hero.png")'
                   borderRadius="28px"
                   position="relative"
@@ -90,8 +110,9 @@ const JoinAndCollectHero = () => {
                 </HStack>
               </VStack>
               <GradientButton
-                w={{ base: 'full', md: 'auto' }}
                 title="NFT marketplace"
+                w={{ base: 'full', md: 'auto' }}
+                d={{ base: 'flex', sm: 'none', md: 'flex' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               />
             </VStack>
@@ -116,5 +137,30 @@ const GradientEllipse = () => {
       zIndex={1}
       bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
     />
+  );
+};
+
+// eslint-disable-next-line no-undef
+const CardBg = ({ children }: { children?: JSX.Element }) => {
+  return (
+    <HStack
+      bg='linear-gradient(89.4deg, #1F2024 1.43%, rgba(31, 32, 36, 0) 37.28%), url("assets/images/join-and-collect-hero.png")'
+      borderRadius="28px"
+      position="relative"
+      overflow="hidden"
+      bgSize="cover"
+      w="full"
+    >
+      {children}
+      <GradientEllipse />
+      <Box
+        d={{ base: 'flex', md: 'flex', sm: 'none' }}
+        bg="linear-gradient(90deg, rgba(31, 32, 36, 0.784) 50%, rgba(31, 32, 36, 0.7124) 63.01%, rgba(31, 32, 36, 0.608) 72.58%, rgba(31, 32, 36, 0) 100%)"
+        borderRadius="28px"
+        w="full"
+        minH="400px"
+        minW="600px"
+      />
+    </HStack>
   );
 };

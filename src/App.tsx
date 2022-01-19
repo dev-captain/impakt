@@ -1,5 +1,6 @@
+/* eslint-disable no-dupe-keys */
 import { Container } from '@chakra-ui/layout';
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, Circle, Text } from '@chakra-ui/react';
 import {
   RoadMapHero,
   Footer,
@@ -29,6 +30,20 @@ const App = () => {
 
   return (
     <Container spacing={0} p={0} minW="full" m={0}>
+      <Circle
+        size="100px"
+        // @ts-ignore
+        sx={{ position: '-webkit-sticky', /* Safari */ position: 'sticky', top: '0' }}
+        bgColor="red.900"
+        alignSelf="flex-end"
+        zIndex={1000}
+      >
+        <Text d={{ base: 'flex', sm: 'none' }}>base</Text>
+        <Text d={{ base: 'none', sm: 'flex', md: 'none' }}>sm</Text>
+        <Text d={{ base: 'none', sm: 'none', md: 'flex', xl: 'none' }}>md</Text>
+        <Text d={{ base: 'none', md: 'none', xl: 'flex', '2xl': 'none' }}>xl</Text>
+        <Text d={{ base: 'none', md: 'none', xl: 'none', '2xl': 'flex' }}>2xl</Text>
+      </Circle>
       <div id="impakt-games">
         <ImpaktGamesHero />
       </div>

@@ -10,6 +10,7 @@ const GradientButton = ({
   px,
   minW,
   radius,
+  d,
 }: {
   title: string;
   icon?: string;
@@ -19,12 +20,14 @@ const GradientButton = ({
   py?: string;
   radius?: string;
   minW?: string;
+  d?: any;
 }) => {
   const Icon = icon ? Icons?.[icon] : undefined;
 
   return (
     <Button
       w={w}
+      d={d}
       size="lg"
       px={px || '3rem'}
       py={py || '2rem'}

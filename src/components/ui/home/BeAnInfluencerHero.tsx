@@ -41,6 +41,13 @@ const BeAnInfluencerHero = () => {
                 <Text fontSize="20px" lineHeight="32px" opacity="0.6" maxW="380px">
                   And host single or team competitions rewarding NFT members!
                 </Text>
+                <GradientCard
+                  title="Baloon Pump"
+                  subtitle="Competition game"
+                  d={{ base: 'none', sm: 'flex', md: 'none' }}
+                  maxW={{ base: 'full', sm: '352px' }}
+                  image="assets/images/baloon-pump.png"
+                />
                 <Image
                   maxH="600px"
                   d={{ base: 'flex', md: 'none' }}
@@ -50,7 +57,8 @@ const BeAnInfluencerHero = () => {
               <GradientCard
                 title="Baloon Pump"
                 subtitle="Competition game"
-                maxW={{ base: 'full', md: '352px' }}
+                d={{ base: 'flex', sm: 'none', md: 'flex' }}
+                maxW={{ base: 'full', sm: '352px' }}
                 image="assets/images/baloon-pump.png"
               />
             </VStack>

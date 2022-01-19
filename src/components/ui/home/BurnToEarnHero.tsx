@@ -10,13 +10,16 @@ const BurnToEarnHero = () => {
       md: '28px',
     },
     px: {
-      base: '20px',
-      lg: '220px',
+      sm: '32px',
+      md: '40px',
+      xl: '120px',
+      base: '16px',
     },
     py: {
-      base: '20px',
-      md: '120px',
-      lg: '240px',
+      base: '60px',
+      md: '100px',
+      xl: '180px',
+      '2xl': '240px',
     },
   };
 
@@ -26,6 +29,7 @@ const BurnToEarnHero = () => {
         <HStack
           w="full"
           bgSize="cover"
+          bgPos={{ base: 'top', xl: 'center' }}
           justify="space-between"
           align="space-between"
           {...vStackSomeProps}
