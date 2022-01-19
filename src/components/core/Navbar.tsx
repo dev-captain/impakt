@@ -113,10 +113,10 @@ const Navbar = () => {
             spacing={[0, 0, 3, 5, 8, 12]}
             justify="flex-end"
           >
-            <NavbarLinkItem title="Impakt Games" isActive href="#" />
-            <NavbarLinkItem title="Tokenomics" href="#" />
-            <NavbarLinkItem title="Roadmap" href="#motion-capture" />
-            <NavbarLinkItem title="How to sign up" href="#motion-capture" />
+            <NavbarLinkItem title="Impakt Games" isActive href="/" />
+            <NavbarLinkItem title="Tokenomics" href="#tokenomics" />
+            <NavbarLinkItem title="Roadmap" href="#road-map" />
+            <NavbarLinkItem title="How to sign up" href="#how-to-sign-up" />
             <NavbarLinkItem title="NFT Marketplace" href="#nft-marketplace" />
             <GradientButton
               title="Sign In"
@@ -147,10 +147,10 @@ const Navbar = () => {
       </Flex>
       <Collapse in={isOpen} animateOpacity>
         <VStack spacing={0} paddingBottom={8} bg="rgba(31, 32, 36, 1)" h="100vh">
-          <NavbarLinkItem title="Impakt Games" isActive hide href="#" onClose={onClose} />
-          <NavbarLinkItem title="Tokenomics" hide href="#" onClose={onClose} />
-          <NavbarLinkItem title="Roadmap" hide href="#motion-capture" onClose={onClose} />
-          <NavbarLinkItem title="How to sign up" hide href="#motion-capture" onClose={onClose} />
+          <NavbarLinkItem title="Impakt Games" isActive hide href="/" onClose={onClose} />
+          <NavbarLinkItem title="Tokenomics" hide href="#tokenomics" onClose={onClose} />
+          <NavbarLinkItem title="Roadmap" hide href="#road-map" onClose={onClose} />
+          <NavbarLinkItem title="How to sign up" hide href="#how-to-sign-up" onClose={onClose} />
           <NavbarLinkItem title="NFT Marketplace" hide href="#nft-marketplace" onClose={onClose} />
         </VStack>
       </Collapse>
