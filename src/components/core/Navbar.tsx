@@ -11,11 +11,11 @@ import {
   VStack,
   Link,
   useMediaQuery,
+  Image,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { layoutPadding } from 'theme';
 import GradientButton from './GradientButton';
-import SmallLogo from './SmallLogo';
 
 const SelectedNavbarLinkBorder = () => {
   return (
@@ -104,7 +104,7 @@ const Navbar = () => {
             aria-label="Toggle Navigation"
           />
           <Box as="a" href="/" zIndex={100}>
-            <SmallLogo />
+            <Image src="assets/images/logo.png" />
           </Box>
           <HStack
             display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
