@@ -29,6 +29,7 @@ const OurCommunityHero = () => {
           maxH="622px"
           bgSize="cover"
           overflow="hidden"
+          bgPosition="center"
           position="relative"
           {...vStackSomeProps}
           backgroundImage={bgImage}

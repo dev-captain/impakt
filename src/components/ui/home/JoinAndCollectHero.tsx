@@ -70,8 +70,15 @@ const JoinAndCollectHero = () => {
             }}
             zIndex={2}
             {...commonProps}
+            h="full"
           >
-            <VStack spacing="52px" align={{ base: 'center', md: 'flex-start' }} w="full">
+            <VStack
+              spacing="52px"
+              align={{ base: 'center', md: 'flex-start' }}
+              w="full"
+              h="full"
+              justifyContent="center"
+            >
               <VStack
                 w="full"
                 {...commonProps}

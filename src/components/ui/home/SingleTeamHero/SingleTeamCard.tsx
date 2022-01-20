@@ -35,6 +35,7 @@ const SingleTeamCard = () => {
       backgroundImage={bgImage}
       position="relative"
       overflow="hidden"
+      backgroundPosition="center"
     >
       <Box
         w="967px"

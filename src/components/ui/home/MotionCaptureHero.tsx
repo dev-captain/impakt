@@ -13,13 +13,13 @@ const MotionCaptureHero = () => {
         px={layoutPadding}
         w={{ base: 'full', xl: 'auto' }}
       >
-        <GridItem display={{ base: 'none', xl: 'flex' }}>
+        <GridItem display={{ base: 'none', md: 'flex' }}>
           <Image src="assets/images/motion-capture.png" />
         </GridItem>
         <GridItem
           colSpan={{
             base: 2,
-            md: 2,
+            md: 1,
             xl: 1,
           }}
         >

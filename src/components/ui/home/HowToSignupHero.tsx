@@ -32,6 +32,7 @@ const HowToSignUpHero = () => {
           backgroundImage={bgImage}
           overflow="hidden"
           position="relative"
+          backgroundPosition="center"
         >
           <VStack
             zIndex={1}

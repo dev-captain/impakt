@@ -51,23 +51,41 @@ const Footer = () => {
                 <SimpleGrid columns={2} rowGap={1}>
                   <GridItem colSpan={{ base: 2, md: 1 }}>
                     <VStack align={{ base: 'center', md: 'flex-start' }}>
-                      <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+                      <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="/">
                         Impakt Games
                       </Text>
-                      <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+                      <Text
+                        fontSize="16px"
+                        lineHeight="24px"
+                        opacity="0.4"
+                        as="a"
+                        href="#nft-marketplace"
+                      >
                         NFT marketplace
                       </Text>
-                      <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+                      <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#about-us">
                         About us
                       </Text>
                     </VStack>
                   </GridItem>
                   <GridItem colSpan={{ base: 2, md: 1 }}>
                     <VStack align={{ base: 'center', md: 'flex-start' }}>
-                      <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+                      <Text
+                        fontSize="16px"
+                        lineHeight="24px"
+                        opacity="0.4"
+                        as="a"
+                        href="#policy-privacy"
+                      >
                         Policy Privacy
                       </Text>
-                      <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+                      <Text
+                        fontSize="16px"
+                        lineHeight="24px"
+                        opacity="0.4"
+                        as="a"
+                        href="#term-of-use"
+                      >
                         Terms of use
                       </Text>
                     </VStack>
@@ -77,9 +95,9 @@ const Footer = () => {
             </SimpleGrid>
           </GridItem>
           <GridItem colSpan={{ base: 5, md: 1 }} marginTop={{ base: 0, md: '60px' }}>
-            <HStack justify={{ base: 'center', md: 'flex-end' }}>
-              <Icons.Facebook />
+            <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px">
               <Icons.SmallTwitter />
+              <Icons.Facebook />
             </HStack>
           </GridItem>
           <GridItem
@@ -127,28 +145,28 @@ const Footer = () => {
         <VStack w="full">
           <HStack align="flex-start" justify="space-between" w="full">
             <Image src="assets/images/logo.png" />
-            <HStack justify={{ base: 'center', md: 'flex-end' }}>
-              <Icons.Facebook />
+            <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="16px">
               <Icons.SmallTwitter />
+              <Icons.Facebook />
             </HStack>
           </HStack>
           <HStack align="flex-start" justify="flex-start" w="full" spacing="40px" pt="16px">
             <VStack align="flex-start">
-              <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+              <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="/">
                 Impakt Games
               </Text>
-              <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+              <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#nft-marketplace">
                 NFT marketplace
               </Text>
-              <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+              <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#about-us">
                 About us
               </Text>
             </VStack>
             <VStack align="flex-start">
-              <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+              <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#policy-privacy">
                 Policy Privacy
               </Text>
-              <Text fontSize="16px" lineHeight="24px" opacity="0.4">
+              <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#term-of-use">
                 Terms of use
               </Text>
             </VStack>

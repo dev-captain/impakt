@@ -7,10 +7,10 @@ import {
   HStack,
   IconButton,
   Text,
-  useBreakpointValue,
   useDisclosure,
   VStack,
   Link,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { layoutPadding } from 'theme';
@@ -67,17 +67,13 @@ const NavbarLinkItem = ({
 
 const Navbar = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const hide = useBreakpointValue({
-    base: false,
-    md: false,
-    lg: true,
-  });
+  const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
 
   useEffect(() => {
-    if (hide) {
+    if (!isLessThan1040) {
       onClose();
     }
-  }, [hide, onClose]);
+  }, [isLessThan1040, onClose]);
 
   return (
     <Box pos="absolute" zIndex="100" w="full">
@@ -95,7 +91,7 @@ const Navbar = () => {
         <HStack w="full" justify="space-between" px={layoutPadding}>
           <IconButton
             zIndex={100}
-            display={['flex', 'flex', 'flex', 'none']}
+            display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
             onClick={onToggle}
             icon={
               isOpen ? (
@@ -107,9 +103,11 @@ const Navbar = () => {
             variant="ghost"
             aria-label="Toggle Navigation"
           />
-          <SmallLogo />
+          <Box as="a" href="/" zIndex={100}>
+            <SmallLogo />
+          </Box>
           <HStack
-            display={['none', 'none', 'none', 'flex']}
+            display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
             spacing={[0, 0, 3, 5, 8, 12]}
             justify="flex-end"
           >
@@ -128,7 +126,7 @@ const Navbar = () => {
           </HStack>
           <HStack
             flex={{ base: 1, md: 'auto' }}
-            display={['flex', 'flex', 'flex', 'none']}
+            display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
             justify="flex-end"
             align="center"
             spacing="44px"

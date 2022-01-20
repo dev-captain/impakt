@@ -15,7 +15,7 @@ const PartnerAndInvestorHero = () => {
     <HeroLayout hideBlur>
       <VStack spacing="120px" py={10} px={layoutPadding} w="full">
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
-          <HStack spacing={5}>
+          <HStack w="full" spacing={5} justify={{ base: 'flex-start', md: 'center' }}>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '44px', md: '60px' }}
@@ -45,7 +45,7 @@ const PartnerAndInvestorHero = () => {
           </SimpleGrid>
         </VStack>
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
-          <HStack spacing={5}>
+          <HStack w="full" spacing={5} justify={{ base: 'flex-start', md: 'center' }}>
             <Text
               fontWeight="300"
               fontSize={{ base: '40px', md: '56px' }}

@@ -6,7 +6,16 @@ const TokenomicsHero = () => {
   return (
     <HeroLayout hideBlur>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
-        <SimpleGrid columns={2} w="full" justifyContent="center" alignItems="center" columnGap={4}>
+        <SimpleGrid
+          columns={2}
+          w="full"
+          justifyContent="center"
+          alignItems="center"
+          columnGap={{
+            base: 0,
+            md: '140px',
+          }}
+        >
           <GridItem display={{ base: 'none', md: 'flex' }} colSpan={{ base: 2, md: 1 }}>
             <Image src="assets/images/tokenomics-hero.png" maxH="600px" />
           </GridItem>
