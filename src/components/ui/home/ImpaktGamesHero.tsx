@@ -37,6 +37,7 @@ const ImpaktGamesHero = () => {
               base: 'center',
               sm: 'flex-start',
             }}
+            pt={{ base: '32px', md: '80px', xl: '40px', '2xl': '107px' }}
           >
             <GradientCard
               title="Burn and Earn!"
@@ -95,6 +96,7 @@ const ImpaktGamesHero = () => {
                 fontWeight="600"
                 borderRadius="20px"
                 w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
+                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               >
                 Get started
@@ -120,6 +122,7 @@ const ImpaktGamesHero = () => {
             w="fit-content"
             h="fit-content"
             objectFit="cover"
+            maxH="550px"
             src="assets/images/macbook.png"
           />
         </GridItem>

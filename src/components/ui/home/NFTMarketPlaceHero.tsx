@@ -57,10 +57,11 @@ const NFTMarketPlaceHero = () => {
                 paddingBottom="30px"
               />
               <Button
-                px="64px"
+                px="80px"
                 py="32px"
-                borderRadius="10px"
+                borderRadius="20px"
                 w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
+                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               >
                 Get Started

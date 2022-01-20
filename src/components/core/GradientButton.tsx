@@ -39,6 +39,7 @@ const GradientButton = ({
       disabled={disabled}
       minW={minW || '160px'}
       borderRadius={radius || '20px'}
+      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
       bgGradient={bgGradient || 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)'}
     >
       <HStack spacing={2} alignItems="center" justifyContent="center">

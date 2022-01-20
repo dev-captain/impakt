@@ -37,6 +37,7 @@ const GradientCard = ({
       spacing="16px"
       d={d || 'flex'}
       bgColor="rgba(31, 32, 36, 1)"
+      filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <GradientEllipse />
       <Image src={image} borderRadius="20px" zIndex={2} w="80px" h="80px" objectFit="cover" />
