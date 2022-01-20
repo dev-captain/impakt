@@ -13,7 +13,8 @@ const TokenomicsHero = () => {
           alignItems="center"
           columnGap={{
             base: 0,
-            md: '140px',
+            md: '100px',
+            xl: '140px',
           }}
         >
           <GridItem display={{ base: 'none', md: 'flex' }} colSpan={{ base: 2, md: 1 }}>
@@ -31,7 +32,7 @@ const TokenomicsHero = () => {
               alignItems={{ base: 'center', md: 'flex-start' }}
             >
               <Text
-                fontSize={{ base: '40px', md: '56px' }}
+                fontSize={{ base: '40px', md: '50px', xl: '56px' }}
                 lineHeight="60px"
                 fontWeight="700"
                 alignSelf={{ base: 'flex-start', md: 'auto' }}

@@ -57,7 +57,7 @@ const Contact = () => {
                 >
                   Contact
                 </Text>
-                <Text minW={{ base: '110px', md: '180px' }}>Us</Text>
+                <Text>Us</Text>
               </Text>
               <VStack
                 bgColor="#1F2024"
