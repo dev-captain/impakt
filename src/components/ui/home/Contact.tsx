@@ -41,7 +41,7 @@ const Contact = () => {
       <VStack px={layoutPadding} w="full">
         <SimpleGrid columns={2} w="full" columnGap={4}>
           <GridItem colSpan={1} d={{ base: 'none', md: 'flex' }}>
-            <Image src="assets/images/contact-us.png" maxH="400px" />
+            <Image src="assets/images/contact-us.png" maxH="600px" objectFit="contain" />
           </GridItem>
           <GridItem colSpan={{ base: 2, sm: 2, md: 1 }}>
             <VStack w="full" spacing="20px" align="flex-start">

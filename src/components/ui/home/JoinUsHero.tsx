@@ -13,6 +13,7 @@ const JoinUsHero = () => {
     <HeroLayout hideBlur>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
+          w="full"
           columns={5}
           justifyContent={{ base: 'flex-start', md: 'center' }}
           alignItems={{ base: 'flex-start', md: 'center' }}

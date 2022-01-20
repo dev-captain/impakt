@@ -8,11 +8,12 @@ const NFTMarketPlaceHero = () => {
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           columns={2}
+          w="full"
           alignItems="center"
           justifyContent="center"
           columnGap={{ base: 4, md: 8 }}
         >
-          <GridItem display={{ base: 'none', md: 'flex' }}>
+          <GridItem display={{ base: 'none', md: 'flex' }} w="full">
             <Image src="assets/images/nft-market-place.png" />
           </GridItem>
           <GridItem

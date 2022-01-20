@@ -18,6 +18,7 @@ const RoadMapHero = () => {
         px={layoutPadding}
         py={{ base: 16, md: 0 }}
         p={{ base: 0, md: 8 }}
+        align={{ base: 'center', xl: 'center', '2xl': 'flex-start' }}
       >
         <HStack
           w="full"

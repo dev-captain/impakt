@@ -25,7 +25,7 @@ const JoinAndCollectHero = () => {
           }}
           px={{ base: '16px', md: 0 }}
         >
-          <GridItem display={{ base: 'none', md: 'flex' }} zIndex={1} colSpan={2} w="full">
+          <GridItem display={{ base: 'none', md: 'flex' }} zIndex={1} colSpan={2}>
             <CardBg />
           </GridItem>
           <GridItem

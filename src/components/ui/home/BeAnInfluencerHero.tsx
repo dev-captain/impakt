@@ -12,7 +12,7 @@ const BeAnInfluencerHero = () => {
   return (
     <HeroLayout hideBlur>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
-        <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={20}>
+        <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={20} w="full">
           <GridItem
             colSpan={{
               base: 2,
