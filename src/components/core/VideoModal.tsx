@@ -36,13 +36,13 @@ function VideoModal({ showPlayer = true, isOpen, onOpen, onClose }: Props) {
           >
             <DownloadButton
               iconName="Window"
-              title="Download for Window"
-              link="https://www.notion.so/desktop/mac/download"
+              title="Download Window"
+              link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
             />
             <DownloadButton
               iconName="Apple"
-              title="Download for Mac"
-              link="https://www.notion.so/desktop/mac/download"
+              title="Download Mac"
+              link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Mac/Impakt_Mac_v1.0.0.zip"
             />
           </SimpleGrid>
         </ModalContent>

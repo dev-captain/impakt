@@ -78,6 +78,7 @@ const ImpaktGamesHero = () => {
                 overflow="hidden"
                 align="center"
                 justify="center"
+                onClick={disclosure.onOpen}
               >
                 <VideoModal {...disclosure} />
                 <Image
@@ -118,6 +119,7 @@ const ImpaktGamesHero = () => {
                 pos="relative"
                 align="center"
                 justify="center"
+                onClick={disclosure.onOpen}
                 display={{ base: 'none', sm: 'flex', md: 'none' }}
               >
                 <VideoModal {...disclosure} />
@@ -148,6 +150,7 @@ const ImpaktGamesHero = () => {
           }}
           pos="relative"
           overflow="hidden"
+          onClick={disclosure.onOpen}
           mt={{ base: 'auto', md: '48px' }}
         >
           <Image
@@ -180,6 +183,7 @@ const ImpaktGamesHero = () => {
           }}
           pos="relative"
           overflow="hidden"
+          onClick={disclosure.onOpen}
         >
           <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
           <VideoModal {...disclosure} />

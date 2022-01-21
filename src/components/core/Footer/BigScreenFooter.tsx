@@ -46,10 +46,10 @@ const BigScreenFooter = () => {
               <SimpleGrid columns={2} rowGap={1}>
                 <GridItem colSpan={{ base: 2, md: 1 }}>
                   <VStack align={{ base: 'center', md: 'flex-start' }}>
-                    <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="/">
+                    {/* <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="/">
                       Impakt Games
-                    </Text>
-                    <Text
+                    </Text> */}
+                    {/* <Text
                       fontSize="16px"
                       lineHeight="24px"
                       opacity="0.4"
@@ -60,11 +60,11 @@ const BigScreenFooter = () => {
                     </Text>
                     <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#about-us">
                       About us
-                    </Text>
+                    </Text> */}
                   </VStack>
                 </GridItem>
                 <GridItem colSpan={{ base: 2, md: 1 }}>
-                  <VStack align={{ base: 'center', md: 'flex-start' }}>
+                  {/* <VStack align={{ base: 'center', md: 'flex-start' }}>
                     <Text
                       fontSize="16px"
                       lineHeight="24px"
@@ -83,16 +83,22 @@ const BigScreenFooter = () => {
                     >
                       Terms of use
                     </Text>
-                  </VStack>
+                  </VStack> */}
                 </GridItem>
               </SimpleGrid>
             </GridItem>
           </SimpleGrid>
         </GridItem>
         <GridItem colSpan={{ base: 5, md: 1 }} marginTop={{ base: 0, md: '60px' }}>
-          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px">
+          <HStack
+            justify={{ base: 'center', md: 'flex-end' }}
+            spacing="32px"
+            as="a"
+            target="_blank"
+            href="https://twitter.com/demideuszin"
+          >
             <Icons.SmallTwitter />
-            <Icons.Facebook />
+            {/* <Icons.Facebook /> */}
           </HStack>
         </GridItem>
         <GridItem

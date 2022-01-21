@@ -14,13 +14,19 @@ const SmallScreenFooter = () => {
       <VStack w="full">
         <HStack align="flex-start" justify="space-between" w="full">
           <Image src="assets/images/logo.png" />
-          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="16px">
+          <HStack
+            justify={{ base: 'center', md: 'flex-end' }}
+            spacing="16px"
+            as="a"
+            target="_blank"
+            href="https://twitter.com/demideuszin"
+          >
             <Icons.SmallTwitter />
-            <Icons.Facebook />
+            {/* <Icons.Facebook /> */}
           </HStack>
         </HStack>
-        <HStack align="flex-start" justify="flex-start" w="full" spacing="40px" pt="16px">
-          <VStack align="flex-start">
+        <HStack align="flex-start" justify="flex-start" w="full" spacing="40px">
+          {/* <VStack align="flex-start">
             <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="/">
               Impakt Games
             </Text>
@@ -30,17 +36,17 @@ const SmallScreenFooter = () => {
             <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#about-us">
               About us
             </Text>
-          </VStack>
-          <VStack align="flex-start">
+          </VStack> */}
+          {/* <VStack align="flex-start">
             <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#policy-privacy">
               Policy Privacy
             </Text>
             <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#term-of-use">
               Terms of use
             </Text>
-          </VStack>
+          </VStack> */}
         </HStack>
-        <VStack spacing="8px" align="flex-start" w="full" pt="24px">
+        <VStack spacing="8px" align="flex-start" w="full">
           <Text display="flex" fontSize="12px" lineHeight="24px" flexDir="row" fontWeight="500">
             <Text fontWeight="400" opacity="0.6">
               Made by
