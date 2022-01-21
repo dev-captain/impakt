@@ -15,6 +15,7 @@ import {
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 import VideoModal from 'components/core/VideoModal';
+import { Videos } from 'data';
 
 const backgroundImage = "url('assets/images/firstherobg.png')";
 
@@ -79,7 +80,7 @@ const ImpaktGamesHero = () => {
                 justify="center"
                 onClick={disclosure.onOpen}
               >
-                <VideoModal {...disclosure} />
+                <VideoModal {...disclosure} path={Videos.impaktGames} />
                 <Image
                   maxW="320px"
                   objectFit="contain"
@@ -121,7 +122,7 @@ const ImpaktGamesHero = () => {
                 onClick={disclosure.onOpen}
                 display={{ base: 'none', sm: 'flex', md: 'none' }}
               >
-                <VideoModal {...disclosure} />
+                <VideoModal {...disclosure} path={Videos.impaktGames} />
                 <Image objectFit="contain" src="assets/images/macbook-tablet.png" />
                 <Box
                   top="8px"
@@ -159,7 +160,7 @@ const ImpaktGamesHero = () => {
             objectFit="contain"
             src="assets/images/macbook.png"
           />
-          <VideoModal {...disclosure} />
+          <VideoModal {...disclosure} path={Videos.impaktGames} />
           <Box
             right="16px"
             maxH="550px"
@@ -185,7 +186,7 @@ const ImpaktGamesHero = () => {
           onClick={disclosure.onOpen}
         >
           <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
-          <VideoModal {...disclosure} />
+          <VideoModal {...disclosure} path={Videos.impaktGames} />
           <Box
             top="32px"
             maxH="550px"

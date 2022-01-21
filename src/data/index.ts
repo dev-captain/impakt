@@ -62,4 +62,9 @@ export const TokenomicsData = [
     color: '#C627B5',
   },
 ];
+
+export const Videos = {
+  burnAndEarn: 'assets/videos/burn-and-earn.mp4',
+  impaktGames: 'assets/videos/impakt-games.mov',
+};
 export default {};

@@ -2,6 +2,7 @@ import { Box, Center, HStack, Text, useDisclosure, VStack } from '@chakra-ui/rea
 import VideoModal from 'components/core/VideoModal';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { Videos } from 'data';
 import { layoutPadding } from 'theme';
 
 const BurnToEarnHero = () => {
@@ -38,6 +39,7 @@ const BurnToEarnHero = () => {
           backgroundImage={bgImage}
           overflow="hidden"
           position="relative"
+          onClick={disclosure.onOpen}
         >
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>
@@ -68,12 +70,7 @@ const BurnToEarnHero = () => {
           />
         </HStack>
       </VStack>
-      <VideoModal
-        showPlayer={false}
-        {...disclosure}
-        hideButtons
-        path="assets/videos/burn-and-earn.mp4"
-      />
+      <VideoModal showPlayer={false} {...disclosure} hideButtons path={Videos.burnAndEarn} />
     </HeroLayout>
   );
 };
