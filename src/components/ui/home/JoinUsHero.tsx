@@ -1,5 +1,6 @@
-import { GridItem, SimpleGrid, Text, VStack, Image } from '@chakra-ui/react';
+import { GridItem, SimpleGrid, Text, VStack, Image, useDisclosure } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
+import VideoModal from 'components/core/VideoModal';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
@@ -9,8 +10,12 @@ const commonProps: any = {
 };
 
 const JoinUsHero = () => {
+  const disclosure = useDisclosure();
+
   return (
     <HeroLayout hideBlur>
+      <VideoModal showPlayer={false} {...disclosure} />
+
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           w="full"
@@ -57,7 +62,8 @@ const JoinUsHero = () => {
                 <Image src="assets/images/joinus-hero.png" display={{ base: 'flex', md: 'none' }} />
               </VStack>
               <GradientButton
-                title="Get started"
+                title="Sneak Peek"
+                onClick={disclosure.onOpen}
                 w={{ base: 'full', md: 'auto' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               />
