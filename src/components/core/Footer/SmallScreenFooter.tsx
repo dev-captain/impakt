@@ -1,4 +1,4 @@
-import { VStack, Text, HStack, Image } from '@chakra-ui/react';
+import { VStack, Text, HStack, Image, Box } from '@chakra-ui/react';
 import Icons from 'components/icons';
 
 const SmallScreenFooter = () => {
@@ -14,15 +14,19 @@ const SmallScreenFooter = () => {
       <VStack w="full">
         <HStack align="flex-start" justify="space-between" w="full">
           <Image src="assets/images/logo.png" />
-          <HStack
-            justify={{ base: 'center', md: 'flex-end' }}
-            spacing="16px"
-            as="a"
-            target="_blank"
-            href="https://twitter.com/demideuszin"
-          >
-            <Icons.SmallTwitter />
-            {/* <Icons.Facebook /> */}
+          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px">
+            <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
+              <Icons.SmallTwitter />
+            </Box>
+            <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
+              <Image
+                w="30px"
+                h="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src="assets/images/discord.png"
+              />
+            </Box>
           </HStack>
         </HStack>
         <HStack align="flex-start" justify="flex-start" w="full" spacing="40px">
