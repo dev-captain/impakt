@@ -1,4 +1,4 @@
-import { Box, GridItem, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { GridItem, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import TextareaField from 'components/core/TextareaField';
 import TextField from 'components/core/TextField';
@@ -6,6 +6,8 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import useContactUs from 'hooks/useContactUs';
 import React, { useState } from 'react';
 import { layoutPadding } from 'theme';
+import { validateEmail } from 'utils';
+import { ContactGradientEllipse, ContactGradientEllipse1 } from '../gradients';
 
 const Contact = () => {
   const { sendData, loading } = useContactUs();
@@ -71,8 +73,8 @@ const Contact = () => {
                 position="relative"
                 spacing="32px"
               >
-                <GradientEllipse />
-                <GradientEllipse1 />
+                <ContactGradientEllipse />
+                <ContactGradientEllipse1 />
                 <VStack w="full" spacing="16px">
                   <TextField placeholder="Your name" name="name" onChange={onChange} />
                   <TextField placeholder="Your e-mail" name="email" onChange={onChange} />
@@ -102,37 +104,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-const GradientEllipse = () => {
-  return (
-    <Box
-      opacity="0.8"
-      pos="absolute"
-      w="252px"
-      h="224px"
-      zIndex={2}
-      left="-109px"
-      top="-136px"
-      filter="blur(94px)"
-      background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
-    />
-  );
-};
-
-const GradientEllipse1 = () => {
-  return (
-    <Box
-      opacity="0.8"
-      pos="absolute"
-      w="380px"
-      h="338px"
-      zIndex={2}
-      left="347px"
-      top="-196px"
-      filter="blur(94px)"
-      background="radial-gradient(50% 50% at 50% 50%, #D33B26 0%, rgba(242, 112, 17, 0) 100%)"
-    />
-  );
-};
-
-export const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);

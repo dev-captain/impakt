@@ -6,4 +6,6 @@ export const horizontalScrollBy = (ref: any, size = 0) => {
   });
 };
 
+export const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+
 export default {};

@@ -1,7 +1,9 @@
-import { Box, Button, Center, HStack, Text, VStack } from '@chakra-ui/react';
-import Icons from 'components/icons';
+import { HStack, Text, VStack } from '@chakra-ui/react';
+import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
+import { HowToSignUpHeroGradient } from 'components/ui/gradients';
+import SocialIcons from './SocialIcons';
 
 const HowToSignUpHero = () => {
   const vStackSomeProps = {
@@ -29,16 +31,16 @@ const HowToSignUpHero = () => {
           justify="space-between"
           align="space-between"
           {...vStackSomeProps}
-          backgroundImage={bgImage}
           overflow="hidden"
           position="relative"
+          backgroundImage={bgImage}
           backgroundPosition="center"
         >
           <VStack
             zIndex={1}
+            maxW="500px"
             align="flex-start"
             spacing={{ base: '20px', md: '120px' }}
-            maxW="500px"
           >
             <VStack align="flex-start" spacing={10}>
               <VStack spacing="24px">
@@ -69,70 +71,20 @@ const HowToSignUpHero = () => {
                 </Text>
               </VStack>
               <SocialIcons forMobile />
-              <Button
+              <GradientButton
                 px="80px"
                 py="32px"
-                borderRadius="20px"
+                title="Sign Up"
                 w={{ base: 'full', md: 'auto' }}
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-              >
-                <Text fontSize="16px" lineHeight="24px" fontWeight="600">
-                  Sign Up
-                </Text>
-              </Button>
+              />
             </VStack>
           </VStack>
-          <Box
-            w="967px"
-            h="472px"
-            left="-307px"
-            top="-204px"
-            opacity={0.49}
-            background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
-            pos="absolute"
-            zIndex={0}
-          />
+          <HowToSignUpHeroGradient />
           <SocialIcons />
         </HStack>
       </VStack>
     </HeroLayout>
-  );
-};
-
-const SocialIcons = ({ forMobile }: { forMobile?: boolean }) => {
-  const StackComponent = forMobile ? HStack : VStack;
-
-  return (
-    <StackComponent
-      right={{
-        base: 10,
-        md: 20,
-        xl: 190,
-      }}
-      zIndex={1}
-      align="center"
-      justify="center"
-      spacing="16px"
-      flexDir={forMobile ? 'row' : 'column'}
-      pos={forMobile ? 'inherit' : 'absolute'}
-      paddingTop={{ base: forMobile ? 0 : 8, md: 0 }}
-      display={{ base: forMobile ? 'flex' : 'none', md: forMobile ? 'none' : 'flex' }}
-    >
-      <SocialIcon name="Facebook" />
-      <SocialIcon name="Google" />
-      <SocialIcon name="Apple" />
-    </StackComponent>
-  );
-};
-
-const SocialIcon = ({ name }: { name: string }) => {
-  const Icon = Icons?.[name];
-
-  return (
-    <Center backgroundColor="blackAlpha.400" w="40px" h="40px" borderRadius="8px" p={0}>
-      <VStack w="full">{Icon && <Icon />}</VStack>
-    </Center>
   );
 };
 

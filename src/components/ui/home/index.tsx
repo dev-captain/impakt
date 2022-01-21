@@ -3,7 +3,7 @@ export { default as SingleTeamHero } from 'components/ui/home/SingleTeamHero';
 export { default as MotionCaptureHero } from 'components/ui/home/MotionCaptureHero';
 export { default as BurnToEarnHero } from 'components/ui/home/BurnToEarnHero';
 export { default as EarningsHero } from 'components/ui/home/EarningsHero';
-export { default as HowToSignUpHero } from 'components/ui/home/HowToSignupHero';
+export { default as HowToSignUpHero } from 'components/ui/home/HowToSignUpHero';
 export { default as NFTMarketPlaceHero } from 'components/ui/home/NFTMarketPlaceHero';
 export { default as RoadMapHero } from 'components/ui/home/RoadmapHero/index';
 export { default as Footer } from 'components/core/Footer';

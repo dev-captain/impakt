@@ -1,5 +1,6 @@
 import { Box, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { TokenomicsData } from 'data';
 import { layoutPadding } from 'theme';
 
 const TokenomicsHero = () => {
@@ -71,7 +72,7 @@ const TokenomicsStatisticCard = () => {
       <GradientEllipse />
       <GradientEllipse1 />
       <GradientEllipse2 />
-      {data.map((item) => {
+      {TokenomicsData.map((item) => {
         return (
           <HStack key={item.title}>
             <Box h="8px" w="8px" borderRadius="4px" bgColor={item.color} />
@@ -134,41 +135,3 @@ const GradientEllipse2 = () => {
     />
   );
 };
-
-const data = [
-  {
-    percentage: '20,0',
-    title: 'Team',
-    color: '#FF7723',
-  },
-  {
-    percentage: '15,3',
-    title: 'Private Sale',
-    color: '#C1DA00',
-  },
-  {
-    percentage: '10,5',
-    title: 'Reserve',
-    color: '#8E30FF',
-  },
-  {
-    percentage: '6,0',
-    title: 'ReStaking + LPserve',
-    color: '#9D5E00',
-  },
-  {
-    percentage: '5,6',
-    title: 'Strategic Round',
-    color: '#7CB413',
-  },
-  {
-    percentage: '4,7',
-    title: 'Seed Round',
-    color: '#0263FF',
-  },
-  {
-    percentage: '2,4',
-    title: 'Public',
-    color: '#C627B5',
-  },
-];

@@ -1,7 +1,7 @@
-import { Box, GridItem, HStack, Image, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
-import Icons from 'components/icons';
-import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
+import HeroLayout from 'components/layouts/HeroLayout';
+import { GridItem, HStack, Image, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
+import EarnTokenCard from './EarnTokenCard';
 
 const EarningsHero = () => {
   return (
@@ -97,46 +97,3 @@ const EarningsHero = () => {
 };
 
 export default EarningsHero;
-
-const EarnTokenCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }) => {
-  const Icon = isVrGlass ? Icons.NftGame : Icons.NftImage;
-
-  return (
-    <Box bgColor="#1F2024" borderRadius={20} position="relative" overflow="hidden">
-      <VStack
-        p={7}
-        maxW="240px"
-        maxH="250px"
-        spacing="32px"
-        align="flex-start"
-        justify="flex-start"
-        minH={{ base: '220px', sm: '170px', md: '220px' }}
-      >
-        <Icon />
-        <Text fontSize={{ base: '14px', md: '16px' }}>{title}</Text>
-        <Box
-          w="220px"
-          h="196px"
-          left="-70px"
-          top="-100px"
-          opacity={0.49}
-          pos="absolute"
-          zIndex={1}
-          filter="blur(64px);"
-          background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
-        />
-        <Box
-          w="220px"
-          h="196px"
-          left="93px"
-          top="100px"
-          opacity={0.49}
-          pos="absolute"
-          zIndex={1}
-          filter="blur(64px);"
-          background="radial-gradient(50% 50% at 50% 50%, rgba(72, 123, 253, 1) 10%, rgba(184, 50, 108, 0) 100%)"
-        />
-      </VStack>
-    </Box>
-  );
-};
