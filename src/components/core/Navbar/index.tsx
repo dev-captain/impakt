@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
-import Icons from 'components/icons';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -50,12 +49,18 @@ const Navbar = () => {
               <NavbarLinkItem title="White Paper" href="https://joker-5.gitbook.io/impakt/" />
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
                 <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
-                  <Icons.SmallTwitter />
+                  <Image
+                    w="35px"
+                    h="35px"
+                    opacity={0.6}
+                    objectFit="contain"
+                    src="assets/images/twitter.png"
+                  />
                 </Box>
                 <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
                   <Image
-                    w="30px"
-                    h="30px"
+                    w="32px"
+                    h="32px"
                     opacity={0.6}
                     objectFit="contain"
                     src="assets/images/discord.png"
@@ -82,12 +87,18 @@ const Navbar = () => {
           >
             <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
               <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
-                <Icons.SmallTwitter />
+                <Image
+                  w="35px"
+                  h="35px"
+                  opacity={0.6}
+                  objectFit="contain"
+                  src="assets/images/twitter.png"
+                />
               </Box>
               <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
                 <Image
-                  w="30px"
-                  h="30px"
+                  w="32px"
+                  h="32px"
                   opacity={0.6}
                   objectFit="contain"
                   src="assets/images/discord.png"

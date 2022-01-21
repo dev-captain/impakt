@@ -1,5 +1,4 @@
 import { VStack, Text, SimpleGrid, GridItem, HStack, Image, Box } from '@chakra-ui/react';
-import Icons from 'components/icons';
 import { layoutPadding } from 'theme';
 
 const BigScreenFooter = () => {
@@ -90,9 +89,15 @@ const BigScreenFooter = () => {
           </SimpleGrid>
         </GridItem>
         <GridItem colSpan={{ base: 5, md: 1 }} marginTop={{ base: 0, md: '60px' }}>
-          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px">
+          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
             <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
-              <Icons.SmallTwitter />
+              <Image
+                w="32px"
+                h="32px"
+                opacity={0.6}
+                objectFit="contain"
+                src="assets/images/twitter.png"
+              />
             </Box>
             <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
               <Image

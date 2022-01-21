@@ -11,7 +11,7 @@ import {
   // EarningsHero,
   // HowToSignUpHero,
   // NFTMarketPlaceHero,
-  BeAnInfluencerHero,
+  // BeAnInfluencerHero,
   // JoinAndCollectHero,
   OurCommunityHero,
   // TokenomicsHero,
@@ -59,9 +59,9 @@ const App = () => {
         <NFTMarketPlaceHero />
       </div> */}
 
-      <div id="be-an-influencer">
+      {/* <div id="be-an-influencer">
         <BeAnInfluencerHero />
-      </div>
+      </div> */}
 
       {/* <div id="join-and-collect">
         <JoinAndCollectHero />

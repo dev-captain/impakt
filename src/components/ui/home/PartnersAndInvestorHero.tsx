@@ -13,7 +13,7 @@ const PartnerAndInvestorHero = () => {
 
   return (
     <HeroLayout hideBlur>
-      <VStack spacing="120px" py={10} px={layoutPadding} w="full">
+      <VStack spacing="0px" py={0} px={layoutPadding} w="full">
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack w="full" spacing={5} justify={{ base: 'flex-start', md: 'center' }}>
             <Text
@@ -84,7 +84,7 @@ export default PartnerAndInvestorHero;
 const Advisors = [
   {
     name: 'Kevin Lin',
-    title: 'Cofounder of twitch',
+    title: 'Founder of Twitch',
     image: 'assets/images/kevin-lin.jpeg',
     subtitle: 'Founder/CEO of Metatheory',
   },

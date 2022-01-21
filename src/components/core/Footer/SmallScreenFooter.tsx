@@ -1,5 +1,4 @@
 import { VStack, Text, HStack, Image, Box } from '@chakra-ui/react';
-import Icons from 'components/icons';
 
 const SmallScreenFooter = () => {
   return (
@@ -14,9 +13,15 @@ const SmallScreenFooter = () => {
       <VStack w="full">
         <HStack align="flex-start" justify="space-between" w="full">
           <Image src="assets/images/logo.png" />
-          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px">
+          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
             <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
-              <Icons.SmallTwitter />
+              <Image
+                w="32px"
+                h="32px"
+                opacity={0.6}
+                objectFit="contain"
+                src="assets/images/twitter.png"
+              />
             </Box>
             <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
               <Image

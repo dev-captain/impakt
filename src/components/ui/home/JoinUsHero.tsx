@@ -2,6 +2,7 @@ import { GridItem, SimpleGrid, Text, VStack, Image, useDisclosure } from '@chakr
 import GradientButton from 'components/core/GradientButton';
 import VideoModal from 'components/core/VideoModal';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { Videos } from 'data';
 import { layoutPadding } from 'theme';
 
 const commonProps: any = {
@@ -14,8 +15,7 @@ const JoinUsHero = () => {
 
   return (
     <HeroLayout hideBlur>
-      <VideoModal showPlayer={false} {...disclosure} />
-
+      <VideoModal showPlayer={false} {...disclosure} path={Videos.impaktGames} />
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           w="full"
