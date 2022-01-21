@@ -2,19 +2,19 @@
 import { Container } from '@chakra-ui/layout';
 import { useColorMode } from '@chakra-ui/react';
 import {
-  RoadMapHero,
+  // RoadMapHero,
   Footer,
   ImpaktGamesHero,
-  SingleTeamHero,
+  // SingleTeamHero,
   MotionCaptureHero,
   BurnToEarnHero,
-  EarningsHero,
-  HowToSignUpHero,
-  NFTMarketPlaceHero,
+  // EarningsHero,
+  // HowToSignUpHero,
+  // NFTMarketPlaceHero,
   BeAnInfluencerHero,
-  JoinAndCollectHero,
+  // JoinAndCollectHero,
   OurCommunityHero,
-  TokenomicsHero,
+  // TokenomicsHero,
   PartnerAndInvestorHero,
   JoinUsHero,
 } from 'components/ui/home';
@@ -35,9 +35,9 @@ const App = () => {
         <ImpaktGamesHero />
       </div>
 
-      <div id="single-team">
+      {/* <div id="single-team">
         <SingleTeamHero />
-      </div>
+      </div> */}
 
       <div id="motion-capture">
         <MotionCaptureHero />
@@ -47,7 +47,7 @@ const App = () => {
         <BurnToEarnHero />
       </div>
 
-      <div id="earnings">
+      {/* <div id="earnings">
         <EarningsHero />
       </div>
 
@@ -57,31 +57,31 @@ const App = () => {
 
       <div id="nft-marketplace">
         <NFTMarketPlaceHero />
-      </div>
+      </div> */}
 
       <div id="be-an-influencer">
         <BeAnInfluencerHero />
       </div>
 
-      <div id="join-and-collect">
+      {/* <div id="join-and-collect">
         <JoinAndCollectHero />
-      </div>
+      </div> */}
 
       <div id="our-community-hero">
         <OurCommunityHero />
       </div>
 
-      <div id="tokenomics">
+      {/* <div id="tokenomics">
         <TokenomicsHero />
-      </div>
+      </div> */}
 
       <div id="partner-and-investor">
         <PartnerAndInvestorHero />
       </div>
 
-      <div id="road-map">
+      {/* <div id="road-map">
         <RoadMapHero />
-      </div>
+      </div> */}
 
       <div id="join-us">
         <JoinUsHero />

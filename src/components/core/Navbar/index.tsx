@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery, VStack } from '@chakra-ui/react';
+import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
 import NavbarLinkItem from './NavbarLinkItem';
-import GradientButton from '../GradientButton';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 
@@ -41,17 +40,15 @@ const Navbar = () => {
           <HStack
             justify="flex-end"
             align="center"
+            w="full"
             spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
           >
-            <HStack spacing={[0, 0, 3, 5, 8, 12]} w="full">
+            <HStack spacing={[0, 0, 3, 5, 8, 12]} w="full" align="center" justify="flex-end">
               <NavbarLinkItem title="Impakt Games" isActive href="/" />
-              <NavbarLinkItem title="Tokenomics" href="#tokenomics" />
-              <NavbarLinkItem title="Roadmap" href="#road-map" />
-              <NavbarLinkItem title="How to sign up" href="#how-to-sign-up" />
-              <NavbarLinkItem title="NFT Marketplace" href="#nft-marketplace" />
+              <NavbarLinkItem title="White Paper" href="https://joker-5.gitbook.io/impakt/" />
             </HStack>
-            <VStack pl={{ base: '16px', md: '100px' }}>
+            {/* <VStack pl={{ base: '16px', md: '100px' }}>
               <GradientButton
                 title="Sign In"
                 icon="ProfileUser"
@@ -59,7 +56,7 @@ const Navbar = () => {
                 px="21px"
                 radius="24px"
               />
-            </VStack>
+            </VStack> */}
           </HStack>
           <HStack
             align="center"
@@ -68,7 +65,7 @@ const Navbar = () => {
             flex={{ base: 1, md: 'auto' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
-            {!isOpen && (
+            {/* {!isOpen && (
               <GradientButton
                 px="21px"
                 minW="120px"
@@ -76,7 +73,7 @@ const Navbar = () => {
                 title="Sign In"
                 icon="ProfileUser"
               />
-            )}
+            )} */}
           </HStack>
         </HStack>
       </Flex>

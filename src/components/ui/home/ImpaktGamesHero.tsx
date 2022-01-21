@@ -1,14 +1,30 @@
-import { Text, VStack, SimpleGrid, Image, Stack, GridItem, Button, HStack } from '@chakra-ui/react';
-import GradientCard from 'components/core/GradientCard';
-import Icons from 'components/icons';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+import {
+  Text,
+  VStack,
+  SimpleGrid,
+  Image,
+  Stack,
+  GridItem,
+  Button,
+  Box,
+  useDisclosure,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { memo } from 'react';
 import { layoutPadding } from 'theme';
+import VideoModal from 'components/core/VideoModal';
 
 const backgroundImage =
   "linear-gradient(180deg, rgba(0, 0, 0, 0.7) 20%, #282A2E 110%), url('assets/images/firstherobg.jpeg')";
 
 const ImpaktGamesHero = () => {
+  const disclosure = useDisclosure();
+  const [isLessThan1272] = useMediaQuery('(max-width: 1272px)');
+  const [isMoreThan1097] = useMediaQuery('(min-width: 1097px)');
+  const isSpecificWidth = isLessThan1272 && isMoreThan1097;
+
   return (
     <HeroLayout
       showNavbar
@@ -37,30 +53,8 @@ const ImpaktGamesHero = () => {
               base: 'center',
               sm: 'flex-start',
             }}
-            pt={{ base: '32px', md: '80px', xl: '40px', '2xl': '107px' }}
+            pt={{ base: '0px', md: '16px', xl: '40px', '2xl': '107px' }}
           >
-            <GradientCard
-              title="Burn and Earn!"
-              image="assets/images/burntoearn.png"
-              subtitle="Let’s start with us be happy"
-              maxW={{ base: 'full', sm: '328px', md: '352px' }}
-              minW={{ base: 'full', sm: '328px', md: '400px' }}
-              // @ts-ignore
-              ThirdComponent={memo(() => (
-                <HStack align="center" justify="center">
-                  <Icons.Play />
-                  <Text
-                    zIndex={100}
-                    fontWeight="600"
-                    bgClip="text"
-                    fontSize="14px"
-                    bgGradient="linear(to-r, #DC143C, #B22222)"
-                  >
-                    Play video
-                  </Text>
-                </HStack>
-              ))}
-            />
             <VStack
               align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
               paddingY={{ base: '0px', sm: '8px', md: '36px' }}
@@ -68,28 +62,43 @@ const ImpaktGamesHero = () => {
             >
               <Text textStyle="TitleBold72" textAlign="left">
                 Impakt
-                <Text textStyle="TitleBold72">Games</Text>
               </Text>
               <Text
-                opacity={0.6}
                 textAlign="left"
-                fontSize={{ base: '18px', md: '20px' }}
+                fontSize={{ base: '18px', md: '60px' }}
                 paddingTop={{ base: '0px', sm: '0px', md: '16px' }}
               >
-                Connect together and have fun while
-                <br />
-                experiencing gamified fitness
+                Social. Fitness. Gamified.
               </Text>
             </VStack>
             <VStack spacing={{ base: '24px', sm: '24px', md: 0, xl: '24px' }} align="flex-start">
-              <Image
-                maxW="320px"
-                objectFit="contain"
-                marginTop="30px"
-                marginBottom="16px"
-                src="assets/images/macbook-mobile.png"
+              <VStack
                 display={{ base: 'flex', sm: 'none' }}
-              />
+                pos="relative"
+                overflow="hidden"
+                align="center"
+                justify="center"
+              >
+                <VideoModal {...disclosure} />
+                <Image
+                  maxW="320px"
+                  objectFit="contain"
+                  marginTop="30px"
+                  marginBottom="16px"
+                  src="assets/images/macbook-mobile.png"
+                />
+                <Box
+                  top="16px"
+                  opacity="0.6"
+                  pos="absolute"
+                  borderRadius="2px"
+                  backgroundPosition="center"
+                  bgImage="assets/images/video.gif"
+                  backgroundSize={{ base: 'contain', md: 'center', xl: 'fill' }}
+                  minH={{ base: '140px', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
+                  minW={{ base: '240px', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
+                />
+              </VStack>
               <Button
                 px="80px"
                 py="32px"
@@ -97,17 +106,35 @@ const ImpaktGamesHero = () => {
                 lineHeight="24px"
                 fontWeight="600"
                 borderRadius="20px"
+                onClick={disclosure.onOpen}
                 w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               >
-                Get started
+                Sneak Peak
               </Button>
-              <Image
-                objectFit="contain"
-                src="assets/images/macbook-tablet.png"
+              <VStack
+                overflow="hidden"
+                pos="relative"
+                align="center"
+                justify="center"
                 display={{ base: 'none', sm: 'flex', md: 'none' }}
-              />
+              >
+                <VideoModal {...disclosure} />
+                <Image objectFit="contain" src="assets/images/macbook-tablet.png" />
+                <Box
+                  top="8px"
+                  pos="absolute"
+                  mx="8vw"
+                  opacity="0.6"
+                  borderRadius="2px"
+                  backgroundPosition="center"
+                  bgImage="assets/images/video.gif"
+                  backgroundSize={{ base: 'fill', md: 'center', xl: 'fill' }}
+                  minH={{ base: '20vw', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
+                  minW={{ base: '60vw', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
+                />
+              </VStack>
             </VStack>
           </Stack>
         </GridItem>
@@ -119,13 +146,30 @@ const ImpaktGamesHero = () => {
             base: 3,
             md: 2,
           }}
+          pos="relative"
+          overflow="hidden"
+          mt={{ base: 'auto', md: '48px' }}
         >
           <Image
-            w="fit-content"
-            h="fit-content"
-            objectFit="cover"
-            maxH="550px"
+            maxH="850px"
+            w="100%"
+            h="100%"
+            objectFit="contain"
             src="assets/images/macbook.png"
+          />
+          <VideoModal {...disclosure} />
+          <Box
+            right="16px"
+            maxH="550px"
+            opacity="0.6"
+            pos="absolute"
+            borderRadius="4px"
+            backgroundSize="cover"
+            backgroundPosition="center"
+            bgImage="assets/images/video.gif"
+            top={{ base: '64px', xl: '32px', '2xl': '64px' }}
+            minH={{ base: '24vw', md: '', xl: '24vw', '2xl': '24vw' }}
+            minW={{ base: '38vw', md: '', xl: '35vw', '2xl': '38vw' }}
           />
         </GridItem>
         <GridItem
@@ -134,8 +178,24 @@ const ImpaktGamesHero = () => {
             base: 3,
             md: 2,
           }}
+          pos="relative"
+          overflow="hidden"
         >
           <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
+          <VideoModal {...disclosure} />
+          <Box
+            top="32px"
+            maxH="550px"
+            pos="absolute"
+            mx={isSpecificWidth ? '5vw' : '8vw'}
+            opacity="0.6"
+            borderRadius="2px"
+            backgroundPosition="center"
+            bgImage="assets/images/video.gif"
+            backgroundSize={{ base: 'fill', md: 'center', xl: 'fill' }}
+            minH={{ base: '17vw', md: '17vw', xl: '24vw', '2xl': '24vw' }}
+            minW={{ base: '30vw', md: '30vw', xl: '35vw', '2xl': '38vw' }}
+          />
         </GridItem>
       </SimpleGrid>
     </HeroLayout>

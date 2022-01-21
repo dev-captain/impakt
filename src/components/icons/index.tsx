@@ -13,10 +13,12 @@ import Discord from './DiscordIcon';
 import SmallTwitter from './SmallTwitterIcon';
 import LeftArrow from './LeftArrowIcon';
 import RightArrow from './RightArrowIcon';
+import Window from './WindowIcon';
 
 const Icons: { [key in string]: any } = {
   ProfileUser,
   Play,
+  Window,
   VrGlass,
   Runner,
   WhitePlay,
