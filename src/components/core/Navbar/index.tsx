@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
+import Icons from 'components/icons';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -16,7 +17,7 @@ const Navbar = () => {
   }, [isLessThan1040, onClose]);
 
   return (
-    <Box pos="absolute" zIndex="100" w="full">
+    <Box pos="absolute" zIndex="100" w="full" boxShadow="0px 4px 26px rgba(0, 0, 0, 0.25)">
       {isOpen && <Gradient />}
       <Flex
         h="100px"
@@ -26,7 +27,7 @@ const Navbar = () => {
         position="relative"
         alignItems="center"
         color="rgba(255,255,255, 0.3)"
-        bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'blackAlpha.500'}
+        bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'blackAlpha.200'}
       >
         <HStack w="full" justify="space-between" px={layoutPadding}>
           <CollapseMenuController
@@ -47,6 +48,20 @@ const Navbar = () => {
             <HStack spacing={[0, 0, 3, 5, 8, 12]} w="full" align="center" justify="flex-end">
               <NavbarLinkItem title="Impakt Games" isActive href="/" />
               <NavbarLinkItem title="White Paper" href="https://joker-5.gitbook.io/impakt/" />
+              <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
+                <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
+                  <Icons.SmallTwitter />
+                </Box>
+                <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
+                  <Image
+                    w="30px"
+                    h="30px"
+                    opacity={0.6}
+                    objectFit="contain"
+                    src="assets/images/discord.png"
+                  />
+                </Box>
+              </HStack>
             </HStack>
             {/* <VStack pl={{ base: '16px', md: '100px' }}>
               <GradientButton
@@ -65,15 +80,20 @@ const Navbar = () => {
             flex={{ base: 1, md: 'auto' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
-            {/* {!isOpen && (
-              <GradientButton
-                px="21px"
-                minW="120px"
-                radius="24px"
-                title="Sign In"
-                icon="ProfileUser"
-              />
-            )} */}
+            <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
+              <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
+                <Icons.SmallTwitter />
+              </Box>
+              <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
+                <Image
+                  w="30px"
+                  h="30px"
+                  opacity={0.6}
+                  objectFit="contain"
+                  src="assets/images/discord.png"
+                />
+              </Box>
+            </HStack>
           </HStack>
         </HStack>
       </Flex>

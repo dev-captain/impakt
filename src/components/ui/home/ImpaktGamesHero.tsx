@@ -16,8 +16,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 import VideoModal from 'components/core/VideoModal';
 
-const backgroundImage =
-  "linear-gradient(180deg, rgba(0, 0, 0, 0.7) 20%, #282A2E 110%), url('assets/images/firstherobg.jpeg')";
+const backgroundImage = "url('assets/images/firstherobg.png')";
 
 const ImpaktGamesHero = () => {
   const disclosure = useDisclosure();
