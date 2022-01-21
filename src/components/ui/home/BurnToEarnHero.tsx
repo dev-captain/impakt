@@ -1,9 +1,11 @@
-import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Center, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import VideoModal from 'components/core/VideoModal';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
 const BurnToEarnHero = () => {
+  const disclosure = useDisclosure();
   const vStackSomeProps = {
     borderRadius: {
       base: '14px',
@@ -43,7 +45,7 @@ const BurnToEarnHero = () => {
                 Burn and
                 <Text fontWeight="700">earn!</Text>
               </Text>
-              <Play forMobile />
+              <Play forMobile onClick={disclosure.onOpen} />
               <Text
                 opacity="0.6"
                 fontSize={{ base: '14px', md: '20px' }}
@@ -53,7 +55,7 @@ const BurnToEarnHero = () => {
               </Text>
             </VStack>
           </VStack>
-          <Play />
+          <Play onClick={disclosure.onOpen} />
           <Box
             w="967px"
             h="472px"
@@ -66,6 +68,12 @@ const BurnToEarnHero = () => {
           />
         </HStack>
       </VStack>
+      <VideoModal
+        showPlayer={false}
+        {...disclosure}
+        hideButtons
+        path="assets/videos/burn-and-earn.mp4"
+      />
     </HeroLayout>
   );
 };
@@ -75,11 +83,12 @@ export default BurnToEarnHero;
 const bgImage =
   "linear-gradient(90deg, #1F2024 18.46%, rgba(31, 32, 36, 0) 63.94%), url('assets/images/burn-to-earn-hero.png')";
 
-const Play = ({ forMobile }: { forMobile?: boolean }) => (
+const Play = ({ forMobile, onClick }: { forMobile?: boolean; onClick: () => void }) => (
   <Center
     w="80px"
     h="80px"
     zIndex={2}
+    onClick={onClick}
     borderRadius="40px"
     alignSelf="center"
     bgColor="whiteAlpha.400"

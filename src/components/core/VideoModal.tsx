@@ -8,9 +8,18 @@ type Props = {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
+  path?: string;
+  hideButtons?: boolean;
 };
 
-function VideoModal({ showPlayer = true, isOpen, onOpen, onClose }: Props) {
+function VideoModal({
+  isOpen,
+  onOpen,
+  onClose,
+  path,
+  showPlayer = true,
+  hideButtons = false,
+}: Props) {
   return (
     <>
       {showPlayer && <Play onClick={onOpen} />}
@@ -19,32 +28,34 @@ function VideoModal({ showPlayer = true, isOpen, onOpen, onClose }: Props) {
         <ModalContent overflow="hidden" bgColor="gray.600">
           <VStack overflow="hidden" w="full">
             <video width="100%" height="100%" controls autoPlay>
-              <source src="assets/images/video.mov" type="video/mp4" />
+              <source src={path || 'assets/images/video.mov'} type="video/mp4" />
             </video>
           </VStack>
-          <SimpleGrid
-            d="flex"
-            p="16px"
-            spacing={6}
-            align="center"
-            justify="center"
-            bgColor="rgba(0,0,0,0.78)"
-            flexDir={{
-              base: 'column',
-              md: 'row',
-            }}
-          >
-            <DownloadButton
-              iconName="Window"
-              title="Download Window"
-              link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
-            />
-            <DownloadButton
-              iconName="Apple"
-              title="Download Mac"
-              link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Mac/Impakt_Mac_v1.0.0.zip"
-            />
-          </SimpleGrid>
+          {!hideButtons && (
+            <SimpleGrid
+              d="flex"
+              p="16px"
+              spacing={6}
+              align="center"
+              justify="center"
+              bgColor="rgba(0,0,0,0.78)"
+              flexDir={{
+                base: 'column',
+                md: 'row',
+              }}
+            >
+              <DownloadButton
+                iconName="Window"
+                title="Download Window"
+                link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
+              />
+              <DownloadButton
+                iconName="Apple"
+                title="Download Mac"
+                link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Mac/Impakt_Mac_v1.0.0.zip"
+              />
+            </SimpleGrid>
+          )}
         </ModalContent>
       </Modal>
     </>
