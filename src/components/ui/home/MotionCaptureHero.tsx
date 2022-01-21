@@ -1,9 +1,20 @@
-import { Box, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  Image,
+  Text,
+  VStack,
+  GridItem,
+  SimpleGrid,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
 const MotionCaptureHero = () => {
+  const [isLessThan850] = useMediaQuery('(max-width: 850px)');
+
   return (
     <HeroLayout hideBlur>
       <SimpleGrid
@@ -13,14 +24,14 @@ const MotionCaptureHero = () => {
         px={layoutPadding}
         w={{ base: 'full', xl: 'auto' }}
       >
-        <GridItem display={{ base: 'none', md: 'flex' }}>
+        <GridItem display={{ base: 'none', sm: 'none', md: isLessThan850 ? 'none' : 'flex' }}>
           <Image src="assets/images/motion-capture.png" />
         </GridItem>
         <GridItem
           colSpan={{
-            base: 2,
-            md: 1,
             xl: 1,
+            base: 2,
+            md: isLessThan850 ? 2 : 1,
           }}
         >
           <VStack align="flex-start" spacing="40px">

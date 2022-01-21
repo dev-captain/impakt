@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery, VStack } from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
 import NavbarLinkItem from './NavbarLinkItem';
 import GradientButton from '../GradientButton';
@@ -40,21 +40,26 @@ const Navbar = () => {
           </Box>
           <HStack
             justify="flex-end"
+            align="center"
             spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
           >
-            <NavbarLinkItem title="Impakt Games" isActive href="/" />
-            <NavbarLinkItem title="Tokenomics" href="#tokenomics" />
-            <NavbarLinkItem title="Roadmap" href="#road-map" />
-            <NavbarLinkItem title="How to sign up" href="#how-to-sign-up" />
-            <NavbarLinkItem title="NFT Marketplace" href="#nft-marketplace" />
-            <GradientButton
-              title="Sign In"
-              icon="ProfileUser"
-              minW="160px"
-              px="21px"
-              radius="24px"
-            />
+            <HStack spacing={[0, 0, 3, 5, 8, 12]} w="full">
+              <NavbarLinkItem title="Impakt Games" isActive href="/" />
+              <NavbarLinkItem title="Tokenomics" href="#tokenomics" />
+              <NavbarLinkItem title="Roadmap" href="#road-map" />
+              <NavbarLinkItem title="How to sign up" href="#how-to-sign-up" />
+              <NavbarLinkItem title="NFT Marketplace" href="#nft-marketplace" />
+            </HStack>
+            <VStack pl={{ base: '16px', md: '100px' }}>
+              <GradientButton
+                title="Sign In"
+                icon="ProfileUser"
+                minW="160px"
+                px="21px"
+                radius="24px"
+              />
+            </VStack>
           </HStack>
           <HStack
             align="center"

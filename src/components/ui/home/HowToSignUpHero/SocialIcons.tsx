@@ -9,7 +9,7 @@ const SocialIcons = ({ forMobile }: { forMobile?: boolean }) => {
       right={{
         base: 10,
         md: 20,
-        xl: 190,
+        xl: '44px',
       }}
       zIndex={1}
       align="center"

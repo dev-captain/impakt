@@ -11,6 +11,8 @@ const TextareaField = ({ placeholder, onChange, ...rest }: FieldProps) => {
   return (
     <Textarea
       w="full"
+      h="100px"
+      resize="none"
       borderWidth={0}
       fontSize="12px"
       lineHeight="16px"

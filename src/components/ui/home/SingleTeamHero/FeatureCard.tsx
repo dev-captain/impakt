@@ -18,7 +18,7 @@ const FeatureCard = ({
       paddingRight="80px"
       borderRadius={8}
       position="relative"
-      maxWidth="300px"
+      w={{ base: 'auto', md: '300px' }}
     >
       <VStack p={0} m={0} spacing={0}>
         <Box
@@ -48,15 +48,18 @@ const FeatureCard = ({
       <Image src={`assets/images/${image}`} borderRadius={8} maxW={{ base: '32px', md: '76px' }} />
       <VStack alignItems="flex-start" pl={{ base: '4px', md: '8px' }}>
         <Text
+          d="flex"
           fontSize={{
             base: '12px',
             md: '16px',
           }}
           opacity={isActive ? 1 : 0.2}
-          flexDir="row"
+          flexDir={{ base: 'column', sm: 'column', md: 'row' }}
         >
           {title}
-          <Text fontWeight="bold">Games</Text>
+          <Text fontWeight="bold" ml={{ base: 0, sm: 0, md: '4px' }}>
+            Games
+          </Text>
         </Text>
       </VStack>
     </HStack>

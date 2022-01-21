@@ -1,4 +1,4 @@
-import { GridItem, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { GridItem, Image, SimpleGrid, Text, useMediaQuery, VStack } from '@chakra-ui/react';
 import GradientCard from 'components/core/GradientCard';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
@@ -9,14 +9,23 @@ const commonProps: any = {
 };
 
 const BeAnInfluencerHero = () => {
+  const [isLessThan890] = useMediaQuery('(max-width: 890px)');
+
   return (
     <HeroLayout hideBlur>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
-        <SimpleGrid columns={2} justifyContent="center" alignItems="center" columnGap={20} w="full">
+        <SimpleGrid
+          columns={2}
+          justifyContent="center"
+          alignItems="center"
+          columnGap={20}
+          rowGap="60px"
+          w="full"
+        >
           <GridItem
             colSpan={{
               base: 2,
-              md: 1,
+              md: isLessThan890 ? 2 : 1,
             }}
             zIndex={2}
             {...commonProps}
@@ -63,7 +72,14 @@ const BeAnInfluencerHero = () => {
               />
             </VStack>
           </GridItem>
-          <GridItem display={{ base: 'none', md: 'flex' }} zIndex={1}>
+          <GridItem
+            display={{ base: 'none', md: 'flex' }}
+            zIndex={1}
+            colSpan={{
+              base: 2,
+              md: isLessThan890 ? 2 : 1,
+            }}
+          >
             <Image src="assets/images/be-an-influencer.png" maxH="600px" />
           </GridItem>
         </SimpleGrid>

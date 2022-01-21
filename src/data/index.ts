@@ -43,7 +43,7 @@ export const TokenomicsData = [
   },
   {
     percentage: '6,0',
-    title: 'ReStaking + LPserve',
+    title: 'Staking + LP',
     color: '#9D5E00',
   },
   {

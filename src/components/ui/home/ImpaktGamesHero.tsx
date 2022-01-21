@@ -85,6 +85,8 @@ const ImpaktGamesHero = () => {
               <Image
                 maxW="320px"
                 objectFit="contain"
+                marginTop="30px"
+                marginBottom="16px"
                 src="assets/images/macbook-mobile.png"
                 display={{ base: 'flex', sm: 'none' }}
               />

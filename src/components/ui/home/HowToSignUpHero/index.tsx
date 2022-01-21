@@ -1,4 +1,4 @@
-import { HStack, Text, VStack } from '@chakra-ui/react';
+import { HStack, Text, useMediaQuery, VStack } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
@@ -6,6 +6,8 @@ import { HowToSignUpHeroGradient } from 'components/ui/gradients';
 import SocialIcons from './SocialIcons';
 
 const HowToSignUpHero = () => {
+  const [isLessThan1600] = useMediaQuery('(max-width: 1600px)');
+
   const vStackSomeProps = {
     borderRadius: {
       base: '14px',
@@ -27,14 +29,14 @@ const HowToSignUpHero = () => {
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           w="full"
-          bgSize="cover"
           justify="space-between"
           align="space-between"
           {...vStackSomeProps}
           overflow="hidden"
           position="relative"
           backgroundImage={bgImage}
-          backgroundPosition="center"
+          backgroundSize={isLessThan1600 ? 'cover' : 'fill'}
+          backgroundPosition={{ base: 'left', sm: 'center', md: 'left' }}
         >
           <VStack
             zIndex={1}

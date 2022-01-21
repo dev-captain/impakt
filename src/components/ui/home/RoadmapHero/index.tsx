@@ -23,8 +23,8 @@ const RoadMapHero = () => {
         <HStack
           w="full"
           maxW="1200px"
-          alignItems={{ base: 'center', md: 'flex-start' }}
-          justify={{ base: 'space-around', md: 'flex-start' }}
+          alignItems={{ base: 'center', md: 'center' }}
+          justify={{ base: 'space-around', md: 'center' }}
         >
           <Text fontWeight="700" fontSize={{ base: '40px', md: '56px' }} lineHeight="60px">
             Roadmap
