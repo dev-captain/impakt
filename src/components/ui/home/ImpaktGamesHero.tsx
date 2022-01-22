@@ -11,11 +11,12 @@ import {
   Button,
   Box,
   useDisclosure,
-  useMediaQuery, ButtonProps,
+  useMediaQuery,
+  ButtonProps,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
-import VideoModal from 'components/core/VideoModal';
+import VideoModal, { Play } from 'components/core/VideoModal';
 import { Videos } from 'data';
 
 const backgroundImage = "url('assets/images/firstherobg.png')";
@@ -30,12 +31,13 @@ const ImpaktGamesHero = () => {
     <HeroLayout
       showNavbar
       addSpacer
-      hideBlur
       spacing={10}
       justify="center"
       align="space-around"
       bgImage={backgroundImage}
+      hideBlur={!disclosure.isOpen}
     >
+      <VideoModal {...disclosure} path={Videos.impaktGames} />
       <SimpleGrid
         columns={4}
         alignItems="flex-start"
@@ -83,7 +85,7 @@ const ImpaktGamesHero = () => {
                 justify="center"
                 onClick={disclosure.onOpen}
               >
-                <VideoModal {...disclosure} path={Videos.impaktGames} />
+                <Play onClick={disclosure.onOpen} />
                 <Image
                   maxW="320px"
                   objectFit="contain"
@@ -103,7 +105,10 @@ const ImpaktGamesHero = () => {
                   minW={{ base: '240px', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
                 />
               </VStack>
-              <DownloadTutorialButton disclosure={disclosure} display={{ base: 'none', md: 'flex' }} />
+              <DownloadTutorialButton
+                disclosure={disclosure}
+                display={{ base: 'none', md: 'flex' }}
+              />
               <VStack
                 overflow="hidden"
                 pos="relative"
@@ -112,7 +117,7 @@ const ImpaktGamesHero = () => {
                 onClick={disclosure.onOpen}
                 display={{ base: 'none', sm: 'flex', md: 'none' }}
               >
-                <VideoModal {...disclosure} path={Videos.impaktGames} />
+                <Play onClick={disclosure.onOpen} />
                 <Image objectFit="contain" src="assets/images/macbook-tablet.png" />
                 <Box
                   top="8px"
@@ -126,12 +131,15 @@ const ImpaktGamesHero = () => {
                   minH={{ base: '20vw', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
                   minW={{ base: '60vw', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
                 />
-              </VStack>               
-                  <>
-                    <Box m={24} /> 
-                    <DownloadTutorialButton disclosure={disclosure} display={{ base: 'flex', md: 'none' }}  />
-                    <Box m={24} />
-                  </>
+              </VStack>
+              <>
+                <Box m={24} />
+                <DownloadTutorialButton
+                  disclosure={disclosure}
+                  display={{ base: 'flex', md: 'none' }}
+                />
+                <Box m={24} />
+              </>
             </VStack>
           </Stack>
         </GridItem>
@@ -155,7 +163,7 @@ const ImpaktGamesHero = () => {
             objectFit="contain"
             src="assets/images/macbook.png"
           />
-          <VideoModal {...disclosure} path={Videos.impaktGames} />
+          <Play onClick={disclosure.onOpen} />
           <Box
             right="16px"
             maxH="550px"
@@ -181,7 +189,7 @@ const ImpaktGamesHero = () => {
           onClick={disclosure.onOpen}
         >
           <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
-          <VideoModal {...disclosure} path={Videos.impaktGames} />
+          <Play onClick={disclosure.onOpen} />
           <Box
             top="32px"
             maxH="550px"
@@ -204,21 +212,22 @@ const ImpaktGamesHero = () => {
 interface DownloadTutorialButtonProps extends ButtonProps {
   disclosure: ReturnType<typeof useDisclosure>;
 }
-const DownloadTutorialButton = ({ disclosure, ...buttonProps } : DownloadTutorialButtonProps) =>               
-    <Button
-      px="80px"
-      py="32px"
-      fontSize="16px"
-      lineHeight="24px"
-      fontWeight="600"
-      borderRadius="20px"
-      onClick={disclosure.onOpen}
-      w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
-      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
-      bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-      {...buttonProps}
-    >
-      Download Tutorial
-    </Button>
+const DownloadTutorialButton = ({ disclosure, ...buttonProps }: DownloadTutorialButtonProps) => (
+  <Button
+    px="80px"
+    py="32px"
+    fontSize="16px"
+    lineHeight="24px"
+    fontWeight="600"
+    borderRadius="20px"
+    onClick={disclosure.onOpen}
+    w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
+    boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
+    bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+    {...buttonProps}
+  >
+    Download Tutorial
+  </Button>
+);
 
 export default ImpaktGamesHero;

@@ -1,6 +1,16 @@
 /* eslint-disable */
 
-import { Box, Circle, GridItem, Stack, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Circle,
+  GridItem,
+  Stack,
+  HStack,
+  Image,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
@@ -33,11 +43,7 @@ const PartnerAndInvestorHero = () => {
               Advisors
             </Text>
           </HStack>
-          <Stack
-            w="full"
-            spacing={8}
-            direction={{ base: 'column', lg: 'row'}}
-          >
+          <Stack w="full" spacing={8} direction={{ base: 'column', lg: 'row' }}>
             {Advisors.map((advisor) => (
               <GridItem colSpan={colSpan} w="full">
                 <CompanyCard {...advisor} />
@@ -124,20 +130,22 @@ const CompanyCard = ({
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      // px={0}
       boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
     >
-      <Circle overflow="hidden" boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)">
+      <Circle
+        overflow="hidden"
+        boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
+      >
         <Image src={image} objectFit="cover" borderRadius="100px" w="180px" h="180px" />
       </Circle>
       <VStack p="8px" align="center" justify="center">
         <Text fontSize="20px" fontWeight="semibold" pt="8px">
           {name}
         </Text>
-        <Text opacity="0.8" align="center">
+        <Text height="20px" opacity="0.8" align="center">
           {title}
         </Text>
-        <Text opacity="0.8" align="center" display="inline">
+        <Text height="20px" opacity="0.8" align="center" display="inline">
           {subtitle}
         </Text>
       </VStack>
