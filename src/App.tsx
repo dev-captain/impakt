@@ -16,7 +16,7 @@ import {
   OurCommunityHero,
   // TokenomicsHero,
   PartnerAndInvestorHero,
-  JoinUsHero,
+  // JoinUsHero,
 } from 'components/ui/home';
 import Contact from 'components/ui/home/Contact';
 
@@ -83,9 +83,9 @@ const App = () => {
         <RoadMapHero />
       </div> */}
 
-      <div id="join-us">
+      {/* <div id="join-us">
         <JoinUsHero />
-      </div>
+      </div> */}
       <div id="join-us">
         <Contact />
       </div>
