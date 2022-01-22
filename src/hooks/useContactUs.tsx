@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 
 interface ContactUs {
@@ -8,7 +8,8 @@ interface ContactUs {
   message: string;
   isSubscribed?: boolean;
 }
-const url = 'https://colyseus-burhan-contact-jlxvys.herokuapp.com/common/contact';
+
+const url = 'https://contact-api-email.herokuapp.com/common/contact';
 
 const useContactUs = () => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +17,6 @@ const useContactUs = () => {
   const [isSuccessful, setIsSuccessful] = useState(false);
   const toast = useToast();
 
-  useEffect(() => {}, []);
   const sendData = async (data: ContactUs, resetFields: () => void) => {
     setLoading(true);
     setError(null);

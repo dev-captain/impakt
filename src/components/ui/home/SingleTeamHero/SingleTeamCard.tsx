@@ -3,7 +3,7 @@ import FeatureCard from './FeatureCard';
 
 const SingleTeamCard = () => {
   const gridItemColSpan = {
-    base: 2,
+    base: 1,
     md: 1,
   };
   const vStackSomeProps = {
@@ -12,10 +12,17 @@ const SingleTeamCard = () => {
       md: '28px',
     },
     px: {
-      base: '20px',
-      lg: '220px',
+      sm: '32px',
+      md: '40px',
+      xl: '120px',
+      base: '16px',
     },
-    py: [20, 90, 90, 130, 130, 230],
+    py: {
+      base: '16px',
+      md: '32px',
+      xl: '100px',
+      '2xl': '230px',
+    },
   };
 
   return (
@@ -28,43 +35,42 @@ const SingleTeamCard = () => {
       backgroundImage={bgImage}
       position="relative"
       overflow="hidden"
+      maxH={{ base: '500px', xl: '700px' }}
+      backgroundPosition="center"
     >
       <Box
         w="967px"
         h="472px"
         left="-30%"
+        zIndex={0}
         top="-204px"
         opacity={0.4}
-        background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
         pos="absolute"
-        zIndex={0}
+        background="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
       />
-      <VStack align="flex-start" spacing={{ base: '20px', md: '120px' }} zIndex={1}>
+      <VStack
+        align="flex-start"
+        spacing={{ base: '20px', md: '80px', xl: '120px' }}
+        zIndex={1}
+        w="full"
+      >
         <VStack align="flex-start" spacing={8}>
-          <Text fontSize="56px" lineHeight="60px">
+          <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="60px">
             Single & Team
             <Text fontWeight="700">Games</Text>
           </Text>
-          <Text fontSize="20px" fontWeight="400" opacity="0.6" maxW="440px">
-            Challenge yourself in match made games or play with your friends.
+          <Text fontSize="20px" fontWeight="400" opacity="0.6" lineHeight="32px" maxW="389px">
+            Challenge yourself in match made games or play with your friends. Experience Fitness
+            Gamified
           </Text>
         </VStack>
-        <HStack>
+        <HStack w="full">
           <SimpleGrid columns={2} columnGap={4} rowGap={4}>
             <GridItem colSpan={gridItemColSpan}>
-              <FeatureCard
-                isActive
-                image="second-hero-feature-card1.png"
-                title="Single & Team"
-                subtitle="Ranked Games"
-              />
+              <FeatureCard isActive image="second-hero-feature-card1.png" title="Ranked" />
             </GridItem>
             <GridItem colSpan={gridItemColSpan}>
-              <FeatureCard
-                image="second-hero-yoga.png"
-                title="Tournaments"
-                subtitle="Battle Royale or Brackets"
-              />
+              <FeatureCard image="second-hero-yoga.png" title="Team" />
             </GridItem>
           </SimpleGrid>
         </HStack>

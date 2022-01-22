@@ -22,8 +22,21 @@ const theme: ThemeOverride = {
       fontSize: { base: 'xl', md: '4xl' },
       opacity: '0.7',
     },
+    TitleBold72: {
+      fontWeight: '900',
+      fontFamily: `Poppins ,${base.fonts?.heading}`,
+      fontSize: { base: '72px', sm: '120px', md: '98px', xl: '120px' },
+      lineHeight: { base: '80px', sm: '120px', md: '98px', xl: '120px' },
+    },
   },
   components: {},
+};
+
+export const layoutPadding = {
+  base: '16px',
+  md: '48px',
+  xl: '120px',
+  '2xl': '240px',
 };
 
 export default extendTheme(theme);

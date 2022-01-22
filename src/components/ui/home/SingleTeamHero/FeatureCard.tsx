@@ -5,13 +5,11 @@ const FeatureCard = ({
   image,
   isFull = false,
   title,
-  subtitle,
 }: {
   isActive?: boolean;
   image: string;
   isFull?: boolean;
   title: string;
-  subtitle: string;
 }) => {
   return (
     <HStack
@@ -20,7 +18,7 @@ const FeatureCard = ({
       paddingRight="80px"
       borderRadius={8}
       position="relative"
-      maxWidth="300px"
+      w={{ base: 'auto', md: '300px' }}
     >
       <VStack p={0} m={0} spacing={0}>
         <Box
@@ -47,13 +45,21 @@ const FeatureCard = ({
           borderColor="whiteAlpha.400"
         />
       </VStack>
-      <Image src={`assets/images/${image}`} borderRadius={8} maxW="76px" />
-      <VStack alignItems="flex-start" pl="8px">
-        <Text fontSize="md" opacity={isActive ? 1 : 0.2} fontWeight="light" w="140px">
+      <Image src={`assets/images/${image}`} borderRadius={8} maxW={{ base: '32px', md: '76px' }} />
+      <VStack alignItems="flex-start" pl={{ base: '4px', md: '8px' }}>
+        <Text
+          d="flex"
+          fontSize={{
+            base: '12px',
+            md: '16px',
+          }}
+          opacity={isActive ? 1 : 0.2}
+          flexDir={{ base: 'column', sm: 'column', md: 'row' }}
+        >
           {title}
-        </Text>
-        <Text fontSize="md" fontWeight="bold" opacity={isActive ? 1 : 0.2}>
-          {subtitle}
+          <Text fontWeight="bold" ml={{ base: 0, sm: 0, md: '4px' }}>
+            Games
+          </Text>
         </Text>
       </VStack>
     </HStack>
