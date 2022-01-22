@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Box,
   HStack,
@@ -29,19 +30,19 @@ const MotionCaptureHero = () => {
         </GridItem>
         <GridItem
           colSpan={{
-            xl: 1,
             base: 2,
             md: isLessThan850 ? 2 : 1,
+            xl: 1,
           }}
         >
-          <VStack align="flex-start" spacing="40px">
-            <VStack textAlign="left" alignItems="flex-start">
+          <VStack align="flex-start" spacing="40px" alignItems={{ base: 'center', md: 'flex-start' }}>
+            <VStack textAlign={{ base: 'center', md: 'left' }} alignItems={{ base: 'center', md: 'flex-start' }}>
               <Text
                 fontSize={{ base: '40px', md: '56px' }}
                 lineHeight={{ base: '56px', md: '60px' }}
                 fontWeight="300"
               >
-                Motion Capture
+                Computer Vision
               </Text>
               <Text
                 fontSize={{ base: '40px', md: '56px' }}
@@ -58,7 +59,7 @@ const MotionCaptureHero = () => {
                 maxW="440px"
                 fontWeight="400"
               >
-                Workout with your friends and battle in competitions.
+                Use your body as a controller - move, sweat, get fit.
               </Text>
             </VStack>
             <HStack spacing="20px" justify={{ base: 'center', sm: 'flex-start', md: 'flex-start' }}>
@@ -69,7 +70,7 @@ const MotionCaptureHero = () => {
                     md: 1,
                   }}
                 >
-                  <MotionCard title="No VR needed, just a camera on your device" isVrGlass />
+                  <MotionCard title="No extra hardware necessary" isVrGlass />
                 </GridItem>
                 <GridItem
                   colSpan={{
@@ -77,7 +78,7 @@ const MotionCaptureHero = () => {
                     md: 1,
                   }}
                 >
-                  <MotionCard title="Highly accurate tracking of your movements" />
+                  <MotionCard title="Use the camera on your phone or laptop" />
                 </GridItem>
               </SimpleGrid>
             </HStack>

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { Center, Modal, VStack, SimpleGrid, ModalContent, ModalOverlay } from '@chakra-ui/react';
+/* eslint-disable */
+import {Center, Modal, VStack, SimpleGrid, ModalContent, ModalOverlay, Circle, Text} from '@chakra-ui/react';
 import Icons from 'components/icons';
 import DownloadButton from 'components/core/DownloadButton';
 
@@ -23,9 +24,12 @@ function VideoModal({
   return (
     <>
       {showPlayer && <Play onClick={onOpen} />}
-      <Modal onClose={onClose} isOpen={isOpen} isCentered size="4xl">
-        <ModalOverlay bgColor="blackAlpha.900" />
-        <ModalContent overflow="hidden" bgColor="gray.600">
+      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+        <ModalOverlay bgColor="blackAlpha.300" />
+        <ModalContent bgColor="gray.600" borderRadius="24px" position="relative">
+            <Circle onClick={onClose} _hover={{ cursor: "pointer" }} top={0} right={-24} bg={"gray.700"} size={12} position="absolute" >
+                <Text fontSize={24}>X</Text>
+            </Circle>
           <VStack overflow="hidden" w="full">
             <video width="100%" height="100%" controls autoPlay>
               <source src={path || 'assets/images/video.mov'} type="video/mp4" />
@@ -39,13 +43,14 @@ function VideoModal({
               align="center"
               justify="center"
               bgColor="rgba(0,0,0,0.78)"
+              borderBottomRadius="20px"
               flexDir={{
                 base: 'column',
-                md: 'row',
+                md: 'column',
               }}
             >
               <DownloadButton
-                iconName="Window"
+                iconName="Windows"
                 title="Download Window"
                 link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
               />

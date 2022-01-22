@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
+/* eslint-disable prettier/prettier */
 import {
   Text,
   VStack,
@@ -10,7 +11,7 @@ import {
   Button,
   Box,
   useDisclosure,
-  useMediaQuery,
+  useMediaQuery, ButtonProps,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
@@ -37,7 +38,7 @@ const ImpaktGamesHero = () => {
     >
       <SimpleGrid
         columns={4}
-        alignItems="center"
+        alignItems="flex-start"
         justifyContent="center"
         columnGap={{ base: '0px', md: '100px', xl: '200px' }}
       >
@@ -53,25 +54,27 @@ const ImpaktGamesHero = () => {
               base: 'center',
               sm: 'flex-start',
             }}
-            pt={{ base: '0px', md: '16px', xl: '40px', '2xl': '107px' }}
+            alignItems={{ base: 'center', md: 'flex-start' }}
+            pt={{ base: '0px', md: '0px', xl: '40px', '2xl': '40px' }}
           >
             <VStack
               align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
-              paddingY={{ base: '0px', sm: '8px', md: '36px' }}
+              // paddingY={{ base: '0px', sm: '8px', md: '36px' }}
               spacing={{ base: '16px', md: '0px', xl: '16px' }}
             >
-              <Text textStyle="TitleBold72" textAlign="left">
-                Impakt
-              </Text>
               <Text
                 textAlign="left"
-                fontSize={{ base: '18px', md: '60px' }}
-                paddingTop={{ base: '0px', sm: '0px', md: '16px' }}
+                fontSize={{ base: '32px', md: '60px' }}
+                paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
               >
                 Social. Fitness. Gamified.
               </Text>
             </VStack>
-            <VStack spacing={{ base: '24px', sm: '24px', md: 0, xl: '24px' }} align="flex-start">
+            <VStack
+              spacing={{ base: '24px', sm: '24px', md: 0, xl: '24px' }}
+              align="flex-start"
+              alignItems={{ base: 'center', sm: 'left' }}
+            >
               <VStack
                 display={{ base: 'flex', sm: 'none' }}
                 pos="relative"
@@ -100,20 +103,7 @@ const ImpaktGamesHero = () => {
                   minW={{ base: '240px', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
                 />
               </VStack>
-              <Button
-                px="80px"
-                py="32px"
-                fontSize="16px"
-                lineHeight="24px"
-                fontWeight="600"
-                borderRadius="20px"
-                onClick={disclosure.onOpen}
-                w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
-                bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-              >
-                Sneak Peak
-              </Button>
+              <DownloadTutorialButton disclosure={disclosure} display={{ base: 'none', md: 'flex' }} />
               <VStack
                 overflow="hidden"
                 pos="relative"
@@ -136,7 +126,12 @@ const ImpaktGamesHero = () => {
                   minH={{ base: '20vw', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
                   minW={{ base: '60vw', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
                 />
-              </VStack>
+              </VStack>               
+                  <>
+                    <Box m={24} /> 
+                    <DownloadTutorialButton disclosure={disclosure} display={{ base: 'flex', md: 'none' }}  />
+                    <Box m={24} />
+                  </>
             </VStack>
           </Stack>
         </GridItem>
@@ -205,5 +200,25 @@ const ImpaktGamesHero = () => {
     </HeroLayout>
   );
 };
+
+interface DownloadTutorialButtonProps extends ButtonProps {
+  disclosure: ReturnType<typeof useDisclosure>;
+}
+const DownloadTutorialButton = ({ disclosure, ...buttonProps } : DownloadTutorialButtonProps) =>               
+    <Button
+      px="80px"
+      py="32px"
+      fontSize="16px"
+      lineHeight="24px"
+      fontWeight="600"
+      borderRadius="20px"
+      onClick={disclosure.onOpen}
+      w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
+      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
+      bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+      {...buttonProps}
+    >
+      Download Tutorial
+    </Button>
 
 export default ImpaktGamesHero;

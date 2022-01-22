@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import { GridItem, SimpleGrid, Text, VStack, Image, useDisclosure } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import VideoModal from 'components/core/VideoModal';
@@ -37,8 +39,11 @@ const JoinUsHero = () => {
             zIndex={2}
             {...commonProps}
           >
-            <VStack spacing="52px" align="flex-start">
-              <VStack spacing="36px" {...commonProps}>
+            <VStack spacing="52px">
+              <VStack 
+                  spacing="36px"
+                  alignItems={{ base: 'center',md: 'flex-start' }}
+              >
                 <Text
                   display="flex"
                   fontSize={{ base: '40px', md: '56px' }}
@@ -62,7 +67,7 @@ const JoinUsHero = () => {
                 <Image src="assets/images/joinus-hero.png" display={{ base: 'flex', md: 'none' }} />
               </VStack>
               <GradientButton
-                title="Sneak Peek"
+                title="Download Tutorial"
                 onClick={disclosure.onOpen}
                 w={{ base: 'full', md: 'auto' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"

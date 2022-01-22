@@ -1,4 +1,6 @@
-import { Box, Circle, GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+/* eslint-disable */
+
+import { Box, Circle, GridItem, Stack, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
@@ -15,7 +17,7 @@ const PartnerAndInvestorHero = () => {
     <HeroLayout hideBlur>
       <VStack spacing="0px" py={0} px={layoutPadding} w="full">
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
-          <HStack w="full" spacing={5} justify={{ base: 'flex-start', md: 'center' }}>
+          <HStack w="full" spacing={5} justify={{ base: 'center', md: 'center' }}>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '44px', md: '60px' }}
@@ -31,18 +33,17 @@ const PartnerAndInvestorHero = () => {
               Advisors
             </Text>
           </HStack>
-          <SimpleGrid
+          <Stack
             w="full"
-            columns={12}
-            columnGap={{ base: '8px', sm: '16px', md: '24px' }}
-            rowGap={{ base: '32px', sm: '16px', md: '24px', xl: '46px' }}
+            spacing={8}
+            direction={{ base: 'column', lg: 'row'}}
           >
             {Advisors.map((advisor) => (
               <GridItem colSpan={colSpan} w="full">
                 <CompanyCard {...advisor} />
               </GridItem>
             ))}
-          </SimpleGrid>
+          </Stack>
         </VStack>
         {/* <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack w="full" spacing={5} justify={{ base: 'flex-start', md: 'center' }}>
@@ -84,15 +85,21 @@ export default PartnerAndInvestorHero;
 const Advisors = [
   {
     name: 'Kevin Lin',
-    title: 'Founder of Twitch',
+    title: 'Founder - Twitch',
     image: 'assets/images/kevin-lin.jpeg',
-    subtitle: 'Founder/CEO of Metatheory',
+    subtitle: '',
+  },
+  {
+    name: 'Tim Howes',
+    title: 'CTO - Netscape',
+    image: 'assets/images/tim-howes.gif',
+    subtitle: 'Director of Engineering - Facebook',
   },
   {
     name: 'Kai Huang',
-    title: 'Founder of Guitar Hero',
+    title: 'Founder - Guitar Hero',
     image: 'assets/images/kai-huang.jpeg',
-    subtitle: 'President of Red Octane @Activision',
+    subtitle: 'President of Red Octane - Activision',
   },
 ];
 
@@ -110,16 +117,18 @@ const CompanyCard = ({
   return (
     <VStack
       w="full"
-      py="72px"
+      py="36px"
       align="center"
       justify="center"
       bgColor="#1F2024"
       overflow="hidden"
       position="relative"
       borderRadius="28px"
+      // px={0}
+      boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
     >
-      <Circle overflow="hidden">
-        <Image src={image} objectFit="cover" borderRadius="100px" w="100px" h="100px" />
+      <Circle overflow="hidden" boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)">
+        <Image src={image} objectFit="cover" borderRadius="100px" w="180px" h="180px" />
       </Circle>
       <VStack p="8px" align="center" justify="center">
         <Text fontSize="20px" fontWeight="semibold" pt="8px">
@@ -128,7 +137,7 @@ const CompanyCard = ({
         <Text opacity="0.8" align="center">
           {title}
         </Text>
-        <Text opacity="0.8" align="center">
+        <Text opacity="0.8" align="center" display="inline">
           {subtitle}
         </Text>
       </VStack>

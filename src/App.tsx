@@ -13,10 +13,10 @@ import {
   // NFTMarketPlaceHero,
   // BeAnInfluencerHero,
   // JoinAndCollectHero,
-  OurCommunityHero,
+  // OurCommunityHero,
   // TokenomicsHero,
   PartnerAndInvestorHero,
-  JoinUsHero,
+  // JoinUsHero,
 } from 'components/ui/home';
 import Contact from 'components/ui/home/Contact';
 
@@ -67,9 +67,9 @@ const App = () => {
         <JoinAndCollectHero />
       </div> */}
 
-      <div id="our-community-hero">
+      {/* <div id="our-community-hero">
         <OurCommunityHero />
-      </div>
+      </div> */}
 
       {/* <div id="tokenomics">
         <TokenomicsHero />
@@ -83,9 +83,9 @@ const App = () => {
         <RoadMapHero />
       </div> */}
 
-      <div id="join-us">
+      {/* <div id="join-us">
         <JoinUsHero />
-      </div>
+      </div> */}
       <div id="join-us">
         <Contact />
       </div>
