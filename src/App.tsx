@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 
 const App = () => {
   const { setColorMode } = useColorMode();
-  const date = dayjs('2022-01-22 12:00').toDate();
+  const date = dayjs(1642896000 * 1000).toDate();
 
   useEffect(() => {
     setColorMode('dark');
