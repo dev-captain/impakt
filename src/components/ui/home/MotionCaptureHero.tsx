@@ -35,8 +35,15 @@ const MotionCaptureHero = () => {
             xl: 1,
           }}
         >
-          <VStack align="flex-start" spacing="40px" alignItems={{ base: 'center', md: 'flex-start' }}>
-            <VStack textAlign={{ base: 'center', md: 'left' }} alignItems={{ base: 'center', md: 'flex-start' }}>
+          <VStack
+            align="flex-start"
+            spacing="40px"
+            alignItems={{ base: 'center', md: 'flex-start' }}
+          >
+            <VStack
+              textAlign={{ base: 'center', md: 'left' }}
+              alignItems={{ base: 'center', md: 'flex-start' }}
+            >
               <Text
                 fontSize={{ base: '40px', md: '56px' }}
                 lineHeight={{ base: '56px', md: '60px' }}
@@ -93,7 +100,13 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
   const Icon = isVrGlass ? Icons.VrGlass : Icons.Runner;
 
   return (
-    <Box bgColor="#1F2024" borderRadius={20} position="relative" overflow="hidden">
+    <Box
+      bgColor="#1F2024"
+      borderRadius={20}
+      position="relative"
+      overflow="hidden"
+      boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
+    >
       <VStack
         align="flex-start"
         maxW="240px"

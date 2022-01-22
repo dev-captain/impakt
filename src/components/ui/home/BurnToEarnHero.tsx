@@ -40,6 +40,7 @@ const BurnToEarnHero = () => {
           overflow="hidden"
           position="relative"
           onClick={disclosure.onOpen}
+          boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
         >
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>

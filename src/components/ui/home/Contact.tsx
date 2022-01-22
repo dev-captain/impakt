@@ -78,6 +78,7 @@ const Contact = () => {
                 overflow="hidden"
                 position="relative"
                 spacing="32px"
+                boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
               >
                 <ContactGradientEllipse />
                 <ContactGradientEllipse1 />
