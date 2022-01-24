@@ -40,7 +40,7 @@ const Contact = () => {
     !validateEmail(values.email);
 
   return (
-    <HeroLayout hideBlur>
+    <HeroLayout hideBlur minH="70vh">
       <VStack px={layoutPadding} w="full">
         <SimpleGrid columns={2} w="full" columnGap={4}>
           <GridItem colSpan={1} d={{ base: 'none', md: 'flex' }}>
