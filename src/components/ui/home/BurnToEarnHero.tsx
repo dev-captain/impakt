@@ -44,8 +44,8 @@ const BurnToEarnHero = () => {
         >
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>
-              <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="60px" fontWeight="300">
-                Burn and
+              <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="1.2em" fontWeight="300">
+                <Text>Burn and</Text>
                 <Text fontWeight="700">earn!</Text>
               </Text>
               <Play forMobile onClick={disclosure.onOpen} />

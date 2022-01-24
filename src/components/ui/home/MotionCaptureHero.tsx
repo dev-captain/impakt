@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import {
   Box,
-  HStack,
   Image,
   Text,
+  HStack,
   VStack,
   GridItem,
   SimpleGrid,
@@ -35,29 +35,24 @@ const MotionCaptureHero = () => {
             xl: 1,
           }}
         >
-          <VStack
-            align="flex-start"
-            spacing="40px"
-            alignItems={{ base: 'center', md: 'flex-start' }}
-          >
-            <VStack
-              textAlign={{ base: 'center', md: 'left' }}
-              alignItems={{ base: 'center', md: 'flex-start' }}
-            >
-              <Text
-                fontSize={{ base: '40px', md: '56px' }}
-                lineHeight={{ base: '56px', md: '60px' }}
-                fontWeight="300"
-              >
-                Computer Vision
-              </Text>
-              <Text
-                fontSize={{ base: '40px', md: '56px' }}
-                lineHeight={{ base: '56px', md: '60px' }}
-                fontWeight="700"
-              >
-                Technology
-              </Text>
+          <VStack spacing={{ base: '32px', md: '80px' }} align="flex-start" alignItems="flex-start">
+            <VStack spacing="20px" alignItems="flex-start">
+              <VStack textAlign="left" alignItems="flex-start">
+                <Text
+                  fontSize={{ base: '40px', md: '56px' }}
+                  lineHeight={{ base: '40px', md: '60px' }}
+                  fontWeight="300"
+                >
+                  Computer Vision
+                </Text>
+                <Text
+                  fontSize={{ base: '40px', md: '56px' }}
+                  lineHeight={{ base: '40px', md: '60px' }}
+                  fontWeight="700"
+                >
+                  Technology
+                </Text>
+              </VStack>
               <Text
                 fontSize="20px"
                 lineHeight="32px"

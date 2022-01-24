@@ -49,9 +49,11 @@ const ImpaktGamesHero = () => {
             base: 4,
             md: 2,
           }}
+          h="full"
           px={layoutPadding}
         >
           <Stack
+            h="full"
             align={{
               base: 'center',
               sm: 'flex-start',
@@ -61,11 +63,12 @@ const ImpaktGamesHero = () => {
           >
             <VStack
               align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
-              // paddingY={{ base: '0px', sm: '8px', md: '36px' }}
               spacing={{ base: '16px', md: '0px', xl: '16px' }}
+              justify="center"
             >
               <Text
                 textAlign="left"
+                lineHeight="1.2em"
                 fontSize={{ base: '32px', md: '60px' }}
                 paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
               >
@@ -73,17 +76,17 @@ const ImpaktGamesHero = () => {
               </Text>
             </VStack>
             <VStack
-              spacing={{ base: '24px', sm: '24px', md: 0, xl: '24px' }}
               align="flex-start"
               alignItems={{ base: 'center', sm: 'left' }}
+              spacing={{ base: '24px', sm: '24px', md: 0, xl: '0px' }}
             >
               <VStack
-                display={{ base: 'flex', sm: 'none' }}
                 pos="relative"
                 overflow="hidden"
                 align="center"
                 justify="center"
                 onClick={disclosure.onOpen}
+                display={{ base: 'flex', sm: 'none' }}
               >
                 <Play onClick={disclosure.onOpen} />
                 <Image
@@ -110,6 +113,7 @@ const ImpaktGamesHero = () => {
                 display={{ base: 'none', md: 'flex' }}
               />
               <VStack
+                h="full"
                 overflow="hidden"
                 pos="relative"
                 align="center"
@@ -144,6 +148,7 @@ const ImpaktGamesHero = () => {
           </Stack>
         </GridItem>
         <GridItem
+          // h="full"
           alignItems="flex-end"
           justifyContent="flex-end"
           display={{ base: 'none', xl: 'flex' }}
@@ -179,6 +184,7 @@ const ImpaktGamesHero = () => {
           />
         </GridItem>
         <GridItem
+          // h="full"
           display={{ base: 'none', sm: 'none', md: 'flex', xl: 'none' }}
           colSpan={{
             base: 3,

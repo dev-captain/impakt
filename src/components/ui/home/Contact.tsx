@@ -16,12 +16,12 @@ const Contact = () => {
     email: '',
     message: '',
     name: '',
-    subject: '',
+    subject: 'Landing Page',
     isSubscribed: false,
   });
 
   const resetFields = () => {
-    setValues({ email: '', message: '', name: '', subject: '', isSubscribed: false });
+    setValues({ email: '', message: '', name: '', subject: 'Landing Page', isSubscribed: false });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -47,17 +47,17 @@ const Contact = () => {
             <Image src="assets/images/contact-us.png" maxH="600px" objectFit="contain" />
           </GridItem>
           <GridItem colSpan={{ base: 2, sm: 2, md: 1 }}>
-            <VStack
-                w="full" 
-                spacing="20px" 
-                align="flex-start" 
-                alignItems={{ base: 'center', md: 'flex-start' }}
-            >
-              <Text display="flex" lineHeight="60px" fontSize={{ base: '36px', md: '56px' }}>
+            <VStack w="full" spacing="24px" align="flex-start" alignItems="flex-start">
+              <Text
+                display="flex"
+                alignItems="center"
+                ineHeight={{ base: '40px', md: '60px' }}
+                fontSize={{ base: '40px', md: '56px' }}
+              >
                 <Text
-                  fontSize={{ base: '36px', md: '56px' }}
+                  fontSize={{ base: '40px', md: '56px' }}
                   fontWeight="700"
-                  lineHeight="60px"
+                  lineHeight={{ base: '40px', md: '60px' }}
                   marginRight={{
                     base: '5px',
                     md: '15px',
@@ -85,11 +85,6 @@ const Contact = () => {
                 <VStack w="full" spacing="16px">
                   <TextField placeholder="Your name" name="name" onChange={onChange} />
                   <TextField placeholder="Your e-mail" name="email" onChange={onChange} />
-                  <TextField
-                    placeholder="Topic of the message"
-                    name="subject"
-                    onChange={onChange}
-                  />
                   <TextareaField placeholder="Your message" name="message" onChange={onChange} />
                 </VStack>
                 <GradientButton

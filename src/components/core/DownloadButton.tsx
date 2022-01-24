@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {Button, HStack, Text, VStack} from '@chakra-ui/react';
+import { Button, HStack, Text, VStack } from '@chakra-ui/react';
 import Icons from '../icons';
 
 const DownloadButton = ({
@@ -11,7 +11,16 @@ const DownloadButton = ({
   title: string;
   iconName: 'Apple' | 'Windows';
 }) => (
-  <Button as="a" href={link} bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)" height={100} width ={300} alignSelf="center" borderRadius="20px">
+  <Button
+    as="a"
+    w="full"
+    h="full"
+    py={'32px'}
+    href={link}
+    alignSelf="center"
+    borderRadius="20px"
+    bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+  >
     <VStack>
       {iconName === 'Apple' && <Icons.Apple opacity="1" />}
       {iconName === 'Windows' && <Icons.Window opacity="1" />}
