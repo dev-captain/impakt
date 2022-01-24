@@ -10,6 +10,7 @@ type HeroLayoutProps = {
   addSpacer?: boolean;
   hideBlur?: boolean;
   pos?: string;
+  minH?: string;
   children: React.ReactNode;
   align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
@@ -19,6 +20,7 @@ const HeroLayout = ({
   bgImage,
   children,
   spacing = 4,
+  minH = '100vh',
   align = 'center',
   bgColor = '#282a2d',
   justify = 'center',
@@ -29,7 +31,7 @@ const HeroLayout = ({
 }: HeroLayoutProps) => {
   return (
     <Box
-      minH={{ base: 'auto', xl: '100vh' }}
+      minH={{ base: 'auto', xl: minH || '100vh' }}
       filter={hideBlur ? '' : 'blur(20px)'}
       overflowY="unset"
       // @ts-ignore
@@ -38,7 +40,7 @@ const HeroLayout = ({
     >
       {showNavbar && <Navbar />}
       <VStack
-        minH={{ base: 'auto', xl: '100vh' }}
+        minH={{ base: 'auto', xl: minH || '100vh' }}
         minW="full"
         align={align}
         justify={justify}

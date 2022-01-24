@@ -31,6 +31,7 @@ const ImpaktGamesHero = () => {
     <HeroLayout
       showNavbar
       addSpacer
+      minH="70vh"
       spacing={10}
       justify="center"
       align="space-around"
@@ -50,16 +51,17 @@ const ImpaktGamesHero = () => {
             md: 2,
           }}
           h="full"
+          w="full"
           px={layoutPadding}
         >
           <Stack
+            w="full"
             h="full"
-            align={{
-              base: 'center',
-              sm: 'flex-start',
-            }}
             alignItems={{ base: 'center', md: 'flex-start' }}
-            pt={{ base: '0px', md: '0px', xl: '40px', '2xl': '40px' }}
+            pt={0}
+            spacing="24px"
+            align="center"
+            justify="center"
           >
             <VStack
               align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
@@ -67,9 +69,10 @@ const ImpaktGamesHero = () => {
               justify="center"
             >
               <Text
-                textAlign="left"
-                lineHeight="1.2em"
-                fontSize={{ base: '32px', md: '60px' }}
+                textStyle="TitleBold72"
+                fontSize={{ base: '64px', md: '90px' }}
+                lineHeight={{ base: '64px', md: '90px' }}
+                textAlign={{ base: 'center', md: 'left' }}
                 paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
               >
                 Social. Fitness. Gamified.
