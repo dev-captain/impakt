@@ -45,11 +45,13 @@ const Navbar = () => {
             spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
           >
-            <HStack spacing={[0, 0, 3, 5, 8, 12]} w="full" align="center" justify="flex-end">
-              <NavbarLinkItem title="Impakt Games" isActive href="/" />
-              <NavbarLinkItem title="White Paper" href="https://joker-5.gitbook.io/impakt/" />
+            <HStack w="full" align="space-between" justify="space-between">
+              <HStack spacing={[0, 0, 3, 5, 8, 12]}>
+                <NavbarLinkItem title="Impakt Games" isActive href="/" />
+                <NavbarLinkItem title="White Paper" href="https://joker-5.gitbook.io/impakt/" />
+              </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
-                <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
+                <Box as="a" target="_blank" href={Socials.twitter}>
                   <Image
                     w="35px"
                     h="35px"
@@ -58,7 +60,7 @@ const Navbar = () => {
                     src="assets/images/twitter.png"
                   />
                 </Box>
-                <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
+                <Box as="a" target="_blank" href={Socials.discord}>
                   <Image
                     w="32px"
                     h="32px"
@@ -69,15 +71,6 @@ const Navbar = () => {
                 </Box>
               </HStack>
             </HStack>
-            {/* <VStack pl={{ base: '16px', md: '100px' }}>
-              <GradientButton
-                title="Sign In"
-                icon="ProfileUser"
-                minW="160px"
-                px="21px"
-                radius="24px"
-              />
-            </VStack> */}
           </HStack>
           <HStack
             align="center"
@@ -86,7 +79,11 @@ const Navbar = () => {
             flex={{ base: 1, md: 'auto' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
-            <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
+            <HStack
+              pl={{ base: 0, md: '64px' }}
+              spacing={{ base: '16px', md: '32px' }}
+              justify={{ base: 'center', md: 'flex-end' }}
+            >
               <Box as="a" target="_blank" href={Socials.twitter}>
                 <Image
                   w="35px"
