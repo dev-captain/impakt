@@ -24,7 +24,16 @@ const PartnerAndInvestorHero = () => {
   };
 
   return (
-    <HeroLayout hideBlur>
+    <HeroLayout
+      hideBlur
+      customPadding={{
+        base: '16px',
+        md: '32px',
+        xl: '0px',
+        '2xl': '0px',
+      }}
+      minH="70vh"
+    >
       <VStack spacing="0px" py={0} px={layoutPadding} w="full">
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack w="full" spacing={5} justify={{ base: 'flex-start', md: 'center' }}>

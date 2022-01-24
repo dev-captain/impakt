@@ -11,6 +11,7 @@ type HeroLayoutProps = {
   hideBlur?: boolean;
   pos?: string;
   minH?: string;
+  customPadding?: string | any;
   removeBottomPadding?: boolean;
   children: React.ReactNode;
   align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
@@ -20,6 +21,7 @@ type HeroLayoutProps = {
 const HeroLayout = ({
   bgImage,
   children,
+  customPadding,
   removeBottomPadding = false,
   spacing = 4,
   minH = '100vh',
@@ -33,7 +35,7 @@ const HeroLayout = ({
 }: HeroLayoutProps) => {
   return (
     <Box
-      minH={{ base: 'auto', xl: minH || '100vh' }}
+      minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
       filter={hideBlur ? '' : 'blur(20px)'}
       overflowY="unset"
       // @ts-ignore
@@ -42,7 +44,7 @@ const HeroLayout = ({
     >
       {showNavbar && <Navbar />}
       <VStack
-        minH={{ base: 'auto', xl: minH || '100vh' }}
+        minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
         minW="full"
         align={align}
         justify={justify}
@@ -50,11 +52,13 @@ const HeroLayout = ({
         backgroundImage={bgImage}
         backgroundColor={bgColor}
         paddingTop={showNavbar ? '120px' : '0px'}
-        paddingBottom={{
-          base: removeBottomPadding ? 0 : '60px',
-          md: removeBottomPadding ? '64px' : '90px',
-          xl: removeBottomPadding ? 0 : 'auto',
-        }}
+        paddingBottom={
+          customPadding || {
+            base: removeBottomPadding ? 0 : '60px',
+            md: removeBottomPadding ? '32px' : '90px',
+            xl: removeBottomPadding ? 0 : 'auto',
+          }
+        }
       >
         {children}
         {addSpacer && <Spacer h={spacing} />}

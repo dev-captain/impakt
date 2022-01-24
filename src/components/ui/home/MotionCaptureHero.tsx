@@ -17,7 +17,16 @@ const MotionCaptureHero = () => {
   const [isLessThan850] = useMediaQuery('(max-width: 850px)');
 
   return (
-    <HeroLayout hideBlur removeBottomPadding minH="70vh">
+    <HeroLayout
+      hideBlur
+      customPadding={{
+        base: '16px',
+        md: '32px',
+        xl: '64px',
+        '2xl': '0px',
+      }}
+      minH="70vh"
+    >
       <SimpleGrid
         columns={2}
         justifyContent="center"
