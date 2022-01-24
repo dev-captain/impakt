@@ -46,7 +46,7 @@ const Navbar = () => {
             display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
           >
             <HStack w="full" align="space-between" justify="space-between">
-              <HStack spacing={[0, 0, 3, 5, 8, 12]}>
+              <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
                 <NavbarLinkItem title="Impakt Games" isActive href="/" />
                 <NavbarLinkItem title="White Paper" href="https://joker-5.gitbook.io/impakt/" />
               </HStack>

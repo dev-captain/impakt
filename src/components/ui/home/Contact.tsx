@@ -87,15 +87,17 @@ const Contact = () => {
                   <TextField placeholder="Your e-mail" name="email" onChange={onChange} />
                   <TextareaField placeholder="Your message" name="message" onChange={onChange} />
                 </VStack>
-                <GradientButton
-                  py="32px"
-                  title="Send"
-                  minW="240px"
-                  radius="14px"
-                  onClick={onSubmit}
-                  disabled={isDisabled || loading}
-                  bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                />
+                <VStack w="full" align="flex-end">
+                  <GradientButton
+                    py="32px"
+                    title="Send"
+                    minW="240px"
+                    radius="14px"
+                    onClick={onSubmit}
+                    disabled={isDisabled || loading}
+                    bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                  />
+                </VStack>
               </VStack>
             </VStack>
           </GridItem>

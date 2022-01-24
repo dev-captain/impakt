@@ -27,7 +27,7 @@ const BurnToEarnHero = () => {
   };
 
   return (
-    <HeroLayout hideBlur={!disclosure.isOpen}>
+    <HeroLayout hideBlur={!disclosure.isOpen} removeBottomPadding minH="70vh">
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           w="full"

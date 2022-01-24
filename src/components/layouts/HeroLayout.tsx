@@ -11,6 +11,7 @@ type HeroLayoutProps = {
   hideBlur?: boolean;
   pos?: string;
   minH?: string;
+  removeBottomPadding?: boolean;
   children: React.ReactNode;
   align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
@@ -19,6 +20,7 @@ type HeroLayoutProps = {
 const HeroLayout = ({
   bgImage,
   children,
+  removeBottomPadding = false,
   spacing = 4,
   minH = '100vh',
   align = 'center',
@@ -48,7 +50,11 @@ const HeroLayout = ({
         backgroundImage={bgImage}
         backgroundColor={bgColor}
         paddingTop={showNavbar ? '120px' : '0px'}
-        paddingBottom={{ base: '60px', md: '120px', xl: 'auto' }}
+        paddingBottom={{
+          base: removeBottomPadding ? 0 : '60px',
+          md: removeBottomPadding ? '64px' : '90px',
+          xl: removeBottomPadding ? 0 : 'auto',
+        }}
       >
         {children}
         {addSpacer && <Spacer h={spacing} />}
