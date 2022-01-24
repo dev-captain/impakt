@@ -65,6 +65,6 @@ export const TokenomicsData = [
 
 export const Videos = {
   burnAndEarn: 'assets/videos/burn-and-earn.mp4',
-  impaktGames: 'assets/videos/tutorial-demo.m4v',
+  impaktGames: 'assets/videos/tutorial-video.mp4',
 };
 export default {};
