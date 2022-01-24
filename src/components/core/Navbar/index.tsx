@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
+import { Socials } from 'data';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -86,7 +87,7 @@ const Navbar = () => {
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
             <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
-              <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
+              <Box as="a" target="_blank" href={Socials.twitter}>
                 <Image
                   w="35px"
                   h="35px"
@@ -95,7 +96,7 @@ const Navbar = () => {
                   src="assets/images/twitter.png"
                 />
               </Box>
-              <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
+              <Box as="a" target="_blank" href={Socials.discord}>
                 <Image
                   w="32px"
                   h="32px"

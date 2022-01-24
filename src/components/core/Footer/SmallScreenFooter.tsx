@@ -1,4 +1,5 @@
 import { VStack, Text, HStack, Image, Box } from '@chakra-ui/react';
+import { Socials } from 'data';
 
 const SmallScreenFooter = () => {
   return (
@@ -14,7 +15,7 @@ const SmallScreenFooter = () => {
         <HStack align="flex-start" justify="space-between" w="full">
           <Image src="assets/images/logo.png" />
           <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
-            <Box as="a" target="_blank" href="https://twitter.com/demideuszin">
+            <Box as="a" target="_blank" href={Socials.twitter}>
               <Image
                 w="32px"
                 h="32px"
@@ -23,7 +24,7 @@ const SmallScreenFooter = () => {
                 src="assets/images/twitter.png"
               />
             </Box>
-            <Box as="a" target="_blank" href="https://discord.com/invite/Wbx7j9DJwT">
+            <Box as="a" target="_blank" href={Socials.discord}>
               <Image
                 w="30px"
                 h="30px"

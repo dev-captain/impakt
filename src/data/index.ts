@@ -67,4 +67,11 @@ export const Videos = {
   burnAndEarn: 'assets/videos/burn-and-earn.mp4',
   impaktGames: 'assets/videos/tutorial-demo.m4v',
 };
+
+export const Socials = {
+  facebook: '',
+  twitter: 'https://twitter.com/demideuszin',
+  discord: 'https://discord.com/invite/Wbx7j9DJwT',
+};
+
 export default {};
