@@ -32,6 +32,7 @@ const ImpaktGamesHero = () => {
       showNavbar
       addSpacer
       minH="70vh"
+      pos="relative"
       spacing={10}
       justify="center"
       align="space-around"
@@ -214,6 +215,14 @@ const ImpaktGamesHero = () => {
           />
         </GridItem>
       </SimpleGrid>
+      <Box
+        height={20}
+        w="full"
+        position="absolute"
+        bottom={0}
+        zIndex={100}
+        bgGradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #282A2E 100%)"
+      />
     </HeroLayout>
   );
 };
