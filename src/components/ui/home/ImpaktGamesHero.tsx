@@ -104,7 +104,7 @@ const ImpaktGamesHero = () => {
                   pos="absolute"
                   borderRadius="2px"
                   backgroundPosition="center"
-                  bgImage="assets/images/video.gif"
+                  bgImage="https://ucarecdn.com/9fa46e2c-bb22-4ea2-b5ea-32b6c214ce54/"
                   backgroundSize={{ base: 'contain', md: 'center', xl: 'fill' }}
                   minH={{ base: '140px', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
                   minW={{ base: '240px', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
@@ -132,7 +132,7 @@ const ImpaktGamesHero = () => {
                   opacity="0.6"
                   borderRadius="2px"
                   backgroundPosition="center"
-                  bgImage="assets/images/video.gif"
+                  bgImage="https://ucarecdn.com/9fa46e2c-bb22-4ea2-b5ea-32b6c214ce54/"
                   backgroundSize={{ base: 'fill', md: 'center', xl: 'fill' }}
                   minH={{ base: '20vw', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
                   minW={{ base: '60vw', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
@@ -179,7 +179,7 @@ const ImpaktGamesHero = () => {
             borderRadius="4px"
             backgroundSize="cover"
             backgroundPosition="center"
-            bgImage="assets/images/video.gif"
+            bgImage="https://ucarecdn.com/9fa46e2c-bb22-4ea2-b5ea-32b6c214ce54/"
             top={{ base: '64px', xl: '32px', '2xl': '64px' }}
             minH={{ base: '24vw', md: '', xl: '24vw', '2xl': '24vw' }}
             minW={{ base: '38vw', md: '', xl: '35vw', '2xl': '38vw' }}
@@ -206,7 +206,7 @@ const ImpaktGamesHero = () => {
             opacity="0.6"
             borderRadius="2px"
             backgroundPosition="center"
-            bgImage="assets/images/video.gif"
+            bgImage="https://ucarecdn.com/9fa46e2c-bb22-4ea2-b5ea-32b6c214ce54/"
             backgroundSize={{ base: 'fill', md: 'center', xl: 'fill' }}
             minH={{ base: '17vw', md: '17vw', xl: '24vw', '2xl': '24vw' }}
             minW={{ base: '30vw', md: '30vw', xl: '35vw', '2xl': '38vw' }}
