@@ -51,6 +51,7 @@ const HeroLayout = ({
         backgroundSize="cover"
         backgroundImage={bgImage}
         backgroundColor={bgColor}
+        backgroundPosition="bottom"
         paddingTop={showNavbar ? '120px' : '0px'}
         paddingBottom={
           customPadding || {

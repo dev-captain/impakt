@@ -45,12 +45,11 @@ function VideoModal({
           _hover={{ cursor: 'pointer' }}
           top={-10}
           right={-10}
-          bg={'gray.700'}
           size={12}
           zIndex={100}
           position="absolute"
         >
-          <Text fontSize={24}>X</Text>
+          <Icons.Cross />
         </Circle>
         {!hideButtons && (
           <SimpleGrid
@@ -67,7 +66,7 @@ function VideoModal({
             <GridItem colSpan={1} w="full">
               <DownloadButton
                 iconName="Windows"
-                title="Download Window"
+                title="Download Windows"
                 link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
               />
             </GridItem>

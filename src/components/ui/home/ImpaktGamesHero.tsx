@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
-/* eslint-disable prettier/prettier */
 import {
   Text,
   VStack,
@@ -19,7 +16,7 @@ import { layoutPadding } from 'theme';
 import VideoModal, { Play } from 'components/core/VideoModal';
 import { Videos } from 'data';
 
-const backgroundImage = "url('assets/images/firstherobg.png')";
+const backgroundImage = "url('assets/images/bg-header.png')";
 
 const ImpaktGamesHero = () => {
   const disclosure = useDisclosure();
@@ -216,11 +213,11 @@ const ImpaktGamesHero = () => {
         </GridItem>
       </SimpleGrid>
       <Box
-        height={20}
+        height="100px"
         w="full"
-        position="absolute"
         bottom={0}
         zIndex={100}
+        position="absolute"
         bgGradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #282A2E 100%)"
       />
     </HeroLayout>
