@@ -5,6 +5,8 @@ const Images = {
     Logo: require('./logo.png'),
     Twitter: require('./twitter.png'),
     Discord: require('./discord.png'),
+    Header: require('./bg-header.png'),
+    Peter: require('./video.gif'),
   },
 };
 
