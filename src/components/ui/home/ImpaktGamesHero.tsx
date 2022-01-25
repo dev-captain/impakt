@@ -16,7 +16,8 @@ import { layoutPadding } from 'theme';
 import VideoModal, { Play } from 'components/core/VideoModal';
 import { Videos } from 'data';
 
-const backgroundImage = "url('assets/images/bg-header.png')";
+const backgroundImage =
+  "url('https://ucarecdn.com/da10a19a-951f-40b9-8fe9-c90d0f488fbe/-/preview/-/quality/smart/')";
 
 const ImpaktGamesHero = () => {
   const disclosure = useDisclosure();
