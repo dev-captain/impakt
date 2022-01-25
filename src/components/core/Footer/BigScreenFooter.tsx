@@ -1,8 +1,12 @@
 import { VStack, Text, SimpleGrid, GridItem, HStack, Image, Box } from '@chakra-ui/react';
+import Images from 'assets/images';
 import { Socials } from 'data';
+import { useNavigate } from 'react-router-dom';
 import { layoutPadding } from 'theme';
 
 const BigScreenFooter = () => {
+  const navigate = useNavigate();
+
   return (
     <VStack
       h="100%"
@@ -22,7 +26,7 @@ const BigScreenFooter = () => {
                 h="full"
                 justify="center"
               >
-                <Image src="assets/images/logo.png" />
+                <Image src={Images.Common.Logo} onClick={() => navigate('/')} />
                 <VStack spacing="8px" align={{ base: 'center', md: 'flex-start' }}>
                   <Text
                     display="flex"
@@ -45,46 +49,9 @@ const BigScreenFooter = () => {
             <GridItem colSpan={{ base: 3, md: 2 }} marginTop={{ base: 0, md: '60px' }}>
               <SimpleGrid columns={2} rowGap={1}>
                 <GridItem colSpan={{ base: 2, md: 1 }}>
-                  <VStack align={{ base: 'center', md: 'flex-start' }}>
-                    {/* <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="/">
-                      Impakt Games
-                    </Text> */}
-                    {/* <Text
-                      fontSize="16px"
-                      lineHeight="24px"
-                      opacity="0.4"
-                      as="a"
-                      href="#nft-marketplace"
-                    >
-                      NFT marketplace
-                    </Text>
-                    <Text fontSize="16px" lineHeight="24px" opacity="0.4" as="a" href="#about-us">
-                      About us
-                    </Text> */}
-                  </VStack>
+                  <VStack align={{ base: 'center', md: 'flex-start' }} />
                 </GridItem>
-                <GridItem colSpan={{ base: 2, md: 1 }}>
-                  {/* <VStack align={{ base: 'center', md: 'flex-start' }}>
-                    <Text
-                      fontSize="16px"
-                      lineHeight="24px"
-                      opacity="0.4"
-                      as="a"
-                      href="#policy-privacy"
-                    >
-                      Policy Privacy
-                    </Text>
-                    <Text
-                      fontSize="16px"
-                      lineHeight="24px"
-                      opacity="0.4"
-                      as="a"
-                      href="#term-of-use"
-                    >
-                      Terms of use
-                    </Text>
-                  </VStack> */}
-                </GridItem>
+                <GridItem colSpan={{ base: 2, md: 1 }} />
               </SimpleGrid>
             </GridItem>
           </SimpleGrid>
@@ -97,7 +64,7 @@ const BigScreenFooter = () => {
                 h="32px"
                 opacity={0.6}
                 objectFit="contain"
-                src="assets/images/twitter.png"
+                src={Images.Common.Twitter}
               />
             </Box>
             <Box as="a" target="_blank" href={Socials.discord}>
@@ -106,7 +73,7 @@ const BigScreenFooter = () => {
                 h="30px"
                 opacity={0.6}
                 objectFit="contain"
-                src="assets/images/discord.png"
+                src={Images.Common.Discord}
               />
             </Box>
           </HStack>

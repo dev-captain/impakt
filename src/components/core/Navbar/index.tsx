@@ -2,11 +2,14 @@ import { useEffect } from 'react';
 import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
 import { Socials } from 'data';
+import Images from 'assets/images';
+import { useNavigate } from 'react-router-dom';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
 
@@ -35,8 +38,8 @@ const Navbar = () => {
             onToggle={onToggle}
             isLessThan1040={isLessThan1040}
           />
-          <Box as="a" href="/" zIndex={100}>
-            <Image src="assets/images/logo.png" />
+          <Box onClick={() => navigate('/')} zIndex={100}>
+            <Image src={Images.Common.Logo} />
           </Box>
           <HStack
             justify="flex-end"
@@ -57,7 +60,7 @@ const Navbar = () => {
                     h="35px"
                     opacity={0.6}
                     objectFit="contain"
-                    src="assets/images/twitter.png"
+                    src={Images.Common.Twitter}
                   />
                 </Box>
                 <Box as="a" target="_blank" href={Socials.discord}>
@@ -66,7 +69,7 @@ const Navbar = () => {
                     h="32px"
                     opacity={0.6}
                     objectFit="contain"
-                    src="assets/images/discord.png"
+                    src={Images.Common.Discord}
                   />
                 </Box>
               </HStack>
@@ -90,7 +93,7 @@ const Navbar = () => {
                   h="35px"
                   opacity={0.6}
                   objectFit="contain"
-                  src="assets/images/twitter.png"
+                  src={Images.Common.Twitter}
                 />
               </Box>
               <Box as="a" target="_blank" href={Socials.discord}>
@@ -99,7 +102,7 @@ const Navbar = () => {
                   h="32px"
                   opacity={0.6}
                   objectFit="contain"
-                  src="assets/images/discord.png"
+                  src={Images.Common.Discord}
                 />
               </Box>
             </HStack>
