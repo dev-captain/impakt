@@ -36,7 +36,7 @@ const PartnerAndInvestorHero = () => {
     >
       <VStack spacing="0px" py={0} px={layoutPadding} w="full">
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
-          <HStack w="full" spacing={5} justify={{ base: 'flex-start', md: 'center' }}>
+          <HStack w="full" spacing={5} justify={{ base: 'center', md: 'center' }}>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '40px', md: '60px' }}

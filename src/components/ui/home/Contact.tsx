@@ -47,7 +47,12 @@ const Contact = () => {
             <Image src="assets/images/contact-us.png" maxH="600px" objectFit="contain" />
           </GridItem>
           <GridItem colSpan={{ base: 2, sm: 2, md: 1 }}>
-            <VStack w="full" spacing="24px" align="flex-start" alignItems="flex-start">
+            <VStack
+              w="full"
+              spacing="24px"
+              align="flex-start"
+              alignItems={{ base: 'center', md: 'flex-start' }}
+            >
               <Text
                 display="flex"
                 alignItems="center"
