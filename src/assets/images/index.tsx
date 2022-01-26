@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 /* eslint-disable global-require */
 
 const Images = {
@@ -6,14 +7,15 @@ const Images = {
     Twitter: require('./twitter.png'),
     Discord: require('./discord.png'),
     Header: require('./bg-header.png'),
-    Peter: 'https://ucarecdn.com/9fa46e2c-bb22-4ea2-b5ea-32b6c214ce54/',
+    Peter: 'https://ucarecdn.com/486c87ea-885b-41ec-b8a1-df3d51404bae/video.webp',
   },
-  motionCapture: 'https://ucarecdn.com/9d2fcade-c321-45bd-9468-4afa630af77f/-/preview/800x800/',
-  burnAndEarn: 'https://ucarecdn.com/d7cd3625-043f-41a7-bcf5-0ebe402d6a7d/-/preview/800x800/',
+  motionCapture: 'https://ucarecdn.com/e521c223-c2a9-4620-a18b-75079ee8f33c/motioncapture.webp',
+  burnAndEarn: 'https://ucarecdn.com/241b7cbd-9cab-4ad4-9774-81866ab4e0dd/burntoearnhero.webp',
+
   contact: {
-    md: 'https://ucarecdn.com/9a840131-c2a0-4b38-a980-d001322b06cf/-/preview/400x400/',
-    sm: 'https://ucarecdn.com/9a840131-c2a0-4b38-a980-d001322b06cf/-/preview/400x400/',
-    xl: 'https://ucarecdn.com/9a840131-c2a0-4b38-a980-d001322b06cf/-/preview/800x800/',
+    md: 'https://ucarecdn.com/94ed78b3-9050-4226-aea5-687217b8d4f3/contactus.webp',
+    sm: 'https://ucarecdn.com/94ed78b3-9050-4226-aea5-687217b8d4f3/contactus.webp',
+    xl: 'https://ucarecdn.com/94ed78b3-9050-4226-aea5-687217b8d4f3/contactus.webp',
   } as any,
 
   impaktGames: {
@@ -22,21 +24,20 @@ const Images = {
         case 'base':
         case 'sm':
         case 'md':
-          return 'https://ucarecdn.com/8cbbb091-bc4a-4a7b-a6e3-bd20d35ac08d/-/preview/-/quality/smart/';
+          return 'https://ucarecdn.com/deff5fd8-4e66-457b-94f4-e227bb9e75ea/md.webp';
         case 'xl':
-          return 'https://ucarecdn.com/4b679a02-95b0-4d1a-b0aa-a66838f5cb4c/-/preview/-/quality/smart/';
+          return 'https://ucarecdn.com/2a67d277-5ea9-442e-9b25-5556d728751c/xl.webp';
         case '2xl':
-          return 'https://ucarecdn.com/71bed9ea-d9ac-41ed-bbf6-fa456bd5e10f/-/preview/-/quality/smart/';
+          return 'https://ucarecdn.com/b5d78ad2-503b-47af-9151-239b646bcac9/2xl.webp';
         default:
-          return 'https://ucarecdn.com/4b679a02-95b0-4d1a-b0aa-a66838f5cb4c/-/preview/-/quality/smart/';
+          return 'https://ucarecdn.com/2a67d277-5ea9-442e-9b25-5556d728751c/xl.webp';
       }
     },
   },
-
   advisor: {
-    kevin: 'https://ucarecdn.com/bd74b6cb-dbae-495d-9fc9-43e5f25a664b/-/preview/300x300/',
-    tim: 'https://ucarecdn.com/271c3150-2b31-453c-9b84-11ea64c61c15/-/preview/300x300/',
-    kai: 'https://ucarecdn.com/5e3c4fc0-7250-489a-af44-578308280112/-/preview/300x300/',
+    kevin: 'https://ucarecdn.com/fa7f3cbb-d737-45bb-9c44-121c92e280a9/kevinlin.webp',
+    tim: 'https://ucarecdn.com/2249567b-d785-41e9-975e-223ccfe1ae9b/timhowes.webp',
+    kai: 'https://ucarecdn.com/1206640b-1fc0-449f-8812-31a990e34360/kaihuang.webp',
   },
 };
 
