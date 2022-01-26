@@ -5,23 +5,39 @@ import {
   Image,
   Stack,
   GridItem,
-  Button,
   Box,
   useDisclosure,
   useMediaQuery,
-  ButtonProps,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 import VideoModal, { Play } from 'components/core/VideoModal';
 import { Videos } from 'data';
 import Images from 'assets/images';
+import DownloadTutorialButton from './DownloadTutorialButton';
+import ScreenVideo from './ScreenVideo';
 
 const ImpaktGamesHero = () => {
   const disclosure = useDisclosure();
   const [isLessThan1272] = useMediaQuery('(max-width: 1272px)');
   const [isMoreThan1097] = useMediaQuery('(min-width: 1097px)');
   const isSpecificWidth = isLessThan1272 && isMoreThan1097;
+
+  const gridCommonProps: any = {
+    colSpan: {
+      base: 3,
+      md: 2,
+    },
+    pos: 'relative',
+    overflow: 'hidden',
+    onClick: disclosure.onOpen,
+  };
+
+  const stackCommonProps: any = {
+    align: 'center',
+    justify: 'center',
+    ...gridCommonProps,
+  };
 
   return (
     <HeroLayout
@@ -52,18 +68,18 @@ const ImpaktGamesHero = () => {
           px={layoutPadding}
         >
           <Stack
+            pt={0}
             w="full"
             h="full"
-            alignItems={{ base: 'center', md: 'flex-start' }}
-            pt={0}
             spacing="24px"
             align="center"
             justify="center"
+            alignItems={{ base: 'center', md: 'flex-start' }}
           >
             <VStack
-              align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
-              spacing={{ base: '16px', md: '0px', xl: '16px' }}
               justify="center"
+              spacing={{ base: '16px', md: '0px', xl: '16px' }}
+              align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
             >
               <Text
                 textStyle="TitleBold72"
@@ -80,33 +96,16 @@ const ImpaktGamesHero = () => {
               alignItems={{ base: 'center', sm: 'left' }}
               spacing={{ base: '24px', sm: '24px', md: 0, xl: '0px' }}
             >
-              <VStack
-                pos="relative"
-                overflow="hidden"
-                align="center"
-                justify="center"
-                onClick={disclosure.onOpen}
-                display={{ base: 'flex', sm: 'none' }}
-              >
+              <VStack {...stackCommonProps} display={{ base: 'flex', sm: 'none' }}>
                 <Play onClick={disclosure.onOpen} />
                 <Image
                   maxW="320px"
-                  objectFit="contain"
                   marginTop="30px"
+                  objectFit="contain"
                   marginBottom="16px"
                   src="assets/images/macbook-mobile.png"
                 />
-                <Box
-                  top="16px"
-                  opacity="0.6"
-                  pos="absolute"
-                  borderRadius="2px"
-                  backgroundPosition="center"
-                  bgImage={Images.Common.Peter}
-                  backgroundSize={{ base: 'contain', md: 'center', xl: 'fill' }}
-                  minH={{ base: '140px', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
-                  minW={{ base: '240px', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
-                />
+                <ScreenVideo isSpecificWidth={isSpecificWidth} />
               </VStack>
               <DownloadTutorialButton
                 disclosure={disclosure}
@@ -114,27 +113,12 @@ const ImpaktGamesHero = () => {
               />
               <VStack
                 h="full"
-                overflow="hidden"
-                pos="relative"
-                align="center"
-                justify="center"
-                onClick={disclosure.onOpen}
+                {...stackCommonProps}
                 display={{ base: 'none', sm: 'flex', md: 'none' }}
               >
                 <Play onClick={disclosure.onOpen} />
                 <Image objectFit="contain" src="assets/images/macbook-tablet.png" />
-                <Box
-                  top="8px"
-                  pos="absolute"
-                  mx="8vw"
-                  opacity="0.6"
-                  borderRadius="2px"
-                  backgroundPosition="center"
-                  bgImage={Images.Common.Peter}
-                  backgroundSize={{ base: 'fill', md: 'center', xl: 'fill' }}
-                  minH={{ base: '20vw', sm: '80%', md: '17vw', xl: '24vw', '2xl': '24vw' }}
-                  minW={{ base: '60vw', sm: '74%', md: '30vw', xl: '35vw', '2xl': '38vw' }}
-                />
+                <ScreenVideo isSpecificWidth={isSpecificWidth} />
               </VStack>
               <>
                 <Box m={24} />
@@ -148,100 +132,49 @@ const ImpaktGamesHero = () => {
           </Stack>
         </GridItem>
         <GridItem
-          // h="full"
-          alignItems="flex-end"
-          justifyContent="flex-end"
-          display={{ base: 'none', xl: 'flex' }}
           colSpan={{
             base: 3,
             md: 2,
           }}
-          pos="relative"
-          overflow="hidden"
-          onClick={disclosure.onOpen}
+          {...gridCommonProps}
+          alignItems="flex-end"
+          justifyContent="flex-end"
           mt={{ base: 'auto', md: '48px' }}
+          display={{ base: 'none', xl: 'flex' }}
         >
           <Image
-            maxH="850px"
             w="100%"
             h="100%"
+            maxH="850px"
             objectFit="contain"
             src="assets/images/macbook.png"
           />
           <Play onClick={disclosure.onOpen} />
-          <Box
-            right="16px"
-            maxH="550px"
-            opacity="0.6"
-            pos="absolute"
-            borderRadius="4px"
-            backgroundSize="cover"
-            backgroundPosition="center"
-            bgImage={Images.Common.Peter}
-            top={{ base: '64px', xl: '32px', '2xl': '64px' }}
-            minH={{ base: '24vw', md: '', xl: '24vw', '2xl': '24vw' }}
-            minW={{ base: '38vw', md: '', xl: '35vw', '2xl': '38vw' }}
-          />
+          <ScreenVideo isSpecificWidth={isSpecificWidth} />
         </GridItem>
         <GridItem
-          // h="full"
-          display={{ base: 'none', sm: 'none', md: 'flex', xl: 'none' }}
           colSpan={{
             base: 3,
             md: 2,
           }}
-          pos="relative"
-          overflow="hidden"
-          onClick={disclosure.onOpen}
+          {...gridCommonProps}
+          display={{ base: 'none', sm: 'none', md: 'flex', xl: 'none' }}
         >
           <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
           <Play onClick={disclosure.onOpen} />
-          <Box
-            top="32px"
-            maxH="550px"
-            pos="absolute"
-            mx={isSpecificWidth ? '5vw' : '8vw'}
-            opacity="0.6"
-            borderRadius="2px"
-            backgroundPosition="center"
-            bgImage={Images.Common.Peter}
-            backgroundSize={{ base: 'fill', md: 'center', xl: 'fill' }}
-            minH={{ base: '17vw', md: '17vw', xl: '24vw', '2xl': '24vw' }}
-            minW={{ base: '30vw', md: '30vw', xl: '35vw', '2xl': '38vw' }}
-          />
+          <ScreenVideo isSpecificWidth={isSpecificWidth} />
         </GridItem>
       </SimpleGrid>
       <Box
-        height="100px"
         w="full"
         bottom={0}
         zIndex={100}
+        height="100px"
         position="absolute"
         bgGradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #282A2E 100%)"
       />
     </HeroLayout>
   );
 };
-
-interface DownloadTutorialButtonProps extends ButtonProps {
-  disclosure: ReturnType<typeof useDisclosure>;
-}
-const DownloadTutorialButton = ({ disclosure, ...buttonProps }: DownloadTutorialButtonProps) => (
-  <Button
-    px="80px"
-    py="32px"
-    fontSize="16px"
-    lineHeight="24px"
-    fontWeight="600"
-    borderRadius="20px"
-    onClick={disclosure.onOpen}
-    w={{ base: 'full', sm: 'fit-content', md: 'auto' }}
-    boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
-    bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-    {...buttonProps}
-  >
-    Download Tutorial
-  </Button>
-);
 
 export default ImpaktGamesHero;
