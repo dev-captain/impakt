@@ -11,6 +11,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
@@ -101,19 +102,22 @@ const Advisors = [
   {
     name: 'Kevin Lin',
     title: 'Founder - Twitch',
-    image: 'assets/images/kevin-lin.jpeg',
+    image: Images.advisor.kevin,
     subtitle: '',
+    alt: 'Kevin Lin',
   },
   {
     name: 'Tim Howes',
     title: 'CTO - Netscape',
-    image: 'assets/images/tim-howes.gif',
+    image: Images.advisor.tim,
+    alt: 'Tim Howes',
     subtitle: 'Director of Engineering - Facebook',
   },
   {
     name: 'Kai Huang',
     title: 'Founder - Guitar Hero',
-    image: 'assets/images/kai-huang.jpeg',
+    image: Images.advisor.kai,
+    alt: 'Kai Huang',
     subtitle: 'President of Red Octane - Activision',
   },
 ];
@@ -123,7 +127,9 @@ const CompanyCard = ({
   name,
   title,
   subtitle,
+  alt,
 }: {
+  alt: string;
   image: string;
   name: string;
   title: string;
@@ -145,7 +151,7 @@ const CompanyCard = ({
         overflow="hidden"
         boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
       >
-        <Image src={image} objectFit="cover" borderRadius="100px" w="180px" h="180px" />
+        <Image src={image} objectFit="cover" borderRadius="100px" w="180px" h="180px" alt={alt} />
       </Circle>
       <VStack p="8px" align="center" justify="center">
         <Text fontSize="20px" fontWeight="semibold" pt="8px">

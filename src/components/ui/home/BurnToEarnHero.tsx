@@ -1,4 +1,5 @@
 import { Box, Center, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import Images from 'assets/images';
 import VideoModal from 'components/core/VideoModal';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -36,7 +37,8 @@ const BurnToEarnHero = () => {
           justify="space-between"
           align="space-between"
           {...vStackSomeProps}
-          backgroundImage={bgImage}
+          backgroundImage={Images.burnAndEarn}
+          bgColor={bgImage}
           overflow="hidden"
           position="relative"
           onClick={disclosure.onOpen}
@@ -78,8 +80,7 @@ const BurnToEarnHero = () => {
 
 export default BurnToEarnHero;
 
-const bgImage =
-  "linear-gradient(90deg, #1F2024 18.46%, rgba(31, 32, 36, 0) 63.94%), url('assets/images/burn-to-earn-hero.png')";
+const bgImage = `linear-gradient(90deg, #1F2024 18.46%, rgba(31, 32, 36, 0) 63.94%)`;
 
 const Play = ({ forMobile, onClick }: { forMobile?: boolean; onClick: () => void }) => (
   <Center

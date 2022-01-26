@@ -1,5 +1,5 @@
-/* eslint-disable prettier/prettier */
 import { GridItem, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import Images from 'assets/images';
 import GradientButton from 'components/core/GradientButton';
 import TextareaField from 'components/core/TextareaField';
 import TextField from 'components/core/TextField';
@@ -44,7 +44,11 @@ const Contact = () => {
       <VStack px={layoutPadding} w="full">
         <SimpleGrid columns={2} w="full" columnGap={4}>
           <GridItem colSpan={1} d={{ base: 'none', md: 'flex' }}>
-            <Image src="assets/images/contact-us.png" maxH="600px" objectFit="contain" />
+            <Image
+              maxH="600px"
+              objectFit="contain"
+              srcSet={`${Images.contact.md} 900w, ${Images.contact.xl} 1200w`}
+            />
           </GridItem>
           <GridItem colSpan={{ base: 2, sm: 2, md: 1 }}>
             <VStack

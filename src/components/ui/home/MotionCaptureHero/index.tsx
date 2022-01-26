@@ -1,4 +1,5 @@
 import { Image, Text, HStack, VStack, GridItem, SimpleGrid, useMediaQuery } from '@chakra-ui/react';
+import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 import MotionCard from './MotionCard';
@@ -31,7 +32,7 @@ const MotionCaptureHero = () => {
         w={{ base: 'full', xl: 'auto' }}
       >
         <GridItem display={{ base: 'none', sm: 'none', md: isLessThan850 ? 'none' : 'flex' }}>
-          <Image src="assets/images/motion-capture.png" />
+          <Image srcSet={Images.motionCapture} />
         </GridItem>
         <GridItem
           colSpan={{
