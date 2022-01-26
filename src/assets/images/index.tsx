@@ -10,7 +10,6 @@ const Images = {
   },
   impaktGames: {
     Header: (view: 'base' | 'sm' | 'md' | 'xl' | '2xl') => {
-      console.log(view);
       switch (view) {
         case 'base':
           return require('./impaktGamesHeroBg/base.png');
