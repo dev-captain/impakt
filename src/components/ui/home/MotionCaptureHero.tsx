@@ -45,8 +45,17 @@ const MotionCaptureHero = () => {
           }}
         >
           <VStack spacing={{ base: '32px', md: '80px' }} align="flex-start" alignItems="flex-start">
-            <VStack spacing="20px" alignItems="flex-start">
-              <VStack textAlign="left" alignItems="flex-start">
+            <VStack
+              spacing="20px"
+              width="full"
+              textAlign={{ base: 'center', md: 'left' }}
+              alignItems={{ base: 'center', md: 'flex-start' }}
+            >
+              <VStack
+                width="full"
+                textAlign={{ base: 'center', md: 'left' }}
+                alignItems={{ base: 'center', md: 'flex-start' }}
+              >
                 <Text
                   fontSize={{ base: '40px', md: '56px' }}
                   lineHeight={{ base: '40px', md: '60px' }}
@@ -73,8 +82,19 @@ const MotionCaptureHero = () => {
                 Use your body as a controller - move, sweat, get fit.
               </Text>
             </VStack>
-            <HStack spacing="20px" justify={{ base: 'center', sm: 'flex-start', md: 'flex-start' }}>
-              <SimpleGrid columns={2} columnGap={4} rowGap={4}>
+            <HStack
+              w="full"
+              spacing="20px"
+              justify={{ base: 'center', sm: 'flex-start', md: 'flex-start' }}
+            >
+              <SimpleGrid
+                columns={2}
+                columnGap={4}
+                rowGap={4}
+                w={{ base: 'full', md: 'auto' }}
+                alignItems="center"
+                justifyContent="center"
+              >
                 <GridItem
                   colSpan={{
                     base: 1,
