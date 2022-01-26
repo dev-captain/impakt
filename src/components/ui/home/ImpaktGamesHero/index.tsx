@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react';
 import {
   Text,
   VStack,
@@ -15,7 +16,8 @@ import VideoModal, { Play } from 'components/core/VideoModal';
 import { Videos } from 'data';
 import Images from 'assets/images';
 import DownloadTutorialButton from './DownloadTutorialButton';
-import ScreenVideo from './ScreenVideo';
+
+const ScreenVideo = React.lazy(() => import('./ScreenVideo'));
 
 const ImpaktGamesHero = () => {
   const disclosure = useDisclosure();
@@ -105,7 +107,9 @@ const ImpaktGamesHero = () => {
                   marginBottom="16px"
                   src="assets/images/macbook-mobile.png"
                 />
-                <ScreenVideo isSpecificWidth={isSpecificWidth} />
+                <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+                  <ScreenVideo isSpecificWidth={isSpecificWidth} />
+                </Suspense>
               </VStack>
               <DownloadTutorialButton
                 disclosure={disclosure}
@@ -118,7 +122,9 @@ const ImpaktGamesHero = () => {
               >
                 <Play onClick={disclosure.onOpen} />
                 <Image objectFit="contain" src="assets/images/macbook-tablet.png" />
-                <ScreenVideo isSpecificWidth={isSpecificWidth} />
+                <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+                  <ScreenVideo isSpecificWidth={isSpecificWidth} />
+                </Suspense>
               </VStack>
               <>
                 <Box m={24} />
@@ -150,7 +156,9 @@ const ImpaktGamesHero = () => {
             src="assets/images/macbook.png"
           />
           <Play onClick={disclosure.onOpen} />
-          <ScreenVideo isSpecificWidth={isSpecificWidth} />
+          <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+            <ScreenVideo isSpecificWidth={isSpecificWidth} />
+          </Suspense>
         </GridItem>
         <GridItem
           colSpan={{
@@ -162,7 +170,9 @@ const ImpaktGamesHero = () => {
         >
           <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
           <Play onClick={disclosure.onOpen} />
-          <ScreenVideo isSpecificWidth={isSpecificWidth} />
+          <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+            <ScreenVideo isSpecificWidth={isSpecificWidth} />
+          </Suspense>
         </GridItem>
       </SimpleGrid>
       <Box
