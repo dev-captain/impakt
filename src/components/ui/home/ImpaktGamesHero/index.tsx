@@ -9,6 +9,7 @@ import {
   Box,
   useDisclosure,
   useMediaQuery,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
@@ -24,6 +25,13 @@ const ImpaktGamesHero = () => {
   const [isLessThan1272] = useMediaQuery('(max-width: 1272px)');
   const [isMoreThan1097] = useMediaQuery('(min-width: 1097px)');
   const isSpecificWidth = isLessThan1272 && isMoreThan1097;
+  const val = useBreakpointValue({
+    base: 'base',
+    sm: 'sm',
+    md: 'md',
+    xl: 'xl',
+    '2xl': '2xl',
+  });
 
   const gridCommonProps: any = {
     colSpan: {
@@ -50,7 +58,7 @@ const ImpaktGamesHero = () => {
       spacing={10}
       justify="center"
       align="space-around"
-      bgImage={Images.Common.Header}
+      bgImage={Images.impaktGames.Header(val as any)}
       hideBlur={!disclosure.isOpen}
     >
       <VideoModal {...disclosure} path={Videos.impaktGames} />
