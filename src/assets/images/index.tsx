@@ -7,7 +7,7 @@ const Images = {
     Twitter: require('./twitter.png'),
     Discord: require('./discord.png'),
     Header: require('./bg-header.png'),
-    Peter: 'https://ucarecdn.com/9fa46e2c-bb22-4ea2-b5ea-32b6c214ce54/peter.gif',
+    Peter: 'https://ucarecdn.com/486c87ea-885b-41ec-b8a1-df3d51404bae/video.webp',
   },
   motionCapture: 'https://ucarecdn.com/e521c223-c2a9-4620-a18b-75079ee8f33c/motioncapture.webp',
   burnAndEarn: 'https://ucarecdn.com/241b7cbd-9cab-4ad4-9774-81866ab4e0dd/burntoearnhero.webp',
