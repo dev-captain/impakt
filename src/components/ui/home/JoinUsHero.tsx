@@ -40,10 +40,7 @@ const JoinUsHero = () => {
             {...commonProps}
           >
             <VStack spacing="52px">
-              <VStack 
-                  spacing="36px"
-                  alignItems={{ base: 'center',md: 'flex-start' }}
-              >
+              <VStack spacing="36px" alignItems={{ base: 'center', md: 'flex-start' }}>
                 <Text
                   display="flex"
                   fontSize={{ base: '40px', md: '56px' }}
