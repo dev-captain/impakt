@@ -1,6 +1,6 @@
 import theme from 'theme';
 import React from 'react';
-import { hydrate, render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import './index.css';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
@@ -8,28 +8,19 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const rootElement = document.getElementById('root');
-
-const Root = () => {
-  return (
-    <React.StrictMode>
-      <HelmetProvider>
-        <BrowserRouter>
-          <ChakraProvider theme={theme}>
-            <ColorModeScript initialColorMode="dark" />
-            <App />
-          </ChakraProvider>
-        </BrowserRouter>
-      </HelmetProvider>
-    </React.StrictMode>
-  );
-};
-
-if (rootElement?.hasChildNodes()) {
-  hydrate(<Root />, rootElement);
-} else {
-  render(<Root />, rootElement);
-}
+ReactDOM.render(
+  <React.StrictMode>
+    <HelmetProvider>
+      <BrowserRouter>
+        <ChakraProvider theme={theme}>
+          <ColorModeScript initialColorMode="dark" />
+          <App />
+        </ChakraProvider>
+      </BrowserRouter>
+    </HelmetProvider>
+  </React.StrictMode>,
+  document.getElementById('root'),
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
