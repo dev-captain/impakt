@@ -55,7 +55,7 @@ const PartnerAndInvestorHero = () => {
           </HStack>
           <Stack w="full" spacing={8} direction={{ base: 'column', lg: 'row' }}>
             {Advisors.map((advisor) => (
-              <GridItem colSpan={colSpan} w="full">
+              <GridItem colSpan={colSpan} w="full" key={advisor.name}>
                 <CompanyCard {...advisor} />
               </GridItem>
             ))}

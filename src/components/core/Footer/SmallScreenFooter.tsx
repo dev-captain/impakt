@@ -41,12 +41,12 @@ const SmallScreenFooter = () => {
         </HStack>
         <HStack align="flex-start" justify="flex-start" w="full" spacing="40px" />
         <VStack spacing="8px" align="flex-start" w="full">
-          <Text display="flex" fontSize="12px" lineHeight="24px" flexDir="row" fontWeight="500">
+          <HStack display="flex" fontSize="12px" lineHeight="24px" flexDir="row" fontWeight="500">
             <Text fontWeight="400" opacity="0.6">
               Made by
             </Text>
             <Text marginLeft="4px">impakt.com</Text>
-          </Text>
+          </HStack>
           <Text fontSize="12px" lineHeight="16px" opacity="0.6">
             © 2021 Impakt. All rights reserved.
           </Text>

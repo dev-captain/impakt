@@ -1,4 +1,4 @@
-import { GridItem, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 import GradientButton from 'components/core/GradientButton';
 import TextareaField from 'components/core/TextareaField';
@@ -57,10 +57,10 @@ const Contact = () => {
               align="flex-start"
               alignItems={{ base: 'center', md: 'flex-start' }}
             >
-              <Text
+              <HStack
                 display="flex"
                 alignItems="center"
-                ineHeight={{ base: '40px', md: '60px' }}
+                lineHeight={{ base: '40px', md: '60px' }}
                 fontSize={{ base: '40px', md: '56px' }}
               >
                 <Text
@@ -75,7 +75,7 @@ const Contact = () => {
                   Contact
                 </Text>
                 <Text>Us</Text>
-              </Text>
+              </HStack>
               <VStack
                 bgColor="#1F2024"
                 w="full"
