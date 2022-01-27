@@ -4,17 +4,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode="dark" />
-        <App />
-      </ChakraProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <ChakraProvider theme={theme}>
+          <ColorModeScript initialColorMode="dark" />
+          <App />
+        </ChakraProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

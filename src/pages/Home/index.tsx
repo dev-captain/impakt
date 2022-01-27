@@ -9,7 +9,7 @@ import {
   PartnerAndInvestorHero,
 } from 'components/ui/home';
 import Contact from 'components/ui/home/Contact';
-import Seo from 'components/core/SeoWrapper';
+import Seo from 'components/core/Seo';
 
 const HomePage = () => {
   const { setColorMode } = useColorMode();

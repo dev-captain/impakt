@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import seoData from 'data/seoData';
 
 type Props = {
@@ -11,7 +11,9 @@ const data = seoData.common;
 
 const Seo = ({ title = data.title, meta = data.meta, lang = data.lang }: Props) => {
   return (
-    <Helmet titleTemplate="%s | impakt.com" title={title} meta={meta} htmlAttributes={{ lang }} />
+    <Helmet title={title} meta={meta} htmlAttributes={{ lang }} titleTemplate="%s | impakt.com">
+      <link rel="canonical" href="https://www.impakt.com/" />
+    </Helmet>
   );
 };
 
