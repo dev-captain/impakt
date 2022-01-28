@@ -1,35 +1,22 @@
 import { ThemeOverride, extendTheme, theme as base } from '@chakra-ui/react';
+import buttons from './buttons';
+import colors from './colors';
+import shadows from './shadows';
+import textStyles from './textStyles';
 
 const theme: ThemeOverride = {
   initialColorMode: 'dark',
   useSystemColorMode: false,
-  colors: {
-    brand: {},
-  },
+  colors,
+  shadows,
+  textStyles,
   fonts: {
     heading: `Poppins ,${base.fonts?.heading}`,
     body: `Poppins ,${base.fonts?.body}`,
   },
-  textStyles: {
-    counterNumber: {
-      fontFamily: 'Source Sans Pro',
-      fontWeight: '300',
-      fontSize: { base: '7xl', md: '9xl' },
-      lineHeight: '120px',
-    },
-    counterText: {
-      fontFamily: 'Source Sans Pro',
-      fontSize: { base: 'xl', md: '4xl' },
-      opacity: '0.7',
-    },
-    TitleBold72: {
-      fontWeight: '900',
-      fontFamily: `Poppins ,${base.fonts?.heading}`,
-      fontSize: { base: '72px', sm: '120px', md: '98px', xl: '120px' },
-      lineHeight: { base: '80px', sm: '120px', md: '98px', xl: '120px' },
-    },
+  components: {
+    Button: buttons as any,
   },
-  components: {},
 };
 
 export const layoutPadding = {

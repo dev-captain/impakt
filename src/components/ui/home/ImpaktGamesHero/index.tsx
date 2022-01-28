@@ -10,13 +10,13 @@ import {
   useDisclosure,
   useMediaQuery,
   useBreakpointValue,
+  Button,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 import VideoModal, { Play } from 'components/core/VideoModal';
 import { Videos } from 'data';
 import Images from 'assets/images';
-import DownloadTutorialButton from './DownloadTutorialButton';
 
 const ScreenVideo = React.lazy(() => import('./ScreenVideo'));
 
@@ -119,10 +119,13 @@ const ImpaktGamesHero = () => {
                   <ScreenVideo isSpecificWidth={isSpecificWidth} />
                 </Suspense>
               </VStack>
-              <DownloadTutorialButton
-                disclosure={disclosure}
+              <Button
+                variant="accent"
+                onClick={disclosure.onOpen}
                 display={{ base: 'none', md: 'flex' }}
-              />
+              >
+                <Text textStyle="semiBold16">Download Tutorial</Text>
+              </Button>
               <VStack
                 h="full"
                 {...stackCommonProps}
@@ -136,10 +139,13 @@ const ImpaktGamesHero = () => {
               </VStack>
               <>
                 <Box m={24} />
-                <DownloadTutorialButton
-                  disclosure={disclosure}
+                <Button
+                  variant="accent"
+                  onClick={disclosure.onOpen}
                   display={{ base: 'flex', md: 'none' }}
-                />
+                >
+                  <Text textStyle="semiBold16">Download Tutorial</Text>
+                </Button>
                 <Box m={24} />
               </>
             </VStack>
