@@ -82,9 +82,9 @@ export default {
     lineHeight: '20px',
   },
   regular2: {
-    fontSize: '12px',
+    fontSize: '14px',
     fontWeight: '400',
-    lineHeight: '16px',
+    lineHeight: '20px',
   },
   bold1: {
     fontSize: '12px',
@@ -92,10 +92,11 @@ export default {
     lineHeight: '16px',
   },
   regular1: {
-    fontSize: '14px',
+    fontSize: '12px',
     fontWeight: '400',
-    lineHeight: '20px',
+    lineHeight: '16px',
   },
+
   regular20: {
     fontSize: '20px',
     fontWeight: '400',

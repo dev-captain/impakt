@@ -6,11 +6,11 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
 
   return (
     <Box
-      bgColor="#1F2024"
+      bgColor="glass.800"
       borderRadius={20}
       position="relative"
       overflow="hidden"
-      boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
+      filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <VStack
         align="flex-start"
@@ -22,9 +22,7 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
         spacing="32px"
       >
         <Icon />
-        <Text fontSize={{ base: '14px', md: '16px' }} lineHeight="20px">
-          {title}
-        </Text>
+        <Text textStyle="regular2">{title}</Text>
         <Box
           w="220px"
           h="196px"

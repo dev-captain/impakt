@@ -195,7 +195,7 @@ const ImpaktGamesHero = () => {
         zIndex={100}
         height="100px"
         position="absolute"
-        bgGradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #282A2E 100%)"
+        bgGradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, glass.900 100%)"
       />
     </HeroLayout>
   );

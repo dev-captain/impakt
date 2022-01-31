@@ -10,7 +10,7 @@ const SmallScreenFooter = () => {
     <VStack
       w="full"
       h="100%"
-      bgColor="#1F2024"
+      bgColor="glass.700"
       px={[4, 8, 12, 16, 40]}
       py={{ base: 16, md: 0 }}
       d={{ base: 'flex', md: 'none' }}

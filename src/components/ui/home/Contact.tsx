@@ -77,7 +77,7 @@ const Contact = () => {
                 <Text>Us</Text>
               </HStack>
               <VStack
-                bgColor="#1F2024"
+                bgColor="glass.800"
                 w="full"
                 px="48px"
                 py="40px"

@@ -11,8 +11,8 @@ const BigScreenFooter = () => {
     <VStack
       h="100%"
       w="full"
-      bgColor="#1F2024"
       px={layoutPadding}
+      bgColor="glass.700"
       py={{ base: 16, md: 0 }}
       d={{ base: 'none', md: 'flex' }}
     >

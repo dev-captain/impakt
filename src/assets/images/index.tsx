@@ -19,7 +19,8 @@ const Images = {
   } as any,
 
   impaktGames: {
-    Header: (view: 'base' | 'sm' | 'md' | 'xl' | '2xl') => {
+    Header: (view: 'base' | 'sm' | 'md' | 'xl' | '2xl' | boolean) => {
+      return require('./bg.png');
       switch (view) {
         case 'base':
         case 'sm':

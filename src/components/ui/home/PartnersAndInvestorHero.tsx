@@ -141,11 +141,11 @@ const CompanyCard = ({
       py="36px"
       align="center"
       justify="center"
-      bgColor="#1F2024"
+      bgColor="glass.800"
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
+      filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <Circle
         overflow="hidden"
