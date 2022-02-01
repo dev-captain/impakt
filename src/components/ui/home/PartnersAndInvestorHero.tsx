@@ -10,11 +10,15 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  useColorModeValue,
 } from '@chakra-ui/react';
+import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
 const PartnerAndInvestorHero = () => {
+  const textColor = useColorModeValue('glass.100', 'glass.700');
+
   const colSpan = {
     base: 12,
     sm: 6,
@@ -34,7 +38,7 @@ const PartnerAndInvestorHero = () => {
       }}
       minH="70vh"
     >
-      <VStack spacing="0px" py={0} px={layoutPadding} w="full">
+      <VStack spacing="0px" py={0} px={layoutPadding} w="full" color={textColor}>
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack w="full" spacing={5} justify={{ base: 'center', md: 'center' }}>
             <Text
@@ -54,7 +58,7 @@ const PartnerAndInvestorHero = () => {
           </HStack>
           <Stack w="full" spacing={8} direction={{ base: 'column', lg: 'row' }}>
             {Advisors.map((advisor) => (
-              <GridItem colSpan={colSpan} w="full">
+              <GridItem colSpan={colSpan} w="full" key={advisor.name}>
                 <CompanyCard {...advisor} />
               </GridItem>
             ))}
@@ -101,19 +105,22 @@ const Advisors = [
   {
     name: 'Kevin Lin',
     title: 'Founder - Twitch',
-    image: 'assets/images/kevin-lin.jpeg',
+    image: Images.advisor.kevin,
     subtitle: '',
+    alt: 'Kevin Lin',
   },
   {
     name: 'Tim Howes',
     title: 'CTO - Netscape',
-    image: 'assets/images/tim-howes.gif',
+    image: Images.advisor.tim,
+    alt: 'Tim Howes',
     subtitle: 'Director of Engineering - Facebook',
   },
   {
     name: 'Kai Huang',
     title: 'Founder - Guitar Hero',
-    image: 'assets/images/kai-huang.jpeg',
+    image: Images.advisor.kai,
+    alt: 'Kai Huang',
     subtitle: 'President of Red Octane - Activision',
   },
 ];
@@ -123,29 +130,33 @@ const CompanyCard = ({
   name,
   title,
   subtitle,
+  alt,
 }: {
+  alt: string;
   image: string;
   name: string;
   title: string;
   subtitle: string;
 }) => {
+  const bgColor = useColorModeValue('glass.800', 'glass.200');
+
   return (
     <VStack
       w="full"
       py="36px"
       align="center"
       justify="center"
-      bgColor="#1F2024"
+      bgColor={bgColor}
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
+      filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <Circle
         overflow="hidden"
         boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
       >
-        <Image src={image} objectFit="cover" borderRadius="100px" w="180px" h="180px" />
+        <Image src={image} objectFit="cover" borderRadius="100px" w="180px" h="180px" alt={alt} />
       </Circle>
       <VStack p="8px" align="center" justify="center">
         <Text fontSize="20px" fontWeight="semibold" pt="8px">

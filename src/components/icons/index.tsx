@@ -15,6 +15,7 @@ import LeftArrow from './LeftArrowIcon';
 import RightArrow from './RightArrowIcon';
 import Window from './WindowIcon';
 import Cross from './CrossIcon';
+import CheckMark from './CheckMarkIcon';
 
 const Icons: { [key in string]: any } = {
   ProfileUser,
@@ -31,6 +32,7 @@ const Icons: { [key in string]: any } = {
   Cross,
   Twitter,
   Discord,
+  CheckMark,
   LeftArrow,
   RightArrow,
   SmallTwitter,

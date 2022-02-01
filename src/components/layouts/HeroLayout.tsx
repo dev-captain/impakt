@@ -1,4 +1,5 @@
-import { Box, Spacer, VStack } from '@chakra-ui/react';
+import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
+import Footer from 'components/core/Footer';
 import Navbar from 'components/core/Navbar';
 import React from 'react';
 
@@ -11,6 +12,7 @@ type HeroLayoutProps = {
   hideBlur?: boolean;
   pos?: string;
   minH?: string;
+  showFooter?: boolean;
   customPadding?: string | any;
   removeBottomPadding?: boolean;
   children: React.ReactNode;
@@ -21,50 +23,57 @@ type HeroLayoutProps = {
 const HeroLayout = ({
   bgImage,
   children,
+  showFooter,
   customPadding,
   removeBottomPadding = false,
   spacing = 4,
   minH = '100vh',
   align = 'center',
-  bgColor = '#282a2d',
+  bgColor,
   justify = 'center',
   showNavbar = false,
   addSpacer = false,
   hideBlur = false,
   pos,
 }: HeroLayoutProps) => {
+  const backgroundColor = useColorModeValue('glass.900', 'glass.200');
+
   return (
-    <Box
-      minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
-      filter={hideBlur ? '' : 'blur(20px)'}
-      overflowY="unset"
-      // @ts-ignore
-      pos={pos}
-      w="full"
-    >
-      {showNavbar && <Navbar />}
-      <VStack
+    <>
+      <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
-        minW="full"
-        align={align}
-        justify={justify}
-        backgroundSize="cover"
-        backgroundImage={bgImage}
-        backgroundColor={bgColor}
-        backgroundPosition="bottom"
-        paddingTop={showNavbar ? '120px' : '0px'}
-        paddingBottom={
-          customPadding || {
-            base: removeBottomPadding ? 0 : '60px',
-            md: removeBottomPadding ? '32px' : '90px',
-            xl: removeBottomPadding ? 0 : 'auto',
-          }
-        }
+        filter={hideBlur ? '' : 'blur(20px)'}
+        overflowY="unset"
+        // @ts-ignore
+        pos={pos}
+        w="full"
+        bgColor="transparent"
       >
-        {children}
-        {addSpacer && <Spacer h={spacing} />}
-      </VStack>
-    </Box>
+        {showNavbar && <Navbar />}
+        <VStack
+          minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
+          minW="full"
+          align={align}
+          justify={justify}
+          backgroundSize="cover"
+          backgroundImage={bgImage}
+          backgroundColor={bgColor || backgroundColor}
+          backgroundPosition="bottom"
+          paddingTop={showNavbar ? '120px' : '0px'}
+          paddingBottom={
+            customPadding || {
+              base: removeBottomPadding ? 0 : '60px',
+              md: removeBottomPadding ? '32px' : '90px',
+              xl: removeBottomPadding ? 0 : 'auto',
+            }
+          }
+        >
+          {children}
+          {addSpacer && <Spacer h={spacing} />}
+        </VStack>
+      </Box>
+      {showFooter && <Footer />}
+    </>
   );
 };
 

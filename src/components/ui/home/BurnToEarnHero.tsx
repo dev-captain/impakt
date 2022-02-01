@@ -1,4 +1,5 @@
 import { Box, Center, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import Images from 'assets/images';
 import VideoModal from 'components/core/VideoModal';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -36,18 +37,20 @@ const BurnToEarnHero = () => {
           justify="space-between"
           align="space-between"
           {...vStackSomeProps}
-          backgroundImage={bgImage}
+          backgroundImage={Images.burnAndEarn}
+          bgColor={bgImage}
           overflow="hidden"
           position="relative"
+          color="glass.0"
           onClick={disclosure.onOpen}
           boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
         >
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>
-              <Text fontSize={{ base: '40px', md: '56px' }} lineHeight="1.2em" fontWeight="300">
+              <HStack fontSize={{ base: '40px', md: '56px' }} lineHeight="1.2em" fontWeight="300">
                 <Text>Burn and</Text>
                 <Text fontWeight="900">earn!</Text>
-              </Text>
+              </HStack>
               <Play forMobile onClick={disclosure.onOpen} />
               <Text
                 opacity="0.6"
@@ -78,8 +81,7 @@ const BurnToEarnHero = () => {
 
 export default BurnToEarnHero;
 
-const bgImage =
-  "linear-gradient(90deg, #1F2024 18.46%, rgba(31, 32, 36, 0) 63.94%), url('assets/images/burn-to-earn-hero.png')";
+const bgImage = `linear-gradient(90deg, #1F2024 18.46%, rgba(31, 32, 36, 0) 63.94%)`;
 
 const Play = ({ forMobile, onClick }: { forMobile?: boolean; onClick: () => void }) => (
   <Center

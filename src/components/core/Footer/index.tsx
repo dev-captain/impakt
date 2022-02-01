@@ -1,11 +1,32 @@
+import { useColorMode } from '@chakra-ui/react';
+import Images from 'assets/images';
 import BigScreenFooter from './BigScreenFooter';
 import SmallScreenFooter from './SmallScreenFooter';
 
 const Footer = () => {
+  const { colorMode } = useColorMode();
+  const bgColor = colorMode === 'light' ? 'glass.700' : 'glass.300';
+  const logo = colorMode === 'light' ? Images.Common.Logo : Images.Common.LogoLight;
+  const discord = colorMode === 'light' ? Images.Common.Discord : Images.Common.DiscordLight;
+  const twitter = colorMode === 'light' ? Images.Common.Twitter : Images.Common.TwitterLight;
+  const textColor = colorMode === 'light' ? 'glass.100' : 'glass.700';
+
   return (
     <>
-      <BigScreenFooter />
-      <SmallScreenFooter />
+      <BigScreenFooter
+        bgColor={bgColor}
+        logo={logo}
+        textColor={textColor}
+        discord={discord}
+        twitter={twitter}
+      />
+      <SmallScreenFooter
+        bgColor={bgColor}
+        logo={logo}
+        textColor={textColor}
+        discord={discord}
+        twitter={twitter}
+      />
     </>
   );
 };

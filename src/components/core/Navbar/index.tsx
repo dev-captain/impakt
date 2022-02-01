@@ -1,14 +1,34 @@
 import { useEffect } from 'react';
-import { Box, Flex, Image, HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Image,
+  HStack,
+  useDisclosure,
+  useMediaQuery,
+  useColorMode,
+} from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
 import { Socials } from 'data';
+import Images from 'assets/images';
+import { useNavigate } from 'react-router-dom';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 
+const { dark, light } = Images;
+const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight } = Images.Common;
+
 const Navbar = () => {
+  const navigate = useNavigate();
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
+  const { colorMode, setColorMode } = useColorMode();
+  const discord = colorMode === 'light' ? Discord : DiscordLight;
+  const twitter = colorMode === 'light' ? Twitter : TwitterLight;
+  const textColor = colorMode === 'light' ? 'glass.100' : 'glass.700';
+  const activeColor = colorMode === 'light' ? 'glass.100' : 'glass.900';
+  const passiveColor = colorMode === 'light' ? 'rgba(255,255,255)' : 'glass.700';
 
   useEffect(() => {
     if (!isLessThan1040) {
@@ -26,7 +46,7 @@ const Navbar = () => {
         overflow="hidden"
         position="relative"
         alignItems="center"
-        color="rgba(255,255,255, 0.3)"
+        color={textColor}
         bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'blackAlpha.200'}
       >
         <HStack w="full" justify="space-between" px={layoutPadding}>
@@ -35,8 +55,8 @@ const Navbar = () => {
             onToggle={onToggle}
             isLessThan1040={isLessThan1040}
           />
-          <Box as="a" href="/" zIndex={100}>
-            <Image src="assets/images/logo.png" />
+          <Box onClick={() => navigate('/')} zIndex={100}>
+            <Image src={colorMode === 'light' ? Logo : LogoLight} />
           </Box>
           <HStack
             justify="flex-end"
@@ -47,26 +67,36 @@ const Navbar = () => {
           >
             <HStack w="full" align="space-between" justify="space-between">
               <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
-                <NavbarLinkItem title="Impakt Games" isActive href="/" />
-                <NavbarLinkItem title="White Paper" href="https://joker-5.gitbook.io/impakt/" />
+                <NavbarLinkItem
+                  title="Impakt Games"
+                  isActive
+                  href="/"
+                  color={activeColor || textColor}
+                  passiveColor="rgba(255,255,255, 0.3)"
+                />
+                <NavbarLinkItem
+                  title="White Paper"
+                  href="https://joker-5.gitbook.io/impakt/"
+                  color={activeColor || textColor}
+                  passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
+                />
               </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
                 <Box as="a" target="_blank" href={Socials.twitter}>
-                  <Image
-                    w="35px"
-                    h="35px"
-                    opacity={0.6}
-                    objectFit="contain"
-                    src="assets/images/twitter.png"
-                  />
+                  <Image w="35px" h="35px" opacity={0.6} objectFit="contain" src={twitter} />
                 </Box>
                 <Box as="a" target="_blank" href={Socials.discord}>
+                  <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={discord} />
+                </Box>
+                <Box
+                  as="button"
+                  onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
+                >
                   <Image
-                    w="32px"
-                    h="32px"
-                    opacity={0.6}
+                    w="26px"
+                    h="26px"
                     objectFit="contain"
-                    src="assets/images/discord.png"
+                    src={colorMode === 'dark' ? dark : light}
                   />
                 </Box>
               </HStack>
@@ -85,21 +115,20 @@ const Navbar = () => {
               justify={{ base: 'center', md: 'flex-end' }}
             >
               <Box as="a" target="_blank" href={Socials.twitter}>
-                <Image
-                  w="35px"
-                  h="35px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src="assets/images/twitter.png"
-                />
+                <Image w="35px" h="35px" opacity={0.6} objectFit="contain" src={twitter} />
               </Box>
               <Box as="a" target="_blank" href={Socials.discord}>
+                <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={discord} />
+              </Box>
+              <Box
+                as="button"
+                onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
+              >
                 <Image
-                  w="32px"
-                  h="32px"
-                  opacity={0.6}
+                  w="26px"
+                  h="26px"
                   objectFit="contain"
-                  src="assets/images/discord.png"
+                  src={colorMode === 'dark' ? dark : light}
                 />
               </Box>
             </HStack>
