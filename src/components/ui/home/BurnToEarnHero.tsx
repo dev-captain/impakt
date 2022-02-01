@@ -41,6 +41,7 @@ const BurnToEarnHero = () => {
           bgColor={bgImage}
           overflow="hidden"
           position="relative"
+          color="glass.0"
           onClick={disclosure.onOpen}
           boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
         >

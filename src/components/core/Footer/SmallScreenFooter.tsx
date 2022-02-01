@@ -1,41 +1,41 @@
 import { VStack, Text, HStack, Image, Box } from '@chakra-ui/react';
-import Images from 'assets/images';
 import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
 
-const SmallScreenFooter = () => {
+const SmallScreenFooter = ({
+  bgColor,
+  logo,
+  textColor,
+  twitter,
+  discord,
+}: {
+  bgColor: string;
+  logo: string;
+  textColor: string;
+  twitter: string;
+  discord: string;
+}) => {
   const navigate = useNavigate();
 
   return (
     <VStack
       w="full"
       h="100%"
-      bgColor="glass.700"
+      color={textColor}
+      bgColor={bgColor}
       px={[4, 8, 12, 16, 40]}
       py={{ base: 16, md: 0 }}
       d={{ base: 'flex', md: 'none' }}
     >
       <VStack w="full">
         <HStack align="flex-start" justify="space-between" w="full">
-          <Image onClick={() => navigate('/')} src={Images.Common.Logo} />
+          <Image onClick={() => navigate('/')} src={logo} />
           <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
             <Box as="a" target="_blank" href={Socials.twitter}>
-              <Image
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={Images.Common.Twitter}
-              />
+              <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={twitter} />
             </Box>
             <Box as="a" target="_blank" href={Socials.discord}>
-              <Image
-                w="30px"
-                h="30px"
-                opacity={0.6}
-                objectFit="contain"
-                src={Images.Common.Discord}
-              />
+              <Image w="30px" h="30px" opacity={0.6} objectFit="contain" src={discord} />
             </Box>
           </HStack>
         </HStack>

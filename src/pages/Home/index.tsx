@@ -19,7 +19,7 @@ const HomePage = () => {
   }, [setColorMode]);
 
   return (
-    <Container spacing={0} p={0} minW="full" m={0}>
+    <Container spacing={0} p={0} minW="full" m={0} bgColor="">
       <Seo />
       <div id="impakt-games">
         <ImpaktGamesHero />

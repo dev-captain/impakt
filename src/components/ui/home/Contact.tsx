@@ -1,4 +1,12 @@
-import { GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import {
+  GridItem,
+  HStack,
+  Image,
+  SimpleGrid,
+  Text,
+  useColorModeValue,
+  VStack,
+} from '@chakra-ui/react';
 import Images from 'assets/images';
 import GradientButton from 'components/core/GradientButton';
 import TextareaField from 'components/core/TextareaField';
@@ -12,6 +20,8 @@ import { ContactGradientEllipse, ContactGradientEllipse1 } from '../gradients';
 
 const Contact = () => {
   const { sendData, loading } = useContactUs();
+  const bgColor = useColorModeValue('glass.800', 'glass.200');
+  const textColor = useColorModeValue('glass.100', 'glass.700');
   const [values, setValues] = useState({
     email: '',
     message: '',
@@ -41,7 +51,7 @@ const Contact = () => {
 
   return (
     <HeroLayout hideBlur minH="70vh">
-      <VStack px={layoutPadding} w="full">
+      <VStack px={layoutPadding} w="full" color={textColor}>
         <SimpleGrid columns={2} w="full" columnGap={4}>
           <GridItem colSpan={1} d={{ base: 'none', md: 'flex' }}>
             <Image
@@ -77,7 +87,7 @@ const Contact = () => {
                 <Text>Us</Text>
               </HStack>
               <VStack
-                bgColor="glass.800"
+                bgColor={bgColor}
                 w="full"
                 px="48px"
                 py="40px"
@@ -87,14 +97,29 @@ const Contact = () => {
                 overflow="hidden"
                 position="relative"
                 spacing="32px"
-                boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
+                filter="drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.12)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.1))"
               >
                 <ContactGradientEllipse />
                 <ContactGradientEllipse1 />
                 <VStack w="full" spacing="16px">
-                  <TextField placeholder="Your name" name="name" onChange={onChange} />
-                  <TextField placeholder="Your e-mail" name="email" onChange={onChange} />
-                  <TextareaField placeholder="Your message" name="message" onChange={onChange} />
+                  <TextField
+                    placeholder="Your name"
+                    name="name"
+                    onChange={onChange}
+                    _placeholder={{ color: textColor }}
+                  />
+                  <TextField
+                    placeholder="Your e-mail"
+                    name="email"
+                    onChange={onChange}
+                    _placeholder={{ color: textColor }}
+                  />
+                  <TextareaField
+                    placeholder="Your message"
+                    name="message"
+                    onChange={onChange}
+                    _placeholder={{ color: textColor }}
+                  />
                 </VStack>
                 <VStack w="full" align="flex-end">
                   <GradientButton

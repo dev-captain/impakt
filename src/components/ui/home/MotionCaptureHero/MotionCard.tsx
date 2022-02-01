@@ -1,12 +1,22 @@
 import { Box, Text, VStack } from '@chakra-ui/react';
 import Icons from 'components/icons';
 
-const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }) => {
+const MotionCard = ({
+  isVrGlass,
+  title,
+  bgColor,
+  iconColor,
+}: {
+  isVrGlass?: boolean;
+  title: string;
+  bgColor: string;
+  iconColor: string;
+}) => {
   const Icon = isVrGlass ? Icons.VrGlass : Icons.Runner;
 
   return (
     <Box
-      bgColor="glass.800"
+      bgColor={bgColor}
       borderRadius={20}
       position="relative"
       overflow="hidden"
@@ -21,7 +31,7 @@ const MotionCard = ({ isVrGlass, title }: { isVrGlass?: boolean; title: string }
         p={7}
         spacing="32px"
       >
-        <Icon />
+        <Icon color={iconColor} />
         <Text textStyle="regular2">{title}</Text>
         <Box
           w="220px"

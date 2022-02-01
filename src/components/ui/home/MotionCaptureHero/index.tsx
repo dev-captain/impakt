@@ -1,7 +1,17 @@
-import { Image, Text, HStack, VStack, GridItem, SimpleGrid, useMediaQuery } from '@chakra-ui/react';
+import {
+  Image,
+  Text,
+  HStack,
+  VStack,
+  GridItem,
+  SimpleGrid,
+  useMediaQuery,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
+import colors from 'theme/colors';
 import MotionCard from './MotionCard';
 
 const commonProps: any = {
@@ -12,6 +22,8 @@ const commonProps: any = {
 
 const MotionCaptureHero = () => {
   const [isLessThan850] = useMediaQuery('(max-width: 850px)');
+  const cardBg = useColorModeValue('glass.800', 'glass.100');
+  const textColor = useColorModeValue(colors.glass[100], colors.glass[700]);
 
   return (
     <HeroLayout
@@ -29,6 +41,7 @@ const MotionCaptureHero = () => {
         px={layoutPadding}
         alignItems="center"
         justifyContent="center"
+        color={textColor}
         w={{ base: 'full', xl: 'auto' }}
       >
         <GridItem display={{ base: 'none', sm: 'none', md: isLessThan850 ? 'none' : 'flex' }}>
@@ -81,7 +94,12 @@ const MotionCaptureHero = () => {
                     md: 1,
                   }}
                 >
-                  <MotionCard title="No extra hardware necessary" isVrGlass />
+                  <MotionCard
+                    iconColor={textColor}
+                    bgColor={cardBg}
+                    title="No extra hardware necessary"
+                    isVrGlass
+                  />
                 </GridItem>
                 <GridItem
                   colSpan={{
@@ -89,7 +107,11 @@ const MotionCaptureHero = () => {
                     md: 1,
                   }}
                 >
-                  <MotionCard title="Use the camera on your phone or laptop" />
+                  <MotionCard
+                    iconColor={textColor}
+                    bgColor={cardBg}
+                    title="Use the camera on your phone or laptop"
+                  />
                 </GridItem>
               </SimpleGrid>
             </HStack>

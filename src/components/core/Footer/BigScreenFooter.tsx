@@ -4,15 +4,28 @@ import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
 import { layoutPadding } from 'theme';
 
-const BigScreenFooter = () => {
+const BigScreenFooter = ({
+  bgColor,
+  logo,
+  textColor,
+  twitter,
+  discord,
+}: {
+  bgColor: string;
+  logo: string;
+  textColor: string;
+  twitter: string;
+  discord: string;
+}) => {
   const navigate = useNavigate();
 
   return (
     <VStack
       h="100%"
       w="full"
+      bgColor={bgColor}
+      color={textColor}
       px={layoutPadding}
-      bgColor="glass.700"
       py={{ base: 16, md: 0 }}
       d={{ base: 'none', md: 'flex' }}
     >
@@ -26,7 +39,7 @@ const BigScreenFooter = () => {
                 h="full"
                 justify="center"
               >
-                <Image src={Images.Common.Logo} onClick={() => navigate('/')} />
+                <Image src={logo || Images.Common.Logo} onClick={() => navigate('/')} />
                 <VStack spacing="8px" align={{ base: 'center', md: 'flex-start' }}>
                   <HStack
                     display="flex"
@@ -59,22 +72,10 @@ const BigScreenFooter = () => {
         <GridItem colSpan={{ base: 5, md: 1 }} marginTop={{ base: 0, md: '60px' }}>
           <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
             <Box as="a" target="_blank" href={Socials.twitter}>
-              <Image
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={Images.Common.Twitter}
-              />
+              <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={twitter} />
             </Box>
             <Box as="a" target="_blank" href={Socials.discord}>
-              <Image
-                w="30px"
-                h="30px"
-                opacity={0.6}
-                objectFit="contain"
-                src={Images.Common.Discord}
-              />
+              <Image w="30px" h="30px" opacity={0.6} objectFit="contain" src={discord} />
             </Box>
           </HStack>
         </GridItem>

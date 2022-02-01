@@ -1,4 +1,4 @@
-import { Box, Spacer, VStack } from '@chakra-ui/react';
+import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
 import Footer from 'components/core/Footer';
 import Navbar from 'components/core/Navbar';
 import React from 'react';
@@ -29,13 +29,15 @@ const HeroLayout = ({
   spacing = 4,
   minH = '100vh',
   align = 'center',
-  bgColor = 'glass.900',
+  bgColor,
   justify = 'center',
   showNavbar = false,
   addSpacer = false,
   hideBlur = false,
   pos,
 }: HeroLayoutProps) => {
+  const backgroundColor = useColorModeValue('glass.900', 'glass.200');
+
   return (
     <>
       <Box
@@ -45,6 +47,7 @@ const HeroLayout = ({
         // @ts-ignore
         pos={pos}
         w="full"
+        bgColor="transparent"
       >
         {showNavbar && <Navbar />}
         <VStack
@@ -54,7 +57,7 @@ const HeroLayout = ({
           justify={justify}
           backgroundSize="cover"
           backgroundImage={bgImage}
-          backgroundColor={bgColor}
+          backgroundColor={bgColor || backgroundColor}
           backgroundPosition="bottom"
           paddingTop={showNavbar ? '120px' : '0px'}
           paddingBottom={

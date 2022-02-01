@@ -7,7 +7,7 @@ const App = () => {
   const { setColorMode } = useColorMode();
 
   useEffect(() => {
-    setColorMode('dark');
+    setColorMode('light');
   }, [setColorMode]);
 
   return (

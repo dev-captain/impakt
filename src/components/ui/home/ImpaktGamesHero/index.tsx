@@ -11,6 +11,8 @@ import {
   useMediaQuery,
   useBreakpointValue,
   Button,
+  useColorModeValue,
+  useColorMode,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
@@ -22,6 +24,8 @@ const ScreenVideo = React.lazy(() => import('./ScreenVideo'));
 
 const ImpaktGamesHero = () => {
   const disclosure = useDisclosure();
+  const mode = useColorMode();
+  const text = useColorModeValue('glass.100', 'glass.700');
   const [isLessThan1272] = useMediaQuery('(max-width: 1272px)');
   const [isMoreThan1097] = useMediaQuery('(min-width: 1097px)');
   const isSpecificWidth = isLessThan1272 && isMoreThan1097;
@@ -32,6 +36,10 @@ const ImpaktGamesHero = () => {
     xl: 'xl',
     '2xl': '2xl',
   });
+  const bgImage = useColorModeValue(
+    Images.impaktGames.Header(val as any),
+    Images.impaktGames.light,
+  );
 
   const gridCommonProps: any = {
     colSpan: {
@@ -58,12 +66,13 @@ const ImpaktGamesHero = () => {
       spacing={10}
       justify="center"
       align="space-around"
-      bgImage={Images.impaktGames.Header(val as any)}
+      bgImage={bgImage}
       hideBlur={!disclosure.isOpen}
     >
       <VideoModal {...disclosure} path={Videos.impaktGames} />
       <SimpleGrid
         columns={4}
+        color={text}
         alignItems="flex-start"
         justifyContent="center"
         columnGap={{ base: '0px', md: '100px', xl: '200px' }}
@@ -124,7 +133,9 @@ const ImpaktGamesHero = () => {
                 onClick={disclosure.onOpen}
                 display={{ base: 'none', md: 'flex' }}
               >
-                <Text textStyle="semiBold16">Download Tutorial</Text>
+                <Text textStyle="semiBold16" color="glass.100">
+                  Download Tutorial
+                </Text>
               </Button>
               <VStack
                 h="full"
@@ -189,14 +200,16 @@ const ImpaktGamesHero = () => {
           </Suspense>
         </GridItem>
       </SimpleGrid>
-      <Box
-        w="full"
-        bottom={0}
-        zIndex={100}
-        height="100px"
-        position="absolute"
-        bgGradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, glass.900 100%)"
-      />
+      {mode.colorMode === 'light' && (
+        <Box
+          w="full"
+          bottom={0}
+          zIndex={100}
+          height="100px"
+          position="absolute"
+          bgGradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, glass.900 100%)"
+        />
+      )}
     </HeroLayout>
   );
 };

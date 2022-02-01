@@ -10,12 +10,15 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 
 const PartnerAndInvestorHero = () => {
+  const textColor = useColorModeValue('glass.100', 'glass.700');
+
   const colSpan = {
     base: 12,
     sm: 6,
@@ -35,7 +38,7 @@ const PartnerAndInvestorHero = () => {
       }}
       minH="70vh"
     >
-      <VStack spacing="0px" py={0} px={layoutPadding} w="full">
+      <VStack spacing="0px" py={0} px={layoutPadding} w="full" color={textColor}>
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack w="full" spacing={5} justify={{ base: 'center', md: 'center' }}>
             <Text
@@ -135,13 +138,15 @@ const CompanyCard = ({
   title: string;
   subtitle: string;
 }) => {
+  const bgColor = useColorModeValue('glass.800', 'glass.200');
+
   return (
     <VStack
       w="full"
       py="36px"
       align="center"
       justify="center"
-      bgColor="glass.800"
+      bgColor={bgColor}
       overflow="hidden"
       position="relative"
       borderRadius="28px"

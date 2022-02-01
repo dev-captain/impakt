@@ -5,6 +5,7 @@ type FieldProps = {
   name?: string;
   error?: string;
   textStyle?: any;
+  _placeholder?: any;
   placeholder?: string;
   errorTextStyle?: any;
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -27,7 +28,8 @@ const TextField = ({ placeholder, onChange, error, textStyle, ...rest }: FieldPr
         style={{ caretColor: '#dc213c' }}
         background="rgba(33, 37, 42, 0.01)"
         textStyle={textStyle || 'regular12'}
-        _placeholder={{ color: 'white', opacity: '0.6' }}
+        // eslint-disable-next-line no-underscore-dangle
+        _placeholder={rest._placeholder || { color: 'white', opacity: '0.6' }}
         boxShadow="inset -2px -2px 6px rgba(255, 255, 255, 0.04), inset 4px 4px 8px rgba(0, 0, 0, 0.25)"
         {...rest}
       />

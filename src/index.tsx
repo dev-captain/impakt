@@ -13,7 +13,7 @@ ReactDOM.render(
     <HelmetProvider>
       <BrowserRouter>
         <ChakraProvider theme={theme}>
-          <ColorModeScript initialColorMode="dark" />
+          <ColorModeScript initialColorMode="light" />
           <App />
         </ChakraProvider>
       </BrowserRouter>

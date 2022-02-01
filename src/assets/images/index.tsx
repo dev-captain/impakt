@@ -2,10 +2,15 @@
 /* eslint-disable global-require */
 
 const Images = {
+  dark: require('./dark.png'),
+  light: require('./light.png'),
   Common: {
     Logo: require('./logo.png'),
+    LogoLight: require('./logo-light.png'),
     Twitter: require('./twitter.png'),
+    TwitterLight: require('./twitter-light.png'),
     Discord: require('./discord.png'),
+    DiscordLight: require('./discord-light.png'),
     Header: require('./bg-header.png'),
     Peter: require('./video.webp'),
   },
@@ -34,6 +39,7 @@ const Images = {
           return require('./impaktGamesHeroBg/xl.webp');
       }
     },
+    light: require('./bg-light.png'),
   },
   advisor: {
     kevin: require('./advisor/kevin-lin.webp'),

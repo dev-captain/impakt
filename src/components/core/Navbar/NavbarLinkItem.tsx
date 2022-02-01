@@ -5,18 +5,30 @@ type Props = {
   href: string;
   title: string;
   hide?: boolean;
+  color?: string;
+  passiveColor?: string;
   isActive?: boolean;
   onClose?: () => void;
 };
 
-const NavbarLinkItem = ({ title, href, isActive, hide = false, onClose }: Props) => {
+const NavbarLinkItem = ({
+  title,
+  href,
+  isActive,
+  hide = false,
+  onClose,
+  color,
+  passiveColor,
+}: Props) => {
   return (
     <VStack justifyContent="center" h="100px" onClick={onClose}>
       <Link href={href} target="_blank">
         <Text
-          fontSize="md"
+          textStyle="regular3"
           pos="relative"
-          color={isActive ? 'glass.100' : 'rgba(255,255,255, 0.3)'}
+          fontWeight={isActive ? '600' : 'normal'}
+          color={isActive ? color : passiveColor}
+          opacity={isActive ? 1 : 0.6}
         >
           {title}
         </Text>
