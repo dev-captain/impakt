@@ -54,8 +54,8 @@ const MotionCaptureHero = () => {
             xl: 1,
           }}
         >
-          <VStack spacing={{ base: '32px', md: '80px' }} align="flex-start" alignItems="flex-start">
-            <VStack spacing="20px" {...commonProps}>
+          <VStack align="flex-start" alignItems="flex-start" spacing={{ base: '32px', md: '34px' }}>
+            <VStack spacing="24px" {...commonProps}>
               <VStack
                 {...commonProps}
                 fontSize={{ base: '40px', md: '56px' }}
@@ -64,14 +64,7 @@ const MotionCaptureHero = () => {
                 <Text fontWeight="300">Computer Vision</Text>
                 <Text fontWeight="700">Technology</Text>
               </VStack>
-              <Text
-                maxW="440px"
-                fontSize="20px"
-                paddingTop={4}
-                opacity="0.62"
-                fontWeight="400"
-                lineHeight="32px"
-              >
+              <Text maxW="440px" fontSize="20px" opacity="0.62" fontWeight="400" lineHeight="32px">
                 Use your body as a controller - move, sweat, get fit.
               </Text>
             </VStack>

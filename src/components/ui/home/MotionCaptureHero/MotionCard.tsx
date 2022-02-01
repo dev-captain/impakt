@@ -16,6 +16,7 @@ const MotionCard = ({
 
   return (
     <Box
+      maxW="250px"
       bgColor={bgColor}
       borderRadius={20}
       position="relative"
