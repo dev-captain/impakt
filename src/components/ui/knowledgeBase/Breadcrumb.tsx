@@ -15,7 +15,7 @@ const Breadcrumb = ({ data, onClickCategory, category }: Props) => {
       w="full"
     >
       <HStack>
-        <Text color="glass.400" onClick={() => onClickCategory(category)}>
+        <Text cursor="pointer" color="glass.400" onClick={() => onClickCategory(category)}>
           {data[0]}
         </Text>
         <Text>{'>'}</Text>

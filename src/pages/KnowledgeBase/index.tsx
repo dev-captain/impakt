@@ -43,14 +43,15 @@ const KnowledgeBasePage = () => {
       />
       <VStack minH="60vh" px={layoutPadding} w="full" color={textColor}>
         <Text
-          textStyle={{ base: 'bold5', md: 'bold7' }}
+          pt="30px"
           textAlign="center"
-          pb={{ base: '24px' }}
+          pb={{ base: '24px', md: '40px' }}
           display={{ base: 'none', md: 'flex' }}
+          textStyle={{ base: 'bold5', md: 'bold7' }}
         >
           Introducing Impakt: Knowledge Base
         </Text>
-        <VStack display={{ base: 'flex', md: 'none' }} spacing="24px" w="full">
+        <VStack display={{ base: 'flex', md: 'none' }} spacing="24px" w="full" pt="20px">
           <Select
             w="full"
             placeholder="Select option"

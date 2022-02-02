@@ -38,6 +38,7 @@ const ArticleList = ({ articles, bgColor, setSelectedArticle, category }: Props)
               <Text
                 key={article.title}
                 textStyle="regular4"
+                cursor="pointer"
                 onClick={() => setSelectedArticle(article)}
               >
                 {article.title}

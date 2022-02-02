@@ -15,6 +15,7 @@ const Category = ({ categories, activeCategory, onClick }: Props) => {
         {categories.map((category) => {
           return (
             <Text
+              cursor="pointer"
               key={category.id}
               onClick={() => onClick(category)}
               textStyle={activeCategory.id === category.id ? 'bold3' : 'regular3'}
