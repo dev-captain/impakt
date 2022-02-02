@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import { Container } from '@chakra-ui/layout';
-import { useColorMode } from '@chakra-ui/react';
 import {
   Footer,
   BurnToEarnHero,
@@ -12,12 +10,6 @@ import Contact from 'components/ui/home/Contact';
 import Seo from 'components/core/Seo';
 
 const HomePage = () => {
-  const { setColorMode } = useColorMode();
-
-  useEffect(() => {
-    setColorMode('dark');
-  }, [setColorMode]);
-
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
       <Seo />

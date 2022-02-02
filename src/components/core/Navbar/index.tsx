@@ -11,7 +11,8 @@ import {
 import { layoutPadding } from 'theme';
 import { Socials } from 'data';
 import Images from 'assets/images';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { parsePathname } from 'utils';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -29,6 +30,8 @@ const Navbar = () => {
   const textColor = colorMode === 'light' ? 'glass.100' : 'glass.700';
   const activeColor = colorMode === 'light' ? 'glass.100' : 'glass.900';
   const passiveColor = colorMode === 'light' ? 'rgba(255,255,255)' : 'glass.700';
+  const location = useLocation();
+  const path = parsePathname(location.pathname);
 
   useEffect(() => {
     if (!isLessThan1040) {
@@ -69,14 +72,22 @@ const Navbar = () => {
               <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
                 <NavbarLinkItem
                   title="Impakt Games"
-                  isActive
                   href="/"
+                  isActive={path.path === ''}
                   color={activeColor || textColor}
-                  passiveColor="rgba(255,255,255, 0.3)"
+                  passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
                 />
                 <NavbarLinkItem
                   title="White Paper"
+                  target="_blank"
                   href="https://joker-5.gitbook.io/impakt/"
+                  color={activeColor || textColor}
+                  passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
+                />
+                <NavbarLinkItem
+                  title="Knowledge Base"
+                  href="/knowledge-base"
+                  isActive={path.path === 'knowledge-base'}
                   color={activeColor || textColor}
                   passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
                 />

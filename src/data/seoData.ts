@@ -14,7 +14,7 @@ export default {
     ],
   },
   blog: {
-    title: 'Blog',
+    title: 'Knowledge Base',
     meta: [
       {
         name: 'description',

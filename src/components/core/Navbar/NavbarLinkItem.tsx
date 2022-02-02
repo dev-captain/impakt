@@ -1,4 +1,6 @@
-import { Text, VStack, Link } from '@chakra-ui/react';
+import { Text, VStack, Box } from '@chakra-ui/react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import SelectedNavbarLinkBorder from './SelectedNavbarLinkBorder';
 
 type Props = {
@@ -9,6 +11,7 @@ type Props = {
   passiveColor?: string;
   isActive?: boolean;
   onClose?: () => void;
+  target?: React.HTMLAttributeAnchorTarget;
 };
 
 const NavbarLinkItem = ({
@@ -18,11 +21,22 @@ const NavbarLinkItem = ({
   hide = false,
   onClose,
   color,
+  target,
   passiveColor,
 }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <VStack justifyContent="center" h="100px" onClick={onClose}>
-      <Link href={href} target="_blank">
+      <Box
+        // @ts-ignore
+        href={href}
+        target={target}
+        onClick={() => {
+          navigate(href);
+        }}
+        as={target === '_blank' ? 'a' : 'div'}
+      >
         <Text
           textStyle="regular3"
           pos="relative"
@@ -32,7 +46,7 @@ const NavbarLinkItem = ({
         >
           {title}
         </Text>
-      </Link>
+      </Box>
       {isActive && !hide && <SelectedNavbarLinkBorder />}
     </VStack>
   );
