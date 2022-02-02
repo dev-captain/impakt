@@ -62,6 +62,8 @@ const KnowledgeBasePage = () => {
                 (_category) => _category.id === e.target.value,
               )!;
               if (selectedCategory) {
+                setSelectedArticle(null);
+                navigate(`/knowledge-base`);
                 setCategory(selectedCategory);
               }
             }}
