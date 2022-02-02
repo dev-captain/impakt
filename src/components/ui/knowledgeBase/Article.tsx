@@ -1,4 +1,5 @@
 import { VStack, Text, Divider } from '@chakra-ui/react';
+import { Dispatch, SetStateAction } from 'react';
 import Breadcrumb from './Breadcrumb';
 
 type Props = {
@@ -16,12 +17,42 @@ type Props = {
   };
   bgColor: string;
   textColor: string;
+  setCategory: Dispatch<
+    SetStateAction<{
+      title: string;
+      id: string;
+    }>
+  >;
+  setSelectedArticle: Dispatch<
+    SetStateAction<{
+      title: string;
+      id: string;
+      category: string;
+      releaseDate: string;
+      description: string;
+      content: string;
+    } | null>
+  >;
 };
 
-const Article = ({ article, category, bgColor, textColor }: Props) => {
+const Article = ({
+  article,
+  category,
+  bgColor,
+  textColor,
+  setSelectedArticle,
+  setCategory,
+}: Props) => {
   return (
     <VStack align="flex-start" color={textColor}>
-      <Breadcrumb data={[category.title, article.title]} />
+      <Breadcrumb
+        category={category}
+        data={[category.title, article.title]}
+        onClickCategory={(_category) => {
+          setCategory(_category);
+          setSelectedArticle(null);
+        }}
+      />
       <VStack
         bgColor={bgColor || 'glass.700'}
         w="full"

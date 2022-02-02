@@ -14,7 +14,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/knowledge-base" element={<KnowledgeBase />}>
-        <Route path=":id" element={<KnowledgeBase />} />
+        <Route path=":article" element={<KnowledgeBase />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
