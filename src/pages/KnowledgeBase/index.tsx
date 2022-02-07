@@ -49,8 +49,11 @@ const KnowledgeBasePage = () => {
   return (
     <HeroLayout hideBlur align="flex-start" justify="flex-start" showNavbar showFooter>
       <Seo
-        title={article || `${title} - ${selectedCategory?.title}`}
-        meta={[...meta, article ? { name: 'keywords', content: article } : {}]}
+        title={selectedArticle?.title || `${title} - ${selectedCategory?.title}`}
+        meta={[
+          ...meta,
+          article ? { name: 'keywords', content: selectedArticle?.seo?.keywords?.join(', ') } : {},
+        ]}
       />
       <VStack minH="60vh" px={layoutPadding} w="full" color={textColor}>
         <Text
