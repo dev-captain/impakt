@@ -39,7 +39,7 @@ const Article = ({
         p="32px"
         spacing="16px"
       >
-        <VStack align="flex-start" spacing={0}>
+        <VStack align="flex-start" spacing={0} w="full">
           <Text textStyle="regular4">{article?.title}</Text>
           <Text textStyle="regular2">
             {

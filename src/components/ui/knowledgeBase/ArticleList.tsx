@@ -16,18 +16,15 @@ const ArticleList = ({ articles, bgColor, setSelectedArticle }: Props) => {
           m={0}
           w="full"
           p="32px"
+          cursor="pointer"
           bgColor={bgColor}
           align="flex-start"
           borderRadius="28px"
           key={article.title}
+          onClick={() => setSelectedArticle(article)}
         >
           <VStack align="flex-start">
-            <Text
-              key={article.title}
-              textStyle="regular4"
-              cursor="pointer"
-              onClick={() => setSelectedArticle(article)}
-            >
+            <Text key={article.title} textStyle="regular4">
               {article.title}
             </Text>
             <Text textStyle="regular2" opacity={0.6}>
