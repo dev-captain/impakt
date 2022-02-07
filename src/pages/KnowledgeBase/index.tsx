@@ -1,13 +1,16 @@
-import { GridItem, Select, SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { GridItem, SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import Seo from 'components/core/Seo';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Article from 'components/ui/knowledgeBase/Article';
 import ArticleList from 'components/ui/knowledgeBase/ArticleList';
 import Category from 'components/ui/knowledgeBase/Category';
-import { Articles, Categories } from 'data';
+import CategorySelectBox from 'components/ui/knowledgeBase/CategorySelectBox';
 import seoData from 'data/seoData';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { dispatch, RootState } from 'store';
+import * as Types from 'store/types';
 import { layoutPadding } from 'theme';
 
 const { title, meta } = seoData.blog;
@@ -17,28 +20,36 @@ const KnowledgeBasePage = () => {
   const navigate = useNavigate();
   const textColor = useColorModeValue('gray.100', 'gray.900');
   const bgColor = useColorModeValue('gray.800', 'glass.300');
-  const [category, setCategory] = useState<{ title: string; id: string }>(Categories[0]);
-  const [selectedArticle, setSelectedArticle] = useState<{
-    title: string;
-    id: string;
-    category: string;
-    releaseDate: string;
-    description: string;
-    content: string;
-  } | null>(null);
+  const { categories, categoryArticles, selectedArticle, selectedCategory } = useSelector(
+    (state: RootState) => state.knowledgeBase,
+  );
 
   useEffect(() => {
-    const articleToSelect = Articles.find((_article) => _article.id === article);
-    if (articleToSelect) {
-      setSelectedArticle(articleToSelect);
-      setCategory(Categories.find((_category) => _category.id === articleToSelect.category)!);
+    if (article) {
+      dispatch.knowledgeBase.fetchArticleBySlug(article);
     }
   }, [article]);
+
+  useEffect(() => {
+    dispatch.knowledgeBase.fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    if (categories.length > 0) {
+      dispatch.knowledgeBase.setSelectedCategory(categories[0]);
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      dispatch.knowledgeBase.fetchArticlesByCategory(selectedCategory?.slug);
+    }
+  }, [selectedCategory?.slug]);
 
   return (
     <HeroLayout hideBlur align="flex-start" justify="flex-start" showNavbar showFooter>
       <Seo
-        title={article || `${title} - ${category.title}`}
+        title={article || `${title} - ${selectedCategory?.title}`}
         meta={[...meta, article ? { name: 'keywords', content: article } : {}]}
       />
       <VStack minH="60vh" px={layoutPadding} w="full" color={textColor}>
@@ -52,30 +63,14 @@ const KnowledgeBasePage = () => {
           Introducing Impakt: Knowledge Base
         </Text>
         <VStack display={{ base: 'flex', md: 'none' }} spacing="24px" w="full" pt="20px">
-          <Select
-            w="full"
-            placeholder="Select option"
+          <CategorySelectBox
             bgColor={bgColor}
-            _selected={{}}
-            borderWidth={0}
-            onChange={(e) => {
-              const selectedCategory = Categories.find(
-                (_category) => _category.id === e.target.value,
-              )!;
-              if (selectedCategory) {
-                setSelectedArticle(null);
-                navigate(`/knowledge-base`);
-                setCategory(selectedCategory);
-              }
-            }}
-            value={category.id}
-          >
-            {Categories.map((_category) => (
-              <option value={_category.id} key={_category.id}>
-                {_category.title}
-              </option>
-            ))}
-          </Select>
+            navigate={navigate}
+            categories={categories}
+            category={selectedCategory || categories?.[0]}
+            setCategory={dispatch.knowledgeBase.setSelectedCategory}
+            setSelectedArticle={dispatch.knowledgeBase.setSelectedArticle}
+          />
           <Text textStyle={{ base: 'bold5', md: 'bold7' }} textAlign="center">
             Introducing Impakt: Knowledge Base
           </Text>
@@ -89,14 +84,15 @@ const KnowledgeBasePage = () => {
           >
             <Category
               onClick={(_category) => {
-                setCategory(_category);
-                setSelectedArticle(null);
+                dispatch.knowledgeBase.setSelectedArticle(undefined);
+                dispatch.knowledgeBase.setSelectedCategory(_category);
                 navigate(`/knowledge-base`);
               }}
-              categories={Categories}
-              activeCategory={category}
+              categories={categories}
+              activeCategory={selectedCategory || categories[0]}
             />
           </GridItem>
+
           <GridItem
             w="full"
             colSpan={{ base: 4, md: 3 }}
@@ -107,30 +103,31 @@ const KnowledgeBasePage = () => {
               {!selectedArticle && (
                 <>
                   <Text textStyle="regular5" d={{ base: 'none', md: 'flex' }}>
-                    {category.title}
+                    {selectedCategory?.title}
                   </Text>
                   <ArticleList
                     bgColor={bgColor}
-                    category={category}
-                    articles={Articles}
+                    articles={
+                      (categoryArticles?.[selectedCategory?.slug!] as Types.Article[]) || []
+                    }
                     setSelectedArticle={(data) => {
-                      setSelectedArticle(data);
-                      navigate(`/knowledge-base/${data.id}`);
+                      dispatch.knowledgeBase.setSelectedArticle(data);
+                      navigate(`/knowledge-base/${data.slug}`);
                     }}
                   />
                 </>
               )}
               {selectedArticle && (
                 <Article
-                  article={selectedArticle}
-                  category={category}
+                  article={selectedArticle!}
+                  category={selectedCategory!}
                   bgColor={bgColor}
                   textColor={textColor}
-                  setCategory={setCategory}
                   setSelectedArticle={() => {
-                    setSelectedArticle(null);
+                    dispatch.knowledgeBase.setSelectedArticle(undefined);
                     navigate(`/knowledge-base`);
                   }}
+                  setCategory={dispatch.knowledgeBase.setSelectedCategory}
                 />
               )}
             </VStack>

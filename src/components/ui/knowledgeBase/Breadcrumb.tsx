@@ -1,9 +1,10 @@
 import { HStack, Text } from '@chakra-ui/react';
+import * as Types from 'store/types';
 
 type Props = {
   data: string[];
-  category: { id: string; title: string };
-  onClickCategory: (category: { id: string; title: string }) => void;
+  category: Types.Category;
+  onClickCategory: (category: Types.Category) => void;
 };
 
 const Breadcrumb = ({ data, onClickCategory, category }: Props) => {

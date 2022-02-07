@@ -1,38 +1,15 @@
 import { VStack, Text, Divider } from '@chakra-ui/react';
-import { Dispatch, SetStateAction } from 'react';
+import * as Types from 'store/types';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 import Breadcrumb from './Breadcrumb';
 
 type Props = {
-  article: {
-    title: string;
-    id: string;
-    category: string;
-    releaseDate: string;
-    description: string;
-    content: string;
-  };
-  category: {
-    id: string;
-    title: string;
-  };
+  article: Types.Article;
+  category: Types.Category;
   bgColor: string;
   textColor: string;
-  setCategory: Dispatch<
-    SetStateAction<{
-      title: string;
-      id: string;
-    }>
-  >;
-  setSelectedArticle: Dispatch<
-    SetStateAction<{
-      title: string;
-      id: string;
-      category: string;
-      releaseDate: string;
-      description: string;
-      content: string;
-    } | null>
-  >;
+  setCategory: any;
+  setSelectedArticle: any;
 };
 
 const Article = ({
@@ -47,10 +24,10 @@ const Article = ({
     <VStack align="flex-start" color={textColor}>
       <Breadcrumb
         category={category}
-        data={[category.title, article.title]}
+        data={[category?.title, article?.title]}
         onClickCategory={(_category) => {
           setCategory(_category);
-          setSelectedArticle(null);
+          setSelectedArticle(undefined);
         }}
       />
       <VStack
@@ -63,14 +40,18 @@ const Article = ({
         spacing="16px"
       >
         <VStack align="flex-start" spacing={0}>
-          <Text textStyle="regular4">{article.title}</Text>
-          <Text textStyle="regular2">{article.releaseDate}</Text>
+          <Text textStyle="regular4">{article?.title}</Text>
+          <Text textStyle="regular2">
+            {
+              // @ts-ignore
+              article?.releaseDate
+            }
+          </Text>
         </VStack>
         <VStack spacing="33px">
           <Divider />
-          <VStack>
-            <Text>{article.description}</Text>
-            <Text>{article.description}</Text>
+          <VStack align="flex-start" w="100%">
+            <MarkdownPreview source={article?.content} />
           </VStack>
         </VStack>
       </VStack>

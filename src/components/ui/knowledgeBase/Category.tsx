@@ -1,24 +1,25 @@
 import { Box, Text, VStack } from '@chakra-ui/react';
-
-type CategoryProps = { id: string; title: string };
+import * as Types from 'store/types';
 
 type Props = {
-  activeCategory: CategoryProps;
-  categories: CategoryProps[];
-  onClick: (category: CategoryProps) => void;
+  activeCategory: Types.Category;
+  categories: Types.Category[];
+  onClick: (category: Types.Category) => void;
 };
 
 const Category = ({ categories, activeCategory, onClick }: Props) => {
   return (
     <>
       <VStack pr="16px" align={{ base: 'center', md: 'flex-start' }} spacing="16px" w="full">
-        {categories.map((category) => {
+        {categories?.map((category) => {
           return (
             <Text
               cursor="pointer"
               key={category.id}
-              onClick={() => onClick(category)}
-              textStyle={activeCategory.id === category.id ? 'bold3' : 'regular3'}
+              onClick={() => {
+                onClick(category);
+              }}
+              textStyle={activeCategory.slug === category.slug ? 'bold3' : 'regular3'}
             >
               {category.title}
             </Text>
