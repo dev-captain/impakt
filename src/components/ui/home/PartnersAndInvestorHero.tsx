@@ -38,7 +38,7 @@ const PartnerAndInvestorHero = () => {
       }}
       minH="70vh"
     >
-      <VStack spacing="0px" pb={'16px'} px={layoutPadding} w="full" color={textColor}>
+      <VStack spacing="0px" pb={'64px'} px={layoutPadding} w="full" color={textColor}>
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
           <HStack
             w="full"
@@ -160,6 +160,8 @@ const CompanyCard = ({
       overflow="hidden"
       position="relative"
       borderRadius="28px"
+      maxH={'650px'}
+      h="full"
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <Image src={image} objectFit="cover" w="full" h="380px" alt={alt} borderRadius="28px" />
