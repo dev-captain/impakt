@@ -9,7 +9,6 @@ type HeroLayoutProps = {
   spacing?: number;
   showNavbar?: boolean;
   addSpacer?: boolean;
-  hideBlur?: boolean;
   pos?: string;
   minH?: string;
   showFooter?: boolean;
@@ -33,7 +32,6 @@ const HeroLayout = ({
   justify = 'center',
   showNavbar = false,
   addSpacer = false,
-  hideBlur = false,
   pos,
 }: HeroLayoutProps) => {
   const backgroundColor = useColorModeValue('glass.900', 'glass.200');
@@ -42,7 +40,6 @@ const HeroLayout = ({
     <>
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
-        filter={hideBlur ? '' : 'blur(20px)'}
         overflowY="unset"
         // @ts-ignore
         pos={pos}

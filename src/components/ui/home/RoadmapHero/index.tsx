@@ -11,7 +11,7 @@ const RoadMapHero = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <HeroLayout hideBlur>
+    <HeroLayout>
       <VStack
         w="full"
         spacing="36px"

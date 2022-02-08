@@ -10,7 +10,6 @@ const PartnerAndInvestorHero = () => {
 
   return (
     <HeroLayout
-      hideBlur
       customPadding={{
         base: '16px',
         md: '32px',
