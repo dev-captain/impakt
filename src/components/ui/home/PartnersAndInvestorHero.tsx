@@ -61,19 +61,27 @@ const PartnerAndInvestorHero = () => {
               Advisors
             </Text>
           </HStack>
-          <Stack
+          <SimpleGrid
             w="full"
-            spacing={8}
-            direction={{ base: 'column', lg: 'row' }}
-            justify={'center'}
-            align="center"
+            columns={3}
+            columnGap={{ base: '8px', sm: '16px', md: '24px', xl: '24px' }}
+            rowGap={{ base: '24px', sm: '16px', md: '24px', xl: '24px' }}
           >
             {Advisors.map((advisor) => (
-              <GridItem colSpan={colSpan} key={advisor.name} maxW="384px" w="full">
+              <GridItem
+                colSpan={{
+                  base: 3,
+                  sm: 1,
+                  md: 1,
+                }}
+                key={advisor.name}
+                maxW="384px"
+                w="full"
+              >
                 <CompanyCard {...advisor} />
               </GridItem>
             ))}
-          </Stack>
+          </SimpleGrid>
         </VStack>
 
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full">
