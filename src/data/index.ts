@@ -117,7 +117,7 @@ export const Team = [
   },
   {
     name: 'DukeNuke',
-    title: 'Influencer Manager',
+    title: 'Strategic Relationships',
     image: Images.team.duke,
     alt: '',
     subtitle: '',
@@ -131,7 +131,7 @@ export const Team = [
   },
   {
     name: 'Dahaka',
-    title: 'Development Manager',
+    title: 'CTO',
     image: Images.team.dahaka,
     alt: '',
     subtitle: '',
