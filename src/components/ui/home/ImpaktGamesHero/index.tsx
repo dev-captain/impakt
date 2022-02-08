@@ -7,7 +7,6 @@ import {
   Stack,
   GridItem,
   Box,
-  useDisclosure,
   useMediaQuery,
   useBreakpointValue,
   Button,
@@ -16,14 +15,15 @@ import {
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
-import VideoModal, { Play } from 'components/core/VideoModal';
-import { Videos } from 'data';
+import { Play } from 'components/core/VideoModal';
 import Images from 'assets/images';
+import useModalStore from 'hooks/store/useModalStore';
 
 const ScreenVideo = React.lazy(() => import('./ScreenVideo'));
 
 const ImpaktGamesHero = () => {
-  const disclosure = useDisclosure();
+  const { setImpaktGames } = useModalStore((state) => state);
+
   const mode = useColorMode();
   const text = useColorModeValue('glass.100', 'glass.700');
   const [isLessThan1272] = useMediaQuery('(max-width: 1272px)');
@@ -48,7 +48,7 @@ const ImpaktGamesHero = () => {
     },
     pos: 'relative',
     overflow: 'hidden',
-    onClick: disclosure.onOpen,
+    onClick: setImpaktGames,
   };
 
   const stackCommonProps: any = {
@@ -67,9 +67,7 @@ const ImpaktGamesHero = () => {
       justify="center"
       align="space-around"
       bgImage={bgImage}
-      hideBlur={!disclosure.isOpen}
     >
-      <VideoModal {...disclosure} path={Videos.impaktGames} />
       <SimpleGrid
         columns={4}
         color={text}
@@ -113,10 +111,15 @@ const ImpaktGamesHero = () => {
             <VStack
               align="flex-start"
               alignItems={{ base: 'center', sm: 'left' }}
+              cursor="pointer"
               spacing={{ base: '24px', sm: '24px', md: 0, xl: '0px' }}
             >
               <VStack {...stackCommonProps} display={{ base: 'flex', sm: 'none' }}>
-                <Play onClick={disclosure.onOpen} />
+                <Play
+                  onClick={() => {
+                    setImpaktGames(true);
+                  }}
+                />
                 <Image
                   maxW="320px"
                   marginTop="30px"
@@ -124,13 +127,23 @@ const ImpaktGamesHero = () => {
                   marginBottom="16px"
                   src="assets/images/macbook-mobile.png"
                 />
-                <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+                <Suspense
+                  fallback={
+                    <Play
+                      onClick={() => {
+                        setImpaktGames(true);
+                      }}
+                    />
+                  }
+                >
                   <ScreenVideo isSpecificWidth={isSpecificWidth} />
                 </Suspense>
               </VStack>
               <Button
                 variant="accent"
-                onClick={disclosure.onOpen}
+                onClick={() => {
+                  setImpaktGames(true);
+                }}
                 display={{ base: 'none', md: 'flex' }}
               >
                 <Text textStyle="semiBold16" color="glass.100">
@@ -139,12 +152,25 @@ const ImpaktGamesHero = () => {
               </Button>
               <VStack
                 h="full"
+                cursor="pointer"
                 {...stackCommonProps}
                 display={{ base: 'none', sm: 'flex', md: 'none' }}
               >
-                <Play onClick={disclosure.onOpen} />
+                <Play
+                  onClick={() => {
+                    setImpaktGames(true);
+                  }}
+                />
                 <Image objectFit="contain" src="assets/images/macbook-tablet.png" />
-                <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+                <Suspense
+                  fallback={
+                    <Play
+                      onClick={() => {
+                        setImpaktGames(true);
+                      }}
+                    />
+                  }
+                >
                   <ScreenVideo isSpecificWidth={isSpecificWidth} />
                 </Suspense>
               </VStack>
@@ -152,7 +178,9 @@ const ImpaktGamesHero = () => {
                 <Box m={24} />
                 <Button
                   variant="accent"
-                  onClick={disclosure.onOpen}
+                  onClick={() => {
+                    setImpaktGames(true);
+                  }}
                   display={{ base: 'flex', md: 'none' }}
                 >
                   <Text textStyle="semiBold16">Download Tutorial</Text>
@@ -170,6 +198,7 @@ const ImpaktGamesHero = () => {
           {...gridCommonProps}
           alignItems="flex-end"
           justifyContent="flex-end"
+          cursor="pointer"
           mt={{ base: 'auto', md: '48px' }}
           display={{ base: 'none', xl: 'flex' }}
         >
@@ -180,8 +209,20 @@ const ImpaktGamesHero = () => {
             objectFit="contain"
             src="assets/images/macbook.png"
           />
-          <Play onClick={disclosure.onOpen} />
-          <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+          <Play
+            onClick={() => {
+              setImpaktGames(true);
+            }}
+          />
+          <Suspense
+            fallback={
+              <Play
+                onClick={() => {
+                  setImpaktGames(true);
+                }}
+              />
+            }
+          >
             <ScreenVideo isSpecificWidth={isSpecificWidth} />
           </Suspense>
         </GridItem>
@@ -194,8 +235,8 @@ const ImpaktGamesHero = () => {
           display={{ base: 'none', sm: 'none', md: 'flex', xl: 'none' }}
         >
           <Image w="500px" objectFit="fill" src="assets/images/macbook-tablet.png" />
-          <Play onClick={disclosure.onOpen} />
-          <Suspense fallback={<Play onClick={disclosure.onOpen} />}>
+          <Play />
+          <Suspense fallback={<Play />}>
             <ScreenVideo isSpecificWidth={isSpecificWidth} />
           </Suspense>
         </GridItem>

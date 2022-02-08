@@ -10,7 +10,7 @@ const commonProps: any = {
 
 const JoinAndCollectHero = () => {
   return (
-    <HeroLayout hideBlur>
+    <HeroLayout>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }} align="flex-start">
         <SimpleGrid
           columns={4}
