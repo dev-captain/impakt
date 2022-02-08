@@ -1,3 +1,5 @@
+import Images from 'assets/images';
+
 export const RoadMapData: {
   date: string;
   isActive: boolean;
@@ -73,5 +75,74 @@ export const Socials = {
   twitter: 'https://twitter.com/demideuszin',
   discord: 'https://discord.com/invite/Wbx7j9DJwT',
 };
+
+export const Advisors = [
+  {
+    name: 'Kevin Lin',
+    title: 'Founder - Twitch',
+    image: Images.advisor.kevin,
+    subtitle: '',
+    alt: 'Kevin Lin',
+  },
+  {
+    name: 'Tim Howes',
+    title: 'CTO - Netscape',
+    image: Images.advisor.tim,
+    alt: 'Tim Howes',
+    subtitle: 'Director of Engineering - Facebook',
+  },
+  {
+    name: 'Kai Huang',
+    title: 'Founder - Guitar Hero',
+    image: Images.advisor.kai,
+    alt: 'Kai Huang',
+    subtitle: 'President of Red Octane - Activision',
+  },
+];
+
+export const Team = [
+  {
+    name: 'Demideus',
+    title: 'CEO',
+    image: Images.team.demideus,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Valtec',
+    title: 'President',
+    image: Images.team.valtec,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'DukeNuke',
+    title: 'Influencer Manager',
+    image: Images.team.duke,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Duke of Deadfall',
+    title: 'Head of Community',
+    image: Images.team.dukeOfDeadfall,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Dahaka',
+    title: 'Development Manager',
+    image: Images.team.dahaka,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Cap’n Crunch',
+    title: 'Head of Marketing',
+    image: Images.team.cap,
+    alt: '',
+    subtitle: '',
+  },
+];
 
 export default {};
