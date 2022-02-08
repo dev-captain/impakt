@@ -20,23 +20,33 @@ const InvestorCard = ({
     <VStack
       w="full"
       pb="36px"
+      maxW="368px"
       align="center"
       justify="center"
       bgColor={bgColor}
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      maxW="384px"
-      maxH="650px"
+      maxH="550px"
       h="full"
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
-      <Image src={image} objectFit="cover" w="full" h="380px" alt={alt} borderRadius="28px" />
-      <VStack p="8px" align="center" justify="center">
+      <VStack>
+        <Image
+          src={image}
+          objectFit="cover"
+          maxW="330"
+          h="336px"
+          alt={alt}
+          mt="16px"
+          borderRadius="28px"
+        />
+      </VStack>
+      <VStack align="center" justify="center">
         <Text textStyle="bold5" pt="8px" align="center">
           {name}
         </Text>
-        <Text textStyle="regular4" opacity="0.6" align="center" pt="24px" color={subTitleColor}>
+        <Text textStyle="regular4" opacity="0.6" align="center" color={subTitleColor}>
           {title}
         </Text>
         <Text height="20px" opacity="0.6" align="center" display="inline" color={subTitleColor}>
