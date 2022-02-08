@@ -21,7 +21,7 @@ const Article = ({
   setCategory,
 }: Props) => {
   return (
-    <VStack align="flex-start" color={textColor}>
+    <VStack align="flex-start" color={textColor} minW="full">
       <Breadcrumb
         category={category}
         data={[category?.title, article?.title]}

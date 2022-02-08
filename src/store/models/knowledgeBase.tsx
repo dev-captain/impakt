@@ -65,7 +65,12 @@ const knowledgeBase = createModel<RootModel>()({
     },
 
     async fetchArticlesByCategory(slug: string) {
-      const response = await fetch(`${KnowledgeBaseEndpoints.ArticlesByCategory(slug)}`);
+      const url =
+        slug === 'all-resources'
+          ? KnowledgeBaseEndpoints.Articles
+          : KnowledgeBaseEndpoints.ArticlesByCategory(slug);
+
+      const response = await fetch(url);
       const { data } = await response.json();
       const articles = data.map((article: { id: number; attributes: Article }) => ({
         ...article.attributes,
