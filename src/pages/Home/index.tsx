@@ -11,7 +11,7 @@ import {
 import Contact from 'components/ui/home/Contact';
 import Seo from 'components/core/Seo';
 import VideoModal from 'components/core/VideoModal';
-import RoadMap from 'components/ui/home/Roadmap';
+import RoadMap from 'components/ui/home/Roadmap/RoadmapSection';
 
 const HomePage = () => {
   const { setColorMode } = useColorMode();
