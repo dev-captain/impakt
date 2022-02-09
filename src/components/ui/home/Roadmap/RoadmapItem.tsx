@@ -6,6 +6,7 @@ import {
   ListItem,
   Text,
   UnorderedList,
+  useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
 
@@ -45,15 +46,22 @@ export const ItemGraphics = ({
   lineHeight: string;
   isCompleted: boolean;
 }) => {
+  const isLight = useColorModeValue(false, true);
+
   return (
     <VStack spacing="0">
       <Circle
         mt="6px"
         size="12px"
+        boxShadow="0px 1px 20px 2px rgba(217, 14, 232, 0.41);"
         background="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
       />
       <VStack>
-        <Image src="assets/images/roadmap-line.png" h={lineHeight} objectFit="fill" />
+        <Image
+          src={!isLight ? 'assets/images/roadmap-line.png' : 'assets/images/roadmap-line-light.png'}
+          h={lineHeight}
+          objectFit="fill"
+        />
         <Image
           src={
             isCompleted

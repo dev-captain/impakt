@@ -212,7 +212,7 @@ export const RoadmapInfo = [
       },
     ],
     height: '289px',
-    lineHeight: '241px',
+    lineHeight: '200px',
     isCompleted: false,
   },
 ];
