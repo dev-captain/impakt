@@ -31,6 +31,7 @@ export const ItemLabel = ({ title, bgColor }: { title: string; bgColor: string |
       fontWeight="600"
       fontSize="14px"
       lineHeight="24px"
+      color="white"
     >
       {title}
     </Box>

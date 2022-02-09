@@ -1,4 +1,4 @@
-import { HStack, Text, useMediaQuery, VStack } from '@chakra-ui/react';
+import { HStack, Text, useColorModeValue, useMediaQuery, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { RoadmapInfo } from 'data';
 import { layoutPadding } from 'theme';
@@ -9,9 +9,11 @@ import RoadMapSmallView from './RoadmapSmallView';
 
 const RoadMap = () => {
   const [isLessThan800] = useMediaQuery('(max-width: 800px)');
+  const bgColor = useColorModeValue('glass.700', 'glass.300');
+  const textColor = useColorModeValue('glass.100', 'glass.700');
 
   if (isLessThan800) {
-    return <RoadMapSmallView />;
+    return <RoadMapSmallView textColor={textColor} bgColor={bgColor} />;
   }
 
   return (
@@ -40,7 +42,7 @@ const RoadMap = () => {
             fontWeight="700"
             fontSize={{ base: '40px', md: '56px' }}
             lineHeight="60px"
-            color="white"
+            color={textColor}
           >
             Roadmap
           </Text>
@@ -51,10 +53,10 @@ const RoadMap = () => {
           overflow="hidden"
           position="relative"
           borderRadius="28px"
-          bgColor="glass.700"
+          bgColor={bgColor}
           align="flex-start"
           justify="center"
-          color="white"
+          color={textColor}
         >
           <VStack pos="relative" w="full">
             <HStack px="16px" justify="space-around" w="full">

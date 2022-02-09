@@ -5,7 +5,7 @@ import { layoutPadding } from 'theme';
 import Progress from './Progress';
 import RoadmapItem from './RoadmapItem';
 
-const RoadMapSmallView = () => {
+const RoadMapSmallView = ({ bgColor, textColor }: { bgColor: string; textColor: string }) => {
   return (
     <HeroLayout>
       <VStack
@@ -25,7 +25,7 @@ const RoadMapSmallView = () => {
             fontWeight="700"
             fontSize={{ base: '40px', md: '56px' }}
             lineHeight="60px"
-            color="white"
+            color={textColor}
           >
             Roadmap
           </Text>
@@ -36,8 +36,8 @@ const RoadMapSmallView = () => {
           overflow="hidden"
           position="relative"
           borderRadius="28px"
-          bgColor="glass.700"
-          color="white"
+          bgColor={bgColor || 'glass.700'}
+          color={textColor}
           pt="100px"
         >
           <HStack w="full" h="full" pl={100} spacing="30px">
