@@ -17,13 +17,15 @@ import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 
 const { dark, light } = Images;
-const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight } = Images.Common;
+const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
+  Images.Common;
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
   const { colorMode, setColorMode } = useColorMode();
+  const youtube = colorMode === 'light' ? Youtube : YoutubeLight;
   const discord = colorMode === 'light' ? Discord : DiscordLight;
   const twitter = colorMode === 'light' ? Twitter : TwitterLight;
   const textColor = colorMode === 'light' ? 'glass.100' : 'glass.700';
@@ -56,7 +58,7 @@ const Navbar = () => {
             isLessThan1040={isLessThan1040}
           />
           <Box onClick={() => navigate('/')} zIndex={100}>
-            <Image src={colorMode === 'light' ? Logo : LogoLight} />
+            <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} />
           </Box>
           <HStack
             justify="flex-end"
@@ -83,10 +85,34 @@ const Navbar = () => {
               </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
                 <Box as="a" target="_blank" href={Socials.twitter}>
-                  <Image w="35px" h="35px" opacity={0.6} objectFit="contain" src={twitter} />
+                  <Image
+                    maxW="35px"
+                    minW="35px"
+                    h="35px"
+                    opacity={0.6}
+                    objectFit="contain"
+                    src={twitter}
+                  />
                 </Box>
                 <Box as="a" target="_blank" href={Socials.discord}>
-                  <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={discord} />
+                  <Image
+                    maxW="32px"
+                    minW="32px"
+                    h="32px"
+                    opacity={0.6}
+                    objectFit="contain"
+                    src={discord}
+                  />
+                </Box>
+                <Box as="a" target="_blank" href={Socials.youtube}>
+                  <Image
+                    maxW="32px"
+                    minW="32px"
+                    h="32px"
+                    opacity={0.6}
+                    objectFit="contain"
+                    src={youtube}
+                  />
                 </Box>
                 <Box
                   as="button"
@@ -111,14 +137,38 @@ const Navbar = () => {
           >
             <HStack
               pl={{ base: 0, md: '64px' }}
-              spacing={{ base: '16px', md: '32px' }}
+              spacing={{ base: '6px', md: '32px' }}
               justify={{ base: 'center', md: 'flex-end' }}
             >
               <Box as="a" target="_blank" href={Socials.twitter}>
-                <Image w="35px" h="35px" opacity={0.6} objectFit="contain" src={twitter} />
+                <Image
+                  maxW="35"
+                  w="35px"
+                  h="35px"
+                  opacity={0.6}
+                  objectFit="contain"
+                  src={twitter}
+                />
               </Box>
               <Box as="a" target="_blank" href={Socials.discord}>
-                <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={discord} />
+                <Image
+                  maxW="32"
+                  w="32px"
+                  h="32px"
+                  opacity={0.6}
+                  objectFit="contain"
+                  src={discord}
+                />
+              </Box>
+              <Box as="a" target="_blank" href={Socials.youtube}>
+                <Image
+                  maxW="32"
+                  w="32px"
+                  h="32px"
+                  opacity={0.6}
+                  objectFit="contain"
+                  src={youtube}
+                />
               </Box>
               <Box
                 as="button"
@@ -127,6 +177,7 @@ const Navbar = () => {
                 <Image
                   w="26px"
                   h="26px"
+                  minW="26px"
                   objectFit="contain"
                   src={colorMode === 'dark' ? dark : light}
                 />

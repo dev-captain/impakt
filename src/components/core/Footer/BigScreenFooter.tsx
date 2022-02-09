@@ -9,6 +9,7 @@ const BigScreenFooter = ({
   logo,
   textColor,
   twitter,
+  youtube,
   discord,
 }: {
   bgColor: string;
@@ -16,6 +17,7 @@ const BigScreenFooter = ({
   textColor: string;
   twitter: string;
   discord: string;
+  youtube: string;
 }) => {
   const navigate = useNavigate();
 
@@ -72,10 +74,34 @@ const BigScreenFooter = ({
         <GridItem colSpan={{ base: 5, md: 1 }} marginTop={{ base: 0, md: '60px' }}>
           <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
             <Box as="a" target="_blank" href={Socials.twitter}>
-              <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={twitter} />
+              <Image
+                maxW="30px"
+                minW="30px"
+                h="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={twitter}
+              />
             </Box>
             <Box as="a" target="_blank" href={Socials.discord}>
-              <Image w="30px" h="30px" opacity={0.6} objectFit="contain" src={discord} />
+              <Image
+                maxW="30px"
+                minW="30px"
+                h="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={discord}
+              />
+            </Box>
+            <Box as="a" target="_blank" href={Socials.youtube}>
+              <Image
+                maxW="30px"
+                minW="30px"
+                h="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={youtube}
+              />
             </Box>
           </HStack>
         </GridItem>

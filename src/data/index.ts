@@ -72,8 +72,9 @@ export const Videos = {
 
 export const Socials = {
   facebook: '',
+  youtube: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw',
   twitter: 'https://twitter.com/demideuszin',
-  discord: 'https://discord.com/invite/Wbx7j9DJwT',
+  discord: 'https://discord.com/invite/DeYvSEgq',
 };
 
 export const Advisors = [

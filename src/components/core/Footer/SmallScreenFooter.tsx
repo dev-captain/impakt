@@ -8,12 +8,14 @@ const SmallScreenFooter = ({
   textColor,
   twitter,
   discord,
+  youtube,
 }: {
   bgColor: string;
   logo: string;
   textColor: string;
   twitter: string;
   discord: string;
+  youtube: string;
 }) => {
   const navigate = useNavigate();
 
@@ -30,12 +32,36 @@ const SmallScreenFooter = ({
       <VStack w="full">
         <HStack align="flex-start" justify="space-between" w="full">
           <Image onClick={() => navigate('/')} src={logo} />
-          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
+          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
             <Box as="a" target="_blank" href={Socials.twitter}>
-              <Image w="32px" h="32px" opacity={0.6} objectFit="contain" src={twitter} />
+              <Image
+                minW="32px"
+                h="32px"
+                maxW="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={twitter}
+              />
             </Box>
             <Box as="a" target="_blank" href={Socials.discord}>
-              <Image w="30px" h="30px" opacity={0.6} objectFit="contain" src={discord} />
+              <Image
+                minW="32px"
+                h="30px"
+                maxW="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={discord}
+              />
+            </Box>
+            <Box as="a" target="_blank" href={Socials.youtube}>
+              <Image
+                minW="32px"
+                h="30px"
+                maxW="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={youtube}
+              />
             </Box>
           </HStack>
         </HStack>

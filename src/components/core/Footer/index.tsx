@@ -10,22 +10,25 @@ const Footer = () => {
   const discord = colorMode === 'light' ? Images.Common.Discord : Images.Common.DiscordLight;
   const twitter = colorMode === 'light' ? Images.Common.Twitter : Images.Common.TwitterLight;
   const textColor = colorMode === 'light' ? 'glass.100' : 'glass.700';
+  const youtube = colorMode === 'light' ? Images.Common.Youtube : Images.Common.YoutubeLight;
 
   return (
     <>
       <BigScreenFooter
-        bgColor={bgColor}
         logo={logo}
-        textColor={textColor}
+        bgColor={bgColor}
+        youtube={youtube}
         discord={discord}
         twitter={twitter}
+        textColor={textColor}
       />
       <SmallScreenFooter
-        bgColor={bgColor}
         logo={logo}
-        textColor={textColor}
+        bgColor={bgColor}
+        youtube={youtube}
         discord={discord}
         twitter={twitter}
+        textColor={textColor}
       />
     </>
   );

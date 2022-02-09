@@ -9,6 +9,8 @@ const Images = {
     LogoLight: require('./logo-light.png'),
     Twitter: require('./twitter.png'),
     TwitterLight: require('./twitter-light.png'),
+    Youtube: require('./youtube-dark.png'),
+    YoutubeLight: require('./youtube-light.png'),
     Discord: require('./discord.png'),
     DiscordLight: require('./discord-light.png'),
     Header: require('./bg-header.png'),
