@@ -28,6 +28,9 @@ export const ItemLabel = ({ title, bgColor }: { title: string; bgColor: string |
       p="12px 24px 12px 22px"
       bgGradient={!bgColor ? 'linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)' : ''}
       bgColor={bgColor || 'transparent'}
+      fontWeight="600"
+      fontSize="14px"
+      lineHeight="24px"
     >
       {title}
     </Box>
@@ -89,7 +92,9 @@ const RoadmapItem = ({
             {items?.map((item) => (
               <ListItem textStyle="regular3" key={item.title}>
                 <HStack spacing="8px" align="flex-start">
-                  <Text w="200px">{item.title}</Text>
+                  <Text w="200px" textStyle="semiBold3">
+                    {item.title}
+                  </Text>
                 </HStack>
               </ListItem>
             ))}
@@ -109,7 +114,7 @@ const RoadmapItem = ({
             {items?.map((item) => (
               <ListItem textStyle="regular3" key={item.title}>
                 <HStack spacing="8px" align="flex-start">
-                  <Text>{item.title}</Text>
+                  <Text textStyle="semiBold3">{item.title}</Text>
                   {item.isDone && (
                     <Image
                       pt="4px"
