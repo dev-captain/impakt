@@ -183,7 +183,9 @@ const ImpaktGamesHero = () => {
                   }}
                   display={{ base: 'flex', md: 'none' }}
                 >
-                  <Text textStyle="semiBold16">Download Tutorial</Text>
+                  <Text textStyle="semiBold16" color="white">
+                    Download Tutorial
+                  </Text>
                 </Button>
                 <Box m={24} />
               </>

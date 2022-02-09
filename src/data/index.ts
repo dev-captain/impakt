@@ -146,4 +146,74 @@ export const Team = [
   },
 ];
 
+export const RoadmapInfo = [
+  {
+    title: 'Q4 2021',
+    items: [
+      {
+        title: 'Develop Computer Vision System',
+        isDone: true,
+      },
+    ],
+    height: '124px',
+    isCompleted: true,
+    lineHeight: '124px',
+  },
+  {
+    title: 'Q1 2022',
+    items: [
+      {
+        title: 'Alpha Test App',
+        isDone: true,
+      },
+      {
+        title: '$IMPK IDO',
+        isDone: false,
+      },
+      {
+        title: 'Staking Pool',
+        isDone: false,
+      },
+    ],
+    height: '184px',
+    lineHeight: '124px',
+    isCompleted: true,
+  },
+  {
+    title: 'Q2 2022',
+    items: [
+      {
+        title: 'Genesis NFT Mint',
+        isDone: false,
+      },
+      {
+        title: 'Beta Test App',
+        isDone: false,
+      },
+      {
+        title: 'Marketplace',
+        isDone: false,
+      },
+      {
+        title: 'Tournaments',
+        isDone: false,
+      },
+    ],
+    height: '241px',
+    isCompleted: false,
+    lineHeight: '184px',
+  },
+  {
+    title: 'Q3 2022',
+    items: [
+      {
+        title: 'Release SDK',
+        isDone: false,
+      },
+    ],
+    height: '289px',
+    lineHeight: '200px',
+    isCompleted: false,
+  },
+];
 export default {};
