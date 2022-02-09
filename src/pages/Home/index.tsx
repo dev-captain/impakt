@@ -11,6 +11,7 @@ import {
 import Contact from 'components/ui/home/Contact';
 import Seo from 'components/core/Seo';
 import VideoModal from 'components/core/VideoModal';
+import RoadMap from 'components/ui/home/Roadmap';
 
 const HomePage = () => {
   const { setColorMode } = useColorMode();
@@ -38,6 +39,10 @@ const HomePage = () => {
 
       <div id="partner-and-investor">
         <PartnerAndInvestorHero />
+      </div>
+
+      <div id="roadmap">
+        <RoadMap />
       </div>
 
       <div id="contact">
