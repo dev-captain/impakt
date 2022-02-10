@@ -167,11 +167,11 @@ export const RoadmapInfo = [
         isDone: true,
       },
       {
-        title: '$IMPK IDO',
+        title: 'Daily/Weekly Routines',
         isDone: false,
       },
       {
-        title: 'Staking Pool',
+        title: 'Centralized Economy',
         isDone: false,
       },
     ],
@@ -187,15 +187,7 @@ export const RoadmapInfo = [
         isDone: false,
       },
       {
-        title: 'Beta Test App',
-        isDone: false,
-      },
-      {
-        title: 'Marketplace',
-        isDone: false,
-      },
-      {
-        title: 'Tournaments',
+        title: 'Decentralized Economy',
         isDone: false,
       },
     ],
