@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import {
   Box,
   Circle,
@@ -19,6 +21,7 @@ export type dataProps = {
   }[];
   lineHeight: string;
   isCompleted: boolean;
+  pinLineHeight: string;
 };
 
 export const ItemLabel = ({ title, bgColor }: { title: string; bgColor: string | null }) => {
@@ -42,26 +45,35 @@ export const ItemLabel = ({ title, bgColor }: { title: string; bgColor: string |
 export const ItemGraphics = ({
   lineHeight,
   isCompleted,
+  hideLine = false,
 }: {
   lineHeight: string;
   isCompleted: boolean;
+  hideLine?: boolean;
 }) => {
   const isLight = useColorModeValue(false, true);
 
   return (
     <VStack spacing="0">
-      <Circle
-        mt="6px"
-        size="12px"
-        boxShadow="0px 1px 20px 2px rgba(217, 14, 232, 0.41);"
-        background="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-      />
-      <VStack>
-        <Image
-          src={!isLight ? 'assets/images/roadmap-line.png' : 'assets/images/roadmap-line-light.png'}
-          h={lineHeight}
-          objectFit="fill"
+      {!hideLine && (
+        <Circle
+          mt="6px"
+          size="12px"
+          boxShadow="0px 1px 20px 2px rgba(217, 14, 232, 0.41);"
+          background="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
         />
+      )}
+      {hideLine && <Box mt="6px" size="12px" w="12px" h="12px" />}
+      <VStack>
+        {!hideLine && (
+          <Image
+            src={
+              !isLight ? 'assets/images/roadmap-line.png' : 'assets/images/roadmap-line-light.png'
+            }
+            h={lineHeight}
+            objectFit="fill"
+          />
+        )}
         <Image
           src={
             isCompleted
@@ -71,7 +83,7 @@ export const ItemGraphics = ({
           w="80px"
           h="80px"
           pos="absolute"
-          bottom={-8}
+          bottom={-12}
           zIndex={100}
         />
       </VStack>
@@ -86,28 +98,33 @@ const RoadmapItem = ({
   data: dataProps;
   type?: 'horizontal' | 'vertical';
 }) => {
-  const { height, title, isCompleted, items, lineHeight } = data;
+  const { height, title, isCompleted, items, lineHeight, pinLineHeight } = data;
   if (type === 'vertical') {
     return (
       <VStack align="flex-start" h="200px" maxW="380px">
-        <VStack pb="16px">
+        <VStack pb="24px">
           <ItemLabel title={title} bgColor={isCompleted ? null : 'glass.500'} />
         </VStack>
-        <HStack>
-          <UnorderedList>
-            <HStack align="flex-start" pos="absolute" w="full" left="-43px">
-              <ItemGraphics lineHeight={lineHeight} isCompleted={isCompleted} />
-            </HStack>
-            {items?.map((item) => (
-              <ListItem textStyle="regular3" key={item.title}>
-                <HStack spacing="8px" align="flex-start">
-                  <Text w="200px" textStyle="semiBold3">
-                    {item.title}
-                  </Text>
-                </HStack>
-              </ListItem>
-            ))}
-          </UnorderedList>
+        <HStack align="flex-start" pos="absolute" w="full" left="-43px">
+          <ItemGraphics lineHeight={lineHeight} isCompleted={isCompleted} hideLine />
+        </HStack>
+        <HStack spacing="36px" align="flex-start">
+          <VStack>
+            <Pin height={pinLineHeight} />
+          </VStack>
+          <VStack>
+            <UnorderedList>
+              {items?.map((item) => (
+                <ListItem textStyle="regular3" key={item.title}>
+                  <HStack spacing="8px" align="flex-start">
+                    <Text w="200px" textStyle="semiBold3">
+                      {item.title}
+                    </Text>
+                  </HStack>
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </VStack>
         </HStack>
       </VStack>
     );
@@ -146,3 +163,22 @@ const RoadmapItem = ({
 };
 
 export default RoadmapItem;
+
+const Pin = ({ height }: { height: string }) => {
+  const image = useColorModeValue(
+    'assets/images/roadmap-line.png',
+    'assets/images/roadmap-line-light.png',
+  );
+
+  return (
+    <VStack spacing={0} align="center">
+      <Circle
+        mt="6px"
+        size="12px"
+        boxShadow="0px 1px 20px 2px rgba(217, 14, 232, 0.41);"
+        background="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+      />
+      <Image src={image} h={height} objectFit="fill" />
+    </VStack>
+  );
+};

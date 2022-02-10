@@ -158,6 +158,7 @@ export const RoadmapInfo = [
     height: '124px',
     isCompleted: true,
     lineHeight: '124px',
+    pinLineHeight: '60px',
   },
   {
     title: 'Q1 2022',
@@ -178,6 +179,7 @@ export const RoadmapInfo = [
     height: '184px',
     lineHeight: '124px',
     isCompleted: true,
+    pinLineHeight: '100px',
   },
   {
     title: 'Q2 2022',
@@ -194,6 +196,7 @@ export const RoadmapInfo = [
     height: '241px',
     isCompleted: false,
     lineHeight: '184px',
+    pinLineHeight: '130px',
   },
   {
     title: 'Q3 2022',
@@ -206,6 +209,7 @@ export const RoadmapInfo = [
     height: '289px',
     lineHeight: '200px',
     isCompleted: false,
+    pinLineHeight: '160px',
   },
 ];
 export default {};

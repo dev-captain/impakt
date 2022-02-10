@@ -32,16 +32,22 @@ const RoadMapSmallView = ({ bgColor, textColor }: { bgColor: string; textColor: 
         </HStack>
         <VStack
           w="full"
-          h="1360px"
+          h="1200px"
           overflow="hidden"
           position="relative"
           borderRadius="28px"
           bgColor={bgColor || 'glass.700'}
           color={textColor}
-          pt="100px"
         >
-          <HStack w="full" h="full" pl={100} spacing="30px">
-            <VStack h="full" pt="190px">
+          <HStack
+            w="full"
+            h="full"
+            spacing="30px"
+            align="flex-start"
+            justify="flex-start"
+            px="32px"
+          >
+            <VStack h="full" pt="120px">
               <Progress value={40} type="vertical" />
             </VStack>
             <VStack
@@ -51,6 +57,7 @@ const RoadMapSmallView = ({ bgColor, textColor }: { bgColor: string; textColor: 
               pos="relative"
               spacing="100px"
               zIndex={10}
+              pt="85px"
             >
               {RoadmapInfo.map((item) => (
                 <RoadmapItem type="vertical" data={item} />
