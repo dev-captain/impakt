@@ -21,16 +21,19 @@ type EventStore = {
   date: Date | null;
   event: Event | null;
 
-  fetchEvent: () => void;
+  fetchEvent: (slug: string) => void;
 };
 
 const useEventStore = create<EventStore>((set: SetState<EventStore>) => ({
   date: null,
   event: null,
 
-  fetchEvent: async () => {
-    const event = await (await fetch('https://impakt-blog.herokuapp.com/api/events/1')).json();
-    const data = event?.data.attributes;
+  fetchEvent: async (slug: string) => {
+    const url = slug
+      ? `https://impakt-blog.herokuapp.com/api/events?filters[slug][$eq]=${slug}`
+      : `https://impakt-blog.herokuapp.com/api/events/?filters[id][$eq]=1`;
+    const event = await (await fetch(url)).json();
+    const data = event?.data[0].attributes;
     const startDate = data?.startDate;
     const utcOffset = data?.utcOffset;
 

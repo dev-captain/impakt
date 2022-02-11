@@ -4,13 +4,15 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import CounterItem from 'components/ui/home/CountdownHero/CounterItem';
 import useEventStore from 'hooks/store/useEventStore';
 import useCountdown from 'hooks/useCountdown';
+import { useParams } from 'react-router-dom';
 
 const EventPage = () => {
+  const { slug } = useParams();
   const eventStore = useEventStore((state) => state);
 
   useEffect(() => {
-    eventStore.fetchEvent();
-  }, []);
+    eventStore.fetchEvent(slug!);
+  }, [slug]);
 
   return (
     <HeroLayout showFooter showNavbar minH="60vh">

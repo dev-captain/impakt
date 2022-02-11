@@ -13,7 +13,9 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/event" element={<Event />} />
+      <Route path="/event" element={<Event />}>
+        <Route path=":slug" element={<Event />} />
+      </Route>
       <Route path="/blog" element={<Blog />}>
         <Route path=":id" element={<Blog />} />
       </Route>
