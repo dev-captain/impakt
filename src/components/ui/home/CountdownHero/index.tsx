@@ -16,15 +16,7 @@ const CountdownHero = ({ date }: { date: Date }) => {
       <VStack pos="absolute" top={{ base: 4, md: 16 }} zIndex={100}>
         <SocialMediasArea />
       </VStack>
-      <SimpleGrid
-        rowGap={0}
-        zIndex={2}
-        columns={4}
-        columnGap={16}
-        paddingTop={{
-          base: '180px',
-        }}
-      >
+      <SimpleGrid rowGap={0} zIndex={2} columns={4} columnGap={16} paddingTop="180px">
         <GridItem colSpan={4}>
           <HStack zIndex={2} alignItems="center" justifyContent="center">
             <Logo />
