@@ -11,7 +11,8 @@ import {
 import { layoutPadding } from 'theme';
 import { Socials } from 'data';
 import Images from 'assets/images';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { parsePathname } from 'utils';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -22,6 +23,8 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, 
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const path = parsePathname(location.pathname);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
   const { colorMode, setColorMode } = useColorMode();
@@ -72,17 +75,25 @@ const Navbar = () => {
             <HStack w="full" align="space-between" justify="space-between">
               <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
                 <NavbarLinkItem
-                  title="Impakt Games"
-                  isActive
                   href="/"
+                  title="Impakt Games"
+                  isActive={path.path === ''}
                   color={activeColor || textColor}
-                  passiveColor="rgba(255,255,255, 0.3)"
+                  passiveColor={passiveColor}
                 />
                 <NavbarLinkItem
-                  title="White Paper"
-                  href="https://joker-5.gitbook.io/impakt/"
-                  color={activeColor || textColor}
-                  passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
+                  onClose={onClose}
+                  title="Knowledge Base"
+                  href="/knowledge-base"
+                  passiveColor={passiveColor}
+                  isActive={path.path === 'knowledge-base'}
+                />
+                <NavbarLinkItem
+                  title="Events"
+                  href="/events"
+                  onClose={onClose}
+                  passiveColor={passiveColor}
+                  isActive={path.path === 'events'}
                 />
               </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
