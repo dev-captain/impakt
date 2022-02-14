@@ -80,16 +80,16 @@ const Navbar = () => {
                   passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
                 />
                 <NavbarLinkItem
-                  title="White Paper"
-                  target="_blank"
-                  href="https://joker-5.gitbook.io/impakt/"
+                  title="Knowledge Base"
+                  href="/knowledge-base"
+                  isActive={path.path === 'knowledge-base'}
                   color={activeColor || textColor}
                   passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
                 />
                 <NavbarLinkItem
-                  title="Knowledge Base"
-                  href="/knowledge-base"
-                  isActive={path.path === 'knowledge-base'}
+                  title="Events"
+                  href="/events"
+                  isActive={path.path === 'events'}
                   color={activeColor || textColor}
                   passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
                 />
