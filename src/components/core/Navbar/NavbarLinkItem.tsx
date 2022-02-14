@@ -27,7 +27,7 @@ const NavbarLinkItem = ({
   const navigate = useNavigate();
 
   return (
-    <VStack justifyContent="center" h="100px" onClick={onClose}>
+    <VStack justifyContent="center" h="100px" onClick={onClose} cursor="pointer">
       <Box
         // @ts-ignore
         href={href}

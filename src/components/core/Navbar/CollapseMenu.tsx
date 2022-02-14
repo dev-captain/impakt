@@ -1,25 +1,43 @@
 import { VStack, Collapse } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
+import { parsePathname } from 'utils';
 import NavbarLinkItem from './NavbarLinkItem';
 
 type Props = {
+  bg: string;
   isOpen: boolean;
+  textColor: string;
   onClose: () => void;
 };
 
-const CollapseMenu = ({ isOpen, onClose }: Props) => {
+const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
+  const location = useLocation();
+  const path = parsePathname(location.pathname);
+
   return (
     <Collapse in={isOpen} animateOpacity>
-      <VStack spacing={0} paddingBottom={8} bg="rgba(31, 32, 36, 1)" h="100vh">
-        <NavbarLinkItem title="Impakt Games" isActive hide href="/" onClose={onClose} />
+      <VStack spacing={0} paddingBottom={8} bg={bg} h="100vh" zIndex={900} color={textColor}>
+        <NavbarLinkItem
+          hide
+          href="/"
+          onClose={onClose}
+          title="Impakt Games"
+          isActive={path.path === ''}
+        />
         <NavbarLinkItem
           hide
           onClose={onClose}
-          title="White Paper"
-          href="https://joker-5.gitbook.io/impakt/"
+          title="Knowledge Base"
+          href="/knowledge-base"
+          isActive={path.path === 'knowledge-base'}
         />
-        {/* <NavbarLinkItem title="Roadmap" hide href="#road-map" onClose={onClose} />
-        <NavbarLinkItem title="How to sign up" hide href="#how-to-sign-up" onClose={onClose} />
-        <NavbarLinkItem title="NFT Marketplace" hide href="#nft-marketplace" onClose={onClose} /> */}
+        <NavbarLinkItem
+          hide
+          title="Events"
+          href="/events"
+          onClose={onClose}
+          isActive={path.path === 'events'}
+        />
       </VStack>
     </Collapse>
   );
