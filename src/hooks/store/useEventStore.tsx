@@ -22,11 +22,29 @@ type EventStore = {
   event: Event | null;
 
   fetchEvent: (slug: string) => void;
+  fetchActiveEvent: () => void;
 };
 
 const useEventStore = create<EventStore>((set: SetState<EventStore>) => ({
   date: null,
   event: null,
+
+  fetchActiveEvent: async () => {
+    const url = 'https://impakt-blog.herokuapp.com/api/events?filters[isActive][$eq]=true';
+    const event = await (await fetch(url)).json();
+    const data = event?.data[0].attributes;
+    const startDate = data?.startDate;
+    const utcOffset = data?.utcOffset;
+
+    const dateString = startDate
+      ? `${startDate} GMT${utcOffset}`
+      : dayjs().add(1, 'seconds').toDate();
+    const date = dayjs(dateString)
+      .utcOffset(utcOffset ? Number(utcOffset) : 8)
+      .toDate();
+
+    set((state) => ({ ...state, date, event: data }));
+  },
 
   fetchEvent: async (slug: string) => {
     const url = slug
