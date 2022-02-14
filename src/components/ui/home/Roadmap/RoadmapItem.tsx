@@ -83,7 +83,7 @@ export const ItemGraphics = ({
           w="80px"
           h="80px"
           pos="absolute"
-          bottom={-12}
+          bottom="-36px"
           zIndex={100}
         />
       </VStack>
