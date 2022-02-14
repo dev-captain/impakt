@@ -22,9 +22,9 @@ const DownloadButton = ({
     bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
   >
     <VStack>
-      {iconName === 'Apple' && <Icons.Apple opacity="1" />}
-      {iconName === 'Windows' && <Icons.Window opacity="1" />}
-      <Text fontSize="16px" lineHeight="20px" fontWeight="500">
+      {iconName === 'Apple' && <Icons.Apple opacity="1" color="white" />}
+      {iconName === 'Windows' && <Icons.Window opacity="1" color="white" />}
+      <Text fontSize="16px" lineHeight="20px" fontWeight="500" color="white">
         {title}
       </Text>
     </VStack>

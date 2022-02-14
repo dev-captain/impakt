@@ -25,7 +25,7 @@ const HowToSignUpHero = () => {
   };
 
   return (
-    <HeroLayout hideBlur>
+    <HeroLayout>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           w="full"

@@ -5,7 +5,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: `Impakt is a fitness platform where you can meet and get fit with other people around the world. Compete through in the world's first computer vision technology with others in WCFNs first virtual boxing competition.`,
+        content: `Impakt is a fitness platform where you can meet and get fit with other people around the world. Compete individually or in teams using computer vision technology and earn crypto.`,
       },
       {
         name: 'keywords',

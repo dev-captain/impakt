@@ -1,13 +1,13 @@
-import { Box, Center, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
-import VideoModal from 'components/core/VideoModal';
 import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { Videos } from 'data';
+import useModalStore from 'hooks/store/useModalStore';
 import { layoutPadding } from 'theme';
 
 const BurnToEarnHero = () => {
-  const disclosure = useDisclosure();
+  const modal = useModalStore((state) => state);
+
   const vStackSomeProps = {
     borderRadius: {
       base: '14px',
@@ -28,7 +28,7 @@ const BurnToEarnHero = () => {
   };
 
   return (
-    <HeroLayout hideBlur={!disclosure.isOpen} removeBottomPadding minH="70vh">
+    <HeroLayout removeBottomPadding minH="70vh">
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           w="full"
@@ -42,7 +42,8 @@ const BurnToEarnHero = () => {
           overflow="hidden"
           position="relative"
           color="glass.0"
-          onClick={disclosure.onOpen}
+          cursor="pointer"
+          onClick={modal.setBurnAndEarn}
           boxShadow="0px 6px 6px rgba(0, 0, 0, 0.3), 0px 6px 16px rgba(0, 0, 0, 0.16)"
         >
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
@@ -51,7 +52,7 @@ const BurnToEarnHero = () => {
                 <Text>Burn and</Text>
                 <Text fontWeight="900">earn!</Text>
               </HStack>
-              <Play forMobile onClick={disclosure.onOpen} />
+              <Play forMobile onClick={modal.setBurnAndEarn} />
               <Text
                 opacity="0.6"
                 fontSize={{ base: '14px', md: '20px' }}
@@ -61,7 +62,7 @@ const BurnToEarnHero = () => {
               </Text>
             </VStack>
           </VStack>
-          <Play onClick={disclosure.onOpen} />
+          <Play onClick={modal.setBurnAndEarn} />
           <Box
             w="967px"
             h="472px"
@@ -74,7 +75,6 @@ const BurnToEarnHero = () => {
           />
         </HStack>
       </VStack>
-      <VideoModal showPlayer={false} {...disclosure} hideButtons path={Videos.burnAndEarn} />
     </HeroLayout>
   );
 };

@@ -47,7 +47,7 @@ const KnowledgeBasePage = () => {
   }, [selectedCategory?.slug]);
 
   return (
-    <HeroLayout hideBlur align="flex-start" justify="flex-start" showNavbar showFooter>
+    <HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
       <Seo
         title={selectedArticle?.title || `${title} - ${selectedCategory?.title}`}
         meta={[

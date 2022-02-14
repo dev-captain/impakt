@@ -1,10 +1,7 @@
-/* eslint-disable prettier/prettier */
-
-import { GridItem, SimpleGrid, Text, VStack, Image, useDisclosure } from '@chakra-ui/react';
+import { GridItem, SimpleGrid, Text, VStack, Image } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
-import VideoModal from 'components/core/VideoModal';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { Videos } from 'data';
+import useModalStore from 'hooks/store/useModalStore';
 import { layoutPadding } from 'theme';
 
 const commonProps: any = {
@@ -13,11 +10,10 @@ const commonProps: any = {
 };
 
 const JoinUsHero = () => {
-  const disclosure = useDisclosure();
+  const setJoinUs = useModalStore((state) => state);
 
   return (
-    <HeroLayout hideBlur>
-      <VideoModal showPlayer={false} {...disclosure} path={Videos.impaktGames} />
+    <HeroLayout>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           w="full"
@@ -65,7 +61,7 @@ const JoinUsHero = () => {
               </VStack>
               <GradientButton
                 title="Download Tutorial"
-                onClick={disclosure.onOpen}
+                onClick={() => setJoinUs}
                 w={{ base: 'full', md: 'auto' }}
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
               />

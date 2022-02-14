@@ -12,7 +12,7 @@ const BlogPage = () => {
   const navigate = useNavigate();
 
   return (
-    <HeroLayout hideBlur align="flex-start" justify="flex-start" showNavbar showFooter>
+    <HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
       <Seo title={id || title} meta={[...meta, id ? { name: 'keywords', content: id } : {}]} />
       <VStack minH="60vh" px={layoutPadding}>
         <Text>Blog: {id}</Text>

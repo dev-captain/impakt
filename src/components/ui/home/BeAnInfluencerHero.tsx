@@ -12,7 +12,7 @@ const BeAnInfluencerHero = () => {
   const [isLessThan890] = useMediaQuery('(max-width: 890px)');
 
   return (
-    <HeroLayout hideBlur>
+    <HeroLayout>
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <SimpleGrid
           columns={2}

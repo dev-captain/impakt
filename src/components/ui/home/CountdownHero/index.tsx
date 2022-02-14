@@ -12,7 +12,7 @@ const CountdownHero = ({ date }: { date: Date }) => {
   const items = ['days', 'hours', 'minutes', 'seconds'];
 
   return (
-    <HeroLayout hideBlur pos="absolute">
+    <HeroLayout pos="absolute">
       <VStack pos="absolute" top={{ base: 4, md: 16 }} zIndex={100}>
         <SocialMediasArea />
       </VStack>

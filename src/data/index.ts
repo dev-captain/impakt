@@ -1,3 +1,5 @@
+import Images from 'assets/images';
+
 export const RoadMapData: {
   date: string;
   isActive: boolean;
@@ -70,8 +72,9 @@ export const Videos = {
 
 export const Socials = {
   facebook: '',
+  youtube: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw',
   twitter: 'https://twitter.com/demideuszin',
-  discord: 'https://discord.com/invite/Wbx7j9DJwT',
+  discord: 'https://discord.com/invite/DeYvSEgq',
 };
 
 export const Categories = [
@@ -158,4 +161,139 @@ export const Articles = [
   },
 ];
 
+export const Advisors = [
+  {
+    name: 'Kevin Lin',
+    title: 'Founder - Twitch',
+    image: Images.advisor.kevin,
+    subtitle: '',
+    alt: 'Kevin Lin',
+  },
+  {
+    name: 'Tim Howes',
+    title: 'CTO - Netscape',
+    image: Images.advisor.tim,
+    alt: 'Tim Howes',
+    subtitle: 'Director of Engineering - Facebook',
+  },
+  {
+    name: 'Kai Huang',
+    title: 'Founder - Guitar Hero',
+    image: Images.advisor.kai,
+    alt: 'Kai Huang',
+    subtitle: 'President of Red Octane - Activision',
+  },
+];
+
+export const Team = [
+  {
+    name: 'Demideus',
+    title: 'CEO',
+    image: Images.team.demideus,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Valtec',
+    title: 'COO',
+    image: Images.team.valtec,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'DukeNuke',
+    title: 'President',
+    image: Images.team.duke,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Dahaka',
+    title: 'CTO',
+    image: Images.team.dahaka,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Cap’n Crunch',
+    title: 'CMO',
+    image: Images.team.cap,
+    alt: '',
+    subtitle: '',
+  },
+  {
+    name: 'Duke of Deadfall',
+    title: 'Head of Community',
+    image: Images.team.dukeOfDeadfall,
+    alt: '',
+    subtitle: '',
+  },
+];
+
+export const RoadmapInfo = [
+  {
+    title: 'Q4 2021',
+    items: [
+      {
+        title: 'Develop Computer Vision System',
+        isDone: true,
+      },
+    ],
+    height: '124px',
+    isCompleted: true,
+    lineHeight: '124px',
+    pinLineHeight: '60px',
+  },
+  {
+    title: 'Q1 2022',
+    items: [
+      {
+        title: 'Alpha Test App',
+        isDone: true,
+      },
+      {
+        title: 'Daily/Weekly Routines',
+        isDone: false,
+      },
+      {
+        title: 'Centralized Economy',
+        isDone: false,
+      },
+    ],
+    height: '184px',
+    lineHeight: '124px',
+    isCompleted: true,
+    pinLineHeight: '100px',
+  },
+  {
+    title: 'Q2 2022',
+    items: [
+      {
+        title: 'Genesis NFT Mint',
+        isDone: false,
+      },
+      {
+        title: 'Decentralized Economy',
+        isDone: false,
+      },
+    ],
+    height: '241px',
+    isCompleted: false,
+    lineHeight: '184px',
+    pinLineHeight: '130px',
+  },
+  {
+    title: 'Q3 2022',
+    items: [
+      {
+        title: 'Release SDK',
+        isDone: false,
+      },
+    ],
+    height: '289px',
+    lineHeight: '200px',
+    isCompleted: false,
+    pinLineHeight: '160px',
+  },
+];
 export default {};

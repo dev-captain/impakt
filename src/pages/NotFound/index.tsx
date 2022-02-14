@@ -4,7 +4,7 @@ import { layoutPadding } from 'theme';
 
 const NotFound = () => {
   return (
-    <HeroLayout hideBlur align="flex-start" justify="flex-start" showNavbar showFooter>
+    <HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
       <VStack minH="60vh" px={layoutPadding}>
         <Text>This page is not found.</Text>
       </VStack>

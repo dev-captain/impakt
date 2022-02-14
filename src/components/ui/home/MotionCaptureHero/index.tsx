@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
+import useModalStore from 'hooks/store/useModalStore';
 import { layoutPadding } from 'theme';
 import colors from 'theme/colors';
 import MotionCard from './MotionCard';
@@ -24,10 +25,10 @@ const MotionCaptureHero = () => {
   const [isLessThan850] = useMediaQuery('(max-width: 850px)');
   const cardBg = useColorModeValue('glass.800', 'glass.100');
   const textColor = useColorModeValue(colors.glass[100], colors.glass[700]);
+  const modal = useModalStore((state) => state);
 
   return (
     <HeroLayout
-      hideBlur
       customPadding={{
         base: '16px',
         md: '32px',
@@ -44,8 +45,19 @@ const MotionCaptureHero = () => {
         color={textColor}
         w={{ base: 'full', xl: 'auto' }}
       >
-        <GridItem display={{ base: 'none', sm: 'none', md: isLessThan850 ? 'none' : 'flex' }}>
-          <Image srcSet={Images.motionCapture} />
+        <GridItem
+          display={{ base: 'none', sm: 'none', md: isLessThan850 ? 'none' : 'flex' }}
+          onClick={modal.setComputerVision}
+          cursor="pointer"
+        >
+          <Image
+            zIndex={100}
+            src={Images.motionCapture}
+            _hover={{
+              transition: '0.5s ease',
+              transform: 'scale(1.15)',
+            }}
+          />
         </GridItem>
         <GridItem
           colSpan={{

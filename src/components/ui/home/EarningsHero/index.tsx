@@ -5,7 +5,7 @@ import EarnTokenCard from './EarnTokenCard';
 
 const EarningsHero = () => {
   return (
-    <HeroLayout hideBlur>
+    <HeroLayout>
       <SimpleGrid
         w="full"
         columns={2}
