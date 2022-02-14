@@ -11,7 +11,8 @@ import {
 import { layoutPadding } from 'theme';
 import { Socials } from 'data';
 import Images from 'assets/images';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { parsePathname } from 'utils';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -22,15 +23,19 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, 
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const path = parsePathname(location.pathname);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
   const { colorMode, setColorMode } = useColorMode();
-  const youtube = colorMode === 'light' ? Youtube : YoutubeLight;
-  const discord = colorMode === 'light' ? Discord : DiscordLight;
-  const twitter = colorMode === 'light' ? Twitter : TwitterLight;
-  const textColor = colorMode === 'light' ? 'glass.100' : 'glass.700';
-  const activeColor = colorMode === 'light' ? 'glass.100' : 'glass.900';
-  const passiveColor = colorMode === 'light' ? 'rgba(255,255,255)' : 'glass.700';
+  const isLight = colorMode === 'light';
+  const youtube = isLight ? Youtube : YoutubeLight;
+  const discord = isLight ? Discord : DiscordLight;
+  const twitter = isLight ? Twitter : TwitterLight;
+  const textColor = isLight ? 'glass.100' : 'glass.700';
+  const activeColor = isLight ? 'glass.100' : 'glass.900';
+  const passiveColor = isLight ? 'rgba(255,255,255)' : 'glass.700';
+  const bgColor = isLight ? 'glass.700' : 'glass.100';
 
   useEffect(() => {
     if (!isLessThan1040) {
@@ -39,7 +44,7 @@ const Navbar = () => {
   }, [isLessThan1040, onClose]);
 
   return (
-    <Box pos="absolute" zIndex="100" w="full" boxShadow="0px 4px 26px rgba(0, 0, 0, 0.25)">
+    <Box pos="absolute" zIndex="101" w="full" boxShadow="0px 4px 26px rgba(0, 0, 0, 0.25)">
       {isOpen && <Gradient />}
       <Flex
         h="100px"
@@ -49,7 +54,7 @@ const Navbar = () => {
         position="relative"
         alignItems="center"
         color={textColor}
-        bgColor={isOpen ? 'rgba(31, 32, 36, 1)' : 'blackAlpha.200'}
+        bgColor={isOpen ? bgColor : 'transparent'}
       >
         <HStack w="full" justify="space-between" px={layoutPadding}>
           <CollapseMenuController
@@ -70,17 +75,25 @@ const Navbar = () => {
             <HStack w="full" align="space-between" justify="space-between">
               <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
                 <NavbarLinkItem
-                  title="Impakt Games"
-                  isActive
                   href="/"
+                  title="Impakt Games"
+                  isActive={path.path === ''}
                   color={activeColor || textColor}
-                  passiveColor="rgba(255,255,255, 0.3)"
+                  passiveColor={passiveColor}
                 />
                 <NavbarLinkItem
-                  title="White Paper"
-                  href="https://joker-5.gitbook.io/impakt/"
-                  color={activeColor || textColor}
-                  passiveColor={passiveColor || 'rgba(255,255,255, 0.3)'}
+                  onClose={onClose}
+                  title="Knowledge Base"
+                  href="/knowledge-base"
+                  passiveColor={passiveColor}
+                  isActive={path.path === 'knowledge-base'}
+                />
+                <NavbarLinkItem
+                  title="Events"
+                  href="/events"
+                  onClose={onClose}
+                  passiveColor={passiveColor}
+                  isActive={path.path === 'events'}
                 />
               </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
@@ -186,7 +199,7 @@ const Navbar = () => {
           </HStack>
         </HStack>
       </Flex>
-      <CollapseMenu isOpen={isOpen} onClose={onClose} />
+      <CollapseMenu isOpen={isOpen} onClose={onClose} bg={bgColor} textColor={textColor} />
     </Box>
   );
 };

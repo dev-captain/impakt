@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 
-const GradientEllipse = () => {
+export const GradientEllipse = () => {
   return (
     <Box
       pos="absolute"

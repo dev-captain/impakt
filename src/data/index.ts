@@ -77,6 +77,90 @@ export const Socials = {
   discord: 'https://discord.com/invite/DeYvSEgq',
 };
 
+export const Categories = [
+  { id: 'all-resources', title: 'All Resources' },
+  { id: 'the-game', title: 'The Game' },
+  { id: 'tokens', title: 'Tokens' },
+  { id: 'announcements', title: 'Announcements' },
+  { id: 'privacy-policy', title: 'Privacy Policy' },
+  { id: 'terms-of-use', title: 'Terms of Use' },
+];
+
+export const Articles = [
+  {
+    id: 'title-of-the-article-1',
+    category: 'all-resources',
+    title: 'Title of the Article #1',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+  {
+    id: 'title-of-the-article-2',
+    category: 'all-resources',
+    title: 'Title of the Article #2',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+  {
+    id: 'title-of-the-article-3',
+    category: 'all-resources',
+    title: 'Title of the Article #3',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+  {
+    id: 'title-of-the-article-4',
+    category: 'announcements',
+    title: 'Title of the Article #4',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+  {
+    id: 'title-of-the-article-5',
+    category: 'tokens',
+    title: 'Title of the Article #5',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+  {
+    id: 'title-of-the-article-6',
+    category: 'the-game',
+    title: 'Title of the Article #6',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+  {
+    id: 'title-of-the-article-7',
+    category: 'privacy-policy',
+    title: 'Title of the Article #7',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+  {
+    id: 'title-of-the-article-8',
+    category: 'terms-of-use',
+    title: 'Title of the Article #8',
+    releaseDate: 'Jan 30, 2022',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper gravida magna id mattis. Praesent fermentum risus ut ex rutrum elementum fermentum risus ut ex rutrum elementum.  fermentum risus ut ex rutrum elementum. . ',
+    content: '',
+  },
+];
+
 export const Advisors = [
   {
     name: 'Kevin Lin',
