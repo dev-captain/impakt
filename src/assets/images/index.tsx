@@ -56,6 +56,10 @@ const Images = {
     valtec: require('./team/valtec.png'),
     dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
   },
+  contactUs: {
+    discordPeter: require('./discordPeter.png'),
+    hiPeter: require('./hiPeter.png'),
+  },
 };
 
 export default Images;
