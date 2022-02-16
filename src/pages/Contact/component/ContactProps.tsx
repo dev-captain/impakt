@@ -12,7 +12,7 @@ const mVStack: StackProps = {
 
 const mHStack: StackProps = {
   w: 'full',
-  spacing: '8px',
+  spacing: { base: '8px', md: '16px' },
   justify: 'center',
   flexDir: 'row',
 };
