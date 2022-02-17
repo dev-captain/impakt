@@ -47,7 +47,7 @@ const DiscordSupport = () => {
             pb={{ base: '20px', md: '80px' }}
             flexDir={{ base: 'column', xl: 'row' }}
           >
-            <Text textStyle={{ base: 'regular5', md: 'light7' }}>Our Join our</Text>
+            <Text textStyle={{ base: 'regular5', md: 'light7' }}>Join our</Text>
             <Text textStyle={{ base: 'bold5', md: 'bold7' }}>Discord Support</Text>
           </HStack>
         </GridItem>
