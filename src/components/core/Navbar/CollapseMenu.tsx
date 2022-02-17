@@ -38,6 +38,12 @@ const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
           onClose={onClose}
           isActive={path.path === 'events'}
         />
+        <NavbarLinkItem
+          title="Contact Us"
+          href="/contact"
+          onClose={onClose}
+          isActive={path.path === 'contact'}
+        />
       </VStack>
     </Collapse>
   );

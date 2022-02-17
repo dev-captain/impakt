@@ -95,6 +95,13 @@ const Navbar = () => {
                   passiveColor={passiveColor}
                   isActive={path.path === 'events'}
                 />
+                <NavbarLinkItem
+                  title="Contact Us"
+                  href="/contact"
+                  onClose={onClose}
+                  passiveColor={passiveColor}
+                  isActive={path.path === 'contact'}
+                />
               </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
                 <Box as="a" target="_blank" href={Socials.twitter}>
