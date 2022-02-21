@@ -76,16 +76,17 @@ const Navbar = () => {
               <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
                 <NavbarLinkItem
                   href="/"
-                  title="Impakt Games"
+                  title="Impakt Fitness"
                   isActive={path.path === ''}
                   color={activeColor || textColor}
                   passiveColor={passiveColor}
                 />
                 <NavbarLinkItem
+                  type="LINK"
                   onClose={onClose}
                   title="Knowledge Base"
-                  href="/knowledge-base"
                   passiveColor={passiveColor}
+                  href="https://knowledgebase.impakt.com"
                   isActive={path.path === 'knowledge-base'}
                 />
                 <NavbarLinkItem

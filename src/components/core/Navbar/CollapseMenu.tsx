@@ -21,14 +21,15 @@ const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
           hide
           href="/"
           onClose={onClose}
-          title="Impakt Games"
+          title="Impakt Fitness"
           isActive={path.path === ''}
         />
         <NavbarLinkItem
           hide
+          type="LINK"
           onClose={onClose}
           title="Knowledge Base"
-          href="/knowledge-base"
+          href="https://knowledgebase.impakt.com"
           isActive={path.path === 'knowledge-base'}
         />
         <NavbarLinkItem
