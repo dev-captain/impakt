@@ -31,7 +31,14 @@ const NavbarLinkItem = ({
   return (
     <VStack justifyContent="center" h="100px" onClick={onClose} cursor="pointer">
       {type === 'LINK' && (
-        <a href={href}>
+        <Box
+          as="a"
+          href={href}
+          _hover={{
+            transition: '0.2s ease',
+            transform: 'scale(1.15)',
+          }}
+        >
           <Text
             textStyle="regular3"
             pos="relative"
@@ -41,7 +48,7 @@ const NavbarLinkItem = ({
           >
             {title}
           </Text>
-        </a>
+        </Box>
       )}
       {type !== 'LINK' && (
         <Box
@@ -52,6 +59,10 @@ const NavbarLinkItem = ({
             navigate(href);
           }}
           as={target === '_blank' ? 'a' : 'div'}
+          _hover={{
+            transition: '0.2s ease',
+            transform: 'scale(1.15)',
+          }}
         >
           <Text
             textStyle="regular3"
