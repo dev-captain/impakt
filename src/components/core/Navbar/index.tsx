@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-vars */
 import { useEffect } from 'react';
 import {
   Box,
@@ -36,6 +38,12 @@ const Navbar = () => {
   const activeColor = isLight ? 'glass.100' : 'glass.900';
   const passiveColor = isLight ? 'rgba(255,255,255)' : 'glass.700';
   const bgColor = isLight ? 'glass.700' : 'glass.100';
+  const _hover = {
+    _hover: {
+      transition: '0.2s ease',
+      transform: 'scale(1.25)',
+    },
+  };
 
   useEffect(() => {
     if (!isLessThan1040) {
@@ -113,6 +121,7 @@ const Navbar = () => {
                     opacity={0.6}
                     objectFit="contain"
                     src={twitter}
+                    {..._hover}
                   />
                 </Box>
                 <Box as="a" target="_blank" href={Socials.discord}>
@@ -123,6 +132,7 @@ const Navbar = () => {
                     opacity={0.6}
                     objectFit="contain"
                     src={discord}
+                    {..._hover}
                   />
                 </Box>
                 <Box as="a" target="_blank" href={Socials.youtube}>
@@ -133,6 +143,7 @@ const Navbar = () => {
                     opacity={0.6}
                     objectFit="contain"
                     src={youtube}
+                    {..._hover}
                   />
                 </Box>
                 <Box
@@ -144,6 +155,7 @@ const Navbar = () => {
                     h="26px"
                     objectFit="contain"
                     src={colorMode === 'dark' ? dark : light}
+                    {..._hover}
                   />
                 </Box>
               </HStack>
@@ -169,6 +181,7 @@ const Navbar = () => {
                   opacity={0.6}
                   objectFit="contain"
                   src={twitter}
+                  {..._hover}
                 />
               </Box>
               <Box as="a" target="_blank" href={Socials.discord}>
@@ -179,6 +192,7 @@ const Navbar = () => {
                   opacity={0.6}
                   objectFit="contain"
                   src={discord}
+                  {..._hover}
                 />
               </Box>
               <Box as="a" target="_blank" href={Socials.youtube}>
@@ -189,6 +203,7 @@ const Navbar = () => {
                   opacity={0.6}
                   objectFit="contain"
                   src={youtube}
+                  {..._hover}
                 />
               </Box>
               <Box
@@ -201,6 +216,7 @@ const Navbar = () => {
                   minW="26px"
                   objectFit="contain"
                   src={colorMode === 'dark' ? dark : light}
+                  {..._hover}
                 />
               </Box>
             </HStack>

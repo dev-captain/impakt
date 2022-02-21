@@ -29,6 +29,10 @@ const InvestorCard = ({
       borderRadius="28px"
       maxH="550px"
       h="full"
+      _hover={{
+        transition: '0.5s ease',
+        transform: 'scale(1.15)',
+      }}
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <VStack>

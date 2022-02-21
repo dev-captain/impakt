@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-vars */
 import { VStack, Text, HStack, Image, Box } from '@chakra-ui/react';
 import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +20,12 @@ const SmallScreenFooter = ({
   youtube: string;
 }) => {
   const navigate = useNavigate();
+  const _hover = {
+    _hover: {
+      transition: '0.2s ease',
+      transform: 'scale(1.25)',
+    },
+  };
 
   return (
     <VStack
@@ -41,6 +49,7 @@ const SmallScreenFooter = ({
                 opacity={0.6}
                 objectFit="contain"
                 src={twitter}
+                {..._hover}
               />
             </Box>
             <Box as="a" target="_blank" href={Socials.discord}>
@@ -51,6 +60,7 @@ const SmallScreenFooter = ({
                 opacity={0.6}
                 objectFit="contain"
                 src={discord}
+                {..._hover}
               />
             </Box>
             <Box as="a" target="_blank" href={Socials.youtube}>
@@ -61,6 +71,7 @@ const SmallScreenFooter = ({
                 opacity={0.6}
                 objectFit="contain"
                 src={youtube}
+                {..._hover}
               />
             </Box>
           </HStack>
