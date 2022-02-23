@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
-import { Home, KnowledgeBase, NotFound, Event, Contact } from 'pages';
+import { Home, KnowledgeBase, NotFound, Event, Contact, Onboarding } from 'pages';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -21,6 +21,8 @@ const App = () => {
       <Route path="/events" element={<Event />}>
         <Route path=":slug" element={<Event />} />
       </Route>
+
+      <Route path="/onboarding" element={<Onboarding />} />
 
       <Route path="/contact" element={<Contact />} />
 
