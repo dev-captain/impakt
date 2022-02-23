@@ -1,4 +1,4 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Box, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 
 type Props = {
   title: string;
@@ -6,6 +6,8 @@ type Props = {
 };
 
 const NotFoundCard = ({ title, show404 }: Props) => {
+  const bgColor = useColorModeValue('glass.800', 'glass.300');
+
   return (
     <VStack
       p="32px"
@@ -14,7 +16,7 @@ const NotFoundCard = ({ title, show404 }: Props) => {
       overflow="hidden"
       borderRadius="28px"
       textAlign="center"
-      bgColor="glass.800"
+      bgColor={bgColor}
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       {show404 && (
