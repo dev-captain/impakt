@@ -7,12 +7,13 @@ const EventPage = () => {
 
   return (
     <HeroLayout showFooter showNavbar minH="60vh">
-      <VStack w="full" minH="70vh" pt={{ base: '16px', md: '80px' }} color={text}>
+      <VStack w="full" minH="70vh" pt={{ base: '16px' }} color={text}>
         <Widget
           id="EEnQpuTA"
           style={{
             width: '100%',
             height: '70vh',
+            padding: '16px',
           }}
         />
       </VStack>
