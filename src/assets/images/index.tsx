@@ -15,6 +15,7 @@ const Images = {
     DiscordLight: require('./discord-light.png'),
     Header: require('./bg-header.png'),
     Peter: require('./video.webp'),
+    Peter404: require('./peter404.png'),
   },
   motionCapture: require('./motion-capture.webp'),
   burnAndEarn: require('./burn-to-earn-hero.webp'),
