@@ -12,8 +12,10 @@ const OnboardingPage = () => {
       <VStack w="full" minH="70vh" pt={{ base: '16px' }} color={text}>
         {!data.loading && !data.isValid && (
           <VStack w="full" minH="70vh" pt={{ base: '16px', md: '80px' }} color={text}>
-            <Text textStyle="bold7" fontWeight="700" mb="52px" pl="16px" align="center">
-              Your onboarding code is wrong.
+            <Text textStyle="bold6" fontWeight="700" mb="52px" pl="16px" align="center">
+              {data.isCodeExist
+                ? 'Your onboarding code is wrong.'
+                : 'Your onboarding code is not found.'}
             </Text>
           </VStack>
         )}

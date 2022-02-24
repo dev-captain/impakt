@@ -9,10 +9,10 @@ function useQuery() {
 }
 
 const useOnboardingCode = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isValid, setIsValid] = useState<boolean | null>(null);
-
   const code = useQuery().get('code');
+
+  const [loading, setLoading] = useState<boolean>(!!code);
+  const [isValid, setIsValid] = useState<boolean | null>(null);
 
   const apiCb = async () => {
     try {
@@ -35,6 +35,7 @@ const useOnboardingCode = () => {
   return {
     loading,
     isValid,
+    isCodeExist: !!code,
   };
 };
 
