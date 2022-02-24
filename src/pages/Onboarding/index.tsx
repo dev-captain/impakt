@@ -1,4 +1,4 @@
-import { Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Spinner, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { Widget } from '@typeform/embed-react';
 import useOnboardingCode from 'hooks/useOnboardingCode';
@@ -10,6 +10,7 @@ const OnboardingPage = () => {
   return (
     <HeroLayout showFooter showNavbar minH="60vh">
       <VStack w="full" minH="70vh" pt={{ base: '16px' }} color={text}>
+        {data.loading && <Spinner size="xl" />}
         {!data.loading && !data.isValid && (
           <VStack w="full" minH="70vh" pt={{ base: '16px', md: '80px' }} color={text}>
             <Text textStyle="bold6" fontWeight="700" mb="52px" pl="16px" align="center">
