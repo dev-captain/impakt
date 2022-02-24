@@ -19,7 +19,7 @@ const OnboardingPage = () => {
         {(loading || (!ready && isValid)) && <Spinner size="xl" />}
         {!loading && !isValid && (
           <Container bgColor={bg} textColor={text}>
-            <Text textStyle="bold6" fontWeight="700" mb="52px" pl="16px" align="center">
+            <Text textStyle="bold6" fontWeight="700" pl="16px" align="center">
               {isCodeExist
                 ? 'Your onboarding code is wrong.'
                 : 'Your onboarding code is not found.'}

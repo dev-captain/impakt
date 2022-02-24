@@ -16,6 +16,8 @@ const Container = ({ children, bgColor, textColor, ...rest }: any) => {
       pt={{ base: '16px', md: '80px' }}
       py={{ base: '16px', md: '60px', xl: '80px' }}
       px={{ base: '16px', md: '125px', xl: '250px' }}
+      align="center"
+      justify="center"
       {...rest}
     >
       {children}
