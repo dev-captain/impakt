@@ -221,13 +221,6 @@ export const Team = [
     alt: '',
     subtitle: '',
   },
-  {
-    name: 'Duke of Deadfall',
-    title: 'Head of Community',
-    image: Images.team.dukeOfDeadfall,
-    alt: '',
-    subtitle: '',
-  },
 ];
 
 export const RoadmapInfo = [
