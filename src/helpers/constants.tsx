@@ -8,6 +8,8 @@ export const KnowledgeBaseEndpoints = {
     `${KnowledgeBaseUrl}/articles?populate=categories&filters[slug][$eq]=${articleSlug}&populate=categories`,
   ArticlesByCategory: (categorySlug: string) =>
     `${KnowledgeBaseUrl}/articles?populate=categories&filters[categories][slug][$eq]=${categorySlug}`,
+  OnboardingCode: (code: string) =>
+    `${KnowledgeBaseUrl}/onboarding-codes?filters[code][$eq]=${code}&filters[isActive][$eq]=true`,
 };
 
 export default {};
