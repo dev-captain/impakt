@@ -31,6 +31,10 @@ const RoadMap = () => {
         px={layoutPadding}
         py={{ base: '16px', md: 0 }}
         p={{ base: 0, md: 8 }}
+        _hover={{
+          transition: '0.5s ease',
+          transform: 'scale(1.1)',
+        }}
         align={{ base: 'center', xl: 'center', '2xl': 'flex-start' }}
       >
         <HStack
@@ -38,14 +42,28 @@ const RoadMap = () => {
           alignItems={{ base: 'center', md: 'center' }}
           justify={{ base: 'space-around', md: 'center' }}
         >
-          <Text
-            fontWeight="700"
-            fontSize={{ base: '40px', md: '56px' }}
-            lineHeight="60px"
+          <HStack
+            w="full"
+            spacing={5}
             color={textColor}
+            justify={{ base: 'center', md: 'center' }}
+            mt={{ base: '24px', md: 0, xl: '64px' }}
           >
-            Roadmap
-          </Text>
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '40px', md: '60px' }}
+              fontWeight="300"
+            >
+              Our
+            </Text>
+            <Text
+              fontSize={{ base: '40px', md: '56px' }}
+              lineHeight={{ base: '40px', md: '60px' }}
+              fontWeight="700"
+            >
+              Roadmap
+            </Text>
+          </HStack>
         </HStack>
         <VStack
           h="460px"

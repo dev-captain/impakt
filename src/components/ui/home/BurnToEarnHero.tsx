@@ -31,6 +31,10 @@ const BurnToEarnHero = () => {
     <HeroLayout removeBottomPadding minH="70vh">
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
+          _hover={{
+            transition: '0.5s ease',
+            transform: 'scale(1.1)',
+          }}
           w="full"
           bgSize="cover"
           bgPos={{ base: 'top', xl: 'center' }}
