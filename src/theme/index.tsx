@@ -1,4 +1,5 @@
 import { ThemeOverride, extendTheme, theme as base } from '@chakra-ui/react';
+import { mode } from '@chakra-ui/theme-tools';
 import buttons from './buttons';
 import colors from './colors';
 import shadows from './shadows';
@@ -16,6 +17,13 @@ const theme: ThemeOverride = {
   },
   components: {
     Button: buttons as any,
+  },
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: mode('glass.900', 'glass.200')(props),
+      },
+    }),
   },
 };
 
