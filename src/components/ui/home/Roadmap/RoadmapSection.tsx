@@ -29,12 +29,8 @@ const RoadMap = () => {
         w="full"
         spacing="36px"
         px={layoutPadding}
-        py={{ base: '16px', md: 0 }}
         p={{ base: 0, md: 8 }}
-        _hover={{
-          transition: '0.5s ease',
-          transform: 'scale(1.1)',
-        }}
+        py={{ base: '16px', md: 0 }}
         align={{ base: 'center', xl: 'center', '2xl': 'flex-start' }}
       >
         <HStack
