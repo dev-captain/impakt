@@ -4,6 +4,7 @@
 const Images = {
   dark: require('./dark.png'),
   light: require('./light.png'),
+  star: require('./star.png'),
   Common: {
     Logo: require('./logo.png'),
     LogoLight: require('./logo-light.png'),
