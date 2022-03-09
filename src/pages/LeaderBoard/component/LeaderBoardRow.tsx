@@ -1,4 +1,4 @@
-import { GridItem, HStack, Image, SimpleGrid, Text } from '@chakra-ui/react';
+import { GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 
 const LeaderBoardRow = ({
@@ -8,7 +8,9 @@ const LeaderBoardRow = ({
   points,
   showStar,
   community,
+  isSmallView,
 }: {
+  isSmallView?: boolean;
   date: string;
   name: string;
   order: number;
@@ -16,6 +18,39 @@ const LeaderBoardRow = ({
   community: string;
   showStar?: boolean;
 }) => {
+  if (isSmallView) {
+    return (
+      <VStack minH="65px" w="full" align="flex-start">
+        <HStack minH="65px" w="full" align="center" justify="center">
+          <Text
+            w="33px"
+            opacity="0.3"
+            textAlign="left"
+            textStyle="regular3"
+            pl={showStar ? 0 : '8px'}
+          >
+            #{order}
+          </Text>
+          <HStack spacing="14px" justify="center" align="center" maxW="120px">
+            {showStar && <Image src={Images.star} w="12.63px" h="12px" />}
+            <Text textStyle="regular3" pl={showStar ? 0 : '22px'} isTruncated>
+              {name}
+            </Text>
+          </HStack>
+          <Text textStyle="regular3" color="electric.250" align="center">
+            {community}
+          </Text>
+          <Text textStyle="regular3" opacity={0.3} align="center">
+            {date}
+          </Text>
+          <Text textStyle="regular3" color="red.300" align="center">
+            {points}
+          </Text>
+        </HStack>
+      </VStack>
+    );
+  }
+
   return (
     <SimpleGrid columns={9} paddingY="16px">
       <GridItem colSpan={1} w="100px">
