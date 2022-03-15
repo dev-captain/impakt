@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { VStack, Text, SimpleGrid, GridItem, HStack, Image, Box } from '@chakra-ui/react';
+import { VStack, Text, SimpleGrid, GridItem, HStack, Image, Box, Link } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
@@ -66,6 +66,11 @@ const BigScreenFooter = ({
                   <Text fontSize="12px" lineHeight="16px" opacity="0.6">
                     © 2021 Impakt. All rights reserved.
                   </Text>
+                  <Link href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use">
+                    <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
+                      Term of Use
+                    </Text>
+                  </Link>
                 </VStack>
               </VStack>
             </GridItem>
