@@ -53,4 +53,21 @@ export default {
     yourMessage: 'Your message',
     yourEmail: 'Your email',
   },
+  events: {
+    noEventsForNow: 'No events for now',
+    waitForUpdates: 'Wait for updates',
+  },
+  contact: {
+    getInTouch: 'Get in Touch',
+    withUs: 'with Us',
+    sendUsMessage: 'Send us a Message',
+    send: 'Send',
+    contact: 'Contact',
+    yourName: 'Your name',
+    yourMessage: 'Your message',
+    yourEmail: 'Your email',
+    topicOfMessage: 'Topic of message',
+    joinOur: 'Join our',
+    discordSupport: 'Discord Support',
+  },
 };

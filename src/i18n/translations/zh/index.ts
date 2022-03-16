@@ -53,4 +53,21 @@ export default {
     yourMessage: '你的留言',
     yourEmail: '你的电子邮箱',
   },
+  events: {
+    noEventsForNow: '目前没有任何事件',
+    waitForUpdates: '等待更新',
+  },
+  contact: {
+    getInTouch: '取得联系',
+    withUs: '与我们',
+    sendUsMessage: '给我们留言',
+    send: '发送',
+    contact: '联系',
+    yourName: '你的姓名',
+    yourMessage: '你的留言',
+    yourEmail: '你的电子邮箱',
+    topicOfMessage: '邮件的主题',
+    joinOur: '加入我们',
+    discordSupport: 'Discord支持',
+  },
 };

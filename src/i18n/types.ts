@@ -1,4 +1,6 @@
 const common = 'common';
+const contact = 'contact';
+const events = 'events';
 const ourRoadmap = 'ourRoadmap';
 const ourAdvisor = 'ourAdvisor';
 const ourTeam = 'ourTeam';
@@ -62,6 +64,23 @@ const TranslationKeys = {
     yourName: `${contactUs}.yourName`,
     yourMessage: `${contactUs}.yourMessage`,
     yourEmail: `${contactUs}.yourEmail`,
+  },
+  events: {
+    noEventsForNow: `${events}.noEventsForNow`,
+    waitForUpdates: `${events}.waitForUpdates`,
+  },
+  contact: {
+    getInTouch: `${contact}.getInTouch`,
+    withUs: `${contact}.withUs`,
+    sendUsMessage: `${contact}.sendUsMessage`,
+    send: `${contact}.send`,
+    contact: `${contact}.contact`,
+    yourName: `${contact}.yourName`,
+    yourMessage: `${contact}.yourMessage`,
+    yourEmail: `${contact}.yourEmail`,
+    topicOfMessage: `${contact}.topicOfMessage`,
+    joinOur: `${contact}.joinOur`,
+    discordSupport: `${contact}.discordSupport`,
   },
 };
 
