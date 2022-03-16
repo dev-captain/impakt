@@ -18,12 +18,15 @@ import { layoutPadding } from 'theme';
 import { Play } from 'components/core/VideoModal';
 import Images from 'assets/images';
 import useModalStore from 'hooks/store/useModalStore';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
+import TitleItem from './components/TitleItem';
 
 const ScreenVideo = React.lazy(() => import('./ScreenVideo'));
 
 const ImpaktGamesHero = () => {
   const { setImpaktGames } = useModalStore((state) => state);
-
+  const { t } = useTranslation(`default`).i18n;
   const mode = useColorMode();
   const text = useColorModeValue('glass.100', 'glass.700');
   const [isLessThan1272] = useMediaQuery('(max-width: 1272px)');
@@ -98,15 +101,9 @@ const ImpaktGamesHero = () => {
               spacing={{ base: '16px', md: '0px', xl: '16px' }}
               align={{ base: 'left', sm: 'flex-start', md: 'flex-start' }}
             >
-              <Text
-                textStyle="TitleBold72"
-                fontSize={{ base: '64px', md: '90px' }}
-                lineHeight={{ base: '64px', md: '90px' }}
-                textAlign={{ base: 'center', md: 'left' }}
-                paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
-              >
-                Social. Fitness. Gamified.
-              </Text>
+              <TitleItem title={t(keys.impaktGamesHero.social)} />
+              <TitleItem title={t(keys.impaktGamesHero.fitness)} />
+              <TitleItem title={t(keys.impaktGamesHero.gamified)} />
             </VStack>
             <VStack
               align="flex-start"
@@ -144,10 +141,11 @@ const ImpaktGamesHero = () => {
                 onClick={() => {
                   setImpaktGames(true);
                 }}
+                minW={{ base: 'auto', md: '300px' }}
                 display={{ base: 'none', md: 'flex' }}
               >
                 <Text textStyle="semiBold16" color="glass.100">
-                  Download Tutorial
+                  {t(keys.common.downloadTutorial)}
                 </Text>
               </Button>
               <VStack
