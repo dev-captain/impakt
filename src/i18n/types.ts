@@ -1,5 +1,6 @@
 const common = 'common';
 const navbar = 'navbar';
+const computerVision = 'computerVision';
 const impaktGamesHero = 'impaktGamesHero';
 
 const TranslationKeys = {
@@ -17,6 +18,13 @@ const TranslationKeys = {
     contactUs: `${navbar}.contactUs`,
     impaktFitness: `${navbar}.impaktFitness`,
     knowledgeBase: `${navbar}.knowledgeBase`,
+  },
+  computerVision: {
+    computerVision: `${computerVision}.computerVision`,
+    technology: `${computerVision}.technology`,
+    description: `${computerVision}.description`,
+    hardwareCard: `${computerVision}.hardwareCard`,
+    cameraCard: `${computerVision}.cameraCard`,
   },
 };
 

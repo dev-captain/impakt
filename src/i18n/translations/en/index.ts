@@ -14,4 +14,11 @@ export default {
     impaktFitness: 'Impakt Fitness',
     knowledgeBase: 'Knowledge Base',
   },
+  computerVision: {
+    computerVision: 'Computer Vision',
+    technology: 'Technology',
+    description: 'Use your body as a controller - move, sweat, get fit.',
+    hardwareCard: 'No extra hardware necessary',
+    cameraCard: 'Use the camera on your phone or laptop',
+  },
 };

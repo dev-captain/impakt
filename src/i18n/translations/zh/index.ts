@@ -16,5 +16,9 @@ export default {
   },
   computerVision: {
     computerVision: '机器视觉',
+    technology: '技术',
+    description: '用你的身体作为控制器 移动 出汗 健身',
+    hardwareCard: '无需额外硬件',
+    cameraCard: '用你手机或电脑的摄像头',
   },
 };
