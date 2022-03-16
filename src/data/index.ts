@@ -228,7 +228,7 @@ export const RoadmapInfo = [
     title: 'Q4 2021',
     items: [
       {
-        title: 'Develop Computer Vision System',
+        title: 'q4_1',
         isDone: true,
       },
     ],
@@ -241,15 +241,15 @@ export const RoadmapInfo = [
     title: 'Q1 2022',
     items: [
       {
-        title: 'Alpha Test App',
+        title: 'q1_1',
         isDone: true,
       },
       {
-        title: 'Daily/Weekly Routines',
+        title: 'q1_2',
         isDone: false,
       },
       {
-        title: 'Centralized Economy',
+        title: 'q1_3',
         isDone: false,
       },
     ],
@@ -262,11 +262,11 @@ export const RoadmapInfo = [
     title: 'Q2 2022',
     items: [
       {
-        title: 'Genesis NFT Mint',
+        title: 'q2_1',
         isDone: false,
       },
       {
-        title: 'Decentralized Economy',
+        title: 'q2_2',
         isDone: false,
       },
     ],
@@ -279,7 +279,7 @@ export const RoadmapInfo = [
     title: 'Q3 2022',
     items: [
       {
-        title: 'Release SDK',
+        title: 'q3_1',
         isDone: false,
       },
     ],

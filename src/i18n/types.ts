@@ -1,4 +1,5 @@
 const common = 'common';
+const ourRoadmap = 'ourRoadmap';
 const ourAdvisor = 'ourAdvisor';
 const ourTeam = 'ourTeam';
 const navbar = 'navbar';
@@ -41,6 +42,17 @@ const TranslationKeys = {
   ourTeam: {
     our: `${ourTeam}.our`,
     team: `${ourTeam}.team`,
+  },
+  ourRoadmap: {
+    our: `${ourRoadmap}.our`,
+    roadmap: `${ourRoadmap}.roadmap`,
+    q4_1: `${ourRoadmap}.q4_1`,
+    q1_1: `${ourRoadmap}.q1_1`,
+    q1_2: `${ourRoadmap}.q1_2`,
+    q1_3: `${ourRoadmap}.q1_3`,
+    q2_1: `${ourRoadmap}.q2_1`,
+    q2_2: `${ourRoadmap}.q2_2`,
+    q3_1: `${ourRoadmap}.q3_1`,
   },
 };
 

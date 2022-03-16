@@ -27,11 +27,22 @@ export default {
     description: 'Connect ANYTIME with ANYONE, ANYWHERE, workout, battle and earn tokens and NFTs!',
   },
   ourAdvisor: {
-    our: '我们的',
-    advisor: '顾问',
+    our: 'Our',
+    advisor: 'Advisor',
   },
   ourTeam: {
-    our: '我们的',
-    team: '团队',
+    our: 'Our',
+    team: 'Team',
+  },
+  ourRoadmap: {
+    our: 'Our',
+    roadmap: 'Roadmap',
+    q4_1: 'Develop Computer Vision System',
+    q1_1: 'Alpha Test App',
+    q1_2: 'Daily/Weekly Routines',
+    q1_3: 'Centralized Economy',
+    q2_1: 'Genesis NFT Mint',
+    q2_2: 'Decentralized Economy',
+    q3_1: 'Release SDK',
   },
 };

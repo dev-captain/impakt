@@ -2,18 +2,28 @@ import { HStack, Text, useColorModeValue, useMediaQuery, VStack } from '@chakra-
 import HeroLayout from 'components/layouts/HeroLayout';
 import { RoadmapInfo } from 'data';
 import { layoutPadding } from 'theme';
+import { useTranslation } from 'react-i18next';
+import Keys from 'i18n/types';
 import Progress from './Progress';
 import RoadMapBackground from './RoadmapBackground';
 import RoadmapItem from './RoadmapItem';
 import RoadMapSmallView from './RoadmapSmallView';
 
 const RoadMap = () => {
+  const { t } = useTranslation().i18n;
   const [isLessThan800] = useMediaQuery('(max-width: 800px)');
   const bgColor = useColorModeValue('glass.700', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   if (isLessThan800) {
-    return <RoadMapSmallView textColor={textColor} bgColor={bgColor} />;
+    return (
+      <RoadMapSmallView
+        bgColor={bgColor}
+        textColor={textColor}
+        ourText={t(Keys.ourRoadmap.our)}
+        roadMapText={t(Keys.ourRoadmap.roadmap)}
+      />
+    );
   }
 
   return (
@@ -50,14 +60,14 @@ const RoadMap = () => {
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="300"
             >
-              Our
+              {t(Keys.ourRoadmap.our)}
             </Text>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="700"
             >
-              Roadmap
+              {t(Keys.ourRoadmap.roadmap)}
             </Text>
           </HStack>
         </HStack>

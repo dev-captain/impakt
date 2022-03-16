@@ -5,7 +5,17 @@ import { layoutPadding } from 'theme';
 import Progress from './Progress';
 import RoadmapItem from './RoadmapItem';
 
-const RoadMapSmallView = ({ bgColor, textColor }: { bgColor: string; textColor: string }) => {
+const RoadMapSmallView = ({
+  bgColor,
+  textColor,
+  ourText,
+  roadMapText,
+}: {
+  bgColor: string;
+  textColor: string;
+  ourText: string;
+  roadMapText: string;
+}) => {
   return (
     <HeroLayout>
       <VStack
@@ -33,14 +43,14 @@ const RoadMapSmallView = ({ bgColor, textColor }: { bgColor: string; textColor: 
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="300"
             >
-              Our
+              {ourText}
             </Text>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="700"
             >
-              Roadmap
+              {roadMapText}
             </Text>
           </HStack>
         </HStack>
