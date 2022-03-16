@@ -21,4 +21,9 @@ export default {
     hardwareCard: '无需额外硬件',
     cameraCard: '用你手机或电脑的摄像头',
   },
+  burnAndEarn: {
+    burnAnd: '燃脂并且',
+    earn: '赚钱',
+    description: '任何时间、任何地点连线任何人，一起健身、对战并且赢取代币和NFT！',
+  },
 };

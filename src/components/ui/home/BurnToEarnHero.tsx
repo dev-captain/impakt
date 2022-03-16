@@ -4,9 +4,12 @@ import Icons from 'components/icons';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
 import { layoutPadding } from 'theme';
+import keys from 'i18n/types';
+import { useTranslation } from 'react-i18next';
 
 const BurnToEarnHero = () => {
   const modal = useModalStore((state) => state);
+  const { t } = useTranslation().i18n;
 
   const vStackSomeProps = {
     borderRadius: {
@@ -53,8 +56,8 @@ const BurnToEarnHero = () => {
           <VStack zIndex={2} align="flex-start" spacing={{ base: '20px', md: '130px' }}>
             <VStack align="flex-start" spacing={8}>
               <HStack fontSize={{ base: '40px', md: '56px' }} lineHeight="1.2em" fontWeight="300">
-                <Text>Burn and</Text>
-                <Text fontWeight="900">earn!</Text>
+                <Text>{t(keys.burnAndEarn.burnAnd)}</Text>
+                <Text fontWeight="900">{t(keys.burnAndEarn.earn)}</Text>
               </HStack>
               <Play forMobile onClick={modal.setBurnAndEarn} />
               <Text
@@ -62,7 +65,7 @@ const BurnToEarnHero = () => {
                 fontSize={{ base: '14px', md: '20px' }}
                 maxW={{ base: '204px', md: '340px' }}
               >
-                Connect ANYTIME with ANYONE, ANYWHERE, workout, battle and earn tokens and NFTs!
+                {t(keys.burnAndEarn.description)}
               </Text>
             </VStack>
           </VStack>

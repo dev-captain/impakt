@@ -1,5 +1,6 @@
 const common = 'common';
 const navbar = 'navbar';
+const burnAndEarn = 'burnAndEarn';
 const computerVision = 'computerVision';
 const impaktGamesHero = 'impaktGamesHero';
 
@@ -25,6 +26,11 @@ const TranslationKeys = {
     description: `${computerVision}.description`,
     hardwareCard: `${computerVision}.hardwareCard`,
     cameraCard: `${computerVision}.cameraCard`,
+  },
+  burnAndEarn: {
+    earn: `${burnAndEarn}.earn`,
+    burnAnd: `${burnAndEarn}.burnAnd`,
+    description: `${burnAndEarn}.description`,
   },
 };
 
