@@ -73,6 +73,6 @@ export default {
   footer: {
     madeBy: '制造',
     termOfUse: '使用条款',
-    allRightReserved: ' 2021 硬派客。保留所有权利。',
+    allRightReserved: '© 2021 硬派客。保留所有权利。',
   },
 };
