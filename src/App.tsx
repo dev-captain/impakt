@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { Home, KnowledgeBase, NotFound, Event, Contact, Onboarding } from 'pages';
+import 'i18n';
 
 const App = () => {
   const { setColorMode } = useColorMode();

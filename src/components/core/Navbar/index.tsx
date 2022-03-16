@@ -9,12 +9,16 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
+  Button,
+  Text,
 } from '@chakra-ui/react';
 import { layoutPadding } from 'theme';
 import { Socials } from 'data';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
+import { useTranslation } from 'react-i18next';
+import Keys from 'i18n/types';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -26,6 +30,7 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { changeLanguage, t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
@@ -84,7 +89,7 @@ const Navbar = () => {
               <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
                 <NavbarLinkItem
                   href="/"
-                  title="Impakt Fitness"
+                  title={t(Keys.navbar.impaktFitness)}
                   isActive={path.path === ''}
                   color={activeColor || textColor}
                   passiveColor={passiveColor}
@@ -92,25 +97,31 @@ const Navbar = () => {
                 <NavbarLinkItem
                   type="LINK"
                   onClose={onClose}
-                  title="Knowledge Base"
                   passiveColor={passiveColor}
+                  title={t(Keys.navbar.knowledgeBase)}
                   href="https://knowledgebase.impakt.com"
                   isActive={path.path === 'knowledge-base'}
                 />
                 <NavbarLinkItem
-                  title="Events"
                   href="/events"
                   onClose={onClose}
                   passiveColor={passiveColor}
+                  title={t(Keys.navbar.events)}
                   isActive={path.path === 'events'}
                 />
                 <NavbarLinkItem
-                  title="Contact Us"
                   href="/contact"
                   onClose={onClose}
                   passiveColor={passiveColor}
+                  title={t(Keys.navbar.contactUs)}
                   isActive={path.path === 'contact'}
                 />
+                <Button variant="ghost" onClick={() => changeLanguage('en')}>
+                  <Text>En</Text>
+                </Button>
+                <Button variant="ghost" onClick={() => changeLanguage('zh')}>
+                  <Text>Zh</Text>
+                </Button>
               </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
                 <Box as="a" target="_blank" href={Socials.twitter}>
