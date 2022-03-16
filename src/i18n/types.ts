@@ -9,6 +9,7 @@ const burnAndEarn = 'burnAndEarn';
 const computerVision = 'computerVision';
 const impaktGamesHero = 'impaktGamesHero';
 const contactUs = 'contactUs';
+const footer = 'footer';
 
 const TranslationKeys = {
   common: {
@@ -81,6 +82,11 @@ const TranslationKeys = {
     topicOfMessage: `${contact}.topicOfMessage`,
     joinOur: `${contact}.joinOur`,
     discordSupport: `${contact}.discordSupport`,
+  },
+  footer: {
+    madeBy: `${footer}.madeBy`,
+    termOfUse: `${footer}.termOfUse`,
+    allRightReserved: `${footer}.allRightReserved`,
   },
 };
 

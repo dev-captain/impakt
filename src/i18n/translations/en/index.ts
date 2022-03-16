@@ -70,4 +70,9 @@ export default {
     joinOur: 'Join our',
     discordSupport: 'Discord Support',
   },
+  footer: {
+    madeBy: 'Made by',
+    termOfUse: 'Term of Use',
+    allRightReserved: '© 2021 Impakt. All rights reserved.',
+  },
 };

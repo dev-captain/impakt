@@ -70,4 +70,9 @@ export default {
     joinOur: '加入我们',
     discordSupport: 'Discord支持',
   },
+  footer: {
+    madeBy: '制造',
+    termOfUse: '使用条款',
+    allRightReserved: ' 2021 硬派客。保留所有权利。',
+  },
 };

@@ -5,6 +5,8 @@ import Images from 'assets/images';
 import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
 import { layoutPadding } from 'theme';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
 
 const BigScreenFooter = ({
   bgColor,
@@ -21,6 +23,7 @@ const BigScreenFooter = ({
   discord: string;
   youtube: string;
 }) => {
+  const { t } = useTranslation().i18n;
   const navigate = useNavigate();
   const _hover = {
     _hover: {
@@ -59,16 +62,16 @@ const BigScreenFooter = ({
                     fontWeight="500"
                   >
                     <Text fontWeight="400" opacity="0.6">
-                      Made by
+                      {t(keys.footer.madeBy)}
                     </Text>
                     <Text marginLeft="4px">impakt.com</Text>
                   </HStack>
                   <Text fontSize="12px" lineHeight="16px" opacity="0.6">
-                    © 2021 Impakt. All rights reserved.
+                    {t(keys.footer.allRightReserved)}
                   </Text>
                   <Link href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use">
                     <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
-                      Term of Use
+                      {t(keys.footer.termOfUse)}
                     </Text>
                   </Link>
                 </VStack>
@@ -143,12 +146,12 @@ const BigScreenFooter = ({
                 fontWeight="500"
               >
                 <Text fontWeight="400" opacity="0.6">
-                  Made by
+                  {t(keys.footer.madeBy)}
                 </Text>
                 <Text marginLeft="4px">impakt.com</Text>
               </HStack>
               <Text fontSize="12px" lineHeight="16px" opacity="0.6">
-                © 2021 Impakt. All rights reserved.
+                {t(keys.footer.allRightReserved)}
               </Text>
             </VStack>
           </VStack>
