@@ -14,11 +14,14 @@ import TextField from 'components/core/TextField';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useContactUs from 'hooks/useContactUs';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { layoutPadding } from 'theme';
 import { validateEmail } from 'utils';
+import keys from 'i18n/types';
 import { ContactGradientEllipse, ContactGradientEllipse1 } from '../gradients';
 
 const Contact = () => {
+  const { t } = useTranslation().i18n;
   const { sendData, loading } = useContactUs();
   const bgColor = useColorModeValue('glass.800', 'glass.200');
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -82,9 +85,9 @@ const Contact = () => {
                     md: '15px',
                   }}
                 >
-                  Contact
+                  {t(keys.contactUs.contact)}
                 </Text>
-                <Text>Us</Text>
+                <Text>{t(keys.contactUs.us)}</Text>
               </HStack>
               <VStack
                 bgColor={bgColor}
@@ -103,31 +106,31 @@ const Contact = () => {
                 <ContactGradientEllipse1 />
                 <VStack w="full" spacing="16px">
                   <TextField
-                    placeholder="Your name"
                     name="name"
                     onChange={onChange}
                     _placeholder={{ color: textColor }}
+                    placeholder={t(keys.contactUs.yourName)}
                   />
                   <TextField
-                    placeholder="Your e-mail"
                     name="email"
                     onChange={onChange}
                     _placeholder={{ color: textColor }}
+                    placeholder={t(keys.contactUs.yourEmail)}
                   />
                   <TextareaField
-                    placeholder="Your message"
                     name="message"
                     onChange={onChange}
                     _placeholder={{ color: textColor }}
+                    placeholder={t(keys.contactUs.yourMessage)}
                   />
                 </VStack>
                 <VStack w="full" align="flex-end">
                   <GradientButton
                     py="32px"
-                    title="Send"
                     minW="240px"
                     radius="14px"
                     onClick={onSubmit}
+                    title={t(keys.contactUs.send)}
                     disabled={isDisabled || loading}
                     bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
                   />

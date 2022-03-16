@@ -6,6 +6,7 @@ const navbar = 'navbar';
 const burnAndEarn = 'burnAndEarn';
 const computerVision = 'computerVision';
 const impaktGamesHero = 'impaktGamesHero';
+const contactUs = 'contactUs';
 
 const TranslationKeys = {
   common: {
@@ -53,6 +54,14 @@ const TranslationKeys = {
     q2_1: `${ourRoadmap}.q2_1`,
     q2_2: `${ourRoadmap}.q2_2`,
     q3_1: `${ourRoadmap}.q3_1`,
+  },
+  contactUs: {
+    us: `${contactUs}.us`,
+    send: `${contactUs}.send`,
+    contact: `${contactUs}.contact`,
+    yourName: `${contactUs}.yourName`,
+    yourMessage: `${contactUs}.yourMessage`,
+    yourEmail: `${contactUs}.yourEmail`,
   },
 };
 

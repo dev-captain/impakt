@@ -45,4 +45,12 @@ export default {
     q2_2: 'Decentralized Economy',
     q3_1: 'Release SDK',
   },
+  contactUs: {
+    us: 'Us',
+    send: 'Send',
+    contact: 'Contact',
+    yourName: 'Your name',
+    yourMessage: 'Your message',
+    yourEmail: 'Your email',
+  },
 };

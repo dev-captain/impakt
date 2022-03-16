@@ -45,4 +45,12 @@ export default {
     q2_2: '去中心化经济体系',
     q3_1: '发布SDK',
   },
+  contactUs: {
+    us: '我们',
+    send: '发送',
+    contact: '联系',
+    yourName: '你的姓名',
+    yourMessage: '你的留言',
+    yourEmail: '你的电子邮箱',
+  },
 };
