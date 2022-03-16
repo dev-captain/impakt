@@ -26,4 +26,12 @@ export default {
     burnAnd: 'Burn and',
     description: 'Connect ANYTIME with ANYONE, ANYWHERE, workout, battle and earn tokens and NFTs!',
   },
+  ourAdvisor: {
+    our: '我们的',
+    advisor: '顾问',
+  },
+  ourTeam: {
+    our: '我们的',
+    team: '团队',
+  },
 };

@@ -26,4 +26,12 @@ export default {
     earn: '赚钱',
     description: '任何时间、任何地点连线任何人，一起健身、对战并且赢取代币和NFT！',
   },
+  ourAdvisor: {
+    our: '我们的',
+    advisor: '顾问',
+  },
+  ourTeam: {
+    our: '我们的',
+    team: '团队',
+  },
 };

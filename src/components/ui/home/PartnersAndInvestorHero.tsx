@@ -2,11 +2,14 @@ import { GridItem, HStack, SimpleGrid, Text, VStack, useColorModeValue } from '@
 import HeroLayout from 'components/layouts/HeroLayout';
 import { Advisors, Team } from 'data';
 import { layoutPadding } from 'theme';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
 import InvestorCard from './PartnerAndInvestorHero/InvestorCard';
 import TeamCard from './PartnerAndInvestorHero/TeamCard';
 
 const PartnerAndInvestorHero = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
+  const { t } = useTranslation().i18n;
 
   return (
     <HeroLayout
@@ -31,14 +34,14 @@ const PartnerAndInvestorHero = () => {
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="300"
             >
-              Our
+              {t(keys.ourAdvisor.our)}
             </Text>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="700"
             >
-              Advisors
+              {t(keys.ourAdvisor.advisor)}
             </Text>
           </HStack>
           <SimpleGrid
@@ -80,14 +83,14 @@ const PartnerAndInvestorHero = () => {
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="300"
             >
-              Our
+              {t(keys.ourTeam.our)}
             </Text>
             <Text
               fontSize={{ base: '40px', md: '56px' }}
               lineHeight={{ base: '40px', md: '60px' }}
               fontWeight="700"
             >
-              Team
+              {t(keys.ourTeam.team)}
             </Text>
           </HStack>
           <SimpleGrid

@@ -1,4 +1,6 @@
 const common = 'common';
+const ourAdvisor = 'ourAdvisor';
+const ourTeam = 'ourTeam';
 const navbar = 'navbar';
 const burnAndEarn = 'burnAndEarn';
 const computerVision = 'computerVision';
@@ -31,6 +33,14 @@ const TranslationKeys = {
     earn: `${burnAndEarn}.earn`,
     burnAnd: `${burnAndEarn}.burnAnd`,
     description: `${burnAndEarn}.description`,
+  },
+  ourAdvisor: {
+    our: `${ourAdvisor}.our`,
+    advisor: `${ourAdvisor}.advisor`,
+  },
+  ourTeam: {
+    our: `${ourTeam}.our`,
+    team: `${ourTeam}.team`,
   },
 };
 
