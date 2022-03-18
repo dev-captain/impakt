@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { Container } from '@chakra-ui/layout';
 import {
   Footer,
@@ -20,7 +22,7 @@ const HomePage = () => {
       <div id="impakt-games">
         <ImpaktGamesHero />
       </div>
-
+      {/* 
       <div id="motion-capture">
         <MotionCaptureHero />
       </div>
@@ -39,7 +41,7 @@ const HomePage = () => {
 
       <div id="contact">
         <Contact />
-      </div>
+      </div> */}
 
       <Footer />
     </Container>

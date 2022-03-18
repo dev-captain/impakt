@@ -4,25 +4,19 @@ import { VStack, Text, SimpleGrid, GridItem, HStack, Image, Box, Link } from '@c
 import Images from 'assets/images';
 import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
-import { layoutPadding } from 'theme';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 
-const BigScreenFooter = ({
-  bgColor,
-  logo,
-  textColor,
-  twitter,
-  youtube,
-  discord,
-}: {
+type Props = {
   bgColor: string;
   logo: string;
   textColor: string;
   twitter: string;
   discord: string;
   youtube: string;
-}) => {
+};
+
+const BigScreenFooter = ({ bgColor, logo, textColor, twitter, youtube, discord }: Props) => {
   const { t } = useTranslation().i18n;
   const navigate = useNavigate();
   const _hover = {
@@ -36,13 +30,13 @@ const BigScreenFooter = ({
     <VStack
       h="100%"
       w="full"
+      px="16px"
       bgColor={bgColor}
       color={textColor}
-      px={layoutPadding}
       py={{ base: 16, md: 0 }}
       d={{ base: 'none', md: 'flex' }}
     >
-      <SimpleGrid columns={5} w="full">
+      <SimpleGrid columns={5} maxW="1200px" w="full">
         <GridItem colSpan={{ base: 5, md: 4 }}>
           <SimpleGrid columns={3} spacing="10px" h="216px" justifyContent="center" rowGap={4}>
             <GridItem colSpan={{ base: 3, md: 1 }} h="full" display={{ base: 'none', md: 'flex' }}>
@@ -123,38 +117,6 @@ const BigScreenFooter = ({
               />
             </Box>
           </HStack>
-        </GridItem>
-        <GridItem
-          colSpan={{ base: 5, md: 1 }}
-          h="full"
-          display={{ base: 'flex', md: 'none' }}
-          marginTop={4}
-        >
-          <VStack
-            align={{ base: 'center', md: 'flex-start' }}
-            spacing="16px"
-            w="full"
-            justify="center"
-          >
-            <Image src="assets/images/logo.png" />
-            <VStack spacing="8px" align={{ base: 'center', md: 'flex-start' }}>
-              <HStack
-                display="flex"
-                fontSize="12px"
-                lineHeight="24px"
-                flexDir="row"
-                fontWeight="500"
-              >
-                <Text fontWeight="400" opacity="0.6">
-                  {t(keys.footer.madeBy)}
-                </Text>
-                <Text marginLeft="4px">impakt.com</Text>
-              </HStack>
-              <Text fontSize="12px" lineHeight="16px" opacity="0.6">
-                {t(keys.footer.allRightReserved)}
-              </Text>
-            </VStack>
-          </VStack>
         </GridItem>
       </SimpleGrid>
     </VStack>
