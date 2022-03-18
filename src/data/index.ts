@@ -290,3 +290,79 @@ export const RoadmapInfo = [
   },
 ];
 export default {};
+
+export const LeaderBoardData = [
+  {
+    order: 1,
+    name: 'CapnCrunc',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 2,
+    name: 'CapnCrunc',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 3,
+    name: 'CapnCrunc',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 4,
+    name: 'CapnCruncx',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 5,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 6,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 7,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 8,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+];
+
+export const CommunityData = [
+  'lorem',
+  'Tron',
+  'Ontology',
+  'ThunderoCore',
+  'WAX',
+  'Hive',
+  'DEP',
+  'Tron',
+  'Polugoon',
+  'NEAR',
+  'Avalanche',
+  'Telos',
+  'Moonriver',
+  'Cronos',
+];
