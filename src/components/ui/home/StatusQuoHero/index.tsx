@@ -6,7 +6,7 @@ import StatusQuoCard from './StatusQuoCard';
 
 const StatusQuoHero = () => {
   return (
-    <HeroLayout removeBottomPadding minH="80vh">
+    <HeroLayout minH="70vh">
       <VStack
         w="full"
         color="white"
@@ -33,7 +33,7 @@ const StatusQuoHero = () => {
             d={{ base: 'flex', lg: 'none' }}
             src={Images.Common.blitzChallenge}
           />
-          <HStack w="full" align="center" justify={{ base: 'center', md: 'space-between' }}>
+          <HStack w="full" align="center" justify={{ base: 'center', lg: 'space-between' }}>
             <StatusQuoCard />
             <StatusQuoBlurs />
             <Image

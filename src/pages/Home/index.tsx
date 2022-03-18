@@ -12,6 +12,8 @@ import Contact from 'components/ui/home/Contact';
 import Seo from 'components/core/Seo';
 import VideoModal from 'components/core/VideoModal';
 import RoadMap from 'components/ui/home/Roadmap/RoadmapSection';
+import StatusQuoHero from 'components/ui/home/StatusQuoHero';
+import LeaderBoard from 'pages/LeaderBoard';
 
 const HomePage = () => {
   return (
@@ -21,6 +23,15 @@ const HomePage = () => {
 
       <div id="impakt-games">
         <ImpaktGamesHero />
+      </div>
+      <div id="status-quo">
+        <StatusQuoHero />
+      </div>
+      <div id="join-challange">
+        <LeaderBoard />
+      </div>
+      <div id="roadmap">
+        <RoadMap />
       </div>
       {/* 
       <div id="motion-capture">

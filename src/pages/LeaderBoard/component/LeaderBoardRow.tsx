@@ -1,53 +1,41 @@
-import { GridItem, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, GridItem, HStack, Image, SimpleGrid, Text } from '@chakra-ui/react';
 import Images from 'assets/images';
 
-const LeaderBoardRow = ({
-  name,
-  date,
-  order,
-  points,
-  showStar,
-  community,
-  isSmallView,
-}: {
-  isSmallView?: boolean;
+type Props = {
   date: string;
   name: string;
   order: number;
   points: string;
   community: string;
   showStar?: boolean;
-}) => {
+  isSmallView?: boolean;
+};
+
+const LeaderBoardRow = ({ name, date, order, points, showStar, community, isSmallView }: Props) => {
   if (isSmallView) {
     return (
-      <VStack minH="65px" w="full" align="flex-start">
-        <HStack minH="65px" w="full" align="center" justify="center">
-          <Text
-            w="33px"
-            opacity="0.3"
-            textAlign="left"
-            textStyle="regular3"
-            pl={showStar ? 0 : '8px'}
-          >
+      <Flex justifyContent="space-around">
+        <Flex justify="space-between" minH="65px" w="full" align="center">
+          <Text w="60px" opacity="0.3" textAlign="left" textStyle="regular4" pl="8px">
             #{order}
           </Text>
-          <HStack spacing="14px" justify="center" align="center" maxW="120px">
-            {showStar && <Image src={Images.star} w="12.63px" h="12px" />}
-            <Text textStyle="regular3" pl={showStar ? 0 : '22px'} isTruncated>
+          <HStack px="8px" spacing="14px" justify="center" align="center" maxW="210px">
+            {showStar && <Image src={Images.star} w="16.63" h="15px" objectFit="contain" />}
+            <Text textStyle="regular4" pl={showStar ? 0 : '22px'} isTruncated>
               {name}
             </Text>
           </HStack>
-          <Text textStyle="regular3" color="electric.250" align="center">
+          <Text textStyle="regular4" color="electric.250" align="center" pr="8px">
             {community}
           </Text>
-          <Text textStyle="regular3" opacity={0.3} align="center">
+          <Text textStyle="regular4" opacity={0.3} align="center" pr="8px">
             {date}
           </Text>
-          <Text textStyle="regular3" color="red.300" align="center">
+          <Text textStyle="regular4" color="red.300" align="center" pr="8px">
             {points}
           </Text>
-        </HStack>
-      </VStack>
+        </Flex>
+      </Flex>
     );
   }
 
@@ -60,7 +48,7 @@ const LeaderBoardRow = ({
       </GridItem>
       <GridItem colSpan={2} w="200px">
         <HStack spacing="14px" justify="center" align="center">
-          {showStar && <Image src={Images.star} w="20px" h="19px" />}
+          {showStar && <Box src={Images.star} w="20px" h="19px" />}
           <Text textStyle="bold4" pl={showStar ? 0 : '42px'}>
             {name}
           </Text>

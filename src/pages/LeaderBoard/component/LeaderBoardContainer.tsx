@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
 type Props = {
@@ -7,9 +7,18 @@ type Props = {
 
 const LeaderBoardContainer: FC<Props> = ({ children }) => {
   return (
-    <VStack spacing={0} bg="rgba(255, 255, 255, 0.04)" borderRadius="24px" p="16px">
+    <Flex
+      w="full"
+      flexDir="column"
+      align="flex-start"
+      overflowX="scroll"
+      borderRadius="24px"
+      bg="rgba(255, 255, 255, 0.04)"
+      pl={{ base: '16px', md: '32px' }}
+      pr={{ base: '16px', md: '32px' }}
+    >
       {children}
-    </VStack>
+    </Flex>
   );
 };
 

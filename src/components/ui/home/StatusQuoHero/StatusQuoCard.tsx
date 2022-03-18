@@ -5,8 +5,9 @@ const StatusQuoCard = () => {
   return (
     <VStack
       p="44px"
+      w="full"
       zIndex={10}
-      maxW="581px"
+      maxW={{ base: 'auto', lg: '581px' }}
       color="white"
       spacing="16px"
       pos="relative"
