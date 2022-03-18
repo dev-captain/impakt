@@ -17,6 +17,7 @@ const Images = {
     Peter: require('./video.webp'),
     Peter404: require('./peter404.png'),
     Laptop: require('./laptop.svg'),
+    blitzChallenge: require('./blitz-challenge.png'),
   },
   motionCapture: require('./motion-capture.webp'),
   burnAndEarn: require('./burn-to-earn-hero.webp'),
