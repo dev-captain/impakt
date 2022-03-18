@@ -16,6 +16,11 @@ export default {
     fontWeight: '900',
     lineHeight: '72px',
   },
+  black7: {
+    fontSize: '56px',
+    fontWeight: '900',
+    lineHeight: '60px',
+  },
   bold7: {
     fontSize: '56px',
     fontWeight: '700',

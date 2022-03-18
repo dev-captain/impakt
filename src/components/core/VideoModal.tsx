@@ -126,19 +126,10 @@ export const Play = ({ onClick }: { onClick?: () => void | any }) => (
     h="80px"
     zIndex={2}
     borderRadius="40px"
-    alignSelf="center"
     opacity="0.8"
     onClick={onClick}
     bgColor="blackAlpha.800"
-    left={{
-      base: 'auto',
-      sm: 'auto',
-      md: '40%',
-      xl: '50%',
-    }}
     boxShadow="4px 4px 10px rgba(0, 0, 0, 0.12)"
-    position="absolute"
-    d="flex"
   >
     <Icons.WhitePlay />
   </Center>

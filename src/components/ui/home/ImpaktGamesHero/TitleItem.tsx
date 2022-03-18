@@ -7,9 +7,7 @@ type Props = {
 const TitleItem: FC<Props> = ({ title }) => {
   return (
     <Text
-      textStyle="TitleBold72"
-      fontSize={{ base: '64px', md: '90px' }}
-      lineHeight={{ base: '64px', md: '90px' }}
+      textStyle={{ base: 'black7', md: 'black8' }}
       textAlign={{ base: 'center', md: 'left' }}
       paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
     >

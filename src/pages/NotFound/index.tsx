@@ -16,7 +16,7 @@ import NotFoundCard from './component/NotFoundCard';
 const NotFound = () => {
   const navigate = useNavigate();
   const text = useColorModeValue('glass.100', 'glass.700');
-  const bgImage = useColorModeValue(Images.impaktGames.Header('xl'), Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const [isLessThan900] = useMediaQuery('(max-width: 900px)');
 
   return (

@@ -9,10 +9,7 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
-  Button,
-  Text,
 } from '@chakra-ui/react';
-import { layoutPadding } from 'theme';
 import { Socials } from 'data';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -30,7 +27,7 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { changeLanguage, t } = useTranslation(`default`).i18n;
+  const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
@@ -57,19 +54,29 @@ const Navbar = () => {
   }, [isLessThan1040, onClose]);
 
   return (
-    <Box pos="absolute" zIndex="101" w="full" boxShadow="0px 4px 26px rgba(0, 0, 0, 0.25)">
+    <Box
+      pos="absolute"
+      zIndex="101"
+      w="full"
+      display={isLessThan1040 ? 'auto' : 'flex'}
+      justifyContent="center"
+      boxShadow="0px 4px 26px rgba(0, 0, 0, 0.25)"
+    >
       {isOpen && <Gradient />}
       <Flex
+        w="full"
         h="100px"
-        minW="full"
+        maxW="1232px"
         flexDir="row"
+        alignSelf="center"
         overflow="hidden"
+        color={textColor}
         position="relative"
         alignItems="center"
-        color={textColor}
+        px="16px"
         bgColor={isOpen ? bgColor : 'transparent'}
       >
-        <HStack w="full" justify="space-between" px={layoutPadding}>
+        <HStack w="full" justify="space-between">
           <CollapseMenuController
             isOpen={isOpen}
             onToggle={onToggle}
@@ -116,12 +123,12 @@ const Navbar = () => {
                   title={t(Keys.navbar.contactUs)}
                   isActive={path.path === 'contact'}
                 />
-                <Button variant="ghost" onClick={() => changeLanguage('en')}>
+                {/* <Button variant="ghost" onClick={() => changeLanguage('en')}>
                   <Text>En</Text>
                 </Button>
                 <Button variant="ghost" onClick={() => changeLanguage('zh')}>
                   <Text>Zh</Text>
-                </Button>
+                </Button> */}
               </HStack>
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
                 <Box as="a" target="_blank" href={Socials.twitter}>
