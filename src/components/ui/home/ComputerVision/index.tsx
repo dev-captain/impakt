@@ -8,12 +8,11 @@ const ComputerVisionHero = () => {
 
   return (
     <HeroLayout minH="70vh" align="flex-start" justify="flex-start">
-      <VStack color={text} w="full" spacing={{ base: '32px', lg: '16px' }}>
+      <VStack color={text} w="full" spacing={{ base: '32px', lg: '16px' }} px="16px">
         <Text textStyle="bold7">Computer vision</Text>
         <HStack
           maxW="1232px"
           w="full"
-          px="16px"
           justify="space-between"
           flexDir={{
             base: 'column',

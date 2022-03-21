@@ -1,7 +1,6 @@
 import { GridItem, HStack, SimpleGrid, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { Advisors, Team } from 'data';
-import { layoutPadding } from 'theme';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import InvestorCard from './PartnerAndInvestorHero/InvestorCard';
@@ -21,7 +20,7 @@ const PartnerAndInvestorHero = () => {
       }}
       minH="70vh"
     >
-      <VStack spacing="0px" pb="64px" px={layoutPadding} w="full" color={textColor}>
+      <VStack spacing="0px" pb="64px" px="16px" maxW="1232px" w="full" color={textColor}>
         <VStack spacing="36px" align={{ base: 'flex-start', md: 'auto' }} w="full" pb="16px">
           <HStack
             w="full"

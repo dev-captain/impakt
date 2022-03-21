@@ -20,7 +20,7 @@ const InvestorCard = ({
     <VStack
       w="full"
       pb="36px"
-      maxW="368px"
+      maxW="360px"
       align="center"
       justify="center"
       bgColor={bgColor}
@@ -39,8 +39,8 @@ const InvestorCard = ({
         <Image
           src={image}
           objectFit="cover"
-          maxW="330"
-          h="336px"
+          maxW="330px"
+          h="310px"
           alt={alt}
           mt="16px"
           borderRadius="28px"
@@ -50,10 +50,17 @@ const InvestorCard = ({
         <Text textStyle="bold5" pt="8px" align="center">
           {name}
         </Text>
-        <Text textStyle="regular4" opacity="0.6" align="center" color={subTitleColor}>
+        <Text textStyle="regular3" opacity="0.6" align="center" color={subTitleColor}>
           {title}
         </Text>
-        <Text height="20px" opacity="0.6" align="center" display="inline" color={subTitleColor}>
+        <Text
+          height="20px"
+          textStyle="regular3"
+          opacity="0.6"
+          align="center"
+          display="inline"
+          color={subTitleColor}
+        >
           {subtitle}
         </Text>
       </VStack>

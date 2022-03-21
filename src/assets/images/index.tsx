@@ -21,11 +21,13 @@ const Images = {
     blitzChallenge: require('./blitz-challenge.png'),
     bgWave: require('./bg-wave.png'),
   },
+
   motionCapture: require('./motion-capture.webp'),
   burnAndEarn: require('./burn-to-earn-hero.webp'),
   computerVision: require('./computer-vision.png'),
   burnAndEarnPeople: require('./burnAndEarnPeople.png'),
   impaktLaptop: require('./impakt-laptop.png'),
+  joinOurCommunity: require('./join-our-community.png'),
 
   contact: {
     md: require('./contact.webp'),
