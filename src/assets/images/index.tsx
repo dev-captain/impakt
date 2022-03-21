@@ -22,6 +22,7 @@ const Images = {
   },
   motionCapture: require('./motion-capture.webp'),
   burnAndEarn: require('./burn-to-earn-hero.webp'),
+  computerVision: require('./computer-vision.png'),
 
   contact: {
     md: require('./contact.webp'),
