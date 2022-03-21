@@ -19,11 +19,13 @@ const Images = {
     Peter404: require('./peter404.png'),
     Laptop: require('./laptop.svg'),
     blitzChallenge: require('./blitz-challenge.png'),
+    bgWave: require('./bg-wave.png'),
   },
   motionCapture: require('./motion-capture.webp'),
   burnAndEarn: require('./burn-to-earn-hero.webp'),
   computerVision: require('./computer-vision.png'),
   burnAndEarnPeople: require('./burnAndEarnPeople.png'),
+  impaktLaptop: require('./impakt-laptop.png'),
 
   contact: {
     md: require('./contact.webp'),
