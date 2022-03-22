@@ -1,4 +1,4 @@
-import { VStack, HStack, useColorModeValue } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, useBreakpointValue } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import useModalStore from 'hooks/store/useModalStore';
@@ -14,6 +14,7 @@ const ImpaktGamesHero = () => {
   const text = useColorModeValue('glass.100', 'glass.700');
   const { setImpaktGames } = useModalStore((state) => state);
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const Wrapper: any = useBreakpointValue({ base: VStack, md: HStack });
 
   return (
     <HeroLayout
@@ -40,7 +41,7 @@ const ImpaktGamesHero = () => {
                 <TitleItem title={t(keys.impaktGamesHero.fitness)} />
                 <TitleItem title={t(keys.impaktGamesHero.gamified)} />
               </VStack>
-              <HStack>
+              <Wrapper>
                 <DownloadButton
                   isHorizontal
                   iconName="Windows"
@@ -53,7 +54,7 @@ const ImpaktGamesHero = () => {
                   title="Download Windows"
                   link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
                 />
-              </HStack>
+              </Wrapper>
             </VStack>
             <ScreenAndVideo
               onPlay={() => {
