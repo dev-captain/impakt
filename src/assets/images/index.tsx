@@ -20,6 +20,7 @@ const Images = {
     Laptop: require('./laptop.svg'),
     blitzChallenge: require('./blitz-challenge.png'),
     bgWave: require('./bg-wave.png'),
+    play: require('./play.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),

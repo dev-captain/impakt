@@ -2,9 +2,11 @@ import { HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react
 import Images from 'assets/images';
 import HeroCard from 'components/common/HeroCard';
 import HeroLayout from 'components/layouts/HeroLayout';
+import useModalStore from 'hooks/store/useModalStore';
 
 const ComputerVisionHero = () => {
   const text = useColorModeValue('glass.100', 'glass.700');
+  const show = useModalStore((state) => state.setComputerVision);
 
   return (
     <HeroLayout minH="70vh" align="flex-start" justify="flex-start">
@@ -19,14 +21,17 @@ const ComputerVisionHero = () => {
             lg: 'row',
           }}
         >
-          <Image
-            src={Images.computerVision}
-            maxW="525px"
-            pb={{
-              base: '32px',
-              lg: '0',
-            }}
-          />
+          <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
+            <Image src={Images.Common.play} pos="absolute" />
+            <Image
+              src={Images.computerVision}
+              maxW="525px"
+              pb={{
+                base: '32px',
+                lg: '0',
+              }}
+            />
+          </VStack>
           <HeroCard
             smallTitle="COMPUTER VISION"
             title="Use your body as the controller"

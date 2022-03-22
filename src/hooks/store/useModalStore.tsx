@@ -14,6 +14,7 @@ type ModalStore = {
   setImpaktGames: (value: boolean) => void;
   setBurnAndEarn: () => void;
   setComputerVision: () => void;
+  setBurnEarnNft: () => void;
   toggleShow: () => void;
   onClose: () => void;
 };
@@ -50,7 +51,18 @@ const useModalStore = create<ModalStore>((set: SetState<ModalStore>) => ({
         showPlayer: false,
         hideButtons: true,
         isYoutubeVideo: true,
-        youtubeUrl: 'https://www.youtube.com/embed/XrgNOdkFIgk',
+        youtubeUrl: 'https://www.youtube.com/embed/PeFD4-a-chY',
+      },
+    })),
+  setBurnEarnNft: () =>
+    set((state) => ({
+      ...state,
+      show: true,
+      modal: {
+        showPlayer: false,
+        hideButtons: true,
+        isYoutubeVideo: true,
+        youtubeUrl: 'https://www.youtube.com/embed/iu9Ccv0OJkY',
       },
     })),
 }));
