@@ -9,7 +9,7 @@ type Props = {
   animationType: 'move' | 'fade';
 };
 
-function AnimationInWhenVisible({ children, isLeft, animationType }: Props) {
+const AnimationInWhenVisible = ({ children, isLeft, animationType }: Props) => {
   const controls = useAnimation();
   const [ref, inView] = useInView();
   const disabled = useBreakpointValue({ base: true, md: false });
@@ -27,13 +27,13 @@ function AnimationInWhenVisible({ children, isLeft, animationType }: Props) {
 
   const transition = {
     move: {
+      delay: 0.2,
       type: 'spring',
       stiffness: 100,
-      delay: 0.2,
     },
     fade: {
-      duration: 0.2,
       delay: 0.2,
+      duration: 0.2,
     },
   };
 
@@ -57,14 +57,14 @@ function AnimationInWhenVisible({ children, isLeft, animationType }: Props) {
   return (
     <motion.div
       ref={ref}
-      animate={controls}
       initial="hidden"
-      transition={transition[animationType]}
+      animate={controls}
       variants={variants[animationType]}
+      transition={transition[animationType]}
     >
       {children}
     </motion.div>
   );
-}
+};
 
 export default memo(AnimationInWhenVisible);

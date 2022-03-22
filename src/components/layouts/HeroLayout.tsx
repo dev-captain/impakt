@@ -48,6 +48,7 @@ const HeroLayout = ({
       >
         {showNavbar && <Navbar />}
         <VStack
+          overflow="hidden"
           minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
           minW="full"
           align={align}

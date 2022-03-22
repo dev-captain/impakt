@@ -1,10 +1,10 @@
+import { memo } from 'react';
 import { VStack, HStack, useColorModeValue, useBreakpointValue } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import useModalStore from 'hooks/store/useModalStore';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import { memo } from 'react';
 import DownloadButton from 'components/core/DownloadButton';
 import TitleItem from './TitleItem';
 import ScreenAndVideo from './ScreenVideo';
@@ -13,8 +13,8 @@ const ImpaktGamesHero = () => {
   const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
   const { setImpaktGames } = useModalStore((state) => state);
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const Wrapper: any = useBreakpointValue({ base: VStack, md: HStack });
+  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
 
   return (
     <HeroLayout
