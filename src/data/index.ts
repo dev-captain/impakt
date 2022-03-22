@@ -74,7 +74,7 @@ export const Socials = {
   facebook: '',
   youtube: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw',
   twitter: 'https://twitter.com/demideuszin',
-  discord: 'https://discord.com/invite/DeYvSEgq',
+  discord: 'https://discord.gg/eVQJ8XRa9S',
 };
 
 export const Categories = [
