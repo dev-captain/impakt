@@ -1,5 +1,6 @@
 import { HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
+import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroCard from 'components/common/HeroCard';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
@@ -21,33 +22,37 @@ const ComputerVisionHero = () => {
             lg: 'row',
           }}
         >
-          <VStack
-            pos="relative"
-            align="center"
-            justify="center"
-            onClick={show}
-            cursor="pointer"
-            _hover={{
-              transition: '0.5s ease',
-              transform: 'scale(1.2)',
-            }}
-          >
-            <Image src={Images.Common.play} pos="absolute" />
-            <Image
-              src={Images.computerVision}
-              maxW="525px"
-              w="100%"
-              pb={{
-                base: '32px',
-                lg: '0',
+          <AnimationInWhenVisible isLeft animationType="move">
+            <VStack
+              pos="relative"
+              align="center"
+              justify="center"
+              onClick={show}
+              cursor="pointer"
+              _hover={{
+                transition: '0.5s ease',
+                transform: 'scale(1.2)',
               }}
+            >
+              <Image src={Images.Common.play} pos="absolute" />
+              <Image
+                src={Images.computerVision}
+                maxW="525px"
+                w="100%"
+                pb={{
+                  base: '32px',
+                  lg: '0',
+                }}
+              />
+            </VStack>
+          </AnimationInWhenVisible>
+          <AnimationInWhenVisible animationType="move">
+            <HeroCard
+              smallTitle="COMPUTER VISION"
+              title="Use your body as the controller"
+              description="You don’t need extra hardware. Just use the camera of your laptop or phone and you will be able to enjoy our platform"
             />
-          </VStack>
-          <HeroCard
-            smallTitle="COMPUTER VISION"
-            title="Use your body as the controller"
-            description="You don’t need extra hardware. Just use the camera of your laptop or phone and you will be able to enjoy our platform"
-          />
+          </AnimationInWhenVisible>
         </HStack>
       </VStack>
     </HeroLayout>

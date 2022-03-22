@@ -1,5 +1,6 @@
 import { HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
+import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroLayout from 'components/layouts/HeroLayout';
 
 const ImpaktLaptopHero = () => {
@@ -29,18 +30,22 @@ const ImpaktLaptopHero = () => {
           }}
           zIndex={10}
         >
-          <Image
-            src={Images.impaktLaptop}
-            maxW="525px"
-            w="100%"
-            pb={{
-              base: '32px',
-              lg: '0',
-            }}
-          />
-          <Text textStyle="bold5" textAlign="center" maxW="525px">
-            Impakt is attractive, addictive, and seriously whips you into shape
-          </Text>
+          <AnimationInWhenVisible isLeft animationType="move">
+            <Image
+              src={Images.impaktLaptop}
+              maxW="525px"
+              w="100%"
+              pb={{
+                base: '32px',
+                lg: '0',
+              }}
+            />
+          </AnimationInWhenVisible>
+          <AnimationInWhenVisible animationType="move">
+            <Text textStyle="bold5" textAlign="center" maxW="525px">
+              Impakt is attractive, addictive, and seriously whips you into shape
+            </Text>
+          </AnimationInWhenVisible>
         </HStack>
       </VStack>
     </HeroLayout>

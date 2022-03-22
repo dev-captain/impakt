@@ -1,5 +1,6 @@
 import { HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
+import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
 
@@ -20,32 +21,36 @@ const BurnAndEarn = () => {
             lg: 'row',
           }}
         >
-          <VStack maxW={{ base: 'full', lg: '453px' }} textAlign={{ base: 'center', lg: 'left' }}>
-            <Text textStyle="bold7">Burn & earn tokens and NFTs</Text>
-            <Text textStyle="regular4">You can earn as individual or with your community</Text>
-          </VStack>
-          <VStack
-            pos="relative"
-            align="center"
-            justify="center"
-            onClick={show}
-            cursor="pointer"
-            _hover={{
-              transition: '0.5s ease',
-              transform: 'scale(1.2)',
-            }}
-          >
-            <Image src={Images.Common.play} pos="absolute" />
-            <Image
-              src={Images.burnAndEarnPeople}
-              maxH="636px"
-              w="100%"
-              pb={{
-                base: '32px',
-                lg: '0',
+          <AnimationInWhenVisible isLeft animationType="move">
+            <VStack maxW={{ base: 'full', lg: '453px' }} textAlign={{ base: 'center', lg: 'left' }}>
+              <Text textStyle="bold7">Burn & earn tokens and NFTs</Text>
+              <Text textStyle="regular4">You can earn as individual or with your community</Text>
+            </VStack>
+          </AnimationInWhenVisible>
+          <AnimationInWhenVisible animationType="move">
+            <VStack
+              pos="relative"
+              align="center"
+              justify="center"
+              onClick={show}
+              cursor="pointer"
+              _hover={{
+                transition: '0.5s ease',
+                transform: 'scale(1.2)',
               }}
-            />
-          </VStack>
+            >
+              <Image src={Images.Common.play} pos="absolute" />
+              <Image
+                src={Images.burnAndEarnPeople}
+                maxH="636px"
+                w="100%"
+                pb={{
+                  base: '32px',
+                  lg: '0',
+                }}
+              />
+            </VStack>
+          </AnimationInWhenVisible>
         </HStack>
       </VStack>
     </HeroLayout>

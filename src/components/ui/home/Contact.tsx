@@ -20,6 +20,7 @@ import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import { ContactProps } from 'pages/Contact/component/ContactProps';
+import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 
 const SendMessage = () => {
   const { t } = useTranslation().i18n;
@@ -82,78 +83,82 @@ const SendMessage = () => {
                 </Text>
               </HStack>
             </GridItem>
-            <GridItem {...ContactProps.sGridItem}>
-              <Image src={Images.contactUs.hiPeter} display={{ base: 'none', lg: 'flex' }} />
-            </GridItem>
-            <GridItem
-              colSpan={{
-                base: 2,
-                lg: 1,
-              }}
-              w="full"
-              alignItems="center"
-              justifyContent="center"
-              display="flex"
-            >
-              <VStack bgColor={bgColor} {...ContactProps.messageVStack}>
-                <Text textStyle={{ base: 'regular4', md: 'regular5' }}>
-                  {t(keys.contact.sendUsMessage)}
-                </Text>
-                <VStack w="full" spacing="16px">
-                  <TextField
-                    name="name"
-                    isOutlined
-                    fontSize="14px"
-                    onChange={onChange}
-                    textStyle="regular2"
-                    placeholder={t(keys.contact.yourName)}
-                    _placeholder={{ color: textColor, fontSize: '14px' }}
-                  />
-                  <TextField
-                    name="email"
-                    isOutlined
-                    fontSize="14px"
-                    onChange={onChange}
-                    textStyle="regular2"
-                    placeholder={t(keys.contact.yourEmail)}
-                    _placeholder={{ color: textColor, fontSize: '14px' }}
-                  />
-                  <TextField
-                    isOutlined
-                    name="subject"
-                    fontSize="14px"
-                    onChange={onChange}
-                    textStyle="regular2"
-                    placeholder={t(keys.contact.topicOfMessage)}
-                    _placeholder={{ color: textColor, fontSize: '14px' }}
-                  />
-                  <TextareaField
-                    isOutlined
-                    name="message"
-                    fontSize="14px"
-                    onChange={onChange}
-                    textStyle="regular2"
-                    placeholder={t(keys.contact.yourMessage)}
-                    _placeholder={{ color: textColor, fontSize: '14px' }}
-                  />
+            <AnimationInWhenVisible animationType="move" isLeft>
+              <GridItem {...ContactProps.sGridItem}>
+                <Image src={Images.contactUs.hiPeter} display={{ base: 'none', lg: 'flex' }} />
+              </GridItem>
+            </AnimationInWhenVisible>
+            <AnimationInWhenVisible animationType="move">
+              <GridItem
+                colSpan={{
+                  base: 2,
+                  lg: 1,
+                }}
+                w="full"
+                alignItems="center"
+                justifyContent="center"
+                display="flex"
+              >
+                <VStack bgColor={bgColor} {...ContactProps.messageVStack}>
+                  <Text textStyle={{ base: 'regular4', md: 'regular5' }}>
+                    {t(keys.contact.sendUsMessage)}
+                  </Text>
+                  <VStack w="full" spacing="16px">
+                    <TextField
+                      name="name"
+                      isOutlined
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.yourName)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <TextField
+                      name="email"
+                      isOutlined
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.yourEmail)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <TextField
+                      isOutlined
+                      name="subject"
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.topicOfMessage)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <TextareaField
+                      isOutlined
+                      name="message"
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.yourMessage)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <Box {...ContactProps.gradients.first} />
+                    <Box {...ContactProps.gradients.second} />
+                  </VStack>
+                  <VStack w="full" align={{ base: 'center', md: 'flex-end' }}>
+                    <GradientButton
+                      py="32px"
+                      minW="240px"
+                      radius="14px"
+                      onClick={onSubmit}
+                      title={t(keys.contact.send)}
+                      disabled={isDisabled || loading}
+                      bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                    />
+                  </VStack>
                   <Box {...ContactProps.gradients.first} />
                   <Box {...ContactProps.gradients.second} />
                 </VStack>
-                <VStack w="full" align={{ base: 'center', md: 'flex-end' }}>
-                  <GradientButton
-                    py="32px"
-                    minW="240px"
-                    radius="14px"
-                    onClick={onSubmit}
-                    title={t(keys.contact.send)}
-                    disabled={isDisabled || loading}
-                    bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                  />
-                </VStack>
-                <Box {...ContactProps.gradients.first} />
-                <Box {...ContactProps.gradients.second} />
-              </VStack>
-            </GridItem>
+              </GridItem>
+            </AnimationInWhenVisible>
           </SimpleGrid>
         </VStack>
       </VStack>

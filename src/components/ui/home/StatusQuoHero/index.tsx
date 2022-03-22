@@ -1,5 +1,6 @@
 import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
+import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { StatusQuoBlurs } from './StatusQuoBlurs';
 import StatusQuoCard from './StatusQuoCard';
@@ -34,14 +35,18 @@ const StatusQuoHero = () => {
             src={Images.Common.blitzChallenge}
           />
           <HStack w="full" align="center" justify={{ base: 'center', lg: 'space-between' }}>
-            <StatusQuoCard />
-            <StatusQuoBlurs />
-            <Image
-              zIndex={10}
-              maxH="358px"
-              d={{ base: 'none', lg: 'flex' }}
-              src={Images.Common.blitzChallenge}
-            />
+            <AnimationInWhenVisible isLeft animationType="move">
+              <StatusQuoCard />
+              <StatusQuoBlurs />
+            </AnimationInWhenVisible>
+            <AnimationInWhenVisible animationType="move">
+              <Image
+                zIndex={11}
+                maxH="358px"
+                d={{ base: 'none', lg: 'flex' }}
+                src={Images.Common.blitzChallenge}
+              />
+            </AnimationInWhenVisible>
           </HStack>
         </VStack>
       </VStack>
