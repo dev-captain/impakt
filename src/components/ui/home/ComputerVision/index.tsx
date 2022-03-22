@@ -21,7 +21,17 @@ const ComputerVisionHero = () => {
             lg: 'row',
           }}
         >
-          <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
+          <VStack
+            pos="relative"
+            align="center"
+            justify="center"
+            onClick={show}
+            cursor="pointer"
+            _hover={{
+              transition: '0.5s ease',
+              transform: 'scale(1.2)',
+            }}
+          >
             <Image src={Images.Common.play} pos="absolute" />
             <Image
               src={Images.computerVision}

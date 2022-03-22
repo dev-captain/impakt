@@ -24,7 +24,17 @@ const BurnAndEarn = () => {
             <Text textStyle="bold7">Burn & earn tokens and NFTs</Text>
             <Text textStyle="regular4">You can earn as individual or with your community</Text>
           </VStack>
-          <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
+          <VStack
+            pos="relative"
+            align="center"
+            justify="center"
+            onClick={show}
+            cursor="pointer"
+            _hover={{
+              transition: '0.5s ease',
+              transform: 'scale(1.2)',
+            }}
+          >
             <Image src={Images.Common.play} pos="absolute" />
             <Image
               src={Images.burnAndEarnPeople}
