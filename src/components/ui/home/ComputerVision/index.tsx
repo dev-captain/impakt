@@ -36,6 +36,7 @@ const ComputerVisionHero = () => {
             <Image
               src={Images.computerVision}
               maxW="525px"
+              w="100%"
               pb={{
                 base: '32px',
                 lg: '0',

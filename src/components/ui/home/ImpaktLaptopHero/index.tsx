@@ -32,6 +32,7 @@ const ImpaktLaptopHero = () => {
           <Image
             src={Images.impaktLaptop}
             maxW="525px"
+            w="100%"
             pb={{
               base: '32px',
               lg: '0',

@@ -1,7 +1,6 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { RoadmapInfo } from 'data';
-import { layoutPadding } from 'theme';
 import Progress from './Progress';
 import RoadmapItem from './RoadmapItem';
 
@@ -21,9 +20,10 @@ const RoadMapSmallView = ({
       <VStack
         m="16px"
         spacing="36px"
-        px={layoutPadding}
         p={{ base: 0, md: 8 }}
         py={{ base: 16, md: 0 }}
+        px="16px"
+        maxW="1232px"
         align={{ base: 'center', xl: 'center', '2xl': 'flex-start' }}
       >
         <HStack

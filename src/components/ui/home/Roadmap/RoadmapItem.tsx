@@ -120,7 +120,7 @@ const RoadmapItem = ({
               {items?.map((item) => (
                 <ListItem textStyle="regular3" key={item.title}>
                   <HStack spacing="8px" align="flex-start">
-                    <Text w="200px" textStyle="semiBold3">
+                    <Text maxW="200px" textStyle="semiBold3" w="full">
                       {t(`ourRoadmap.${item.title}`)}
                     </Text>
                   </HStack>

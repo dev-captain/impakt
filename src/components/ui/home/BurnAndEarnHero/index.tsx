@@ -39,6 +39,7 @@ const BurnAndEarn = () => {
             <Image
               src={Images.burnAndEarnPeople}
               maxH="636px"
+              w="100%"
               pb={{
                 base: '32px',
                 lg: '0',
