@@ -1,10 +1,11 @@
-import { Text, VStack, Button, HStack, useColorModeValue } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import useModalStore from 'hooks/store/useModalStore';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import { memo } from 'react';
+import DownloadButton from 'components/core/DownloadButton';
 import TitleItem from './TitleItem';
 import ScreenAndVideo from './ScreenVideo';
 
@@ -39,11 +40,20 @@ const ImpaktGamesHero = () => {
                 <TitleItem title={t(keys.impaktGamesHero.fitness)} />
                 <TitleItem title={t(keys.impaktGamesHero.gamified)} />
               </VStack>
-              <Button variant="accent" onClick={() => {}}>
-                <Text textStyle="semiBold16" color="white">
-                  Download Tutorial
-                </Text>
-              </Button>
+              <HStack>
+                <DownloadButton
+                  isHorizontal
+                  iconName="Windows"
+                  title="Download Windows"
+                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
+                />
+                <DownloadButton
+                  isHorizontal
+                  iconName="Apple"
+                  title="Download Windows"
+                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
+                />
+              </HStack>
             </VStack>
             <ScreenAndVideo
               onPlay={() => {

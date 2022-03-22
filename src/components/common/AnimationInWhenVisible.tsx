@@ -50,7 +50,8 @@ function AnimationInWhenVisible({ children, isLeft, animationType }: Props) {
   }, [controls, inView]);
 
   if (disabled) {
-    return <div>{children}</div>;
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return <>{children}</>;
   }
 
   return (
