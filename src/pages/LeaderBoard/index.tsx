@@ -1,11 +1,13 @@
 import { Button, Text, useBreakpointValue, useColorModeValue, VStack } from '@chakra-ui/react';
 import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { LeaderBoardData } from 'data';
+import useLeaderBoard from 'hooks/store/useLeaderboard';
+import { useEffect } from 'react';
 import LeaderBoardContainer from './component/LeaderBoardContainer';
 import LeaderBoardRow from './component/LeaderBoardRow';
 
 const LeaderBoard = () => {
+  const data = useLeaderBoard();
   const text = useColorModeValue('glass.100', 'glass.700');
   const isSmallView = useBreakpointValue({
     base: true,
@@ -15,6 +17,10 @@ const LeaderBoard = () => {
     xl: false,
     '2xl': false,
   });
+
+  useEffect(() => {
+    data.getLeaderboard();
+  }, []);
 
   return (
     <HeroLayout>
@@ -40,7 +46,7 @@ const LeaderBoard = () => {
               className={isSmallView ? '' : 'leaderBoard'}
             >
               <LeaderBoardContainer>
-                {LeaderBoardData.slice(0, 3).map((item, index) => {
+                {data.leaderboard?.slice(0, 3).map((item, index) => {
                   return (
                     <LeaderBoardRow
                       {...item}
@@ -52,7 +58,7 @@ const LeaderBoard = () => {
                 })}
               </LeaderBoardContainer>
               <LeaderBoardContainer>
-                {LeaderBoardData.slice(3).map((item, index) => {
+                {data.leaderboard?.slice(3).map((item, index) => {
                   return (
                     <LeaderBoardRow isSmallView={isSmallView} {...item} key={index.toString()} />
                   );
