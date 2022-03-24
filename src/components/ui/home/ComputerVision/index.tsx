@@ -2,6 +2,7 @@ import { HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react
 import Images from 'assets/images';
 import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroCard from 'components/common/HeroCard';
+import Play from 'components/icons/Play';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
 
@@ -34,7 +35,9 @@ const ComputerVisionHero = () => {
                 transform: 'scale(1.2)',
               }}
             >
-              <Image src={Images.Common.play} pos="absolute" />
+              <VStack pos="absolute">
+                <Play />
+              </VStack>
               <Image
                 src={Images.computerVision}
                 maxW="525px"
