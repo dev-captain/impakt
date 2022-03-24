@@ -82,6 +82,7 @@ const RoadMap = () => {
                 <HStack px="16px" justify="space-around" w="full">
                   {RoadmapInfo.map((item, index) => (
                     <VStack
+                      key={index.toString()}
                       pl={{ base: 0, sm: index === 0 ? '16px' : 0, md: index === 0 ? '50px' : 0 }}
                     >
                       <RoadmapItem data={item} />

@@ -1,10 +1,10 @@
 import { Button, Text, useBreakpointValue, useColorModeValue, VStack } from '@chakra-ui/react';
 import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
+import Spacer from 'components/core/Spacer';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useLeaderBoard from 'hooks/store/useLeaderboard';
 import { useEffect } from 'react';
-import LeaderBoardContainer from './component/LeaderBoardContainer';
-import LeaderBoardRow from './component/LeaderBoardRow';
+import LeaderboardCard from './component/LeaderboardCard';
 
 const LeaderBoard = () => {
   const data = useLeaderBoard();
@@ -38,33 +38,17 @@ const LeaderBoard = () => {
                 </Text>
               </Button>
             </VStack>
-            <VStack
-              w="full"
-              spacing="24px"
-              justify="flex-start"
-              borderRadius="28px"
-              className={isSmallView ? '' : 'leaderBoard'}
-            >
-              <LeaderBoardContainer>
-                {data.leaderboard?.slice(0, 3).map((item, index) => {
-                  return (
-                    <LeaderBoardRow
-                      {...item}
-                      showStar
-                      key={index.toString()}
-                      isSmallView={isSmallView}
-                    />
-                  );
-                })}
-              </LeaderBoardContainer>
-              <LeaderBoardContainer>
-                {data.leaderboard?.slice(3).map((item, index) => {
-                  return (
-                    <LeaderBoardRow isSmallView={isSmallView} {...item} key={index.toString()} />
-                  );
-                })}
-              </LeaderBoardContainer>
-            </VStack>
+            <LeaderboardCard
+              title="Daily leaderboard"
+              isSmallView={!!isSmallView}
+              data={data.dailyLeaderboard}
+            />
+            <Spacer size="100px" />
+            <LeaderboardCard
+              title="Weekly leaderboard"
+              isSmallView={!!isSmallView}
+              data={data.weeklyLeaderboard}
+            />
           </VStack>
         </VStack>
       </AnimationInWhenVisible>

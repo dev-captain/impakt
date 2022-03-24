@@ -51,7 +51,7 @@ const useModalStore = create<ModalStore>((set: SetState<ModalStore>) => ({
         showPlayer: false,
         hideButtons: true,
         isYoutubeVideo: true,
-        youtubeUrl: 'https://www.youtube.com/embed/PeFD4-a-chY',
+        youtubeUrl: 'https://www.youtube.com/embed/8yNNFJh134Y',
       },
     })),
   setBurnEarnNft: () =>
@@ -62,7 +62,7 @@ const useModalStore = create<ModalStore>((set: SetState<ModalStore>) => ({
         showPlayer: false,
         hideButtons: true,
         isYoutubeVideo: true,
-        youtubeUrl: 'https://www.youtube.com/embed/iu9Ccv0OJkY',
+        youtubeUrl: 'https://www.youtube.com/embed/vEhIeYY-CJc',
       },
     })),
 }));
