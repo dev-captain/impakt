@@ -17,7 +17,7 @@ const AnimationInWhenVisible = ({ children, isLeft, animationType }: Props) => {
   const variants = {
     move: {
       visible: { opacity: 1, x: isLeft ? 0 : 0, duration: 0.5 },
-      hidden: { opacity: 0, x: isLeft ? -500 : 500, duration: 0.5 },
+      hidden: { opacity: 0, x: isLeft ? -200 : 200, duration: 0.5 },
     },
     fade: {
       visible: { opacity: 1, scale: 1 },

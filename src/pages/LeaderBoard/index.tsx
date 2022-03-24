@@ -41,13 +41,13 @@ const LeaderBoard = () => {
             <LeaderboardCard
               title="Daily leaderboard"
               isSmallView={!!isSmallView}
-              data={data.dailyLeaderboard}
+              data={data?.dailyLeaderboard}
             />
             <Spacer size="100px" />
             <LeaderboardCard
               title="Weekly leaderboard"
               isSmallView={!!isSmallView}
-              data={data.weeklyLeaderboard}
+              data={data?.weeklyLeaderboard}
             />
           </VStack>
         </VStack>

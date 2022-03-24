@@ -26,6 +26,8 @@ const useLeaderboard = create<LeaderboardStore>(
     },
 
     getLeaderboardId: async (challengeId: number) => {
+      if (!challengeId) return [];
+
       const url = `${API}/leaderboards/${challengeId}`;
       const event = await (await fetch(url)).json();
       const leaderboardUsers = event.usersPassed as LeaderBoardResponseUser[];
@@ -56,8 +58,8 @@ const useLeaderboard = create<LeaderboardStore>(
         (routine) => routine.challengeType === 'Weekly',
       )[0];
 
-      const dailyLeaderboard = await get().getLeaderboardId(daily.id);
-      const weeklyLeaderboard = await get().getLeaderboardId(weekly.id);
+      const dailyLeaderboard = (await get().getLeaderboardId(daily?.id)) || [];
+      const weeklyLeaderboard = (await get().getLeaderboardId(weekly?.id)) || [];
 
       set((state) => ({ ...state, dailyLeaderboard, weeklyLeaderboard }));
     },

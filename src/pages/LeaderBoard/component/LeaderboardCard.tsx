@@ -20,7 +20,7 @@ const LeaderboardCard = ({
       borderRadius="28px"
       className={isSmallView ? '' : 'leaderBoard'}
     >
-      <Text textStyle="bold7" pb="70px">
+      <Text textStyle={{ base: 'bold6', md: 'bold7' }} pb="70px" textAlign="center">
         {title}
       </Text>
       {data?.length > 0 && (
