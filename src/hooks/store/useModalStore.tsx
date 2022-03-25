@@ -38,9 +38,10 @@ const useModalStore = create<ModalStore>((set: SetState<ModalStore>) => ({
       ...state,
       show: true,
       modal: {
-        path: Videos.burnAndEarn,
         showPlayer: false,
         hideButtons: true,
+        isYoutubeVideo: true,
+        youtubeUrl: 'https://www.youtube.com/embed/vEhIeYY-CJc',
       },
     })),
   setComputerVision: () =>
