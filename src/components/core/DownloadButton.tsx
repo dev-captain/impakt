@@ -21,10 +21,11 @@ const DownloadButton = ({
       w="full"
       h="full"
       py={'20px'}
-      href={link}
       alignSelf="center"
       borderRadius="20px"
       bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+      href={link}
+      variant="buttonHover"
     >
       <Wrapper>
         {iconName === 'Apple' && <Icons.Apple opacity="1" color="white" />}
