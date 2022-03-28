@@ -59,11 +59,5 @@ export default {
       },
       _disabled: {},
     },
-    buttonHover: {
-      _hover: {
-        background: 'linear-gradient(283.61deg, #0B1725 16.94%, #0B1725 95.35%)',
-        boxShadow: 'dark',
-      },
-    },
   },
 } as SystemStyleObject;
