@@ -20,8 +20,8 @@ const StatusQuoCard = () => {
       <Text textStyle="regular3">USE ONLY YOUR BODY</Text>
       <Text textStyle="bold5">Tap into motivation whenever you want.</Text>
       <Text textStyle="regular4" color="electric.100" opacity="0.6">
-        Workout with our computer vision plaftorm ANYTIME with ANYONE, ANYWHERE,. Challenge
-        yourself, friends or family and earn tokens and NFTs!
+        Workout with our computer vision plaftorm ANYTIME with ANYONE, ANYWHERE. Challenge yourself,
+        friends or family and earn tokens and NFTs!
       </Text>
     </VStack>
   );

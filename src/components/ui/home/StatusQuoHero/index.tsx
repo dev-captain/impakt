@@ -15,18 +15,18 @@ const StatusQuoHero = () => {
         justify="center"
         pt={{ base: '120px', md: '0px' }}
       >
-        <Text textStyle="bold7" maxW={{ base: '400px', md: '100%' }} align="center">
-          Changing the status quo
+        <Text textStyle="bold7" maxW={{ base: '400px', md: '60%' }} align="center">
+          The only platform where jumping jacks earn you crypto
         </Text>
         <VStack
           w="full"
-          px="16px"
           maxW="1232px"
+          marginTop="70px !important"
           pos="relative"
           align="center"
           spacing="32px"
           justify={{ base: 'center', md: 'space-between' }}
-          pt={{ base: '16px', lg: '45px' }}
+          pt={{ base: '16px', md: '0' }}
         >
           <Image
             zIndex={10}
@@ -34,7 +34,12 @@ const StatusQuoHero = () => {
             d={{ base: 'flex', lg: 'none' }}
             src={Images.Common.blitzChallenge}
           />
-          <HStack w="full" align="center" justify={{ base: 'center', lg: 'space-between' }}>
+          <HStack
+            w="full"
+            align="center"
+            marginTop="0 !important"
+            justify={{ base: 'center', lg: 'space-between' }}
+          >
             <AnimationInWhenVisible isLeft animationType="move">
               <StatusQuoCard />
               <StatusQuoBlurs />

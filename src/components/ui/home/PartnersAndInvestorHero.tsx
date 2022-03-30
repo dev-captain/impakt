@@ -50,7 +50,7 @@ const PartnerAndInvestorHero = () => {
               columns={6}
               alignContent="center"
               alignItems="center"
-              columnGap={{ base: '8px', sm: '16px', md: '24px', xl: '24px' }}
+              columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
               rowGap={{ base: '24px', sm: '16px', md: '24px', xl: '24px' }}
             >
               {Advisors.map((advisor) => (
@@ -99,8 +99,8 @@ const PartnerAndInvestorHero = () => {
             <SimpleGrid
               w="full"
               columns={6}
-              columnGap={{ base: '8px', sm: '16px', md: '24px', xl: '24px' }}
-              rowGap={{ base: '24px', sm: '16px', md: '24px', xl: '24px' }}
+              columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
+              rowGap={{ base: '24px', sm: '16px', md: '50px !important', xl: '24px' }}
             >
               {Team.map((team) => (
                 <GridItem
