@@ -25,19 +25,15 @@ const LeaderBoard = () => {
   return (
     <HeroLayout>
       <AnimationInWhenVisible animationType="fade">
-        <VStack color={text} maxW="1232px" w="full" px="16px" pt={{ base: '100px', md: '0px' }}>
+        <VStack
+          color={text}
+          maxW="1232px"
+          marginTop="85px"
+          w="full"
+          px="16px"
+          pt={{ base: '100px', md: '0px' }}
+        >
           <VStack w="full">
-            <VStack spacing="24px" mb={{ base: '25px', md: '60px' }} textAlign="center">
-              <Text textStyle={isSmallView ? 'black7' : 'black8'}>Join the challenge</Text>
-              <Text textStyle={isSmallView ? 'regular3' : 'regular5'} opacity="0.6">
-                Represent your community and earn together!
-              </Text>
-              <Button variant="accent" onClick={() => {}} display={{ base: 'none', md: 'flex' }}>
-                <Text textStyle="semiBold16" color="glass.100">
-                  Fill up the form and get your community to join
-                </Text>
-              </Button>
-            </VStack>
             <LeaderboardCard
               title="Daily leaderboard"
               isSmallView={!!isSmallView}
@@ -49,6 +45,22 @@ const LeaderBoard = () => {
               isSmallView={!!isSmallView}
               data={data?.weeklyLeaderboard}
             />
+            <VStack
+              spacing="24px"
+              marginTop="95px !important"
+              mb={{ base: '25px', md: '60px' }}
+              textAlign="center"
+            >
+              <Text textStyle={isSmallView ? 'black7' : 'black8'}>Join the NFT Whitelist</Text>
+              <Text textStyle={isSmallView ? 'regular3' : 'regular5'} opacity="0.6">
+                Represent your community! Take part in group challenges and win together!
+              </Text>
+              <Button variant="accent" onClick={() => {}} display={{ base: 'none', md: 'flex' }}>
+                <Text textStyle="semiBold16" color="glass.100">
+                  Fill out the form to register your community!
+                </Text>
+              </Button>
+            </VStack>
           </VStack>
         </VStack>
       </AnimationInWhenVisible>

@@ -2,13 +2,14 @@ import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { StatusQuoBlurs } from './StatusQuoBlurs';
+// import { StatusQuoBlurs } from './StatusQuoBlurs';
 import StatusQuoCard from './StatusQuoCard';
 
 const StatusQuoHero = () => {
   return (
     <HeroLayout minH="70vh">
       <VStack
+        background="radial-gradient(40% 35% at 50% 70%,rgba(184, 50, 108, 0.5) 0%, rgba(184, 50, 108, 0) 90%)"
         w="full"
         color="white"
         align="center"
@@ -42,7 +43,7 @@ const StatusQuoHero = () => {
           >
             <AnimationInWhenVisible isLeft animationType="move">
               <StatusQuoCard />
-              <StatusQuoBlurs />
+              {/* <StatusQuoBlurs /> */}
             </AnimationInWhenVisible>
             <AnimationInWhenVisible animationType="move">
               <Image

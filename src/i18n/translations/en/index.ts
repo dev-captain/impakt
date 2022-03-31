@@ -15,7 +15,7 @@ export default {
     knowledgeBase: 'Knowledge Base',
   },
   computerVision: {
-    computerVision: 'Computer Vision',
+    computerVision: 'Computer vision',
     technology: 'Technology',
     description: 'Use your body as a controller - move, sweat, get fit.',
     hardwareCard: 'No extra hardware necessary',
@@ -28,11 +28,11 @@ export default {
   },
   ourAdvisor: {
     our: 'Our',
-    advisor: 'Advisor',
+    advisor: 'advisors',
   },
   ourTeam: {
-    our: 'Our',
-    team: 'Team',
+    our: 'Leadership',
+    team: 'team',
   },
   ourRoadmap: {
     our: 'Our',

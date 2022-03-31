@@ -33,7 +33,7 @@ const PartnerAndInvestorHero = () => {
               <Text
                 fontSize={{ base: '40px', md: '56px' }}
                 lineHeight={{ base: '40px', md: '60px' }}
-                fontWeight="300"
+                fontWeight="700"
               >
                 {t(keys.ourAdvisor.our)}
               </Text>
@@ -84,7 +84,7 @@ const PartnerAndInvestorHero = () => {
               <Text
                 fontSize={{ base: '40px', md: '56px' }}
                 lineHeight={{ base: '40px', md: '60px' }}
-                fontWeight="300"
+                fontWeight="700"
               >
                 {t(keys.ourTeam.our)}
               </Text>

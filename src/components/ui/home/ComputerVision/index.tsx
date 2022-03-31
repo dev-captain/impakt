@@ -52,8 +52,9 @@ const ComputerVisionHero = () => {
           <AnimationInWhenVisible animationType="move">
             <HeroCard
               smallTitle="COMPUTER VISION"
-              title="Use your body as the controller"
-              description="You don’t need extra hardware. Just use the camera of your laptop or phone and you will be able to enjoy our platform"
+              title="Your body is the controller"
+              description="A webcam & laptop or a smartphone! That's all you need to join our platform!"
+              // description="You don’t need extra hardware. Just use the camera of your laptop or phone and you will be able to enjoy our platform"
             />
           </AnimationInWhenVisible>
         </HStack>

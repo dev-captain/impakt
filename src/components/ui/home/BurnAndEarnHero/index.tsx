@@ -25,7 +25,9 @@ const BurnAndEarn = () => {
           <AnimationInWhenVisible isLeft animationType="move">
             <VStack maxW={{ base: 'full', lg: '453px' }} textAlign={{ base: 'center', lg: 'left' }}>
               <Text textStyle="bold7">Burn & earn tokens and NFTs</Text>
-              <Text textStyle="regular4">You can earn as individual or with your community</Text>
+              <Text textStyle="regular4">
+                You can earn by yourself, or together with your community.
+              </Text>
             </VStack>
           </AnimationInWhenVisible>
           <AnimationInWhenVisible animationType="move">

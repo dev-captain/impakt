@@ -51,13 +51,13 @@ const RoadMap = () => {
                 justify={{ base: 'center', md: 'center' }}
                 mt={{ base: '24px', md: 0, xl: '64px' }}
               >
-                <Text
+                {/* <Text
                   fontSize={{ base: '40px', md: '56px' }}
                   lineHeight={{ base: '40px', md: '60px' }}
-                  fontWeight="300"
+                  fontWeight="700"
                 >
                   {t(Keys.ourRoadmap.our)}
-                </Text>
+                </Text> */}
                 <Text
                   fontSize={{ base: '40px', md: '56px' }}
                   lineHeight={{ base: '40px', md: '60px' }}
