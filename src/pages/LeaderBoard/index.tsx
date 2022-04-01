@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Button, Text, useBreakpointValue, useColorModeValue, VStack } from '@chakra-ui/react';
 import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import Spacer from 'components/core/Spacer';
@@ -5,6 +6,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import useLeaderBoard from 'hooks/store/useLeaderboard';
 import { useEffect } from 'react';
 import LeaderboardCard from './component/LeaderboardCard';
+import { LeaderBoardUser } from "../../hooks/store/types";
 
 const LeaderBoard = () => {
   const data = useLeaderBoard();
@@ -22,6 +24,18 @@ const LeaderBoard = () => {
     data.getLeaderboard();
   }, []);
 
+  let mockDailyData: LeaderBoardUser[] = [];
+  
+  for (let i = 0; i < 15; i++) {
+    mockDailyData.push({ 
+      date: '2022.04.01',
+      name: `Community${i + 1}`,
+      score: 1000 - (i * 50),
+      userId: 0,
+      order: i + 1
+    })
+  }
+
   return (
     <HeroLayout>
       <AnimationInWhenVisible animationType="fade">
@@ -37,7 +51,7 @@ const LeaderBoard = () => {
             <LeaderboardCard
               title="Daily leaderboard"
               isSmallView={!!isSmallView}
-              data={data?.dailyLeaderboard}
+              data={mockDailyData}
             />
             <Spacer size="100px" />
             <LeaderboardCard
