@@ -5,13 +5,12 @@ type Props = {
   date: string;
   name: string;
   order: number;
-  points: number;
-  community: string;
+  score: number;
   showStar?: boolean;
   isSmallView?: boolean;
 };
 
-const LeaderBoardRow = ({ name, date, order, points, showStar, community, isSmallView }: Props) => {
+const LeaderBoardRow = ({ name, date, order, score, showStar, isSmallView }: Props) => {
   if (isSmallView) {
     return (
       <Flex justifyContent="space-around">
@@ -27,17 +26,6 @@ const LeaderBoardRow = ({ name, date, order, points, showStar, community, isSmal
           </HStack>
           <Text
             pr="8px"
-            w="250px"
-            isTruncated
-            align="center"
-            textAlign="left"
-            textStyle="regular4"
-            color="electric.250"
-          >
-            {community}
-          </Text>
-          <Text
-            pr="8px"
             w="210px"
             opacity={0.3}
             align="center"
@@ -47,7 +35,7 @@ const LeaderBoardRow = ({ name, date, order, points, showStar, community, isSmal
             {date}
           </Text>
           <Text textStyle="regular4" color="red.300" align="center" pr="8px" w="210px">
-            {points}
+            {score}
           </Text>
         </Flex>
       </Flex>
@@ -61,7 +49,7 @@ const LeaderBoardRow = ({ name, date, order, points, showStar, community, isSmal
           #{order}
         </Text>
       </GridItem>
-      <GridItem colSpan={2} w="200px">
+      <GridItem colSpan={4} w="200px">
         <HStack spacing="14px" justify="flex-start" align="center">
           {showStar && <Image src={Images.star} w="20px" h="19px" objectFit="contain" />}
           <Text textStyle="bold4" pl={showStar ? 0 : '42px'}>
@@ -69,19 +57,14 @@ const LeaderBoardRow = ({ name, date, order, points, showStar, community, isSmal
           </Text>
         </HStack>
       </GridItem>
-      <GridItem colSpan={2} w="200px">
-        <Text textStyle="regular4" color="electric.250" align="left" noOfLines={1}>
-          {community}
-        </Text>
-      </GridItem>
       <GridItem colSpan={2}>
         <Text textStyle="regular4" opacity={0.3} align="center">
           {date}
         </Text>
       </GridItem>
       <GridItem colSpan={2}>
-        <Text textStyle="regular4" color="red.300" align="center">
-          {points}
+        <Text textStyle="bold4" color="red.300" align="right">
+          {score}
         </Text>
       </GridItem>
     </SimpleGrid>

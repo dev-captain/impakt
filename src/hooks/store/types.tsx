@@ -29,11 +29,8 @@ export interface Routine {
 
 export type LeaderBoardResponseUser = {
   id: number;
-  userCount: number;
-  userTime: number;
-  username: string;
-  communityName: string;
-  completedAt: string;
+  name: string;
+  score: number;
 };
 
 export type LeaderBoardUser = {
@@ -41,6 +38,5 @@ export type LeaderBoardUser = {
   date: string;
   order: number;
   userId: number;
-  points: number;
-  community: string;
+  score: number;
 };

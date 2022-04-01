@@ -28,21 +28,17 @@ const useLeaderboard = create<LeaderboardStore>(
     getLeaderboardId: async (challengeId: number) => {
       if (!challengeId) return [];
 
-      const url = `${API}/leaderboards/${challengeId}`;
-      const event = await (await fetch(url)).json();
-      const leaderboardUsers = event.usersPassed as LeaderBoardResponseUser[];
-      const newData = leaderboardUsers.sort(
-        (a, b) => a.userCount - b.userCount,
-      ) as LeaderBoardResponseUser[];
+      const url = `${API}/leaderboards/${challengeId}/communities`;
+      const leaderboardCommunities = (await (await fetch(url)).json()) as LeaderBoardResponseUser[];
+      const newData = leaderboardCommunities.sort((a, b) => a.score - b.score);
 
-      const leaderboard = newData.map((user, i) => {
+      const leaderboard = newData.map((community, i) => {
         return {
           order: i + 1,
-          userId: user.id,
-          name: user.username,
-          points: user.userCount,
-          community: user.communityName,
-          date: dayjs(user.completedAt).format('MM.DD.YY'),
+          userId: community.id,
+          name: community.name,
+          score: community.score,
+          date: dayjs().format('MM.DD.YY'),
         };
       });
 
