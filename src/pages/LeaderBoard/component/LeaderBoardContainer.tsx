@@ -11,7 +11,8 @@ const LeaderBoardContainer: FC<Props> = ({ children }) => {
       w="full"
       flexDir="column"
       align="flex-start"
-      overflowX="scroll"
+      overflowX="auto"
+      overflowY="auto"
       borderRadius="24px"
       bg="rgba(255, 255, 255, 0.04)"
       pl={{ base: '16px', md: '32px' }}
