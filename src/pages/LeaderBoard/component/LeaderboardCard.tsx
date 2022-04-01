@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Spinner, Text, VStack } from '@chakra-ui/react';
 import { LeaderBoardUser } from 'hooks/store/types';
 import LeaderBoardContainer from './LeaderBoardContainer';
@@ -44,7 +45,6 @@ const LeaderboardCard = ({
           </LeaderBoardContainer>
         </>
       )}
-      {!data || (data?.length < 1 && <Spinner h={20} w={20} />)}
     </VStack>
   );
 };
