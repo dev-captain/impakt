@@ -46,13 +46,13 @@ const ImpaktGamesHero = () => {
                   isHorizontal
                   iconName="Windows"
                   title="Download for Windows"
-                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
+                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_v1.1.8.zip"
                 />
                 <DownloadButton
                   isHorizontal
                   iconName="Apple"
                   title="Download for Mac"
-                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
+                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Mac/Impakt_Mac_v1.1.8.zip"
                 />
               </Wrapper>
             </VStack>

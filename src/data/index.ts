@@ -73,7 +73,7 @@ export const Videos = {
 export const Socials = {
   facebook: '',
   youtube: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw',
-  twitter: 'https://twitter.com/demideuszin',
+  twitter: 'https://twitter.com/impaktlife',
   discord: 'https://discord.gg/eVQJ8XRa9S',
 };
 
