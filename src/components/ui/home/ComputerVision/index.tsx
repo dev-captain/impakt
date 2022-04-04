@@ -13,7 +13,9 @@ const ComputerVisionHero = () => {
   return (
     <HeroLayout minH="70vh" align="flex-start" justify="flex-start">
       <VStack color={text} w="full" spacing={{ base: '32px', lg: '16px' }} px="16px">
-        <Text textStyle="bold7">Computer vision</Text>
+        <Text textStyle="bold7" textAlign={{ base: 'center', sm: 'center' }}>
+          Computer vision
+        </Text>
         <HStack
           maxW="1232px"
           w="full"
@@ -54,7 +56,6 @@ const ComputerVisionHero = () => {
               smallTitle="COMPUTER VISION"
               title="Your body is the controller"
               description="A webcam & laptop or a smartphone! That's all you need to join our platform!"
-              // description="You don’t need extra hardware. Just use the camera of your laptop or phone and you will be able to enjoy our platform"
             />
           </AnimationInWhenVisible>
         </HStack>

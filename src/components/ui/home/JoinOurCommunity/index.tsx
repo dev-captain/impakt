@@ -46,10 +46,15 @@ const JoinOurCommunity = () => {
                 justify="center"
                 align="flex-start"
                 zIndex={10}
-                pl={{ base: '32px', md: '120px' }}
+                pl={{ base: '50px', md: '120px' }}
+                pr={{ base: '50px', md: '0' }}
               >
-                <VStack spacing="4px" align="flex-start">
-                  <Text textStyle={{ base: 'bold6', md: 'bold5' }} maxW="340px">
+                <VStack spacing="4px" align="flex-start" w="100%">
+                  <Text
+                    width={{ base: 'full' }}
+                    textStyle={{ base: 'bold6', md: 'bold5' }}
+                    maxW="340px"
+                  >
                     Join our community
                   </Text>
                   <Text textStyle={{ base: 'regular3', md: 'regular4' }} maxW="340px" opacity={0.6}>
