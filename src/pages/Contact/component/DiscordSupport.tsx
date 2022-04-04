@@ -12,9 +12,12 @@ import {
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { layoutPadding } from 'theme';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
 import { ContactProps } from './ContactProps';
 
 const DiscordSupport = () => {
+  const { t } = useTranslation().i18n;
   const mode = useColorModeValue('dark', 'light');
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -47,8 +50,8 @@ const DiscordSupport = () => {
             pb={{ base: '20px', md: '80px' }}
             flexDir={{ base: 'column', xl: 'row' }}
           >
-            <Text textStyle={{ base: 'regular5', md: 'light7' }}>Join our</Text>
-            <Text textStyle={{ base: 'bold5', md: 'bold7' }}>Discord Support</Text>
+            <Text textStyle={{ base: 'regular5', md: 'light7' }}>{t(keys.contact.joinOur)}</Text>
+            <Text textStyle={{ base: 'bold5', md: 'bold7' }}>{t(keys.contact.discordSupport)}</Text>
           </HStack>
         </GridItem>
         <GridItem

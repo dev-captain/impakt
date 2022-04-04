@@ -48,6 +48,7 @@ const HeroLayout = ({
       >
         {showNavbar && <Navbar />}
         <VStack
+          overflow="hidden"
           minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
           minW="full"
           align={align}
@@ -55,8 +56,8 @@ const HeroLayout = ({
           backgroundSize="cover"
           backgroundImage={bgImage}
           backgroundColor={bgColor || backgroundColor}
-          backgroundPosition="bottom"
-          paddingTop={showNavbar ? '120px' : '0px'}
+          backgroundPosition={{ base: 'top', md: 'bottom' }}
+          paddingTop={showNavbar ? '100px' : '0px'}
           paddingBottom={
             customPadding || {
               base: removeBottomPadding ? 0 : '60px',

@@ -9,7 +9,7 @@ const WindowIcon = (props: SVGProps<SVGSVGElement>) => (
       display: 'block',
       fill: 'currentColor',
       flexShrink: 0,
-      marginRight: 8,
+      marginLeft: 8,
     }}
     className="windowsLogo"
     {...props}

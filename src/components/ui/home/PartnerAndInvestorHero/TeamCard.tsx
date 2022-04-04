@@ -17,15 +17,17 @@ const TeamCard = ({
   return (
     <VStack
       w="full"
-      pb="36px"
-      maxW="368px"
+      paddingLeft="15px"
+      paddingRight="15px"
+      pb="40px"
+      maxW="300px"
       align="center"
       justify="center"
       bgColor={bgColor}
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      maxH="467px"
+      maxH="418px"
       h="full"
       _hover={{
         transition: '0.5s ease',
@@ -34,13 +36,27 @@ const TeamCard = ({
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <VStack>
-        <Image src={image} maxW="330" maxH="336px" alt={alt} mt="16px" borderRadius="28px" />
+        <Image
+          src={image}
+          objectFit="cover"
+          maxW="270"
+          h="270px"
+          alt={alt}
+          mt="16px"
+          borderRadius="28px"
+        />
       </VStack>
-      <VStack align="center" justify="center">
-        <Text textStyle="bold5" pt="8px" align="center">
+      <VStack align="center" justify="center" marginTop="10px !important">
+        <Text textStyle="bold5" align="center">
           {name}
         </Text>
-        <Text textStyle="regular4" opacity="0.6" align="center" color={subTitleColor}>
+        <Text
+          textStyle="regular4"
+          opacity="0.6"
+          align="center"
+          color={subTitleColor}
+          marginTop="0 !important"
+        >
           {title}
         </Text>
       </VStack>

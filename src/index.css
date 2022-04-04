@@ -14,3 +14,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.leaderBoard::-webkit-scrollbar {
+  width: 16px;
+}
+
+.leaderBoard::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+}
+
+.leaderBoard::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+}
+
+.grid { width: '100%'; display: flex; flex-wrap: wrap;}

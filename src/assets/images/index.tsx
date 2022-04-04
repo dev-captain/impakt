@@ -4,6 +4,7 @@
 const Images = {
   dark: require('./dark.png'),
   light: require('./light.png'),
+  star: require('./star.png'),
   Common: {
     Logo: require('./logo.png'),
     LogoLight: require('./logo-light.png'),
@@ -16,9 +17,18 @@ const Images = {
     Header: require('./bg-header.png'),
     Peter: require('./video.webp'),
     Peter404: require('./peter404.png'),
+    Laptop: require('./laptop.svg'),
+    blitzChallenge: require('./blitz-challenge.png'),
+    bgWave: require('./bg-wave.png'),
+    play: require('./play.png'),
   },
+
   motionCapture: require('./motion-capture.webp'),
   burnAndEarn: require('./burn-to-earn-hero.webp'),
+  computerVision: require('./computer-vision.png'),
+  burnAndEarnPeople: require('./burnAndEarnPeople.png'),
+  impaktLaptop: require('./impakt-laptop.png'),
+  joinOurCommunity: require('./join-our-community.png'),
 
   contact: {
     md: require('./contact.webp'),
@@ -27,21 +37,7 @@ const Images = {
   } as any,
 
   impaktGames: {
-    Header: (view: 'base' | 'sm' | 'md' | 'xl' | '2xl' | boolean) => {
-      return require('./bg.png');
-      switch (view) {
-        case 'base':
-        case 'sm':
-        case 'md':
-          return require('./impaktGamesHeroBg/md.webp');
-        case 'xl':
-          return require('./impaktGamesHeroBg/xl.webp');
-        case '2xl':
-          return require('./impaktGamesHeroBg/2xl.webp');
-        default:
-          return require('./impaktGamesHeroBg/xl.webp');
-      }
-    },
+    Header: require('./bg.png'),
     light: require('./bg-light.png'),
   },
   advisor: {

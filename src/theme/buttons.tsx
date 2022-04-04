@@ -2,6 +2,22 @@ import type { SystemStyleObject } from '@chakra-ui/theme-tools';
 
 export default {
   variants: {
+    discord: {
+      borderRadius: '20px',
+      minH: '64px',
+      px: '74px',
+      bg: 'linear-gradient(143.78deg, #7783F0 18.94%, #5361D6 78.86%)',
+      boxShadow: 'dark',
+      _hover: {
+        background: 'linear-gradient(143.78deg, #7783F0 18.94%, #5361D6 78.86%)',
+        boxShadow: 'dark',
+      },
+      _disabled: {
+        opacity: 0.4,
+        boxShadow: 'dark',
+        backgroundColor: 'accentRed',
+      },
+    },
     accent: {
       borderRadius: '20px',
       minH: '64px',

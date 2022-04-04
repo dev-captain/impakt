@@ -73,7 +73,7 @@ export const Videos = {
 export const Socials = {
   facebook: '',
   youtube: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw',
-  twitter: 'https://twitter.com/demideuszin',
+  twitter: 'https://twitter.com/impaktlife',
   discord: 'https://discord.gg/eVQJ8XRa9S',
 };
 
@@ -228,7 +228,7 @@ export const RoadmapInfo = [
     title: 'Q4 2021',
     items: [
       {
-        title: 'Develop Computer Vision System',
+        title: 'q4_1',
         isDone: true,
       },
     ],
@@ -241,15 +241,15 @@ export const RoadmapInfo = [
     title: 'Q1 2022',
     items: [
       {
-        title: 'Alpha Test App',
+        title: 'q1_1',
         isDone: true,
       },
       {
-        title: 'Daily/Weekly Routines',
+        title: 'q1_2',
         isDone: false,
       },
       {
-        title: 'Centralized Economy',
+        title: 'q1_3',
         isDone: false,
       },
     ],
@@ -262,11 +262,11 @@ export const RoadmapInfo = [
     title: 'Q2 2022',
     items: [
       {
-        title: 'Genesis NFT Mint',
+        title: 'q2_1',
         isDone: false,
       },
       {
-        title: 'Decentralized Economy',
+        title: 'q2_2',
         isDone: false,
       },
     ],
@@ -279,7 +279,7 @@ export const RoadmapInfo = [
     title: 'Q3 2022',
     items: [
       {
-        title: 'Release SDK',
+        title: 'q3_1',
         isDone: false,
       },
     ],
@@ -290,3 +290,79 @@ export const RoadmapInfo = [
   },
 ];
 export default {};
+
+export const LeaderBoardData = [
+  {
+    order: 1,
+    name: 'CapnCrunc',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 2,
+    name: 'CapnCrunc',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 3,
+    name: 'CapnCrunc',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 4,
+    name: 'CapnCruncx',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 5,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 6,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 7,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+  {
+    order: 8,
+    name: 'CapnCrunco',
+    community: 'Cereal',
+    date: '02.11.22',
+    points: '8,500',
+  },
+];
+
+export const CommunityData = [
+  'lorem',
+  'Tron',
+  'Ontology',
+  'ThunderoCore',
+  'WAX',
+  'Hive',
+  'DEP',
+  'Tron',
+  'Polugoon',
+  'NEAR',
+  'Avalanche',
+  'Telos',
+  'Moonriver',
+  'Cronos',
+];

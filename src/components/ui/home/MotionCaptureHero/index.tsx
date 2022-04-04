@@ -11,8 +11,10 @@ import {
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
+import { useTranslation } from 'react-i18next';
 import { layoutPadding } from 'theme';
 import colors from 'theme/colors';
+import keys from 'i18n/types';
 import MotionCard from './MotionCard';
 
 const commonProps: any = {
@@ -26,6 +28,7 @@ const MotionCaptureHero = () => {
   const cardBg = useColorModeValue('glass.800', 'glass.100');
   const textColor = useColorModeValue(colors.glass[100], colors.glass[700]);
   const modal = useModalStore((state) => state);
+  const { t } = useTranslation(`default`).i18n;
 
   return (
     <HeroLayout
@@ -73,11 +76,11 @@ const MotionCaptureHero = () => {
                 fontSize={{ base: '40px', md: '56px' }}
                 lineHeight={{ base: '40px', md: '60px' }}
               >
-                <Text fontWeight="300">Computer Vision</Text>
-                <Text fontWeight="700">Technology</Text>
+                <Text fontWeight="300">{t(keys.computerVision.computerVision)}</Text>
+                <Text fontWeight="700">{t(keys.computerVision.technology)}</Text>
               </VStack>
               <Text maxW="440px" fontSize="20px" opacity="0.62" fontWeight="400" lineHeight="32px">
-                Use your body as a controller - move, sweat, get fit.
+                {t(keys.computerVision.description)}
               </Text>
             </VStack>
             <HStack
@@ -100,10 +103,10 @@ const MotionCaptureHero = () => {
                   }}
                 >
                   <MotionCard
-                    iconColor={textColor}
-                    bgColor={cardBg}
-                    title="No extra hardware necessary"
                     isVrGlass
+                    bgColor={cardBg}
+                    iconColor={textColor}
+                    title={t(keys.computerVision.hardwareCard)}
                   />
                 </GridItem>
                 <GridItem
@@ -113,9 +116,9 @@ const MotionCaptureHero = () => {
                   }}
                 >
                   <MotionCard
-                    iconColor={textColor}
                     bgColor={cardBg}
-                    title="Use the camera on your phone or laptop"
+                    iconColor={textColor}
+                    title={t(keys.computerVision.cameraCard)}
                   />
                 </GridItem>
               </SimpleGrid>

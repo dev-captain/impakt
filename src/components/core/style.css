@@ -1,0 +1,8 @@
+.buttonHover, .buttonHover svg, .buttonHover p{
+    color: #fff;
+}
+.buttonHover:hover, .buttonHover:hover svg, .buttonHover:hover, .buttonHover:hover p{
+    color: #0B1725;
+    fill: #0B1725;
+    opacity: 1;
+}

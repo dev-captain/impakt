@@ -8,10 +8,12 @@ const CountDown = ({
   date,
   bgColor,
   isLoading,
+  noEventTitle,
 }: {
   date: Date;
   bgColor: string;
   isLoading?: boolean;
+  noEventTitle: string;
 }) => {
   const countdown = useCountdown(date);
   const items = ['days', 'hours', 'minutes', 'seconds'];
@@ -35,7 +37,7 @@ const CountDown = ({
           <GridItem colSpan={4}>
             <VStack>
               {isLoading && <Spinner size="xl" />}
-              {!isLoading && <Text textStyle="regular5">Wait for updates</Text>}
+              {!isLoading && <Text textStyle="regular5">{noEventTitle}</Text>}
             </VStack>
           </GridItem>
         )}

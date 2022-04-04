@@ -18,12 +18,15 @@ import useContactUs from 'hooks/useContactUs';
 import React, { useState } from 'react';
 import { layoutPadding } from 'theme';
 import { validateEmail } from 'utils';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
 import { ContactProps } from './ContactProps';
 
 const SendMessage = () => {
+  const { t } = useTranslation().i18n;
   const [isLessThan355] = useMediaQuery('(max-width: 355px)');
   const bgColor = useColorModeValue('glass.800', 'glass.300');
-  const bgImage = useColorModeValue(Images.impaktGames.Header('xl'), Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const { sendData, loading } = useContactUs();
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const [values, setValues] = useState({
@@ -77,10 +80,10 @@ const SendMessage = () => {
           >
             <HStack {...ContactProps.mHStack} pb={{ base: '20px', md: '80px' }} w="full">
               <Text textStyle={{ base: isLessThan355 ? 'regular4' : 'regular5', md: 'light7' }}>
-                Get in Touch
+                {t(keys.contact.getInTouch)}
               </Text>
               <Text textStyle={{ base: isLessThan355 ? 'bold4' : 'bold5', md: 'bold7' }}>
-                with Us
+                {t(keys.contact.withUs)}
               </Text>
             </HStack>
           </GridItem>
@@ -98,7 +101,9 @@ const SendMessage = () => {
             display="flex"
           >
             <VStack bgColor={bgColor} {...ContactProps.messageVStack}>
-              <Text textStyle={{ base: 'regular4', md: 'regular5' }}>Send us a Message</Text>
+              <Text textStyle={{ base: 'regular4', md: 'regular5' }}>
+                {t(keys.contact.sendUsMessage)}
+              </Text>
               <VStack w="full" spacing="16px">
                 <TextField
                   name="name"
@@ -106,7 +111,7 @@ const SendMessage = () => {
                   fontSize="14px"
                   onChange={onChange}
                   textStyle="regular2"
-                  placeholder="Your name"
+                  placeholder={t(keys.contact.yourName)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
                 <TextField
@@ -115,7 +120,7 @@ const SendMessage = () => {
                   fontSize="14px"
                   onChange={onChange}
                   textStyle="regular2"
-                  placeholder="Your e-mail"
+                  placeholder={t(keys.contact.yourEmail)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
                 <TextField
@@ -124,7 +129,7 @@ const SendMessage = () => {
                   fontSize="14px"
                   onChange={onChange}
                   textStyle="regular2"
-                  placeholder="Topic of the message"
+                  placeholder={t(keys.contact.topicOfMessage)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
                 <TextareaField
@@ -133,7 +138,7 @@ const SendMessage = () => {
                   fontSize="14px"
                   onChange={onChange}
                   textStyle="regular2"
-                  placeholder="Your message"
+                  placeholder={t(keys.contact.yourMessage)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
                 <Box {...ContactProps.gradients.first} />
@@ -142,10 +147,10 @@ const SendMessage = () => {
               <VStack w="full" align={{ base: 'center', md: 'flex-end' }}>
                 <GradientButton
                   py="32px"
-                  title="Send"
                   minW="240px"
                   radius="14px"
                   onClick={onSubmit}
+                  title={t(keys.contact.send)}
                   disabled={isDisabled || loading}
                   bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
                 />

@@ -19,15 +19,17 @@ const InvestorCard = ({
   return (
     <VStack
       w="full"
-      pb="36px"
-      maxW="368px"
+      paddingLeft="10px"
+      paddingRight="10px"
+      pb="65px"
+      maxW="310px"
       align="center"
       justify="center"
       bgColor={bgColor}
       overflow="hidden"
       position="relative"
       borderRadius="28px"
-      maxH="550px"
+      maxH="449px"
       h="full"
       _hover={{
         transition: '0.5s ease',
@@ -39,21 +41,35 @@ const InvestorCard = ({
         <Image
           src={image}
           objectFit="cover"
-          maxW="330"
-          h="336px"
+          maxW="270px"
+          h="270px"
           alt={alt}
           mt="16px"
           borderRadius="28px"
         />
       </VStack>
-      <VStack align="center" justify="center">
-        <Text textStyle="bold5" pt="8px" align="center">
+      <VStack align="center" justify="center" marginTop="10px !important">
+        <Text textStyle="bold5" paddingBottom="5px" align="center">
           {name}
         </Text>
-        <Text textStyle="regular4" opacity="0.6" align="center" color={subTitleColor}>
+        <Text
+          textStyle="regular3"
+          margin="0 !important"
+          opacity="0.6"
+          align="center"
+          color={subTitleColor}
+        >
           {title}
         </Text>
-        <Text height="20px" opacity="0.6" align="center" display="inline" color={subTitleColor}>
+        <Text
+          height="20px"
+          textStyle="regular3"
+          margin="0 !important"
+          opacity="0.6"
+          align="center"
+          display="inline"
+          color={subTitleColor}
+        >
           {subtitle}
         </Text>
       </VStack>

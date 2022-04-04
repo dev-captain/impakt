@@ -1,10 +1,12 @@
 import {
+  Box,
   GridItem,
   HStack,
   Image,
   SimpleGrid,
   Text,
   useColorModeValue,
+  useMediaQuery,
   VStack,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
@@ -14,13 +16,17 @@ import TextField from 'components/core/TextField';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useContactUs from 'hooks/useContactUs';
 import React, { useState } from 'react';
-import { layoutPadding } from 'theme';
 import { validateEmail } from 'utils';
-import { ContactGradientEllipse, ContactGradientEllipse1 } from '../gradients';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
+import { ContactProps } from 'pages/Contact/component/ContactProps';
+import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 
-const Contact = () => {
+const SendMessage = () => {
+  const { t } = useTranslation().i18n;
+  const [isLessThan355] = useMediaQuery('(max-width: 355px)');
+  const bgColor = useColorModeValue('glass.800', 'glass.300');
   const { sendData, loading } = useContactUs();
-  const bgColor = useColorModeValue('glass.800', 'glass.200');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const [values, setValues] = useState({
     email: '',
@@ -50,95 +56,114 @@ const Contact = () => {
     !validateEmail(values.email);
 
   return (
-    <HeroLayout minH="70vh">
-      <VStack px={layoutPadding} w="full" color={textColor}>
-        <SimpleGrid columns={2} w="full" columnGap={4}>
-          <GridItem colSpan={1} d={{ base: 'none', md: 'flex' }}>
-            <Image
-              maxH="600px"
-              objectFit="contain"
-              srcSet={`${Images.contact.md} 900w, ${Images.contact.xl} 1200w`}
-            />
-          </GridItem>
-          <GridItem colSpan={{ base: 2, sm: 2, md: 1 }}>
-            <VStack
+    <HeroLayout minH="20vh">
+      <VStack w="full">
+        <VStack
+          {...ContactProps.mVStack}
+          px="16px"
+          maxW="1232px"
+          pt={{ base: '16px', md: '70px' }}
+          color={textColor}
+        >
+          <SimpleGrid {...ContactProps.sGrid}>
+            <GridItem
+              colSpan={{
+                base: 2,
+                md: 2,
+              }}
               w="full"
-              spacing="24px"
-              align="flex-start"
-              alignItems={{ base: 'center', md: 'flex-start' }}
+              alignItems="center"
+              justifyContent="center"
+              display="flex"
             >
-              <HStack
-                display="flex"
-                alignItems="center"
-                lineHeight={{ base: '40px', md: '60px' }}
-                fontSize={{ base: '40px', md: '56px' }}
-              >
-                <Text
-                  fontSize={{ base: '40px', md: '56px' }}
-                  fontWeight="700"
-                  lineHeight={{ base: '40px', md: '60px' }}
-                  marginRight={{
-                    base: '5px',
-                    md: '15px',
-                  }}
-                >
-                  Contact
+              <HStack {...ContactProps.mHStack} pb={{ base: '20px', md: '20px' }} w="full">
+                <Text textStyle={{ base: isLessThan355 ? 'bold4' : 'bold5', md: 'bold7' }}>
+                  {t(keys.contact.getInTouch)} {` `}
+                  {t(keys.contact.withUs)}
                 </Text>
-                <Text>Us</Text>
               </HStack>
-              <VStack
-                bgColor={bgColor}
+            </GridItem>
+            <AnimationInWhenVisible animationType="move" isLeft>
+              <GridItem {...ContactProps.sGridItem}>
+                <Image src={Images.contactUs.hiPeter} display={{ base: 'none', lg: 'flex' }} />
+              </GridItem>
+            </AnimationInWhenVisible>
+            <AnimationInWhenVisible animationType="move">
+              <GridItem
+                colSpan={{
+                  base: 2,
+                  lg: 1,
+                }}
                 w="full"
-                px="48px"
-                py="40px"
-                borderRadius="28px"
-                maxW="600px"
-                align="flex-start"
-                overflow="hidden"
-                position="relative"
-                spacing="32px"
-                filter="drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.12)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.1))"
+                alignItems="center"
+                justifyContent="center"
+                display="flex"
               >
-                <ContactGradientEllipse />
-                <ContactGradientEllipse1 />
-                <VStack w="full" spacing="16px">
-                  <TextField
-                    placeholder="Your name"
-                    name="name"
-                    onChange={onChange}
-                    _placeholder={{ color: textColor }}
-                  />
-                  <TextField
-                    placeholder="Your e-mail"
-                    name="email"
-                    onChange={onChange}
-                    _placeholder={{ color: textColor }}
-                  />
-                  <TextareaField
-                    placeholder="Your message"
-                    name="message"
-                    onChange={onChange}
-                    _placeholder={{ color: textColor }}
-                  />
+                <VStack bgColor={bgColor} {...ContactProps.messageVStack}>
+                  <Text textStyle={{ base: 'regular4', md: 'regular5' }}>
+                    {t(keys.contact.sendUsMessage)}
+                  </Text>
+                  <VStack w="full" spacing="16px">
+                    <TextField
+                      name="name"
+                      isOutlined
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.yourName)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <TextField
+                      name="email"
+                      isOutlined
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.yourEmail)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <TextField
+                      isOutlined
+                      name="subject"
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.topicOfMessage)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <TextareaField
+                      isOutlined
+                      name="message"
+                      fontSize="14px"
+                      onChange={onChange}
+                      textStyle="regular2"
+                      placeholder={t(keys.contact.yourMessage)}
+                      _placeholder={{ color: textColor, fontSize: '14px' }}
+                    />
+                    <Box {...ContactProps.gradients.first} />
+                    <Box {...ContactProps.gradients.second} />
+                  </VStack>
+                  <VStack w="full" align={{ base: 'center', md: 'flex-end' }}>
+                    <GradientButton
+                      py="32px"
+                      minW="240px"
+                      radius="14px"
+                      onClick={onSubmit}
+                      title={t(keys.contact.send)}
+                      disabled={isDisabled || loading}
+                      bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                    />
+                  </VStack>
+                  <Box {...ContactProps.gradients.first} />
+                  <Box {...ContactProps.gradients.second} />
                 </VStack>
-                <VStack w="full" align="flex-end">
-                  <GradientButton
-                    py="32px"
-                    title="Send"
-                    minW="240px"
-                    radius="14px"
-                    onClick={onSubmit}
-                    disabled={isDisabled || loading}
-                    bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                  />
-                </VStack>
-              </VStack>
-            </VStack>
-          </GridItem>
-        </SimpleGrid>
+              </GridItem>
+            </AnimationInWhenVisible>
+          </SimpleGrid>
+        </VStack>
       </VStack>
     </HeroLayout>
   );
 };
 
-export default Contact;
+export default SendMessage;
