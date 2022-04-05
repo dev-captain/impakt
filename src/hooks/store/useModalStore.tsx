@@ -1,5 +1,5 @@
-import { Videos } from 'data';
 import create, { SetState } from 'zustand';
+// import { Videos } from 'data';
 
 type ModalStore = {
   modal: {
@@ -30,9 +30,22 @@ const useModalStore = create<ModalStore>((set: SetState<ModalStore>) => ({
       ...state,
       show: true,
       modal: {
-        path: Videos.impaktGames,
+        showPlayer: false,
+        hideButtons: true,
+        isYoutubeVideo: true,
+        youtubeUrl: 'https://www.youtube.com/embed/8yNNFJh134Y',
       },
     })),
+
+  // setImpaktGames: () =>
+  //   set((state) => ({
+  //     ...state,
+  //     show: true,
+  //     modal: {
+  //       path: Videos.impaktGames,
+  //     },
+  //   })),
+
   setBurnAndEarn: () =>
     set((state) => ({
       ...state,
