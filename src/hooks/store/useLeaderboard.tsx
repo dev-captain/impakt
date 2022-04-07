@@ -32,15 +32,17 @@ const useLeaderboard = create<LeaderboardStore>(
       const leaderboardCommunities = (await (await fetch(url)).json()) as LeaderBoardResponseUser[];
       const newData = leaderboardCommunities.sort((a, b) => a.score - b.score);
 
-      const leaderboard = newData.map((community, i) => {
-        return {
-          order: i + 1,
-          userId: community.id,
-          name: community.name,
-          score: community.score,
-          date: dayjs().format('MM.DD.YY'),
-        };
-      });
+      const leaderboard = newData
+        .sort((firstscore, secondscore) => (firstscore.score > secondscore.score ? -1 : 1))
+        .map((community, i) => {
+          return {
+            order: i + 1,
+            userId: community.id,
+            name: community.name,
+            score: community.score,
+            date: dayjs().format('MM.DD.YY'),
+          };
+        });
 
       return leaderboard;
     },
