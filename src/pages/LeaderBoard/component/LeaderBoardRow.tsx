@@ -2,7 +2,6 @@ import { Flex, GridItem, HStack, Image, SimpleGrid, Text } from '@chakra-ui/reac
 import Images from 'assets/images';
 
 type Props = {
-  date: string;
   name: string;
   order: number;
   score: number;
@@ -10,7 +9,7 @@ type Props = {
   isSmallView?: boolean;
 };
 
-const LeaderBoardRow = ({ name, date, order, score, showStar, isSmallView }: Props) => {
+const LeaderBoardRow = ({ name, order, score, showStar, isSmallView }: Props) => {
   if (isSmallView) {
     return (
       <Flex justifyContent="space-around">
@@ -24,7 +23,7 @@ const LeaderBoardRow = ({ name, date, order, score, showStar, isSmallView }: Pro
               {name}
             </Text>
           </HStack>
-          <Text
+          {/* <Text
             pr="8px"
             w="210px"
             opacity={0.3}
@@ -33,8 +32,8 @@ const LeaderBoardRow = ({ name, date, order, score, showStar, isSmallView }: Pro
             textStyle="regular4"
           >
             {date}
-          </Text>
-          <Text textStyle="regular4" color="red.300" align="center" pr="8px" w="210px">
+          </Text> */}
+          <Text textStyle="regular4" color="red.300" align="center" pr="8px" w="80px">
             {score}
           </Text>
         </Flex>
@@ -44,12 +43,12 @@ const LeaderBoardRow = ({ name, date, order, score, showStar, isSmallView }: Pro
 
   return (
     <SimpleGrid columns={9} paddingY="16px">
-      <GridItem colSpan={1} w="100px">
+      <GridItem colSpan={3} w="100px" marginLeft={{ base: '0', md: '150px' }}>
         <Text textStyle="regular4" opacity="0.3">
           #{order}
         </Text>
       </GridItem>
-      <GridItem colSpan={4} w="200px">
+      <GridItem colSpan={3} w="300px" marginLeft={{ base: '0', md: '100px' }}>
         <HStack spacing="14px" justify="flex-start" align="center">
           {showStar && <Image src={Images.star} w="20px" h="19px" objectFit="contain" />}
           <Text textStyle="bold4" pl={showStar ? 0 : '42px'}>
@@ -57,12 +56,12 @@ const LeaderBoardRow = ({ name, date, order, score, showStar, isSmallView }: Pro
           </Text>
         </HStack>
       </GridItem>
-      <GridItem colSpan={2}>
+      {/* <GridItem colSpan={2}>
         <Text textStyle="regular4" opacity={0.3} align="center">
           {date}
         </Text>
-      </GridItem>
-      <GridItem colSpan={2}>
+      </GridItem> */}
+      <GridItem colSpan={3} marginRight={{ base: '0', md: '150px' }}>
         <Text textStyle="bold4" color="red.300" align="right">
           {score}
         </Text>
