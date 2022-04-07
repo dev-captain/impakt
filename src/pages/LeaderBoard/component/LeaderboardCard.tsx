@@ -27,7 +27,7 @@ const LeaderboardCard = ({
       {data?.length > 0 && (
         <>
           <LeaderBoardContainer>
-            {data?.sort((firstscore, secondscore) => (firstscore.score > secondscore.score ? -1 : 1)).slice(0, 3).map((item, index) => {
+            {data?.slice(0, 3).map((item, index) => {
               return (
                 <LeaderBoardRow
                   {...item}
