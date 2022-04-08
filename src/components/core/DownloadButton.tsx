@@ -12,7 +12,7 @@ const DownloadButton = ({
   link: string;
   title: string;
   isHorizontal?: boolean;
-  iconName: 'Apple' | 'Windows';
+  iconName: 'Apple' | 'Windows' | '';
 }) => {
   const Wrapper = isHorizontal ? HStack : VStack;
 
