@@ -63,10 +63,11 @@ const LeaderBoard = () => {
               </Text>
               <Button
                 as="a"
-                href="https://airtable.com/shrlRU72JdcfXIvKj"
                 variant="accent"
-                onClick={() => {}}
-                display={{ base: 'none', md: 'flex' }}
+                target="_blank"
+                _focus={{}}
+                cursor="pointer"
+                href="https://airtable.com/shrlRU72JdcfXIvKj"
               >
                 <Text textStyle="semiBold16" color="glass.100">
                   Fill out the form to register your community!
