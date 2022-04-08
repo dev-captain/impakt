@@ -25,6 +25,7 @@ import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 const SendMessage = () => {
   const { t } = useTranslation().i18n;
   const [isLessThan355] = useMediaQuery('(max-width: 355px)');
+  const [isLessThan992] = useMediaQuery('(max-width: 992px)');
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const { sendData, loading } = useContactUs();
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -65,7 +66,10 @@ const SendMessage = () => {
           pt={{ base: '16px', md: '70px' }}
           color={textColor}
         >
-          <SimpleGrid {...ContactProps.sGrid}>
+          <SimpleGrid
+            {...ContactProps.sGrid}
+            templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}
+          >
             <GridItem
               colSpan={{
                 base: 2,
@@ -83,82 +87,91 @@ const SendMessage = () => {
                 </Text>
               </HStack>
             </GridItem>
-            <AnimationInWhenVisible animationType="move" isLeft>
-              <GridItem {...ContactProps.sGridItem}>
-                <Image src={Images.contactUs.hiPeter} display={{ base: 'none', lg: 'flex' }} />
-              </GridItem>
-            </AnimationInWhenVisible>
-            <AnimationInWhenVisible animationType="move">
-              <GridItem
-                colSpan={{
-                  base: 2,
-                  lg: 1,
-                }}
-                w="full"
-                alignItems="center"
-                justifyContent="center"
-                display="flex"
-              >
-                <VStack bgColor={bgColor} {...ContactProps.messageVStack}>
-                  <Text textStyle={{ base: 'regular4', md: 'regular5' }}>
-                    {t(keys.contact.sendUsMessage)}
-                  </Text>
-                  <VStack w="full" spacing="16px">
-                    <TextField
-                      name="name"
-                      isOutlined
-                      fontSize="14px"
-                      onChange={onChange}
-                      textStyle="regular2"
-                      placeholder={t(keys.contact.yourName)}
-                      _placeholder={{ color: textColor, fontSize: '14px' }}
-                    />
-                    <TextField
-                      name="email"
-                      isOutlined
-                      fontSize="14px"
-                      onChange={onChange}
-                      textStyle="regular2"
-                      placeholder={t(keys.contact.yourEmail)}
-                      _placeholder={{ color: textColor, fontSize: '14px' }}
-                    />
-                    <TextField
-                      isOutlined
-                      name="subject"
-                      fontSize="14px"
-                      onChange={onChange}
-                      textStyle="regular2"
-                      placeholder={t(keys.contact.topicOfMessage)}
-                      _placeholder={{ color: textColor, fontSize: '14px' }}
-                    />
-                    <TextareaField
-                      isOutlined
-                      name="message"
-                      fontSize="14px"
-                      onChange={onChange}
-                      textStyle="regular2"
-                      placeholder={t(keys.contact.yourMessage)}
-                      _placeholder={{ color: textColor, fontSize: '14px' }}
-                    />
+
+            <VStack display={isLessThan992 ? 'none' : ''}>
+              <AnimationInWhenVisible animationType="move" isLeft>
+                <GridItem {...ContactProps.sGridItem}>
+                  <Image src={Images.contactUs.hiPeter} display={{ base: 'none', lg: 'flex' }} />
+                </GridItem>
+              </AnimationInWhenVisible>
+            </VStack>
+            <GridItem
+              colSpan={{ base: isLessThan992 ? 2 : 'auto' }}
+              display={isLessThan992 ? 'block' : ''}
+            >
+              <AnimationInWhenVisible animationType="move">
+                <GridItem
+                  colSpan={{
+                    base: 2,
+                    md: 2,
+                    lg: 1,
+                  }}
+                  w={{ base: 'full', md: 'full' }}
+                  alignItems="center"
+                  justifyContent="center"
+                  display="flex"
+                >
+                  <VStack bgColor={bgColor} {...ContactProps.messageVStack}>
+                    <Text textStyle={{ base: 'regular4', md: 'regular5' }}>
+                      {t(keys.contact.sendUsMessage)}
+                    </Text>
+                    <VStack w="full" spacing="16px">
+                      <TextField
+                        name="name"
+                        isOutlined
+                        fontSize="14px"
+                        onChange={onChange}
+                        textStyle="regular2"
+                        placeholder={t(keys.contact.yourName)}
+                        _placeholder={{ color: textColor, fontSize: '14px' }}
+                      />
+                      <TextField
+                        name="email"
+                        isOutlined
+                        fontSize="14px"
+                        onChange={onChange}
+                        textStyle="regular2"
+                        placeholder={t(keys.contact.yourEmail)}
+                        _placeholder={{ color: textColor, fontSize: '14px' }}
+                      />
+                      <TextField
+                        isOutlined
+                        name="subject"
+                        fontSize="14px"
+                        onChange={onChange}
+                        textStyle="regular2"
+                        placeholder={t(keys.contact.topicOfMessage)}
+                        _placeholder={{ color: textColor, fontSize: '14px' }}
+                      />
+                      <TextareaField
+                        isOutlined
+                        name="message"
+                        fontSize="14px"
+                        onChange={onChange}
+                        textStyle="regular2"
+                        placeholder={t(keys.contact.yourMessage)}
+                        _placeholder={{ color: textColor, fontSize: '14px' }}
+                      />
+                      <Box {...ContactProps.gradients.first} />
+                      <Box {...ContactProps.gradients.second} />
+                    </VStack>
+                    <VStack w="full" align={{ base: 'center', md: 'flex-end' }}>
+                      <GradientButton
+                        py="32px"
+                        minW="240px"
+                        radius="14px"
+                        onClick={onSubmit}
+                        title={t(keys.contact.send)}
+                        disabled={isDisabled || loading}
+                        bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                      />
+                    </VStack>
                     <Box {...ContactProps.gradients.first} />
                     <Box {...ContactProps.gradients.second} />
                   </VStack>
-                  <VStack w="full" align={{ base: 'center', md: 'flex-end' }}>
-                    <GradientButton
-                      py="32px"
-                      minW="240px"
-                      radius="14px"
-                      onClick={onSubmit}
-                      title={t(keys.contact.send)}
-                      disabled={isDisabled || loading}
-                      bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                    />
-                  </VStack>
-                  <Box {...ContactProps.gradients.first} />
-                  <Box {...ContactProps.gradients.second} />
-                </VStack>
-              </GridItem>
-            </AnimationInWhenVisible>
+                </GridItem>
+              </AnimationInWhenVisible>
+            </GridItem>
           </SimpleGrid>
         </VStack>
       </VStack>
