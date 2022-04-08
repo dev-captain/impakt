@@ -44,16 +44,16 @@ const ImpaktGamesHero = () => {
               <Wrapper>
                 <DownloadButton
                   isHorizontal
-                  iconName="Windows"
-                  title="Download for Windows"
+                  iconName=""
+                  title="Download from our Discord"
                   link="https://discord.gg/e38WmMRK"
                 />
-                <DownloadButton
+                {/* <DownloadButton
                   isHorizontal
                   iconName="Apple"
                   title="Download for Mac"
                   link="https://discord.gg/e38WmMRK"
-                />
+                /> */}
               </Wrapper>
             </VStack>
             <ScreenAndVideo

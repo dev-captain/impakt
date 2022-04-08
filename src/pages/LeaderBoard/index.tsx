@@ -61,7 +61,13 @@ const LeaderBoard = () => {
               <Text textStyle={isSmallView ? 'regular3' : 'regular5'} opacity="0.6">
                 Represent your community! Take part in group challenges and win together!
               </Text>
-              <Button variant="accent" onClick={() => {}} display={{ base: 'none', md: 'flex' }}>
+              <Button
+                as="a"
+                href="https://airtable.com/shrlRU72JdcfXIvKj"
+                variant="accent"
+                onClick={() => {}}
+                display={{ base: 'none', md: 'flex' }}
+              >
                 <Text textStyle="semiBold16" color="glass.100">
                   Fill out the form to register your community!
                 </Text>
