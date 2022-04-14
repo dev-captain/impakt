@@ -8,11 +8,16 @@ export default {
     fitness: 'Fitness.',
     gamified: 'Gamified.',
   },
+  downloadPlateform: {
+    download: 'Download',
+    platform: 'our Platform',
+  },
   navbar: {
     events: 'Events',
     contactUs: 'Contact Us',
     impaktFitness: 'Impakt Fitness',
     knowledgeBase: 'Knowledge Base',
+    download: 'Download Platform',
   },
   computerVision: {
     computerVision: 'Computer vision',

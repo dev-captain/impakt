@@ -10,6 +10,7 @@ const computerVision = 'computerVision';
 const impaktGamesHero = 'impaktGamesHero';
 const contactUs = 'contactUs';
 const footer = 'footer';
+const downloadPlateform = 'downloadPlateform';
 
 const TranslationKeys = {
   common: {
@@ -21,11 +22,16 @@ const TranslationKeys = {
     fitness: `${impaktGamesHero}.fitness`,
     gamified: `${impaktGamesHero}.gamified`,
   },
+  downloadPlateform: {
+    download: `${downloadPlateform}.download`,
+    platform: `${downloadPlateform}.platform`,
+  },
   navbar: {
     events: `${navbar}.events`,
     contactUs: `${navbar}.contactUs`,
     impaktFitness: `${navbar}.impaktFitness`,
     knowledgeBase: `${navbar}.knowledgeBase`,
+    download: `${navbar}.download`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,

@@ -29,7 +29,7 @@ const Images = {
   burnAndEarnPeople: require('./burnAndEarnPeople.png'),
   impaktLaptop: require('./impakt-laptop.png'),
   joinOurCommunity: require('./join-our-community.png'),
-
+  downloadlaptop: require('./download.png'),
   contact: {
     md: require('./contact.webp'),
     sm: require('./contact.webp'),

@@ -6,3 +6,4 @@ export { default as Event } from './Event';
 export { default as Contact } from './Contact';
 export { default as Onboarding } from './Onboarding';
 export { default as LeaderBoard } from './LeaderBoard';
+export { default as DownloadSCreen } from './Download';
