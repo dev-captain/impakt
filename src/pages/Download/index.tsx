@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/layout';
-import { DownloadPlatfrom, Footer } from 'components/ui/Download';
+import { DownloadPlatfrom, Footer, SubscriptionForm } from 'components/ui/Download';
 import Seo from 'components/core/Seo';
 import VideoModal from 'components/core/VideoModal';
 
@@ -9,8 +9,12 @@ const DownloadSCreen = () => {
       <VideoModal />
       <Seo />
 
-      <div id="impakt-nft">
+      <div id="download-platform">
         <DownloadPlatfrom />
+      </div>
+
+      <div id="subscription-form">
+        <SubscriptionForm />
       </div>
       <Footer />
     </Container>
