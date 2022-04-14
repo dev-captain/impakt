@@ -25,8 +25,12 @@ const DownloadPlatform = () => {
     >
       <VStack color={text} w="full" pt={{ base: '27px', md: '148px' }}>
         <VStack maxW="1232px" w="full" px="16px">
-          <HStack w="full" justify="space-between">
-            <VStack align={{ base: 'center', md: 'flex-start' }} spacing="37px">
+          <HStack
+            w="full"
+            justify="space-between"
+            flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
+          >
+            <VStack align={{ base: 'center', md: 'flex-start' }} spacing="20px">
               <VStack align="inherit">
                 <DownloadTitleItem title={t(keys.downloadPlateform.download)} />
                 <DownloadTitleItem title={t(keys.downloadPlateform.platform)} />
@@ -35,7 +39,7 @@ const DownloadPlatform = () => {
                 <DownloadButton
                   isHorizontal
                   iconName=""
-                  title="Download from our Discord"
+                  title="Download from Windows"
                   link="https://discord.gg/e38WmMRK"
                 />
                 <DownloadButton
@@ -46,13 +50,9 @@ const DownloadPlatform = () => {
                 />
               </Wrapper>
             </VStack>
-            <Image
-              zIndex={11}
-              maxH="358px"
-              d={{ base: 'none', lg: 'flex' }}
-              src={Images.downloadlaptop}
-            />
-            <VStack />
+            <VStack marginBottom={{ base: '35px !important' }}>
+              <Image zIndex={11} maxH="358px" d="flex" src={Images.downloadlaptop} />
+            </VStack>
           </HStack>
         </VStack>
       </VStack>

@@ -40,16 +40,15 @@ const SubscriptionForm = () => {
       <VStack
         position="relative"
         color={textColor}
-        maxW={{ base: 'full', md: '1232px' }}
-        marginTop="85px"
+        maxW={{ base: 'full', md: '800px' }}
+        marginTop={{ base: '40px !important', md: '85px' }}
         w="full"
-        px="16px"
-        pt={{ base: '100px', md: '0px' }}
+        px="20px"
         filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16));"
       >
         <VStack
           spacing="24px"
-          marginTop="95px !important"
+          marginTop={{ base: '0', md: '95px !important' }}
           mb={{ base: '25px', md: '60px' }}
           textAlign="center"
           overflow="hidden"
@@ -64,8 +63,8 @@ const SubscriptionForm = () => {
           </Text>
           <Text
             textStyle={isSmallView ? 'regular3' : 'regular5'}
-            fontSize={{ base: '24px', md: '18px' }}
-            lineHeight={{ base: '30px', md: '24px' }}
+            fontSize={{ base: '16px', md: '24px' }}
+            lineHeight={{ base: '24px', md: '32px' }}
             opacity="0.6"
           >
             Subscribe to our Newsletter — the best way to stay informed about everything related to
@@ -83,7 +82,7 @@ const SubscriptionForm = () => {
           overflow="hidden"
           marginTop="0 !important"
         >
-          <VStack spacing="16px" w={{ base: 'full', md: '600px' }} borderRadius={16}>
+          <VStack spacing="16px" w={{ base: 'full', md: '424px' }} borderRadius={16}>
             <TextField
               name="email"
               isOutlined
@@ -98,14 +97,14 @@ const SubscriptionForm = () => {
             {/* <Gradients /> */}
           </VStack>
           <VStack
-            w={{ base: 'full', md: '600px' }}
+            w={{ base: 'full', md: '424px' }}
             align={{ base: 'center', md: 'flex-end' }}
             display="flex"
             fontSize={16}
           >
             <GradientButton
               py="24px"
-              w={{ base: 'full', md: '600px' }}
+              w={{ base: 'full', md: '424px' }}
               radius="16px"
               onClick={onSubmit}
               title="Subscribe"
