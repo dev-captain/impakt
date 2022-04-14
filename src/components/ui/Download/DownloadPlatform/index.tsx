@@ -30,12 +30,17 @@ const DownloadPlatform = () => {
             justify="space-between"
             flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
           >
-            <VStack align={{ base: 'center', md: 'flex-start' }} spacing="20px">
+            <VStack
+              align={{ base: 'center', md: 'flex-start' }}
+              spacing="20px"
+              w="full"
+              paddingX={{ base: '50px' }}
+            >
               <VStack align="inherit">
                 <DownloadTitleItem title={t(keys.downloadPlateform.download)} />
                 <DownloadTitleItem title={t(keys.downloadPlateform.platform)} />
               </VStack>
-              <Wrapper>
+              <Wrapper width="full">
                 <DownloadButton
                   isHorizontal
                   iconName="Windows"

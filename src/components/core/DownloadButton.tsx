@@ -19,7 +19,7 @@ const DownloadButton = ({
   return (
     <Button
       as="a"
-      w="231px"
+      w={{base:'full', md:'231px'}}
       h="full"
       py={'20px'}
       alignSelf="center"
