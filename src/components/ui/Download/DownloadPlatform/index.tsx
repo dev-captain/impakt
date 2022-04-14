@@ -38,13 +38,13 @@ const DownloadPlatform = () => {
               <Wrapper>
                 <DownloadButton
                   isHorizontal
-                  iconName=""
+                  iconName="Windows"
                   title="Download from Windows"
                   link="https://discord.gg/e38WmMRK"
                 />
                 <DownloadButton
                   isHorizontal
-                  iconName=""
+                  iconName="Apple"
                   title="Download for Mac"
                   link="https://discord.gg/e38WmMRK"
                 />
