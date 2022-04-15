@@ -10,7 +10,7 @@ export default {
   },
   downloadPlateform: {
     download: 'Download',
-    platform: 'our Platform',
+    platform: 'our App',
   },
   navbar: {
     events: 'Events',

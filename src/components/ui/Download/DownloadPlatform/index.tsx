@@ -6,12 +6,15 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import DownloadButton from 'components/core/DownloadButton';
 import DownloadTitleItem from './DownloadTitleItem';
+// import Play from 'components/icons/Play';
+// import useModalStore from 'hooks/store/useModalStore';
 
 const DownloadPlatform = () => {
   const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
   const Wrapper: any = useBreakpointValue({ base: VStack, md: HStack });
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  // const show = useModalStore((state) => state.setDownloadPage);
 
   return (
     <HeroLayout
