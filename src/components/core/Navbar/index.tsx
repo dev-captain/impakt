@@ -123,13 +123,6 @@ const Navbar = () => {
                   title={t(Keys.navbar.contactUs)}
                   isActive={path.path === 'contact'}
                 />
-                <NavbarLinkItem
-                  href="/download"
-                  onClose={onClose}
-                  passiveColor={passiveColor}
-                  title={t(Keys.navbar.download)}
-                  isActive={path.path === 'download'}
-                />
                 {/* <Button variant="ghost" onClick={() => changeLanguage('en')}>
                   <Text>En</Text>
                 </Button>
