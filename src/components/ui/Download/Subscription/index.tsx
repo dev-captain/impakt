@@ -48,7 +48,7 @@ const SubscriptionForm = () => {
       >
         <VStack
           spacing="24px"
-          marginTop={{ base: '0', md: '95px !important' }}
+          marginTop={{ base: '0', md: '15px !important' }}
           mb={{ base: '25px', md: '60px' }}
           textAlign="center"
           overflow="hidden"
