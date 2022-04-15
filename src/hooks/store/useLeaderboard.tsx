@@ -9,7 +9,7 @@ type LeaderboardStore = {
   weeklyLeaderboard: LeaderBoardUser[];
 
   getLeaderboard: () => void;
-  getChallenges: () => Promise<Challenges>;
+  getChallenges: () => Promise<Challenges[]>;
   getLeaderboardId: (id: number) => Promise<LeaderBoardUser[]>;
 };
 
@@ -22,7 +22,7 @@ const useLeaderboard = create<LeaderboardStore>(
       const url = `${API}/fitness/challenges?validOnly=true`;
       const challenges = (await (await fetch(url)).json()) as Challenges[];
 
-      return challenges[0];
+      return challenges;
     },
 
     getLeaderboardId: async (challengeId: number) => {
@@ -49,15 +49,28 @@ const useLeaderboard = create<LeaderboardStore>(
 
     getLeaderboard: async () => {
       const challenges = await get().getChallenges();
-      const daily = challenges.RoutinesToChallenges.filter(
-        (routine) => routine.challengeType === 'Daily',
-      )[0];
-      const weekly = challenges.RoutinesToChallenges.filter(
-        (routine) => routine.challengeType === 'Weekly',
-      )[0];
+      // const daily = challenges.RoutinesToChallenges.filter(
+      //   (routine) => routine.challengeType === 'Daily',
+      // )[0];
+      // const weekly = challenges.RoutinesToChallenges.filter(
+      //   (routine) => routine.challengeType === 'Weekly',
+      // )[0];
 
-      const dailyLeaderboard = (await get().getLeaderboardId(daily?.id)) || [];
-      const weeklyLeaderboard = (await get().getLeaderboardId(weekly?.id)) || [];
+      const daily: Challenges[] = [];
+      const weekly: Challenges[] = [];
+
+      challenges.map((challenge) => {
+        if (challenge.RoutinesToChallenges[0].challengeType === 'Daily') {
+          daily.push(challenge);
+        }
+        if (challenge.RoutinesToChallenges[0].challengeType === 'Weekly') {
+          weekly.push(challenge);
+        }
+
+        return null;
+      });
+      const dailyLeaderboard = (await get().getLeaderboardId(daily[0]?.id)) || [];
+      const weeklyLeaderboard = (await get().getLeaderboardId(weekly[0]?.id)) || [];
 
       set((state) => ({ ...state, dailyLeaderboard, weeklyLeaderboard }));
     },
