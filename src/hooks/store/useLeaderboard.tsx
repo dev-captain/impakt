@@ -49,6 +49,12 @@ const useLeaderboard = create<LeaderboardStore>(
 
     getLeaderboard: async () => {
       const challenges = await get().getChallenges();
+      // const daily = challenges.RoutinesToChallenges.filter(
+      //   (routine) => routine.challengeType === 'Daily',
+      // )[0];
+      // const weekly = challenges.RoutinesToChallenges.filter(
+      //   (routine) => routine.challengeType === 'Weekly',
+      // )[0];
 
       const daily: Challenges[] = [];
       const weekly: Challenges[] = [];
@@ -63,14 +69,6 @@ const useLeaderboard = create<LeaderboardStore>(
 
         return null;
       });
-
-      // const daily = challenges.RoutinesToChallenges.filter(
-      //   (routine) => routine.challengeType === 'Daily',
-      // )[0];
-      // const weekly = challenges.RoutinesToChallenges.filter(
-      //   (routine) => routine.challengeType === 'Weekly',
-      // )[0];
-
       const dailyLeaderboard = (await get().getLeaderboardId(daily[0]?.id)) || [];
       const weeklyLeaderboard = (await get().getLeaderboardId(weekly[0]?.id)) || [];
 
