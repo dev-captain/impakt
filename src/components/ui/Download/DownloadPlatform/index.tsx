@@ -1,5 +1,12 @@
 import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, useBreakpointValue, Image } from '@chakra-ui/react';
+import {
+  VStack,
+  HStack,
+  useColorModeValue,
+  useBreakpointValue,
+  Image,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +22,7 @@ const DownloadPlatform = () => {
   const Wrapper: any = useBreakpointValue({ base: VStack, md: HStack });
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   // const show = useModalStore((state) => state.setDownloadPage);
+  const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
   return (
     <HeroLayout
@@ -36,8 +44,8 @@ const DownloadPlatform = () => {
             <VStack
               align={{ base: 'center', md: 'flex-start' }}
               spacing="20px"
-              w="full"
-              paddingX={{ base: '50px' }}
+              w={{ base: isLessThan768 ? 'full' : 'auto', md: 'auto' }}
+              paddingX={{ base: isLessThan768 ? '50px' : '0', md: '0' }}
             >
               <VStack align="inherit">
                 <DownloadTitleItem title={t(keys.downloadPlateform.download)} />
@@ -58,8 +66,14 @@ const DownloadPlatform = () => {
                 />
               </Wrapper>
             </VStack>
-            <VStack marginBottom={{ base: '35px !important' }}>
-              <Image zIndex={11} maxH="358px" d="flex" src={Images.downloadlaptop} />
+            <VStack marginBottom={{ base: '35px !important', md: '0 !important' }}>
+              <Image
+                zIndex={11}
+                maxH="358px"
+                d="flex"
+                src={Images.downloadlaptop}
+                marginTop={{ md: '30px' }}
+              />
             </VStack>
           </HStack>
         </VStack>
