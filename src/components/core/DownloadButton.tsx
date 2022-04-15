@@ -19,7 +19,7 @@ const DownloadButton = ({
   return (
     <Button
       as="a"
-      w="full"
+      w={{base:'full', md:'231px'}}
       h="full"
       py={'20px'}
       alignSelf="center"
@@ -33,7 +33,7 @@ const DownloadButton = ({
       <Wrapper>
         {iconName === 'Apple' && <Icons.Apple opacity="1" />}
         {iconName === 'Windows' && <Icons.Window opacity="1" />}
-        <Text fontSize="16px" lineHeight="20px" fontWeight="500" color="white">
+        <Text fontSize="14px" lineHeight="24px" fontWeight="500" color="white">
           {title}
         </Text>
       </Wrapper>

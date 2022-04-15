@@ -12,6 +12,7 @@ const GradientButton = ({
   radius,
   d,
   disabled,
+  color = 'white',
   onClick,
 }: {
   title: string;
@@ -23,6 +24,7 @@ const GradientButton = ({
   radius?: string;
   minW?: string;
   d?: any;
+  color?: string;
   disabled?: boolean;
   onClick?: () => void;
 }) => {
@@ -41,10 +43,11 @@ const GradientButton = ({
       borderRadius={radius || '20px'}
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 14px rgba(0, 0, 0, 0.16)"
       bgGradient={bgGradient || 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)'}
+      className="buttonHover"
     >
       <HStack spacing={2} alignItems="center" justifyContent="center">
         {Icon && <Icon />}
-        <Text color="white">{title}</Text>
+        <Text color={color}>{title}</Text>
       </HStack>
     </Button>
   );

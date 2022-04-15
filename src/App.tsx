@@ -2,7 +2,16 @@ import 'i18n';
 import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
-import { Home, KnowledgeBase, NotFound, Event, Contact, Onboarding, LeaderBoard } from 'pages';
+import {
+  Home,
+  KnowledgeBase,
+  NotFound,
+  Event,
+  Contact,
+  Onboarding,
+  LeaderBoard,
+  DownloadSCreen,
+} from 'pages';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -27,6 +36,7 @@ const App = () => {
 
       <Route path="/contact" element={<Contact />} />
       <Route path="/leader-board" element={<LeaderBoard />} />
+      <Route path="/download" element={<DownloadSCreen />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
