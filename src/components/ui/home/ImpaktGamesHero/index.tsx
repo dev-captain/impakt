@@ -46,13 +46,13 @@ const ImpaktGamesHero = () => {
                   isHorizontal
                   iconName=""
                   title="Download from our Discord"
-                  link="https://discord.gg/e38WmMRK"
+                  link="https://discord.gg/eVQJ8XRa9S"
                 />
                 {/* <DownloadButton
                   isHorizontal
                   iconName="Apple"
                   title="Download for Mac"
-                  link="https://discord.gg/e38WmMRK"
+                  link="https://discord.gg/eVQJ8XRa9S"
                 /> */}
               </Wrapper>
             </VStack>
