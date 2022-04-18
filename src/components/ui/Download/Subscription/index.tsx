@@ -1,4 +1,4 @@
-import { Box, useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
+import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import TextField from 'components/core/TextField';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import Gradients, { GradientEllipse, GradientEllipse1 } from './Gradient';
+import Gradients from './Gradient';
 
 const SubscriptionForm = () => {
   const { t } = useTranslation().i18n;
@@ -40,7 +40,7 @@ const SubscriptionForm = () => {
       <VStack
         position="relative"
         color={textColor}
-        maxW={{ base: 'full', md: '800px' }}
+        maxW={{ base: 'full', md: '840px' }}
         marginTop={{ base: '40px !important', md: '85px' }}
         w="full"
         px="20px"
@@ -66,6 +66,7 @@ const SubscriptionForm = () => {
             fontSize={{ base: '16px', md: '24px' }}
             lineHeight={{ base: '24px', md: '32px' }}
             opacity="0.6"
+            paddingX={{ base: '20px', md: '0' }}
           >
             Subscribe to our Newsletter — the best way to stay informed about everything related to
             Impakt!
@@ -94,7 +95,6 @@ const SubscriptionForm = () => {
             />
 
             <Gradients />
-            {/* <Gradients /> */}
           </VStack>
           <VStack
             w={{ base: 'full', md: '424px' }}
@@ -112,8 +112,6 @@ const SubscriptionForm = () => {
               bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
             />
           </VStack>
-          <Box {...GradientEllipse} />
-          <Box {...GradientEllipse1} />
         </VStack>
       </VStack>
     </HeroLayout>

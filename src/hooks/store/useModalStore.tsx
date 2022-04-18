@@ -77,7 +77,7 @@ const useModalStore = create<ModalStore>((set: SetState<ModalStore>) => ({
         showPlayer: false,
         hideButtons: true,
         isYoutubeVideo: true,
-        youtubeUrl: 'https://www.youtube.com/watch/5CIwd9Fj-w0',
+        youtubeUrl: 'https://www.youtube.com/embed/5CIwd9Fj-w0',
       },
     })),
   setBurnEarnNft: () =>

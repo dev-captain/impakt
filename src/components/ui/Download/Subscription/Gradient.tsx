@@ -1,14 +1,14 @@
 import { Box } from '@chakra-ui/react';
 
-export const GradientEllipse = () => {
+const GradientEllipse = () => {
   return (
     <Box
       pos="absolute"
       width="220px"
-      height="196px"
+      height={{ base: '', md: '248px' }}
       left="87px"
       top="-126px"
-      opacity="0.79"
+      opacity="0.6"
       zIndex={0}
       filter="blur(94px)"
       bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%);"
@@ -16,7 +16,7 @@ export const GradientEllipse = () => {
   );
 };
 
-export const GradientEllipse1 = () => {
+const GradientEllipse1 = () => {
   return (
     <Box
       pos="absolute"
