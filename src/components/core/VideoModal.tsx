@@ -18,8 +18,10 @@ function VideoModal() {
 
   return (
     <VStack
-      h="1100vh"
-      w="1000vw"
+      // h="1100vh"
+      // w="1000vw"
+      h="100%"
+      w="full"
       zIndex={1000}
       position="absolute"
       backdropFilter="auto"
@@ -28,7 +30,12 @@ function VideoModal() {
     >
       <Modal onClose={onClose} isOpen={show} isCentered size="2xl">
         <ModalOverlay bgColor="blackAlpha.300" />
-        <ModalContent bgColor="gray.600" borderRadius="24px" position="relative">
+        <ModalContent
+          bgColor="gray.600"
+          borderRadius="24px"
+          position="relative"
+          w="calc(100% - 80px)"
+        >
           <VStack overflow="hidden" w="full" borderTopRadius="24px" position="relative">
             {modal.path && (
               <video width="100%" height="100%" controls autoPlay>
@@ -79,10 +86,11 @@ function VideoModal() {
             onClick={onClose}
             _hover={{ cursor: 'pointer' }}
             top={-10}
-            right={-10}
+            right={{ base: '-5', md: '-10' }}
             size={12}
             zIndex={100}
             position="absolute"
+            w={{ base: '20px', md: '50px' }}
           >
             <Icons.Cross />
           </Circle>
