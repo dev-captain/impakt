@@ -11,6 +11,7 @@ const DownloadTitleItem: FC<Props> = ({ title }) => {
       lineHeight={{ base: '36px', md: '72px' }}
       textStyle={{ base: 'black7', md: 'black8' }}
       textAlign={{ base: 'center', md: 'left' }}
+      marginTop="0 !important"
       paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
     >
       {title}
