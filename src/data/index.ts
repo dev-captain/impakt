@@ -195,14 +195,14 @@ export const Team = [
   },
   {
     name: 'Valtec',
-    title: 'COO',
+    title: 'President',
     image: Images.team.valtec,
     alt: '',
     subtitle: '',
   },
   {
     name: 'DukeNuke',
-    title: 'President',
+    title: 'Partner',
     image: Images.team.duke,
     alt: '',
     subtitle: '',
@@ -214,13 +214,13 @@ export const Team = [
     alt: '',
     subtitle: '',
   },
-  {
-    name: 'Cap’n Crunch',
-    title: 'CMO',
-    image: Images.team.cap,
-    alt: '',
-    subtitle: '',
-  },
+  // {
+  //   name: 'Cap’n Crunch',
+  //   title: 'CMO',
+  //   image: Images.team.cap,
+  //   alt: '',
+  //   subtitle: '',
+  // },
 ];
 
 export const RoadmapInfo = [
