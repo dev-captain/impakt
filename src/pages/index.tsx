@@ -7,3 +7,5 @@ export { default as Contact } from './Contact';
 export { default as Onboarding } from './Onboarding';
 export { default as LeaderBoard } from './LeaderBoard';
 export { default as DownloadSCreen } from './Download';
+export { default as RecoveryPassword } from './Password/RecoveryPassword';
+export { default as ChangePassword } from './Password/ChangePassword';

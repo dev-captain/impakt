@@ -11,6 +11,7 @@ const impaktGamesHero = 'impaktGamesHero';
 const contactUs = 'contactUs';
 const footer = 'footer';
 const downloadPlateform = 'downloadPlateform';
+const password = 'password';
 
 const TranslationKeys = {
   common: {
@@ -93,6 +94,16 @@ const TranslationKeys = {
     madeBy: `${footer}.madeBy`,
     termOfUse: `${footer}.termOfUse`,
     allRightReserved: `${footer}.allRightReserved`,
+  },
+  password: {
+    recovery: `${password}.recovery`,
+    password: `${password}.password`,
+    recoveryText: `${password}.recoveryText`,
+    yourEmail: `${password}.yourEmail`,
+    newPassword: `${password}.newPassword`,
+    confirmPassword: `${password}.confirmPassword`,
+    changeText: `${password}.changeText`,
+    new: `${password}.new`,
   },
 };
 

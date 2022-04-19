@@ -80,4 +80,14 @@ export default {
     termOfUse: 'Term of Use',
     allRightReserved: '© 2021 Impakt. All rights reserved.',
   },
+  password: {
+    new: 'New',
+    recovery: 'Recovery',
+    password: 'Password',
+    recoveryText: 'We’ll email you instructions to reset your password',
+    yourEmail: 'Your email',
+    newPassword: 'New Password',
+    confirmPassword: 'Confirm Password',
+    changeText: 'Choose a unique password to protect your account',
+  },
 };

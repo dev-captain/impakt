@@ -11,6 +11,8 @@ import {
   Onboarding,
   LeaderBoard,
   DownloadSCreen,
+  RecoveryPassword,
+  ChangePassword,
 } from 'pages';
 
 const App = () => {
@@ -37,6 +39,8 @@ const App = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/leader-board" element={<LeaderBoard />} />
       <Route path="/download" element={<DownloadSCreen />} />
+      <Route path="/recovery-password" element={<RecoveryPassword />} />
+      <Route path="/change-password" element={<ChangePassword />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
