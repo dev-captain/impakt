@@ -59,7 +59,7 @@ const TextField = ({
         borderWidth={1}
         fontSize="12px"
         lineHeight="16px"
-        borderRadius="12px"
+        borderRadius="16px"
         onChange={onChange}
         backdropFilter="blur(1px)"
         placeholder={placeholder || ''}
@@ -74,7 +74,8 @@ const TextField = ({
             : 'inset -2px -2px 6px rgba(255, 255, 255, 0.04), inset 4px 4px 8px rgba(0, 0, 0, 0.25)'
         }
         border={isOutlined ? '1px' : 0}
-        borderColor={borderColor || 'glass.500'}
+        // borderColor={borderColor || 'glass.500'}
+        borderColor="#E4EAF1"
         _placeholder={
           _placeholder || {
             color: placeholderColor || 'white',
@@ -97,7 +98,7 @@ const TextField = ({
         </Box>
       )}
       {!!error && (
-        <Box w="full" textAlign="end" mt="2px">
+        <Box w="full" textAlign="end" mt="2px" pos="absolute" top="14px" paddingRight="10px">
           <Text
             bgClip="text"
             textStyle={rest.errorTextStyle || 'regular12'}
