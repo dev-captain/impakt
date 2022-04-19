@@ -12,12 +12,12 @@ type Props = {
 const LeaderBoardRow = ({ name, order, score, showStar, isSmallView }: Props) => {
   if (isSmallView) {
     return (
-      <Flex justifyContent="space-around">
+      <Flex justifyContent="space-around" w="full">
         <Flex justify="space-between" minH="65px" w="full" align="center" whiteSpace="nowrap">
-          <Text w="60px" opacity="0.3" textAlign="left" textStyle="regular4" pl="8px">
+          <Text w="25%" opacity="0.3" textAlign="left" textStyle="regular4" pl="8px">
             #{order}
           </Text>
-          <HStack px="8px" spacing="14px" justify="flex-start" align="center" w="210px">
+          <HStack px="8px" spacing="14px" justify="flex-start" align="center" w="50%">
             {showStar && <Image src={Images.star} w="16.63" h="15px" objectFit="contain" />}
             <Text textStyle="regular4" pl={showStar ? 0 : '22px'} isTruncated textAlign="left">
               {name}
@@ -42,13 +42,18 @@ const LeaderBoardRow = ({ name, order, score, showStar, isSmallView }: Props) =>
   }
 
   return (
-    <SimpleGrid columns={9} paddingY="16px">
-      <GridItem colSpan={3} w="100px" marginLeft={{ base: '0', md: '150px' }}>
+    <SimpleGrid
+      gridTemplateColumns="20% 60% 20%"
+      w="full"
+      paddingY="16px"
+      paddingX={{ base: '25px', md: '50px', lg: '150px' }}
+    >
+      <GridItem>
         <Text textStyle="regular4" opacity="0.3">
           #{order}
         </Text>
       </GridItem>
-      <GridItem colSpan={3} w="300px" marginLeft={{ base: '0', md: '100px' }}>
+      <GridItem paddingLeft={{ md: '50px', lg: '75px' }}>
         <HStack spacing="14px" justify="flex-start" align="center">
           {showStar && <Image src={Images.star} w="20px" h="19px" objectFit="contain" />}
           <Text textStyle="bold4" pl={showStar ? 0 : '42px'}>
@@ -61,7 +66,7 @@ const LeaderBoardRow = ({ name, order, score, showStar, isSmallView }: Props) =>
           {date}
         </Text>
       </GridItem> */}
-      <GridItem colSpan={3} marginRight={{ base: '0', md: '150px' }}>
+      <GridItem>
         <Text textStyle="bold4" color="red.300" align="right">
           {score}
         </Text>
