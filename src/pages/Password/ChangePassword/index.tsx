@@ -41,6 +41,7 @@ const ChangePassword = () => {
 
   const isDisabled = !values.newpassword || !values.confirmpassword;
   const isValid = values.newpassword.length < 8 && values.newpassword.length > 1;
+  const isValidConfirm = values.newpassword === values.confirmpassword;
 
   const onSubmit = async () => {
     // const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
@@ -132,7 +133,7 @@ const ChangePassword = () => {
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
               // iconColor={textColor}
-              error={values.newpassword === values.confirmpassword ? '' : 'Passwords don’t match'}
+              error={isValidConfirm ? '' : 'Passwords don’t match'}
             />
           </VStack>
           <VStack
