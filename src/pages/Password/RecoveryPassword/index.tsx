@@ -42,31 +42,36 @@ const RecoveryPassword = () => {
       <VStack
         position="relative"
         color={textColor}
-        maxW={{ base: 'full', md: '800px' }}
+        maxW={{ base: 'full', md: '520px' }}
         marginTop={{ base: '40px !important', md: '85px' }}
         w="full"
-        px="20px"
+        px={{ base: '20px', md: '0' }}
         filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16));"
       >
         <VStack
           spacing="24px"
           marginTop={{ base: '0', md: '15px !important' }}
-          mb={{ base: '25px', md: '60px' }}
+          mb="48px"
           textAlign="center"
           overflow="hidden"
-          marginBottom="20px !important"
+          flexDirection="row"
+          justifyContent="center"
+          w="full"
         >
           <Text
-            textStyle={isSmallView ? 'black7' : 'black8'}
-            fontSize={{ base: '32px', md: '56px' }}
-            lineHeight={{ base: '36px', md: '60px' }}
+            // textStyle={isSmallView ? 'black7' : 'black8'}
+            textStyle="black3"
+            fontSize={{ base: '40px', md: '56px' }}
+            lineHeight={{ base: '40px', md: '60px' }}
+            marginRight={{ base: '5px', md: '10px' }}
           >
             {t(keys.password.recovery)}
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
-            fontSize={{ base: '32px', md: '56px' }}
-            lineHeight={{ base: '36px', md: '60px' }}
+            fontSize={{ base: '40px', md: '56px' }}
+            lineHeight={{ base: '40px', md: '60px' }}
+            marginTop="0 !important"
           >
             {t(keys.password.password)}
           </Text>
@@ -75,15 +80,20 @@ const RecoveryPassword = () => {
           bgColor={bgColor}
           height="50%"
           w="full"
-          paddingY="50px"
-          paddingX={{ base: '50px' }}
+          padding={{ base: '32px 15px', md: '50px 45px 30px' }}
           borderRadius={30}
           position="relative"
           overflow="hidden"
           marginTop="0 !important"
         >
-          <VStack spacing="16px" w={{ base: 'full', md: '424px' }} borderRadius={16}>
-            <Text textStyle={{ base: 'regular4', md: 'regular5' }}>
+          <VStack spacing="24px" w="full" borderRadius={16}>
+            <Text
+              textStyle={{ base: 'regular4', md: 'regular5' }}
+              fontSize="24px !important"
+              lineHeight="32px !important"
+              textAlign={{ base: 'center', md: 'left' }}
+              paddingX={{ base: '20px', md: '0' }}
+            >
               {t(keys.password.recoveryText)}
             </Text>
             <TextField
@@ -95,26 +105,25 @@ const RecoveryPassword = () => {
               placeholder={t(keys.password.yourEmail)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
             />
-
-            <Gradients />
-            {/* <Gradients /> */}
           </VStack>
           <VStack
-            w={{ base: 'full', md: '424px' }}
+            w="full"
             align={{ base: 'center', md: 'flex-end' }}
             display="flex"
             fontSize={16}
+            marginTop={{ base: '20px !important', md: '24px !important' }}
           >
             <GradientButton
-              py="24px"
-              w={{ base: 'full', md: '424px' }}
-              radius="16px"
+              py="32px"
+              w="full"
+              radius="20px"
               onClick={onSubmit}
               title="Send a recovery link"
               disabled={isDisabled}
               bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
             />
           </VStack>
+          <Gradients />
           <Box {...GradientEllipse} />
           <Box {...GradientEllipse1} />
         </VStack>

@@ -98,7 +98,7 @@ const TextField = ({
         </Box>
       )}
       {!!error && (
-        <Box w="full" textAlign="end" mt="2px" pos="absolute" top="14px" paddingRight="10px">
+        <Box w="full" textAlign="end" pos="absolute" top="16px" paddingRight="10px">
           <Text
             bgClip="text"
             textStyle={rest.errorTextStyle || 'regular12'}
