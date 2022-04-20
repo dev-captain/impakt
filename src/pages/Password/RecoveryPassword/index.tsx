@@ -58,7 +58,6 @@ const RecoveryPassword = () => {
           w="full"
         >
           <Text
-            // textStyle={isSmallView ? 'black7' : 'black8'}
             textStyle="black3"
             fontSize={{ base: '36px', md: '50px' }}
             lineHeight={{ base: '40px', md: '60px' }}
