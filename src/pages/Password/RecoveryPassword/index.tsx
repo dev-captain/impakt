@@ -24,7 +24,6 @@ const RecoveryPassword = () => {
   });
   const [values, setValues] = useState({
     email: '',
-    isSubscribed: false,
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
