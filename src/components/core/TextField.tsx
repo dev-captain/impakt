@@ -1,12 +1,12 @@
 import React from 'react';
-import Icons from 'components/icons';
+// import Icons from 'components/icons';
 import { Box, Input, Text } from '@chakra-ui/react';
 
 type FieldProps = {
   name?: string;
   error?: string;
   textStyle?: any;
-  iconColor?: string;
+  // iconColor?: string;
   _placeholder?: any;
   borderColor?: string;
   placeholder?: string;
@@ -28,14 +28,15 @@ const TextField = ({
   fontSize,
   borderColor,
   textStyle,
-  iconColor,
+  // iconColor,
   isOutlined,
   _placeholder,
   placeholderColor,
   ...rest
 }: FieldProps) => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const onToggleShowPassword = () => setShowPassword(!showPassword);
+  const [showPassword] = React.useState(false);
+  // const [showPassword, setShowPassword] = React.useState(false);
+  // const onToggleShowPassword = () => setShowPassword(!showPassword);
 
   return (
     <Box w="full" minH="fit-content" position="relative" overflow="hidden">
@@ -92,11 +93,11 @@ const TextField = ({
         }}
         {...rest}
       />
-      {type === 'password' && (
+      {/* {type === 'password' && (
         <Box position="absolute" zIndex={10} top="16px" right="24px" onClick={onToggleShowPassword}>
           {showPassword ? <Icons.Eye color={iconColor} /> : <Icons.EyeOff color={iconColor} />}
         </Box>
-      )}
+      )} */}
       {!!error && (
         <Box w="full" textAlign="end" pos="absolute" top="16px" paddingRight="10px">
           <Text

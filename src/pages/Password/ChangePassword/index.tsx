@@ -7,18 +7,22 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
 import Gradients from '../Gradient';
-import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+// import axios from "axios";
+// import { useSearchParams } from 'react-router-dom';
 
-const apiBaseUrl = process.env.REACT_APP_API;
+// const apiBaseUrl = process.env.REACT_APP_API;
 
 const ChangePassword = () => {
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get('token');
+  // const [searchParams] = useSearchParams();
+  // const token = searchParams.get('token');
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
+  // const [error, setError] = useState({
+  //   newpassword: '',
+  //   confirmpassword: '',
+  // });
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -31,7 +35,6 @@ const ChangePassword = () => {
     newpassword: '',
     confirmpassword: '',
   });
-
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -39,12 +42,12 @@ const ChangePassword = () => {
   const isDisabled = !values.newpassword || !values.confirmpassword;
 
   const onSubmit = async () => {
-    const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
-    try {
-      await axios.post(url, { password: values.newpassword });
-    } catch (err) {
-      console.error(err);
-    }
+    // const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
+    // try {
+    //   await axios.post(url, { password: values.newpassword });
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   return (
@@ -113,6 +116,9 @@ const ChangePassword = () => {
               onChange={onChange}
               placeholder={t(keys.password.newPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
+              type="password"
+              // iconColor={textColor}
+              error={values.newpassword.length < 8 ? 'Use atleast 8 characters' : ''}
             />
 
             <TextField
@@ -123,6 +129,9 @@ const ChangePassword = () => {
               onChange={onChange}
               placeholder={t(keys.password.confirmPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
+              type="password"
+              // iconColor={textColor}
+              error={values.newpassword === values.confirmpassword ? '' : 'Passwords don’t match'}
             />
           </VStack>
           <VStack
