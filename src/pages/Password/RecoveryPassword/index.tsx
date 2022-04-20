@@ -1,12 +1,12 @@
 import { Box, useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
-import TextField from 'components/core/TextField';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+import TextField from '../TextField';
 import Gradients, { GradientEllipse, GradientEllipse1 } from '../Gradient';
 
 const RecoveryPassword = () => {

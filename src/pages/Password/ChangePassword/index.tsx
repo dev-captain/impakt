@@ -1,11 +1,11 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
-import TextField from 'components/core/TextField';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+import TextField from '../TextField';
 import Gradients from '../Gradient';
 // import axios from "axios";
 // import { useSearchParams } from 'react-router-dom';
@@ -40,6 +40,7 @@ const ChangePassword = () => {
   };
 
   const isDisabled = !values.newpassword || !values.confirmpassword;
+  const isValid = values.newpassword.length < 8 && values.newpassword.length > 1;
 
   const onSubmit = async () => {
     // const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
@@ -118,7 +119,7 @@ const ChangePassword = () => {
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
               // iconColor={textColor}
-              error={values.newpassword.length < 8 ? 'Use atleast 8 characters' : ''}
+              error={isValid ? 'Use atleast 8 characters' : ''}
             />
 
             <TextField
