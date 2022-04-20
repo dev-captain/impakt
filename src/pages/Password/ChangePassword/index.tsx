@@ -19,10 +19,9 @@ const ChangePassword = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  // const [error, setError] = useState({
-  //   newpassword: '',
-  //   confirmpassword: '',
-  // });
+  const [isNewPasswordActive, setIsNewPasswordActive] = useState(true);
+  const [isConformPasswordActive, setIsConformPasswordActive] = useState(true);
+
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -40,9 +39,6 @@ const ChangePassword = () => {
   };
 
   const isDisabled = !values.newpassword || !values.confirmpassword;
-  const isValid = values.newpassword.length < 8 && values.newpassword.length > 1;
-  const isValidConfirm = values.newpassword === values.confirmpassword;
-
   const onSubmit = async () => {
     // const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
     // try {
@@ -50,6 +46,33 @@ const ChangePassword = () => {
     // } catch (err) {
     //   console.error(err);
     // }
+  };
+
+  console.log('nww pass ref ', isNewPasswordActive);
+  console.log('nconform pass ref ', isConformPasswordActive);
+  // const pass
+  const passwordLength = () => {
+    let valid = '';
+    if (!isNewPasswordActive) {
+      if (values.newpassword.length > 8) {
+        valid = 'Use maximun 8 characters';
+      }
+      if (values.newpassword.length < 1) {
+        valid = 'Use atleast 1 characters';
+      }
+    }
+
+    return valid;
+  };
+  const confirmPass = () => {
+    let valid = '';
+    if (!isConformPasswordActive) {
+      if (values.newpassword !== values.confirmpassword) {
+        valid = 'Passwords don’t match';
+      }
+    }
+
+    return valid;
   };
 
   return (
@@ -113,27 +136,29 @@ const ChangePassword = () => {
             <TextField
               isOutlined
               name="newpassword"
+              onBlur={() => setIsNewPasswordActive(false)}
+              onFocus={() => setIsNewPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
               placeholder={t(keys.password.newPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              // iconColor={textColor}
-              error={isValid ? 'Use atleast 8 characters' : ''}
+              error={passwordLength()}
             />
 
             <TextField
               isOutlined
               name="confirmpassword"
+              onBlur={() => setIsConformPasswordActive(false)}
+              onFocus={() => setIsConformPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
               placeholder={t(keys.password.confirmPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              // iconColor={textColor}
-              error={isValidConfirm ? '' : 'Passwords don’t match'}
+              error={confirmPass()}
             />
           </VStack>
           <VStack
