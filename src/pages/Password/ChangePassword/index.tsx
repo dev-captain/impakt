@@ -22,19 +22,19 @@ const ChangePassword = () => {
     '2xl': false,
   });
   const [values, setValues] = useState({
-    email: '',
-    isSubscribed: false,
+    newpassword: '',
+    confirmpassword: '',
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const isDisabled = !values.newpassword || !values.confirmpassword;
+
   const onSubmit = () => {
     console.log('values', values);
   };
-
-  // const isDisabled = !values.email || !validateEmail(values.email);
 
   return (
     <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
@@ -58,16 +58,15 @@ const ChangePassword = () => {
           w="full"
         >
           <Text
-            // textStyle={isSmallView ? 'black7' : 'black8'}
             fontSize={{ base: '40px', md: '56px' }}
-            lineHeight={{ base: '40px', md: '60px' }}
+            lineHeight={{ base: '36px', md: '60px' }}
             marginRight={{ base: '5px', md: '10px' }}
           >
             {t(keys.password.new)}
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
-            fontSize={{ base: '40px', md: '56px' }}
+            fontSize={{ base: '36px', md: '56px' }}
             lineHeight={{ base: '40px', md: '60px' }}
             marginTop="0 !important"
           >
@@ -96,24 +95,23 @@ const ChangePassword = () => {
               {t(keys.password.changeText)}
             </Text>
             <TextField
-              name="newpassword"
               isOutlined
+              name="newpassword"
               fontSize="14px"
-              onChange={onChange}
               textStyle="regular2"
+              onChange={onChange}
               placeholder={t(keys.password.newPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
             />
 
             <TextField
-              name="confirmpassword"
               isOutlined
+              name="confirmpassword"
               fontSize="14px"
-              onChange={onChange}
               textStyle="regular2"
+              onChange={onChange}
               placeholder={t(keys.password.confirmPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
-              error="Invalid Password"
             />
           </VStack>
           <VStack
@@ -129,6 +127,7 @@ const ChangePassword = () => {
               radius="20px"
               onClick={onSubmit}
               title="Update"
+              disabled={isDisabled}
               bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
             />
           </VStack>

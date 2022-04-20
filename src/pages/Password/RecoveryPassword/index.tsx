@@ -60,7 +60,7 @@ const RecoveryPassword = () => {
           <Text
             // textStyle={isSmallView ? 'black7' : 'black8'}
             textStyle="black3"
-            fontSize={{ base: '40px', md: '50px' }}
+            fontSize={{ base: '36px', md: '50px' }}
             lineHeight={{ base: '40px', md: '60px' }}
             marginRight={{ base: '5px', md: '10px' }}
           >
@@ -68,7 +68,7 @@ const RecoveryPassword = () => {
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
-            fontSize={{ base: '40px', md: '56px' }}
+            fontSize={{ base: '36px', md: '56px' }}
             lineHeight={{ base: '40px', md: '60px' }}
             marginTop="0 !important"
           >
