@@ -1,20 +1,21 @@
-import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
+import { useColorModeValue, VStack, Text, useBreakpointValue, useToast } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+import axios, { AxiosError } from 'axios';
+import { useSearchParams } from 'react-router-dom';
 import TextField from '../TextField';
 import Gradients from '../Gradient';
-// import axios from "axios";
-// import { useSearchParams } from 'react-router-dom';
 
-// const apiBaseUrl = process.env.REACT_APP_API;
+const apiBaseUrl = process.env.REACT_APP_API;
 
 const ChangePassword = () => {
-  // const [searchParams] = useSearchParams();
-  // const token = searchParams.get('token');
+  const toast = useToast();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -40,27 +41,52 @@ const ChangePassword = () => {
 
   const isDisabled = !values.newpassword || !values.confirmpassword;
   const onSubmit = async () => {
-    // const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
-    // try {
-    //   await axios.post(url, { password: values.newpassword });
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
+    try {
+      await axios.post(url, { password: values.newpassword });
+      toast({
+        title: 'Success',
+        description: 'Your password was changed, you can now login in the Impakt app.',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (err) {
+      const error = err as AxiosError;
+      const { status } = error.response ?? {};
+      if (status && status >= 400 && status < 500) {
+        toast({
+          title: 'Error',
+          description: 'Your link is invalid or has expired. Please request a new link.',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Something went wrong. Please contact support.',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      }
+    }
   };
 
-  // new passowrd validation
+  // new password validation
   const isValidNewPassword = () => {
     let valid = '';
     if (!isNewPasswordActive) {
       if (values.newpassword.length > 1 && values.newpassword.length < 8) {
-        valid = 'Use atleast 8 characters';
+        valid = 'Use at least 8 characters';
       }
     }
 
     return valid;
   };
 
-  // confirm passowrd validation
+  // confirm password validation
   const isValidConfirmPassword = () => {
     let valid = '';
     if (!isConformPasswordActive) {
