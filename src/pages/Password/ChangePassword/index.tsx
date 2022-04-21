@@ -37,7 +37,9 @@ const ChangePassword = () => {
     confirmPassword: '',
   });
   useEffect(() => {
-    setIsUpdateButtonDisabled(values.newPassword.length === 0 || !isValidNewPassword() || !isValidConfirmPassword());
+    setIsUpdateButtonDisabled(
+      values.newPassword.length === 0 || !isValidNewPassword() || !isValidConfirmPassword(),
+    );
   }, [values]);
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -80,12 +82,15 @@ const ChangePassword = () => {
   };
 
   // new password validation
-  const isValidNewPassword = () => values.newPassword.length === 0 || values.newPassword.length >= 8;
-  const getNewPasswordError = () => isNewPasswordActive && !isValidNewPassword() ? 'Use at least 8 characters' : '';
+  const isValidNewPassword = () =>
+    values.newPassword.length === 0 || values.newPassword.length >= 8;
+  const getNewPasswordError = () =>
+    isNewPasswordActive && !isValidNewPassword() ? 'Use at least 8 characters' : '';
 
   // confirm password validation
-  const isValidConfirmPassword = () => values.newPassword === values.confirmPassword
-  const getConfirmPasswordError = () => isConfirmPasswordActive && !isValidConfirmPassword() ? 'Passwords don’t match' : '';
+  const isValidConfirmPassword = () => values.newPassword === values.confirmPassword;
+  const getConfirmPasswordError = () =>
+    isConfirmPasswordActive && !isValidConfirmPassword() ? 'Passwords don’t match' : '';
 
   return (
     <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
