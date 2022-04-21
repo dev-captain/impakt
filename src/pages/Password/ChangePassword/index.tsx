@@ -1,7 +1,7 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue, useToast } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
@@ -21,8 +21,9 @@ const ChangePassword = () => {
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const [isNewPasswordActive, setIsNewPasswordActive] = useState(true);
-  const [isConformPasswordActive, setIsConformPasswordActive] = useState(true);
-
+  const [isConfirmPasswordActive, setIsConfirmPasswordActive] = useState(true);
+  const [isUpdateButtonLoading, setIsUpdateButtonLoading] = useState(false);
+  const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(true);
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -32,18 +33,21 @@ const ChangePassword = () => {
     '2xl': false,
   });
   const [values, setValues] = useState({
-    newpassword: '',
-    confirmpassword: '',
+    newPassword: '',
+    confirmPassword: '',
   });
+  useEffect(() => {
+    setIsUpdateButtonDisabled(values.newPassword.length === 0 || !isValidNewPassword() || !isValidConfirmPassword());
+  }, [values]);
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const isDisabled = !values.newpassword || !values.confirmpassword;
   const onSubmit = async () => {
+    setIsUpdateButtonLoading(true);
     const url = `${apiBaseUrl}/iam/auth/passwordReset/${token}`;
     try {
-      await axios.post(url, { password: values.newpassword });
+      await axios.post(url, { password: values.newPassword });
       toast({
         title: 'Success',
         description: 'Your password was changed, you can now login in the Impakt app.',
@@ -72,31 +76,16 @@ const ChangePassword = () => {
         });
       }
     }
+    setIsUpdateButtonLoading(false);
   };
 
   // new password validation
-  const isValidNewPassword = () => {
-    let valid = '';
-    if (!isNewPasswordActive) {
-      if (values.newpassword.length > 1 && values.newpassword.length < 8) {
-        valid = 'Use at least 8 characters';
-      }
-    }
-
-    return valid;
-  };
+  const isValidNewPassword = () => values.newPassword.length === 0 || values.newPassword.length >= 8;
+  const getNewPasswordError = () => isNewPasswordActive && !isValidNewPassword() ? 'Use at least 8 characters' : '';
 
   // confirm password validation
-  const isValidConfirmPassword = () => {
-    let valid = '';
-    if (!isConformPasswordActive) {
-      if (values.newpassword !== values.confirmpassword) {
-        valid = 'Passwords don’t match';
-      }
-    }
-
-    return valid;
-  };
+  const isValidConfirmPassword = () => values.newPassword === values.confirmPassword
+  const getConfirmPasswordError = () => isConfirmPasswordActive && !isValidConfirmPassword() ? 'Passwords don’t match' : '';
 
   return (
     <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
@@ -158,30 +147,30 @@ const ChangePassword = () => {
             </Text>
             <TextField
               isOutlined
-              name="newpassword"
+              name="newPassword"
               onBlur={() => setIsNewPasswordActive(false)}
               onFocus={() => setIsNewPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
-              placeholder={t(keys.password.newPassword)}
+              placeholder={t(keys.password.password)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              error={isValidNewPassword()}
+              error={getNewPasswordError()}
             />
 
             <TextField
               isOutlined
-              name="confirmpassword"
-              onBlur={() => setIsConformPasswordActive(false)}
-              onFocus={() => setIsConformPasswordActive(true)}
+              name="confirmPassword"
+              onBlur={() => setIsConfirmPasswordActive(false)}
+              onFocus={() => setIsConfirmPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
               placeholder={t(keys.password.confirmPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              error={isValidConfirmPassword()}
+              error={getConfirmPasswordError()}
             />
           </VStack>
           <VStack
@@ -197,8 +186,9 @@ const ChangePassword = () => {
               radius="20px"
               onClick={onSubmit}
               title="Update"
-              disabled={isDisabled}
+              disabled={isUpdateButtonDisabled}
               bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+              isLoading={isUpdateButtonLoading}
             />
           </VStack>
           <Gradients />
