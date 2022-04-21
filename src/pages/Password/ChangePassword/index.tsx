@@ -48,23 +48,20 @@ const ChangePassword = () => {
     // }
   };
 
-  console.log('nww pass ref ', isNewPasswordActive);
-  console.log('nconform pass ref ', isConformPasswordActive);
-  // const pass
-  const passwordLength = () => {
+  // new passowrd validation
+  const isValidNewPassword = () => {
     let valid = '';
     if (!isNewPasswordActive) {
-      if (values.newpassword.length > 8) {
-        valid = 'Use maximun 8 characters';
-      }
-      if (values.newpassword.length < 1) {
-        valid = 'Use atleast 1 characters';
+      if (values.newpassword.length > 1 && values.newpassword.length < 8) {
+        valid = 'Use atleast 8 characters';
       }
     }
 
     return valid;
   };
-  const confirmPass = () => {
+
+  // confirm passowrd validation
+  const isValidConfirmPassword = () => {
     let valid = '';
     if (!isConformPasswordActive) {
       if (values.newpassword !== values.confirmpassword) {
@@ -144,7 +141,7 @@ const ChangePassword = () => {
               placeholder={t(keys.password.newPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              error={passwordLength()}
+              error={isValidNewPassword()}
             />
 
             <TextField
@@ -158,7 +155,7 @@ const ChangePassword = () => {
               placeholder={t(keys.password.confirmPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              error={confirmPass()}
+              error={isValidConfirmPassword()}
             />
           </VStack>
           <VStack
