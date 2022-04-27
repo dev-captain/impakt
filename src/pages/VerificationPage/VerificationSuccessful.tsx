@@ -4,9 +4,18 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
 import Gradients from './Gradient';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+
+type VerificationStatus = 'Success' | 'Error' | 'Pending'
+
+const apiBaseUrl = process.env.REACT_APP_API;
 
 const VerificationSuccessful = () => {
   const { t } = useTranslation().i18n;
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -18,6 +27,7 @@ const VerificationSuccessful = () => {
     xl: false,
     '2xl': false,
   });
+  const [verificationStatus, setVerificationStatus] = useState<VerificationStatus>('Pending');
 
   const commonProps: any = {
     textStyle: { base: 'regular4', md: 'regular5' },
@@ -25,6 +35,20 @@ const VerificationSuccessful = () => {
     lineHeight: '32px !important',
     textAlign: { base: 'center', md: 'left' },
   };
+  
+  useEffect(() => {
+    const verify = async () => {
+      const url = `${apiBaseUrl}/iam/auth/verification/${token}`;
+      try {
+        await axios.get(url);
+        setVerificationStatus('Success');
+      } catch (err) {
+        setVerificationStatus('Error');
+      }
+    };
+    
+    verify();
+  }, [])
 
   return (
     <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
