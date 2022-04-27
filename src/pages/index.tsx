@@ -9,3 +9,5 @@ export { default as LeaderBoard } from './LeaderBoard';
 export { default as DownloadSCreen } from './Download';
 export { default as RecoveryPassword } from './Password/RecoveryPassword';
 export { default as ChangePassword } from './Password/ChangePassword';
+export { default as VerificationSuccessful } from './VerificationPage/VerificationSuccessful';
+export { default as SomethingWorng } from './VerificationPage/SomethingWorng';

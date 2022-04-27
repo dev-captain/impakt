@@ -12,6 +12,7 @@ const contactUs = 'contactUs';
 const footer = 'footer';
 const downloadPlateform = 'downloadPlateform';
 const password = 'password';
+const verification = 'verification';
 
 const TranslationKeys = {
   common: {
@@ -104,6 +105,15 @@ const TranslationKeys = {
     confirmPassword: `${password}.confirmPassword`,
     changeText: `${password}.changeText`,
     new: `${password}.new`,
+  },
+  verification: {
+    verification: `${verification}.verification`,
+    successful: `${verification}.successful`,
+    thankyou: `${verification}.thankyou`,
+    Successtitle: `${verification}.Successtitle`,
+    something: `${verification}.something`,
+    wrong: `${verification}.wrong`,
+    message: `${verification}.message`,
   },
 };
 

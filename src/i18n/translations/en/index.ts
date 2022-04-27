@@ -90,4 +90,13 @@ export default {
     confirmPassword: 'Confirm Password',
     changeText: 'Choose a unique password to protect your account',
   },
+  verification: {
+    verification: 'Verification',
+    successful: 'successful',
+    Successtitle: 'You can close this page now.',
+    thankyou: 'Thank you!',
+    something: 'Something went',
+    wrong: 'wrong',
+    message: 'Perhaps the link has expired or something went wrong. Please try again.',
+  },
 };
