@@ -21,44 +21,43 @@ const SomethingWorng = () => {
 
   const commonProps: any = {
     textStyle: { base: 'regular4', md: 'regular5' },
-    fontSize: '24px !important',
-    lineHeight: '32px !important',
-    textAlign: { base: 'center', md: 'left' },
+    fontSize: '16px !important',
+    lineHeight: '24px !important',
+    textAlign: 'center',
   };
 
   return (
-    <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
+    <HeroLayout showNavbar spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         position="relative"
         color={textColor}
-        maxW={{ base: 'full', md: '50%' }}
-        marginTop={{ base: '40px !important', md: '85px' }}
+        maxW={{ base: 'full', md: '800px' }}
+        marginTop={{ base: '48px', md: '72px' }}
         w="full"
         px={{ base: '20px', md: '0' }}
         filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16));"
       >
         <VStack
           spacing="24px"
-          marginTop={{ base: '0', md: '15px !important' }}
+          marginTop="0 !important"
           mb="48px"
           textAlign="center"
-          overflow="hidden"
           flexDirection="row"
           justifyContent="center"
           w="full"
         >
           <Text
             textStyle="black3"
-            fontSize={{ base: '36px', md: '50px' }}
-            lineHeight={{ base: '40px', md: '60px' }}
-            marginRight={{ base: '5px', md: '10px' }}
+            fontSize={{ base: '30px', md: '60px' }}
+            lineHeight={{ base: '36px', md: '60px' }}
+            marginRight={{ base: '0', md: '10px' }}
           >
             {t(keys.verification.something)}
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
-            fontSize={{ base: '36px', md: '56px' }}
-            lineHeight={{ base: '40px', md: '60px' }}
+            fontSize={{ base: '30px', md: '56px' }}
+            lineHeight={{ base: '36px', md: '60px' }}
             marginTop="0 !important"
           >
             {t(keys.verification.wrong)}
@@ -66,9 +65,9 @@ const SomethingWorng = () => {
         </VStack>
         <VStack
           bgColor={bgColor}
-          height="50%"
+          maxW={{ base: 'full', md: '550px' }}
           w="full"
-          padding={{ base: '32px 15px', md: '50px 45px 30px' }}
+          padding={{ base: '20px 16px 48px', md: '20px 90px 35px' }}
           borderRadius={30}
           position="relative"
           overflow="hidden"
@@ -76,7 +75,7 @@ const SomethingWorng = () => {
         >
           <Image minW="127px" h="150px" src={Images.wrong} />
 
-          <VStack spacing="24px" w="full" borderRadius={16}>
+          <VStack spacing="24px" w="full" borderRadius={16} marginTop="0 !important">
             <Text {...commonProps}>{t(keys.verification.message)}</Text>
           </VStack>
 
