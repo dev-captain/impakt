@@ -43,8 +43,8 @@ const App = () => {
       <Route path="/download" element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
-      <Route path="/verification-successful" element={<VerificationSuccessful />} />
-      <Route path="/something-wrong" element={<SomethingWorng />} />
+      <Route path="/verify" element={<VerificationSuccessful />} />
+      <Route path="SomethingWorng" element={<SomethingWorng />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
