@@ -1,11 +1,13 @@
+import React from 'react';
 import { useColorModeValue, VStack, Text, useBreakpointValue, Image } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+
 import Gradients from './Gradient';
 
-const SomethingWorng = () => {
+const VerificationSomethingWentWrong: React.FC = () => {
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -86,4 +88,4 @@ const SomethingWorng = () => {
   );
 };
 
-export default SomethingWorng;
+export default VerificationSomethingWentWrong;
