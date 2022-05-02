@@ -23,7 +23,7 @@ const VerificationLoading: React.FC = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   return (
-    <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
+    <HeroLayout showNavbar spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         position="relative"
         color={textColor}
