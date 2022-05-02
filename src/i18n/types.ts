@@ -108,6 +108,7 @@ const TranslationKeys = {
   },
   verification: {
     verification: `${verification}.verification`,
+    loading: `${verification}.loading`,
     successful: `${verification}.successful`,
     thankyou: `${verification}.thankyou`,
     Successtitle: `${verification}.Successtitle`,

@@ -98,5 +98,6 @@ export default {
     something: 'Something went',
     wrong: 'wrong',
     message: 'Perhaps the link has expired or something went wrong. Please try again.',
+    loading: 'loading',
   },
 };
