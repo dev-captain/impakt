@@ -30,6 +30,8 @@ const Images = {
   impaktLaptop: require('./impakt-laptop.png'),
   joinOurCommunity: require('./join-our-community.png'),
   downloadlaptop: require('./download.png'),
+  verification: require('./rich-icon.png'),
+  wrong: require('./some-wrong.png'),
   contact: {
     md: require('./contact.webp'),
     sm: require('./contact.webp'),

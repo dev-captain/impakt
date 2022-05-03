@@ -13,6 +13,7 @@ import {
   DownloadSCreen,
   ChangePassword,
   RecoveryPassword,
+  Verify,
 } from 'pages';
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
       <Route path="/download" element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
+      <Route path="/verify" element={<Verify />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
