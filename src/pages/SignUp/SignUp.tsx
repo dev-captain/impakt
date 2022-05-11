@@ -44,8 +44,6 @@ const SignUp = () => {
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
-  const [isNewPasswordActive, setIsNewPasswordActive] = useState(true);
-  const [isConfirmPasswordActive, setIsConfirmPasswordActive] = useState(true);
   const [isAggreeToTermsAndPrivacy, setIsAgreeToTermsAndPrivacy] = useState(false);
   const [errorMessageIsAgreeToTermsAndPrivacy, setErrorMessageIsAggreeToTermsAndPrivacy] =
     useState('');
@@ -120,6 +118,8 @@ const SignUp = () => {
           bgColor={bgColor}
           height="50%"
           w="full"
+          maxH={{ base: 'unset', md: '516px' }}
+          maxW={{ base: 'unset', md: '520px' }}
           padding={{ base: '48px' }}
           borderRadius={30}
           position="relative"
@@ -136,8 +136,6 @@ const SignUp = () => {
             <TextField
               isOutlined
               name="username"
-              onBlur={() => setIsNewPasswordActive(false)}
-              onFocus={() => setIsNewPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
@@ -150,8 +148,6 @@ const SignUp = () => {
             <TextField
               isOutlined
               name="email"
-              onBlur={() => setIsNewPasswordActive(false)}
-              onFocus={() => setIsNewPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
@@ -163,8 +159,6 @@ const SignUp = () => {
             <TextField
               isOutlined
               name="password"
-              onBlur={() => setIsNewPasswordActive(false)}
-              onFocus={() => setIsNewPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
@@ -177,8 +171,6 @@ const SignUp = () => {
             <TextField
               isOutlined
               name="passwordConfirmation"
-              onBlur={() => setIsConfirmPasswordActive(false)}
-              onFocus={() => setIsConfirmPasswordActive(true)}
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
