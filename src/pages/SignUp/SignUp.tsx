@@ -253,7 +253,7 @@ const SignUp = () => {
             </VStack>
 
             {!!errorMessageIsAgreeToTermsAndPrivacy && (
-              <Box textAlign="end" mt="2px">
+              <Box textAlign="end" position="absolute" top="-5px" mt="2px">
                 <Text
                   bgClip="text"
                   textStyle="regular12"
