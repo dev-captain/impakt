@@ -1,6 +1,7 @@
 import React from 'react';
 import Icons from 'components/icons';
 import { Box, Input, Text } from '@chakra-ui/react';
+import { UseFormRegisterReturn } from 'react-hook-form/dist/types/form';
 
 type FieldProps = {
   name?: string;
@@ -44,6 +45,7 @@ const TextField = ({
   return (
     <Box w="full" minH="fit-content" position="relative" overflow="hidden">
       <Input
+        {...rest}
         w="full"
         minH="48px"
         _focus={
@@ -95,7 +97,6 @@ const TextField = ({
           fontSize,
           caretColor: '#dc213c',
         }}
-        {...rest}
       />
       {type === 'password' && (
         <Box position="absolute" zIndex={10} top="16px" right="24px" onClick={onToggleShowPassword}>

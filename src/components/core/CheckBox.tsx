@@ -3,17 +3,20 @@ import Icons from 'components/icons';
 
 const CheckBox = ({
   checked,
+  name,
   onToggle,
   size = '12px',
   radius = '4px',
 }: {
   checked: boolean;
-  onToggle: () => void;
+  name: string;
+  onToggle: any;
   size?: number | string;
   radius?: number | string;
 }) => {
   return (
     <Center
+      name={name}
       cursor="pointer"
       minW={size}
       minH={size}

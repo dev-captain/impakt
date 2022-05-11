@@ -6,6 +6,7 @@ import {
   useToast,
   Flex,
   Box,
+  FormControl,
 } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -14,11 +15,25 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
 import axios, { AxiosError } from 'axios';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useSearchParams } from 'react-router-dom';
 import Gradients from './Gradient';
 import CheckBox from '../../components/core/CheckBox';
 import TextField from '../../components/core/TextField';
+
+const signUpFormYupScheme = yup.object().shape({
+  username: yup.string().required(),
+  email: yup.string().email(),
+  password: yup
+    .string()
+    .required('No password provided.')
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .matches(/(?=.*[0-9])/, 'Password must contain a number.'),
+  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match.'),
+});
 
 const SignUp = () => {
   const toast = useToast();
@@ -31,8 +46,10 @@ const SignUp = () => {
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const [isNewPasswordActive, setIsNewPasswordActive] = useState(true);
   const [isConfirmPasswordActive, setIsConfirmPasswordActive] = useState(true);
+  const [isAggreeToTermsAndPrivacy, setIsAgreeToTermsAndPrivacy] = useState(false);
+  const [errorMessageIsAgreeToTermsAndPrivacy, setErrorMessageIsAggreeToTermsAndPrivacy] =
+    useState('');
   const [isUpdateButtonLoading, setIsUpdateButtonLoading] = useState(false);
-  const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(true);
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -41,33 +58,26 @@ const SignUp = () => {
     xl: false,
     '2xl': false,
   });
-  const [values, setValues] = useState({
-    newPassword: '',
-    confirmPassword: '',
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    getValues,
+  } = useForm({
+    resolver: yupResolver(signUpFormYupScheme),
   });
-  useEffect(() => {
-    setIsUpdateButtonDisabled(
-      values.newPassword.length === 0 || !isValidNewPassword() || !isValidConfirmPassword(),
-    );
-  }, [values]);
+
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValue(e.target.name, e.target.value, { shouldValidate: true });
   };
 
-  const onSubmit = async () => {
-    // on submit process here
+  const handleRegisterFormSubmit = (data: any) => {
+    if (!isAggreeToTermsAndPrivacy)
+      return setErrorMessageIsAggreeToTermsAndPrivacy('You must accept the terms and conditions');
+
+    return console.log('clicked', data);
   };
-
-  // new password validation
-  const isValidNewPassword = () =>
-    values.newPassword.length === 0 || values.newPassword.length >= 8;
-  const getNewPasswordError = () =>
-    isNewPasswordActive && !isValidNewPassword() ? 'Use at least 8 characters' : '';
-
-  // confirm password validation
-  const isValidConfirmPassword = () => values.newPassword === values.confirmPassword;
-  const getConfirmPasswordError = () =>
-    isConfirmPasswordActive && !isValidConfirmPassword() ? 'Passwords don’t match' : '';
 
   return (
     <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
@@ -116,7 +126,13 @@ const SignUp = () => {
           overflow="hidden"
           marginTop="0 !important"
         >
-          <VStack spacing="24px" w="full" borderRadius={16}>
+          <VStack
+            as="form"
+            onSubmit={handleSubmit(handleRegisterFormSubmit)}
+            spacing="24px"
+            w="full"
+            borderRadius={16}
+          >
             <TextField
               isOutlined
               name="username"
@@ -128,7 +144,7 @@ const SignUp = () => {
               placeholder={t(keys.signUp.username)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="username"
-              error={getNewPasswordError()}
+              error={errors.username ? errors.username.message : ''}
             />
 
             <TextField
@@ -142,11 +158,11 @@ const SignUp = () => {
               placeholder={t(keys.signUp.email)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="email"
-              error={getNewPasswordError()}
+              error={errors.email ? errors.email.message : ''}
             />
             <TextField
               isOutlined
-              name="newPassword"
+              name="password"
               onBlur={() => setIsNewPasswordActive(false)}
               onFocus={() => setIsNewPasswordActive(true)}
               fontSize="14px"
@@ -155,12 +171,12 @@ const SignUp = () => {
               placeholder={t(keys.password.password)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              error={getNewPasswordError()}
+              error={errors.password ? errors.password.message : ''}
             />
 
             <TextField
               isOutlined
-              name="confirmPassword"
+              name="passwordConfirmation"
               onBlur={() => setIsConfirmPasswordActive(false)}
               onFocus={() => setIsConfirmPasswordActive(true)}
               fontSize="14px"
@@ -169,56 +185,75 @@ const SignUp = () => {
               placeholder={t(keys.password.confirmPassword)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="password"
-              error={getConfirmPasswordError()}
+              error={errors.passwordConfirmation ? errors.passwordConfirmation.message : ''}
             />
-          </VStack>
+            <VStack
+              marginTop={{ base: '20px !important' }}
+              w="full"
+              justifyContent="start"
+              alignItems="baseline"
+              flexDir="row"
+              borderRadius={16}
+            >
+              <Flex justifyContent="center" alignItems="center">
+                <CheckBox
+                  name="aggreeToTermsAndPrivacy"
+                  checked={isAggreeToTermsAndPrivacy}
+                  onToggle={() => {
+                    setIsAgreeToTermsAndPrivacy(!isAggreeToTermsAndPrivacy);
+                    setErrorMessageIsAggreeToTermsAndPrivacy('');
+                  }}
+                />
+                <Text ml="1em" textStyle="regular3" pos="relative">
+                  I agree to
+                  <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
+                    Terms
+                  </Box>
+                  and
+                  <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
+                    Privacy Policy
+                  </Box>
+                </Text>
+              </Flex>
+            </VStack>
 
-          <VStack
-            marginTop={{ base: '20px !important' }}
-            w="full"
-            justifyContent="start"
-            alignItems="baseline"
-            flexDir="row"
-            borderRadius={16}
-          >
-            <Flex justifyContent="center" alignItems="center">
-              <CheckBox checked={false} onToggle={() => {}} />
+            {!!errorMessageIsAgreeToTermsAndPrivacy && (
+              <Box textAlign="end" mt="2px">
+                <Text
+                  bgClip="text"
+                  textStyle="regular12"
+                  bgGradient="linear(to-r, rgba(220, 20, 60, 1), rgba(178, 34, 34, 1))"
+                >
+                  {errorMessageIsAgreeToTermsAndPrivacy}
+                </Text>
+              </Box>
+            )}
+
+            <VStack
+              w="full"
+              align={{ base: 'center' }}
+              display="flex"
+              fontSize={16}
+              marginTop={{ base: '24px !important' }}
+            >
+              <GradientButton
+                type="submit"
+                py="32px"
+                w={{ base: 'full' }}
+                radius="20px"
+                title="Create account"
+                bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                isLoading={isUpdateButtonLoading}
+              />
               <Text ml="1em" textStyle="regular3" pos="relative">
-                I agree to
-                <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
-                  Terms
-                </Box>
-                and
-                <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
-                  Privacy Policy
+                Already have an account?
+                <Box mx="3px" cursor="pointer" textColor={accentRedtextColor} as="span">
+                  Login
                 </Box>
               </Text>
-            </Flex>
+            </VStack>
           </VStack>
-          <VStack
-            w="full"
-            align={{ base: 'center' }}
-            display="flex"
-            fontSize={16}
-            marginTop={{ base: '24px !important' }}
-          >
-            <GradientButton
-              py="32px"
-              w={{ base: 'full' }}
-              radius="20px"
-              onClick={onSubmit}
-              title="Create account"
-              disabled={isUpdateButtonDisabled}
-              bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-              isLoading={isUpdateButtonLoading}
-            />
-            <Text ml="1em" textStyle="regular3" pos="relative">
-              Already have an account?
-              <Box mx="3px" cursor="pointer" textColor={accentRedtextColor} as="span">
-                Login
-              </Box>
-            </Text>
-          </VStack>
+
           <Gradients />
         </VStack>
       </VStack>
