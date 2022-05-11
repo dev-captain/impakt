@@ -24,6 +24,8 @@ import Gradients from './Gradient';
 import CheckBox from '../../components/core/CheckBox';
 import TextField from '../../components/core/TextField';
 
+const apiBaseUrl = process.env.REACT_APP_API;
+
 const signUpFormYupScheme = yup.object().shape({
   username: yup.string().required(),
   email: yup.string().email(),
@@ -70,11 +72,52 @@ const SignUp = () => {
     setValue(e.target.name, e.target.value, { shouldValidate: true });
   };
 
-  const handleRegisterFormSubmit = (data: any) => {
+  const handleRegisterFormSubmit = async (data: any) => {
     if (!isAggreeToTermsAndPrivacy)
       return setErrorMessageIsAggreeToTermsAndPrivacy('You must accept the terms and conditions');
+    const url = `${apiBaseUrl}/iam/auth/user`;
 
-    return console.log('clicked', data);
+    try {
+      const { username, email, password } = data;
+      const payload = {
+        username,
+        password,
+        email,
+        referrerId: '32',
+        discordHandle: '',
+        cryptoWallet: '',
+      };
+
+      await axios.post(url, payload);
+
+      return toast({
+        title: 'Success',
+        description: 'Your account created successfully, you can now login in the Impakt app.',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (err) {
+      const error = err as AxiosError;
+      const { status } = error.response ?? {};
+      if (status && status >= 400 && status < 500) {
+        return toast({
+          title: 'Error',
+          description: 'Something went wrong...',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      }
+
+      return toast({
+        title: 'Error',
+        description: 'Something went wrong. Please contact support.',
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
   };
 
   return (
