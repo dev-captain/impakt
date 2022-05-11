@@ -1,7 +1,6 @@
 import React from 'react';
 import Icons from 'components/icons';
 import { Box, Input, Text } from '@chakra-ui/react';
-import { UseFormRegisterReturn } from 'react-hook-form/dist/types/form';
 
 type FieldProps = {
   name?: string;

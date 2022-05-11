@@ -6,11 +6,10 @@ import {
   useToast,
   Flex,
   Box,
-  FormControl,
 } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
@@ -19,7 +18,6 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useSearchParams } from 'react-router-dom';
 import Gradients from './Gradient';
 import CheckBox from '../../components/core/CheckBox';
 import TextField from '../../components/core/TextField';
@@ -39,8 +37,6 @@ const signUpFormYupScheme = yup.object().shape({
 
 const SignUp = () => {
   const toast = useToast();
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get('token');
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -49,7 +45,7 @@ const SignUp = () => {
   const [isAggreeToTermsAndPrivacy, setIsAgreeToTermsAndPrivacy] = useState(false);
   const [errorMessageIsAgreeToTermsAndPrivacy, setErrorMessageIsAggreeToTermsAndPrivacy] =
     useState('');
-  const [isUpdateButtonLoading, setIsUpdateButtonLoading] = useState(false);
+  const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -61,9 +57,7 @@ const SignUp = () => {
   const {
     handleSubmit,
     formState: { errors },
-    reset,
     setValue,
-    getValues,
   } = useForm({
     resolver: yupResolver(signUpFormYupScheme),
   });
@@ -77,6 +71,7 @@ const SignUp = () => {
       return setErrorMessageIsAggreeToTermsAndPrivacy('You must accept the terms and conditions');
     const url = `${apiBaseUrl}/iam/auth/user`;
 
+    setIsCreateAccountButtonLoading(true);
     try {
       const { username, email, password } = data;
       const payload = {
@@ -90,7 +85,7 @@ const SignUp = () => {
 
       await axios.post(url, payload);
 
-      return toast({
+      toast({
         title: 'Success',
         description: 'Your account created successfully, you can now login in the Impakt app.',
         isClosable: true,
@@ -101,7 +96,7 @@ const SignUp = () => {
       const error = err as AxiosError;
       const { status } = error.response ?? {};
       if (status && status >= 400 && status < 500) {
-        return toast({
+        toast({
           title: 'Error',
           description: 'Something went wrong...',
           isClosable: true,
@@ -110,7 +105,7 @@ const SignUp = () => {
         });
       }
 
-      return toast({
+      toast({
         title: 'Error',
         description: 'Something went wrong. Please contact support.',
         isClosable: true,
@@ -118,6 +113,8 @@ const SignUp = () => {
         status: 'error',
       });
     }
+
+    return setIsCreateAccountButtonLoading(false);
   };
 
   return (
@@ -278,7 +275,7 @@ const SignUp = () => {
                 radius="20px"
                 title="Create account"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                isLoading={isUpdateButtonLoading}
+                isLoading={isCreateAccountButtonLoading}
               />
               <Text ml="1em" textStyle="regular3" pos="relative">
                 Already have an account?
