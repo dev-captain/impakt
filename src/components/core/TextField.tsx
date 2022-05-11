@@ -18,11 +18,15 @@ type FieldProps = {
   showPasswordToggle?: () => void;
   type?: React.HTMLInputTypeAttribute | undefined;
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
+  onFocus?: React.FocusEventHandler<HTMLInputElement> | undefined;
 };
 
 const TextField = ({
   placeholder,
   onChange,
+  onBlur,
+  onFocus,
   type,
   error,
   fontSize,
@@ -61,6 +65,8 @@ const TextField = ({
         lineHeight="16px"
         borderRadius="12px"
         onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
         backdropFilter="blur(1px)"
         placeholder={placeholder || ''}
         background="rgba(33, 37, 42, 0.01)"

@@ -20,9 +20,8 @@ const CheckBox = ({
       borderRadius={radius}
       borderColor="#21252A"
       borderWidth={checked ? 0 : '1px'}
-      bg={checked ? 'linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)' : 'white'}
     >
-      {checked && <Icons.CheckMark />}
+      {checked ? <Icons.CheckMark /> : <Icons.UnCheckMark />}
     </Center>
   );
 };
