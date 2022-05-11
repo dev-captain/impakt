@@ -14,6 +14,7 @@ const CheckBox = ({
 }) => {
   return (
     <Center
+      cursor="pointer"
       minW={size}
       minH={size}
       onClick={onToggle}

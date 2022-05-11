@@ -185,11 +185,11 @@ const SignUp = () => {
               <CheckBox checked={false} onToggle={() => {}} />
               <Text ml="1em" textStyle="regular3" pos="relative">
                 I agree to
-                <Box mx="5px" textColor={accentRedtextColor} as="span">
+                <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
                   Terms
                 </Box>
                 and
-                <Box mx="5px" textColor={accentRedtextColor} as="span">
+                <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
                   Privacy Policy
                 </Box>
               </Text>
@@ -214,7 +214,7 @@ const SignUp = () => {
             />
             <Text ml="1em" textStyle="regular3" pos="relative">
               Already have an account?
-              <Box mx="3px" textColor={accentRedtextColor} as="span">
+              <Box mx="3px" cursor="pointer" textColor={accentRedtextColor} as="span">
                 Login
               </Box>
             </Text>
