@@ -97,7 +97,7 @@ const SignUp = () => {
 
       toast({
         title: 'Success',
-        description: 'Your account created successfully, you can now login in the Impakt app.',
+        description: 'Your account created successfully.',
         isClosable: true,
         duration: 8000,
         status: 'success',
