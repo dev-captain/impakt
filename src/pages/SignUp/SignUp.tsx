@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
@@ -17,6 +17,7 @@ import axios, { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
 import CheckBox from '../../components/core/CheckBox';
@@ -38,6 +39,7 @@ const signUpFormYupScheme = yup.object().shape({
 });
 
 const SignUp = () => {
+  const { id } = useParams();
   const toast = useToast();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
@@ -45,6 +47,7 @@ const SignUp = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const [isAggreeToTermsAndPrivacy, setIsAgreeToTermsAndPrivacy] = useState(false);
+  const [activeReferrerId, setActiveReferrerId] = useState<number>();
   const [errorMessageIsAgreeToTermsAndPrivacy, setErrorMessageIsAggreeToTermsAndPrivacy] =
     useState('');
   const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
@@ -56,6 +59,17 @@ const SignUp = () => {
     xl: false,
     '2xl': false,
   });
+
+  useEffect(() => {
+    if (!id) return;
+    const isNumberConvartibleStringAndPositiveInteger =
+      Number.isInteger(Number(id)) && Number(id) > 0;
+    if (isNumberConvartibleStringAndPositiveInteger) {
+      const referrerNumberId = Number(id);
+      setActiveReferrerId(referrerNumberId);
+    }
+  }, []);
+
   const {
     handleSubmit,
     formState: { errors },
@@ -80,13 +94,12 @@ const SignUp = () => {
         username,
         password,
         email,
-        referrerId: '32',
-        discordHandle: '',
-        cryptoWallet: '',
+        referrerId: activeReferrerId,
       };
 
-      await axios.post(url, payload);
+      const createAccountResponse = await axios.post(url, payload);
 
+      console.log(createAccountResponse.data);
       toast({
         title: 'Success',
         description: 'Your account created successfully, you can now login in the Impakt app.',
@@ -100,20 +113,23 @@ const SignUp = () => {
       if (status && status >= 400 && status < 500) {
         toast({
           title: 'Error',
-          description: 'Something went wrong...',
+          description:
+            error.response?.data.message && error.response.data.message.length > 1
+              ? error.response.data.message[0]
+              : 'Something went wrong',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Something went wrong. Please contact support.',
           isClosable: true,
           duration: 8000,
           status: 'error',
         });
       }
-
-      toast({
-        title: 'Error',
-        description: 'Something went wrong. Please contact support.',
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
     }
 
     return setIsCreateAccountButtonLoading(false);
