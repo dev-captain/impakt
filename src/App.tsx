@@ -43,7 +43,7 @@ const App = () => {
       <Route path="/download" element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/register/:id" element={<SignUp />} />
       <Route path="/verify" element={<Verify />} />
 
       <Route path="*" element={<NotFound />} />
