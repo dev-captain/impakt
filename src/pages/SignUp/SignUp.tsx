@@ -174,6 +174,7 @@ const SignUp = () => {
             borderRadius={16}
           >
             <TextField
+              zIndex="999"
               isOutlined
               name="username"
               fontSize="14px"
@@ -181,7 +182,7 @@ const SignUp = () => {
               onChange={onChange}
               placeholder={t(keys.signUp.username)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
-              type="username"
+              type="text"
               error={errors.username ? errors.username.message : ''}
             />
 

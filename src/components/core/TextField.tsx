@@ -7,6 +7,7 @@ type FieldProps = {
   error?: string;
   textStyle?: any;
   iconColor?: string;
+  zIndex?: string;
   _placeholder?: any;
   borderColor?: string;
   placeholder?: string;
