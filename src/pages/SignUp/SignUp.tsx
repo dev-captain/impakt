@@ -32,9 +32,12 @@ const signUpFormYupScheme = yup.object().shape({
     .required('Email is required field'),
   password: yup
     .string()
-    .required('No password provided.')
+    .required('Password is required field')
     .min(8, 'Password is too short - should be 8 chars minimum.'),
-  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match.'),
+  passwordConfirmation: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match.')
+    .required('Confirm Password is required field'),
 });
 
 const SignUp = () => {
