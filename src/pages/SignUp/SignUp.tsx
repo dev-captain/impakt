@@ -6,6 +6,7 @@ import {
   useToast,
   Flex,
   Box,
+  Link,
 } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -244,13 +245,23 @@ const SignUp = () => {
               <Flex justifyContent="center" alignItems="center">
                 <Text textStyle="regular3" pos="relative">
                   By clicking on &apos;Create Account&apos; you agree to our
-                  <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
-                    Terms
-                  </Box>
+                  <Link
+                    _hover={{ textDecoration: 'none' }}
+                    href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+                  >
+                    <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
+                      Terms
+                    </Box>
+                  </Link>
                   and
-                  <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
-                    Privacy Policy
-                  </Box>
+                  <Link
+                    _hover={{ textDecoration: 'none' }}
+                    href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+                  >
+                    <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
+                      Privacy Policy
+                    </Box>
+                  </Link>
                 </Text>
               </Flex>
             </VStack>
