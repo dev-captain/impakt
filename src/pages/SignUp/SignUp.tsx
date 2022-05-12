@@ -20,7 +20,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
-import CheckBox from '../../components/core/CheckBox';
 import TextField from '../../components/core/TextField';
 
 const apiBaseUrl = process.env.REACT_APP_API;
@@ -46,10 +45,7 @@ const SignUp = () => {
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
-  const [isAggreeToTermsAndPrivacy, setIsAgreeToTermsAndPrivacy] = useState(false);
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
-  const [errorMessageIsAgreeToTermsAndPrivacy, setErrorMessageIsAggreeToTermsAndPrivacy] =
-    useState('');
   const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
   const isSmallView = useBreakpointValue({
     base: true,
@@ -62,9 +58,8 @@ const SignUp = () => {
 
   useEffect(() => {
     if (!id) return;
-    const isNumberConvartibleStringAndPositiveInteger =
-      Number.isInteger(Number(id)) && Number(id) > 0;
-    if (isNumberConvartibleStringAndPositiveInteger) {
+    const isStringThatCanConvertToPositiveInt = Number.isInteger(Number(id)) && Number(id) > 0;
+    if (isStringThatCanConvertToPositiveInt) {
       const referrerNumberId = Number(id);
       setActiveReferrerId(referrerNumberId);
     }
@@ -83,8 +78,6 @@ const SignUp = () => {
   };
 
   const handleRegisterFormSubmit = async (data: any) => {
-    if (!isAggreeToTermsAndPrivacy)
-      return setErrorMessageIsAggreeToTermsAndPrivacy('You must accept the terms and conditions');
     const url = `${apiBaseUrl}/iam/user`;
 
     setIsCreateAccountButtonLoading(true);
@@ -97,9 +90,8 @@ const SignUp = () => {
         referrerId: activeReferrerId,
       };
 
-      const createAccountResponse = await axios.post(url, payload);
+      await axios.post(url, payload);
 
-      console.log(createAccountResponse.data);
       toast({
         title: 'Success',
         description: 'Your account created successfully, you can now login in the Impakt app.',
@@ -247,16 +239,8 @@ const SignUp = () => {
               borderRadius={16}
             >
               <Flex justifyContent="center" alignItems="center">
-                <CheckBox
-                  name="aggreeToTermsAndPrivacy"
-                  checked={isAggreeToTermsAndPrivacy}
-                  onToggle={() => {
-                    setIsAgreeToTermsAndPrivacy(!isAggreeToTermsAndPrivacy);
-                    setErrorMessageIsAggreeToTermsAndPrivacy('');
-                  }}
-                />
-                <Text ml="1em" textStyle="regular3" pos="relative">
-                  I agree to
+                <Text textStyle="regular3" pos="relative">
+                  By clicking on &apos;Create Account&apos; you agree to our
                   <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
                     Terms
                   </Box>
@@ -267,19 +251,6 @@ const SignUp = () => {
                 </Text>
               </Flex>
             </VStack>
-
-            {!!errorMessageIsAgreeToTermsAndPrivacy && (
-              <Box textAlign="end" position="absolute" top="-5px" mt="2px">
-                <Text
-                  bgClip="text"
-                  textStyle="regular12"
-                  bgGradient="linear(to-r, rgba(220, 20, 60, 1), rgba(178, 34, 34, 1))"
-                >
-                  {errorMessageIsAgreeToTermsAndPrivacy}
-                </Text>
-              </Box>
-            )}
-
             <VStack
               w="full"
               align={{ base: 'center' }}
