@@ -26,12 +26,11 @@ const apiBaseUrl = process.env.REACT_APP_API;
 
 const signUpFormYupScheme = yup.object().shape({
   username: yup.string().required(),
-  email: yup.string().email(),
+  email: yup.string().email('Email field should be a valid email').required(),
   password: yup
     .string()
     .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.')
-    .matches(/(?=.*[0-9])/, 'Password must contain a number.'),
+    .min(8, 'Password is too short - should be 8 chars minimum.'),
   passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match.'),
 });
 
