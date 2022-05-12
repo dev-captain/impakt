@@ -246,6 +246,7 @@ const SignUp = () => {
                 <Text textStyle="regular3" pos="relative">
                   By clicking on &apos;Create Account&apos; you agree to our
                   <Link
+                    target="_blank"
                     _hover={{ textDecoration: 'none' }}
                     href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
                   >
@@ -256,6 +257,7 @@ const SignUp = () => {
                   and
                   <Link
                     _hover={{ textDecoration: 'none' }}
+                    target="_blank"
                     href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
                   >
                     <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
