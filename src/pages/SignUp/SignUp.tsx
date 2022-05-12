@@ -25,8 +25,11 @@ import TextField from '../../components/core/TextField';
 const apiBaseUrl = process.env.REACT_APP_API;
 
 const signUpFormYupScheme = yup.object().shape({
-  username: yup.string().required(),
-  email: yup.string().email('Email field should be a valid email').required(),
+  username: yup.string().required('Username is required field'),
+  email: yup
+    .string()
+    .email('Email field should be a valid email')
+    .required('Email is required field'),
   password: yup
     .string()
     .required('No password provided.')
