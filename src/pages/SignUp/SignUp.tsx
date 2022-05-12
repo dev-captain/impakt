@@ -270,12 +270,6 @@ const SignUp = () => {
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
                 isLoading={isCreateAccountButtonLoading}
               />
-              <Text ml="1em" textStyle="regular3" pos="relative">
-                Already have an account?
-                <Box mx="3px" cursor="pointer" textColor={accentRedtextColor} as="span">
-                  Login
-                </Box>
-              </Text>
             </VStack>
           </VStack>
 
