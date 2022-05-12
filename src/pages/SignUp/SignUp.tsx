@@ -69,7 +69,7 @@ const SignUp = () => {
   const handleRegisterFormSubmit = async (data: any) => {
     if (!isAggreeToTermsAndPrivacy)
       return setErrorMessageIsAggreeToTermsAndPrivacy('You must accept the terms and conditions');
-    const url = `${apiBaseUrl}/iam/auth/user`;
+    const url = `${apiBaseUrl}/iam/user`;
 
     setIsCreateAccountButtonLoading(true);
     try {
