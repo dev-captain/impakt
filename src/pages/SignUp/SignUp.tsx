@@ -153,7 +153,7 @@ const SignUp = () => {
         >
           <Text
             textStyle="black3"
-            fontSize={{ base: '34px', sm: '36px', md: '56px' }}
+            fontSize={{ base: '31.8px', sm: '40px', md: '56px' }}
             lineHeight={{ base: '40px', md: '60px' }}
             marginRight={{ base: '5px', md: '10px' }}
           >
@@ -161,7 +161,7 @@ const SignUp = () => {
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
-            fontSize={{ base: '34px', sm: '36px', md: '56px' }}
+            fontSize={{ base: '36px', sm: '40px', md: '56px' }}
             lineHeight={{ base: '40px', md: '60px' }}
             marginTop="0 !important"
           >
