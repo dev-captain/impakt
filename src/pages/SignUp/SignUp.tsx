@@ -134,7 +134,6 @@ const SignUp = () => {
   return (
     <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
-        position="relative"
         color={textColor}
         maxW={{ base: 'full', md: '551px' }}
         marginTop={{ base: '40px !important', md: '85px' }}
@@ -143,25 +142,26 @@ const SignUp = () => {
         filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16));"
       >
         <VStack
-          spacing="24px"
           marginTop={{ base: '0', md: '15px !important' }}
           mb="48px"
           textAlign="center"
           overflow="hidden"
           flexDirection="row"
+          position="relative"
           justifyContent="center"
           w="full"
         >
           <Text
-            fontSize={{ base: '40px', md: '56px' }}
-            lineHeight={{ base: '36px', md: '60px' }}
+            textStyle="black3"
+            fontSize={{ base: '34px', sm: '36px', md: '56px' }}
+            lineHeight={{ base: '40px', md: '60px' }}
             marginRight={{ base: '5px', md: '10px' }}
           >
             {t(keys.signUp.createAn)}
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
-            fontSize={{ base: '36px', md: '56px' }}
+            fontSize={{ base: '34px', sm: '36px', md: '56px' }}
             lineHeight={{ base: '40px', md: '60px' }}
             marginTop="0 !important"
           >
@@ -174,7 +174,7 @@ const SignUp = () => {
           w="full"
           maxH={{ base: 'unset', md: '516px' }}
           maxW={{ base: 'unset', md: '520px' }}
-          padding={{ base: '48px' }}
+          padding={{ base: '32px 16px', md: '48px' }}
           borderRadius={30}
           position="relative"
           overflow="hidden"
