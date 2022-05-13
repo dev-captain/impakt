@@ -111,8 +111,8 @@ const SignUp = () => {
           title: 'Error',
           description:
             error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message[0]
-              : 'Something went wrong',
+              ? error.response.data.message
+              : 'Something went wrong.Please contact support.',
           isClosable: true,
           duration: 8000,
           status: 'error',
