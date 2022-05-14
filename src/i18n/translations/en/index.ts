@@ -90,6 +90,12 @@ export default {
     confirmPassword: 'Confirm Password',
     changeText: 'Choose a unique password to protect your account',
   },
+  signUp: {
+    createAn: 'Create an',
+    account: 'account',
+    yourUsername: 'Username',
+    yourEmail: 'Email',
+  },
   verification: {
     verification: 'Verification',
     successful: 'successful',

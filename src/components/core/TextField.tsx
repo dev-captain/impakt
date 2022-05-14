@@ -7,6 +7,7 @@ type FieldProps = {
   error?: string;
   textStyle?: any;
   iconColor?: string;
+  zIndex?: string;
   _placeholder?: any;
   borderColor?: string;
   placeholder?: string;
@@ -18,11 +19,15 @@ type FieldProps = {
   showPasswordToggle?: () => void;
   type?: React.HTMLInputTypeAttribute | undefined;
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
+  onFocus?: React.FocusEventHandler<HTMLInputElement> | undefined;
 };
 
 const TextField = ({
   placeholder,
   onChange,
+  onBlur,
+  onFocus,
   type,
   error,
   fontSize,
@@ -40,6 +45,7 @@ const TextField = ({
   return (
     <Box w="full" minH="fit-content" position="relative" overflow="hidden">
       <Input
+        {...rest}
         w="full"
         minH="48px"
         _focus={
@@ -61,6 +67,8 @@ const TextField = ({
         lineHeight="16px"
         borderRadius="12px"
         onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
         backdropFilter="blur(1px)"
         placeholder={placeholder || ''}
         background="rgba(33, 37, 42, 0.01)"
@@ -89,7 +97,6 @@ const TextField = ({
           fontSize,
           caretColor: '#dc213c',
         }}
-        {...rest}
       />
       {type === 'password' && (
         <Box position="absolute" zIndex={10} top="16px" right="24px" onClick={onToggleShowPassword}>
@@ -97,7 +104,15 @@ const TextField = ({
         </Box>
       )}
       {!!error && (
-        <Box w="full" textAlign="end" mt="2px">
+        <Box
+          w="full"
+          zIndex="999"
+          position="absolute"
+          bottom="0px"
+          right="10px"
+          textAlign="end"
+          mt="2px"
+        >
           <Text
             bgClip="text"
             textStyle={rest.errorTextStyle || 'regular12'}

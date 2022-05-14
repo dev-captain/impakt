@@ -16,6 +16,7 @@ import RightArrow from './RightArrowIcon';
 import Window from './WindowIcon';
 import Cross from './CrossIcon';
 import CheckMark from './CheckMarkIcon';
+import UnCheckMark from './UnCheckMarkIcon';
 import Eye from './Eye';
 import EyeOff from './EyeOff';
 
@@ -35,6 +36,7 @@ const Icons: { [key in string]: any } = {
   Twitter,
   Discord,
   CheckMark,
+  UnCheckMark,
   LeftArrow,
   RightArrow,
   SmallTwitter,
