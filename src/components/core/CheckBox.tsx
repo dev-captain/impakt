@@ -3,26 +3,29 @@ import Icons from 'components/icons';
 
 const CheckBox = ({
   checked,
+  name,
   onToggle,
   size = '12px',
   radius = '4px',
 }: {
   checked: boolean;
-  onToggle: () => void;
+  name: string;
+  onToggle: any;
   size?: number | string;
   radius?: number | string;
 }) => {
   return (
     <Center
+      name={name}
+      cursor="pointer"
       minW={size}
       minH={size}
       onClick={onToggle}
       borderRadius={radius}
       borderColor="#21252A"
       borderWidth={checked ? 0 : '1px'}
-      bg={checked ? 'linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)' : 'white'}
     >
-      {checked && <Icons.CheckMark />}
+      {checked ? <Icons.CheckMark /> : <Icons.UnCheckMark />}
     </Center>
   );
 };
