@@ -6,6 +6,8 @@ type FieldProps = {
   name?: string;
   error?: string;
   textStyle?: any;
+  inputWidth?: string;
+  boxWidth?: string;
   iconColor?: string;
   zIndex?: string;
   _placeholder?: any;
@@ -21,9 +23,11 @@ type FieldProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
   onFocus?: React.FocusEventHandler<HTMLInputElement> | undefined;
+  value?: any;
 };
 
-const TextField = ({
+const TextField: React.FC<FieldProps> = ({
+  children,
   placeholder,
   onChange,
   onBlur,
@@ -37,16 +41,25 @@ const TextField = ({
   isOutlined,
   _placeholder,
   placeholderColor,
+  boxWidth,
+  inputWidth,
   ...rest
-}: FieldProps) => {
+}) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const onToggleShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <Box w="full" minH="fit-content" position="relative" overflow="hidden">
+    <Box
+      w={boxWidth ?? 'full'}
+      marginLeft={boxWidth ? '1em' : 'unset'}
+      minH="fit-content"
+      position="relative"
+      overflow="hidden"
+    >
+      {children}
       <Input
         {...rest}
-        w="full"
+        w={inputWidth ?? 'full'}
         minH="48px"
         _focus={
           isOutlined
