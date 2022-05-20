@@ -57,13 +57,13 @@ const DownloadPlatform = () => {
                   isHorizontal
                   iconName="Windows"
                   title="Download for Windows"
-                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Win_v1.2.0.zip"
+                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup_1.3.0.exe"
                 />
                 <DownloadButton
                   isHorizontal
                   iconName="Apple"
                   title="Download for Mac"
-                  link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Mac/Impakt_Mac_v1.2.0.zip"
+                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt-1.3.0-installer.pkg"
                 />
               </Wrapper>
             </VStack>
