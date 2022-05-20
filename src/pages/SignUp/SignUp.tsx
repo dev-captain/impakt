@@ -243,7 +243,7 @@ const SignUp = () => {
                 value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
                 placeholder={t(keys.signUp.fourDigit)}
                 _placeholder={{ color: textColor, fontSize: '14px' }}
-                type="text"
+                type="number"
                 error={errors.fourDigit ? errors.fourDigit.message : ''}
               >
                 <Box
