@@ -96,6 +96,12 @@ export default {
     yourUsername: 'Username',
     yourEmail: 'Email',
   },
+  signIn: {
+    signIn: `Sign in`,
+    createAn: `Create an account`,
+    firstTime: `First time?`,
+    signInButton: `Sign In`,
+  },
   verification: {
     verification: 'Verification',
     successful: 'successful',
