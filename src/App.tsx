@@ -16,6 +16,7 @@ import {
   Verify,
   SignUp,
 } from 'pages';
+import MemberDashBoard from './pages/MemberDashBoard';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -45,6 +46,8 @@ const App = () => {
       <Route path="/recover-password" element={<RecoveryPassword />} />
       <Route path="/register/:id" element={<SignUp />} />
       <Route path="/verify" element={<Verify />} />
+
+      <Route path="/dashboard" element={<MemberDashBoard />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
