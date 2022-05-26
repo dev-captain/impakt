@@ -102,6 +102,7 @@ export default {
     createAn: `Create an account`,
     firstTime: `First time?`,
     signInButton: `Sign In`,
+    emailOrUsername: `Email or Username...`,
   },
   verification: {
     verification: 'Verification',

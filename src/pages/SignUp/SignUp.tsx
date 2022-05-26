@@ -18,11 +18,12 @@ import axios, { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
 import GenerateDigitNumber from './component/GenerateDigitNumber';
+import { useUserContext } from '../../context/UserContext';
 
 const apiBaseUrl = process.env.REACT_APP_API;
 
@@ -51,6 +52,8 @@ const signUpFormYupScheme = yup.object().shape({
 });
 
 const SignUp = () => {
+  const { user } = useUserContext();
+  const navigate = useNavigate();
   const { id } = useParams();
   const toast = useToast();
   const { t } = useTranslation().i18n;
@@ -68,6 +71,10 @@ const SignUp = () => {
     xl: false,
     '2xl': false,
   });
+
+  React.useEffect(() => {
+    if (user) navigate('/');
+  }, [user]);
 
   useEffect(() => {
     if (!id) return;

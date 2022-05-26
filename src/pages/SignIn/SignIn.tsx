@@ -8,6 +8,7 @@ import Images from 'assets/images';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 // import { useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
@@ -17,7 +18,7 @@ import { useUserContext } from '../../context/UserContext';
 // const apiBaseUrl = process.env.REACT_APP_API;
 
 const signInFormYupScheme = yup.object().shape({
-  email: yup
+  emailOrUsername: yup
     .string()
     .email('Email field should be a valid email')
     .required('Email is required field'),
@@ -25,6 +26,8 @@ const signInFormYupScheme = yup.object().shape({
 });
 
 const SignIn = () => {
+  const { user } = useUserContext();
+  const navigate = useNavigate();
   const { signIn } = useUserContext();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
@@ -32,6 +35,10 @@ const SignIn = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
+
+  React.useEffect(() => {
+    if (user) navigate('/');
+  }, [user]);
 
   const {
     handleSubmit,
@@ -46,12 +53,10 @@ const SignIn = () => {
   };
 
   const handleRegisterFormSubmit = async (data: any) => {
-    // const url = `${apiBaseUrl}/iam/user`;
-
     setIsCreateAccountButtonLoading(true);
-    const { email, password } = data as { email: string; password: string };
+    const { emailOrUsername, password } = data as { emailOrUsername: string; password: string };
     try {
-      signIn({ emailOrUsername: email, password });
+      signIn({ emailOrUsername, password });
     } catch (err) {
       console.error(err);
     }
@@ -114,12 +119,12 @@ const SignIn = () => {
           >
             <TextField
               isOutlined
-              name="email"
+              name="emailOrUsername"
               borderColor="#E4EAF1"
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
-              placeholder={t(keys.signUp.email)}
+              placeholder={t(keys.signIn.emailOrUsername)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
               type="email"
               error={errors.email ? errors.email.message : ''}

@@ -120,6 +120,7 @@ const TranslationKeys = {
     createAn: `${signIn}.createAn`,
     firstTime: `${signIn}.firstTime`,
     signInButton: `${signIn}.signInButton`,
+    emailOrUsername: `${signIn}.emailOrUsername`,
   },
   verification: {
     verification: `${verification}.verification`,
