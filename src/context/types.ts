@@ -16,3 +16,9 @@ export interface User {
 }
 
 export type signInInput = { emailOrUsername: string; password: string };
+export type signUpInput = {
+  username: string;
+  password: string;
+  email: string;
+  referrerId?: number;
+};
