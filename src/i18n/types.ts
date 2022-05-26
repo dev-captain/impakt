@@ -14,6 +14,7 @@ const downloadPlateform = 'downloadPlateform';
 const password = 'password';
 const verification = 'verification';
 const signUp = 'signUp';
+const signIn = 'signIn';
 
 const TranslationKeys = {
   common: {
@@ -113,6 +114,13 @@ const TranslationKeys = {
     username: `${signUp}.yourUsername`,
     fourDigit: `${signUp}.fourDigit`,
     email: `${signUp}.yourEmail`,
+  },
+  signIn: {
+    signIn: `${signIn}.signIn`,
+    createAn: `${signIn}.createAn`,
+    firstTime: `${signIn}.firstTime`,
+    signInButton: `${signIn}.signInButton`,
+    emailOrUsername: `${signIn}.emailOrUsername`,
   },
   verification: {
     verification: `${verification}.verification`,

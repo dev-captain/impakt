@@ -97,6 +97,13 @@ export default {
     yourEmail: 'Email',
     fourDigit: '0000',
   },
+  signIn: {
+    signIn: `Sign in`,
+    createAn: `Create an account`,
+    firstTime: `First time?`,
+    signInButton: `Sign In`,
+    emailOrUsername: `Email or Username...`,
+  },
   verification: {
     verification: 'Verification',
     successful: 'successful',

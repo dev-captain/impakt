@@ -7,6 +7,7 @@ const Images = {
   star: require('./star.png'),
   Common: {
     Logo: require('./logo.png'),
+    HighResLogo: require('./high-res-impakt-logo.png'),
     LogoLight: require('./logo-light.png'),
     Twitter: require('./twitter.png'),
     TwitterLight: require('./twitter-light.png'),
