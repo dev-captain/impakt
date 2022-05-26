@@ -19,7 +19,7 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
       h="220px"
       filter="drop-shadow(0px 2.00758px 4.01516px rgba(0, 0, 0, 0.12)) drop-shadow(0px 2.00758px 7.02653px rgba(0, 0, 0, 0.1));"
       borderRadius="14px"
-      ml="3.93em !important"
+      ml={{ base: '5px !important', lg: '3.93em !important' }}
       alignItems="center"
       justifyContent="center"
     >

@@ -1,16 +1,48 @@
-import { HStack } from '@chakra-ui/react';
+import { VStack, Box, HStack } from '@chakra-ui/react';
 import * as React from 'react';
-import MemberDashBoardUserImage from './MemberDashBoardUserImage';
-import MemberDashboardSummarizePoint from './Points';
-import MemberDashBoardSummarizeRank from './Rank';
+import MemberDashBoardCard from '../MemberDashBoardCard';
+import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
+import Referrals from './Referrals';
+import SummarizeImpaktUserInfo from './SummarizeImpaktUserInfo';
+import WhiteListChallange from './WhiteListChallange';
 
 const SummarizeImpaktUser: React.FC = () => {
   return (
-    <HStack padding="96px 79px 96px 96px" id="summarize-section" w="full" columnGap="2.5em">
-      <MemberDashBoardUserImage />
-      <MemberDashBoardSummarizeRank nameOfUser="Duke Nuke" rankValue="3" statusOfUser="Talent" />
-      <MemberDashboardSummarizePoint isNeedMore={false} pointValue="12700" />
-    </HStack>
+    <VStack
+      justifyContent="space-between"
+      alignItems="flex-start"
+      maxW="1200px"
+      w="full"
+      rowGap="97px"
+      mt="97px"
+    >
+      <Box w="100%" textAlign={{ base: 'center', lg: 'left' }} id="member-dashboard-headline">
+        <MemberDashBoardHeadlineText>Member Dashboard</MemberDashBoardHeadlineText>
+      </Box>
+      <VStack rowGap="37px" id="member-dasboard-summarize-card" px="2em" w="100%">
+        <MemberDashBoardCard isGradient>
+          <SummarizeImpaktUserInfo />
+        </MemberDashBoardCard>
+        <HStack
+          flexDir={{ base: 'column', lg: 'row' }}
+          justifyContent="space-between"
+          w="100%"
+          columnGap="32px"
+          rowGap="32px"
+        >
+          <Box w={{ base: '100%', lg: '50%' }}>
+            <MemberDashBoardCard>
+              <WhiteListChallange />
+            </MemberDashBoardCard>
+          </Box>
+          <Box w={{ base: '100%', lg: '50%' }}>
+            <MemberDashBoardCard>
+              <Referrals referralLink="impakt.com/duke-nuke-ref" />
+            </MemberDashBoardCard>
+          </Box>
+        </HStack>
+      </VStack>
+    </VStack>
   );
 };
 
