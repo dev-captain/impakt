@@ -1,25 +1,14 @@
 import { useToast } from '@chakra-ui/react';
 import axios, { AxiosError } from 'axios';
-import React, { createContext, useCallback, useContext } from 'react';
-
-type signInInput = { emailOrUsername: string; password: string };
+import React, { createContext, useCallback, useContext, useState } from 'react';
+import { signInInput, User } from './types';
 
 const apiBaseUrl = process.env.REACT_APP_API;
 const url = `${apiBaseUrl}/iam/auth/signin`;
 
 interface UserContextI {
   signIn: (payload: signInInput) => Promise<void>;
-  // user: any | null;
-  // isUserLoading: boolean;
-  // signInWithGoogle: () => Promise<void>;
-  // signOutCurrentAuth: () => Promise<void>;
-  // isUserLoggedIn: () => boolean;
-  // signInWithPasswordAndEmail: (emailAndPassword: any) => Promise<void>;
-  // createUserWithEmailPasswordAndDisplayName: (
-  //   emailAndPassword: any & {
-  //     displayName: string;
-  //   },
-  // ) => Promise<void>;
+  user: User | null;
 }
 
 const UserContext = createContext<UserContextI | null>(null);
@@ -34,38 +23,22 @@ export function useUserContext() {
 }
 
 export const UserContextProvider: React.FC = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
   const toast = useToast();
-  // const [user, setUser] = React.useState(null);
-  // const [isUserLoading, setIsUserLoading] = React.useState<boolean>(true);
 
-  // const signOut = async () => {
-  // await signOut(auth)
-  //   .then((res) => {
-  //     return res;
-  //   })
-  //   .catch((error) => {
-  //     alert(error);
-  //     // An error happened.
-  //   });
-  // };
+  React.useEffect(() => {
+    // TODO change with access token
+    const userPersistenceData = localStorage.getItem('user');
+    if (!userPersistenceData) return;
+    const userData = JSON.parse(userPersistenceData);
+    setUser(userData as User);
+  }, []);
 
-  // const signInWithPasswordAndEmail = async ({ email, password }: UserRequiredInput) => {};
-
-  // const createUserWithEmailPasswordAndDisplayName = async ({}: { displayName: string }) => {};
-
-  // listen for any changes on auth
-  // React.useEffect(() => {
-  //   const unlisten = auth.onAuthStateChanged((authUser) => {
-  //     setUser(authUser);
-  //     setIsUserLoading(false);
-  //   });
-  //   return () => {
-  //     unlisten();
-  //   };
-  // }, []);
   const signIn = useCallback(async (payload: signInInput) => {
     try {
-      await axios.post(url, payload);
+      const userRes = await axios.post(url, payload);
+      setUser(userRes.data);
+      localStorage.setItem('user', JSON.stringify(userRes.data));
       toast({
         title: 'Success',
         description: 'Welcome !',
@@ -100,5 +73,5 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, []);
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  return <UserContext.Provider value={{ signIn }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ signIn, user }}>{children}</UserContext.Provider>;
 };
