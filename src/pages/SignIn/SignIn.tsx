@@ -18,10 +18,7 @@ import { useUserContext } from '../../context/UserContext';
 // const apiBaseUrl = process.env.REACT_APP_API;
 
 const signInFormYupScheme = yup.object().shape({
-  emailOrUsername: yup
-    .string()
-    .email('Email field should be a valid email')
-    .required('Email is required field'),
+  emailOrUsername: yup.string().required('Required username/email field'),
   password: yup.string().required('Password is required field'),
 });
 
@@ -35,18 +32,23 @@ const SignIn = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
+  const {
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    register,
+  } = useForm({
+    resolver: yupResolver(signInFormYupScheme),
+  });
 
   React.useEffect(() => {
     if (user) navigate('/');
   }, [user]);
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm({
-    resolver: yupResolver(signInFormYupScheme),
-  });
+  React.useEffect(() => {
+    register('emailOrUsername');
+    register('password');
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name, e.target.value, { shouldValidate: true });
@@ -126,7 +128,7 @@ const SignIn = () => {
               onChange={onChange}
               placeholder={t(keys.signIn.emailOrUsername)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
-              type="email"
+              type="text"
               error={errors.email ? errors.email.message : ''}
             />
             <TextField
