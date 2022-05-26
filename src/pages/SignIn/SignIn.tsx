@@ -1,20 +1,10 @@
-import {
-  useColorModeValue,
-  Image,
-  VStack,
-  Text,
-  useToast,
-  Flex,
-  Box,
-  Link,
-} from '@chakra-ui/react';
+import { useColorModeValue, Image, VStack, Text, Flex, Box, Link } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
-import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,6 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
+import { useUserContext } from '../../context/UserContext';
 
 // const apiBaseUrl = process.env.REACT_APP_API;
 
@@ -34,8 +25,7 @@ const signInFormYupScheme = yup.object().shape({
 });
 
 const SignIn = () => {
-  // const { id } = useParams();
-  const toast = useToast();
+  const { signIn } = useUserContext();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -59,40 +49,11 @@ const SignIn = () => {
     // const url = `${apiBaseUrl}/iam/user`;
 
     setIsCreateAccountButtonLoading(true);
+    const { email, password } = data as { email: string; password: string };
     try {
-      const { email, password } = data;
-      console.log(email, password);
-      // await axios.post(url, payload);
-      toast({
-        title: 'Success',
-        description: 'Welcome !',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
+      signIn({ emailOrUsername: email, password });
     } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
-        toast({
-          title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
+      console.error(err);
     }
 
     return setIsCreateAccountButtonLoading(false);
