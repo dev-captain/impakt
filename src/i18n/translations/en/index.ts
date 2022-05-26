@@ -95,6 +95,7 @@ export default {
     account: 'account',
     yourUsername: 'Username',
     yourEmail: 'Email',
+    fourDigit: '0000',
   },
   signIn: {
     signIn: `Sign in`,

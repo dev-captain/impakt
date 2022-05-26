@@ -22,15 +22,24 @@ import { useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
+import GenerateDigitNumber from './component/GenerateDigitNumber';
 
 const apiBaseUrl = process.env.REACT_APP_API;
 
 const signUpFormYupScheme = yup.object().shape({
   username: yup.string().required('Username is required field'),
+  fourDigit: yup
+    .string()
+    .test('len', ' ', (val) => {
+      return val?.length === 4;
+    })
+    .matches(/^\d+$/, ' ')
+    .required(' '),
   email: yup
     .string()
     .email('Email field should be a valid email')
-    .required('Email is required field'),
+    .required('Email is required field')
+    .default(''),
   password: yup
     .string()
     .required('Password is required field')
@@ -73,12 +82,29 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    register,
+    getValues,
   } = useForm({
     resolver: yupResolver(signUpFormYupScheme),
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      fourDigit: '',
+    },
   });
 
+  useEffect(() => {
+    register('password');
+    register('passwordConfirmation');
+    register('username');
+    register('fourDigit');
+    register('email');
+  }, []);
+
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name, e.target.value, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value, { shouldValidate: true });
   };
 
   const handleRegisterFormSubmit = async (data: any) => {
@@ -86,9 +112,9 @@ const SignUp = () => {
 
     setIsCreateAccountButtonLoading(true);
     try {
-      const { username, email, password } = data;
+      const { username, fourDigit, email, password } = data;
       const payload = {
-        username,
+        username: `${username}#${fourDigit}`,
         password,
         email,
         referrerId: activeReferrerId,
@@ -98,7 +124,7 @@ const SignUp = () => {
 
       toast({
         title: 'Success',
-        description: 'Your account created successfully.',
+        description: 'Your account created successfully.You can now login in the Impakt app.',
         isClosable: true,
         duration: 8000,
         status: 'success',
@@ -129,6 +155,11 @@ const SignUp = () => {
     }
 
     return setIsCreateAccountButtonLoading(false);
+  };
+
+  const generateRandomFourDigitNumberString = () => {
+    const generatedNumber = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString();
+    setValue('fourDigit', generatedNumber, { shouldValidate: true });
   };
 
   return (
@@ -187,22 +218,50 @@ const SignUp = () => {
             w="full"
             borderRadius={16}
           >
-            <TextField
-              zIndex="999"
-              isOutlined
-              name="username"
-              fontSize="14px"
-              textStyle="regular2"
-              onChange={onChange}
-              placeholder={t(keys.signUp.username)}
-              _placeholder={{ color: textColor, fontSize: '14px' }}
-              type="text"
-              error={errors.username ? errors.username.message : ''}
-            />
+            <Flex justifyContent="space-between" w="full">
+              <TextField
+                name="username"
+                zIndex="999"
+                isOutlined
+                fontSize="14px"
+                textStyle="regular2"
+                onChange={onChange}
+                placeholder={t(keys.signUp.username)}
+                _placeholder={{ color: textColor, fontSize: '14px' }}
+                type="text"
+                error={errors.username ? errors.username.message : ''}
+              />
+
+              <TextField
+                name="fourDigit"
+                boxWidth="40%"
+                zIndex="999"
+                isOutlined
+                fontSize="14px"
+                textStyle="regular2"
+                onChange={onChange}
+                value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
+                placeholder={t(keys.signUp.fourDigit)}
+                _placeholder={{ color: textColor, fontSize: '14px' }}
+                type="number"
+                error={errors.fourDigit ? errors.fourDigit.message : ''}
+              >
+                <Box
+                  as="span"
+                  position="absolute"
+                  top="3"
+                  left="0.5"
+                  textColor="whiteAlpha.400"
+                  zIndex={2000}
+                >
+                  #
+                </Box>
+              </TextField>
+            </Flex>
 
             <TextField
-              isOutlined
               name="email"
+              isOutlined
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
@@ -212,8 +271,8 @@ const SignUp = () => {
               error={errors.email ? errors.email.message : ''}
             />
             <TextField
-              isOutlined
               name="password"
+              isOutlined
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
@@ -287,6 +346,8 @@ const SignUp = () => {
           </VStack>
 
           <Gradients />
+
+          <GenerateDigitNumber onClick={generateRandomFourDigitNumberString} />
         </VStack>
       </VStack>
     </HeroLayout>

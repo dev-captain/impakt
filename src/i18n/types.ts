@@ -112,6 +112,7 @@ const TranslationKeys = {
     createAn: `${signUp}.createAn`,
     account: `${signUp}.account`,
     username: `${signUp}.yourUsername`,
+    fourDigit: `${signUp}.fourDigit`,
     email: `${signUp}.yourEmail`,
   },
   signIn: {
