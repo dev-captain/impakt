@@ -54,7 +54,7 @@ const SignIn = () => {
     setValue(e.target.name, e.target.value, { shouldValidate: true });
   };
 
-  const handleRegisterFormSubmit = async (data: any) => {
+  const handleSignInFormSubmit = async (data: any) => {
     setIsCreateAccountButtonLoading(true);
     const { emailOrUsername, password } = data as { emailOrUsername: string; password: string };
     try {
@@ -114,7 +114,7 @@ const SignIn = () => {
           <VStack
             mt="56px"
             as="form"
-            onSubmit={handleSubmit(handleRegisterFormSubmit)}
+            onSubmit={handleSubmit(handleSignInFormSubmit)}
             spacing="24px"
             w="full"
             borderRadius={16}
