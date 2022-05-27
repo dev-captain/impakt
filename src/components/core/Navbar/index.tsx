@@ -9,7 +9,6 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
-  Text,
 } from '@chakra-ui/react';
 import { Socials } from 'data';
 import Images from 'assets/images';
@@ -20,8 +19,6 @@ import Keys from 'i18n/types';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
-import DefaultImpaktProfileIcon from '../../icons/DefaultImpaktProfileIcon';
-import { useUserContext } from '../../../context/UserContext';
 import DropDownProfileMenu from './DropDownProfileMenu';
 
 const { dark, light } = Images;

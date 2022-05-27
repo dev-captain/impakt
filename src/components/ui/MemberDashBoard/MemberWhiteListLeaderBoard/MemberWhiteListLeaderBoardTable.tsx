@@ -106,8 +106,9 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
         )}
         <Tbody color="rgba(255, 255, 255, 0.7)">
           {data.map(
-            ({ memberName, rank, personalScore, referrals, referralsScore, totalScore }, index) => (
+            ({ memberName, rank, personalScore, referrals, referralsScore, totalScore }) => (
               <Tr
+                key={rank}
                 backgroundColor={rank % 2 === 0 ? '#182638' : '#1B2C3F'}
                 fontSize="14px"
                 fontWeight="500"

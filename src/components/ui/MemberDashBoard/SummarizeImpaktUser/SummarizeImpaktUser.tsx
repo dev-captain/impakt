@@ -1,7 +1,6 @@
 import { VStack, Box, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import MemberDashBoardCard from '../MemberDashBoardCard';
-import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
 import Referrals from './Referrals';
 import SummarizeImpaktUserInfo from './SummarizeImpaktUserInfo';
 import WhiteListChallange from './WhiteListChallange';

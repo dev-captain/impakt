@@ -1,16 +1,6 @@
-import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { SmallCloseIcon } from '@chakra-ui/icons';
 
-import {
-  Menu,
-  Text,
-  MenuButton,
-  Button,
-  MenuList,
-  MenuItem,
-  HStack,
-  MenuGroup,
-  MenuDivider,
-} from '@chakra-ui/react';
+import { Menu, Text, MenuButton, MenuList, MenuItem, HStack, MenuDivider } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../../context/UserContext';
