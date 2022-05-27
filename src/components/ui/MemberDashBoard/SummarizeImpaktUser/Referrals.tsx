@@ -1,11 +1,21 @@
 import * as React from 'react';
 import { VStack, Box, Text } from '@chakra-ui/react';
 import CopyClibBoardIcon from '../../../icons/CopyClibBoardIcon';
+import { useUserContext } from '../../../../context/UserContext';
 
-interface ReferralsPropsI {
-  referralLink: string;
-}
-const Referrals: React.FC<ReferralsPropsI> = ({ referralLink }) => {
+const Referrals: React.FC = () => {
+  const [isCopied, setIsCopied] = React.useState(false);
+  const { user } = useUserContext();
+  const referralLink = `impakt.com/${user?.id}`;
+
+  const copyClipBoardReferralLink = () => {
+    navigator.clipboard.writeText(`https://${referralLink}`);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 5000);
+  };
+
   return (
     <VStack
       w="100%"
@@ -37,8 +47,8 @@ const Referrals: React.FC<ReferralsPropsI> = ({ referralLink }) => {
           <Text textStyle="semiBold16">Your referral link:</Text>
           <Text textStyle="bold4">{referralLink}</Text>
         </Box>
-        <Box cursor="pointer">
-          <CopyClibBoardIcon />
+        <Box onClick={copyClipBoardReferralLink} cursor="pointer">
+          {isCopied ? <Text>Copied!</Text> : <CopyClibBoardIcon />}
         </Box>
       </Box>
     </VStack>

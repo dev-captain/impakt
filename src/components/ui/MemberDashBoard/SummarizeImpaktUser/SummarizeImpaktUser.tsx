@@ -37,7 +37,7 @@ const SummarizeImpaktUser: React.FC = () => {
           </Box>
           <Box w={{ base: '100%', lg: '50%' }}>
             <MemberDashBoardCard>
-              <Referrals referralLink="impakt.com/duke-nuke-ref" />
+              <Referrals />
             </MemberDashBoardCard>
           </Box>
         </HStack>
