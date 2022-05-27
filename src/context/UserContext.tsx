@@ -6,10 +6,12 @@ import { signInInput, signUpInput, User } from './types';
 const apiBaseUrl = process.env.REACT_APP_API;
 const signInUrl = `${apiBaseUrl}/iam/auth/signin`;
 const signUpUrl = `${apiBaseUrl}/iam/user`;
+const signOutUrl = `${apiBaseUrl}/iam/auth/signout`;
 
 interface UserContextI {
   signIn: (payload: signInInput) => Promise<void>;
   signUp: (payload: signUpInput) => Promise<void>;
+  signOut: () => Promise<void>;
   user: User | null;
 }
 
@@ -110,6 +112,48 @@ export const UserContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  return <UserContext.Provider value={{ signIn, signUp, user }}>{children}</UserContext.Provider>;
+  const signOut = useCallback(async () => {
+    try {
+      await axios.post(signOutUrl);
+      setUser(null);
+      localStorage.removeItem('user');
+      toast({
+        title: 'Success',
+        description: 'You have successfully logged out!',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (err) {
+      const error = err as AxiosError;
+      const { status } = error.response ?? {};
+      if (status && status >= 400 && status < 500) {
+        toast({
+          title: 'Error',
+          description:
+            error.response?.data.message && error.response.data.message.length > 1
+              ? error.response.data.message
+              : 'Something went wrong.Please contact support.',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Something went wrong. Please contact support.',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      }
+    }
+  }, []);
+
+  return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <UserContext.Provider value={{ signIn, signUp, signOut, user }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
