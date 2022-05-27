@@ -22,6 +22,7 @@ import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DefaultImpaktProfileIcon from '../../icons/DefaultImpaktProfileIcon';
 import { useUserContext } from '../../../context/UserContext';
+import DropDownProfileMenu from './DropDownProfileMenu';
 
 const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
@@ -29,7 +30,6 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, 
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user } = useUserContext();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
@@ -180,12 +180,9 @@ const Navbar = () => {
                     {..._hover}
                   />
                 </Box>
-                {user && (
-                  <HStack as="button" onClick={() => navigate('/dashboard')}>
-                    <DefaultImpaktProfileIcon width="40px" height="40px" />
-                    <Text>{user?.firstName ?? user?.username}</Text>
-                  </HStack>
-                )}
+                <Box>
+                  <DropDownProfileMenu />
+                </Box>
               </HStack>
             </HStack>
           </HStack>

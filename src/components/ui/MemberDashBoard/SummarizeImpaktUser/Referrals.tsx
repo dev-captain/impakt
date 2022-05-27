@@ -6,7 +6,7 @@ import { useUserContext } from '../../../../context/UserContext';
 const Referrals: React.FC = () => {
   const [isCopied, setIsCopied] = React.useState(false);
   const { user } = useUserContext();
-  const referralLink = `impakt.com/${user?.id}`;
+  const referralLink = `impakt.com/register/${user?.id}`;
 
   const copyClipBoardReferralLink = () => {
     navigator.clipboard.writeText(`https://${referralLink}`);

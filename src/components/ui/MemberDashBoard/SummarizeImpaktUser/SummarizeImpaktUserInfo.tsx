@@ -23,7 +23,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
         rankValue="3"
         // statusOfUser="Talent"
       />
-      <MemberDashboardSummarizePoint isNeedMore={false} pointValue="12700" />
+      <MemberDashboardSummarizePoint isNeedMore pointValue="+15600" />
     </HStack>
   );
 };
