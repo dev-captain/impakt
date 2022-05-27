@@ -58,7 +58,7 @@ const SignIn = () => {
     setIsCreateAccountButtonLoading(true);
     const { emailOrUsername, password } = data as { emailOrUsername: string; password: string };
     try {
-      signIn({ emailOrUsername, password });
+      await signIn({ emailOrUsername, password });
     } catch (err) {
       console.error(err);
     }
