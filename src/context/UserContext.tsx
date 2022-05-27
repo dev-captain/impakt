@@ -113,6 +113,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const signOut = useCallback(async () => {
+    // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
     try {
       await axios.post(signOutUrl);
       setUser(null);

@@ -17,7 +17,7 @@ import { useUserContext } from '../../../context/UserContext';
 import DefaultImpaktProfileIcon from '../../icons/DefaultImpaktProfileIcon';
 
 const DropDownProfileMenu: React.FC = () => {
-  const { user } = useUserContext();
+  const { user, signOut } = useUserContext();
   const navigate = useNavigate();
 
   return user ? (
@@ -37,7 +37,11 @@ const DropDownProfileMenu: React.FC = () => {
           Dashboard
         </MenuItem>
         <MenuDivider />
-        <MenuItem icon={<SmallCloseIcon color="accentR1" />} _hover={{ color: '#08121F' }}>
+        <MenuItem
+          onClick={() => signOut()}
+          icon={<SmallCloseIcon color="accentR1" />}
+          _hover={{ color: '#08121F' }}
+        >
           Logout
         </MenuItem>
       </MenuList>
