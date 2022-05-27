@@ -1,4 +1,4 @@
-import { useColorModeValue, Image, VStack, Text, Flex, Box, Link } from '@chakra-ui/react';
+import { useColorModeValue, Image, VStack, Text, Flex, Box } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useState } from 'react';
@@ -166,15 +166,15 @@ const SignIn = () => {
             <Flex mt="5px !important" justifyContent="center">
               <Text textStyle="regular2" pos="relative">
                 {t(keys.signIn.firstTime)}
-                <Link
-                  target="_blank"
-                  _hover={{ textDecoration: 'none' }}
-                  href="https://impakt.com/register/1"
+                <Box
+                  onClick={() => navigate('/register/1')}
+                  mx="5px"
+                  cursor="pointer"
+                  textColor={accentRedtextColor}
+                  as="span"
                 >
-                  <Box mx="5px" cursor="pointer" textColor={accentRedtextColor} as="span">
-                    {t(keys.signIn.createAn)}
-                  </Box>
-                </Link>
+                  {t(keys.signIn.createAn)}
+                </Box>
               </Text>
             </Flex>
           </VStack>
