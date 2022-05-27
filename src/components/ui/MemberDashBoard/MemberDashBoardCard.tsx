@@ -20,7 +20,7 @@ const MemberDashBoardCard: React.FC<MemberDashBoardCardPropsI> = ({ children, is
       marginTop="0 !important"
     >
       {children}
-      {isGradient && <Gradients />}
+      {isGradient && <Gradients secondX="875px" secondY="-31px" secondOpacity="0.8" isOrange />}
     </VStack>
   );
 };

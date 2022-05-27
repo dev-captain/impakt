@@ -42,7 +42,7 @@ const SignIn = () => {
   });
 
   React.useEffect(() => {
-    if (user) navigate('/');
+    if (user) navigate('/dashboard');
   }, [user]);
 
   React.useEffect(() => {

@@ -14,7 +14,7 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
   // statusOfUser,
 }) => {
   return (
-    <VStack id="yo" h="100%" justifyContent="space-between" alignItems="flex-start">
+    <VStack h="100%" justifyContent="space-between" alignItems="flex-start">
       <Box>
         <Text textStyle="bold6">{nameOfUser}</Text>
         {/* <Text color="#587393" fontWeight="400px" textStyle="bold5">

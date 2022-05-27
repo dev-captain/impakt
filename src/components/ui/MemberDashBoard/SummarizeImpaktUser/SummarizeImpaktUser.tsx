@@ -16,9 +16,6 @@ const SummarizeImpaktUser: React.FC = () => {
       rowGap="97px"
       mt="97px"
     >
-      <Box w="100%" textAlign={{ base: 'center', lg: 'left' }} id="member-dashboard-headline">
-        <MemberDashBoardHeadlineText>Member Dashboard</MemberDashBoardHeadlineText>
-      </Box>
       <VStack rowGap="37px" id="member-dasboard-summarize-card" px="2em" w="100%">
         <MemberDashBoardCard isGradient>
           <SummarizeImpaktUserInfo />

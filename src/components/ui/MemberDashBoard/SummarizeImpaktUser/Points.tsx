@@ -13,13 +13,12 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
     <VStack
       border="1.82573px solid #F5F6FF;"
       w="302px"
-      paddingRight="20px"
       paddingLeft="30px"
       bgColor={isNeedMore ? '#778FAD' : '#7ECE86'}
       h="220px"
       filter="drop-shadow(0px 2.00758px 4.01516px rgba(0, 0, 0, 0.12)) drop-shadow(0px 2.00758px 7.02653px rgba(0, 0, 0, 0.1));"
+      margin="0 !important"
       borderRadius="14px"
-      ml={{ base: '5px !important', lg: '3.93em !important' }}
       alignItems="center"
       justifyContent="center"
     >
