@@ -31,8 +31,8 @@ const Referrals: React.FC = () => {
       </Box>
       <Box mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="regular4">
-          For each member who joins through your referral link and starts working out with Impakt,
-          you recieve +500 GODL and they recieve +5000 GODL.
+          For each member who joins through your referral link and completes at least 5 challenges
+          with Impakt, you receive +1000 GODL and they receive +5000 GODL.
         </Text>
       </Box>
       <Box
