@@ -18,7 +18,11 @@ import { useUserContext } from '../../context/UserContext';
 // const apiBaseUrl = process.env.REACT_APP_API;
 
 const signInFormYupScheme = yup.object().shape({
-  emailOrUsername: yup.string().required('Required username/email field'),
+  email: yup
+    .string()
+    .email('Email field should be a valid email')
+    .required('Email is required field')
+    .default(''),
   password: yup.string().required('Password is required field'),
 });
 
@@ -46,7 +50,7 @@ const SignIn = () => {
   }, [user]);
 
   React.useEffect(() => {
-    register('emailOrUsername');
+    register('email');
     register('password');
   }, []);
 
@@ -56,14 +60,13 @@ const SignIn = () => {
 
   const handleSignInFormSubmit = async (data: any) => {
     setIsCreateAccountButtonLoading(true);
-    const { emailOrUsername, password } = data as { emailOrUsername: string; password: string };
+    const { email, password } = data as { email: string; password: string };
     try {
-      await signIn({ emailOrUsername, password });
+      await signIn({ emailOrUsername: email, password });
     } catch (err) {
       console.error(err);
     }
-
-    return setIsCreateAccountButtonLoading(false);
+    setIsCreateAccountButtonLoading(false);
   };
 
   return (
@@ -120,15 +123,14 @@ const SignIn = () => {
             borderRadius={16}
           >
             <TextField
+              name="email"
               isOutlined
-              name="emailOrUsername"
-              borderColor="#E4EAF1"
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
-              placeholder={t(keys.signIn.emailOrUsername)}
+              placeholder={t(keys.signUp.email)}
               _placeholder={{ color: textColor, fontSize: '14px' }}
-              type="text"
+              type="email"
               error={errors.email ? errors.email.message : ''}
             />
             <TextField
