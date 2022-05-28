@@ -13,7 +13,7 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
     <VStack
       border="1.82573px solid #F5F6FF;"
       w="302px"
-      paddingLeft="30px"
+      padding="30px"
       bgColor={isNeedMore ? '#778FAD' : '#7ECE86'}
       h="220px"
       filter="drop-shadow(0px 2.00758px 4.01516px rgba(0, 0, 0, 0.12)) drop-shadow(0px 2.00758px 7.02653px rgba(0, 0, 0, 0.1));"
@@ -24,7 +24,7 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
     >
       <Box id="point-value" w="100%">
         <Text fontSize="65px" fontWeight="900" lineHeight="66px" color="#F5F6FF">
-          {pointValue}
+          {isNeedMore ? `+${pointValue}` : pointValue}
         </Text>
         <Text fontSize="29px" fontWeight="400" lineHeight="32px" color="#fff">
           {isNeedMore ? 'Points you need to get to rank 2500' : 'Points more than rank 2500'}

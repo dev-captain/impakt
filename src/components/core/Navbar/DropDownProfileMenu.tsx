@@ -1,6 +1,6 @@
 import { SmallCloseIcon } from '@chakra-ui/icons';
 
-import { Menu, Text, MenuButton, MenuList, MenuItem, HStack, MenuDivider } from '@chakra-ui/react';
+import { Menu, MenuButton, MenuList, MenuItem, HStack, MenuDivider } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../../context/UserContext';
@@ -15,7 +15,6 @@ const DropDownProfileMenu: React.FC = () => {
       <MenuButton>
         <HStack as="button" onClick={() => navigate('/dashboard')}>
           <DefaultImpaktProfileIcon width="40px" height="40px" />
-          <Text>{user?.firstName ?? user?.username}</Text>
         </HStack>
       </MenuButton>
       <MenuList border="0.02px solid white" color="white" backgroundColor="#08121F !important">

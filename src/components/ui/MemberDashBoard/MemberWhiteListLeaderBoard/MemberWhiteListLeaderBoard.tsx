@@ -6,7 +6,7 @@ import MemberWhiteListLeaderBoardTable from './MemberWhiteListLeaderBoardTable';
 const MemberWhiteListLeaderBoard: React.FC = () => {
   return (
     <VStack justifyContent="space-between" alignItems="flex-start" maxW="1200px" w="full">
-      <VStack rowGap="97px" alignItems="flex-start" w="100%">
+      <VStack rowGap="48.5px" alignItems="flex-start" w="100%">
         <Box
           color="#F5F6FF"
           w="100%"
@@ -89,54 +89,6 @@ const dummyLeaderBoardData2 = [
   {
     rank: 21,
     memberName: 'Demideus',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 22,
-    memberName: 'Valtec',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 23,
-    memberName: 'Valtec',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 24,
-    memberName: 'CapnCrunc',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 25,
-    memberName: 'Demideus',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 26,
-    memberName: 'Valtec',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 27,
-    memberName: 'Valtec',
     personalScore: '20,000',
     referrals: '7',
     referralsScore: '12,023',

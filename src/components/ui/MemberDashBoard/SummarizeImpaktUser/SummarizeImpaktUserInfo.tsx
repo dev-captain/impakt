@@ -11,7 +11,8 @@ const SummarizeImpaktUserInfo: React.FC = () => {
   return (
     <HStack
       flexDir={{ base: 'column', lg: 'row' }}
-      padding="95px 66px 96px 109px"
+      padding="95px"
+      justifyContent="center"
       id="summarize-section"
       w="full"
       columnGap="2.5em"
@@ -23,7 +24,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
         rankValue="3"
         // statusOfUser="Talent"
       />
-      <MemberDashboardSummarizePoint isNeedMore pointValue="+15600" />
+      <MemberDashboardSummarizePoint isNeedMore pointValue="15600" />
     </HStack>
   );
 };

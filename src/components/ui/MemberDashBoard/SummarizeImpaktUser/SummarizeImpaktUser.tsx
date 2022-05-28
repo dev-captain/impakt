@@ -13,7 +13,7 @@ const SummarizeImpaktUser: React.FC = () => {
       maxW="1200px"
       w="full"
       rowGap="97px"
-      mt="97px"
+      mt="48.5px"
     >
       <VStack rowGap="37px" id="member-dasboard-summarize-card" px="2em" w="100%">
         <MemberDashBoardCard isGradient>

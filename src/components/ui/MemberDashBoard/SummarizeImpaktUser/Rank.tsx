@@ -15,13 +15,19 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
 }) => {
   return (
     <VStack h="100%" justifyContent="space-between" alignItems="flex-start">
-      <Box>
+      <Box w="100%" maxW={{ base: '100%', lg: '400px' }}>
         <Text textStyle="bold6">{nameOfUser}</Text>
         {/* <Text color="#587393" fontWeight="400px" textStyle="bold5">
           {statusOfUser}
         </Text> */}
       </Box>
-      <Box mt="1.6875em !important" id="current-rank-value-box">
+      <Box
+        display="flex"
+        flexDir="column"
+        alignSelf={{ base: 'center', lg: 'auto' }}
+        mt="1.6875em !important"
+        id="current-rank-value-box"
+      >
         <Box
           w="126px"
           h="30px"

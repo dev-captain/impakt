@@ -16,7 +16,7 @@ const MemberDashBoard: React.FC = () => {
       justify="flex-start"
       showFooter
     >
-      <VStack rowGap="148px" w="full">
+      <VStack rowGap="74px" w="full">
         <VStack id="sumarize-impakt-user-section" color="white" w="full">
           <SummarizeImpaktUser />
         </VStack>
