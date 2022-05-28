@@ -24,7 +24,7 @@ import GenerateDigitNumber from './component/GenerateDigitNumber';
 import { useUserContext } from '../../context/UserContext';
 
 const signUpFormYupScheme = yup.object().shape({
-  username: yup.string().required('Username is required field'),
+  memberName: yup.string().required('Membername is required field'),
   fourDigit: yup
     .string()
     .test('len', ' ', (val) => {
@@ -89,7 +89,7 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(signUpFormYupScheme),
     defaultValues: {
-      username: '',
+      memberName: '',
       email: '',
       password: '',
       passwordConfirmation: '',
@@ -100,7 +100,7 @@ const SignUp = () => {
   useEffect(() => {
     register('password');
     register('passwordConfirmation');
-    register('username');
+    register('memberName');
     register('fourDigit');
     register('email');
   }, []);
@@ -111,9 +111,9 @@ const SignUp = () => {
 
   const handleRegisterFormSubmit = async (data: any) => {
     setIsCreateAccountButtonLoading(true);
-    const { username, fourDigit, email, password } = data;
+    const { memberName, fourDigit, email, password } = data;
     const payload = {
-      username: `${username}#${fourDigit}`,
+      username: `${memberName}#${fourDigit}`,
       password,
       email,
       referrerId: activeReferrerId,
@@ -198,10 +198,10 @@ const SignUp = () => {
                 fontSize="14px"
                 textStyle="regular2"
                 onChange={onChange}
-                placeholder={t(keys.signUp.username)}
+                placeholder={t(keys.signUp.memberName)}
                 _placeholder={{ color: textColor, fontSize: '14px' }}
                 type="text"
-                error={errors.username ? errors.username.message : ''}
+                error={errors.memberName ? errors.memberName.message : ''}
               />
 
               <TextField
