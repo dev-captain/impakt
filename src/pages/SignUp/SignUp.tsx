@@ -68,7 +68,7 @@ const SignUp = () => {
   });
 
   React.useEffect(() => {
-    if (user) navigate('/');
+    if (user) navigate('/download');
   }, [user]);
 
   useEffect(() => {
