@@ -6,7 +6,7 @@ import { signInInput, signUpInput, User } from './types';
 const apiBaseUrl = process.env.REACT_APP_API;
 const signInUrl = `${apiBaseUrl}/iam/auth/signin`;
 const signUpUrl = `${apiBaseUrl}/iam/user`;
-const signOutUrl = `${apiBaseUrl}/iam/auth/signout`;
+// const signOutUrl = `${apiBaseUrl}/iam/auth/signout`;
 
 interface UserContextI {
   signIn: (payload: signInInput) => Promise<void>;
@@ -115,7 +115,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   const signOut = useCallback(async () => {
     // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
     try {
-      await axios.post(signOutUrl);
+      // await axios.post(signOutUrl);
       setUser(null);
       localStorage.removeItem('user');
       toast({
