@@ -20,7 +20,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
     >
       <MemberDashBoardUserImage />
       <MemberDashBoardSummarizeRank
-        nameOfUser={user?.firstName ?? 'testuser123#1234'}
+        nameOfUser={user?.firstName ?? user?.username}
         rankValue="3"
         // statusOfUser="Talent"
       />
