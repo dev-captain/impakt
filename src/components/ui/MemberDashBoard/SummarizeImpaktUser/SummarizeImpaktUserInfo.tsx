@@ -11,7 +11,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
   return (
     <HStack
       flexDir={{ base: 'column', lg: 'row' }}
-      padding="95px"
+      padding="50px"
       justifyContent="center"
       id="summarize-section"
       w="full"
@@ -20,7 +20,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
     >
       <MemberDashBoardUserImage />
       <MemberDashBoardSummarizeRank
-        nameOfUser={user?.firstName ?? user?.username}
+        nameOfUser={user?.firstName ?? 'testuser123#1234'}
         rankValue="3"
         // statusOfUser="Talent"
       />

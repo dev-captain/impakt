@@ -177,7 +177,7 @@ const Navbar = () => {
                     {..._hover}
                   />
                 </Box>
-                <Box>
+                <Box display="flex">
                   <DropDownProfileMenu />
                 </Box>
               </HStack>
