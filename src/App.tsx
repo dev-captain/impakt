@@ -18,7 +18,7 @@ import {
 } from 'pages';
 import MemberDashBoard from './pages/MemberDashBoard';
 import SignIn from './pages/SignIn/SignIn';
-import Authentication from './middlewares/Authentication';
+// import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -53,9 +53,9 @@ const App = () => {
       <Route
         path="/dashboard"
         element={
-          <Authentication>
-            <MemberDashBoard />
-          </Authentication>
+          // <Authentication>
+          <MemberDashBoard />
+          // </Authentication>
         }
       />
 

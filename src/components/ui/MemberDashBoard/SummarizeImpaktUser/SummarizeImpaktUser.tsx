@@ -1,9 +1,7 @@
-import { VStack, Box, HStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import MemberDashBoardCard from '../MemberDashBoardCard';
-import Referrals from './Referrals';
 import SummarizeImpaktUserInfo from './SummarizeImpaktUserInfo';
-import WhiteListChallange from './WhiteListChallange';
 
 const SummarizeImpaktUser: React.FC = () => {
   return (
@@ -19,24 +17,6 @@ const SummarizeImpaktUser: React.FC = () => {
         <MemberDashBoardCard isGradient>
           <SummarizeImpaktUserInfo />
         </MemberDashBoardCard>
-        <HStack
-          flexDir={{ base: 'column', lg: 'row' }}
-          justifyContent="space-between"
-          w="100%"
-          columnGap="32px"
-          rowGap="32px"
-        >
-          <Box w={{ base: '100%', lg: '50%' }}>
-            <MemberDashBoardCard>
-              <WhiteListChallange />
-            </MemberDashBoardCard>
-          </Box>
-          <Box w={{ base: '100%', lg: '50%' }}>
-            <MemberDashBoardCard>
-              <Referrals />
-            </MemberDashBoardCard>
-          </Box>
-        </HStack>
       </VStack>
     </VStack>
   );
