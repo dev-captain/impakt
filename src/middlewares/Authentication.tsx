@@ -11,7 +11,7 @@ const Authentication: React.FC = ({ children }) => {
       if (!user) {
         navigate('/login');
       }
-    }, 500);
+    }, 50);
 
     return () => clearTimeout(timeout);
   }, [user]);
