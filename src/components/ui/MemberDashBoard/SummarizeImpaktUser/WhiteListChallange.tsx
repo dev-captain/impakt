@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const WhiteListChallange: React.FC = () => {
   return (
-    <VStack w="100%" alignItems="flex-start" padding="86px 27px 86px 50px" rowGap="2em !important">
+    <VStack w="100%" alignItems="flex-start" padding="50px" rowGap="2em !important">
       <Box mt="0 !important" id="whitelist-challange-headline-box">
         <Text textStyle="bold6">Whitelist Challenge</Text>
       </Box>

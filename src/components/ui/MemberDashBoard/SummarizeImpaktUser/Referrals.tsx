@@ -25,13 +25,7 @@ const Referrals: React.FC = () => {
   };
 
   return (
-    <VStack
-      w="100%"
-      alignItems="flex-start"
-      padding="86px 39px 71px 50px"
-      maxH="500px"
-      rowGap="1.8em !important"
-    >
+    <VStack w="100%" alignItems="flex-start" padding="50px" maxH="500px" rowGap="1.8em !important">
       <Box mt="0 !important" id="whitelist-challange-headline-box">
         <Text textStyle="bold6">Referrals</Text>
       </Box>
