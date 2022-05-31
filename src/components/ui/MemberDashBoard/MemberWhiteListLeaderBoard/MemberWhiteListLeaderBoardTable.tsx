@@ -188,7 +188,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
                 w="177px !important"
                 paddingLeft="16px !important"
               >
-                {userScore}
+                {userScore + referralScore}
               </Td>
             </Tr>
           ))}

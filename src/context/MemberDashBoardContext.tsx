@@ -1,8 +1,6 @@
 import React, { createContext, useCallback, useContext } from 'react';
 import leaderBoardAxiosInstance from '../lib/axios/leaderBoard';
 
-// const signOutUrl = `${apiBaseUrl}/iam/auth/signout`;
-
 interface MemberDashBoardContextI {
   fetchLeaderBoard: ({ take, skip }: { take: string; skip: string }) => Promise<void>;
   fetchCertainUserLeaderBoardById: ({ userId }: { userId: number }) => Promise<void>;
@@ -47,9 +45,8 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
 
   const getFiveRanksAboveAndFiveRanksBelowByRank = useCallback(
     (arr: any[], certainRank: number) => {
-      console.log('rank', certainRank);
-      const less5 = certainRank - 6;
-      const plus5 = certainRank + 6;
+      const less5 = certainRank - 4;
+      const plus5 = certainRank + 4;
       const fiveRanksAboveAndFiveRanksBelow = arr.filter(({ rank }) => {
         return less5 < rank && rank < plus5;
       });
