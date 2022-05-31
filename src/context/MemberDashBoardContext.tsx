@@ -7,7 +7,7 @@ interface MemberDashBoardContextI {
   memberDashBoardData: any[];
   memberDashBoarCertainUserData: any[];
   getTopThreeByRank: (arr: any[]) => any[];
-  getFiveRanksAboveAndFiveRanksBelowByRank: (arr: any[], certainRank: number) => any[];
+  getFiveRanksAboveAndFiveRanksBelowByRank: (arr: any[], certainRank?: number) => any[];
   getCertainMemberById: (arr: any[], memberId?: number) => any;
 }
 
@@ -29,8 +29,8 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
   );
 
   const getCertainMemberById = useCallback((arr: any[], memberId?: number) => {
-    console.log('Arr', memberId);
     const member = arr.find(({ userId }) => userId === memberId);
+    if (!member) return arr;
 
     return member;
   }, []);
@@ -44,12 +44,22 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const getFiveRanksAboveAndFiveRanksBelowByRank = useCallback(
-    (arr: any[], certainRank: number) => {
+    (arr: any[], certainRank?: number) => {
+      // TODO what if Rank of person not coming from backend ?
+      if (!certainRank) {
+        const topTenExceptTopThree = arr.filter(({ rank }) => {
+          return rank > 3 && rank < 11;
+        });
+
+        return topTenExceptTopThree;
+      }
+
       const less5 = certainRank - 4;
       const plus5 = certainRank + 4;
       const fiveRanksAboveAndFiveRanksBelow = arr.filter(({ rank }) => {
         return less5 < rank && rank < plus5;
       });
+      if (fiveRanksAboveAndFiveRanksBelow.length === 0) return arr;
 
       return fiveRanksAboveAndFiveRanksBelow;
     },
