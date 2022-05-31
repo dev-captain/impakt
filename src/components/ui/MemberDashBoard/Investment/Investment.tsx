@@ -8,7 +8,7 @@ const Investment: React.FC = () => {
     <VStack
       justifyContent="space-between"
       alignItems="flex-start"
-      maxW="1280px"
+      maxW="1200px"
       w="full"
       rowGap="97px"
       mt="48.5px"
