@@ -105,95 +105,93 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
           </Thead>
         )}
         <Tbody color="rgba(255, 255, 255, 0.7)">
-          {data.map(
-            ({ memberName, rank, personalScore, referrals, referralsScore, totalScore }) => (
-              <Tr
-                key={rank}
-                backgroundColor={rank % 2 === 0 ? '#182638' : '#1B2C3F'}
-                fontSize="14px"
+          {data.map(({ username, rank, referralCount, referralScore, userScore }) => (
+            <Tr
+              key={rank}
+              backgroundColor={rank % 2 === 0 ? '#182638' : '#1B2C3F'}
+              fontSize="14px"
+              fontWeight="500"
+              paddingTop="21px !important"
+              paddingLeft="30px !important"
+            >
+              <Td
+                fontWeight="500"
+                color={
+                  rank === currentUserRank
+                    ? 'rgba(254, 196, 23, 1) !important'
+                    : 'rgba(255, 255, 255, 0.7) !important'
+                }
+                w="133px !important"
+                paddingTop="21px !important"
+                paddingLeft="30px !important"
+              >
+                #{rank}
+              </Td>
+              <Td
+                fontWeight="500"
+                w="296px !important"
+                color={
+                  rank === currentUserRank
+                    ? 'rgba(254, 196, 23, 1) !important'
+                    : 'rgba(255, 255, 255, 0.7) !important'
+                }
+                paddingTop="21px !important"
+                paddingLeft="30px !important"
+              >
+                {username}
+              </Td>
+              <Td
+                w="177px !important"
+                color={
+                  rank === currentUserRank
+                    ? 'rgba(254, 196, 23, 1) !important'
+                    : 'rgba(255, 255, 255, 0.5) !important'
+                }
                 fontWeight="500"
                 paddingTop="21px !important"
                 paddingLeft="30px !important"
               >
-                <Td
-                  fontWeight="500"
-                  color={
-                    rank === currentUserRank
-                      ? 'rgba(254, 196, 23, 1) !important'
-                      : 'rgba(255, 255, 255, 0.7) !important'
-                  }
-                  w="133px !important"
-                  paddingTop="21px !important"
-                  paddingLeft="30px !important"
-                >
-                  #{rank}
-                </Td>
-                <Td
-                  fontWeight="500"
-                  w="296px !important"
-                  color={
-                    rank === currentUserRank
-                      ? 'rgba(254, 196, 23, 1) !important'
-                      : 'rgba(255, 255, 255, 0.7) !important'
-                  }
-                  paddingTop="21px !important"
-                  paddingLeft="30px !important"
-                >
-                  {memberName}
-                </Td>
-                <Td
-                  w="177px !important"
-                  color={
-                    rank === currentUserRank
-                      ? 'rgba(254, 196, 23, 1) !important'
-                      : 'rgba(255, 255, 255, 0.5) !important'
-                  }
-                  fontWeight="500"
-                  paddingTop="21px !important"
-                  paddingLeft="30px !important"
-                >
-                  {personalScore}
-                </Td>
-                <Td
-                  color={
-                    rank === currentUserRank
-                      ? 'rgba(254, 196, 23, 1) !important'
-                      : 'rgba(255, 255, 255, 0.5) !important'
-                  }
-                  fontWeight="500"
-                  w="177px !important"
-                  paddingTop="21px !important"
-                  paddingLeft="30px !important"
-                >
-                  {referrals}
-                </Td>
-                <Td
-                  color={
-                    rank === currentUserRank
-                      ? 'rgba(254, 196, 23, 1) !important'
-                      : 'rgba(255, 255, 255, 0.5) !important'
-                  }
-                  w="177px !important"
-                  fontWeight="500"
-                  paddingLeft="16px !important"
-                >
-                  {referralsScore}
-                </Td>
-                <Td
-                  color={
-                    rank === currentUserRank
-                      ? 'rgba(254, 196, 23, 1) !important'
-                      : 'rgba(240, 65, 83, 1) !important'
-                  }
-                  fontWeight="600"
-                  w="177px !important"
-                  paddingLeft="16px !important"
-                >
-                  {totalScore}
-                </Td>
-              </Tr>
-            ),
-          )}
+                {userScore}
+              </Td>
+              <Td
+                color={
+                  rank === currentUserRank
+                    ? 'rgba(254, 196, 23, 1) !important'
+                    : 'rgba(255, 255, 255, 0.5) !important'
+                }
+                fontWeight="500"
+                w="177px !important"
+                paddingTop="21px !important"
+                paddingLeft="30px !important"
+              >
+                {referralCount}
+              </Td>
+              <Td
+                color={
+                  rank === currentUserRank
+                    ? 'rgba(254, 196, 23, 1) !important'
+                    : 'rgba(255, 255, 255, 0.5) !important'
+                }
+                w="177px !important"
+                fontWeight="500"
+                paddingLeft="16px !important"
+              >
+                {referralScore}
+              </Td>
+              <Td
+                color={
+                  rank === currentUserRank
+                    ? 'rgba(254, 196, 23, 1) !important'
+                    : 'rgba(240, 65, 83, 1) !important'
+                }
+                fontWeight="600"
+                w="177px !important"
+                paddingLeft="16px !important"
+              >
+                {userScore}
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>

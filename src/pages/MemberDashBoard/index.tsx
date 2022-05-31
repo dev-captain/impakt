@@ -4,6 +4,7 @@ import { VStack } from '@chakra-ui/react';
 import HeroLayout from '../../components/layouts/HeroLayout';
 import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeImpaktUser/SummarizeImpaktUser';
 import MemberWhiteListLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
+import { MemberDashBoardContextProvider } from '../../context/MemberDashBoardContext';
 
 const MemberDashBoard: React.FC = () => {
   return (
@@ -21,7 +22,9 @@ const MemberDashBoard: React.FC = () => {
           <SummarizeImpaktUser />
         </VStack>
         <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
-          <MemberWhiteListLeaderBoard />
+          <MemberDashBoardContextProvider>
+            <MemberWhiteListLeaderBoard />
+          </MemberDashBoardContextProvider>
         </VStack>
       </VStack>
     </HeroLayout>

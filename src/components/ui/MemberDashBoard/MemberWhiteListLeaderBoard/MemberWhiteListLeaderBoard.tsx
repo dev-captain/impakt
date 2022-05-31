@@ -2,8 +2,31 @@ import * as React from 'react';
 import { VStack, Text, Box } from '@chakra-ui/react';
 import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
 import MemberWhiteListLeaderBoardTable from './MemberWhiteListLeaderBoardTable';
+import { useUserContext } from '../../../../context/UserContext';
+import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 
 const MemberWhiteListLeaderBoard: React.FC = () => {
+  const { user } = useUserContext();
+  const {
+    getTopThreeByRank,
+    getFiveRanksAboveAndFiveRanksBelowByRank,
+    getCertainMemberById,
+    memberDashBoarCertainUserData,
+    fetchCertainUserLeaderBoardById,
+  } = useMemberDashBoardContext();
+
+  React.useEffect(() => {
+    if (!user) return;
+    fetchCertainUserLeaderBoardById({ userId: 6 });
+  }, []);
+
+  const topThree = getTopThreeByRank(memberDashBoarCertainUserData);
+  const certainMember = getCertainMemberById(memberDashBoarCertainUserData, 6);
+  const fiveRanksAboveAndFiveRanksBelow = getFiveRanksAboveAndFiveRanksBelowByRank(
+    memberDashBoarCertainUserData,
+    certainMember?.rank,
+  );
+
   return (
     <VStack justifyContent="space-between" alignItems="flex-start" maxW="1200px" w="full">
       <VStack rowGap="48.5px" alignItems="flex-start" w="100%">
@@ -23,13 +46,16 @@ const MemberWhiteListLeaderBoard: React.FC = () => {
         <VStack w="full" rowGap="48px">
           <Box px="2em" w="100%" id="member-whitelist-table">
             <MemberWhiteListLeaderBoardTable
-              currentUserRank={3}
+              currentUserRank={certainMember?.rank}
               isShowTableHead
-              data={dummyLeaderBoardData1}
+              data={topThree}
             />
           </Box>
           <Box px="2em" w="100%" id="member-whitelist-table">
-            <MemberWhiteListLeaderBoardTable currentUserRank={3} data={dummyLeaderBoardData2} />
+            <MemberWhiteListLeaderBoardTable
+              currentUserRank={certainMember?.rank}
+              data={fiveRanksAboveAndFiveRanksBelow}
+            />
           </Box>
         </VStack>
       </VStack>
@@ -37,89 +63,4 @@ const MemberWhiteListLeaderBoard: React.FC = () => {
   );
 };
 
-const dummyLeaderBoardData2 = [
-  {
-    rank: 15,
-    memberName: 'Valtec',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 16,
-    memberName: 'CapnCrunc',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 17,
-    memberName: 'Demideus',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 18,
-    memberName: 'Valtec',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 19,
-    memberName: 'Valtec',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 20,
-    memberName: 'Valtec',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 21,
-    memberName: 'Demideus',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-];
-
-const dummyLeaderBoardData1 = [
-  {
-    rank: 1,
-    memberName: 'CapnCrunc',
-    personalScore: '20,000',
-    referrals: '7',
-    referralsScore: '12,023',
-    totalScore: '22,000',
-  },
-  {
-    rank: 2,
-    memberName: 'Demideus',
-    personalScore: '7,000',
-    referrals: '12',
-    referralsScore: '15,000',
-    totalScore: '22,000',
-  },
-  {
-    rank: 3,
-    memberName: 'Valtec',
-    personalScore: '10,000',
-    referrals: '10',
-    referralsScore: '11,103',
-    totalScore: '21,100',
-  },
-];
 export default MemberWhiteListLeaderBoard;
