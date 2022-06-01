@@ -1,4 +1,4 @@
-import { Box, HStack, Progress, VStack } from '@chakra-ui/react';
+import { Box, HStack, Progress, VStack, Text } from '@chakra-ui/react';
 import * as React from 'react';
 
 import TokenPriceDownItem from './TokenPriceDownItem';
@@ -42,6 +42,31 @@ const TokenPriceDown: React.FC = () => {
           h="13px"
           left="41%"
         />
+        <Box
+          as="span"
+          top="-60px"
+          position="absolute"
+          bgColor="#FEC417"
+          borderRadius="50%"
+          zIndex="9999"
+          w="122px"
+          transform="rotate(90deg)"
+          h="0.92px"
+          left="35.3%"
+        >
+          <Text
+            fontWeight="700"
+            fontSize="22px"
+            lineHeight="30px"
+            color="#fff"
+            position="absolute"
+            left="-12"
+            top="-4"
+            transform="rotate(270deg)"
+          >
+            8,013
+          </Text>
+        </Box>
         <Progress colorScheme="yellow" h="3.7px" value={41} w="full" />
       </Box>
     </VStack>
