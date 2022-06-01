@@ -14,7 +14,7 @@ const TokenPriceDownItem: React.FC<TokenPriceDownPropsI> = ({
   isAchieved,
 }) => {
   return (
-    <VStack rowGap="30px" position="relative" w="200px">
+    <VStack rowGap="30px" position="relative">
       <TokenPriceDownItemCircle isAchieved={isAchieved} priceValue={priceValue} />
       <Text fontSize="22px" fontWeight="700" color="#fff" lineHeight="29.59px">
         {numberOfMemberLabel}

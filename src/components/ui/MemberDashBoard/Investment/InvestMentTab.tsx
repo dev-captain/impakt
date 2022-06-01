@@ -56,7 +56,7 @@ const InvestMentTab: React.FC = () => {
         </HStack>
       </TabList>
 
-      <HStack mt="100px" columnGap="83px" w="full">
+      <HStack mt="100px" columnGap="83px" justifyContent="space-between" w="full">
         <TabPanels maxW="560px !important" w="full" id="panels">
           {phaseItems.map(({ content, title, description }) => {
             return content.map(({ p1, p2 }) => (
