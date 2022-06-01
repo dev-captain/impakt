@@ -66,7 +66,7 @@ const InvestMentTab: React.FC = () => {
                     <Box id="headline" display="flex" alignItems="center" w="100%">
                       <Box position="relative" alignItems="center" display="flex">
                         <PhaseHeadlineText>{`${title}: ${description}`}</PhaseHeadlineText>
-                        <Box right="-12em" position="absolute">
+                        <Box right="-10.5em" position="absolute">
                           <RedLabelTag value="Current Phase" />
                         </Box>
                       </Box>
