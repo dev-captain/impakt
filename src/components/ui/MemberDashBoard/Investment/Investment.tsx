@@ -1,6 +1,7 @@
 import { VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
+import TokenPriceDown from '../TokenPriceDown/TokenPriceDown';
 import InvestMentTab from './InvestMentTab';
 
 const Investment: React.FC = () => {
@@ -15,6 +16,7 @@ const Investment: React.FC = () => {
       <MemberDashBoardHeadlineText>Be an early investor</MemberDashBoardHeadlineText>
       <VStack w="100%" id="investment-tabs">
         <InvestMentTab />
+        <TokenPriceDown />
       </VStack>
     </VStack>
   );
