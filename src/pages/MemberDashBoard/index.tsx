@@ -23,13 +23,13 @@ const MemberDashBoard: React.FC = () => {
           <SummarizeImpaktUser />
         </VStack>
 
-        <Divider w="50%" />
+        <Divider w="75%" />
 
         <VStack id="sumarize-impakt-investment-section" color="white" w="full">
           <Investment />
         </VStack>
 
-        <Divider w="50%" />
+        <Divider w="75%" />
 
         <VStack id="sumarize-impakt-user-section" color="white" w="full">
           <ReferralsAndWhiteListChallange />

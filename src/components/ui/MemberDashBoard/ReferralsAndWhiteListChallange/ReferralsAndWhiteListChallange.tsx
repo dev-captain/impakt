@@ -14,7 +14,6 @@ const ReferralsAndWhiteListChallange: React.FC<PropsI> = () => {
       maxW="1200px"
       w="full"
       rowGap="97px"
-      mt="48.5px"
     >
       <VStack rowGap="37px" id="member-dasboard-whitelist-referrals-card" px="2em" w="100%">
         <MemberDashBoardHeadlineText>Whitelist & Referrals</MemberDashBoardHeadlineText>
