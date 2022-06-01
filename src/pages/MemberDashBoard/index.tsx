@@ -19,31 +19,29 @@ const MemberDashBoard: React.FC = () => {
       justify="flex-start"
       showFooter
     >
-      <VStack rowGap="74px" w="full">
-        <VStack id="sumarize-impakt-user-section" color="white" w="full">
-          <MemberDashBoardContextProvider>
+      <MemberDashBoardContextProvider>
+        <VStack rowGap="74px" w="full">
+          <VStack id="sumarize-impakt-user-section" color="white" w="full">
             <SummarizeImpaktUser />
-          </MemberDashBoardContextProvider>
-        </VStack>
+          </VStack>
 
-        <Divider w="75%" />
+          <Divider w="75%" />
 
-        <VStack id="sumarize-impakt-investment-section" color="white" w="full">
-          <Investment />
-        </VStack>
+          <VStack id="sumarize-impakt-investment-section" color="white" w="full">
+            <Investment />
+          </VStack>
 
-        <Divider w="75%" />
+          <Divider w="75%" />
 
-        <VStack id="sumarize-impakt-user-section" color="white" w="full">
-          <ReferralsAndWhiteListChallange />
-        </VStack>
+          <VStack id="sumarize-impakt-user-section" color="white" w="full">
+            <ReferralsAndWhiteListChallange />
+          </VStack>
 
-        <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
-          <MemberDashBoardContextProvider>
+          <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
             <MemberWhiteListLeaderBoard />
-          </MemberDashBoardContextProvider>
+          </VStack>
         </VStack>
-      </VStack>
+      </MemberDashBoardContextProvider>
     </HeroLayout>
   );
 };

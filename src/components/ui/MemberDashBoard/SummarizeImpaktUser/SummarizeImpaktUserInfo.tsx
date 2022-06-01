@@ -25,7 +25,6 @@ const SummarizeImpaktUserInfo: React.FC = () => {
   const pointValue = basedMemberInfoByRank
     ? Math.abs(basedMemberInfoByRank.totalScore - totalScoreOfUser).toLocaleString()
     : '0';
-  console.log(totalScoreOfUser, basedMemberInfoByRank?.totalScore);
 
   // console.log(basedMemberInfoByRank?.totalScore - totalScoreOfUser);
   // const totalScoreOfBasedUser = basedMemberInfoByRank.totalScore;

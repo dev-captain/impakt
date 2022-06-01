@@ -4,6 +4,8 @@ import MemberDashBoardCard from '../MemberDashBoardCard';
 import SummarizeImpaktUserInfo from './SummarizeImpaktUserInfo';
 
 const SummarizeImpaktUser: React.FC = () => {
+  console.log('render for summarize impakt user');
+
   return (
     <VStack
       justifyContent="space-between"
