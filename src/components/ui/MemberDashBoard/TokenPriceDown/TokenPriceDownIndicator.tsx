@@ -35,7 +35,7 @@ const TokenPriceDownIndicator: React.FC<TokenPriceDownIndicatorPropsI> = ({
         transform="rotate(90deg)"
         h="0.92px"
         transition="all 2s linear"
-        left={`${value - 5.4}%`}
+        left={`${value - 5.3}%`}
       >
         <Text
           fontWeight="700"

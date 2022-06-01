@@ -5,7 +5,7 @@ import TokenPriceDownItem from './TokenPriceDownItem';
 import TokenPriceDownProgress from './TokenPriceDownProgress';
 
 const TokenPriceDown: React.FC = () => {
-  const activeNumberOfMember = 18000;
+  const activeNumberOfMember = 12000;
   const calculateIndicatorValue = (100 * activeNumberOfMember) / 20000;
 
   return (
