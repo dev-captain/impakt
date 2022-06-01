@@ -2,10 +2,13 @@ import * as React from 'react';
 
 import { Box, VStack, Text, HStack } from '@chakra-ui/react';
 import CountDownTimerItem from './CountDownTimerItem';
+import useCountdown from '../../../../hooks/useCountdown';
 
 interface CoundDownTimerInvestMentPropsI {}
 
 const CoundDownTimerInvestMent: React.FC<CoundDownTimerInvestMentPropsI> = () => {
+  const { days, hours, minutes, seconds } = useCountdown(new Date('7/20/2022'));
+
   return (
     <VStack
       bgColor="#FEC417"
@@ -25,10 +28,10 @@ const CoundDownTimerInvestMent: React.FC<CoundDownTimerInvestMentPropsI> = () =>
         </Text>
       </Box>
       <HStack>
-        <CountDownTimerItem label="Days" value="48" />
-        <CountDownTimerItem label="Hours" value="10" />
-        <CountDownTimerItem label="Minutes" value="30" />
-        <CountDownTimerItem label="Second" value="11" />
+        <CountDownTimerItem label="Days" value={`${days}`} />
+        <CountDownTimerItem label="Hours" value={`${hours}`} />
+        <CountDownTimerItem label="Minutes" value={`${minutes}`} />
+        <CountDownTimerItem label="Second" value={`${seconds}`} />
       </HStack>
     </VStack>
   );
