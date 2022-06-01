@@ -9,6 +9,8 @@ interface MemberDashBoardContextI {
   getTopThreeByRank: (arr: any[]) => any[];
   getFiveRanksAboveAndFiveRanksBelowByRank: (arr: any[], certainRank?: number) => any[];
   getCertainMemberById: (arr: any[], memberId?: number) => any;
+  fetchBasedRankMemberInfo: () => Promise<void>;
+  basedMemberInfoByRank: any;
 }
 
 const MemberDashBoardContext = createContext<MemberDashBoardContextI | null>(null);
@@ -16,7 +18,9 @@ const MemberDashBoardContext = createContext<MemberDashBoardContextI | null>(nul
 export function useMemberDashBoardContext() {
   const context = useContext(MemberDashBoardContext);
   if (!context) {
-    throw new Error('use UserContext provider must be used within the UserContext.Provider');
+    throw new Error(
+      'use MemberDashBoardContext provider must be used within the MemberDashBoardContext.Provider',
+    );
   }
 
   return context;
@@ -24,6 +28,7 @@ export function useMemberDashBoardContext() {
 
 export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
   const [memberDashBoardData, setMemberDashBoardData] = React.useState<any[]>([]);
+  const [basedMemberInfoByRank, setBasedMemberInfoByRank] = React.useState<any>(null);
   const [memberDashBoarCertainUserData, setMemberDashBoarCertainUserData] = React.useState<any[]>(
     [],
   );
@@ -45,7 +50,6 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
 
   const getFiveRanksAboveAndFiveRanksBelowByRank = useCallback(
     (arr: any[], certainRank?: number) => {
-      // TODO what if Rank of person not coming from backend ?
       if (!certainRank) {
         const topTenExceptTopThree = arr.filter(({ rank }) => {
           return rank > 3 && rank < 11;
@@ -71,7 +75,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
       const leaderBoardRes = await leaderBoardAxiosInstance.get(
         `/leaderboards/user-leaderboards?take=${take}&skip=${skip}`,
       );
-      setMemberDashBoardData([...memberDashBoardData, ...leaderBoardRes.data.data]);
+      setMemberDashBoardData([...memberDashBoardData, ...leaderBoardRes.data]);
     } catch (e: any) {
       console.log(e);
     }
@@ -79,14 +83,32 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
 
   const fetchCertainUserLeaderBoardById = useCallback(async ({ userId }: { userId: number }) => {
     try {
-      const leaderBoardRes = await leaderBoardAxiosInstance.get(
-        `/leaderboards/user-leaderboards/${userId}`,
+      const leaderBoardResById = await leaderBoardAxiosInstance.get(
+        `/leaderboards/user-leaderboards/users/${userId}`,
       );
+
       setMemberDashBoarCertainUserData([
         ...memberDashBoarCertainUserData,
-        ...leaderBoardRes.data.data,
+        ...leaderBoardResById.data,
       ]);
     } catch (e: any) {
+      console.log(e);
+    }
+  }, []);
+
+  const fetchBasedRankMemberInfo = useCallback(async () => {
+    const rank = process.env.NODE_ENV === 'development' ? 200 : 2500;
+    try {
+      const leaderBoardByRankRes = await leaderBoardAxiosInstance.get(
+        `/leaderboards/user-leaderboards/ranks/${rank}`,
+      );
+
+      if (leaderBoardByRankRes.data && leaderBoardByRankRes.data.length > 0) {
+        setBasedMemberInfoByRank(leaderBoardByRankRes.data[0]);
+      }
+
+      return;
+    } catch (e) {
       console.log(e);
     }
   }, []);
@@ -102,6 +124,8 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
         getTopThreeByRank,
         getFiveRanksAboveAndFiveRanksBelowByRank,
         getCertainMemberById,
+        fetchBasedRankMemberInfo,
+        basedMemberInfoByRank,
       }}
     >
       {children}

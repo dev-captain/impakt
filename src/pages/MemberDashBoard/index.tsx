@@ -18,14 +18,14 @@ const MemberDashBoard: React.FC = () => {
       showFooter
     >
       <VStack rowGap="74px" w="full">
-        <VStack id="sumarize-impakt-user-section" color="white" w="full">
-          <SummarizeImpaktUser />
-        </VStack>
-        <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
-          <MemberDashBoardContextProvider>
+        <MemberDashBoardContextProvider>
+          <VStack id="sumarize-impakt-user-section" color="white" w="full">
+            <SummarizeImpaktUser />
+          </VStack>
+          <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
             <MemberWhiteListLeaderBoard />
-          </MemberDashBoardContextProvider>
-        </VStack>
+          </VStack>
+        </MemberDashBoardContextProvider>
       </VStack>
     </HeroLayout>
   );

@@ -1,5 +1,6 @@
-import { HStack } from '@chakra-ui/react';
+import { HStack, Spinner } from '@chakra-ui/react';
 import * as React from 'react';
+import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 import { useUserContext } from '../../../../context/UserContext';
 import MemberDashBoardUserImage from './MemberDashBoardUserImage';
 import MemberDashboardSummarizePoint from './Points';
@@ -7,6 +8,27 @@ import MemberDashBoardSummarizeRank from './Rank';
 
 const SummarizeImpaktUserInfo: React.FC = () => {
   const { user } = useUserContext();
+  const {
+    fetchBasedRankMemberInfo,
+    basedMemberInfoByRank,
+    memberDashBoarCertainUserData,
+    getCertainMemberById,
+  } = useMemberDashBoardContext();
+
+  React.useEffect(() => {
+    fetchBasedRankMemberInfo();
+  }, []);
+
+  const userScoreInfo = getCertainMemberById(memberDashBoarCertainUserData, 48);
+  const totalScoreOfUser = userScoreInfo?.totalScore;
+  const isNeedMoreScore = totalScoreOfUser < basedMemberInfoByRank?.totalScore;
+  const pointValue = basedMemberInfoByRank
+    ? Math.abs(basedMemberInfoByRank.totalScore - totalScoreOfUser).toLocaleString()
+    : '0';
+  console.log(totalScoreOfUser, basedMemberInfoByRank?.totalScore);
+
+  // console.log(basedMemberInfoByRank?.totalScore - totalScoreOfUser);
+  // const totalScoreOfBasedUser = basedMemberInfoByRank.totalScore;
 
   return (
     <HStack
@@ -24,7 +46,11 @@ const SummarizeImpaktUserInfo: React.FC = () => {
         rankValue="3"
         // statusOfUser="Talent"
       />
-      <MemberDashboardSummarizePoint isNeedMore pointValue="15600" />
+      {!userScoreInfo || userScoreInfo.length === 0 ? (
+        <Spinner color="#fff" thickness="5px" size="xl" />
+      ) : (
+        <MemberDashboardSummarizePoint isNeedMore={isNeedMoreScore} pointValue={pointValue} />
+      )}
     </HStack>
   );
 };
