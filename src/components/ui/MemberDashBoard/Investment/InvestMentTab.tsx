@@ -56,19 +56,19 @@ const InvestMentTab: React.FC = () => {
         </HStack>
       </TabList>
 
-      <HStack mt="100px" justifyContent="space-between" w="full">
-        <TabPanels maxW="59.6%" id="panels">
+      <HStack mt="100px" columnGap="83px" w="full">
+        <TabPanels maxW="560px !important" w="full" id="panels">
           {phaseItems.map(({ content, title, description }) => {
             return content.map(({ p1, p2 }) => (
-              <TabPanel padding="0 !important" key={`${title}-panel`}>
+              <TabPanel position="relative" padding="0 !important" key={`${title}-panel`}>
                 <AnimationInWhenVisible animationType="fade">
                   <VStack rowGap="30px">
                     <Box id="headline" display="flex" alignItems="center" w="100%">
-                      <Box display="inline-flex">
+                      <Box position="relative" alignItems="center" display="flex">
                         <PhaseHeadlineText>{`${title}: ${description}`}</PhaseHeadlineText>
-                      </Box>
-                      <Box ml="30px" display="inline-flex">
-                        <RedLabelTag value="Current Phase" />
+                        <Box right="-12em" position="absolute">
+                          <RedLabelTag value="Current Phase" />
+                        </Box>
                       </Box>
                     </Box>
                     <PhaseDescriptionText>{p1}</PhaseDescriptionText>

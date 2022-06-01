@@ -9,7 +9,7 @@ interface RedLabelTagPropsI {
 const RedLabelTag: React.FC<RedLabelTagPropsI> = ({ value }) => {
   return (
     <Box
-      w="126px"
+      w="141px"
       h="30px"
       borderRadius="12px"
       justifyContent="center"
