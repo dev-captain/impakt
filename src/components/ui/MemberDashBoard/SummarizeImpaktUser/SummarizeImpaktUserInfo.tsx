@@ -19,7 +19,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
     fetchBasedRankMemberInfo();
   }, []);
 
-  const userScoreInfo = getCertainMemberById(memberDashBoarCertainUserData, 48);
+  const userScoreInfo = getCertainMemberById(memberDashBoarCertainUserData, user?.id);
   const totalScoreOfUser = userScoreInfo?.totalScore;
   const isNeedMoreScore = totalScoreOfUser < basedMemberInfoByRank?.totalScore;
   const pointValue = basedMemberInfoByRank
@@ -43,7 +43,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
       <MemberDashBoardUserImage />
       <MemberDashBoardSummarizeRank
         nameOfUser={user?.firstName ?? user?.username}
-        rankValue="3"
+        rankValue={userScoreInfo.rank}
         // statusOfUser="Talent"
       />
       {!userScoreInfo || userScoreInfo.length === 0 ? (
