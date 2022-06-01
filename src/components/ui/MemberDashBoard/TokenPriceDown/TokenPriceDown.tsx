@@ -5,6 +5,9 @@ import TokenPriceDownItem from './TokenPriceDownItem';
 import TokenPriceDownProgress from './TokenPriceDownProgress';
 
 const TokenPriceDown: React.FC = () => {
+  const activeNumberOfMember = 18000;
+  const calculateIndicatorValue = (100 * activeNumberOfMember) / 20000;
+
   return (
     <VStack alignItems="center" justifyContent="center" position="relative" w="100%">
       <HStack
@@ -14,26 +17,31 @@ const TokenPriceDown: React.FC = () => {
         mt="8em !important"
         w="100%"
       >
-        {tokenPriceDownItems.map(({ isAchieved, numberOfMemberLabel, priceValue }) => (
+        {tokenPriceDownItems.map(({ numberOfMemberLabel, priceValue }) => (
           <TokenPriceDownItem
             key={`${priceValue}-price-down-item`}
-            isAchieved={isAchieved}
-            numberOfMemberLabel={numberOfMemberLabel}
+            isAchieved={numberOfMemberLabel <= activeNumberOfMember}
+            numberOfMemberLabel={
+              numberOfMemberLabel === 0 ? '#active members' : numberOfMemberLabel.toLocaleString()
+            }
             priceValue={priceValue}
           />
         ))}
       </HStack>
-      <TokenPriceDownProgress value={43} />
+      <TokenPriceDownProgress
+        numberOfActiveMembers={activeNumberOfMember.toLocaleString()}
+        value={calculateIndicatorValue}
+      />
     </VStack>
   );
 };
 
 const tokenPriceDownItems = [
-  { numberOfMemberLabel: '#active member', priceValue: '0.01$', isAchieved: true },
-  { numberOfMemberLabel: '5,000', priceValue: '0.009$', isAchieved: true },
-  { numberOfMemberLabel: '10,000', priceValue: '0.008$', isAchieved: false },
-  { numberOfMemberLabel: '15,000', priceValue: '0.007$', isAchieved: false },
-  { numberOfMemberLabel: '20,000', priceValue: '0.006$', isAchieved: false },
+  { numberOfMemberLabel: 0, priceValue: '0.01$', isAchieved: true },
+  { numberOfMemberLabel: 5000, priceValue: '0.009$', isAchieved: true },
+  { numberOfMemberLabel: 10000, priceValue: '0.008$', isAchieved: false },
+  { numberOfMemberLabel: 15000, priceValue: '0.007$', isAchieved: false },
+  { numberOfMemberLabel: 20000, priceValue: '0.006$', isAchieved: false },
 ];
 
 export default TokenPriceDown;

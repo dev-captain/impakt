@@ -21,6 +21,7 @@ const TokenPriceDownIndicator: React.FC<TokenPriceDownIndicatorPropsI> = ({
         zIndex="9999"
         w="13px"
         h="13px"
+        transition="all 2s linear"
         left={`${value}%`}
       />
       <Box
@@ -33,6 +34,7 @@ const TokenPriceDownIndicator: React.FC<TokenPriceDownIndicatorPropsI> = ({
         w="122px"
         transform="rotate(90deg)"
         h="0.92px"
+        transition="all 2s linear"
         left={`${value - 5.4}%`}
       >
         <Text
