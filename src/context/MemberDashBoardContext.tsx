@@ -97,7 +97,9 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const fetchBasedRankMemberInfo = useCallback(async () => {
-    const rank = process.env.NODE_ENV === 'development' ? 200 : 2500;
+    console.log(process.env.NODE_ENV);
+    const rank =
+      process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test' ? 200 : 2500;
     try {
       const leaderBoardByRankRes = await leaderBoardAxiosInstance.get(
         `/leaderboards/user-leaderboards/ranks/${rank}`,
