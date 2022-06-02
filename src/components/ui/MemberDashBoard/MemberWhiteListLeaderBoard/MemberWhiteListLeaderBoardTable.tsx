@@ -53,52 +53,22 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               fontWeight="600"
               color="rgba(255, 255, 255, 0.5)"
             >
-              <Th
-                w="133px !important"
-                paddingLeft="30px !important"
-                paddingTop="36px !important"
-                fontSize="initial !important"
-              >
+              <Th w="133px !important" paddingLeft="30px !important" fontSize="initial !important">
                 Place
               </Th>
-              <Th
-                w="296px !important"
-                paddingTop="36px !important"
-                paddingLeft="30px !important"
-                fontSize="initial !important"
-              >
+              <Th w="296px !important" paddingLeft="30px !important" fontSize="initial !important">
                 Member
               </Th>
-              <Th
-                w="177px !important"
-                paddingLeft="25px !important"
-                paddingTop="36px !important"
-                fontSize="initial !important"
-              >
+              <Th w="177px !important" paddingLeft="25px !important" fontSize="initial !important">
                 Personal score
               </Th>
-              <Th
-                w="177px !important"
-                paddingLeft="30px !important"
-                paddingTop="36px !important"
-                fontSize="initial !important"
-              >
+              <Th w="177px !important" paddingLeft="30px !important" fontSize="initial !important">
                 Referrals
               </Th>
-              <Th
-                w="177px !important"
-                paddingLeft="5px !important"
-                paddingTop="36px !important"
-                fontSize="initial !important"
-              >
+              <Th w="177px !important" paddingLeft="5px !important" fontSize="initial !important">
                 Referrals score
               </Th>
-              <Th
-                w="177px !important"
-                paddingLeft="10px !important"
-                paddingTop="36px !important"
-                fontSize="initial !important"
-              >
+              <Th w="177px !important" paddingLeft="10px !important" fontSize="initial !important">
                 Total Score
               </Th>
             </Tr>
