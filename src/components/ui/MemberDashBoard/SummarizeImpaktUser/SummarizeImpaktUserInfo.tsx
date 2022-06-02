@@ -29,8 +29,8 @@ const SummarizeImpaktUserInfo: React.FC = () => {
 
   return (
     <HStack
-      flexDir={{ base: 'column', lg: 'row' }}
-      padding="50px"
+      flexDir={{ base: 'column', xl: 'row' }}
+      padding={{ base: '50px 0', lg: '50px' }}
       justifyContent="center"
       id="summarize-section"
       w="full"

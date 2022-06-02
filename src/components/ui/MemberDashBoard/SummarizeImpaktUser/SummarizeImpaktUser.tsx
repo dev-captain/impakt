@@ -13,7 +13,13 @@ const SummarizeImpaktUser: React.FC = () => {
       rowGap="97px"
       mt="48.5px"
     >
-      <VStack rowGap="37px" id="member-dasboard-summarize-card" px="2em" w="100%">
+      <VStack
+        rowGap="37px"
+        margin="auto"
+        id="member-dasboard-summarize-card"
+        px={{ base: '0', xl: '2em' }}
+        w="100%"
+      >
         <MemberDashBoardCard isGradient>
           <SummarizeImpaktUserInfo />
         </MemberDashBoardCard>
