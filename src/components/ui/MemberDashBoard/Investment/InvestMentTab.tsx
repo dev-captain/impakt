@@ -44,7 +44,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
               _hover={{ backgroundColor: '#778FAD', color: '#fff !important' }}
             >
               <PhaseHeadlineText>{title}</PhaseHeadlineText>
-              <PhaseDescriptionText>{description}</PhaseDescriptionText>
+              <PhaseDescriptionText isBold>{description}</PhaseDescriptionText>
             </Tab>
           ))}
         </HStack>

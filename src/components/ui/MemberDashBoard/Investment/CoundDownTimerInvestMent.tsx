@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import { Box, VStack, Text, HStack } from '@chakra-ui/react';
+import { Box, VStack, HStack } from '@chakra-ui/react';
 import CountDownTimerItem from './CountDownTimerItem';
 import useCountdown from '../../../../hooks/useCountdown';
+import PhaseHeadlineText from './PhaseHeadlineText';
 
 interface CoundDownTimerInvestMentPropsI {}
 
@@ -22,10 +23,8 @@ const CoundDownTimerInvestMent: React.FC<CoundDownTimerInvestMentPropsI> = () =>
       border="1px solid #F5F6FF"
       mt="30px !important"
     >
-      <Box id="end-is-headline">
-        <Text color="rgba(11, 23, 37, 1)" textStyle="bold6">
-          Ends in{' '}
-        </Text>
+      <Box color="#000" id="end-is-headline">
+        <PhaseHeadlineText>Ends in</PhaseHeadlineText>
       </Box>
       <HStack>
         <CountDownTimerItem label="Days" value={`${days}`} />
