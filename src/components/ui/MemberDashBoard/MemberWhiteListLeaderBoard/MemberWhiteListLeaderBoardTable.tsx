@@ -56,18 +56,38 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               <Th w="133px !important" paddingLeft="30px !important" fontSize="initial !important">
                 Place
               </Th>
-              <Th w="296px !important" paddingLeft="30px !important" fontSize="initial !important">
+              <Th
+                w={isLessThan1200 ? '177px !important' : '296px !important'}
+                paddingLeft="30px !important"
+                minW="177px !important"
+                fontSize="initial !important"
+              >
                 Member
               </Th>
-              <Th w="177px !important" paddingLeft="25px !important" fontSize="initial !important">
-                Personal score
-              </Th>
-              <Th w="177px !important" paddingLeft="30px !important" fontSize="initial !important">
-                Referrals
-              </Th>
-              <Th w="177px !important" paddingLeft="5px !important" fontSize="initial !important">
-                Referrals score
-              </Th>
+              {!isLessThan1200 && (
+                <Th
+                  w="177px !important"
+                  paddingLeft="25px !important"
+                  fontSize="initial !important"
+                >
+                  Personal score
+                </Th>
+              )}
+              {!isLessThan1200 && (
+                <Th
+                  w="177px !important"
+                  paddingLeft="30px !important"
+                  fontSize="initial !important"
+                >
+                  Referrals
+                </Th>
+              )}
+
+              {!isLessThan1200 && (
+                <Th w="177px !important" paddingLeft="5px !important" fontSize="initial !important">
+                  Referrals score
+                </Th>
+              )}
               <Th w="177px !important" paddingLeft="10px !important" fontSize="initial !important">
                 Total Score
               </Th>
@@ -99,7 +119,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               </Td>
               <Td
                 fontWeight="500"
-                w="296px !important"
+                w={isLessThan1200 ? '177px !important' : '296px !important'}
                 color={
                   rank === currentUserRank
                     ? 'rgba(254, 196, 23, 1) !important'
@@ -110,44 +130,53 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               >
                 {username}
               </Td>
-              <Td
-                w="177px !important"
-                color={
-                  rank === currentUserRank
-                    ? 'rgba(254, 196, 23, 1) !important'
-                    : 'rgba(255, 255, 255, 0.5) !important'
-                }
-                fontWeight="500"
-                paddingTop="21px !important"
-                paddingLeft="30px !important"
-              >
-                {userScore}
-              </Td>
-              <Td
-                color={
-                  rank === currentUserRank
-                    ? 'rgba(254, 196, 23, 1) !important'
-                    : 'rgba(255, 255, 255, 0.5) !important'
-                }
-                fontWeight="500"
-                w="177px !important"
-                paddingTop="21px !important"
-                paddingLeft="30px !important"
-              >
-                {referralCount}
-              </Td>
-              <Td
-                color={
-                  rank === currentUserRank
-                    ? 'rgba(254, 196, 23, 1) !important'
-                    : 'rgba(255, 255, 255, 0.5) !important'
-                }
-                w="177px !important"
-                fontWeight="500"
-                paddingLeft="16px !important"
-              >
-                {referralScore}
-              </Td>
+
+              {!isLessThan1200 && (
+                <Td
+                  w="177px !important"
+                  color={
+                    rank === currentUserRank
+                      ? 'rgba(254, 196, 23, 1) !important'
+                      : 'rgba(255, 255, 255, 0.5) !important'
+                  }
+                  fontWeight="500"
+                  paddingTop="21px !important"
+                  paddingLeft="30px !important"
+                >
+                  {userScore}
+                </Td>
+              )}
+
+              {!isLessThan1200 && (
+                <Td
+                  color={
+                    rank === currentUserRank
+                      ? 'rgba(254, 196, 23, 1) !important'
+                      : 'rgba(255, 255, 255, 0.5) !important'
+                  }
+                  fontWeight="500"
+                  w="177px !important"
+                  paddingTop="21px !important"
+                  paddingLeft="30px !important"
+                >
+                  {referralCount}
+                </Td>
+              )}
+
+              {!isLessThan1200 && (
+                <Td
+                  color={
+                    rank === currentUserRank
+                      ? 'rgba(254, 196, 23, 1) !important'
+                      : 'rgba(255, 255, 255, 0.5) !important'
+                  }
+                  w="177px !important"
+                  fontWeight="500"
+                  paddingLeft="16px !important"
+                >
+                  {referralScore}
+                </Td>
+              )}
               <Td
                 color={
                   rank === currentUserRank
