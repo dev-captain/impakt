@@ -12,7 +12,6 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
   return (
     <VStack
       border="1.82573px solid #F5F6FF;"
-      alignSelf="flex-start"
       w="302px"
       padding="30px"
       bgColor={isNeedMore ? '#778FAD' : '#609C6E'}
