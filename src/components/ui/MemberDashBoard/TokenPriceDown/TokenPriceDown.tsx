@@ -5,7 +5,7 @@ import TokenPriceDownItem from './TokenPriceDownItem';
 import TokenPriceDownProgress from './TokenPriceDownProgress';
 
 const TokenPriceDown: React.FC = () => {
-  const activeNumberOfMember = 15000;
+  const activeNumberOfMember = 0;
   const calculationOfIndicatorPosition = () => {
     const percentageOfSet = (100 * activeNumberOfMember) / 20000;
     if (percentageOfSet === 25) return percentageOfSet + 3.5;
@@ -21,7 +21,7 @@ const TokenPriceDown: React.FC = () => {
         zIndex="999"
         position="relative"
         justifyContent="space-between"
-        mt="8em !important"
+        mt="6.5em !important"
         w="100%"
       >
         {tokenPriceDownItems.map(({ numberOfMemberLabel, priceValue }) => (
