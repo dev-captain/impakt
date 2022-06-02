@@ -21,19 +21,19 @@ const MemberDashBoard: React.FC = () => {
     >
       <MemberDashBoardContextProvider>
         <VStack rowGap="74px" w="full">
-          <VStack id="sumarize-impakt-user-section" color="white" w="full">
+          <VStack id="summarize-impakt-user-section" color="white" w="full">
             <SummarizeImpaktUser />
           </VStack>
 
           <Divider w="75%" />
 
-          <VStack id="sumarize-impakt-investment-section" color="white" w="full">
+          <VStack id="impakt-investment-section" color="white" w="full">
             <Investment />
           </VStack>
 
           <Divider w="75%" />
 
-          <VStack id="sumarize-impakt-user-section" color="white" w="full">
+          <VStack id="referrals-impakt-section" color="white" w="full">
             <ReferralsAndWhiteListChallange />
           </VStack>
 

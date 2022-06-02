@@ -26,7 +26,12 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
       flexDirection="column"
     >
       <TabList justifyContent="space-between" borderBottom="0">
-        <HStack justifyContent="space-between" w="full">
+        <HStack
+          flexDir={{ base: 'column', lg: 'row' }}
+          rowGap="5px"
+          justifyContent="space-between"
+          w="full"
+        >
           {phaseItems.map(({ description, title }) => (
             <Tab
               key={`tab-phrase-${title}`}
@@ -50,7 +55,13 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
         </HStack>
       </TabList>
 
-      <HStack mt="100px" columnGap="83px" justifyContent="space-between" w="full">
+      <HStack
+        flexDir={{ base: 'column', lg: 'row' }}
+        mt="100px"
+        columnGap="83px"
+        justifyContent="space-between"
+        w="full"
+      >
         <TabPanels maxW={activeTabIndex === 0 ? '560px !important' : 'unset'} w="full" id="panels">
           {phaseItems.map(({ content, title, description }) => {
             return content.map(({ p1, p2 }) => (

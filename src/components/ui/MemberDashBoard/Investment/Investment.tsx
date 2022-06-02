@@ -17,7 +17,7 @@ const Investment: React.FC = () => {
       maxW="1200px"
       w="full"
       rowGap="48px"
-      px="2em"
+      px={{ base: '15px', lg: '2em' }}
     >
       <MemberDashBoardHeadlineText>Be an early investor</MemberDashBoardHeadlineText>
       <VStack w="100%" id="investment-tabs">

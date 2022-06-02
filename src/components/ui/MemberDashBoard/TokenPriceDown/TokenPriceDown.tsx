@@ -1,10 +1,11 @@
-import { HStack, VStack } from '@chakra-ui/react';
+import { HStack, useMediaQuery, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 
 import TokenPriceDownItem from './TokenPriceDownItem';
 import TokenPriceDownProgress from './TokenPriceDownProgress';
 
 const TokenPriceDown: React.FC = () => {
+  const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
   const activeNumberOfMember = 15000;
   const calculationOfIndicatorPosition = () => {
     const percentageOfSet = (100 * activeNumberOfMember) / 20000;
@@ -23,6 +24,8 @@ const TokenPriceDown: React.FC = () => {
         justifyContent="space-between"
         mt="6.8em !important"
         w="100%"
+        flexDir={{ base: 'column', lg: 'row' }}
+        rowGap="20px"
       >
         {tokenPriceDownItems.map(({ numberOfMemberLabel, priceValue }) => (
           <TokenPriceDownItem
@@ -35,20 +38,23 @@ const TokenPriceDown: React.FC = () => {
           />
         ))}
       </HStack>
-      <TokenPriceDownProgress
-        numberOfActiveMembers={activeNumberOfMember.toLocaleString()}
-        value={calculationOfIndicatorPosition()}
-      />
+
+      {!isLessThan1040 && (
+        <TokenPriceDownProgress
+          numberOfActiveMembers={activeNumberOfMember.toLocaleString()}
+          value={calculationOfIndicatorPosition()}
+        />
+      )}
     </VStack>
   );
 };
 
 const tokenPriceDownItems = [
-  { numberOfMemberLabel: 0, priceValue: '0.01$', isAchieved: true },
-  { numberOfMemberLabel: 5000, priceValue: '0.009$', isAchieved: true },
-  { numberOfMemberLabel: 10000, priceValue: '0.008$', isAchieved: false },
-  { numberOfMemberLabel: 15000, priceValue: '0.007$', isAchieved: false },
-  { numberOfMemberLabel: 20000, priceValue: '0.006$', isAchieved: false },
+  { numberOfMemberLabel: 0, priceValue: '0.01$' },
+  { numberOfMemberLabel: 5000, priceValue: '0.009$' },
+  { numberOfMemberLabel: 10000, priceValue: '0.008$' },
+  { numberOfMemberLabel: 15000, priceValue: '0.007$' },
+  { numberOfMemberLabel: 20000, priceValue: '0.006$' },
 ];
 
 export default TokenPriceDown;

@@ -18,6 +18,7 @@ const CoundDownTimerInvestMent: React.FC<CoundDownTimerInvestMentPropsI> = () =>
       padding="34px"
       rowGap="25px"
       minH="242px"
+      marginLeft="0 !important"
       id="investment-count-down-timer"
       borderRadius="24px"
       border="1px solid #F5F6FF"
