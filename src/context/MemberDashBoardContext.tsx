@@ -75,7 +75,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
       const leaderBoardRes = await leaderBoardAxiosInstance.get(
         `/leaderboards/user-leaderboards?take=${take}&skip=${skip}`,
       );
-      setMemberDashBoardData([...leaderBoardRes.data]);
+      setMemberDashBoardData([...memberDashBoardData, ...leaderBoardRes.data]);
     } catch (e: any) {
       console.log(e);
     }
@@ -87,14 +87,17 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
         `/leaderboards/user-leaderboards/users/${userId}`,
       );
 
-      setMemberDashBoarCertainUserData([...leaderBoardResById.data]);
+      setMemberDashBoarCertainUserData([
+        ...memberDashBoarCertainUserData,
+        ...leaderBoardResById.data,
+      ]);
     } catch (e: any) {
       console.log(e);
     }
   }, []);
 
   const fetchBasedRankMemberInfo = useCallback(async () => {
-    const rank = 2000;
+    const rank = 200;
 
     try {
       const leaderBoardByRankRes = await leaderBoardAxiosInstance.get(

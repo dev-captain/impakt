@@ -27,7 +27,7 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
           {isNeedMore ? `+${pointValue}` : pointValue}
         </Text>
         <Text fontSize="29px" fontWeight="400" lineHeight="32px" color="#fff">
-          {isNeedMore ? 'Points you need to get to rank 200' : 'Points more than rank 200'}
+          {isNeedMore ? 'Points you need to get to rank 2500' : 'Points more than rank 2500'}
         </Text>
       </Box>
     </VStack>

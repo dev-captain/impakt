@@ -21,7 +21,7 @@ const TokenPriceDown: React.FC = () => {
         zIndex="999"
         position="relative"
         justifyContent="space-between"
-        mt="7em !important"
+        mt="6.5em !important"
         w="100%"
       >
         {tokenPriceDownItems.map(({ numberOfMemberLabel, priceValue }) => (
