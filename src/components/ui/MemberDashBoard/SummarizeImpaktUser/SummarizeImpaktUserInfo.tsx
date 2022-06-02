@@ -41,6 +41,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
       <MemberDashBoardSummarizeRank
         nameOfUser={user?.firstName ?? user?.username}
         rankValue={userScoreInfo?.rank}
+        userId={user?.id}
       />
       {!basedMemberInfoByRank || !userScoreInfo ? (
         <Spinner />

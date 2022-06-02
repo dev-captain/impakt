@@ -1,28 +1,10 @@
 import * as React from 'react';
-import { VStack, Box, Text, useToast } from '@chakra-ui/react';
-import CopyClibBoardIcon from '../../../icons/CopyClibBoardIcon';
+import { VStack, Box, Text } from '@chakra-ui/react';
 import { useUserContext } from '../../../../context/UserContext';
+import ReferralCopyClipBoard from '../ReferralCopyClipBoard';
 
 const Referrals: React.FC = () => {
-  const toast = useToast();
-  const [isCopied, setIsCopied] = React.useState(false);
   const { user } = useUserContext();
-  const referralLink = `impakt.com/register/${user?.id}`;
-
-  const copyClipBoardReferralLink = () => {
-    navigator.clipboard.writeText(`https://${referralLink}`);
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 5000);
-    toast({
-      title: 'Success',
-      description: 'Referral link copied successfully!',
-      isClosable: true,
-      duration: 5000,
-      status: 'success',
-    });
-  };
 
   return (
     <VStack w="100%" alignItems="flex-start" padding="50px" maxH="500px" rowGap="1.8em !important">
@@ -41,18 +23,12 @@ const Referrals: React.FC = () => {
       <Box
         display="flex"
         justifyContent="space-between"
-        w="100%"
+        w="83%"
         alignItems="flex-end"
         mt="0 !important"
         id="whitelist-challange-description-box-3"
       >
-        <Box>
-          <Text textStyle="semiBold16">Your referral link:</Text>
-          <Text textStyle="bold4">{referralLink}</Text>
-        </Box>
-        <Box onClick={copyClipBoardReferralLink} cursor="pointer">
-          {isCopied ? null : <CopyClibBoardIcon />}
-        </Box>
+        <ReferralCopyClipBoard isAnimate userId={user?.id} />
       </Box>
     </VStack>
   );

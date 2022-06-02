@@ -12,15 +12,17 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
   return (
     <VStack
       border="1.82573px solid #F5F6FF;"
+      alignSelf="flex-start"
       w="302px"
       padding="30px"
-      bgColor={isNeedMore ? '#778FAD' : '#7ECE86'}
-      h="220px"
+      bgColor={isNeedMore ? '#778FAD' : '#609C6E'}
+      h="189px"
       filter="drop-shadow(0px 2.00758px 4.01516px rgba(0, 0, 0, 0.12)) drop-shadow(0px 2.00758px 7.02653px rgba(0, 0, 0, 0.1));"
       margin="0 !important"
       borderRadius="14px"
       alignItems="center"
       justifyContent="center"
+      textAlign="right"
     >
       <Box id="point-value" w="100%">
         <Text fontSize="65px" fontWeight="900" lineHeight="66px" color="#F5F6FF">
