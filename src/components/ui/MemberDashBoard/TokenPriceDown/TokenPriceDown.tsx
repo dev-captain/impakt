@@ -5,7 +5,7 @@ import TokenPriceDownItem from './TokenPriceDownItem';
 import TokenPriceDownProgress from './TokenPriceDownProgress';
 
 const TokenPriceDown: React.FC = () => {
-  const activeNumberOfMember = 0;
+  const activeNumberOfMember = 15000;
   const calculationOfIndicatorPosition = () => {
     const percentageOfSet = (100 * activeNumberOfMember) / 20000;
     if (percentageOfSet === 25) return percentageOfSet + 3.5;
