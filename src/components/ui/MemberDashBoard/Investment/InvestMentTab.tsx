@@ -81,9 +81,11 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                     <Box id="headline" display="flex" alignItems="center" w="100%">
                       <Box position="relative" alignItems="center" display="flex">
                         <PhaseHeadlineText>{`${title}: ${description}`}</PhaseHeadlineText>
-                        <Box right="-10.5em" position="absolute">
-                          <RedLabelTag value="Current Phase" />
-                        </Box>
+                        {activeTabIndex === 0 && (
+                          <Box right="-10.5em" position="absolute">
+                            <RedLabelTag value="Current Phase" />
+                          </Box>
+                        )}
                       </Box>
                     </Box>
                     <PhaseDescriptionText>{p1}</PhaseDescriptionText>
