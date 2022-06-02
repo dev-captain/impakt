@@ -15,12 +15,18 @@ const ReferralsAndWhiteListChallange: React.FC<PropsI> = () => {
       w="full"
       rowGap="97px"
     >
-      <VStack rowGap="37px" id="member-dasboard-whitelist-referrals-card" px="2em" w="100%">
+      <VStack
+        rowGap="37px"
+        id="member-dasboard-whitelist-referrals-card"
+        px={{ base: '10px', lg: '2em' }}
+        w="100%"
+      >
         <MemberDashBoardHeadlineText>Whitelist & Referrals</MemberDashBoardHeadlineText>
         <HStack
           flexDir={{ base: 'column', lg: 'row' }}
           justifyContent="space-between"
           w="100%"
+          rowGap="32px"
           columnGap="32px"
         >
           <Box w={{ base: '100%', lg: '50%' }}>

@@ -6,7 +6,7 @@ const WhiteListChallange: React.FC = () => {
     <VStack
       w="100%"
       alignItems="flex-start"
-      padding="50px"
+      padding={{ base: '30px', lg: '50px' }}
       minH="474.90px"
       rowGap="1.8em !important"
     >

@@ -7,7 +7,13 @@ const Referrals: React.FC = () => {
   const { user } = useUserContext();
 
   return (
-    <VStack w="100%" alignItems="flex-start" padding="50px" maxH="500px" rowGap="1.8em !important">
+    <VStack
+      w="100%"
+      alignItems="flex-start"
+      padding={{ base: '30px', lg: '50px' }}
+      maxH={{ base: 'auto', lg: '500px' }}
+      rowGap="1.8em !important"
+    >
       <Box mt="0 !important" id="whitelist-challange-headline-box">
         <Text textStyle="bold6">Referrals</Text>
       </Box>
