@@ -95,7 +95,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
 const phaseItems = [
   {
     title: 'Phase 1',
-    description: 'Token Price Challange',
+    description: 'Token Price Challenge',
     content: [
       {
         p1: 'The community decides token price through a collective effort. The goal for you as a community is to recruit as many active members as possible.',
