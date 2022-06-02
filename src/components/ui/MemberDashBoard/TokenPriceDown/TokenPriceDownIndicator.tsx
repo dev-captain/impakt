@@ -10,6 +10,23 @@ const TokenPriceDownIndicator: React.FC<TokenPriceDownIndicatorPropsI> = ({
   numberOfActiveMembers,
   value,
 }) => {
+  const indicatorTextValuePosition = () => {
+    if (numberOfActiveMembers.length === 1 || numberOfActiveMembers.length === 2) {
+      return '-0.7em';
+    }
+    if (numberOfActiveMembers.length === 3) {
+      return '-0.8em';
+    }
+    if (numberOfActiveMembers.length === 5) {
+      return '-0.5em';
+    }
+    if (numberOfActiveMembers.length === 6) {
+      return '-1em';
+    }
+
+    return '0';
+  };
+
   return (
     <Box id="indicator">
       <Box
@@ -35,6 +52,7 @@ const TokenPriceDownIndicator: React.FC<TokenPriceDownIndicatorPropsI> = ({
         transform="rotate(90deg)"
         h="0.92px"
         transition="all 2s linear"
+        textAlign="center"
         left={`${value - 5.3}%`}
       >
         <Text
@@ -42,9 +60,9 @@ const TokenPriceDownIndicator: React.FC<TokenPriceDownIndicatorPropsI> = ({
           fontSize="22px"
           lineHeight="30px"
           color="#fff"
-          position="absolute"
-          left="-12"
-          top="-4"
+          position="relative"
+          left="-80px"
+          top={indicatorTextValuePosition()}
           transform="rotate(270deg)"
         >
           {numberOfActiveMembers}

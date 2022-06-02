@@ -5,8 +5,15 @@ import TokenPriceDownItem from './TokenPriceDownItem';
 import TokenPriceDownProgress from './TokenPriceDownProgress';
 
 const TokenPriceDown: React.FC = () => {
-  const activeNumberOfMember = 12000;
-  const calculateIndicatorValue = (100 * activeNumberOfMember) / 20000;
+  const activeNumberOfMember = 15000;
+  const calculationOfIndicatorPosition = () => {
+    const percentageOfSet = (100 * activeNumberOfMember) / 20000;
+    if (percentageOfSet === 25) return percentageOfSet + 3.5;
+    if (percentageOfSet === 50) return percentageOfSet + 2.25;
+    if (percentageOfSet === 75) return percentageOfSet + 1.1;
+
+    return percentageOfSet;
+  };
 
   return (
     <VStack alignItems="center" justifyContent="center" position="relative" w="100%">
@@ -30,7 +37,7 @@ const TokenPriceDown: React.FC = () => {
       </HStack>
       <TokenPriceDownProgress
         numberOfActiveMembers={activeNumberOfMember.toLocaleString()}
-        value={calculateIndicatorValue}
+        value={calculationOfIndicatorPosition()}
       />
     </VStack>
   );

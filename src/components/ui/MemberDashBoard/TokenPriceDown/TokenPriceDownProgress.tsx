@@ -13,7 +13,7 @@ const TokenPriceDownProgress: React.FC<TokenPriceDownProgressPropsI> = ({
   numberOfActiveMembers,
 }) => {
   return (
-    <Box w="85%" top="56%" left="10%" zIndex="0" position="absolute" maxH="3.7px" id="progress-box">
+    <Box w="87%" top="56%" left="8%" zIndex="0" position="absolute" maxH="3.7px" id="progress-box">
       <TokenPriceDownIndicator numberOfActiveMembers={numberOfActiveMembers} value={value} />
       <Progress transition="all 2s linear" colorScheme="yellow" h="3.7px" value={value} w="full" />
     </Box>
