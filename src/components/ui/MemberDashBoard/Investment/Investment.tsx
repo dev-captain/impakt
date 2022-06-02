@@ -16,7 +16,7 @@ const Investment: React.FC = () => {
       alignItems="flex-start"
       maxW="1200px"
       w="full"
-      rowGap="97px"
+      rowGap="48px"
       px="2em"
     >
       <MemberDashBoardHeadlineText>Be an early investor</MemberDashBoardHeadlineText>
