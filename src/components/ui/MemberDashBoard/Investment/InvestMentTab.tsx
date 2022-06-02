@@ -28,7 +28,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
       <TabList justifyContent="space-between" borderBottom="0">
         <HStack
           flexDir={{ base: 'column', lg: 'row' }}
-          rowGap="5px"
+          rowGap="1em"
           justifyContent="space-between"
           w="full"
         >
@@ -42,6 +42,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
               color="#fff !important"
               borderRadius="14px"
               w="341px"
+              margin="0 !important"
               border="1px solid #F5F6FF"
               padding="20 !important"
               _focus={{ outline: 0 }}
