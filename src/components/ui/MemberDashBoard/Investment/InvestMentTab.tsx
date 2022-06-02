@@ -36,34 +36,25 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
       flexDirection="column"
     >
       <TabList justifyContent="space-between" borderBottom="0">
-        <HStack columnGap="30px" w="full">
+        <HStack justifyContent="space-between" w="full">
           {phaseItems.map(({ description, title }) => (
             <Tab
               key={`tab-phrase-${title}`}
               flexDirection="column"
               columnGap="5px"
-              height="129px"
+              height="117px"
               backgroundColor="transparent"
               color="#fff !important"
               borderRadius="14px"
-              minW="377px"
-              w="full"
+              w="341px"
               border="1px solid #F5F6FF"
               padding="20 !important"
               _focus={{ outline: 0 }}
               _selected={{ color: '#000 !important', backgroundColor: '#FEC417' }}
               _hover={{ backgroundColor: '#778FAD', color: '#fff !important' }}
             >
-              <Text
-                display="block"
-                fontWeight="700"
-                color="inherit"
-                fontSize="40px"
-                lineHeight="36px"
-              >
-                {title}
-              </Text>
-              <Text mt="10px" color="inherit" fontWeight="400" lineHeight="36px" fontSize="30px">
+              <Text textStyle="bold5">{title}</Text>
+              <Text textStyle="bold4" fontWeight="400">
                 {description}
               </Text>
             </Tab>
