@@ -31,7 +31,7 @@ const CoundDownTimerInvestMent: React.FC<CoundDownTimerInvestMentPropsI> = () =>
         <CountDownTimerItem label="Days" value={`${days}`} />
         <CountDownTimerItem label="Hours" value={`${hours}`} />
         <CountDownTimerItem label="Minutes" value={`${minutes}`} />
-        <CountDownTimerItem label="Second" value={`${seconds}`} />
+        <CountDownTimerItem label="Seconds" value={`${seconds}`} />
       </HStack>
     </VStack>
   );
