@@ -5,6 +5,11 @@ import TokenPriceDown from '../TokenPriceDown/TokenPriceDown';
 import InvestMentTab from './InvestMentTab';
 
 const Investment: React.FC = () => {
+  const [activeTabIndex, setActiveTabIndex] = React.useState(0);
+  const handleTabIndexChanges = (index: number) => {
+    setActiveTabIndex(index);
+  };
+
   return (
     <VStack
       justifyContent="space-between"
@@ -15,8 +20,11 @@ const Investment: React.FC = () => {
     >
       <MemberDashBoardHeadlineText>Be an early investor</MemberDashBoardHeadlineText>
       <VStack w="100%" id="investment-tabs">
-        <InvestMentTab />
-        <TokenPriceDown />
+        <InvestMentTab
+          activeTabIndex={activeTabIndex}
+          handleTabIndexChanges={handleTabIndexChanges}
+        />
+        {activeTabIndex === 0 && <TokenPriceDown />}
       </VStack>
     </VStack>
   );
