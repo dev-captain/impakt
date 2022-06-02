@@ -35,7 +35,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
 
   const getCertainMemberById = useCallback((arr: any[], memberId?: number) => {
     const member = arr.find(({ userId }) => userId === memberId);
-    if (!member) return arr;
+    if (!member) return null;
 
     return member;
   }, []);
@@ -97,9 +97,9 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const fetchBasedRankMemberInfo = useCallback(async () => {
-    console.log(process.env.NODE_ENV);
     const rank =
       process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test' ? 200 : 2500;
+
     try {
       const leaderBoardByRankRes = await leaderBoardAxiosInstance.get(
         `/leaderboards/user-leaderboards/ranks/${rank}`,

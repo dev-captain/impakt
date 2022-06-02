@@ -17,11 +17,11 @@ const MemberWhiteListLeaderBoard: React.FC = () => {
 
   React.useEffect(() => {
     if (!user) return;
-    fetchCertainUserLeaderBoardById({ userId: user.id });
+    fetchCertainUserLeaderBoardById({ userId: 18 });
   }, []);
 
   const topThree = getTopThreeByRank(memberDashBoarCertainUserData);
-  const certainMember = getCertainMemberById(memberDashBoarCertainUserData, user?.id);
+  const certainMember = getCertainMemberById(memberDashBoarCertainUserData, 18);
   const fiveRanksAboveAndFiveRanksBelow = getFiveRanksAboveAndFiveRanksBelowByRank(
     memberDashBoarCertainUserData,
     certainMember?.rank,
