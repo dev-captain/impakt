@@ -1,15 +1,5 @@
 import * as React from 'react';
-import {
-  Box,
-  HStack,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
 
 import AnimationInWhenVisible from '../../../common/AnimationInWhenVisible';
 import PhaseHeadlineText from './PhaseHeadlineText';
@@ -53,10 +43,8 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
               _selected={{ color: '#000 !important', backgroundColor: '#FEC417' }}
               _hover={{ backgroundColor: '#778FAD', color: '#fff !important' }}
             >
-              <Text textStyle="bold5">{title}</Text>
-              <Text textStyle="bold4" fontWeight="400">
-                {description}
-              </Text>
+              <PhaseHeadlineText>{title}</PhaseHeadlineText>
+              <PhaseDescriptionText>{description}</PhaseDescriptionText>
             </Tab>
           ))}
         </HStack>
