@@ -35,7 +35,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
 
   const getCertainMemberById = useCallback((arr: any[], memberId?: number) => {
     const member = arr.find(({ userId }) => userId === memberId);
-    if (!member) return null;
+    if (!member) return { rank: 'UNK', totalScore: 0 };
 
     return member;
   }, []);
@@ -48,27 +48,24 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
     return topThree;
   }, []);
 
-  const getFiveRanksAboveAndFiveRanksBelowByRank = useCallback(
-    (arr: any[], certainRank?: number) => {
-      if (!certainRank || certainRank <= 10) {
-        const topTenExceptTopThree = arr.filter(({ rank }) => {
-          return rank > 3 && rank < 11;
-        });
-
-        return topTenExceptTopThree;
-      }
-
-      const less5 = certainRank - 4;
-      const plus5 = certainRank + 4;
-      const fiveRanksAboveAndFiveRanksBelow = arr.filter(({ rank }) => {
-        return less5 < rank && rank < plus5;
+  const getFiveRanksAboveAndFiveRanksBelowByRank = useCallback((arr: any[], certainRank?: any) => {
+    if (!certainRank || certainRank <= 10 || certainRank === 'UNK') {
+      const topTenExceptTopThree = arr.filter(({ rank }) => {
+        return rank > 3 && rank < 11;
       });
-      if (fiveRanksAboveAndFiveRanksBelow.length === 0) return arr;
 
-      return fiveRanksAboveAndFiveRanksBelow;
-    },
-    [],
-  );
+      return topTenExceptTopThree;
+    }
+
+    const less5 = certainRank - 4;
+    const plus5 = certainRank + 4;
+    const fiveRanksAboveAndFiveRanksBelow = arr.filter(({ rank }) => {
+      return less5 < rank && rank < plus5;
+    });
+    if (fiveRanksAboveAndFiveRanksBelow.length === 0) return arr;
+
+    return fiveRanksAboveAndFiveRanksBelow;
+  }, []);
 
   const fetchLeaderBoard = useCallback(async ({ take, skip }: { take: string; skip: string }) => {
     try {
