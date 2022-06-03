@@ -5,6 +5,7 @@ import AnimationInWhenVisible from '../../../common/AnimationInWhenVisible';
 import PhaseHeadlineText from './PhaseHeadlineText';
 import PhaseDescriptionText from './PhaseDescriptionText';
 import RedLabelTag from '../RedLabelTag';
+import ActiveMembersCard from './ActiveMembersCard';
 // import CoundDownTimerInvestMent from './CoundDownTimerInvestMent';
 
 interface InvestmentTabPropsI {
@@ -82,6 +83,8 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                       </Box>
                     </Box>
                     <PhaseDescriptionText>{p1}</PhaseDescriptionText>
+
+                    {activeTabIndex === 0 && <ActiveMembersCard activeMembersValue={8032} />}
                     <PhaseDescriptionText>{p2}</PhaseDescriptionText>
                   </VStack>
                 </AnimationInWhenVisible>
