@@ -20,7 +20,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
     fetchBasedRankMemberInfo();
   }, []);
 
-  const userScoreInfo = getCertainMemberById(memberDashBoarCertainUserData, 85);
+  const userScoreInfo = getCertainMemberById(memberDashBoarCertainUserData, 5);
   const totalScoreOfUser = userScoreInfo?.totalScore;
   const isNeedMoreScore = totalScoreOfUser < basedMemberInfoByRank?.totalScore;
   const pointValue = basedMemberInfoByRank
