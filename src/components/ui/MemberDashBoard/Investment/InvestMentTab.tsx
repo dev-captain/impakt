@@ -70,7 +70,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
         justifyContent="space-between"
         w="full"
       >
-        <TabPanels maxW={activeTabIndex === 0 ? '560px !important' : 'unset'} w="full" id="panels">
+        <TabPanels w="full" id="panels">
           {phaseItems.map(({ content, title, description }) => {
             return content.map(({ p1, p2 }) => (
               <TabPanel position="relative" padding="0 !important" key={`${title}-panel`}>

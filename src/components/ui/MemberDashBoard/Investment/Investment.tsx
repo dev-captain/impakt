@@ -1,7 +1,7 @@
 import { VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
-import TokenPriceDown from '../TokenPriceDown/TokenPriceDown';
+// import TokenPriceDown from '../TokenPriceDown/TokenPriceDown';
 import InvestMentTab from './InvestMentTab';
 
 const Investment: React.FC = () => {
@@ -25,7 +25,7 @@ const Investment: React.FC = () => {
           activeTabIndex={activeTabIndex}
           handleTabIndexChanges={handleTabIndexChanges}
         />
-        {activeTabIndex === 0 && <TokenPriceDown />}
+        {/* {activeTabIndex === 0 && <TokenPriceDown />} */}
       </VStack>
     </VStack>
   );
