@@ -1,4 +1,4 @@
-import { VStack, Box, Text } from '@chakra-ui/react';
+import { VStack, Box, Text, UnorderedList, ListItem } from '@chakra-ui/react';
 import * as React from 'react';
 
 const WhiteListChallange: React.FC = () => {
@@ -20,9 +20,19 @@ const WhiteListChallange: React.FC = () => {
       </Box>
       <Box mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="regular4">
-          Whenever you or your referred friends work out, their workout score will be added to your
-          leaderboard score It pays to workout with your friends!
+          Your total score & rank on the leaderboard is determined by summing up:
         </Text>
+      </Box>
+      <Box mt="0 !important" id="whitelist-challange-description-box-2">
+        <UnorderedList>
+          <ListItem>All your workout scores</ListItem>
+          <ListItem>5% of your referred friends&apos; workout scores</ListItem>
+          <ListItem>2% of your referred friends&apos; referrals&apos; workout scores</ListItem>
+        </UnorderedList>
+      </Box>
+
+      <Box mt="0 !important" id="whitelist-challange-description-box-2">
+        <Text textStyle="regular4">It pays to workout with your friends!</Text>
       </Box>
     </VStack>
   );
