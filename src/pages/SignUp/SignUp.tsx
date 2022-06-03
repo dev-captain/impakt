@@ -347,6 +347,21 @@ const SignUp = () => {
                 isLoading={isCreateAccountButtonLoading}
               />
             </VStack>
+
+            <Flex mt="8px !important" justifyContent="center">
+              <Text textStyle="regular2" pos="relative">
+                Already have an account?
+                <Box
+                  onClick={() => navigate('/login')}
+                  mx="5px"
+                  cursor="pointer"
+                  textColor={accentRedtextColor}
+                  as="span"
+                >
+                  Login
+                </Box>
+              </Text>
+            </Flex>
           </VStack>
 
           <Gradients />
