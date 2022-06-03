@@ -7,7 +7,24 @@ interface ActiveMembersCardPropsI {
   activeMembersValue: number;
 }
 
+const tokenPriceDownItems = [
+  { activeMember: 0, priceValue: '0.01$' },
+  { activeMember: 5000, priceValue: '0.009$' },
+  { activeMember: 10000, priceValue: '0.008$' },
+  { activeMember: 15000, priceValue: '0.007$' },
+  { activeMember: 20000, priceValue: '0.006$' },
+];
+
 const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersValue }) => {
+  const nextActiveMemberGoalInstancesIndex =
+    activeMembersValue === 20000
+      ? 4
+      : tokenPriceDownItems.findIndex(({ activeMember }) => activeMember > activeMembersValue);
+
+  const nextActiveMemberGoalInstance = tokenPriceDownItems[nextActiveMemberGoalInstancesIndex];
+  const nextActiveMemberGoalNumber = nextActiveMemberGoalInstance.activeMember.toLocaleString();
+  const nextActiveMemberGoalPriceValue = nextActiveMemberGoalInstance.priceValue;
+
   return (
     <VStack
       w="470px"
@@ -41,12 +58,20 @@ const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersVal
         <Text textStyle="regular2">Active members</Text>
       </Box>
       <VStack id="active-members-description-box">
-        <Text fontWeight={400} textStyle="bold4">
-          At <b>10,000 active members</b>
-        </Text>
-        <Text fontWeight={400} textStyle="bold4">
-          token price will <b>reduced to $0.008</b>
-        </Text>
+        {activeMembersValue !== 20000 ? (
+          <>
+            <Text fontWeight={400} textStyle="bold4">
+              At <b>{nextActiveMemberGoalNumber} active members</b>
+            </Text>
+            <Text fontWeight={400} textStyle="bold4">
+              token price will <b>reduced to {nextActiveMemberGoalPriceValue}</b>
+            </Text>
+          </>
+        ) : (
+          <Text fontWeight={400} textStyle="bold4">
+            Token price is <b>{nextActiveMemberGoalPriceValue}</b>
+          </Text>
+        )}
       </VStack>
       <Gradients />
     </VStack>
