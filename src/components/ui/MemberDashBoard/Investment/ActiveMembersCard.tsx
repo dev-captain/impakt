@@ -56,7 +56,7 @@ const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersVal
               At <b>{nextActiveMemberGoalNumber} active members</b>
             </Text>
             <Text fontWeight={400} textStyle="bold4">
-              token price will <b>reduced to {nextActiveMemberGoalPriceValue}</b>
+              token price will be <b>reduced to {nextActiveMemberGoalPriceValue}</b>
             </Text>
           </>
         ) : (

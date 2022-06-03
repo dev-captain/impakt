@@ -66,7 +66,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
 
       <HStack
         flexDir={{ base: 'column', lg: 'row' }}
-        mt="100px"
+        mt="80px"
         columnGap="83px"
         justifyContent="space-between"
         w="full"
@@ -75,11 +75,6 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
           <TabPanel position="relative" padding="0 !important">
             <AnimationInWhenVisible animationType="fade">
               <VStack rowGap="32px" w="full">
-                <Box id="headline" display="flex" alignItems="center" w="100%">
-                  <Box position="relative" alignItems="center" display="flex">
-                    <PhaseHeadlineText>Phase 1: Token Price Challenge</PhaseHeadlineText>
-                  </Box>
-                </Box>
                 <PhaseDescriptionText>
                   <b>As a community, together we&apos;ll decide the price we pay for each token</b>{' '}
                   . Through teamwork, we will drive the token price down the more we share and
@@ -87,7 +82,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                   able to purchase more for less. Impakt will have a maximum limited supply of 100B
                   tokens.
                 </PhaseDescriptionText>
-                {activeTabIndex === 0 && <ActiveMembersCard activeMembersValue={5001} />}
+                {activeTabIndex === 0 && <ActiveMembersCard activeMembersValue={3050} />}
                 <PhaseDescriptionText>
                   <b>Who knows how low the final price will be?</b> Token price starts at $0.01 USD
                   and the final price will be determined by the number of active members on Impakt.
@@ -106,11 +101,6 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
           <TabPanel position="relative" padding="0 !important">
             <AnimationInWhenVisible animationType="fade">
               <VStack rowGap="32px" w="full">
-                <Box id="headline" display="flex" alignItems="center" w="100%">
-                  <Box position="relative" alignItems="center" display="flex">
-                    <PhaseHeadlineText>Phase 2: Community Private Presale</PhaseHeadlineText>
-                  </Box>
-                </Box>
                 <PhaseDescriptionText>
                   <b>Don&apos;t be &quot;just a member&quot;... Be Family! </b> At Impakt, we take
                   care of our own first. In this phase, you, as a member of the Impakt community
@@ -133,11 +123,6 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
           <TabPanel position="relative" padding="0 !important">
             <AnimationInWhenVisible animationType="fade">
               <VStack rowGap="32px" w="full">
-                <Box id="headline" display="flex" alignItems="center" w="100%">
-                  <Box position="relative" alignItems="center" display="flex">
-                    <PhaseHeadlineText>Phase 3: IDO Token Launch</PhaseHeadlineText>
-                  </Box>
-                </Box>
                 <PhaseDescriptionText>
                   <b>
                     This is the time we&apos;ve all been waiting for! Once our token $IO is
@@ -164,11 +149,11 @@ const phaseItems = [
   },
   {
     title: 'Phase 2',
-    description: 'Community Presale',
+    description: 'Community Private Presale',
   },
   {
     title: 'Phase 3',
-    description: 'Token Launch',
+    description: 'IDO Token Launch',
   },
 ];
 
