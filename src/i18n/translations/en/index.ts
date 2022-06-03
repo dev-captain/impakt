@@ -93,9 +93,16 @@ export default {
   signUp: {
     createAn: 'Create an',
     account: 'account',
-    yourUsername: 'Username',
     yourEmail: 'Email',
     fourDigit: '0000',
+    memberName: `Membername`,
+  },
+  signIn: {
+    signIn: `Sign in`,
+    createAn: `Create an account`,
+    firstTime: `First time?`,
+    signInButton: `Sign In`,
+    email: `Email...`,
   },
   verification: {
     verification: 'Verification',

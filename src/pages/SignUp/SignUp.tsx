@@ -3,7 +3,6 @@ import {
   VStack,
   Text,
   useBreakpointValue,
-  useToast,
   Flex,
   Box,
   Link,
@@ -14,20 +13,18 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
-import axios, { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
 import GenerateDigitNumber from './component/GenerateDigitNumber';
-
-const apiBaseUrl = process.env.REACT_APP_API;
+import { useUserContext } from '../../context/UserContext';
 
 const signUpFormYupScheme = yup.object().shape({
-  username: yup.string().required('Username is required field'),
+  memberName: yup.string().required('Membername is required field'),
   fourDigit: yup
     .string()
     .test('len', ' ', (val) => {
@@ -51,8 +48,9 @@ const signUpFormYupScheme = yup.object().shape({
 });
 
 const SignUp = () => {
+  const { user, signUp } = useUserContext();
+  const navigate = useNavigate();
   const { id } = useParams();
-  const toast = useToast();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -68,6 +66,10 @@ const SignUp = () => {
     xl: false,
     '2xl': false,
   });
+
+  React.useEffect(() => {
+    if (user) navigate('/login');
+  }, [user]);
 
   useEffect(() => {
     if (!id) return;
@@ -87,7 +89,7 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(signUpFormYupScheme),
     defaultValues: {
-      username: '',
+      memberName: '',
       email: '',
       password: '',
       passwordConfirmation: '',
@@ -98,7 +100,7 @@ const SignUp = () => {
   useEffect(() => {
     register('password');
     register('passwordConfirmation');
-    register('username');
+    register('memberName');
     register('fourDigit');
     register('email');
   }, []);
@@ -108,50 +110,20 @@ const SignUp = () => {
   };
 
   const handleRegisterFormSubmit = async (data: any) => {
-    const url = `${apiBaseUrl}/iam/user`;
-
     setIsCreateAccountButtonLoading(true);
+    const { memberName, fourDigit, email, password } = data;
+    const payload = {
+      username: `${memberName}#${fourDigit}`,
+      password,
+      email,
+      referrerId: activeReferrerId,
+    };
+
     try {
-      const { username, fourDigit, email, password } = data;
-      const payload = {
-        username: `${username}#${fourDigit}`,
-        password,
-        email,
-        referrerId: activeReferrerId,
-      };
-
-      await axios.post(url, payload);
-
-      toast({
-        title: 'Success',
-        description: 'Your account created successfully.You can now login in the Impakt app.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
-        toast({
-          title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
+      await signUp(payload);
+      navigate('/download');
+    } catch (e) {
+      console.error(e);
     }
 
     return setIsCreateAccountButtonLoading(false);
@@ -220,16 +192,16 @@ const SignUp = () => {
           >
             <Flex justifyContent="space-between" w="full">
               <TextField
-                name="username"
+                name="memberName"
                 zIndex="999"
                 isOutlined
                 fontSize="14px"
                 textStyle="regular2"
                 onChange={onChange}
-                placeholder={t(keys.signUp.username)}
+                placeholder={t(keys.signUp.memberName)}
                 _placeholder={{ color: textColor, fontSize: '14px' }}
                 type="text"
-                error={errors.username ? errors.username.message : ''}
+                error={errors.memberName ? errors.memberName.message : ''}
               />
 
               <TextField

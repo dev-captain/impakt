@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
+import { UserContextProvider } from './context/UserContext';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.render(
         <BrowserRouter>
           <ChakraProvider theme={theme}>
             <ColorModeScript initialColorMode="light" />
-            <App />
+            <UserContextProvider>
+              <App />
+            </UserContextProvider>
           </ChakraProvider>
         </BrowserRouter>
       </HelmetProvider>
