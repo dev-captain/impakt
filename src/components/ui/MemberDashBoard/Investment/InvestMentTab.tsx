@@ -5,7 +5,7 @@ import AnimationInWhenVisible from '../../../common/AnimationInWhenVisible';
 import PhaseHeadlineText from './PhaseHeadlineText';
 import PhaseDescriptionText from './PhaseDescriptionText';
 import RedLabelTag from '../RedLabelTag';
-import CoundDownTimerInvestMent from './CoundDownTimerInvestMent';
+// import CoundDownTimerInvestMent from './CoundDownTimerInvestMent';
 
 interface InvestmentTabPropsI {
   handleTabIndexChanges: (index: number) => void;
@@ -30,6 +30,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
           flexDir={{ base: 'column', lg: 'row' }}
           rowGap="1em"
           justifyContent="space-between"
+          position="relative"
           w="full"
         >
           {phaseItems.map(({ description, title }) => (
@@ -53,6 +54,12 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
               <PhaseDescriptionText isBold>{description}</PhaseDescriptionText>
             </Tab>
           ))}
+
+          {activeTabIndex === 0 && (
+            <Box left="5.5em" bottom="-3em" position="absolute">
+              <RedLabelTag value="Current Phase" />
+            </Box>
+          )}
         </HStack>
       </TabList>
 
@@ -72,11 +79,6 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                     <Box id="headline" display="flex" alignItems="center" w="100%">
                       <Box position="relative" alignItems="center" display="flex">
                         <PhaseHeadlineText>{`${title}: ${description}`}</PhaseHeadlineText>
-                        {activeTabIndex === 0 && (
-                          <Box right="-10.5em" position="absolute">
-                            <RedLabelTag value="Current Phase" />
-                          </Box>
-                        )}
                       </Box>
                     </Box>
                     <PhaseDescriptionText>{p1}</PhaseDescriptionText>
@@ -87,7 +89,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
             ));
           })}
         </TabPanels>
-        {activeTabIndex === 0 && <CoundDownTimerInvestMent />}
+        {/* {activeTabIndex === 0 && <CoundDownTimerInvestMent />} */}
       </HStack>
     </Tabs>
   );
