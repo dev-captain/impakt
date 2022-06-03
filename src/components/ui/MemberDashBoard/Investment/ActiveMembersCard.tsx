@@ -7,14 +7,6 @@ interface ActiveMembersCardPropsI {
   activeMembersValue: number;
 }
 
-const tokenPriceDownItems = [
-  { activeMember: 0, priceValue: '0.01$' },
-  { activeMember: 5000, priceValue: '0.009$' },
-  { activeMember: 10000, priceValue: '0.008$' },
-  { activeMember: 15000, priceValue: '0.007$' },
-  { activeMember: 20000, priceValue: '0.006$' },
-];
-
 const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersValue }) => {
   const nextActiveMemberGoalInstancesIndex =
     activeMembersValue === 20000
@@ -77,5 +69,13 @@ const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersVal
     </VStack>
   );
 };
+
+const tokenPriceDownItems = [
+  { activeMember: 0, priceValue: '0.01$' },
+  { activeMember: 5000, priceValue: '0.009$' },
+  { activeMember: 10000, priceValue: '0.008$' },
+  { activeMember: 15000, priceValue: '0.007$' },
+  { activeMember: 20000, priceValue: '0.006$' },
+];
 
 export default ActiveMembersCard;
