@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { VStack, Text, Box } from '@chakra-ui/react';
+import { VStack, Text, Box, Link } from '@chakra-ui/react';
 import ReferralCopyClipBoard from '../ReferralCopyClipBoard';
 
 interface MemberDashBoardSummarizeRankPropsI {
   nameOfUser?: string;
   // statusOfUser: 'Talent' | 'Beginner';
-  rankValue: string;
+  rankValue?: string;
   userId?: number;
 }
 
@@ -45,7 +45,22 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
         </Box>
 
         <Box id="rank-box">
-          <Text textStyle="light7">#{rankValue}</Text>
+          {rankValue ? (
+            <Text textStyle="light7">#{rankValue}</Text>
+          ) : (
+            <>
+              <Text mt="5px" fontWeight={400} textStyle="semibold3">
+                <i>You are not ranked yet.</i>{' '}
+              </Text>
+              <Text textStyle="semibold3">
+                <Link textStyle="semibold3" href="/download">
+                  <i>
+                    <b>Download our app now.</b>
+                  </i>
+                </Link>
+              </Text>
+            </>
+          )}
         </Box>
       </Box>
 

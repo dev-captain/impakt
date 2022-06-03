@@ -2,13 +2,15 @@ import * as React from 'react';
 import { Box, Text, VStack } from '@chakra-ui/react';
 
 interface MemberDashboardSummarizePointPropsI {
-  pointValue: string;
+  pointValue: any;
   isNeedMore: boolean;
 }
 const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointPropsI> = ({
   isNeedMore,
   pointValue,
 }) => {
+  // eslint-disable-next-line no-restricted-globals
+
   return (
     <VStack
       border="1.82573px solid #F5F6FF;"
@@ -22,10 +24,11 @@ const MemberDashboardSummarizePoint: React.FC<MemberDashboardSummarizePointProps
       alignItems="center"
       justifyContent="center"
       textAlign="right"
+      opacity={Number.isNaN(pointValue) ? '0' : '1'}
     >
       <Box id="point-value" w="100%">
         <Text fontSize="65px" fontWeight="900" lineHeight="66px" color="#F5F6FF">
-          {isNeedMore ? `+${pointValue}` : pointValue}
+          {isNeedMore ? `+${pointValue.toLocaleString()}` : pointValue.toLocaleString()}
         </Text>
         <Text fontSize="29px" fontWeight="400" lineHeight="32px" color="#fff">
           {isNeedMore ? 'Points you need to get to rank 2500' : 'Points more than rank 2500'}

@@ -23,9 +23,10 @@ const SummarizeImpaktUserInfo: React.FC = () => {
   const userScoreInfo = getCertainMemberById(memberDashBoarCertainUserData, user?.id);
   const totalScoreOfUser = userScoreInfo?.totalScore;
   const isNeedMoreScore = totalScoreOfUser < basedMemberInfoByRank?.totalScore;
-  const pointValue = basedMemberInfoByRank
-    ? Math.abs(basedMemberInfoByRank.totalScore - totalScoreOfUser).toLocaleString()
-    : '0';
+
+  const pointDifferanceValue = basedMemberInfoByRank
+    ? Math.abs(basedMemberInfoByRank.totalScore - totalScoreOfUser)
+    : NaN;
 
   return (
     <HStack
@@ -46,7 +47,10 @@ const SummarizeImpaktUserInfo: React.FC = () => {
       {!basedMemberInfoByRank || !userScoreInfo ? (
         <Spinner />
       ) : (
-        <MemberDashboardSummarizePoint isNeedMore={isNeedMoreScore} pointValue={pointValue} />
+        <MemberDashboardSummarizePoint
+          isNeedMore={isNeedMoreScore}
+          pointValue={pointDifferanceValue}
+        />
       )}
     </HStack>
   );

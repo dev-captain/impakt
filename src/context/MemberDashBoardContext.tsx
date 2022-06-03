@@ -35,7 +35,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
 
   const getCertainMemberById = useCallback((arr: any[], memberId?: number) => {
     const member = arr.find(({ userId }) => userId === memberId);
-    if (!member) return { rank: 'UNK', totalScore: 0 };
+    if (!member) return { rank: undefined, totalScore: undefined };
 
     return member;
   }, []);
