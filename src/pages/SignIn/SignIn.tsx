@@ -169,7 +169,7 @@ const SignIn = () => {
               <Text textStyle="regular2" pos="relative">
                 {t(keys.signIn.firstTime)}
                 <Box
-                  onClick={() => navigate('/register/1')}
+                  onClick={() => navigate('/register')}
                   mx="5px"
                   cursor="pointer"
                   textColor={accentRedtextColor}
