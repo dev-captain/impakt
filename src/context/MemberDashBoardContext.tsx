@@ -94,7 +94,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const fetchBasedRankMemberInfo = useCallback(async () => {
-    const rank = 200;
+    const rank = 2500;
 
     try {
       const leaderBoardByRankRes = await leaderBoardAxiosInstance.get(
@@ -104,6 +104,8 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
       if (leaderBoardByRankRes.data && leaderBoardByRankRes.data.length > 0) {
         setBasedMemberInfoByRank(leaderBoardByRankRes.data[0]);
       }
+
+      setBasedMemberInfoByRank({ totalScore: 0 });
 
       return;
     } catch (e) {
