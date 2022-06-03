@@ -50,7 +50,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
 
   const getFiveRanksAboveAndFiveRanksBelowByRank = useCallback(
     (arr: any[], certainRank?: number) => {
-      if (!certainRank) {
+      if (!certainRank || certainRank <= 10) {
         const topTenExceptTopThree = arr.filter(({ rank }) => {
           return rank > 3 && rank < 11;
         });
