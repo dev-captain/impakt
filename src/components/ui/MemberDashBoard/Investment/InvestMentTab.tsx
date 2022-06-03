@@ -72,25 +72,37 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
         w="full"
       >
         <TabPanels w="full" id="panels">
-          {phaseItems.map(({ content, title, description }) => {
-            return content.map(({ p1, p2 }) => (
-              <TabPanel position="relative" padding="0 !important" key={`${title}-panel`}>
-                <AnimationInWhenVisible animationType="fade">
-                  <VStack rowGap="30px" w="full">
-                    <Box id="headline" display="flex" alignItems="center" w="100%">
-                      <Box position="relative" alignItems="center" display="flex">
-                        <PhaseHeadlineText>{`${title}: ${description}`}</PhaseHeadlineText>
-                      </Box>
-                    </Box>
-                    <PhaseDescriptionText>{p1}</PhaseDescriptionText>
-
-                    {activeTabIndex === 0 && <ActiveMembersCard activeMembersValue={8032} />}
-                    <PhaseDescriptionText>{p2}</PhaseDescriptionText>
-                  </VStack>
-                </AnimationInWhenVisible>
-              </TabPanel>
-            ));
-          })}
+          <TabPanel position="relative" padding="0 !important">
+            <AnimationInWhenVisible animationType="fade">
+              <VStack rowGap="32px" w="full">
+                <Box id="headline" display="flex" alignItems="center" w="100%">
+                  <Box position="relative" alignItems="center" display="flex">
+                    <PhaseHeadlineText>Phase 1: Token Price Challenge</PhaseHeadlineText>
+                  </Box>
+                </Box>
+                <PhaseDescriptionText>
+                  <b>As a community, together we&apos;ll decide the price we pay for each token</b>{' '}
+                  . Through teamwork, we will drive the token price down the more we share and
+                  recruit members ahead of our IDO. In other words, the entire community will be
+                  able to purchase more for less. Impakt will have a maximum limited supply of 100B
+                  tokens.
+                </PhaseDescriptionText>
+                {activeTabIndex === 0 && <ActiveMembersCard activeMembersValue={8013} />}
+                <PhaseDescriptionText>
+                  <b>Who knows how low the final price will be?</b>
+                  Token price starts at $0.01 USD and the final price will be determined by the
+                  number of active members on Impakt. A member is deemed active in this phase, by
+                  doing at least one daily, weekly or targeted challenge every week.
+                </PhaseDescriptionText>
+                <PhaseDescriptionText>
+                  <b>
+                    So grab your friends, get fit and have fun together! It&apos;ll be great for
+                    everyone!
+                  </b>
+                </PhaseDescriptionText>
+              </VStack>
+            </AnimationInWhenVisible>
+          </TabPanel>
         </TabPanels>
         {/* {activeTabIndex === 0 && <CoundDownTimerInvestMent />} */}
       </HStack>
@@ -101,32 +113,14 @@ const phaseItems = [
   {
     title: 'Phase 1',
     description: 'Token Price Challenge',
-    content: [
-      {
-        p1: 'The community decides token price through a collective effort. The goal for you as a community is to recruit as many active members as possible.',
-        p2: 'The more active members, the lower the price for the community presale. Token price will start at $ 0.01 USD. At the end of the challenge, the token price will be determined by the goals reached - the more active members, the lower the price. The challenge will run for 6 weeks. ',
-      },
-    ],
   },
   {
     title: 'Phase 2',
     description: 'Community Presale',
-    content: [
-      {
-        p1: 'When phase two starts, you, as a member of the Impakt community, will be able to buy allocation with the GODL you earned. You can then invest up to the amount of your allocation in our virtual token $vIO.',
-        p2: 'At the beginning of this phase, token price will start at the price that was achieved in phase 1. It will then linearly increase until it hits the price at which we will IDO in the next phase. So essentially, the sooner you invest in the presale, the more tokens you will get for your money.',
-      },
-    ],
   },
   {
     title: 'Phase 3',
     description: 'Token Launch',
-    content: [
-      {
-        p1: 'Phase 3 starts with our IDO. Once our token $IO is launched, your $vIO translate 1:1 to $IO.',
-        p2: 'Your tokens will be locked up for 3 months from IDO and after that linearly vest over a 6 month period. You will see the tokens being unlocked in real time on this dashboard and will be able to withdraw the unlocked amount to your wallet at any time.',
-      },
-    ],
   },
 ];
 

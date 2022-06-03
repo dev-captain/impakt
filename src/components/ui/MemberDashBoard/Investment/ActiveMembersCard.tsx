@@ -28,6 +28,7 @@ const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersVal
         flexDir="column"
         justifyContent="center"
         alignItems="center"
+        mt="20px"
         id="active-members-value-box"
         w="138px"
         h="98px"
