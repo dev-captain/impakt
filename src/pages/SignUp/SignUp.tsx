@@ -68,7 +68,7 @@ const SignUp = () => {
   });
 
   React.useEffect(() => {
-    if (user) navigate('/');
+    if (user) navigate('/login');
   }, [user]);
 
   useEffect(() => {
@@ -121,7 +121,7 @@ const SignUp = () => {
 
     try {
       await signUp(payload);
-      navigate('/login');
+      navigate('/download');
     } catch (e) {
       console.error(e);
     }
@@ -192,7 +192,7 @@ const SignUp = () => {
           >
             <Flex justifyContent="space-between" w="full">
               <TextField
-                name="username"
+                name="memberName"
                 zIndex="999"
                 isOutlined
                 fontSize="14px"
