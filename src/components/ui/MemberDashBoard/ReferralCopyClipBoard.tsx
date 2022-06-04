@@ -1,5 +1,8 @@
 import { Box, useToast, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
+
 import CopyClipBoardIcon from '../../icons/CopyClipBoardIcon';
 
 const ReferralCopyClipboard: React.FC<{
@@ -7,6 +10,7 @@ const ReferralCopyClipboard: React.FC<{
   isBadge?: boolean;
   animate?: boolean;
 }> = ({ userId, isBadge, animate }) => {
+  const { t } = useTranslation().i18n;
   const toast = useToast();
   const [isCopied, setIsCopied] = React.useState(false);
   const referralLink = `impakt.com/register/${userId}`;
@@ -30,7 +34,7 @@ const ReferralCopyClipboard: React.FC<{
   return (
     <>
       <Box>
-        {!isBadge && <Text textStyle="semiBold16">Your referral link:</Text>}
+        {!isBadge && <Text textStyle="semiBold16">{t(keys.memberDashboard.yourReferralLink)}</Text>}
         <Text textStyle={isBadge ? 'bold4' : 'bold4'}>{referralLink}</Text>
       </Box>
       <Box

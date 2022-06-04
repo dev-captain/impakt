@@ -114,4 +114,13 @@ export default {
     message: 'Perhaps the link has expired or something went wrong. Please try again.',
     loading: 'loading',
   },
+  memberDashboard: {
+    referrals: {
+      headline: 'Referrals',
+      subHeadline: 'Refer friends and earn GODL',
+      description:
+        'For each member who joins through your referral link and completes at least 5 daily,weekly or targeted challenges with Impakt, you receive +1000 GODL and they receive +5000 GODL.',
+    },
+    yourReferralLink: `Your referral link:`,
+  },
 };

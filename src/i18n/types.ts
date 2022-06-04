@@ -15,6 +15,7 @@ const password = 'password';
 const verification = 'verification';
 const signUp = 'signUp';
 const signIn = 'signIn';
+const memberDashboard = 'memberDashboard';
 
 const TranslationKeys = {
   common: {
@@ -131,6 +132,14 @@ const TranslationKeys = {
     something: `${verification}.something`,
     wrong: `${verification}.wrong`,
     message: `${verification}.message`,
+  },
+  memberDashboard: {
+    referrals: {
+      headline: `${memberDashboard}.referrals.headline`,
+      subHeadline: `${memberDashboard}.referrals.subHeadline`,
+      description: `${memberDashboard}.referrals.description`,
+    },
+    yourReferralLink: `${memberDashboard}.yourReferralLink`,
   },
 };
 
