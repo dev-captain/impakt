@@ -122,5 +122,14 @@ export default {
         'For each member who joins through your referral link and completes at least 5 daily,weekly or targeted challenges with Impakt, you receive +1000 GODL and they receive +5000 GODL.',
     },
     yourReferralLink: `Your referral link:`,
+    whitelist: {
+      headline: 'Whitelist Challenge',
+      subHeadline: 'Top 2500 members on the member whitelist leaderboard will get whitelisted.',
+      description: 'Your total score & rank on the leaderboard is determined by summing up:',
+      description2: 'It pays to workout with your friends!',
+      item1: 'All your workout scores',
+      item2: "5% of your referred friends' workout scores",
+      item3: "2% of your referred friends' referrals' workout scores",
+    },
   },
 };

@@ -140,6 +140,15 @@ const TranslationKeys = {
       description: `${memberDashboard}.referrals.description`,
     },
     yourReferralLink: `${memberDashboard}.yourReferralLink`,
+    whitelist: {
+      headline: `${memberDashboard}.whitelist.headline`,
+      subHeadline: `${memberDashboard}.whitelist.subHeadline`,
+      description: `${memberDashboard}.whitelist.description`,
+      description2: `${memberDashboard}.whitelist.description2`,
+      item1: `${memberDashboard}.whitelist.item1`,
+      item2: `${memberDashboard}.whitelist.item2`,
+      item3: `${memberDashboard}.whitelist.item3`,
+    },
   },
 };
 
