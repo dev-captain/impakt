@@ -55,7 +55,7 @@ const MemberWhitelistLeaderBoard: React.FC = () => {
           <Box px="2em" w="100%" id="member-whitelist-table">
             <MemberWhiteListLeaderBoardTable
               currentUserRank={certainMember?.rank}
-              isShowTableHead
+              showTableHead
               data={topThree}
             />
           </Box>

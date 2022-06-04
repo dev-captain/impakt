@@ -3,13 +3,13 @@ import { TableContainer, Table, Tr, Tbody, Td, Thead, Th, useMediaQuery } from '
 
 interface MemberWhiteListLeaderBoardTablePropsI {
   data: any[];
-  isShowTableHead?: boolean;
+  showTableHead?: boolean;
   currentUserRank: number;
 }
 
 const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTablePropsI> = ({
   data,
-  isShowTableHead,
+  showTableHead,
   currentUserRank,
 }) => {
   const [isLessThan1200] = useMediaQuery('(max-width: 1200px)');
@@ -43,7 +43,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
         }}
         variant="unstyled"
       >
-        {isShowTableHead && (
+        {showTableHead && (
           <Thead backgroundColor="#121D2D">
             <Tr
               css={{
