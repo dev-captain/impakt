@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { VStack, Text, Box, Link } from '@chakra-ui/react';
-import ReferralCopyClipBoard from '../ReferralCopyClipBoard';
+import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 
 interface MemberDashBoardSummarizeRankPropsI {
   nameOfUser?: string;
@@ -80,7 +80,7 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
           </Text>
         </Box>
         <Box display="flex">
-          <ReferralCopyClipBoard isBadge userId={userId} />
+          <ReferralCopyClipboard isBadge userId={userId} />
         </Box>
       </Box>
     </VStack>

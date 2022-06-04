@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { VStack, Box, Text } from '@chakra-ui/react';
 import { useUserContext } from '../../../../context/UserContext';
-import ReferralCopyClipBoard from '../ReferralCopyClipBoard';
+import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 
 const Referrals: React.FC = () => {
   const { user } = useUserContext();
@@ -36,7 +36,7 @@ const Referrals: React.FC = () => {
         mt="0 !important"
         id="whitelist-challange-description-box-3"
       >
-        <ReferralCopyClipBoard isAnimate userId={user?.id} />
+        <ReferralCopyClipboard isAnimate userId={user?.id} />
       </Box>
     </VStack>
   );

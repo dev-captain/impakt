@@ -2,7 +2,7 @@ import { Box, useToast, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import CopyClipBoardIcon from '../../icons/CopyClipBoardIcon';
 
-const ReferralCopyClipBoard: React.FC<{
+const ReferralCopyClipboard: React.FC<{
   userId?: number;
   isBadge?: boolean;
   isAnimate?: boolean;
@@ -43,4 +43,4 @@ const ReferralCopyClipBoard: React.FC<{
     </>
   );
 };
-export default ReferralCopyClipBoard;
+export default ReferralCopyClipboard;
