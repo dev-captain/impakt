@@ -5,7 +5,7 @@ import CountdownTimer from './CountDownTimerItem';
 import useCountdown from '../../../../hooks/useCountdown';
 import PhaseHeadlineText from './PhaseHeadlineText';
 
-const CountDownTimerInvestment: React.FC = () => {
+const CountdownTimerInvestment: React.FC = () => {
   const { days, hours, minutes, seconds } = useCountdown(new Date('7/20/2022'));
 
   return (
@@ -36,4 +36,4 @@ const CountDownTimerInvestment: React.FC = () => {
   );
 };
 
-export default CountDownTimerInvestment;
+export default CountdownTimerInvestment;

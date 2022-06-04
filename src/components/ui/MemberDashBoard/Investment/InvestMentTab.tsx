@@ -136,7 +136,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
             </AnimationInWhenVisible>
           </TabPanel>
         </TabPanels>
-        {/* {activeTabIndex === 0 && <CoundDownTimerInvestMent />} */}
+        {/* {activeTabIndex === 0 && <CountdownTimerInvestMent />} */}
       </HStack>
     </Tabs>
   );
