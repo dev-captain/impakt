@@ -3,7 +3,7 @@ import * as React from 'react';
 import MemberDashboardCard from '../MemberDashBoardCard';
 import MemberDashboardHeadlineText from '../MemberDashBoardHeadlineText';
 import Referrals from './Referrals';
-import WhiteListChallange from './WhiteListChallange';
+import WhitelistChallange from './WhiteListChallange';
 
 interface PropsI {}
 const ReferralsAndWhiteListChallange: React.FC<PropsI> = () => {
@@ -31,7 +31,7 @@ const ReferralsAndWhiteListChallange: React.FC<PropsI> = () => {
         >
           <Box w={{ base: '100%', lg: '50%' }}>
             <MemberDashboardCard>
-              <WhiteListChallange />
+              <WhitelistChallange />
             </MemberDashboardCard>
           </Box>
           <Box w={{ base: '100%', lg: '50%' }}>

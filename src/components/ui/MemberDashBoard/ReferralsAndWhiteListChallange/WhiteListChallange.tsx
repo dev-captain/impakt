@@ -1,7 +1,7 @@
 import { VStack, Box, Text, UnorderedList, ListItem } from '@chakra-ui/react';
 import * as React from 'react';
 
-const WhiteListChallange: React.FC = () => {
+const WhitelistChallenge: React.FC = () => {
   return (
     <VStack
       w="100%"
@@ -37,4 +37,4 @@ const WhiteListChallange: React.FC = () => {
     </VStack>
   );
 };
-export default WhiteListChallange;
+export default WhitelistChallenge;
