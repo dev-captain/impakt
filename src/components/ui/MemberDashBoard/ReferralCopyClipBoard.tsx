@@ -5,14 +5,14 @@ import CopyClipBoardIcon from '../../icons/CopyClipBoardIcon';
 const ReferralCopyClipboard: React.FC<{
   userId?: number;
   isBadge?: boolean;
-  isAnimate?: boolean;
-}> = ({ userId, isBadge, isAnimate }) => {
+  animate?: boolean;
+}> = ({ userId, isBadge, animate }) => {
   const toast = useToast();
   const [isCopied, setIsCopied] = React.useState(false);
   const referralLink = `impakt.com/register/${userId}`;
   const copyClipBoardReferralLink = () => {
     navigator.clipboard.writeText(`https://${referralLink}`);
-    if (isAnimate) {
+    if (animate) {
       setIsCopied(true);
       setTimeout(() => {
         setIsCopied(false);

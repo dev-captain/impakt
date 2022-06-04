@@ -36,7 +36,7 @@ const Referrals: React.FC = () => {
         mt="0 !important"
         id="whitelist-challange-description-box-3"
       >
-        <ReferralCopyClipboard isAnimate userId={user?.id} />
+        <ReferralCopyClipboard animate userId={user?.id} />
       </Box>
     </VStack>
   );
