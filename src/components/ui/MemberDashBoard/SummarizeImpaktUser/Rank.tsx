@@ -48,18 +48,15 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
           {rankValue ? (
             <Text textStyle="light7">#{rankValue}</Text>
           ) : (
-            <>
-              <Text mt="5px" fontWeight={400} textStyle="semibold3">
-                <i>You are not ranked yet.</i>{' '}
-              </Text>
-              <Text textStyle="semibold3">
-                <Link textStyle="semibold3" href="/download">
-                  <i>
-                    <b>Download our app now.</b>
-                  </i>
-                </Link>
-              </Text>
-            </>
+            <Text mt="5px" fontWeight={400} textStyle="semibold3">
+              <i>
+                You are not ranked yet.
+                <Link fontWeight={700} textStyle="semibold3" href="/download">
+                  Download our app now
+                </Link>{' '}
+                and do a daily, weekly or targeted challenge to get ranked.
+              </i>
+            </Text>
           )}
         </Box>
       </Box>
