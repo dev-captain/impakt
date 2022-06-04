@@ -27,12 +27,12 @@ const TokenPriceDown: React.FC = () => {
         flexDir={{ base: 'column', lg: 'row' }}
         rowGap="20px"
       >
-        {tokenPriceDownItems.map(({ numberOfMemberLabel, priceValue }) => (
+        {tokenPriceDownItems.map(({ numberOfMembersLabel, priceValue }) => (
           <TokenPriceDownItem
             key={`${priceValue}-price-down-item`}
-            isAchieved={numberOfMemberLabel <= activeNumberOfMember}
-            numberOfMemberLabel={
-              numberOfMemberLabel === 0 ? '#active members' : numberOfMemberLabel.toLocaleString()
+            isAchieved={numberOfMembersLabel <= activeNumberOfMember}
+            numberOfMembersLabel={
+              numberOfMembersLabel === 0 ? '#active members' : numberOfMembersLabel.toLocaleString()
             }
             priceValue={priceValue}
           />
@@ -50,11 +50,11 @@ const TokenPriceDown: React.FC = () => {
 };
 
 const tokenPriceDownItems = [
-  { numberOfMemberLabel: 0, priceValue: '0.01$' },
-  { numberOfMemberLabel: 5000, priceValue: '0.009$' },
-  { numberOfMemberLabel: 10000, priceValue: '0.008$' },
-  { numberOfMemberLabel: 15000, priceValue: '0.007$' },
-  { numberOfMemberLabel: 20000, priceValue: '0.006$' },
+  { numberOfMembersLabel: 0, priceValue: '0.01$' },
+  { numberOfMembersLabel: 5000, priceValue: '0.009$' },
+  { numberOfMembersLabel: 10000, priceValue: '0.008$' },
+  { numberOfMembersLabel: 15000, priceValue: '0.007$' },
+  { numberOfMembersLabel: 20000, priceValue: '0.006$' },
 ];
 
 export default TokenPriceDown;

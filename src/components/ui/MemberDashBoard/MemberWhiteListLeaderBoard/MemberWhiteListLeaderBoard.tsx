@@ -10,20 +10,20 @@ const MemberWhiteListLeaderBoard: React.FC = () => {
   const {
     getTopThreeByRank,
     getFiveRanksAboveAndFiveRanksBelowByRank,
-    getCertainMemberById,
-    memberDashBoarCertainUserData,
-    fetchCertainUserLeaderBoardById,
+    getMemberById,
+    memberWhitelistLeaderboardMember,
+    fetchUserLeaderboardById,
   } = useMemberDashBoardContext();
 
   React.useEffect(() => {
     if (!user) return;
-    fetchCertainUserLeaderBoardById({ userId: user.id });
+    fetchUserLeaderboardById({ userId: user.id });
   }, []);
 
-  const topThree = getTopThreeByRank(memberDashBoarCertainUserData);
-  const certainMember = getCertainMemberById(memberDashBoarCertainUserData, user?.id);
+  const topThree = getTopThreeByRank(memberWhitelistLeaderboardMember);
+  const certainMember = getMemberById(memberWhitelistLeaderboardMember, user?.id);
   const fiveRanksAboveAndFiveRanksBelow = getFiveRanksAboveAndFiveRanksBelowByRank(
-    memberDashBoarCertainUserData,
+    memberWhitelistLeaderboardMember,
     certainMember?.rank,
   );
 

@@ -4,12 +4,12 @@ import { VStack, Box, Text } from '@chakra-ui/react';
 
 interface TokenPriceDownPropsI {
   priceValue: string;
-  numberOfMemberLabel: string;
+  numberOfMembersLabel: string;
   isAchieved: boolean;
 }
 
 const TokenPriceDownItem: React.FC<TokenPriceDownPropsI> = ({
-  numberOfMemberLabel,
+  numberOfMembersLabel,
   priceValue,
   isAchieved,
 }) => {
@@ -17,7 +17,7 @@ const TokenPriceDownItem: React.FC<TokenPriceDownPropsI> = ({
     <VStack rowGap={{ base: '0', lg: '30px' }} margin="0 !important" position="relative">
       <TokenPriceDownItemCircle isAchieved={isAchieved} priceValue={priceValue} />
       <Text fontSize="22px" fontWeight="700" color="#fff" lineHeight="29.59px">
-        {numberOfMemberLabel}
+        {numberOfMembersLabel}
       </Text>
     </VStack>
   );

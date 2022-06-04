@@ -2,15 +2,21 @@ import React, { createContext, useCallback, useContext } from 'react';
 import leaderBoardAxiosInstance from '../lib/axios/leaderBoard';
 
 interface MemberDashBoardContextI {
-  fetchLeaderBoard: ({ take, skip }: { take: string; skip: string }) => Promise<void>;
-  fetchCertainUserLeaderBoardById: ({ userId }: { userId: number }) => Promise<void>;
-  memberDashBoardData: any[];
-  memberDashBoarCertainUserData: any[];
+  fetchMemberWhitelistLeaderboard: ({
+    take,
+    skip,
+  }: {
+    take: string;
+    skip: string;
+  }) => Promise<void>;
+  fetchUserLeaderboardById: ({ userId }: { userId: number }) => Promise<void>;
+  memberWhitelistLeaderboard: any[];
+  memberWhitelistLeaderboardMember: any[];
   getTopThreeByRank: (arr: any[]) => any[];
   getFiveRanksAboveAndFiveRanksBelowByRank: (arr: any[], certainRank?: number) => any[];
-  getCertainMemberById: (arr: any[], memberId?: number) => any;
+  getMemberById: (arr: any[], memberId?: number) => any;
   fetchBasedRankMemberInfo: () => Promise<void>;
-  basedMemberInfoByRank: any;
+  memberWhitelistLeaderboardBasedMember: any;
 }
 
 const MemberDashBoardContext = createContext<MemberDashBoardContextI | null>(null);
@@ -27,13 +33,14 @@ export function useMemberDashBoardContext() {
 }
 
 export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
-  const [memberDashBoardData, setMemberDashBoardData] = React.useState<any[]>([]);
-  const [basedMemberInfoByRank, setBasedMemberInfoByRank] = React.useState<any>(null);
-  const [memberDashBoarCertainUserData, setMemberDashBoarCertainUserData] = React.useState<any[]>(
-    [],
-  );
+  const [memberWhitelistLeaderboard, setMemberWhitelistLeaderboard] = React.useState<any[]>([]);
+  const [memberWhitelistLeaderboardBasedMember, setMemberWhitelistLeaderboardBasedMember] =
+    React.useState<any>(null);
+  const [memberWhitelistLeaderboardMember, setMemberWhitelistLeaderboardMember] = React.useState<
+    any[]
+  >([]);
 
-  const getCertainMemberById = useCallback((arr: any[], memberId?: number) => {
+  const getMemberById = useCallback((arr: any[], memberId?: number) => {
     const member = arr.find(({ userId }) => userId === memberId);
     if (!member) return { rank: undefined, totalScore: undefined };
 
@@ -67,24 +74,27 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
     return fiveRanksAboveAndFiveRanksBelow;
   }, []);
 
-  const fetchLeaderBoard = useCallback(async ({ take, skip }: { take: string; skip: string }) => {
-    try {
-      const leaderBoardRes = await leaderBoardAxiosInstance.get(
-        `/leaderboards/user-leaderboards?take=${take}&skip=${skip}`,
-      );
-      setMemberDashBoardData([...leaderBoardRes.data]);
-    } catch (e: any) {
-      console.log(e);
-    }
-  }, []);
+  const fetchMemberWhitelistLeaderboard = useCallback(
+    async ({ take, skip }: { take: string; skip: string }) => {
+      try {
+        const leaderBoardRes = await leaderBoardAxiosInstance.get(
+          `/leaderboards/user-leaderboards?take=${take}&skip=${skip}`,
+        );
+        setMemberWhitelistLeaderboard([...leaderBoardRes.data]);
+      } catch (e: any) {
+        console.log(e);
+      }
+    },
+    [],
+  );
 
-  const fetchCertainUserLeaderBoardById = useCallback(async ({ userId }: { userId: number }) => {
+  const fetchUserLeaderboardById = useCallback(async ({ userId }: { userId: number }) => {
     try {
       const leaderBoardResById = await leaderBoardAxiosInstance.get(
         `/leaderboards/user-leaderboards/users/${userId}`,
       );
 
-      setMemberDashBoarCertainUserData([...leaderBoardResById.data]);
+      setMemberWhitelistLeaderboardMember([...leaderBoardResById.data]);
     } catch (e: any) {
       console.log(e);
     }
@@ -99,10 +109,9 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
       );
 
       if (leaderBoardByRankRes.data && leaderBoardByRankRes.data.length > 0) {
-        setBasedMemberInfoByRank(leaderBoardByRankRes.data[0]);
+        setMemberWhitelistLeaderboardBasedMember(leaderBoardByRankRes.data[0]);
       }
-
-      setBasedMemberInfoByRank({ totalScore: 0 });
+      setMemberWhitelistLeaderboardBasedMember({ totalScore: 0 });
 
       return;
     } catch (e) {
@@ -114,15 +123,15 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
     <MemberDashBoardContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        fetchLeaderBoard,
-        fetchCertainUserLeaderBoardById,
-        memberDashBoardData,
-        memberDashBoarCertainUserData,
+        fetchMemberWhitelistLeaderboard,
+        fetchUserLeaderboardById,
         getTopThreeByRank,
         getFiveRanksAboveAndFiveRanksBelowByRank,
-        getCertainMemberById,
+        getMemberById,
         fetchBasedRankMemberInfo,
-        basedMemberInfoByRank,
+        memberWhitelistLeaderboard,
+        memberWhitelistLeaderboardBasedMember,
+        memberWhitelistLeaderboardMember,
       }}
     >
       {children}

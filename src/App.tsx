@@ -19,7 +19,6 @@ import {
 import MemberDashBoard from './pages/MemberDashBoard';
 import SignIn from './pages/SignIn/SignIn';
 import Authentication from './middlewares/Authentication';
-// import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -48,7 +47,7 @@ const App = () => {
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
       <Route path="/register/:id" element={<SignUp />} />
-      <Route path="/login" element={<SignIn />} />
+      <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
 
       <Route

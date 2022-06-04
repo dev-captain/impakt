@@ -11,21 +11,21 @@ const SummarizeImpaktUserInfo: React.FC = () => {
   const { user } = useUserContext();
   const {
     fetchBasedRankMemberInfo,
-    basedMemberInfoByRank,
-    memberDashBoarCertainUserData,
-    getCertainMemberById,
+    memberWhitelistLeaderboardBasedMember,
+    memberWhitelistLeaderboardMember,
+    getMemberById,
   } = useMemberDashBoardContext();
 
   React.useEffect(() => {
     fetchBasedRankMemberInfo();
   }, []);
 
-  const userScoreInfo = getCertainMemberById(memberDashBoarCertainUserData, user?.id);
+  const userScoreInfo = getMemberById(memberWhitelistLeaderboardMember, user?.id);
   const totalScoreOfUser = userScoreInfo?.totalScore;
-  const isNeedMoreScore = totalScoreOfUser < basedMemberInfoByRank?.totalScore;
+  const isNeedMoreScore = totalScoreOfUser < memberWhitelistLeaderboardBasedMember?.totalScore;
 
-  const pointDifferanceValue = basedMemberInfoByRank
-    ? Math.abs(basedMemberInfoByRank.totalScore - totalScoreOfUser)
+  const pointDifferanceValue = memberWhitelistLeaderboardBasedMember
+    ? Math.abs(memberWhitelistLeaderboardBasedMember.totalScore - totalScoreOfUser)
     : NaN;
 
   return (
@@ -44,7 +44,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
         rankValue={userScoreInfo?.rank}
         userId={user?.id}
       />
-      {!basedMemberInfoByRank || !userScoreInfo ? (
+      {!memberWhitelistLeaderboardBasedMember || !userScoreInfo ? (
         <Spinner />
       ) : (
         <MemberDashboardSummarizePoint
