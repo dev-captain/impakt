@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
 import leaderBoardAxiosInstance from '../lib/axios/leaderBoard';
+import statsChannel from '../lib/pusher/init';
 import { MemberI } from './types/MemberDashBoardTypes';
 
 interface MemberDashboardContextI {
@@ -9,6 +10,7 @@ interface MemberDashboardContextI {
   whitelistLeaderboardTopThree: MemberI[];
   whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen: MemberI[];
   whitelistLeaderBoardIsLoading: boolean;
+  activeMembers: number;
 }
 
 const MemberDashboardContext = createContext<MemberDashboardContextI | null>(null);
@@ -37,6 +39,8 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
     setWhitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
   ] = React.useState<MemberI[]>([]);
+
+  const [activeMembers] = React.useState(0);
 
   const [whitelistLeaderBoardIsLoading, setWhitelistLeaderBoardIsLoading] = React.useState(false);
 
@@ -152,6 +156,16 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     fetchWhitelistLeaderboardBasedRankTotalScore();
   }, []);
 
+  useEffect(() => {
+    statsChannel.bind('message', (data: any) => {
+      console.log(data);
+    });
+
+    return () => {
+      statsChannel.unbind('message');
+    };
+  }, []);
+
   return (
     <MemberDashboardContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -162,6 +176,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
         whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
         whitelistLeaderboardTopThree,
         whitelistLeaderBoardIsLoading,
+        activeMembers,
       }}
     >
       {children}
