@@ -9,7 +9,7 @@ interface MemberDashboardContextI {
     take: string;
     skip: string;
   }) => Promise<void>;
-  fetchUserLeaderboardById: ({ userId }: { userId: number }) => Promise<void>;
+  fetchMemberLeaderboardById: ({ userId }: { userId: number }) => Promise<void>;
   memberWhitelistLeaderboard: any[];
   memberWhitelistLeaderboardMember: any[];
   getTopThreeByRank: (arr: any[]) => any[];
@@ -88,7 +88,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     [],
   );
 
-  const fetchUserLeaderboardById = useCallback(async ({ userId }: { userId: number }) => {
+  const fetchMemberLeaderboardById = useCallback(async ({ userId }: { userId: number }) => {
     try {
       const leaderBoardResById = await leaderBoardAxiosInstance.get(
         `/leaderboards/user-leaderboards/users/${userId}`,
@@ -124,7 +124,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         fetchMemberWhitelistLeaderboard,
-        fetchUserLeaderboardById,
+        fetchMemberLeaderboardById,
         getTopThreeByRank,
         getFiveRanksAboveAndFiveRanksBelowByRank,
         getMemberById,
