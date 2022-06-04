@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Divider, VStack } from '@chakra-ui/react';
 import HeroLayout from '../../components/layouts/HeroLayout';
 import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeImpaktUser/SummarizeImpaktUser';
-import MemberWhiteListLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
+import MemberWhitelistLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
 import Investment from '../../components/ui/MemberDashBoard/Investment/Investment';
 import ReferralsAndWhiteListChallange from '../../components/ui/MemberDashBoard/ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';
 import { MemberDashboardContextProvider } from '../../context/MemberDashBoardContext';
@@ -38,7 +38,7 @@ const MemberDashBoard: React.FC = () => {
           </VStack>
 
           <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
-            <MemberWhiteListLeaderBoard />
+            <MemberWhitelistLeaderBoard />
           </VStack>
         </VStack>
       </MemberDashboardContextProvider>

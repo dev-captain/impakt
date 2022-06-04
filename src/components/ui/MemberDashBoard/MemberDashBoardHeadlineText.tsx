@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, Box } from '@chakra-ui/react';
 
-const MemberDashBoardHeadlineText: React.FC = ({ children }) => {
+const MemberDashboardHeadlineText: React.FC = ({ children }) => {
   return (
     <Box w="100%" textAlign="center">
       <Text textStyle="bold7">{children}</Text>
@@ -9,4 +9,4 @@ const MemberDashBoardHeadlineText: React.FC = ({ children }) => {
   );
 };
 
-export default MemberDashBoardHeadlineText;
+export default MemberDashboardHeadlineText;

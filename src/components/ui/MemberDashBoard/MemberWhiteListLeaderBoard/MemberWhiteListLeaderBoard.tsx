@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { VStack, Text, Box, Spinner } from '@chakra-ui/react';
-import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
+import MemberDashboardHeadlineText from '../MemberDashBoardHeadlineText';
 import MemberWhiteListLeaderBoardTable from './MemberWhiteListLeaderBoardTable';
 import { useUserContext } from '../../../../context/UserContext';
 import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 
-const MemberWhiteListLeaderBoard: React.FC = () => {
+const MemberWhitelistLeaderBoard: React.FC = () => {
   const { user } = useUserContext();
   const {
     getTopThreeByRank,
@@ -44,12 +44,12 @@ const MemberWhiteListLeaderBoard: React.FC = () => {
           textAlign={{ base: 'center', lg: 'left' }}
           id="member-whitelist-headline"
         >
-          <MemberDashBoardHeadlineText>
+          <MemberDashboardHeadlineText>
             <Text fontWeight="300 !important" display="inline-block">
               Member Whitelist
             </Text>{' '}
             Leaderboard
-          </MemberDashBoardHeadlineText>
+          </MemberDashboardHeadlineText>
         </Box>
         <VStack w="full" rowGap="48px">
           <Box px="2em" w="100%" id="member-whitelist-table">
@@ -71,4 +71,4 @@ const MemberWhiteListLeaderBoard: React.FC = () => {
   );
 };
 
-export default MemberWhiteListLeaderBoard;
+export default MemberWhitelistLeaderBoard;

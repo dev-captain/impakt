@@ -1,6 +1,6 @@
 import { VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
+import MemberDashboardHeadlineText from '../MemberDashBoardHeadlineText';
 // import TokenPriceDown from '../TokenPriceDown/TokenPriceDown';
 import InvestMentTab from './InvestMentTab';
 
@@ -19,7 +19,7 @@ const Investment: React.FC = () => {
       rowGap="48px"
       px={{ base: '15px', lg: '2em' }}
     >
-      <MemberDashBoardHeadlineText>Be an early investor</MemberDashBoardHeadlineText>
+      <MemberDashboardHeadlineText>Be an early investor</MemberDashboardHeadlineText>
       <VStack w="100%" id="investment-tabs">
         <InvestMentTab
           activeTabIndex={activeTabIndex}

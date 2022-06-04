@@ -1,7 +1,7 @@
 import { VStack, HStack, Box } from '@chakra-ui/react';
 import * as React from 'react';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
+import MemberDashboardHeadlineText from '../MemberDashBoardHeadlineText';
 import Referrals from './Referrals';
 import WhiteListChallange from './WhiteListChallange';
 
@@ -21,7 +21,7 @@ const ReferralsAndWhiteListChallange: React.FC<PropsI> = () => {
         px={{ base: '10px', lg: '2em' }}
         w="100%"
       >
-        <MemberDashBoardHeadlineText>Whitelist & Referrals</MemberDashBoardHeadlineText>
+        <MemberDashboardHeadlineText>Whitelist & Referrals</MemberDashboardHeadlineText>
         <HStack
           flexDir={{ base: 'column', lg: 'row' }}
           justifyContent="space-between"
