@@ -8,7 +8,7 @@ import Investment from '../../components/ui/MemberDashBoard/Investment/Investmen
 import ReferralsAndWhiteListChallange from '../../components/ui/MemberDashBoard/ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';
 import { MemberDashboardContextProvider } from '../../context/MemberDashBoardContext';
 
-const MemberDashBoard: React.FC = () => {
+const MemberDashboard: React.FC = () => {
   return (
     <HeroLayout
       showNavbar
@@ -46,4 +46,4 @@ const MemberDashBoard: React.FC = () => {
   );
 };
 
-export default MemberDashBoard;
+export default MemberDashboard;

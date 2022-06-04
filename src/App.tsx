@@ -16,7 +16,7 @@ import {
   Verify,
   SignUp,
 } from 'pages';
-import MemberDashBoard from './pages/MemberDashBoard';
+import MemberDashboard from './pages/MemberDashBoard';
 import SignIn from './pages/SignIn/SignIn';
 import Authentication from './middlewares/Authentication';
 
@@ -54,7 +54,7 @@ const App = () => {
         path="/dashboard"
         element={
           <Authentication>
-            <MemberDashBoard />
+            <MemberDashboard />
           </Authentication>
         }
       />
