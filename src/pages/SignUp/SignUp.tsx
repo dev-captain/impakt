@@ -6,6 +6,7 @@ import {
   Flex,
   Box,
   Link,
+  useToast,
 } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -17,6 +18,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
@@ -49,6 +51,7 @@ const signUpFormYupScheme = yup.object().shape({
 
 const SignUp = () => {
   const { user, signUp } = useUserContext();
+  const toast = useToast();
   const navigate = useNavigate();
   const { id } = useParams();
   const { t } = useTranslation().i18n;
@@ -103,6 +106,7 @@ const SignUp = () => {
     register('memberName');
     register('fourDigit');
     register('email');
+    generateRandomFourDigitNumberString();
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -121,9 +125,37 @@ const SignUp = () => {
 
     try {
       await signUp(payload);
+      toast({
+        title: 'Success',
+        description: 'Your account created successfully.You can now login in the Impakt app.',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
       navigate('/download');
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      const error = err as AxiosError;
+      const { status } = error.response ?? {};
+      if (status && status >= 400 && status < 500) {
+        toast({
+          title: 'Error',
+          description:
+            error.response?.data.message && error.response.data.message.length > 1
+              ? error.response.data.message
+              : 'Something went wrong.Please contact support.',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Something went wrong. Please contact support.',
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      }
     }
 
     return setIsCreateAccountButtonLoading(false);
@@ -315,6 +347,21 @@ const SignUp = () => {
                 isLoading={isCreateAccountButtonLoading}
               />
             </VStack>
+
+            <Flex mt="8px !important" justifyContent="center">
+              <Text textStyle="regular2" pos="relative">
+                Already have an account?
+                <Box
+                  onClick={() => navigate('/login')}
+                  mx="5px"
+                  cursor="pointer"
+                  textColor={accentRedtextColor}
+                  as="span"
+                >
+                  Login
+                </Box>
+              </Text>
+            </Flex>
           </VStack>
 
           <Gradients />
