@@ -4,13 +4,13 @@ import { TableContainer, Table, Tr, Tbody, Td, Thead, Th, useMediaQuery } from '
 interface MemberWhiteListLeaderBoardTablePropsI {
   data: any[];
   showTableHead?: boolean;
-  currentUserRank: number;
+  memberRank: number;
 }
 
 const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTablePropsI> = ({
   data,
   showTableHead,
-  currentUserRank,
+  memberRank,
 }) => {
   const [isLessThan1200] = useMediaQuery('(max-width: 1200px)');
 
@@ -107,7 +107,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               <Td
                 fontWeight="500"
                 color={
-                  rank === currentUserRank
+                  rank === memberRank
                     ? 'rgba(254, 196, 23, 1) !important'
                     : 'rgba(255, 255, 255, 0.7) !important'
                 }
@@ -121,7 +121,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
                 fontWeight="500"
                 w={isLessThan1200 ? '177px !important' : '296px !important'}
                 color={
-                  rank === currentUserRank
+                  rank === memberRank
                     ? 'rgba(254, 196, 23, 1) !important'
                     : 'rgba(255, 255, 255, 0.7) !important'
                 }
@@ -135,7 +135,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
                 <Td
                   w="177px !important"
                   color={
-                    rank === currentUserRank
+                    rank === memberRank
                       ? 'rgba(254, 196, 23, 1) !important'
                       : 'rgba(255, 255, 255, 0.5) !important'
                   }
@@ -150,7 +150,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               {!isLessThan1200 && (
                 <Td
                   color={
-                    rank === currentUserRank
+                    rank === memberRank
                       ? 'rgba(254, 196, 23, 1) !important'
                       : 'rgba(255, 255, 255, 0.5) !important'
                   }
@@ -166,7 +166,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               {!isLessThan1200 && (
                 <Td
                   color={
-                    rank === currentUserRank
+                    rank === memberRank
                       ? 'rgba(254, 196, 23, 1) !important'
                       : 'rgba(255, 255, 255, 0.5) !important'
                   }
@@ -179,7 +179,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
               )}
               <Td
                 color={
-                  rank === currentUserRank
+                  rank === memberRank
                     ? 'rgba(254, 196, 23, 1) !important'
                     : 'rgba(240, 65, 83, 1) !important'
                 }

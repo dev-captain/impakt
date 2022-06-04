@@ -1,25 +1,18 @@
-import React, { createContext, useCallback, useContext } from 'react';
+import React, { createContext, useCallback, useContext, useEffect } from 'react';
 import leaderBoardAxiosInstance from '../lib/axios/leaderBoard';
+import { MemberI } from './types/MemberDashBoardTypes';
 
 interface MemberDashboardContextI {
-  fetchMemberWhitelistLeaderboard: ({
-    take,
-    skip,
-  }: {
-    take: string;
-    skip: string;
-  }) => Promise<void>;
-  fetchMemberLeaderboardById: ({ userId }: { userId: number }) => Promise<void>;
-  memberWhitelistLeaderboard: any[];
-  memberWhitelistLeaderboardMember: any[];
-  getTopThreeByRank: (arr: any[]) => any[];
-  getFiveRanksAboveAndFiveRanksBelowByRank: (arr: any[], certainRank?: number) => any[];
-  getMemberById: (arr: any[], memberId?: number) => any;
-  fetchBasedRankMemberInfo: () => Promise<void>;
-  memberWhitelistLeaderboardBasedMember: any;
+  fetchWhitelistLeaderboardMemberById: (userId: MemberI['userId']) => Promise<void | boolean>;
+  whitelistLeaderboardBasedMemberTotalScore: MemberI['totalScore'];
+  whitelistLeaderboardMember: MemberI | null;
+  whitelistLeaderboardTopThree: MemberI[];
+  whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen: MemberI[];
+  whitelistLeaderBoardIsLoading: boolean;
 }
 
 const MemberDashboardContext = createContext<MemberDashboardContextI | null>(null);
+const basedRank = 2500;
 
 export function useMemberDashBoardContext() {
   const context = useContext(MemberDashboardContext);
@@ -33,105 +26,142 @@ export function useMemberDashBoardContext() {
 }
 
 export const MemberDashboardContextProvider: React.FC = ({ children }) => {
-  const [memberWhitelistLeaderboard, setMemberWhitelistLeaderboard] = React.useState<any[]>([]);
-  const [memberWhitelistLeaderboardBasedMember, setMemberWhitelistLeaderboardBasedMember] =
-    React.useState<any>(null);
-  const [memberWhitelistLeaderboardMember, setMemberWhitelistLeaderboardMember] = React.useState<
-    any[]
-  >([]);
+  const [whitelistLeaderboardBasedMemberTotalScore, setWhitelistLeaderboardBasedMemberTotalScore] =
+    React.useState<MemberI['totalScore']>(0);
+  const [whitelistLeaderboardMember, setWhitelistLeaderboardMember] =
+    React.useState<MemberI | null>(null);
+  const [whitelistLeaderboardTopThree, setWhitelistLeaderboardTopThree] = React.useState<MemberI[]>(
+    [],
+  );
+  const [
+    whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
+    setWhitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
+  ] = React.useState<MemberI[]>([]);
 
-  const getMemberById = useCallback((arr: any[], memberId?: number) => {
-    const member = arr.find(({ userId }) => userId === memberId);
-    if (!member) return { rank: undefined, totalScore: undefined };
+  const [whitelistLeaderBoardIsLoading, setWhitelistLeaderBoardIsLoading] = React.useState(false);
 
-    return member;
-  }, []);
+  const getMemberById = useCallback(
+    (whiteListLeaderBoardMembersArr: MemberI[], memberId?: MemberI['userId']) => {
+      const member = whiteListLeaderBoardMembersArr.find(
+        (memberObj) => memberObj.userId === memberId,
+      );
+      if (!member) return null;
 
-  const getTopThreeByRank = useCallback((arr: any[]) => {
-    const topThree = arr.filter(({ rank }) => {
+      return member;
+    },
+    [],
+  );
+
+  const getTopThreeByRank = useCallback((whiteListLeaderBoardMembersArr: MemberI[]) => {
+    const topThree = whiteListLeaderBoardMembersArr.filter(({ rank }) => {
       return rank === 1 || rank === 2 || rank === 3;
     });
 
     return topThree;
   }, []);
 
-  const getFiveRanksAboveAndFiveRanksBelowByRank = useCallback((arr: any[], certainRank?: any) => {
-    if (!certainRank || certainRank <= 10 || certainRank === 'UNK') {
-      const topTenExceptTopThree = arr.filter(({ rank }) => {
-        return rank > 3 && rank < 11;
-      });
+  const getFiveRanksAboveAndFiveRanksBelowOrTopTenByRank = useCallback(
+    (whiteListLeaderBoardMembersArr: MemberI[], certainRank?: any) => {
+      if (!certainRank || certainRank <= 10 || certainRank === 'UNK') {
+        const topTenExceptTopThree = whiteListLeaderBoardMembersArr.filter(({ rank }) => {
+          return rank > 3 && rank < 11;
+        });
 
-      return topTenExceptTopThree;
-    }
-
-    const less5 = certainRank - 4;
-    const plus5 = certainRank + 4;
-    const fiveRanksAboveAndFiveRanksBelow = arr.filter(({ rank }) => {
-      return less5 < rank && rank < plus5;
-    });
-    if (fiveRanksAboveAndFiveRanksBelow.length === 0) return arr;
-
-    return fiveRanksAboveAndFiveRanksBelow;
-  }, []);
-
-  const fetchMemberWhitelistLeaderboard = useCallback(
-    async ({ take, skip }: { take: string; skip: string }) => {
-      try {
-        const leaderBoardRes = await leaderBoardAxiosInstance.get(
-          `/leaderboards/user-leaderboards?take=${take}&skip=${skip}`,
-        );
-        setMemberWhitelistLeaderboard([...leaderBoardRes.data]);
-      } catch (e: any) {
-        console.log(e);
+        return topTenExceptTopThree;
       }
+
+      const less5 = certainRank - 4;
+      const plus5 = certainRank + 4;
+      const fiveRanksAboveAndFiveRanksBelow = whiteListLeaderBoardMembersArr.filter(({ rank }) => {
+        return less5 < rank && rank < plus5;
+      });
+      if (fiveRanksAboveAndFiveRanksBelow.length === 0) return whiteListLeaderBoardMembersArr;
+
+      return fiveRanksAboveAndFiveRanksBelow;
     },
     [],
   );
 
-  const fetchMemberLeaderboardById = useCallback(async ({ userId }: { userId: number }) => {
+  // TODO for pagination in future
+  // const fetchMemberWhitelistLeaderboard = useCallback(
+  //   async ({ take, skip }: MemberWhitelistLeaderboardFetchInput) => {
+  //     try {
+  //       const leaderBoardRes = await leaderBoardAxiosInstance.get(
+  //         `/leaderboards/user-leaderboards?take=${take}&skip=${skip}`,
+  //       );
+
+  //       return setMemberWhitelistLeaderboard([...leaderBoardRes.data]);
+  //     } catch (e: any) {
+  //       return null;
+  //     }
+  //   },
+  //   [],
+  // );
+
+  const fetchWhitelistLeaderboardMemberById = useCallback(async (memberId: MemberI['userId']) => {
+    setWhitelistLeaderBoardIsLoading(true);
     try {
       const leaderBoardResById = await leaderBoardAxiosInstance.get(
-        `/leaderboards/user-leaderboards/users/${userId}`,
+        `/leaderboards/user-leaderboards/users/${memberId}`,
       );
 
-      setMemberWhitelistLeaderboardMember([...leaderBoardResById.data]);
+      const leaderBoardData = leaderBoardResById.data as MemberI[];
+      const member = getMemberById(leaderBoardData, memberId);
+      const topThree = getTopThreeByRank(leaderBoardData);
+      const memberFiveRanksAboveAndFiveRanksBelowOrTopTen =
+        getFiveRanksAboveAndFiveRanksBelowOrTopTenByRank(leaderBoardData, member?.rank);
+
+      setWhitelistLeaderboardMember(member);
+      setWhitelistLeaderboardTopThree(topThree);
+      setWhitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen(
+        memberFiveRanksAboveAndFiveRanksBelowOrTopTen,
+      );
+
+      return true;
     } catch (e: any) {
-      console.log(e);
+      return false;
+    } finally {
+      setWhitelistLeaderBoardIsLoading(false);
     }
   }, []);
 
-  const fetchBasedRankMemberInfo = useCallback(async () => {
-    const rank = 2500;
-
+  const fetchMemberWhitelistLeaderboardByRank = useCallback(async (rank: MemberI['rank']) => {
     try {
       const leaderBoardByRankRes = await leaderBoardAxiosInstance.get(
         `/leaderboards/user-leaderboards/ranks/${rank}`,
       );
 
-      if (leaderBoardByRankRes.data && leaderBoardByRankRes.data.length > 0) {
-        setMemberWhitelistLeaderboardBasedMember(leaderBoardByRankRes.data[0]);
-      }
-      setMemberWhitelistLeaderboardBasedMember({ totalScore: 0 });
-
-      return;
+      return leaderBoardByRankRes.data as MemberI[] | [];
     } catch (e) {
-      console.log(e);
+      return null;
     }
+  }, []);
+
+  const fetchWhitelistLeaderboardBasedRankTotalScore = useCallback(async () => {
+    try {
+      const memberDataByRank2500 = await fetchMemberWhitelistLeaderboardByRank(basedRank);
+      if (memberDataByRank2500 && memberDataByRank2500.length > 0) {
+        setWhitelistLeaderboardBasedMemberTotalScore(memberDataByRank2500[0].totalScore);
+      }
+    } catch (e) {
+      setWhitelistLeaderboardBasedMemberTotalScore(0);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchWhitelistLeaderboardBasedRankTotalScore();
   }, []);
 
   return (
     <MemberDashboardContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        fetchMemberWhitelistLeaderboard,
-        fetchMemberLeaderboardById,
-        getTopThreeByRank,
-        getFiveRanksAboveAndFiveRanksBelowByRank,
-        getMemberById,
-        fetchBasedRankMemberInfo,
-        memberWhitelistLeaderboard,
-        memberWhitelistLeaderboardBasedMember,
-        memberWhitelistLeaderboardMember,
+        fetchWhitelistLeaderboardMemberById,
+        whitelistLeaderboardBasedMemberTotalScore,
+        whitelistLeaderboardMember,
+        whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
+        whitelistLeaderboardTopThree,
+        whitelistLeaderBoardIsLoading,
       }}
     >
       {children}

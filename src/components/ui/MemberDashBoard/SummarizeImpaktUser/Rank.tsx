@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { VStack, Text, Box, Link } from '@chakra-ui/react';
+import { VStack, Text, Box, Link, Skeleton } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
+import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 
 interface MemberDashBoardSummarizeRankPropsI {
   nameOfUser?: string;
@@ -16,6 +17,8 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
   userId,
   // statusOfUser,
 }) => {
+  const { whitelistLeaderBoardIsLoading } = useMemberDashBoardContext();
+
   return (
     <VStack h="100%" justifyContent="space-between" rowGap="20px" alignItems="flex-start">
       <Box w="100%" textAlign={{ base: 'center', lg: 'left' }} maxW={{ base: '100%', lg: '400px' }}>
@@ -25,41 +28,48 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
         </Text> */}
       </Box>
 
-      <Box
-        display="flex"
-        flexDir="column"
-        alignSelf={{ base: 'center', lg: 'auto' }}
-        id="current-rank-value-box"
+      <Skeleton
+        borderRadius={whitelistLeaderBoardIsLoading ? '12px' : 'unset'}
+        w={whitelistLeaderBoardIsLoading ? '30%' : 'unset'}
+        h={whitelistLeaderBoardIsLoading ? '60px' : 'unset'}
+        isLoaded={!whitelistLeaderBoardIsLoading}
       >
         <Box
-          w="126px"
-          h="30px"
-          borderRadius="12px"
-          justifyContent="center"
-          alignItems="center"
           display="flex"
-          bgColor="#B22221"
-          id="current-rank-label-box"
+          flexDir="column"
+          alignSelf={{ base: 'center', lg: 'auto' }}
+          id="current-rank-value-box"
         >
-          <Text textStyle="semiBold3">Current Rank</Text>
-        </Box>
+          <Box
+            w="126px"
+            h="30px"
+            borderRadius="12px"
+            justifyContent="center"
+            alignItems="center"
+            display="flex"
+            bgColor="#B22221"
+            id="current-rank-label-box"
+          >
+            <Text textStyle="semiBold3">Current Rank</Text>
+          </Box>
 
-        <Box id="rank-box">
-          {rankValue ? (
-            <Text textStyle="light7">#{rankValue}</Text>
-          ) : (
-            <Text mt="5px" fontWeight={400} textStyle="semibold3">
-              <i>
-                You are not ranked yet.
-                <Link fontWeight={700} textStyle="semibold3" href="/download">
-                  Download our app now
-                </Link>{' '}
-                and do a daily, weekly or targeted challenge to get ranked.
-              </i>
-            </Text>
-          )}
+          <Box id="rank-box">
+            {rankValue ? (
+              <Text textStyle="light7">#{rankValue}</Text>
+            ) : (
+              <Text mt="5px" fontWeight={400} textStyle="semibold3">
+                <i>
+                  You are not ranked yet.
+                  <Link fontWeight={700} textStyle="semibold3" href="/download">
+                    Download our app now
+                  </Link>{' '}
+                  and do a daily, weekly or targeted challenge to get ranked.
+                </i>
+              </Text>
+            )}
+          </Box>
         </Box>
-      </Box>
+      </Skeleton>
 
       <Box flexDir="column" rowGap="0.3em" alignItems="start" display="flex" w="100%">
         <Box

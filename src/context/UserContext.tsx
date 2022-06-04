@@ -1,7 +1,7 @@
 import { useToast } from '@chakra-ui/react';
 import axios, { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { signInInput, signUpInput, User } from './types';
+import { signInInput, signUpInput, User } from './types/UserTypes';
 
 const apiBaseUrl = process.env.REACT_APP_API;
 const signInUrl = `${apiBaseUrl}/iam/auth/signin`;

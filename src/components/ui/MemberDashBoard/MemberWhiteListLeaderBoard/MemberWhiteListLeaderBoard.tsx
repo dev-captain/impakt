@@ -8,30 +8,21 @@ import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardCo
 const MemberWhitelistLeaderBoard: React.FC = () => {
   const { user } = useUserContext();
   const {
-    getTopThreeByRank,
-    getFiveRanksAboveAndFiveRanksBelowByRank,
-    getMemberById,
-    memberWhitelistLeaderboardMember,
-    fetchMemberLeaderboardById,
+    fetchWhitelistLeaderboardMemberById,
+    whitelistLeaderboardMember,
+    whitelistLeaderboardTopThree,
+    whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
   } = useMemberDashBoardContext();
 
   React.useEffect(() => {
     if (!user) return;
-    fetchMemberLeaderboardById({ userId: user.id });
+    fetchWhitelistLeaderboardMemberById(user.id);
   }, []);
 
-  const topThree = getTopThreeByRank(memberWhitelistLeaderboardMember);
-  const certainMember = getMemberById(memberWhitelistLeaderboardMember, user?.id);
-  const fiveRanksAboveAndFiveRanksBelow = getFiveRanksAboveAndFiveRanksBelowByRank(
-    memberWhitelistLeaderboardMember,
-    certainMember?.rank,
-  );
-
   if (
-    !user ||
-    topThree.length === 0 ||
-    !certainMember ||
-    fiveRanksAboveAndFiveRanksBelow.length === 0
+    !user &&
+    (whitelistLeaderboardMember ||
+      whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen)
   )
     return <Spinner color="#fff" thickness="5px" size="xl" />;
 
@@ -54,15 +45,15 @@ const MemberWhitelistLeaderBoard: React.FC = () => {
         <VStack w="full" rowGap="48px">
           <Box px="2em" w="100%" id="member-whitelist-table">
             <MemberWhiteListLeaderBoardTable
-              currentUserRank={certainMember?.rank}
+              memberRank={whitelistLeaderboardMember?.rank ?? 0}
               showTableHead
-              data={topThree}
+              data={whitelistLeaderboardTopThree}
             />
           </Box>
           <Box px="2em" w="100%" id="member-whitelist-table">
             <MemberWhiteListLeaderBoardTable
-              currentUserRank={certainMember?.rank}
-              data={fiveRanksAboveAndFiveRanksBelow}
+              memberRank={whitelistLeaderboardMember?.rank ?? 0}
+              data={whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen}
             />
           </Box>
         </VStack>

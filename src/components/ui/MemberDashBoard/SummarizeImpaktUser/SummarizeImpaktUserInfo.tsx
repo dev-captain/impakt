@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HStack, Spinner } from '@chakra-ui/react';
+import { HStack, Skeleton } from '@chakra-ui/react';
 
 import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 import { useUserContext } from '../../../../context/UserContext';
@@ -10,22 +10,18 @@ import MemberDashBoardSummarizeRank from './Rank';
 const SummarizeImpaktUserInfo: React.FC = () => {
   const { user } = useUserContext();
   const {
-    fetchBasedRankMemberInfo,
-    memberWhitelistLeaderboardBasedMember,
-    memberWhitelistLeaderboardMember,
-    getMemberById,
+    whitelistLeaderboardBasedMemberTotalScore,
+    whitelistLeaderboardMember,
+    whitelistLeaderBoardIsLoading,
   } = useMemberDashBoardContext();
 
-  React.useEffect(() => {
-    fetchBasedRankMemberInfo();
-  }, []);
-
-  const userScoreInfo = getMemberById(memberWhitelistLeaderboardMember, user?.id);
-  const totalScoreOfUser = userScoreInfo?.totalScore;
-  const isNeedMoreScore = totalScoreOfUser < memberWhitelistLeaderboardBasedMember?.totalScore;
-
-  const pointDifferanceValue = memberWhitelistLeaderboardBasedMember
-    ? Math.abs(memberWhitelistLeaderboardBasedMember.totalScore - totalScoreOfUser)
+  const member = whitelistLeaderboardMember;
+  const totalScoreOfUser = member?.totalScore;
+  const isNeedMoreScore = totalScoreOfUser
+    ? totalScoreOfUser < whitelistLeaderboardBasedMemberTotalScore
+    : true;
+  const pointDifferanceValue = totalScoreOfUser
+    ? Math.abs(whitelistLeaderboardBasedMemberTotalScore - totalScoreOfUser)
     : NaN;
 
   return (
@@ -41,17 +37,15 @@ const SummarizeImpaktUserInfo: React.FC = () => {
       <MemberDashBoardUserImage />
       <MemberDashBoardSummarizeRank
         nameOfUser={user?.firstName ?? user?.username}
-        rankValue={userScoreInfo?.rank}
+        rankValue={member?.rank.toLocaleString()}
         userId={user?.id}
       />
-      {!memberWhitelistLeaderboardBasedMember || !userScoreInfo ? (
-        <Spinner />
-      ) : (
+      <Skeleton isLoaded={!whitelistLeaderBoardIsLoading} borderRadius="8px">
         <MemberDashboardSummarizePoint
           isNeedMore={isNeedMoreScore}
           pointValue={pointDifferanceValue}
         />
-      )}
+      </Skeleton>
     </HStack>
   );
 };
