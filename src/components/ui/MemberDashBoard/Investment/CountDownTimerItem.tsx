@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Box, VStack, Text } from '@chakra-ui/react';
 
-interface CountDownTimerItemPropsI {
+interface CountdownTimerItemPropsI {
   value: string;
   label: string;
 }
 
-const CountDownTimerItem: React.FC<CountDownTimerItemPropsI> = ({ value, label }) => {
+const CountdownTimerItem: React.FC<CountdownTimerItemPropsI> = ({ value, label }) => {
   return (
     <VStack
       justifyContent="center"
@@ -30,4 +30,4 @@ const CountDownTimerItem: React.FC<CountDownTimerItemPropsI> = ({ value, label }
   );
 };
 
-export default CountDownTimerItem;
+export default CountdownTimerItem;
