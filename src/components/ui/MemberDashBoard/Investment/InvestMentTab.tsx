@@ -33,7 +33,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
           position="relative"
           w="full"
         >
-          {phaseItems.map(({ description, title, isShowCurrentPhaseLabel }) => (
+          {phaseItems.map(({ description, title, isCurrentPhase }) => (
             <Tab
               key={`tab-phrase-${title}`}
               flexDirection="column"
@@ -52,7 +52,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
             >
               <PhaseHeadlineText>{title}</PhaseHeadlineText>
               <PhaseDescriptionText isBold>{description}</PhaseDescriptionText>
-              {isShowCurrentPhaseLabel && (
+              {isCurrentPhase && (
                 <Box color="#fff">
                   <RedLabelTag value="Current Phase" />
                 </Box>
@@ -144,17 +144,17 @@ const phaseItems = [
   {
     title: 'Phase 1',
     description: 'Token Price Challenge',
-    isShowCurrentPhaseLabel: true,
+    isCurrentPhase: true,
   },
   {
     title: 'Phase 2',
     description: 'Community Private Presale',
-    isShowCurrentPhaseLabel: false,
+    isCurrentPhase: false,
   },
   {
     title: 'Phase 3',
     description: 'IDO Token Launch',
-    isShowCurrentPhaseLabel: false,
+    isCurrentPhase: false,
   },
 ];
 
