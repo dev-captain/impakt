@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { SVGProps } from 'react';
 
-const CopyClibBoardIcon = () => (
-  <svg width="25" height="28" viewBox="0 0 25 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+const CopyClipBoardIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg {...props} viewBox="0 0 25 28" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -21,4 +21,4 @@ const CopyClibBoardIcon = () => (
   </svg>
 );
 
-export default CopyClibBoardIcon;
+export default CopyClipBoardIcon;

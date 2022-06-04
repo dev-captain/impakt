@@ -1,6 +1,6 @@
 import { Box, useToast, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import CopyClibBoardIcon from '../../icons/CopyClibBoardIcon';
+import CopyClipBoardIcon from '../../icons/CopyClipBoardIcon';
 
 const ReferralCopyClipBoard: React.FC<{
   userId?: number;
@@ -38,7 +38,7 @@ const ReferralCopyClipBoard: React.FC<{
         onClick={copyClipBoardReferralLink}
         cursor="pointer"
       >
-        {isCopied ? null : <CopyClibBoardIcon />}
+        {isCopied ? null : <CopyClipBoardIcon width="25" height="28" />}
       </Box>
     </>
   );
