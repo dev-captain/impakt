@@ -5,15 +5,15 @@ import TokenPriceDownItem from './TokenPriceDownItem';
 import TokenPriceDownProgress from './TokenPriceDownProgress';
 
 const TokenPriceDown: React.FC = () => {
-  const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
-  const activeNumberOfMember = 15000;
+  const [isLessThan1020] = useMediaQuery('(max-width: 1020px)');
+  const activeNumberOfMembers = 15000;
   const calculationOfIndicatorPosition = () => {
-    const percentageOfSet = (100 * activeNumberOfMember) / 20000;
-    if (percentageOfSet === 25) return percentageOfSet + 3.5;
-    if (percentageOfSet === 50) return percentageOfSet + 2.25;
-    if (percentageOfSet === 75) return percentageOfSet + 1.1;
+    const indicatorPositionAsPercentage = (100 * activeNumberOfMembers) / 20000;
+    if (indicatorPositionAsPercentage === 25) return indicatorPositionAsPercentage + 3.5;
+    if (indicatorPositionAsPercentage === 50) return indicatorPositionAsPercentage + 2.25;
+    if (indicatorPositionAsPercentage === 75) return indicatorPositionAsPercentage + 1.1;
 
-    return percentageOfSet;
+    return indicatorPositionAsPercentage;
   };
 
   return (
@@ -30,7 +30,7 @@ const TokenPriceDown: React.FC = () => {
         {tokenPriceDownItems.map(({ numberOfMembersLabel, priceValue }) => (
           <TokenPriceDownItem
             key={`${priceValue}-price-down-item`}
-            isAchieved={numberOfMembersLabel <= activeNumberOfMember}
+            isAchieved={numberOfMembersLabel <= activeNumberOfMembers}
             numberOfMembersLabel={
               numberOfMembersLabel === 0 ? '#active members' : numberOfMembersLabel.toLocaleString()
             }
@@ -39,9 +39,9 @@ const TokenPriceDown: React.FC = () => {
         ))}
       </HStack>
 
-      {!isLessThan1040 && (
+      {!isLessThan1020 && (
         <TokenPriceDownProgress
-          numberOfActiveMembers={activeNumberOfMember.toLocaleString()}
+          numberOfActiveMembers={activeNumberOfMembers.toLocaleString()}
           value={calculationOfIndicatorPosition()}
         />
       )}
