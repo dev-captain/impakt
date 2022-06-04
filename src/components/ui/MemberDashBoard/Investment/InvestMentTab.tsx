@@ -6,7 +6,6 @@ import PhaseHeadlineText from './PhaseHeadlineText';
 import PhaseDescriptionText from './PhaseDescriptionText';
 import RedLabelTag from '../RedLabelTag';
 import ActiveMembersCard from './ActiveMembersCard';
-// import CoundDownTimerInvestMent from './CoundDownTimerInvestMent';
 
 interface InvestmentTabPropsI {
   handleTabIndexChanges: (index: number) => void;
