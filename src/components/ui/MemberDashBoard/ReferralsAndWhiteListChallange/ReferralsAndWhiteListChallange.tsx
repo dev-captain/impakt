@@ -1,6 +1,6 @@
 import { VStack, HStack, Box } from '@chakra-ui/react';
 import * as React from 'react';
-import MemberDashBoardCard from '../MemberDashBoardCard';
+import MemberDashboardCard from '../MemberDashBoardCard';
 import MemberDashBoardHeadlineText from '../MemberDashBoardHeadlineText';
 import Referrals from './Referrals';
 import WhiteListChallange from './WhiteListChallange';
@@ -30,14 +30,14 @@ const ReferralsAndWhiteListChallange: React.FC<PropsI> = () => {
           columnGap="32px"
         >
           <Box w={{ base: '100%', lg: '50%' }}>
-            <MemberDashBoardCard>
+            <MemberDashboardCard>
               <WhiteListChallange />
-            </MemberDashBoardCard>
+            </MemberDashboardCard>
           </Box>
           <Box w={{ base: '100%', lg: '50%' }}>
-            <MemberDashBoardCard>
+            <MemberDashboardCard>
               <Referrals />
-            </MemberDashBoardCard>
+            </MemberDashboardCard>
           </Box>
         </HStack>
       </VStack>

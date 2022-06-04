@@ -3,10 +3,10 @@ import * as React from 'react';
 import { VStack, useColorModeValue } from '@chakra-ui/react';
 import Gradients from '../home/RoadmapHero/Gradients';
 
-interface MemberDashBoardCardPropsI {
+interface MemberDashboardCardPropsI {
   isGradient?: boolean;
 }
-const MemberDashBoardCard: React.FC<MemberDashBoardCardPropsI> = ({ children, isGradient }) => {
+const MemberDashboardCard: React.FC<MemberDashboardCardPropsI> = ({ children, isGradient }) => {
   const bgColor = useColorModeValue('glass.800', 'glass.300');
 
   return (
@@ -25,4 +25,4 @@ const MemberDashBoardCard: React.FC<MemberDashBoardCardPropsI> = ({ children, is
   );
 };
 
-export default MemberDashBoardCard;
+export default MemberDashboardCard;
