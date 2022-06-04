@@ -12,6 +12,7 @@ const MemberWhitelistLeaderBoard: React.FC = () => {
     whitelistLeaderboardMember,
     whitelistLeaderboardTopThree,
     whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
+    whitelistLeaderBoardIsLoading,
   } = useMemberDashBoardContext();
 
   React.useEffect(() => {
@@ -19,11 +20,7 @@ const MemberWhitelistLeaderBoard: React.FC = () => {
     fetchWhitelistLeaderboardMemberById(user.id);
   }, []);
 
-  if (
-    !user &&
-    (whitelistLeaderboardMember ||
-      whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen)
-  )
+  if (!user || whitelistLeaderBoardIsLoading)
     return <Spinner color="#fff" thickness="5px" size="xl" />;
 
   return (
