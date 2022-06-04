@@ -59,7 +59,7 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
             ) : (
               <Text mt="5px" fontWeight={400} textStyle="semibold3">
                 <i>
-                  You are not ranked yet.
+                  You are not ranked yet.{' '}
                   <Link fontWeight={700} textStyle="semibold3" href="/download">
                     Download our app now
                   </Link>{' '}
