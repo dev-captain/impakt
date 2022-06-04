@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext } from 'react';
 import leaderBoardAxiosInstance from '../lib/axios/leaderBoard';
 
-interface MemberDashBoardContextI {
+interface MemberDashboardContextI {
   fetchMemberWhitelistLeaderboard: ({
     take,
     skip,
@@ -19,10 +19,10 @@ interface MemberDashBoardContextI {
   memberWhitelistLeaderboardBasedMember: any;
 }
 
-const MemberDashBoardContext = createContext<MemberDashBoardContextI | null>(null);
+const MemberDashboardContext = createContext<MemberDashboardContextI | null>(null);
 
 export function useMemberDashBoardContext() {
-  const context = useContext(MemberDashBoardContext);
+  const context = useContext(MemberDashboardContext);
   if (!context) {
     throw new Error(
       'use MemberDashBoardContext provider must be used within the MemberDashBoardContext.Provider',
@@ -32,7 +32,7 @@ export function useMemberDashBoardContext() {
   return context;
 }
 
-export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
+export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   const [memberWhitelistLeaderboard, setMemberWhitelistLeaderboard] = React.useState<any[]>([]);
   const [memberWhitelistLeaderboardBasedMember, setMemberWhitelistLeaderboardBasedMember] =
     React.useState<any>(null);
@@ -120,7 +120,7 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <MemberDashBoardContext.Provider
+    <MemberDashboardContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         fetchMemberWhitelistLeaderboard,
@@ -135,6 +135,6 @@ export const MemberDashBoardContextProvider: React.FC = ({ children }) => {
       }}
     >
       {children}
-    </MemberDashBoardContext.Provider>
+    </MemberDashboardContext.Provider>
   );
 };

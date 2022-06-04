@@ -6,7 +6,7 @@ import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeIm
 import MemberWhiteListLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
 import Investment from '../../components/ui/MemberDashBoard/Investment/Investment';
 import ReferralsAndWhiteListChallange from '../../components/ui/MemberDashBoard/ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';
-import { MemberDashBoardContextProvider } from '../../context/MemberDashBoardContext';
+import { MemberDashboardContextProvider } from '../../context/MemberDashBoardContext';
 
 const MemberDashBoard: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const MemberDashBoard: React.FC = () => {
       justify="flex-start"
       showFooter
     >
-      <MemberDashBoardContextProvider>
+      <MemberDashboardContextProvider>
         <VStack rowGap="74px" w="full">
           <VStack id="summarize-impakt-user-section" color="white" w="full">
             <SummarizeImpaktUser />
@@ -41,7 +41,7 @@ const MemberDashBoard: React.FC = () => {
             <MemberWhiteListLeaderBoard />
           </VStack>
         </VStack>
-      </MemberDashBoardContextProvider>
+      </MemberDashboardContextProvider>
     </HeroLayout>
   );
 };
