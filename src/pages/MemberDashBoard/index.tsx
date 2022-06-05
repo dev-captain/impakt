@@ -18,6 +18,7 @@ const MemberDashboard: React.FC = () => {
       align="flex-start"
       justify="flex-start"
       showFooter
+      showDarkOrLightModeOnNavbar={false}
     >
       <MemberDashboardContextProvider>
         <VStack rowGap="74px" w="full">
