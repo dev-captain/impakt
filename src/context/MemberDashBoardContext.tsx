@@ -180,7 +180,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     statsChannel.bind('RoutineSessionSuccess', (activeMemberStatsData: any) => {
       if (activeMemberStatsData?.activeMembers7Days) {
         if (!Number.isNaN(Number(activeMemberStatsData?.activeMembers7Days))) {
-          setActiveMembers((prevState) => prevState + activeMemberStatsData.activeMembers7Days);
+          setActiveMembers(activeMemberStatsData.activeMembers7Days);
         }
       }
     });
