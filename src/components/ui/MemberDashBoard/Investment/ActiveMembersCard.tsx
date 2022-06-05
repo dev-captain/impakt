@@ -7,19 +7,43 @@ import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardCo
 const ActiveMembersCard: React.FC = () => {
   const { activeMembers } = useMemberDashBoardContext();
 
-  const nextActiveMemberGoalInstancesIndex =
-    activeMembers === 20000
-      ? 4
-      : tokenPriceDownItems.findIndex(({ activeMember }) => activeMember > activeMembers);
+  const getCurrentTokenPrice = () => {
+    if (
+      !activeMemberGoals.includes(activeMembers) &&
+      tokenPriceDownItems[0].activeMember <= activeMembers &&
+      activeMembers < tokenPriceDownItems[tokenPriceDownItems.length - 1].activeMember
+    ) {
+      const getPreviousTokenPrices = tokenPriceDownItems.filter(
+        ({ activeMember }) => activeMembers > activeMember,
+      );
+      const theBiggerThatClosest = getPreviousTokenPrices[getPreviousTokenPrices.length - 1];
 
-  const nextActiveMemberGoalInstance = tokenPriceDownItems[nextActiveMemberGoalInstancesIndex];
-  const nextActiveMemberGoalNumber = nextActiveMemberGoalInstance.activeMember.toLocaleString();
-  const nextActiveMemberGoalPriceValue = nextActiveMemberGoalInstance.priceValue;
+      return theBiggerThatClosest.priceValue;
+    }
+
+    const currentToken = tokenPriceDownItems.find(
+      ({ activeMember }) => activeMember === activeMembers,
+    );
+
+    return currentToken?.priceValue ?? 'UNK';
+  };
+
+  const getNextActiveMemberGoalAndPrice = () => {
+    const getNextTokenPrices = tokenPriceDownItems.filter(
+      ({ activeMember }) => activeMembers < activeMember,
+    );
+    const nextBiggerThatClosest = getNextTokenPrices[0];
+
+    return nextBiggerThatClosest;
+  };
+
+  const nextActiveMemberGoalAndPrice = getNextActiveMemberGoalAndPrice();
+  const currentTokenPrice = getCurrentTokenPrice();
 
   return (
     <VStack
       w="470px"
-      h="256px"
+      h="297px"
       alignItems="center"
       justifyContent="center"
       bgColor="#1C2C40"
@@ -38,8 +62,8 @@ const ActiveMembersCard: React.FC = () => {
         alignItems="center"
         mt="20px"
         id="active-members-value-box"
-        w="138px"
-        h="98px"
+        w="163px"
+        h="167px"
         color="rgba(11, 23, 37, 1)"
         bgColor="rgba(254, 196, 23, 1)"
         border="1px solid #FEC417"
@@ -47,27 +71,27 @@ const ActiveMembersCard: React.FC = () => {
       >
         <Text textStyle="bold6">{activeMembers}</Text>
         <Text textStyle="regular2">Active members</Text>
+        <Text textStyle="bold6">{currentTokenPrice}</Text>
+        <Text textStyle="regular2">Current token price</Text>
       </Box>
-      <VStack id="active-members-description-box">
-        {activeMembers !== 20000 ? (
-          <>
+      {tokenPriceDownItems[0].activeMember <= activeMembers &&
+        activeMembers < tokenPriceDownItems[tokenPriceDownItems.length - 1].activeMember &&
+        activeMembers !== activeMemberGoals[activeMemberGoals.length - 1] && (
+          <VStack id="active-members-description-box">
             <Text fontWeight={400} textStyle="bold4">
-              At <b>{nextActiveMemberGoalNumber} active members</b>
+              At <b>{nextActiveMemberGoalAndPrice.activeMember} active members</b>
             </Text>
             <Text fontWeight={400} textStyle="bold4">
-              token price will be <b>reduced to {nextActiveMemberGoalPriceValue}</b>
+              token price will be <b>reduced to {nextActiveMemberGoalAndPrice.priceValue}</b>
             </Text>
-          </>
-        ) : (
-          <Text fontWeight={400} textStyle="bold4">
-            Token price is <b>{nextActiveMemberGoalPriceValue}</b>
-          </Text>
+          </VStack>
         )}
-      </VStack>
       <Gradients />
     </VStack>
   );
 };
+
+const activeMemberGoals = [0, 5000, 10000, 15000, 20000];
 
 const tokenPriceDownItems = [
   { activeMember: 0, priceValue: '0.01$' },
