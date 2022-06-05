@@ -2,16 +2,15 @@ import * as React from 'react';
 import { VStack, Box, Text } from '@chakra-ui/react';
 
 import Gradients from '../../home/RoadmapHero/Gradients';
+import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 
-interface ActiveMembersCardPropsI {
-  activeMembersValue: number;
-}
+const ActiveMembersCard: React.FC = () => {
+  const { activeMembers } = useMemberDashBoardContext();
 
-const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersValue }) => {
   const nextActiveMemberGoalInstancesIndex =
-    activeMembersValue === 20000
+    activeMembers === 20000
       ? 4
-      : tokenPriceDownItems.findIndex(({ activeMember }) => activeMember > activeMembersValue);
+      : tokenPriceDownItems.findIndex(({ activeMember }) => activeMember > activeMembers);
 
   const nextActiveMemberGoalInstance = tokenPriceDownItems[nextActiveMemberGoalInstancesIndex];
   const nextActiveMemberGoalNumber = nextActiveMemberGoalInstance.activeMember.toLocaleString();
@@ -46,11 +45,11 @@ const ActiveMembersCard: React.FC<ActiveMembersCardPropsI> = ({ activeMembersVal
         border="1px solid #FEC417"
         borderRadius="8px"
       >
-        <Text textStyle="bold6">{activeMembersValue}</Text>
+        <Text textStyle="bold6">{activeMembers}</Text>
         <Text textStyle="regular2">Active members</Text>
       </Box>
       <VStack id="active-members-description-box">
-        {activeMembersValue !== 20000 ? (
+        {activeMembers !== 20000 ? (
           <>
             <Text fontWeight={400} textStyle="bold4">
               At <b>{nextActiveMemberGoalNumber} active members</b>

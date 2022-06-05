@@ -10,6 +10,10 @@ export interface MemberI {
   totalScore: number;
 }
 
+export interface ActiveMembersI {
+  count: number;
+}
+
 // input types
 export type MemberWhitelistLeaderboardFetchInput = { take: string; skip: string };
 

@@ -80,7 +80,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                   able to purchase more for less. Impakt will have a maximum limited supply of 100B
                   tokens.
                 </PhaseDescriptionText>
-                {activeTabIndex === 0 && <ActiveMembersCard activeMembersValue={3050} />}
+                {activeTabIndex === 0 && <ActiveMembersCard />}
                 <PhaseDescriptionText>
                   <b>Who knows how low the final price will be?</b> Token price starts at $0.01 USD
                   and the final price will be determined by the number of active members on Impakt.

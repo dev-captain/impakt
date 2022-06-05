@@ -1,7 +1,8 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
-import leaderBoardAxiosInstance from '../lib/axios/leaderBoard';
+import activeMemberApiAxiosInstance from '../lib/axios/activeMemberApi';
+import apiAxiosInstance from '../lib/axios/api';
 import statsChannel from '../lib/pusher/init';
-import { MemberI } from './types/MemberDashBoardTypes';
+import { ActiveMembersI, MemberI } from './types/MemberDashBoardTypes';
 
 interface MemberDashboardContextI {
   fetchWhitelistLeaderboardMemberById: (userId: MemberI['userId']) => Promise<void | boolean>;
@@ -40,7 +41,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     setWhitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen,
   ] = React.useState<MemberI[]>([]);
 
-  const [activeMembers] = React.useState(0);
+  const [activeMembers, setActiveMembers] = React.useState(0);
 
   const [whitelistLeaderBoardIsLoading, setWhitelistLeaderBoardIsLoading] = React.useState(false);
 
@@ -105,7 +106,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   const fetchWhitelistLeaderboardMemberById = useCallback(async (memberId: MemberI['userId']) => {
     setWhitelistLeaderBoardIsLoading(true);
     try {
-      const leaderBoardResById = await leaderBoardAxiosInstance.get(
+      const leaderBoardResById = await apiAxiosInstance.get(
         `/leaderboards/user-leaderboards/users/${memberId}`,
       );
 
@@ -131,7 +132,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
 
   const fetchMemberWhitelistLeaderboardByRank = useCallback(async (rank: MemberI['rank']) => {
     try {
-      const leaderBoardByRankRes = await leaderBoardAxiosInstance.get(
+      const leaderBoardByRankRes = await apiAxiosInstance.get(
         `/leaderboards/user-leaderboards/ranks/${rank}`,
       );
 
@@ -152,17 +153,40 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const fetchActiveMemberByDay = useCallback(async (day: number) => {
+    try {
+      const activeMemberByDayRes = await activeMemberApiAxiosInstance.get(
+        `/users/activeMembers?days=${day}`,
+      );
+      if (activeMemberByDayRes.data) {
+        setActiveMembers((activeMemberByDayRes.data as ActiveMembersI).count as number);
+      }
+
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }, []);
+
   useEffect(() => {
     fetchWhitelistLeaderboardBasedRankTotalScore();
   }, []);
 
   useEffect(() => {
-    statsChannel.bind('message', (data: any) => {
-      console.log(data);
+    fetchActiveMemberByDay(7);
+  }, []);
+
+  useEffect(() => {
+    statsChannel.bind('RoutineSessionSuccess', (activeMemberStatsData: any) => {
+      if (activeMemberStatsData?.activeMembers7Days) {
+        if (!Number.isNaN(Number(activeMemberStatsData?.activeMembers7Days))) {
+          setActiveMembers((prevState) => prevState + activeMemberStatsData.activeMembers7Days);
+        }
+      }
     });
 
     return () => {
-      statsChannel.unbind('message');
+      statsChannel.unbind('RoutineSessionSuccess');
     };
   }, []);
 
