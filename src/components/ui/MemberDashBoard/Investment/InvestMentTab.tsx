@@ -38,7 +38,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
               key={`tab-phrase-${title}`}
               flexDirection="column"
               columnGap="5px"
-              height="117px"
+              height="170px"
               backgroundColor="transparent"
               color="#fff !important"
               borderRadius="14px"
@@ -47,11 +47,14 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
               border="1px solid #F5F6FF"
               padding="20 !important"
               _focus={{ outline: 0 }}
+              justifyContent={isCurrentPhase ? 'flex-end' : 'center'}
               _selected={{ color: '#000 !important', backgroundColor: '#FEC417' }}
               _hover={{ backgroundColor: '#778FAD', color: '#fff !important' }}
             >
-              <PhaseHeadlineText>{title}</PhaseHeadlineText>
-              <PhaseDescriptionText isBold>{description}</PhaseDescriptionText>
+              <Box mb={isCurrentPhase ? '12px' : '0'}>
+                <PhaseHeadlineText>{title}</PhaseHeadlineText>
+                <PhaseDescriptionText isBold>{description}</PhaseDescriptionText>
+              </Box>
               {isCurrentPhase && (
                 <Box color="#fff">
                   <RedLabelTag value="Current Phase" />
