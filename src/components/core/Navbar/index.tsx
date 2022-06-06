@@ -20,6 +20,7 @@ import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
+import SignInLinkItem from './SignInLinkItem';
 
 const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
@@ -181,6 +182,10 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                 )}
                 <Box display="flex">
                   <DropDownProfileMenu />
+                </Box>
+
+                <Box as="button">
+                  <SignInLinkItem />
                 </Box>
               </HStack>
             </HStack>

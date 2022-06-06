@@ -77,39 +77,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const signUp = useCallback(async (payload: signUpInput) => {
-    try {
-      await axios.post(signUpUrl, payload);
-      toast({
-        title: 'Success',
-        description: 'Your account created successfully.You can now login in the Impakt app.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
-        toast({
-          title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
-    }
+    await axios.post(signUpUrl, payload);
   }, []);
 
   const signOut = useCallback(async () => {
