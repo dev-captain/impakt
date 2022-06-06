@@ -118,7 +118,7 @@ const SignIn = () => {
             mt="56px"
             as="form"
             onSubmit={handleSubmit(handleSignInFormSubmit)}
-            spacing="24px"
+            spacing="22px"
             w="full"
             borderRadius={16}
           >
