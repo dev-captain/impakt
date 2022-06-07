@@ -77,11 +77,10 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
             <AnimationInWhenVisible animationType="fade">
               <VStack rowGap="32px" w="full">
                 <PhaseDescriptionText>
-                  <b>As a community, together we&apos;ll decide the price we pay for each token</b>{' '}
-                  . Through teamwork, we will drive the token price down the more we share and
-                  recruit members ahead of our IDO. In other words, the entire community will be
-                  able to purchase more for less. Impakt will have a maximum limited supply of 100B
-                  tokens.
+                  <b>As a community, together we&apos;ll decide the price we pay for each token</b>.
+                  Through teamwork, we will drive the token price down the more we share and recruit
+                  members ahead of our IDO. In other words, the entire community will be able to
+                  purchase more for less. Impakt will have a maximum limited supply of 100B tokens.
                 </PhaseDescriptionText>
                 {activeTabIndex === 0 && <ActiveMembersCard />}
                 <PhaseDescriptionText>
