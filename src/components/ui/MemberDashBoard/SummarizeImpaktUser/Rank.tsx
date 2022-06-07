@@ -1,23 +1,23 @@
 import * as React from 'react';
 
-import { VStack, Text, Box, Link, Skeleton } from '@chakra-ui/react';
+import { VStack, Text, Box } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
-import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
+// import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 
 interface MemberDashBoardSummarizeRankPropsI {
   nameOfUser?: string;
   // statusOfUser: 'Talent' | 'Beginner';
-  rankValue?: string;
+  // rankValue?: string;
   userId?: number;
 }
 
 const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI> = ({
   nameOfUser,
-  rankValue,
+  // rankValue,
   userId,
   // statusOfUser,
 }) => {
-  const { whitelistLeaderBoardIsLoading } = useMemberDashBoardContext();
+  // const { whitelistLeaderBoardIsLoading } = useMemberDashBoardContext();
 
   return (
     <VStack h="100%" justifyContent="space-between" rowGap="20px" alignItems="flex-start">
@@ -28,7 +28,7 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
         </Text> */}
       </Box>
 
-      <Skeleton
+      {/* <Skeleton
         borderRadius={whitelistLeaderBoardIsLoading ? '12px' : 'unset'}
         w={whitelistLeaderBoardIsLoading ? '30%' : 'unset'}
         h={whitelistLeaderBoardIsLoading ? '60px' : 'unset'}
@@ -69,7 +69,7 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
             )}
           </Box>
         </Box>
-      </Skeleton>
+      </Skeleton> */}
 
       <Box flexDir="column" rowGap="0.3em" alignItems="start" display="flex" w="100%">
         <Box

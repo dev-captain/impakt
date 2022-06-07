@@ -1,28 +1,28 @@
 import * as React from 'react';
-import { HStack, Skeleton } from '@chakra-ui/react';
+import { HStack } from '@chakra-ui/react';
 
-import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
-import { useUserContext } from '../../../../context/UserContext';
+// import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
+// import { useUserContext } from '../../../../context/UserContext';
 import MemberDashBoardUserImage from './MemberDashBoardUserImage';
-import MemberDashboardSummarizePoint from './Points';
-import MemberDashBoardSummarizeRank from './Rank';
+// import MemberDashboardSummarizePoint from './Points';
+// import MemberDashBoardSummarizeRank from './Rank';
 
 const SummarizeImpaktUserInfo: React.FC = () => {
-  const { user } = useUserContext();
-  const {
-    whitelistLeaderboardBasedMemberTotalScore,
-    whitelistLeaderboardMember,
-    whitelistLeaderBoardIsLoading,
-  } = useMemberDashBoardContext();
+  // const { user } = useUserContext();
+  // const {
+  //   whitelistLeaderboardBasedMemberTotalScore,
+  //   whitelistLeaderboardMember,
+  //   whitelistLeaderBoardIsLoading,
+  // } = useMemberDashBoardContext();
 
-  const member = whitelistLeaderboardMember;
-  const totalScoreOfUser = member?.totalScore;
-  const isNeedMoreScore = totalScoreOfUser
-    ? totalScoreOfUser < whitelistLeaderboardBasedMemberTotalScore
-    : true;
-  const pointDifferanceValue = totalScoreOfUser
-    ? Math.abs(whitelistLeaderboardBasedMemberTotalScore - totalScoreOfUser)
-    : NaN;
+  // const member = whitelistLeaderboardMember;
+  // const totalScoreOfUser = member?.totalScore;
+  // const isNeedMoreScore = totalScoreOfUser
+  //   ? totalScoreOfUser < whitelistLeaderboardBasedMemberTotalScore
+  //   : true;
+  // const pointDifferanceValue = totalScoreOfUser
+  //   ? Math.abs(whitelistLeaderboardBasedMemberTotalScore - totalScoreOfUser)
+  //   : NaN;
 
   return (
     <HStack
@@ -35,7 +35,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
       rowGap="2.5em"
     >
       <MemberDashBoardUserImage />
-      <MemberDashBoardSummarizeRank
+      {/* <MemberDashBoardSummarizeRank
         nameOfUser={user?.firstName ?? user?.username}
         rankValue={member?.rank.toLocaleString()}
         userId={user?.id}
@@ -45,7 +45,7 @@ const SummarizeImpaktUserInfo: React.FC = () => {
           isNeedMore={isNeedMoreScore}
           pointValue={pointDifferanceValue}
         />
-      </Skeleton>
+      </Skeleton> */}
     </HStack>
   );
 };
