@@ -12,7 +12,7 @@ import { API_BASE_URL, apiAxiosInstance } from '../axios/api';
 
 export const RefreshToken = async () => {
   await apiAxiosInstance
-    .post('iam/auth/refresh')
+    .post('api/v1/iam/auth/refresh')
     .then((res) => {
       console.log(res);
     })
@@ -47,6 +47,7 @@ export const configuration = createConfiguration({
               );
             })
             .catch(async (err) => {
+              console.log('error on client library', err.response);
               const error = JSON.parse(err.response.data);
               if (error.statusCode === 401) {
                 // await RefreshToken();
