@@ -79,7 +79,7 @@ const ActiveMembersCard: React.FC = () => {
         activeMembers !== activeMemberGoals[activeMemberGoals.length - 1] && (
           <VStack id="active-members-description-box">
             <Text fontWeight={400} textStyle="bold4">
-              At <b>{nextActiveMemberGoalAndPrice.activeMember} active members</b>
+              At <b>{nextActiveMemberGoalAndPrice.activeMember.toLocaleString()} active members</b>
             </Text>
             <Text fontWeight={400} textStyle="bold4">
               token price will be <b>reduced to {nextActiveMemberGoalAndPrice.priceValue}</b>
@@ -91,14 +91,14 @@ const ActiveMembersCard: React.FC = () => {
   );
 };
 
-const activeMemberGoals = [0, 5000, 10000, 15000, 20000];
+const activeMemberGoals = [0, 5000, 10000, 20000, 40000];
 
 const tokenPriceDownItems = [
   { activeMember: 0, priceValue: '0.01$' },
   { activeMember: 5000, priceValue: '0.009$' },
   { activeMember: 10000, priceValue: '0.008$' },
-  { activeMember: 15000, priceValue: '0.007$' },
-  { activeMember: 20000, priceValue: '0.006$' },
+  { activeMember: 20000, priceValue: '0.007$' },
+  { activeMember: 40000, priceValue: '0.006$' },
 ];
 
 export default ActiveMembersCard;
