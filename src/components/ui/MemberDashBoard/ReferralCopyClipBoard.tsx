@@ -35,7 +35,7 @@ const ReferralCopyClipboard: React.FC<{
     <>
       <Box>
         {!isBadge && <Text textStyle="semiBold16">{t(keys.memberDashboard.yourReferralLink)}</Text>}
-        <Text textStyle={isBadge ? 'bold4' : 'bold4'}>{referralLink}</Text>
+        <Text textStyle="bold4">{referralLink}</Text>
       </Box>
       <Box
         ml={isBadge ? '0.8em' : '0px !important'}
