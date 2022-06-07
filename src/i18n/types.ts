@@ -37,6 +37,9 @@ const TranslationKeys = {
     impaktFitness: `${navbar}.impaktFitness`,
     knowledgeBase: `${navbar}.knowledgeBase`,
     download: `${navbar}.download`,
+    dashboard: `${navbar}.dashboard`,
+    signOut: `${navbar}.signOut`,
+    signIn: `${navbar}.signIn`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,

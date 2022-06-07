@@ -18,6 +18,9 @@ export default {
     impaktFitness: 'Impakt Fitness',
     knowledgeBase: 'Knowledge Base',
     download: 'Download Platform',
+    dashboard: 'Dashboard',
+    signOut: 'Sign Out',
+    signIn: 'Sign in',
   },
   computerVision: {
     computerVision: 'Computer vision',
