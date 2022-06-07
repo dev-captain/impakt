@@ -1,7 +1,6 @@
 import { VStack, HStack, Box } from '@chakra-ui/react';
 import * as React from 'react';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import MemberDashboardHeadlineText from '../MemberDashBoardHeadlineText';
 import Referrals from './Referrals';
 import GodlScore from './GodlScore';
 
@@ -13,6 +12,7 @@ const ReferralsAndGodlScore: React.FC = () => {
       maxW="1200px"
       w="full"
       rowGap="97px"
+      mt="5.125em"
     >
       <VStack
         rowGap="37px"
@@ -20,7 +20,6 @@ const ReferralsAndGodlScore: React.FC = () => {
         px={{ base: '10px', lg: '2em' }}
         w="100%"
       >
-        <MemberDashboardHeadlineText>Whitelist & Referrals</MemberDashboardHeadlineText>
         <HStack
           flexDir={{ base: 'column', lg: 'row' }}
           justifyContent="space-between"
