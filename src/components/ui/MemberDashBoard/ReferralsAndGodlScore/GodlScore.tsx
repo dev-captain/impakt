@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useUserContext } from '../../../../context/UserContext';
 
 const GodlScore: React.FC = () => {
-  const score = 21350;
+  // const score = 21350;
   const { user } = useUserContext();
   const hiMessage = `Hi, ${user?.username}`;
 
@@ -25,7 +25,7 @@ const GodlScore: React.FC = () => {
         </Text>
       </Box>
 
-      <Box
+      {/* <Box
         color="#FEC417"
         mt="0 !important"
         textAlign="center"
@@ -35,7 +35,7 @@ const GodlScore: React.FC = () => {
         <Text mt="10px" textStyle="regular4">
           Your GODL Balance
         </Text>
-      </Box>
+      </Box> */}
     </VStack>
   );
 };
