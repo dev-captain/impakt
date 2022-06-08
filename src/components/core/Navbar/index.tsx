@@ -46,7 +46,6 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
       setColorMode('light');
     }
   }, [path.path]);
-  console.log(colorMode);
 
   const isLight = colorMode === 'light';
   const youtube = isLight ? Youtube : YoutubeLight;
