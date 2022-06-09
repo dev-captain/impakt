@@ -9,9 +9,9 @@ const Authentication: React.FC = ({ children }) => {
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       if (!user) {
-        navigate('/login');
+        navigate('/signin');
       }
-    }, 500);
+    }, 50);
 
     return () => clearTimeout(timeout);
   }, [user]);

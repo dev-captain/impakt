@@ -71,7 +71,7 @@ const SignUp = () => {
   });
 
   React.useEffect(() => {
-    if (user) navigate('/login');
+    if (user) navigate('/signin');
   }, [user]);
 
   useEffect(() => {
@@ -352,7 +352,7 @@ const SignUp = () => {
               <Text textStyle="regular2" pos="relative">
                 Already have an account?
                 <Box
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate('/signin')}
                   mx="5px"
                   cursor="pointer"
                   textColor={accentRedtextColor}

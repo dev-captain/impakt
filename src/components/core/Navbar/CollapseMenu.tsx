@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import NavbarLinkItem from './NavbarLinkItem';
+import { useUserContext } from '../../../context/UserContext';
 
 type Props = {
   bg: string;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
+  const { user, signOut } = useUserContext();
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;
@@ -48,6 +50,34 @@ const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
         />
+        {user && (
+          <NavbarLinkItem
+            href="/dashboard"
+            onClose={onClose}
+            title={t(Keys.navbar.dashboard)}
+            isActive={path.path === 'dashboard'}
+          />
+        )}
+
+        {user && (
+          <NavbarLinkItem
+            href="#"
+            onClose={() => {
+              signOut();
+              onClose();
+            }}
+            title={t(Keys.navbar.signOut)}
+            isActive={path.path === '#'}
+          />
+        )}
+
+        {!user && (
+          <NavbarLinkItem
+            href="/signin"
+            title={t(Keys.navbar.signIn)}
+            isActive={path.path === 'signin'}
+          />
+        )}
       </VStack>
     </Collapse>
   );

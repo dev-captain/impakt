@@ -1,7 +1,7 @@
 import { useToast } from '@chakra-ui/react';
 import axios, { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { signInInput, signUpInput, User } from './types';
+import { signInInput, signUpInput, User } from './types/UserTypes';
 
 const apiBaseUrl = process.env.REACT_APP_API;
 const signInUrl = `${apiBaseUrl}/iam/auth/signin`;
@@ -81,6 +81,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const signOut = useCallback(async () => {
+    // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
     try {
       // await axios.post(signOutUrl);
       setUser(null);

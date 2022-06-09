@@ -15,6 +15,7 @@ const password = 'password';
 const verification = 'verification';
 const signUp = 'signUp';
 const signIn = 'signIn';
+const memberDashboard = 'memberDashboard';
 
 const TranslationKeys = {
   common: {
@@ -36,6 +37,9 @@ const TranslationKeys = {
     impaktFitness: `${navbar}.impaktFitness`,
     knowledgeBase: `${navbar}.knowledgeBase`,
     download: `${navbar}.download`,
+    dashboard: `${navbar}.dashboard`,
+    signOut: `${navbar}.signOut`,
+    signIn: `${navbar}.signIn`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,
@@ -131,6 +135,23 @@ const TranslationKeys = {
     something: `${verification}.something`,
     wrong: `${verification}.wrong`,
     message: `${verification}.message`,
+  },
+  memberDashboard: {
+    referrals: {
+      headline: `${memberDashboard}.referrals.headline`,
+      subHeadline: `${memberDashboard}.referrals.subHeadline`,
+      description: `${memberDashboard}.referrals.description`,
+    },
+    yourReferralLink: `${memberDashboard}.yourReferralLink`,
+    whitelist: {
+      headline: `${memberDashboard}.whitelist.headline`,
+      subHeadline: `${memberDashboard}.whitelist.subHeadline`,
+      description: `${memberDashboard}.whitelist.description`,
+      description2: `${memberDashboard}.whitelist.description2`,
+      item1: `${memberDashboard}.whitelist.item1`,
+      item2: `${memberDashboard}.whitelist.item2`,
+      item3: `${memberDashboard}.whitelist.item3`,
+    },
   },
 };
 

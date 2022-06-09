@@ -16,7 +16,9 @@ import {
   Verify,
   SignUp,
 } from 'pages';
+import MemberDashboard from './pages/MemberDashBoard';
 import SignIn from './pages/SignIn/SignIn';
+import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -49,8 +51,17 @@ const App = () => {
         <Route path=":id" element={<SignUp />} />
       </Route>
 
-      <Route path="/login" element={<SignIn />} />
+      <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <Authentication>
+            <MemberDashboard />
+          </Authentication>
+        }
+      />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

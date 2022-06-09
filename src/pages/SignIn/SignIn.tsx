@@ -46,7 +46,7 @@ const SignIn = () => {
   });
 
   React.useEffect(() => {
-    if (user) navigate('/');
+    if (user) navigate('/dashboard');
   }, [user]);
 
   React.useEffect(() => {
@@ -118,7 +118,7 @@ const SignIn = () => {
             mt="56px"
             as="form"
             onSubmit={handleSubmit(handleSignInFormSubmit)}
-            spacing="24px"
+            spacing="22px"
             w="full"
             borderRadius={16}
           >
@@ -133,18 +133,34 @@ const SignIn = () => {
               type="email"
               error={errors.email ? errors.email.message : ''}
             />
-            <TextField
-              isOutlined
-              name="password"
-              fontSize="14px"
-              borderColor="#E4EAF1"
-              textStyle="regular2"
-              onChange={onChange}
-              placeholder={t(keys.password.password)}
-              _placeholder={{ color: textColor, fontSize: '14px' }}
-              type="password"
-              error={errors.password ? errors.password.message : ''}
-            />
+            <Box w="full" position="relative">
+              <Box
+                w="full"
+                cursor="pointer"
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="flex-start"
+                mb="5px"
+                as="a"
+                href="/recover-password"
+              >
+                <Text textStyle="regular2" textColor={accentRedtextColor} as="span">
+                  Forgot password?
+                </Text>
+              </Box>
+              <TextField
+                isOutlined
+                name="password"
+                fontSize="14px"
+                borderColor="#E4EAF1"
+                textStyle="regular2"
+                onChange={onChange}
+                placeholder={t(keys.password.password)}
+                _placeholder={{ color: textColor, fontSize: '14px' }}
+                type="password"
+                error={errors.password ? errors.password.message : ''}
+              />
+            </Box>
 
             <VStack
               w="full"
