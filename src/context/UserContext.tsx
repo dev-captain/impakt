@@ -1,14 +1,9 @@
 import { useToast } from '@chakra-ui/react';
-import { GetUserRes, LoginReq } from '@impakt-dev/api-client';
-import axios, { AxiosError } from 'axios';
+import { GetUserRes, LoginReq, PostUserReq } from '@impakt-dev/api-client';
+import { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { authInstance } from '../lib/impakt-dev-api-client/init';
-import { signInInput, signUpInput, User } from './types/UserTypes';
-
-const apiBaseUrl = process.env.REACT_APP_API;
-const signInUrl = `${apiBaseUrl}/iam/auth/signin`;
-const signUpUrl = `${apiBaseUrl}/iam/user`;
-// const signOutUrl = `${apiBaseUrl}/iam/auth/signout`;
+import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
+import { signInInput, signUpInput } from './types/UserTypes';
 
 interface UserContextI {
   signIn: (payload: signInInput) => Promise<void>;
@@ -42,10 +37,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(async (payload: LoginReq) => {
     try {
-      // const userRes = await axios.post(signInUrl, payload);
       const userData = await authInstance.authControllerLogin(payload);
-      // const accesstoken = await authInstance.authControllerSignAccessToken({authMethods:{Authentication:"",Refresh:""}});
-      // console.log(acc);
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
       toast({
@@ -78,8 +70,8 @@ export const UserContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  const signUp = useCallback(async (payload: signUpInput) => {
-    await axios.post(signUpUrl, payload);
+  const signUp = useCallback(async (payload: PostUserReq) => {
+    await UserInstance.userControllerCreate(payload);
   }, []);
 
   const signOut = useCallback(async () => {
