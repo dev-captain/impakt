@@ -94,11 +94,11 @@ const ActiveMembersCard: React.FC = () => {
 const activeMemberGoals = [0, 5000, 10000, 20000, 40000];
 
 const tokenPriceDownItems = [
-  { activeMember: 0, priceValue: '0.01$' },
-  { activeMember: 5000, priceValue: '0.009$' },
-  { activeMember: 10000, priceValue: '0.008$' },
-  { activeMember: 20000, priceValue: '0.007$' },
-  { activeMember: 40000, priceValue: '0.006$' },
+  { activeMember: 0, priceValue: '0.001$' },
+  { activeMember: 5000, priceValue: '0.0009$' },
+  { activeMember: 10000, priceValue: '0.0008$' },
+  { activeMember: 20000, priceValue: '0.0007$' },
+  { activeMember: 40000, priceValue: '0.0006$' },
 ];
 
 export default ActiveMembersCard;
