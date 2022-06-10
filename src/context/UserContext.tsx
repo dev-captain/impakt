@@ -77,9 +77,9 @@ export const UserContextProvider: React.FC = ({ children }) => {
   const signOut = useCallback(async () => {
     // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
     try {
-      await authInstance.authControllerLogout();
       setUser(null);
       localStorage.removeItem('user');
+      await authInstance.authControllerLogout();
       toast({
         title: 'Success',
         description: 'You have successfully logged out!',
