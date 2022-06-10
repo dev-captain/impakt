@@ -51,7 +51,7 @@ export const configuration = createConfiguration({
               console.log('error on client library', err.response);
               const error = JSON.parse(err.response.data);
               if (error.statusCode === 401) {
-                // await RefreshToken();
+                await RefreshToken();
                 error.message = 'Something went wrong please try again';
                 reject(error);
               } else {
