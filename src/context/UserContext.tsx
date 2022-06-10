@@ -1,18 +1,15 @@
 import { useToast } from '@chakra-ui/react';
-import axios, { AxiosError } from 'axios';
+import { GetUserRes, LoginReq, PostUserReq } from '@impakt-dev/api-client';
+import { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { signInInput, signUpInput, User } from './types/UserTypes';
-
-const apiBaseUrl = process.env.REACT_APP_API;
-const signInUrl = `${apiBaseUrl}/iam/auth/signin`;
-const signUpUrl = `${apiBaseUrl}/iam/user`;
-// const signOutUrl = `${apiBaseUrl}/iam/auth/signout`;
+import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
+import { signInInput, signUpInput } from './types/UserTypes';
 
 interface UserContextI {
   signIn: (payload: signInInput) => Promise<void>;
   signUp: (payload: signUpInput) => Promise<void>;
   signOut: () => Promise<void>;
-  user: User | null;
+  user: GetUserRes | null;
 }
 
 const UserContext = createContext<UserContextI | null>(null);
@@ -27,7 +24,7 @@ export function useUserContext() {
 }
 
 export const UserContextProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<GetUserRes | null>(null);
   const toast = useToast();
 
   React.useEffect(() => {
@@ -35,14 +32,14 @@ export const UserContextProvider: React.FC = ({ children }) => {
     const userPersistenceData = localStorage.getItem('user');
     if (!userPersistenceData) return;
     const userData = JSON.parse(userPersistenceData);
-    setUser(userData as User);
+    setUser(userData);
   }, []);
 
-  const signIn = useCallback(async (payload: signInInput) => {
+  const signIn = useCallback(async (payload: LoginReq) => {
     try {
-      const userRes = await axios.post(signInUrl, payload);
-      setUser(userRes.data);
-      localStorage.setItem('user', JSON.stringify(userRes.data));
+      const userData = await authInstance.authControllerLogin(payload);
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
       toast({
         title: 'Success',
         description: 'Welcome !',
@@ -50,16 +47,13 @@ export const UserContextProvider: React.FC = ({ children }) => {
         duration: 8000,
         status: 'success',
       });
-    } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
+    } catch (err: any) {
+      const { statusCode, message } = err;
+
+      if (statusCode && statusCode >= 400 && statusCode < 500) {
         toast({
           title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
+          description: message,
           isClosable: true,
           duration: 8000,
           status: 'error',
@@ -76,14 +70,14 @@ export const UserContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  const signUp = useCallback(async (payload: signUpInput) => {
-    await axios.post(signUpUrl, payload);
+  const signUp = useCallback(async (payload: PostUserReq) => {
+    await UserInstance.userControllerCreate(payload);
   }, []);
 
   const signOut = useCallback(async () => {
     // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
     try {
-      // await axios.post(signOutUrl);
+      await authInstance.authControllerLogout();
       setUser(null);
       localStorage.removeItem('user');
       toast({

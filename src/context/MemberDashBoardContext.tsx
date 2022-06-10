@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
-import apiAxiosInstance from '../lib/axios/api';
+import { apiAxiosInstance } from '../lib/axios/api';
 import statsChannel from '../lib/pusher/init';
 import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
@@ -155,7 +155,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   const fetchActiveMemberByDay = useCallback(async (day: number) => {
     try {
       const activeMemberByDayRes = await apiAxiosInstance.get(
-        `/stats/users/activeMembers?days=${day}`,
+        `/api/v1/stats/users/activeMembers?days=${day}`,
       );
       if (activeMemberByDayRes.data) {
         setActiveMembers((activeMemberByDayRes.data as ActiveMembersI).count as number);
