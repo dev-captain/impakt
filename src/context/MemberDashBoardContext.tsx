@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
 import { apiAxiosInstance } from '../lib/axios/api';
-import { godlhInstance } from '../lib/impakt-dev-api-client/init';
+import { godlInstance } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
 import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
@@ -172,9 +172,9 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
 
   const fetchGodlBalanceScore = useCallback(async () => {
     try {
-      const data = await godlhInstance.godlAccountControllerGetAccount();
-      if (data) {
-        setGodlBalanceScore(data.balance);
+      const { balance } = await godlInstance.godlAccountControllerGetAccount();
+      if (balance) {
+        setGodlBalanceScore(balance);
       }
 
       return null;

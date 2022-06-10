@@ -65,5 +65,5 @@ export const configuration = createConfiguration({
 });
 
 export const authInstance = new AuthApi(configuration);
-export const godlhInstance = new GodlAccountApi(configuration);
+export const godlInstance = new GodlAccountApi(configuration);
 export const UserInstance = new UsersApi(configuration);
