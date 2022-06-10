@@ -29,11 +29,11 @@ const MemberDashboard: React.FC = () => {
             <SummarizeImpaktUser />
           </VStack> */}
 
-          <Divider w="75%" />
+          {/* <Divider w="75%" />
 
           <VStack id="impakt-investment-section" color="white" w="full">
             <Investment />
-          </VStack>
+          </VStack> */}
 
           {/* <Divider w="75%" /> */}
 
