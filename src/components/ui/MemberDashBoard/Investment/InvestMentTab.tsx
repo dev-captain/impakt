@@ -1,5 +1,16 @@
 import * as React from 'react';
-import { Box, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  ListItem,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  UnorderedList,
+  VStack,
+} from '@chakra-ui/react';
 
 import AnimationInWhenVisible from '../../../common/AnimationInWhenVisible';
 import PhaseHeadlineText from './PhaseHeadlineText';
@@ -129,10 +140,28 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                     launched, your $vIO translate 1:1 to $IO.
                   </b>{' '}
                 </PhaseDescriptionText>
-                <PhaseDescriptionText>
-                  Your tokens will be locked for 3 months from IDO, and after that, linearly vest
-                  over a 6 month period. You will see the tokens being unlocked in real time.
-                </PhaseDescriptionText>
+                <Box w="full">
+                  <PhaseDescriptionText>Investment Information : </PhaseDescriptionText>
+
+                  <UnorderedList>
+                    <ListItem>
+                      <PhaseDescriptionText>Market Cap: $100,000,000 USD.</PhaseDescriptionText>
+                    </ListItem>
+                    <ListItem>
+                      <PhaseDescriptionText>
+                        Token Supply: 100 Billion (limited supply).
+                      </PhaseDescriptionText>
+                    </ListItem>
+                    <ListItem>
+                      <PhaseDescriptionText>Lock Up: 3 Months.</PhaseDescriptionText>
+                    </ListItem>
+                    <ListItem>
+                      <PhaseDescriptionText>
+                        Vesting: 24 Months (linear vesting).
+                      </PhaseDescriptionText>
+                    </ListItem>
+                  </UnorderedList>
+                </Box>
               </VStack>
             </AnimationInWhenVisible>
           </TabPanel>
