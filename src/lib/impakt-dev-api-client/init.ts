@@ -5,6 +5,7 @@ import {
   RequestContext,
   HttpMethod,
   ResponseContext,
+  GodlAccountApi,
 } from '@impakt-dev/api-client';
 import axios from 'axios';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
@@ -64,4 +65,5 @@ export const configuration = createConfiguration({
 });
 
 export const authInstance = new AuthApi(configuration);
+export const godlhInstance = new GodlAccountApi(configuration);
 export const UserInstance = new UsersApi(configuration);
