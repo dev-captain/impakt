@@ -141,7 +141,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                   </b>{' '}
                 </PhaseDescriptionText>
                 <Box w="full">
-                  <PhaseDescriptionText>Investment Information : </PhaseDescriptionText>
+                  <PhaseDescriptionText isBold>Investment Information</PhaseDescriptionText>
 
                   <UnorderedList>
                     <ListItem>
