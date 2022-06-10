@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
-import apiAxiosInstance from '../lib/axios/api';
+import { apiAxiosInstance } from '../lib/axios/api';
+import { godlInstance } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
 import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
@@ -11,6 +12,7 @@ interface MemberDashboardContextI {
   // whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen: MemberI[];
   // whitelistLeaderBoardIsLoading: boolean;
   activeMembers: number;
+  godlBalanceScore: number;
 }
 
 const MemberDashboardContext = createContext<MemberDashboardContextI | null>(null);
@@ -42,6 +44,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   // ] = React.useState<MemberI[]>([]);
 
   const [activeMembers, setActiveMembers] = React.useState(0);
+  const [godlBalanceScore, setGodlBalanceScore] = React.useState(0);
 
   // const [whitelistLeaderBoardIsLoading, setWhitelistLeaderBoardIsLoading] = React.useState(false);
 
@@ -155,7 +158,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   const fetchActiveMemberByDay = useCallback(async (day: number) => {
     try {
       const activeMemberByDayRes = await apiAxiosInstance.get(
-        `/stats/users/activeMembers?days=${day}`,
+        `/api/v1/stats/users/activeMembers?days=${day}`,
       );
       if (activeMemberByDayRes.data) {
         setActiveMembers((activeMemberByDayRes.data as ActiveMembersI).count as number);
@@ -167,9 +170,26 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const fetchGodlBalanceScore = useCallback(async () => {
+    try {
+      const { balance } = await godlInstance.godlAccountControllerGetAccount();
+      if (balance) {
+        setGodlBalanceScore(balance);
+      }
+
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }, []);
+
   // useEffect(() => {
   //   fetchWhitelistLeaderboardBasedRankTotalScore();
   // }, []);
+
+  useEffect(() => {
+    fetchGodlBalanceScore();
+  }, []);
 
   useEffect(() => {
     fetchActiveMemberByDay(7);
@@ -200,6 +220,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
         // whitelistLeaderboardTopThree,
         // whitelistLeaderBoardIsLoading,
         activeMembers,
+        godlBalanceScore,
       }}
     >
       {children}
