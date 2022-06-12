@@ -1,8 +1,8 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
-import { apiAxiosInstance } from '../lib/axios/api';
+// import { apiAxiosInstance } from '../lib/axios/api';
 import { godlInstance } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
-import { ActiveMembersI } from './types/MemberDashBoardTypes';
+// import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
 interface MemberDashboardContextI {
   // fetchWhitelistLeaderboardMemberById: (userId: MemberI['userId']) => Promise<void | boolean>;
@@ -155,20 +155,20 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   //   }
   // }, []);
 
-  const fetchActiveMemberByDay = useCallback(async (day: number) => {
-    try {
-      const activeMemberByDayRes = await apiAxiosInstance.get(
-        `/api/v1/stats/users/activeMembers?days=${day}`,
-      );
-      if (activeMemberByDayRes.data) {
-        setActiveMembers((activeMemberByDayRes.data as ActiveMembersI).count as number);
-      }
+  // const fetchActiveMemberByDay = useCallback(async (day: number) => {
+  //   try {
+  //     const activeMemberByDayRes = await apiAxiosInstance.get(
+  //       `/api/v1/stats/users/activeMembers?days=${day}`,
+  //     );
+  //     if (activeMemberByDayRes.data) {
+  //       setActiveMembers((activeMemberByDayRes.data as ActiveMembersI).count as number);
+  //     }
 
-      return null;
-    } catch (e) {
-      return null;
-    }
-  }, []);
+  //     return null;
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }, []);
 
   const fetchGodlBalanceScore = useCallback(async () => {
     try {
@@ -191,9 +191,9 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     fetchGodlBalanceScore();
   }, []);
 
-  useEffect(() => {
-    fetchActiveMemberByDay(7);
-  }, []);
+  // useEffect(() => {
+  //   fetchActiveMemberByDay(7);
+  // }, []);
 
   useEffect(() => {
     statsChannel.bind('RoutineSessionSuccess', (activeMemberStatsData: any) => {
