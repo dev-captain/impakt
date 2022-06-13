@@ -46,7 +46,7 @@ const ImpaktGamesHero = () => {
                   isHorizontal
                   iconName=""
                   title="Download from our Discord"
-                  link="https://discord.gg/eVQJ8XRa9S"
+                  link="/download"
                 />
                 {/* <DownloadButton
                   isHorizontal
