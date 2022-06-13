@@ -41,19 +41,19 @@ const ImpaktGamesHero = () => {
                 <TitleItem title={t(keys.impaktGamesHero.fitness)} />
                 <TitleItem title={t(keys.impaktGamesHero.gamified)} />
               </VStack>
-              <Wrapper>
+              <Wrapper width="full">
                 <DownloadButton
                   isHorizontal
-                  iconName=""
-                  title="Download from our Discord"
-                  link="/download"
+                  iconName="Windows"
+                  title="Download for Windows"
+                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
                 />
-                {/* <DownloadButton
+                <DownloadButton
                   isHorizontal
                   iconName="Apple"
                   title="Download for Mac"
-                  link="https://discord.gg/eVQJ8XRa9S"
-                /> */}
+                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
+                />
               </Wrapper>
             </VStack>
             <ScreenAndVideo
