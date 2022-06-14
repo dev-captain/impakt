@@ -9,13 +9,11 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-// import { useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
 import { useUserContext } from '../../context/UserContext';
-
-// const apiBaseUrl = process.env.REACT_APP_API;
+import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 
 const signInFormYupScheme = yup.object().shape({
   email: yup
@@ -27,6 +25,7 @@ const signInFormYupScheme = yup.object().shape({
 });
 
 const SignIn = () => {
+  const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const { user } = useUserContext();
   const navigate = useNavigate();
   const { signIn } = useUserContext();
@@ -46,7 +45,7 @@ const SignIn = () => {
   });
 
   React.useEffect(() => {
-    if (user) navigate('/dashboard');
+    if (user && !queryString.DiscourseConnect) navigate('/dashboard');
   }, [user]);
 
   React.useEffect(() => {
