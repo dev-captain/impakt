@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { GetUserRes, LoginReq, PostUserReq, RequestPasswordResetReq } from '@impakt-dev/api-client';
 import { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
+import { authInstance, RefreshToken, UserInstance } from '../lib/impakt-dev-api-client/init';
 import { signInInput, signUpInput } from './types/UserTypes';
 
 interface UserContextI {
@@ -113,9 +113,9 @@ export const UserContextProvider: React.FC = ({ children }) => {
   const signOut = useCallback(async () => {
     // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
     try {
+      await authInstance.authControllerLogout();
       setUser(null);
       localStorage.removeItem('user');
-      await authInstance.authControllerLogout();
       toast({
         title: 'Success',
         description: 'You have successfully logged out!',
@@ -123,29 +123,21 @@ export const UserContextProvider: React.FC = ({ children }) => {
         duration: 8000,
         status: 'success',
       });
-    } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
-        toast({
-          title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
+    } catch (err: any) {
+      if (err && err.statusCode === 401) {
+        await RefreshToken();
+        signOut();
+
+        return;
       }
+
+      toast({
+        title: 'Error',
+        description: err.message,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
     }
   }, []);
 

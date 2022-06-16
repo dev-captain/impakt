@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
 // import { apiAxiosInstance } from '../lib/axios/api';
-import { godlInstance } from '../lib/impakt-dev-api-client/init';
+import { godlInstance, RefreshToken } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
 // import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
@@ -178,7 +178,12 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
       }
 
       return null;
-    } catch (e) {
+    } catch (err: any) {
+      if (err && err.statusCode === 401) {
+        await RefreshToken();
+        fetchGodlBalanceScore();
+      }
+
       return null;
     }
   }, []);
