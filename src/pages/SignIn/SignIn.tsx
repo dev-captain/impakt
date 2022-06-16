@@ -8,7 +8,7 @@ import Images from 'assets/images';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { LoginReq } from '@impakt-dev/api-client';
 
 import Gradients from './Gradient';
