@@ -51,7 +51,8 @@ const SignIn = () => {
 
       return;
     }
-    navigate('/dashboard');
+
+    if (user) navigate('/dashboard');
   }, [user]);
 
   React.useEffect(() => {
