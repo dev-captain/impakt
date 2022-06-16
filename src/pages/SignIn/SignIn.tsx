@@ -29,7 +29,7 @@ const SignIn = () => {
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const { user } = useUserContext();
   const navigate = useNavigate();
-  const { signIn } = useUserContext();
+  const { signIn, requestAccessToken } = useUserContext();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -46,6 +46,15 @@ const SignIn = () => {
   });
 
   useEffect(() => {
+    if (user && queryString.DiscourseConnect && !user?.discourseRedirectUrl) {
+      requestAccessToken({
+        DiscoursePayload: queryString.sso,
+        DiscourseSig: queryString.sig,
+      });
+
+      return;
+    }
+
     if (user?.discourseRedirectUrl) {
       window.location.href = user.discourseRedirectUrl;
 

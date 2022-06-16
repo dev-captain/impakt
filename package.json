@@ -8,7 +8,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@hookform/resolvers": "^2.8.8",
-    "@impakt-dev/api-client": "^0.16.0",
+    "@impakt-dev/api-client": "^0.16.2",
     "@rematch/core": "^2.2.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",

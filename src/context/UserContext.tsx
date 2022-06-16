@@ -3,12 +3,13 @@ import { GetUserRes, LoginReq, PostUserReq } from '@impakt-dev/api-client';
 import { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
-import { signInInput, signUpInput } from './types/UserTypes';
+import { singleSignOnInput, signInInput, signUpInput } from './types/UserTypes';
 
 interface UserContextI {
   signIn: (payload: signInInput) => Promise<void>;
   signUp: (payload: signUpInput) => Promise<void>;
   signOut: () => Promise<void>;
+  requestAccessToken: (payload: singleSignOnInput) => Promise<void>;
   user: GetUserRes | null;
 }
 
@@ -39,7 +40,10 @@ export const UserContextProvider: React.FC = ({ children }) => {
     try {
       const userData = await authInstance.authControllerLogin(payload);
       setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ ...userData, discourseRedirectUrl: undefined }),
+      );
       toast({
         title: 'Success',
         description: 'Welcome !',
@@ -113,9 +117,21 @@ export const UserContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const requestAccessToken = useCallback(async (payload: singleSignOnInput) => {
+    try {
+      const resp = await authInstance.authControllerSignAccessToken({
+        discoursePayload: payload.DiscoursePayload,
+        discourseSig: payload.DiscourseSig,
+      });
+      setUser(resp);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <UserContext.Provider value={{ signIn, signUp, signOut, user }}>
+    <UserContext.Provider value={{ signIn, signUp, signOut, requestAccessToken, user }}>
       {children}
     </UserContext.Provider>
   );

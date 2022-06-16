@@ -1795,10 +1795,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@impakt-dev/api-client@^0.16.0":
-  version "0.16.0"
-  resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client/0.16.0/b87dda9f6edd13b5b2e97c77dafdfa1e5af43fd0533c40238d9ec56c99643fcb#9ae763fdc507c07e609e9074ad7a9689071f7a17"
-  integrity sha512-U9p95SgHptcY6abom++IbP2QxgJIOcO3kVthwvu64cnNiusQ3IkBYPU9CzM3eLEAe4OtiX+fGXsxI3oTaeGSww==
+"@impakt-dev/api-client@^0.16.2":
+  version "0.16.2"
+  resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client/0.16.2/df1456115768480b6c41b67a5acc4fef9bd08ee79dc82ca459d012e8e10c987a#53fb1a27d3fbdd65852b46f4bb48d70827a9e6cd"
+  integrity sha512-4QybVSnhOPVe8urQLj4f12703IGEI3mtEYr3EMGPiWei5rDwbYMaGwCXqgDJTb6Ij4uEStggZ5Ju3Mg7S8gstA==
   dependencies:
     es6-promise "^4.2.4"
     url-parse "^1.4.3"
