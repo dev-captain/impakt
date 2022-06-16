@@ -46,8 +46,12 @@ const SignIn = () => {
   });
 
   useEffect(() => {
-    if (user?.discourseRedirectUrl) window.location.href = user.discourseRedirectUrl;
-    else if (user) navigate('/dashboard');
+    if (user?.discourseRedirectUrl) {
+      window.location.href = user.discourseRedirectUrl;
+
+      return;
+    }
+    navigate('/dashboard');
   }, [user]);
 
   React.useEffect(() => {
