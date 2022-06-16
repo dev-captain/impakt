@@ -1,14 +1,15 @@
 import { useColorModeValue, Image, VStack, Text, Flex, Box } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { LoginReq } from '@impakt-dev/api-client';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
@@ -44,8 +45,9 @@ const SignIn = () => {
     resolver: yupResolver(signInFormYupScheme),
   });
 
-  React.useEffect(() => {
-    if (user && !queryString.DiscourseConnect) navigate('/dashboard');
+  useEffect(() => {
+    if (user?.discourseRedirectUrl) window.location.href = user.discourseRedirectUrl;
+    else if (user) navigate('/dashboard');
   }, [user]);
 
   React.useEffect(() => {
@@ -61,7 +63,14 @@ const SignIn = () => {
     setIsCreateAccountButtonLoading(true);
     const { email, password } = data as { email: string; password: string };
     try {
-      await signIn({ emailOrUsername: email, password });
+      const signInPayload: LoginReq = { emailOrUsername: email, password };
+
+      if (queryString.DiscourseConnect) {
+        signInPayload.discoursePayload = queryString.sso;
+        signInPayload.discourseSig = queryString.sig;
+      }
+
+      await signIn(signInPayload);
     } catch (err) {
       console.error(err);
     }
