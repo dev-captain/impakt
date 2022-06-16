@@ -8,8 +8,10 @@ import keys from 'i18n/types';
 import Images from 'assets/images';
 import TextField from '../TextField';
 import Gradients, { GradientEllipse, GradientEllipse1 } from '../Gradient';
+import { useUserContext } from '../../../context/UserContext';
 
 const RecoveryPassword = () => {
+  const { requestPasswordResetByEmail } = useUserContext();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -30,8 +32,8 @@ const RecoveryPassword = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = () => {
-    console.log('values', values);
+  const onSubmit = async () => {
+    await requestPasswordResetByEmail({ email: values.email });
   };
 
   const isDisabled = !values.email || !validateEmail(values.email);

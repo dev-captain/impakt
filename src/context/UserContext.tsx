@@ -1,5 +1,5 @@
 import { useToast } from '@chakra-ui/react';
-import { GetUserRes, LoginReq, PostUserReq } from '@impakt-dev/api-client';
+import { GetUserRes, LoginReq, PostUserReq, RequestPasswordResetReq } from '@impakt-dev/api-client';
 import { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
@@ -11,6 +11,7 @@ interface UserContextI {
   signOut: () => Promise<void>;
   requestAccessToken: (payload: singleSignOnInput) => Promise<void>;
   user: GetUserRes | null;
+  requestPasswordResetByEmail: (requestPasswordResetReq: RequestPasswordResetReq) => Promise<void>;
 }
 
 const UserContext = createContext<UserContextI | null>(null);
@@ -78,6 +79,41 @@ export const UserContextProvider: React.FC = ({ children }) => {
     await UserInstance.userControllerCreate(payload);
   }, []);
 
+  const requestPasswordResetByEmail = useCallback(
+    async (requestPasswordResetReq: RequestPasswordResetReq) => {
+      try {
+        await authInstance.authControllerRequestPasswordReset(requestPasswordResetReq);
+        toast({
+          title: 'Success',
+          description: 'We have e-mailed your password reset link!',
+          isClosable: true,
+          duration: 8000,
+          status: 'success',
+        });
+      } catch (err: any) {
+        const { statusCode } = err;
+        if (statusCode && statusCode >= 400 && statusCode < 500) {
+          toast({
+            title: 'Error',
+            description: err.message,
+            isClosable: true,
+            duration: 8000,
+            status: 'error',
+          });
+        } else {
+          toast({
+            title: 'Error',
+            description: 'Something went wrong. Please contact support.',
+            isClosable: true,
+            duration: 8000,
+            status: 'error',
+          });
+        }
+      }
+    },
+    [],
+  );
+
   const signOut = useCallback(async () => {
     // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
     try {
@@ -130,8 +166,10 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <UserContext.Provider value={{ signIn, signUp, signOut, requestAccessToken, user }}>
+    <UserContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      value={{ signIn, signUp, signOut, user, requestPasswordResetByEmail, requestAccessToken }}
+    >
       {children}
     </UserContext.Provider>
   );
