@@ -1,5 +1,5 @@
 import 'i18n';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import {
@@ -22,6 +22,16 @@ import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
+
+  const [scroll, setScroll] = useState(false);
+  window.addEventListener('scroll', () => {
+    setScroll(window.scrollY > 50);
+    document.body.classList.add('scroll');
+  });
+  setTimeout(() => {
+    setScroll(false);
+    document.body.classList.remove('scroll');
+  }, 100);
 
   useEffect(() => {
     setColorMode('light');
