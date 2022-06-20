@@ -1,8 +1,7 @@
 import { useToast } from '@chakra-ui/react';
 import { GetUserRes, LoginReq, PostUserReq, RequestPasswordResetReq } from '@impakt-dev/api-client';
-import { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { authInstance, RefreshToken, UserInstance } from '../lib/impakt-dev-api-client/init';
+import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
 import { signInInput, signUpInput } from './types/UserTypes';
 
 interface UserContextI {
@@ -37,38 +36,16 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const signIn = useCallback(async (payload: LoginReq) => {
-    try {
-      const userData = await authInstance.authControllerLogin(payload);
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      toast({
-        title: 'Success',
-        description: 'Welcome !',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (err: any) {
-      const { statusCode, message } = err;
-
-      if (statusCode && statusCode >= 400 && statusCode < 500) {
-        toast({
-          title: 'Error',
-          description: message,
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
-    }
+    const userData = await authInstance.authControllerLogin(payload);
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+    toast({
+      title: 'Success',
+      description: 'Welcome !',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   }, []);
 
   const signUp = useCallback(async (payload: PostUserReq) => {
@@ -77,68 +54,30 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
   const requestPasswordResetByEmail = useCallback(
     async (requestPasswordResetReq: RequestPasswordResetReq) => {
-      try {
-        await authInstance.authControllerRequestPasswordReset(requestPasswordResetReq);
-        toast({
-          title: 'Success',
-          description: 'We have e-mailed your password reset link!',
-          isClosable: true,
-          duration: 8000,
-          status: 'success',
-        });
-      } catch (err: any) {
-        const { statusCode } = err;
-        if (statusCode && statusCode >= 400 && statusCode < 500) {
-          toast({
-            title: 'Error',
-            description: err.message,
-            isClosable: true,
-            duration: 8000,
-            status: 'error',
-          });
-        } else {
-          toast({
-            title: 'Error',
-            description: 'Something went wrong. Please contact support.',
-            isClosable: true,
-            duration: 8000,
-            status: 'error',
-          });
-        }
-      }
+      await authInstance.authControllerRequestPasswordReset(requestPasswordResetReq);
+      toast({
+        title: 'Success',
+        description: 'We have e-mailed your password reset link!',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
     },
     [],
   );
 
   const signOut = useCallback(async () => {
     // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
-    try {
-      await authInstance.authControllerLogout();
-      setUser(null);
-      localStorage.removeItem('user');
-      toast({
-        title: 'Success',
-        description: 'You have successfully logged out!',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (err: any) {
-      if (err && err.statusCode === 401) {
-        await RefreshToken();
-        signOut();
-
-        return;
-      }
-
-      toast({
-        title: 'Error',
-        description: err.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
-    }
+    await authInstance.authControllerLogout();
+    setUser(null);
+    localStorage.removeItem('user');
+    toast({
+      title: 'Success',
+      description: 'You have successfully logged out!',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   }, []);
 
   return (

@@ -1,3 +1,4 @@
+import { createStandaloneToast } from '@chakra-ui/react';
 import {
   UsersApi,
   createConfiguration,
@@ -7,25 +8,17 @@ import {
   ResponseContext,
   GodlAccountApi,
 } from '@impakt-dev/api-client';
-import axios from 'axios';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
-import { API_BASE_URL, apiAxiosInstance } from '../axios/api';
+import axios from '../axios/api';
 
-export const RefreshToken = async () => {
-  await apiAxiosInstance
-    .post('api/v1/iam/auth/refresh')
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
+
+const toast = createStandaloneToast();
 
 export const configuration = createConfiguration({
   baseServer: {
     makeRequestContext: (endpoint: string, method: HttpMethod) =>
-      new RequestContext(`${API_BASE_URL}${endpoint}`, method),
+      new RequestContext(`${API_SERVER_BASE_URL}${endpoint}`, method),
   },
   httpApi: {
     send: (request: RequestContext) =>
@@ -47,9 +40,47 @@ export const configuration = createConfiguration({
                 }),
               );
             })
-            .catch(async (err) => {
-              const error = JSON.parse(err.response.data);
-              reject(JSON.parse(err.response.data));
+            .catch(async (err: any) => {
+              const error: { statusCode: number; message: string } = {
+                statusCode: 500,
+                message: 'Something went wrong...',
+              };
+              if (axios.isAxiosError(err)) {
+                if (typeof err.response?.data === 'string') {
+                  const errorRes = JSON.parse(err.response.data) as {
+                    statusCode: number;
+                    message: string;
+                  };
+
+                  error.statusCode = errorRes.statusCode ?? 500;
+                  error.message = errorRes.message ?? 'Something went wrong..';
+                  if (error.statusCode >= 400 && error.statusCode < 500) {
+                    if (Array.isArray(error.message)) {
+                      error.message.forEach((message) => {
+                        toast({
+                          description: message,
+                          status: 'error',
+                          duration: 4000,
+                          isClosable: true,
+                        });
+                      });
+                    } else {
+                      toast({
+                        description: error.message,
+                        status: 'error',
+                        duration: 4000,
+                        isClosable: true,
+                      });
+                    }
+                  }
+
+                  return reject(error);
+                }
+
+                return reject(error);
+              }
+
+              return reject(error);
             });
         }),
       ),
