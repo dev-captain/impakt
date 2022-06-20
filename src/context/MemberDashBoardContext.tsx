@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
 // import { apiAxiosInstance } from '../lib/axios/api';
-import { godlInstance, RefreshToken } from '../lib/impakt-dev-api-client/init';
+import { godlInstance } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
 // import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
@@ -171,20 +171,9 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   // }, []);
 
   const fetchGodlBalanceScore = useCallback(async () => {
-    try {
-      const { balance } = await godlInstance.godlAccountControllerGetAccount();
-      if (balance) {
-        setGodlBalanceScore(balance);
-      }
-
-      return null;
-    } catch (err: any) {
-      if (err && err.statusCode === 401) {
-        await RefreshToken();
-        fetchGodlBalanceScore();
-      }
-
-      return null;
+    const { balance } = await godlInstance.godlAccountControllerGetAccount();
+    if (balance) {
+      setGodlBalanceScore(balance);
     }
   }, []);
 
