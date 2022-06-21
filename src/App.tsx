@@ -35,6 +35,7 @@ const App = () => {
       setScroll(false);
       document.body.classList.remove('scroll');
     }, 100);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(timeout);
