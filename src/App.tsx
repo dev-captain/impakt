@@ -22,17 +22,21 @@ import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
-
   const [scroll, setScroll] = useState(false);
-  window.addEventListener('scroll', () => {
-    setScroll(window.scrollY > 50);
-    document.body.classList.add('scroll');
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setScroll(window.scrollY > 50);
+      document.body.classList.add('scroll');
+    });
+    const timeout = setTimeout(() => {
+      setScroll(false);
+      document.body.classList.remove('scroll');
+    }, 100);
+    return () => {
+      window.removeEventListener('scroll', () => {});
+      clearTimeout(timeout);
+    };
   });
-  setTimeout(() => {
-    setScroll(false);
-    document.body.classList.remove('scroll');
-  }, 100);
-
   useEffect(() => {
     setColorMode('light');
   }, [setColorMode]);
