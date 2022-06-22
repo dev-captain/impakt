@@ -141,6 +141,12 @@ const TranslationKeys = {
       headline: `${memberDashboard}.referrals.headline`,
       subHeadline: `${memberDashboard}.referrals.subHeadline`,
       description: `${memberDashboard}.referrals.description`,
+      subDescription: `${memberDashboard}.referrals.subDescription`,
+      discription_list1: `${memberDashboard}.referrals.discription_list1`,
+      discription_list2: `${memberDashboard}.referrals.discription_list2`,
+      discription_list3: `${memberDashboard}.referrals.discription_list3`,
+      discription_list4: `${memberDashboard}.referrals.discription_list4`,
+      descriptionFooter: `${memberDashboard}.referrals.descriptionFooter`,
     },
     yourReferralLink: `${memberDashboard}.yourReferralLink`,
     whitelist: {
