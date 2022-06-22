@@ -132,33 +132,11 @@ const SignUp = () => {
         duration: 8000,
         status: 'success',
       });
-      navigate('/download');
-    } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
-        toast({
-          title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
-    }
 
-    return setIsCreateAccountButtonLoading(false);
+      return navigate('/download');
+    } catch (e) {
+      return setIsCreateAccountButtonLoading(false);
+    }
   };
 
   const generateRandomFourDigitNumberString = () => {

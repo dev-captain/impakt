@@ -1,6 +1,5 @@
 import { useToast } from '@chakra-ui/react';
 import { GetUserRes, LoginReq, PostUserReq, RequestPasswordResetReq } from '@impakt-dev/api-client';
-import { AxiosError } from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
 import { singleSignOnInput, signInInput, signUpInput } from './types/UserTypes';
@@ -10,7 +9,7 @@ interface UserContextI {
   signUp: (payload: signUpInput) => Promise<void>;
   signOut: () => Promise<void>;
   requestAccessToken: (payload: singleSignOnInput) => Promise<void>;
-  user: GetUserRes | null;
+  user: (GetUserRes & { discourseRedirectUrl?: string }) | null;
   requestPasswordResetByEmail: (requestPasswordResetReq: RequestPasswordResetReq) => Promise<void>;
 }
 
@@ -26,7 +25,7 @@ export function useUserContext() {
 }
 
 export const UserContextProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<GetUserRes | null>(null);
+  const [user, setUser] = useState<(GetUserRes & { discourseRedirectUrl?: string }) | null>(null);
   const toast = useToast();
 
   React.useEffect(() => {
@@ -38,41 +37,16 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const signIn = useCallback(async (payload: LoginReq) => {
-    try {
-      const userData = await authInstance.authControllerLogin(payload);
-      setUser(userData);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ ...userData, discourseRedirectUrl: undefined }),
-      );
-      toast({
-        title: 'Success',
-        description: 'Welcome !',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (err: any) {
-      const { statusCode, message } = err;
-
-      if (statusCode && statusCode >= 400 && statusCode < 500) {
-        toast({
-          title: 'Error',
-          description: message,
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
-    }
+    const userData = await authInstance.authControllerLogin(payload);
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify({ ...userData, discourseRedirectUrl: undefined }));
+    toast({
+      title: 'Success',
+      description: 'Welcome !',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   }, []);
 
   const signUp = useCallback(async (payload: PostUserReq) => {
@@ -81,88 +55,41 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
   const requestPasswordResetByEmail = useCallback(
     async (requestPasswordResetReq: RequestPasswordResetReq) => {
-      try {
-        await authInstance.authControllerRequestPasswordReset(requestPasswordResetReq);
-        toast({
-          title: 'Success',
-          description: 'We have e-mailed your password reset link!',
-          isClosable: true,
-          duration: 8000,
-          status: 'success',
-        });
-      } catch (err: any) {
-        const { statusCode } = err;
-        if (statusCode && statusCode >= 400 && statusCode < 500) {
-          toast({
-            title: 'Error',
-            description: err.message,
-            isClosable: true,
-            duration: 8000,
-            status: 'error',
-          });
-        } else {
-          toast({
-            title: 'Error',
-            description: 'Something went wrong. Please contact support.',
-            isClosable: true,
-            duration: 8000,
-            status: 'error',
-          });
-        }
-      }
+      await authInstance.authControllerRequestPasswordReset(requestPasswordResetReq);
+      toast({
+        title: 'Success',
+        description: 'We have e-mailed your password reset link!',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
     },
     [],
   );
 
   const signOut = useCallback(async () => {
     // TODO SIGNOUT PROCESS UNAUTORIZED ERROR WILL BE FIXED
-    try {
-      setUser(null);
-      localStorage.removeItem('user');
-      await authInstance.authControllerLogout();
-      toast({
-        title: 'Success',
-        description: 'You have successfully logged out!',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
-        toast({
-          title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
-    }
+    await authInstance.authControllerLogout();
+    setUser(null);
+    localStorage.removeItem('user');
+    toast({
+      title: 'Success',
+      description: 'You have successfully logged out!',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   }, []);
 
   const requestAccessToken = useCallback(async (payload: singleSignOnInput) => {
-    try {
-      const resp = await authInstance.authControllerSignAccessToken({
-        discoursePayload: payload.DiscoursePayload,
-        discourseSig: payload.DiscourseSig,
-      });
-      setUser(resp);
-    } catch (error) {
-      console.error(error);
-    }
+    const resp = await authInstance.authControllerSignAccessToken({
+      discoursePayload: payload.DiscoursePayload,
+      discourseSig: payload.DiscourseSig,
+    });
+
+    console.log('payload', payload, 'response', resp);
+
+    setUser(resp as any);
   }, []);
 
   return (

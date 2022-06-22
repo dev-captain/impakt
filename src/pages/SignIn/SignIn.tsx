@@ -77,7 +77,10 @@ const SignIn = () => {
     setIsCreateAccountButtonLoading(true);
     const { email, password } = data as { email: string; password: string };
     try {
-      const signInPayload: LoginReq = { emailOrUsername: email, password };
+      const signInPayload: LoginReq & { discoursePayload?: any; discourseSig?: any } = {
+        emailOrUsername: email,
+        password,
+      };
 
       if (queryString.DiscourseConnect) {
         signInPayload.discoursePayload = queryString.sso;

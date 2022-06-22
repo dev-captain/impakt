@@ -171,15 +171,9 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   // }, []);
 
   const fetchGodlBalanceScore = useCallback(async () => {
-    try {
-      const { balance } = await godlInstance.godlAccountControllerGetAccount();
-      if (balance) {
-        setGodlBalanceScore(balance);
-      }
-
-      return null;
-    } catch (e) {
-      return null;
+    const { balance } = await godlInstance.godlAccountControllerGetAccount();
+    if (balance) {
+      setGodlBalanceScore(balance);
     }
   }, []);
 
