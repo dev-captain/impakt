@@ -120,9 +120,17 @@ export default {
   memberDashboard: {
     referrals: {
       headline: 'Referrals',
-      subHeadline: 'Refer friends and earn GODL',
+      subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive +1000 GODL and they receive +5000 GODL.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive $1 USD in Crypto and they receive $5 USD in Crypto.',
+      subDescription:
+        'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
+      discription_list1: 'WLs',
+      discription_list2: 'Genesis NFT',
+      discription_list3: 'Crypto Allocations',
+      discription_list4: 'Crypto Tokens (1000 GODL = $1 USD worth of our tokens)',
+      descriptionFooter:
+        'Have your friends join us on the Impakt Rocket and let’s moon it together!🚀🚀🚀',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {

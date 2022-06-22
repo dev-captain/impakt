@@ -17,12 +17,13 @@ const ReferralsAndGodlScore: React.FC = () => {
       <VStack
         rowGap="37px"
         id="member-dasboard-whitelist-referrals-card"
-        px={{ base: '10px', lg: '2em' }}
+        px={{ base: '10px' }}
         w="100%"
       >
         <HStack
           flexDir={{ base: 'column', lg: 'row' }}
           justifyContent="space-between"
+          alignItems="start"
           w="100%"
           rowGap="32px"
           columnGap="32px"
