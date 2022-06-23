@@ -1,14 +1,15 @@
-import { useToast } from '@chakra-ui/react';
+import { createStandaloneToast } from '@chakra-ui/react';
 import { GetUserRes, LoginReq, PostUserReq, RequestPasswordResetReq } from '@impakt-dev/api-client';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
-import { signInInput, signUpInput } from './types/UserTypes';
+import { singleSignOnInput, signInInput, signUpInput } from './types/UserTypes';
 
 interface UserContextI {
   signIn: (payload: signInInput) => Promise<void>;
   signUp: (payload: signUpInput) => Promise<void>;
   signOut: () => Promise<void>;
-  user: GetUserRes | null;
+  requestAccessToken: (payload: singleSignOnInput) => Promise<void>;
+  user: (GetUserRes & { discourseRedirectUrl?: string }) | null;
   requestPasswordResetByEmail: (requestPasswordResetReq: RequestPasswordResetReq) => Promise<void>;
 }
 
@@ -24,8 +25,8 @@ export function useUserContext() {
 }
 
 export const UserContextProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<GetUserRes | null>(null);
-  const toast = useToast();
+  const [user, setUser] = useState<(GetUserRes & { discourseRedirectUrl?: string }) | null>(null);
+  const toast = createStandaloneToast();
 
   React.useEffect(() => {
     // TODO change with access token
@@ -38,7 +39,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   const signIn = useCallback(async (payload: LoginReq) => {
     const userData = await authInstance.authControllerLogin(payload);
     setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('user', JSON.stringify({ ...userData, discourseRedirectUrl: undefined }));
     toast({
       title: 'Success',
       description: 'Welcome !',
@@ -80,9 +81,34 @@ export const UserContextProvider: React.FC = ({ children }) => {
     });
   }, []);
 
+  const requestAccessToken = useCallback(async (payload: singleSignOnInput) => {
+    toast({
+      title: 'Logging in to forums',
+      duration: 2000,
+      status: 'info',
+    });
+
+    const resp = await authInstance.authControllerSignAccessToken({
+      discoursePayload: payload.DiscoursePayload,
+      discourseSig: payload.DiscourseSig,
+    });
+
+    toast({
+      title: 'Success',
+      description: ' "Redirecting to forums..',
+      isClosable: false,
+      duration: 2000,
+      status: 'success',
+    });
+
+    setUser(resp);
+  }, []);
+
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <UserContext.Provider value={{ signIn, signUp, signOut, user, requestPasswordResetByEmail }}>
+    <UserContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      value={{ signIn, signUp, signOut, user, requestPasswordResetByEmail, requestAccessToken }}
+    >
       {children}
     </UserContext.Provider>
   );

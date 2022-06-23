@@ -22,3 +22,8 @@ export type signUpInput = {
   email: string;
   referrerId?: number;
 };
+
+export type singleSignOnInput = {
+  DiscoursePayload?: string;
+  DiscourseSig?: string;
+};
