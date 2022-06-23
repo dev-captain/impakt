@@ -130,7 +130,7 @@ export default {
       discription_list3: 'Crypto Allocations',
       discription_list4: 'Crypto Tokens (1000 GODL = $1 USD worth of our tokens)',
       descriptionFooter:
-        'Have your friends join us on the Impakt Rocket and let’s moon it together!🚀🚀🚀',
+        'Have your friends join us on the Impakt Rocket and let’s moon it together!',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {

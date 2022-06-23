@@ -6,6 +6,7 @@ import keys from 'i18n/types';
 import { VStack, Box, Text, OrderedList, ListItem } from '@chakra-ui/react';
 import { useUserContext } from '../../../../context/UserContext';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
+import RocketImg from '../../../../assets/images/rocket.png';
 
 const Referrals: React.FC = () => {
   const { user } = useUserContext();
@@ -27,7 +28,9 @@ const Referrals: React.FC = () => {
       <Box mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="bold4">{t(keys.memberDashboard.referrals.subHeadline)}</Text>
         <Text textStyle="regular4" mt="5">
-          {t(keys.memberDashboard.referrals.description)}
+          For each member who joins through your referral link and completes at least 5 daily,
+          weekly or targeted challenges with Impakt, you receive <strong>$1 USD in Crypto</strong>{' '}
+          and they receive <strong>$5 USD in Crypto</strong>.
         </Text>
         <Text textStyle="regular4" mt="5">
           {t(keys.memberDashboard.referrals.subDescription)}
@@ -48,6 +51,15 @@ const Referrals: React.FC = () => {
         </OrderedList>
         <Text textStyle="regular4" mt="5">
           {t(keys.memberDashboard.referrals.descriptionFooter)}
+          <Box ml={2} display="inline-block">
+            <img src={RocketImg} width={25} alt="rocket" />
+          </Box>
+          <Box display="inline-block">
+            <img src={RocketImg} width={25} alt="rocket" />
+          </Box>
+          <Box display="inline-block">
+            <img src={RocketImg} width={25} alt="rocket" />
+          </Box>
         </Text>
       </Box>
       <Box
@@ -64,3 +76,6 @@ const Referrals: React.FC = () => {
   );
 };
 export default Referrals;
+function ReactHtmlParser(arg0: any): React.ReactNode {
+  throw new Error('Function not implemented.');
+}
