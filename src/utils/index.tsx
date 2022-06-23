@@ -23,5 +23,9 @@ export const parseUrlQueryParamsToKeyValuePairs = (queryString: string) => {
     .map((x) => x.split(/=/))
     .reduce<{ [key: string]: any }>((p, c) => ({ ...p, [c[0]]: c[1] }), {});
 };
-
+export function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 export default {};

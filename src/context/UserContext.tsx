@@ -1,7 +1,8 @@
-import { useToast } from '@chakra-ui/react';
+import { useTimeout, createStandaloneToast } from '@chakra-ui/react';
 import { GetUserRes, LoginReq, PostUserReq, RequestPasswordResetReq } from '@impakt-dev/api-client';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { authInstance, UserInstance } from '../lib/impakt-dev-api-client/init';
+import { sleep } from '../utils';
 import { singleSignOnInput, signInInput, signUpInput } from './types/UserTypes';
 
 interface UserContextI {
@@ -26,7 +27,7 @@ export function useUserContext() {
 
 export const UserContextProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<(GetUserRes & { discourseRedirectUrl?: string }) | null>(null);
-  const toast = useToast();
+  const toast = createStandaloneToast();
 
   React.useEffect(() => {
     // TODO change with access token
@@ -87,9 +88,17 @@ export const UserContextProvider: React.FC = ({ children }) => {
       discourseSig: payload.DiscourseSig,
     });
 
-    console.log('payload', payload, 'response', resp);
+    // console.log('payload', payload, 'response', resp.discourseRedirectUrl);
 
-    setUser(resp as any);
+    toast({
+      title: 'Success',
+      description: ' "Redirecting to the forums...',
+      isClosable: false,
+      duration: 4000,
+      status: 'success',
+    });
+    await sleep(1000);
+    setUser(resp);
   }, []);
 
   return (

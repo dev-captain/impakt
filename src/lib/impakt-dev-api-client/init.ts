@@ -33,7 +33,6 @@ export const configuration = createConfiguration({
             transformResponse: (x) => x,
           })
             .then((resp) => {
-              console.log('RESP', resp);
               resolve(
                 new ResponseContext(resp.status, resp.headers, {
                   text: async () => resp.data,
@@ -42,7 +41,6 @@ export const configuration = createConfiguration({
               );
             })
             .catch(async (err: any) => {
-              console.log('err', err);
               const error: { statusCode: number; message: string } = {
                 statusCode: 500,
                 message: 'Something went wrong...',
