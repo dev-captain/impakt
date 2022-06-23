@@ -11,7 +11,6 @@ import RocketImg from '../../../../assets/images/rocket.png';
 const Referrals: React.FC = () => {
   const { user } = useUserContext();
   const { t } = useTranslation().i18n;
-
   return (
     <VStack
       w="100%"
@@ -27,11 +26,11 @@ const Referrals: React.FC = () => {
       </Box>
       <Box mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="bold4">{t(keys.memberDashboard.referrals.subHeadline)}</Text>
-        <Text textStyle="regular4" mt="5">
-          For each member who joins through your referral link and completes at least 5 daily,
-          weekly or targeted challenges with Impakt, you receive <strong>$1 USD in Crypto</strong>{' '}
-          and they receive <strong>$5 USD in Crypto</strong>.
-        </Text>
+        <Text
+          textStyle="regular4"
+          mt="5"
+          dangerouslySetInnerHTML={{ __html: t(keys.memberDashboard.referrals.description) }}
+        />
         <Text textStyle="regular4" mt="5">
           {t(keys.memberDashboard.referrals.subDescription)}
         </Text>
@@ -76,6 +75,3 @@ const Referrals: React.FC = () => {
   );
 };
 export default Referrals;
-function ReactHtmlParser(arg0: any): React.ReactNode {
-  throw new Error('Function not implemented.');
-}
