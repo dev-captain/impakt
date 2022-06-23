@@ -1,4 +1,4 @@
-import { useColorModeValue, Image, VStack, Text, Flex, Box } from '@chakra-ui/react';
+import { useColorModeValue, Image, VStack, Text, Flex, Box, Spinner } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useEffect, useState } from 'react';
@@ -105,6 +105,7 @@ const SignIn = () => {
         filter="drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.12)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.1));"
         overflow="hidden !important"
       >
+        {user && queryString.DiscourseConnect && <Spinner size="xl" />}
         {!user && (
           <>
             <VStack
