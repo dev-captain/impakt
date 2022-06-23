@@ -6,8 +6,8 @@ import { useUserContext } from '../../../../context/UserContext';
 const GodlScore: React.FC = () => {
   const { user } = useUserContext();
   const { godlBalanceScore } = useMemberDashBoardContext();
-
-  const hiMessage = `Hi, ${user?.username}`;
+  const userName = user?.username;
+  const userInfo = userName?.split('#');
 
   return (
     <VStack
@@ -21,7 +21,14 @@ const GodlScore: React.FC = () => {
       letterSpacing="-0.04em !important"
     >
       <Box textAlign="center" mt="0 !important" id="whitelist-challange-description-box-2">
-        <Text textStyle="bold6">{hiMessage}</Text>
+        <Text textStyle="bold6">
+          {userInfo?.map((data, i) => (
+            <span style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
+              {i === 1 ? `#` : `Hi, `}
+              {data}
+            </span>
+          ))}
+        </Text>
         <Text mt="20px" textStyle="regular4">
           Nice to see you!
         </Text>

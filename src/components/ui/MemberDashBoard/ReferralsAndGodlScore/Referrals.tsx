@@ -6,11 +6,11 @@ import keys from 'i18n/types';
 import { VStack, Box, Text, OrderedList, ListItem } from '@chakra-ui/react';
 import { useUserContext } from '../../../../context/UserContext';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
+import RocketImg from '../../../../assets/images/rocket.png';
 
 const Referrals: React.FC = () => {
   const { user } = useUserContext();
   const { t } = useTranslation().i18n;
-
   return (
     <VStack
       w="100%"
@@ -26,9 +26,11 @@ const Referrals: React.FC = () => {
       </Box>
       <Box mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="bold4">{t(keys.memberDashboard.referrals.subHeadline)}</Text>
-        <Text textStyle="regular4" mt="5">
-          {t(keys.memberDashboard.referrals.description)}
-        </Text>
+        <Text
+          textStyle="regular4"
+          mt="5"
+          dangerouslySetInnerHTML={{ __html: t(keys.memberDashboard.referrals.description) }}
+        />
         <Text textStyle="regular4" mt="5">
           {t(keys.memberDashboard.referrals.subDescription)}
         </Text>
@@ -48,6 +50,15 @@ const Referrals: React.FC = () => {
         </OrderedList>
         <Text textStyle="regular4" mt="5">
           {t(keys.memberDashboard.referrals.descriptionFooter)}
+          <Box ml={2} display="inline-block">
+            <img src={RocketImg} width={25} alt="rocket" />
+          </Box>
+          <Box display="inline-block">
+            <img src={RocketImg} width={25} alt="rocket" />
+          </Box>
+          <Box display="inline-block">
+            <img src={RocketImg} width={25} alt="rocket" />
+          </Box>
         </Text>
       </Box>
       <Box
