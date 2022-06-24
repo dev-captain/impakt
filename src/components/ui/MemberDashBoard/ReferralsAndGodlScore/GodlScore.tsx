@@ -39,17 +39,17 @@ const GodlScore: React.FC = () => {
             </span>
           ))}
         </Text>
-        <Box ms={3}>
+        {/* <Box ms={3}>
           <img src={Whitelist} alt="Whitelist" />
-        </Box>
+        </Box> */}
       </Box>
       <Box id="whitelist-challange-description-box-2">
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        <Text mt="8px" textStyle="regular3">
+        {/* <Text mt="8px" textStyle="regular3">
           You are whitelisted. Congrats!
-        </Text>
+        </Text> */}
       </Box>
 
       {/* <Grid templateColumns="repeat(2, 1fr)" gap={4}>
