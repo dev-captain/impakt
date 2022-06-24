@@ -7,13 +7,13 @@ import Whitelist from '../../../../assets/svgs/Vector.svg';
 
 const GodlScore: React.FC = () => {
   const { user } = useUserContext();
-  const { godlBalanceScore, activeDays, setUserData } = useMemberDashBoardContext();
+  const { godlBalanceScore, activeDays, fetchActiveDays } = useMemberDashBoardContext();
   const userName = user?.username;
   const userInfo = userName?.split('#');
   // const hiMessage = `Hi, ${user?.username}`;
   React.useEffect(() => {
     if (user?.id) {
-      setUserData(user?.id);
+      fetchActiveDays(user?.id);
     }
   }, []);
   return (

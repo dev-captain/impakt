@@ -12,7 +12,7 @@ interface MemberDashboardContextI {
   // whitelistLeaderboardTopThree: MemberI[];
   // whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen: MemberI[];
   // whitelistLeaderBoardIsLoading: boolean;
-  setUserData(id: number): void;
+  fetchActiveDays(id: number): void;
   activeMembers: number;
   activeDays: number;
   godlBalanceScore: number;
@@ -189,10 +189,6 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  const setUserData = (uid: number) => {
-    setUserId(uid);
-  };
-
   // useEffect(() => {
   //   fetchWhitelistLeaderboardBasedRankTotalScore();
   // }, []);
@@ -200,12 +196,6 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     fetchGodlBalanceScore();
   }, []);
-
-  useEffect(() => {
-    if (userId) {
-      fetchActiveDays(userId);
-    }
-  }, [userId]);
 
   // useEffect(() => {
   //   fetchActiveMemberByDay(7);
@@ -237,7 +227,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
         activeMembers,
         activeDays,
         godlBalanceScore,
-        setUserData,
+        fetchActiveDays,
       }}
     >
       {children}
