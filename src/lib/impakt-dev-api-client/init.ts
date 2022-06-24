@@ -7,6 +7,7 @@ import {
   HttpMethod,
   ResponseContext,
   GodlAccountApi,
+  FitnessStatsApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
@@ -90,3 +91,4 @@ export const configuration = createConfiguration({
 export const authInstance = new AuthApi(configuration);
 export const godlInstance = new GodlAccountApi(configuration);
 export const UserInstance = new UsersApi(configuration);
+export const FitnessInstance = new FitnessStatsApi(configuration);

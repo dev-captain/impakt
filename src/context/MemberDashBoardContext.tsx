@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
 // import { apiAxiosInstance } from '../lib/axios/api';
-import { godlInstance } from '../lib/impakt-dev-api-client/init';
+import { number } from 'yup/lib/locale';
+import { godlInstance, FitnessInstance } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
 // import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
@@ -11,7 +12,9 @@ interface MemberDashboardContextI {
   // whitelistLeaderboardTopThree: MemberI[];
   // whitelistLeaderboardMemberFiveRanksAboveAndFiveRanksBelowOrTopTen: MemberI[];
   // whitelistLeaderBoardIsLoading: boolean;
+  setUserData(id: number): void;
   activeMembers: number;
+  activeDays: number;
   godlBalanceScore: number;
 }
 
@@ -44,7 +47,9 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   // ] = React.useState<MemberI[]>([]);
 
   const [activeMembers, setActiveMembers] = React.useState(0);
+  const [activeDays, setActiveDays] = React.useState(0);
   const [godlBalanceScore, setGodlBalanceScore] = React.useState(0);
+  const [userId, setUserId] = React.useState(0);
 
   // const [whitelistLeaderBoardIsLoading, setWhitelistLeaderBoardIsLoading] = React.useState(false);
 
@@ -177,6 +182,17 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const fetchActiveDays = useCallback(async (uid) => {
+    const { value } = await FitnessInstance.fitnessStatsControllerGetDaysActive(uid);
+    if (value) {
+      setActiveDays(value);
+    }
+  }, []);
+
+  const setUserData = (uid: number) => {
+    setUserId(uid);
+  };
+
   // useEffect(() => {
   //   fetchWhitelistLeaderboardBasedRankTotalScore();
   // }, []);
@@ -184,6 +200,12 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     fetchGodlBalanceScore();
   }, []);
+
+  useEffect(() => {
+    if (userId) {
+      fetchActiveDays(userId);
+    }
+  }, [userId]);
 
   // useEffect(() => {
   //   fetchActiveMemberByDay(7);
@@ -202,7 +224,6 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
       statsChannel.unbind('RoutineSessionSuccess');
     };
   }, []);
-
   return (
     <MemberDashboardContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -214,7 +235,9 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
         // whitelistLeaderboardTopThree,
         // whitelistLeaderBoardIsLoading,
         activeMembers,
+        activeDays,
         godlBalanceScore,
+        setUserData,
       }}
     >
       {children}

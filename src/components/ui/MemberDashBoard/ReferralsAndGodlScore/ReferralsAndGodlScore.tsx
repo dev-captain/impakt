@@ -33,7 +33,7 @@ const ReferralsAndGodlScore: React.FC = () => {
               <GodlScore />
             </MemberDashboardCard>
           </Box>
-          <Box w={{ base: '100%', lg: '50%' }}>
+          <Box w={{ base: '100%', lg: '50%' }} marginLeft="0 !important">
             <MemberDashboardCard borderRadius={40}>
               <Referrals />
             </MemberDashboardCard>
