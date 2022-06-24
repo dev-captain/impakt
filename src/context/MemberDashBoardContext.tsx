@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect } from 'react';
 // import { apiAxiosInstance } from '../lib/axios/api';
-import { number } from 'yup/lib/locale';
 import { godlInstance, FitnessInstance } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
 // import { ActiveMembersI } from './types/MemberDashBoardTypes';
@@ -213,6 +212,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
       statsChannel.unbind('RoutineSessionSuccess');
     };
   }, []);
+
   return (
     <MemberDashboardContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values

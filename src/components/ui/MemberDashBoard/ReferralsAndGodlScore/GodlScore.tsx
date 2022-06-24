@@ -1,9 +1,8 @@
-import { VStack, Box, Text, Grid, GridItem, SimpleGrid } from '@chakra-ui/react';
+import { VStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
 import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 import { useUserContext } from '../../../../context/UserContext';
-import Whitelist from '../../../../assets/svgs/Vector.svg';
 
 const GodlScore: React.FC = () => {
   const { user } = useUserContext();
@@ -16,6 +15,7 @@ const GodlScore: React.FC = () => {
       fetchActiveDays(user?.id);
     }
   }, []);
+
   return (
     <VStack
       w="100%"
@@ -53,7 +53,7 @@ const GodlScore: React.FC = () => {
       </Box>
 
       {/* <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-        
+
       </Grid> */}
       <SimpleGrid display="flex" flexWrap="wrap" width={{ base: '100%' }} gap={4}>
         <GridItem

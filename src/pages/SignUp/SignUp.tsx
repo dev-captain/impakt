@@ -18,7 +18,6 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AxiosError } from 'axios';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
