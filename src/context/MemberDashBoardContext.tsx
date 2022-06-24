@@ -49,7 +49,6 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   const [activeMembers, setActiveMembers] = React.useState(0);
   const [activeDays, setActiveDays] = React.useState(0);
   const [godlBalanceScore, setGodlBalanceScore] = React.useState(0);
-  const [userId, setUserId] = React.useState(0);
 
   // const [whitelistLeaderBoardIsLoading, setWhitelistLeaderBoardIsLoading] = React.useState(false);
 
