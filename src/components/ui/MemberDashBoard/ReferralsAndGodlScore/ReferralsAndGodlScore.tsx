@@ -29,7 +29,7 @@ const ReferralsAndGodlScore: React.FC = () => {
           columnGap="32px"
         >
           <Box w={{ base: '100%', lg: '50%' }}>
-            <MemberDashboardCard borderRadius={40} isGradient>
+            <MemberDashboardCard borderRadius={40}>
               <GodlScore />
             </MemberDashboardCard>
           </Box>
