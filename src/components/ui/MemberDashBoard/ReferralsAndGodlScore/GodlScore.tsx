@@ -1,11 +1,11 @@
 import { VStack, Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
+
 import useAppSelector from '../../../../hooks/useAppSelector';
 
 const GodlScore: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuthReducer.member);
-  const { godlBalanceScore } = useMemberDashBoardContext();
+  const godlBalanceScore = useAppSelector((state) => state.godlReducer.godlBalanceScore);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 

@@ -2,10 +2,10 @@ import * as React from 'react';
 import { VStack, Box, Text } from '@chakra-ui/react';
 
 import Gradients from '../../home/RoadmapHero/Gradients';
-import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
+import { usePusherContext } from '../../../../context/PusherContext';
 
 const ActiveMembersCard: React.FC = () => {
-  const { activeMembers } = useMemberDashBoardContext();
+  const { activeMembers } = usePusherContext();
 
   const getCurrentTokenPrice = () => {
     if (

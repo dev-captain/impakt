@@ -11,19 +11,22 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './lib/redux/store';
+import { PusherContextProvider } from './context/PusherContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <HelmetProvider>
-          <BrowserRouter>
-            <ChakraProvider theme={theme}>
-              <ColorModeScript initialColorMode="light" />
-              <App />
-            </ChakraProvider>
-          </BrowserRouter>
-        </HelmetProvider>
+        <PusherContextProvider>
+          <HelmetProvider>
+            <BrowserRouter>
+              <ChakraProvider theme={theme}>
+                <ColorModeScript initialColorMode="light" />
+                <App />
+              </ChakraProvider>
+            </BrowserRouter>
+          </HelmetProvider>
+        </PusherContextProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>,
