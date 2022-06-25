@@ -1,7 +1,7 @@
 import { PatchUserReq } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { UserInstance } from '../../../../../lib/impakt-dev-api-client/init';
+import { UserInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 import { updateAuthMember } from '../memberAuthSlice';
 

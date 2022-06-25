@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UserInstance } from '../../../../../lib/impakt-dev-api-client/init';
+import { UserInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 
 interface FetchMembersInputType {

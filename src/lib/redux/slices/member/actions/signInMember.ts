@@ -1,6 +1,6 @@
 import { GetUserRes, LoginReq } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authInstance } from '../../../../../lib/impakt-dev-api-client/init';
+import { authInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 
 const signInMember = createAsyncThunk<GetUserRes, LoginReq>(
