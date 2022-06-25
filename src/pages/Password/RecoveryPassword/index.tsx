@@ -6,12 +6,14 @@ import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+
 import TextField from '../TextField';
 import Gradients, { GradientEllipse, GradientEllipse1 } from '../Gradient';
-import { useUserContext } from '../../../context/UserContext';
+import useAppDispatch from '../../../hooks/useAppDispatch';
+import { forgotPassword } from '../../../lib/redux/slices/member/actions/forgotPassword';
 
 const RecoveryPassword = () => {
-  const { requestPasswordResetByEmail } = useUserContext();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -33,7 +35,7 @@ const RecoveryPassword = () => {
   };
 
   const onSubmit = async () => {
-    await requestPasswordResetByEmail({ email: values.email });
+    await dispatch(forgotPassword({ email: values.email }));
   };
 
   const isDisabled = !values.email || !validateEmail(values.email);

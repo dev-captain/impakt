@@ -6,24 +6,25 @@ import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from './lib/redux/store';
-import { UserContextProvider } from './context/UserContext';
+import { persistor, store } from './lib/redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <ChakraProvider theme={theme}>
-            <ColorModeScript initialColorMode="light" />
-            <UserContextProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <HelmetProvider>
+          <BrowserRouter>
+            <ChakraProvider theme={theme}>
+              <ColorModeScript initialColorMode="light" />
               <App />
-            </UserContextProvider>
-          </ChakraProvider>
-        </BrowserRouter>
-      </HelmetProvider>
+            </ChakraProvider>
+          </BrowserRouter>
+        </HelmetProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

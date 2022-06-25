@@ -1,13 +1,13 @@
 import { VStack, Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
-import { useUserContext } from '../../../../context/UserContext';
+import useAppSelector from '../../../../hooks/useAppSelector';
 
 const GodlScore: React.FC = () => {
-  const { user } = useUserContext();
+  const member = useAppSelector((state) => state.memberAuthReducer.member);
   const { godlBalanceScore } = useMemberDashBoardContext();
-  const userName = user?.username;
-  const userInfo = userName?.split('#');
+  const memberName = member?.username;
+  const memberInfo = memberName?.split('#');
 
   return (
     <VStack
@@ -22,7 +22,7 @@ const GodlScore: React.FC = () => {
     >
       <Box textAlign="center" mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="bold6">
-          {userInfo?.map((data, i) => (
+          {memberInfo?.map((data, i) => (
             <span style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
               {i === 1 ? `#` : `Hi, `}
               {data}
