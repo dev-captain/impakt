@@ -7,42 +7,50 @@ import Category from 'components/ui/knowledgeBase/Category';
 import CategorySelectBox from 'components/ui/knowledgeBase/CategorySelectBox';
 import seoData from 'data/seoData';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { dispatch, RootState } from 'store';
 import * as Types from 'store/types';
 import { layoutPadding } from 'theme';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import useAppSelector from '../../hooks/useAppSelector';
+import { fetchArticleBySlug } from '../../lib/redux/slices/knowledgeBase/actions/fetchArticleBySlug';
+import { fetchArticlesByCategory } from '../../lib/redux/slices/knowledgeBase/actions/fetchArticlesByCategory';
+import { fetchCategories } from '../../lib/redux/slices/knowledgeBase/actions/fetchCategories';
+import {
+  updateSelectedArticle,
+  updateSelectedCategory,
+} from '../../lib/redux/slices/knowledgeBase/knowledgeBaseSlice';
 
 const { title, meta } = seoData.blog;
 
 const KnowledgeBasePage = () => {
+  const dispatch = useAppDispatch();
   const { article } = useParams();
   const navigate = useNavigate();
   const textColor = useColorModeValue('gray.100', 'gray.900');
   const bgColor = useColorModeValue('gray.800', 'glass.300');
-  const { categories, categoryArticles, selectedArticle, selectedCategory } = useSelector(
-    (state: RootState) => state.knowledgeBase,
+  const { categories, categoryArticles, selectedArticle, selectedCategory } = useAppSelector(
+    (state) => state.knowledgeBaseReducer,
   );
 
   useEffect(() => {
     if (article) {
-      dispatch.knowledgeBase.fetchArticleBySlug(article);
+      dispatch(fetchArticleBySlug(article));
     }
   }, [article]);
 
   useEffect(() => {
-    dispatch.knowledgeBase.fetchCategories();
+    dispatch(fetchCategories());
   }, []);
 
   useEffect(() => {
     if (categories.length > 0) {
-      dispatch.knowledgeBase.setSelectedCategory(categories[0]);
+      dispatch(updateSelectedCategory(categories[0]));
     }
   }, [categories]);
 
   useEffect(() => {
     if (selectedCategory) {
-      dispatch.knowledgeBase.fetchArticlesByCategory(selectedCategory?.slug);
+      dispatch(fetchArticlesByCategory(selectedCategory.slug));
     }
   }, [selectedCategory?.slug]);
 
@@ -71,8 +79,8 @@ const KnowledgeBasePage = () => {
             navigate={navigate}
             categories={categories}
             category={selectedCategory || categories?.[0]}
-            setCategory={dispatch.knowledgeBase.setSelectedCategory}
-            setSelectedArticle={dispatch.knowledgeBase.setSelectedArticle}
+            setCategory={dispatch(updateSelectedCategory)}
+            setSelectedArticle={dispatch(updateSelectedArticle)}
           />
           <Text textStyle={{ base: 'bold5', md: 'bold7' }} textAlign="center">
             Introducing Impakt: Knowledge Base
@@ -87,8 +95,8 @@ const KnowledgeBasePage = () => {
           >
             <Category
               onClick={(_category) => {
-                dispatch.knowledgeBase.setSelectedArticle(undefined);
-                dispatch.knowledgeBase.setSelectedCategory(_category);
+                dispatch(updateSelectedArticle(undefined));
+                dispatch(updateSelectedCategory(_category));
                 navigate(`/knowledge-base`);
               }}
               categories={categories}
@@ -130,7 +138,7 @@ const KnowledgeBasePage = () => {
                     dispatch.knowledgeBase.setSelectedArticle(undefined);
                     navigate(`/knowledge-base`);
                   }}
-                  setCategory={dispatch.knowledgeBase.setSelectedCategory}
+                  setCategory={dispatch(updateSelectedCategory)}
                 />
               )}
             </VStack>

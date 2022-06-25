@@ -53,6 +53,7 @@ const knowledgeBase = createModel<RootModel>()({
       this.setArticles(articles);
     },
 
+    // Done
     async fetchCategories() {
       const response = await fetch(`${KnowledgeBaseEndpoints.Categories}`);
       const { data } = await response.json();
@@ -64,6 +65,7 @@ const knowledgeBase = createModel<RootModel>()({
       this.setCategories(categories);
     },
 
+    // Done
     async fetchArticlesByCategory(slug: string) {
       const url =
         slug === 'all-resources'

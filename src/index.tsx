@@ -8,7 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from './store';
+import { store } from './lib/redux/store';
 import { UserContextProvider } from './context/UserContext';
 
 ReactDOM.render(
