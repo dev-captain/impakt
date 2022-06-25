@@ -1,16 +1,19 @@
 import * as React from 'react';
 
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+// import { useTranslation } from 'react-i18next';
+// import keys from 'i18n/types';
 
-import { VStack, Box, Text, OrderedList, ListItem } from '@chakra-ui/react';
+import { VStack, Box, Text } from '@chakra-ui/react';
 import { useUserContext } from '../../../../context/UserContext';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
-import RocketImg from '../../../../assets/images/rocket.png';
+// import RocketImg from '../../../../assets/images/rocket.png';
+import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
 
 const Referrals: React.FC = () => {
   const { user } = useUserContext();
-  const { t } = useTranslation().i18n;
+  // const { t } = useTranslation().i18n;
+  const { numberOfRegisteredReferree } = useMemberDashBoardContext();
+
   return (
     <VStack
       w="100%"
@@ -22,9 +25,9 @@ const Referrals: React.FC = () => {
       letterSpacing="-0.04em !important"
     >
       <Box mt="0 !important" id="whitelist-challange-headline-box">
-        <Text textStyle="bold6">{t(keys.memberDashboard.referrals.headline)}</Text>
+        <Text textStyle="bold6">Registered with your link : {numberOfRegisteredReferree}</Text>
       </Box>
-      <Box mt="0 !important" id="whitelist-challange-description-box-2">
+      {/* <Box mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="bold4">{t(keys.memberDashboard.referrals.subHeadline)}</Text>
         <Text
           textStyle="regular4"
@@ -60,7 +63,7 @@ const Referrals: React.FC = () => {
             <img src={RocketImg} width={25} alt="rocket" />
           </Box>
         </Text>
-      </Box>
+      </Box> */}
       <Box
         display="flex"
         justifyContent="space-between"

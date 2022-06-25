@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useContext, useEffect } from 'react'
 // import { apiAxiosInstance } from '../lib/axios/api';
 import { godlInstance, FitnessInstance } from '../lib/impakt-dev-api-client/init';
 import statsChannel from '../lib/pusher/init';
+import axios, { API_SERVER_BASE_URL } from '../lib/axios/api';
 // import { ActiveMembersI } from './types/MemberDashBoardTypes';
 
 interface MemberDashboardContextI {
@@ -15,6 +16,7 @@ interface MemberDashboardContextI {
   activeMembers: number;
   activeDays: number;
   godlBalanceScore: number;
+  numberOfRegisteredReferree: number;
 }
 
 const MemberDashboardContext = createContext<MemberDashboardContextI | null>(null);
@@ -48,6 +50,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
   const [activeMembers, setActiveMembers] = React.useState(0);
   const [activeDays, setActiveDays] = React.useState(0);
   const [godlBalanceScore, setGodlBalanceScore] = React.useState(0);
+  const [numberOfRegisteredReferree, setNumberOfRegisteredReferree] = React.useState(0);
 
   // const [whitelistLeaderBoardIsLoading, setWhitelistLeaderBoardIsLoading] = React.useState(false);
 
@@ -187,12 +190,30 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const fetchRegisteredNumberOfReferree = async () => {
+    try {
+      const registeredNumberOfReferreeRes = await axios({
+        baseURL: API_SERVER_BASE_URL,
+        method: 'get',
+        withCredentials: true,
+        url: '/api/v1/referrals?count=true',
+      });
+
+      setNumberOfRegisteredReferree(registeredNumberOfReferreeRes.data.totalCount);
+
+      localStorage.setItem('numberOfReferree', registeredNumberOfReferreeRes.data.totalCount);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // useEffect(() => {
   //   fetchWhitelistLeaderboardBasedRankTotalScore();
   // }, []);
 
   useEffect(() => {
     fetchGodlBalanceScore();
+    fetchRegisteredNumberOfReferree();
   }, []);
 
   // useEffect(() => {
@@ -227,6 +248,7 @@ export const MemberDashboardContextProvider: React.FC = ({ children }) => {
         activeDays,
         godlBalanceScore,
         fetchActiveDays,
+        numberOfRegisteredReferree,
       }}
     >
       {children}

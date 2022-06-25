@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
+export const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
 export const RefreshToken = async () => {
   await axios
     .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
