@@ -1,4 +1,4 @@
-import { VStack, Collapse } from '@chakra-ui/react';
+import { VStack, Collapse, useToast } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
@@ -17,6 +17,7 @@ type Props = {
 
 const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const member = useAppSelector((state) => state.memberAuthReducer.member);
   const location = useLocation();
   const path = parsePathname(location.pathname);
@@ -66,7 +67,14 @@ const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
           <NavbarLinkItem
             href="#"
             onClose={async () => {
-              await dispatch(signOutMember());
+              await dispatch(signOutMember()).unwrap();
+              toast({
+                title: 'Success',
+                description: 'You have successfully logged out!',
+                isClosable: true,
+                duration: 8000,
+                status: 'success',
+              });
               onClose();
             }}
             title={t(Keys.navbar.signOut)}

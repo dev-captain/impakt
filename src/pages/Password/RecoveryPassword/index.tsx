@@ -1,4 +1,11 @@
-import { Box, useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Box,
+  useColorModeValue,
+  VStack,
+  Text,
+  useBreakpointValue,
+  useToast,
+} from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useState } from 'react';
@@ -14,6 +21,7 @@ import { forgotPassword } from '../../../lib/redux/slices/member/actions/forgotP
 
 const RecoveryPassword = () => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -36,6 +44,13 @@ const RecoveryPassword = () => {
 
   const onSubmit = async () => {
     await dispatch(forgotPassword({ email: values.email }));
+    toast({
+      title: 'Success',
+      description: 'We have e-mailed your password reset link!',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   };
 
   const isDisabled = !values.email || !validateEmail(values.email);

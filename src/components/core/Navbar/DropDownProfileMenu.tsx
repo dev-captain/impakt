@@ -1,4 +1,13 @@
-import { Menu, Text, MenuButton, MenuList, MenuItem, HStack, MenuDivider } from '@chakra-ui/react';
+import {
+  Menu,
+  Text,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  HStack,
+  MenuDivider,
+  useToast,
+} from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +21,7 @@ const DropDownProfileMenu: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuthReducer.member);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const toast = useToast();
 
   return member ? (
     <Menu autoSelect={false} strategy="fixed">
@@ -46,7 +56,14 @@ const DropDownProfileMenu: React.FC = () => {
           paddingX="21px"
           borderRadius="0px 0px 8px 8px"
           onClick={async () => {
-            await dispatch(signOutMember());
+            await dispatch(signOutMember()).unwrap();
+            toast({
+              title: 'Success',
+              description: 'You have successfully logged out!',
+              isClosable: true,
+              duration: 8000,
+              status: 'success',
+            });
           }}
           icon={<SignOutIcon />}
           _hover={{ color: '#fff !important', backgroundColor: '#364A63' }}
