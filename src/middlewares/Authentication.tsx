@@ -7,7 +7,6 @@ const Authentication: React.FC = ({ children }) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    console.log('member', member);
     if (!member) {
       navigate('/signin');
     }
