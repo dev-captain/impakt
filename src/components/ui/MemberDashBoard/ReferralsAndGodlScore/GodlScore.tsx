@@ -1,13 +1,20 @@
 import { VStack, Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
 
 import useAppSelector from '../../../../hooks/useAppSelector';
+import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 
 const GodlScore: React.FC = () => {
+  const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuthReducer.member);
   const godlBalanceScore = useAppSelector((state) => state.godlReducer.godlBalanceScore);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
+
+  React.useEffect(() => {
+    dispatch(fetchGodlBalanceScore());
+  }, []);
 
   return (
     <VStack
