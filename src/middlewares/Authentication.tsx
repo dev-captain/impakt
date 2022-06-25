@@ -1,23 +1,19 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserContext } from '../context/UserContext';
+import useAppSelector from '../hooks/useAppSelector';
 
 const Authentication: React.FC = ({ children }) => {
-  const { user } = useUserContext();
+  const member = useAppSelector((state) => state.memberAuthReducer.member);
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (!user) {
-        navigate('/signin');
-      }
-    }, 50);
-
-    return () => clearTimeout(timeout);
-  }, [user]);
+    if (!member) {
+      navigate('/signin');
+    }
+  }, [member]);
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  return user ? <>{children}</> : null;
+  return member ? <>{children}</> : null;
 };
 
 export default Authentication;

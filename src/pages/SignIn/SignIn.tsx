@@ -1,7 +1,16 @@
-import { useColorModeValue, Image, VStack, Text, Flex, Box, Spinner } from '@chakra-ui/react';
+import {
+  useColorModeValue,
+  Image,
+  VStack,
+  Text,
+  Flex,
+  Box,
+  Spinner,
+  useToast,
+} from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
@@ -13,8 +22,11 @@ import { LoginReq } from '@impakt-dev/api-client';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
-import { useUserContext } from '../../context/UserContext';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import { signInMember } from '../../lib/redux/slices/member/actions/signInMember';
+import useAppSelector from '../../hooks/useAppSelector';
+import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
 
 const signInFormYupScheme = yup.object().shape({
   email: yup
@@ -26,16 +38,17 @@ const signInFormYupScheme = yup.object().shape({
 });
 
 const SignIn = () => {
+  const toast = useToast();
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
-  const { user } = useUserContext();
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const isMemberAuthLoading = useAppSelector((state) => state.memberAuthReducer.isLoading);
   const navigate = useNavigate();
-  const { signIn, requestAccessToken } = useUserContext();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
-  const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
   const {
     handleSubmit,
     formState: { errors },
@@ -45,24 +58,44 @@ const SignIn = () => {
     resolver: yupResolver(signInFormYupScheme),
   });
 
-  useEffect(() => {
-    if (user?.discourseRedirectUrl) {
-      window.location.href = user.discourseRedirectUrl;
+  const requestAccessTokenAsync = React.useCallback(async () => {
+    toast({
+      title: 'Logging in to forums',
+      duration: 2000,
+      status: 'info',
+    });
 
-      return;
-    }
-
-    if (user && queryString.DiscourseConnect) {
+    await dispatch(
       requestAccessToken({
-        DiscoursePayload: queryString.sso,
-        DiscourseSig: queryString.sig,
-      });
+        discoursePayload: queryString.DiscoursePayload,
+        discourseSig: queryString.DiscourseSig,
+      }),
+    ).unwrap();
+
+    toast({
+      title: 'Success',
+      description: ' "Redirecting to forums..',
+      isClosable: false,
+      duration: 2000,
+      status: 'success',
+    });
+  }, []);
+
+  useEffect(() => {
+    if (member?.discourseRedirectUrl) {
+      window.location.href = member.discourseRedirectUrl;
 
       return;
     }
 
-    if (user) navigate('/dashboard');
-  }, [user]);
+    if (member && queryString.DiscourseConnect) {
+      requestAccessTokenAsync();
+
+      return;
+    }
+
+    if (member) navigate('/dashboard');
+  }, [member]);
 
   React.useEffect(() => {
     register('email');
@@ -74,24 +107,26 @@ const SignIn = () => {
   };
 
   const handleSignInFormSubmit = async (data: any) => {
-    setIsCreateAccountButtonLoading(true);
     const { email, password } = data as { email: string; password: string };
-    try {
-      const signInPayload: LoginReq & { discoursePayload?: any; discourseSig?: any } = {
-        emailOrUsername: email,
-        password,
-      };
+    const signInPayload: LoginReq & { discoursePayload?: any; discourseSig?: any } = {
+      emailOrUsername: email,
+      password,
+    };
 
-      if (queryString.DiscourseConnect) {
-        signInPayload.discoursePayload = queryString.sso;
-        signInPayload.discourseSig = queryString.sig;
-      }
-
-      await signIn(signInPayload);
-    } catch (err) {
-      console.error(err);
+    if (queryString.DiscourseConnect) {
+      signInPayload.discoursePayload = queryString.sso;
+      signInPayload.discourseSig = queryString.sig;
     }
-    setIsCreateAccountButtonLoading(false);
+
+    await dispatch(signInMember(signInPayload)).unwrap();
+
+    toast({
+      title: 'Success',
+      description: 'Welcome !',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   };
 
   return (
@@ -105,8 +140,8 @@ const SignIn = () => {
         filter="drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.12)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.1));"
         overflow="hidden !important"
       >
-        {user && queryString.DiscourseConnect && <Spinner size="xl" />}
-        {!user && (
+        {member && queryString.DiscourseConnect && <Spinner size="xl" />}
+        {!member && (
           <>
             <VStack
               marginTop={{ base: '0', md: '15px !important' }}
@@ -205,7 +240,7 @@ const SignIn = () => {
                     radius="20px"
                     title={t(keys.signIn.signInButton)}
                     bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                    isLoading={isCreateAccountButtonLoading}
+                    isLoading={isMemberAuthLoading}
                   />
                 </VStack>
 

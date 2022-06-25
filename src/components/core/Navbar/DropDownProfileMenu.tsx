@@ -2,15 +2,18 @@ import { Menu, Text, MenuButton, MenuList, MenuItem, HStack, MenuDivider } from 
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useUserContext } from '../../../context/UserContext';
+import useAppDispatch from '../../../hooks/useAppDispatch';
+import useAppSelector from '../../../hooks/useAppSelector';
+import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 import DefaultImpaktProfileIcon from '../../icons/DefaultImpaktProfileIcon';
 import SignOutIcon from '../../icons/SignOutIcon';
 
 const DropDownProfileMenu: React.FC = () => {
-  const { user, signOut } = useUserContext();
+  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  return user ? (
+  return member ? (
     <Menu autoSelect={false} strategy="fixed">
       <MenuButton>
         <HStack as="button" onClick={() => navigate('/dashboard')}>
@@ -42,7 +45,9 @@ const DropDownProfileMenu: React.FC = () => {
           paddingY="12px"
           paddingX="21px"
           borderRadius="0px 0px 8px 8px"
-          onClick={() => signOut()}
+          onClick={async () => {
+            await dispatch(signOutMember());
+          }}
           icon={<SignOutIcon />}
           _hover={{ color: '#fff !important', backgroundColor: '#364A63' }}
         >

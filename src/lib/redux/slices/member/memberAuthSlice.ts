@@ -5,6 +5,7 @@ import { signInMember } from './actions/signInMember';
 import { signOutMember } from './actions/signOutMember';
 import { forgotPassword } from './actions/forgotPassword';
 import { requestVerification } from './actions/requestVerification';
+import { requestAccessToken } from './actions/requestAccessToken';
 
 interface MemberAuthInitialI {
   member: GetUserRes | null;
@@ -74,6 +75,18 @@ const memberAuthSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(requestVerification.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(requestAccessToken.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(requestAccessToken.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.member = action.payload;
+      })
+      .addCase(requestAccessToken.rejected, (state) => {
         state.isLoading = false;
       });
   },

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 
-import { useUserContext } from '../../../context/UserContext';
+import useAppSelector from '../../../hooks/useAppSelector';
 
 const SignInButton: React.FC = () => {
-  const { user } = useUserContext();
+  const member = useAppSelector((state) => state.memberAuthReducer.member);
 
-  return !user ? (
+  return !member ? (
     <Box as="a" href="/signin">
       <Text>Sign In</Text>
     </Box>
