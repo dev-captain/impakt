@@ -8,8 +8,9 @@ import CategorySelectBox from 'components/ui/knowledgeBase/CategorySelectBox';
 import seoData from 'data/seoData';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import * as Types from 'store/types';
 import { layoutPadding } from 'theme';
+
+import * as Types from '../../lib/redux/slices/knowledgeBase/types';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useAppSelector from '../../hooks/useAppSelector';
 import { fetchArticleBySlug } from '../../lib/redux/slices/knowledgeBase/actions/fetchArticleBySlug';
@@ -25,12 +26,12 @@ const { title, meta } = seoData.blog;
 const KnowledgeBasePage = () => {
   const dispatch = useAppDispatch();
   const { article } = useParams();
-  const navigate = useNavigate();
-  const textColor = useColorModeValue('gray.100', 'gray.900');
-  const bgColor = useColorModeValue('gray.800', 'glass.300');
   const { categories, categoryArticles, selectedArticle, selectedCategory } = useAppSelector(
     (state) => state.knowledgeBaseReducer,
   );
+  const navigate = useNavigate();
+  const textColor = useColorModeValue('gray.100', 'gray.900');
+  const bgColor = useColorModeValue('gray.800', 'glass.300');
 
   useEffect(() => {
     if (article) {
@@ -122,7 +123,7 @@ const KnowledgeBasePage = () => {
                       (categoryArticles?.[selectedCategory?.slug!] as Types.Article[]) || []
                     }
                     setSelectedArticle={(data) => {
-                      dispatch.knowledgeBase.setSelectedArticle(data);
+                      dispatch(updateSelectedArticle(data));
                       navigate(`/knowledge-base/${data.slug}`);
                     }}
                   />
@@ -135,7 +136,7 @@ const KnowledgeBasePage = () => {
                   bgColor={bgColor}
                   textColor={textColor}
                   setSelectedArticle={() => {
-                    dispatch.knowledgeBase.setSelectedArticle(undefined);
+                    dispatch(updateSelectedArticle(undefined));
                     navigate(`/knowledge-base`);
                   }}
                   setCategory={dispatch(updateSelectedCategory)}

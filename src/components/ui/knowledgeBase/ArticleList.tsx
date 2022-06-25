@@ -1,6 +1,7 @@
 import { Divider, Text, VStack } from '@chakra-ui/react';
 import dayjs from 'dayjs';
-import { Article } from 'store/types';
+
+import { Article } from '../../../lib/redux/slices/knowledgeBase/types';
 
 type Props = {
   articles: Article[];
