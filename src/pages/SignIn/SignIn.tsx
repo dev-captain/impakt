@@ -27,6 +27,7 @@ import useAppDispatch from '../../hooks/useAppDispatch';
 import { signInMember } from '../../lib/redux/slices/member/actions/signInMember';
 import useAppSelector from '../../hooks/useAppSelector';
 import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
+import { setIsMemberAuthLoading } from '../../lib/redux/slices/member/memberAuthSlice';
 
 const signInFormYupScheme = yup.object().shape({
   email: yup
@@ -100,6 +101,14 @@ const SignIn = () => {
   React.useEffect(() => {
     register('email');
     register('password');
+  }, []);
+
+  React.useEffect(() => {
+    if (!member) {
+      if (isMemberAuthLoading) {
+        dispatch(setIsMemberAuthLoading(false));
+      }
+    }
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
