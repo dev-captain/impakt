@@ -2,28 +2,26 @@ import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 
-import memberAuthReducer from '../slices/member/memberAuthSlice';
-import memberReducer from '../slices/member/memberSlice';
+import memberAuth from '../slices/member/memberAuthSlice';
 import knowledgeBaseReducer from '../slices/knowledgeBase/knowledgeBaseSlice';
 import godlReducer from '../slices/godl/godlSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['memberAuthReducer'],
+  blacklist: ['memberAuth'],
 };
 
 export const memberAuthPersistConfig = {
-  key: 'memberAuthReducer',
+  key: 'memberAuth',
   storage,
   blacklist: ['isLoading'],
 };
 
 const rootReducer = combineReducers({
-  memberAuthReducer: persistReducer(memberAuthPersistConfig, memberAuthReducer),
-  memberReducer,
-  knowledgeBaseReducer,
-  godlReducer,
+  memberAuth: persistReducer(memberAuthPersistConfig, memberAuth),
+  knowledgeBase: knowledgeBaseReducer,
+  godl: godlReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

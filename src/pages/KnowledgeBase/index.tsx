@@ -27,7 +27,7 @@ const KnowledgeBasePage = () => {
   const dispatch = useAppDispatch();
   const { article } = useParams();
   const { categories, categoryArticles, selectedArticle, selectedCategory } = useAppSelector(
-    (state) => state.knowledgeBaseReducer,
+    (state) => state.knowledgeBase,
   );
   const navigate = useNavigate();
   const textColor = useColorModeValue('gray.100', 'gray.900');

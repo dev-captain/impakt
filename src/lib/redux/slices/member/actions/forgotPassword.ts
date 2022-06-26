@@ -8,7 +8,7 @@ const forgotPassword = createAsyncThunk(
   async ({ email }: RequestPasswordResetReq, { rejectWithValue, getState }) => {
     try {
       const {
-        memberAuthReducer: { isLogin },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
       if (isLogin) {

@@ -19,7 +19,7 @@ const fetchMembers = createAsyncThunk(
   ) => {
     try {
       const {
-        memberAuthReducer: { isLogin },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
       if (!isLogin) {

@@ -52,8 +52,8 @@ const signUpFormYupScheme = yup.object().shape({
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
-  const isMemberCreateLoading = useAppSelector((state) => state.memberReducer.isLoading);
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const toast = useToast();
   const navigate = useNavigate();
   const { id } = useParams();

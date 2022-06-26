@@ -7,8 +7,8 @@ import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions
 
 const GodlScore: React.FC = () => {
   const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
-  const godlBalanceScore = useAppSelector((state) => state.godlReducer.godlBalanceScore);
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 

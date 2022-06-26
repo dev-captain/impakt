@@ -7,7 +7,7 @@ const requestVerification = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const {
-        memberAuthReducer: { isLogin },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
       if (!isLogin) {

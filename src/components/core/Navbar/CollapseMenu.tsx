@@ -18,7 +18,7 @@ type Props = {
 const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const member = useAppSelector((state) => state.memberAuth.member);
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;

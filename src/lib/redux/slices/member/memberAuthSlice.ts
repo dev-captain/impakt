@@ -6,6 +6,7 @@ import { signOutMember } from './actions/signOutMember';
 import { forgotPassword } from './actions/forgotPassword';
 import { requestVerification } from './actions/requestVerification';
 import { requestAccessToken } from './actions/requestAccessToken';
+import { signUpMember } from './actions/signUpMember';
 
 interface MemberAuthInitialI {
   member: GetUserRes | null;
@@ -38,6 +39,17 @@ const memberAuthSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder
+      .addCase(signUpMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signUpMember.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(signUpMember.rejected, (state) => {
+        state.isLoading = false;
+      });
+
     builder
       .addCase(signInMember.pending, (state) => {
         state.isLoading = true;

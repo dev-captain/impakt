@@ -4,21 +4,19 @@ import { authInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 import { cleanGodlState } from '../../godl/godlSlice';
 import { cleanMemberAuthState } from '../memberAuthSlice';
-import { cleanMembersState } from '../memberSlice';
 
 const signOutMember = createAsyncThunk(
   'auth/signout',
   async (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const {
-        memberAuthReducer: { isLogin },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
       if (!isLogin) {
         return Promise.reject(new Error('This account is already signed out'));
       }
 
-      dispatch(cleanMembersState());
       dispatch(cleanGodlState());
       dispatch(cleanMemberAuthState());
 

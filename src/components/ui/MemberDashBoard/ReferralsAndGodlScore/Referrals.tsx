@@ -9,7 +9,7 @@ import RocketImg from '../../../../assets/images/rocket.png';
 import useAppSelector from '../../../../hooks/useAppSelector';
 
 const Referrals: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const member = useAppSelector((state) => state.memberAuth.member);
   const { t } = useTranslation().i18n;
 
   return (

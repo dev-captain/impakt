@@ -18,7 +18,7 @@ import DefaultImpaktProfileIcon from '../../icons/DefaultImpaktProfileIcon';
 import SignOutIcon from '../../icons/SignOutIcon';
 
 const DropDownProfileMenu: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const member = useAppSelector((state) => state.memberAuth.member);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const toast = useToast();
