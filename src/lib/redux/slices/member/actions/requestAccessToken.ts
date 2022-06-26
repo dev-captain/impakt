@@ -9,7 +9,7 @@ const requestAccessToken = createAsyncThunk(
   async ({ discoursePayload, discourseSig }: RefreshReq, { rejectWithValue, getState }) => {
     try {
       const {
-        memberAuthReducer: { isLogin },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
       if (!isLogin) {

@@ -8,10 +8,10 @@ const signUpMember = createAsyncThunk(
   async (payload: PostUserReq, { rejectWithValue, getState }) => {
     try {
       const {
-        memberAuthReducer: { isLogin, isLoading },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
-      if (isLogin || isLoading) {
+      if (isLogin) {
         return Promise.reject(new Error('Something went wrong'));
       }
 

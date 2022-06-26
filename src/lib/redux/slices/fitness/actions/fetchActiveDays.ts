@@ -8,7 +8,7 @@ const fetchActiveDays = createAsyncThunk(
   async (userId: number, { rejectWithValue, getState }) => {
     try {
       const {
-        memberAuthReducer: { isLogin },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
       if (!isLogin) {

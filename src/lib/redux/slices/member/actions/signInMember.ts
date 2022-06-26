@@ -8,7 +8,7 @@ const signInMember = createAsyncThunk<GetUserRes, LoginReq>(
   async (values: LoginReq, { rejectWithValue, getState }) => {
     try {
       const {
-        memberAuthReducer: { isLogin },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
       if (isLogin) {

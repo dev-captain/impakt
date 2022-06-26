@@ -4,7 +4,7 @@ import { Box, Text } from '@chakra-ui/react';
 import useAppSelector from '../../../hooks/useAppSelector';
 
 const SignInButton: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const member = useAppSelector((state) => state.memberAuth.member);
 
   return !member ? (
     <Box as="a" href="/signin">

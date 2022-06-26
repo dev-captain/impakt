@@ -41,8 +41,8 @@ const SignIn = () => {
   const toast = useToast();
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
-  const isMemberAuthLoading = useAppSelector((state) => state.memberAuthReducer.isLoading);
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const navigate = useNavigate();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);

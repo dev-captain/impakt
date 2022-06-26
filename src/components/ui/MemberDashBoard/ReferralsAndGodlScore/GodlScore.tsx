@@ -9,9 +9,9 @@ import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions
 
 const GodlScore: React.FC = () => {
   const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const member = useAppSelector((state) => state.memberAuth.member);
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
-  const godlBalanceScore = useAppSelector((state) => state.godlReducer.godlBalanceScore);
+  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 
@@ -42,7 +42,7 @@ const GodlScore: React.FC = () => {
       >
         <Text textStyle="bold5" color="#FFFFFF">
           {memberInfo?.map((data, i) => (
-            <span style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
+            <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
               {i === 1 ? `#` : `Hi, `}
               {data}
             </span>
