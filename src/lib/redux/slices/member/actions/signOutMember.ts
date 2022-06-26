@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 import { cleanGodlState } from '../../godl/godlSlice';
+import { cleanMemberAuthState } from '../memberAuthSlice';
 import { cleanMembersState } from '../memberSlice';
 
 const signOutMember = createAsyncThunk(
@@ -17,10 +18,11 @@ const signOutMember = createAsyncThunk(
         return Promise.reject(new Error('This account is already signed out'));
       }
 
-      await authInstance.authControllerLogout();
-
       dispatch(cleanMembersState());
       dispatch(cleanGodlState());
+      dispatch(cleanMemberAuthState());
+
+      await authInstance.authControllerLogout();
 
       return null;
     } catch (err: any) {

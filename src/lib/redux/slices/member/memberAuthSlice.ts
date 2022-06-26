@@ -26,6 +26,13 @@ const memberAuthSlice = createSlice({
     updateAuthMember(state: MemberAuthInitialI, action: PayloadAction<GetUserRes>) {
       state.member = action.payload;
     },
+    cleanMemberAuthState(state: MemberAuthInitialI) {
+      if (state.member || state.isLoading) {
+        state.isLoading = memberAuthInitialState.isLoading;
+        state.member = memberAuthInitialState.member;
+        state.isLogin = memberAuthInitialState.isLogin;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -92,6 +99,6 @@ const memberAuthSlice = createSlice({
   },
 });
 
-export const { updateAuthMember } = memberAuthSlice.actions;
+export const { updateAuthMember, cleanMemberAuthState } = memberAuthSlice.actions;
 // eslint-disable-next-line import/prefer-default-export
 export default memberAuthSlice.reducer;
