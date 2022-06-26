@@ -123,7 +123,9 @@ const SignUp = () => {
       email,
       referrerId: activeReferrerId,
     };
+
     await dispatch(signUpMember(payload)).unwrap();
+
     toast({
       title: 'Success',
       description: 'Your account created successfully.You can now login in the Impakt app.',
@@ -131,6 +133,8 @@ const SignUp = () => {
       duration: 8000,
       status: 'success',
     });
+
+    navigate('/download');
   };
 
   const generateRandomFourDigitNumberString = () => {
