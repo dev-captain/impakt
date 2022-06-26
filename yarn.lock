@@ -1795,10 +1795,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@impakt-dev/api-client@^0.16.3":
-  version "0.16.3"
-  resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client/0.16.3/8e4342127c297778ad22411869bc1c9e8b8c750c17e35076cb4a5c21896a8d72#2404488a8052f1e7782373995331b080ef98a53f"
-  integrity sha512-Uy2Eb+ic9liyckAA/YiHf3cs/UzCPemGazDsiQ0jKUJz4RdDFPQj204QMVXzOkGatZfmkB6/H1y5LJmHFMUs7w==
+"@impakt-dev/api-client@^0.17.1":
+  version "0.17.1"
+  resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client/0.17.1/d96de686f4e96229e26ee9eeccbad4c3c241b050b9130b0c8f7bb4b55bac982d#67a8610313f3a2e4a489ad3107cdb856c27c5880"
+  integrity sha512-wPpcM0zFUGBHCl2l7pXXHt7P7d2NP0ro42xwJVTBUWuR8iMCx9rw7+8+1fnTB5ZH7rXE83DzbldMWaLUv1jeWQ==
   dependencies:
     es6-promise "^4.2.4"
     url-parse "^1.4.3"
@@ -9843,6 +9843,13 @@ react-merge-refs@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
+
+react-number-format@^4.9.3:
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-4.9.3.tgz#338500fe9c61b1ac73c8d6dff4ec97dd13fd2b50"
+  integrity sha512-am1A1xYAbENuKJ+zpM7V+B1oRTSeOHYltqVKExznIVFweBzhLmOBmyb1DfIKjHo90E0bo1p3nzVJ2NgS5xh+sQ==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-redux@^7.2.6:
   version "7.2.6"
