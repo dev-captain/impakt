@@ -30,7 +30,7 @@ const GodlScore: React.FC = () => {
       <Box textAlign="center" mt="0 !important" id="whitelist-challange-description-box-2">
         <Text textStyle="bold6">
           {memberInfo?.map((data, i) => (
-            <span style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
+            <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
               {i === 1 ? `#` : `Hi, `}
               {data}
             </span>
