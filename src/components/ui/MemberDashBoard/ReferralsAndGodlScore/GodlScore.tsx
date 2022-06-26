@@ -1,21 +1,30 @@
-import { VStack, Box, Text, Grid, GridItem, SimpleGrid } from '@chakra-ui/react';
+import { VStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
-import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
-import { useUserContext } from '../../../../context/UserContext';
-import Whitelist from '../../../../assets/svgs/Vector.svg';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+
+import useAppSelector from '../../../../hooks/useAppSelector';
+import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fetchActiveDays';
+import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 
 const GodlScore: React.FC = () => {
-  const { user } = useUserContext();
-  const { godlBalanceScore, activeDays, fetchActiveDays } = useMemberDashBoardContext();
-  const userName = user?.username;
-  const userInfo = userName?.split('#');
-  // const hiMessage = `Hi, ${user?.username}`;
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuthReducer.member);
+  const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
+  const godlBalanceScore = useAppSelector((state) => state.godlReducer.godlBalanceScore);
+  const memberName = member?.username;
+  const memberInfo = memberName?.split('#');
+
   React.useEffect(() => {
-    if (user?.id) {
-      fetchActiveDays(user?.id);
+    dispatch(fetchGodlBalanceScore());
+  }, []);
+
+  React.useEffect(() => {
+    if (member) {
+      dispatch(fetchActiveDays(member.id));
     }
   }, []);
+
   return (
     <VStack
       w="100%"
@@ -32,7 +41,7 @@ const GodlScore: React.FC = () => {
         id="whitelist-challange-description-box-2"
       >
         <Text textStyle="bold5" color="#FFFFFF">
-          {userInfo?.map((data, i) => (
+          {memberInfo?.map((data, i) => (
             <span style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
               {i === 1 ? `#` : `Hi, `}
               {data}
@@ -53,7 +62,7 @@ const GodlScore: React.FC = () => {
       </Box>
 
       {/* <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-        
+
       </Grid> */}
       <SimpleGrid display="flex" flexWrap="wrap" width={{ base: '100%' }} gap={4}>
         <GridItem

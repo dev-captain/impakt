@@ -1,4 +1,11 @@
-import { Box, useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Box,
+  useColorModeValue,
+  VStack,
+  Text,
+  useBreakpointValue,
+  useToast,
+} from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
 import React, { useState } from 'react';
@@ -6,12 +13,15 @@ import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+
 import TextField from '../TextField';
 import Gradients, { GradientEllipse, GradientEllipse1 } from '../Gradient';
-import { useUserContext } from '../../../context/UserContext';
+import useAppDispatch from '../../../hooks/useAppDispatch';
+import { forgotPassword } from '../../../lib/redux/slices/member/actions/forgotPassword';
 
 const RecoveryPassword = () => {
-  const { requestPasswordResetByEmail } = useUserContext();
+  const dispatch = useAppDispatch();
+  const toast = useToast();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
@@ -33,7 +43,14 @@ const RecoveryPassword = () => {
   };
 
   const onSubmit = async () => {
-    await requestPasswordResetByEmail({ email: values.email });
+    await dispatch(forgotPassword({ email: values.email }));
+    toast({
+      title: 'Success',
+      description: 'We have e-mailed your password reset link!',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   };
 
   const isDisabled = !values.email || !validateEmail(values.email);
