@@ -1,36 +1,30 @@
 import * as React from 'react';
 
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-
 import {
   VStack,
   Box,
   Text,
-  OrderedList,
-  ListItem,
-  Grid,
   GridItem,
   Tooltip,
   SimpleGrid,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
-import { InfoIcon } from '@chakra-ui/icons';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import useAppSelector from '../../../../hooks/useAppSelector';
 
 const Referrals: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
-  const { t } = useTranslation().i18n;
+  const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
+  const TooltipHandler = () => {
+    setIsTooltipClicked(!isTooltipClicked);
+  };
 
   return (
     <VStack
@@ -54,7 +48,14 @@ const Referrals: React.FC = () => {
         <Text textStyle="bold5" color="#FFFFFF">
           Referrals
         </Text>
-        <Tooltip hasArrow label="You can see me" mt="3" placement="auto" closeOnClick={false}>
+        <Tooltip
+          hasArrow
+          label="You can see me"
+          mt="3"
+          placement="auto"
+          closeOnClick={false}
+          onClick={TooltipHandler}
+        >
           <img
             style={{ position: 'absolute', right: '-16px', bottom: '20px' }}
             src={TooltopIcon}
