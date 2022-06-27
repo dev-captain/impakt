@@ -28,11 +28,15 @@ import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import useAppSelector from '../../../../hooks/useAppSelector';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
 import { fetchReferrals } from '../../../../lib/redux/slices/referrals/actions/fetchReferrals';
+import { fetchReferralsChallenges } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
 
 const Referrals: React.FC = () => {
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
   const referralsRegisteredNumber = useAppSelector((state) => state.referrals.referrals.totalCount);
+  const referralsChallangesHaveDone = useAppSelector(
+    (state) => state.referrals.referralsChallengesHaveDone,
+  );
   // const { t } = useTranslation().i18n;
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
   const TooltipHandler = () => {
@@ -41,6 +45,7 @@ const Referrals: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchReferrals({ count: true }));
+    dispatch(fetchReferralsChallenges());
   }, []);
 
   return (
@@ -155,37 +160,41 @@ const Referrals: React.FC = () => {
               <Td color="#FEC417" borderBottom={0}>
                 1
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0}>
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneOneChallenge}
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
-                1
+                2
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0}>
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneTwoChallenges}
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
-                1
+                3
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0}>
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneThreeChallenges}
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
-                1
+                4
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0}>
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFourChallenges}
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
-                1
+                5
               </Td>
-              <Td borderBottom={0}>24</Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
-                1
+              <Td borderBottom={0}>
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
               </Td>
-              <Td borderBottom={0}>24</Td>
             </Tr>
           </Tbody>
         </Table>

@@ -1,14 +1,26 @@
-import { ReferreesOfReferrerRes } from '@impakt-dev/api-client-168-merge';
+import {
+  ReferralReferreeChallengesRes,
+  ReferreesOfReferrerRes,
+} from '@impakt-dev/api-client-168-merge';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchReferrals } from './actions/fetchReferrals';
+import { fetchReferralsChallenges } from './actions/fetchReferralsChallenges';
 
 interface ReferralsInitialI {
   referrals: ReferreesOfReferrerRes;
+  referralsChallengesHaveDone: ReferralReferreeChallengesRes;
   isReferralsLoading: boolean;
 }
 
 const referralsInitialState: ReferralsInitialI = {
   referrals: { referrees: [], referrerId: 0 },
+  referralsChallengesHaveDone: {
+    numberOfReferreesWhoHaveDoneFiveChallenges: 0,
+    numberOfReferreesWhoHaveDoneFourChallenges: 0,
+    numberOfReferreesWhoHaveDoneOneChallenge: 0,
+    numberOfReferreesWhoHaveDoneThreeChallenges: 0,
+    numberOfReferreesWhoHaveDoneTwoChallenges: 0,
+  },
   isReferralsLoading: false,
 };
 
@@ -26,6 +38,18 @@ const referralsSlice = createSlice({
         state.isReferralsLoading = false;
       })
       .addCase(fetchReferrals.rejected, (state) => {
+        state.isReferralsLoading = false;
+      });
+
+    builder
+      .addCase(fetchReferralsChallenges.pending, (state) => {
+        state.isReferralsLoading = true;
+      })
+      .addCase(fetchReferralsChallenges.fulfilled, (state, action) => {
+        state.referralsChallengesHaveDone = action.payload;
+        state.isReferralsLoading = false;
+      })
+      .addCase(fetchReferralsChallenges.rejected, (state) => {
         state.isReferralsLoading = false;
       });
   },
