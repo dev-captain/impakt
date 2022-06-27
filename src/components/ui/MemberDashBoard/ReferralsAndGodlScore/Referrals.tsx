@@ -1,26 +1,26 @@
 import * as React from 'react';
 
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+// import { useTranslation } from 'react-i18next';
+// import keys from 'i18n/types';
 
 import {
   VStack,
   Box,
   Text,
-  OrderedList,
-  ListItem,
-  Grid,
+  // OrderedList,
+  // ListItem,
+  // Grid,
   GridItem,
   Tooltip,
   SimpleGrid,
   Table,
   Thead,
   Tbody,
-  Tfoot,
+  // Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
+  // TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
@@ -29,7 +29,7 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 
 const Referrals: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
-  const { t } = useTranslation().i18n;
+  // const { t } = useTranslation().i18n;
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
   const TooltipHandler = () => {
     setIsTooltipClicked(!isTooltipClicked);
