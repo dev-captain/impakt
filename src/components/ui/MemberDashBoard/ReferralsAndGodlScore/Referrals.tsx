@@ -29,6 +29,7 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
 import { fetchReferrals } from '../../../../lib/redux/slices/referrals/actions/fetchReferrals';
 import { fetchReferralsChallenges } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
+import { fetchReferralsReward } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsReward';
 
 const Referrals: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ const Referrals: React.FC = () => {
   const referralsChallangesHaveDone = useAppSelector(
     (state) => state.referrals.referralsChallengesHaveDone,
   );
+  const referralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
   // const { t } = useTranslation().i18n;
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
   const TooltipHandler = () => {
@@ -46,6 +48,7 @@ const Referrals: React.FC = () => {
   React.useEffect(() => {
     dispatch(fetchReferrals({ count: true }));
     dispatch(fetchReferralsChallenges());
+    dispatch(fetchReferralsReward());
   }, []);
 
   return (
@@ -107,7 +110,7 @@ const Referrals: React.FC = () => {
         >
           <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textAlign="center" textStyle="bold5">
-              3,240
+              {referralsReward}
             </Text>
             <Text textAlign="center" mt="6px" textStyle="regular3">
               GODL earned

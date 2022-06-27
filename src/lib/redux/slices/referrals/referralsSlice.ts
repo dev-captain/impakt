@@ -5,10 +5,12 @@ import {
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchReferrals } from './actions/fetchReferrals';
 import { fetchReferralsChallenges } from './actions/fetchReferralsChallenges';
+import { fetchReferralsReward } from './actions/fetchReferralsReward';
 
 interface ReferralsInitialI {
   referrals: ReferreesOfReferrerRes;
   referralsChallengesHaveDone: ReferralReferreeChallengesRes;
+  godlRewardedByReferrals: number;
   isReferralsLoading: boolean;
 }
 
@@ -21,6 +23,7 @@ const referralsInitialState: ReferralsInitialI = {
     numberOfReferreesWhoHaveDoneThreeChallenges: 0,
     numberOfReferreesWhoHaveDoneTwoChallenges: 0,
   },
+  godlRewardedByReferrals: 0,
   isReferralsLoading: false,
 };
 
@@ -50,6 +53,18 @@ const referralsSlice = createSlice({
         state.isReferralsLoading = false;
       })
       .addCase(fetchReferralsChallenges.rejected, (state) => {
+        state.isReferralsLoading = false;
+      });
+
+    builder
+      .addCase(fetchReferralsReward.pending, (state) => {
+        state.isReferralsLoading = true;
+      })
+      .addCase(fetchReferralsReward.fulfilled, (state, action) => {
+        state.isReferralsLoading = false;
+        state.godlRewardedByReferrals = action.payload;
+      })
+      .addCase(fetchReferralsReward.rejected, (state) => {
         state.isReferralsLoading = false;
       });
   },
