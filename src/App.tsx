@@ -27,6 +27,8 @@ const App = () => {
   const handleScroll = () => {
     setScroll(window.scrollY > 50);
     document.body.classList.add('scroll');
+
+    return scroll;
   };
 
   useEffect(() => {

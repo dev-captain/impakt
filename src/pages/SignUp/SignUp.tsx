@@ -18,12 +18,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AxiosError } from 'axios';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
 import GenerateDigitNumber from './component/GenerateDigitNumber';
-import { useUserContext } from '../../context/UserContext';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import useAppSelector from '../../hooks/useAppSelector';
+import { signUpMember } from '../../lib/redux/slices/member/actions/signUpMember';
 
 const signUpFormYupScheme = yup.object().shape({
   memberName: yup.string().required('Membername is required field'),
@@ -50,7 +51,9 @@ const signUpFormYupScheme = yup.object().shape({
 });
 
 const SignUp = () => {
-  const { user, signUp } = useUserContext();
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const toast = useToast();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -60,7 +63,6 @@ const SignUp = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
-  const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -71,8 +73,8 @@ const SignUp = () => {
   });
 
   React.useEffect(() => {
-    if (user) navigate('/signin');
-  }, [user]);
+    if (member) navigate('/signin');
+  }, [member]);
 
   useEffect(() => {
     if (!id) return;
@@ -114,7 +116,6 @@ const SignUp = () => {
   };
 
   const handleRegisterFormSubmit = async (data: any) => {
-    setIsCreateAccountButtonLoading(true);
     const { memberName, fourDigit, email, password } = data;
     const payload = {
       username: `${memberName}#${fourDigit}`,
@@ -123,20 +124,17 @@ const SignUp = () => {
       referrerId: activeReferrerId,
     };
 
-    try {
-      await signUp(payload);
-      toast({
-        title: 'Success',
-        description: 'Your account created successfully.You can now login in the Impakt app.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
+    await dispatch(signUpMember(payload)).unwrap();
 
-      return navigate('/download');
-    } catch (e) {
-      return setIsCreateAccountButtonLoading(false);
-    }
+    toast({
+      title: 'Success',
+      description: 'Your account created successfully.You can now login in the Impakt app.',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
+
+    navigate('/download');
   };
 
   const generateRandomFourDigitNumberString = () => {
@@ -322,7 +320,7 @@ const SignUp = () => {
                 radius="20px"
                 title="Create account"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                isLoading={isCreateAccountButtonLoading}
+                isLoading={isMemberCreateLoading}
               />
             </VStack>
 

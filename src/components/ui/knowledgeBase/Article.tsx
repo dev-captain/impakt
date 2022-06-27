@@ -1,6 +1,7 @@
 import { VStack, Text, Divider } from '@chakra-ui/react';
-import * as Types from 'store/types';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+
+import * as Types from '../../../lib/redux/slices/knowledgeBase/types';
 import Breadcrumb from './Breadcrumb';
 
 type Props = {

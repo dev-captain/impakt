@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 
 import { VStack, Box, Text } from '@chakra-ui/react';
-import { useUserContext } from '../../../../context/UserContext';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
+import useAppSelector from '../../../../hooks/useAppSelector';
 
 const Referrals: React.FC = () => {
-  const { user } = useUserContext();
+  const member = useAppSelector((state) => state.memberAuth.member);
   const { t } = useTranslation().i18n;
 
   return (
@@ -37,7 +37,7 @@ const Referrals: React.FC = () => {
         mt="0 !important"
         id="whitelist-challange-description-box-3"
       >
-        <ReferralCopyClipboard animate userId={user?.id} />
+        <ReferralCopyClipboard animate userId={member?.id} />
       </Box>
     </VStack>
   );
