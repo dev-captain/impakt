@@ -47,7 +47,7 @@ const ReferralCopyClipboard: React.FC<{
         mt="8px"
       >
         <Box>
-          <Text textStyle="regular3">{referralLink}</Text>
+          <Text textStyle={{ base: 'regular2', sm: 'regular3' }}>{referralLink}</Text>
         </Box>
         <Box onClick={copyClipBoardReferralLink}>
           {isCopied ? null : <CopyClipBoardIcon cursor="pointer" width="25" height="28" />}

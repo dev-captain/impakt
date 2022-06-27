@@ -31,7 +31,7 @@ const GodlScore: React.FC = () => {
       alignItems="start"
       padding={{ base: '30px', lg: '40px' }}
       maxH={{ base: 'auto', lg: '548px' }}
-      rowGap="32px"
+      rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
     >
       <Box
@@ -40,7 +40,7 @@ const GodlScore: React.FC = () => {
         mt="0 !important"
         id="whitelist-challange-description-box-2"
       >
-        <Text textStyle="bold5" color="#FFFFFF">
+        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
           {memberInfo?.map((data, i) => (
             <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
               {i === 1 ? `#` : `Hi, `}
@@ -52,11 +52,11 @@ const GodlScore: React.FC = () => {
           <img src={Whitelist} alt="Whitelist" />
         </Box> */}
       </Box>
-      <Box id="whitelist-challange-description-box-2">
+      <Box id="whitelist-challange-description-box-2 " sx={{ marginTop: '0px !important' }}>
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        {/* <Text mt="8px" textStyle="regular3">
+        {/* <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3" >
           You are whitelisted. Congrats!
         </Text> */}
       </Box>
@@ -64,7 +64,7 @@ const GodlScore: React.FC = () => {
       {/* <Grid templateColumns="repeat(2, 1fr)" gap={4}>
 
       </Grid> */}
-      <SimpleGrid display="flex" flexWrap="wrap" width={{ base: '100%' }} gap={4}>
+      <SimpleGrid display="flex" flexWrap="wrap" width={{ base: '100%' }} gap={{ base: 3, lg: 4 }}>
         <GridItem
           w={{ base: '100%', md: '48%', lg: 'auto', xl: 'auto' }}
           h="auto"

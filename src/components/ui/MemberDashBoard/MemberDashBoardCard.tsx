@@ -10,7 +10,7 @@ interface MemberDashboardCardPropsI {
 const MemberDashboardCard: React.FC<MemberDashboardCardPropsI> = ({
   children,
   isGradient,
-  borderRadius = 59,
+  borderRadius = { base: 24, lg: 32 },
 }) => {
   const bgColor = useColorModeValue('glass.800', 'glass.300');
 
