@@ -1,18 +1,27 @@
 import { VStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
-import { useMemberDashBoardContext } from '../../../../context/MemberDashBoardContext';
-import { useUserContext } from '../../../../context/UserContext';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+
+import useAppSelector from '../../../../hooks/useAppSelector';
+import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fetchActiveDays';
+import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 
 const GodlScore: React.FC = () => {
-  const { user } = useUserContext();
-  const { godlBalanceScore, activeDays, fetchActiveDays } = useMemberDashBoardContext();
-  const userName = user?.username;
-  const userInfo = userName?.split('#');
-  // const hiMessage = `Hi, ${user?.username}`;
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
+  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
+  const memberName = member?.username;
+  const memberInfo = memberName?.split('#');
+
   React.useEffect(() => {
-    if (user?.id) {
-      fetchActiveDays(user?.id);
+    dispatch(fetchGodlBalanceScore());
+  }, []);
+
+  React.useEffect(() => {
+    if (member) {
+      dispatch(fetchActiveDays(member.id));
     }
   }, []);
 
@@ -22,7 +31,7 @@ const GodlScore: React.FC = () => {
       alignItems="start"
       padding={{ base: '30px', lg: '40px' }}
       maxH={{ base: 'auto', lg: '548px' }}
-      rowGap="32px"
+      rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
     >
       <Box
@@ -31,9 +40,9 @@ const GodlScore: React.FC = () => {
         mt="0 !important"
         id="whitelist-challange-description-box-2"
       >
-        <Text textStyle="bold5" color="#FFFFFF">
-          {userInfo?.map((data, i) => (
-            <span style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
+        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
+          {memberInfo?.map((data, i) => (
+            <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
               {i === 1 ? `#` : `Hi, `}
               {data}
             </span>
@@ -43,11 +52,11 @@ const GodlScore: React.FC = () => {
           <img src={Whitelist} alt="Whitelist" />
         </Box> */}
       </Box>
-      <Box id="whitelist-challange-description-box-2">
+      <Box id="whitelist-challange-description-box-2 " sx={{ marginTop: '0px !important' }}>
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        {/* <Text mt="8px" textStyle="regular3">
+        {/* <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3" >
           You are whitelisted. Congrats!
         </Text> */}
       </Box>
@@ -55,7 +64,7 @@ const GodlScore: React.FC = () => {
       {/* <Grid templateColumns="repeat(2, 1fr)" gap={4}>
 
       </Grid> */}
-      <SimpleGrid display="flex" flexWrap="wrap" width={{ base: '100%' }} gap={4}>
+      <SimpleGrid display="flex" flexWrap="wrap" width={{ base: '100%' }} gap={{ base: 3, lg: 4 }}>
         <GridItem
           w={{ base: '100%', md: '48%', lg: 'auto', xl: 'auto' }}
           h="auto"

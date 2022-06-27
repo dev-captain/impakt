@@ -5,7 +5,6 @@ import HeroLayout from '../../components/layouts/HeroLayout';
 // import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeImpaktUser/SummarizeImpaktUser';
 // import MemberWhitelistLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
 // import ReferralsAndWhiteListChallange from '../../components/ui/MemberDashBoard/ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';
-import { MemberDashboardContextProvider } from '../../context/MemberDashBoardContext';
 import ReferralsAndGodlScore from '../../components/ui/MemberDashBoard/ReferralsAndGodlScore/ReferralsAndGodlScore';
 
 const MemberDashboard: React.FC = () => {
@@ -19,32 +18,30 @@ const MemberDashboard: React.FC = () => {
       justify="flex-start"
       showDarkOrLightModeOnNavbar={false}
     >
-      <MemberDashboardContextProvider>
-        <VStack rowGap="74px" w="full">
-          <VStack id="referrals-impakt-section" color="white" w="full">
-            <ReferralsAndGodlScore />
-          </VStack>
-          {/* <VStack id="summarize-impakt-user-section" color="white" w="full">
+      <VStack rowGap="74px" w="full">
+        <VStack id="referrals-impakt-section" color="white" w="full">
+          <ReferralsAndGodlScore />
+        </VStack>
+        {/* <VStack id="summarize-impakt-user-section" color="white" w="full">
             <SummarizeImpaktUser />
           </VStack> */}
 
-          {/* <Divider w="75%" />
+        {/* <Divider w="75%" />
 
           <VStack id="impakt-investment-section" color="white" w="full">
             <Investment />
           </VStack> */}
 
-          {/* <Divider w="75%" /> */}
+        {/* <Divider w="75%" /> */}
 
-          {/* <VStack id="referrals-impakt-section" color="white" w="full">
+        {/* <VStack id="referrals-impakt-section" color="white" w="full">
             <ReferralsAndWhiteListChallange />
           </VStack> */}
 
-          {/* <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
+        {/* <VStack id="member-whitelist-leaderboard-section" rowGap="44px" w="full">
             <MemberWhitelistLeaderBoard />
           </VStack> */}
-        </VStack>
-      </MemberDashboardContextProvider>
+      </VStack>
     </HeroLayout>
   );
 };
