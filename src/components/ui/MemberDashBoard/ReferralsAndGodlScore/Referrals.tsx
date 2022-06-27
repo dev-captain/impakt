@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-// import { useTranslation } from 'react-i18next';
-// import keys from 'i18n/types';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
 
 import {
   VStack,
@@ -22,6 +22,7 @@ import {
   Td,
   // TableCaption,
   TableContainer,
+  Link,
 } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
@@ -29,11 +30,7 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 
 const Referrals: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
-  // const { t } = useTranslation().i18n;
-  const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
-  const TooltipHandler = () => {
-    setIsTooltipClicked(!isTooltipClicked);
-  };
+  const { t } = useTranslation().i18n;
 
   return (
     <VStack
@@ -59,11 +56,16 @@ const Referrals: React.FC = () => {
         </Text>
         <Tooltip
           hasArrow
-          label="You can see me"
+          label={
+            <Link href="https://knowledgebase.impakt.com/article-9?category=all-resources">
+              <Text
+                dangerouslySetInnerHTML={{ __html: t(keys.memberDashboard.referrals.description) }}
+              />
+            </Link>
+          }
           mt="3"
           placement="auto"
           closeOnClick={false}
-          onClick={TooltipHandler}
         >
           <Box
             position="absolute"
@@ -71,7 +73,9 @@ const Referrals: React.FC = () => {
             bottom={{ base: '22px', md: '20px' }}
             width={{ base: '24px', md: '32px' }}
           >
-            <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
+            <Link href="https://knowledgebase.impakt.com/article-9?category=all-resources">
+              <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
+            </Link>
           </Box>
         </Tooltip>
       </Box>
@@ -129,6 +133,7 @@ const Referrals: React.FC = () => {
                 color="rgba(255, 255, 255, 0.4) "
                 borderBottom={0}
                 whiteSpace="normal"
+                textTransform="capitalize"
               >
                 Challenges completed
               </Th>
@@ -136,13 +141,14 @@ const Referrals: React.FC = () => {
                 textAlign="start"
                 color="rgba(255, 255, 255, 0.4)"
                 borderBottom={0}
+                textTransform="capitalize"
                 whiteSpace="normal"
               >
                 Number of referrals
               </Th>
             </Tr>
           </Thead>
-          <Tbody display="block" maxHeight="210px" sx={{ overflowY: 'overlay' }}>
+          <Tbody display="block" maxHeight="208px" sx={{ overflowY: 'overlay' }}>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
                 1
