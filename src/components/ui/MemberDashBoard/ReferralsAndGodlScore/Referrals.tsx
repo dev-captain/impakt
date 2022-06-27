@@ -21,8 +21,8 @@ import {
   Th,
   Td,
   // TableCaption,
-  TableContainer,
   Link,
+  TableContainer,
 } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
@@ -96,9 +96,9 @@ const Referrals: React.FC = () => {
             bottom={{ base: '22px', md: '20px' }}
             width={{ base: '24px', md: '32px' }}
           >
-            <Link href="https://knowledgebase.impakt.com/article-9?category=all-resources">
+            <a href="https://knowledgebase.impakt.com/article-9?category=all-resources">
               <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
-            </Link>
+            </a>
           </Box>
         </Tooltip>
       </Box>
