@@ -1802,6 +1802,15 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@impakt-dev/api-client-168-merge@^0.18.0-757":
+  version "0.18.0-757"
+  resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client-168-merge/0.18.0-757/6c42f6111171141dcc2fa22b25e2ac4de99bd33e00312480f6fa4e8b2252c9b9#1e8076f14efe483cb58a306e96917fe645c27daf"
+  integrity sha512-X6EX9NIacM6R80EmB6HjV7Tum7k6GXbDXO4Fy63zgm/SHy6WOf9LyUCbmiABDrO0oqxWA+bRUdatbJ6/7WigDA==
+  dependencies:
+    es6-promise "^4.2.4"
+    url-parse "^1.4.3"
+    whatwg-fetch "^3.0.0"
+
 "@impakt-dev/api-client@^0.17.1":
   version "0.17.1"
   resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client/0.17.1/d96de686f4e96229e26ee9eeccbad4c3c241b050b9130b0c8f7bb4b55bac982d#67a8610313f3a2e4a489ad3107cdb856c27c5880"

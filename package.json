@@ -9,6 +9,7 @@
     "@emotion/styled": "^11",
     "@hookform/resolvers": "^2.8.8",
     "@impakt-dev/api-client": "^0.17.1",
+    "@impakt-dev/api-client-168-merge": "^0.18.0-757",
     "@reduxjs/toolkit": "^1.8.2",
     "@rematch/core": "^2.2.0",
     "@testing-library/jest-dom": "^5.14.1",
