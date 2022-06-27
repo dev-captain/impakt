@@ -10,29 +10,17 @@ import {
   // OrderedList,
   // ListItem,
   // Grid,
-  GridItem,
   Tooltip,
-  SimpleGrid,
-  Table,
-  Thead,
-  Tbody,
   // Tfoot,
-  Tr,
-  Th,
-  Td,
   // TableCaption,
-  TableContainer,
 } from '@chakra-ui/react';
-import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Twitter from '../../../../assets/images/twitter.png';
-import useAppSelector from '../../../../hooks/useAppSelector';
 import Discord from '../../../../assets/images/discord.png';
 import Walletad from '../../../../assets/images/walletad.png';
 import Goldaword from '../../../../assets/images/goldaword.png';
 
 const WhiteList: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
   // const { t } = useTranslation().i18n;
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
   const TooltipHandler = () => {
