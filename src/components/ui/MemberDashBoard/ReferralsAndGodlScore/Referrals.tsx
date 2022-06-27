@@ -26,14 +26,22 @@ import {
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import useAppSelector from '../../../../hooks/useAppSelector';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import { fetchReferrals } from '../../../../lib/redux/slices/referrals/actions/fetchReferrals';
 
 const Referrals: React.FC = () => {
+  const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
+  const referralsRegisteredNumber = useAppSelector((state) => state.referrals.referrals.totalCount);
   // const { t } = useTranslation().i18n;
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
   const TooltipHandler = () => {
     setIsTooltipClicked(!isTooltipClicked);
   };
+
+  React.useEffect(() => {
+    dispatch(fetchReferrals({ count: true }));
+  }, []);
 
   return (
     <VStack
@@ -111,7 +119,7 @@ const Referrals: React.FC = () => {
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text color="#FFFFFF" textAlign="center" textStyle="bold5">
-              75
+              {referralsRegisteredNumber ?? 0}
             </Text>
             <Text color="rgba(255, 255, 255, 0.4)" textAlign="center" mt="6px" textStyle="regular3">
               registered <br />
