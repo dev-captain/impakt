@@ -146,7 +146,7 @@ const Referrals: React.FC = () => {
               </Th>
             </Tr>
           </Thead>
-          <Tbody display="block" maxHeight="208px" sx={{ overflowY: 'overlay' }}>
+          <Tbody display="block" maxHeight="260px" sx={{ overflowY: 'overlay' }}>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
                 1
