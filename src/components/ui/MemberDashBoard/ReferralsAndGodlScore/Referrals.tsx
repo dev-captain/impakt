@@ -72,7 +72,7 @@ const Referrals: React.FC = () => {
             bottom={{ base: '22px', md: '20px' }}
             width={{ base: '24px', md: '32px' }}
           >
-            <Link href="https://knowledgebase.impakt.com/referral-rewards-2?category=all-resources">
+            <Link href="https://knowledgebase.impakt.com/referral-rewards?category=all-resources">
               <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
             </Link>
           </Box>
