@@ -42,6 +42,7 @@ const Referrals: React.FC = () => {
       rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
       backgroundColor="rgba(28, 28, 40, 0.65);"
+      backdropBlur="40px"
     >
       <Box
         display="flex"
@@ -151,37 +152,41 @@ const Referrals: React.FC = () => {
               <Td color="#FEC417" borderBottom={0}>
                 1
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0} textStyle="regular4">
+                24
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
-                1
+                2
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0} textStyle="regular4">
+                24
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
-                1
+                3
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0} textStyle="regular4">
+                24
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
-                1
+                4
               </Td>
-              <Td borderBottom={0}>24</Td>
+              <Td borderBottom={0} textStyle="regular4">
+                24
+              </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
-                1
+              <Td color="#FEC417" borderBottom={0} textStyle="bold4">
+                5
               </Td>
-              <Td borderBottom={0}>24</Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
-                1
+              <Td borderBottom={0} textStyle="bold4">
+                24
               </Td>
-              <Td borderBottom={0}>24</Td>
             </Tr>
           </Tbody>
         </Table>

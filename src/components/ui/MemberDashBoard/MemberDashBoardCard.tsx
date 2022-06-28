@@ -16,9 +16,9 @@ const MemberDashboardCard: React.FC<MemberDashboardCardPropsI> = ({
 
   return (
     <VStack
-      bgColor={bgColor}
+      // bgColor={bgColor}
       w="full"
-      filter="drop-shadow(0px 8.55078px 17.1016px rgba(0, 0, 0, 0.12)) drop-shadow(0px 8.55078px 29.9277px rgba(0, 0, 0, 0.1))"
+      // filter="drop-shadow(0px 8.55078px 17.1016px rgba(0, 0, 0, 0.12)) drop-shadow(0px 8.55078px 29.9277px rgba(0, 0, 0, 0.1))"
       borderRadius={borderRadius}
       position="relative"
       overflow="hidden"
