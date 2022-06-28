@@ -57,11 +57,9 @@ const Referrals: React.FC = () => {
         <Tooltip
           hasArrow
           label={
-            <Link href="https://knowledgebase.impakt.com/article-9?category=all-resources">
-              <Text
-                dangerouslySetInnerHTML={{ __html: t(keys.memberDashboard.referrals.description) }}
-              />
-            </Link>
+            <Text
+              dangerouslySetInnerHTML={{ __html: t(keys.memberDashboard.referrals.description) }}
+            />
           }
           mt="3"
           placement="auto"
@@ -73,7 +71,7 @@ const Referrals: React.FC = () => {
             bottom={{ base: '22px', md: '20px' }}
             width={{ base: '24px', md: '32px' }}
           >
-            <Link href="https://knowledgebase.impakt.com/article-9?category=all-resources">
+            <Link href="https://knowledgebase.impakt.com/referral-rewards-2?category=all-resources">
               <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
             </Link>
           </Box>
