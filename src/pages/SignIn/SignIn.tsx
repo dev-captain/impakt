@@ -42,6 +42,9 @@ const SignIn = () => {
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
+  const requestAccessTokenAttemp = useAppSelector(
+    (state) => state.memberAuth.requestAccessTokenAttemptCount,
+  );
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const navigate = useNavigate();
   const { t } = useTranslation().i18n;
@@ -64,15 +67,24 @@ const SignIn = () => {
       duration: 2000,
       status: 'info',
     });
-
-    await dispatch(
+    const request = await dispatch(
       requestAccessToken({
         discoursePayload: queryString.DiscoursePayload,
         discourseSig: queryString.DiscourseSig,
       }),
     ).unwrap();
 
-    toast({
+    if (request.discourseRedirectUrl === undefined) {
+      return toast({
+        title: 'Error',
+        description: ' "Something went wrong...',
+        isClosable: false,
+        duration: 2000,
+        status: 'error',
+      });
+    }
+
+    return toast({
       title: 'Success',
       description: ' "Redirecting to forums..',
       isClosable: false,
@@ -89,9 +101,11 @@ const SignIn = () => {
     }
 
     if (member && queryString.DiscourseConnect) {
-      requestAccessTokenAsync();
+      if (requestAccessTokenAttemp !== 1) {
+        requestAccessTokenAsync();
 
-      return;
+        return;
+      }
     }
 
     if (member) navigate('/dashboard');

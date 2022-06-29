@@ -17,7 +17,7 @@ const persistConfig = {
 export const memberAuthPersistConfig = {
   key: 'memberAuth',
   storage,
-  blacklist: ['isLoading'],
+  blacklist: ['isLoading', 'requestAccessTokenAttemptCount'],
 };
 
 const rootReducer = combineReducers({

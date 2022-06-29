@@ -12,12 +12,14 @@ interface MemberAuthInitialI {
   member: GetUserRes | null;
   isLogin: boolean;
   isLoading: boolean;
+  requestAccessTokenAttemptCount: number;
 }
 
 const memberAuthInitialState: MemberAuthInitialI = {
   member: null,
   isLoading: false,
   isLogin: false,
+  requestAccessTokenAttemptCount: 0,
 };
 
 const memberAuthSlice = createSlice({
@@ -107,6 +109,9 @@ const memberAuthSlice = createSlice({
       .addCase(requestAccessToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.member = action.payload;
+        if (action.payload.discourseRedirectUrl === undefined) {
+          state.requestAccessTokenAttemptCount = 1;
+        }
       })
       .addCase(requestAccessToken.rejected, (state) => {
         state.isLoading = false;
