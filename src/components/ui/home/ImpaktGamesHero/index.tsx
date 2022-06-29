@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Text, Flex, Image } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import HeroVideo from './HeroVideo';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
+import StarsVideo from './StarsVideo';
 
 const ImpaktGamesHero = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
@@ -21,8 +22,8 @@ const ImpaktGamesHero = () => {
     >
       <VStack w="full">
         <VStack maxW={{ base: '100%', lg: '1200px' }} w="full">
-          <HStack w="full" justify="space-between">
-            <VStack rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
+          <HStack columnGap="48px" alignItems="flex-start" w="full">
+            <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
               <Box
                 id="hero-headline-box"
                 backgroundClip="text"
@@ -42,12 +43,17 @@ const ImpaktGamesHero = () => {
                   Gamified.
                 </Text>
               </Box>
-              <Box mt="0 !important" id="hero-headline-description" backgroundClip="text">
+              <Box
+                ml="7px !important"
+                mt="0 !important"
+                id="hero-headline-description"
+                backgroundClip="text"
+              >
                 <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular20">
                   Work out! Get fit! Get paid!
                 </Text>
               </Box>
-              <Box w="500px" id="hero-info-card-box">
+              <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
                 <InfoCard isShowTooltip LeftLogo={<YoutubeIcon />}>
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>
@@ -61,12 +67,30 @@ const ImpaktGamesHero = () => {
                 </InfoCard>
               </Box>
             </VStack>
-            <Box>Right</Box>
-            <HeroVideo />
-            {/* <Box></Box> */}
+            <HStack w="full">
+              <Box position="relative" height="700px" width="500px">
+                <StarsVideo />
+                <Box zIndex="0" position="absolute" top="251px" left="-1.31%" minW="640px" w="100%">
+                  <Image height="380px" w="650px" src={Images.Common.window} alt="_" />
+                </Box>
+                <div
+                  className="shadow"
+                  style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
+                    top: '0',
+                    left: '0',
+                    borderRadius: '150px 150px 0px 0',
+                  }}
+                />
+              </Box>
+            </HStack>
           </HStack>
         </VStack>
       </VStack>
+      <HeroVideo />
     </HeroLayout>
   );
 };

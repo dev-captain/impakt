@@ -22,6 +22,7 @@ const Images = {
     blitzChallenge: require('./blitz-challenge.png'),
     bgWave: require('./bg-wave.png'),
     play: require('./play.png'),
+    window: require('./window.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),

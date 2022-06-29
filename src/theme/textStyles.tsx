@@ -152,8 +152,8 @@ export default {
   TitleBold73: {
     fontWeight: '700',
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
-    fontSize: { base: '96px', sm: '120px', md: '98px', xl: '120px' },
-    lineHeight: { base: '96px', sm: '120px', md: '98px', xl: '120px' },
+    fontSize: '96px',
+    lineHeight: '96px',
   },
   accentGradient: {
     bgClip: 'text',

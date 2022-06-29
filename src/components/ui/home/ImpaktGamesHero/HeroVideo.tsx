@@ -8,22 +8,12 @@ const rotate = keyframes`
     transform: scale(1);
     top:0;
     left: 0;
-    max-width:unset;
-    max-height:unset;
-  }
-
-  50% {
-    transform: scale(1);
-    top:0;
-    left: 0;
-    max-width:unset;
-    max-height:unset;
   }
 
   100% {
-  transform: scale(0.3);
-  top:5%;
-  left: 20%;
+  transform: scale(0.297);
+  top:50px;
+  left: 342px;
   }
 `;
 
@@ -31,17 +21,18 @@ const Video = styled.video<{ isScrolling: boolean }>`
   object-fit: cover;
   width: 100vw;
   height: 100vh;
+  z-index:999;
   position: fixed;
   animation:${(p) =>
     p.isScrolling &&
     css`
-      ${rotate} 3s linear;
+      ${rotate} 1s linear;
     `}
   animation-fill-mode: forwards;
   top: 0;
   left: 0;
   margin:0 !important;
-  border-radius:0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
 `;
 
 const Source = styled.source``;
