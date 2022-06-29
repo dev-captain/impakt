@@ -34,15 +34,24 @@ const ReferralCopyClipboard: React.FC<{
   return (
     <>
       <Box>
-        {!isBadge && <Text textStyle="semiBold16">{t(keys.memberDashboard.yourReferralLink)}</Text>}
-        <Text textStyle="bold4">{referralLink}</Text>
+        {!isBadge && <Text textStyle="regular3">{t(keys.memberDashboard.yourReferralLink)}</Text>}
       </Box>
       <Box
         ml={isBadge ? '0.8em' : '0px !important'}
-        onClick={copyClipBoardReferralLink}
-        cursor="pointer"
+        display="flex"
+        justifyContent="space-between"
+        bgColor="rgba(9, 9, 11, 0.4);"
+        p="17px 24px"
+        borderRadius="16px"
+        alignItems="center"
+        mt="8px"
       >
-        {isCopied ? null : <CopyClipBoardIcon width="25" height="28" />}
+        <Box>
+          <Text textStyle={{ base: 'regular2', sm: 'regular3' }}>{referralLink}</Text>
+        </Box>
+        <Box onClick={copyClipBoardReferralLink}>
+          {isCopied ? null : <CopyClipBoardIcon cursor="pointer" width="25" height="28" />}
+        </Box>
       </Box>
     </>
   );

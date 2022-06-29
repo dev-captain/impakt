@@ -1,4 +1,4 @@
-import { RequestPasswordResetReq } from '@impakt-dev/api-client';
+import { RequestPasswordResetReq } from '@impakt-dev/api-client-168-merge';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';

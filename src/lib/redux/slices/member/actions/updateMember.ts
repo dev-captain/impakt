@@ -1,4 +1,4 @@
-import { PatchUserReq } from '@impakt-dev/api-client';
+import { PatchUserReq } from '@impakt-dev/api-client-168-merge';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { UserInstance } from '../../../../impakt-dev-api-client/init';
