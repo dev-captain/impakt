@@ -9,6 +9,7 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
+  Button,
 } from '@chakra-ui/react';
 import { Socials } from 'data';
 import Images from 'assets/images';
@@ -69,7 +70,7 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
       w="full"
       display={isLessThan1040 ? 'auto' : 'flex'}
       justifyContent="center"
-      boxShadow="0px 4px 26px rgba(0, 0, 0, 0.25)"
+      sx={{ position: 'fixed', top: '0' }}
     >
       {isOpen && <Gradient />}
       <Flex
@@ -83,14 +84,10 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
         position="relative"
         alignItems="center"
         px="16px"
+        className="navBg"
         bgColor={isOpen ? bgColor : 'transparent'}
       >
         <HStack w="full" justify="space-between">
-          <CollapseMenuController
-            isOpen={isOpen}
-            onToggle={onToggle}
-            isLessThan1040={isLessThan1040}
-          />
           <Box onClick={() => navigate('/')} zIndex={100}>
             <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} />
           </Box>
@@ -139,8 +136,8 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                   <Text>Zh</Text>
                 </Button> */}
               </HStack>
-              <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
-                <Box as="a" target="_blank" href={Socials.twitter}>
+              <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
+                <Box mr="24px !important" as="a" target="_blank" href={Socials.twitter}>
                   <Image
                     maxW="35px"
                     minW="35px"
@@ -151,7 +148,7 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                     {..._hover}
                   />
                 </Box>
-                <Box as="a" target="_blank" href={Socials.discord}>
+                <Box me="24px !important" as="a" target="_blank" href={Socials.discord}>
                   <Image
                     maxW="32px"
                     minW="32px"
@@ -162,7 +159,7 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                     {..._hover}
                   />
                 </Box>
-                <Box as="a" target="_blank" href={Socials.youtube}>
+                <Box me="24px !important" as="a" target="_blank" href={Socials.youtube}>
                   <Image
                     maxW="32px"
                     minW="32px"
@@ -173,7 +170,7 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                     {..._hover}
                   />
                 </Box>
-                {showDarkOrLightModeButton && (
+                {/* {showDarkOrLightModeButton && (
                   <Box
                     as="button"
                     onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
@@ -186,14 +183,14 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                       {..._hover}
                     />
                   </Box>
-                )}
+                )} */}
                 <Box display="flex">
                   <DropDownProfileMenu />
                 </Box>
-
-                <Box as="button">
+                <Box>
                   <SignInLinkItem />
                 </Box>
+                <Button colorScheme="red">{t(Keys.navbar.download)}</Button>
               </HStack>
             </HStack>
           </HStack>
@@ -208,6 +205,7 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
               pl={{ base: 0, md: '64px' }}
               spacing={{ base: '6px', md: '32px' }}
               justify={{ base: 'center', md: 'flex-end' }}
+              display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
             >
               <Box as="a" target="_blank" href={Socials.twitter}>
                 <Image
@@ -259,9 +257,24 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
               )}
             </HStack>
           </HStack>
+          <CollapseMenuController
+            isOpen={isOpen}
+            onToggle={onToggle}
+            isLessThan1040={isLessThan1040}
+          />
         </HStack>
       </Flex>
-      <CollapseMenu isOpen={isOpen} onClose={onClose} bg={bgColor} textColor={textColor} />
+      <CollapseMenu
+        isOpen={isOpen}
+        onClose={onClose}
+        bg={bgColor}
+        textColor={textColor}
+        isLessThan1040={isLessThan1040}
+        twitter={twitter}
+        discord={discord}
+        hover={_hover}
+        youtube={youtube}
+      />
     </Box>
   );
 };

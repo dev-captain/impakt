@@ -1,7 +1,6 @@
 import { Text, VStack, Box } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SelectedNavbarLinkBorder from './SelectedNavbarLinkBorder';
 
 type Props = {
   href: string;
@@ -75,7 +74,7 @@ const NavbarLinkItem = ({
           </Text>
         </Box>
       )}
-      {isActive && !hide && <SelectedNavbarLinkBorder />}
+      {isActive && !hide}
     </VStack>
   );
 };
