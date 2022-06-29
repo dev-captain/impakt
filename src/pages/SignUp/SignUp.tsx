@@ -3,10 +3,10 @@ import {
   VStack,
   Text,
   useBreakpointValue,
-  useToast,
   Flex,
   Box,
   Link,
+  useToast,
 } from '@chakra-ui/react';
 import GradientButton from 'components/core/GradientButton';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -14,23 +14,32 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
-import axios, { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';
-
-const apiBaseUrl = process.env.REACT_APP_API;
+import GenerateDigitNumber from './component/GenerateDigitNumber';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import useAppSelector from '../../hooks/useAppSelector';
+import { signUpMember } from '../../lib/redux/slices/member/actions/signUpMember';
 
 const signUpFormYupScheme = yup.object().shape({
-  username: yup.string().required('Username is required field'),
+  memberName: yup.string().required('Membername is required field'),
+  fourDigit: yup
+    .string()
+    .test('len', ' ', (val) => {
+      return val?.length === 4;
+    })
+    .matches(/^\d+$/, ' ')
+    .required(' '),
   email: yup
     .string()
     .email('Email field should be a valid email')
-    .required('Email is required field'),
+    .required('Email is required field')
+    .default(''),
   password: yup
     .string()
     .required('Password is required field')
@@ -42,15 +51,18 @@ const signUpFormYupScheme = yup.object().shape({
 });
 
 const SignUp = () => {
-  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const toast = useToast();
+  const navigate = useNavigate();
+  const { id } = useParams();
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
-  const [isCreateAccountButtonLoading, setIsCreateAccountButtonLoading] = useState(false);
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -59,6 +71,10 @@ const SignUp = () => {
     xl: false,
     '2xl': false,
   });
+
+  React.useEffect(() => {
+    if (member) navigate('/signin');
+  }, [member]);
 
   useEffect(() => {
     if (!id) return;
@@ -73,62 +89,57 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    register,
+    getValues,
   } = useForm({
     resolver: yupResolver(signUpFormYupScheme),
+    defaultValues: {
+      memberName: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      fourDigit: '',
+    },
   });
 
+  useEffect(() => {
+    register('password');
+    register('passwordConfirmation');
+    register('memberName');
+    register('fourDigit');
+    register('email');
+    generateRandomFourDigitNumberString();
+  }, []);
+
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name, e.target.value, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value, { shouldValidate: true });
   };
 
   const handleRegisterFormSubmit = async (data: any) => {
-    const url = `${apiBaseUrl}/iam/user`;
+    const { memberName, fourDigit, email, password } = data;
+    const payload = {
+      username: `${memberName}#${fourDigit}`,
+      password,
+      email,
+      referrerId: activeReferrerId,
+    };
 
-    setIsCreateAccountButtonLoading(true);
-    try {
-      const { username, email, password } = data;
-      const payload = {
-        username,
-        password,
-        email,
-        referrerId: activeReferrerId,
-      };
+    await dispatch(signUpMember(payload)).unwrap();
 
-      await axios.post(url, payload);
+    toast({
+      title: 'Success',
+      description: 'Your account created successfully.You can now login in the Impakt app.',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
 
-      toast({
-        title: 'Success',
-        description: 'Your account created successfully.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (err) {
-      const error = err as AxiosError;
-      const { status } = error.response ?? {};
-      if (status && status >= 400 && status < 500) {
-        toast({
-          title: 'Error',
-          description:
-            error.response?.data.message && error.response.data.message.length > 1
-              ? error.response.data.message
-              : 'Something went wrong.Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Something went wrong. Please contact support.',
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
-      }
-    }
+    navigate('/download');
+  };
 
-    return setIsCreateAccountButtonLoading(false);
+  const generateRandomFourDigitNumberString = () => {
+    const generatedNumber = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString();
+    setValue('fourDigit', generatedNumber, { shouldValidate: true });
   };
 
   return (
@@ -187,22 +198,50 @@ const SignUp = () => {
             w="full"
             borderRadius={16}
           >
-            <TextField
-              zIndex="999"
-              isOutlined
-              name="username"
-              fontSize="14px"
-              textStyle="regular2"
-              onChange={onChange}
-              placeholder={t(keys.signUp.username)}
-              _placeholder={{ color: textColor, fontSize: '14px' }}
-              type="text"
-              error={errors.username ? errors.username.message : ''}
-            />
+            <Flex justifyContent="space-between" w="full">
+              <TextField
+                name="memberName"
+                zIndex="999"
+                isOutlined
+                fontSize="14px"
+                textStyle="regular2"
+                onChange={onChange}
+                placeholder={t(keys.signUp.memberName)}
+                _placeholder={{ color: textColor, fontSize: '14px' }}
+                type="text"
+                error={errors.memberName ? errors.memberName.message : ''}
+              />
+
+              <TextField
+                name="fourDigit"
+                boxWidth="40%"
+                zIndex="999"
+                isOutlined
+                fontSize="14px"
+                textStyle="regular2"
+                onChange={onChange}
+                value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
+                placeholder={t(keys.signUp.fourDigit)}
+                _placeholder={{ color: textColor, fontSize: '14px' }}
+                type="number"
+                error={errors.fourDigit ? errors.fourDigit.message : ''}
+              >
+                <Box
+                  as="span"
+                  position="absolute"
+                  top="3"
+                  left="0.5"
+                  textColor="whiteAlpha.400"
+                  zIndex={2000}
+                >
+                  #
+                </Box>
+              </TextField>
+            </Flex>
 
             <TextField
-              isOutlined
               name="email"
+              isOutlined
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
@@ -212,8 +251,8 @@ const SignUp = () => {
               error={errors.email ? errors.email.message : ''}
             />
             <TextField
-              isOutlined
               name="password"
+              isOutlined
               fontSize="14px"
               textStyle="regular2"
               onChange={onChange}
@@ -281,12 +320,29 @@ const SignUp = () => {
                 radius="20px"
                 title="Create account"
                 bgGradient="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                isLoading={isCreateAccountButtonLoading}
+                isLoading={isMemberCreateLoading}
               />
             </VStack>
+
+            <Flex mt="8px !important" justifyContent="center">
+              <Text textStyle="regular2" pos="relative">
+                Already have an account?
+                <Box
+                  onClick={() => navigate('/signin')}
+                  mx="5px"
+                  cursor="pointer"
+                  textColor={accentRedtextColor}
+                  as="span"
+                >
+                  Login
+                </Box>
+              </Text>
+            </Flex>
           </VStack>
 
           <Gradients />
+
+          <GenerateDigitNumber onClick={generateRandomFourDigitNumberString} />
         </VStack>
       </VStack>
     </HeroLayout>

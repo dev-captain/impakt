@@ -1,5 +1,6 @@
 import { Select } from '@chakra-ui/react';
-import * as Types from 'store/types';
+
+import * as Types from '../../../lib/redux/slices/knowledgeBase/types';
 
 type CategorySelectBoxProps = {
   categories: Types.Category[];

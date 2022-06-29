@@ -19,12 +19,14 @@ import Keys from 'i18n/types';
 import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
+import DropDownProfileMenu from './DropDownProfileMenu';
+import SignInLinkItem from './SignInLinkItem';
 
 const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
   Images.Common;
 
-const Navbar = () => {
+const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButton?: boolean }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -32,6 +34,19 @@ const Navbar = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
   const { colorMode, setColorMode } = useColorMode();
+
+  useEffect(() => {
+    if (!isLessThan1040) {
+      onClose();
+    }
+  }, [isLessThan1040, onClose]);
+
+  useEffect(() => {
+    if (path.path === 'dashboard') {
+      setColorMode('light');
+    }
+  }, [path.path]);
+
   const isLight = colorMode === 'light';
   const youtube = isLight ? Youtube : YoutubeLight;
   const discord = isLight ? Discord : DiscordLight;
@@ -46,12 +61,6 @@ const Navbar = () => {
       transform: 'scale(1.25)',
     },
   };
-
-  useEffect(() => {
-    if (!isLessThan1040) {
-      onClose();
-    }
-  }, [isLessThan1040, onClose]);
 
   return (
     <Box
@@ -164,17 +173,26 @@ const Navbar = () => {
                     {..._hover}
                   />
                 </Box>
-                <Box
-                  as="button"
-                  onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
-                >
-                  <Image
-                    w="26px"
-                    h="26px"
-                    objectFit="contain"
-                    src={colorMode === 'dark' ? dark : light}
-                    {..._hover}
-                  />
+                {showDarkOrLightModeButton && (
+                  <Box
+                    as="button"
+                    onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
+                  >
+                    <Image
+                      w="26px"
+                      h="26px"
+                      objectFit="contain"
+                      src={colorMode === 'dark' ? dark : light}
+                      {..._hover}
+                    />
+                  </Box>
+                )}
+                <Box display="flex">
+                  <DropDownProfileMenu />
+                </Box>
+
+                <Box as="button">
+                  <SignInLinkItem />
                 </Box>
               </HStack>
             </HStack>
@@ -224,19 +242,21 @@ const Navbar = () => {
                   {..._hover}
                 />
               </Box>
-              <Box
-                as="button"
-                onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
-              >
-                <Image
-                  w="26px"
-                  h="26px"
-                  minW="26px"
-                  objectFit="contain"
-                  src={colorMode === 'dark' ? dark : light}
-                  {..._hover}
-                />
-              </Box>
+              {path.path !== 'dashboard' && (
+                <Box
+                  as="button"
+                  onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
+                >
+                  <Image
+                    w="26px"
+                    h="26px"
+                    minW="26px"
+                    objectFit="contain"
+                    src={colorMode === 'dark' ? dark : light}
+                    {..._hover}
+                  />
+                </Box>
+              )}
             </HStack>
           </HStack>
         </HStack>

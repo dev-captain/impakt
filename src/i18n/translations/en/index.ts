@@ -18,6 +18,9 @@ export default {
     impaktFitness: 'Impakt Fitness',
     knowledgeBase: 'Knowledge Base',
     download: 'Download Platform',
+    dashboard: 'Dashboard',
+    signOut: 'Sign Out',
+    signIn: 'Sign in',
   },
   computerVision: {
     computerVision: 'Computer vision',
@@ -93,8 +96,16 @@ export default {
   signUp: {
     createAn: 'Create an',
     account: 'account',
-    yourUsername: 'Username',
     yourEmail: 'Email',
+    fourDigit: '0000',
+    memberName: `Membername`,
+  },
+  signIn: {
+    signIn: `Sign in`,
+    createAn: `Create an account`,
+    firstTime: `First time?`,
+    signInButton: `Sign In`,
+    email: `Email...`,
   },
   verification: {
     verification: 'Verification',
@@ -105,5 +116,31 @@ export default {
     wrong: 'wrong',
     message: 'Perhaps the link has expired or something went wrong. Please try again.',
     loading: 'loading',
+  },
+  memberDashboard: {
+    referrals: {
+      headline: 'Referrals',
+      subHeadline: 'Refer friends and together earn $6 USD in Crypto',
+      description:
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong>$1 USD in Crypto</strong> and they receive <strong>$5 USD in Crypto</strong>.',
+      subDescription:
+        'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
+      discription_list1: 'WLs',
+      discription_list2: 'Genesis NFT',
+      discription_list3: 'Crypto Allocations',
+      discription_list4: 'Crypto Tokens (1000 GODL = $1 USD worth of our tokens)',
+      descriptionFooter:
+        'Have your friends join us on the Impakt Rocket and let’s moon it together!',
+    },
+    yourReferralLink: `Your referral link:`,
+    whitelist: {
+      headline: 'Whitelist Challenge',
+      subHeadline: 'Top 2500 members on the member whitelist leaderboard will get whitelisted.',
+      description: 'Your total score & rank on the leaderboard is determined by summing up:',
+      description2: 'It pays to workout with your friends!',
+      item1: 'All your workout scores',
+      item2: "5% of your referred friends' workout scores",
+      item3: "2% of your referred friends' referrals' workout scores",
+    },
   },
 };

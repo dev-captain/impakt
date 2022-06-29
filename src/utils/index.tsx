@@ -16,4 +16,16 @@ export const parsePathname = (pathname: string) => {
   };
 };
 
+export const parseUrlQueryParamsToKeyValuePairs = (queryString: string) => {
+  return queryString
+    .split(/[?&]/)
+    .filter((x) => x.includes('='))
+    .map((x) => x.split(/=/))
+    .reduce<{ [key: string]: any }>((p, c) => ({ ...p, [c[0]]: c[1] }), {});
+};
+export function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 export default {};

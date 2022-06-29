@@ -1,9 +1,12 @@
-import { VStack, Collapse } from '@chakra-ui/react';
+import { VStack, Collapse, useToast } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import NavbarLinkItem from './NavbarLinkItem';
+import useAppSelector from '../../../hooks/useAppSelector';
+import useAppDispatch from '../../../hooks/useAppDispatch';
+import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 
 type Props = {
   bg: string;
@@ -13,6 +16,9 @@ type Props = {
 };
 
 const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
+  const dispatch = useAppDispatch();
+  const toast = useToast();
+  const member = useAppSelector((state) => state.memberAuth.member);
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;
@@ -48,6 +54,41 @@ const CollapseMenu = ({ isOpen, onClose, bg, textColor }: Props) => {
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
         />
+        {member && (
+          <NavbarLinkItem
+            href="/dashboard"
+            onClose={onClose}
+            title={t(Keys.navbar.dashboard)}
+            isActive={path.path === 'dashboard'}
+          />
+        )}
+
+        {member && (
+          <NavbarLinkItem
+            href="#"
+            onClose={async () => {
+              await dispatch(signOutMember()).unwrap();
+              toast({
+                title: 'Success',
+                description: 'You have successfully logged out!',
+                isClosable: true,
+                duration: 8000,
+                status: 'success',
+              });
+              onClose();
+            }}
+            title={t(Keys.navbar.signOut)}
+            isActive={path.path === '#'}
+          />
+        )}
+
+        {!member && (
+          <NavbarLinkItem
+            href="/signin"
+            title={t(Keys.navbar.signIn)}
+            isActive={path.path === 'signin'}
+          />
+        )}
       </VStack>
     </Collapse>
   );
