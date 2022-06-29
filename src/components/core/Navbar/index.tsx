@@ -27,7 +27,7 @@ const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
   Images.Common;
 
-const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButton?: boolean }) => {
+const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButton?: boolean }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -170,7 +170,7 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                     {..._hover}
                   />
                 </Box>
-                {/* {showDarkOrLightModeButton && (
+                {!showDarkOrLightModeButton && (
                   <Box
                     as="button"
                     onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
@@ -183,7 +183,7 @@ const Navbar = ({ showDarkOrLightModeButton = true }: { showDarkOrLightModeButto
                       {..._hover}
                     />
                   </Box>
-                )} */}
+                )}
                 <Box display="flex">
                   <DropDownProfileMenu />
                 </Box>
