@@ -15,9 +15,9 @@ export default {
   navbar: {
     events: 'Events',
     contactUs: 'Contact Us',
-    impaktFitness: 'Impakt Fitness',
+    impaktFitness: 'Fitness',
     knowledgeBase: 'Knowledge Base',
-    download: 'Download Platform',
+    download: 'Download',
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
     signIn: 'Sign in',
