@@ -66,7 +66,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
   return (
     <Box
       pos="absolute"
-      zIndex="101"
+      zIndex="99999"
       w="full"
       display={isLessThan1040 ? 'auto' : 'flex'}
       justifyContent="center"

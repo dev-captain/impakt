@@ -12,7 +12,7 @@ const rotate = keyframes`
 
   100% {
   transform: scale(0.297);
-  top:50px;
+  top:30px;
   left: 342px;
   }
 `;

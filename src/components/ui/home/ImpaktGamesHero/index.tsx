@@ -20,7 +20,7 @@ const ImpaktGamesHero = () => {
       align="flex-start"
       justify="flex-start"
     >
-      <VStack w="full">
+      <VStack paddingTop="15px" w="full">
         <VStack maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
             <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
@@ -70,7 +70,14 @@ const ImpaktGamesHero = () => {
             <HStack w="full">
               <Box position="relative" height="700px" width="500px">
                 <StarsVideo />
-                <Box zIndex="0" position="absolute" top="251px" left="-1.31%" minW="640px" w="100%">
+                <Box
+                  zIndex="0"
+                  position="absolute"
+                  top="215.7px"
+                  left="-1.31%"
+                  minW="640px"
+                  w="100%"
+                >
                   <Image height="380px" w="650px" src={Images.Common.window} alt="_" />
                 </Box>
                 <div
