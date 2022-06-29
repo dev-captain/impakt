@@ -67,30 +67,35 @@ const SignIn = () => {
       duration: 2000,
       status: 'info',
     });
-    const request = await dispatch(
-      requestAccessToken({
-        discoursePayload: queryString.DiscoursePayload,
-        discourseSig: queryString.DiscourseSig,
-      }),
-    ).unwrap();
 
-    if (request.discourseRedirectUrl === undefined) {
+    try {
+      const request = await dispatch(
+        requestAccessToken({
+          discoursePayload: queryString.DiscoursePayload,
+          discourseSig: queryString.DiscourseSig,
+        }),
+      ).unwrap();
+
+      if (request.discourseRedirectUrl === undefined) {
+        return toast({
+          title: 'Error',
+          description: ' "Something went wrong...',
+          isClosable: false,
+          duration: 2000,
+          status: 'error',
+        });
+      }
+
       return toast({
-        title: 'Error',
-        description: ' "Something went wrong...',
+        title: 'Success',
+        description: ' "Redirecting to forums..',
         isClosable: false,
         duration: 2000,
-        status: 'error',
+        status: 'success',
       });
+    } catch (error: any) {
+      return null;
     }
-
-    return toast({
-      title: 'Success',
-      description: ' "Redirecting to forums..',
-      isClosable: false,
-      duration: 2000,
-      status: 'success',
-    });
   }, []);
 
   useEffect(() => {

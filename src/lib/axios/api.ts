@@ -15,8 +15,9 @@ axios.interceptors.response.use(
     // Reject promise if usual error
     const originalRequest = error.config;
 
-    console.log('Error', error);
-    if (error.response.status !== 401) {
+    const errMsj = JSON.parse(error.response.data);
+
+    if (error.response.status !== 401 || errMsj?.message.includes('Please verify your email')) {
       return Promise.reject(error);
     }
 
