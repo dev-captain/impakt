@@ -40,7 +40,7 @@ const Images = {
   } as any,
 
   impaktGames: {
-    Header: require('./bg.png'),
+    Header: require('./latestdefaultbg.jpg'),
     light: require('./bg-light.png'),
   },
   advisor: {

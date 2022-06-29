@@ -1,19 +1,28 @@
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
+import { Videos } from '../../../../data';
+
 const rotate = keyframes`
   0% {
     transform: scale(1);
+    top:0;
     left: 0;
+    max-width:unset;
+    max-height:unset;
   }
 
   50% {
     transform: scale(1);
+    top:0;
     left: 0;
+    max-width:unset;
+    max-height:unset;
   }
 
   100% {
-  transform: scale(0.5);
+  transform: scale(0.3);
+  top:5%;
   left: 20%;
   }
 `;
@@ -26,16 +35,18 @@ const Video = styled.video<{ isScrolling: boolean }>`
   animation:${(p) =>
     p.isScrolling &&
     css`
-      ${rotate} 5s linear;
+      ${rotate} 3s linear;
     `}
   animation-fill-mode: forwards;
   top: 0;
   left: 0;
+  margin:0 !important;
+  border-radius:0px 0px 10px 10px;
 `;
 
 const Source = styled.source``;
 
-const ScreenAndVideo = () => {
+const HeroVideo = () => {
   const [isScrolling, setIsScrolling] = React.useState(false);
 
   return (
@@ -48,9 +59,9 @@ const ScreenAndVideo = () => {
       loop
       muted
     >
-      <Source src=".../asd.mp4" />
+      <Source src={Videos.heroVideo} type="video/mp4" />
     </Video>
   );
 };
 
-export default memo(ScreenAndVideo);
+export default memo(HeroVideo);

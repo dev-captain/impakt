@@ -48,7 +48,7 @@ const HeroLayout = ({
         w="full"
         bgColor="transparent"
       >
-        <Navbar showDarkOrLightModeButton={showDarkOrLightModeOnNavbar} />
+        {/* <Navbar showDarkOrLightModeButton={showDarkOrLightModeOnNavbar} /> */}
         <VStack
           overflow="hidden"
           minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
