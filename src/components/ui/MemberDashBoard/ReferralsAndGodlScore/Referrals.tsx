@@ -21,7 +21,6 @@ import {
   Th,
   Td,
   // TableCaption,
-  Link,
   TableContainer,
 } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
@@ -65,6 +64,7 @@ const Referrals: React.FC = () => {
       rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
       backgroundColor="rgba(28, 28, 40, 0.65);"
+      backdropBlur="40px"
     >
       <Box
         display="flex"
@@ -80,11 +80,9 @@ const Referrals: React.FC = () => {
         <Tooltip
           hasArrow
           label={
-            <Link href="https://knowledgebase.impakt.com/article-9?category=all-resources">
-              <Text
-                dangerouslySetInnerHTML={{ __html: t(keys.memberDashboard.referrals.description) }}
-              />
-            </Link>
+            <Text
+              dangerouslySetInnerHTML={{ __html: t(keys.memberDashboard.referrals.description) }}
+            />
           }
           mt="3"
           placement="auto"
@@ -96,7 +94,7 @@ const Referrals: React.FC = () => {
             bottom={{ base: '22px', md: '20px' }}
             width={{ base: '24px', md: '32px' }}
           >
-            <a href="https://knowledgebase.impakt.com/article-9?category=all-resources">
+            <a href="https://knowledgebase.impakt.com/referral-rewards?category=all-resources">
               <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
             </a>
           </Box>
@@ -171,12 +169,12 @@ const Referrals: React.FC = () => {
               </Th>
             </Tr>
           </Thead>
-          <Tbody display="block" maxHeight="208px" sx={{ overflowY: 'overlay' }}>
+          <Tbody display="block" maxHeight="260px" sx={{ overflowY: 'overlay' }}>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
                 1
               </Td>
-              <Td borderBottom={0}>
+              <Td borderBottom={0} textStyle="regular4">
                 {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneOneChallenge}
               </Td>
             </Tr>
@@ -184,7 +182,7 @@ const Referrals: React.FC = () => {
               <Td color="#FEC417" borderBottom={0}>
                 2
               </Td>
-              <Td borderBottom={0}>
+              <Td borderBottom={0} textStyle="regular4">
                 {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneTwoChallenges}
               </Td>
             </Tr>
@@ -192,7 +190,7 @@ const Referrals: React.FC = () => {
               <Td color="#FEC417" borderBottom={0}>
                 3
               </Td>
-              <Td borderBottom={0}>
+              <Td borderBottom={0} textStyle="regular4">
                 {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneThreeChallenges}
               </Td>
             </Tr>
@@ -200,15 +198,15 @@ const Referrals: React.FC = () => {
               <Td color="#FEC417" borderBottom={0}>
                 4
               </Td>
-              <Td borderBottom={0}>
+              <Td textStyle="regular4" borderBottom={0}>
                 {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFourChallenges}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
+              <Td color="#FEC417" textStyle="bold4" borderBottom={0}>
                 5
               </Td>
-              <Td borderBottom={0}>
+              <Td textStyle="bold4" borderBottom={0}>
                 {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
               </Td>
             </Tr>
