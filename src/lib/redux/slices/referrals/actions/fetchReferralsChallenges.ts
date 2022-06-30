@@ -14,7 +14,7 @@ const fetchReferralsChallenges = createAsyncThunk(
         return Promise.reject(new Error('Please Sign In first to continue'));
       }
       const referreHowManyChallengesDoneRes =
-        await ReferralsInstance.referralControllerGetReferreeHowManyChallangesDone();
+        await ReferralsInstance.referralControllerGetReferreeHowManyChallengesDone();
 
       return referreHowManyChallengesDoneRes;
     } catch (err: any) {

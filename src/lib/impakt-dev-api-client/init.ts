@@ -9,8 +9,8 @@ import {
   GodlAccountApi,
   FitnessStatsApi,
   ReferralsApi,
-} from '@impakt-dev/api-client-168-merge';
-import { Observable } from '@impakt-dev/api-client-168-merge/dist/rxjsStub';
+} from '@impakt-dev/api-client';
+import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
 
 const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
