@@ -14,14 +14,14 @@ import JoinOurCommunity from 'components/ui/home/JoinOurCommunity';
 const HomePage = () => {
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      <VideoModal />
-      <Seo />
+      {/* <VideoModal />
+      <Seo /> */}
 
       <div id="impakt-games">
         <ImpaktGamesHero />
       </div>
 
-      <div id="status-quo">
+      {/* <div id="status-quo">
         <StatusQuoHero />
       </div>
 
@@ -54,8 +54,8 @@ const HomePage = () => {
 
       <div id="contact">
         <Contact />
-      </div>
-      <Footer />
+      </div> */}
+      {/* <Footer /> */}
     </Container>
   );
 };
