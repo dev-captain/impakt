@@ -44,6 +44,10 @@ const Images = {
     Header: require('./latestdefaultbg.jpg'),
     light: require('./bg-light.png'),
   },
+  impaktNFT: {
+    Header: require('./nftbg.png'),
+    light: require('./bg-light.png'),
+  },
   advisor: {
     kevin: require('./advisor/kevin-lin.webp'),
     tim: require('./advisor/tim.png'),
