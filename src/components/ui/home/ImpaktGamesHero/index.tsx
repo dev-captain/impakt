@@ -1,6 +1,15 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text, Flex, Image } from '@chakra-ui/react';
+import { memo, useRef } from 'react';
+import {
+  VStack,
+  HStack,
+  useColorModeValue,
+  Box,
+  Text,
+  Flex,
+  Image,
+  useDimensions,
+} from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import HeroVideo from './HeroVideo';
@@ -10,6 +19,10 @@ import StarsVideo from './StarsVideo';
 
 const ImpaktGamesHero = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const mirrorRef = useRef() as any;
+  const heroVideoRef = useRef();
+  const heroVideoDimensionRef = useDimensions(heroVideoRef as any);
+  const mirrorDimensionRef = useDimensions(mirrorRef as any);
 
   return (
     <HeroLayout
@@ -21,7 +34,7 @@ const ImpaktGamesHero = () => {
       justify="flex-start"
     >
       <VStack w="full">
-        <VStack maxW={{ base: '100%', lg: '1200px' }} w="full">
+        <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
             <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
               <Box
@@ -68,11 +81,8 @@ const ImpaktGamesHero = () => {
               </Box>
             </VStack>
             <HStack w="full">
-              <Box position="relative" height="700px" width="500px">
+              <Box ref={mirrorRef} position="relative" height="700px" width="500px">
                 <StarsVideo />
-                <Box zIndex="0" position="absolute" top="251px" left="-1.31%" minW="640px" w="100%">
-                  <Image height="380px" w="650px" src={Images.Common.window} alt="_" />
-                </Box>
                 <div
                   className="shadow"
                   style={{
@@ -90,7 +100,10 @@ const ImpaktGamesHero = () => {
           </HStack>
         </VStack>
       </VStack>
-      <HeroVideo />
+      <HeroVideo
+        borderX={mirrorDimensionRef?.contentBox.center.x}
+        borderY={mirrorDimensionRef?.contentBox.center.y}
+      />
     </HeroLayout>
   );
 };
