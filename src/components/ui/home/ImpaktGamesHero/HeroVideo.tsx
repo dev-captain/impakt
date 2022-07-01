@@ -4,11 +4,12 @@ import styled, { css, keyframes } from 'styled-components';
 import Images from '../../../../assets/images';
 
 import { Videos } from '../../../../data';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import useAppSelector from '../../../../hooks/useAppSelector';
+import { setIsAnimated, setIsScrolling } from '../../../../lib/redux/slices/state/stateSlice';
 
 const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   0% {
-    width: 100vw;
-    height: 100vh;
     top:0;
     left: 0;
   }
@@ -16,48 +17,53 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   100% {
   width:640px;
   height:360px;
-  top: ${y + 200}px;
-  left: ${x + 30}px;
+  top: ${y}px;
+  left: ${x}px;
   }
 `;
 
-const Video = styled.video<{ isScrolling: boolean; x?: number; y?: number }>`
+const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: number; y: number }>`
   object-fit: cover;
-  width: 100vw;
-  height: 100vh;
-  z-index:999;
+  width: ${(p) => (p.isAnimated ? '640px' : '100vw')};
+  height: ${(p) => (p.isAnimated ? '360px' : '100vh')};
+  z-index: 999;
   position: absolute;
-  animation:${(p) =>
+  animation: ${(p) =>
     p.isScrolling &&
+    !p.isAnimated &&
     css`
-      ${rotate({ x: p.x ?? 0, y: p.y ?? 0 })} 1s linear;
-    `}
-  animation-fill-mode: forwards;
-  top: 0;
-  left: 0;
-  margin:0 !important;
+      ${rotate({ x: p.x ?? 0, y: p.y ?? 0 })} 1s linear forwards;
+    `};
+  top: ${(p) => (p.isAnimated ? `${p.y}px` : '0')};
+  left: ${(p) => (p.isAnimated ? `${p.x}px` : '0')};
+  margin: 0 !important;
   border-radius: 0px 0px 10px 10px;
 `;
 
 const Source = styled.source``;
 
-const HeroVideo: React.FC<{ borderX?: number; borderY?: number }> = ({ borderX, borderY }) => {
-  const [isScrolling, setIsScrolling] = React.useState(false);
-
-  const currentBorderX = borderX ?? 0;
-  const currentBorderY = borderY ?? 0;
-  const windowBoxPositionX = currentBorderX - 60;
-  const windowBoxPositionY = currentBorderY - 110;
+const HeroVideo: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+  const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
+  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
 
   return (
     <>
       <Video
-        x={currentBorderX}
-        y={currentBorderY}
+        x={borderX}
+        y={borderY}
+        isAnimated={isAnimated}
         onWheel={() => {
-          setIsScrolling(true);
+          if (!isScrolling) {
+            dispatch(setIsScrolling());
+            setTimeout(() => {
+              dispatch(setIsAnimated());
+            }, 1000);
+          }
         }}
-        isScrolling={isScrolling}
+        isScrolling={isScrolling && !isAnimated}
         autoPlay
         loop
         muted
@@ -68,11 +74,11 @@ const HeroVideo: React.FC<{ borderX?: number; borderY?: number }> = ({ borderX, 
       <Box
         height="380px"
         display="flex"
-        w="715.5px"
+        w="717px"
         zIndex="0"
         position="absolute"
-        left={windowBoxPositionX - 200}
-        top={windowBoxPositionY}
+        left={borderX - 39}
+        top={borderY - 49}
       >
         <img width="100%" height="100%" src={Images.Common.window} alt="_" />
       </Box>

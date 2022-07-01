@@ -1,41 +1,37 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { memo, useLayoutEffect, useRef, useState } from 'react';
-import {
-  VStack,
-  HStack,
-  useColorModeValue,
-  Box,
-  Text,
-  Flex,
-  Image,
-  useDimensions,
-} from '@chakra-ui/react';
+import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import HeroVideo from './HeroVideo';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
 import StarsVideo from './StarsVideo';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
 
 const ImpaktGamesHero = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const mirrorRef = useRef() as any;
-  const heroVideoRef = useRef();
-  const heroVideoDimensionRef = useDimensions(heroVideoRef as any);
-  const mirrorDimensionRef = useDimensions(mirrorRef as any);
-  const [size, setSize] = useState([0, 0]);
-  const [currentX, setCurrentX] = useState(mirrorDimensionRef?.contentBox.left);
-
-  console.log(currentX);
+  const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
     function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-      setCurrentX(mirrorRef.current.offsetLeft);
+      if (mirrorRef.current) {
+        dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+        dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+      }
     }
     window.addEventListener('resize', updateSize);
 
     return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  useEffect(() => {
+    if (mirrorRef.current) {
+      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+      dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+    }
   }, []);
 
   return (
@@ -114,7 +110,7 @@ const ImpaktGamesHero = () => {
           </HStack>
         </VStack>
       </VStack>
-      <HeroVideo borderX={currentX} borderY={mirrorDimensionRef?.contentBox.y} />
+      <HeroVideo />
     </HeroLayout>
   );
 };
