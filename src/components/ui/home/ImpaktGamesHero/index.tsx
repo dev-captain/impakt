@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { memo, useRef } from 'react';
+import { memo, useLayoutEffect, useRef, useState } from 'react';
 import {
   VStack,
   HStack,
@@ -23,6 +23,20 @@ const ImpaktGamesHero = () => {
   const heroVideoRef = useRef();
   const heroVideoDimensionRef = useDimensions(heroVideoRef as any);
   const mirrorDimensionRef = useDimensions(mirrorRef as any);
+  const [size, setSize] = useState([0, 0]);
+  const [currentX, setCurrentX] = useState(mirrorDimensionRef?.contentBox.left);
+
+  console.log(currentX);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+      setCurrentX(mirrorRef.current.offsetLeft);
+    }
+    window.addEventListener('resize', updateSize);
+
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   return (
     <HeroLayout
@@ -100,10 +114,7 @@ const ImpaktGamesHero = () => {
           </HStack>
         </VStack>
       </VStack>
-      <HeroVideo
-        borderX={mirrorDimensionRef?.contentBox.center.x}
-        borderY={mirrorDimensionRef?.contentBox.center.y}
-      />
+      <HeroVideo borderX={currentX} borderY={mirrorDimensionRef?.contentBox.y} />
     </HeroLayout>
   );
 };

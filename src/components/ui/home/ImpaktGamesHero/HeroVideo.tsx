@@ -16,8 +16,8 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   100% {
   width:640px;
   height:360px;
-  top: ${y - 60}px;
-  left: ${x - 221}px;
+  top: ${y + 200}px;
+  left: ${x + 30}px;
   }
 `;
 
