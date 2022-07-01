@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useColorMode,
   Button,
+  Link,
 } from '@chakra-ui/react';
 import { Socials } from 'data';
 import Images from 'assets/images';
@@ -190,7 +191,9 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
                 <Box>
                   <SignInLinkItem />
                 </Box>
-                <Button colorScheme="red">{t(Keys.navbar.download)}</Button>
+                <Link href="/download">
+                  <Button colorScheme="red">{t(Keys.navbar.download)}</Button>
+                </Link>
               </HStack>
             </HStack>
           </HStack>

@@ -14,7 +14,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import InfoCard from '../../../core/InfoCard';
 import RichIcon from '../../../icons/RichIcon';
-import Gradients from '../RoadmapHero/Gradients';
+// import Gradients from '../RoadmapHero/Gradients';
 import '../../../../theme/styles.css';
 
 const ImpaktNFT = () => {

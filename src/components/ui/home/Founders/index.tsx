@@ -11,7 +11,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import { Advisors } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
+// import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import InvestorCard from '../PartnerAndInvestorHero/InvestorCard';
 
 const Founders = () => {

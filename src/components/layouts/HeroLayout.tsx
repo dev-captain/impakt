@@ -8,7 +8,7 @@ type HeroLayoutProps = {
   bgColor?: string;
   spacing?: number;
   showNavbar?: boolean;
-  showDarkOrLightModeOnNavbar?: boolean;
+  showDarkOrLightModeButton?: boolean;
   addSpacer?: boolean;
   pos?: string;
   minH?: string;
@@ -33,7 +33,7 @@ const HeroLayout = ({
   justify = 'center',
   showNavbar = false,
   addSpacer = false,
-  showDarkOrLightModeOnNavbar = true,
+  showDarkOrLightModeButton = true,
   pos,
 }: HeroLayoutProps) => {
   const backgroundColor = useColorModeValue('glass.900', 'glass.200');
@@ -48,7 +48,7 @@ const HeroLayout = ({
         w="full"
         bgColor="transparent"
       >
-        <Navbar showDarkOrLightModeButton />
+        <Navbar showDarkOrLightModeButton={showDarkOrLightModeButton} />
         <VStack
           overflow="hidden"
           minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}

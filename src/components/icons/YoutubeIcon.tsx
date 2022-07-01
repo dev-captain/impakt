@@ -1,6 +1,4 @@
-import { SVGProps } from 'react';
-
-const YoutubeIcon = (props: SVGProps<SVGSVGElement>) => (
+const YoutubeIcon = () => (
   <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M6 18C6 11.3726 11.3726 6 18 6H58C64.6274 6 70 11.3726 70 18V58C70 64.6274 64.6274 70 58 70H18C11.3726 70 6 64.6274 6 58V18Z"
