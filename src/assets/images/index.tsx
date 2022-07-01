@@ -49,9 +49,9 @@ const Images = {
     light: require('./bg-light.png'),
   },
   advisor: {
-    kevin: require('./advisor/kevin-lin.webp'),
+    kevin: require('./advisor/kevin.png'),
     tim: require('./advisor/tim.png'),
-    kai: require('./advisor/kai-huang.webp'),
+    kai: require('./advisor/kai.png'),
   },
   team: {
     cap: require('./team/cap.png'),

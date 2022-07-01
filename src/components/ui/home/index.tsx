@@ -1,5 +1,6 @@
 export { default as ImpaktGamesHero } from 'components/ui/home/ImpaktGamesHero';
 export { default as ImpaktNFT } from 'components/ui/home/ImpaktNFT';
+export { default as Founders } from 'components/ui/home/Founders';
 export { default as SingleTeamHero } from 'components/ui/home/SingleTeamHero';
 export { default as MotionCaptureHero } from 'components/ui/home/MotionCaptureHero';
 export { default as BurnToEarnHero } from 'components/ui/home/BurnToEarnHero';

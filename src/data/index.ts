@@ -166,24 +166,46 @@ export const Articles = [
 export const Advisors = [
   {
     name: 'Kevin Lin',
-    title: 'Founder - Twitch',
+    title: 'Twitch Founder',
     image: Images.advisor.kevin,
     subtitle: '',
     alt: 'Kevin Lin',
   },
   {
     name: 'Tim Howes',
-    title: 'CTO - Netscape',
+    title: 'Netscape CTO',
     image: Images.advisor.tim,
     alt: 'Tim Howes',
     subtitle: 'Director of Engineering - Facebook',
   },
   {
     name: 'Kai Huang',
-    title: 'Founder - Guitar Hero',
+    title: 'Guitar Hero Founder',
     image: Images.advisor.kai,
     alt: 'Kai Huang',
     subtitle: 'President of Red Octane - Activision',
+  },
+];
+
+export const AdvisorSec = [
+  {
+    name: 'Kevin Lin',
+    title: 'Twitch Founder',
+    image: Images.advisor.kevin,
+    subtitle: '',
+    alt: 'Kevin Lin',
+  },
+  {
+    name: 'Tim Howes',
+    title: 'Netscape CTO ',
+    image: Images.advisor.tim,
+    alt: 'Tim Howes',
+  },
+  {
+    name: 'Kai Huang',
+    title: 'Guitar Hero Founder',
+    image: Images.advisor.kai,
+    alt: 'Kai Huang',
   },
 ];
 
