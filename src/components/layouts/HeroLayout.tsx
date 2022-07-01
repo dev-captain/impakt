@@ -42,7 +42,7 @@ const HeroLayout = ({
     <>
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
-        overflowY="unset"
+        overflowY="hidden"
         // @ts-ignore
         pos={pos}
         w="full"

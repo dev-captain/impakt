@@ -36,52 +36,50 @@ const Founders = () => {
         w="full"
         color={textColor}
       >
-        <AnimationInWhenVisible animationType="fade">
+        <VStack
+          spacing="24px"
+          align={{ base: 'flex-start', md: 'auto' }}
+          justifyContent="center"
+          maxW={{ base: '100%', lg: '1200px' }}
+          pb="16px"
+        >
           <VStack
-            spacing="24px"
-            align={{ base: 'flex-start', md: 'auto' }}
-            justifyContent="center"
-            maxW={{ base: '100%', lg: '1200px' }}
-            pb="16px"
+            w="full"
+            spacing={5}
+            justify={{ base: 'center', md: 'center' }}
+            mt={{ base: 0, md: 0, xl: '64px' }}
           >
-            <VStack
-              w="full"
-              spacing={5}
-              justify={{ base: 'center', md: 'center' }}
-              mt={{ base: 0, md: 0, xl: '64px' }}
-            >
-              <Text color="#F04153">{t(keys.ourAdvisorTitle.adviser)}</Text>
-            </VStack>
-            <VStack
-              width={{ base: '100%', lg: '100%', xl: '1200px' }}
-              textAlign="center"
-              spacing={5}
-              justify={{ base: 'center', md: 'center' }}
-              mt={{ base: 0, md: 0, xl: '24px' }}
-              mb="72px !important"
-            >
-              <Box maxW={{ base: '100%', lg: '800px' }}>
-                <Text textStyle="TitleBold48">{t(keys.ourAdvisorTitle.Title)}</Text>
-              </Box>
-            </VStack>
-            <SimpleGrid
-              w="full"
-              columns={{ base: 1, md: 2, lg: 3 }}
-              alignContent="center"
-              alignItems="center"
-              columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
-              rowGap={{ base: '24px', sm: '16px', md: '24px', xl: '24px' }}
-            >
-              {Advisors.map((advisor) => (
-                <GridItem key={advisor.name} w="full">
-                  <HStack w="full" align="center" justify="center">
-                    <InvestorCard {...advisor} />
-                  </HStack>
-                </GridItem>
-              ))}
-            </SimpleGrid>
+            <Text color="#F04153">{t(keys.ourAdvisorTitle.adviser)}</Text>
           </VStack>
-        </AnimationInWhenVisible>
+          <VStack
+            width={{ base: '100%', lg: '100%', xl: '1200px' }}
+            textAlign="center"
+            spacing={5}
+            justify={{ base: 'center', md: 'center' }}
+            mt={{ base: 0, md: 0, xl: '24px' }}
+            mb="72px !important"
+          >
+            <Box maxW={{ base: '100%', lg: '800px' }}>
+              <Text textStyle="TitleBold48">{t(keys.ourAdvisorTitle.Title)}</Text>
+            </Box>
+          </VStack>
+          <SimpleGrid
+            w="full"
+            columns={{ base: 1, md: 2, lg: 3 }}
+            alignContent="center"
+            alignItems="center"
+            columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
+            rowGap={{ base: '24px', sm: '16px', md: '24px', xl: '24px' }}
+          >
+            {Advisors.map((advisor) => (
+              <GridItem key={advisor.name} w="full">
+                <HStack w="full" align="center" justify="center">
+                  <InvestorCard {...advisor} />
+                </HStack>
+              </GridItem>
+            ))}
+          </SimpleGrid>
+        </VStack>
       </VStack>
     </HeroLayout>
   );
