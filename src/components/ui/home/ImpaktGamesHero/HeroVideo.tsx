@@ -74,10 +74,10 @@ const HeroVideo: React.FC = () => {
       <Box
         height="380px"
         display="flex"
-        w="717px"
+        w="717.1px"
         zIndex="0"
         position="absolute"
-        left={borderX - 39}
+        left={borderX - 39.3}
         top={borderY - 49}
       >
         <img width="100%" height="100%" src={Images.Common.window} alt="_" />
