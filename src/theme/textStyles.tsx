@@ -66,6 +66,11 @@ export default {
     fontWeight: '400',
     lineHeight: '32px',
   },
+  regular18: {
+    fontWeight: '400',
+    fontSize: ' 18px',
+    lineHeight: '30px',
+  },
   bold3: {
     fontSize: '16px',
     fontWeight: '700',
@@ -154,6 +159,12 @@ export default {
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
     fontSize: '96px',
     lineHeight: '96px',
+  },
+  TitleBold48: {
+    fontWeight: '700',
+    fontFamily: `Poppins ,${theme.fonts?.heading}`,
+    fontSize: '48px',
+    lineHeight: '56px',
   },
   accentGradient: {
     bgClip: 'text',

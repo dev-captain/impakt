@@ -38,6 +38,10 @@ export default {
     our: 'Our',
     advisor: 'advisors',
   },
+  ourAdvisorTitle: {
+    adviser: 'ADVISORS',
+    Title: 'Advised by some of the best disruptive minds in the industry',
+  },
   ourTeam: {
     our: 'Leadership',
     team: 'team',

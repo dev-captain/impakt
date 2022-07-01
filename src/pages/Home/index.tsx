@@ -1,5 +1,11 @@
 import { Container } from '@chakra-ui/layout';
-import { Footer, ImpaktGamesHero, PartnerAndInvestorHero } from 'components/ui/home';
+import {
+  Footer,
+  ImpaktGamesHero,
+  PartnerAndInvestorHero,
+  ImpaktNFT,
+  Founders,
+} from 'components/ui/home';
 import Contact from 'components/ui/home/Contact';
 import Seo from 'components/core/Seo';
 import VideoModal from 'components/core/VideoModal';
@@ -17,11 +23,23 @@ const HomePage = () => {
       {/* <VideoModal />
       <Seo /> */}
 
-      <div id="impakt-games">
+      {/* <div id="impakt-games">
         <ImpaktGamesHero />
+      </div> */}
+      <div>
+        <Founders />
+      </div>
+      {/* <div>
+        <CardFounder />
+      </div> */}
+      <div>
+        <ImpaktNFT />
       </div>
 
       {/* <div id="status-quo">
+        <StatusQuoHero />
+      </div>
+      <div id="status-quo">
         <StatusQuoHero />
       </div>
 
@@ -54,7 +72,7 @@ const HomePage = () => {
 
       <div id="contact">
         <Contact />
-      </div> */}
+      </div>  */}
       {/* <Footer /> */}
     </Container>
   );
