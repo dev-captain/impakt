@@ -1,57 +1,88 @@
+import { Box } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import Images from '../../../../assets/images';
 
 import { Videos } from '../../../../data';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import useAppSelector from '../../../../hooks/useAppSelector';
+import { setIsAnimated, setIsScrolling } from '../../../../lib/redux/slices/state/stateSlice';
 
-const rotate = keyframes`
+const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   0% {
-    transform: scale(1);
     top:0;
     left: 0;
   }
 
   100% {
-  transform: scale(0.297);
-  top:30px;
-  left: 342px;
+  width:640px;
+  height:360px;
+  top: ${y}px;
+  left: ${x}px;
   }
 `;
 
-const Video = styled.video<{ isScrolling: boolean }>`
+const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: number; y: number }>`
   object-fit: cover;
-  width: 100vw;
-  height: 100vh;
-  z-index:999;
-  position: fixed;
-  animation:${(p) =>
+  width: ${(p) => (p.isAnimated ? '640px' : '100vw')};
+  height: ${(p) => (p.isAnimated ? '360px' : '100vh')};
+  z-index: 999;
+  position: absolute;
+  animation: ${(p) =>
     p.isScrolling &&
+    !p.isAnimated &&
     css`
-      ${rotate} 1s linear;
-    `}
-  animation-fill-mode: forwards;
-  top: 0;
-  left: 0;
-  margin:0 !important;
+      ${rotate({ x: p.x ?? 0, y: p.y ?? 0 })} 1s linear forwards;
+    `};
+  top: ${(p) => (p.isAnimated ? `${p.y}px` : '0')};
+  left: ${(p) => (p.isAnimated ? `${p.x}px` : '0')};
+  margin: 0 !important;
   border-radius: 0px 0px 10px 10px;
 `;
 
 const Source = styled.source``;
 
-const HeroVideo = () => {
-  const [isScrolling, setIsScrolling] = React.useState(false);
+const HeroVideo: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+  const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
+  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
 
   return (
-    <Video
-      onWheel={() => {
-        setIsScrolling(true);
-      }}
-      isScrolling={isScrolling}
-      autoPlay
-      loop
-      muted
-    >
-      <Source src={Videos.heroVideo} type="video/mp4" />
-    </Video>
+    <>
+      <Video
+        x={borderX}
+        y={borderY}
+        isAnimated={isAnimated}
+        onWheel={() => {
+          if (!isScrolling) {
+            dispatch(setIsScrolling());
+            setTimeout(() => {
+              dispatch(setIsAnimated());
+            }, 1000);
+          }
+        }}
+        isScrolling={isScrolling && !isAnimated}
+        autoPlay
+        loop
+        muted
+      >
+        <Source src={Videos.heroVideo} type="video/mp4" />
+      </Video>
+
+      <Box
+        height="380px"
+        display="flex"
+        w="717px"
+        zIndex="0"
+        position="absolute"
+        left={borderX - 39}
+        top={borderY - 49}
+      >
+        <img width="100%" height="100%" src={Images.Common.window} alt="_" />
+      </Box>
+    </>
   );
 };
 

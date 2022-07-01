@@ -1,15 +1,38 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text, Flex, Image } from '@chakra-ui/react';
+import { memo, useEffect, useLayoutEffect, useRef } from 'react';
+import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import HeroVideo from './HeroVideo';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
 import StarsVideo from './StarsVideo';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
 
 const ImpaktGamesHero = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const mirrorRef = useRef() as any;
+  const dispatch = useAppDispatch();
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (mirrorRef.current) {
+        dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+        dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+      }
+    }
+    window.addEventListener('resize', updateSize);
+
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  useEffect(() => {
+    if (mirrorRef.current) {
+      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+      dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+    }
+  }, []);
 
   return (
     <HeroLayout
@@ -20,8 +43,8 @@ const ImpaktGamesHero = () => {
       align="flex-start"
       justify="flex-start"
     >
-      <VStack paddingTop="15px" w="full">
-        <VStack maxW={{ base: '100%', lg: '1200px' }} w="full">
+      <VStack w="full">
+        <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
             <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
               <Box
@@ -68,18 +91,8 @@ const ImpaktGamesHero = () => {
               </Box>
             </VStack>
             <HStack w="full">
-              <Box position="relative" height="700px" width="500px">
+              <Box ref={mirrorRef} position="relative" height="700px" width="500px">
                 <StarsVideo />
-                <Box
-                  zIndex="0"
-                  position="absolute"
-                  top="215.7px"
-                  left="-1.31%"
-                  minW="640px"
-                  w="100%"
-                >
-                  <Image height="380px" w="650px" src={Images.Common.window} alt="_" />
-                </Box>
                 <div
                   className="shadow"
                   style={{
