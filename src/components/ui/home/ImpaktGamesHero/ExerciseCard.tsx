@@ -9,8 +9,9 @@ import {
 } from '@chakra-ui/react';
 import gsap, { Power2 } from 'gsap';
 import * as React from 'react';
+
 import useAppSelector from '../../../../hooks/useAppSelector';
-import AnimationInWhenVisible from '../../../common/AnimationInWhenVisible';
+import AnimationAlways from '../../../common/AnimationAlways';
 import AccelerationIcon from '../../../icons/AccelerationIcon';
 
 const ExerciseCard: React.FC = () => {
@@ -56,7 +57,7 @@ const ExerciseCard: React.FC = () => {
   };
 
   return !isAnimated ? null : (
-    <AnimationInWhenVisible animationType="move" xValue={50}>
+    <AnimationAlways animationType="move" xValue={50}>
       <VStack
         ref={boxRef}
         zIndex={99999}
@@ -115,7 +116,7 @@ const ExerciseCard: React.FC = () => {
           </CircularProgress>
         </Box>
       </VStack>
-    </AnimationInWhenVisible>
+    </AnimationAlways>
   );
 };
 

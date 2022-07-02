@@ -95,7 +95,7 @@ const ImpaktGamesHero = () => {
               </Box>
             </VStack>
             <HStack w="full">
-              <Box left={borderX + 485} top={borderY - 150} zIndex={9999} position="absolute">
+              <Box left={borderX + 480} top={borderY - 150} zIndex={9999} position="absolute">
                 <ExerciseCard />
               </Box>
               <Box ref={mirrorRef} position="relative" height="788px" width="600px">
