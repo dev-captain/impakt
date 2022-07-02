@@ -44,20 +44,23 @@ const ExerciseCard: React.FC = () => {
     }
   }, [isAnimated]);
 
+  const handleMouseOver = (e: any) => {
+    const rotateX = -(e.clientY - window.innerHeight / 3.6) * 0.09;
+    const rotateY = (e.clientX - window.innerWidth / 1.36) * 0.09;
+    gsap.to(boxRef.current, {
+      duration: 0.5,
+      ease: Power2.easeOut,
+      rotationX: rotateX,
+      rotationY: rotateY,
+    });
+  };
+
   return !isAnimated ? null : (
     <AnimationInWhenVisible animationType="move" xValue={50}>
       <VStack
         ref={boxRef}
         zIndex={99999}
-        onMouseMove={(e: any) => {
-          const rotateX = -(e.clientY - window.innerHeight / 3.6) * 0.09;
-          const rotateY = (e.clientX - window.innerWidth / 1.36) * 0.09;
-          gsap.to(boxRef.current, 0.5, {
-            ease: Power2.easeOut,
-            rotationX: rotateX,
-            rotationY: rotateY,
-          });
-        }}
+        onMouseOver={handleMouseOver}
         w="234px"
         h="294px"
         borderRadius="24px"
@@ -100,7 +103,15 @@ const ExerciseCard: React.FC = () => {
             thickness="13"
             stroke="transparent !important"
           >
-            <CircularProgressLabel color="#FFFFFF">{displayValue}</CircularProgressLabel>
+            <CircularProgressLabel
+              letterSpacing="1px"
+              fontWeight={500}
+              lineHeight="100%"
+              fontSize="56px"
+              color="#FFFFFF"
+            >
+              {displayValue}
+            </CircularProgressLabel>
           </CircularProgress>
         </Box>
       </VStack>
