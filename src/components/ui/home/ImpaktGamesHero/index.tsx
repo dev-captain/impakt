@@ -9,11 +9,15 @@ import YoutubeIcon from '../../../icons/YoutubeIcon';
 import StarsVideo from './StarsVideo';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
 import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
+import ExerciseCard from './ExerciseCard';
+import useAppSelector from '../../../../hooks/useAppSelector';
 
 const ImpaktGamesHero = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const mirrorRef = useRef() as any;
   const dispatch = useAppDispatch();
+  const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
+  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
 
   useLayoutEffect(() => {
     function updateSize() {
@@ -91,7 +95,10 @@ const ImpaktGamesHero = () => {
               </Box>
             </VStack>
             <HStack w="full">
-              <Box ref={mirrorRef} position="relative" height="700px" width="500px">
+              <Box left={borderX + 485} top={borderY - 150} zIndex={9999} position="absolute">
+                <ExerciseCard />
+              </Box>
+              <Box ref={mirrorRef} position="relative" height="788px" width="600px">
                 <StarsVideo />
                 <div
                   className="shadow"

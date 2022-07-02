@@ -51,6 +51,11 @@ export default {
     fontWeight: '700',
     lineHeight: '36px',
   },
+  normal5: {
+    fontSize: '32px',
+    fontWeight: '600',
+    lineHeight: '100%',
+  },
   regular5: {
     fontSize: '32px',
     fontWeight: '400',
