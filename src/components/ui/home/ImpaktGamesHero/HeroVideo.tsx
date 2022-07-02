@@ -72,13 +72,12 @@ const HeroVideo: React.FC = () => {
       </Video>
 
       <Box
-        height="380px"
         display="flex"
         w="717.1px"
         zIndex="0"
         position="absolute"
         left={borderX - 39.3}
-        top={borderY - 49}
+        top={borderY - 56}
       >
         <img width="100%" height="100%" src={Images.Common.window} alt="_" />
       </Box>

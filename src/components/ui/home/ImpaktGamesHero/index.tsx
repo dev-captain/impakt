@@ -16,7 +16,6 @@ const ImpaktGamesHero = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const mirrorRef = useRef() as any;
   const dispatch = useAppDispatch();
-  const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
 
   useLayoutEffect(() => {
@@ -95,7 +94,7 @@ const ImpaktGamesHero = () => {
               </Box>
             </VStack>
             <HStack w="full">
-              <Box left={borderX + 480} top={borderY - 150} zIndex={9999} position="absolute">
+              <Box left="80vw" top={borderY - 150} zIndex={9999} position="absolute">
                 <ExerciseCard />
               </Box>
               <Box ref={mirrorRef} position="relative" height="788px" width="600px">
@@ -117,6 +116,7 @@ const ImpaktGamesHero = () => {
           </HStack>
         </VStack>
       </VStack>
+
       <HeroVideo />
     </HeroLayout>
   );
