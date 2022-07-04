@@ -12,6 +12,7 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   0% {
     top:0;
     left: 0;
+    position:fixed;
   }
 
   100% {
@@ -19,6 +20,7 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   height:360px;
   top: ${y}px;
   left: ${x}px;
+  position:absolute
   }
 `;
 
@@ -27,7 +29,7 @@ const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: numbe
   width: ${(p) => (p.isAnimated ? '640px' : '100vw')};
   height: ${(p) => (p.isAnimated ? '360px' : '100vh')};
   z-index: 1;
-  position: fixed;
+  position: ${(p) => (p.isAnimated ? 'absolute' : 'fixed')};
   animation: ${(p) =>
     p.isScrolling &&
     !p.isAnimated &&
@@ -75,7 +77,7 @@ const HeroVideo: React.FC = () => {
         display="flex"
         w="717.1px"
         zIndex="0"
-        position="absolute"
+        position="fixed"
         left={borderX - 39.3}
         top={borderY - 56}
       >

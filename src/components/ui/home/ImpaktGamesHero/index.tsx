@@ -17,29 +17,7 @@ const ImpaktGamesHero: React.FC<{ moveToYourBodySection: () => void }> = ({
 }) => {
   const [moved, setMoved] = React.useState(false);
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
-  const mirrorRef = useRef() as any;
-  const dispatch = useAppDispatch();
-  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
   const isAnimate = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
-
-  useLayoutEffect(() => {
-    function updateSize() {
-      if (mirrorRef.current) {
-        dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-        dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-      }
-    }
-    window.addEventListener('resize', updateSize);
-
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-
-  useEffect(() => {
-    if (mirrorRef.current) {
-      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-      dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-    }
-  }, []);
 
   return (
     <HeroLayout
@@ -104,29 +82,11 @@ const ImpaktGamesHero: React.FC<{ moveToYourBodySection: () => void }> = ({
                 </InfoCard>
               </Box>
             </VStack>
-            <HStack w="full">
-              <Box left="80vw" top={borderY - 150} zIndex={9999} position="absolute">
-                <ExerciseCard />
-              </Box>
-              <Box ref={mirrorRef} position="relative" height="788px" width="600px">
-                <StarsVideo />
-                <div
-                  className="shadow"
-                  style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
-                    top: '0',
-                    left: '0',
-                    borderRadius: '150px 150px 0px 0',
-                  }}
-                />
-              </Box>
+            <HStack id="right" w="full">
+              <Box />
             </HStack>
           </HStack>
         </VStack>
-        <HeroVideo />
       </VStack>
     </HeroLayout>
   );
