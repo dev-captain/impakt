@@ -217,7 +217,6 @@ export const Team = [
     alt: '',
     subtitle:
       '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses. \n Previous 2 CEO/Founder roles in companies valued at $30M+.',
-
   },
   {
     name: 'Valtec',

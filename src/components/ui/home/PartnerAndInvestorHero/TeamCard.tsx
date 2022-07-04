@@ -11,7 +11,7 @@ const TeamCard = ({
   title: string;
   subtitle: string;
 }) => {
-  const bgColor = useColorModeValue('glass.800', 'glass.200');
+  // const bgColor = useColorModeValue('glass.800', 'glass.200');
 
   return (
     <VStack
