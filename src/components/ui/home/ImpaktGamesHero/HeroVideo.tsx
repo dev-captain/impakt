@@ -26,8 +26,8 @@ const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: numbe
   object-fit: cover;
   width: ${(p) => (p.isAnimated ? '640px' : '100vw')};
   height: ${(p) => (p.isAnimated ? '360px' : '100vh')};
-  z-index: 999;
-  position: absolute;
+  z-index: 1;
+  position: fixed;
   animation: ${(p) =>
     p.isScrolling &&
     !p.isAnimated &&

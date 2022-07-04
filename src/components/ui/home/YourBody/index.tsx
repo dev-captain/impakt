@@ -1,63 +1,29 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { VStack, HStack, Box, Text } from '@chakra-ui/react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import HeroLayout from 'components/layouts/HeroLayout';
-import Images from 'assets/images';
-import HeroVideo from './HeroVideo';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
-import StarsVideo from './StarsVideo';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
-import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
-import ExerciseCard from './ExerciseCard';
-import useAppSelector from '../../../../hooks/useAppSelector';
 
-const ImpaktGamesHero: React.FC<{ moveToYourBodySection: () => void }> = ({
-  moveToYourBodySection,
-}) => {
-  const [moved, setMoved] = React.useState(false);
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
-  const mirrorRef = useRef() as any;
-  const dispatch = useAppDispatch();
-  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
-  const isAnimate = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
-
-  useLayoutEffect(() => {
-    function updateSize() {
-      if (mirrorRef.current) {
-        dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-        dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-      }
-    }
-    window.addEventListener('resize', updateSize);
-
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-
+const YourBody: React.FC = () => {
   useEffect(() => {
-    if (mirrorRef.current) {
-      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-      dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-    }
+    AOS.init({
+      duration: 5000,
+    });
   }, []);
 
   return (
     <HeroLayout
-      showNavbar
       spacing={10}
       pos="relative"
-      bgImage={bgImage}
+      bgColor="#121117"
       align="flex-start"
       justify="flex-start"
     >
-      <VStack
-        onWheel={() => {
-          if (isAnimate) {
-            moveToYourBodySection();
-          }
-        }}
-        w="full"
-      >
+      <VStack id="your-body-section" all="inherit" w="full">
         <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
             <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
@@ -104,32 +70,11 @@ const ImpaktGamesHero: React.FC<{ moveToYourBodySection: () => void }> = ({
                 </InfoCard>
               </Box>
             </VStack>
-            <HStack w="full">
-              <Box left="80vw" top={borderY - 150} zIndex={9999} position="absolute">
-                <ExerciseCard />
-              </Box>
-              <Box ref={mirrorRef} position="relative" height="788px" width="600px">
-                <StarsVideo />
-                <div
-                  className="shadow"
-                  style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
-                    top: '0',
-                    left: '0',
-                    borderRadius: '150px 150px 0px 0',
-                  }}
-                />
-              </Box>
-            </HStack>
           </HStack>
         </VStack>
-        <HeroVideo />
       </VStack>
     </HeroLayout>
   );
 };
 
-export default ImpaktGamesHero;
+export default YourBody;

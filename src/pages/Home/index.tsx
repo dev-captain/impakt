@@ -1,12 +1,37 @@
+import { useRef, useState } from 'react';
 import { Container } from '@chakra-ui/layout';
 import { ImpaktGamesHero, ImpaktNFT, Founders } from 'components/ui/home';
+import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
+
+import YourBody from '../../components/ui/home/YourBody';
 
 const HomePage = () => {
+  const containerRef = useRef(null);
+  const [isMovedToYourBodySection, setIsMovedToYourBodySection] = useState(false);
+
+  const yourBodySectionRef = useRef<HTMLDivElement | null>(null);
+  const moveToYourBodySection = () => {
+    if (yourBodySectionRef && yourBodySectionRef.current && !isMovedToYourBodySection) {
+      setIsMovedToYourBodySection(true);
+      window.scrollTo(0, yourBodySectionRef.current.offsetTop - 300);
+    }
+  };
+
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      <div id="impakt-games">
-        <ImpaktGamesHero />
-      </div>
+      <LocomotiveScrollProvider
+        options={{
+          smooth: true,
+        }}
+      >
+        <div ref={containerRef} id="stick">
+          <ImpaktGamesHero moveToYourBodySection={moveToYourBodySection} />
+          <div id="impakt-your-body" ref={yourBodySectionRef}>
+            <YourBody />
+          </div>
+        </div>
+      </LocomotiveScrollProvider>
+
       <div>
         <Founders />
       </div>
