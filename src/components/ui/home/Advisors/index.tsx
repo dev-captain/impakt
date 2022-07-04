@@ -8,19 +8,18 @@ import {
   Box,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { Team } from 'data';
+import { Advisors } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import TeamCard from '../PartnerAndInvestorHero/TeamCard';
-import bgImage from '../../../../assets/images/teambg.png';
+import InvestorCard from '../PartnerAndInvestorHero/InvestorCard';
 
-const Founder = () => {
+const Advisor = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const { t } = useTranslation().i18n;
 
   return (
     <HeroLayout
-      bgImage={bgImage}
+      bgImage="linear-gradient(180deg, #090909 0%, rgb(0 0 0) 22.71%, rgb(9 9 11) 49.69%, #09090b00 63%)"
       customPadding={{
         base: '16px',
         md: '32px',
@@ -28,14 +27,16 @@ const Founder = () => {
         '2xl': '0px',
       }}
       minH="70vh"
+      bgColor="transparent"
     >
       <VStack
         spacing="0px"
-        pb="64px"
         px="16px"
         maxW={{ base: '100%', lg: '1200px' }}
         w="full"
         color={textColor}
+        position="relative"
+        zIndex={1}
       >
         <VStack>
           <VStack
@@ -51,7 +52,7 @@ const Founder = () => {
               justify={{ base: 'center', md: 'center' }}
               mt={{ base: 0, md: 0, xl: '64px' }}
             >
-              <Text color="#F04153">{t(keys.Founder.builders)}</Text>
+              <Text color="#F04153">{t(keys.ourAdvisorTitle.adviser)}</Text>
             </VStack>
             <VStack
               width={{ base: '100%', lg: '100%', xl: '1200px' }}
@@ -62,7 +63,7 @@ const Founder = () => {
               mb="72px !important"
             >
               <Box maxW={{ base: '100%', lg: '800px' }}>
-                <Text textStyle="TitleBold48">{t(keys.Founder.Title)}</Text>
+                <Text textStyle="TitleBold48">{t(keys.ourAdvisorTitle.Title)}</Text>
               </Box>
             </VStack>
             <SimpleGrid
@@ -73,10 +74,10 @@ const Founder = () => {
               columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
               rowGap={{ base: '100px', sm: '100px', md: '100px', xl: '24px' }}
             >
-              {Team.map((advisor) => (
+              {Advisors.map((advisor) => (
                 <GridItem key={advisor.name} w="full">
                   <HStack w="full" align="center" justify="center">
-                    <TeamCard {...advisor} />
+                    <InvestorCard {...advisor} />
                   </HStack>
                 </GridItem>
               ))}
@@ -88,4 +89,4 @@ const Founder = () => {
   );
 };
 
-export default Founder;
+export default Advisor;

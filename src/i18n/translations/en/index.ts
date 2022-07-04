@@ -42,6 +42,10 @@ export default {
     adviser: 'ADVISORS',
     Title: 'Advised by some of the best disruptive minds in the industry',
   },
+  Founder: {
+    builders: 'IMPAKT BUILDERS',
+    Title: 'The Founders',
+  },
   ourTeam: {
     our: 'Leadership',
     team: 'team',

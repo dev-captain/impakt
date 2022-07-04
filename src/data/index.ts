@@ -215,28 +215,25 @@ export const Team = [
     title: 'CEO',
     image: Images.team.demideus,
     alt: '',
-    subtitle: '',
+    subtitle:
+      '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses. \n Previous 2 CEO/Founder roles in companies valued at $30M+.',
+
   },
   {
     name: 'Valtec',
     title: 'President',
     image: Images.team.valtec,
     alt: '',
-    subtitle: '',
-  },
-  {
-    name: 'DukeNuke',
-    title: 'Partner',
-    image: Images.team.duke,
-    alt: '',
-    subtitle: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> of building technology companies at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
   },
   {
     name: 'Dahaka',
     title: 'CTO',
     image: Images.team.dahaka,
     alt: '',
-    subtitle: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.',
   },
   // {
   //   name: 'Cap’n Crunch',

@@ -4,97 +4,101 @@ const TeamCard = ({
   image,
   name,
   title,
-  alt,
+  subtitle,
 }: {
-  alt: string;
   image: string;
   name: string;
   title: string;
+  subtitle: string;
 }) => {
   const bgColor = useColorModeValue('glass.800', 'glass.200');
-  const subTitleColor = useColorModeValue('electric.100', 'glass.700');
 
   return (
     <VStack
-      w="full"
-      paddingLeft="15px"
-      paddingRight="15px"
-      pb="40px"
-      maxW="300px"
+      pl="32px"
+      pr="32px"
+      pb="32px"
+      w="368px"
+      h="364px"
       align="center"
-      justify="center"
-      bgColor={bgColor}
-      overflow="hidden"
+      justify="space-between"
+      bgColor="rgba(28, 28, 40, 0.65)"
       position="relative"
-      borderRadius="28px"
-      maxH="418px"
-      h="full"
-      _hover={{
-        transition: '0.5s ease',
-        transform: 'scale(1.07)',
-      }}
+      borderRadius="32px"
+      backdropFilter="blur(40px)"
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
-      <VStack>
-        <Image
-          src={image}
-          objectFit="cover"
-          maxW="270"
-          h="270px"
-          alt={alt}
-          mt="16px"
-          borderRadius="28px"
-        />
+      <VStack pos="relative" zIndex={1} top="-19px" height="100px">
+        <Box role="group" maxW="330px" w="full" boxShadow="sm" rounded="lg">
+          <Box
+            rounded="lg"
+            mt={-12}
+            pos="relative"
+            _after={{
+              transition: 'all .3s ease',
+              content: '""',
+              w: 'full',
+              h: '110px',
+              pos: 'absolute',
+              top: '54px',
+              left: 0,
+              backgroundImage: `url(${image})`,
+              filter: 'blur(15px)',
+              zIndex: -1,
+            }}
+          >
+            <Image
+              rounded="lg"
+              objectFit="cover"
+              src={image}
+              boxSizing="border-box"
+              borderRadius="24px"
+            />
+          </Box>
+        </Box>
       </VStack>
-      <VStack align="center" justify="center" marginTop="10px !important">
-        <Text textStyle="bold5" align="center">
-          {name}
-        </Text>
-        <Text
-          textStyle="regular4"
-          opacity="0.6"
-          align="center"
-          color={subTitleColor}
-          marginTop="0 !important"
-        >
+
+      <VStack
+        w="full"
+        spacing={5}
+        justify={{ base: 'center', md: 'center' }}
+        mt={{ base: 0, md: 0, xl: '64px' }}
+      >
+        <Text textStyle="semiBold16" color="#F04153">
+          {' '}
           {title}
         </Text>
       </VStack>
-      <GradientEllipse />
-      <GradientEllipse1 />
+
+      <VStack align="center" justify="center" mb="24px !important">
+        <Text textStyle="bold5" pb="5px" align="center">
+          {name}
+        </Text>
+      </VStack>
+      <VStack
+        width="100%"
+        maxWidth="100%"
+        align="center"
+        justify="center"
+        mt="0px !important"
+        mb="10px !important"
+      >
+        <Box backgroundColor="rgba(255, 255, 255, 0.04)" borderRadius="8px" w="100%">
+          <Text
+            textStyle="regular3"
+            margin="0 !important"
+            height="136px"
+            padding="8px 16px 8px 16px"
+            box-sizing="border-box"
+            borderRadius="8px"
+            border="2px solid rgba(255, 255, 255, 0.04)"
+            color="#9fa4af"
+            whiteSpace="pre-line"
+            dangerouslySetInnerHTML={{ __html: subtitle }}
+          />
+        </Box>
+      </VStack>
     </VStack>
-  );
-};
-
-const GradientEllipse = () => {
-  return (
-    <Box
-      pos="absolute"
-      width="220px"
-      height="196px"
-      left="-93px"
-      top="-136px"
-      opacity="0.49"
-      zIndex={1}
-      filter="blur(94px)"
-      bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
-    />
-  );
-};
-
-const GradientEllipse1 = () => {
-  return (
-    <Box
-      top="68px"
-      zIndex={1}
-      width="335px"
-      pos="absolute"
-      height="116px"
-      right="-231px"
-      opacity="0.21"
-      filter="blur(64px)"
-      bg="radial-gradient(50% 50% at 50% 50%, #487BFD 58.11%, #00B2FF 100%)"
-    />
   );
 };
 

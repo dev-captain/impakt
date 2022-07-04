@@ -25,12 +25,28 @@ const ImpaktNFT = () => {
       showNavbar
       spacing={10}
       pos="relative"
-      bgImage={bgImage}
+      // bgImage={bgImage}
       align="flex-start"
       justify="flex-start"
     >
-      <VStack w="full">
-        <VStack maxW={{ base: '100%', lg: '1200px' }} w="full">
+      <VStack
+        w="full"
+        pos="relative"
+        _after={{
+          transition: 'all .3s ease',
+          content: '""',
+          top: '-419px',
+          pos: 'absolute',
+          left: 0,
+          w: 'full',
+          bottom: '-10px',
+          backgroundSize: 'cover',
+          backgroundImage: `url(${bgImage})`,
+          filter: 'blur(15px)',
+          zIndex: 0,
+        }}
+      >
+        <VStack maxW={{ base: '100%', lg: '1200px' }} w="full" zIndex="2">
           <HStack columnGap={{ base: 'auto', lg: '40px' }} alignItems="flex-start" w="full">
             <SimpleGrid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}>
               <GridItem w="full" alignItems="center" justifyContent="center" display="flex">
@@ -101,9 +117,17 @@ const ImpaktNFT = () => {
               </GridItem>
               <GridItem w="full" alignItems="center" justifyContent="center" display="flex">
                 <VStack w="full" rowGap="24px" justifyContent="flex-start" alignItems="flex-start">
-                  <Box position={{ base: 'static', lg: 'absolute' }} top="85px" right="0">
+                  <Box
+                    position={{ base: 'static', lg: 'absolute' }}
+                    top="85px"
+                    right="0"
+                    width={{ base: '100%', lg: '67%', xl: '67%' }}
+                    display="flex"
+                    justifyContent={{ base: 'center', md: 'center', lg: 'end' }}
+                  >
                     <Image
                       height={{ base: 'auto', lg: '90%' }}
+                      width={{ base: '100%', md: '50%', lg: '67%', xl: '67%' }}
                       src="assets/images/Chris-Armsden.png"
                       className="imgTopBlur"
                     />

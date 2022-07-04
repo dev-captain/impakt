@@ -54,12 +54,12 @@ const Images = {
     kai: require('./advisor/kai.png'),
   },
   team: {
-    cap: require('./team/cap.png'),
+    // cap: require('./team/cap.png'),
     dahaka: require('./team/dahaka.png'),
     demideus: require('./team/demideus.png'),
-    duke: require('./team/duke.png'),
+    // duke: require('./team/duke.png'),
     valtec: require('./team/valtec.png'),
-    dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
+    // dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
   },
   contactUs: {
     discordPeter: require('./discordPeter.png'),

@@ -142,6 +142,11 @@ export default {
     fontWeight: '500px',
     lineHeight: '14px',
   },
+  semiBold17: {
+    fontSize: '16px',
+    fontWeight: '500px',
+    lineHeight: '16px',
+  },
   counterNumber: {
     fontFamily: 'Source Sans Pro',
     fontWeight: '300',
