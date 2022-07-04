@@ -204,7 +204,7 @@ const Referrals: React.FC = () => {
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" textStyle="bold4" borderBottom={0}>
-                5
+                5+
               </Td>
               <Td textStyle="bold4" borderBottom={0}>
                 {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
