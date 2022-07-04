@@ -1,4 +1,4 @@
-import { Box, Image, Text, VStack, useColorModeValue } from '@chakra-ui/react';
+import { Box, Image, Text, VStack } from '@chakra-ui/react';
 
 const TeamCard = ({
   image,
