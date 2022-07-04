@@ -59,8 +59,12 @@ const referralsSlice = createSlice({
       })
       .addCase(fetchReferralsReward.fulfilled, (state, action) => {
         state.isReferralsLoading = false;
-        if (action.payload === 0) {
-          state.godlRewardedByReferrals = state.referrals.confirmedCount ?? 0 * 1000;
+        if (
+          action.payload === 0 &&
+          state.referrals.confirmedCount &&
+          state.referrals.confirmedCount !== 0
+        ) {
+          state.godlRewardedByReferrals = state.referrals.confirmedCount * 1000;
         } else {
           state.godlRewardedByReferrals = action.payload;
         }
