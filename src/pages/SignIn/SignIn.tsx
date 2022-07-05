@@ -107,22 +107,19 @@ const SignIn = () => {
       if (queryString.DiscourseConnect) {
         if (requestAccessTokenAttemp !== 1) {
           const request = requestAccessTokenAsync();
-          request
-            .then((res) => {
-              if (res) {
-                window.location.href = res;
-              }
-              navigate('/dashboard');
-            })
-            .catch(() => {
-              navigate('/dashboard');
-            });
+          request.then((res) => {
+            if (res) {
+              window.location.href = res;
+            }
+          });
 
           return;
         }
       }
 
-      navigate('/dashboard');
+      if (requestAccessTokenAttemp === 0) {
+        navigate('/dashboard');
+      }
     }
   }, [member, requestAccessTokenAttemp]);
 
