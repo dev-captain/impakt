@@ -80,7 +80,7 @@ const HomePage = () => {
           <YourBody />
         </div>
 
-        <Box
+        {/* <Box
           left="75vw"
           ref={exerciseCardRef}
           zIndex={99999}
@@ -117,7 +117,7 @@ const HomePage = () => {
           top={borderY + 210}
         >
           <img width="100%" height="100%" src={Images.Common.window} alt="_" />
-        </Box>
+        </Box> */}
       </div>
 
       <div>

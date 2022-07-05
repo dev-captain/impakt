@@ -7,6 +7,8 @@ import 'aos/dist/aos.css';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
+import RichIcon from '../../../icons/RichIcon';
+import RichIcon2 from '../../../icons/RichIcon2';
 
 const YourBody: React.FC = () => {
   useEffect(() => {
@@ -17,59 +19,72 @@ const YourBody: React.FC = () => {
 
   return (
     <HeroLayout
-      spacing={10}
+      showNavbar
+      spacing={0}
       pos="relative"
       bgColor="#121117"
       align="flex-start"
       justify="flex-start"
     >
-      <VStack id="your-body-section" all="inherit" w="full">
+      <VStack w="full">
         <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
-            <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
-              <Box
-                id="hero-headline-box"
-                backgroundClip="text"
-                css={{
-                  '-webkit-background-clip': 'text',
-                  '-webkit-text-fill-color': 'transparent',
-                }}
-                background="linear-gradient(302.56deg, rgba(140, 48, 155, 0.44) 3.86%, rgba(140, 48, 155, 0) 52.18%), linear-gradient(57.44deg, rgba(56, 4, 193, 0.55) -14.75%, rgba(56, 4, 193, 0) 32.81%), #FFFFFF;"
-              >
-                <Text letterSpacing="-4px" textStyle="TitleBold73">
-                  Your
-                </Text>
-                <Text letterSpacing="-4px" textStyle="TitleBold73">
-                  Body
-                </Text>
-                <Text letterSpacing="-4px" textStyle="TitleBold73">
-                  is Controller.
+            <VStack w="95%" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
+              <Box id="our-ai-card-box" w="full">
+                <InfoCard LeftLogo={<RichIcon2 />}>
+                  <VStack alignItems="flex-start" color="white">
+                    <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
+                      Our AI technology recognizes your gestures & movements in real time
+                    </Text>
+                  </VStack>
+                </InfoCard>
+              </Box>
+              <Box id="computer-vision-box" w="full">
+                <Text textStyle="semiBold5" letterSpacing="2px" color="#F04153">
+                  COMPUTER VISION
                 </Text>
               </Box>
-              <Box
-                ml="7px !important"
-                mt="0 !important"
-                id="hero-headline-description"
-                backgroundClip="text"
-              >
-                <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular20">
-                  Work out! Get fit! Get paid!
+
+              <Box id="your-body-headline-box" w="full">
+                <Text textStyle="TitleBold64" letterSpacing="-2.5px" color="#fff">
+                  Your body is
+                </Text>
+                <Text textStyle="TitleBold64" letterSpacing="-2.5px" color="#fff">
+                  the controller.
                 </Text>
               </Box>
-              <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
+
+              <Box id="your-body-headline-box" w="full">
+                <Text textStyle="regular20" color="rgba(255, 255, 255, 0.75);">
+                  All you need is a webcam or a phone camera.
+                </Text>
+              </Box>
+
+              <Box id="get-the-bonus-box" w="full">
                 <InfoCard isShowTooltip LeftLogo={<YoutubeIcon />}>
                   <VStack alignItems="flex-start" color="white">
-                    <Text textStyle="regular201">Start earning CRYPTO now!</Text>
-                    <Text color="gold" fontWeight="bold" textStyle="regular201">
-                      1000 GODL BONUS
+                    <Text textStyle="regular201" display="inline-block">
+                      Get the
+                      <Text
+                        display="inline-block"
+                        m="5px"
+                        color="gold"
+                        fontWeight="bold"
+                        textStyle="regular201"
+                      >
+                        1000 GODL BONUS
+                      </Text>
                     </Text>
                     <Text textStyle="semiBold14" color="whiteAlpha.400">
-                      *for new accounts
+                      *download App & create account
                     </Text>
                   </VStack>
                 </InfoCard>
               </Box>
             </VStack>
+            <HStack id="right" w="full">
+              <Box />
+            </HStack>
           </HStack>
         </VStack>
       </VStack>
