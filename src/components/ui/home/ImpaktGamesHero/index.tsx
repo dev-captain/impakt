@@ -30,9 +30,7 @@ const ImpaktGamesHero: React.FC<{ moveToYourBodySection: () => void }> = ({
     >
       <VStack
         onWheel={() => {
-          if (isAnimate) {
-            moveToYourBodySection();
-          }
+          moveToYourBodySection();
         }}
         w="full"
       >

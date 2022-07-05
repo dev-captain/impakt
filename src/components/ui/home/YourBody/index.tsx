@@ -37,13 +37,13 @@ const YourBody: React.FC = () => {
                 background="linear-gradient(302.56deg, rgba(140, 48, 155, 0.44) 3.86%, rgba(140, 48, 155, 0) 52.18%), linear-gradient(57.44deg, rgba(56, 4, 193, 0.55) -14.75%, rgba(56, 4, 193, 0) 32.81%), #FFFFFF;"
               >
                 <Text letterSpacing="-4px" textStyle="TitleBold73">
-                  Social
+                  Your
                 </Text>
                 <Text letterSpacing="-4px" textStyle="TitleBold73">
-                  Fitness.
+                  Body
                 </Text>
                 <Text letterSpacing="-4px" textStyle="TitleBold73">
-                  Gamified.
+                  is Controller.
                 </Text>
               </Box>
               <Box

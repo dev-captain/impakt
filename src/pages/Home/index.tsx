@@ -9,70 +9,87 @@ import ExerciseCard from '../../components/ui/home/ImpaktGamesHero/ExerciseCard'
 import StarsVideo from '../../components/ui/home/ImpaktGamesHero/StarsVideo';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import { setBorderX, setBorderY } from '../../lib/redux/slices/state/stateSlice';
 import HeroVideo from '../../components/ui/home/ImpaktGamesHero/HeroVideo';
+import Images from '../../assets/images';
 
 const HomePage = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mirrorRef = useRef<HTMLDivElement | null>(null);
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const heroVideoScreenRef = useRef<HTMLDivElement | null>(null);
+  const exerciseCardRef = useRef<HTMLDivElement | null>(null);
 
-  const dispatch = useAppDispatch();
-
+  const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
+
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
 
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = useState(false);
 
   const yourBodySectionRef = useRef<HTMLDivElement | null>(null);
+
   const moveToYourBodySection = () => {
-    if (
-      yourBodySectionRef &&
-      yourBodySectionRef.current &&
-      !isMovedToYourBodySection &&
-      isAnimated
-    ) {
+    if (yourBodySectionRef && yourBodySectionRef.current && !isMovedToYourBodySection) {
       setIsMovedToYourBodySection(true);
-      window.scrollTo(0, yourBodySectionRef.current.offsetTop - 100);
+      window.scrollTo(0, 800);
     }
   };
 
-  useLayoutEffect(() => {
-    function updateSize() {
-      if (mirrorRef.current) {
-        dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-        dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+  // useLayoutEffect(() => {
+  //   function updateSize() {
+  //     if (mirrorRef.current) {
+  //       dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+  //       dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+  //     }
+  //   }
+
+  //   window.addEventListener('resize', updateSize);
+
+  //   return () => window.removeEventListener('resize', updateSize);
+  // }, []);
+
+  useEffect(() => {
+    function checkOffSet() {
+      console.log(window.scrollY);
+      if (
+        mirrorRef.current &&
+        heroVideoRef.current &&
+        heroVideoScreenRef.current &&
+        exerciseCardRef.current &&
+        isAnimated &&
+        window.scrollY < 800
+      ) {
+        mirrorRef.current.style.top = `${window.scrollY + 100}px`;
+        heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
+        heroVideoScreenRef.current.style.top = `${window.scrollY + 100 + 210}px`;
+        exerciseCardRef.current.style.top = `${window.scrollY + 200}px`;
+        mirrorRef.current.style.position = 'absolute';
       }
     }
 
-    window.addEventListener('resize', updateSize);
+    window.addEventListener('scroll', checkOffSet);
 
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-
-  useEffect(() => {
-    if (mirrorRef.current) {
-      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-      dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-    }
-  }, []);
+    return () => window.removeEventListener('scroll', checkOffSet);
+  }, [isAnimated]);
 
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      <div ref={containerRef} id="stick">
+      <div style={{ position: 'relative' }} ref={containerRef} id="stick">
         <ImpaktGamesHero moveToYourBodySection={moveToYourBodySection} />
         <div id="impakt-your-body" ref={yourBodySectionRef}>
           <YourBody />
         </div>
 
-        <Box left="80vw" top={borderY - 150} zIndex={9999} position="fixed">
+        <Box
+          left="75vw"
+          ref={exerciseCardRef}
+          zIndex={99999}
+          top={borderY + 100}
+          position="absolute"
+        >
           <ExerciseCard />
         </Box>
-        <Box
-          ref={mirrorRef}
-          position={isMovedToYourBodySection ? 'absolute' : 'fixed'}
-          left="900px"
-          top="100px"
-        >
+        <Box ref={mirrorRef} id="mirror" position="absolute" left={borderX} top={borderY}>
           <Box position="relative" height="788px" width="600px">
             <StarsVideo />
             <div
@@ -89,7 +106,18 @@ const HomePage = () => {
             />
           </Box>
         </Box>
-        <HeroVideo />
+        <HeroVideo ref={heroVideoRef} />
+        <Box
+          display="flex"
+          ref={heroVideoScreenRef}
+          w="717.1px"
+          zIndex="0"
+          position="absolute"
+          left="96vh"
+          top={borderY + 210}
+        >
+          <img width="100%" height="100%" src={Images.Common.window} alt="_" />
+        </Box>
       </div>
 
       <div>
