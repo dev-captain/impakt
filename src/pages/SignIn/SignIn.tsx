@@ -71,50 +71,60 @@ const SignIn = () => {
     try {
       const request = await dispatch(
         requestAccessToken({
-          discoursePayload: queryString.DiscoursePayload,
-          discourseSig: queryString.DiscourseSig,
+          discoursePayload: queryString.sso,
+          discourseSig: queryString.sig,
         }),
       ).unwrap();
 
       if (request.discourseRedirectUrl === undefined) {
-        return toast({
+        toast({
           title: 'Error',
           description: ' "Something went wrong...',
           isClosable: false,
           duration: 2000,
           status: 'error',
         });
+
+        return undefined;
       }
 
-      return toast({
+      toast({
         title: 'Success',
         description: ' "Redirecting to forums..',
         isClosable: false,
         duration: 2000,
         status: 'success',
       });
+
+      return request.discourseRedirectUrl;
     } catch (error: any) {
       return null;
     }
   }, []);
 
   useEffect(() => {
-    if (member?.discourseRedirectUrl) {
-      window.location.href = member.discourseRedirectUrl;
+    if (member) {
+      if (queryString.DiscourseConnect) {
+        if (requestAccessTokenAttemp !== 1) {
+          const request = requestAccessTokenAsync();
+          request
+            .then((res) => {
+              if (res) {
+                window.location.href = res;
+              }
+              navigate('/dashboard');
+            })
+            .catch(() => {
+              navigate('/dashboard');
+            });
 
-      return;
-    }
-
-    if (member && queryString.DiscourseConnect) {
-      if (requestAccessTokenAttemp !== 1) {
-        requestAccessTokenAsync();
-
-        return;
+          return;
+        }
       }
-    }
 
-    if (member) navigate('/dashboard');
-  }, [member]);
+      navigate('/dashboard');
+    }
+  }, [member, requestAccessTokenAttemp]);
 
   React.useEffect(() => {
     register('email');
