@@ -19,7 +19,7 @@ const TeamCard = ({
       pr="32px"
       pb="32px"
       w="368px"
-      h="364px"
+      h="436px"
       align="center"
       justify="space-between"
       bgColor="rgba(28, 28, 40, 0.65)"
@@ -87,7 +87,7 @@ const TeamCard = ({
           <Text
             textStyle="regular3"
             margin="0 !important"
-            height="136px"
+            height="168px"
             padding="8px 16px 8px 16px"
             box-sizing="border-box"
             borderRadius="8px"

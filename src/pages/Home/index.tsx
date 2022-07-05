@@ -1,5 +1,12 @@
 import { Container } from '@chakra-ui/layout';
-import { ImpaktGamesHero, ImpaktNFT, Advisor, Founder } from 'components/ui/home';
+import {
+  ImpaktGamesHero,
+  ImpaktNFT,
+  Advisor,
+  Founder,
+  ImpaktCreed,
+  ImpaktFooter,
+} from 'components/ui/home';
 
 const HomePage = () => {
   return (
@@ -8,17 +15,23 @@ const HomePage = () => {
         <ImpaktGamesHero />
       </div>
       <div>
+        <ImpaktNFT />
+      </div>
+      <div>
+        <ImpaktCreed />
+      </div>
+      <div>
         <Founder />
       </div>
       <div>
         <Advisor />
       </div>
+      <div>
+        <ImpaktFooter />
+      </div>
       {/* <div>
         <CardFounder />
       </div> */}
-      <div>
-        <ImpaktNFT />
-      </div>
 
       {/* <div id="status-quo">
         <StatusQuoHero />

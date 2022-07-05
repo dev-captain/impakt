@@ -12,6 +12,7 @@ import { Advisors } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import InvestorCard from '../PartnerAndInvestorHero/InvestorCard';
+import bgImage from '../../../../assets/images/bgadvvisors.png';
 
 const Advisor = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -19,7 +20,7 @@ const Advisor = () => {
 
   return (
     <HeroLayout
-      bgImage="linear-gradient(180deg, #090909 0%, rgb(0 0 0) 22.71%, rgb(9 9 11) 49.69%, #09090b00 63%)"
+      bgImage={bgImage}
       customPadding={{
         base: '16px',
         md: '32px',
@@ -35,8 +36,6 @@ const Advisor = () => {
         maxW={{ base: '100%', lg: '1200px' }}
         w="full"
         color={textColor}
-        position="relative"
-        zIndex={1}
       >
         <VStack>
           <VStack
@@ -52,7 +51,9 @@ const Advisor = () => {
               justify={{ base: 'center', md: 'center' }}
               mt={{ base: 0, md: 0, xl: '64px' }}
             >
-              <Text color="#F04153">{t(keys.ourAdvisorTitle.adviser)}</Text>
+              <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
+                {t(keys.ourAdvisorTitle.adviser)}
+              </Text>
             </VStack>
             <VStack
               width={{ base: '100%', lg: '100%', xl: '1200px' }}
