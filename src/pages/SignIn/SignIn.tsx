@@ -105,7 +105,7 @@ const SignIn = () => {
   useEffect(() => {
     if (member) {
       if (queryString.DiscourseConnect) {
-        if (requestAccessTokenAttemp !== 1) {
+        if (requestAccessTokenAttemp === 0) {
           const request = requestAccessTokenAsync();
           request.then((res) => {
             if (res) {
