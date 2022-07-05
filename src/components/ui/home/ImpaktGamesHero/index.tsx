@@ -1,69 +1,123 @@
-import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, useBreakpointValue } from '@chakra-ui/react';
+/* eslint-disable jsx-a11y/media-has-caption */
+import { memo, useEffect, useLayoutEffect, useRef } from 'react';
+import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
-import useModalStore from 'hooks/store/useModalStore';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import DownloadButton from 'components/core/DownloadButton';
-import TitleItem from './TitleItem';
-import ScreenAndVideo from './ScreenVideo';
+import HeroVideo from './HeroVideo';
+import InfoCard from '../../../core/InfoCard';
+import YoutubeIcon from '../../../icons/YoutubeIcon';
+import StarsVideo from './StarsVideo';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
+import ExerciseCard from './ExerciseCard';
+import useAppSelector from '../../../../hooks/useAppSelector';
 
 const ImpaktGamesHero = () => {
-  const { t } = useTranslation(`default`).i18n;
-  const text = useColorModeValue('glass.100', 'glass.700');
-  const { setImpaktGames } = useModalStore((state) => state);
-  const Wrapper: any = useBreakpointValue({ base: VStack, md: HStack });
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const mirrorRef = useRef() as any;
+  const dispatch = useAppDispatch();
+  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (mirrorRef.current) {
+        dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+        dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+      }
+    }
+    window.addEventListener('resize', updateSize);
+
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  useEffect(() => {
+    if (mirrorRef.current) {
+      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+      dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
+    }
+  }, []);
 
   return (
     <HeroLayout
       showNavbar
-      minH="70vh"
       spacing={10}
       pos="relative"
       bgImage={bgImage}
       align="flex-start"
       justify="flex-start"
     >
-      <VStack color={text} w="full" pt={{ base: '27px', md: '148px' }}>
-        <VStack maxW="1232px" w="full" px="16px">
-          <HStack w="full" justify="space-between">
-            <VStack align={{ base: 'center', md: 'flex-start' }} spacing="37px">
-              <ScreenAndVideo
-                onPlay={() => {
-                  setImpaktGames(true);
+      <VStack w="full">
+        <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
+          <HStack columnGap="48px" alignItems="flex-start" w="full">
+            <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
+              <Box
+                id="hero-headline-box"
+                backgroundClip="text"
+                css={{
+                  '-webkit-background-clip': 'text',
+                  '-webkit-text-fill-color': 'transparent',
                 }}
-                view="mobile"
-              />
-              <VStack align="inherit">
-                <TitleItem title={t(keys.impaktGamesHero.social)} />
-                <TitleItem title={t(keys.impaktGamesHero.fitness)} />
-                <TitleItem title={t(keys.impaktGamesHero.gamified)} />
-              </VStack>
-              <Wrapper width="full">
-                <DownloadButton
-                  isHorizontal
-                  iconName="Windows"
-                  title="Download for Windows"
-                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
-                />
-                <DownloadButton
-                  isHorizontal
-                  iconName="Apple"
-                  title="Download for Mac"
-                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
-                />
-              </Wrapper>
+                background="linear-gradient(302.56deg, rgba(140, 48, 155, 0.44) 3.86%, rgba(140, 48, 155, 0) 52.18%), linear-gradient(57.44deg, rgba(56, 4, 193, 0.55) -14.75%, rgba(56, 4, 193, 0) 32.81%), #FFFFFF;"
+              >
+                <Text letterSpacing="-4px" textStyle="TitleBold73">
+                  Social
+                </Text>
+                <Text letterSpacing="-4px" textStyle="TitleBold73">
+                  Fitness.
+                </Text>
+                <Text letterSpacing="-4px" textStyle="TitleBold73">
+                  Gamified.
+                </Text>
+              </Box>
+              <Box
+                ml="7px !important"
+                mt="0 !important"
+                id="hero-headline-description"
+                backgroundClip="text"
+              >
+                <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular20">
+                  Work out! Get fit! Get paid!
+                </Text>
+              </Box>
+              <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
+                <InfoCard isShowTooltip LeftLogo={<YoutubeIcon />}>
+                  <VStack alignItems="flex-start" color="white">
+                    <Text textStyle="regular201">Start earning CRYPTO now!</Text>
+                    <Text color="gold" fontWeight="bold" textStyle="regular201">
+                      1000 GODL BONUS
+                    </Text>
+                    <Text textStyle="semiBold14" color="whiteAlpha.400">
+                      *for new accounts
+                    </Text>
+                  </VStack>
+                </InfoCard>
+              </Box>
             </VStack>
-            <ScreenAndVideo
-              onPlay={() => {
-                setImpaktGames(true);
-              }}
-            />
+            <HStack w="full">
+              <Box left="80vw" top={borderY - 150} zIndex={9999} position="absolute">
+                <ExerciseCard />
+              </Box>
+              <Box ref={mirrorRef} position="relative" height="788px" width="600px">
+                <StarsVideo />
+                <div
+                  className="shadow"
+                  style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
+                    top: '0',
+                    left: '0',
+                    borderRadius: '150px 150px 0px 0',
+                  }}
+                />
+              </Box>
+            </HStack>
           </HStack>
         </VStack>
       </VStack>
+
+      <HeroVideo />
     </HeroLayout>
   );
 };

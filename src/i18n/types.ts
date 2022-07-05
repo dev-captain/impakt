@@ -3,6 +3,8 @@ const contact = 'contact';
 const events = 'events';
 const ourRoadmap = 'ourRoadmap';
 const ourAdvisor = 'ourAdvisor';
+const ourAdvisorTitle = 'ourAdvisorTitle';
+const Founder = 'Founder';
 const ourTeam = 'ourTeam';
 const navbar = 'navbar';
 const burnAndEarn = 'burnAndEarn';
@@ -56,6 +58,14 @@ const TranslationKeys = {
   ourAdvisor: {
     our: `${ourAdvisor}.our`,
     advisor: `${ourAdvisor}.advisor`,
+  },
+  ourAdvisorTitle: {
+    adviser: `${ourAdvisorTitle}.adviser`,
+    Title: `${ourAdvisorTitle}.Title`,
+  },
+  Founder: {
+    builders: `${Founder}.builders`,
+    Title: `${Founder}.Title`,
   },
   ourTeam: {
     our: `${ourTeam}.our`,

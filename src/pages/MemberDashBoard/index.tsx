@@ -16,7 +16,7 @@ const MemberDashboard: React.FC = () => {
       pos="relative"
       align="flex-start"
       justify="flex-start"
-      showDarkOrLightModeOnNavbar={false}
+      showDarkOrLightModeButton={false}
     >
       <VStack rowGap="74px" w="full">
         <VStack id="referrals-impakt-section" color="white" w="full">

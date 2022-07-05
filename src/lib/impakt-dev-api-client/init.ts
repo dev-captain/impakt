@@ -7,8 +7,10 @@ import {
   HttpMethod,
   ResponseContext,
   GodlAccountApi,
-} from '@impakt-dev/api-client';
-import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
+  FitnessStatsApi,
+  ReferralsApi,
+} from '@impakt-dev/api-client-168-merge';
+import { Observable } from '@impakt-dev/api-client-168-merge/dist/rxjsStub';
 import axios from '../axios/api';
 
 const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
@@ -90,3 +92,5 @@ export const configuration = createConfiguration({
 export const authInstance = new AuthApi(configuration);
 export const godlInstance = new GodlAccountApi(configuration);
 export const UserInstance = new UsersApi(configuration);
+export const FitnessInstance = new FitnessStatsApi(configuration);
+export const ReferralsInstance = new ReferralsApi(configuration);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'i18n';
 import { useEffect, useState } from 'react';
 import { useColorMode } from '@chakra-ui/react';
@@ -22,6 +23,8 @@ import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
+
+  // eslint-disable-next-line no-unused-vars
   const [scroll, setScroll] = useState(false);
 
   const handleScroll = () => {

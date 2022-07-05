@@ -1,8 +1,11 @@
 import { VStack, HStack, Box } from '@chakra-ui/react';
 import * as React from 'react';
+
 import MemberDashboardCard from '../MemberDashBoardCard';
+// import WhiteList from '../ExerciseAndHowToWL/WhiteList';
 import Referrals from './Referrals';
 import GodlScore from './GodlScore';
+// import Excercise from '../ExerciseAndHowToWL/Exercise';
 
 const ReferralsAndGodlScore: React.FC = () => {
   return (
@@ -29,12 +32,12 @@ const ReferralsAndGodlScore: React.FC = () => {
           columnGap="32px"
         >
           <Box w={{ base: '100%', lg: '50%' }}>
-            <MemberDashboardCard borderRadius={40} isGradient>
+            <MemberDashboardCard>
               <GodlScore />
             </MemberDashboardCard>
           </Box>
-          <Box w={{ base: '100%', lg: '50%' }}>
-            <MemberDashboardCard borderRadius={40}>
+          <Box w={{ base: '100%', lg: '50%' }} marginLeft="0 !important">
+            <MemberDashboardCard>
               <Referrals />
             </MemberDashboardCard>
           </Box>

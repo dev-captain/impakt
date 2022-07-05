@@ -22,6 +22,7 @@ const Images = {
     blitzChallenge: require('./blitz-challenge.png'),
     bgWave: require('./bg-wave.png'),
     play: require('./play.png'),
+    window: require('./window.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),
@@ -40,21 +41,25 @@ const Images = {
   } as any,
 
   impaktGames: {
-    Header: require('./bg.png'),
+    Header: require('./latestdefaultbg.jpg'),
+    light: require('./bg-light.png'),
+  },
+  impaktNFT: {
+    Header: require('./nftbg.png'),
     light: require('./bg-light.png'),
   },
   advisor: {
-    kevin: require('./advisor/kevin-lin.webp'),
+    kevin: require('./advisor/kevin.png'),
     tim: require('./advisor/tim.png'),
-    kai: require('./advisor/kai-huang.webp'),
+    kai: require('./advisor/kai.png'),
   },
   team: {
-    cap: require('./team/cap.png'),
+    // cap: require('./team/cap.png'),
     dahaka: require('./team/dahaka.png'),
     demideus: require('./team/demideus.png'),
-    duke: require('./team/duke.png'),
+    // duke: require('./team/duke.png'),
     valtec: require('./team/valtec.png'),
-    dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
+    // dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
   },
   contactUs: {
     discordPeter: require('./discordPeter.png'),

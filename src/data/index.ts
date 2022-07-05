@@ -68,6 +68,8 @@ export const TokenomicsData = [
 export const Videos = {
   burnAndEarn: 'assets/videos/burn-and-earn.mp4',
   impaktGames: 'assets/videos/tutorial-video.mp4',
+  heroVideo: 'assets/videos/herovideo.mp4',
+  stars: 'assets/videos/stars.mp4',
 };
 
 export const Socials = {
@@ -164,24 +166,46 @@ export const Articles = [
 export const Advisors = [
   {
     name: 'Kevin Lin',
-    title: 'Founder - Twitch',
+    title: 'Twitch Founder',
     image: Images.advisor.kevin,
     subtitle: '',
     alt: 'Kevin Lin',
   },
   {
     name: 'Tim Howes',
-    title: 'CTO - Netscape',
+    title: 'Netscape CTO',
     image: Images.advisor.tim,
     alt: 'Tim Howes',
     subtitle: 'Director of Engineering - Facebook',
   },
   {
     name: 'Kai Huang',
-    title: 'Founder - Guitar Hero',
+    title: 'Guitar Hero Founder',
     image: Images.advisor.kai,
     alt: 'Kai Huang',
     subtitle: 'President of Red Octane - Activision',
+  },
+];
+
+export const AdvisorSec = [
+  {
+    name: 'Kevin Lin',
+    title: 'Twitch Founder',
+    image: Images.advisor.kevin,
+    subtitle: '',
+    alt: 'Kevin Lin',
+  },
+  {
+    name: 'Tim Howes',
+    title: 'Netscape CTO ',
+    image: Images.advisor.tim,
+    alt: 'Tim Howes',
+  },
+  {
+    name: 'Kai Huang',
+    title: 'Guitar Hero Founder',
+    image: Images.advisor.kai,
+    alt: 'Kai Huang',
   },
 ];
 
@@ -191,28 +215,24 @@ export const Team = [
     title: 'CEO',
     image: Images.team.demideus,
     alt: '',
-    subtitle: '',
+    subtitle:
+      '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses. \n Previous 2 CEO/Founder roles in companies valued at $30M+.',
   },
   {
     name: 'Valtec',
     title: 'President',
     image: Images.team.valtec,
     alt: '',
-    subtitle: '',
-  },
-  {
-    name: 'DukeNuke',
-    title: 'Partner',
-    image: Images.team.duke,
-    alt: '',
-    subtitle: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> of building technology companies at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
   },
   {
     name: 'Dahaka',
     title: 'CTO',
     image: Images.team.dahaka,
     alt: '',
-    subtitle: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.',
   },
   // {
   //   name: 'Cap’n Crunch',

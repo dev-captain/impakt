@@ -5,11 +5,14 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import memberAuth from '../slices/member/memberAuthSlice';
 import knowledgeBaseReducer from '../slices/knowledgeBase/knowledgeBaseSlice';
 import godlReducer from '../slices/godl/godlSlice';
+import fitnessReducer from '../slices/fitness/fitnessSlice';
+import referralsReducer from '../slices/referrals/referralsSlice';
+import stateReducer from '../slices/state/stateSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['memberAuth'],
+  blacklist: ['memberAuth', 'stateReducer'],
 };
 
 export const memberAuthPersistConfig = {
@@ -22,6 +25,9 @@ const rootReducer = combineReducers({
   memberAuth: persistReducer(memberAuthPersistConfig, memberAuth),
   knowledgeBase: knowledgeBaseReducer,
   godl: godlReducer,
+  fitnessReducer,
+  referrals: referralsReducer,
+  stateReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -51,6 +51,11 @@ export default {
     fontWeight: '700',
     lineHeight: '36px',
   },
+  normal5: {
+    fontSize: '32px',
+    fontWeight: '600',
+    lineHeight: '100%',
+  },
   regular5: {
     fontSize: '32px',
     fontWeight: '400',
@@ -65,6 +70,11 @@ export default {
     fontSize: '24px',
     fontWeight: '400',
     lineHeight: '32px',
+  },
+  regular18: {
+    fontWeight: '400',
+    fontSize: ' 18px',
+    lineHeight: '30px',
   },
   bold3: {
     fontSize: '16px',
@@ -107,6 +117,11 @@ export default {
     fontWeight: '400',
     lineHeight: '32px',
   },
+  regular201: {
+    fontSize: '20px',
+    fontWeight: '500',
+    lineHeight: '20px',
+  },
   semiBold16: {
     fontSize: '16px',
     fontWeight: '600',
@@ -120,6 +135,16 @@ export default {
   regular12: {
     fontSize: '12px',
     fontWeight: '400',
+    lineHeight: '16px',
+  },
+  semiBold14: {
+    fontSize: '14px',
+    fontWeight: '500px',
+    lineHeight: '14px',
+  },
+  semiBold17: {
+    fontSize: '16px',
+    fontWeight: '500px',
     lineHeight: '16px',
   },
   counterNumber: {
@@ -138,6 +163,18 @@ export default {
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
     fontSize: { base: '72px', sm: '120px', md: '98px', xl: '120px' },
     lineHeight: { base: '80px', sm: '120px', md: '98px', xl: '120px' },
+  },
+  TitleBold73: {
+    fontWeight: '700',
+    fontFamily: `Poppins ,${theme.fonts?.heading}`,
+    fontSize: '96px',
+    lineHeight: '96px',
+  },
+  TitleBold48: {
+    fontWeight: '700',
+    fontFamily: `Poppins ,${theme.fonts?.heading}`,
+    fontSize: '48px',
+    lineHeight: '56px',
   },
   accentGradient: {
     bgClip: 'text',

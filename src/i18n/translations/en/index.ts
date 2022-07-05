@@ -15,9 +15,9 @@ export default {
   navbar: {
     events: 'Events',
     contactUs: 'Contact Us',
-    impaktFitness: 'Impakt Fitness',
+    impaktFitness: 'Fitness',
     knowledgeBase: 'Knowledge Base',
-    download: 'Download Platform',
+    download: 'Download',
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
     signIn: 'Sign in',
@@ -37,6 +37,14 @@ export default {
   ourAdvisor: {
     our: 'Our',
     advisor: 'advisors',
+  },
+  ourAdvisorTitle: {
+    adviser: 'ADVISORS',
+    Title: 'Advised by some of the best disruptive minds in the industry',
+  },
+  Founder: {
+    builders: 'IMPAKT BUILDERS',
+    Title: 'The Founders',
   },
   ourTeam: {
     our: 'Leadership',
