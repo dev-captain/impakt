@@ -12,8 +12,8 @@ interface InitialStateI {
 const initialState: InitialStateI = {
   heroVideo: {
     isScrolling: false,
-    borderX: 0,
-    borderY: 0,
+    borderX: 940,
+    borderY: 100,
     isAnimated: false,
   },
 };

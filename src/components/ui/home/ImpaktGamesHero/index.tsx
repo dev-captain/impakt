@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { memo, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
@@ -12,30 +12,12 @@ import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/state
 import ExerciseCard from './ExerciseCard';
 import useAppSelector from '../../../../hooks/useAppSelector';
 
-const ImpaktGamesHero = () => {
+const ImpaktGamesHero: React.FC<{ moveToYourBodySection: () => void }> = ({
+  moveToYourBodySection,
+}) => {
+  const [moved, setMoved] = React.useState(false);
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
-  const mirrorRef = useRef() as any;
-  const dispatch = useAppDispatch();
-  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
-
-  useLayoutEffect(() => {
-    function updateSize() {
-      if (mirrorRef.current) {
-        dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-        dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-      }
-    }
-    window.addEventListener('resize', updateSize);
-
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-
-  useEffect(() => {
-    if (mirrorRef.current) {
-      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-      dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-    }
-  }, []);
+  const isAnimate = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
 
   return (
     <HeroLayout
@@ -46,7 +28,12 @@ const ImpaktGamesHero = () => {
       align="flex-start"
       justify="flex-start"
     >
-      <VStack w="full">
+      <VStack
+        onWheel={() => {
+          moveToYourBodySection();
+        }}
+        w="full"
+      >
         <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
             <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
@@ -93,33 +80,14 @@ const ImpaktGamesHero = () => {
                 </InfoCard>
               </Box>
             </VStack>
-            <HStack w="full">
-              <Box left="80vw" top={borderY - 150} zIndex={9999} position="absolute">
-                <ExerciseCard />
-              </Box>
-              <Box ref={mirrorRef} position="relative" height="788px" width="600px">
-                <StarsVideo />
-                <div
-                  className="shadow"
-                  style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
-                    top: '0',
-                    left: '0',
-                    borderRadius: '150px 150px 0px 0',
-                  }}
-                />
-              </Box>
+            <HStack id="right" w="full">
+              <Box />
             </HStack>
           </HStack>
         </VStack>
       </VStack>
-
-      <HeroVideo />
     </HeroLayout>
   );
 };
 
-export default memo(ImpaktGamesHero);
+export default ImpaktGamesHero;

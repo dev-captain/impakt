@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'i18n';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import {
@@ -25,27 +25,27 @@ const App = () => {
   const { setColorMode } = useColorMode();
 
   // eslint-disable-next-line no-unused-vars
-  const [scroll, setScroll] = useState(false);
+  // const [scroll, setScroll] = useState(false);
 
-  const handleScroll = () => {
-    setScroll(window.scrollY > 50);
-    document.body.classList.add('scroll');
+  // const handleScroll = () => {
+  //   setScroll(window.scrollY > 50);
+  //   document.body.classList.add('scroll');
 
-    return scroll;
-  };
+  //   return scroll;
+  // };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    const timeout = setTimeout(() => {
-      setScroll(false);
-      document.body.classList.remove('scroll');
-    }, 100);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   const timeout = setTimeout(() => {
+  //     setScroll(false);
+  //     document.body.classList.remove('scroll');
+  //   }, 100);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeout);
-    };
-  }, [handleScroll]);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //     clearTimeout(timeout);
+  //   };
+  // }, [handleScroll]);
 
   useEffect(() => {
     setColorMode('light');

@@ -91,6 +91,11 @@ export default {
     fontWeight: '600',
     lineHeight: '24px',
   },
+  semiBold5: {
+    fontSize: '16px',
+    fontWeight: '500',
+    lineHeight: '24px',
+  },
   regular3: {
     fontSize: '16px',
     fontWeight: '400',
@@ -169,17 +174,17 @@ export default {
     fontSize: '96px',
     lineHeight: '96px',
   },
-  TitleBold64: {
-    fontWeight: '700',
-    fontFamily: `Poppins ,${theme.fonts?.heading}`,
-    fontSize: '64px',
-    lineHeight: '100%',
-  },
   TitleBold48: {
     fontWeight: '700',
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
     fontSize: '48px',
     lineHeight: '56px',
+  },
+  TitleBold64: {
+    fontWeight: '700',
+    fontFamily: `Poppins ,${theme.fonts?.heading}`,
+    fontSize: '64px',
+    lineHeight: '100%',
   },
   accentGradient: {
     bgClip: 'text',

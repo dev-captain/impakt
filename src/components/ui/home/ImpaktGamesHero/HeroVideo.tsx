@@ -1,7 +1,5 @@
-import { Box } from '@chakra-ui/react';
-import React, { memo } from 'react';
+import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import Images from '../../../../assets/images';
 
 import { Videos } from '../../../../data';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
@@ -12,6 +10,7 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   0% {
     top:0;
     left: 0;
+    position:fixed;
   }
 
   100% {
@@ -19,6 +18,7 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   height:360px;
   top: ${y}px;
   left: ${x}px;
+  position:absolute
   }
 `;
 
@@ -26,8 +26,8 @@ const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: numbe
   object-fit: cover;
   width: ${(p) => (p.isAnimated ? '640px' : '100vw')};
   height: ${(p) => (p.isAnimated ? '360px' : '100vh')};
-  z-index: 999;
-  position: absolute;
+  z-index: 1;
+  position: ${(p) => (p.isAnimated ? 'absolute' : 'fixed')};
   animation: ${(p) =>
     p.isScrolling &&
     !p.isAnimated &&
@@ -42,7 +42,7 @@ const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: numbe
 
 const Source = styled.source``;
 
-const HeroVideo: React.FC = () => {
+const HeroVideo = React.forwardRef<HTMLVideoElement>((_, ref) => {
   const dispatch = useAppDispatch();
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
@@ -50,39 +50,27 @@ const HeroVideo: React.FC = () => {
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
 
   return (
-    <>
-      <Video
-        x={borderX}
-        y={borderY}
-        isAnimated={isAnimated}
-        onWheel={() => {
-          if (!isScrolling) {
-            dispatch(setIsScrolling());
-            setTimeout(() => {
-              dispatch(setIsAnimated());
-            }, 1000);
-          }
-        }}
-        isScrolling={isScrolling && !isAnimated}
-        autoPlay
-        loop
-        muted
-      >
-        <Source src={Videos.heroVideo} type="video/mp4" />
-      </Video>
-
-      <Box
-        display="flex"
-        w="717.1px"
-        zIndex="0"
-        position="absolute"
-        left={borderX - 39.3}
-        top={borderY - 56}
-      >
-        <img width="100%" height="100%" src={Images.Common.window} alt="_" />
-      </Box>
-    </>
+    <Video
+      x={borderX + 10}
+      ref={ref}
+      y={borderY + 260}
+      isAnimated={isAnimated}
+      onWheel={() => {
+        if (!isScrolling) {
+          dispatch(setIsScrolling());
+          setTimeout(() => {
+            dispatch(setIsAnimated());
+          }, 1000);
+        }
+      }}
+      isScrolling={isScrolling && !isAnimated}
+      autoPlay
+      loop
+      muted
+    >
+      <Source src={Videos.heroVideo} type="video/mp4" />
+    </Video>
   );
-};
+});
 
-export default memo(HeroVideo);
+export default HeroVideo;
