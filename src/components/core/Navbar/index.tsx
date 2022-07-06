@@ -23,6 +23,7 @@ import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
+import useAppSelector from '../../../hooks/useAppSelector';
 
 const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
@@ -36,6 +37,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
   const { colorMode, setColorMode } = useColorMode();
+  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
 
   useEffect(() => {
     if (!isLessThan1040) {
@@ -56,13 +58,15 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
   const textColor = isLight ? 'glass.100' : 'glass.700';
   const activeColor = isLight ? 'glass.100' : 'glass.900';
   const passiveColor = isLight ? 'rgba(255,255,255)' : 'glass.700';
-  const bgColor = isLight ? 'glass.700' : 'glass.100';
+  const bgColor = isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
   const _hover = {
     _hover: {
       transition: '0.2s ease',
       transform: 'scale(1.25)',
     },
   };
+
+  console.log('isAnimated', isScrolling);
 
   return (
     <Box
@@ -85,8 +89,11 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         position="relative"
         alignItems="center"
         px="16px"
-        className="navBg"
-        bgColor={isOpen ? bgColor : 'transparent'}
+        borderRadius="16px"
+        height="70px"
+        marginTop="10px"
+        transition="background-color 0.5s linear"
+        bgColor={bgColor}
       >
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100}>

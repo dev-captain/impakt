@@ -1,14 +1,13 @@
-.buttonHover, .buttonHover svg, .buttonHover p{
-    color: #fff;
+.buttonHover,
+.buttonHover svg,
+.buttonHover p {
+  color: #fff;
 }
-.buttonHover:hover, .buttonHover:hover svg, .buttonHover:hover, .buttonHover:hover p{
-    color: #0B1725;
-    fill: #0B1725;
-    opacity: 1;
-}
-.navBg{
-    background: rgba(28, 28, 40, 0.65) !important;
-    border-radius: 16px !important;
-    height: 70px !important;
-    margin-top: 10px !important;
+.buttonHover:hover,
+.buttonHover:hover svg,
+.buttonHover:hover,
+.buttonHover:hover p {
+  color: #0b1725;
+  fill: #0b1725;
+  opacity: 1;
 }

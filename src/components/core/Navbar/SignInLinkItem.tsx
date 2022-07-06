@@ -7,7 +7,13 @@ const SignInButton: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
 
   return !member ? (
-    <Button colorScheme="whiteAlpha" as="a" href="/signin">
+    <Button
+      backgroundColor="rgba(255, 255, 255, 0.1)"
+      backdropFilter="blur(40px)"
+      _hover={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
+      as="a"
+      href="/signin"
+    >
       <Text>Sign In</Text>
     </Button>
   ) : null;
