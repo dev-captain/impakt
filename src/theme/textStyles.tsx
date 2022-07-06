@@ -76,6 +76,11 @@ export default {
     fontSize: ' 18px',
     lineHeight: '30px',
   },
+  regular20: {
+    fontWeight: '400',
+    fontSize: ' 20px',
+    lineHeight: '32px',
+  },
   bold3: {
     fontSize: '16px',
     fontWeight: '700',
@@ -111,12 +116,6 @@ export default {
     fontWeight: '400',
     lineHeight: '16px',
   },
-
-  regular20: {
-    fontSize: '20px',
-    fontWeight: '400',
-    lineHeight: '32px',
-  },
   regular201: {
     fontSize: '20px',
     fontWeight: '500',
@@ -144,7 +143,7 @@ export default {
   },
   semiBold17: {
     fontSize: '16px',
-    fontWeight: '500px',
+    fontWeight: '500',
     lineHeight: '16px',
   },
   counterNumber: {
@@ -169,6 +168,12 @@ export default {
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
     fontSize: '96px',
     lineHeight: '96px',
+  },
+  TitleBold64: {
+    fontWeight: '700',
+    fontFamily: `Poppins ,${theme.fonts?.heading}`,
+    fontSize: '64px',
+    lineHeight: '100%',
   },
   TitleBold48: {
     fontWeight: '700',

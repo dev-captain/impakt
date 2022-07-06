@@ -25,28 +25,12 @@ const ImpaktNFT = () => {
       showNavbar
       spacing={10}
       pos="relative"
-      // bgImage={bgImage}
+      bgImage={bgImage}
       align="flex-start"
       justify="flex-start"
     >
-      <VStack
-        w="full"
-        pos="relative"
-        _after={{
-          transition: 'all .3s ease',
-          content: '""',
-          top: '-419px',
-          pos: 'absolute',
-          left: 0,
-          w: 'full',
-          bottom: '-10px',
-          backgroundSize: 'cover',
-          backgroundImage: `url(${bgImage})`,
-          filter: 'blur(15px)',
-          zIndex: 0,
-        }}
-      >
-        <VStack maxW={{ base: '100%', lg: '1200px' }} w="full" zIndex="2">
+      <VStack w="full">
+        <VStack maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap={{ base: 'auto', lg: '40px' }} alignItems="flex-start" w="full">
             <SimpleGrid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}>
               <GridItem w="full" alignItems="center" justifyContent="center" display="flex">

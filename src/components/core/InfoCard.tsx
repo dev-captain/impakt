@@ -10,9 +10,9 @@ interface InfoCardPropsI {
 const InfoCard: React.FC<InfoCardPropsI> = ({ LeftLogo, children, isShowTooltip }) => {
   return (
     <HStack
-      paddingX="24px"
-      paddingY="27px"
-      borderRadius="32px"
+      paddingX="19px"
+      paddingY="16px"
+      borderRadius="16px"
       backdropFilter="blur(40px);"
       background="rgba(28, 28, 40, 0.65)"
       id="info-card"

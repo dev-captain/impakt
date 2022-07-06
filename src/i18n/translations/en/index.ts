@@ -50,6 +50,12 @@ export default {
     our: 'Leadership',
     team: 'team',
   },
+  impaktCreed: {
+    creed: 'CREED',
+    Title: 'The Impakt Creed',
+    description:
+      'Call us old-school, but we believe that you <strong>build first and market later</strong>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later. Our creed is: <strong>provide value before asking for investment</strong>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
+  },
   ourRoadmap: {
     our: 'Our',
     roadmap: 'Roadmap',

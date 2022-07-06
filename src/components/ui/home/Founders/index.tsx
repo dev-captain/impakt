@@ -51,7 +51,9 @@ const Founder = () => {
               justify={{ base: 'center', md: 'center' }}
               mt={{ base: 0, md: 0, xl: '64px' }}
             >
-              <Text color="#F04153">{t(keys.Founder.builders)}</Text>
+              <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
+                {t(keys.Founder.builders)}
+              </Text>
             </VStack>
             <VStack
               width={{ base: '100%', lg: '100%', xl: '1200px' }}
