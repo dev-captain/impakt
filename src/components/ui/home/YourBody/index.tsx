@@ -7,7 +7,6 @@ import 'aos/dist/aos.css';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
-import RichIcon from '../../../icons/RichIcon';
 import RichIcon2 from '../../../icons/RichIcon2';
 
 const YourBody: React.FC = () => {
@@ -19,7 +18,6 @@ const YourBody: React.FC = () => {
 
   return (
     <HeroLayout
-      showNavbar
       spacing={0}
       pos="relative"
       bgColor="#121117"

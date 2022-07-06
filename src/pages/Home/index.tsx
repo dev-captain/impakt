@@ -1,8 +1,7 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Container } from '@chakra-ui/layout';
 import { ImpaktGamesHero, ImpaktNFT, Founders } from 'components/ui/home';
-import { Box } from '@chakra-ui/react';
-import styled, { css, keyframes } from 'styled-components';
+import { Box, useDimensions } from '@chakra-ui/react';
 
 import YourBody from '../../components/ui/home/YourBody';
 import ExerciseCard from '../../components/ui/home/ImpaktGamesHero/ExerciseCard';
@@ -14,6 +13,7 @@ import Images from '../../assets/images';
 import { setBorderX } from '../../lib/redux/slices/state/stateSlice';
 
 const HomePage = () => {
+  const impaktGameHeroRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mirrorRef = useRef<HTMLDivElement | null>(null);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -28,11 +28,18 @@ const HomePage = () => {
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = useState(false);
 
   const yourBodySectionRef = useRef<HTMLDivElement | null>(null);
+  const yourBodySectionDimension = useDimensions(yourBodySectionRef);
+  const imapktGameHeroDimension = useDimensions(impaktGameHeroRef);
 
   const moveToYourBodySection = () => {
-    if (yourBodySectionRef && yourBodySectionRef.current && !isMovedToYourBodySection) {
+    if (
+      !isMovedToYourBodySection &&
+      yourBodySectionDimension &&
+      yourBodySectionRef &&
+      imapktGameHeroDimension
+    ) {
       setIsMovedToYourBodySection(true);
-      window.scrollTo(0, 800);
+      window.scrollTo(0, imapktGameHeroDimension.contentBox.bottom - 200);
     }
   };
 
@@ -62,8 +69,9 @@ const HomePage = () => {
         heroVideoRef.current &&
         heroVideoScreenRef.current &&
         exerciseCardRef.current &&
+        yourBodySectionDimension &&
         isAnimated &&
-        window.scrollY < 800
+        window.scrollY < yourBodySectionDimension.contentBox.top - 100
       ) {
         mirrorRef.current.style.top = `${window.scrollY + 100}px`;
         heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
@@ -98,8 +106,14 @@ const HomePage = () => {
 
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      <div style={{ position: 'relative' }} ref={containerRef} id="stick">
-        <ImpaktGamesHero moveToYourBodySection={moveToYourBodySection} />
+      <div
+        style={{ backgroundColor: '#121117', position: 'relative' }}
+        ref={containerRef}
+        id="stick"
+      >
+        <div ref={impaktGameHeroRef} id="impakt-game-hero">
+          <ImpaktGamesHero moveToYourBodySection={moveToYourBodySection} />
+        </div>
         <div id="impakt-your-body" ref={yourBodySectionRef}>
           <YourBody />
         </div>
@@ -113,7 +127,7 @@ const HomePage = () => {
         >
           <ExerciseCard />
         </Box>
-        <Box ref={mirrorRef} id="mirror" position="absolute" left="51vw" top={borderY}>
+        <Box ref={mirrorRef} id="mirror" position="absolute" left="49vw" top={borderY}>
           <Box position="relative" height="788px" width="600px">
             <StarsVideo />
             <div
