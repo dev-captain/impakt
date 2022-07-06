@@ -66,8 +66,6 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
     },
   };
 
-  console.log('isAnimated', isScrolling);
-
   return (
     <Box
       pos="absolute"
