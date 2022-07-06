@@ -23,6 +23,7 @@ const Images = {
     bgWave: require('./bg-wave.png'),
     play: require('./play.png'),
     window: require('./window.png'),
+    Tiktok: require('./tiktok.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),

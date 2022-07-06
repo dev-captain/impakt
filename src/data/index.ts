@@ -77,6 +77,7 @@ export const Socials = {
   youtube: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw',
   twitter: 'https://twitter.com/impaktlife',
   discord: 'https://discord.gg/eVQJ8XRa9S',
+  tiktok: 'http://tiktok.com/@impakt.life',
 };
 
 export const Categories = [

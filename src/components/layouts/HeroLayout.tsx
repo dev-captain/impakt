@@ -63,8 +63,8 @@ const HeroLayout = ({
           paddingBottom={
             customPadding || {
               base: removeBottomPadding ? 0 : '60px',
-              md: removeBottomPadding ? '32px' : '90px',
-              xl: removeBottomPadding ? 0 : 'auto',
+              md: removeBottomPadding ? '32px' : '40px',
+              xl: removeBottomPadding ? 0 : '40px',
             }
           }
         >

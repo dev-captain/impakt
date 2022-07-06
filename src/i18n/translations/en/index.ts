@@ -21,6 +21,7 @@ export default {
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
     signIn: 'Sign in',
+    termsOfUse: 'Terms of Use',
   },
   computerVision: {
     computerVision: 'Computer vision',
@@ -93,10 +94,12 @@ export default {
     discordSupport: 'Discord Support',
   },
   footer: {
-    madeBy: 'Made by',
+    madeBy: 'Made by Impakt.',
     termOfUse: 'Term of Use',
-    allRightReserved: '© 2021 Impakt. All rights reserved.',
+    allRightReserved: '© 2022 Impakt. All rights reserved.',
+    downloadApp: 'Download App',
   },
+
   password: {
     new: 'New',
     recovery: 'Recover',

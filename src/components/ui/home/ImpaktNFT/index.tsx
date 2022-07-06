@@ -12,10 +12,14 @@ import {
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
+import AOS from 'aos';
 import InfoCard from '../../../core/InfoCard';
 import RichIcon from '../../../icons/RichIcon';
 // import Gradients from '../RoadmapHero/Gradients';
 import '../../../../theme/styles.css';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+
+AOS.init();
 
 const ImpaktNFT = () => {
   const bgImage = useColorModeValue(Images.impaktNFT.Header, Images.impaktNFT.light);
@@ -33,7 +37,16 @@ const ImpaktNFT = () => {
         <VStack maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap={{ base: 'auto', lg: '40px' }} alignItems="flex-start" w="full">
             <SimpleGrid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}>
-              <GridItem w="full" alignItems="center" justifyContent="center" display="flex">
+              <GridItem
+                w="full"
+                alignItems="center"
+                justifyContent="center"
+                display="flex"
+                data-aos="fade-up"
+                data-aos-duration="2000"
+                data-aos-offset="200"
+                data-aos-delay="50"
+              >
                 <VStack
                   w="full"
                   padding={{ base: '0px 10px', md: '0px 40px', lg: '0px' }}
@@ -105,7 +118,7 @@ const ImpaktNFT = () => {
                     position={{ base: 'static', lg: 'absolute' }}
                     top="85px"
                     right="0"
-                    width={{ base: '100%', lg: '67%', xl: '67%' }}
+                    width={{ base: '100%', lg: '60%', xl: '60%' }}
                     display="flex"
                     justifyContent={{ base: 'center', md: 'center', lg: 'end' }}
                   >
@@ -114,6 +127,10 @@ const ImpaktNFT = () => {
                       width={{ base: '100%', md: '50%', lg: '67%', xl: '67%' }}
                       src="assets/images/Chris-Armsden.png"
                       className="imgTopBlur"
+                      data-aos="fade-left"
+                      data-aos-duration="2000"
+                      data-aos-offset="200"
+                      data-aos-delay="50"
                     />
                   </Box>
                 </VStack>

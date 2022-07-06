@@ -42,6 +42,7 @@ const TranslationKeys = {
     dashboard: `${navbar}.dashboard`,
     signOut: `${navbar}.signOut`,
     signIn: `${navbar}.signIn`,
+    termsOfUse: `${navbar}.termsOfUse`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,
@@ -111,6 +112,7 @@ const TranslationKeys = {
     madeBy: `${footer}.madeBy`,
     termOfUse: `${footer}.termOfUse`,
     allRightReserved: `${footer}.allRightReserved`,
+    downloadApp: `${footer}.downloadApp`,
   },
   password: {
     recovery: `${password}.recovery`,

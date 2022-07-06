@@ -12,18 +12,18 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import { Socials } from 'data';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import NavbarLinkItem from './NavbarLinkItem';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import useAppSelector from '../../../hooks/useAppSelector';
+import NavBarLink from './NavBarLink';
+import NavBarSocialIcons from './NavBarSocialIcons';
 
 const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
@@ -56,8 +56,6 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
   const discord = isLight ? Discord : DiscordLight;
   const twitter = isLight ? Twitter : TwitterLight;
   const textColor = isLight ? 'glass.100' : 'glass.700';
-  const activeColor = isLight ? 'glass.100' : 'glass.900';
-  const passiveColor = isLight ? 'rgba(255,255,255)' : 'glass.700';
   const bgColor = isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
   const _hover = {
     _hover: {
@@ -96,7 +94,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         bgColor={bgColor}
       >
         <HStack w="full" justify="space-between">
-          <Box onClick={() => navigate('/')} zIndex={100}>
+          <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
             <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} />
           </Box>
           <HStack
@@ -107,77 +105,9 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
             display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
           >
             <HStack w="full" align="space-between" justify="space-between">
-              <HStack spacing={[0, 0, 3, 5, 8, 12]} pl="40px">
-                <NavbarLinkItem
-                  href="/"
-                  title={t(Keys.navbar.impaktFitness)}
-                  isActive={path.path === ''}
-                  color={activeColor || textColor}
-                  passiveColor={passiveColor}
-                />
-                <NavbarLinkItem
-                  type="LINK"
-                  onClose={onClose}
-                  passiveColor={passiveColor}
-                  title={t(Keys.navbar.knowledgeBase)}
-                  href="https://knowledgebase.impakt.com"
-                  isActive={path.path === 'knowledge-base'}
-                />
-                <NavbarLinkItem
-                  href="/events"
-                  onClose={onClose}
-                  passiveColor={passiveColor}
-                  title={t(Keys.navbar.events)}
-                  isActive={path.path === 'events'}
-                />
-                <NavbarLinkItem
-                  href="/contact"
-                  onClose={onClose}
-                  passiveColor={passiveColor}
-                  title={t(Keys.navbar.contactUs)}
-                  isActive={path.path === 'contact'}
-                />
-                {/* <Button variant="ghost" onClick={() => changeLanguage('en')}>
-                  <Text>En</Text>
-                </Button>
-                <Button variant="ghost" onClick={() => changeLanguage('zh')}>
-                  <Text>Zh</Text>
-                </Button> */}
-              </HStack>
+              <NavBarLink IsHeader />
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
-                <Box mr="24px !important" as="a" target="_blank" href={Socials.twitter}>
-                  <Image
-                    maxW="35px"
-                    minW="35px"
-                    h="35px"
-                    opacity={0.6}
-                    objectFit="contain"
-                    src={twitter}
-                    {..._hover}
-                  />
-                </Box>
-                <Box me="24px !important" as="a" target="_blank" href={Socials.discord}>
-                  <Image
-                    maxW="32px"
-                    minW="32px"
-                    h="32px"
-                    opacity={0.6}
-                    objectFit="contain"
-                    src={discord}
-                    {..._hover}
-                  />
-                </Box>
-                <Box me="24px !important" as="a" target="_blank" href={Socials.youtube}>
-                  <Image
-                    maxW="32px"
-                    minW="32px"
-                    h="32px"
-                    opacity={0.6}
-                    objectFit="contain"
-                    src={youtube}
-                    {..._hover}
-                  />
-                </Box>
+                <NavBarSocialIcons />
                 {!showDarkOrLightModeButton && (
                   <Box
                     as="button"
@@ -198,13 +128,13 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
                 <Box>
                   <SignInLinkItem />
                 </Box>
-                <Link href="/download">
+                <Link href="/download" _hover={{ textDecoration: 'none' }}>
                   <Button colorScheme="red">{t(Keys.navbar.download)}</Button>
                 </Link>
               </HStack>
             </HStack>
           </HStack>
-          <HStack
+          {/* <HStack
             align="center"
             spacing="44px"
             justify="flex-end"
@@ -239,6 +169,17 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
                   {..._hover}
                 />
               </Box>
+              <Box me="24px !important" as="a" target="_blank" href={Socials.tiktok}>
+                <Image
+                  maxW="21px"
+                  minW="24px"
+                  h="24px"
+                  opacity={0.6}
+                  objectFit="contain"
+                  src={Tiktok}
+                  {..._hover}
+                />
+              </Box>
               <Box as="a" target="_blank" href={Socials.youtube}>
                 <Image
                   maxW="32"
@@ -266,7 +207,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
                 </Box>
               )}
             </HStack>
-          </HStack>
+          </HStack> */}
           <CollapseMenuController
             isOpen={isOpen}
             onToggle={onToggle}
