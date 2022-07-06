@@ -1,4 +1,4 @@
-export { default as ImpaktGamesHero } from 'components/ui/home/ImpaktGamesHero';
+export { default as HeroSection } from 'components/ui/home/ImpaktGamesHero';
 export { default as ImpaktNFT } from 'components/ui/home/ImpaktNFT';
 export { default as Advisor } from 'components/ui/home/Advisors';
 export { default as Founder } from 'components/ui/home/Founders';
