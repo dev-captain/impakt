@@ -7,10 +7,10 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
-import gsap, { Power2 } from 'gsap';
 import * as React from 'react';
 
 import useAppSelector from '../../../../hooks/useAppSelector';
+import useParallax from '../../../../hooks/useParallax';
 import AnimationAlways from '../../../common/AnimationAlways';
 import AccelerationIcon from '../../../icons/AccelerationIcon';
 
@@ -19,7 +19,8 @@ const ExerciseCard: React.FC = () => {
   const [displayValue, setDisplayValue] = React.useState(12);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
-  const boxRef = React.useRef() as any;
+  const boxRef = React.useRef<HTMLDivElement | null>(null);
+  const { handleMouseOver } = useParallax(boxRef);
   // eslint-disable-next-line consistent-return
   React.useEffect(() => {
     if (isAnimated) {
@@ -44,17 +45,6 @@ const ExerciseCard: React.FC = () => {
       return () => clearInterval(interval);
     }
   }, [isAnimated]);
-
-  const handleMouseOver = (e: any) => {
-    const rotateX = -(e.clientY - window.innerHeight / 3.6) * 0.09;
-    const rotateY = (e.clientX - window.innerWidth / 1.36) * 0.09;
-    gsap.to(boxRef.current, {
-      duration: 0.5,
-      ease: Power2.easeOut,
-      rotationX: rotateX,
-      rotationY: rotateY,
-    });
-  };
 
   return !isAnimated ? null : (
     <AnimationAlways animationType="move" xValue={50}>
