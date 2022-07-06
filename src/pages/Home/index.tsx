@@ -21,7 +21,6 @@ const HomePage = () => {
   const exerciseCardRef = useRef<HTMLDivElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
 
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
@@ -37,7 +36,7 @@ const HomePage = () => {
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     function updateSize() {
       if (
         mirrorRef.current &&
@@ -48,13 +47,7 @@ const HomePage = () => {
         heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
         exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
         heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
-        // console.log(mirrorRef.current.style.offset);
-        // mirrorRef.current.style.left = `${window.innerWidth - 900}px`;
-        // heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
-        // heroVideoScreenRef.current.style.top = `${window.scrollY + 100 + 210}px`;
-        // exerciseCardRef.current.style.top = `${window.scrollY + 200}px`;
       }
-      // heroVideoScreenRef.current.style.left = heroVideoRef.current.style.left - 2;
     }
 
     window.addEventListener('resize', updateSize);
@@ -85,6 +78,17 @@ const HomePage = () => {
   }, [isAnimated]);
 
   useEffect(() => {
+    if (!isAnimated) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (isAnimated && isMovedToYourBodySection) {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isAnimated, isMovedToYourBodySection]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
     if (mirrorRef.current && heroVideoScreenRef.current && exerciseCardRef.current) {
       heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
       exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
