@@ -6,12 +6,17 @@ import {
   ImpaktCreed,
   ImpaktFooter,
   HeroSection,
+  EarnCrypto,
 } from 'components/ui/home';
 
 const HomePage = () => {
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
       <HeroSection />
+
+      <div>
+        <EarnCrypto />
+      </div>
 
       <div>
         <ImpaktNFT />

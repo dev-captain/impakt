@@ -19,3 +19,4 @@ export { default as OurCommunityHero } from 'components/ui/home/OurCommunityHero
 export { default as BeAnInfluencerHero } from 'components/ui/home/BeAnInfluencerHero';
 export { default as JoinAndCollectHero } from 'components/ui/home/JoinAndCollectHero';
 export { default as CountdownHero } from 'components/ui/home/CountdownHero/index';
+export { default as EarnCrypto } from 'components/ui/home/EarnCrypto';

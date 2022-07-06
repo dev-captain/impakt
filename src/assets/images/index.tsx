@@ -42,6 +42,7 @@ const Images = {
 
   impaktGames: {
     Header: require('./latestdefaultbg.jpg'),
+    Header2: require('./latestdefaultbg2.jpg'),
     light: require('./bg-light.png'),
   },
   impaktNFT: {
