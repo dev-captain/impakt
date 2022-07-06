@@ -17,7 +17,7 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   width:640px;
   height:360px;
   top: ${y}px;
-  left: 100vh;
+  left: ${x}px;
   position:absolute
   }
 `;
@@ -35,7 +35,7 @@ const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: numbe
       ${rotate({ x: p.x ?? 0, y: p.y ?? 0 })} 1s linear forwards;
     `};
   top: ${(p) => (p.isAnimated ? `${p.y}px` : '0')};
-  left: ${(p) => (p.isAnimated ? `100vh` : '0')};
+  left: ${(p) => (p.isAnimated ? `${p.x}px` : '0')};
   margin: 0 !important;
   border-radius: 0px 0px 10px 10px;
 `;
@@ -51,8 +51,8 @@ const HeroVideo = React.forwardRef<HTMLVideoElement>((_, ref) => {
 
   return (
     <Video
+      x={borderX + 10}
       ref={ref}
-      x={borderX}
       y={borderY + 260}
       isAnimated={isAnimated}
       onWheel={() => {

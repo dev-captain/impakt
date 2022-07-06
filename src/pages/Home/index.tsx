@@ -11,6 +11,7 @@ import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import HeroVideo from '../../components/ui/home/ImpaktGamesHero/HeroVideo';
 import Images from '../../assets/images';
+import { setBorderX } from '../../lib/redux/slices/state/stateSlice';
 
 const HomePage = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -19,6 +20,7 @@ const HomePage = () => {
   const heroVideoScreenRef = useRef<HTMLDivElement | null>(null);
   const exerciseCardRef = useRef<HTMLDivElement | null>(null);
 
+  const dispatch = useAppDispatch();
   const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
 
@@ -35,22 +37,33 @@ const HomePage = () => {
     }
   };
 
-  // useLayoutEffect(() => {
-  //   function updateSize() {
-  //     if (mirrorRef.current) {
-  //       dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
-  //       dispatch(setBorderY({ borderY: mirrorRef.current.offsetTop }));
-  //     }
-  //   }
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (
+        mirrorRef.current &&
+        heroVideoScreenRef.current &&
+        exerciseCardRef.current &&
+        heroVideoRef.current
+      ) {
+        heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
+        exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
+        heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
+        // console.log(mirrorRef.current.style.offset);
+        // mirrorRef.current.style.left = `${window.innerWidth - 900}px`;
+        // heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
+        // heroVideoScreenRef.current.style.top = `${window.scrollY + 100 + 210}px`;
+        // exerciseCardRef.current.style.top = `${window.scrollY + 200}px`;
+      }
+      // heroVideoScreenRef.current.style.left = heroVideoRef.current.style.left - 2;
+    }
 
-  //   window.addEventListener('resize', updateSize);
+    window.addEventListener('resize', updateSize);
 
-  //   return () => window.removeEventListener('resize', updateSize);
-  // }, []);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   useEffect(() => {
     function checkOffSet() {
-      console.log(window.scrollY);
       if (
         mirrorRef.current &&
         heroVideoRef.current &&
@@ -63,7 +76,6 @@ const HomePage = () => {
         heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
         heroVideoScreenRef.current.style.top = `${window.scrollY + 100 + 210}px`;
         exerciseCardRef.current.style.top = `${window.scrollY + 200}px`;
-        mirrorRef.current.style.position = 'absolute';
       }
     }
 
@@ -71,6 +83,14 @@ const HomePage = () => {
 
     return () => window.removeEventListener('scroll', checkOffSet);
   }, [isAnimated]);
+
+  useEffect(() => {
+    if (mirrorRef.current && heroVideoScreenRef.current && exerciseCardRef.current) {
+      heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
+      exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
+      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+    }
+  }, []);
 
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
@@ -80,7 +100,7 @@ const HomePage = () => {
           <YourBody />
         </div>
 
-        {/* <Box
+        <Box
           left="75vw"
           ref={exerciseCardRef}
           zIndex={99999}
@@ -89,7 +109,7 @@ const HomePage = () => {
         >
           <ExerciseCard />
         </Box>
-        <Box ref={mirrorRef} id="mirror" position="absolute" left={borderX} top={borderY}>
+        <Box ref={mirrorRef} id="mirror" position="absolute" left="51vw" top={borderY}>
           <Box position="relative" height="788px" width="600px">
             <StarsVideo />
             <div
@@ -113,11 +133,10 @@ const HomePage = () => {
           w="717.1px"
           zIndex="0"
           position="absolute"
-          left="96vh"
           top={borderY + 210}
         >
           <img width="100%" height="100%" src={Images.Common.window} alt="_" />
-        </Box> */}
+        </Box>
       </div>
 
       <div>

@@ -29,7 +29,7 @@ const YourBody: React.FC = () => {
       <VStack w="full">
         <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
-            <VStack w="95%" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
+            <VStack w="80%" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
               <Box id="our-ai-card-box" w="full">
                 <InfoCard LeftLogo={<RichIcon2 />}>
                   <VStack alignItems="flex-start" color="white">
