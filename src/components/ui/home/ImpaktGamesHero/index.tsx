@@ -25,19 +25,8 @@ export const HeroSection: React.FC = () => {
   const yourBodySectionRef = React.useRef<HTMLDivElement | null>(null);
 
   const yourBodySectionDimension = useDimensions(yourBodySectionRef);
-  const imapktGameHeroDimension = useDimensions(impaktGameHeroRef);
-
-  const moveToYourBodySection = () => {
-    if (
-      !isMovedToYourBodySection &&
-      yourBodySectionDimension &&
-      yourBodySectionRef &&
-      imapktGameHeroDimension
-    ) {
-      setIsMovedToYourBodySection(true);
-      window.scrollTo(0, imapktGameHeroDimension.contentBox.bottom - 200);
-    }
-  };
+  const impaktGameHeroDimension = useDimensions(impaktGameHeroRef);
+  const isRunning = React.useRef(false);
 
   React.useEffect(() => {
     function updateSize() {
@@ -45,7 +34,8 @@ export const HeroSection: React.FC = () => {
         mirrorRef.current &&
         heroVideoScreenRef.current &&
         exerciseCardRef.current &&
-        heroVideoRef.current
+        heroVideoRef.current &&
+        isAnimated
       ) {
         heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
         exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
@@ -56,7 +46,24 @@ export const HeroSection: React.FC = () => {
     window.addEventListener('resize', updateSize);
 
     return () => window.removeEventListener('resize', updateSize);
-  }, []);
+  }, [isAnimated]);
+  const moveToYourBodySection = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+
+    if (isRunning.current) return;
+
+    if (
+      !isMovedToYourBodySection &&
+      yourBodySectionDimension &&
+      impaktGameHeroDimension &&
+      isAnimated
+    ) {
+      window.scrollTo(0, impaktGameHeroDimension.contentBox.bottom - 200);
+      isRunning.current = true;
+      setIsMovedToYourBodySection((prev) => !prev);
+    }
+  };
+  // eslint-disable-next-line consistent-return
 
   React.useEffect(() => {
     function checkOffSet() {
@@ -82,11 +89,11 @@ export const HeroSection: React.FC = () => {
   }, [isAnimated]);
 
   React.useEffect(() => {
-    if (!isAnimated) {
+    if (!isAnimated || isMovedToYourBodySection) {
       document.body.style.overflow = 'hidden';
     }
 
-    if (isAnimated && isMovedToYourBodySection) {
+    if (isMovedToYourBodySection && isRunning.current) {
       document.body.style.overflow = 'unset';
     }
   }, [isAnimated, isMovedToYourBodySection]);
@@ -101,9 +108,13 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div
+      onWheel={(e) => moveToYourBodySection(e)}
+      style={{ backgroundColor: '#121117', position: 'relative' }}
+      id="stick"
+    >
       <div ref={impaktGameHeroRef} id="impakt-game-hero">
-        <SocialFitnessGamified moveToYourBodySection={moveToYourBodySection} />
+        <SocialFitnessGamified />
       </div>
       <div id="impakt-your-body" ref={yourBodySectionRef}>
         <YourBody />
@@ -140,7 +151,7 @@ export const HeroSection: React.FC = () => {
       >
         <img width="100%" height="100%" src={Images.Common.window} alt="_" />
       </Box>
-    </>
+    </div>
   );
 };
 

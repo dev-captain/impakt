@@ -12,9 +12,7 @@ import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/state
 import ExerciseCard from './ExerciseCard';
 import useAppSelector from '../../../../hooks/useAppSelector';
 
-const SocialFitnessGamified: React.FC<{ moveToYourBodySection: () => void }> = ({
-  moveToYourBodySection,
-}) => {
+const SocialFitnessGamified: React.FC = () => {
   const [moved, setMoved] = React.useState(false);
   const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
   const isAnimate = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
@@ -28,12 +26,7 @@ const SocialFitnessGamified: React.FC<{ moveToYourBodySection: () => void }> = (
       align="flex-start"
       justify="flex-start"
     >
-      <VStack
-        onWheel={() => {
-          moveToYourBodySection();
-        }}
-        w="full"
-      >
+      <VStack w="full">
         <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
           <HStack columnGap="48px" alignItems="flex-start" w="full">
             <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">

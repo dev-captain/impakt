@@ -11,9 +11,7 @@ import {
 const HomePage = () => {
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      <div style={{ backgroundColor: '#121117', position: 'relative' }} id="stick">
-        <HeroSection />
-      </div>
+      <HeroSection />
 
       <div>
         <ImpaktNFT />
