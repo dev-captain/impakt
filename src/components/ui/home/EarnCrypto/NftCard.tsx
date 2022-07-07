@@ -11,11 +11,12 @@ const NftCard: React.FC<PropsI> = () => {
     if (!impaktNftCardRef.current || !impaktNftCardGlowRef.current) return;
     const mouseX = e.clientX;
     const mouseY = e.clientY;
-    const leftX = mouseX - impaktNftCardRef.current.getBoundingClientRect().x;
-    const topY = mouseY - impaktNftCardRef.current.getBoundingClientRect().y;
+    const bound = impaktNftCardRef.current.getBoundingClientRect();
+    const leftX = mouseX - bound.x;
+    const topY = mouseY - bound.y;
     const center = {
-      x: leftX - impaktNftCardRef.current.getBoundingClientRect().width / 2,
-      y: topY - impaktNftCardRef.current.getBoundingClientRect().height / 2,
+      x: leftX - bound.width / 2,
+      y: topY - bound.height / 2,
     };
     const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
     impaktNftCardRef.current.style.transform = `
@@ -31,8 +32,8 @@ const NftCard: React.FC<PropsI> = () => {
     impaktNftCardGlowRef.current.style.backgroundImage = `
     radial-gradient(
       circle at
-      ${center.x * 2 + impaktNftCardRef.current.getBoundingClientRect().width / 2}px
-      ${center.y * 2 + impaktNftCardRef.current.getBoundingClientRect().height / 2}px,
+      ${center.x * 2 + bound.width / 2}px
+      ${center.y * 2 + bound.height / 2}px,
       #ffffff55,
       #0000000f
     )
