@@ -1,10 +1,11 @@
+import React, { useRef } from 'react';
 import { Box, HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
-import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
 import StarsVideo from '../ImpaktGamesHero/StarsVideo';
+import NftCard from './NftCard';
 // import { StatusQuoBlurs } from './StatusQuoBlurs';
 
 const EarnCrypto = () => {
@@ -37,7 +38,7 @@ const EarnCrypto = () => {
                   height="788px"
                   width="600px"
                 >
-                  <Image w="497px" h="300px" zIndex={2} src={Images.impaktNFT.nftCard} />
+                  <NftCard />
                   <Box zIndex={0} position="absolute" h="100%">
                     <StarsVideo />
                   </Box>
