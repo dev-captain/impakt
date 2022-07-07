@@ -4,24 +4,24 @@ import ScrollIcon from '../../../icons/Scroll';
 
 const rotate = keyframes`
   0%{
-    transform: translateY(0);
+    transform: translateY(-20px);
   }
 
   25%{
-    transform: translateY(-5px);
+    transform: translateY(-25px);
   }
 
   75%{
-    transform: translateY(-10px);
+    transform: translateY(-30px);
   }
 
   100%{
-    transform: translateY(0);
+    transform: translateY(-20px);
   }
 `;
 
 const Box = styled.div<{ isVisible: boolean; position: string; left: string; zIndex: string }>`
-  animation: ${rotate} 2s linear infinite;
+  animation: ${rotate} 1.5s linear infinite;
   opacity: ${(p) => (p.isVisible ? '1' : '0')};
   transition: opacity 0.2s ease-in;
   display: flex;
