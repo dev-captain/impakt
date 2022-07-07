@@ -13,15 +13,11 @@ const TeamCard = ({
   title: string;
   subtitle: string;
 }) => {
-  const boxRef = React.useRef<HTMLDivElement | null>(null);
-  const { handleMouseOver } = useParallax(boxRef);
   // const bgColor = useColorModeValue('glass.800', 'glass.200');
 
   return (
     <VStack
-      ref={boxRef}
       zIndex={99999}
-      onMouseOver={handleMouseOver}
       pl="32px"
       pr="32px"
       pb="32px"
