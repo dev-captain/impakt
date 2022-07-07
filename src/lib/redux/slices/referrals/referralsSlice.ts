@@ -1,7 +1,4 @@
-import {
-  ReferralReferreeChallengesRes,
-  ReferreesOfReferrerRes,
-} from '@impakt-dev/api-client-168-merge';
+import { ReferralReferreeChallengesRes, ReferreesOfReferrerRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchReferrals } from './actions/fetchReferrals';
 import { fetchReferralsChallenges } from './actions/fetchReferralsChallenges';
