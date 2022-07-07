@@ -48,6 +48,7 @@ const Images = {
   impaktNFT: {
     Header: require('./nftbg.png'),
     light: require('./bg-light.png'),
+    nftCard: require('./nft-flat.png'),
   },
   advisor: {
     kevin: require('./advisor/kevin.png'),

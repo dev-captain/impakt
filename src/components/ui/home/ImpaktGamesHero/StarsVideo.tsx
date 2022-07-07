@@ -10,7 +10,7 @@ const Video = styled.video`
   width: 100%;
   height: 100%;
   border-radius: 150px 150px 0px 0;
-  filter: contrast(120%) brightness(120%); ;
+  filter: contrast(120%) brightness(120%);
 `;
 
 const Source = styled.source``;
