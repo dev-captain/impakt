@@ -9,7 +9,7 @@ import NftCard from './NftCard';
 // import { StatusQuoBlurs } from './StatusQuoBlurs';
 
 const EarnCrypto = () => {
-  const bgImage = useColorModeValue(Images.impaktGames.Header2, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.impaktGames.Header3, Images.impaktGames.light);
 
   return (
     <HeroLayout

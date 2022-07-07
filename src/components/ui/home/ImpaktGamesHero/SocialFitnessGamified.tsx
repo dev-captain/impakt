@@ -3,6 +3,8 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
+import { useNavigate } from 'react-router-dom';
+
 import HeroVideo from './HeroVideo';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
@@ -13,8 +15,9 @@ import ExerciseCard from './ExerciseCard';
 import useAppSelector from '../../../../hooks/useAppSelector';
 
 const SocialFitnessGamified: React.FC = () => {
+  const navigate = useNavigate();
   const [moved, setMoved] = React.useState(false);
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.impaktGames.Header2, Images.impaktGames.light);
   const isAnimate = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
 
   return (
@@ -60,7 +63,13 @@ const SocialFitnessGamified: React.FC = () => {
                 </Text>
               </Box>
               <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
-                <InfoCard isShowTooltip LeftLogo={<YoutubeIcon />}>
+                <InfoCard
+                  onToolTipClick={() => {
+                    navigate('/download');
+                  }}
+                  isShowTooltip
+                  LeftLogo={<YoutubeIcon />}
+                >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>
                     <Text color="gold" fontWeight="bold" textStyle="regular201">
