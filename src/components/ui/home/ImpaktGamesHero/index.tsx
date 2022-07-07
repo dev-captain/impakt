@@ -1,5 +1,6 @@
-import { Box, useDimensions } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import * as React from 'react';
+
 import Images from '../../../../assets/images';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
 import useAppSelector from '../../../../hooks/useAppSelector';
@@ -16,6 +17,7 @@ export const HeroSection: React.FC = () => {
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  const isScrolled = React.useRef(false);
 
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = React.useState(false);
 
@@ -25,10 +27,6 @@ export const HeroSection: React.FC = () => {
   const heroVideoScreenRef = React.useRef<HTMLDivElement | null>(null);
   const exerciseCardRef = React.useRef<HTMLDivElement | null>(null);
   const yourBodySectionRef = React.useRef<HTMLDivElement | null>(null);
-
-  const yourBodySectionDimension = useDimensions(yourBodySectionRef);
-  const impaktGameHeroDimension = useDimensions(impaktGameHeroRef);
-  const isRunning = React.useRef(false);
 
   React.useEffect(() => {
     function updateSize() {
@@ -52,17 +50,13 @@ export const HeroSection: React.FC = () => {
   const moveToYourBodySection = (e: React.WheelEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
-    if (isRunning.current) return;
-
-    if (
-      !isMovedToYourBodySection &&
-      yourBodySectionDimension &&
-      impaktGameHeroDimension &&
-      isAnimated
-    ) {
-      window.scrollTo(0, impaktGameHeroDimension.contentBox.bottom - 200);
-      isRunning.current = true;
-      setIsMovedToYourBodySection((prev) => !prev);
+    if (isScrolled.current) return;
+    if (impaktGameHeroRef.current && isAnimated) {
+      isScrolled.current = true;
+      window.scrollTo(0, impaktGameHeroRef.current.clientHeight);
+      setTimeout(() => {
+        setIsMovedToYourBodySection((prev) => !prev);
+      }, 200);
     }
   };
   // eslint-disable-next-line consistent-return
@@ -74,9 +68,9 @@ export const HeroSection: React.FC = () => {
         heroVideoRef.current &&
         heroVideoScreenRef.current &&
         exerciseCardRef.current &&
-        yourBodySectionDimension &&
-        isAnimated &&
-        window.scrollY < yourBodySectionDimension.contentBox.top - 100
+        yourBodySectionRef.current &&
+        window.scrollY < yourBodySectionRef.current.offsetTop - 100 &&
+        isAnimated
       ) {
         mirrorRef.current.style.top = `${window.scrollY + 100}px`;
         heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
@@ -88,20 +82,26 @@ export const HeroSection: React.FC = () => {
     window.addEventListener('scroll', checkOffSet);
 
     return () => window.removeEventListener('scroll', checkOffSet);
-  }, [isAnimated]);
+  }, [
+    isAnimated,
+    mirrorRef,
+    heroVideoRef,
+    heroVideoScreenRef,
+    exerciseCardRef,
+    yourBodySectionRef,
+  ]);
 
   React.useEffect(() => {
     if (!isAnimated || isMovedToYourBodySection) {
       document.body.style.overflow = 'hidden';
     }
 
-    if (isMovedToYourBodySection && isRunning.current) {
+    if (isMovedToYourBodySection) {
       document.body.style.overflow = 'unset';
     }
   }, [isAnimated, isMovedToYourBodySection]);
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
     if (mirrorRef.current && heroVideoScreenRef.current && exerciseCardRef.current) {
       heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
       exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
