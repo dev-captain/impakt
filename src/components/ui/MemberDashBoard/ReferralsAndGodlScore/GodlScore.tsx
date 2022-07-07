@@ -33,6 +33,8 @@ const GodlScore: React.FC = () => {
       maxH={{ base: 'auto', lg: '548px' }}
       rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
+      backgroundColor="rgba(28, 28, 40, 0.65);"
+      backdropBlur="40px"
     >
       <Box
         display="flex"

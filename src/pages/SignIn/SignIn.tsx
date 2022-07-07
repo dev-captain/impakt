@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { LoginReq } from '@impakt-dev/api-client-168-merge';
+import { LoginReq } from '@impakt-dev/api-client';
 
 import Gradients from './Gradient';
 import TextField from '../../components/core/TextField';

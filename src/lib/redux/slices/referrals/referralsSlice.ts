@@ -1,7 +1,4 @@
-import {
-  ReferralReferreeChallengesRes,
-  ReferreesOfReferrerRes,
-} from '@impakt-dev/api-client-168-merge';
+import { ReferralReferreeChallengesRes, ReferreesOfReferrerRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchReferrals } from './actions/fetchReferrals';
 import { fetchReferralsChallenges } from './actions/fetchReferralsChallenges';
@@ -62,7 +59,15 @@ const referralsSlice = createSlice({
       })
       .addCase(fetchReferralsReward.fulfilled, (state, action) => {
         state.isReferralsLoading = false;
-        state.godlRewardedByReferrals = action.payload;
+        if (
+          action.payload === 0 &&
+          state.referrals.confirmedCount &&
+          state.referrals.confirmedCount !== 0
+        ) {
+          state.godlRewardedByReferrals = state.referrals.confirmedCount * 1000;
+        } else {
+          state.godlRewardedByReferrals = action.payload;
+        }
       })
       .addCase(fetchReferralsReward.rejected, (state) => {
         state.isReferralsLoading = false;
