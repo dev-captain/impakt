@@ -1,6 +1,5 @@
 import { Box, Image, Text, VStack } from '@chakra-ui/react';
-import useParallax from 'hooks/useParallax';
-import React from 'react';
+import React, { useRef } from 'react';
 
 const TeamCard = ({
   image,
@@ -14,9 +13,41 @@ const TeamCard = ({
   subtitle: string;
 }) => {
   // const bgColor = useColorModeValue('glass.800', 'glass.200');
+  const teamCardRef = useRef<HTMLDivElement | null>(null);
+  const handleOnMouseOverTeamCard = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!teamCardRef.current) return;
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    const bound = teamCardRef.current.getBoundingClientRect();
+    const leftX = mouseX - bound.x;
+    const topY = mouseY - bound.y;
+    const center = {
+      x: leftX - bound.width / 2,
+      y: topY - bound.height / 2,
+    };
+    const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
+    teamCardRef.current.style.transform = `
+      scale3d(1.07, 1.07, 1.07)
+      rotate3d(
+        ${center.y / 100},
+        ${-center.x / 100},
+        0,
+        ${Math.log(distance) * 5}deg
+      )
+    `;
+  };
+  const handleOnMouseLeaveTeamCard = () => {
+    if (!teamCardRef.current) return;
+    teamCardRef.current.style.transform = '';
+    teamCardRef.current.style.background = '';
+  };
 
   return (
     <VStack
+      id="card"
+      onMouseMove={handleOnMouseOverTeamCard}
+      onMouseLeave={handleOnMouseLeaveTeamCard}
+      ref={teamCardRef}
       zIndex={99999}
       pl="32px"
       pr="32px"
@@ -24,6 +55,7 @@ const TeamCard = ({
       w="368px"
       h="436px"
       align="center"
+      transitionDuration="150ms"
       justify="space-between"
       bgColor="rgba(28, 28, 40, 0.65)"
       position="relative"
@@ -60,7 +92,6 @@ const TeamCard = ({
           </Box>
         </Box>
       </VStack>
-
       <VStack
         w="full"
         spacing={5}
@@ -72,7 +103,6 @@ const TeamCard = ({
           {title}
         </Text>
       </VStack>
-
       <VStack align="center" justify="center" mb="24px !important">
         <Text textStyle="bold5" pb="5px" align="center">
           {name}
@@ -104,5 +134,4 @@ const TeamCard = ({
     </VStack>
   );
 };
-
 export default TeamCard;
