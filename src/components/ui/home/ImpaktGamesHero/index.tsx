@@ -7,6 +7,7 @@ import { setBorderX } from '../../../../lib/redux/slices/state/stateSlice';
 import YourBody from '../YourBody';
 import ExerciseCard from './ExerciseCard';
 import HeroVideo from './HeroVideo';
+import ScrollIconComponent from './ScrollIconComponent';
 import SocialFitnessGamified from './SocialFitnessGamified';
 import StarsVideo from './StarsVideo';
 
@@ -14,6 +15,7 @@ export const HeroSection: React.FC = () => {
   const dispatch = useAppDispatch();
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
 
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = React.useState(false);
 
@@ -139,8 +141,12 @@ export const HeroSection: React.FC = () => {
             }}
           />
         </Box>
+        {isAnimated && !isMovedToYourBodySection && (
+          <ScrollIconComponent position="absolute" zIndex="1" left="40%" />
+        )}
       </Box>
       <HeroVideo ref={heroVideoRef} />
+      {!isScrolling && <ScrollIconComponent zIndex="999999" position="fixed" left="50%" />}
       <Box
         display="flex"
         ref={heroVideoScreenRef}
