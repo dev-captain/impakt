@@ -56,7 +56,6 @@ const ExerciseCard: React.FC = () => {
         h="294px"
         borderRadius="24px"
         backdropFilter="blur(60px)"
-        border="2px solid rgba(0, 2, 10, 0.14);"
         background="rgba(0, 2, 10, 0.4)"
         rowGap="25px"
         justifyContent="flex-start"

@@ -40,6 +40,7 @@ const HeroLayout = ({
 
   return (
     <>
+      {showNavbar && <Navbar showDarkOrLightModeButton={showDarkOrLightModeButton} />}
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
         overflowY="visible"
@@ -48,7 +49,6 @@ const HeroLayout = ({
         w="full"
         bgColor="transparent"
       >
-        <Navbar showDarkOrLightModeButton={showDarkOrLightModeButton} />
         <VStack
           overflow="visible"
           minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}

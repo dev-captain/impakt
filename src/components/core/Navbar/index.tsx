@@ -64,11 +64,10 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
     },
   };
 
-  console.log('isAnimated', isScrolling);
-
   return (
     <Box
       pos="absolute"
+      background="linear-gradient(180deg, #121216 -50%, rgba(18, 18, 22, 0) 100%);"
       zIndex="99999"
       w="full"
       display={isLessThan1040 ? 'auto' : 'flex'}
