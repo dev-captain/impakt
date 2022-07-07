@@ -65,7 +65,8 @@ const SocialFitnessGamified: React.FC = () => {
               <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
                 <InfoCard
                   onToolTipClick={() => navigate('/download')}
-                  tooltipLabel="Download"
+                  tooltipLabel="GODL is our in-game currency!
+                  You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   isShowTooltip
                   LeftLogo={<YoutubeIcon />}
                 >

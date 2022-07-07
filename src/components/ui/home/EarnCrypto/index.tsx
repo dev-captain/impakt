@@ -91,7 +91,8 @@ const EarnCrypto = () => {
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
                 <InfoCard
-                  tooltipLabel="Download"
+                  tooltipLabel="GODL is our in-game currency!
+                  You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   onToolTipClick={() => navigate('/download')}
                   isShowTooltip
                   LeftLogo={<YoutubeIcon />}

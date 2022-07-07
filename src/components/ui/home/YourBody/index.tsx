@@ -63,7 +63,8 @@ const YourBody: React.FC = () => {
               <Box id="get-the-bonus-box" w="full">
                 <InfoCard
                   onToolTipClick={() => navigate('/download')}
-                  tooltipLabel="Download"
+                  tooltipLabel="GODL is our in-game currency!
+                  You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   isShowTooltip
                   LeftLogo={<YoutubeIcon />}
                 >
