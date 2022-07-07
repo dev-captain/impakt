@@ -141,7 +141,7 @@ export const HeroSection: React.FC = () => {
             }}
           />
         </Box>
-        <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="40%" />
+        <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
       </Box>
       <HeroVideo ref={heroVideoRef} />
       <ScrollIconComponent isVisible={!isScrolling} zIndex="999999" position="fixed" left="48%" />
