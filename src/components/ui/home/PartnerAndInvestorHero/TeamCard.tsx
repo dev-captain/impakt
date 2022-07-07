@@ -1,5 +1,6 @@
 import { Box, Image, Text, VStack } from '@chakra-ui/react';
 import React, { useRef } from 'react';
+
 const TeamCard = ({
   image,
   name,
