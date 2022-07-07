@@ -34,7 +34,18 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
       <Flex id="right">
         {isShowTooltip && (
           <Box onClick={onToolTipClick} cursor="pointer" id="tooltip">
-            <Tooltip p="20px 20px" label={tooltipLabel} textStyle="semiBold16 " hasArrow mt="3" textAlign="center" borderRadius="10px" bg="#121216" placement="top" closeOnClick={false}>
+            <Tooltip
+              p="20px 20px"
+              label={tooltipLabel}
+              textStyle="semiBold16 "
+              hasArrow
+              mt="3"
+              textAlign="center"
+              borderRadius="10px"
+              bg="#121216"
+              placement="top"
+              closeOnClick={false}
+            >
               <Box>
                 <img src={TooltopIcon} alt="TooltopIcon" sizes="32px" />
               </Box>
