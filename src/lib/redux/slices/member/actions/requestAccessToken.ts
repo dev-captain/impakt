@@ -1,4 +1,4 @@
-import { RefreshReq } from '@impakt-dev/api-client-168-merge';
+import { RefreshReq } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { authInstance } from '../../../../impakt-dev-api-client/init';
