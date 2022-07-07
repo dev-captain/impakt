@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { Box, HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
@@ -10,6 +12,7 @@ import NftCard from './NftCard';
 
 const EarnCrypto = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header3, Images.impaktGames.light);
+  const navigate = useNavigate();
 
   return (
     <HeroLayout
@@ -87,7 +90,12 @@ const EarnCrypto = () => {
                 <Text>Get the app,log in,start earning!</Text>
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
-                <InfoCard isShowTooltip LeftLogo={<YoutubeIcon />}>
+                <InfoCard
+                  tooltipLabel="Download"
+                  onToolTipClick={() => navigate('/download')}
+                  isShowTooltip
+                  LeftLogo={<YoutubeIcon />}
+                >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201" display="inline-block">
                       Get the

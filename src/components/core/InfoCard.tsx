@@ -6,6 +6,7 @@ import TooltopIcon from '../../assets/svgs/tooltipIcon.svg';
 interface InfoCardPropsI {
   LeftLogo?: any;
   isShowTooltip?: boolean;
+  tooltipLabel?: string;
   onToolTipClick?: () => void;
 }
 const InfoCard: React.FC<InfoCardPropsI> = ({
@@ -13,6 +14,7 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
   children,
   isShowTooltip,
   onToolTipClick,
+  tooltipLabel,
 }) => {
   return (
     <HStack
@@ -31,8 +33,8 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
       </HStack>
       <Flex id="right">
         {isShowTooltip && (
-          <Box onClick={onToolTipClick} id="tooltip">
-            <Tooltip label="hey" hasArrow mt="3" placement="auto" closeOnClick={false}>
+          <Box onClick={onToolTipClick} cursor="pointer" id="tooltip">
+            <Tooltip label={tooltipLabel} hasArrow mt="3" placement="bottom" closeOnClick={false}>
               <Box>
                 <img src={TooltopIcon} alt="TooltopIcon" sizes="32px" />
               </Box>

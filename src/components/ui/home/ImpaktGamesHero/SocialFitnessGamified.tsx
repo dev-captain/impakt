@@ -64,9 +64,8 @@ const SocialFitnessGamified: React.FC = () => {
               </Box>
               <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
                 <InfoCard
-                  onToolTipClick={() => {
-                    navigate('/download');
-                  }}
+                  onToolTipClick={() => navigate('/download')}
+                  tooltipLabel="Download"
                   isShowTooltip
                   LeftLogo={<YoutubeIcon />}
                 >
