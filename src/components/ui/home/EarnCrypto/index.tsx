@@ -1,14 +1,18 @@
+import React, { useRef } from 'react';
 import { Box, HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+
 import Images from 'assets/images';
-import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
 import StarsVideo from '../ImpaktGamesHero/StarsVideo';
+import NftCard from './NftCard';
 // import { StatusQuoBlurs } from './StatusQuoBlurs';
 
 const EarnCrypto = () => {
-  const bgImage = useColorModeValue(Images.impaktGames.Header2, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.impaktGames.Header3, Images.impaktGames.light);
+  const navigate = useNavigate();
 
   return (
     <HeroLayout
@@ -37,7 +41,7 @@ const EarnCrypto = () => {
                   height="788px"
                   width="600px"
                 >
-                  <Image w="497px" h="300px" zIndex={2} src={Images.impaktNFT.nftCard} />
+                  <NftCard />
                   <Box zIndex={0} position="absolute" h="100%">
                     <StarsVideo />
                   </Box>
@@ -86,7 +90,12 @@ const EarnCrypto = () => {
                 <Text>Get the app,log in,start earning!</Text>
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
-                <InfoCard isShowTooltip LeftLogo={<YoutubeIcon />}>
+                <InfoCard
+                  tooltipLabel="Download"
+                  onToolTipClick={() => navigate('/download')}
+                  isShowTooltip
+                  LeftLogo={<YoutubeIcon />}
+                >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201" display="inline-block">
                       Get the
