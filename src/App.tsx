@@ -2,7 +2,7 @@
 import 'i18n';
 import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   Home,
   KnowledgeBase,
@@ -23,6 +23,20 @@ import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
+  const location = useLocation();
+
+  const onRouteChanged = () => {
+    // force overflow unset if it's hidden on other then / page
+    if (location.pathname !== '/') {
+      if (document.body.style.overflow === 'hidden') {
+        document.body.style.overflow = 'unset';
+      }
+    }
+  };
+
+  useEffect(() => {
+    onRouteChanged();
+  }, [location]);
 
   // eslint-disable-next-line no-unused-vars
   // const [scroll, setScroll] = useState(false);

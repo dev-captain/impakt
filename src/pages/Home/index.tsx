@@ -8,10 +8,17 @@ import {
   HeroSection,
   EarnCrypto,
 } from 'components/ui/home';
+import { useEffect } from 'react';
+
 import useAppSelector from '../../hooks/useAppSelector';
 
 const HomePage = () => {
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+
+  useEffect(() => {
+    // force to scroll x:0 y:0 as initial
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
