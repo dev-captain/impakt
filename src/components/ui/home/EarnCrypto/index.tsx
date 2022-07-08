@@ -84,7 +84,7 @@ const EarnCrypto = () => {
                 fontWeight="400"
                 lineHeight="32px"
               >
-                <Text>Get the app,log in,start earning!</Text>
+                <Text>Get the app, log in, start earning!</Text>
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
                 <InfoCard
