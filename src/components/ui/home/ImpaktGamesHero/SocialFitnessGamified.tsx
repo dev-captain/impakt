@@ -31,7 +31,7 @@ const SocialFitnessGamified: React.FC = () => {
     >
       <VStack w="full">
         <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
-          <HStack columnGap="48px" alignItems="flex-start" w="full">
+          <HStack marginTop="96px" columnGap="48px" alignItems="flex-start" w="full">
             <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
               <Box
                 id="hero-headline-box"
@@ -43,7 +43,7 @@ const SocialFitnessGamified: React.FC = () => {
                 background="linear-gradient(302.56deg, rgba(140, 48, 155, 0.44) 3.86%, rgba(140, 48, 155, 0) 52.18%), linear-gradient(57.44deg, rgba(56, 4, 193, 0.55) -14.75%, rgba(56, 4, 193, 0) 32.81%), #FFFFFF;"
               >
                 <Text letterSpacing="-4px" textStyle="TitleBold73">
-                  Social
+                  Social.
                 </Text>
                 <Text letterSpacing="-4px" textStyle="TitleBold73">
                   Fitness.
