@@ -34,19 +34,30 @@ export const HeroSection: React.FC = () => {
         mirrorRef.current &&
         heroVideoScreenRef.current &&
         exerciseCardRef.current &&
-        heroVideoRef.current &&
-        isAnimated
+        heroVideoRef.current
       ) {
         heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
         exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
-        heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
+        if (!isAnimated) {
+          heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft}`;
+        }
+        if (isScrolling && isAnimated) {
+          heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
+        }
       }
     }
 
     window.addEventListener('resize', updateSize);
 
     return () => window.removeEventListener('resize', updateSize);
-  }, [isAnimated]);
+  }, [isScrolling, isAnimated]);
+
+  React.useEffect(() => {
+    if (isScrolling && heroVideoRef.current && mirrorRef.current) {
+      heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
+    }
+  }, [isScrolling]);
+
   const moveToYourBodySection = (e: React.WheelEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
