@@ -24,6 +24,10 @@ const Images = {
     play: require('./play.png'),
     window: require('./window.png'),
     Tiktok: require('./tiktok.png'),
+    Facebook: require('./Facebook.png'),
+    Instagram: require('./Instagram.png'),
+    FacebookDark: require('./FacebookDark.png'),
+    InstagramDark: require('./InstagramDark.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),
