@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text, Link } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 

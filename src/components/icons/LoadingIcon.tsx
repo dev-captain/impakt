@@ -1,6 +1,4 @@
-import { SVGProps } from 'react';
-
-const LoadingIcon = (props: SVGProps<SVGSVGElement>) => (
+const LoadingIcon = () => (
   <svg
     width="296"
     height="303"

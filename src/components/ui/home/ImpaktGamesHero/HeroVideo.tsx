@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 

@@ -1,4 +1,4 @@
-import { Box, HStack, Link, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Box, HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
