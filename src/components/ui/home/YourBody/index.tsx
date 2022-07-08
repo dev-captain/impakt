@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
-import { VStack, HStack, Box, Text, Link } from '@chakra-ui/react';
+import { VStack, HStack, Box, Text } from '@chakra-ui/react';
 
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
