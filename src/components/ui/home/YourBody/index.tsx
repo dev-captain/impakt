@@ -12,7 +12,7 @@ const YourBody: React.FC = () => {
     <HeroLayout
       spacing={0}
       pos="relative"
-      bgColor="#121117"
+      bgColor="#09090B"
       align="flex-start"
       justify="flex-start"
     >
