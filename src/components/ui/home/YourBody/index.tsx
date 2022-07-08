@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { VStack, HStack, Box, Text, Link } from '@chakra-ui/react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
@@ -10,12 +8,6 @@ import YoutubeIcon from '../../../icons/YoutubeIcon';
 import RichIcon2 from '../../../icons/RichIcon2';
 
 const YourBody: React.FC = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 5000,
-    });
-  }, []);
-
   return (
     <HeroLayout
       spacing={0}
