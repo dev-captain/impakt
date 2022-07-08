@@ -1,10 +1,15 @@
+import { Box } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 import { Videos } from '../../../../data';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
 import useAppSelector from '../../../../hooks/useAppSelector';
-import { setIsAnimated, setIsScrolling } from '../../../../lib/redux/slices/state/stateSlice';
+import {
+  setIsAnimated,
+  setIsLoaded,
+  setIsScrolling,
+} from '../../../../lib/redux/slices/state/stateSlice';
 
 const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   0% {
@@ -67,6 +72,9 @@ const HeroVideo = React.forwardRef<HTMLVideoElement>((_, ref) => {
       autoPlay
       loop
       muted
+      onLoadedData={() => {
+        dispatch(setIsLoaded(true));
+      }}
     >
       <Source src={Videos.heroVideo} type="video/mp4" />
     </Video>

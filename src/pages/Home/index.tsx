@@ -1,4 +1,4 @@
-import { Container } from '@chakra-ui/layout';
+import { Box, Text, Container } from '@chakra-ui/react';
 import {
   ImpaktNFT,
   Advisor,
@@ -9,11 +9,13 @@ import {
   EarnCrypto,
 } from 'components/ui/home';
 import { useEffect } from 'react';
+import LoadingIcon from '../../components/icons/LoadingIcon';
 
 import useAppSelector from '../../hooks/useAppSelector';
 
 const HomePage = () => {
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+  const isVideoLoaded = useAppSelector((state) => state.stateReducer.heroVideo.isLoaded);
 
   useEffect(() => {
     // force to scroll x:0 y:0 as initial
@@ -22,6 +24,26 @@ const HomePage = () => {
 
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
+      {!isVideoLoaded && (
+        <Box
+          bgColor="#000"
+          top="0"
+          left="0"
+          zIndex="999999999"
+          position="fixed"
+          height="100vh"
+          width="100vw"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDir="column"
+        >
+          <LoadingIcon />
+          <Text color="rgba(255, 255, 255, 0.5)" textStyle="bold5">
+            Loading...
+          </Text>
+        </Box>
+      )}
       <HeroSection />
 
       {isAnimated && (

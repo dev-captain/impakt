@@ -6,6 +6,7 @@ interface InitialStateI {
     borderX: number;
     borderY: number;
     isAnimated: boolean;
+    isLoaded: boolean;
   };
 }
 
@@ -15,6 +16,7 @@ const initialState: InitialStateI = {
     borderX: 940,
     borderY: 130,
     isAnimated: false,
+    isLoaded: false,
   },
 };
 
@@ -35,9 +37,14 @@ const stateSlice = createSlice({
     setBorderY: (state: InitialStateI, action: PayloadAction<{ borderY: number }>) => {
       state.heroVideo.borderY = action.payload.borderY + 248;
     },
+
+    setIsLoaded: (state: InitialStateI, action: PayloadAction<boolean>) => {
+      state.heroVideo.isLoaded = action.payload;
+    },
   },
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export const { setIsScrolling, setBorderX, setIsAnimated, setBorderY } = stateSlice.actions;
+export const { setIsScrolling, setBorderX, setIsAnimated, setBorderY, setIsLoaded } =
+  stateSlice.actions;
 export default stateSlice.reducer;
