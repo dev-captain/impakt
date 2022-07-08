@@ -51,7 +51,7 @@ const EarnCrypto = () => {
                       boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
                       top: '0',
                       left: '0',
-                      borderRadius: '150px 150px 0px 0',
+                      borderRadius: '120px',
                     }}
                   />
                 </Box>
