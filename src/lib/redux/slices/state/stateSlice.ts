@@ -13,7 +13,7 @@ const initialState: InitialStateI = {
   heroVideo: {
     isScrolling: false,
     borderX: 940,
-    borderY: 150,
+    borderY: 130,
     isAnimated: false,
   },
 };
