@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import {
   VStack,
   HStack,
@@ -21,6 +21,7 @@ import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import Email from 'components/icons/Email';
+import useNewsletter from 'hooks/useNewsletter';
 import NavBarLink from '../Navbar/NavBarLink';
 import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
 
@@ -30,6 +31,8 @@ const ImpaktFooter = () => {
   const navigate = useNavigate();
   const { colorMode } = useColorMode();
   const { t } = useTranslation(`default`).i18n;
+  const [email, setEmail] = useState('');
+  const { sendData, loading } = useNewsletter();
   return (
     <HeroLayout
       showNavbar
@@ -95,6 +98,7 @@ const ImpaktFooter = () => {
                           textStyle="regular201"
                           _placeholder={{ color: 'rgba(255, 255, 255, 0.4)' }}
                           borderRadius="12px"
+                          onChange={(event) => setEmail(event.target.value as string)}
                         />
                       </InputGroup>
                     </Box>
@@ -105,6 +109,7 @@ const ImpaktFooter = () => {
                       ms={{ base: '0px !important', md: '16px !important' }}
                     >
                       <Button
+                        isDisabled={loading}
                         background="rgba(240, 65, 83, 0.12)"
                         _hover={{ background: 'rgba(240, 65, 83, 0.2)' }}
                         color="#F04153"
@@ -115,6 +120,9 @@ const ImpaktFooter = () => {
                         height="60px"
                         borderRadius="12px"
                         minWidth={{ base: '100%', md: '201px' }}
+                        onClick={() => {
+                          sendData({ email });
+                        }}
                       >
                         Stay updated
                       </Button>
