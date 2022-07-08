@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
     if (isScrolled.current) return;
     if (impaktGameHeroRef.current && isAnimated) {
       isScrolled.current = true;
-      window.scrollTo(0, impaktGameHeroRef.current.clientHeight);
+      window.scrollTo(0, impaktGameHeroRef.current.clientHeight - 100);
       setTimeout(() => {
         setIsMovedToYourBodySection((prev) => !prev);
       }, 200);
