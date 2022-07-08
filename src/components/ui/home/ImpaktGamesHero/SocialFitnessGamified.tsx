@@ -1,24 +1,14 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
+import React from 'react';
+import { VStack, HStack, useColorModeValue, Box, Text, Link } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
-import { useNavigate } from 'react-router-dom';
 
-import HeroVideo from './HeroVideo';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
-import StarsVideo from './StarsVideo';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
-import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
-import ExerciseCard from './ExerciseCard';
-import useAppSelector from '../../../../hooks/useAppSelector';
 
 const SocialFitnessGamified: React.FC = () => {
-  const navigate = useNavigate();
-  const [moved, setMoved] = React.useState(false);
   const bgImage = useColorModeValue(Images.impaktGames.Header2, Images.impaktGames.light);
-  const isAnimate = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
 
   return (
     <HeroLayout
@@ -64,11 +54,19 @@ const SocialFitnessGamified: React.FC = () => {
               </Box>
               <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
                 <InfoCard
-                  onToolTipClick={() => navigate('/download')}
                   tooltipLabel="GODL is our in-game currency!
                   You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon />}
+                  LeftLogo={
+                    <Link
+                      href="/download"
+                      _focus={{
+                        boxShadow: 'none',
+                      }}
+                    >
+                      <YoutubeIcon />
+                    </Link>
+                  }
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>

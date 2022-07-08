@@ -3,7 +3,6 @@ import {
   VStack,
   HStack,
   useColorModeValue,
-  useBreakpointValue,
   Image,
   useMediaQuery,
   Box,

@@ -1,6 +1,4 @@
-import React, { useRef } from 'react';
-import { Box, HStack, Image, Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Box, HStack, Link, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -12,7 +10,6 @@ import NftCard from './NftCard';
 
 const EarnCrypto = () => {
   const bgImage = useColorModeValue(Images.impaktGames.Header3, Images.impaktGames.light);
-  const navigate = useNavigate();
 
   return (
     <HeroLayout
@@ -91,11 +88,19 @@ const EarnCrypto = () => {
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
                 <InfoCard
-                  onToolTipClick={() => navigate('/download')}
                   tooltipLabel="GODL is our in-game currency!
                   You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon />}
+                  LeftLogo={
+                    <Link
+                      href="/download"
+                      _focus={{
+                        boxShadow: 'none',
+                      }}
+                    >
+                      <YoutubeIcon />
+                    </Link>
+                  }
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>

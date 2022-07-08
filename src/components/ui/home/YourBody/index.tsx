@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { VStack, HStack, Box, Text } from '@chakra-ui/react';
+import { VStack, HStack, Box, Text, Link } from '@chakra-ui/react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -11,7 +10,6 @@ import YoutubeIcon from '../../../icons/YoutubeIcon';
 import RichIcon2 from '../../../icons/RichIcon2';
 
 const YourBody: React.FC = () => {
-  const navigate = useNavigate();
   useEffect(() => {
     AOS.init({
       duration: 5000,
@@ -62,11 +60,19 @@ const YourBody: React.FC = () => {
 
               <Box id="get-the-bonus-box" w="full">
                 <InfoCard
-                  onToolTipClick={() => navigate('/download')}
                   tooltipLabel="GODL is our in-game currency!
                   You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon />}
+                  LeftLogo={
+                    <Link
+                      href="/download"
+                      _focus={{
+                        boxShadow: 'none',
+                      }}
+                    >
+                      <YoutubeIcon />
+                    </Link>
+                  }
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>

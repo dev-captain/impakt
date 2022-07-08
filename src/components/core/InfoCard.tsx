@@ -37,6 +37,7 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
             <Tooltip
               p="20px 20px"
               label={tooltipLabel}
+              onClick={onToolTipClick}
               textStyle="semiBold16 "
               hasArrow
               mt="3"
