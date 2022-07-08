@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { memo, useState } from 'react';
+import React, { memo, useState } from 'react';
 import {
   VStack,
   HStack,
@@ -33,6 +33,10 @@ const ImpaktFooter = () => {
   const { t } = useTranslation(`default`).i18n;
   const [email, setEmail] = useState('');
   const { sendData, loading } = useNewsletter();
+  const handleEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <HeroLayout
       showNavbar
@@ -98,7 +102,7 @@ const ImpaktFooter = () => {
                           textStyle="regular201"
                           _placeholder={{ color: 'rgba(255, 255, 255, 0.4)' }}
                           borderRadius="12px"
-                          onChange={(event) => setEmail(event.target.value as string)}
+                          onChange={handleEmailOnChange}
                         />
                       </InputGroup>
                     </Box>
