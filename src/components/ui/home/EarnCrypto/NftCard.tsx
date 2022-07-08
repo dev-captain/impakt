@@ -64,7 +64,6 @@ const NftCard: React.FC<PropsI> = () => {
       transform="rotate3d(0)"
       _hover={{ transitionDuration: '150ms' }}
     >
-      {/* <Image src={Images.impaktNFT.nftCard} /> */}
       <Box
         id="glow"
         ref={impaktNftCardGlowRef}
@@ -73,6 +72,7 @@ const NftCard: React.FC<PropsI> = () => {
         height="100%"
         left="0"
         top="0"
+        borderRadius="26px 13px 13px 26px "
         backgroundImage="radial-gradient(circle at 50% -20%, #ffffff22, #0000000f)"
       />
     </Box>
