@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 
 import Images from '../../../../assets/images';
@@ -155,11 +155,7 @@ export const HeroSection: React.FC = () => {
         </Box>
         <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
       </Box>
-      <React.Suspense
-        fallback={
-          <CircularProgress size="160px" color="rgba(0, 0, 0, 1)" isIndeterminate thickness="13" />
-        }
-      >
+      <React.Suspense fallback={null}>
         <HeroVideo ref={heroVideoRef} />
       </React.Suspense>
       <ScrollIconComponent isVisible={!isScrolling} zIndex="999999" position="fixed" left="48%" />
