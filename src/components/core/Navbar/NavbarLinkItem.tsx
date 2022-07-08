@@ -35,6 +35,7 @@ const NavbarLinkItem = ({
           href={href}
           _hover={{
             transition: '0.2s ease',
+            opacity: 1,
             // transform: 'scale(1.15)',
           }}
         >
@@ -44,6 +45,10 @@ const NavbarLinkItem = ({
             fontWeight={isActive ? '600' : 'normal'}
             color={isActive ? color : passiveColor}
             opacity={isActive ? 1 : 0.6}
+            _hover={{
+              opacity: 'inherit',
+              transition: 'inherit',
+            }}
           >
             {title}
           </Text>
@@ -60,6 +65,7 @@ const NavbarLinkItem = ({
           as={target === '_blank' ? 'a' : 'div'}
           _hover={{
             transition: '0.2s ease',
+            opacity: 1,
             // transform: 'scale(1.15)',
           }}
         >
@@ -69,6 +75,10 @@ const NavbarLinkItem = ({
             fontWeight={isActive ? '600' : 'normal'}
             color={isActive ? color : passiveColor}
             opacity={isActive ? 1 : 0.6}
+            _hover={{
+              opacity: 'inherit',
+              transition: 'inherit',
+            }}
           >
             {title}
           </Text>
