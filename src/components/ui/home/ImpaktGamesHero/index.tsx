@@ -1,71 +1,176 @@
-import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, useBreakpointValue } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
-import Images from 'assets/images';
-import useModalStore from 'hooks/store/useModalStore';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import DownloadButton from 'components/core/DownloadButton';
-import TitleItem from './TitleItem';
-import ScreenAndVideo from './ScreenVideo';
+import { Box } from '@chakra-ui/react';
+import * as React from 'react';
 
-const ImpaktGamesHero = () => {
-  const { t } = useTranslation(`default`).i18n;
-  const text = useColorModeValue('glass.100', 'glass.700');
-  const { setImpaktGames } = useModalStore((state) => state);
-  const Wrapper: any = useBreakpointValue({ base: VStack, md: HStack });
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+import Images from '../../../../assets/images';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import useAppSelector from '../../../../hooks/useAppSelector';
+import { setBorderX } from '../../../../lib/redux/slices/state/stateSlice';
+import YourBody from '../YourBody';
+import ExerciseCard from './ExerciseCard';
+import ScrollIconComponent from './ScrollIconComponent';
+import SocialFitnessGamified from './SocialFitnessGamified';
+import StarsVideo from './StarsVideo';
+
+const HeroVideo = React.lazy(() => import('./HeroVideo'));
+
+export const HeroSection: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
+  const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  const isScrolled = React.useRef(false);
+
+  const [isMovedToYourBodySection, setIsMovedToYourBodySection] = React.useState(false);
+
+  const impaktGameHeroRef = React.useRef<HTMLDivElement | null>(null);
+  const mirrorRef = React.useRef<HTMLDivElement | null>(null);
+  const heroVideoRef = React.useRef<HTMLVideoElement | null>(null);
+  const heroVideoScreenRef = React.useRef<HTMLDivElement | null>(null);
+  const exerciseCardRef = React.useRef<HTMLDivElement | null>(null);
+  const yourBodySectionRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    function updateSize() {
+      if (
+        mirrorRef.current &&
+        heroVideoScreenRef.current &&
+        exerciseCardRef.current &&
+        heroVideoRef.current
+      ) {
+        heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
+        exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
+        if (!isAnimated) {
+          heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft}`;
+        }
+        if (isScrolling && isAnimated) {
+          heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
+        }
+      }
+    }
+
+    window.addEventListener('resize', updateSize);
+
+    return () => window.removeEventListener('resize', updateSize);
+  }, [isScrolling, isAnimated]);
+
+  React.useEffect(() => {
+    if (isScrolling && heroVideoRef.current && mirrorRef.current) {
+      heroVideoRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
+    }
+  }, [isScrolling]);
+
+  const moveToYourBodySection = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+
+    if (isScrolled.current) return;
+    if (impaktGameHeroRef.current && isAnimated) {
+      isScrolled.current = true;
+      window.scrollTo(0, impaktGameHeroRef.current.clientHeight - 100);
+      setTimeout(() => {
+        setIsMovedToYourBodySection((prev) => !prev);
+      }, 200);
+    }
+  };
+  // eslint-disable-next-line consistent-return
+
+  React.useEffect(() => {
+    function checkOffSet() {
+      if (
+        mirrorRef.current &&
+        heroVideoRef.current &&
+        heroVideoScreenRef.current &&
+        exerciseCardRef.current &&
+        yourBodySectionRef.current &&
+        window.scrollY < yourBodySectionRef.current.offsetTop - 100 &&
+        isAnimated
+      ) {
+        mirrorRef.current.style.top = `${window.scrollY + 100}px`;
+        heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
+        heroVideoScreenRef.current.style.top = `${window.scrollY + 100 + 210}px`;
+        exerciseCardRef.current.style.top = `${window.scrollY + 200}px`;
+      }
+    }
+
+    window.addEventListener('scroll', checkOffSet);
+
+    return () => window.removeEventListener('scroll', checkOffSet);
+  }, [
+    isAnimated,
+    mirrorRef,
+    heroVideoRef,
+    heroVideoScreenRef,
+    exerciseCardRef,
+    yourBodySectionRef,
+  ]);
+
+  React.useEffect(() => {
+    if (!isAnimated || isMovedToYourBodySection) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (isMovedToYourBodySection) {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isAnimated, isMovedToYourBodySection]);
+
+  React.useEffect(() => {
+    if (mirrorRef.current && heroVideoScreenRef.current && exerciseCardRef.current) {
+      heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
+      exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
+      dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
+    }
+  }, []);
 
   return (
-    <HeroLayout
-      showNavbar
-      minH="70vh"
-      spacing={10}
-      pos="relative"
-      bgImage={bgImage}
-      align="flex-start"
-      justify="flex-start"
+    <div
+      onWheel={(e) => moveToYourBodySection(e)}
+      style={{ backgroundColor: '#121117', position: 'relative' }}
+      id="stick"
     >
-      <VStack color={text} w="full" pt={{ base: '27px', md: '148px' }}>
-        <VStack maxW="1232px" w="full" px="16px">
-          <HStack w="full" justify="space-between">
-            <VStack align={{ base: 'center', md: 'flex-start' }} spacing="37px">
-              <ScreenAndVideo
-                onPlay={() => {
-                  setImpaktGames(true);
-                }}
-                view="mobile"
-              />
-              <VStack align="inherit">
-                <TitleItem title={t(keys.impaktGamesHero.social)} />
-                <TitleItem title={t(keys.impaktGamesHero.fitness)} />
-                <TitleItem title={t(keys.impaktGamesHero.gamified)} />
-              </VStack>
-              <Wrapper width="full">
-                <DownloadButton
-                  isHorizontal
-                  iconName="Windows"
-                  title="Download for Windows"
-                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
-                />
-                <DownloadButton
-                  isHorizontal
-                  iconName="Apple"
-                  title="Download for Mac"
-                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
-                />
-              </Wrapper>
-            </VStack>
-            <ScreenAndVideo
-              onPlay={() => {
-                setImpaktGames(true);
-              }}
-            />
-          </HStack>
-        </VStack>
-      </VStack>
-    </HeroLayout>
+      <div ref={impaktGameHeroRef} id="impakt-game-hero">
+        <SocialFitnessGamified />
+      </div>
+      <div id="impakt-your-body" ref={yourBodySectionRef}>
+        <YourBody />
+      </div>
+
+      <Box left="75vw" ref={exerciseCardRef} zIndex={99999} top={borderY + 100} position="absolute">
+        <ExerciseCard />
+      </Box>
+      <Box ref={mirrorRef} id="mirror" position="absolute" left="49vw" top={borderY}>
+        <Box position="relative" height="788px" width="600px">
+          <StarsVideo />
+          <div
+            className="shadow"
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
+              top: '0',
+              left: '0',
+              borderRadius: '120px',
+            }}
+          />
+        </Box>
+        <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
+      </Box>
+      <React.Suspense fallback={null}>
+        <HeroVideo ref={heroVideoRef} />
+      </React.Suspense>
+      <ScrollIconComponent isVisible={!isScrolling} zIndex="999999" position="fixed" left="48%" />
+      <Box
+        display="flex"
+        ref={heroVideoScreenRef}
+        w="717.1px"
+        zIndex="0"
+        position="absolute"
+        top={borderY + 210}
+      >
+        <img width="100%" height="100%" src={Images.Common.window} alt="_" />
+      </Box>
+    </div>
   );
 };
 
-export default memo(ImpaktGamesHero);
+export default HeroSection;

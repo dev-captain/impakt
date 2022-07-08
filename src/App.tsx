@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'i18n';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   Home,
   KnowledgeBase,
@@ -23,29 +23,43 @@ import Authentication from './middlewares/Authentication';
 
 const App = () => {
   const { setColorMode } = useColorMode();
+  const location = useLocation();
 
-  // eslint-disable-next-line no-unused-vars
-  const [scroll, setScroll] = useState(false);
-
-  const handleScroll = () => {
-    setScroll(window.scrollY > 50);
-    document.body.classList.add('scroll');
-
-    return scroll;
+  const onRouteChanged = () => {
+    // force overflow unset if it's hidden on other then / page
+    if (location.pathname !== '/') {
+      if (document.body.style.overflow === 'hidden') {
+        document.body.style.overflow = 'unset';
+      }
+    }
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    const timeout = setTimeout(() => {
-      setScroll(false);
-      document.body.classList.remove('scroll');
-    }, 100);
+    onRouteChanged();
+  }, [location]);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeout);
-    };
-  }, [handleScroll]);
+  // eslint-disable-next-line no-unused-vars
+  // const [scroll, setScroll] = useState(false);
+
+  // const handleScroll = () => {
+  //   setScroll(window.scrollY > 50);
+  //   document.body.classList.add('scroll');
+
+  //   return scroll;
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   const timeout = setTimeout(() => {
+  //     setScroll(false);
+  //     document.body.classList.remove('scroll');
+  //   }, 100);
+
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //     clearTimeout(timeout);
+  //   };
+  // }, [handleScroll]);
 
   useEffect(() => {
     setColorMode('light');

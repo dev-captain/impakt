@@ -22,6 +22,12 @@ const Images = {
     blitzChallenge: require('./blitz-challenge.png'),
     bgWave: require('./bg-wave.png'),
     play: require('./play.png'),
+    window: require('./window.png'),
+    Tiktok: require('./tiktok.png'),
+    Facebook: require('./Facebook.png'),
+    Instagram: require('./Instagram.png'),
+    FacebookDark: require('./FacebookDark.png'),
+    InstagramDark: require('./InstagramDark.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),
@@ -41,20 +47,29 @@ const Images = {
 
   impaktGames: {
     Header: require('./bg.png'),
+    Header2: require('./latestdefaultbg.jpg'),
+    Header3: require('./latestdefaultbg2.jpg'),
     light: require('./bg-light.png'),
+    dark: require('./bg-dark.jpg'),
+    dark2: require('./bg-dark2.jpg'),
+  },
+  impaktNFT: {
+    Header: require('./nftbg.png'),
+    light: require('./bg-light.png'),
+    nftCard: require('./nft-flat.png'),
   },
   advisor: {
-    kevin: require('./advisor/kevin-lin.webp'),
+    kevin: require('./advisor/kevin.png'),
     tim: require('./advisor/tim.png'),
-    kai: require('./advisor/kai-huang.webp'),
+    kai: require('./advisor/kai.png'),
   },
   team: {
-    cap: require('./team/cap.png'),
+    // cap: require('./team/cap.png'),
     dahaka: require('./team/dahaka.png'),
     demideus: require('./team/demideus.png'),
-    duke: require('./team/duke.png'),
+    // duke: require('./team/duke.png'),
     valtec: require('./team/valtec.png'),
-    dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
+    // dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
   },
   contactUs: {
     discordPeter: require('./discordPeter.png'),

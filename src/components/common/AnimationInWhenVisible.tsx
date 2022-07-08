@@ -5,11 +5,12 @@ import { useBreakpointValue } from '@chakra-ui/react';
 
 type Props = {
   isLeft?: boolean;
+  xValue?: number;
   children: React.ReactNode;
   animationType: 'move' | 'fade';
 };
 
-const AnimationInWhenVisible = ({ children, isLeft, animationType }: Props) => {
+const AnimationInWhenVisible = ({ children, isLeft, animationType, xValue = 200 }: Props) => {
   const controls = useAnimation();
   const [ref, inView] = useInView();
   const disabled = useBreakpointValue({ base: true, md: false });
@@ -17,7 +18,7 @@ const AnimationInWhenVisible = ({ children, isLeft, animationType }: Props) => {
   const variants = {
     move: {
       visible: { opacity: 1, x: isLeft ? 0 : 0, duration: 0.5 },
-      hidden: { opacity: 0, x: isLeft ? -200 : 200, duration: 0.5 },
+      hidden: { opacity: 0, x: isLeft ? -xValue : xValue, duration: 0.5 },
     },
     fade: {
       visible: { opacity: 1, scale: 1 },

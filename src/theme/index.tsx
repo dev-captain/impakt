@@ -1,12 +1,21 @@
 import { ThemeOverride, extendTheme, theme as base } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
+import { createBreakpoints, mode } from '@chakra-ui/theme-tools';
 import buttons from './buttons';
 import colors from './colors';
+
 import shadows from './shadows';
 import textStyles from './textStyles';
 
+const breakpoints = createBreakpoints({
+  sm: '0',
+  md: '992px',
+  lg: '1280px',
+  xl: '1920px',
+});
+
 const theme: ThemeOverride = {
   initialColorMode: 'dark',
+  breakpoints,
   useSystemColorMode: false,
   colors,
   shadows,

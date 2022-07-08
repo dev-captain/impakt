@@ -1,4 +1,9 @@
-export { default as ImpaktGamesHero } from 'components/ui/home/ImpaktGamesHero';
+export { default as HeroSection } from 'components/ui/home/ImpaktGamesHero';
+export { default as ImpaktNFT } from 'components/ui/home/ImpaktNFT';
+export { default as Advisor } from 'components/ui/home/Advisors';
+export { default as Founder } from 'components/ui/home/Founders';
+export { default as ImpaktCreed } from 'components/ui/home/ImpaktCreed';
+export { default as ImpaktFooter } from 'components/core/Footer/footer';
 export { default as SingleTeamHero } from 'components/ui/home/SingleTeamHero';
 export { default as MotionCaptureHero } from 'components/ui/home/MotionCaptureHero';
 export { default as BurnToEarnHero } from 'components/ui/home/BurnToEarnHero';
@@ -14,3 +19,4 @@ export { default as OurCommunityHero } from 'components/ui/home/OurCommunityHero
 export { default as BeAnInfluencerHero } from 'components/ui/home/BeAnInfluencerHero';
 export { default as JoinAndCollectHero } from 'components/ui/home/JoinAndCollectHero';
 export { default as CountdownHero } from 'components/ui/home/CountdownHero/index';
+export { default as EarnCrypto } from 'components/ui/home/EarnCrypto';

@@ -11,8 +11,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .leaderBoard::-webkit-scrollbar {
@@ -29,7 +28,11 @@ code {
   border-radius: 100px;
 }
 
-.grid { width: '100%'; display: flex; flex-wrap: wrap;}
+.grid {
+  width: '100%';
+  display: flex;
+  flex-wrap: wrap;
+}
 
 #root {
   overflow: hidden;
@@ -44,21 +47,21 @@ code {
 .inner.scroll {
   padding-right: 0;
 }
-::-webkit-scrollbar{
- opacity: 0;
- width: 5px;
- visibility: hidden;
- transition: all 0.5s;
-background-color: black;
+::-webkit-scrollbar {
+  opacity: 0;
+  width: 5px;
+  visibility: hidden;
+  transition: all 0.5s;
+  background-color: black;
 }
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: rgb(170, 170, 170);
   width: 10px;
   height: 90px;
   border-radius: 10px;
   visibility: hidden;
   transition: all 0.5s;
-} 
-.scroll::-webkit-scrollbar-thumb{
+}
+.scroll::-webkit-scrollbar-thumb {
   visibility: visible;
-} 
+}
