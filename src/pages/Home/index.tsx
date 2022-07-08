@@ -45,14 +45,14 @@ const HomePage = () => {
         </Box>
       )}
       <Box
-        background="linear-gradient(180deg, rgba(18, 18, 22, 0.9) 6%, rgba(18, 18, 22, 0) 100%);"
+        background="linear-gradient(180deg, rgba(18, 18, 22, 0.95) 6%, rgba(18, 18, 22, 0) 100%);"
         zIndex="99999"
         w="full"
         justifyContent="center"
         position="fixed"
         top="0"
         left="0"
-        height="25%"
+        height="23%"
       />
       <HeroSection />
 
