@@ -24,10 +24,10 @@ import SignInLinkItem from './SignInLinkItem';
 import useAppSelector from '../../../hooks/useAppSelector';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
+import ImpaktIcon from '../../icons/ImpaktIcon';
 
 const { dark, light } = Images;
-const { Discord, Twitter, TwitterLight, DiscordLight, Logo, LogoLight, Youtube, YoutubeLight } =
-  Images.Common;
+const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight } = Images.Common;
 
 const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButton?: boolean }) => {
   const navigate = useNavigate();
@@ -93,7 +93,8 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
       >
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
-            <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} />
+            {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
+            <ImpaktIcon width="111px" height="32px" />
           </Box>
           <HStack
             justify="flex-end"
