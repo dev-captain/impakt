@@ -91,27 +91,19 @@ const EarnCrypto = () => {
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
                 <InfoCard
+                  onToolTipClick={() => navigate('/download')}
                   tooltipLabel="GODL is our in-game currency!
                   You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
-                  onToolTipClick={() => navigate('/download')}
                   isShowTooltip
                   LeftLogo={<YoutubeIcon />}
                 >
                   <VStack alignItems="flex-start" color="white">
-                    <Text textStyle="regular201" display="inline-block">
-                      Get the
-                      <Text
-                        display="inline-block"
-                        m="5px"
-                        color="gold"
-                        fontWeight="bold"
-                        textStyle="regular201"
-                      >
-                        1000 GODL BONUS
-                      </Text>
+                    <Text textStyle="regular201">Start earning CRYPTO now!</Text>
+                    <Text color="gold" fontWeight="bold" textStyle="regular201">
+                      1000 GODL BONUS
                     </Text>
                     <Text textStyle="semiBold14" color="whiteAlpha.400">
-                      *download App & create account
+                      *for new accounts
                     </Text>
                   </VStack>
                 </InfoCard>

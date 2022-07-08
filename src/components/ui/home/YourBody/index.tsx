@@ -69,20 +69,12 @@ const YourBody: React.FC = () => {
                   LeftLogo={<YoutubeIcon />}
                 >
                   <VStack alignItems="flex-start" color="white">
-                    <Text textStyle="regular201" display="inline-block">
-                      Get the
-                      <Text
-                        display="inline-block"
-                        m="5px"
-                        color="gold"
-                        fontWeight="bold"
-                        textStyle="regular201"
-                      >
-                        1000 GODL BONUS
-                      </Text>
+                    <Text textStyle="regular201">Start earning CRYPTO now!</Text>
+                    <Text color="gold" fontWeight="bold" textStyle="regular201">
+                      1000 GODL BONUS
                     </Text>
                     <Text textStyle="semiBold14" color="whiteAlpha.400">
-                      *download App & create account
+                      *for new accounts
                     </Text>
                   </VStack>
                 </InfoCard>

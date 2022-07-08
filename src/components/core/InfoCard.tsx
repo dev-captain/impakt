@@ -33,7 +33,7 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
       </HStack>
       <Flex id="right">
         {isShowTooltip && (
-          <Box onClick={onToolTipClick} cursor="pointer" id="tooltip">
+          <Box cursor="pointer" id="tooltip">
             <Tooltip
               p="20px 20px"
               label={tooltipLabel}
