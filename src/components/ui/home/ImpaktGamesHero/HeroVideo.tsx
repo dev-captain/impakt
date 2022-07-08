@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 import { Videos } from '../../../../data';
@@ -73,4 +73,4 @@ const HeroVideo = React.forwardRef<HTMLVideoElement>((_, ref) => {
   );
 });
 
-export default HeroVideo;
+export default memo(HeroVideo);

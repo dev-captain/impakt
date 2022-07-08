@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, CircularProgress } from '@chakra-ui/react';
 import * as React from 'react';
 
 import Images from '../../../../assets/images';
@@ -7,10 +7,11 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 import { setBorderX } from '../../../../lib/redux/slices/state/stateSlice';
 import YourBody from '../YourBody';
 import ExerciseCard from './ExerciseCard';
-import HeroVideo from './HeroVideo';
 import ScrollIconComponent from './ScrollIconComponent';
 import SocialFitnessGamified from './SocialFitnessGamified';
 import StarsVideo from './StarsVideo';
+
+const HeroVideo = React.lazy(() => import('./HeroVideo'));
 
 export const HeroSection: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -154,7 +155,13 @@ export const HeroSection: React.FC = () => {
         </Box>
         <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
       </Box>
-      <HeroVideo ref={heroVideoRef} />
+      <React.Suspense
+        fallback={
+          <CircularProgress size="160px" color="rgba(0, 0, 0, 1)" isIndeterminate thickness="13" />
+        }
+      >
+        <HeroVideo ref={heroVideoRef} />
+      </React.Suspense>
       <ScrollIconComponent isVisible={!isScrolling} zIndex="999999" position="fixed" left="48%" />
       <Box
         display="flex"
