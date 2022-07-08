@@ -7,10 +7,11 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 import { setBorderX } from '../../../../lib/redux/slices/state/stateSlice';
 import YourBody from '../YourBody';
 import ExerciseCard from './ExerciseCard';
-import HeroVideo from './HeroVideo';
 import ScrollIconComponent from './ScrollIconComponent';
 import SocialFitnessGamified from './SocialFitnessGamified';
 import StarsVideo from './StarsVideo';
+
+const HeroVideo = React.lazy(() => import('./HeroVideo'));
 
 export const HeroSection: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -148,13 +149,15 @@ export const HeroSection: React.FC = () => {
               boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
               top: '0',
               left: '0',
-              borderRadius: '150px 150px 0px 0',
+              borderRadius: '120px',
             }}
           />
         </Box>
         <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
       </Box>
-      <HeroVideo ref={heroVideoRef} />
+      <React.Suspense fallback={null}>
+        <HeroVideo ref={heroVideoRef} />
+      </React.Suspense>
       <ScrollIconComponent isVisible={!isScrolling} zIndex="999999" position="fixed" left="48%" />
       <Box
         display="flex"

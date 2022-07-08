@@ -55,16 +55,7 @@ const YourBody: React.FC = () => {
                   tooltipLabel="GODL is our in-game currency!
                   You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   isShowTooltip
-                  LeftLogo={
-                    <Link
-                      href="/download"
-                      _focus={{
-                        boxShadow: 'none',
-                      }}
-                    >
-                      <YoutubeIcon />
-                    </Link>
-                  }
+                  LeftLogo={<YoutubeIcon />}
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>

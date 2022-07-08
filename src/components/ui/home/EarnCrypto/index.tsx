@@ -9,7 +9,7 @@ import NftCard from './NftCard';
 // import { StatusQuoBlurs } from './StatusQuoBlurs';
 
 const EarnCrypto = () => {
-  const bgImage = useColorModeValue(Images.impaktGames.Header3, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.impaktGames.dark2, Images.impaktGames.light);
 
   return (
     <HeroLayout
@@ -51,7 +51,7 @@ const EarnCrypto = () => {
                       boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
                       top: '0',
                       left: '0',
-                      borderRadius: '150px 150px 0px 0',
+                      borderRadius: '120px',
                     }}
                   />
                 </Box>
@@ -84,23 +84,14 @@ const EarnCrypto = () => {
                 fontWeight="400"
                 lineHeight="32px"
               >
-                <Text>Get the app,log in,start earning!</Text>
+                <Text>Get the app, log in, start earning!</Text>
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
                 <InfoCard
                   tooltipLabel="GODL is our in-game currency!
                   You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
                   isShowTooltip
-                  LeftLogo={
-                    <Link
-                      href="/download"
-                      _focus={{
-                        boxShadow: 'none',
-                      }}
-                    >
-                      <YoutubeIcon />
-                    </Link>
-                  }
+                  LeftLogo={<YoutubeIcon />}
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>

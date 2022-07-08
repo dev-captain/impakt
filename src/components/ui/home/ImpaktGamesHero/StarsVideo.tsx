@@ -9,7 +9,7 @@ const Video = styled.video`
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 150px 150px 0px 0;
+  border-radius: 120px;
   filter: contrast(120%) brightness(120%);
 `;
 
