@@ -130,9 +130,11 @@ export const HeroSection: React.FC = () => {
       <div ref={impaktGameHeroRef} id="impakt-game-hero">
         <SocialFitnessGamified />
       </div>
-      <div id="impakt-your-body" ref={yourBodySectionRef}>
-        <YourBody />
-      </div>
+      {isScrolling && (
+        <div id="impakt-your-body" ref={yourBodySectionRef}>
+          <YourBody />
+        </div>
+      )}
 
       <Box left="75vw" ref={exerciseCardRef} zIndex={99999} top={borderY + 100} position="absolute">
         <ExerciseCard />
