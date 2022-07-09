@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import * as React from 'react';
-import ScrollIcon from '../../../icons/Scroll';
+import ScrollIcon from '../../icons/Scroll';
 
 const rotate = keyframes`
   0%{

@@ -9,7 +9,7 @@ import { setBorderX } from '../../../../lib/redux/slices/state/stateSlice';
 import YourBody from '../YourBody';
 import ExerciseCard from './ExerciseCard';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
-import ScrollIconComponent from './ScrollIconComponent';
+import ScrollIconComponent from '../ScrollIconComponent';
 import SocialFitnessGamified from './SocialFitnessGamified';
 
 const HeroVideo = React.lazy(() => import('./HeroVideo'));
