@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { VStack, Box, Text } from '@chakra-ui/react';
 
-import Gradients from '../../home/RoadmapHero/Gradients';
+import Gradients from '../../../common/Gradients';
 import { usePusherContext } from '../../../../context/PusherContext';
 
 const ActiveMembersCard: React.FC = () => {

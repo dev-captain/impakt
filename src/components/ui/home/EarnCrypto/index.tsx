@@ -4,7 +4,7 @@ import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
-import MirrorAndStarsVideo from '../ImpaktGamesHero/MirrorAndStarsVideo';
+import MirrorAndStarsVideo from '../HeroSection/MirrorAndStarsVideo';
 import NftCard from './NftCard';
 
 const EarnCrypto = () => {

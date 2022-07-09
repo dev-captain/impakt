@@ -15,7 +15,6 @@ import Images from 'assets/images';
 import AOS from 'aos';
 import InfoCard from '../../../core/InfoCard';
 import RichIcon from '../../../icons/RichIcon';
-// import Gradients from '../RoadmapHero/Gradients';
 import '../../../../theme/styles.css';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 

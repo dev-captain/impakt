@@ -11,7 +11,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import { Advisors } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import InvestorCard from '../PartnerAndInvestorHero/InvestorCard';
+import InvestorCard from '../Founders/InvestorCard';
 import bgImage from '../../../../assets/images/bgadvvisors.png';
 
 const Advisor = () => {

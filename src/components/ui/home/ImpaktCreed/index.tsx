@@ -4,7 +4,6 @@ import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/reac
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import RichIconK from '../../../icons/RichIconK';
-// import Gradients from '../RoadmapHero/Gradients';
 import bgImage from '../../../../assets/images/bgcreed.png';
 
 const ImpaktCreed = () => {

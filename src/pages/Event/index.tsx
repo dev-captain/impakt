@@ -3,10 +3,9 @@ import { Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useEventStore from 'hooks/store/useEventStore';
 import { useParams } from 'react-router-dom';
-import { BurnToEarnHero, MotionCaptureHero } from 'components/ui/home';
-import CountDown from 'components/ui/events/CountDown';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+import { CountDown, BurnToEarnHero, MotionCaptureHero } from 'components/ui/events';
 
 const EventPage = () => {
   const { slug } = useParams();

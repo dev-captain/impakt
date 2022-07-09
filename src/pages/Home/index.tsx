@@ -73,48 +73,10 @@ const HomePage = () => {
           </div>
         </>
       )}
-      {/* <div>
-        <CardFounder />
-      </div> */}
 
-      {/* <div id="status-quo">
-        <StatusQuoHero />
-      </div>
-      <div id="status-quo">
-        <StatusQuoHero />
-      </div>
-
-      <div id="join-challange">
+      {/* <div id="join-challange">
         <LeaderBoard />
-      </div>
-      <div id="computer-vision">
-        <ComputerVisionHero />
-      </div>
-
-      <div id="burnAndEarn">
-        <BurnAndEarn />
-      </div>
-
-      <div id="roadmap">
-        <RoadMap />
-      </div>
-
-      <div id="impakt-laptop">
-        <ImpaktLaptopHero />
-      </div>
-
-      <div id="partner-and-investor">
-        <PartnerAndInvestorHero />
-      </div>
-
-      <div id="partner-and-investor">
-        <JoinOurCommunity />
-      </div>
-
-      <div id="contact">
-        <Contact />
-      </div>  */}
-      {/* <Footer /> */}
+      </div> */}
     </Container>
   );
 };
