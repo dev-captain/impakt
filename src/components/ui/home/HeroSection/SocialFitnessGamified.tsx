@@ -8,7 +8,7 @@ import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
 
 const SocialFitnessGamified: React.FC = () => {
-  const bgImage = useColorModeValue(Images.impaktGames.dark, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
 
   return (
     <HeroLayout

@@ -163,7 +163,7 @@ export const HeroSection: React.FC = () => {
         position="absolute"
         top={borderY + 210}
       >
-        <img width="100%" height="100%" src={Images.Common.window} alt="_" />
+        <img width="100%" height="100%" src={Images.Common.Window} alt="_" />
       </Box>
     </div>
   );

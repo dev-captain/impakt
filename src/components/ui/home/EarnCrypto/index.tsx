@@ -8,7 +8,7 @@ import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
 
 const EarnCrypto = () => {
-  const bgImage = useColorModeValue(Images.impaktGames.dark2, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.backgrounds.gradientBgRotated, Images.backgrounds.light);
 
   return (
     <HeroLayout

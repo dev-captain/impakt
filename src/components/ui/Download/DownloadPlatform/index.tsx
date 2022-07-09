@@ -23,7 +23,7 @@ import Gradient from './Gradient';
 const DownloadPlatform = () => {
   const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.backgrounds.defaultBg, Images.backgrounds.light);
   const show = useModalStore((state) => state.setDownloadPage);
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
