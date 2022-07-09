@@ -8,7 +8,7 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 import { setBorderX } from '../../../../lib/redux/slices/state/stateSlice';
 import YourBody from '../YourBody';
 import ExerciseCard from './ExerciseCard';
-import MirrorAndStarsVideo from './MirrorAndStarsVideo';
+import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import ScrollIconComponent from './ScrollIconComponent';
 import SocialFitnessGamified from './SocialFitnessGamified';
 

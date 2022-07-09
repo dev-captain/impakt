@@ -1,6 +1,6 @@
 import { Box, BoxProps, forwardRef } from '@chakra-ui/react';
 
-import StarsVideo from './StarsVideo';
+import StarsVideo from './HeroSection/StarsVideo';
 
 const MirrorAndStarsVideo = forwardRef<BoxProps, 'div'>((props, ref) => {
   return (
