@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 
-import { Videos } from '../../../../data';
+import { Videos } from '../../../data';
 
 const Video = styled.video`
   object-fit: cover;
