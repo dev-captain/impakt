@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 
@@ -7,9 +8,9 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 import { setBorderX } from '../../../../lib/redux/slices/state/stateSlice';
 import YourBody from '../YourBody';
 import ExerciseCard from './ExerciseCard';
+import MirrorAndStarsVideo from './MirrorAndStarsVideo';
 import ScrollIconComponent from './ScrollIconComponent';
 import SocialFitnessGamified from './SocialFitnessGamified';
-import StarsVideo from './StarsVideo';
 
 const HeroVideo = React.lazy(() => import('./HeroVideo'));
 
@@ -139,24 +140,17 @@ export const HeroSection: React.FC = () => {
       <Box left="75vw" ref={exerciseCardRef} zIndex={99999} top={borderY + 100} position="absolute">
         <ExerciseCard />
       </Box>
-      <Box ref={mirrorRef} id="mirror" position="absolute" left="49vw" top={borderY}>
-        <Box position="relative" height="788px" width="600px">
-          <StarsVideo />
-          <div
-            className="shadow"
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
-              top: '0',
-              left: '0',
-              borderRadius: '120px',
-            }}
-          />
-        </Box>
+      <MirrorAndStarsVideo
+        id="starsvideo"
+        position="absolute"
+        left="49vw"
+        top={borderY}
+        ref={mirrorRef}
+        height="788px"
+        width="600px"
+      >
         <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
-      </Box>
+      </MirrorAndStarsVideo>
       <React.Suspense fallback={null}>
         <HeroVideo ref={heroVideoRef} />
       </React.Suspense>

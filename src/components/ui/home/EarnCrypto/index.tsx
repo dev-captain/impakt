@@ -4,9 +4,8 @@ import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
-import StarsVideo from '../ImpaktGamesHero/StarsVideo';
+import MirrorAndStarsVideo from '../ImpaktGamesHero/MirrorAndStarsVideo';
 import NftCard from './NftCard';
-// import { StatusQuoBlurs } from './StatusQuoBlurs';
 
 const EarnCrypto = () => {
   const bgImage = useColorModeValue(Images.impaktGames.dark2, Images.impaktGames.light);
@@ -29,33 +28,19 @@ const EarnCrypto = () => {
             columnGap="48px"
           >
             <Box id="left">
-              <Box id="mirror">
+              <MirrorAndStarsVideo position="relative" height="788px" width="600px">
                 <Box
+                  id="box-nft"
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
-                  position="relative"
-                  height="788px"
-                  width="600px"
+                  position="absolute"
+                  height="100%"
+                  width="100%"
                 >
                   <NftCard />
-                  <Box zIndex={0} position="absolute" h="100%">
-                    <StarsVideo />
-                  </Box>
-                  <div
-                    className="shadow"
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      height: '100%',
-                      boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
-                      top: '0',
-                      left: '0',
-                      borderRadius: '120px',
-                    }}
-                  />
                 </Box>
-              </Box>
+              </MirrorAndStarsVideo>
             </Box>
             <Box />
             <VStack
