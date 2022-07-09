@@ -22,9 +22,12 @@ const Images = {
     Instagram: require('./Instagram.png'),
     FacebookDark: require('./FacebookDark.png'),
     InstagramDark: require('./InstagramDark.png'),
+    Walletad: require('./walletad.png'),
+    Goldaword: require('./goldaword.png'),
   },
   backgrounds: {
     advisorsSectionBg: require('./bgadvvisors.png'),
+    creedSectionBg: require('./bgcreed.png'),
     defaultBg: require('./bg.png'),
     gradientBg: require('./gradientbg.jpg'),
     gradientBgRotated: require('./gradientbgrotated.jpg'),
