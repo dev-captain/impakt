@@ -1,4 +1,6 @@
 import { Box, HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import Keys from 'i18n/types';
 
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
@@ -9,6 +11,7 @@ import NftCard from './NftCard';
 
 const EarnCrypto = () => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBgRotated, Images.backgrounds.light);
+  const { t } = useTranslation(`default`).i18n;
 
   return (
     <HeroLayout
@@ -52,13 +55,13 @@ const EarnCrypto = () => {
             >
               <Box id="move-to-earn-box">
                 <Text textStyle="semiBold3" letterSpacing="2px" color="#F04153" lineHeight="100%">
-                  MOVE TO EARN
+                  {t(Keys.burnAndEarn.burnAnd)}
                 </Text>
               </Box>
 
               <Box id="earn-crypto-box">
                 <Text letterSpacing="-2.5px" textStyle="TitleBold64" color="#fff">
-                  Earn crypto.
+                  {t(Keys.burnAndEarn.earn)}123
                 </Text>
               </Box>
 
@@ -73,18 +76,17 @@ const EarnCrypto = () => {
               </Box>
               <Box w="full" maxW="500px" id="info-card-box">
                 <InfoCard
-                  tooltipLabel="GODL is our in-game currency!
-                  You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
+                  tooltipLabel={t(Keys.toolTip.downloadLabel)}
                   isShowTooltip
                   LeftLogo={<YoutubeIcon />}
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle="regular201">Start earning CRYPTO now!</Text>
                     <Text color="gold" fontWeight="bold" textStyle="regular201">
-                      1000 GODL BONUS
+                      {t(Keys.toolTip.godlBonus)}
                     </Text>
                     <Text textStyle="semiBold14" color="whiteAlpha.400">
-                      *for new accounts
+                      {t(Keys.toolTip.description)}
                     </Text>
                   </VStack>
                 </InfoCard>

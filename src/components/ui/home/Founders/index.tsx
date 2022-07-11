@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   GridItem,
   HStack,
@@ -8,7 +9,6 @@ import {
   Box,
 } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { Team } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import TeamCard from './TeamCard';
@@ -17,7 +17,8 @@ import bgImage from '../../../../assets/images/teambg.png';
 const Founder = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const { t } = useTranslation().i18n;
-
+  let Team = useState<object[]>();
+  Team = t('Founder.team', { returnObjects: true });
   return (
     <HeroLayout
       bgImage={bgImage}
@@ -31,7 +32,7 @@ const Founder = () => {
     >
       <VStack
         spacing="0px"
-        pb="64px"
+        py="64px"
         px="16px"
         maxW={{ base: '100%', lg: '1200px' }}
         w="full"
@@ -75,13 +76,15 @@ const Founder = () => {
               columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
               rowGap={{ base: '100px', sm: '100px', md: '100px', xl: '24px' }}
             >
-              {Team.map((advisor) => (
-                <GridItem key={advisor.name} w="full">
-                  <HStack w="full" align="center" justify="center">
-                    <TeamCard {...advisor} />
-                  </HStack>
-                </GridItem>
-              ))}
+              {Team.map((advisor: any) => {
+                return (
+                  <GridItem key={advisor.name} w="full">
+                    <HStack w="full" align="center" justify="center">
+                      <TeamCard {...advisor} />
+                    </HStack>
+                  </GridItem>
+                );
+              })}
             </SimpleGrid>
           </VStack>
         </VStack>

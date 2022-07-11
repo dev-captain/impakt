@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { memo } from 'react';
 import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import Keys from 'i18n/types';
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
 import RichIconK from '../../../icons/RichIconK';
 import Images from '../../../../assets/images';
 
 const ImpaktCreed = () => {
+  const { t } = useTranslation(`default`).i18n;
   return (
     <HeroLayout
       showNavbar
@@ -35,12 +38,12 @@ const ImpaktCreed = () => {
                 >
                   <Box mt="0 !important" mb="24px">
                     <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
-                      creed
+                      {t(Keys.impaktCreed.creed)}
                     </Text>
                   </Box>
                   <Box mt="0 !important" mb="24px !important">
                     <Text color="white" letterSpacing="-2.5px" textStyle="TitleBold64">
-                      The Impakt Creed
+                      {t(Keys.impaktCreed.creedLabel)}
                     </Text>
                   </Box>
                   <Box
@@ -49,22 +52,25 @@ const ImpaktCreed = () => {
                     mb="24px !important"
                     backgroundClip="text"
                   >
-                    <Text color="rgba(255, 255, 255, 0.85);" fontSize="20px" textStyle="regular20">
-                      Call us old-school, but we believe that you
-                      <b>build first and market later</b>. Many projects do it backwards: sell-out
-                      an NFT collection, get 1000 ETH, build later. Our creed is:{' '}
-                      <b>provide value before asking for investment</b>. That&apos;s why even before
-                      seeking institutional investment or even taking a penny from the community, we
-                      had our Beta app out.
-                    </Text>
+                    <Text
+                      color="rgba(255, 255, 255, 0.85);"
+                      fontSize="20px"
+                      textStyle="regular20"
+                      dangerouslySetInnerHTML={{
+                        __html: t(Keys.impaktCreed.description),
+                      }}
+                    />
                   </Box>
                   <Box mt="0 !important" w="full">
                     <InfoCard LeftLogo={<RichIconK />}>
                       <VStack alignItems="flex-start" color="white">
-                        <Text textStyle="regular20" color="rgba(255, 255, 255, 0.75);">
-                          We are visionaries, we are innovators,
-                          <br /> we are builders. We are Impakt.
-                        </Text>
+                        <Text
+                          textStyle="regular20"
+                          color="rgba(255, 255, 255, 0.75);"
+                          dangerouslySetInnerHTML={{
+                            __html: t(Keys.impaktCreed.description1),
+                          }}
+                        />
                       </VStack>
                     </InfoCard>
                   </Box>

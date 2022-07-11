@@ -66,12 +66,12 @@ const ImpaktFooter = () => {
                 >
                   <Box mt="0 !important" mb="8px">
                     <Text color="#FFF" letterSpacing="-0.5px" textStyle="normal5">
-                      Get Impakt updates!
+                      {t(Keys.footer.getImpakt)}
                     </Text>
                   </Box>
                   <Box mt="0 !important" mb="32px !important">
                     <Text color="rgba(255, 255, 255, 0.4)" textStyle="regular201">
-                      Unsubscribe anytime
+                      {t(Keys.footer.unsubscribe)}
                     </Text>
                   </Box>
                   <HStack spacing={4} w="full" flexWrap={{ base: 'wrap', md: 'nowrap' }}>
@@ -123,7 +123,7 @@ const ImpaktFooter = () => {
                           sendData({ email });
                         }}
                       >
-                        Stay updated
+                        {t(Keys.footer.stayUpdated)}
                       </Button>
                     </Box>
                   </HStack>
@@ -142,7 +142,7 @@ const ImpaktFooter = () => {
             >
               <SimpleGrid w="full">
                 <GridItem
-                  w="full"
+                  w={{ base: '100%', sm: '100%', md: '100%', lg: '1200px' }}
                   margin="auto"
                   alignItems="center"
                   justifyContent="center"
@@ -150,12 +150,17 @@ const ImpaktFooter = () => {
                 >
                   <HStack
                     w="full"
-                    padding={{ base: '0px 10px', md: '0px 40px', lg: '0px' }}
-                    rowGap="24px"
+                    padding={{ base: '0px 10px', md: '0px' }}
+                    rowGap={{ base: '32px', md: '24px' }}
                     display="flex"
+                    flexWrap={{ base: 'wrap', md: 'nowrap' }}
                     justify="space-between"
                   >
-                    <HStack w="full">
+                    <HStack
+                      w="full"
+                      display="flex"
+                      justifyContent={{ base: 'space-between', md: 'start' }}
+                    >
                       <Box onClick={() => navigate('/')} zIndex={100} mr="32px">
                         <ImpaktIcon width="111px" height="32px" />
                       </Box>
@@ -164,7 +169,13 @@ const ImpaktFooter = () => {
                       </Link>
                     </HStack>
 
-                    <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
+                    <HStack
+                      justifyContent={{ base: 'center', md: 'flex-end' }}
+                      mb={{ base: '32px !important', md: '0px !important ' }}
+                      spacing="8px"
+                      pl={{ base: '0px', md: '64px' }}
+                      w="100%"
+                    >
                       <NavBarSocialIcons />
                       {/* {!showDarkOrLightModeButton && (
                         <Box
@@ -185,13 +196,15 @@ const ImpaktFooter = () => {
                 </GridItem>
               </SimpleGrid>
             </HStack>
-            <HStack w="full">
+            <HStack w="full" padding={{ base: '0px 10px', md: '0px' }}>
               <NavBarLink IsHeader={false} />
             </HStack>
 
             <HStack
-              display="flex"
+              display={{ base: 'block', md: 'flex' }}
+              textAlign={{ base: 'center', md: 'start' }}
               w="full"
+              marginTop={{ base: '32px !important', md: '0px' }}
               justifyContent={{ base: 'center', md: 'flex-start' }}
               flexDir="row"
             >

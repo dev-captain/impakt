@@ -33,7 +33,12 @@ const NavbarLink = ({ IsHeader }: Props) => {
     }
   }, [isLessThan1040, onClose]);
   return (
-    <HStack spacing={[0, 0, 3, 5, 8, 12]}>
+    <HStack
+      spacing={[3, 3, 3, 5, 8, 12]}
+      flexWrap={{ base: 'wrap', md: 'nowrap' }}
+      justifyContent={{ base: 'center', md: 'start' }}
+      display="flex"
+    >
       <NavbarLinkItem
         href="/"
         title={t(Keys.navbar.impaktFitness)}

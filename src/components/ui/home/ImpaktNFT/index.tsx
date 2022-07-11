@@ -10,6 +10,8 @@ import {
   GridItem,
   SimpleGrid,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import Keys from 'i18n/types';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import AOS from 'aos';
@@ -22,6 +24,7 @@ AOS.init();
 
 const ImpaktNFT = () => {
   const bgImage = useColorModeValue(Images.impaktNFT.Header, Images.impaktNFT.light);
+  const { t } = useTranslation(`default`).i18n;
 
   return (
     <HeroLayout
@@ -55,19 +58,19 @@ const ImpaktNFT = () => {
                 >
                   <Box mt="0 !important">
                     <Text color="gold" textTransform="uppercase" textStyle="reguler2">
-                      nft design
+                      {t(Keys.impaktNFT.impaktDesign)}
                     </Text>
                   </Box>
                   <Box mt="0 !important">
                     <Text color="white" letterSpacing="-1.5px" textStyle="TitleBold48">
-                      Impakt NFT designed in partnership with Oscar Winner —
+                      {t(Keys.impaktNFT.impaktlabel)}
                       <Text
                         display="inline-block"
                         letterSpacing="-1.5px"
                         textStyle="TitleBold48"
                         className="gradient-text"
                       >
-                        Chris Armsden
+                        {t(Keys.impaktNFT.impaktChris)}
                       </Text>
                     </Text>
                   </Box>
@@ -78,19 +81,14 @@ const ImpaktNFT = () => {
                     backgroundClip="text"
                   >
                     <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular18">
-                      Chris Armsden is a graphics technical director and software developer for some
-                      of Hollywood’s biggest blockbusters over the last 17 years. Among them, 6 have
-                      been Oscar-nominated for their Visual Effects and with The Jungle Book (2016)
-                      he took home the prestigious award.
+                      {t(Keys.impaktNFT.description)}
                     </Text>
                   </Box>
                   <Box ml="7px !important" mt="0 !important" w="full" id="hero-info-card-box">
                     <InfoCard LeftLogo={<RichIcon />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text textStyle="regular18" color="rgba(255, 255, 255, 0.75);">
-                          Chris believes in the transformational power of graphics to educate, to
-                          entertain, to change hearts and minds, and ultimately change the world. If
-                          you can see it, you can believe it.
+                          {t(Keys.impaktNFT.description1)}
                         </Text>
                       </VStack>
                     </InfoCard>
@@ -102,10 +100,9 @@ const ImpaktNFT = () => {
                     backgroundClip="text"
                   >
                     <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular18">
-                      His career is truly impressive! And Impakt is honored to call Chris a partner!
-                      Don’t believe us?{' '}
+                      {t(Keys.impaktNFT.careerdescription)}
                       <Text color="gold" as="a" target="_blank" href="#">
-                        Check it for yourself.
+                        {t(Keys.impaktNFT.careerdescription1)}
                       </Text>
                     </Text>
                   </Box>

@@ -7,8 +7,8 @@ import {
   useColorModeValue,
   Box,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import HeroLayout from 'components/layouts/HeroLayout';
-import { Advisors } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import InvestorCard from '../Founders/InvestorCard';
@@ -17,6 +17,8 @@ import Images from '../../../../assets/images';
 const Advisor = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const { t } = useTranslation().i18n;
+  let Advisors = useState<object[]>();
+  Advisors = t('impaktAdvisor.Advisors', { returnObjects: true });
 
   return (
     <HeroLayout
@@ -52,7 +54,7 @@ const Advisor = () => {
               mt={{ base: 0, md: 0, xl: '64px' }}
             >
               <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
-                {t(keys.ourAdvisorTitle.adviser)}
+                {t(keys.impaktAdvisor.adviser)}
               </Text>
             </VStack>
             <VStack
@@ -64,7 +66,7 @@ const Advisor = () => {
               mb="72px !important"
             >
               <Box maxW={{ base: '100%', lg: '800px' }}>
-                <Text textStyle="TitleBold48">{t(keys.ourAdvisorTitle.Title)}</Text>
+                <Text textStyle="TitleBold48">{t(keys.impaktAdvisor.Title)}</Text>
               </Box>
             </VStack>
             <SimpleGrid
@@ -75,7 +77,7 @@ const Advisor = () => {
               columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
               rowGap={{ base: '100px', sm: '100px', md: '100px', xl: '24px' }}
             >
-              {Advisors.map((advisor) => (
+              {Advisors.map((advisor: any) => (
                 <GridItem key={advisor.name} w="full">
                   <HStack w="full" align="center" justify="center">
                     <InvestorCard {...advisor} />

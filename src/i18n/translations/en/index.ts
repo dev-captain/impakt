@@ -1,3 +1,5 @@
+import Images from 'assets/images';
+
 export default {
   common: {
     impakt: 'Impakt',
@@ -7,6 +9,9 @@ export default {
     social: 'Social.',
     fitness: 'Fitness.',
     gamified: 'Gamified.',
+    workout: 'Work out! Get fit! Get paid!',
+    excercise: 'EXERCISE',
+    squats: 'SQUATS',
   },
   downloadPlateform: {
     download: 'Download',
@@ -24,38 +29,109 @@ export default {
     termsOfUse: 'Terms of Use',
   },
   computerVision: {
-    computerVision: 'Computer vision',
+    computerVision: 'COMPUTER VISION',
     technology: 'Technology',
-    description: 'Use your body as a controller - move, sweat, get fit.',
+    description: 'Your body is',
+    description1: 'the controller.',
     hardwareCard: 'No extra hardware necessary',
-    cameraCard: 'Use the camera on your phone or laptop',
+    cameraCard: 'All you need is a webcam or a phone camera.',
+    aiDescription: 'Our AI technology recognizes your gestures & movements in real time',
+  },
+  toolTip: {
+    downloadLabel:
+      'ODL is our in-game currency! You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!',
+    godlBonus: '1000 GODL BONUS',
+    description: ' *for new accounts',
   },
   burnAndEarn: {
-    earn: 'Earn',
-    burnAnd: 'Burn and',
-    description: 'Connect ANYTIME with ANYONE, ANYWHERE, workout, battle and earn tokens and NFTs!',
+    earn: 'Earn crypto.',
+    burnAnd: ' MOVE TO EARN',
+    description: 'Get the app, log in, start earning!',
+  },
+  impaktNFT: {
+    impaktDesign: 'nft design',
+    impaktlabel: 'Impakt NFT designed in partnership with Oscar Winner —',
+    impaktChris: 'Chris Armsden',
+    description:
+      'Chris Armsden is a graphics technical director and software developer for some of Hollywood’s biggest blockbusters over the last 17 years. Among them, 6 have been Oscar-nominated for their Visual Effects and with The Jungle Book (2016) he took home the prestigious award.',
+    description1:
+      'Chris believes in the transformational power of graphics to educate, to entertain, to change hearts and minds, and ultimately change the world. If you can see it, you can believe it.',
+    careerdescription:
+      'His career is truly impressive! And Impakt is honored to call Chris a partner! Don’t believe us?',
+    careerdescription1: ' Check it for yourself.',
   },
   ourAdvisor: {
     our: 'Our',
     advisor: 'advisors',
   },
-  ourAdvisorTitle: {
+  impaktAdvisor: {
     adviser: 'ADVISORS',
     Title: 'Advised by some of the best disruptive minds in the industry',
+    Advisors: [
+      {
+        name: 'Kevin Lin',
+        title: 'Twitch Founder',
+        image: Images.advisor.kevin,
+        subtitle: '',
+        alt: 'Kevin Lin',
+      },
+      {
+        name: 'Tim Howes',
+        title: 'Netscape CTO',
+        image: Images.advisor.tim,
+        alt: 'Tim Howes',
+        subtitle: 'Director of Engineering - Facebook',
+      },
+      {
+        name: 'Kai Huang',
+        title: 'Guitar Hero Founder',
+        image: Images.advisor.kai,
+        alt: 'Kai Huang',
+        subtitle: 'President of Red Octane - Activision',
+      },
+    ],
   },
   Founder: {
     builders: 'IMPAKT BUILDERS',
     Title: 'The Founders',
+    team: [
+      {
+        name: 'Demideus',
+        title: 'CEO',
+        image: Images.team.demideus,
+        alt: '',
+        subtitle:
+          '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.\nPrevious 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
+      },
+      {
+        name: 'Valtec',
+        title: 'President',
+        image: Images.team.valtec,
+        alt: '',
+        subtitle:
+          ' <span style="color:#FFF;">10+ years</span> of building technology companies.\nPrevious roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
+      },
+      {
+        name: 'Dahaka',
+        title: 'CTO',
+        image: Images.team.dahaka,
+        alt: '',
+        subtitle:
+          ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.\nManaging a team of <span style="color:#FFF;">20+</span> engineers & product managers',
+      },
+    ],
   },
+
   ourTeam: {
     our: 'Leadership',
     team: 'team',
   },
   impaktCreed: {
-    creed: 'CREED',
-    Title: 'The Impakt Creed',
+    creed: 'creed',
+    creedLabel: 'The Impakt Creed',
     description:
-      'Call us old-school, but we believe that you <strong>build first and market later</strong>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later. Our creed is: <strong>provide value before asking for investment</strong>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
+      'Call us old-school, but we believe that you <b> build first and market later</b>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later. Our creed is: <b>provide value before asking for investment</b>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
+    description1: 'We are visionaries, we are innovators, <br /> we are builders. We are Impakt.',
   },
   ourRoadmap: {
     our: 'Our',
@@ -98,6 +174,9 @@ export default {
     termOfUse: 'Term of Use',
     allRightReserved: '© 2022 Impakt. All rights reserved.',
     downloadApp: 'Download App',
+    getImpakt: 'Get Impakt updates!',
+    unsubscribe: 'Unsubscribe anytime',
+    stayUpdated: 'Stay updated',
   },
 
   password: {
