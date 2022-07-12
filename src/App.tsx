@@ -20,6 +20,7 @@ import {
 import MemberDashboard from './pages/MemberDashBoard';
 import SignIn from './pages/SignIn/SignIn';
 import Authentication from './middlewares/Authentication';
+import ScrollToTop from './components/core/ScrollToTop';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -38,36 +39,20 @@ const App = () => {
     onRouteChanged();
   }, [location]);
 
-  // eslint-disable-next-line no-unused-vars
-  // const [scroll, setScroll] = useState(false);
-
-  // const handleScroll = () => {
-  //   setScroll(window.scrollY > 50);
-  //   document.body.classList.add('scroll');
-
-  //   return scroll;
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll);
-  //   const timeout = setTimeout(() => {
-  //     setScroll(false);
-  //     document.body.classList.remove('scroll');
-  //   }, 100);
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //     clearTimeout(timeout);
-  //   };
-  // }, [handleScroll]);
-
   useEffect(() => {
     setColorMode('light');
   }, [setColorMode]);
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <ScrollToTop>
+            <Home />
+          </ScrollToTop>
+        }
+      />
 
       <Route path="/knowledge-base" element={<KnowledgeBase />}>
         <Route path=":article" element={<KnowledgeBase />} />

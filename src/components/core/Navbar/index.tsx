@@ -94,7 +94,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <ImpaktIcon width="111px" height="32px" />
+            <ImpaktIcon cursor="pointer" width="111px" height="32px" />
           </Box>
           <HStack
             justify="flex-end"

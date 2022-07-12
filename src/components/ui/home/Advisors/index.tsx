@@ -11,8 +11,8 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import { Advisors } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import InvestorCard from '../PartnerAndInvestorHero/InvestorCard';
-import bgImage from '../../../../assets/images/bgadvvisors.png';
+import InvestorCard from '../Founders/InvestorCard';
+import Images from '../../../../assets/images';
 
 const Advisor = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -20,7 +20,7 @@ const Advisor = () => {
 
   return (
     <HeroLayout
-      bgImage={bgImage}
+      bgImage={Images.backgrounds.advisorsSectionBg}
       customPadding={{
         base: '16px',
         md: '32px',

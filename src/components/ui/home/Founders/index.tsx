@@ -11,7 +11,7 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import { Team } from 'data';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import TeamCard from '../PartnerAndInvestorHero/TeamCard';
+import TeamCard from './TeamCard';
 import bgImage from '../../../../assets/images/teambg.png';
 
 const Founder = () => {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { VStack } from '@chakra-ui/react';
-import Gradients from '../home/RoadmapHero/Gradients';
+import Gradients from '../../common/Gradients';
 
 interface MemberDashboardCardPropsI {
   isGradient?: boolean;
