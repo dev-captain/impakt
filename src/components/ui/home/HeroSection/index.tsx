@@ -156,7 +156,12 @@ export const HeroSection: React.FC = () => {
       <React.Suspense fallback={null}>
         <HeroVideo ref={heroVideoRef} />
       </React.Suspense>
-      <ScrollIconComponent isVisible={!isScrolling} zIndex="999999" position="fixed" left="48%" />
+      <ScrollIconComponent
+        isVisible={!isScrolling && !isLessThan1280}
+        zIndex="999999"
+        position="fixed"
+        left="48%"
+      />
       <Box
         display="flex"
         ref={heroVideoScreenRef}
