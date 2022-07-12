@@ -61,7 +61,7 @@ const EarnCrypto = () => {
 
               <Box id="earn-crypto-box">
                 <Text letterSpacing="-2.5px" textStyle="TitleBold64" color="#fff">
-                  {t(Keys.burnAndEarn.earn)}123
+                  {t(Keys.burnAndEarn.earn)}
                 </Text>
               </Box>
 

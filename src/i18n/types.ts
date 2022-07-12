@@ -6,6 +6,7 @@ const ourAdvisor = 'ourAdvisor';
 const impaktAdvisor = 'impaktAdvisor';
 const Founder = 'Founder';
 const ourTeam = 'ourTeam';
+const impaktIcons = 'impaktIcons';
 const navbar = 'navbar';
 const burnAndEarn = 'burnAndEarn';
 const impaktNFT = 'impaktNFT';
@@ -100,7 +101,14 @@ const TranslationKeys = {
     our: `${ourTeam}.our`,
     team: `${ourTeam}.team`,
   },
-
+  impaktIcons: {
+    influential: `${impaktIcons}.influential`,
+    Title: `${impaktIcons}.Title`,
+    description: `${impaktIcons}.description`,
+    twitter: `${impaktIcons}.twitter`,
+    tiktok: `${impaktIcons}.tiktok`,
+    instagram: `${impaktIcons}.instagram`,
+  },
   ourRoadmap: {
     our: `${ourRoadmap}.our`,
     roadmap: `${ourRoadmap}.roadmap`,

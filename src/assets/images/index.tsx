@@ -18,6 +18,7 @@ const Images = {
     Peter404: require('./peter404.png'),
     Window: require('./window.png'),
     Tiktok: require('./tiktok.png'),
+    TiktokDark: require('./TiktokDark.png'),
     Facebook: require('./Facebook.png'),
     Instagram: require('./Instagram.png'),
     FacebookDark: require('./FacebookDark.png'),
@@ -62,6 +63,13 @@ const Images = {
   contactUs: {
     discordPeter: require('./discordPeter.png'),
     hiPeter: require('./hiPeter.png'),
+  },
+  impaktIcons: {
+    MattFox: require('./Icons/MattFox.png'),
+    Icon1: require('./Icons/Icon1.png'),
+    Icon2: require('./Icons/Icon2.png'),
+    Icon3: require('./Icons/Icon3.png'),
+    UserIcon: require('./Icons/UserIcon.png'),
   },
 };
 

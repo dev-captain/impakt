@@ -24,7 +24,7 @@ const ImpaktCreed = () => {
           <HStack justifyContent="center" alignItems="flex-start" w="full">
             <SimpleGrid>
               <GridItem
-                w={{ base: '100%', sm: '100%', md: '548px', lg: '548px' }}
+                w={{ base: '100%', sm: '100%', md: '700px', lg: '700px' }}
                 margin="auto"
                 alignItems="center"
                 justifyContent="center"

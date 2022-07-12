@@ -127,11 +127,51 @@ export default {
     team: 'team',
   },
   impaktCreed: {
-    creed: 'creed',
-    creedLabel: 'The Impakt Creed',
+    creed: 'philosophy',
+    creedLabel: 'The Impakt Philosophy',
     description:
-      'Call us old-school, but we believe that you <b> build first and market later</b>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later. Our creed is: <b>provide value before asking for investment</b>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
+      'Call us old-school, but we believe that you <b> build first and market later</b>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later. Our philosophy is: <b>provide value before asking for investment</b>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
     description1: 'We are visionaries, we are innovators, <br /> we are builders. We are Impakt.',
+  },
+  impaktIcons: {
+    influential: 'Influential',
+    Title: 'Impakt ICONs',
+    twitter: 'Twitter',
+    tiktok: 'TikTok',
+    instagram: 'Instagram',
+    description:
+      'Fitness experts, Health Specialists, Athletes and overall Overachievers. They are our Impakt ICONs and we are honored to have them on board our journey!',
+    icons: [
+      {
+        name: 'Matt Fox',
+        title: '500k followers',
+        image: Images.impaktIcons.MattFox,
+        alt: '',
+        subtitle:
+          'The Godfather of Home Workouts! Fitness expert proud father, and cancer survivor!',
+      },
+      {
+        name: '???',
+        title: '1M+ followers',
+        image: Images.impaktIcons.Icon1,
+        alt: '',
+        subtitle: 'REVEALING...',
+      },
+      {
+        name: '???',
+        title: '???',
+        image: Images.impaktIcons.Icon2,
+        alt: '',
+        subtitle: 'REVEALING...',
+      },
+      {
+        name: '???',
+        title: '???',
+        image: Images.impaktIcons.Icon3,
+        alt: '',
+        subtitle: 'REVEALING...',
+      },
+    ],
   },
   ourRoadmap: {
     our: 'Our',
