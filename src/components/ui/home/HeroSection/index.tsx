@@ -133,7 +133,7 @@ export const HeroSection: React.FC = () => {
       <div ref={impaktGameHeroRef} id="impakt-game-hero">
         <SocialFitnessGamified />
       </div>
-      {isScrolling && (
+      {(isScrolling || isLessThan1280) && (
         <div id="impakt-your-body" ref={yourBodySectionRef}>
           <YourBody />
         </div>
@@ -142,36 +142,44 @@ export const HeroSection: React.FC = () => {
       <Box left="75vw" ref={exerciseCardRef} zIndex={99999} top={borderY + 100} position="absolute">
         <ExerciseCard />
       </Box>
-      <MirrorAndStarsVideo
-        id="starsvideo"
-        position="absolute"
-        left="49vw"
-        top={borderY}
-        ref={mirrorRef}
-        height="788px"
-        width="600px"
-      >
-        <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
-      </MirrorAndStarsVideo>
-      <React.Suspense fallback={null}>
-        <HeroVideo ref={heroVideoRef} />
-      </React.Suspense>
+      {!isLessThan1280 && (
+        <>
+          <MirrorAndStarsVideo
+            id="starsvideo"
+            position="absolute"
+            left="49vw"
+            top={borderY}
+            ref={mirrorRef}
+            height="788px"
+            width="600px"
+          >
+            <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
+          </MirrorAndStarsVideo>
+          <React.Suspense fallback={null}>
+            <HeroVideo ref={heroVideoRef} />
+          </React.Suspense>
+        </>
+      )}
       <ScrollIconComponent
         isVisible={!isScrolling && !isLessThan1280}
         zIndex="999999"
         position="fixed"
         left="48%"
       />
-      <Box
-        display="flex"
-        ref={heroVideoScreenRef}
-        w="717.1px"
-        zIndex="0"
-        position="absolute"
-        top={borderY + 210}
-      >
-        <img width="100%" height="100%" src={Images.Common.Window} alt="_" />
-      </Box>
+
+      {!isLessThan1280 && (
+        <Box
+          display="flex"
+          ref={heroVideoScreenRef}
+          w="717.1px"
+          zIndex="0"
+          position="absolute"
+          top={borderY + 210}
+        >
+          <img width="100%" height="100%" src={Images.Common.Window} alt="_" />
+        </Box>
+      )}
+      <></>
     </div>
   );
 };
