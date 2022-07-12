@@ -107,11 +107,11 @@ export const HeroSection: React.FC = () => {
   ]);
 
   React.useEffect(() => {
-    if (!isAnimated || isMovedToYourBodySection) {
+    if ((!isAnimated || isMovedToYourBodySection) && !isLessThan1280) {
       document.body.style.overflow = 'hidden';
     }
 
-    if (isMovedToYourBodySection) {
+    if (isMovedToYourBodySection || isLessThan1280) {
       document.body.style.overflow = 'unset';
     }
   }, [isAnimated, isMovedToYourBodySection]);
