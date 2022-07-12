@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { Box } from '@chakra-ui/react';
+import { Box, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
 
 import Images from '../../../../assets/images';
@@ -20,6 +20,7 @@ export const HeroSection: React.FC = () => {
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
   const isScrolled = React.useRef(false);
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = React.useState(false);
 
@@ -64,7 +65,8 @@ export const HeroSection: React.FC = () => {
     e.stopPropagation();
 
     if (isScrolled.current) return;
-    if (impaktGameHeroRef.current && isAnimated) {
+    if (!impaktGameHeroRef.current) return;
+    if (isAnimated || isLessThan1280) {
       isScrolled.current = true;
       window.scrollTo(0, impaktGameHeroRef.current.clientHeight - 100);
       setTimeout(() => {

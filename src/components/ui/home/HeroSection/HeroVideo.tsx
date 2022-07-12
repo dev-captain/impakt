@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
@@ -52,13 +53,14 @@ const HeroVideo = React.forwardRef<HTMLVideoElement>((_, ref) => {
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
   const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
     <Video
       x={borderX + 10}
       ref={ref}
       y={borderY + 260}
-      isAnimated={isAnimated}
+      isAnimated={isLessThan1280 || isAnimated}
       onWheel={() => {
         if (!isScrolling) {
           dispatch(setIsScrolling());
@@ -67,7 +69,7 @@ const HeroVideo = React.forwardRef<HTMLVideoElement>((_, ref) => {
           }, 1000);
         }
       }}
-      isScrolling={isScrolling && !isAnimated}
+      isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
       autoPlay
       loop
       muted

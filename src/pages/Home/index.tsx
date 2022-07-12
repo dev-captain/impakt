@@ -1,4 +1,4 @@
-import { Box, Text, Container } from '@chakra-ui/react';
+import { Box, Text, Container, useMediaQuery } from '@chakra-ui/react';
 import {
   ImpaktNFT,
   Advisor,
@@ -16,9 +16,11 @@ const HomePage = () => {
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const isVideoLoaded = useAppSelector((state) => state.stateReducer.heroVideo.isLoaded);
 
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
+
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      {!isVideoLoaded && (
+      {!isVideoLoaded && !isLessThan1280 && (
         <Box
           bgColor="#000"
           top="0"
@@ -50,7 +52,7 @@ const HomePage = () => {
       />
       <HeroSection />
 
-      {isAnimated && (
+      {(isAnimated || isLessThan1280) && (
         <>
           <div>
             <EarnCrypto />
