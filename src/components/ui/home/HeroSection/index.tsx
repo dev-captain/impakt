@@ -89,7 +89,7 @@ export const HeroSection: React.FC = () => {
       ) {
         mirrorRef.current.style.top = `${window.scrollY + 100}px`;
         heroVideoRef.current.style.top = `${window.scrollY + 100 + 260}px`;
-        heroVideoScreenRef.current.style.top = `${window.scrollY + 100 + 210}px`;
+        heroVideoScreenRef.current.style.top = `${window.scrollY + 100 + 232}px`;
         exerciseCardRef.current.style.top = `${window.scrollY + 200}px`;
       }
     }
@@ -118,7 +118,7 @@ export const HeroSection: React.FC = () => {
 
   React.useEffect(() => {
     if (mirrorRef.current && heroVideoScreenRef.current && exerciseCardRef.current) {
-      heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft}px`;
+      heroVideoScreenRef.current.style.left = `${mirrorRef.current.offsetLeft + 40}px`;
       exerciseCardRef.current.style.left = `${mirrorRef.current.offsetLeft + 500}px`;
       dispatch(setBorderX({ borderX: mirrorRef.current.offsetLeft }));
     }
@@ -148,7 +148,7 @@ export const HeroSection: React.FC = () => {
         left="49vw"
         top={borderY}
         ref={mirrorRef}
-        height="788px"
+        height="72.962962962963vh"
         width="600px"
       >
         <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
@@ -165,10 +165,11 @@ export const HeroSection: React.FC = () => {
       <Box
         display="flex"
         ref={heroVideoScreenRef}
-        w="717.1px"
+        w="640px"
+        h="380px"
         zIndex="0"
         position="absolute"
-        top={borderY + 210}
+        top={borderY + 232}
       >
         <img width="100%" height="100%" src={Images.Common.Window} alt="_" />
       </Box>
