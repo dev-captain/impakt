@@ -126,7 +126,7 @@ export const HeroSection: React.FC = () => {
 
   return (
     <div
-      onWheel={(e) => moveToYourBodySection(e)}
+      onWheel={(e) => (isLessThan1280 ? null : moveToYourBodySection(e))}
       style={{ backgroundColor: '#121117', position: 'relative' }}
       id="stick"
     >
