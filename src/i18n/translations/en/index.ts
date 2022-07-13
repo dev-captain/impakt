@@ -101,15 +101,18 @@ export default {
         image: Images.team.demideus,
         alt: '',
         subtitle:
-          '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.\nPrevious 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
+          '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.',
+        subtitle1:
+          'Previous 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
       },
       {
         name: 'Valtec',
         title: 'President',
         image: Images.team.valtec,
         alt: '',
-        subtitle:
-          ' <span style="color:#FFF;">10+ years</span> of building technology companies.\nPrevious roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
+        subtitle: ' <span style="color:#FFF;">10+ years</span> of building technology companies.',
+        subtitle1:
+          'Previous roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
       },
       {
         name: 'Dahaka',
@@ -117,7 +120,9 @@ export default {
         image: Images.team.dahaka,
         alt: '',
         subtitle:
-          ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.\nManaging a team of <span style="color:#FFF;">20+</span> engineers & product managers',
+          ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.',
+        subtitle1:
+          'Managing a team of <span style="color:#FFF;">20+</span> engineers & product managers',
       },
     ],
   },

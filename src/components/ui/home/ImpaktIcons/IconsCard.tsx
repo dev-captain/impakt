@@ -82,6 +82,7 @@ const IconsCard = ({
               src={image}
               boxSizing="border-box"
               borderRadius="24px"
+              sx={{ filter: name !== '???' ? 'blur(4px)' : 'blur(0px)' }}
             />
             {name === '???' && (
               <Image
@@ -107,6 +108,7 @@ const IconsCard = ({
           pb="5px"
           align="center"
           color={name === '???' ? 'rgba(255,255,255,0.4)' : '#FFF'}
+          sx={{ filter: name !== '???' ? 'blur(4px)' : 'blur(0px)' }}
         >
           {name}
         </Text>
@@ -132,7 +134,8 @@ const IconsCard = ({
         mb="10px !important"
       >
         {name !== '???' ? (
-          <Box position="relative" data-group>
+          // <Box position="relative" data-group> // To allow the flip feature
+          <Box position="relative">
             <Box
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
@@ -158,6 +161,7 @@ const IconsCard = ({
                 color="rgba(255, 255, 255, 0.75)"
                 whiteSpace="pre-line"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
+                sx={{ filter: name !== '???' ? 'blur(4px)' : 'blur(0px)' }}
               />
             </Box>
             <Box
