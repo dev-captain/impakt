@@ -34,7 +34,6 @@ const ImpaktFooter = () => {
 
   return (
     <HeroLayout
-      showNavbar
       pos="relative"
       bgColor="#09090B"
       align="center"

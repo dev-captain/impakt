@@ -135,7 +135,9 @@ export default {
     creed: 'philosophy',
     creedLabel: 'The Impakt Philosophy',
     description:
-      'Call us old-school, but we believe that you <b> build first and market later</b>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later. Our philosophy is: <b>provide value before asking for investment</b>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
+      'Call us old-school, but we believe that you <b> build first and market later</b>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later.',
+    description2:
+      'Our philosophy is: <b>provide value before asking for investment</b>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
     description1: 'We are visionaries, we are innovators, <br /> we are builders. We are Impakt.',
   },
   impaktIcons: {

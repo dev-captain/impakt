@@ -12,7 +12,7 @@ const ImpaktCreed = () => {
   const { t } = useTranslation(`default`).i18n;
   return (
     <HeroLayout
-      showNavbar
+      // showNavbar
       pos="relative"
       bgImage={Images.backgrounds.creedSectionBg}
       align="flex-start"
@@ -32,7 +32,7 @@ const ImpaktCreed = () => {
               >
                 <VStack
                   w="full"
-                  padding={{ base: '0px 10px', md: '0px 40px', lg: '0px' }}
+                  padding={{ base: '0px 16px', md: '0px 40px', lg: '0px' }}
                   rowGap="24px"
                   display="block"
                 >
@@ -42,7 +42,11 @@ const ImpaktCreed = () => {
                     </Text>
                   </Box>
                   <Box mt="0 !important" mb="24px !important">
-                    <Text color="white" letterSpacing="-2.5px" textStyle="TitleBold64">
+                    <Text
+                      color="white"
+                      letterSpacing="-2.5px"
+                      textStyle={{ base: 'TitleBold48', sm: 'TitleBold64', md: 'TitleBold64' }}
+                    >
                       {t(Keys.impaktCreed.creedLabel)}
                     </Text>
                   </Box>
@@ -55,9 +59,18 @@ const ImpaktCreed = () => {
                     <Text
                       color="rgba(255, 255, 255, 0.85);"
                       fontSize="20px"
-                      textStyle="regular20"
+                      textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
                       dangerouslySetInnerHTML={{
                         __html: t(Keys.impaktCreed.description),
+                      }}
+                    />
+                    <Text
+                      marginTop="4px"
+                      color="rgba(255, 255, 255, 0.85);"
+                      fontSize="20px"
+                      textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
+                      dangerouslySetInnerHTML={{
+                        __html: t(Keys.impaktCreed.description2),
                       }}
                     />
                   </Box>
@@ -65,7 +78,7 @@ const ImpaktCreed = () => {
                     <InfoCard LeftLogo={<RichIconK />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text
-                          textStyle="regular20"
+                          textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
                           color="rgba(255, 255, 255, 0.75);"
                           dangerouslySetInnerHTML={{
                             __html: t(Keys.impaktCreed.description1),

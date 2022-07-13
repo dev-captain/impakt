@@ -46,7 +46,7 @@ const IconsCard = ({
       pl="24px"
       pr="24px"
       pb="24px"
-      w="288px"
+      width={{ base: '343px', sm: '288px', md: '288px' }}
       h="422px"
       align="center"
       transitionDuration="150ms"
@@ -82,7 +82,7 @@ const IconsCard = ({
               src={image}
               boxSizing="border-box"
               borderRadius="24px"
-              sx={{ filter: name !== '???' ? 'blur(4px)' : 'blur(0px)' }}
+              sx={{ filter: name !== '???' ? 'blur(7px)' : 'blur(0px)' }}
             />
             {name === '???' && (
               <Image
@@ -108,7 +108,7 @@ const IconsCard = ({
           pb="5px"
           align="center"
           color={name === '???' ? 'rgba(255,255,255,0.4)' : '#FFF'}
-          sx={{ filter: name !== '???' ? 'blur(4px)' : 'blur(0px)' }}
+          sx={{ filter: name !== '???' ? 'blur(7px)' : 'blur(0px)' }}
         >
           {name}
         </Text>
@@ -135,12 +135,11 @@ const IconsCard = ({
       >
         {name !== '???' ? (
           // <Box position="relative" data-group> // To allow the flip feature
-          <Box position="relative">
+          <Box position="relative" w="100%">
             <Box
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
               w="100%"
-              minW="240"
               border="2px solid rgba(255, 255, 255, 0.04)"
               transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
               transform="rotateX(0deg)"
@@ -264,12 +263,11 @@ const IconsCard = ({
             </Box>
           </Box>
         ) : (
-          <Box position="relative">
+          <Box position="relative" w="100%">
             <Box
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
               w="100%"
-              minW="240"
               border="2px solid rgba(255, 255, 255, 0.04)"
               transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
               transform="rotateX(0deg)"

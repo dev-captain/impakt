@@ -83,6 +83,7 @@ const TranslationKeys = {
     creed: `${impaktCreed}.creed`,
     creedLabel: `${impaktCreed}.creedLabel`,
     description: `${impaktCreed}.description`,
+    description2: `${impaktCreed}.description2`,
     description1: `${impaktCreed}.description1`,
   },
   ourAdvisor: {

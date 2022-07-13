@@ -12,6 +12,7 @@ type HeroLayoutProps = {
   addSpacer?: boolean;
   pos?: string;
   minH?: string;
+
   showFooter?: boolean;
   customPadding?: string | any;
   removeBottomPadding?: boolean;
@@ -33,6 +34,7 @@ const HeroLayout = ({
   justify = 'center',
   showNavbar = false,
   addSpacer = false,
+
   showDarkOrLightModeButton = true,
   pos,
 }: HeroLayoutProps) => {
@@ -59,7 +61,7 @@ const HeroLayout = ({
           backgroundImage={bgImage}
           backgroundColor={bgColor || backgroundColor}
           backgroundPosition={{ base: 'top', md: 'bottom' }}
-          paddingTop={showNavbar ? '100px' : '0px'}
+          paddingTop="100px"
           paddingBottom={
             customPadding || {
               base: removeBottomPadding ? 0 : '60px',

@@ -21,20 +21,20 @@ const Founder = () => {
   Team = t('Founder.team', { returnObjects: true });
   return (
     <HeroLayout
+      // showNavbar
       bgImage={bgImage}
       customPadding={{
         base: '16px',
         md: '32px',
-        xl: '0px',
+        xl: '100px',
         '2xl': '0px',
       }}
       minH="70vh"
     >
       <VStack
         spacing="0px"
-        py="64px"
         px="16px"
-        maxW={{ base: '100%', lg: '1200px' }}
+        maxW={{ base: '100%', lg: '1232px' }}
         w="full"
         color={textColor}
       >
@@ -43,7 +43,7 @@ const Founder = () => {
             spacing="24px"
             align={{ base: 'flex-start', md: 'auto' }}
             justifyContent="center"
-            maxW={{ base: '100%', lg: '1200px' }}
+            maxW={{ base: '100%', lg: '1232px' }}
             pb="16px"
           >
             <VStack
@@ -57,7 +57,7 @@ const Founder = () => {
               </Text>
             </VStack>
             <VStack
-              width={{ base: '100%', lg: '100%', xl: '1200px' }}
+              width={{ base: '100%', lg: '100%', xl: '1232px' }}
               textAlign="center"
               spacing={5}
               justify={{ base: 'center', md: 'center' }}
@@ -74,7 +74,7 @@ const Founder = () => {
               alignContent="center"
               alignItems="center"
               columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
-              rowGap={{ base: '100px', sm: '100px', md: '100px', xl: '24px' }}
+              rowGap={{ base: '99px', sm: '99px', md: '115px', xl: '16px' }}
             >
               {Team.map((advisor: any) => {
                 return (

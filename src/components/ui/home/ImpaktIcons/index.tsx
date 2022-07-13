@@ -32,9 +32,8 @@ const ImpaktIcons = () => {
     >
       <VStack
         spacing="0px"
-        pb="64px"
         px="16px"
-        maxW={{ base: '100%', lg: '1200px' }}
+        maxW={{ base: '100%', lg: '1232px' }}
         w="full"
         color={textColor}
       >
@@ -43,7 +42,7 @@ const ImpaktIcons = () => {
             spacing="24px"
             align={{ base: 'flex-start', md: 'auto' }}
             justifyContent="center"
-            maxW={{ base: '100%', lg: '1200px' }}
+            maxW={{ base: '100%', lg: '1232px' }}
             pb="16px"
           >
             <VStack
@@ -57,7 +56,7 @@ const ImpaktIcons = () => {
               </Text>
             </VStack>
             <VStack
-              width={{ base: '100%', lg: '100%', xl: '1200px' }}
+              width={{ base: '100%', lg: '100%', xl: '1232px' }}
               textAlign="center"
               spacing={5}
               justify={{ base: 'center', md: 'center' }}
@@ -70,13 +69,15 @@ const ImpaktIcons = () => {
             <VStack
               width={{ base: '100%', lg: '100%' }}
               textAlign="center"
-              spacing={5}
               justify={{ base: 'center', md: 'center' }}
-              mt={{ base: 0, md: 0, xl: '24px' }}
+              mt={{ base: '8px !important', md: '8px', xl: '24px' }}
               mb="72px !important"
             >
               <Box maxW={{ base: '100%', lg: '600px' }}>
-                <Text textStyle="regular18" color="rgba(255, 255, 255, 0.75);">
+                <Text
+                  textStyle={{ base: 'regular16', md: 'regular18' }}
+                  color="rgba(255, 255, 255, 0.75);"
+                >
                   {t(keys.impaktIcons.description)}
                 </Text>
               </Box>
@@ -87,7 +88,7 @@ const ImpaktIcons = () => {
               alignContent="center"
               alignItems="center"
               columnGap={{ base: '8px', sm: '16px', md: '16px ', xl: '100px' }}
-              rowGap={{ base: '115px', sm: '115px', md: '115px', xl: '16px' }}
+              rowGap={{ base: '99px', sm: '99px', md: '115px', xl: '16px' }}
             >
               {Icons.map((icon: any) => {
                 return (

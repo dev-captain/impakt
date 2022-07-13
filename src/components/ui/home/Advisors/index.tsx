@@ -35,7 +35,7 @@ const Advisor = () => {
       <VStack
         spacing="0px"
         px="16px"
-        maxW={{ base: '100%', lg: '1200px' }}
+        maxW={{ base: '100%', lg: '1232px' }}
         w="full"
         color={textColor}
       >
@@ -44,7 +44,7 @@ const Advisor = () => {
             spacing="24px"
             align={{ base: 'flex-start', md: 'auto' }}
             justifyContent="center"
-            maxW={{ base: '100%', lg: '1200px' }}
+            maxW={{ base: '100%', lg: '1232px' }}
             pb="16px"
           >
             <VStack
@@ -58,7 +58,7 @@ const Advisor = () => {
               </Text>
             </VStack>
             <VStack
-              width={{ base: '100%', lg: '100%', xl: '1200px' }}
+              width={{ base: '100%', lg: '100%', xl: '1232px' }}
               textAlign="center"
               spacing={5}
               justify={{ base: 'center', md: 'center' }}
@@ -66,7 +66,12 @@ const Advisor = () => {
               mb="72px !important"
             >
               <Box maxW={{ base: '100%', lg: '800px' }}>
-                <Text textStyle="TitleBold48">{t(keys.impaktAdvisor.Title)}</Text>
+                <Text
+                  textStyle={{ base: 'bold5', md: 'TitleBold48' }}
+                  letterSpacing={{ base: '-0.5px', md: 'auto' }}
+                >
+                  {t(keys.impaktAdvisor.Title)}
+                </Text>
               </Box>
             </VStack>
             <SimpleGrid
@@ -75,11 +80,11 @@ const Advisor = () => {
               alignContent="center"
               alignItems="center"
               columnGap={{ base: '8px', sm: '16px', md: '50px !important', xl: '24px' }}
-              rowGap={{ base: '100px', sm: '100px', md: '100px', xl: '24px' }}
+              rowGap={{ base: '99px', sm: '99px', md: '115px', xl: '16px' }}
             >
               {Advisors.map((advisor: any) => (
                 <GridItem key={advisor.name} w="full">
-                  <HStack w="full" align="center" justify="center">
+                  <HStack w={{ base: '100%', md: 'full' }} align="center" justify="center">
                     <InvestorCard {...advisor} />
                   </HStack>
                 </GridItem>

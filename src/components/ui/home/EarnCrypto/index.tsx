@@ -16,7 +16,7 @@ const EarnCrypto = () => {
   return (
     <HeroLayout
       customPadding={0}
-      showNavbar
+      // showNavbar
       pos="relative"
       bgImage={bgImage}
       align="flex-start"

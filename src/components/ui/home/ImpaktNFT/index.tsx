@@ -28,7 +28,7 @@ const ImpaktNFT = () => {
 
   return (
     <HeroLayout
-      showNavbar
+      // showNavbar
       spacing={10}
       pos="relative"
       bgImage={bgImage}
@@ -51,7 +51,7 @@ const ImpaktNFT = () => {
               >
                 <VStack
                   w="full"
-                  padding={{ base: '0px 10px', md: '0px 40px', lg: '0px' }}
+                  padding={{ base: '0px 16px', md: '0px 40px', lg: '0px' }}
                   rowGap="24px"
                   justifyContent="flex-start"
                   alignItems="flex-start"
@@ -62,44 +62,42 @@ const ImpaktNFT = () => {
                     </Text>
                   </Box>
                   <Box mt="0 !important">
-                    <Text color="white" letterSpacing="-1.5px" textStyle="TitleBold48">
+                    <Text
+                      color="white"
+                      letterSpacing="-1.5px"
+                      textStyle={{ base: 'bold5', md: 'TitleBold48' }}
+                    >
                       {t(Keys.impaktNFT.impaktlabel)}
-                      <Text
-                        display="inline-block"
-                        letterSpacing="-1.5px"
-                        textStyle="TitleBold48"
-                        className="gradient-text"
-                      >
+                      <Text display="inline-block" letterSpacing="-1.5px" className="gradient-text">
                         {t(Keys.impaktNFT.impaktChris)}
                       </Text>
                     </Text>
                   </Box>
-                  <Box
-                    ml="7px !important"
-                    mt="0 !important"
-                    id="hero-headline-description"
-                    backgroundClip="text"
-                  >
-                    <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular18">
+                  <Box mt="0 !important" id="hero-headline-description" backgroundClip="text">
+                    <Text
+                      color="rgba(255, 255, 255, 0.85);"
+                      textStyle={{ base: 'semiBold5', md: 'regular18' }}
+                    >
                       {t(Keys.impaktNFT.description)}
                     </Text>
                   </Box>
-                  <Box ml="7px !important" mt="0 !important" w="full" id="hero-info-card-box">
+                  <Box mt="0 !important" w="full" id="hero-info-card-box">
                     <InfoCard LeftLogo={<RichIcon />}>
                       <VStack alignItems="flex-start" color="white">
-                        <Text textStyle="regular18" color="rgba(255, 255, 255, 0.75);">
+                        <Text
+                          textStyle={{ base: 'semiBold5', md: 'regular18' }}
+                          color="rgba(255, 255, 255, 0.75);"
+                        >
                           {t(Keys.impaktNFT.description1)}
                         </Text>
                       </VStack>
                     </InfoCard>
                   </Box>
-                  <Box
-                    ml="7px !important"
-                    mt="0 !important"
-                    id="hero-headline-description"
-                    backgroundClip="text"
-                  >
-                    <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular18">
+                  <Box mt="0 !important" id="hero-headline-description" backgroundClip="text">
+                    <Text
+                      color="rgba(255, 255, 255, 0.85);"
+                      textStyle={{ base: 'semiBold5', md: 'regular18' }}
+                    >
                       {t(Keys.impaktNFT.careerdescription)}
                       <Text color="gold" as="a" target="_blank" href="#">
                         {t(Keys.impaktNFT.careerdescription1)}
@@ -109,7 +107,13 @@ const ImpaktNFT = () => {
                 </VStack>
               </GridItem>
               <GridItem w="full" alignItems="center" justifyContent="center" display="flex">
-                <VStack w="full" rowGap="24px" justifyContent="flex-start" alignItems="flex-start">
+                <VStack
+                  padding={{ base: '0px 16px', md: '0px 40px', lg: '0px' }}
+                  w="full"
+                  rowGap="24px"
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
+                >
                   <Box
                     position={{ base: 'static', lg: 'absolute' }}
                     top="85px"
