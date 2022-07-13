@@ -32,10 +32,10 @@ const stateSlice = createSlice({
       state.heroVideo.isAnimated = !state.heroVideo.isAnimated;
     },
     setBorderX: (state: InitialStateI, action: PayloadAction<{ borderX: number }>) => {
-      state.heroVideo.borderX = action.payload.borderX + 30;
+      state.heroVideo.borderX = action.payload.borderX;
     },
     setBorderY: (state: InitialStateI, action: PayloadAction<{ borderY: number }>) => {
-      state.heroVideo.borderY = action.payload.borderY + 248;
+      state.heroVideo.borderY = action.payload.borderY;
     },
 
     setIsLoaded: (state: InitialStateI, action: PayloadAction<boolean>) => {

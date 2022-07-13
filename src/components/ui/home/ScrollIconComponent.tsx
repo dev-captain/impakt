@@ -35,10 +35,12 @@ const ScrollIconComponent: React.FC<{
   left: string;
   position: string;
   zIndex: string;
-}> = ({ isVisible, left, position, zIndex }) => {
+  width?: string;
+  height?: string;
+}> = ({ isVisible, left, position, zIndex, width, height }) => {
   return (
     <Box isVisible={isVisible} left={left} zIndex={zIndex} position={position}>
-      <ScrollIcon />
+      <ScrollIcon width={width} height={height} />
     </Box>
   );
 };

@@ -7,7 +7,7 @@ import Images from 'assets/images';
 import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
 
-const SocialFitnessGamified: React.FC = () => {
+const SocialFitnessGamified: React.FC = ({ children }) => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
 
   return (
@@ -20,12 +20,30 @@ const SocialFitnessGamified: React.FC = () => {
       justify="flex-start"
     >
       <VStack w="full">
-        <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
-          <HStack marginTop="96px" columnGap="48px" alignItems="flex-start" w="full">
-            <VStack w="full" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
+        <VStack
+          paddingX={{ base: '1em', lg: '0' }}
+          id="general"
+          maxW={{ base: '100%', lg: '1200px' }}
+          w="full"
+        >
+          <HStack
+            flexDir={{ base: 'column', lg: 'row' }}
+            marginTop={{ base: '33px', lg: '96px' }}
+            columnGap="48px"
+            rowGap="48px"
+            alignItems="flex-start"
+            w="full"
+          >
+            <VStack
+              w="full"
+              rowGap="32px"
+              justifyContent={{ base: 'center', lg: 'flex-start' }}
+              alignItems={{ base: 'center', lg: 'flex-start' }}
+            >
               <Box
                 id="hero-headline-box"
                 backgroundClip="text"
+                textAlign={{ base: 'center', lg: 'unset' }}
                 css={{
                   '-webkit-background-clip': 'text',
                   '-webkit-text-fill-color': 'transparent',
@@ -71,9 +89,7 @@ const SocialFitnessGamified: React.FC = () => {
                 </InfoCard>
               </Box>
             </VStack>
-            <HStack id="right" w="full">
-              <Box />
-            </HStack>
+            {children}
           </HStack>
         </VStack>
       </VStack>

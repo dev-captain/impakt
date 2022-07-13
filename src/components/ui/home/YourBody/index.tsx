@@ -7,7 +7,7 @@ import InfoCard from '../../../core/InfoCard';
 import YoutubeIcon from '../../../icons/YoutubeIcon';
 import RichIcon2 from '../../../icons/RichIcon2';
 
-const YourBody: React.FC = () => {
+const YourBody: React.FC = ({ children }) => {
   return (
     <HeroLayout
       spacing={0}
@@ -17,9 +17,24 @@ const YourBody: React.FC = () => {
       justify="flex-start"
     >
       <VStack w="full">
-        <VStack id="general" maxW={{ base: '100%', lg: '1200px' }} w="full">
-          <HStack columnGap="48px" alignItems="flex-start" w="full">
-            <VStack w="80%" rowGap="32px" justifyContent="flex-start" alignItems="flex-start">
+        <VStack
+          id="general"
+          paddingX={{ base: '1em', lg: '0' }}
+          maxW={{ base: '100%', lg: '1200px' }}
+          w="full"
+        >
+          <HStack
+            flexDir={{ base: 'column', lg: 'row' }}
+            columnGap="48px"
+            alignItems="flex-start"
+            w="full"
+          >
+            <VStack
+              w={{ base: '100%', lg: '80%' }}
+              rowGap="32px"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+            >
               <Box id="our-ai-card-box" w="full">
                 <InfoCard LeftLogo={<RichIcon2 />}>
                   <VStack alignItems="flex-start" color="white">
@@ -50,7 +65,7 @@ const YourBody: React.FC = () => {
                 </Text>
               </Box>
 
-              <Box id="get-the-bonus-box" w="full">
+              <Box display={{ base: 'none', lg: 'unset' }} id="get-the-bonus-box" w="full">
                 <InfoCard
                   tooltipLabel="GODL is our in-game currency!
                   You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!"
@@ -69,9 +84,7 @@ const YourBody: React.FC = () => {
                 </InfoCard>
               </Box>
             </VStack>
-            <HStack id="right" w="full">
-              <Box />
-            </HStack>
+            {children}
           </HStack>
         </VStack>
       </VStack>
