@@ -1,7 +1,6 @@
 import { Text, VStack, Box } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SelectedNavbarLinkBorder from './SelectedNavbarLinkBorder';
 
 type Props = {
   href: string;
@@ -36,7 +35,8 @@ const NavbarLinkItem = ({
           href={href}
           _hover={{
             transition: '0.2s ease',
-            transform: 'scale(1.15)',
+            opacity: 1,
+            // transform: 'scale(1.15)',
           }}
         >
           <Text
@@ -45,6 +45,10 @@ const NavbarLinkItem = ({
             fontWeight={isActive ? '600' : 'normal'}
             color={isActive ? color : passiveColor}
             opacity={isActive ? 1 : 0.6}
+            _hover={{
+              opacity: 'inherit',
+              transition: 'inherit',
+            }}
           >
             {title}
           </Text>
@@ -61,7 +65,8 @@ const NavbarLinkItem = ({
           as={target === '_blank' ? 'a' : 'div'}
           _hover={{
             transition: '0.2s ease',
-            transform: 'scale(1.15)',
+            opacity: 1,
+            // transform: 'scale(1.15)',
           }}
         >
           <Text
@@ -70,12 +75,16 @@ const NavbarLinkItem = ({
             fontWeight={isActive ? '600' : 'normal'}
             color={isActive ? color : passiveColor}
             opacity={isActive ? 1 : 0.6}
+            _hover={{
+              opacity: 'inherit',
+              transition: 'inherit',
+            }}
           >
             {title}
           </Text>
         </Box>
       )}
-      {isActive && !hide && <SelectedNavbarLinkBorder />}
+      {isActive && !hide}
     </VStack>
   );
 };

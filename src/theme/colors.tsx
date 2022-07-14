@@ -6,7 +6,9 @@ export default {
   },
   accentR1: '#DC143C',
   accentR2: '#B22222',
+  gold: '#FEC417',
   accentRed: 'linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)',
+  accentRed2: 'linear-gradient(180deg, #F04153 0%, #F91F35 100%)',
   accentGreen: '#40DC1A',
   accentBlackGradient: 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)',
   bg: {

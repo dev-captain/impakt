@@ -2,7 +2,7 @@ import { Spinner, Text, VStack } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import { Widget } from '@typeform/embed-react';
 import useOnboardingCode from 'hooks/useOnboardingCode';
-import { GradientEllipse } from 'components/ui/home/RoadmapHero/Gradients';
+import { GradientEllipse } from 'components/common/Gradients';
 import { layoutPadding } from 'theme';
 import Container from './component/Container';
 

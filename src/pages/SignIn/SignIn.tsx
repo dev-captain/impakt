@@ -48,7 +48,7 @@ const SignIn = () => {
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const navigate = useNavigate();
   const { t } = useTranslation().i18n;
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.backgrounds.defaultBg, Images.backgrounds.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
@@ -71,50 +71,57 @@ const SignIn = () => {
     try {
       const request = await dispatch(
         requestAccessToken({
-          discoursePayload: queryString.DiscoursePayload,
-          discourseSig: queryString.DiscourseSig,
+          discoursePayload: queryString.sso,
+          discourseSig: queryString.sig,
         }),
       ).unwrap();
 
       if (request.discourseRedirectUrl === undefined) {
-        return toast({
+        toast({
           title: 'Error',
           description: ' "Something went wrong...',
           isClosable: false,
           duration: 2000,
           status: 'error',
         });
+
+        return undefined;
       }
 
-      return toast({
+      toast({
         title: 'Success',
         description: ' "Redirecting to forums..',
         isClosable: false,
         duration: 2000,
         status: 'success',
       });
+
+      return request.discourseRedirectUrl;
     } catch (error: any) {
       return null;
     }
   }, []);
 
   useEffect(() => {
-    if (member?.discourseRedirectUrl) {
-      window.location.href = member.discourseRedirectUrl;
+    if (member) {
+      if (queryString.DiscourseConnect) {
+        if (requestAccessTokenAttemp === 0) {
+          const request = requestAccessTokenAsync();
+          request.then((res) => {
+            if (res) {
+              window.location.href = res;
+            }
+          });
 
-      return;
-    }
+          return;
+        }
+      }
 
-    if (member && queryString.DiscourseConnect) {
-      if (requestAccessTokenAttemp !== 1) {
-        requestAccessTokenAsync();
-
-        return;
+      if (requestAccessTokenAttemp === 0) {
+        navigate('/dashboard');
       }
     }
-
-    if (member) navigate('/dashboard');
-  }, [member]);
+  }, [member, requestAccessTokenAttemp]);
 
   React.useEffect(() => {
     register('email');

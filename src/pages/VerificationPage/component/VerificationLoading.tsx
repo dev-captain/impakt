@@ -18,7 +18,7 @@ const VerificationLoading: React.FC = () => {
     '2xl': false,
   });
 
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.backgrounds.defaultBg, Images.backgrounds.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
 

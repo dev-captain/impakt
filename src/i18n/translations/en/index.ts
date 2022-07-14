@@ -15,12 +15,13 @@ export default {
   navbar: {
     events: 'Events',
     contactUs: 'Contact Us',
-    impaktFitness: 'Impakt Fitness',
+    impaktFitness: 'Fitness',
     knowledgeBase: 'Knowledge Base',
-    download: 'Download Platform',
+    download: 'Download',
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
     signIn: 'Sign in',
+    termsOfUse: 'Terms of Use',
   },
   computerVision: {
     computerVision: 'Computer vision',
@@ -38,9 +39,23 @@ export default {
     our: 'Our',
     advisor: 'advisors',
   },
+  ourAdvisorTitle: {
+    adviser: 'ADVISORS',
+    Title: 'Advised by some of the best disruptive minds in the industry',
+  },
+  Founder: {
+    builders: 'IMPAKT BUILDERS',
+    Title: 'The Founders',
+  },
   ourTeam: {
     our: 'Leadership',
     team: 'team',
+  },
+  impaktCreed: {
+    creed: 'CREED',
+    Title: 'The Impakt Creed',
+    description:
+      'Call us old-school, but we believe that you <strong>build first and market later</strong>. Many projects do it backwards: sell-out an NFT collection, get 1000 ETH, build later. Our creed is: <strong>provide value before asking for investment</strong>. That&apos;s why even before seeking institutional investment or even taking a penny from the community, we had our Beta app out.',
   },
   ourRoadmap: {
     our: 'Our',
@@ -79,10 +94,12 @@ export default {
     discordSupport: 'Discord Support',
   },
   footer: {
-    madeBy: 'Made by',
+    madeBy: 'Made by Impakt.',
     termOfUse: 'Term of Use',
-    allRightReserved: '© 2021 Impakt. All rights reserved.',
+    allRightReserved: '© 2022 Impakt. All rights reserved.',
+    downloadApp: 'Download App',
   },
+
   password: {
     new: 'New',
     recovery: 'Recover',

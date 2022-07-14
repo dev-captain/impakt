@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'i18n';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   Home,
   KnowledgeBase,
@@ -19,30 +20,24 @@ import {
 import MemberDashboard from './pages/MemberDashBoard';
 import SignIn from './pages/SignIn/SignIn';
 import Authentication from './middlewares/Authentication';
+import ScrollToTop from './components/core/ScrollToTop';
 
 const App = () => {
   const { setColorMode } = useColorMode();
-  const [scroll, setScroll] = useState(false);
+  const location = useLocation();
 
-  const handleScroll = () => {
-    setScroll(window.scrollY > 50);
-    document.body.classList.add('scroll');
-
-    return scroll;
+  const onRouteChanged = () => {
+    // force overflow unset if it's hidden on other then / page
+    if (location.pathname !== '/') {
+      if (document.body.style.overflow === 'hidden') {
+        document.body.style.overflow = 'unset';
+      }
+    }
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    const timeout = setTimeout(() => {
-      setScroll(false);
-      document.body.classList.remove('scroll');
-    }, 100);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeout);
-    };
-  }, [handleScroll]);
+    onRouteChanged();
+  }, [location]);
 
   useEffect(() => {
     setColorMode('light');
@@ -50,7 +45,14 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <ScrollToTop>
+            <Home />
+          </ScrollToTop>
+        }
+      />
 
       <Route path="/knowledge-base" element={<KnowledgeBase />}>
         <Route path=":article" element={<KnowledgeBase />} />

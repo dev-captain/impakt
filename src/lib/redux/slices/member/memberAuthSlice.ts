@@ -108,10 +108,8 @@ const memberAuthSlice = createSlice({
       })
       .addCase(requestAccessToken.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.requestAccessTokenAttemptCount += 1;
         state.member = action.payload;
-        if (action.payload.discourseRedirectUrl === undefined) {
-          state.requestAccessTokenAttemptCount = 1;
-        }
       })
       .addCase(requestAccessToken.rejected, (state) => {
         state.isLoading = false;
