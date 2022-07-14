@@ -1,5 +1,6 @@
-import { useMediaQuery, Box, HStack } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import * as React from 'react';
+
 import Images from '../../../../assets/images';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
 import useAppSelector from '../../../../hooks/useAppSelector';
@@ -13,7 +14,6 @@ import SocialFitnessGamified from './SocialFitnessGamified';
 
 export const HeroDesktop: React.FC = () => {
   const dispatch = useAppDispatch();
-  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
   const isScrolled = React.useRef(false);
