@@ -146,6 +146,11 @@ export default {
     fontWeight: '400',
     lineHeight: '16px',
   },
+  semiBold12: {
+    fontSize: '14px',
+    fontWeight: '500',
+    lineHeight: '12px',
+  },
   semiBold14: {
     fontSize: '14px',
     fontWeight: '500',

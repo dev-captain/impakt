@@ -1,4 +1,4 @@
-import { Box, HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Box, HStack, Text, useColorModeValue, useMediaQuery, VStack } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
@@ -12,6 +12,7 @@ import NftCard from './NftCard';
 const EarnCrypto = () => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBgRotated, Images.backgrounds.light);
   const { t } = useTranslation(`default`).i18n;
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
     <HeroLayout
@@ -65,6 +66,7 @@ const EarnCrypto = () => {
               padding={{ base: '0px', md: '0px 0px', lg: '0px' }}
             >
               <VStack
+                w="full"
                 rowGap={{ base: '0px', md: '32px' }}
                 alignItems={{ base: 'flex-start', lg: 'flex-start' }}
                 justifyContent={{ base: 'flex-start', lg: 'flex-start' }}
@@ -95,24 +97,32 @@ const EarnCrypto = () => {
                     Get the app, log in, start earning!
                   </Text>
                 </Box>
-                <Box w="full" maxW="500px" id="info-card-box" mt="17px !important">
+                <Box
+                  w="full"
+                  maxW={{ base: 'unset', lg: '500px' }}
+                  id="info-card-box"
+                  mt="17px !important"
+                >
                   <InfoCard
                     tooltipLabel={t(Keys.toolTip.downloadLabel)}
                     isShowTooltip
-                    LeftLogo={<YoutubeIcon />}
+                    LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
                   >
-                    <VStack alignItems="flex-start" color="white" ml="0px !important">
-                      <Text textStyle={{ base: 'semiBold15', md: 'regular201' }}>
+                    <VStack alignItems="flex-start" color="white">
+                      <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
                         {t(Keys.toolTip.earningCrypto)}
                       </Text>
                       <Text
                         color="gold"
-                        fontWeight="bold"
-                        textStyle={{ base: 'bold15', md: 'regular201' }}
+                        fontWeight="700 !important"
+                        textStyle={{ base: 'semiBold15', lg: 'regular201' }}
                       >
                         {t(Keys.toolTip.godlBonus)}
                       </Text>
-                      <Text textStyle="semiBold14" color="whiteAlpha.400">
+                      <Text
+                        textStyle={{ base: 'semiBold12', lg: 'semiBold14' }}
+                        color="whiteAlpha.400"
+                      >
                         {t(Keys.toolTip.description)}
                       </Text>
                     </VStack>

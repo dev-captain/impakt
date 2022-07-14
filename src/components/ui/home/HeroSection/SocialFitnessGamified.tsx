@@ -80,14 +80,23 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                 <InfoCard
                   tooltipLabel={t(Keys.toolTip.downloadLabel)}
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon />}
+                  LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
                 >
                   <VStack alignItems="flex-start" color="white">
-                    <Text textStyle="regular201">{t(Keys.toolTip.earningCrypto)}</Text>
-                    <Text color="gold" fontWeight="bold" textStyle="regular201">
+                    <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
+                      {t(Keys.toolTip.earningCrypto)}
+                    </Text>
+                    <Text
+                      color="gold"
+                      fontWeight="700 !important"
+                      textStyle={{ base: 'semiBold15', lg: 'regular201' }}
+                    >
                       {t(Keys.toolTip.godlBonus)}
                     </Text>
-                    <Text textStyle="semiBold14" color="whiteAlpha.400">
+                    <Text
+                      textStyle={{ base: 'semiBold12', lg: 'semiBold14' }}
+                      color="whiteAlpha.400"
+                    >
                       {t(Keys.toolTip.description)}
                     </Text>
                   </VStack>
