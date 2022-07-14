@@ -17,6 +17,7 @@ const YourBody: React.FC = ({ children }) => {
     <HeroLayout
       spacing={0}
       removeTopPadding={isSmall}
+      removeBottomPadding={isSmall}
       customPadding={0}
       pos="relative"
       bgColor="#09090B"
