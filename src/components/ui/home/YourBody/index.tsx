@@ -17,7 +17,6 @@ const YourBody: React.FC = ({ children }) => {
     <HeroLayout
       spacing={0}
       removeTopPadding={isSmall}
-      removeBottomPadding={isSmall}
       customPadding={0}
       pos="relative"
       bgColor="#09090B"
@@ -35,12 +34,13 @@ const YourBody: React.FC = ({ children }) => {
           <HStack
             flexDir={{ base: 'column', lg: 'row' }}
             columnGap="48px"
+            rowGap="48px"
             alignItems="flex-start"
             w="full"
           >
             <VStack
               w={{ base: '100%', lg: '80%' }}
-              rowGap="32px"
+              rowGap={{ base: '16px', lg: '32px' }}
               justifyContent="flex-start"
               alignItems="flex-start"
             >
@@ -69,7 +69,10 @@ const YourBody: React.FC = ({ children }) => {
               </Box>
 
               <Box id="your-body-headline-box" w="full">
-                <Text textStyle="regular20" color="rgba(255, 255, 255, 0.75);">
+                <Text
+                  textStyle={{ base: 'semiBold5', lg: 'regular20' }}
+                  color="rgba(255, 255, 255, 0.75);"
+                >
                   {t(Keys.computerVision.cameraCard)}
                 </Text>
               </Box>
