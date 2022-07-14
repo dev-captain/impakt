@@ -105,6 +105,10 @@ export const HeroDesktop: React.FC = () => {
     if (isMovedToYourBodySection) {
       document.body.style.overflow = 'unset';
     }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [isAnimated, isMovedToYourBodySection]);
 
   React.useEffect(() => {
@@ -154,11 +158,11 @@ export const HeroDesktop: React.FC = () => {
         left="49vw"
         top="158px"
         ref={mirrorRef}
-        height={{ base: '89.962962962963vh', lgx: '788px' }}
-        width={{ base: '38.250vw', lgx: '600px' }}
+        height={{ base: '80.962962962963vh', lgx: '788px' }}
+        width={{ base: '40.250vw', lgx: '600px' }}
       >
         <Box
-          right="-9.5em"
+          right={{ lg: '-3.1vw', lgx: '-7.9vw' }}
           top="90px"
           id="exercise-card"
           ref={exerciseCardRef}
@@ -167,7 +171,14 @@ export const HeroDesktop: React.FC = () => {
         >
           <ExerciseCard />
         </Box>
-        <ScrollIconComponent isVisible={isAnimated} position="absolute" zIndex="1" left="43%" />
+        <ScrollIconComponent
+          width="80"
+          height="80"
+          isVisible={isAnimated}
+          position="absolute"
+          zIndex="1"
+          left="43%"
+        />
 
         <Box
           display="flex"
@@ -185,7 +196,14 @@ export const HeroDesktop: React.FC = () => {
       <React.Suspense fallback={null}>
         <HeroVideo ref={heroVideoRef} />
       </React.Suspense>
-      <ScrollIconComponent isVisible={!isScrolling} zIndex="999999" position="fixed" left="48%" />
+      <ScrollIconComponent
+        width="80"
+        height="80"
+        isVisible={!isScrolling}
+        zIndex="999999"
+        position="fixed"
+        left="48%"
+      />
     </div>
   );
 };

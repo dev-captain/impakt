@@ -8,8 +8,12 @@ import SocialFitnessGamified from './SocialFitnessGamified';
 
 const HeroMobile: React.FC = () => {
   const [isSmall] = useMediaQuery('(max-width: 1036px)');
-  const windowRef = React.useRef<HTMLDivElement>(null);
   const heroVideoRef = React.useRef<HTMLVideoElement>(null);
+  React.useEffect(() => {
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
 
   return (
     <>
