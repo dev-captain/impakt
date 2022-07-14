@@ -16,7 +16,7 @@ const MirrorAndStarsVideo = forwardRef<BoxProps, 'div'>((props, ref) => {
           boxShadow: 'inset 0px 0px 20px rgba(232, 219, 202, 0.5)',
           top: '0',
           left: '0',
-          borderRadius: '120px',
+          borderRadius: '200px 200px 0px 0px',
         }}
       />
     </Box>

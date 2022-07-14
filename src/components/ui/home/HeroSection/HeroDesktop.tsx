@@ -37,6 +37,12 @@ export const HeroDesktop: React.FC = () => {
         heroRightSideRef.current
       ) {
         mirrorRef.current.style.left = `${heroRightSideRef.current.getBoundingClientRect().x}px`;
+        mirrorRef.current.style.width = `${
+          heroRightSideRef.current.getBoundingClientRect().width
+        }px`;
+        mirrorRef.current.style.height = `${
+          heroRightSideRef.current.getBoundingClientRect().height
+        }px`;
         if (!isAnimated) {
           dispatch(setBorderX({ borderX: heroVideoScreenRef.current.getBoundingClientRect().x }));
           dispatch(
@@ -113,7 +119,11 @@ export const HeroDesktop: React.FC = () => {
 
   React.useEffect(() => {
     if (mirrorRef.current && heroVideoScreenRef.current && heroRightSideRef.current) {
-      mirrorRef.current.style.top = `${heroRightSideRef.current.getBoundingClientRect().y - 24}px`;
+      mirrorRef.current.style.width = `${heroRightSideRef.current.getBoundingClientRect().width}px`;
+      mirrorRef.current.style.height = `${
+        heroRightSideRef.current.getBoundingClientRect().height
+      }px`;
+      mirrorRef.current.style.top = `${heroRightSideRef.current.getBoundingClientRect().y - 50}px`;
       mirrorRef.current.style.left = `${heroRightSideRef.current.getBoundingClientRect().x}px`;
       dispatch(setBorderX({ borderX: heroVideoScreenRef.current.getBoundingClientRect().x }));
       dispatch(setBorderY({ borderY: heroVideoScreenRef.current.getBoundingClientRect().y + 28 }));
@@ -129,23 +139,28 @@ export const HeroDesktop: React.FC = () => {
       <div ref={impaktGameHeroRef} id="impakt-game-hero">
         <SocialFitnessGamified>
           <HStack
+            id="hero-right"
             ref={heroRightSideRef}
-            height={{ base: '89.962962962963vh', lgx: '788px' }}
-            minH={{ base: '89.962962962963vh', lgx: '788px' }}
-            width={{ base: '38.250vw', lgx: '600px' }}
-            minW={{ base: '38.250vw', lgx: '600px' }}
-            id="right"
+            maxH="788px"
+            h="75vh"
             w="full"
             margin="0 !important"
           >
-            <Box height="72.962962962963vh" />
+            <Box height="100%" />
           </HStack>
         </SocialFitnessGamified>
       </div>
       {isScrolling && (
         <div id="impakt-your-body" ref={yourBodySectionRef}>
           <YourBody>
-            <HStack id="right" w="full">
+            <HStack
+              height={{ base: '89.962962962963vh', lgx: '788px' }}
+              minH={{ base: '89.962962962963vh', lgx: '788px' }}
+              width={{ base: '38.250vw', lgx: '600px' }}
+              minW={{ base: '38.250vw', lgx: '600px' }}
+              id="right"
+              w="full"
+            >
               <Box />
             </HStack>
           </YourBody>
@@ -155,14 +170,13 @@ export const HeroDesktop: React.FC = () => {
       <MirrorAndStarsVideo
         id="starsvideo"
         position="absolute"
-        left="49vw"
-        top="158px"
         ref={mirrorRef}
-        height={{ base: '80.962962962963vh', lgx: '788px' }}
-        width={{ base: '40.250vw', lgx: '600px' }}
+
+        // height={{ base: '80.962962962963vh', lgx: '788px' }}
+        // width={{ base: '40.250vw', lgx: '600px' }}
       >
         <Box
-          right={{ lg: '-3.1vw', lgx: '-7.9vw' }}
+          right="-20%"
           top="90px"
           id="exercise-card"
           ref={exerciseCardRef}
@@ -172,19 +186,21 @@ export const HeroDesktop: React.FC = () => {
           <ExerciseCard />
         </Box>
         <ScrollIconComponent
-          width="80"
-          height="80"
+          fillIcon="rgba(255, 255, 255, 0.75)"
+          width="20"
+          height="20"
           isVisible={isAnimated}
           position="absolute"
           zIndex="1"
           left="43%"
+          bottom="-4%"
         />
 
         <Box
           display="flex"
           w="640px"
           h="388px"
-          top="33%"
+          top="26vh"
           zIndex="5"
           left="40px"
           position="absolute"
