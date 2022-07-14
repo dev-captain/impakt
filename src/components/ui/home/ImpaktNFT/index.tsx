@@ -10,6 +10,8 @@ import {
   GridItem,
   SimpleGrid,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import Keys from 'i18n/types';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import AOS from 'aos';
@@ -22,10 +24,11 @@ AOS.init();
 
 const ImpaktNFT = () => {
   const bgImage = useColorModeValue(Images.impaktNFT.Header, Images.impaktNFT.light);
+  const { t } = useTranslation(`default`).i18n;
 
   return (
     <HeroLayout
-      showNavbar
+      // showNavbar
       spacing={10}
       pos="relative"
       bgImage={bgImage}
@@ -48,71 +51,69 @@ const ImpaktNFT = () => {
               >
                 <VStack
                   w="full"
-                  padding={{ base: '0px 10px', md: '0px 40px', lg: '0px' }}
+                  padding={{ base: '0px 16px', md: '0px 40px', lg: '0px' }}
                   rowGap="24px"
                   justifyContent="flex-start"
                   alignItems="flex-start"
                 >
                   <Box mt="0 !important">
                     <Text color="gold" textTransform="uppercase" textStyle="reguler2">
-                      nft design
+                      {t(Keys.impaktNFT.impaktDesign)}
                     </Text>
                   </Box>
                   <Box mt="0 !important">
-                    <Text color="white" letterSpacing="-1.5px" textStyle="TitleBold48">
-                      Impakt NFT designed in partnership with Oscar Winner —
-                      <Text
-                        display="inline-block"
-                        letterSpacing="-1.5px"
-                        textStyle="TitleBold48"
-                        className="gradient-text"
-                      >
-                        Chris Armsden
+                    <Text
+                      color="white"
+                      letterSpacing="-1.5px"
+                      textStyle={{ base: 'bold5', md: 'TitleBold48' }}
+                    >
+                      {t(Keys.impaktNFT.impaktlabel)}
+                      <Text display="inline-block" letterSpacing="-1.5px" className="gradient-text">
+                        {t(Keys.impaktNFT.impaktChris)}
                       </Text>
                     </Text>
                   </Box>
-                  <Box
-                    ml="7px !important"
-                    mt="0 !important"
-                    id="hero-headline-description"
-                    backgroundClip="text"
-                  >
-                    <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular18">
-                      Chris Armsden is a graphics technical director and software developer for some
-                      of Hollywood’s biggest blockbusters over the last 17 years. Among them, 6 have
-                      been Oscar-nominated for their Visual Effects and with The Jungle Book (2016)
-                      he took home the prestigious award.
+                  <Box mt="0 !important" id="hero-headline-description" backgroundClip="text">
+                    <Text
+                      color="rgba(255, 255, 255, 0.85);"
+                      textStyle={{ base: 'semiBold5', md: 'regular18' }}
+                    >
+                      {t(Keys.impaktNFT.description)}
                     </Text>
                   </Box>
-                  <Box ml="7px !important" mt="0 !important" w="full" id="hero-info-card-box">
+                  <Box mt="0 !important" w="full" id="hero-info-card-box">
                     <InfoCard LeftLogo={<RichIcon />}>
                       <VStack alignItems="flex-start" color="white">
-                        <Text textStyle="regular18" color="rgba(255, 255, 255, 0.75);">
-                          Chris believes in the transformational power of graphics to educate, to
-                          entertain, to change hearts and minds, and ultimately change the world. If
-                          you can see it, you can believe it.
+                        <Text
+                          textStyle={{ base: 'semiBold5', md: 'regular18' }}
+                          color="rgba(255, 255, 255, 0.75);"
+                        >
+                          {t(Keys.impaktNFT.description1)}
                         </Text>
                       </VStack>
                     </InfoCard>
                   </Box>
-                  <Box
-                    ml="7px !important"
-                    mt="0 !important"
-                    id="hero-headline-description"
-                    backgroundClip="text"
-                  >
-                    <Text color="rgba(255, 255, 255, 0.85);" textStyle="regular18">
-                      His career is truly impressive! And Impakt is honored to call Chris a partner!
-                      Don’t believe us?{' '}
+                  <Box mt="0 !important" id="hero-headline-description" backgroundClip="text">
+                    <Text
+                      color="rgba(255, 255, 255, 0.85);"
+                      textStyle={{ base: 'semiBold5', md: 'regular18' }}
+                    >
+                      {t(Keys.impaktNFT.careerdescription)}
                       <Text color="gold" as="a" target="_blank" href="#">
-                        Check it for yourself.
+                        {t(Keys.impaktNFT.careerdescription1)}
                       </Text>
                     </Text>
                   </Box>
                 </VStack>
               </GridItem>
               <GridItem w="full" alignItems="center" justifyContent="center" display="flex">
-                <VStack w="full" rowGap="24px" justifyContent="flex-start" alignItems="flex-start">
+                <VStack
+                  padding={{ base: '0px 16px', md: '0px 40px', lg: '0px' }}
+                  w="full"
+                  rowGap="24px"
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
+                >
                   <Box
                     position={{ base: 'static', lg: 'absolute' }}
                     top="85px"

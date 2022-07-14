@@ -8,6 +8,8 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import Keys from 'i18n/types';
 
 import useAppSelector from '../../../../hooks/useAppSelector';
 import useParallax from '../../../../hooks/useParallax';
@@ -15,6 +17,7 @@ import AnimationAlways from '../../../common/AnimationAlways';
 import AccelerationIcon from '../../../icons/AccelerationIcon';
 
 const ExerciseCard: React.FC = () => {
+  const { t } = useTranslation(`default`).i18n;
   const [circularProgressValue, setCircularProgressValue] = React.useState(20);
   const [displayValue, setDisplayValue] = React.useState(12);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
@@ -75,13 +78,13 @@ const ExerciseCard: React.FC = () => {
             fontWeight={700}
             lineHeight="135%"
           >
-            EXERCISE
+            {t(Keys.impaktGamesHero.excercise)}
           </Text>
         </Box>
         <HStack columnGap="10px" mt="0 !important" id="exercise-card-activity-description">
           <AccelerationIcon />
           <Text color="#FFFFFF" textStyle="normal5">
-            SQUATS
+            {t(Keys.impaktGamesHero.squats)}
           </Text>
         </HStack>
         <Box mt="0 !important" id="exercise-cardprogress-bar-box">

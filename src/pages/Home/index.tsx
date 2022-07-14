@@ -7,6 +7,7 @@ import {
   ImpaktFooter,
   HeroSection,
   EarnCrypto,
+  ImpaktIcons,
 } from 'components/ui/home';
 
 import LoadingIcon from '../../components/icons/LoadingIcon';
@@ -69,6 +70,9 @@ const HomePage = () => {
           </div>
           <div>
             <Advisor />
+          </div>
+          <div>
+            <ImpaktIcons />
           </div>
           <div>
             <ImpaktFooter />

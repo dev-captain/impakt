@@ -27,7 +27,8 @@ import NavBarSocialIcons from './NavBarSocialIcons';
 import ImpaktIcon from '../../icons/ImpaktIcon';
 
 const { dark, light } = Images;
-const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight } = Images.Common;
+const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
+  Images.Common;
 
 const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButton?: boolean }) => {
   const navigate = useNavigate();
@@ -67,8 +68,9 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
   return (
     <Box
       pos="absolute"
-      zIndex="99999"
+      zIndex="999999"
       w="full"
+      paddingX="16px"
       display={isLessThan1040 ? 'auto' : 'flex'}
       justifyContent="center"
       sx={{ position: 'fixed', top: '0' }}
@@ -90,6 +92,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         marginTop="10px"
         transition="background-color 0.5s linear"
         bgColor={bgColor}
+        backdropFilter={isScrolling ? 'blur(40px)' : 'blur(0px)'}
       >
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
@@ -224,6 +227,8 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         discord={discord}
         hover={_hover}
         youtube={youtube}
+        tiktok={Tiktok}
+        isScrolling={isScrolling}
       />
     </Box>
   );
@@ -238,7 +243,7 @@ const Gradient = () => {
       bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
       opacity="0.4"
       pos="absolute"
-      w="967px"
+      w="930px"
       h="472px"
       left="-637px"
       top="-314px"
