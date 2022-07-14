@@ -36,9 +36,6 @@ export const HeroDesktop: React.FC = () => {
         heroVideoRef.current &&
         heroRightSideRef.current
       ) {
-        mirrorRef.current.style.top = `${
-          heroRightSideRef.current.getBoundingClientRect().y - 24
-        }px`;
         mirrorRef.current.style.left = `${heroRightSideRef.current.getBoundingClientRect().x}px`;
         if (!isAnimated) {
           dispatch(setBorderX({ borderX: heroVideoScreenRef.current.getBoundingClientRect().x }));
@@ -52,7 +49,7 @@ export const HeroDesktop: React.FC = () => {
           }px`;
 
           heroVideoRef.current.style.top = `${
-            heroVideoScreenRef.current.getBoundingClientRect().y + 28
+            heroVideoScreenRef.current.getBoundingClientRect().y + 28 + window.scrollY
           }px`;
         }
       }
@@ -70,7 +67,7 @@ export const HeroDesktop: React.FC = () => {
     if (!impaktGameHeroRef.current) return;
     if (isAnimated) {
       isScrolled.current = true;
-      window.scrollTo(0, impaktGameHeroRef.current.clientHeight - 100);
+      window.scrollTo(0, impaktGameHeroRef.current.clientHeight - 200);
       setTimeout(() => {
         setIsMovedToYourBodySection((prev) => !prev);
       }, 200);
@@ -84,7 +81,7 @@ export const HeroDesktop: React.FC = () => {
         mirrorRef.current &&
         heroVideoRef.current &&
         yourBodySectionRef.current &&
-        window.scrollY < yourBodySectionRef.current.offsetTop - 500 &&
+        window.scrollY < yourBodySectionRef.current.offsetTop - 200 &&
         heroVideoScreenRef.current &&
         isAnimated
       ) {

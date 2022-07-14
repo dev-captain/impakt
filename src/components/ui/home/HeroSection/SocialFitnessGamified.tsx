@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 
@@ -9,6 +9,7 @@ import YoutubeIcon from '../../../icons/YoutubeIcon';
 
 const SocialFitnessGamified: React.FC = ({ children }) => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
     <HeroLayout
@@ -27,7 +28,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
           w="full"
         >
           <HStack
-            flexDir={{ base: 'column', lg: 'row' }}
+            flexDir={isLessThan1280 ? 'column' : 'row'}
             marginTop={{ base: '33px', lg: '96px' }}
             columnGap="48px"
             rowGap="48px"

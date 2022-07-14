@@ -171,7 +171,8 @@ export default {
   TitleBold73: {
     fontWeight: '700',
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
-    fontSize: '96px',
+
+    fontSize: { sm: '72px', md: '86px', lg: '96px' },
     lineHeight: '96px',
   },
   TitleBold48: {

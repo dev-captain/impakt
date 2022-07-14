@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
-import { VStack, HStack, Box, Text } from '@chakra-ui/react';
+import { VStack, HStack, Box, Text, useMediaQuery } from '@chakra-ui/react';
 
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
@@ -8,12 +8,15 @@ import YoutubeIcon from '../../../icons/YoutubeIcon';
 import RichIcon2 from '../../../icons/RichIcon2';
 
 const YourBody: React.FC = ({ children }) => {
+  const [isSmall] = useMediaQuery('(max-width: 1280px)');
+
   return (
     <HeroLayout
       spacing={0}
       pos="relative"
       bgColor="#09090B"
       align="flex-start"
+      minH={isSmall ? '40vh' : '100vh'}
       justify="flex-start"
     >
       <VStack w="full">
