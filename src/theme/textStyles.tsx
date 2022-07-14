@@ -194,7 +194,7 @@ export default {
   TitleBold64: {
     fontWeight: '700',
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
-    fontSize: '64px',
+    fontSize: { base: '48px', lg: '64px' },
     lineHeight: '100%',
   },
   accentGradient: {

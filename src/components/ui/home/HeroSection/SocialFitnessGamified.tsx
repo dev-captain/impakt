@@ -20,6 +20,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
       showNavbar
       spacing={10}
       pos="relative"
+      removeBottomPadding={isLessThan1280}
       bgImage={bgImage}
       align="flex-start"
       justify="flex-start"

@@ -16,6 +16,8 @@ const YourBody: React.FC = ({ children }) => {
   return (
     <HeroLayout
       spacing={0}
+      removeTopPadding={isSmall}
+      customPadding={0}
       pos="relative"
       bgColor="#09090B"
       align="flex-start"
