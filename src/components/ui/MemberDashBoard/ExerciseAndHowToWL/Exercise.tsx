@@ -82,7 +82,12 @@ const Excercise: React.FC = () => {
             {excerciseStatistics &&
               excerciseStatistics.map((stats: any) => {
                 return (
-                  <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
+                  <Tr
+                    display="table"
+                    width="100%"
+                    style={{ tableLayout: 'fixed' }}
+                    key={stats.exercisei}
+                  >
                     <Td textStyle="regular3" borderBottom={0}>
                       {stats.exercise}
                     </Td>
