@@ -113,13 +113,13 @@ const CollapseMenu = ({
           />
         )}
 
-        {!member && (
+        {/* {!member && (
           <NavbarLinkItem
             href="/signin"
             title={t(Keys.navbar.signIn)}
             isActive={path.path === 'signin'}
           />
-        )}
+        )} */}
 
         <HStack
           align="center"
