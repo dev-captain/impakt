@@ -34,7 +34,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
         >
           <HStack
             flexDir={isLessThan1280 ? 'column' : 'row'}
-            marginTop={{ base: '33px', lg: '96px' }}
+            marginTop={{ base: '0px', lg: '96px' }}
             columnGap="48px"
             rowGap="48px"
             alignItems="flex-start"
