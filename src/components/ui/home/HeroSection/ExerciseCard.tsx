@@ -15,11 +15,12 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 import useParallax from '../../../../hooks/useParallax';
 import AnimationAlways from '../../../common/AnimationAlways';
 import AccelerationIcon from '../../../icons/AccelerationIcon';
+import SegmentedProgress from '../../../icons/SegmentedProgress';
 
 const ExerciseCard: React.FC = () => {
   const { t } = useTranslation(`default`).i18n;
-  const [circularProgressValue, setCircularProgressValue] = React.useState(20);
-  const [displayValue, setDisplayValue] = React.useState(12);
+  const [circularProgressValue, setCircularProgressValue] = React.useState(4.16666666667);
+  const [displayValue, setDisplayValue] = React.useState(10);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const boxRef = React.useRef<HTMLDivElement | null>(null);
@@ -29,19 +30,19 @@ const ExerciseCard: React.FC = () => {
     if (isAnimated) {
       const interval = setInterval(() => {
         setDisplayValue((prevState) => {
-          if (prevState === 20) {
+          if (prevState >= 20) {
             return 10;
           }
 
-          return prevState + 1;
+          return prevState + 0.45454545;
         });
 
         setCircularProgressValue((prevState) => {
-          if (prevState === 100) {
-            return 0;
+          if (prevState >= 100) {
+            return 4.16666666667;
           }
 
-          return prevState + 10;
+          return prevState + 4.16666666667;
         });
       }, 1950);
 
@@ -88,26 +89,30 @@ const ExerciseCard: React.FC = () => {
           </Text>
         </HStack>
         <Box mt="0 !important" id="exercise-cardprogress-bar-box">
-          <CircularProgress
-            trackColor={accentRedtextColor}
-            size="160px"
-            color="rgba(0, 0, 0, 1)"
-            value={circularProgressValue}
-            thickness="13"
-            stroke="transparent !important"
-          >
-            <CircularProgressLabel
-              letterSpacing="1px"
-              fontWeight={500}
-              lineHeight="100%"
-              fontSize="56px"
-              color="#FFFFFF"
+          <Box position="relative">
+            <CircularProgress
+              trackColor="rgba(240, 65, 83, 0.35)"
+              size="150px"
+              color={accentRedtextColor}
+              value={circularProgressValue}
+              thickness="9.5"
             >
-              {displayValue}
-            </CircularProgressLabel>
-          </CircularProgress>
-        </Box>
-      </VStack>
+              <CircularProgressLabel
+                letterSpacing="1px"
+                fontWeight={500}
+                lineHeight="100%"
+                fontSize="56px"
+                color="#FFFFFF"
+              >
+                {Math.floor(displayValue)}
+              </CircularProgressLabel>
+            </CircularProgress>
+            <Box position="absolute" left="2px" top="2.4px">
+              <SegmentedProgress />
+            </Box>
+          </Box>{' '}
+        </Box>{' '}
+      </VStack>{' '}
     </AnimationAlways>
   );
 };
