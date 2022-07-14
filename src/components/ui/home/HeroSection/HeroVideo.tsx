@@ -73,7 +73,17 @@ const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithout
     const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
     return isLessThan1280 ? (
-      <MobileVideo ref={ref} autoPlay loop muted {...props} playsInline>
+      <MobileVideo
+        onLoadedData={() => {
+          dispatch(setIsLoaded(true));
+        }}
+        ref={ref}
+        autoPlay
+        loop
+        muted
+        {...props}
+        playsInline
+      >
         <Source src={Videos.heroVideo} type="video/mp4" />
       </MobileVideo>
     ) : (
