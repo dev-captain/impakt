@@ -69,7 +69,7 @@ export const Videos = {
   burnAndEarn: 'assets/videos/burn-and-earn.mp4',
   impaktGames: 'assets/videos/tutorial-video.mp4',
   heroVideo: 'assets/videos/herovideo.mov',
-  stars: 'assets/videos/stars.mp4',
+  stars: 'assets/videos/stars.mov',
 };
 
 export const Socials = {

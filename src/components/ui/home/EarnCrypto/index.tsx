@@ -34,8 +34,8 @@ const EarnCrypto = () => {
           <HStack
             flexDirection={{ base: 'column-reverse', md: 'row' }}
             w="full"
-            rowGap={{ base: '24px', md: '48px' }}
-            columnGap={{ base: '24px', md: '10px', lg: '48px' }}
+            rowGap={{ base: '12px !important', md: '48px' }}
+            columnGap={{ base: '12px !important', md: '10px', lg: '48px' }}
           >
             <Box id="left">
               <MirrorAndStarsVideo
@@ -56,7 +56,6 @@ const EarnCrypto = () => {
                 </Box>
               </MirrorAndStarsVideo>
             </Box>
-            <Box />
             <VStack
               w="full"
               alignItems={{ base: 'center', lg: 'flex-start' }}
@@ -102,6 +101,7 @@ const EarnCrypto = () => {
                   maxW={{ base: 'unset', lg: '500px' }}
                   id="info-card-box"
                   mt="17px !important"
+                  mb="48px !important"
                 >
                   <InfoCard
                     tooltipLabel={t(Keys.toolTip.downloadLabel)}
