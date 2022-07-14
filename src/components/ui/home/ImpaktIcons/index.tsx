@@ -87,7 +87,7 @@ const ImpaktIcons = () => {
               columns={{ base: 1, md: 2, lg: 4 }}
               alignContent="center"
               alignItems="center"
-              columnGap={{ base: '8px', sm: '16px', md: '16px ', xl: '100px' }}
+              columnGap={{ base: '8px', sm: '16px', md: '16px ' }}
               rowGap={{ base: '99px', sm: '99px', md: '115px', xl: '16px' }}
             >
               {Icons.map((icon: any) => {

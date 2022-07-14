@@ -106,6 +106,11 @@ export default {
     fontWeight: '700',
     lineHeight: '20px',
   },
+  bold15: {
+    fontSize: '15px',
+    fontWeight: '700',
+    lineHeight: '15px',
+  },
   regular2: {
     fontSize: '14px',
     fontWeight: '400',
@@ -143,8 +148,13 @@ export default {
   },
   semiBold14: {
     fontSize: '14px',
-    fontWeight: '500px',
+    fontWeight: '500',
     lineHeight: '14px',
+  },
+  semiBold15: {
+    fontSize: '15px',
+    fontWeight: '500',
+    lineHeight: '15px',
   },
   semiBold17: {
     fontSize: '16px',

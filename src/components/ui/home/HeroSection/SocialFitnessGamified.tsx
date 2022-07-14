@@ -82,7 +82,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                   LeftLogo={<YoutubeIcon />}
                 >
                   <VStack alignItems="flex-start" color="white">
-                    <Text textStyle="regular201">Start earning CRYPTO now!</Text>
+                    <Text textStyle="regular201">{t(Keys.toolTip.earningCrypto)}</Text>
                     <Text color="gold" fontWeight="bold" textStyle="regular201">
                       {t(Keys.toolTip.godlBonus)}
                     </Text>
