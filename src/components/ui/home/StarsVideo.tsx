@@ -20,7 +20,7 @@ const Source = styled.source``;
 
 const StarsVideo = () => {
   return (
-    <Video autoPlay loop muted>
+    <Video autoPlay loop muted playsInline>
       <Source src={Videos.stars} type="video/mp4" />
     </Video>
   );
