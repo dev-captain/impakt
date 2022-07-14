@@ -88,7 +88,14 @@ const HeroMobile: React.FC = () => {
         </VStack>
       </SocialFitnessGamified>
       <YourBody>
-        <HStack m="0 !important" id="right" flex="1" w="full">
+        <HStack
+          justifyContent={{ base: 'center', lg: 'flex-start' }}
+          alignItems={{ base: 'center', lg: 'flex-start' }}
+          m="0 !important"
+          id="right"
+          flex="1"
+          w="full"
+        >
           <Box maxW="800px" minW="343px" minH="207px" id="screen-video-box" position="relative">
             <Box display="flex" w="100%" h="100%" zIndex="0" position="relative">
               <img width="100%" src={Images.Common.Window} alt="_" />

@@ -32,10 +32,10 @@ const EarnCrypto = () => {
           w="full"
         >
           <HStack
-            flexDirection={{ base: 'column-reverse', md: 'row' }}
+            flexDirection={{ base: 'column-reverse', lg: 'row' }}
             w="full"
-            rowGap={{ base: '12px !important', md: '48px' }}
-            columnGap={{ base: '12px !important', md: '10px', lg: '48px' }}
+            rowGap={{ base: '12px', md: '48px', lg: '48px' }}
+            columnGap={{ base: '12px', md: '10px', lg: '48px' }}
           >
             <Box id="left">
               <MirrorAndStarsVideo
@@ -67,8 +67,8 @@ const EarnCrypto = () => {
               <VStack
                 w="full"
                 rowGap={{ base: '0px', md: '32px' }}
-                alignItems={{ base: 'flex-start', lg: 'flex-start' }}
-                justifyContent={{ base: 'flex-start', lg: 'flex-start' }}
+                justifyContent={{ base: 'flex-start', md: 'center', lg: 'flex-start' }}
+                alignItems={{ base: 'flex-start', md: 'center', lg: 'flex-start' }}
               >
                 <Box id="move-to-earn-box">
                   <Text textStyle="semiBold3" letterSpacing="2px" color="#F04153" lineHeight="100%">
@@ -98,6 +98,9 @@ const EarnCrypto = () => {
                 </Box>
                 <Box
                   w="full"
+                  display="flex"
+                  justifyContent={{ base: 'flex-start', md: 'center', lg: 'flex-start' }}
+                  alignItems={{ base: 'flex-start', md: 'center', lg: 'flex-start' }}
                   maxW={{ base: 'unset', lg: '500px' }}
                   id="info-card-box"
                   mt="17px !important"
