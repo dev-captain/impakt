@@ -63,6 +63,7 @@ const TranslationKeys = {
   toolTip: {
     downloadLabel: `${toolTip}.downloadLabel`,
     godlBonus: `${toolTip}.godlBonus`,
+    earningCrypto: `${toolTip}.earningCrypto`,
     description: `${toolTip}.description`,
   },
   burnAndEarn: {

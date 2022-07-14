@@ -65,3 +65,9 @@ code {
 .scroll::-webkit-scrollbar-thumb {
   visibility: visible;
 }
+@media (max-width:991px) {
+  .video-layout{
+    border-radius: 68.6px !important;
+  }
+}
+

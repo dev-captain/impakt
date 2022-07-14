@@ -107,6 +107,7 @@ const IconsCard = ({
           textStyle="bold5"
           pb="5px"
           align="center"
+          userSelect="none"
           color={name === '???' ? 'rgba(255,255,255,0.4)' : '#FFF'}
           sx={{ filter: name !== '???' ? 'blur(7px)' : 'blur(0px)' }}
         >
@@ -159,6 +160,7 @@ const IconsCard = ({
                 borderRadius="8px"
                 color="rgba(255, 255, 255, 0.75)"
                 whiteSpace="pre-line"
+                userSelect="none"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
                 sx={{ filter: name !== '???' ? 'blur(4px)' : 'blur(0px)' }}
               />

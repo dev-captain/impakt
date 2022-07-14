@@ -31,7 +31,7 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
         {LeftLogo && <Box>{LeftLogo}</Box>}
         <Box id="description">{children}</Box>
       </HStack>
-      <Flex id="right">
+      <Flex id="right" ml="0px !important">
         {isShowTooltip && (
           <Box cursor="pointer" id="tooltip">
             <Tooltip

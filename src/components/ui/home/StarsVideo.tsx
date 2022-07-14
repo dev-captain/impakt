@@ -11,6 +11,9 @@ const Video = styled.video`
   height: 100%;
   border-radius: 120px;
   filter: contrast(120%) brightness(120%);
+  @media (max-width: 991px) {
+    border-radius: 68.6px !important;
+  }
 `;
 
 const Source = styled.source``;
