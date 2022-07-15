@@ -8,6 +8,7 @@ const SignInButton: React.FC = () => {
 
   return !member ? (
     <Button
+      width={{ base: '100%', md: 'auto' }}
       backgroundColor="rgba(255, 255, 255, 0.1)"
       backdropFilter="blur(40px)"
       _hover={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}

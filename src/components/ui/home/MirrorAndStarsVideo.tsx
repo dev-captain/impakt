@@ -8,7 +8,7 @@ const MirrorAndStarsVideo = forwardRef<BoxProps, 'div'>((props, ref) => {
       {props.children}
       <StarsVideo />
       <div
-        className="shadow"
+        className="shadow video-layout"
         style={{
           position: 'absolute',
           width: '100%',

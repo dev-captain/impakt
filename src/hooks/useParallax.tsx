@@ -1,20 +1,46 @@
-import gsap, { Power2 } from 'gsap';
+/* eslint-disable no-param-reassign */
 import React from 'react';
 
-const useParallax = (ref: React.MutableRefObject<HTMLDivElement | null>) => {
-  const handleMouseOver = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rotateX = -(e.clientY - window.innerHeight / 3.6) * 0.09;
-    const rotateY = (e.clientX - window.innerWidth / 1.36) * 0.09;
-    gsap.to(ref.current, {
-      duration: 0.5,
-      ease: Power2.easeOut,
-      rotationX: rotateX,
-      rotationY: rotateY,
-    });
-  };
+type UseParallaxOptionsType = {
+  range: number;
+};
 
-  return { handleMouseOver };
+const useParallax = (
+  containerRef: React.MutableRefObject<HTMLDivElement | null>,
+  elementsRef: React.MutableRefObject<any>[],
+  { range }: UseParallaxOptionsType,
+) => {
+  const calcValue = (a: any, b: any) => ((a / b) * range - range / 2).toFixed(1); // thanks @alice-mx
+
+  React.useEffect(() => {
+    let timeout: any;
+    document.addEventListener(
+      'mousemove',
+      ({ x, y }) => {
+        if (timeout) {
+          window.cancelAnimationFrame(timeout);
+        }
+        timeout = window.requestAnimationFrame(() => {
+          if (!containerRef.current) return;
+
+          const yValue = calcValue(y, window.innerHeight);
+          const xValue = calcValue(x, window.innerWidth);
+
+          containerRef.current.style.transform = `rotateX(${yValue}deg) rotateY(${xValue}deg)`;
+
+          elementsRef.forEach((el) => {
+            if (!el.current) return;
+            el.current.style.transform = `translateX(${-xValue}px) translateY(${yValue}px)`;
+          });
+
+          // textRef.current.style.backgroundPosition = `${Number(xValue) * 0.45}px ${
+          //   -yValue * 0.45
+          // }px`;
+        });
+      },
+      false,
+    );
+  }, []);
 };
 
 export default useParallax;

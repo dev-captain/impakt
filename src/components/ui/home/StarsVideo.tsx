@@ -11,13 +11,16 @@ const Video = styled.video`
   height: 100%;
   border-radius: 200px 200px 0px 0px;
   filter: contrast(120%) brightness(120%);
+  @media (max-width: 991px) {
+    border-radius: 68.6px !important;
+  }
 `;
 
 const Source = styled.source``;
 
 const StarsVideo = () => {
   return (
-    <Video autoPlay loop muted>
+    <Video autoPlay loop muted playsInline>
       <Source src={Videos.stars} type="video/mp4" />
     </Video>
   );

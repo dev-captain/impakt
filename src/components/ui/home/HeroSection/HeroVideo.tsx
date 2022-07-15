@@ -53,6 +53,7 @@ const DesktopVideo = styled.video<{
 `;
 
 const MobileVideo = styled.video`
+  z-index: 9999;
   object-fit: cover;
   width: 640px;
   height: 360px;
@@ -72,7 +73,17 @@ const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithout
     const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
     return isLessThan1280 ? (
-      <MobileVideo ref={ref} autoPlay loop muted {...props}>
+      <MobileVideo
+        onLoadedData={() => {
+          dispatch(setIsLoaded(true));
+        }}
+        ref={ref}
+        autoPlay
+        loop
+        muted
+        {...props}
+        playsInline
+      >
         <Source src={Videos.heroVideo} type="video/mp4" />
       </MobileVideo>
     ) : (
@@ -94,6 +105,7 @@ const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithout
         autoPlay
         loop
         muted
+        playsInline
         onLoadedData={() => {
           dispatch(setIsLoaded(true));
         }}
