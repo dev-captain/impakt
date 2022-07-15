@@ -3,6 +3,8 @@ const contact = 'contact';
 const events = 'events';
 const ourRoadmap = 'ourRoadmap';
 const ourAdvisor = 'ourAdvisor';
+const ourAdvisorTitle = 'ourAdvisorTitle';
+const Founder = 'Founder';
 const ourTeam = 'ourTeam';
 const navbar = 'navbar';
 const burnAndEarn = 'burnAndEarn';
@@ -40,6 +42,7 @@ const TranslationKeys = {
     dashboard: `${navbar}.dashboard`,
     signOut: `${navbar}.signOut`,
     signIn: `${navbar}.signIn`,
+    termsOfUse: `${navbar}.termsOfUse`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,
@@ -56,6 +59,14 @@ const TranslationKeys = {
   ourAdvisor: {
     our: `${ourAdvisor}.our`,
     advisor: `${ourAdvisor}.advisor`,
+  },
+  ourAdvisorTitle: {
+    adviser: `${ourAdvisorTitle}.adviser`,
+    Title: `${ourAdvisorTitle}.Title`,
+  },
+  Founder: {
+    builders: `${Founder}.builders`,
+    Title: `${Founder}.Title`,
   },
   ourTeam: {
     our: `${ourTeam}.our`,
@@ -101,6 +112,7 @@ const TranslationKeys = {
     madeBy: `${footer}.madeBy`,
     termOfUse: `${footer}.termOfUse`,
     allRightReserved: `${footer}.allRightReserved`,
+    downloadApp: `${footer}.downloadApp`,
   },
   password: {
     recovery: `${password}.recovery`,

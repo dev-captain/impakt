@@ -1,7 +1,7 @@
 import { GridItem, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react';
 import useCountdown from 'hooks/useCountdown';
 import { layoutPadding } from 'theme';
-import { GradientEllipse } from 'components/ui/home/RoadmapHero/Gradients';
+import { GradientEllipse } from 'components/common/Gradients';
 import EventCounterItem from 'components/ui/events/EventCounterItem';
 
 const CountDown = ({

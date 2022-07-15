@@ -22,15 +22,37 @@ import {
   Td,
   // TableCaption,
   TableContainer,
-  Link,
 } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import useAppSelector from '../../../../hooks/useAppSelector';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import { fetchReferrals } from '../../../../lib/redux/slices/referrals/actions/fetchReferrals';
+import { fetchReferralsChallenges } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
+import { fetchReferralsReward } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsReward';
 
 const Referrals: React.FC = () => {
+  const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
+  const referralsRegisteredNumber = useAppSelector((state) => state.referrals.referrals.totalCount);
+  const referralsChallangesHaveDone = useAppSelector(
+    (state) => state.referrals.referralsChallengesHaveDone,
+  );
+  const referralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
+  // const { t } = useTranslation().i18n;
+  // const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
+
+  // const TooltipHandler = () => {
+  //   setIsTooltipClicked(!isTooltipClicked);
+  // };
+
   const { t } = useTranslation().i18n;
+
+  React.useEffect(() => {
+    dispatch(fetchReferrals({ count: true }));
+    dispatch(fetchReferralsChallenges());
+    dispatch(fetchReferralsReward());
+  }, []);
 
   return (
     <VStack
@@ -72,9 +94,9 @@ const Referrals: React.FC = () => {
             bottom={{ base: '22px', md: '20px' }}
             width={{ base: '24px', md: '32px' }}
           >
-            <Link href="https://knowledgebase.impakt.com/referral-rewards?category=all-resources">
+            <a href="https://knowledgebase.impakt.com/referral-rewards?category=all-resources">
               <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
-            </Link>
+            </a>
           </Box>
         </Tooltip>
       </Box>
@@ -97,7 +119,7 @@ const Referrals: React.FC = () => {
         >
           <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textAlign="center" textStyle="bold5">
-              3,240
+              {referralsReward}
             </Text>
             <Text textAlign="center" mt="6px" textStyle="regular3">
               GODL earned
@@ -114,7 +136,7 @@ const Referrals: React.FC = () => {
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text color="#FFFFFF" textAlign="center" textStyle="bold5">
-              75
+              {referralsRegisteredNumber ?? 0}
             </Text>
             <Text color="rgba(255, 255, 255, 0.4)" textAlign="center" mt="6px" textStyle="regular3">
               registered <br />
@@ -153,7 +175,7 @@ const Referrals: React.FC = () => {
                 1
               </Td>
               <Td borderBottom={0} textStyle="regular4">
-                24
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneOneChallenge}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
@@ -161,7 +183,7 @@ const Referrals: React.FC = () => {
                 2
               </Td>
               <Td borderBottom={0} textStyle="regular4">
-                24
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneTwoChallenges}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
@@ -169,23 +191,23 @@ const Referrals: React.FC = () => {
                 3
               </Td>
               <Td borderBottom={0} textStyle="regular4">
-                24
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneThreeChallenges}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
               <Td color="#FEC417" borderBottom={0}>
                 4
               </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                24
+              <Td textStyle="regular4" borderBottom={0}>
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFourChallenges}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0} textStyle="bold4">
-                5
+              <Td color="#FEC417" textStyle="bold4" borderBottom={0}>
+                5+
               </Td>
-              <Td borderBottom={0} textStyle="bold4">
-                24
+              <Td textStyle="bold4" borderBottom={0}>
+                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
               </Td>
             </Tr>
           </Tbody>

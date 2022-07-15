@@ -6,17 +6,19 @@ import memberAuth from '../slices/member/memberAuthSlice';
 import knowledgeBaseReducer from '../slices/knowledgeBase/knowledgeBaseSlice';
 import godlReducer from '../slices/godl/godlSlice';
 import fitnessReducer from '../slices/fitness/fitnessSlice';
+import referralsReducer from '../slices/referrals/referralsSlice';
+import stateReducer from '../slices/state/stateSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['memberAuth'],
+  blacklist: ['memberAuth', 'stateReducer'],
 };
 
 export const memberAuthPersistConfig = {
   key: 'memberAuth',
   storage,
-  blacklist: ['isLoading'],
+  blacklist: ['isLoading', 'requestAccessTokenAttemptCount'],
 };
 
 const rootReducer = combineReducers({
@@ -24,6 +26,8 @@ const rootReducer = combineReducers({
   knowledgeBase: knowledgeBaseReducer,
   godl: godlReducer,
   fitnessReducer,
+  referrals: referralsReducer,
+  stateReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

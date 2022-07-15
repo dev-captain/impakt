@@ -26,7 +26,7 @@ const SendMessage = () => {
   const { t } = useTranslation().i18n;
   const [isLessThan355] = useMediaQuery('(max-width: 355px)');
   const bgColor = useColorModeValue('glass.800', 'glass.300');
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.backgrounds.defaultBg, Images.backgrounds.light);
   const { sendData, loading } = useContactUs();
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const [values, setValues] = useState({

@@ -12,12 +12,14 @@ interface MemberAuthInitialI {
   member: GetUserRes | null;
   isLogin: boolean;
   isLoading: boolean;
+  requestAccessTokenAttemptCount: number;
 }
 
 const memberAuthInitialState: MemberAuthInitialI = {
   member: null,
   isLoading: false,
   isLogin: false,
+  requestAccessTokenAttemptCount: 0,
 };
 
 const memberAuthSlice = createSlice({
@@ -106,6 +108,7 @@ const memberAuthSlice = createSlice({
       })
       .addCase(requestAccessToken.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.requestAccessTokenAttemptCount += 1;
         state.member = action.payload;
       })
       .addCase(requestAccessToken.rejected, (state) => {

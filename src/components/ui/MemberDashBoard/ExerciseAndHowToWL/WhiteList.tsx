@@ -3,12 +3,19 @@ import * as React from 'react';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import { VStack, Box, Text, Tooltip } from '@chakra-ui/react';
+import {
+  VStack,
+  Box,
+  Text,
+  // OrderedList,
+  // ListItem,
+  // Grid,
+  Tooltip,
+  // Tfoot,
+  // TableCaption,
+} from '@chakra-ui/react';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
-import Twitter from '../../../../assets/images/twitter.png';
-import Discord from '../../../../assets/images/discord.png';
-import Walletad from '../../../../assets/images/walletad.png';
-import Goldaword from '../../../../assets/images/goldaword.png';
+import Images from '../../../../assets/images';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
@@ -69,7 +76,7 @@ const WhiteList: React.FC = () => {
           mt="0px"
         >
           <Box>
-            <img src={Discord} alt="Discord" width="24px" />
+            <img src={Images.Common.Discord} alt="Discord" width="24px" />
           </Box>
           <Box marginLeft="16px">
             <Text textStyle="regular3" fontWeight={500}>
@@ -88,7 +95,7 @@ const WhiteList: React.FC = () => {
           mt="12px"
         >
           <Box>
-            <img src={Twitter} alt="Discord" width="24px" />
+            <img src={Images.Common.Twitter} alt="Discord" width="24px" />
           </Box>
           <Box marginLeft="16px">
             <Text textStyle="regular3" fontWeight={500}>
@@ -107,7 +114,7 @@ const WhiteList: React.FC = () => {
           mt="12px"
         >
           <Box>
-            <img src={Walletad} alt="Discord" width="19px" height="32px" />
+            <img src={Images.Common.Walletad} alt="Discord" width="19px" height="32px" />
           </Box>
           <Box marginLeft="16px">
             <Text textStyle="regular3" fontWeight={500}>
@@ -126,7 +133,7 @@ const WhiteList: React.FC = () => {
           mt="12px"
         >
           <Box>
-            <img src={Goldaword} alt="Discord" width="24px" />
+            <img src={Images.Common.Goldaword} alt="Discord" width="24px" />
           </Box>
           <Box marginLeft="16px" width={{ base: '100%', lg: '257px' }}>
             <Text textStyle="regular3" fontWeight={500} color="#FEC417">

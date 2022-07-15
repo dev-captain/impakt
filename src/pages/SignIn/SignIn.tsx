@@ -42,10 +42,13 @@ const SignIn = () => {
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
+  const requestAccessTokenAttemp = useAppSelector(
+    (state) => state.memberAuth.requestAccessTokenAttemptCount,
+  );
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const navigate = useNavigate();
   const { t } = useTranslation().i18n;
-  const bgImage = useColorModeValue(Images.impaktGames.Header, Images.impaktGames.light);
+  const bgImage = useColorModeValue(Images.backgrounds.defaultBg, Images.backgrounds.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
@@ -65,37 +68,60 @@ const SignIn = () => {
       status: 'info',
     });
 
-    await dispatch(
-      requestAccessToken({
-        discoursePayload: queryString.DiscoursePayload,
-        discourseSig: queryString.DiscourseSig,
-      }),
-    ).unwrap();
+    try {
+      const request = await dispatch(
+        requestAccessToken({
+          discoursePayload: queryString.sso,
+          discourseSig: queryString.sig,
+        }),
+      ).unwrap();
 
-    toast({
-      title: 'Success',
-      description: ' "Redirecting to forums..',
-      isClosable: false,
-      duration: 2000,
-      status: 'success',
-    });
+      if (request.discourseRedirectUrl === undefined) {
+        toast({
+          title: 'Error',
+          description: ' "Something went wrong...',
+          isClosable: false,
+          duration: 2000,
+          status: 'error',
+        });
+
+        return undefined;
+      }
+
+      toast({
+        title: 'Success',
+        description: ' "Redirecting to forums..',
+        isClosable: false,
+        duration: 2000,
+        status: 'success',
+      });
+
+      return request.discourseRedirectUrl;
+    } catch (error: any) {
+      return null;
+    }
   }, []);
 
   useEffect(() => {
-    if (member?.discourseRedirectUrl) {
-      window.location.href = member.discourseRedirectUrl;
+    if (member) {
+      if (queryString.DiscourseConnect) {
+        if (requestAccessTokenAttemp === 0) {
+          const request = requestAccessTokenAsync();
+          request.then((res) => {
+            if (res) {
+              window.location.href = res;
+            }
+          });
 
-      return;
+          return;
+        }
+      }
+
+      if (requestAccessTokenAttemp === 0) {
+        navigate('/dashboard');
+      }
     }
-
-    if (member && queryString.DiscourseConnect) {
-      requestAccessTokenAsync();
-
-      return;
-    }
-
-    if (member) navigate('/dashboard');
-  }, [member]);
+  }, [member, requestAccessTokenAttemp]);
 
   React.useEffect(() => {
     register('email');

@@ -29,6 +29,7 @@ const Excercise: React.FC = () => {
       dispatch(fetchExerciseStats(member.id));
     }
   }, []);
+
   return (
     <VStack
       w="100%"
