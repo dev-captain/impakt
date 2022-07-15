@@ -30,7 +30,9 @@ const fitnessSlice = createSlice({
       .addCase(fetchActiveDays.rejected, (state) => {
         state.activeDays = 0;
         state.isFitnessLoading = false;
-      })
+      });
+
+    builder
       .addCase(fetchExerciseStats.pending, (state) => {
         state.isFitnessLoading = true;
       })
