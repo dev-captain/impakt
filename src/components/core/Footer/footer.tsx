@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import {
   VStack,
   HStack,
@@ -7,9 +7,9 @@ import {
   Text,
   GridItem,
   SimpleGrid,
-  InputGroup,
-  InputLeftElement,
-  Input,
+  // InputGroup,
+  // InputLeftElement,
+  // Input,
   Button,
   Link,
 } from '@chakra-ui/react';
@@ -17,8 +17,8 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import Email from 'components/icons/Email';
-import useNewsletter from 'hooks/useNewsletter';
+// import Email from 'components/icons/Email';
+// import useNewsletter from 'hooks/useNewsletter';
 import NavBarLink from '../Navbar/NavBarLink';
 import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
 import ImpaktIcon from '../../icons/ImpaktIcon';
@@ -26,22 +26,23 @@ import ImpaktIcon from '../../icons/ImpaktIcon';
 const ImpaktFooter = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(`default`).i18n;
-  const [email, setEmail] = useState('');
-  const { sendData, loading } = useNewsletter();
-  const handleEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  // const [email, setEmail] = useState('');
+  // const { sendData, loading } = useNewsletter();
+  // const handleEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(e.target.value);
+  // };
 
   return (
     <HeroLayout
       pos="relative"
+      removeTopPadding
       bgColor="#09090B"
       align="center"
       minH="auto !important"
       justify="flex-start"
     >
       <VStack width="100%">
-        <VStack w="100%">
+        {/* <VStack w="100%">
           <HStack
             justifyContent="center"
             alignItems="flex-start"
@@ -57,7 +58,7 @@ const ImpaktFooter = () => {
                 justifyContent="center"
                 display="flex"
               >
-                <VStack
+                {/* <VStack
                   w="full"
                   padding={{ base: '0px 10px', md: '0px 40px', lg: '0px' }}
                   rowGap="24px"
@@ -126,11 +127,11 @@ const ImpaktFooter = () => {
                       </Button>
                     </Box>
                   </HStack>
-                </VStack>
-              </GridItem>
-            </SimpleGrid>
-          </HStack>
-        </VStack>
+                </VStack> */}
+        {/* </GridItem> */}
+        {/* </SimpleGrid> */}
+        {/* </HStack> */}
+        {/* </VStack>  */}
         <VStack w="100%">
           <VStack w={{ base: 'auto', lg: '1200px', xl: '1200px' }}>
             <HStack
