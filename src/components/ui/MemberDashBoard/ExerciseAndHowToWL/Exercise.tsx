@@ -23,7 +23,7 @@ const Excercise: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
-  const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.excersieStates);
+  const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.exerciseState);
   React.useEffect(() => {
     if (member) {
       dispatch(fetchExerciseStats(member.id));
@@ -89,7 +89,6 @@ const Excercise: React.FC = () => {
                     key={stats.exercisei}
                   >
                     <Td textStyle="regular3" borderBottom={0}>
-                      {/* {console.log(usePascalCase(stats.exercise), "usePascalCase(stats.exercise)")} */}
                       {usePascalCase(stats.exercise)}
                     </Td>
                     <Td borderBottom={0} textStyle="regular4">

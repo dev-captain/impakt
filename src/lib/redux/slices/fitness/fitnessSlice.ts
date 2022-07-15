@@ -5,13 +5,13 @@ import { fetchExerciseStats } from './actions/fetchExerciseStats';
 interface FitnessInitialI {
   isFitnessLoading: boolean;
   activeDays: number;
-  excersieStates: Array<string>;
+  exerciseState: Array<string>;
 }
 
 const fitnessInitialState: FitnessInitialI = {
   isFitnessLoading: false,
   activeDays: 0,
-  excersieStates: [],
+  exerciseState: [],
 };
 
 const fitnessSlice = createSlice({
@@ -35,11 +35,11 @@ const fitnessSlice = createSlice({
         state.isFitnessLoading = true;
       })
       .addCase(fetchExerciseStats.fulfilled, (state, action) => {
-        state.excersieStates = action.payload;
+        state.exerciseState = action.payload;
         state.isFitnessLoading = false;
       })
       .addCase(fetchExerciseStats.rejected, (state) => {
-        state.excersieStates = [];
+        state.exerciseState = [];
         state.isFitnessLoading = false;
       });
   },
