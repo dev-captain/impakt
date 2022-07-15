@@ -23,6 +23,8 @@ const Images = {
     Instagram: require('./Instagram.png'),
     FacebookDark: require('./FacebookDark.png'),
     InstagramDark: require('./InstagramDark.png'),
+    LinkedIn: require('./linkedin.png'),
+    LinkedInDark: require('./linkedindark.png'),
     Walletad: require('./walletad.png'),
     Goldaword: require('./goldaword.png'),
   },
