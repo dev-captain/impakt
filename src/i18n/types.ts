@@ -3,12 +3,16 @@ const contact = 'contact';
 const events = 'events';
 const ourRoadmap = 'ourRoadmap';
 const ourAdvisor = 'ourAdvisor';
-const ourAdvisorTitle = 'ourAdvisorTitle';
+const impaktAdvisor = 'impaktAdvisor';
 const Founder = 'Founder';
 const ourTeam = 'ourTeam';
+const impaktIcons = 'impaktIcons';
 const navbar = 'navbar';
 const burnAndEarn = 'burnAndEarn';
+const impaktNFT = 'impaktNFT';
+const impaktCreed = 'impaktCreed';
 const computerVision = 'computerVision';
+const toolTip = 'toolTip';
 const impaktGamesHero = 'impaktGamesHero';
 const contactUs = 'contactUs';
 const footer = 'footer';
@@ -28,6 +32,9 @@ const TranslationKeys = {
     social: `${impaktGamesHero}.social`,
     fitness: `${impaktGamesHero}.fitness`,
     gamified: `${impaktGamesHero}.gamified`,
+    workout: `${impaktGamesHero}.workout`,
+    excercise: `${impaktGamesHero}.excercise`,
+    squats: `${impaktGamesHero}.squats`,
   },
   downloadPlateform: {
     download: `${downloadPlateform}.download`,
@@ -48,21 +55,45 @@ const TranslationKeys = {
     computerVision: `${computerVision}.computerVision`,
     technology: `${computerVision}.technology`,
     description: `${computerVision}.description`,
+    description1: `${computerVision}.description1`,
+    aiDescription: `${computerVision}.aiDescription`,
     hardwareCard: `${computerVision}.hardwareCard`,
     cameraCard: `${computerVision}.cameraCard`,
+  },
+  toolTip: {
+    downloadLabel: `${toolTip}.downloadLabel`,
+    godlBonus: `${toolTip}.godlBonus`,
+    earningCrypto: `${toolTip}.earningCrypto`,
+    description: `${toolTip}.description`,
   },
   burnAndEarn: {
     earn: `${burnAndEarn}.earn`,
     burnAnd: `${burnAndEarn}.burnAnd`,
     description: `${burnAndEarn}.description`,
   },
+  impaktNFT: {
+    impaktDesign: `${impaktNFT}.impaktDesign`,
+    impaktlabel: `${impaktNFT}.impaktlabel`,
+    impaktChris: `${impaktNFT}.impaktChris`,
+    description: `${impaktNFT}.description`,
+    description1: `${impaktNFT}.description1`,
+    careerdescription: `${impaktNFT}.careerdescription`,
+    careerdescription1: `${impaktNFT}.careerdescription1`,
+  },
+  impaktCreed: {
+    creed: `${impaktCreed}.creed`,
+    creedLabel: `${impaktCreed}.creedLabel`,
+    description: `${impaktCreed}.description`,
+    description2: `${impaktCreed}.description2`,
+    description1: `${impaktCreed}.description1`,
+  },
   ourAdvisor: {
     our: `${ourAdvisor}.our`,
     advisor: `${ourAdvisor}.advisor`,
   },
-  ourAdvisorTitle: {
-    adviser: `${ourAdvisorTitle}.adviser`,
-    Title: `${ourAdvisorTitle}.Title`,
+  impaktAdvisor: {
+    adviser: `${impaktAdvisor}.adviser`,
+    Title: `${impaktAdvisor}.Title`,
   },
   Founder: {
     builders: `${Founder}.builders`,
@@ -71,6 +102,14 @@ const TranslationKeys = {
   ourTeam: {
     our: `${ourTeam}.our`,
     team: `${ourTeam}.team`,
+  },
+  impaktIcons: {
+    influential: `${impaktIcons}.influential`,
+    Title: `${impaktIcons}.Title`,
+    description: `${impaktIcons}.description`,
+    twitter: `${impaktIcons}.twitter`,
+    tiktok: `${impaktIcons}.tiktok`,
+    instagram: `${impaktIcons}.instagram`,
   },
   ourRoadmap: {
     our: `${ourRoadmap}.our`,
@@ -113,6 +152,9 @@ const TranslationKeys = {
     termOfUse: `${footer}.termOfUse`,
     allRightReserved: `${footer}.allRightReserved`,
     downloadApp: `${footer}.downloadApp`,
+    getImpakt: `${footer}.getImpakt`,
+    unsubscribe: `${footer}.unsubscribe`,
+    stayUpdated: `${footer}.stayUpdated`,
   },
   password: {
     recovery: `${password}.recovery`,

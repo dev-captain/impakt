@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useMediaQuery } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
@@ -27,11 +28,17 @@ const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   }
 `;
 
-const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: number; y: number }>`
+const DesktopVideo = styled.video<{
+  isAnimated: boolean;
+  isScrolling: boolean;
+  x: number;
+  y: number;
+  isMobile: boolean;
+}>`
   object-fit: cover;
   width: ${(p) => (p.isAnimated ? '640px' : '100vw')};
   height: ${(p) => (p.isAnimated ? '360px' : '100vh')};
-  z-index: 1;
+  z-index: 7;
   position: ${(p) => (p.isAnimated ? 'absolute' : 'fixed')};
   animation: ${(p) =>
     p.isScrolling &&
@@ -45,41 +52,68 @@ const Video = styled.video<{ isAnimated: boolean; isScrolling: boolean; x: numbe
   border-radius: 0px 0px 10px 10px;
 `;
 
+const MobileVideo = styled.video`
+  z-index: 9999;
+  object-fit: cover;
+  width: 640px;
+  height: 360px;
+  margin: 0 !important;
+  border-radius: 0px 0px 10px 10px;
+`;
+
 const Source = styled.source``;
 
-const HeroVideo = React.forwardRef<HTMLVideoElement>((_, ref) => {
-  const dispatch = useAppDispatch();
-  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
-  const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
-  const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
-  const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
-  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
+const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithoutRef<'video'>>(
+  (props, ref) => {
+    const dispatch = useAppDispatch();
+    const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+    const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+    const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
+    const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
+    const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
-  return (
-    <Video
-      x={borderX + 10}
-      ref={ref}
-      y={borderY + 260}
-      isAnimated={isLessThan1280 || isAnimated}
-      onWheel={() => {
-        if (!isScrolling) {
-          dispatch(setIsScrolling());
-          setTimeout(() => {
-            dispatch(setIsAnimated());
-          }, 1000);
-        }
-      }}
-      isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
-      autoPlay
-      loop
-      muted
-      onLoadedData={() => {
-        dispatch(setIsLoaded(true));
-      }}
-    >
-      <Source src={Videos.heroVideo} type="video/mp4" />
-    </Video>
-  );
-});
+    return isLessThan1280 ? (
+      <MobileVideo
+        onLoadedData={() => {
+          dispatch(setIsLoaded(true));
+        }}
+        ref={ref}
+        autoPlay
+        loop
+        muted
+        {...props}
+        playsInline
+      >
+        <Source src={Videos.heroVideo} type="video/mp4" />
+      </MobileVideo>
+    ) : (
+      <DesktopVideo
+        x={borderX}
+        ref={ref}
+        y={borderY}
+        isMobile
+        isAnimated={isLessThan1280 || isAnimated}
+        onWheel={() => {
+          if (!isScrolling) {
+            dispatch(setIsScrolling());
+            setTimeout(() => {
+              dispatch(setIsAnimated());
+            }, 1000);
+          }
+        }}
+        isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
+        autoPlay
+        loop
+        muted
+        playsInline
+        onLoadedData={() => {
+          dispatch(setIsLoaded(true));
+        }}
+      >
+        <Source src={Videos.heroVideo} type="video/mp4" />
+      </DesktopVideo>
+    );
+  },
+);
 
 export default memo(HeroVideo);

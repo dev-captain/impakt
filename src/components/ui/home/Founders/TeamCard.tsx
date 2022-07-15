@@ -1,4 +1,4 @@
-import { Box, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Image, Text, useMediaQuery, VStack } from '@chakra-ui/react';
 import React, { useRef } from 'react';
 
 const TeamCard = ({
@@ -6,16 +6,19 @@ const TeamCard = ({
   name,
   title,
   subtitle,
+  subtitle1,
 }: {
   image: string;
   name: string;
   title: string;
   subtitle: string;
+  subtitle1: string;
 }) => {
   // const bgColor = useColorModeValue('glass.800', 'glass.200');
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const teamCardRef = useRef<HTMLDivElement | null>(null);
   const handleOnMouseOverTeamCard = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!teamCardRef.current) return;
+    if (!teamCardRef.current || isLessThan1280) return;
     const mouseX = e.clientX;
     const mouseY = e.clientY;
     const bound = teamCardRef.current.getBoundingClientRect();
@@ -37,7 +40,7 @@ const TeamCard = ({
     `;
   };
   const handleOnMouseLeaveTeamCard = () => {
-    if (!teamCardRef.current) return;
+    if (!teamCardRef.current || isLessThan1280) return;
     teamCardRef.current.style.transform = '';
     teamCardRef.current.style.background = '';
   };
@@ -98,7 +101,7 @@ const TeamCard = ({
         justify={{ base: 'center', md: 'center' }}
         mt={{ base: 0, md: 0, xl: '64px' }}
       >
-        <Text textStyle="semiBold16" color="#F04153">
+        <Text textStyle="semiBold5" color="#F04153">
           {' '}
           {title}
         </Text>
@@ -114,20 +117,30 @@ const TeamCard = ({
         align="center"
         justify="center"
         mt="0px !important"
-        mb="10px !important"
+        mb="0px !important"
       >
-        <Box backgroundColor="rgba(255, 255, 255, 0.04)" borderRadius="8px" w="100%">
+        <Box
+          backgroundColor="rgba(255, 255, 255, 0.04)"
+          borderRadius="8px"
+          w="100%"
+          height={{ base: 'auto', md: '178px' }}
+          padding="12px 16px 12px 16px"
+          box-sizing="border-box"
+          border="2px solid rgba(255, 255, 255, 0.04)"
+        >
           <Text
-            textStyle="regular3"
+            textStyle="semiBold5"
             margin="0 !important"
-            height="168px"
-            padding="8px 16px 8px 16px"
-            box-sizing="border-box"
-            borderRadius="8px"
-            border="2px solid rgba(255, 255, 255, 0.04)"
-            color="#9fa4af"
+            color=" rgba(255, 255, 255, 0.75)"
             whiteSpace="pre-line"
             dangerouslySetInnerHTML={{ __html: subtitle }}
+          />
+          <Text
+            textStyle="semiBold5"
+            marginTop="6px !important"
+            color=" rgba(255, 255, 255, 0.75)"
+            whiteSpace="pre-line"
+            dangerouslySetInnerHTML={{ __html: subtitle1 }}
           />
         </Box>
       </VStack>

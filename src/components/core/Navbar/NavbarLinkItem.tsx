@@ -28,7 +28,12 @@ const NavbarLinkItem = ({
   const navigate = useNavigate();
 
   return (
-    <VStack justifyContent="center" h="100px" onClick={onClose} cursor="pointer">
+    <VStack
+      justifyContent="center"
+      h={{ base: '40px', md: '100px' }}
+      onClick={onClose}
+      cursor="pointer"
+    >
       {type === 'LINK' && (
         <Box
           as="a"

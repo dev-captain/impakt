@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Tooltip } from '@chakra-ui/react';
+import { Box, Flex, HStack, Tooltip, Image } from '@chakra-ui/react';
 import * as React from 'react';
 
 import TooltopIcon from '../../assets/svgs/tooltipIcon.svg';
@@ -18,22 +18,25 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
 }) => {
   return (
     <HStack
-      paddingX="19px"
-      paddingY="16px"
+      paddingX={{ base: '12px', lg: '19px' }}
+      paddingY={{ base: '12px', lg: '16px' }}
       borderRadius="16px"
       backdropFilter="blur(40px);"
       background="rgba(28, 28, 40, 0.65)"
       id="info-card"
       w="100%"
+      maxW="500px"
       justifyContent="space-between"
     >
       <HStack columnGap="0.5em" id="left">
         {LeftLogo && <Box>{LeftLogo}</Box>}
-        <Box id="description">{children}</Box>
+        <Box id="description" ml="0 !important">
+          {children}
+        </Box>
       </HStack>
-      <Flex id="right">
+      <Flex id="right" ml="0px !important">
         {isShowTooltip && (
-          <Box cursor="pointer" id="tooltip">
+          <Box ml="10px" cursor="pointer" id="tooltip">
             <Tooltip
               p="20px 20px"
               label={tooltipLabel}
@@ -48,7 +51,7 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
               closeOnClick={false}
             >
               <Box>
-                <img src={TooltopIcon} alt="TooltopIcon" sizes="32px" />
+                <Image src={TooltopIcon} alt="TooltopIcon" width={{ base: '24px', lg: '32px' }} />
               </Box>
             </Tooltip>
           </Box>

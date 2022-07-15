@@ -106,6 +106,11 @@ export default {
     fontWeight: '700',
     lineHeight: '20px',
   },
+  bold15: {
+    fontSize: '15px',
+    fontWeight: '700',
+    lineHeight: '15px',
+  },
   regular2: {
     fontSize: '14px',
     fontWeight: '400',
@@ -141,10 +146,20 @@ export default {
     fontWeight: '400',
     lineHeight: '16px',
   },
+  semiBold12: {
+    fontSize: '14px',
+    fontWeight: '500',
+    lineHeight: '12px',
+  },
   semiBold14: {
     fontSize: '14px',
-    fontWeight: '500px',
+    fontWeight: '500',
     lineHeight: '14px',
+  },
+  semiBold15: {
+    fontSize: '15px',
+    fontWeight: '500',
+    lineHeight: '15px',
   },
   semiBold17: {
     fontSize: '16px',
@@ -171,7 +186,8 @@ export default {
   TitleBold73: {
     fontWeight: '700',
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
-    fontSize: '96px',
+
+    fontSize: { sm: '72px', md: '86px', lg: '96px' },
     lineHeight: '96px',
   },
   TitleBold48: {
@@ -183,7 +199,7 @@ export default {
   TitleBold64: {
     fontWeight: '700',
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
-    fontSize: '64px',
+    fontSize: { base: '48px', lg: '64px' },
     lineHeight: '100%',
   },
   accentGradient: {
