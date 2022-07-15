@@ -91,9 +91,9 @@ const ExerciseCard: React.FC = () => {
         <Box mt="0 !important" id="exercise-cardprogress-bar-box">
           <Box position="relative">
             <CircularProgress
-              trackColor="rgba(240, 65, 83, 0.35)"
+              trackColor={accentRedtextColor}
               size="150px"
-              color={accentRedtextColor}
+              color="rgba(0,0,0,0.5)"
               value={circularProgressValue}
               thickness="9.5"
             >
