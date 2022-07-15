@@ -1,4 +1,4 @@
-import { Box, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Image, Text, useMediaQuery, VStack } from '@chakra-ui/react';
 import React, { useRef } from 'react';
 
 const TeamCard = ({
@@ -15,9 +15,10 @@ const TeamCard = ({
   subtitle1: string;
 }) => {
   // const bgColor = useColorModeValue('glass.800', 'glass.200');
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const teamCardRef = useRef<HTMLDivElement | null>(null);
   const handleOnMouseOverTeamCard = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!teamCardRef.current) return;
+    if (!teamCardRef.current || isLessThan1280) return;
     const mouseX = e.clientX;
     const mouseY = e.clientY;
     const bound = teamCardRef.current.getBoundingClientRect();
@@ -39,7 +40,7 @@ const TeamCard = ({
     `;
   };
   const handleOnMouseLeaveTeamCard = () => {
-    if (!teamCardRef.current) return;
+    if (!teamCardRef.current || isLessThan1280) return;
     teamCardRef.current.style.transform = '';
     teamCardRef.current.style.background = '';
   };
