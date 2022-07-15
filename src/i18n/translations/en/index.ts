@@ -39,7 +39,7 @@ export default {
   },
   toolTip: {
     downloadLabel:
-      'ODL is our in-game currency! You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!',
+      'GODL is our in-game currency! You’ll use it on our marketplace for whitelist spots, NFT discounts, Token exchange, and more!',
     earningCrypto: 'Start earning CRYPTO now!',
     godlBonus: '1000 GODL BONUS',
     description: ' *for new accounts',
