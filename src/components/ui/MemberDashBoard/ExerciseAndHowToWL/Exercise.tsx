@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import usePascalCase from 'hooks/usePascalCase';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
@@ -89,7 +89,8 @@ const Excercise: React.FC = () => {
                     key={stats.exercisei}
                   >
                     <Td textStyle="regular3" borderBottom={0}>
-                      {stats.exercise}
+                      {/* {console.log(usePascalCase(stats.exercise), "usePascalCase(stats.exercise)")} */}
+                      {usePascalCase(stats.exercise)}
                     </Td>
                     <Td borderBottom={0} textStyle="regular4">
                       {stats.repetitions}
