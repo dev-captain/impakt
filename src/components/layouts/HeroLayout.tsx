@@ -1,5 +1,5 @@
 import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
-import Footer from 'components/core/Footer';
+import Footer from 'components/core/Footer/FooterV1';
 import Navbar from 'components/core/Navbar';
 import React from 'react';
 
