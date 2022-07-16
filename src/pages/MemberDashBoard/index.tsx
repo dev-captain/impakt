@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
 
-import { WelcomeModal, Referrals } from 'components/ui/MemberDashBoard';
-import { C } from 'components';
+import { C, S } from 'components';
 // import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeImpaktUser/SummarizeImpaktUser';
 // import MemberWhitelistLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
 // import ReferralsAndWhiteListChallange from '../../components/ui/MemberDashBoard/ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';
@@ -45,13 +44,13 @@ const MemberDashboard: React.FC = () => {
               >
                 <Box w={{ base: '100%', lg: '50%' }}>
                   <MemberDashboardCard>
-                    <WelcomeModal />
+                    <S.WelcomeModal />
                   </MemberDashboardCard>
                 </Box>
 
                 <Box w={{ base: '100%', lg: '50%' }} marginLeft="0 !important">
                   <MemberDashboardCard>
-                    <Referrals />
+                    <S.Referrals />
                   </MemberDashboardCard>
                 </Box>
               </HStack>
