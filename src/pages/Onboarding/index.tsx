@@ -1,9 +1,9 @@
 import { Spinner, Text, VStack } from '@chakra-ui/react';
-import { C } from 'components';
+import { C, Common } from 'components';
 import { Widget } from '@typeform/embed-react';
 import useOnboardingCode from 'hooks/useOnboardingCode';
-import { GradientEllipse } from 'components/common/Gradients';
 import { layoutPadding } from 'theme';
+
 import Container from './component/Container';
 
 const OnboardingPage = () => {
@@ -26,7 +26,7 @@ const OnboardingPage = () => {
             <Text textStyle="bold6" fontWeight="700" pl="16px" align="center">
               {informativeMessage}
             </Text>
-            <GradientEllipse />
+            <Common.GradientEllipse />
           </Container>
         )}
         {showWidget && <Widget {...widgetProps} />}

@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import Images from 'assets/images';
-import { I, C } from 'components';
-import InfoCard from '../../../common/InfoCard';
+import { I, C, Common } from 'components';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
 
@@ -105,7 +104,7 @@ const EarnCrypto = () => {
                   mt="17px !important"
                   mb="48px !important"
                 >
-                  <InfoCard
+                  <Common.InfoCard
                     tooltipLabel={t(Keys.toolTip.downloadLabel)}
                     isShowTooltip
                     LeftLogo={<I.YoutubeIcon isMobile={isLessThan1280} />}
@@ -128,7 +127,7 @@ const EarnCrypto = () => {
                         {t(Keys.toolTip.description)}
                       </Text>
                     </VStack>
-                  </InfoCard>
+                  </Common.InfoCard>
                 </Box>
               </VStack>
             </VStack>

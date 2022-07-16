@@ -8,8 +8,7 @@ import {
   Spinner,
   useToast,
 } from '@chakra-ui/react';
-import GradientButton from 'components/common/GradientButton';
-import { C } from 'components';
+import { C, Common } from 'components';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -21,7 +20,6 @@ import { useNavigate } from 'react-router-dom';
 import { LoginReq } from '@impakt-dev/api-client';
 
 import Gradients from './Gradient';
-import TextField from '../../components/common/TextField';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { signInMember } from '../../lib/redux/slices/member/actions/signInMember';
@@ -211,7 +209,7 @@ const SignIn = () => {
                 w="full"
                 borderRadius={16}
               >
-                <TextField
+                <Common.TextField
                   name="email"
                   isOutlined
                   fontSize="14px"
@@ -237,7 +235,7 @@ const SignIn = () => {
                       Forgot password?
                     </Text>
                   </Box>
-                  <TextField
+                  <Common.TextField
                     isOutlined
                     name="password"
                     fontSize="14px"
@@ -258,7 +256,7 @@ const SignIn = () => {
                   fontSize={16}
                   marginTop={{ base: '24px !important' }}
                 >
-                  <GradientButton
+                  <Common.GradientButton
                     type="submit"
                     minH="64px"
                     py="32px"

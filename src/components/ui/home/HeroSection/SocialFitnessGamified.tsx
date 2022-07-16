@@ -3,10 +3,8 @@ import React from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import { C, I } from 'components';
+import { C, I, Common } from 'components';
 import Images from 'assets/images';
-
-import InfoCard from '../../../common/InfoCard';
 
 const SocialFitnessGamified: React.FC = ({ children }) => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
@@ -76,7 +74,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                 </Text>
               </Box>
               <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
-                <InfoCard
+                <Common.InfoCard
                   tooltipLabel={t(Keys.toolTip.downloadLabel)}
                   isShowTooltip
                   LeftLogo={<I.YoutubeIcon isMobile={isLessThan1280} />}
@@ -99,7 +97,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                       {t(Keys.toolTip.description)}
                     </Text>
                   </VStack>
-                </InfoCard>
+                </Common.InfoCard>
               </Box>
             </VStack>
             {children}

@@ -11,12 +11,10 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { I, C } from 'components';
+import { I, C, Common } from 'components';
 import Keys from 'i18n/types';
 import Images from 'assets/images';
 import AOS from 'aos';
-
-import InfoCard from '../../../common/InfoCard';
 
 import '../../../../theme/styles.css';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
@@ -83,7 +81,7 @@ const ImpaktNFT = () => {
                     </Text>
                   </Box>
                   <Box mt="0 !important" w="full" id="hero-info-card-box">
-                    <InfoCard LeftLogo={<I.RichIcon />}>
+                    <Common.InfoCard LeftLogo={<I.RichIcon />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text
                           textStyle={{ base: 'semiBold5', md: 'regular18' }}
@@ -92,7 +90,7 @@ const ImpaktNFT = () => {
                           {t(Keys.impaktNFT.description1)}
                         </Text>
                       </VStack>
-                    </InfoCard>
+                    </Common.InfoCard>
                   </Box>
                   <Box mt="0 !important" id="hero-headline-description" backgroundClip="text">
                     <Text

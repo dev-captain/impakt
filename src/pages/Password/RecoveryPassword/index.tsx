@@ -6,8 +6,7 @@ import {
   useBreakpointValue,
   useToast,
 } from '@chakra-ui/react';
-import GradientButton from 'components/common/GradientButton';
-import { C } from 'components';
+import { C, Common } from 'components';
 import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
@@ -130,7 +129,7 @@ const RecoveryPassword = () => {
             fontSize={16}
             marginTop={{ base: '20px !important', md: '24px !important' }}
           >
-            <GradientButton
+            <Common.GradientButton
               py="32px"
               w="full"
               radius="20px"

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
+import { Common } from 'components';
 import { VStack } from '@chakra-ui/react';
-import Gradients from '../../common/Gradients';
 
 interface MemberDashboardCardPropsI {
   isGradient?: boolean;
@@ -23,7 +23,9 @@ const MemberDashboardCard: React.FC<MemberDashboardCardPropsI> = ({
       marginTop="0 !important"
     >
       {children}
-      {isGradient && <Gradients secondX="875px" secondY="-31px" secondOpacity="0.8" isOrange />}
+      {isGradient && (
+        <Common.Gradients secondX="875px" secondY="-31px" secondOpacity="0.8" isOrange />
+      )}
     </VStack>
   );
 };

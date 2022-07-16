@@ -1,22 +1,20 @@
 import { Container } from '@chakra-ui/layout';
-import { DownloadPlatfrom, Footer, SubscriptionForm } from 'components/ui/Download';
-import Seo from 'components/core/Seo';
-import VideoModal from 'components/common/VideoModal';
+import { C, S, Common } from 'components';
 
 const DownloadSCreen = () => {
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      <VideoModal />
-      <Seo />
+      <Common.VideoModal />
+      <C.Seo />
 
       <div id="download-platform">
-        <DownloadPlatfrom />
+        <S.DownloadPlatfrom />
       </div>
 
       <div id="subscription-form">
-        <SubscriptionForm />
+        <S.SubscriptionForm />
       </div>
-      <Footer />
+      <C.FooterV1 />
     </Container>
   );
 };

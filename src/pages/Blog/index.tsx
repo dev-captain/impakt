@@ -1,5 +1,4 @@
 import { Text, VStack } from '@chakra-ui/react';
-import Seo from 'components/core/Seo';
 import { C } from 'components';
 import seoData from 'data/seoData';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,7 +12,7 @@ const BlogPage = () => {
 
   return (
     <C.HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
-      <Seo title={id || title} meta={[...meta, id ? { name: 'keywords', content: id } : {}]} />
+      <C.Seo title={id || title} meta={[...meta, id ? { name: 'keywords', content: id } : {}]} />
       <VStack minH="60vh" px={layoutPadding}>
         <Text>Blog: {id}</Text>
         <Text onClick={() => navigate('nft-marketplace')}>Nft Market Place</Text>

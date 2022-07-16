@@ -1,7 +1,5 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
-import GradientButton from 'components/common/GradientButton';
-import TextField from 'components/common/TextField';
-import { C } from 'components';
+import { C, Common } from 'components';
 import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
@@ -82,7 +80,7 @@ const SubscriptionForm = () => {
           marginTop="0 !important"
         >
           <VStack spacing="16px" w={{ base: 'full', md: '424px' }} borderRadius={16}>
-            <TextField
+            <Common.TextField
               name="email"
               isOutlined
               fontSize="14px"
@@ -100,7 +98,7 @@ const SubscriptionForm = () => {
             display="flex"
             fontSize={16}
           >
-            <GradientButton
+            <Common.GradientButton
               py="24px"
               w={{ base: 'full', md: '424px' }}
               radius="16px"

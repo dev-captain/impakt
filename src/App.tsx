@@ -19,8 +19,9 @@ import {
   MemberDashboard,
   SignIn,
 } from 'pages';
+import { Common } from 'components';
+
 import Authentication from './middlewares/Authentication';
-import ScrollToTop from './components/common/ScrollToTop';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -48,9 +49,9 @@ const App = () => {
       <Route
         path="/"
         element={
-          <ScrollToTop>
+          <Common.ScrollToTop>
             <Home />
-          </ScrollToTop>
+          </Common.ScrollToTop>
         }
       />
 

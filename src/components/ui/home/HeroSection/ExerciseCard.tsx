@@ -10,11 +10,10 @@ import {
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import { I } from 'components';
+import { I, Common } from 'components';
 
 import useAppSelector from '../../../../hooks/useAppSelector';
 // import useParallax from '../../../../hooks/useParallax';
-import AnimationAlways from '../../../common/AnimationAlways';
 
 import useParallax from '../../../../hooks/useParallax';
 
@@ -59,7 +58,7 @@ const ExerciseCard: React.FC = () => {
   }, [isAnimated]);
 
   return !isAnimated ? null : (
-    <AnimationAlways animationType="move" xValue={50}>
+    <Common.AnimationAlways animationType="move" xValue={50}>
       <Box left="-50%" top="-50%" w="1024px" h="768px" id="area" position="absolute" />
       <VStack
         zIndex={99999}
@@ -127,7 +126,7 @@ const ExerciseCard: React.FC = () => {
           </Box>{' '}
         </Box>{' '}
       </VStack>{' '}
-    </AnimationAlways>
+    </Common.AnimationAlways>
   );
 };
 

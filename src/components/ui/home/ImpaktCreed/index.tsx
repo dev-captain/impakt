@@ -3,9 +3,8 @@ import { memo } from 'react';
 import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import { C, I } from 'components';
+import { C, I, Common } from 'components';
 
-import InfoCard from '../../../common/InfoCard';
 import Images from '../../../../assets/images';
 
 const ImpaktCreed = () => {
@@ -76,7 +75,7 @@ const ImpaktCreed = () => {
                     />
                   </Box>
                   <Box mt="0 !important" w="full">
-                    <InfoCard LeftLogo={<I.RichIconK />}>
+                    <Common.InfoCard LeftLogo={<I.RichIconK />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text
                           textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
@@ -86,7 +85,7 @@ const ImpaktCreed = () => {
                           }}
                         />
                       </VStack>
-                    </InfoCard>
+                    </Common.InfoCard>
                   </Box>
                 </VStack>
               </GridItem>

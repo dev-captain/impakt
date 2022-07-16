@@ -1,5 +1,4 @@
 import { GridItem, SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import Seo from 'components/core/Seo';
 import { C } from 'components';
 import Article from 'components/ui/knowledgeBase/Article';
 import ArticleList from 'components/ui/knowledgeBase/ArticleList';
@@ -57,7 +56,7 @@ const KnowledgeBasePage = () => {
 
   return (
     <C.HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
-      <Seo
+      <C.Seo
         title={selectedArticle?.title || `${title} - ${selectedCategory?.title}`}
         meta={[
           ...meta,

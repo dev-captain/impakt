@@ -13,8 +13,7 @@ import {
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import DownloadButton from 'components/common/DownloadButton';
-import { I, C } from 'components';
+import { I, C, Common } from 'components';
 import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
 import Gradient from './Gradient';
@@ -55,7 +54,7 @@ const DownloadPlatform = () => {
               </VStack>
               <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={5} columnGap={5} w="100%">
                 <GridItem w="100%">
-                  <DownloadButton
+                  <Common.DownloadButton
                     isHorizontal
                     iconName="Windows"
                     title="Download for Windows"
@@ -63,7 +62,7 @@ const DownloadPlatform = () => {
                   />
                 </GridItem>
                 <GridItem w="full">
-                  <DownloadButton
+                  <Common.DownloadButton
                     isHorizontal
                     iconName="Apple"
                     title="Download for Mac"

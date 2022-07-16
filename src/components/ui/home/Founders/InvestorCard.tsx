@@ -1,5 +1,5 @@
 import { Box, Image, Text, VStack, useColorModeValue } from '@chakra-ui/react';
-import AnimationAlways from 'components/common/AnimationAlways';
+import { Common } from 'components';
 // import gsap, { Power2 } from 'gsap';
 import * as React from 'react';
 import useParallax from '../../../../hooks/useParallax';
@@ -25,7 +25,7 @@ const InvestorCard = ({ image, name, title }: { image: string; name: string; tit
   // };
 
   return (
-    <AnimationAlways animationType="move" xValue={100}>
+    <Common.AnimationAlways animationType="move" xValue={100}>
       <VStack
         ref={cardRef}
         // onMouseOver={handleMouseOver}
@@ -103,7 +103,7 @@ const InvestorCard = ({ image, name, title }: { image: string; name: string; tit
           </Box>
         </VStack>
       </VStack>
-    </AnimationAlways>
+    </Common.AnimationAlways>
   );
 };
 

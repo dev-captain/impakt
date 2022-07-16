@@ -1,6 +1,5 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue, useToast } from '@chakra-ui/react';
-import GradientButton from 'components/common/GradientButton';
-import { C } from 'components';
+import { C, Common } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -185,7 +184,7 @@ const ChangePassword = () => {
             fontSize={16}
             marginTop={{ base: '20px !important', md: '24px !important' }}
           >
-            <GradientButton
+            <Common.GradientButton
               py="32px"
               w={{ base: 'full', md: '240px' }}
               radius="20px"

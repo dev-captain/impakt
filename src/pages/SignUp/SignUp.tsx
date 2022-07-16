@@ -8,8 +8,7 @@ import {
   Link,
   useToast,
 } from '@chakra-ui/react';
-import GradientButton from 'components/common/GradientButton';
-import { C } from 'components';
+import { C, Common } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -20,7 +19,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
-import TextField from '../../components/common/TextField';
 import GenerateDigitNumber from './component/GenerateDigitNumber';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useAppSelector from '../../hooks/useAppSelector';
@@ -199,7 +197,7 @@ const SignUp = () => {
             borderRadius={16}
           >
             <Flex justifyContent="space-between" w="full">
-              <TextField
+              <Common.TextField
                 name="memberName"
                 zIndex="999"
                 isOutlined
@@ -212,7 +210,7 @@ const SignUp = () => {
                 error={errors.memberName ? errors.memberName.message : ''}
               />
 
-              <TextField
+              <Common.TextField
                 name="fourDigit"
                 boxWidth="40%"
                 zIndex="999"
@@ -236,10 +234,10 @@ const SignUp = () => {
                 >
                   #
                 </Box>
-              </TextField>
+              </Common.TextField>
             </Flex>
 
-            <TextField
+            <Common.TextField
               name="email"
               isOutlined
               fontSize="14px"
@@ -250,7 +248,7 @@ const SignUp = () => {
               type="email"
               error={errors.email ? errors.email.message : ''}
             />
-            <TextField
+            <Common.TextField
               name="password"
               isOutlined
               fontSize="14px"
@@ -262,7 +260,7 @@ const SignUp = () => {
               error={errors.password ? errors.password.message : ''}
             />
 
-            <TextField
+            <Common.TextField
               isOutlined
               name="passwordConfirmation"
               fontSize="14px"
@@ -313,7 +311,7 @@ const SignUp = () => {
               fontSize={16}
               marginTop={{ base: '24px !important' }}
             >
-              <GradientButton
+              <Common.GradientButton
                 type="submit"
                 py="32px"
                 w={{ base: 'full' }}
