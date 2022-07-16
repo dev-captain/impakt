@@ -3,11 +3,11 @@ import React from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import { I } from 'components';
 import Images from 'assets/images';
 
-import InfoCard from '../../../core/InfoCard';
+import InfoCard from '../../../common/InfoCard';
 
 const SocialFitnessGamified: React.FC = ({ children }) => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);

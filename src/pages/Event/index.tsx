@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import useEventStore from 'hooks/store/useEventStore';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

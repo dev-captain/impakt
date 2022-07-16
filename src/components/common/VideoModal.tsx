@@ -10,7 +10,7 @@ import {
   GridItem,
 } from '@chakra-ui/react';
 import { I } from 'components';
-import DownloadButton from 'components/core/DownloadButton';
+import DownloadButton from 'components/common/DownloadButton';
 import useModalStore from 'hooks/store/useModalStore';
 
 function VideoModal() {

@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import { layoutPadding } from 'theme';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';

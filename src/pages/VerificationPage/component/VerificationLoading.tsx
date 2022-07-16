@@ -4,7 +4,7 @@ import keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
 import Images from 'assets/images';
 
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import Gradients from './Gradient';
 
 const VerificationLoading: React.FC = () => {

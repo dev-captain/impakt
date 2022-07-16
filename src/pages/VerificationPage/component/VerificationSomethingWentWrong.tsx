@@ -1,6 +1,6 @@
 import React from 'react';
 import { useColorModeValue, VStack, Text, useBreakpointValue, Image } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';

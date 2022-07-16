@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
 
 import { WelcomeModal, Referrals } from 'components/ui/MemberDashBoard';
-import HeroLayout from '../../components/layouts/HeroLayout';
+import HeroLayout from '../../components/core/Layouts/HeroLayout';
 // import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeImpaktUser/SummarizeImpaktUser';
 // import MemberWhitelistLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
 // import ReferralsAndWhiteListChallange from '../../components/ui/MemberDashBoard/ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';

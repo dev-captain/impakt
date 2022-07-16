@@ -8,7 +8,7 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import InvestorCard from '../Founders/InvestorCard';

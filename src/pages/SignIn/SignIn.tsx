@@ -8,8 +8,8 @@ import {
   Spinner,
   useToast,
 } from '@chakra-ui/react';
-import GradientButton from 'components/core/GradientButton';
-import HeroLayout from 'components/layouts/HeroLayout';
+import GradientButton from 'components/common/GradientButton';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { LoginReq } from '@impakt-dev/api-client';
 
 import Gradients from './Gradient';
-import TextField from '../../components/core/TextField';
+import TextField from '../../components/common/TextField';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { signInMember } from '../../lib/redux/slices/member/actions/signInMember';

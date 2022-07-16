@@ -8,8 +8,8 @@ import {
   Link,
   useToast,
 } from '@chakra-ui/react';
-import GradientButton from 'components/core/GradientButton';
-import HeroLayout from 'components/layouts/HeroLayout';
+import GradientButton from 'components/common/GradientButton';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -20,7 +20,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Gradients from './Gradient';
-import TextField from '../../components/core/TextField';
+import TextField from '../../components/common/TextField';
 import GenerateDigitNumber from './component/GenerateDigitNumber';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useAppSelector from '../../hooks/useAppSelector';

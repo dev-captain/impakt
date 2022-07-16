@@ -1,7 +1,7 @@
 import { Container } from '@chakra-ui/layout';
 import { DownloadPlatfrom, Footer, SubscriptionForm } from 'components/ui/Download';
 import Seo from 'components/core/Seo';
-import VideoModal from 'components/core/VideoModal';
+import VideoModal from 'components/common/VideoModal';
 
 const DownloadSCreen = () => {
   return (

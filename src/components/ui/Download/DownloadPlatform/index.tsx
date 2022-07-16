@@ -10,11 +10,11 @@ import {
   GridItem,
   Text,
 } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import DownloadButton from 'components/core/DownloadButton';
+import DownloadButton from 'components/common/DownloadButton';
 import { I } from 'components';
 import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';

@@ -1,5 +1,5 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
-import Spacer from 'components/core/Spacer';
+import Spacer from 'components/common/Spacer';
 import { CommunityData } from 'data';
 import CommunityChip from './CommunityChip';
 

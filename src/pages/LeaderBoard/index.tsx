@@ -1,7 +1,7 @@
 import { Button, Text, useBreakpointValue, useColorModeValue, VStack } from '@chakra-ui/react';
 import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
-import Spacer from 'components/core/Spacer';
-import HeroLayout from 'components/layouts/HeroLayout';
+import Spacer from 'components/common/Spacer';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import useLeaderBoard from 'hooks/store/useLeaderboard';
 import { useEffect } from 'react';
 import LeaderboardCard from './component/LeaderboardCard';

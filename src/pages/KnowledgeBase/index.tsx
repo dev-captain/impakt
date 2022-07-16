@@ -1,6 +1,6 @@
 import { GridItem, SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import Seo from 'components/core/Seo';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import Article from 'components/ui/knowledgeBase/Article';
 import ArticleList from 'components/ui/knowledgeBase/ArticleList';
 import Category from 'components/ui/knowledgeBase/Category';

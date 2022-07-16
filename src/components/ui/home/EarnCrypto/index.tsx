@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import Images from 'assets/images';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import { I } from 'components';
-import InfoCard from '../../../core/InfoCard';
+import InfoCard from '../../../common/InfoCard';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
 

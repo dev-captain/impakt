@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import { I } from 'components';
 
-import HeroLayout from 'components/layouts/HeroLayout';
-import InfoCard from '../../../core/InfoCard';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
+import InfoCard from '../../../common/InfoCard';
 
 const YourBody: React.FC = ({ children }) => {
   const [isSmall] = useMediaQuery('(max-width: 1280px)');

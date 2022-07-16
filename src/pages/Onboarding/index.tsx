@@ -1,5 +1,5 @@
 import { Spinner, Text, VStack } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import { Widget } from '@typeform/embed-react';
 import useOnboardingCode from 'hooks/useOnboardingCode';
 import { GradientEllipse } from 'components/common/Gradients';

@@ -1,7 +1,7 @@
 import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { I } from 'components';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
 import { layoutPadding } from 'theme';
 import keys from 'i18n/types';

@@ -20,7 +20,7 @@ import {
   SignIn,
 } from 'pages';
 import Authentication from './middlewares/Authentication';
-import ScrollToTop from './components/core/ScrollToTop';
+import ScrollToTop from './components/common/ScrollToTop';
 
 const App = () => {
   const { setColorMode } = useColorMode();

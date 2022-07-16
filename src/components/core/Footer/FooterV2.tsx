@@ -13,7 +13,7 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';

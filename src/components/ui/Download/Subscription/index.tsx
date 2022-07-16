@@ -1,7 +1,7 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
-import GradientButton from 'components/core/GradientButton';
-import TextField from 'components/core/TextField';
-import HeroLayout from 'components/layouts/HeroLayout';
+import GradientButton from 'components/common/GradientButton';
+import TextField from 'components/common/TextField';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';

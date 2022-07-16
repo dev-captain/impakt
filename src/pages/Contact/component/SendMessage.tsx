@@ -10,10 +10,10 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
-import GradientButton from 'components/core/GradientButton';
-import TextareaField from 'components/core/TextareaField';
-import TextField from 'components/core/TextField';
-import HeroLayout from 'components/layouts/HeroLayout';
+import GradientButton from 'components/common/GradientButton';
+import TextareaField from 'components/common/TextareaField';
+import TextField from 'components/common/TextField';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import useContactUs from 'hooks/useContactUs';
 import React, { useState } from 'react';
 import { layoutPadding } from 'theme';

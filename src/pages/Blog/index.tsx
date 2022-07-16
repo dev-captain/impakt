@@ -1,6 +1,6 @@
 import { Text, VStack } from '@chakra-ui/react';
 import Seo from 'components/core/Seo';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import seoData from 'data/seoData';
 import { useNavigate, useParams } from 'react-router-dom';
 import { layoutPadding } from 'theme';

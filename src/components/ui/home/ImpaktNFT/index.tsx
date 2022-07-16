@@ -12,12 +12,12 @@ import {
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import Images from 'assets/images';
 import AOS from 'aos';
 import { I } from 'components';
 
-import InfoCard from '../../../core/InfoCard';
+import InfoCard from '../../../common/InfoCard';
 
 import '../../../../theme/styles.css';
 import 'aos/dist/aos.css'; // You can also use <link> for styles

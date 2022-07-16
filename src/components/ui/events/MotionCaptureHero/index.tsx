@@ -9,7 +9,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
-import HeroLayout from 'components/layouts/HeroLayout';
+import HeroLayout from 'components/core/Layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
 import { useTranslation } from 'react-i18next';
 import { layoutPadding } from 'theme';
