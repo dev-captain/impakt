@@ -17,11 +17,11 @@ import HeroLayout from 'components/layouts/HeroLayout';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+import { I } from 'components';
 // import Email from 'components/icons/Email';
 // import useNewsletter from 'hooks/useNewsletter';
 import NavBarLink from '../Navbar/NavBarLink';
 import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
-import ImpaktIcon from '../../icons/ImpaktIcon';
 
 const ImpaktFooter = () => {
   const navigate = useNavigate();
@@ -162,7 +162,7 @@ const ImpaktFooter = () => {
                       justifyContent={{ base: 'space-between', md: 'start' }}
                     >
                       <Box onClick={() => navigate('/')} zIndex={100} mr="32px">
-                        <ImpaktIcon width="111px" height="32px" />
+                        <I.ImpaktIcon width="111px" height="32px" />
                       </Box>
                       <Link href="/download" _hover={{ textDecoration: 'none' }}>
                         <Button colorScheme="red">{t(Keys.footer.downloadApp)}</Button>

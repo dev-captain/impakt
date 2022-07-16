@@ -15,8 +15,10 @@ import Keys from 'i18n/types';
 import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import AOS from 'aos';
+import { I } from 'components';
+
 import InfoCard from '../../../core/InfoCard';
-import RichIcon from '../../../icons/RichIcon';
+
 import '../../../../theme/styles.css';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 
@@ -82,7 +84,7 @@ const ImpaktNFT = () => {
                     </Text>
                   </Box>
                   <Box mt="0 !important" w="full" id="hero-info-card-box">
-                    <InfoCard LeftLogo={<RichIcon />}>
+                    <InfoCard LeftLogo={<I.RichIcon />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text
                           textStyle={{ base: 'semiBold5', md: 'regular18' }}

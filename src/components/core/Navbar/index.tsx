@@ -16,6 +16,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+
+import { I } from 'components';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -23,7 +25,6 @@ import SignInLinkItem from './SignInLinkItem';
 import useAppSelector from '../../../hooks/useAppSelector';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import ImpaktIcon from '../../icons/ImpaktIcon';
 
 // const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
@@ -96,7 +97,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <ImpaktIcon cursor="pointer" width="111px" height="32px" />
+            <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
           </Box>
           <HStack
             justify="flex-end"

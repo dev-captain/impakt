@@ -4,8 +4,8 @@ import Keys from 'i18n/types';
 
 import Images from 'assets/images';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { I } from 'components';
 import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
 
@@ -109,7 +109,7 @@ const EarnCrypto = () => {
                   <InfoCard
                     tooltipLabel={t(Keys.toolTip.downloadLabel)}
                     isShowTooltip
-                    LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
+                    LeftLogo={<I.YoutubeIcon isMobile={isLessThan1280} />}
                   >
                     <VStack alignItems="flex-start" color="white">
                       <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>

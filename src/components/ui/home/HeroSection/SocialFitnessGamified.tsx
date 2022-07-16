@@ -4,10 +4,10 @@ import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@ch
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { I } from 'components';
 import Images from 'assets/images';
 
 import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
 
 const SocialFitnessGamified: React.FC = ({ children }) => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
@@ -80,7 +80,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                 <InfoCard
                   tooltipLabel={t(Keys.toolTip.downloadLabel)}
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
+                  LeftLogo={<I.YoutubeIcon isMobile={isLessThan1280} />}
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>

@@ -3,11 +3,10 @@ import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+import { I } from 'components';
 
 import HeroLayout from 'components/layouts/HeroLayout';
 import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
-import RichIcon2 from '../../../icons/RichIcon2';
 
 const YourBody: React.FC = ({ children }) => {
   const [isSmall] = useMediaQuery('(max-width: 1280px)');
@@ -51,7 +50,7 @@ const YourBody: React.FC = ({ children }) => {
                 id="our-ai-card-box"
                 w="full"
               >
-                <InfoCard LeftLogo={<RichIcon2 />}>
+                <InfoCard LeftLogo={<I.RichIcon2 />}>
                   <VStack alignItems="flex-start" color="white">
                     <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
                       {t(Keys.computerVision.aiDescription)}
@@ -110,7 +109,7 @@ const YourBody: React.FC = ({ children }) => {
                 <InfoCard
                   tooltipLabel={t(Keys.toolTip.downloadLabel)}
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon isMobile={isSmall} />}
+                  LeftLogo={<I.YoutubeIcon isMobile={isSmall} />}
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>

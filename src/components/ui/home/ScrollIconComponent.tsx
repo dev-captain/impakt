@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import * as React from 'react';
-import ScrollIcon from '../../icons/Scroll';
+import { I } from 'components';
 
 const rotate = keyframes`
   0%{
@@ -52,7 +52,7 @@ const ScrollIconComponent: React.FC<{
 
   return (
     <Box bottom={bottom} isVisible={isVisible} left={left} zIndex={zIndex} position={position}>
-      <ScrollIcon viewBox={viewBox} fillIcon={fillIcon} width={width} height={height} />
+      <I.ScrollIcon viewBox={viewBox} fillIcon={fillIcon} width={width} height={height} />
     </Box>
   );
 };

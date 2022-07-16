@@ -10,12 +10,12 @@ import {
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+import { I } from 'components';
 
 import useAppSelector from '../../../../hooks/useAppSelector';
 // import useParallax from '../../../../hooks/useParallax';
 import AnimationAlways from '../../../common/AnimationAlways';
-import AccelerationIcon from '../../../icons/AccelerationIcon';
-import SegmentedProgress from '../../../icons/SegmentedProgress';
+
 import useParallax from '../../../../hooks/useParallax';
 
 const ExerciseCard: React.FC = () => {
@@ -97,7 +97,7 @@ const ExerciseCard: React.FC = () => {
           mt="0 !important"
           id="exercise-card-activity-description"
         >
-          <AccelerationIcon />
+          <I.AccelerationIcon />
           <Text color="#FFFFFF" textStyle="normal5">
             {t(Keys.impaktGamesHero.squats)}
           </Text>
@@ -122,7 +122,7 @@ const ExerciseCard: React.FC = () => {
               </CircularProgressLabel>
             </CircularProgress>
             <Box position="absolute" left="2px" top="2.4px">
-              <SegmentedProgress />
+              <I.SegmentedProgress />
             </Box>
           </Box>{' '}
         </Box>{' '}

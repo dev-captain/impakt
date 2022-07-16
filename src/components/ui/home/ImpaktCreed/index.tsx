@@ -4,8 +4,9 @@ import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/reac
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import HeroLayout from 'components/layouts/HeroLayout';
+import { I } from 'components';
+
 import InfoCard from '../../../core/InfoCard';
-import RichIconK from '../../../icons/RichIconK';
 import Images from '../../../../assets/images';
 
 const ImpaktCreed = () => {
@@ -76,7 +77,7 @@ const ImpaktCreed = () => {
                     />
                   </Box>
                   <Box mt="0 !important" w="full">
-                    <InfoCard LeftLogo={<RichIconK />}>
+                    <InfoCard LeftLogo={<I.RichIconK />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text
                           textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
