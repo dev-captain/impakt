@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import {
   Box,
   Flex,
-  Image,
+  // Image,
   HStack,
   useDisclosure,
   useMediaQuery,
@@ -26,25 +26,25 @@ import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import ImpaktIcon from '../../icons/ImpaktIcon';
 
-const { dark, light } = Images;
+// const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
   Images.Common;
 
-const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButton?: boolean }) => {
+const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
 
   useEffect(() => {
-    if (!isLessThan1040) {
+    if (!isLessThan1280) {
       onClose();
     }
-  }, [isLessThan1040, onClose]);
+  }, [isLessThan1280, onClose]);
 
   useEffect(() => {
     if (path.path === 'dashboard') {
@@ -68,10 +68,10 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
   return (
     <Box
       pos="absolute"
-      zIndex="999999"
+      zIndex="99999"
       w="full"
       paddingX="16px"
-      display={isLessThan1040 ? 'auto' : 'flex'}
+      display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
       sx={{ position: 'fixed', top: '0' }}
     >
@@ -82,7 +82,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         maxW="1232px"
         flexDir="row"
         alignSelf="center"
-        overflow="hidden"
+        overflow="visible"
         color={textColor}
         position="relative"
         alignItems="center"
@@ -104,13 +104,13 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
             align="center"
             w="full"
             spacing={[0, 0, 3, 5, 8, 12]}
-            display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
+            display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
           >
             <HStack w="full" align="space-between" justify="space-between">
               <NavBarLink IsHeader />
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
                 <NavBarSocialIcons />
-                {!showDarkOrLightModeButton && (
+                {/* {!showDarkOrLightModeButton && (
                   <Box
                     as="button"
                     onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
@@ -123,8 +123,8 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
                       {..._hover}
                     />
                   </Box>
-                )}
-                <Box display="flex">
+                )} */}
+                <Box position="relative" display="flex">
                   <DropDownProfileMenu />
                 </Box>
                 <Box>
@@ -213,7 +213,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
           <CollapseMenuController
             isOpen={isOpen}
             onToggle={onToggle}
-            isLessThan1040={isLessThan1040}
+            isLessThan1280={isLessThan1280}
           />
         </HStack>
       </Flex>
@@ -222,7 +222,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         onClose={onClose}
         bg={bgColor}
         textColor={textColor}
-        isLessThan1040={isLessThan1040}
+        isLessThan1040={isLessThan1280}
         twitter={twitter}
         discord={discord}
         hover={_hover}
