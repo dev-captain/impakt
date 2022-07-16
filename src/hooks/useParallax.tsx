@@ -10,7 +10,7 @@ const useParallax = (
   elementsRef: React.MutableRefObject<any>[],
   { range }: UseParallaxOptionsType,
 ) => {
-  const calcValue = (a: any, b: any) => ((a / b) * range - range / 2).toFixed(1); // thanks @alice-mx
+  const calcValue = (a: any, b: any) => ((a / b) * range - range / 2).toFixed(1);
 
   React.useEffect(() => {
     let timeout: any;
