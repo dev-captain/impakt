@@ -24,9 +24,9 @@ const DropDownProfileMenu: React.FC = () => {
   const toast = useToast();
 
   return member ? (
-    <Menu autoSelect={false} strategy="fixed">
+    <Menu placement="bottom" boundary="scrollParent" autoSelect={false}>
       <MenuButton>
-        <HStack as="button" onClick={() => navigate('/dashboard')}>
+        <HStack>
           <DefaultImpaktProfileIcon width="40px" height="40px" />
         </HStack>
       </MenuButton>

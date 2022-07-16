@@ -32,6 +32,7 @@ const NavbarLink = ({ IsHeader }: Props) => {
       onClose();
     }
   }, [isLessThan1040, onClose]);
+
   return (
     <HStack
       spacing={[3, 3, 3, 5, 8, 12]}

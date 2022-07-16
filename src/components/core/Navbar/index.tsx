@@ -68,7 +68,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
   return (
     <Box
       pos="absolute"
-      zIndex="999999"
+      zIndex="99999"
       w="full"
       paddingX="16px"
       display={isLessThan1040 ? 'auto' : 'flex'}
@@ -82,7 +82,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
         maxW="1232px"
         flexDir="row"
         alignSelf="center"
-        overflow="hidden"
+        overflow="visible"
         color={textColor}
         position="relative"
         alignItems="center"
@@ -124,7 +124,7 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
                     />
                   </Box>
                 )}
-                <Box display="flex">
+                <Box position="relative" display="flex">
                   <DropDownProfileMenu />
                 </Box>
                 <Box>
