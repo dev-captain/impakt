@@ -3,8 +3,7 @@ import React from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
-import { I } from 'components';
+import { C, I } from 'components';
 import Images from 'assets/images';
 
 import InfoCard from '../../../common/InfoCard';
@@ -16,7 +15,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       showNavbar
       spacing={10}
       pos="relative"
@@ -107,7 +106,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

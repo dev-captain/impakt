@@ -3,9 +3,8 @@ import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import { I } from 'components';
+import { I, C } from 'components';
 
-import HeroLayout from 'components/core/Layouts/HeroLayout';
 import InfoCard from '../../../common/InfoCard';
 
 const YourBody: React.FC = ({ children }) => {
@@ -13,7 +12,7 @@ const YourBody: React.FC = ({ children }) => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       spacing={0}
       removeTopPadding={isSmall}
       customPadding={0}
@@ -136,7 +135,7 @@ const YourBody: React.FC = ({ children }) => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -3,8 +3,7 @@ import { memo } from 'react';
 import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
-import { I } from 'components';
+import { C, I } from 'components';
 
 import InfoCard from '../../../common/InfoCard';
 import Images from '../../../../assets/images';
@@ -13,7 +12,7 @@ const ImpaktCreed = () => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       // showNavbar
       pos="relative"
       bgImage={Images.backgrounds.creedSectionBg}
@@ -95,7 +94,7 @@ const ImpaktCreed = () => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import { GridItem, SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import Seo from 'components/core/Seo';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import Article from 'components/ui/knowledgeBase/Article';
 import ArticleList from 'components/ui/knowledgeBase/ArticleList';
 import Category from 'components/ui/knowledgeBase/Category';
@@ -56,7 +56,7 @@ const KnowledgeBasePage = () => {
   }, [selectedCategory?.slug]);
 
   return (
-    <HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
+    <C.HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
       <Seo
         title={selectedArticle?.title || `${title} - ${selectedCategory?.title}`}
         meta={[
@@ -146,7 +146,7 @@ const KnowledgeBasePage = () => {
           </GridItem>
         </SimpleGrid>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

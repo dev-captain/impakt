@@ -9,7 +9,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import GradientButton from 'components/common/GradientButton';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -143,7 +143,7 @@ const SignUp = () => {
   };
 
   return (
-    <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
+    <C.HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         color={textColor}
         maxW={{ base: 'full', md: '551px' }}
@@ -345,7 +345,7 @@ const SignUp = () => {
           <GenerateDigitNumber onClick={generateRandomFourDigitNumberString} />
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 export default SignUp;

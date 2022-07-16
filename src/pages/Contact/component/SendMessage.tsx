@@ -13,7 +13,7 @@ import Images from 'assets/images';
 import GradientButton from 'components/common/GradientButton';
 import TextareaField from 'components/common/TextareaField';
 import TextField from 'components/common/TextField';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import useContactUs from 'hooks/useContactUs';
 import React, { useState } from 'react';
 import { layoutPadding } from 'theme';
@@ -57,7 +57,7 @@ const SendMessage = () => {
     !validateEmail(values.email);
 
   return (
-    <HeroLayout showNavbar bgImage={bgImage} minH="20vh">
+    <C.HeroLayout showNavbar bgImage={bgImage} minH="20vh">
       <VStack
         {...ContactProps.mVStack}
         px={layoutPadding}
@@ -161,7 +161,7 @@ const SendMessage = () => {
           </GridItem>
         </SimpleGrid>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import { Text, VStack } from '@chakra-ui/react';
 import Seo from 'components/core/Seo';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import seoData from 'data/seoData';
 import { useNavigate, useParams } from 'react-router-dom';
 import { layoutPadding } from 'theme';
@@ -12,13 +12,13 @@ const BlogPage = () => {
   const navigate = useNavigate();
 
   return (
-    <HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
+    <C.HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
       <Seo title={id || title} meta={[...meta, id ? { name: 'keywords', content: id } : {}]} />
       <VStack minH="60vh" px={layoutPadding}>
         <Text>Blog: {id}</Text>
         <Text onClick={() => navigate('nft-marketplace')}>Nft Market Place</Text>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

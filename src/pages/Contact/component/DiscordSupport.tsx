@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import { layoutPadding } from 'theme';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -23,7 +23,7 @@ const DiscordSupport = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   return (
-    <HeroLayout showFooter minH="20vh">
+    <C.HeroLayout showFooter minH="20vh">
       <SimpleGrid {...ContactProps.sGrid} px={layoutPadding}>
         <GridItem
           colSpan={{
@@ -94,7 +94,7 @@ const DiscordSupport = () => {
           <Image src={Images.contactUs.discordPeter} />
         </GridItem>
       </SimpleGrid>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -1,9 +1,11 @@
 import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
-import Footer from 'components/core/Footer/FooterV1';
-import Navbar from 'components/core/Navbar';
 import React from 'react';
 
-type HeroLayoutProps = {
+import Footer from './Footer/FooterV1';
+import Navbar from './Navbar';
+
+// eslint-disable-next-line import/prefer-default-export
+export const HeroLayout: React.FC<{
   bgImage?: string;
   bgColor?: string;
   spacing?: number;
@@ -20,9 +22,7 @@ type HeroLayoutProps = {
   children: React.ReactNode;
   align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
-};
-
-const HeroLayout = ({
+}> = ({
   bgImage,
   children,
   showFooter,
@@ -39,7 +39,7 @@ const HeroLayout = ({
   removeTopPadding = false,
   showDarkOrLightModeButton = true,
   pos,
-}: HeroLayoutProps) => {
+}) => {
   const backgroundColor = useColorModeValue('glass.900', 'glass.200');
 
   return (
@@ -80,5 +80,3 @@ const HeroLayout = ({
     </>
   );
 };
-
-export default HeroLayout;

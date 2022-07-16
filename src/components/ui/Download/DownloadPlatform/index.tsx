@@ -10,12 +10,11 @@ import {
   GridItem,
   Text,
 } from '@chakra-ui/react';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import DownloadButton from 'components/common/DownloadButton';
-import { I } from 'components';
+import { I, C } from 'components';
 import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
 import Gradient from './Gradient';
@@ -28,7 +27,7 @@ const DownloadPlatform = () => {
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       showNavbar
       minH="70vh"
       spacing={10}
@@ -96,7 +95,7 @@ const DownloadPlatform = () => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

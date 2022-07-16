@@ -13,11 +13,10 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { I, C } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import { I } from 'components';
 // import Email from 'components/icons/Email';
 // import useNewsletter from 'hooks/useNewsletter';
 import NavBarLink from '../Navbar/NavBarLink';
@@ -33,7 +32,7 @@ const ImpaktFooter = () => {
   // };
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       pos="relative"
       removeTopPadding
       bgColor="#09090B"
@@ -218,7 +217,7 @@ const ImpaktFooter = () => {
           </VStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

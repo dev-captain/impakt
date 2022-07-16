@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import useEventStore from 'hooks/store/useEventStore';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +19,7 @@ const EventPage = () => {
   }, [slug]);
 
   return (
-    <HeroLayout showFooter showNavbar minH="60vh">
+    <C.HeroLayout showFooter showNavbar minH="60vh">
       <VStack w="full" minH="70vh" pt={{ base: '16px', md: '80px' }} color={text}>
         <Text textStyle="bold7" fontWeight="700" mb="52px" pl="16px" align="center">
           {eventStore.event?.title || t(Keys.events.noEventsForNow)}
@@ -33,7 +33,7 @@ const EventPage = () => {
         <MotionCaptureHero />
         <BurnToEarnHero />
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

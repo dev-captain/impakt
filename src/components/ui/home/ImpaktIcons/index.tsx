@@ -8,7 +8,7 @@ import {
   useColorModeValue,
   Box,
 } from '@chakra-ui/react';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import IconsCard from './IconsCard';
@@ -21,7 +21,7 @@ const ImpaktIcons = () => {
   Icons = t('impaktIcons.icons', { returnObjects: true });
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       bgImage={bgImage}
       customPadding={{
         base: '16px',
@@ -104,7 +104,7 @@ const ImpaktIcons = () => {
           </VStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

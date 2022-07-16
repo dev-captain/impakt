@@ -1,5 +1,5 @@
 import { Spinner, Text, VStack } from '@chakra-ui/react';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import { Widget } from '@typeform/embed-react';
 import useOnboardingCode from 'hooks/useOnboardingCode';
 import { GradientEllipse } from 'components/common/Gradients';
@@ -18,7 +18,7 @@ const OnboardingPage = () => {
   } = useOnboardingCode();
 
   return (
-    <HeroLayout showFooter showNavbar minH="60vh">
+    <C.HeroLayout showFooter showNavbar minH="60vh">
       <VStack w="full" minH="70vh" pt={{ base: '16px' }} color={text} px={layoutPadding}>
         {showSpinner && <Spinner size="xl" />}
         {showInformativeMessage && (
@@ -31,7 +31,7 @@ const OnboardingPage = () => {
         )}
         {showWidget && <Widget {...widgetProps} />}
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

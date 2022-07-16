@@ -8,7 +8,7 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import InvestorCard from '../Founders/InvestorCard';
@@ -21,7 +21,7 @@ const Advisor = () => {
   Advisors = t('impaktAdvisor.Advisors', { returnObjects: true });
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       bgImage={Images.backgrounds.advisorsSectionBg}
       customPadding={{
         base: '16px',
@@ -93,7 +93,7 @@ const Advisor = () => {
           </VStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

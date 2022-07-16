@@ -1,7 +1,7 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
 import GradientButton from 'components/common/GradientButton';
 import TextField from 'components/common/TextField';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
@@ -34,7 +34,7 @@ const SubscriptionForm = () => {
   const isDisabled = !values.email || !validateEmail(values.email);
 
   return (
-    <HeroLayout minH="20vh">
+    <C.HeroLayout minH="20vh">
       <VStack
         position="relative"
         color={textColor}
@@ -112,7 +112,7 @@ const SubscriptionForm = () => {
           </VStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

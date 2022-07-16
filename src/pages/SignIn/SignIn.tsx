@@ -9,7 +9,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import GradientButton from 'components/common/GradientButton';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -156,7 +156,7 @@ const SignIn = () => {
   };
 
   return (
-    <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
+    <C.HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         color={textColor}
         maxW={{ base: 'full', md: '551px' }}
@@ -290,7 +290,7 @@ const SignIn = () => {
           </>
         )}
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 export default SignIn;

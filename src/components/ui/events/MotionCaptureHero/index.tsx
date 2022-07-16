@@ -9,12 +9,13 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
 import { useTranslation } from 'react-i18next';
 import { layoutPadding } from 'theme';
 import colors from 'theme/colors';
 import keys from 'i18n/types';
+import { C } from 'components';
+
 import MotionCard from './MotionCard';
 
 const commonProps: any = {
@@ -31,7 +32,7 @@ const MotionCaptureHero = () => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       customPadding={{
         base: '16px',
         md: '32px',
@@ -126,7 +127,7 @@ const MotionCaptureHero = () => {
           </VStack>
         </GridItem>
       </SimpleGrid>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

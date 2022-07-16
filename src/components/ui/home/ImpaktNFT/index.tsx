@@ -11,11 +11,10 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import { I, C } from 'components';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
 import Images from 'assets/images';
 import AOS from 'aos';
-import { I } from 'components';
 
 import InfoCard from '../../../common/InfoCard';
 
@@ -29,7 +28,7 @@ const ImpaktNFT = () => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       // showNavbar
       spacing={10}
       pos="relative"
@@ -141,7 +140,7 @@ const ImpaktNFT = () => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import Images from 'assets/images';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
-import { I } from 'components';
+import { I, C } from 'components';
 import InfoCard from '../../../common/InfoCard';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
@@ -15,7 +14,7 @@ const EarnCrypto = () => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       customPadding={0}
       // showNavbar
       pos="relative"
@@ -136,7 +135,7 @@ const EarnCrypto = () => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

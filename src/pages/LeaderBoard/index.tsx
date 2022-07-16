@@ -1,7 +1,7 @@
 import { Button, Text, useBreakpointValue, useColorModeValue, VStack } from '@chakra-ui/react';
 import AnimationInWhenVisible from 'components/common/AnimationInWhenVisible';
 import Spacer from 'components/common/Spacer';
-import HeroLayout from 'components/core/Layouts/HeroLayout';
+import { C } from 'components';
 import useLeaderBoard from 'hooks/store/useLeaderboard';
 import { useEffect } from 'react';
 import LeaderboardCard from './component/LeaderboardCard';
@@ -23,7 +23,7 @@ const LeaderBoard = () => {
   }, []);
 
   return (
-    <HeroLayout>
+    <C.HeroLayout>
       <AnimationInWhenVisible animationType="fade">
         <VStack
           color={text}
@@ -77,7 +77,7 @@ const LeaderBoard = () => {
           </VStack>
         </VStack>
       </AnimationInWhenVisible>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

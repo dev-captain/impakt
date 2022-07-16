@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
 
 import { WelcomeModal, Referrals } from 'components/ui/MemberDashBoard';
-import HeroLayout from '../../components/core/Layouts/HeroLayout';
+import { C } from 'components';
 // import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeImpaktUser/SummarizeImpaktUser';
 // import MemberWhitelistLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
 // import ReferralsAndWhiteListChallange from '../../components/ui/MemberDashBoard/ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';
@@ -10,7 +10,7 @@ import MemberDashboardCard from '../../components/ui/MemberDashBoard/MemberDashB
 
 const MemberDashboard: React.FC = () => {
   return (
-    <HeroLayout
+    <C.HeroLayout
       showNavbar
       minH="70vh"
       spacing={10}
@@ -78,7 +78,7 @@ const MemberDashboard: React.FC = () => {
             <MemberWhitelistLeaderBoard />
           </VStack> */}
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 
