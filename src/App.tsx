@@ -16,9 +16,9 @@ import {
   RecoveryPassword,
   Verify,
   SignUp,
+  MemberDashboard,
+  SignIn,
 } from 'pages';
-import MemberDashboard from './pages/MemberDashBoard';
-import SignIn from './pages/SignIn/SignIn';
 import Authentication from './middlewares/Authentication';
 import ScrollToTop from './components/core/ScrollToTop';
 
