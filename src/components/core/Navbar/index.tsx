@@ -10,7 +10,6 @@ import {
   useMediaQuery,
   useColorMode,
   Button,
-  Link,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -130,9 +129,18 @@ const Navbar = ({ showDarkOrLightModeButton = false }: { showDarkOrLightModeButt
                 <Box>
                   <SignInLinkItem />
                 </Box>
-                <Link href="/download" _hover={{ textDecoration: 'none' }}>
-                  <Button colorScheme="red">{t(Keys.navbar.download)}</Button>
-                </Link>
+                <Button
+                  as="a"
+                  href="/download"
+                  _hover={{ textDecoration: 'none' }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/download');
+                  }}
+                  colorScheme="red"
+                >
+                  {t(Keys.navbar.download)}
+                </Button>
               </HStack>
             </HStack>
           </HStack>
