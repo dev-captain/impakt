@@ -7,7 +7,7 @@ import useAppSelector from '../../../../hooks/useAppSelector';
 import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fetchActiveDays';
 import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 
-const GodlScore: React.FC = () => {
+const WelcomeModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
@@ -138,4 +138,4 @@ const GodlScore: React.FC = () => {
     </VStack>
   );
 };
-export default GodlScore;
+export default WelcomeModal;
