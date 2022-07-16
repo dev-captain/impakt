@@ -198,17 +198,19 @@ const CollapseMenu = ({
           </HStack>
         </HStack>
         <HStack w="full" align="space-between" flexDirection="column" justify="space-between">
-          <Box display="flex">
+          <Box justifyContent="center" my="2" alignItems="center" display="flex">
             <DropDownProfileMenu />
           </Box>
-          <Box>
+          <Box w="full" ml="0 !important">
             <SignInLinkItem />
           </Box>
-          <Link href="/download" _hover={{ textDecoration: 'none' }}>
-            <Button marginTop="8px" width={{ base: '100%', md: 'auto' }} colorScheme="red">
-              {t(Keys.navbar.download)}
-            </Button>
-          </Link>
+          <Box w="full" display="flex" mt="2" ml="0 !important">
+            <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
+              <Button marginTop="8px" width={{ base: '100%', md: 'auto' }} colorScheme="red">
+                {t(Keys.navbar.download)}
+              </Button>
+            </Link>
+          </Box>
         </HStack>
       </VStack>
     </Collapse>
