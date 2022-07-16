@@ -19,6 +19,7 @@ const ImpaktIcons = () => {
   const { t } = useTranslation().i18n;
   let Icons = useState<object[]>();
   Icons = t('impaktIcons.icons', { returnObjects: true });
+
   return (
     <HeroLayout
       bgImage={bgImage}

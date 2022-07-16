@@ -19,6 +19,7 @@ const Founder = () => {
   const { t } = useTranslation().i18n;
   let Team = useState<object[]>();
   Team = t('Founder.team', { returnObjects: true });
+
   return (
     <HeroLayout
       // showNavbar

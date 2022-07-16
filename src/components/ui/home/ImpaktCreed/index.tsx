@@ -10,6 +10,7 @@ import Images from '../../../../assets/images';
 
 const ImpaktCreed = () => {
   const { t } = useTranslation(`default`).i18n;
+
   return (
     <HeroLayout
       // showNavbar

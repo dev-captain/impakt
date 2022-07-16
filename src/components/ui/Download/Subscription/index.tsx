@@ -29,9 +29,7 @@ const SubscriptionForm = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = () => {
-    console.log('values', values);
-  };
+  const onSubmit = () => {};
 
   const isDisabled = !values.email || !validateEmail(values.email);
 
