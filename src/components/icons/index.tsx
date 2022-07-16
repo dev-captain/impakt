@@ -1,47 +1,22 @@
-import Play from './PlayIcon';
-import ProfileUser from './ProfileUserIcon';
-import VrGlass from './VrGlassIcon';
-import Runner from './RunnerIcon';
-import WhitePlay from './WhitePlayIcon';
-import NftGame from './NftGameIcon';
-import NftImage from './NftImageIcon';
-import Facebook from './FacebookIcon';
-import Google from './GoogleIcon';
-import Apple from './AppleIcon';
-import Twitter from './TwitterIcon';
-import Discord from './DiscordIcon';
-import SmallTwitter from './SmallTwitterIcon';
-import LeftArrow from './LeftArrowIcon';
-import RightArrow from './RightArrowIcon';
-import Window from './WindowIcon';
-import Cross from './CrossIcon';
-import CheckMark from './CheckMarkIcon';
-import UnCheckMark from './UnCheckMarkIcon';
-import Eye from './Eye';
-import EyeOff from './EyeOff';
-
-const Icons: { [key in string]: any } = {
-  ProfileUser,
-  Play,
-  Window,
-  VrGlass,
-  Runner,
-  WhitePlay,
-  NftGame,
-  NftImage,
-  Facebook,
-  Google,
-  Apple,
-  Cross,
-  Twitter,
-  Discord,
-  CheckMark,
-  UnCheckMark,
-  LeftArrow,
-  RightArrow,
-  SmallTwitter,
-  EyeOff,
-  Eye,
-};
-
-export default Icons;
+export { default as Play } from './PlayIcon';
+export { default as ProfileUserIcon } from './ProfileUserIcon';
+export { default as VrGlass } from './VrGlassIcon';
+export { default as Runner } from './RunnerIcon';
+export { default as WhitePlay } from './WhitePlayIcon';
+export { default as NftGame } from './NftGameIcon';
+export { default as NftImage } from './NftImageIcon';
+export { default as Facebook } from './FacebookIcon';
+export { default as Google } from './GoogleIcon';
+export { default as Apple } from './AppleIcon';
+export { default as Twitter } from './TwitterIcon';
+export { default as Discord } from './DiscordIcon';
+export { default as SmallTwitter } from './SmallTwitterIcon';
+export { default as LeftArrow } from './LeftArrowIcon';
+export { default as RightArrow } from './RightArrowIcon';
+export { default as Window } from './WindowIcon';
+export { default as Cross } from './CrossIcon';
+export { default as CheckMark } from './CheckMarkIcon';
+export { default as UnCheckMark } from './UnCheckMarkIcon';
+export { default as Eye } from './Eye';
+export { default as EyeOff } from './EyeOff';
+export { default as LoadingIcon } from './LoadingIcon';

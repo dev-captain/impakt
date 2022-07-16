@@ -1,6 +1,6 @@
 import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
-import Icons from 'components/icons';
+import { I } from 'components';
 import HeroLayout from 'components/layouts/HeroLayout';
 import useModalStore from 'hooks/store/useModalStore';
 import { layoutPadding } from 'theme';
@@ -104,6 +104,6 @@ const Play = ({ forMobile, onClick }: { forMobile?: boolean; onClick: () => void
     position={forMobile ? 'initial' : 'absolute'}
     d={{ base: forMobile ? 'flex' : 'none', md: forMobile ? 'none' : 'flex' }}
   >
-    <Icons.WhitePlay />
+    <I.WhitePlay />
   </Center>
 );

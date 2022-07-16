@@ -9,7 +9,7 @@ import {
   Circle,
   GridItem,
 } from '@chakra-ui/react';
-import Icons from 'components/icons';
+import { I } from 'components';
 import DownloadButton from 'components/core/DownloadButton';
 import useModalStore from 'hooks/store/useModalStore';
 
@@ -92,7 +92,7 @@ function VideoModal() {
             position="absolute"
             w={{ base: '20px', md: '50px' }}
           >
-            <Icons.Cross />
+            <I.Cross />
           </Circle>
           {!modal.hideButtons && (
             <SimpleGrid
@@ -139,7 +139,7 @@ export const Play = ({ onClick }: { onClick?: () => void | any }) => (
     bgColor="blackAlpha.800"
     boxShadow="4px 4px 10px rgba(0, 0, 0, 0.12)"
   >
-    <Icons.WhitePlay />
+    <I.WhitePlay />
   </Center>
 );
 

@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react';
-import Icons from 'components/icons';
+import { I } from 'components';
 
 const CheckBox = ({
   checked,
@@ -25,7 +25,7 @@ const CheckBox = ({
       borderColor="#21252A"
       borderWidth={checked ? 0 : '1px'}
     >
-      {checked ? <Icons.CheckMark /> : <Icons.UnCheckMark />}
+      {checked ? <I.CheckMark /> : <I.UnCheckMark />}
     </Center>
   );
 };

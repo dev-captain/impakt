@@ -1,5 +1,5 @@
 import React from 'react';
-import Icons from 'components/icons';
+import { I } from 'components';
 import { Box, Input, Text } from '@chakra-ui/react';
 
 type FieldProps = {
@@ -113,7 +113,7 @@ const TextField: React.FC<FieldProps> = ({
       />
       {type === 'password' && (
         <Box position="absolute" zIndex={10} top="16px" right="24px" onClick={onToggleShowPassword}>
-          {showPassword ? <Icons.Eye color={iconColor} /> : <Icons.EyeOff color={iconColor} />}
+          {showPassword ? <I.Eye color={iconColor} /> : <I.EyeOff color={iconColor} />}
         </Box>
       )}
       {!!error && (

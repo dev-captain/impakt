@@ -15,7 +15,7 @@ import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import DownloadButton from 'components/core/DownloadButton';
-import Play from 'components/icons/Play';
+import { I } from 'components';
 import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
 import Gradient from './Gradient';
@@ -79,7 +79,7 @@ const DownloadPlatform = () => {
 
             <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
               <VStack pos="absolute" zIndex={2}>
-                <Play />
+                <I.Play />
               </VStack>
               <Image
                 src={Images.downloadlaptop}
