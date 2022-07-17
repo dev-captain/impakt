@@ -20,6 +20,7 @@ export const HeroDesktop: React.FC = () => {
 
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = React.useState(false);
 
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const impaktGameHeroRef = React.useRef<HTMLDivElement | null>(null);
   const mirrorRef = React.useRef<HTMLDivElement | null>(null);
   const heroVideoRef = React.useRef<HTMLVideoElement | null>(null);
@@ -69,11 +70,14 @@ export const HeroDesktop: React.FC = () => {
   const moveToYourBodySection = (e: React.WheelEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
+    // console.log(containerRef.current?.scrollHeight);
     if (isScrolled.current) return;
-    if (!impaktGameHeroRef.current) return;
+    if (!impaktGameHeroRef.current || !containerRef.current || !yourBodySectionRef.current) return;
     if (isAnimated) {
       isScrolled.current = true;
-      window.scrollTo(0, impaktGameHeroRef.current.clientHeight - 200);
+      const centerY = yourBodySectionRef.current.offsetTop - 100;
+
+      window.scrollTo(0, centerY);
       setTimeout(() => {
         setIsMovedToYourBodySection((prev) => !prev);
       }, 200);
@@ -83,11 +87,12 @@ export const HeroDesktop: React.FC = () => {
 
   React.useEffect(() => {
     function checkOffSet() {
+      // console.log(window.scrollY);
       if (
         mirrorRef.current &&
         heroVideoRef.current &&
         yourBodySectionRef.current &&
-        window.scrollY < yourBodySectionRef.current.offsetTop - 200 &&
+        window.scrollY < yourBodySectionRef.current.offsetTop - 50 &&
         heroVideoScreenRef.current &&
         isAnimated
       ) {
@@ -134,6 +139,7 @@ export const HeroDesktop: React.FC = () => {
     <div
       onWheel={(e) => moveToYourBodySection(e)}
       style={{ backgroundColor: '#121117', position: 'relative' }}
+      ref={containerRef}
       id="stick"
     >
       <div ref={impaktGameHeroRef} id="impakt-game-hero">
@@ -142,7 +148,7 @@ export const HeroDesktop: React.FC = () => {
             id="hero-right"
             ref={heroRightSideRef}
             maxH="788px"
-            h="75vh"
+            h="80vh"
             w="full"
             margin="0 !important"
           >
@@ -187,8 +193,6 @@ export const HeroDesktop: React.FC = () => {
         </Box>
         <ScrollIconComponent
           fillIcon="rgba(255, 255, 255, 0.75)"
-          width="20"
-          height="20"
           isVisible={isAnimated}
           position="absolute"
           zIndex="1"
@@ -200,7 +204,7 @@ export const HeroDesktop: React.FC = () => {
           display="flex"
           w="640px"
           h="388px"
-          top="26vh"
+          top={{ lg: '20vh', lgx: '26vh' }}
           zIndex="5"
           left="40px"
           position="absolute"

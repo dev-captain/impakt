@@ -45,10 +45,8 @@ const ScrollIconComponent: React.FC<{
   height?: string;
   fillIcon?: string;
   bottom?: string;
-}> = ({ isVisible, left, position, zIndex, width, height, fillIcon, bottom }) => {
-  const viewBox = `0 0 ${Number(width) ? Number(width) + 90 : 80} ${
-    Number(height) ? Number(height) + 20 : 80
-  }`;
+}> = ({ isVisible, left, position, zIndex, width = 80, height = 80, fillIcon, bottom }) => {
+  const viewBox = `0 0 80 80`;
 
   return (
     <Box bottom={bottom} isVisible={isVisible} left={left} zIndex={zIndex} position={position}>
