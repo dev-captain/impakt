@@ -68,7 +68,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
   return (
     <Box
       pos="absolute"
-      zIndex="99999"
+      zIndex="99999999999"
       w="full"
       paddingX="16px"
       display={isLessThan1280 ? 'auto' : 'flex'}
