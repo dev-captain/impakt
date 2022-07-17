@@ -59,7 +59,7 @@ const ExerciseCard: React.FC = () => {
 
   return !isAnimated ? null : (
     <Common.AnimationAlways animationType="move" xValue={50}>
-      <Box left="-50%" top="-50%" w="1024px" h="768px" id="area" position="absolute" />
+      {/* <Box left="-50%" top="-50%" w="1024px" zIndex="-5" h="768px" id="area" position="absolute" /> */}
       <VStack
         zIndex={99999}
         w="234px"
