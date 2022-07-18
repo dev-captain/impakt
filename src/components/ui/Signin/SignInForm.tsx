@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import useAppDispatch from '../../../hooks/useAppDispatch';
 import useAppSelector from '../../../hooks/useAppSelector';
-import { requestAccessToken } from '../../../lib/redux/slices/member/actions/requestAccessToken';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
 import { Eye } from '../../icons';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -30,12 +29,7 @@ const SignInForm: React.FC = () => {
   const toast = useToast();
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuth.member);
-  const requestAccessTokenAttemp = useAppSelector(
-    (state) => state.memberAuth.requestAccessTokenAttemptCount,
-  );
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
-  const navigate = useNavigate();
   const {
     handleSubmit,
     formState: { errors },
@@ -49,68 +43,6 @@ const SignInForm: React.FC = () => {
     register('email');
     register('password');
   }, []);
-
-  const requestAccessTokenAsync = React.useCallback(async () => {
-    toast({
-      title: 'Logging in to forums',
-      duration: 2000,
-      status: 'info',
-    });
-
-    try {
-      const request = await dispatch(
-        requestAccessToken({
-          discoursePayload: queryString.sso,
-          discourseSig: queryString.sig,
-        }),
-      ).unwrap();
-
-      if (request.discourseRedirectUrl === undefined) {
-        toast({
-          title: 'Error',
-          description: ' "Something went wrong...',
-          isClosable: false,
-          duration: 2000,
-          status: 'error',
-        });
-
-        return undefined;
-      }
-
-      toast({
-        title: 'Success',
-        description: ' "Redirecting to forums..',
-        isClosable: false,
-        duration: 2000,
-        status: 'success',
-      });
-
-      return request.discourseRedirectUrl;
-    } catch (error: any) {
-      return null;
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (member) {
-      if (queryString.DiscourseConnect) {
-        if (requestAccessTokenAttemp === 0) {
-          const request = requestAccessTokenAsync();
-          request.then((res) => {
-            if (res) {
-              window.location.href = res;
-            }
-          });
-
-          return;
-        }
-      }
-
-      if (requestAccessTokenAttemp === 0) {
-        navigate('/dashboard');
-      }
-    }
-  }, [member, requestAccessTokenAttemp]);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name, e.target.value, { shouldValidate: true });
