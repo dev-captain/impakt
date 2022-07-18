@@ -1,5 +1,6 @@
 import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
 import React from 'react';
+import { ImpaktFooter } from '../ui';
 
 import Footer from './Footer/FooterV1';
 import Navbar from './Navbar';
@@ -16,6 +17,7 @@ export const HeroLayout: React.FC<{
   minH?: string;
 
   showFooter?: boolean;
+  showFooterV2?: boolean;
   customPadding?: string | any;
   removeBottomPadding?: boolean;
   removeTopPadding?: boolean;
@@ -35,6 +37,7 @@ export const HeroLayout: React.FC<{
   justify = 'center',
   showNavbar = false,
   addSpacer = false,
+  showFooterV2 = false,
 
   removeTopPadding = false,
   showDarkOrLightModeButton = true,
@@ -77,6 +80,7 @@ export const HeroLayout: React.FC<{
         </VStack>
       </Box>
       {showFooter && <Footer />}
+      {showFooterV2 && <ImpaktFooter />}
     </>
   );
 };

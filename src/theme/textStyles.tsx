@@ -96,6 +96,11 @@ export default {
     fontWeight: '500',
     lineHeight: '24px',
   },
+  semiBold6: {
+    fontSize: '18px',
+    fontWeight: '500',
+    lineHeight: '24px',
+  },
   regular3: {
     fontSize: '16px',
     fontWeight: '400',

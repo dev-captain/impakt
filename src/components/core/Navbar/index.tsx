@@ -25,6 +25,7 @@ import SignInLinkItem from './SignInLinkItem';
 import useAppSelector from '../../../hooks/useAppSelector';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
+import ImpaktButton from '../../common/ImpaktButton';
 
 // const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
@@ -130,18 +131,16 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
                 <Box>
                   <SignInLinkItem />
                 </Box>
-                <Button
+                <ImpaktButton
                   as="a"
                   href="/download"
-                  _hover={{ textDecoration: 'none' }}
                   onClick={(e) => {
                     e.preventDefault();
                     navigate('/download');
                   }}
-                  colorScheme="red"
                 >
                   {t(Keys.navbar.download)}
-                </Button>
+                </ImpaktButton>
               </HStack>
             </HStack>
           </HStack>

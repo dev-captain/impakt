@@ -21,3 +21,6 @@ export { default as RichIconK } from './RichIconK';
 export { default as RichIcon } from './RichIcon';
 export { default as RichIcon2 } from './RichIcon2';
 export { default as CopyClipBoardIcon } from './CopyClipBoardIcon';
+export { default as Email } from './Email';
+export { default as Password } from './Password';
+export { default as EnterIcon } from './EnterIcon';
