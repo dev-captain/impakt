@@ -1,4 +1,4 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, HStack, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
 
 import Images from '../../../../assets/images';
@@ -17,6 +17,7 @@ export const HeroDesktop: React.FC = () => {
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
   const isScrolled = React.useRef(false);
+  const [isHeightLessThan975] = useMediaQuery('(max-height: 975px)');
 
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = React.useState(false);
 
@@ -75,7 +76,9 @@ export const HeroDesktop: React.FC = () => {
     if (!impaktGameHeroRef.current || !containerRef.current || !yourBodySectionRef.current) return;
     if (isAnimated) {
       isScrolled.current = true;
-      const centerY = yourBodySectionRef.current.offsetTop - 100;
+      const minus = isHeightLessThan975 ? -50 : 100;
+      console.log(isHeightLessThan975);
+      const centerY = yourBodySectionRef.current.offsetTop - minus;
 
       window.scrollTo(0, centerY);
       setTimeout(() => {
@@ -156,8 +159,9 @@ export const HeroDesktop: React.FC = () => {
           </HStack>
         </SocialFitnessGamified>
       </div>
-      {isScrolling && (
-        <div id="impakt-your-body" ref={yourBodySectionRef}>
+
+      <div id="impakt-your-body" ref={yourBodySectionRef}>
+        {isScrolling && (
           <YourBody>
             <HStack
               height={{ base: '89.962962962963vh', lgx: '788px' }}
@@ -170,8 +174,8 @@ export const HeroDesktop: React.FC = () => {
               <Box />
             </HStack>
           </YourBody>
-        </div>
-      )}
+        )}
+      </div>
 
       <MirrorAndStarsVideo
         id="starsvideo"
