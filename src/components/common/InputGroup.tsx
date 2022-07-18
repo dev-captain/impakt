@@ -87,12 +87,13 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
         )}
         <Input
           name={name}
+          id={name}
           h="100%"
           border="none"
           _focus={{ border: '2px solid rgba(240, 65, 83, 1)' }}
           minH="60px"
           type={type}
-          pl="80px"
+          pl={leftIcon ? '80px' : '20px'}
           minWidth={{ base: '100%', md: '503px' }}
           placeholder={placeholder}
           textStyle="regular201"
