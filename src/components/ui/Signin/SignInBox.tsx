@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Common } from 'components';
 import { Text, Flex, Box } from '@chakra-ui/react';
-import { t } from 'i18next';
 
 import SignInForm from './SignInForm';
 
@@ -13,13 +12,7 @@ const SignInBox: React.FC<PropsI> = () => {
       <Flex mt="1em !important" justifyContent="center">
         <Text textStyle="semiBold5" pos="relative">
           First time?
-          <Box
-            // onClick={() => navigate('/register')}
-            mx="5px"
-            cursor="pointer"
-            textColor="impaktRed"
-            as="span"
-          >
+          <Box as="a" href="register" mx="5px" cursor="pointer" textColor="impaktRed">
             Create an account
           </Box>
         </Text>

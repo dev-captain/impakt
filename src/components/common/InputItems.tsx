@@ -1,19 +1,9 @@
 import * as React from 'react';
 import { Common } from 'components';
+import { InputGroupPropsI } from './InputGroup';
 
 interface InputBoxProps {
-  inputItems: {
-    leftIcon?: Element;
-    rightIcon?: Element;
-    placeholder?: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-    type?: React.HTMLInputTypeAttribute;
-    label?: string;
-    helpText?: {
-      onClick: () => void;
-      text: string;
-    };
-  }[];
+  inputItems: InputGroupPropsI[];
 }
 const InputItems: React.FC<InputBoxProps> = ({ inputItems }) => {
   return (

@@ -4,25 +4,31 @@ import {
   InputGroup as ChakraInputGroup,
   FormLabel,
   Box,
-  VStack,
   InputRightElement,
+  Text,
+  As,
 } from '@chakra-ui/react';
 import * as React from 'react';
 
-interface InputGroupPropsI {
-  leftIcon?: Element;
-  rightIcon?: Element;
+export interface InputGroupPropsI {
+  name: string;
+  leftIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
+  rightIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
   placeholder?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
   type?: React.HTMLInputTypeAttribute;
   label?: string;
   helpText?: {
-    onClick: () => void;
+    onClick?: () => void;
     text: string;
+    as?: As<any>;
+    href?: string;
   };
+  errorMsg?: string;
 }
 
 const InputGroup: React.FC<InputGroupPropsI> = ({
+  name,
   leftIcon,
   rightIcon,
   placeholder,
@@ -30,10 +36,8 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
   type,
   label,
   helpText,
+  errorMsg,
 }) => {
-  const [isFocus, setIsFocus] = React.useState(false);
-  const [isHover, setIsHover] = React.useState(false);
-
   return (
     <Box minH="60px" justifyContent="flex-start" alignItems="flex-start">
       {label && (
@@ -41,12 +45,19 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
           justifyContent="space-between"
           display="flex"
           w="full"
+          color="rgba(255, 255, 255, 0.85)"
           textStyle="semiBold6"
           lineHeight="120%"
         >
           <Box>{label}:</Box>
           {helpText && (
-            <Box cursor="pointer" onClick={helpText.onClick} color="impaktRed">
+            <Box
+              cursor="pointer"
+              href={helpText.href}
+              as={helpText.as}
+              onClick={helpText.onClick}
+              color="impaktRed"
+            >
               {helpText.text}
             </Box>
           )}
@@ -75,6 +86,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
           </InputLeftElement>
         )}
         <Input
+          name={name}
           h="100%"
           border="none"
           _focus={{ border: '2px solid rgba(240, 65, 83, 1)' }}
@@ -84,16 +96,33 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
           minWidth={{ base: '100%', md: '503px' }}
           placeholder={placeholder}
           textStyle="regular201"
-          _placeholder={{ color: 'rgba(255, 255, 255, 0.4)' }}
+          isInvalid={!!errorMsg}
           borderRadius="12px"
           onChange={onChange}
+          _autofill={{
+            textFillColor: '#c6c6c6',
+            boxShadow: '0 0 0px 1000px #121216 inset',
+            transition: 'background-color 5000s ease-in-out 0s',
+          }}
         />
         {rightIcon && (
-          <InputRightElement marginRight="3px" pointerEvents="none" h="full">
+          <InputRightElement cursor="pointer" marginRight="3px" h="full">
             {rightIcon}
           </InputRightElement>
         )}
       </ChakraInputGroup>
+
+      {errorMsg && (
+        <Box w="full" mt="5px" ml="10px">
+          <Text
+            bgClip="text"
+            textStyle="regular12"
+            bgGradient="linear(to-r, rgba(220, 20, 60, 1), rgba(178, 34, 34, 1))"
+          >
+            {errorMsg}
+          </Text>
+        </Box>
+      )}
     </Box>
   );
 };

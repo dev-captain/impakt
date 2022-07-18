@@ -9,6 +9,7 @@ interface ImpaktButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
+  isLoading?: boolean;
 }
 
 const ImpaktButton: React.FC<ImpaktButtonProps> = ({
@@ -20,6 +21,7 @@ const ImpaktButton: React.FC<ImpaktButtonProps> = ({
   children,
   href,
   type,
+  isLoading,
 }) => {
   const bgColor = getBgColor(variant);
 
@@ -27,6 +29,7 @@ const ImpaktButton: React.FC<ImpaktButtonProps> = ({
     <Button
       type={type}
       w="full"
+      isLoading={isLoading}
       minW={size === 'sm' ? '122px' : '202px'}
       minH={size === 'sm' ? '38px' : '64px'}
       _hover={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
