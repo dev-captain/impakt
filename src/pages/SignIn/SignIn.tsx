@@ -157,7 +157,6 @@ const SignIn = () => {
 
   return (
     <C.HeroLayout
-      removeBottomPadding
       showFooterV2
       showNavbar
       minH="100vh"
@@ -175,7 +174,7 @@ const SignIn = () => {
       >
         {member && queryString.DiscourseConnect && <Spinner size="xl" />}
         {!member && (
-          <VStack>
+          <VStack w="full">
             <VStack w="full">
               <Box
                 css={{

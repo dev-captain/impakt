@@ -204,7 +204,7 @@ const SignInForm: React.FC = () => {
     >
       <Common.InputItems inputItems={inputItems} />
       <VStack m="0 !important" w="full">
-        <Box w="240px">
+        <Box w={{ base: 'full', lg: '240px' }}>
           <ImpaktButton
             isLoading={isMemberAuthLoading}
             type="submit"

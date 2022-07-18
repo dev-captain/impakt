@@ -7,7 +7,7 @@ import SignInForm from './SignInForm';
 interface PropsI {}
 const SignInBox: React.FC<PropsI> = () => {
   return (
-    <Common.Card maxW="576px" minH="428px" h="100%" w="full">
+    <Common.Card maxW="576px" h="100%" w="full">
       <SignInForm />
       <Flex mt="1em !important" justifyContent="center">
         <Text textStyle="semiBold5" pos="relative">

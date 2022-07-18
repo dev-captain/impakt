@@ -39,7 +39,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
   errorMsg,
 }) => {
   return (
-    <Box minH="60px" justifyContent="flex-start" alignItems="flex-start">
+    <Box width="full" minH="60px" justifyContent="flex-start" alignItems="flex-start">
       {label && (
         <FormLabel
           justifyContent="space-between"
