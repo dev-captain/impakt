@@ -24,9 +24,10 @@ const SignIn = () => {
       <VStack
         color={textColor}
         w="full"
-        px={{ base: '20px', md: '0' }}
+        px={{ base: '1em', md: '0' }}
         filter="drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.12)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.1));"
         overflow="hidden !important"
+        mt={{ base: '10px', lg: '15px' }}
       >
         {member && queryString.DiscourseConnect && <Spinner size="xl" />}
         {!member && <S.SignIn />}
