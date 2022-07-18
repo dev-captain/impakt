@@ -159,5 +159,12 @@ export default {
       item2: "5% of your referred friends' workout scores",
       item3: "2% of your referred friends' referrals' workout scores",
     },
+    exerciseList: {
+      headline: 'Reward History',
+      toolTipDescription: 'Tooltip here',
+      date: 'Date',
+      reason: 'Reason',
+      godl: 'GODL',
+    },
   },
 };

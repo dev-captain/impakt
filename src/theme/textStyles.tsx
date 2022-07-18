@@ -61,6 +61,11 @@ export default {
     fontWeight: '400',
     lineHeight: '36px',
   },
+  normal14: {
+    fontSize: '14px',
+    fontWeight: '600',
+    lineHeight: '16px',
+  },
   bold4: {
     fontSize: '24px',
     fontWeight: '700',

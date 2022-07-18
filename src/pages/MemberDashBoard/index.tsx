@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { VStack } from '@chakra-ui/react';
+import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 import HeroLayout from '../../components/layouts/HeroLayout';
 // import SummarizeImpaktUser from '../../components/ui/MemberDashBoard/SummarizeImpaktUser/SummarizeImpaktUser';
 // import MemberWhitelistLeaderBoard from '../../components/ui/MemberDashBoard/MemberWhiteListLeaderBoard/MemberWhiteListLeaderBoard';
@@ -21,6 +22,9 @@ const MemberDashboard: React.FC = () => {
       <VStack rowGap="74px" w="full">
         <VStack id="referrals-impakt-section" color="white" w="full">
           <ReferralsAndGodlScore />
+        </VStack>
+        <VStack id="referrals-impakt-section" color="white" w="full">
+          <ExerciseHistory />
         </VStack>
         {/* <VStack id="summarize-impakt-user-section" color="white" w="full">
             <SummarizeImpaktUser />

@@ -170,6 +170,13 @@ const TranslationKeys = {
       item2: `${memberDashboard}.whitelist.item2`,
       item3: `${memberDashboard}.whitelist.item3`,
     },
+    exerciseList: {
+      headline: `${memberDashboard}.exerciseList.headline`,
+      toolTipDescription: `${memberDashboard}.exerciseList.toolTipDescription`,
+      date: `${memberDashboard}.exerciseList.date`,
+      reason: `${memberDashboard}.exerciseList.reason`,
+      godl: `${memberDashboard}.exerciseList.godl`,
+    },
   },
 };
 

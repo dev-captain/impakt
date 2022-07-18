@@ -79,7 +79,12 @@ const Excercise: React.FC = () => {
               </Th>
             </Tr>
           </Thead>
-          <Tbody display="block" maxHeight="312px" sx={{ overflowY: 'overlay' }}>
+          <Tbody
+            display="block"
+            maxHeight="312px"
+            sx={{ overflowY: 'overlay' }}
+            className="table_scroll"
+          >
             {excerciseStatistics &&
               excerciseStatistics.map((stats: any) => {
                 return (
