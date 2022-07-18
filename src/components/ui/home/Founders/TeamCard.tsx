@@ -130,7 +130,7 @@ const TeamCard = ({
               box-sizing="border-box"
               transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
               transform="rotateX(0deg)"
-              transitionDuration="1s"
+              transitionDuration="0.5s"
               transitionProperty="transform, opacity"
               _groupHover={{
                 transform: 'rotateX(180deg)',
@@ -159,7 +159,7 @@ const TeamCard = ({
               border="2px solid rgba(255, 255, 255, 0.04)"
               padding="20px 16px"
               transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
-              transitionDuration="1s"
+              transitionDuration="0.5s"
               transitionProperty="transform, opacity"
               position="absolute"
               opacity="0"
