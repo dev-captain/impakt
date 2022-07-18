@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import ImpaktButton from '../../common/ImpaktButton';
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import useAppDispatch from '../../../hooks/useAppDispatch';
 import useAppSelector from '../../../hooks/useAppSelector';
@@ -195,14 +194,14 @@ const SignInForm: React.FC = () => {
       <Common.InputItems inputItems={inputItems} />
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '240px' }}>
-          <ImpaktButton
+          <Common.ImpaktButton
             isLoading={isMemberAuthLoading}
             type="submit"
             leftIcon={<I.EnterIcon width="24" height="24" />}
             size="lg"
           >
             Sign In
-          </ImpaktButton>
+          </Common.ImpaktButton>
         </Box>
       </VStack>
     </FormControl>
