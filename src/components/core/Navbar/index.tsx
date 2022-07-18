@@ -58,7 +58,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
   const discord = isLight ? Discord : DiscordLight;
   const twitter = isLight ? Twitter : TwitterLight;
   const textColor = isLight ? 'glass.100' : 'glass.700';
-  const bgColor = isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
   const _hover = {
     _hover: {
       transition: '0.2s ease',
