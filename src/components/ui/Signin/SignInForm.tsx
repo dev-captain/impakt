@@ -1,25 +1,15 @@
-import {
-  Box,
-  Flex,
-  FormControl,
-  Input,
-  useColorModeValue,
-  useToast,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import * as yup from 'yup';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginReq } from '@impakt-dev/api-client';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import ImpaktButton from '../../common/ImpaktButton';
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
-import Images from '../../../assets/images';
 import useAppDispatch from '../../../hooks/useAppDispatch';
 import useAppSelector from '../../../hooks/useAppSelector';
 import { requestAccessToken } from '../../../lib/redux/slices/member/actions/requestAccessToken';

@@ -4,8 +4,7 @@ import { Text, Flex, Box } from '@chakra-ui/react';
 
 import SignInForm from './SignInForm';
 
-interface PropsI {}
-const SignInBox: React.FC<PropsI> = () => {
+const SignInBox: React.FC = () => {
   return (
     <Common.Card maxW="576px" h="100%" w="full">
       <SignInForm />
