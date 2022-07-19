@@ -191,7 +191,7 @@ const SignUpForm: React.FC = () => {
           alignItems="center"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
-          {isShowPassword ? <EyeOff /> : <Eye />}
+          {isShowPassword ? <EyeOff width="24px" height="24px" /> : <Eye />}
         </Box>
       ),
       onChange,
@@ -212,7 +212,7 @@ const SignUpForm: React.FC = () => {
           alignItems="center"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
-          <Eye />
+          {isShowPassword ? <EyeOff width="24px" height="24px" /> : <Eye />}
         </Box>
       ),
       onChange,
