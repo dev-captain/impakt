@@ -7,12 +7,14 @@ import {
   InputRightElement,
   Text,
   As,
+  ResponsiveValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
 
 export interface InputGroupPropsI {
   name: string;
   leftIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
+  inputIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
   rightIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
   placeholder?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
@@ -26,7 +28,7 @@ export interface InputGroupPropsI {
   };
   errorMsg?: string;
   children?: React.ReactNode;
-  width?: string;
+  width?: ResponsiveValue<any>;
   value?: string | number | readonly string[] | undefined;
 }
 
@@ -34,6 +36,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
   name,
   leftIcon,
   rightIcon,
+  inputIcon,
   placeholder,
   onChange,
   type,
@@ -103,6 +106,8 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
               {leftIcon}
             </InputLeftElement>
           )}
+
+          {inputIcon}
           <Input
             name={name}
             id={name}
@@ -112,7 +117,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
             minH="60px"
             type={type}
             value={value}
-            pl={leftIcon ? '80px' : '20px'}
+            pl={leftIcon ? '80px' : '2em'}
             // minWidth={{ base: '100%', md: '503px' }}
             w="full"
             placeholder={placeholder}

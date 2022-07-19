@@ -11,8 +11,17 @@ const InputItems: React.FC<InputBoxProps> = ({ inputItems }) => {
   return (
     <>
       {inputItems.map((props, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Box display="flex" ml="0 !important" w="full" justifyContent="space-between" key={index}>
+        <Box
+          display="flex"
+          flexDir={{ base: 'column', lg: 'row' }}
+          ml="0 !important"
+          w="full"
+          columnGap="1em"
+          rowGap="1em"
+          justifyContent="space-between"
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+        >
           <Common.InputGroup {...props} />
         </Box>
       ))}

@@ -7,6 +7,7 @@ import {
   useToast,
   VStack,
   Text,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import * as yup from 'yup';
@@ -52,7 +53,8 @@ const signUpFormYupScheme = yup.object().shape({
 
 const SignUpForm: React.FC = () => {
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
-
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
@@ -133,18 +135,32 @@ const SignUpForm: React.FC = () => {
       type: 'text',
       name: 'memberName',
       label: 'Nickname',
-      width: '70%',
+      width: { base: '100%', lg: '75%' },
       errorMsg: errors?.memberName?.message || errors?.fourDigit?.message,
       children: (
         <Common.InputGroup
           placeholder="0000"
-          label=" "
+          label={isLessThan1280 ? 'ID' : ' '}
+          inputIcon={
+            <Text
+              as="span"
+              position="absolute"
+              left={{ base: '4%', lg: '15%' }}
+              top="28%"
+              fontWeight="500"
+              fontSize="18px"
+              textColor="whiteAlpha.400"
+              zIndex={2000}
+            >
+              #
+            </Text>
+          }
           helpText={{ text: 'Generate ID' }}
           name="fourDigit"
           type="number"
           // value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
           errorMsg={errors?.fourDigit?.message}
-          width="28%"
+          width={{ base: '100%', lg: '23%' }}
           onChange={onChange}
         />
       ),
@@ -168,13 +184,13 @@ const SignUpForm: React.FC = () => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          // onClick={() => setIsShowPassword(!isShowPassword)}
+          onClick={() => setIsShowPassword(!isShowPassword)}
         >
           <Eye />
         </Box>
       ),
       onChange,
-      // type: isShowPassword ? 'text' : 'password',
+      type: isShowPassword ? 'text' : 'password',
       label: 'Password',
       name: 'password',
       errorMsg: errors?.password?.message,
@@ -189,13 +205,13 @@ const SignUpForm: React.FC = () => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          // onClick={() => setIsShowPassword(!isShowPassword)}
+          onClick={() => setIsShowPassword(!isShowPassword)}
         >
           <Eye />
         </Box>
       ),
       onChange,
-      // type: isShowPassword ? 'text' : 'password',
+      type: isShowPassword ? 'text' : 'password',
       label: 'Confirm password',
       name: 'passwordConfirmation',
       errorMsg: errors?.passwordConfirmation?.message,
@@ -209,7 +225,7 @@ const SignUpForm: React.FC = () => {
       justifyContent="center"
       flexDir="column"
       m="0 !important"
-      rowGap="32px"
+      rowGap={{ base: '1em', lg: '2em' }}
       as="form"
       onSubmit={handleSubmit(handleRegisterFormSubmit)}
       autoComplete="off"
