@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
 
 type UseParallaxOptionsType = {
@@ -10,9 +11,11 @@ const useParallax = (
   elementsRef: React.MutableRefObject<any>[],
   { range }: UseParallaxOptionsType,
 ) => {
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const calcValue = (a: any, b: any) => ((a / b) * range - range / 2).toFixed(1);
 
   React.useEffect(() => {
+    if (isLessThan1280) return;
     let timeout: any;
     document.addEventListener(
       'mousemove',
@@ -40,7 +43,7 @@ const useParallax = (
       },
       false,
     );
-  }, []);
+  }, [isLessThan1280]);
 };
 
 export default useParallax;
