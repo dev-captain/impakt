@@ -4,10 +4,10 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 type Props = {
   isOpen: boolean;
   onToggle: () => void;
-  isLessThan1040: boolean;
+  isLessThan1280: boolean;
 };
 
-const CollapseMenuController = ({ isLessThan1040, onToggle, isOpen }: Props) => {
+const CollapseMenuController = ({ isLessThan1280, onToggle, isOpen }: Props) => {
   return (
     <IconButton
       zIndex={100}
@@ -16,7 +16,7 @@ const CollapseMenuController = ({ isLessThan1040, onToggle, isOpen }: Props) => 
       aria-label="Toggle Navigation"
       backdropFilter="blur(40px)"
       background={isOpen ? '#fff' : 'rgba(255, 255, 255, 0.1)'}
-      display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
+      display={['flex', 'flex', 'flex', isLessThan1280 ? 'flex' : 'none', 'none']}
       _hover={{
         backgroundColor: isOpen ? '#FFF' : 'rgba(255, 255, 255, 0.1)',
       }}

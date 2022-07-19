@@ -7,6 +7,7 @@ import {
   HStack,
   MenuDivider,
   useToast,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -18,15 +19,16 @@ import DefaultImpaktProfileIcon from '../../icons/DefaultImpaktProfileIcon';
 import SignOutIcon from '../../icons/SignOutIcon';
 
 const DropDownProfileMenu: React.FC = () => {
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const member = useAppSelector((state) => state.memberAuth.member);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const toast = useToast();
 
   return member ? (
-    <Menu autoSelect={false} strategy="fixed">
+    <Menu placement="bottom" boundary="scrollParent" autoSelect={false}>
       <MenuButton>
-        <HStack as="button" onClick={() => navigate('/dashboard')}>
+        <HStack>
           <DefaultImpaktProfileIcon width="40px" height="40px" />
         </HStack>
       </MenuButton>
@@ -35,7 +37,7 @@ const DropDownProfileMenu: React.FC = () => {
         minW="162px"
         border="1px solid white"
         color="white"
-        backgroundColor="transparent !important"
+        backgroundColor={isLessThan1280 ? 'rgba(28, 28, 40, 1)' : 'transparent !important'}
         padding="0"
         borderRadius="8px"
       >
