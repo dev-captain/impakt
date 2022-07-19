@@ -140,6 +140,7 @@ const SignUpForm: React.FC = () => {
       children: (
         <Common.InputGroup
           placeholder="0000"
+          value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
           label={isLessThan1280 ? 'ID' : ' '}
           inputIcon={
             <Text
@@ -155,7 +156,7 @@ const SignUpForm: React.FC = () => {
               #
             </Text>
           }
-          helpText={{ text: 'Generate ID' }}
+          helpText={{ text: 'Generate ID', onClick: generateRandomFourDigitNumberString }}
           name="fourDigit"
           type="number"
           // value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
