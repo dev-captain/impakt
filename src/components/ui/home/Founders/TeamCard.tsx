@@ -2,6 +2,8 @@ import { Box, Image, Text, VStack, Link } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Images from 'assets/images';
 
+// import colors from 'theme/colors';
+
 const { Twitter, TwitterLight, Facebook, FacebookDark, LinkedIn, LinkedInDark } = Images.Common;
 
 const TeamCard = ({
@@ -72,7 +74,7 @@ const TeamCard = ({
             mt={-12}
             pos="relative"
             _after={{
-              transition: 'all .3s ease',
+              transition: 'all .0.2s ease',
               content: '""',
               w: 'full',
               h: '110px',
@@ -121,20 +123,25 @@ const TeamCard = ({
         {title !== 'CTO' ? (
           <Box position="relative" data-group>
             <Box
+              className="flipWebkit"
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
               w="100%"
+              style={{ backfaceVisibility: 'hidden' }}
+              position="relative"
+              zIndex="10"
               border="2px solid rgba(255, 255, 255, 0.04)"
               height={{ base: 'auto', md: '178px' }}
               padding="12px 16px 12px 16px"
               box-sizing="border-box"
-              transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
               transform="rotateX(0deg)"
-              transitionDuration="0.5s"
+              transitionDuration="0.2s"
               transitionProperty="transform, opacity"
               _groupHover={{
                 transform: 'rotateX(180deg)',
                 opacity: '0',
+                zIndex: '0',
+                backfaceVisibility: 'visible',
               }}
             >
               <Text
@@ -153,45 +160,56 @@ const TeamCard = ({
               />
             </Box>
             <Box
+              className="flipWebkit"
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
               w="100%"
               border="2px solid rgba(255, 255, 255, 0.04)"
               padding="20px 16px"
-              transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
-              transitionDuration="0.5s"
+              transitionDuration="0.2s"
               transitionProperty="transform, opacity"
               position="absolute"
               opacity="0"
+              zIndex="-1"
               top="0px"
               left="0px"
+              style={{ backfaceVisibility: 'hidden' }}
               transform="rotateX(-180deg)"
               _groupHover={{
                 opacity: '1',
+                zIndex: '10',
                 transform: 'rotateX(0deg)',
+                backfaceVisibility: 'visible',
               }}
             >
               {twitterLink && (
-                <Link
-                  href={twitterLink}
-                  target="_blank"
-                  _focus={{ boxShadow: 'none' }}
-                  _hover={{ textDecoration: 'none' }}
+                <Box
+                  borderRadius="8px"
+                  display="flex"
+                  paddingY="5px"
+                  marginBottom="5px"
+                  justifyContent="center"
+                  backdropFilter="blur(40px)"
+                  backgroundColor="rgba(255, 255, 255, 0.1)"
+                  alignItems="center"
+                  transition="0.2s"
+                  cursor="pointer"
+                  onMouseMove={(e) => handleOnMouseOverTeamSocial(e, TwitterLight, 'Twitter')}
+                  onMouseLeave={(e) => handleOnMouseLeaveTeamSocial(e, Twitter, 'Twitter')}
+                  _hover={{ backgroundColor: '#FFF', color: '#000' }}
                 >
-                  <Box
-                    borderRadius="8px"
+                  <Link
+                    href={twitterLink}
+                    target="_blank"
+                    width="100%"
+                    height="100%"
+                    _focus={{ boxShadow: 'none' }}
                     display="flex"
-                    paddingY="5px"
-                    marginBottom="5px"
-                    justifyContent="center"
-                    backdropFilter="blur(40px)"
-                    backgroundColor="rgba(255, 255, 255, 0.1)"
                     alignItems="center"
-                    transition="0.5s"
-                    cursor="pointer"
-                    onMouseMove={(e) => handleOnMouseOverTeamSocial(e, TwitterLight, 'Twitter')}
-                    onMouseLeave={(e) => handleOnMouseLeaveTeamSocial(e, Twitter, 'Twitter')}
-                    _hover={{ backgroundColor: '#FFF', color: '#000' }}
+                    justifyContent="center"
+                    // pointerEvents="none"
+                    _hover={{ textDecoration: 'none' }}
+                    //
                   >
                     <Image
                       maxW="24px"
@@ -203,8 +221,8 @@ const TeamCard = ({
                       me="8px"
                     />
                     <Text textStyle="semiBold17">Twitter</Text>
-                  </Box>
-                </Link>
+                  </Link>
+                </Box>
               )}
               {facebookLink && (
                 <Link
@@ -223,7 +241,7 @@ const TeamCard = ({
                     backgroundColor="rgba(255, 255, 255, 0.1)"
                     alignItems="center"
                     cursor="pointer"
-                    transition="0.5s"
+                    transition="0.2s"
                     onMouseMove={(e) => handleOnMouseOverTeamSocial(e, FacebookDark, 'Facebook')}
                     onMouseLeave={(e) => handleOnMouseLeaveTeamSocial(e, Facebook, 'Facebook')}
                     _hover={{ backgroundColor: '#FFF', color: '#000' }}
@@ -256,7 +274,7 @@ const TeamCard = ({
                     marginBottom="5px"
                     cursor="pointer"
                     alignItems="center"
-                    transition="0.5s"
+                    transition="0.2s"
                     backdropFilter="blur(40px)"
                     backgroundColor="rgba(255, 255, 255, 0.1)"
                     onMouseMove={(e) => handleOnMouseOverTeamSocial(e, LinkedInDark, 'LinkedIn')}
@@ -290,7 +308,7 @@ const TeamCard = ({
               box-sizing="border-box"
               transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
               transform="rotateX(0deg)"
-              transitionDuration="1s"
+              transitionDuration="0.2s"
               transitionProperty="transform, opacity"
               _groupHover={{
                 transform: 'rotateX(180deg)',

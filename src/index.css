@@ -70,4 +70,11 @@ code {
     border-radius: 68.6px !important;
   }
 }
+.flipWebkit{
+  -webkit-backface-visibility: hidden;
+-moz-backface-visibility: hidden;
+-ms-backface-visibility: hidden;
+-o-backface-visibility: hidden;
+backface-visibility: hidden;
+}
 
