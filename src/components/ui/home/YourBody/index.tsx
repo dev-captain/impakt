@@ -3,18 +3,14 @@ import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-
-import HeroLayout from 'components/layouts/HeroLayout';
-import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
-import RichIcon2 from '../../../icons/RichIcon2';
+import { I, C, Common } from 'components';
 
 const YourBody: React.FC = ({ children }) => {
   const [isSmall] = useMediaQuery('(max-width: 1280px)');
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       spacing={0}
       removeTopPadding={isSmall}
       customPadding={0}
@@ -51,13 +47,13 @@ const YourBody: React.FC = ({ children }) => {
                 id="our-ai-card-box"
                 w="full"
               >
-                <InfoCard LeftLogo={<RichIcon2 />}>
+                <Common.InfoCard LeftLogo={<I.RichIcon2 />}>
                   <VStack alignItems="flex-start" color="white">
                     <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
                       {t(Keys.computerVision.aiDescription)}
                     </Text>
                   </VStack>
-                </InfoCard>
+                </Common.InfoCard>
               </Box>
               <Box
                 justifyContent={{ base: 'flex-start', md: 'center', lg: 'flex-start' }}
@@ -107,10 +103,10 @@ const YourBody: React.FC = ({ children }) => {
               </Box>
 
               <Box display={{ base: 'none', lg: 'unset' }} id="get-the-bonus-box" w="full">
-                <InfoCard
+                <Common.InfoCard
                   tooltipLabel={t(Keys.toolTip.downloadLabel)}
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon isMobile={isSmall} />}
+                  LeftLogo={<I.YoutubeIcon isMobile={isSmall} />}
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
@@ -130,14 +126,14 @@ const YourBody: React.FC = ({ children }) => {
                       {t(Keys.toolTip.description)}
                     </Text>
                   </VStack>
-                </InfoCard>
+                </Common.InfoCard>
               </Box>
             </VStack>
             {children}
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

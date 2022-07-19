@@ -3,15 +3,15 @@ import { memo } from 'react';
 import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/layouts/HeroLayout';
-import InfoCard from '../../../core/InfoCard';
-import RichIconK from '../../../icons/RichIconK';
+import { C, I, Common } from 'components';
+
 import Images from '../../../../assets/images';
 
 const ImpaktCreed = () => {
   const { t } = useTranslation(`default`).i18n;
+
   return (
-    <HeroLayout
+    <C.HeroLayout
       // showNavbar
       pos="relative"
       bgImage={Images.backgrounds.creedSectionBg}
@@ -75,7 +75,7 @@ const ImpaktCreed = () => {
                     />
                   </Box>
                   <Box mt="0 !important" w="full">
-                    <InfoCard LeftLogo={<RichIconK />}>
+                    <Common.InfoCard LeftLogo={<I.RichIconK />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text
                           textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
@@ -85,7 +85,7 @@ const ImpaktCreed = () => {
                           }}
                         />
                       </VStack>
-                    </InfoCard>
+                    </Common.InfoCard>
                   </Box>
                 </VStack>
               </GridItem>
@@ -93,7 +93,7 @@ const ImpaktCreed = () => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

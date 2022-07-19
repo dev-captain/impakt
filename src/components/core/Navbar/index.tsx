@@ -9,14 +9,14 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
-  Button,
-  Link,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+
+import { I } from 'components';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -24,7 +24,7 @@ import SignInLinkItem from './SignInLinkItem';
 import useAppSelector from '../../../hooks/useAppSelector';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import ImpaktIcon from '../../icons/ImpaktIcon';
+import ImpaktButton from '../../common/ImpaktButton';
 
 // const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
@@ -57,7 +57,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
   const discord = isLight ? Discord : DiscordLight;
   const twitter = isLight ? Twitter : TwitterLight;
   const textColor = isLight ? 'glass.100' : 'glass.700';
-  const bgColor = isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
   const _hover = {
     _hover: {
       transition: '0.2s ease',
@@ -68,7 +68,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
   return (
     <Box
       pos="absolute"
-      zIndex="99999"
+      zIndex="99999999999"
       w="full"
       paddingX="16px"
       display={isLessThan1280 ? 'auto' : 'flex'}
@@ -97,7 +97,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <ImpaktIcon cursor="pointer" width="111px" height="32px" />
+            <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
           </Box>
           <HStack
             justify="flex-end"
@@ -130,9 +130,16 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
                 <Box>
                   <SignInLinkItem />
                 </Box>
-                <Link href="/download" _hover={{ textDecoration: 'none' }}>
-                  <Button colorScheme="red">{t(Keys.navbar.download)}</Button>
-                </Link>
+                <ImpaktButton
+                  as="a"
+                  href="/download"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/download');
+                  }}
+                >
+                  {t(Keys.navbar.download)}
+                </ImpaktButton>
               </HStack>
             </HStack>
           </HStack>

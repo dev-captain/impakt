@@ -10,12 +10,10 @@ import {
   GridItem,
   Text,
 } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import DownloadButton from 'components/core/DownloadButton';
-import Play from 'components/icons/Play';
+import { I, C, Common } from 'components';
 import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
 import Gradient from './Gradient';
@@ -28,7 +26,7 @@ const DownloadPlatform = () => {
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       showNavbar
       minH="70vh"
       spacing={10}
@@ -56,7 +54,7 @@ const DownloadPlatform = () => {
               </VStack>
               <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={5} columnGap={5} w="100%">
                 <GridItem w="100%">
-                  <DownloadButton
+                  <Common.DownloadButton
                     isHorizontal
                     iconName="Windows"
                     title="Download for Windows"
@@ -64,7 +62,7 @@ const DownloadPlatform = () => {
                   />
                 </GridItem>
                 <GridItem w="full">
-                  <DownloadButton
+                  <Common.DownloadButton
                     isHorizontal
                     iconName="Apple"
                     title="Download for Mac"
@@ -79,7 +77,7 @@ const DownloadPlatform = () => {
 
             <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
               <VStack pos="absolute" zIndex={2}>
-                <Play />
+                <I.Play />
               </VStack>
               <Image
                 src={Images.downloadlaptop}
@@ -96,7 +94,7 @@ const DownloadPlatform = () => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -6,8 +6,7 @@ import {
   useBreakpointValue,
   useToast,
 } from '@chakra-ui/react';
-import GradientButton from 'components/core/GradientButton';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C, Common } from 'components';
 import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
@@ -56,7 +55,7 @@ const RecoveryPassword = () => {
   const isDisabled = !values.email || !validateEmail(values.email);
 
   return (
-    <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
+    <C.HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         position="relative"
         color={textColor}
@@ -130,7 +129,7 @@ const RecoveryPassword = () => {
             fontSize={16}
             marginTop={{ base: '20px !important', md: '24px !important' }}
           >
-            <GradientButton
+            <Common.GradientButton
               py="32px"
               w="full"
               radius="20px"
@@ -145,7 +144,7 @@ const RecoveryPassword = () => {
           <Box {...GradientEllipse1} />
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

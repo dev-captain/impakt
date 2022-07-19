@@ -3,11 +3,8 @@ import React from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C, I, Common } from 'components';
 import Images from 'assets/images';
-
-import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
 
 const SocialFitnessGamified: React.FC = ({ children }) => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
@@ -16,7 +13,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       showNavbar
       spacing={10}
       pos="relative"
@@ -77,10 +74,10 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                 </Text>
               </Box>
               <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
-                <InfoCard
+                <Common.InfoCard
                   tooltipLabel={t(Keys.toolTip.downloadLabel)}
                   isShowTooltip
-                  LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
+                  LeftLogo={<I.YoutubeIcon isMobile={isLessThan1280} />}
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
@@ -100,14 +97,14 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                       {t(Keys.toolTip.description)}
                     </Text>
                   </VStack>
-                </InfoCard>
+                </Common.InfoCard>
               </Box>
             </VStack>
             {children}
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

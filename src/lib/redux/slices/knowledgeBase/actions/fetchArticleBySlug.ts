@@ -14,8 +14,6 @@ const fetchArticleBySlug = createAsyncThunk(
 
       return { article, category };
     } catch (err: any) {
-      console.log(err);
-
       return rejectWithValue(err);
     }
   },

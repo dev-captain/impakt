@@ -277,8 +277,10 @@ const TeamCard = ({
                     transition="0.2s"
                     backdropFilter="blur(40px)"
                     backgroundColor="rgba(255, 255, 255, 0.1)"
-                    onMouseMove={(e) => handleOnMouseOverTeamSocial(e, LinkedInDark, 'LinkedIn')}
-                    onMouseLeave={(e) => handleOnMouseLeaveTeamSocial(e, LinkedIn, 'LinkedIn')}
+                    onMouseMove={(e: any) =>
+                      handleOnMouseOverTeamSocial(e, LinkedInDark, 'LinkedIn')
+                    }
+                    onMouseLeave={(e: any) => handleOnMouseLeaveTeamSocial(e, LinkedIn, 'LinkedIn')}
                     _hover={{ backgroundColor: '#FFF', color: '#000' }}
                   >
                     <Image

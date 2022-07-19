@@ -10,10 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
-import GradientButton from 'components/core/GradientButton';
-import TextareaField from 'components/core/TextareaField';
-import TextField from 'components/core/TextField';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C, Common } from 'components';
 import useContactUs from 'hooks/useContactUs';
 import React, { useState } from 'react';
 import { layoutPadding } from 'theme';
@@ -57,7 +54,7 @@ const SendMessage = () => {
     !validateEmail(values.email);
 
   return (
-    <HeroLayout showNavbar bgImage={bgImage} minH="20vh">
+    <C.HeroLayout showNavbar bgImage={bgImage} minH="20vh">
       <VStack
         {...ContactProps.mVStack}
         px={layoutPadding}
@@ -105,7 +102,7 @@ const SendMessage = () => {
                 {t(keys.contact.sendUsMessage)}
               </Text>
               <VStack w="full" spacing="16px">
-                <TextField
+                <Common.TextField
                   name="name"
                   isOutlined
                   fontSize="14px"
@@ -114,7 +111,7 @@ const SendMessage = () => {
                   placeholder={t(keys.contact.yourName)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
-                <TextField
+                <Common.TextField
                   name="email"
                   isOutlined
                   fontSize="14px"
@@ -123,7 +120,7 @@ const SendMessage = () => {
                   placeholder={t(keys.contact.yourEmail)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
-                <TextField
+                <Common.TextField
                   isOutlined
                   name="subject"
                   fontSize="14px"
@@ -132,7 +129,7 @@ const SendMessage = () => {
                   placeholder={t(keys.contact.topicOfMessage)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
-                <TextareaField
+                <Common.TextareaField
                   isOutlined
                   name="message"
                   fontSize="14px"
@@ -145,7 +142,7 @@ const SendMessage = () => {
                 <Box {...ContactProps.gradients.second} />
               </VStack>
               <VStack w="full" align={{ base: 'center', md: 'flex-end' }}>
-                <GradientButton
+                <Common.GradientButton
                   py="32px"
                   minW="240px"
                   radius="14px"
@@ -161,7 +158,7 @@ const SendMessage = () => {
           </GridItem>
         </SimpleGrid>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -12,7 +12,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-import AnimationInWhenVisible from '../../../common/AnimationInWhenVisible';
+import { Common } from 'components';
 import PhaseHeadlineText from './PhaseHeadlineText';
 import PhaseDescriptionText from './PhaseDescriptionText';
 import RedLabelTag from '../RedLabelTag';
@@ -85,7 +85,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
       >
         <TabPanels w="full" id="panels">
           <TabPanel position="relative" padding="0 !important">
-            <AnimationInWhenVisible animationType="fade">
+            <Common.AnimationInWhenVisible animationType="fade">
               <VStack rowGap="32px" w="full">
                 <PhaseDescriptionText>
                   <b>As a community, together we&apos;ll decide the price we pay for each token</b>.
@@ -107,10 +107,10 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                   </b>
                 </PhaseDescriptionText>
               </VStack>
-            </AnimationInWhenVisible>
+            </Common.AnimationInWhenVisible>
           </TabPanel>
           <TabPanel position="relative" padding="0 !important">
-            <AnimationInWhenVisible animationType="fade">
+            <Common.AnimationInWhenVisible animationType="fade">
               <VStack rowGap="32px" w="full">
                 <PhaseDescriptionText>
                   <b>Don&apos;t be &quot;just a member&quot;... Be Family! </b> At Impakt, we take
@@ -129,10 +129,10 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                   token.
                 </PhaseDescriptionText>
               </VStack>
-            </AnimationInWhenVisible>
+            </Common.AnimationInWhenVisible>
           </TabPanel>
           <TabPanel position="relative" padding="0 !important">
-            <AnimationInWhenVisible animationType="fade">
+            <Common.AnimationInWhenVisible animationType="fade">
               <VStack rowGap="32px" w="full">
                 <PhaseDescriptionText>
                   <b>
@@ -163,7 +163,7 @@ const InvestMentTab: React.FC<InvestmentTabPropsI> = ({
                   </UnorderedList>
                 </Box>
               </VStack>
-            </AnimationInWhenVisible>
+            </Common.AnimationInWhenVisible>
           </TabPanel>
         </TabPanels>
         {/* {activeTabIndex === 0 && <CountdownTimerInvestMent />} */}

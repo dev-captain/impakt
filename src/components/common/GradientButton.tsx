@@ -1,16 +1,13 @@
 import { Button, ButtonProps, HStack, Text } from '@chakra-ui/react';
-import Icons from 'components/icons';
 
 interface GradientButtonProps extends ButtonProps {
   title: string;
-  icon?: string;
   radius?: string;
   color?: string;
 }
 
 const GradientButton = ({
   title,
-  icon,
   w = 'auto',
   bgGradient = 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)',
   radius = '20px',
@@ -20,8 +17,6 @@ const GradientButton = ({
   color = 'white',
   ...buttonProps
 }: GradientButtonProps) => {
-  const Icon = icon ? Icons?.[icon] : undefined;
-
   return (
     <Button
       w={w}
@@ -36,7 +31,6 @@ const GradientButton = ({
       {...buttonProps}
     >
       <HStack spacing={2} alignItems="center" justifyContent="center">
-        {Icon && <Icon />}
         <Text color={color}>{title}</Text>
       </HStack>
     </Button>

@@ -1,9 +1,15 @@
 import { Box, Image, Text, VStack, useColorModeValue } from '@chakra-ui/react';
-import AnimationAlways from 'components/common/AnimationAlways';
+import { Common } from 'components';
 // import gsap, { Power2 } from 'gsap';
 import * as React from 'react';
+import useParallax from '../../../../hooks/useParallax';
 
 const InvestorCard = ({ image, name, title }: { image: string; name: string; title: string }) => {
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const imageBoxRef = React.useRef<HTMLDivElement>(null);
+  const nameBoxRef = React.useRef<HTMLDivElement>(null);
+  const positionBoxRef = React.useRef<HTMLDivElement>(null);
+  useParallax(cardRef, [imageBoxRef, nameBoxRef, positionBoxRef], { range: 25 });
   // const bgColor = useColorModeValue('glass.800', 'glass.200');
   const subTitleColor = useColorModeValue('electric.100', 'glass.700');
   // const boxRef = React.useRef() as any;
@@ -17,10 +23,11 @@ const InvestorCard = ({ image, name, title }: { image: string; name: string; tit
   //     rotationY: rotateY,
   //   });
   // };
+
   return (
-    <AnimationAlways animationType="move" xValue={100}>
+    <Common.AnimationAlways animationType="move" xValue={100}>
       <VStack
-        // ref={boxRef}
+        ref={cardRef}
         // onMouseOver={handleMouseOver}
         pl="32px"
         pr="32px"
@@ -40,6 +47,7 @@ const InvestorCard = ({ image, name, title }: { image: string; name: string; tit
             <Box
               rounded="lg"
               mt={-12}
+              ref={imageBoxRef}
               pos="relative"
               _after={{
                 transition: 'all .3s ease',
@@ -64,7 +72,7 @@ const InvestorCard = ({ image, name, title }: { image: string; name: string; tit
             </Box>
           </Box>
         </VStack>
-        <VStack align="center" justify="center">
+        <VStack ref={nameBoxRef} align="center" justify="center">
           <Text textStyle="bold5" pb="5px" align="center">
             {name}
           </Text>
@@ -76,6 +84,7 @@ const InvestorCard = ({ image, name, title }: { image: string; name: string; tit
           justify="center"
           mt="0px !important"
           mb="10px !important"
+          ref={positionBoxRef}
         >
           <Box backgroundColor="rgba(255, 255, 255, 0.04)" borderRadius="8px" w="100%">
             <Text
@@ -94,7 +103,7 @@ const InvestorCard = ({ image, name, title }: { image: string; name: string; tit
           </Box>
         </VStack>
       </VStack>
-    </AnimationAlways>
+    </Common.AnimationAlways>
   );
 };
 

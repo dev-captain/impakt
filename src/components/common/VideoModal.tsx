@@ -9,8 +9,7 @@ import {
   Circle,
   GridItem,
 } from '@chakra-ui/react';
-import Icons from 'components/icons';
-import DownloadButton from 'components/core/DownloadButton';
+import { I, Common } from 'components';
 import useModalStore from 'hooks/store/useModalStore';
 
 function VideoModal() {
@@ -92,7 +91,7 @@ function VideoModal() {
             position="absolute"
             w={{ base: '20px', md: '50px' }}
           >
-            <Icons.Cross />
+            <I.Cross />
           </Circle>
           {!modal.hideButtons && (
             <SimpleGrid
@@ -107,14 +106,14 @@ function VideoModal() {
               w="full"
             >
               <GridItem colSpan={1} w="full">
-                <DownloadButton
+                <Common.DownloadButton
                   iconName="Windows"
                   title="Download Windows"
                   link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
                 />
               </GridItem>
               <GridItem colSpan={1} w="full">
-                <DownloadButton
+                <Common.DownloadButton
                   iconName="Apple"
                   title="Download Mac"
                   link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Mac/Impakt_Mac_v1.0.0.zip"
@@ -139,7 +138,7 @@ export const Play = ({ onClick }: { onClick?: () => void | any }) => (
     bgColor="blackAlpha.800"
     boxShadow="4px 4px 10px rgba(0, 0, 0, 0.12)"
   >
-    <Icons.WhitePlay />
+    <I.WhitePlay />
   </Center>
 );
 

@@ -3,9 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import Images from 'assets/images';
-import HeroLayout from 'components/layouts/HeroLayout';
-import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
+import { I, C, Common } from 'components';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
 
@@ -15,7 +13,7 @@ const EarnCrypto = () => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       customPadding={0}
       // showNavbar
       pos="relative"
@@ -106,10 +104,10 @@ const EarnCrypto = () => {
                   mt="17px !important"
                   mb="48px !important"
                 >
-                  <InfoCard
+                  <Common.InfoCard
                     tooltipLabel={t(Keys.toolTip.downloadLabel)}
                     isShowTooltip
-                    LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
+                    LeftLogo={<I.YoutubeIcon isMobile={isLessThan1280} />}
                   >
                     <VStack alignItems="flex-start" color="white">
                       <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
@@ -129,14 +127,14 @@ const EarnCrypto = () => {
                         {t(Keys.toolTip.description)}
                       </Text>
                     </VStack>
-                  </InfoCard>
+                  </Common.InfoCard>
                 </Box>
               </VStack>
             </VStack>
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

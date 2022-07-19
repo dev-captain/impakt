@@ -1,6 +1,5 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue, useToast } from '@chakra-ui/react';
-import GradientButton from 'components/core/GradientButton';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C, Common } from 'components';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -93,7 +92,7 @@ const ChangePassword = () => {
     isConfirmPasswordActive && !isValidConfirmPassword() ? 'Passwords don’t match' : '';
 
   return (
-    <HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
+    <C.HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         position="relative"
         color={textColor}
@@ -185,7 +184,7 @@ const ChangePassword = () => {
             fontSize={16}
             marginTop={{ base: '20px !important', md: '24px !important' }}
           >
-            <GradientButton
+            <Common.GradientButton
               py="32px"
               w={{ base: 'full', md: '240px' }}
               radius="20px"
@@ -199,7 +198,7 @@ const ChangePassword = () => {
           <Gradients />
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

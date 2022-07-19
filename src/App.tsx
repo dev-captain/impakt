@@ -16,11 +16,12 @@ import {
   RecoveryPassword,
   Verify,
   SignUp,
+  MemberDashboard,
+  SignIn,
 } from 'pages';
-import MemberDashboard from './pages/MemberDashBoard';
-import SignIn from './pages/SignIn/SignIn';
+import { Common } from 'components';
+
 import Authentication from './middlewares/Authentication';
-import ScrollToTop from './components/core/ScrollToTop';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -48,9 +49,9 @@ const App = () => {
       <Route
         path="/"
         element={
-          <ScrollToTop>
+          <Common.ScrollToTop>
             <Home />
-          </ScrollToTop>
+          </Common.ScrollToTop>
         }
       />
 

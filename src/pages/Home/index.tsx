@@ -1,16 +1,6 @@
 import { Box, Text, Container, useMediaQuery } from '@chakra-ui/react';
-import {
-  ImpaktNFT,
-  Advisor,
-  Founder,
-  ImpaktCreed,
-  ImpaktFooter,
-  HeroSection,
-  EarnCrypto,
-  ImpaktIcons,
-} from 'components/ui/home';
+import { S, I } from 'components';
 
-import LoadingIcon from '../../components/icons/LoadingIcon';
 import useAppSelector from '../../hooks/useAppSelector';
 
 const HomePage = () => {
@@ -35,7 +25,7 @@ const HomePage = () => {
           justifyContent="center"
           flexDir="column"
         >
-          <LoadingIcon />
+          <I.LoadingIcon />
           <Text color="rgba(255, 255, 255, 0.5)" textStyle="bold5">
             Loading...
           </Text>
@@ -51,31 +41,31 @@ const HomePage = () => {
         left="0"
         height="23%"
       />
-      <HeroSection />
+      <S.HeroSection />
 
       {(isAnimated || isLessThan1280) && (
         <>
           <div>
-            <EarnCrypto />
+            <S.EarnCrypto />
           </div>
 
           <div>
-            <ImpaktNFT />
+            <S.ImpaktNFT />
           </div>
           <div>
-            <ImpaktCreed />
+            <S.ImpaktCreed />
           </div>
           <div>
-            <Founder />
+            <S.Founder />
           </div>
           <div>
-            <Advisor />
+            <S.Advisor />
           </div>
           <div>
-            <ImpaktIcons />
+            <S.ImpaktIcons />
           </div>
           <div>
-            <ImpaktFooter />
+            <S.ImpaktFooter />
           </div>
         </>
       )}

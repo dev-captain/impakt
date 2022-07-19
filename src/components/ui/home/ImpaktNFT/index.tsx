@@ -11,12 +11,11 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import { I, C, Common } from 'components';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/layouts/HeroLayout';
 import Images from 'assets/images';
 import AOS from 'aos';
-import InfoCard from '../../../core/InfoCard';
-import RichIcon from '../../../icons/RichIcon';
+
 import '../../../../theme/styles.css';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 
@@ -27,7 +26,7 @@ const ImpaktNFT = () => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       // showNavbar
       spacing={10}
       pos="relative"
@@ -82,7 +81,7 @@ const ImpaktNFT = () => {
                     </Text>
                   </Box>
                   <Box mt="0 !important" w="full" id="hero-info-card-box">
-                    <InfoCard LeftLogo={<RichIcon />}>
+                    <Common.InfoCard LeftLogo={<I.RichIcon />}>
                       <VStack alignItems="flex-start" color="white">
                         <Text
                           textStyle={{ base: 'semiBold5', md: 'regular18' }}
@@ -91,7 +90,7 @@ const ImpaktNFT = () => {
                           {t(Keys.impaktNFT.description1)}
                         </Text>
                       </VStack>
-                    </InfoCard>
+                    </Common.InfoCard>
                   </Box>
                   <Box mt="0 !important" id="hero-headline-description" backgroundClip="text">
                     <Text
@@ -139,7 +138,7 @@ const ImpaktNFT = () => {
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 
-import CopyClipBoardIcon from '../../icons/CopyClipBoardIcon';
+import { I } from 'components';
 
 const ReferralCopyClipboard: React.FC<{
   userId?: number;
@@ -50,7 +50,7 @@ const ReferralCopyClipboard: React.FC<{
           <Text textStyle={{ base: 'regular2', sm: 'regular3' }}>{referralLink}</Text>
         </Box>
         <Box onClick={copyClipBoardReferralLink}>
-          {isCopied ? null : <CopyClipBoardIcon cursor="pointer" width="25" height="28" />}
+          {isCopied ? null : <I.CopyClipBoardIcon cursor="pointer" width="25" height="28" />}
         </Box>
       </Box>
     </>

@@ -25,7 +25,7 @@ export default {
     download: 'Download',
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
-    signIn: 'Sign in',
+    signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
   },
   computerVision: {
@@ -247,14 +247,13 @@ export default {
     changeText: 'Choose a unique password to protect your account',
   },
   signUp: {
-    createAn: 'Create an',
-    account: 'account',
+    createAn: 'Create an account',
     yourEmail: 'Email',
     fourDigit: '0000',
     memberName: `Membername`,
   },
   signIn: {
-    signIn: `Sign in`,
+    signIn: `Sign In`,
     createAn: `Create an account`,
     firstTime: `First time?`,
     signInButton: `Sign In`,

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Button, color, HStack, Text, VStack } from '@chakra-ui/react';
-import Icons from '../icons';
+import { I } from 'components';
 import './style.css';
 
 const DownloadButton = ({
@@ -19,7 +19,7 @@ const DownloadButton = ({
   return (
     <Button
       as="a"
-      w={{base:'full', lg:'231px'}}
+      w={{ base: 'full', lg: '231px' }}
       h="full"
       py={'20px'}
       alignSelf="center"
@@ -31,8 +31,8 @@ const DownloadButton = ({
       className="buttonHover"
     >
       <Wrapper>
-        {iconName === 'Apple' && <Icons.Apple opacity="1" />}
-        {iconName === 'Windows' && <Icons.Window opacity="1" />}
+        {iconName === 'Apple' && <I.Apple opacity="1" />}
+        {iconName === 'Windows' && <I.Window opacity="1" />}
         <Text fontSize="14px" lineHeight="24px" fontWeight="500" color="white">
           {title}
         </Text>

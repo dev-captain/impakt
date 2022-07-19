@@ -1,8 +1,7 @@
 import { GridItem, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react';
 import useCountdown from 'hooks/useCountdown';
 import { layoutPadding } from 'theme';
-import { GradientEllipse } from 'components/common/Gradients';
-import EventCounterItem from 'components/ui/events/EventCounterItem';
+import { S, Common } from 'components';
 
 const CountDown = ({
   date,
@@ -45,9 +44,9 @@ const CountDown = ({
         {date &&
           items.map((item) => (
             // @ts-ignore
-            <EventCounterItem value={countdown?.[item]} title={item} key={item} />
+            <S.EventCounterItem value={countdown?.[item]} title={item} key={item} />
           ))}
-        <GradientEllipse />
+        <Common.GradientEllipse1 />
       </SimpleGrid>
     </VStack>
   );

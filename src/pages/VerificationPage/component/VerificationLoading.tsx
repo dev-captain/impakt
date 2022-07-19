@@ -4,7 +4,7 @@ import keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
 import Images from 'assets/images';
 
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C } from 'components';
 import Gradients from './Gradient';
 
 const VerificationLoading: React.FC = () => {
@@ -23,7 +23,7 @@ const VerificationLoading: React.FC = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   return (
-    <HeroLayout showNavbar spacing={10} pos="relative" bgImage={bgImage}>
+    <C.HeroLayout showNavbar spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         position="relative"
         color={textColor}
@@ -75,7 +75,7 @@ const VerificationLoading: React.FC = () => {
           <Gradients />
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

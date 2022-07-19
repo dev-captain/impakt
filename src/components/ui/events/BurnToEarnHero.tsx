@@ -1,7 +1,6 @@
 import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
-import Icons from 'components/icons';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { I, C } from 'components';
 import useModalStore from 'hooks/store/useModalStore';
 import { layoutPadding } from 'theme';
 import keys from 'i18n/types';
@@ -31,7 +30,7 @@ const BurnToEarnHero = () => {
   };
 
   return (
-    <HeroLayout removeBottomPadding minH="70vh">
+    <C.HeroLayout removeBottomPadding minH="70vh">
       <VStack px={layoutPadding} w="full" py={{ base: 16, md: 0 }}>
         <HStack
           _hover={{
@@ -82,7 +81,7 @@ const BurnToEarnHero = () => {
           />
         </HStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 
@@ -104,6 +103,6 @@ const Play = ({ forMobile, onClick }: { forMobile?: boolean; onClick: () => void
     position={forMobile ? 'initial' : 'absolute'}
     d={{ base: forMobile ? 'flex' : 'none', md: forMobile ? 'none' : 'flex' }}
   >
-    <Icons.WhitePlay />
+    <I.WhitePlay />
   </Center>
 );
