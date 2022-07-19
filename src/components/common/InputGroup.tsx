@@ -75,6 +75,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
             </Box>
             {helpText && (
               <Box
+                tabIndex={-1}
                 cursor="pointer"
                 href={helpText.href}
                 as={helpText.as}

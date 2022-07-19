@@ -245,6 +245,7 @@ const SignUpForm: React.FC = () => {
               as="a"
               href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
               mx="5px"
+              tabIndex={-1}
               cursor="pointer"
               textColor="impaktRed"
             >
@@ -257,6 +258,7 @@ const SignUpForm: React.FC = () => {
               mx="5px"
               cursor="pointer"
               textColor="impaktRed"
+              tabIndex={-1}
             >
               Privacy Policy
             </Box>
