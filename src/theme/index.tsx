@@ -31,7 +31,8 @@ const theme: ThemeOverride = {
   styles: {
     global: (props) => ({
       body: {
-        bg: mode('glass.900', 'glass.200')(props),
+        // bg: mode('glass.900', 'glass.200')(props),
+        bg: '#0D0B10',
       },
     }),
   },

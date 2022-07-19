@@ -90,6 +90,7 @@ const SignIn = () => {
       showNavbar
       minH="100vh"
       pos="relative"
+      customPadding="200"
       justify="flex-start"
       align="flex-start"
       bgImage={bgImage}

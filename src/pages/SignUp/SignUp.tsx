@@ -21,6 +21,7 @@ const SignUp = () => {
       showFooterV2
       showNavbar
       minH="100vh"
+      customPadding="200"
       pos="relative"
       justify="flex-start"
       align="flex-start"
