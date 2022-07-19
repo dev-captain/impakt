@@ -1,28 +1,14 @@
-import {
-  Box,
-  Flex,
-  FormControl,
-  useBreakpointValue,
-  useColorModeValue,
-  useToast,
-  VStack,
-  Text,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Box, Flex, FormControl, useToast, VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
 import * as yup from 'yup';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginReq } from '@impakt-dev/api-client';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
-import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import useAppDispatch from '../../../hooks/useAppDispatch';
 import useAppSelector from '../../../hooks/useAppSelector';
-import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
 import { Eye } from '../../icons';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';

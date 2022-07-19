@@ -77,7 +77,6 @@ export const HeroDesktop: React.FC = () => {
     if (isAnimated) {
       isScrolled.current = true;
       const minus = isHeightLessThan975 ? -50 : 100;
-      console.log(isHeightLessThan975);
       const centerY = yourBodySectionRef.current.offsetTop - minus;
 
       window.scrollTo(0, centerY);

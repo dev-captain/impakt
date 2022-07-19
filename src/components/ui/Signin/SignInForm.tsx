@@ -5,7 +5,6 @@ import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginReq } from '@impakt-dev/api-client';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';

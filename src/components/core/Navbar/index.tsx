@@ -9,7 +9,6 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
-  Button,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
