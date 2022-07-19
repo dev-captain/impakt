@@ -233,14 +233,26 @@ const SignUpForm: React.FC = () => {
     >
       <Common.InputItems inputItems={inputItems} />
       <VStack m="0 !important" w="full">
-        <Flex mt="1em !important" w="75%" textAlign="center" justifyContent="center">
+        <Flex mb="5px" w="75%" textAlign="center" justifyContent="center">
           <Text textStyle="semiBold5" pos="relative">
             By clicking on &apos;Create Account&apos; you agree to our
-            <Box as="a" href="register" mx="5px" cursor="pointer" textColor="impaktRed">
+            <Box
+              as="a"
+              href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+              mx="5px"
+              cursor="pointer"
+              textColor="impaktRed"
+            >
               Terms
             </Box>
             and
-            <Box as="a" href="register" mx="5px" cursor="pointer" textColor="impaktRed">
+            <Box
+              as="a"
+              href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+              mx="5px"
+              cursor="pointer"
+              textColor="impaktRed"
+            >
               Privacy Policy
             </Box>
           </Text>
