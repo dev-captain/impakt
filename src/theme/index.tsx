@@ -1,5 +1,5 @@
 import { ThemeOverride, extendTheme, theme as base } from '@chakra-ui/react';
-import { createBreakpoints, mode } from '@chakra-ui/theme-tools';
+import { createBreakpoints } from '@chakra-ui/theme-tools';
 import buttons from './buttons';
 import colors from './colors';
 
@@ -29,7 +29,7 @@ const theme: ThemeOverride = {
     Button: buttons as any,
   },
   styles: {
-    global: (props) => ({
+    global: () => ({
       body: {
         // bg: mode('glass.900', 'glass.200')(props),
         bg: '#0D0B10',

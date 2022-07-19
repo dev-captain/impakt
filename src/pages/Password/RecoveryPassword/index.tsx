@@ -55,7 +55,7 @@ const RecoveryPassword = () => {
   const isDisabled = !values.email || !validateEmail(values.email);
 
   return (
-    <C.HeroLayout showNavbar minH="70vh" spacing={10} pos="relative" bgImage={bgImage}>
+    <C.HeroLayout showNavbar minH="100vh" spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         position="relative"
         color={textColor}
