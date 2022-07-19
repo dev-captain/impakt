@@ -126,7 +126,6 @@ const SignUpForm: React.FC = () => {
     setValue('fourDigit', generatedNumber, { shouldValidate: true });
   };
 
-  console.log(errors.fourDigit?.message);
   const inputItems: InputGroupPropsI[] = [
     {
       placeholder: 'Nickname',
@@ -248,9 +247,9 @@ const SignUpForm: React.FC = () => {
         </Flex>
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
-            // isLoading={isMemberAuthLoading}
+            isLoading={isMemberCreateLoading}
             type="submit"
-            leftIcon={<I.EnterIcon width="24" height="24" />}
+            leftIcon={<I.AddMemberIcon />}
             size="lg"
           >
             Create account
