@@ -24,3 +24,4 @@ export { default as CopyClipBoardIcon } from './CopyClipBoardIcon';
 export { default as Email } from './Email';
 export { default as Password } from './Password';
 export { default as EnterIcon } from './EnterIcon';
+export { default as NickNameIcon } from './NickNameIcon';

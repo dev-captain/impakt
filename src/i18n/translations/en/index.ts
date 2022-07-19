@@ -247,8 +247,7 @@ export default {
     changeText: 'Choose a unique password to protect your account',
   },
   signUp: {
-    createAn: 'Create an',
-    account: 'account',
+    createAn: 'Create an account',
     yourEmail: 'Email',
     fourDigit: '0000',
     memberName: `Membername`,
