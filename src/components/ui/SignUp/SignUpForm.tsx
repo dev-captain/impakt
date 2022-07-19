@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 import useAppDispatch from '../../../hooks/useAppDispatch';
 import useAppSelector from '../../../hooks/useAppSelector';
-import { Eye } from '../../icons';
+import { Eye, EyeOff } from '../../icons';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
 
@@ -82,6 +82,24 @@ const SignUpForm: React.FC = () => {
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (e.target.name === 'fourDigit') {
+      if (e.target.value.length === 0) {
+        setValue(e.target.name as any, e.target.value, { shouldValidate: true });
+
+        return;
+      }
+      const aZPattern = /[a-zA-Z]/;
+      const specialCharacterPattern =
+        /[!@#æ$%^&£§*½ı÷~ğüşçöĞÜŞÇÖİ≥`()_+\-=\\[\]{};':"\\|,.<>\\/?]+/;
+
+      const isMatch = aZPattern.test(e.target.value);
+      const isMatch2 = specialCharacterPattern.test(e.target.value);
+      if (isMatch || isMatch2) return;
+
+      setValue(e.target.name as any, e.target.value, { shouldValidate: true });
+
+      return;
+    }
     setValue(e.target.name as any, e.target.value, { shouldValidate: true });
   };
 
@@ -125,7 +143,9 @@ const SignUpForm: React.FC = () => {
       children: (
         <Common.InputGroup
           placeholder="0000"
+          maxLength={4}
           value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
+          type="text"
           label={isLessThan1280 ? 'ID' : ' '}
           inputIcon={
             <Text
@@ -143,7 +163,6 @@ const SignUpForm: React.FC = () => {
           }
           helpText={{ text: 'Generate ID', onClick: generateRandomFourDigitNumberString }}
           name="fourDigit"
-          type="number"
           // value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
           errorMsg={errors?.fourDigit?.message}
           width={{ base: '100%', lg: '23%' }}
@@ -172,7 +191,7 @@ const SignUpForm: React.FC = () => {
           alignItems="center"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
-          <Eye />
+          {isShowPassword ? <EyeOff /> : <Eye />}
         </Box>
       ),
       onChange,

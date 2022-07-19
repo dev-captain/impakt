@@ -30,6 +30,7 @@ export interface InputGroupPropsI {
   children?: React.ReactNode;
   width?: ResponsiveValue<any>;
   value?: string | number | readonly string[] | undefined;
+  maxLength?: number;
 }
 
 const InputGroup: React.FC<InputGroupPropsI> = ({
@@ -46,6 +47,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
   width = 'full',
   value,
   children,
+  maxLength,
 }) => {
   return (
     <>
@@ -115,6 +117,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
             border="none"
             _focus={{ border: '2px solid rgba(240, 65, 83, 1)' }}
             minH="60px"
+            maxLength={maxLength}
             type={type}
             value={value}
             pl={leftIcon ? '80px' : '2em'}
