@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAppSelector from '../hooks/useAppSelector';
+import { useAppSelector } from 'hooks';
 
 const Authentication: React.FC = ({ children }) => {
   const member = useAppSelector((state) => state.memberAuth.member);

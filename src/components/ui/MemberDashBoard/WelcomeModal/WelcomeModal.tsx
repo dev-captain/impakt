@@ -1,9 +1,8 @@
 import { VStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
-import useAppSelector from '../../../../hooks/useAppSelector';
 import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fetchActiveDays';
 import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 

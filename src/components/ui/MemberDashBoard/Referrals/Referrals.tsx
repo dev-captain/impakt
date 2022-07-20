@@ -23,10 +23,10 @@ import {
   // TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
+import { useAppDispatch, useAppSelector } from 'hooks';
+
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
-import useAppSelector from '../../../../hooks/useAppSelector';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
 import { fetchReferrals } from '../../../../lib/redux/slices/referrals/actions/fetchReferrals';
 import { fetchReferralsChallenges } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
 import { fetchReferralsReward } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsReward';

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
-import useParallax from '../../../../hooks/useParallax';
+import { useParallax } from 'hooks';
 
 const { Twitter, TwitterLight, Tiktok, Instagram, TiktokDark, InstagramDark } = Images.Common;
 const { UserIcon } = Images.impaktIcons;

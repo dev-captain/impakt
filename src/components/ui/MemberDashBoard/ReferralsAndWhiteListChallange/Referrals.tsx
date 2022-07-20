@@ -5,7 +5,7 @@ import keys from 'i18n/types';
 
 import { VStack, Box, Text } from '@chakra-ui/react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
-import useAppSelector from '../../../../hooks/useAppSelector';
+import { useAppSelector } from 'hooks';
 
 const Referrals: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);

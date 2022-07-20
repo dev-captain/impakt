@@ -12,10 +12,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import { I, Common } from 'components';
 
-import useAppSelector from '../../../../hooks/useAppSelector';
-// import useParallax from '../../../../hooks/useParallax';
-
-import useParallax from '../../../../hooks/useParallax';
+import { useAppSelector, useParallax } from 'hooks';
 
 const ExerciseCard: React.FC = () => {
   const { t } = useTranslation(`default`).i18n;

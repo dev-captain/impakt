@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
+import { useAppDispatch, useAppSelector } from 'hooks';
+
 import NavbarLinkItem from './NavbarLinkItem';
-import useAppSelector from '../../../hooks/useAppSelector';
-import useAppDispatch from '../../../hooks/useAppDispatch';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';

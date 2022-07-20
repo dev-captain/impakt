@@ -12,9 +12,8 @@ import {
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { I } from 'components';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
-import useAppDispatch from '../../../hooks/useAppDispatch';
-import useAppSelector from '../../../hooks/useAppSelector';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 
 const DropDownProfileMenu: React.FC = () => {

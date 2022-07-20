@@ -3,11 +3,10 @@ import { S, C } from 'components';
 import { useEffect, useCallback } from 'react';
 import Images from 'assets/images';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from 'hooks';
 
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
-import useAppSelector from '../../hooks/useAppSelector';
 import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
-import useAppDispatch from '../../hooks/useAppDispatch';
 
 const SignIn = () => {
   const navigate = useNavigate();

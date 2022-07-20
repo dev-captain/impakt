@@ -2,10 +2,9 @@
 import { useMediaQuery } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { Videos } from '../../../../data';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
-import useAppSelector from '../../../../hooks/useAppSelector';
 import {
   setIsAnimated,
   setIsLoaded,

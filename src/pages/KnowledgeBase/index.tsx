@@ -8,10 +8,9 @@ import seoData from 'data/seoData';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { layoutPadding } from 'theme';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import * as Types from '../../lib/redux/slices/knowledgeBase/types';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import useAppSelector from '../../hooks/useAppSelector';
 import { fetchArticleBySlug } from '../../lib/redux/slices/knowledgeBase/actions/fetchArticleBySlug';
 import { fetchArticlesByCategory } from '../../lib/redux/slices/knowledgeBase/actions/fetchArticlesByCategory';
 import { fetchCategories } from '../../lib/redux/slices/knowledgeBase/actions/fetchCategories';

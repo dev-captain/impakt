@@ -2,7 +2,7 @@ import { Box, Image, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import { Common } from 'components';
 // import gsap, { Power2 } from 'gsap';
 import * as React from 'react';
-import useParallax from '../../../../hooks/useParallax';
+import { useParallax } from 'hooks';
 
 const InvestorCard = ({ image, name, title }: { image: string; name: string; title: string }) => {
   const cardRef = React.useRef<HTMLDivElement>(null);

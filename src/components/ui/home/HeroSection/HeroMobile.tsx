@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Box, HStack, useMediaQuery, VStack, Text } from '@chakra-ui/react';
 import { I } from 'components';
+import { useAppSelector } from 'hooks';
 
 import Images from '../../../../assets/images';
-import useAppSelector from '../../../../hooks/useAppSelector';
 
 import ScrollIconComponent from '../ScrollIconComponent';
 import YourBody from '../YourBody';

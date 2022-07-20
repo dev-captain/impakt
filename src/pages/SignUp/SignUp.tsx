@@ -4,7 +4,7 @@ import React from 'react';
 import Images from 'assets/images';
 import { useNavigate } from 'react-router-dom';
 
-import useAppSelector from '../../hooks/useAppSelector';
+import { useAppSelector } from 'hooks';
 
 const SignUp = () => {
   const member = useAppSelector((state) => state.memberAuth.member);

@@ -12,10 +12,10 @@ import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+import { useAppDispatch } from 'hooks';
 
 import TextField from '../TextField';
 import Gradients, { GradientEllipse, GradientEllipse1 } from '../Gradient';
-import useAppDispatch from '../../../hooks/useAppDispatch';
 import { forgotPassword } from '../../../lib/redux/slices/member/actions/forgotPassword';
 
 const RecoveryPassword = () => {

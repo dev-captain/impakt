@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Common } from 'components';
 
-import useAppSelector from '../../../hooks/useAppSelector';
+import { useAppSelector } from 'hooks';
 
 const SignInButton: React.FC = () => {
   const navigate = useNavigate();

@@ -6,10 +6,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginReq } from '@impakt-dev/api-client';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
-import useAppDispatch from '../../../hooks/useAppDispatch';
-import useAppSelector from '../../../hooks/useAppSelector';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
 import { Eye } from '../../icons';
 import { InputGroupPropsI } from '../../common/InputGroup';
