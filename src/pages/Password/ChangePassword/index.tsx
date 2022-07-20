@@ -11,11 +11,11 @@ const ChangePassword = () => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate('/');
-  //   }
-  // }, [token]);
+  useEffect(() => {
+    if (!token) {
+      navigate('/');
+    }
+  }, [token]);
 
   return (
     <C.HeroLayout
