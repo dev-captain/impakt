@@ -8,7 +8,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 
-import { Eye, EyeOff } from '../../icons';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
 
@@ -190,7 +189,7 @@ const SignUpForm: React.FC = () => {
           alignItems="center"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
-          {isShowPassword ? <EyeOff width="24px" height="24px" /> : <Eye />}
+          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
         </Box>
       ),
       onChange,
@@ -211,7 +210,7 @@ const SignUpForm: React.FC = () => {
           alignItems="center"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
-          {isShowPassword ? <EyeOff width="24px" height="24px" /> : <Eye />}
+          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
         </Box>
       ),
       onChange,

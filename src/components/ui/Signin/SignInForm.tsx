@@ -10,7 +10,6 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
-import { Eye } from '../../icons';
 import { InputGroupPropsI } from '../../common/InputGroup';
 
 const signInFormYupScheme = yup.object().shape({
@@ -92,7 +91,7 @@ const SignInForm: React.FC = () => {
           alignItems="center"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
-          <Eye />
+          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
         </Box>
       ),
       onChange,
