@@ -67,7 +67,7 @@ const DownloadPlatform = () => {
                 <GridItem w="full">
                   <DownloadButton
                     isHorizontal
-                    iconName=""
+                    iconName="Android"
                     title="Download for Android"
                     link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
                   />

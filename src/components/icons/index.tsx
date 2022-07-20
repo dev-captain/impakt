@@ -19,6 +19,7 @@ import CheckMark from './CheckMarkIcon';
 import UnCheckMark from './UnCheckMarkIcon';
 import Eye from './Eye';
 import EyeOff from './EyeOff';
+import AndroidIcon from './AndroidIcon';
 
 const Icons: { [key in string]: any } = {
   ProfileUser,
@@ -42,6 +43,7 @@ const Icons: { [key in string]: any } = {
   SmallTwitter,
   EyeOff,
   Eye,
+  AndroidIcon,
 };
 
 export default Icons;
