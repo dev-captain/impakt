@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none !important;
 }
 
 body {
@@ -8,6 +9,11 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
 }
 
 code {
@@ -65,16 +71,15 @@ code {
 .scroll::-webkit-scrollbar-thumb {
   visibility: visible;
 }
-@media (max-width:991px) {
-  .video-layout{
+@media (max-width: 991px) {
+  .video-layout {
     border-radius: 68.6px !important;
   }
 }
-.flipWebkit{
+.flipWebkit {
   -webkit-backface-visibility: hidden;
--moz-backface-visibility: hidden;
--ms-backface-visibility: hidden;
--o-backface-visibility: hidden;
-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
-
