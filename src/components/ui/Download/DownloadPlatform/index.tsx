@@ -67,6 +67,15 @@ const DownloadPlatform = () => {
                 <GridItem w="full">
                   <DownloadButton
                     isHorizontal
+                    iconName="Apple"
+                    title="Download for Mac"
+                    link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
+                  />
+                </GridItem>
+
+                <GridItem w="full">
+                  <DownloadButton
+                    isHorizontal
                     iconName="Android"
                     title="Download for Android"
                     link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
