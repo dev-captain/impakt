@@ -1,19 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { memo } from 'react';
-import {
-  VStack,
-  HStack,
-  Box,
-  Text,
-  GridItem,
-  SimpleGrid,
-  // InputGroup,
-  // InputLeftElement,
-  // Input,
-  Button,
-  Link,
-} from '@chakra-ui/react';
-import { I, C } from 'components';
+import { VStack, HStack, Box, Text, GridItem, SimpleGrid, Link } from '@chakra-ui/react';
+import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
@@ -164,7 +152,7 @@ const ImpaktFooter = () => {
                         <I.ImpaktIcon width="111px" height="32px" />
                       </Box>
                       <Link href="/download" _hover={{ textDecoration: 'none' }}>
-                        <Button colorScheme="red">{t(Keys.footer.downloadApp)}</Button>
+                        <Common.ImpaktButton>{t(Keys.footer.downloadApp)}</Common.ImpaktButton>
                       </Link>
                     </HStack>
 

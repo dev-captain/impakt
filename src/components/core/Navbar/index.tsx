@@ -16,7 +16,7 @@ import { parsePathname } from 'utils';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
-import { I } from 'components';
+import { I, Common } from 'components';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -24,7 +24,6 @@ import SignInLinkItem from './SignInLinkItem';
 import useAppSelector from '../../../hooks/useAppSelector';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import ImpaktButton from '../../common/ImpaktButton';
 
 // const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
@@ -130,7 +129,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
                 <Box>
                   <SignInLinkItem />
                 </Box>
-                <ImpaktButton
+                <Common.ImpaktButton
                   as="a"
                   href="/download"
                   onClick={(e) => {
@@ -139,7 +138,7 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
                   }}
                 >
                   {t(Keys.navbar.download)}
-                </ImpaktButton>
+                </Common.ImpaktButton>
               </HStack>
             </HStack>
           </HStack>

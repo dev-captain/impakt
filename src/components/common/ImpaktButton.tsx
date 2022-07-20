@@ -30,8 +30,9 @@ const ImpaktButton: React.FC<ImpaktButtonProps> = ({
       type={type}
       w="full"
       isLoading={isLoading}
-      minW={size === 'sm' ? '122px' : '202px'}
-      minH={size === 'sm' ? '38px' : '64px'}
+      minW={size === 'lg' ? '202px' : 'unset'}
+      minH={size === 'lg' ? '64px' : 'unset'}
+      color="#fff"
       _hover={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
       transition="all .2s linear"
       px="20px"
