@@ -26,3 +26,4 @@ export { default as Password } from './Password';
 export { default as EnterIcon } from './EnterIcon';
 export { default as NickNameIcon } from './NickNameIcon';
 export { default as AddMemberIcon } from './AddMemberIcon';
+export { default as SendIcon } from './SendIcon';

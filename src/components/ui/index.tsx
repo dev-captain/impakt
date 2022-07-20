@@ -4,3 +4,4 @@ export * from './home';
 export * from './MemberDashBoard';
 export * from './Signin';
 export * from './SignUp';
+export * from './RecoverPassword';

@@ -238,8 +238,7 @@ export default {
 
   password: {
     new: 'New',
-    recovery: 'Recover',
-    password: 'Password',
+    recovery: 'Recover Password',
     recoveryText: 'We’ll email you instructions to reset your password',
     yourEmail: 'Your email',
     newPassword: 'New Password',

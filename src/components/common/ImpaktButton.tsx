@@ -10,6 +10,7 @@ interface ImpaktButtonProps {
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;
+  isDisabled?: boolean;
 }
 
 const ImpaktButton: React.FC<ImpaktButtonProps> = ({
@@ -22,6 +23,7 @@ const ImpaktButton: React.FC<ImpaktButtonProps> = ({
   href,
   type,
   isLoading,
+  isDisabled,
 }) => {
   const bgColor = getBgColor(variant);
 
@@ -29,6 +31,7 @@ const ImpaktButton: React.FC<ImpaktButtonProps> = ({
     <Button
       type={type}
       w="full"
+      isDisabled={isDisabled}
       isLoading={isLoading}
       minW={size === 'lg' ? '202px' : 'unset'}
       minH={size === 'lg' ? '64px' : 'unset'}

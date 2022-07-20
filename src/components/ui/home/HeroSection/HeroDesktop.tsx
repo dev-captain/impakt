@@ -1,8 +1,8 @@
 import { Box, HStack, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import Images from '../../../../assets/images';
-import { useAppDispatch, useAppSelector } from 'hooks';
 import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import ScrollIconComponent from '../ScrollIconComponent';
