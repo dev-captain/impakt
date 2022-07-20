@@ -98,7 +98,7 @@ const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithout
             dispatch(setIsScrolling());
             setTimeout(() => {
               dispatch(setIsAnimated());
-            }, 1200);
+            }, 1070);
           }
         }}
         isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
