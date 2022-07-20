@@ -63,17 +63,18 @@ const DownloadPlatform = () => {
                     link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
                   />
                 </GridItem>
+
                 <GridItem w="full">
                   <DownloadButton
                     isHorizontal
-                    iconName="Apple"
-                    title="Download for Mac"
-                    link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
+                    iconName=""
+                    title="Download for Android"
+                    link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
                   />
                 </GridItem>
               </SimpleGrid>
               <Box w="full" textAlign="center">
-                <Text textStyle="regular201">iOS/Android coming soon</Text>
+                <Text textStyle="regular201">iOS coming soon</Text>
               </Box>
             </VStack>
 
