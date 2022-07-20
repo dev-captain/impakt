@@ -100,7 +100,6 @@ const SignInForm: React.FC = () => {
       name: 'password',
       helpText: {
         text: 'Forgot password?',
-        as: 'a',
         href: '/recover-password',
       },
       errorMsg: errors?.password?.message,

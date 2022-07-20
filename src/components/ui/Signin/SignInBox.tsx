@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Common } from 'components';
-import { Text, Flex, Box } from '@chakra-ui/react';
+import { Text, Flex, Link } from '@chakra-ui/react';
+
+import { Link as ReactRouterLink } from 'react-router-dom';
 
 import SignInForm from './SignInForm';
 
@@ -16,9 +18,16 @@ const SignInBox: React.FC = () => {
       <Flex mt="1em !important" justifyContent="center">
         <Text textStyle="semiBold5" pos="relative">
           First time?
-          <Box as="a" href="register" mx="5px" cursor="pointer" textColor="impaktRed">
+          <Link
+            as={ReactRouterLink}
+            to="/register"
+            textDecor="none !important"
+            mx="5px"
+            cursor="pointer"
+            textColor="impaktRed"
+          >
             Create an account
-          </Box>
+          </Link>
         </Text>
       </Flex>
     </Common.Card>

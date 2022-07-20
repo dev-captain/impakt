@@ -6,9 +6,11 @@ import {
   Box,
   InputRightElement,
   Text,
-  As,
   ResponsiveValue,
+  Link,
 } from '@chakra-ui/react';
+import { Link as ReactRouterLink } from 'react-router-dom';
+
 import * as React from 'react';
 
 export interface InputGroupPropsI {
@@ -22,8 +24,7 @@ export interface InputGroupPropsI {
   label?: string;
   helpText?: {
     onClick?: () => void;
-    text: string;
-    as?: As<any>;
+    text?: string;
     href?: string;
   };
   errorMsg?: string;
@@ -73,16 +74,22 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
               {label}
               {label.length > 1 && ':'}
             </Box>
-            {helpText && (
-              <Box
-                tabIndex={-1}
-                cursor="pointer"
-                href={helpText.href}
-                as={helpText.as}
+            {helpText && helpText.href && (
+              <Link
+                as={ReactRouterLink}
+                to={helpText.href ?? '#'}
                 onClick={helpText.onClick}
-                color="impaktRed"
+                tabIndex={-1}
+                textDecor="none !important"
+                cursor="pointer"
+                textColor="impaktRed"
               >
                 {helpText.text}
+              </Link>
+            )}
+            {helpText && !helpText.href && (
+              <Box tabIndex={-1} cursor="pointer" onClick={helpText?.onClick} color="impaktRed">
+                {helpText?.text}
               </Box>
             )}
           </FormLabel>
