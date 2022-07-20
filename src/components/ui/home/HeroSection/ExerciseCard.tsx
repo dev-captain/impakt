@@ -16,8 +16,8 @@ import { useAppSelector, useParallax } from 'hooks';
 
 const ExerciseCard: React.FC = () => {
   const { t } = useTranslation(`default`).i18n;
-  const [circularProgressValue, setCircularProgressValue] = React.useState(4.16666666667);
-  const [displayValue, setDisplayValue] = React.useState(10);
+  const [circularProgressValue, setCircularProgressValue] = React.useState(0);
+  const [displayValue, setDisplayValue] = React.useState(24);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const cardsRef = React.useRef<HTMLDivElement | null>(null);
@@ -34,21 +34,21 @@ const ExerciseCard: React.FC = () => {
     if (isAnimated) {
       const interval = setInterval(() => {
         setDisplayValue((prevState) => {
-          if (prevState >= 20) {
-            return 10;
+          if (prevState === 0) {
+            return 24;
           }
 
-          return prevState + 0.45454545;
+          return prevState - 1;
         });
 
         setCircularProgressValue((prevState) => {
           if (prevState >= 100) {
-            return 4.16666666667;
+            return 0;
           }
 
           return prevState + 4.16666666667;
         });
-      }, 1950);
+      }, 1920);
 
       return () => clearInterval(interval);
     }
@@ -105,7 +105,7 @@ const ExerciseCard: React.FC = () => {
               size="150px"
               color="rgba(0,0,0,0.5)"
               value={circularProgressValue}
-              thickness="9.5"
+              thickness="11"
             >
               <CircularProgressLabel
                 letterSpacing="1px"
@@ -114,10 +114,10 @@ const ExerciseCard: React.FC = () => {
                 fontSize="56px"
                 color="#FFFFFF"
               >
-                {Math.floor(displayValue)}
+                {displayValue}
               </CircularProgressLabel>
             </CircularProgress>
-            <Box position="absolute" left="2px" top="2.4px">
+            <Box position="absolute" left="2px" top="1.5444px">
               <I.SegmentedProgress />
             </Box>
           </Box>{' '}
