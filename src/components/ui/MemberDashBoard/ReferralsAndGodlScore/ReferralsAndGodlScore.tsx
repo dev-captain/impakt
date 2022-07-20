@@ -1,7 +1,7 @@
 import { VStack, HStack, Box, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import MemberDashboardCard from '../MemberDashBoardCard';
-// import WhiteList from '../ExerciseAndHowToWL/WhiteList';
+import WhiteList from '../ExerciseAndHowToWL/WhiteList';
 import Referrals from './Referrals';
 import GodlScore from './GodlScore';
 import Excercise from '../ExerciseAndHowToWL/Exercise';
@@ -53,11 +53,11 @@ const ReferralsAndGodlScore: React.FC = () => {
           w="100%"
         >
           <SimpleGrid columns={{ base: 1 }} gap={5} width="100%">
-            {/* <Box>
+            <Box>
               <MemberDashboardCard>
                 <WhiteList />
               </MemberDashboardCard>
-            </Box> */}
+            </Box>
             <Box>
               <MemberDashboardCard>
                 <Excercise />

@@ -8,6 +8,7 @@ import godlReducer from '../slices/godl/godlSlice';
 import fitnessReducer from '../slices/fitness/fitnessSlice';
 import referralsReducer from '../slices/referrals/referralsSlice';
 import stateReducer from '../slices/state/stateSlice';
+import whitelistReducer from '../slices/whitelist/whitelistSlice';
 
 const persistConfig = {
   key: 'root',
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   fitnessReducer,
   referrals: referralsReducer,
   stateReducer,
+  whitelistReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
