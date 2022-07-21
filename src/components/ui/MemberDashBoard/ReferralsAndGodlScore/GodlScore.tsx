@@ -6,12 +6,14 @@ import useAppDispatch from '../../../../hooks/useAppDispatch';
 import useAppSelector from '../../../../hooks/useAppSelector';
 import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fetchActiveDays';
 import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
+import Whitelist from '../../../../assets/svgs/Vector.svg';
 
 const GodlScore: React.FC = () => {
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
   const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
+  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 
@@ -50,17 +52,21 @@ const GodlScore: React.FC = () => {
             </span>
           ))}
         </Text>
-        {/* <Box ms={3}>
-          <img src={Whitelist} alt="Whitelist" />
-        </Box> */}
+        {isWhitelisted && (
+          <Box ms={3}>
+            <img src={Whitelist} alt="Whitelist" />
+          </Box>
+        )}
       </Box>
       <Box id="whitelist-challange-description-box-2 " sx={{ marginTop: '0px !important' }}>
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        {/* <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3" >
-          You are whitelisted. Congrats!
-        </Text> */}
+        {isWhitelisted && (
+          <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3">
+            You are whitelisted. Congrats!
+          </Text>
+        )}
       </Box>
 
       {/* <Grid templateColumns="repeat(2, 1fr)" gap={4}>
