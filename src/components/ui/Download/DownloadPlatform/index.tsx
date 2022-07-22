@@ -72,7 +72,7 @@ const DownloadPlatform = () => {
                 </GridItem>
 
                 <GridItem w="full">
-                  <DownloadButton
+                  <Common.DownloadButton
                     isHorizontal
                     iconName="Android"
                     title="Download for Android"

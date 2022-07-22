@@ -12,7 +12,7 @@ const DownloadButton = ({
   link: string;
   title: string;
   isHorizontal?: boolean;
-  iconName: 'Apple' | 'Windows' | '';
+  iconName: 'Apple' | 'Windows' | 'Android' | '';
 }) => {
   const Wrapper = isHorizontal ? HStack : VStack;
 
@@ -33,6 +33,7 @@ const DownloadButton = ({
       <Wrapper>
         {iconName === 'Apple' && <I.Apple opacity="1" />}
         {iconName === 'Windows' && <I.Window opacity="1" />}
+        {iconName === 'Android' && <I.AndroidIcon width="18" height="18" opacity="1" />}
         <Text fontSize="14px" lineHeight="24px" fontWeight="500" color="white">
           {title}
         </Text>
