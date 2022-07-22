@@ -98,7 +98,12 @@ const ImpaktNFT = () => {
                       textStyle={{ base: 'semiBold5', md: 'regular18' }}
                     >
                       {t(Keys.impaktNFT.careerdescription)}
-                      <Text color="gold" as="a" target="_blank" href="#">
+                      <Text
+                        color="gold"
+                        as="a"
+                        target="_blank"
+                        href="https://www.imdb.com/name/nm1942545"
+                      >
                         {t(Keys.impaktNFT.careerdescription1)}
                       </Text>
                     </Text>
