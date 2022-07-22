@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 
 import { VStack, Box, Text } from '@chakra-ui/react';
-import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import { useAppSelector } from 'hooks';
+import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 
 const Referrals: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
