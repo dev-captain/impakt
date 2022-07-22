@@ -64,7 +64,6 @@ const Source = styled.source``;
 
 const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithoutRef<'video'>>(
   (props, ref) => {
-    console.log('video render');
     const dispatch = useAppDispatch();
     const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
     const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
