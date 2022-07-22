@@ -3,11 +3,9 @@ import React from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C } from 'components';
 import Images from 'assets/images';
-
-import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
+import StartEarningCryptoNowInfoCard from '../StartEarningCryptoNowInfoCard';
 
 const SocialFitnessGamified: React.FC = ({ children }) => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
@@ -16,7 +14,7 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
   const { t } = useTranslation(`default`).i18n;
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       showNavbar
       spacing={10}
       pos="relative"
@@ -77,37 +75,14 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                 </Text>
               </Box>
               <Box ml="7px !important" maxW="500px" w="full" id="hero-info-card-box">
-                <InfoCard
-                  tooltipLabel={t(Keys.toolTip.downloadLabel)}
-                  isShowTooltip
-                  LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
-                >
-                  <VStack alignItems="flex-start" color="white">
-                    <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
-                      {t(Keys.toolTip.earningCrypto)}
-                    </Text>
-                    <Text
-                      color="gold"
-                      fontWeight="700 !important"
-                      textStyle={{ base: 'semiBold15', lg: 'regular201' }}
-                    >
-                      {t(Keys.toolTip.godlBonus)}
-                    </Text>
-                    <Text
-                      textStyle={{ base: 'semiBold12', lg: 'semiBold14' }}
-                      color="whiteAlpha.400"
-                    >
-                      {t(Keys.toolTip.description)}
-                    </Text>
-                  </VStack>
-                </InfoCard>
+                <StartEarningCryptoNowInfoCard />
               </Box>
             </VStack>
             {children}
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

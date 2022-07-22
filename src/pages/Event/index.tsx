@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { S, C } from 'components';
 import useEventStore from 'hooks/store/useEventStore';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import { CountDown, BurnToEarnHero, MotionCaptureHero } from 'components/ui/events';
 
 const EventPage = () => {
   const { slug } = useParams();
@@ -19,21 +18,21 @@ const EventPage = () => {
   }, [slug]);
 
   return (
-    <HeroLayout showFooter showNavbar minH="60vh">
+    <C.HeroLayout showFooter showNavbar minH="60vh">
       <VStack w="full" minH="70vh" pt={{ base: '16px', md: '80px' }} color={text}>
         <Text textStyle="bold7" fontWeight="700" mb="52px" pl="16px" align="center">
           {eventStore.event?.title || t(Keys.events.noEventsForNow)}
         </Text>
-        <CountDown
+        <S.CountDown
           bgColor={bg}
           date={eventStore.date!}
           isLoading={eventStore.isLoading}
           noEventTitle={t(Keys.events.waitForUpdates)}
         />
-        <MotionCaptureHero />
-        <BurnToEarnHero />
+        <S.MotionCaptureHero />
+        <S.BurnToEarnHero />
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

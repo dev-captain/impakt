@@ -8,7 +8,7 @@ import {
   useColorModeValue,
   Box,
 } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import TeamCard from './TeamCard';
@@ -19,8 +19,9 @@ const Founder = () => {
   const { t } = useTranslation().i18n;
   let Team = useState<object[]>();
   Team = t('Founder.team', { returnObjects: true });
+
   return (
-    <HeroLayout
+    <C.HeroLayout
       // showNavbar
       bgImage={bgImage}
       customPadding={{
@@ -89,7 +90,7 @@ const Founder = () => {
           </VStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

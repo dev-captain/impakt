@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import { Box, VStack, HStack } from '@chakra-ui/react';
+import { useCountdown } from 'hooks';
+
 import CountdownTimer from './CountDownTimerItem';
-import useCountdown from '../../../../hooks/useCountdown';
 import PhaseHeadlineText from './PhaseHeadlineText';
 
 const CountdownTimerInvestment: React.FC = () => {

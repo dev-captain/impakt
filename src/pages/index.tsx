@@ -11,3 +11,5 @@ export { default as RecoveryPassword } from './Password/RecoveryPassword';
 export { default as ChangePassword } from './Password/ChangePassword';
 export { default as Verify } from './VerificationPage/Verify';
 export { default as SignUp } from './SignUp/SignUp';
+export { default as SignIn } from './SignIn/SignIn';
+export { default as MemberDashboard } from './MemberDashBoard';

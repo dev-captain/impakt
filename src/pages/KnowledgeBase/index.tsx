@@ -1,6 +1,5 @@
 import { GridItem, SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import Seo from 'components/core/Seo';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C } from 'components';
 import Article from 'components/ui/knowledgeBase/Article';
 import ArticleList from 'components/ui/knowledgeBase/ArticleList';
 import Category from 'components/ui/knowledgeBase/Category';
@@ -9,10 +8,9 @@ import seoData from 'data/seoData';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { layoutPadding } from 'theme';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import * as Types from '../../lib/redux/slices/knowledgeBase/types';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import useAppSelector from '../../hooks/useAppSelector';
 import { fetchArticleBySlug } from '../../lib/redux/slices/knowledgeBase/actions/fetchArticleBySlug';
 import { fetchArticlesByCategory } from '../../lib/redux/slices/knowledgeBase/actions/fetchArticlesByCategory';
 import { fetchCategories } from '../../lib/redux/slices/knowledgeBase/actions/fetchCategories';
@@ -56,8 +54,8 @@ const KnowledgeBasePage = () => {
   }, [selectedCategory?.slug]);
 
   return (
-    <HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
-      <Seo
+    <C.HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter>
+      <C.Seo
         title={selectedArticle?.title || `${title} - ${selectedCategory?.title}`}
         meta={[
           ...meta,
@@ -146,7 +144,7 @@ const KnowledgeBasePage = () => {
           </GridItem>
         </SimpleGrid>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useColorModeValue, VStack, Text, useBreakpointValue, Image } from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
@@ -29,7 +29,7 @@ const VerificationSomethingWentWrong: React.FC = () => {
   };
 
   return (
-    <HeroLayout showNavbar spacing={10} pos="relative" bgImage={bgImage}>
+    <C.HeroLayout showNavbar spacing={10} pos="relative" bgImage={bgImage}>
       <VStack
         position="relative"
         color={textColor}
@@ -84,7 +84,7 @@ const VerificationSomethingWentWrong: React.FC = () => {
           <Gradients />
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

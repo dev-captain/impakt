@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { VStack, Box, Text } from '@chakra-ui/react';
 
-import Gradients from '../../../common/Gradients';
+import { Common } from 'components';
 import { usePusherContext } from '../../../../context/PusherContext';
 
 const ActiveMembersCard: React.FC = () => {
@@ -86,7 +86,7 @@ const ActiveMembersCard: React.FC = () => {
             </Text>
           </VStack>
         )}
-      <Gradients />
+      <Common.Gradients />
     </VStack>
   );
 };

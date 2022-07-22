@@ -1,5 +1,5 @@
 import { Box, Text, VStack } from '@chakra-ui/react';
-import Icons from 'components/icons';
+import { I } from 'components';
 
 const MotionCard = ({
   isVrGlass,
@@ -12,7 +12,7 @@ const MotionCard = ({
   bgColor: string;
   iconColor: string;
 }) => {
-  const Icon = isVrGlass ? Icons.VrGlass : Icons.Runner;
+  const Icon = isVrGlass ? I.VrGlass : I.Runner;
 
   return (
     <Box

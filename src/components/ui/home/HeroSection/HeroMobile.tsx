@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Box, HStack, useMediaQuery, VStack, Text } from '@chakra-ui/react';
+import { I } from 'components';
+import { useAppSelector } from 'hooks';
 
 import Images from '../../../../assets/images';
-import useAppSelector from '../../../../hooks/useAppSelector';
-import LoadingIcon from '../../../icons/LoadingIcon';
+
 import ScrollIconComponent from '../ScrollIconComponent';
 import YourBody from '../YourBody';
 import HeroVideo from './HeroVideo';
@@ -49,7 +50,7 @@ const HeroMobile: React.FC = () => {
                 borderRadius="0px 0px 10px 10px"
                 flexDir="column"
               >
-                <LoadingIcon />
+                <I.LoadingIcon />
                 <Text top="-20px" color="rgba(255, 255, 255, 0.5)" textStyle="bold5">
                   Loading...
                 </Text>
@@ -115,7 +116,7 @@ const HeroMobile: React.FC = () => {
                 borderRadius="0px 0px 10px 10px"
                 flexDir="column"
               >
-                <LoadingIcon />
+                <I.LoadingIcon />
                 <Text top="-20px" color="rgba(255, 255, 255, 0.5)" textStyle="bold5">
                   Loading...
                 </Text>

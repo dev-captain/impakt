@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import * as React from 'react';
-import ScrollIcon from '../../icons/Scroll';
+import { I } from 'components';
 
 const rotate = keyframes`
   0%{
@@ -20,7 +20,13 @@ const rotate = keyframes`
   }
 `;
 
-const Box = styled.div<{ isVisible: boolean; position: string; left: string; zIndex: string }>`
+const Box = styled.div<{
+  isVisible: boolean;
+  position: string;
+  left: string;
+  zIndex: string;
+  bottom?: string;
+}>`
   animation: ${rotate} 1.5s linear infinite;
   opacity: ${(p) => (p.isVisible ? '1' : '0')};
   transition: opacity 0.2s ease-in;
@@ -28,7 +34,7 @@ const Box = styled.div<{ isVisible: boolean; position: string; left: string; zIn
   z-index: ${(p) => p.zIndex};
   left: ${(p) => p.left};
   position: ${(p) => p.position};
-  bottom: 0;
+  bottom: ${(p) => p.bottom ?? 0};
 `;
 const ScrollIconComponent: React.FC<{
   isVisible: boolean;
@@ -37,10 +43,14 @@ const ScrollIconComponent: React.FC<{
   zIndex: string;
   width?: string;
   height?: string;
-}> = ({ isVisible, left, position, zIndex, width, height }) => {
+  fillIcon?: string;
+  bottom?: string;
+}> = ({ isVisible, left, position, zIndex, width = 80, height = 80, fillIcon, bottom }) => {
+  const viewBox = `0 0 80 80`;
+
   return (
-    <Box isVisible={isVisible} left={left} zIndex={zIndex} position={position}>
-      <ScrollIcon width={width} height={height} />
+    <Box bottom={bottom} isVisible={isVisible} left={left} zIndex={zIndex} position={position}>
+      <I.ScrollIcon viewBox={viewBox} fillIcon={fillIcon} width={width} height={height} />
     </Box>
   );
 };

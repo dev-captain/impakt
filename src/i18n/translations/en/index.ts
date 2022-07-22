@@ -25,7 +25,7 @@ export default {
     download: 'Download',
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
-    signIn: 'Sign in',
+    signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
   },
   computerVision: {
@@ -105,6 +105,9 @@ export default {
           '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.',
         subtitle1:
           'Previous 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
+        twitterLink: 'https://twitter.com/demideuszin',
+        linkedInLink: '',
+        facebookLink: '',
       },
       {
         name: 'Valtec',
@@ -114,6 +117,9 @@ export default {
         subtitle: ' <span style="color:#FFF;">10+ years</span> of building technology companies.',
         subtitle1:
           'Previous roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
+        twitterLink: 'https://twitter.com/shabamanation?s=21&t=WPEL7jC2IhTtV1U-9I-_Kw',
+        linkedInLink: 'https://www.linkedin.com/in/john-keh',
+        facebookLink: '',
       },
       {
         name: 'Dahaka',
@@ -124,6 +130,9 @@ export default {
           ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.',
         subtitle1:
           'Managing a team of <span style="color:#FFF;">20+</span> engineers & product managers',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
       },
     ],
   },
@@ -229,8 +238,7 @@ export default {
 
   password: {
     new: 'New',
-    recovery: 'Recover',
-    password: 'Password',
+    recovery: 'Recover Password',
     recoveryText: 'We’ll email you instructions to reset your password',
     yourEmail: 'Your email',
     newPassword: 'New Password',
@@ -238,14 +246,13 @@ export default {
     changeText: 'Choose a unique password to protect your account',
   },
   signUp: {
-    createAn: 'Create an',
-    account: 'account',
+    createAn: 'Create an account',
     yourEmail: 'Email',
     fourDigit: '0000',
     memberName: `Membername`,
   },
   signIn: {
-    signIn: `Sign in`,
+    signIn: `Sign In`,
     createAn: `Create an account`,
     firstTime: `First time?`,
     signInButton: `Sign In`,

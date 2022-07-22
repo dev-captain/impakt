@@ -10,53 +10,57 @@ import {
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+import { I, Common } from 'components';
 
-import useAppSelector from '../../../../hooks/useAppSelector';
-import useParallax from '../../../../hooks/useParallax';
-import AnimationAlways from '../../../common/AnimationAlways';
-import AccelerationIcon from '../../../icons/AccelerationIcon';
-import SegmentedProgress from '../../../icons/SegmentedProgress';
+import { useAppSelector, useParallax } from 'hooks';
 
 const ExerciseCard: React.FC = () => {
   const { t } = useTranslation(`default`).i18n;
-  const [circularProgressValue, setCircularProgressValue] = React.useState(4.16666666667);
-  const [displayValue, setDisplayValue] = React.useState(10);
+  const [circularProgressValue, setCircularProgressValue] = React.useState(0);
+  const [displayValue, setDisplayValue] = React.useState(24);
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
-  const boxRef = React.useRef<HTMLDivElement | null>(null);
-  const { handleMouseOver } = useParallax(boxRef);
+  const cardsRef = React.useRef<HTMLDivElement | null>(null);
+  const exerciseHeadlineTextBox = React.useRef<HTMLDivElement | null>(null);
+  const exerciseProgressBox = React.useRef<HTMLDivElement | null>(null);
+  const exerciseNameBox = React.useRef<HTMLDivElement | null>(null);
+
+  useParallax(cardsRef, [exerciseHeadlineTextBox, exerciseProgressBox, exerciseNameBox], {
+    range: 40,
+  });
+
   // eslint-disable-next-line consistent-return
   React.useEffect(() => {
     if (isAnimated) {
       const interval = setInterval(() => {
         setDisplayValue((prevState) => {
-          if (prevState >= 20) {
-            return 10;
+          if (prevState === 0) {
+            return 24;
           }
 
-          return prevState + 0.45454545;
+          return prevState - 1;
         });
 
         setCircularProgressValue((prevState) => {
           if (prevState >= 100) {
-            return 4.16666666667;
+            return 0;
           }
 
           return prevState + 4.16666666667;
         });
-      }, 1950);
+      }, 1920);
 
       return () => clearInterval(interval);
     }
   }, [isAnimated]);
 
   return !isAnimated ? null : (
-    <AnimationAlways animationType="move" xValue={50}>
+    <Common.AnimationAlways animationType="move" xValue={50}>
+      {/* <Box left="-50%" top="-50%" w="1024px" zIndex="-5" h="768px" id="area" position="absolute" /> */}
       <VStack
-        ref={boxRef}
         zIndex={99999}
-        onMouseOver={handleMouseOver}
         w="234px"
+        ref={cardsRef}
         h="294px"
         borderRadius="24px"
         backdropFilter="blur(60px)"
@@ -72,6 +76,7 @@ const ExerciseCard: React.FC = () => {
           id="exercise-card-header"
           textAlign="center"
           justifyContent="center"
+          ref={exerciseHeadlineTextBox}
         >
           <Text
             fontSize="14.61px"
@@ -82,20 +87,25 @@ const ExerciseCard: React.FC = () => {
             {t(Keys.impaktGamesHero.excercise)}
           </Text>
         </Box>
-        <HStack columnGap="10px" mt="0 !important" id="exercise-card-activity-description">
-          <AccelerationIcon />
+        <HStack
+          ref={exerciseNameBox}
+          columnGap="10px"
+          mt="0 !important"
+          id="exercise-card-activity-description"
+        >
+          <I.AccelerationIcon />
           <Text color="#FFFFFF" textStyle="normal5">
             {t(Keys.impaktGamesHero.squats)}
           </Text>
         </HStack>
-        <Box mt="0 !important" id="exercise-cardprogress-bar-box">
+        <Box ref={exerciseProgressBox} mt="0 !important" id="exercise-cardprogress-bar-box">
           <Box position="relative">
             <CircularProgress
               trackColor={accentRedtextColor}
               size="150px"
               color="rgba(0,0,0,0.5)"
               value={circularProgressValue}
-              thickness="9.5"
+              thickness="11"
             >
               <CircularProgressLabel
                 letterSpacing="1px"
@@ -104,16 +114,16 @@ const ExerciseCard: React.FC = () => {
                 fontSize="56px"
                 color="#FFFFFF"
               >
-                {Math.floor(displayValue)}
+                {displayValue}
               </CircularProgressLabel>
             </CircularProgress>
-            <Box position="absolute" left="2px" top="2.4px">
-              <SegmentedProgress />
+            <Box position="absolute" left="2px" top="1.5444px">
+              <I.SegmentedProgress />
             </Box>
           </Box>{' '}
         </Box>{' '}
       </VStack>{' '}
-    </AnimationAlways>
+    </Common.AnimationAlways>
   );
 };
 

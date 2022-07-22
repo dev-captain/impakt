@@ -1,21 +1,20 @@
-import { Box, HStack, Text, useColorModeValue, useMediaQuery, VStack } from '@chakra-ui/react';
+import { Box, HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import Images from 'assets/images';
-import HeroLayout from 'components/layouts/HeroLayout';
-import InfoCard from '../../../core/InfoCard';
-import YoutubeIcon from '../../../icons/YoutubeIcon';
+import { C } from 'components';
+
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
+import StartEarningCryptoNowInfoCard from '../StartEarningCryptoNowInfoCard';
 
 const EarnCrypto = () => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBgRotated, Images.backgrounds.light);
   const { t } = useTranslation(`default`).i18n;
-  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       customPadding={0}
       // showNavbar
       pos="relative"
@@ -106,37 +105,14 @@ const EarnCrypto = () => {
                   mt="17px !important"
                   mb="48px !important"
                 >
-                  <InfoCard
-                    tooltipLabel={t(Keys.toolTip.downloadLabel)}
-                    isShowTooltip
-                    LeftLogo={<YoutubeIcon isMobile={isLessThan1280} />}
-                  >
-                    <VStack alignItems="flex-start" color="white">
-                      <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
-                        {t(Keys.toolTip.earningCrypto)}
-                      </Text>
-                      <Text
-                        color="gold"
-                        fontWeight="700 !important"
-                        textStyle={{ base: 'semiBold15', lg: 'regular201' }}
-                      >
-                        {t(Keys.toolTip.godlBonus)}
-                      </Text>
-                      <Text
-                        textStyle={{ base: 'semiBold12', lg: 'semiBold14' }}
-                        color="whiteAlpha.400"
-                      >
-                        {t(Keys.toolTip.description)}
-                      </Text>
-                    </VStack>
-                  </InfoCard>
+                  <StartEarningCryptoNowInfoCard />
                 </Box>
               </VStack>
             </VStack>
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

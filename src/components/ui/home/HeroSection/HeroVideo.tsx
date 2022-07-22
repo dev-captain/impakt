@@ -2,10 +2,9 @@
 import { useMediaQuery } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { Videos } from '../../../../data';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
-import useAppSelector from '../../../../hooks/useAppSelector';
 import {
   setIsAnimated,
   setIsLoaded,
@@ -65,6 +64,7 @@ const Source = styled.source``;
 
 const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithoutRef<'video'>>(
   (props, ref) => {
+    console.log('video render');
     const dispatch = useAppDispatch();
     const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
     const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
@@ -98,7 +98,7 @@ const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithout
             dispatch(setIsScrolling());
             setTimeout(() => {
               dispatch(setIsAnimated());
-            }, 1000);
+            }, 1070);
           }
         }}
         isScrolling={(isScrolling && !isAnimated) || isLessThan1280}

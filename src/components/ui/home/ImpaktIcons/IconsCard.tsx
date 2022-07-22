@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
+import { useParallax } from 'hooks';
 
 const { Twitter, TwitterLight, Tiktok, Instagram, TiktokDark, InstagramDark } = Images.Common;
 const { UserIcon } = Images.impaktIcons;
@@ -18,6 +19,15 @@ const IconsCard = ({
   title: string;
   subtitle: string;
 }) => {
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const imageBoxRef = React.useRef<HTMLDivElement>(null);
+  const nameBoxRef = React.useRef<HTMLDivElement>(null);
+  const followersBoxRef = React.useRef<HTMLDivElement>(null);
+  const descriptionBoxRef = React.useRef<HTMLDivElement>(null);
+  useParallax(cardRef, [imageBoxRef, nameBoxRef, followersBoxRef, descriptionBoxRef], {
+    range: 40,
+  });
+
   const [twitterImg, setTwitterImg] = useState(Twitter);
   const [tiktokImg, setTiktokImg] = useState(Tiktok);
   const [instagramImg, setInstagramImg] = useState(Instagram);
@@ -41,11 +51,13 @@ const IconsCard = ({
     if (hoverType === 'Instagram') setInstagramImg(socialImage);
   };
   const { t } = useTranslation().i18n;
+
   return (
     <VStack
       pl="24px"
       pr="24px"
       pb="24px"
+      ref={cardRef}
       width={{ base: '343px', sm: '288px', md: '288px' }}
       h="422px"
       align="center"
@@ -58,7 +70,7 @@ const IconsCard = ({
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <VStack pos="relative" zIndex={1} top="-19px" height="100px">
-        <Box role="group" maxW="330px" w="full" boxShadow="sm" rounded="lg">
+        <Box ref={imageBoxRef} role="group" maxW="330px" w="full" boxShadow="sm" rounded="lg">
           <Box
             rounded="lg"
             mt={-12}
@@ -102,7 +114,7 @@ const IconsCard = ({
         </Box>
       </VStack>
 
-      <VStack align="center" justify="center" mb="0px !important">
+      <VStack ref={nameBoxRef} align="center" justify="center" mb="0px !important">
         <Text
           textStyle="bold5"
           pb="5px"
@@ -120,6 +132,7 @@ const IconsCard = ({
         justify={{ base: 'center', md: 'center' }}
         mt="0px !important"
         mb="14px !important"
+        ref={followersBoxRef}
       >
         <Text textStyle="semiBold16" color="#FEC417">
           {' '}
@@ -136,7 +149,7 @@ const IconsCard = ({
       >
         {name !== '???' ? (
           // <Box position="relative" data-group> // To allow the flip feature
-          <Box position="relative" w="100%">
+          <Box ref={descriptionBoxRef} position="relative" w="100%">
             <Box
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
@@ -265,7 +278,7 @@ const IconsCard = ({
             </Box>
           </Box>
         ) : (
-          <Box position="relative" w="100%">
+          <Box ref={descriptionBoxRef} position="relative" w="100%">
             <Box
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"

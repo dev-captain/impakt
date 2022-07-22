@@ -18,6 +18,7 @@ const NavBarSocialIcons = () => {
       transform: 'scale(1.25)',
     },
   };
+
   return (
     <HStack justify={{ base: 'center', md: 'flex-end' }}>
       <Box mr="24px !important" as="a" target="_blank" href={Socials.twitter}>

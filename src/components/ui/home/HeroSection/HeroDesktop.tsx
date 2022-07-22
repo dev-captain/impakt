@@ -1,9 +1,8 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, HStack, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import Images from '../../../../assets/images';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
-import useAppSelector from '../../../../hooks/useAppSelector';
 import { setBorderX, setBorderY } from '../../../../lib/redux/slices/state/stateSlice';
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import ScrollIconComponent from '../ScrollIconComponent';
@@ -17,9 +16,11 @@ export const HeroDesktop: React.FC = () => {
   const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
   const isScrolled = React.useRef(false);
+  const [isHeightLessThan975] = useMediaQuery('(max-height: 975px)');
 
   const [isMovedToYourBodySection, setIsMovedToYourBodySection] = React.useState(false);
 
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const impaktGameHeroRef = React.useRef<HTMLDivElement | null>(null);
   const mirrorRef = React.useRef<HTMLDivElement | null>(null);
   const heroVideoRef = React.useRef<HTMLVideoElement | null>(null);
@@ -37,6 +38,12 @@ export const HeroDesktop: React.FC = () => {
         heroRightSideRef.current
       ) {
         mirrorRef.current.style.left = `${heroRightSideRef.current.getBoundingClientRect().x}px`;
+        mirrorRef.current.style.width = `${
+          heroRightSideRef.current.getBoundingClientRect().width
+        }px`;
+        mirrorRef.current.style.height = `${
+          heroRightSideRef.current.getBoundingClientRect().height
+        }px`;
         if (!isAnimated) {
           dispatch(setBorderX({ borderX: heroVideoScreenRef.current.getBoundingClientRect().x }));
           dispatch(
@@ -63,11 +70,15 @@ export const HeroDesktop: React.FC = () => {
   const moveToYourBodySection = (e: React.WheelEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
+    // console.log(containerRef.current?.scrollHeight);
     if (isScrolled.current) return;
-    if (!impaktGameHeroRef.current) return;
+    if (!impaktGameHeroRef.current || !containerRef.current || !yourBodySectionRef.current) return;
     if (isAnimated) {
       isScrolled.current = true;
-      window.scrollTo(0, impaktGameHeroRef.current.clientHeight - 200);
+      const minus = isHeightLessThan975 ? -50 : 100;
+      const centerY = yourBodySectionRef.current.offsetTop - minus;
+
+      window.scrollTo(0, centerY);
       setTimeout(() => {
         setIsMovedToYourBodySection((prev) => !prev);
       }, 200);
@@ -77,11 +88,12 @@ export const HeroDesktop: React.FC = () => {
 
   React.useEffect(() => {
     function checkOffSet() {
+      // console.log(window.scrollY);
       if (
         mirrorRef.current &&
         heroVideoRef.current &&
         yourBodySectionRef.current &&
-        window.scrollY < yourBodySectionRef.current.offsetTop - 200 &&
+        window.scrollY < yourBodySectionRef.current.offsetTop - 50 &&
         heroVideoScreenRef.current &&
         isAnimated
       ) {
@@ -113,7 +125,11 @@ export const HeroDesktop: React.FC = () => {
 
   React.useEffect(() => {
     if (mirrorRef.current && heroVideoScreenRef.current && heroRightSideRef.current) {
-      mirrorRef.current.style.top = `${heroRightSideRef.current.getBoundingClientRect().y - 24}px`;
+      mirrorRef.current.style.width = `${heroRightSideRef.current.getBoundingClientRect().width}px`;
+      mirrorRef.current.style.height = `${
+        heroRightSideRef.current.getBoundingClientRect().height
+      }px`;
+      mirrorRef.current.style.top = `${heroRightSideRef.current.getBoundingClientRect().y - 50}px`;
       mirrorRef.current.style.left = `${heroRightSideRef.current.getBoundingClientRect().x}px`;
       dispatch(setBorderX({ borderX: heroVideoScreenRef.current.getBoundingClientRect().x }));
       dispatch(setBorderY({ borderY: heroVideoScreenRef.current.getBoundingClientRect().y + 28 }));
@@ -124,45 +140,51 @@ export const HeroDesktop: React.FC = () => {
     <div
       onWheel={(e) => moveToYourBodySection(e)}
       style={{ backgroundColor: '#121117', position: 'relative' }}
+      ref={containerRef}
       id="stick"
     >
       <div ref={impaktGameHeroRef} id="impakt-game-hero">
         <SocialFitnessGamified>
           <HStack
+            id="hero-right"
             ref={heroRightSideRef}
-            height={{ base: '89.962962962963vh', lgx: '788px' }}
-            minH={{ base: '89.962962962963vh', lgx: '788px' }}
-            width={{ base: '38.250vw', lgx: '600px' }}
-            minW={{ base: '38.250vw', lgx: '600px' }}
-            id="right"
+            maxH="788px"
+            h="80vh"
             w="full"
             margin="0 !important"
           >
-            <Box height="72.962962962963vh" />
+            <Box height="100%" />
           </HStack>
         </SocialFitnessGamified>
       </div>
-      {isScrolling && (
-        <div id="impakt-your-body" ref={yourBodySectionRef}>
+
+      <div id="impakt-your-body" ref={yourBodySectionRef}>
+        {isScrolling && (
           <YourBody>
-            <HStack id="right" w="full">
+            <HStack
+              height={{ base: '89.962962962963vh', lgx: '788px' }}
+              minH={{ base: '89.962962962963vh', lgx: '788px' }}
+              width={{ base: '38.250vw', lgx: '600px' }}
+              minW={{ base: '38.250vw', lgx: '600px' }}
+              id="right"
+              w="full"
+            >
               <Box />
             </HStack>
           </YourBody>
-        </div>
-      )}
+        )}
+      </div>
 
       <MirrorAndStarsVideo
         id="starsvideo"
         position="absolute"
-        left="49vw"
-        top="158px"
         ref={mirrorRef}
-        height={{ base: '80.962962962963vh', lgx: '788px' }}
-        width={{ base: '40.250vw', lgx: '600px' }}
+
+        // height={{ base: '80.962962962963vh', lgx: '788px' }}
+        // width={{ base: '40.250vw', lgx: '600px' }}
       >
         <Box
-          right={{ lg: '-3.1vw', lgx: '-7.9vw' }}
+          right="-20%"
           top="90px"
           id="exercise-card"
           ref={exerciseCardRef}
@@ -172,19 +194,19 @@ export const HeroDesktop: React.FC = () => {
           <ExerciseCard />
         </Box>
         <ScrollIconComponent
-          width="80"
-          height="80"
+          fillIcon="rgba(255, 255, 255, 0.75)"
           isVisible={isAnimated}
           position="absolute"
           zIndex="1"
           left="43%"
+          bottom="-4%"
         />
 
         <Box
           display="flex"
           w="640px"
           h="388px"
-          top="33%"
+          top={{ lg: '20vh', lgx: '26vh' }}
           zIndex="5"
           left="40px"
           position="absolute"

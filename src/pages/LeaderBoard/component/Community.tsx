@@ -1,5 +1,5 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
-import Spacer from 'components/core/Spacer';
+import { Common } from 'components';
 import { CommunityData } from 'data';
 import CommunityChip from './CommunityChip';
 
@@ -12,7 +12,7 @@ const Community = () => {
         </Text>
         <Text textStyle="bold7">Communities</Text>
       </HStack>
-      <Spacer size="50px" />
+      <Common.Spacer size="50px" />
       <HStack
         w="full"
         maxW="1100px"
