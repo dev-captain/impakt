@@ -6,6 +6,7 @@ import memberAuth from '../slices/member/memberAuthSlice';
 import knowledgeBaseReducer from '../slices/knowledgeBase/knowledgeBaseSlice';
 import godlReducer from '../slices/godl/godlSlice';
 import fitnessReducer from '../slices/fitness/fitnessSlice';
+import rewardHistoryReducer from '../slices/rewardHistory/rewardHistorySlice';
 import referralsReducer from '../slices/referrals/referralsSlice';
 import stateReducer from '../slices/state/stateSlice';
 import whitelistReducer from '../slices/whitelist/whitelistSlice';
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   knowledgeBase: knowledgeBaseReducer,
   godl: godlReducer,
   fitnessReducer,
+  rewardHistoryReducer,
   referrals: referralsReducer,
   stateReducer,
   whitelistReducer,

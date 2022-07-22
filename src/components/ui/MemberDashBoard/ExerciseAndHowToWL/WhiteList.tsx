@@ -91,7 +91,7 @@ const WhiteList: React.FC = () => {
             <Box marginLeft="16px">
               <Text textStyle="regular3" fontWeight={500}>
                 {' '}
-                {isWhitelisted ? 'Discored Connected' : 'Connect Discord'}
+                {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
               </Text>
             </Box>
           </Link>

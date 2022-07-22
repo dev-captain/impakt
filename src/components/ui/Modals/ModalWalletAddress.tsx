@@ -38,13 +38,12 @@ const ModalWalletAddress: React.FC<InfoModalPropsI> = ({ handleModal, isModalOpe
         <ModalBody pt="0px" px="40px" pb="40px">
           <HStack spacing={4} w="full" flexWrap={{ base: 'wrap', md: 'nowrap' }}>
             <Box w="full">
-              <InputGroup border="none"   background="#121216" borderRadius="12px">
+              <InputGroup border="none" background="#121216" borderRadius="12px">
                 <InputLeftElement
                   pointerEvents="none"
                   height="60px"
                   width="60px"
                   borderEnd="1px solid rgba(255, 255, 255, 0.1)"
-                 
                   marginRight="16px"
                 >
                   <img
@@ -65,7 +64,7 @@ const ModalWalletAddress: React.FC<InfoModalPropsI> = ({ handleModal, isModalOpe
                   color="rgba(255, 255, 255, 0.4)"
                   textStyle="regular201"
                   _placeholder={{ color: 'rgba(255, 255, 255, 0.4)' }}
-                  _focus={{border:"none !important" , boxShadow:"none !important"}}
+                  _focus={{ border: 'none !important', boxShadow: 'none !important' }}
                   borderRadius="16px !important"
                 />
               </InputGroup>

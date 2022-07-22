@@ -1,8 +1,21 @@
 import { VStack, HStack, Box, SimpleGrid } from '@chakra-ui/react';
+import useAppSelector from 'hooks/useAppSelector';
 import * as React from 'react';
-import Exercises from './Exercises';
+import useAppDispatch from 'hooks/useAppDispatch';
+import { fetchRewardHistory } from 'lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
+import ExercisesList from './ExercisesList';
 
 const ExerciseHistory: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const excerciseStatistics = useAppSelector(
+    (state) => state.rewardHistoryReducer.rewardHistoryState,
+  );
+  React.useEffect(() => {
+    if (member) {
+      dispatch(fetchRewardHistory(member.id));
+    }
+  }, []);
   return (
     <VStack
       justifyContent="space-between"
@@ -30,7 +43,7 @@ const ExerciseHistory: React.FC = () => {
         >
           <SimpleGrid columns={{ base: 1 }} gap={5}>
             <Box marginLeft="0 !important">
-              <Exercises />
+              <ExercisesList excerciseStatistics={excerciseStatistics} />
             </Box>
           </SimpleGrid>
         </VStack>
