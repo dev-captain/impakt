@@ -98,7 +98,12 @@ const ExerciseCard: React.FC = () => {
             {t(Keys.impaktGamesHero.squats)}
           </Text>
         </HStack>
-        <Box ref={exerciseProgressBox} mt="0 !important" id="exercise-cardprogress-bar-box">
+        <Box
+          ref={exerciseProgressBox}
+          position="relative"
+          mt="0 !important"
+          id="exercise-cardprogress-bar-box"
+        >
           <Box position="relative">
             <CircularProgress
               w="100%"
