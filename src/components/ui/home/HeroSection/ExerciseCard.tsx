@@ -101,11 +101,13 @@ const ExerciseCard: React.FC = () => {
         <Box ref={exerciseProgressBox} mt="0 !important" id="exercise-cardprogress-bar-box">
           <Box position="relative">
             <CircularProgress
-              trackColor={accentRedtextColor}
+              w="100%"
+              h="100%"
               size="150px"
+              thickness="9.5"
+              trackColor={accentRedtextColor}
               color="rgba(0,0,0,0.5)"
               value={circularProgressValue}
-              thickness="11"
             >
               <CircularProgressLabel
                 letterSpacing="1px"
@@ -117,10 +119,10 @@ const ExerciseCard: React.FC = () => {
                 {displayValue}
               </CircularProgressLabel>
             </CircularProgress>
-            <Box position="absolute" left="2px" top="1.5444px">
-              <I.SegmentedProgress />
-            </Box>
           </Box>{' '}
+          <Box position="absolute" left="2px" top="2.4">
+            <I.SegmentedProgress />
+          </Box>
         </Box>{' '}
       </VStack>{' '}
     </Common.AnimationAlways>
