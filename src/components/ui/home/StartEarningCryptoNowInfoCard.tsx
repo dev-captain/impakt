@@ -37,7 +37,7 @@ const StartEarningCryptoNowInfoCard: FC = () => {
         >
           {t(Keys.toolTip.godlBonus)}
         </Text>
-        <Text textStyle={{ base: 'semiBold12', lg: 'semiBold14' }} color="whiteAlpha.400">
+        <Text textStyle={{ base: 'semiBold12', lg: 'semiBold14' }} color="rgba(255,255,255,0.85)">
           {t(Keys.toolTip.description)}
         </Text>
       </VStack>
