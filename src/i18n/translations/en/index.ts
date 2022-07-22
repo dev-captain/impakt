@@ -58,7 +58,7 @@ export default {
     description1:
       'Chris believes in the transformational power of graphics to educate, to entertain, to change hearts and minds, and ultimately change the world. If you can see it, you can believe it.',
     careerdescription:
-      'His career is truly impressive! And Impakt is honored to call Chris a partner! Don’t believe us?',
+      'His career is truly impressive! And Impakt is honored to call Chris a partner!',
     careerdescription1: ' Check it for yourself.',
   },
   ourAdvisor: {
