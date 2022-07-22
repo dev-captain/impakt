@@ -107,6 +107,7 @@ const ChangePasswordForm: React.FC = () => {
       label: 'Password',
       name: 'password',
       errorMsg: errors?.password?.message,
+      autoFocus: true,
     },
     {
       placeholder: '********',

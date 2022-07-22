@@ -78,6 +78,7 @@ const SignInForm: React.FC = () => {
       name: 'email',
       label: 'Email',
       errorMsg: errors?.email?.message,
+      autoFocus: true,
     },
     {
       placeholder: '********',

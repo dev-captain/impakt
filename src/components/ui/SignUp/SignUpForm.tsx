@@ -131,6 +131,7 @@ const SignUpForm: React.FC = () => {
   const inputItems: InputGroupPropsI[] = [
     {
       placeholder: 'Nickname',
+      autoFocus: true,
       leftIcon: <I.NickNameIcon />,
       onChange,
       type: 'text',

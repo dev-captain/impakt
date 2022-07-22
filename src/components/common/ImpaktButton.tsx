@@ -42,6 +42,7 @@ const ImpaktButton: React.FC<ImpaktButtonProps> = ({
       borderRadius={size === 'sm' ? '8px' : '16px'}
       as={as}
       fontSize={size === 'sm' ? '16px' : '20px'}
+      _focus={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
       fontWeight="500"
       lineHeight={size === 'sm' ? '18px' : '32px'}
       py={size === 'sm' ? '10px' : '16px'}
