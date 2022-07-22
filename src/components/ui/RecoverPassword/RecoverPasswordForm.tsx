@@ -1,6 +1,5 @@
 import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import * as yup from 'yup';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -8,14 +7,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { forgotPassword } from '../../../lib/redux/slices/member/actions/forgotPassword';
-
-const recoverPasswordFormYupScheme = yup.object().shape({
-  email: yup
-    .string()
-    .email('Email field should be a valid email')
-    .required('Email is required field')
-    .default(''),
-});
+import recoverPasswordFormYupScheme from '../../../lib/yup/schemas/recoverPasswordScheme';
 
 const RecoverPasswordForm: React.FC = () => {
   const toast = useToast();

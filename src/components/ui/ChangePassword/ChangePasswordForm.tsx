@@ -1,6 +1,5 @@
 import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import * as yup from 'yup';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -8,17 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
-
-const changePasswordFormYupScheme = yup.object().shape({
-  password: yup
-    .string()
-    .required('Password is required field')
-    .min(8, 'Password is too short - should be 8 chars minimum.'),
-  passwordConfirmation: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match.')
-    .required('Confirm Password is required field'),
-});
+import changePasswordFormYupScheme from '../../../lib/yup/schemas/changePasswordYupScheme';
 
 const apiBaseUrl = process.env.REACT_APP_API;
 

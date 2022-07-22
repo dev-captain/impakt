@@ -1,6 +1,5 @@
 import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import * as yup from 'yup';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginReq } from '@impakt-dev/api-client';
@@ -11,15 +10,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
 import { InputGroupPropsI } from '../../common/InputGroup';
-
-const signInFormYupScheme = yup.object().shape({
-  email: yup
-    .string()
-    .email('Email field should be a valid email')
-    .required('Email is required field')
-    .default(''),
-  password: yup.string().required('Password is required field'),
-});
+import signInFormYupScheme from '../../../lib/yup/schemas/signInYupScheme';
 
 const SignInForm: React.FC = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
