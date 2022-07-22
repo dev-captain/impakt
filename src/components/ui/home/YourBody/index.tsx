@@ -1,9 +1,10 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import { I, C, Common } from 'components';
+
+import StartEarningCryptoNowInfoCard from '../StartEarningCryptoNowInfoCard';
 
 const YourBody: React.FC = ({ children }) => {
   const [isSmall] = useMediaQuery('(max-width: 1280px)');
@@ -103,30 +104,7 @@ const YourBody: React.FC = ({ children }) => {
               </Box>
 
               <Box display={{ base: 'none', lg: 'unset' }} id="get-the-bonus-box" w="full">
-                <Common.InfoCard
-                  tooltipLabel={t(Keys.toolTip.downloadLabel)}
-                  isShowTooltip
-                  LeftLogo={<I.YoutubeIcon isMobile={isSmall} />}
-                >
-                  <VStack alignItems="flex-start" color="white">
-                    <Text textStyle={{ base: 'semiBold15', lg: 'regular201' }}>
-                      {t(Keys.toolTip.earningCrypto)}
-                    </Text>
-                    <Text
-                      color="gold"
-                      fontWeight="700 !important"
-                      textStyle={{ base: 'semiBold15', lg: 'regular201' }}
-                    >
-                      {t(Keys.toolTip.godlBonus)}
-                    </Text>
-                    <Text
-                      textStyle={{ base: 'semiBold12', lg: 'semiBold14' }}
-                      color="whiteAlpha.400"
-                    >
-                      {t(Keys.toolTip.description)}
-                    </Text>
-                  </VStack>
-                </Common.InfoCard>
+                <StartEarningCryptoNowInfoCard />
               </Box>
             </VStack>
             {children}
