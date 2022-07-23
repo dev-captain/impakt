@@ -13,7 +13,7 @@ const passwordConfirmation = yup
   .oneOf([yup.ref('password'), null], 'Passwords must match.')
   .required('Confirm Password is required field');
 
-const memberName = yup.string().required('Membername is required field');
+const memberName = yup.string().required('Member name is required field');
 
 const fourDigit = yup
   .string()

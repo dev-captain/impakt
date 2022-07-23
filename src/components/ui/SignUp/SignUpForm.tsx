@@ -92,13 +92,13 @@ const SignUpForm: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Member Name...',
+      placeholder: 'Member name...',
       autoFocus: true,
       leftIcon: <I.NickNameIcon />,
       onChange,
       type: 'text',
       name: 'memberName',
-      label: 'Member Name',
+      label: 'Member name',
       width: { base: '100%', lg: '75%' },
       errorMsg: errors?.memberName?.message || errors?.fourDigit?.message,
       children: (
