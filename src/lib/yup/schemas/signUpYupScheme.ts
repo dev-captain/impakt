@@ -5,7 +5,7 @@ const signUpYupScheme = yup.object().shape({
   memberName,
   fourDigit,
   email,
-  password,
+  password: password.min(8, 'Password is too short - should be 8 chars minimum.'),
   passwordConfirmation,
 });
 

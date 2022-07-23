@@ -102,7 +102,6 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
           _focusVisible={{ color: '#fff' }}
           transition="all .2s ease-in"
           color="rgba(255, 255, 255, 0.5)"
-          _groupActive={{ color: '#fff !important' }}
           h="100% !important"
           border="none"
           background="#121216"

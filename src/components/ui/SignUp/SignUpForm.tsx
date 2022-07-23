@@ -2,10 +2,9 @@ import { Box, Flex, FormControl, useToast, VStack, Text, useMediaQuery } from '@
 import * as React from 'react';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
@@ -29,13 +28,7 @@ const SignUpForm: React.FC = () => {
     }
   }, []);
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    register,
-    getValues,
-  } = useForm({
+  const { handleSubmit, errors, getValues, setValue } = useForm({
     resolver: yupResolver(signUpYupScheme),
     defaultValues: {
       memberName: '',
@@ -47,11 +40,6 @@ const SignUpForm: React.FC = () => {
   });
 
   React.useEffect(() => {
-    register('password');
-    register('passwordConfirmation');
-    register('memberName');
-    register('fourDigit');
-    register('email');
     generateRandomFourDigitNumberString();
   }, []);
 
@@ -62,13 +50,10 @@ const SignUpForm: React.FC = () => {
 
         return;
       }
-      // const aZPattern = /[a-zA-Z]/;
-      // const specialCharacterPattern =
-      //   /[!@#æ$%^&£§*½ı÷~ğüşçöĞÜŞÇÖİ≥`()_+\-=\\[\]{};':"\\|,.<>\\/?]+/;
 
       const digitRegExp = /^[0-9]+$/;
       const isMatch = digitRegExp.test(e.target.value);
-      // const isMatch2 = specialCharacterPattern.test(e.target.value);
+
       if (!isMatch) return;
 
       setValue(e.target.name as any, e.target.value, { shouldValidate: true });
@@ -107,13 +92,13 @@ const SignUpForm: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Nickname',
+      placeholder: 'Member Name...',
       autoFocus: true,
       leftIcon: <I.NickNameIcon />,
       onChange,
       type: 'text',
       name: 'memberName',
-      label: 'Nickname',
+      label: 'Member Name',
       width: { base: '100%', lg: '75%' },
       errorMsg: errors?.memberName?.message || errors?.fourDigit?.message,
       children: (

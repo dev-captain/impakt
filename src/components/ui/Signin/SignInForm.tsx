@@ -1,11 +1,10 @@
 import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginReq } from '@impakt-dev/api-client';
-import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
@@ -18,22 +17,14 @@ const SignInForm: React.FC = () => {
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const dispatch = useAppDispatch();
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
-  const {
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    register,
-  } = useForm({
+
+  const { handleSubmit, errors, setValue } = useForm({
+    defaultValues: { email: '', password: '' },
     resolver: yupResolver(signInFormYupScheme),
   });
 
-  React.useEffect(() => {
-    register('email');
-    register('password');
-  }, []);
-
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name, e.target.value, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
 
   const handleSignInFormSubmit = async (data: any) => {

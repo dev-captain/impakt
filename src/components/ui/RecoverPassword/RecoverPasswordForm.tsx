@@ -2,8 +2,7 @@ import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { forgotPassword } from '../../../lib/redux/slices/member/actions/forgotPassword';
@@ -13,22 +12,13 @@ const RecoverPasswordForm: React.FC = () => {
   const toast = useToast();
   const dispatch = useAppDispatch();
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
-  const {
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    register,
-    getValues,
-  } = useForm({
+  const { handleSubmit, errors, getValues, setValue } = useForm({
+    defaultValues: { email: '' },
     resolver: yupResolver(recoverPasswordFormYupScheme),
   });
 
-  React.useEffect(() => {
-    register('email');
-  }, []);
-
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name, e.target.value, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
 
   const handleRecoverPasswordFormSubmit = async (data: any) => {
