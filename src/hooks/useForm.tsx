@@ -30,14 +30,14 @@ const useForm = <TFieldValues extends FieldValues = FieldValues, TContext = any>
   handleSubmit: UseFormHandleSubmit<TFieldValues>;
   errors: DeepMap<DeepPartial<TFieldValues>, FieldError>;
 } => {
-  const hooks = useReactHookForm(props);
+  const formReturn = useReactHookForm(props);
 
   const {
     formState: { errors },
     register,
     setValue,
     ...rest
-  } = hooks;
+  } = formReturn;
 
   React.useEffect(() => {
     if (!props?.defaultValues) return;
