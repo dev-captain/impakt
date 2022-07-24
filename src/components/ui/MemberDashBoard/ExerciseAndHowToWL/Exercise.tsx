@@ -1,5 +1,5 @@
 import * as React from 'react';
-import usePascalCase from 'hooks/usePascalCase';
+import { usePascalCase } from 'hooks';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 

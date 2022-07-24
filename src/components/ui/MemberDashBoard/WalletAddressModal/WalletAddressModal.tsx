@@ -14,15 +14,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import Images from '../../../assets/images';
+import Images from '../../../../assets/images';
 
 interface InfoModalPropsI {
   handleModal?: () => void;
   isModalOpen: boolean;
 }
 
-const ModalWalletAddress: React.FC<InfoModalPropsI> = ({ handleModal, isModalOpen }) => {
+const WalletAddressModal: React.FC<InfoModalPropsI> = ({ handleModal, isModalOpen }) => {
   const { onClose } = useDisclosure();
+
   return (
     <Modal closeOnOverlayClick={false} isOpen={isModalOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -95,4 +96,4 @@ const ModalWalletAddress: React.FC<InfoModalPropsI> = ({ handleModal, isModalOpe
     </Modal>
   );
 };
-export default ModalWalletAddress;
+export default WalletAddressModal;

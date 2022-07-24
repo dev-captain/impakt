@@ -24,6 +24,7 @@ const getWhiteListed = createAsyncThunk(
         .then((response) => {
           isWhitelisted = response.data.isWhitelisted;
         });
+
       return isWhitelisted;
     } catch (err: any) {
       return rejectWithValue(err);

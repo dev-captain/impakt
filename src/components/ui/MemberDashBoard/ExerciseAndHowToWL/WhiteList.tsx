@@ -9,7 +9,7 @@ import useAppSelector from 'hooks/useAppSelector';
 import useAppDispatch from 'hooks/useAppDispatch';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
-import ModalWalletAddress from '../../Modals/ModalWalletAddress';
+import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
@@ -156,7 +156,7 @@ const WhiteList: React.FC = () => {
           </Box>
         </Box>
       </Box>
-      {isWallet && <ModalWalletAddress handleModal={handleModal} isModalOpen={isWallet} />}
+      {isWallet && <WalletAddressModal handleModal={handleModal} isModalOpen={isWallet} />}
     </VStack>
   );
 };

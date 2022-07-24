@@ -7,6 +7,7 @@ const usePascalCase = (label: string) => {
       setExcerciseLable(label.replace(/([a-z0-9])([A-Z])/g, '$1 $2'));
     }
   }, [excerciseLable]);
+
   return excerciseLable;
 };
 
