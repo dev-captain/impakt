@@ -1,29 +1,34 @@
 import * as React from 'react';
+import { getWhiteListed } from 'lib/redux/slices/whitelist/actions/getWhiteListed';
 
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import {
-  VStack,
-  Box,
-  Text,
-  // OrderedList,
-  // ListItem,
-  // Grid,
-  Tooltip,
-  // Tfoot,
-  // TableCaption,
-} from '@chakra-ui/react';
+import { VStack, Box, Text, Tooltip, Link } from '@chakra-ui/react';
+import useAppSelector from 'hooks/useAppSelector';
+import useAppDispatch from 'hooks/useAppDispatch';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
+import ModalWalletAddress from '../../Modals/ModalWalletAddress';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
+  const [isWallet, setIsWallet] = React.useState(false);
   const TooltipHandler = () => {
     setIsTooltipClicked(!isTooltipClicked);
   };
-
+  React.useEffect(() => {
+    if (member) {
+      dispatch(getWhiteListed());
+    }
+  }, []);
+  const handleModal = () => {
+    setIsWallet(!isWallet);
+  };
   return (
     <VStack
       w="100%"
@@ -78,12 +83,18 @@ const WhiteList: React.FC = () => {
           <Box>
             <img src={Images.Common.Discord} alt="Discord" width="24px" />
           </Box>
-          <Box marginLeft="16px">
-            <Text textStyle="regular3" fontWeight={500}>
-              {' '}
-              Connect Discord
-            </Text>
-          </Box>
+          <Link
+            href="https://impakt-api-kevde-cu-2ng-ttwbrs.herokuapp.com/api/v1/iam/auth/discord/login"
+            _hover={{ textDecoration: 'none' }}
+            _focus={{ outline: 'none !important' }}
+          >
+            <Box marginLeft="16px">
+              <Text textStyle="regular3" fontWeight={500}>
+                {' '}
+                {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
+              </Text>
+            </Box>
+          </Link>
         </Box>
         <Box
           display="flex"
@@ -112,11 +123,13 @@ const WhiteList: React.FC = () => {
           borderRadius="16px"
           alignItems="center"
           mt="12px"
+          onClick={handleModal}
+          cursor="pointer"
         >
           <Box>
             <img src={Images.Common.Walletad} alt="Discord" width="19px" height="32px" />
           </Box>
-          <Box marginLeft="16px">
+          <Box marginLeft="16px ">
             <Text textStyle="regular3" fontWeight={500}>
               {' '}
               Submit wallet address
@@ -142,6 +155,7 @@ const WhiteList: React.FC = () => {
           </Box>
         </Box>
       </Box>
+      {isWallet && <ModalWalletAddress handleModal={handleModal} isModalOpen={isWallet} />}
     </VStack>
   );
 };

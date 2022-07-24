@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import usePascalCase from 'hooks/usePascalCase';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
@@ -7,21 +7,29 @@ import {
   VStack,
   Box,
   Text,
-  // OrderedList,
-  // ListItem,
-  // Grid,
   Table,
   Thead,
   Tbody,
-  // Tfoot,
   Tr,
   Th,
   Td,
-  // TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
+import useAppDispatch from '../../../../hooks/useAppDispatch';
+import useAppSelector from '../../../../hooks/useAppSelector';
+import { fetchExerciseStats } from '../../../../lib/redux/slices/fitness/actions/fetchExerciseStats';
 
 const Excercise: React.FC = () => {
+  // const { t } = useTranslation().i18n;
+  const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.exerciseState);
+  React.useEffect(() => {
+    if (member) {
+      dispatch(fetchExerciseStats(member.id));
+    }
+  }, []);
+
   return (
     <VStack
       w="100%"
@@ -71,71 +79,30 @@ const Excercise: React.FC = () => {
               </Th>
             </Tr>
           </Thead>
-          <Tbody display="block" maxHeight="312px" sx={{ overflowY: 'overlay' }}>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Push Ups
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                124
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Burpees
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                38
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                High Knees
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                566
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Sit Ups
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                291
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Leg Raises
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                93
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Walk Outs
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                107
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Walk Outs
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                107
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Walk Outs
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                107
-              </Td>
-            </Tr>
+          <Tbody
+            display="block"
+            maxHeight="312px"
+            sx={{ overflowY: 'overlay' }}
+            className="table_scroll"
+          >
+            {excerciseStatistics &&
+              excerciseStatistics.map((stats: any) => {
+                return (
+                  <Tr
+                    display="table"
+                    width="100%"
+                    style={{ tableLayout: 'fixed' }}
+                    key={stats.exercisei}
+                  >
+                    <Td textStyle="regular3" borderBottom={0}>
+                      {usePascalCase(stats.exercise)}
+                    </Td>
+                    <Td borderBottom={0} textStyle="regular4">
+                      {stats.repetitions}
+                    </Td>
+                  </Tr>
+                );
+              })}
           </Tbody>
         </Table>
       </TableContainer>
