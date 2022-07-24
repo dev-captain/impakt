@@ -9,6 +9,7 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
+  PositionProps,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -26,11 +27,15 @@ import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 
+interface NavbarProps {
+  position?: PositionProps['position'];
+  isVersion2?: boolean;
+}
 // const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
   Images.Common;
 
-const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
+const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -67,32 +72,34 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
 
   return (
     <Box
-      pos="absolute"
+      position={position}
+      top="0"
       zIndex="99999999999"
       w="full"
-      paddingX="16px"
+      px={isVersion2 && !isLessThan1280 ? '0' : '16px'}
       display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
-      sx={{ position: 'fixed', top: '0' }}
     >
-      {isOpen && <Gradient />}
+      {isOpen && !isVersion2 && <Gradient />}
       <Flex
         w="full"
         h="100px"
-        maxW="1232px"
+        maxW={isVersion2 && !isLessThan1280 ? 'full' : '1232px'}
         flexDir="row"
         alignSelf="center"
         overflow="visible"
         color={textColor}
         position="relative"
         alignItems="center"
-        px="16px"
-        borderRadius="16px"
-        height="70px"
-        marginTop="10px"
+        px={isVersion2 && !isLessThan1280 ? '3em' : '16px'}
+        borderRadius={isVersion2 && !isLessThan1280 ? '0' : '16px'}
+        height={isVersion2 && !isLessThan1280 ? '80px' : '70px'}
+        marginTop={isVersion2 && !isLessThan1280 ? '0' : '10px'}
         transition="background-color 0.5s linear"
         bgColor={bgColor}
         backdropFilter={isScrolling ? 'blur(40px)' : 'blur(0px)'}
+        borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
+        border={{ base: isVersion2 ? '1px solid rgba(255,255,255,0.1)' : '0' }}
       >
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
@@ -109,7 +116,30 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
             <HStack w="full" align="space-between" justify="space-between">
               <NavBarLink IsHeader />
               <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
-                <NavBarSocialIcons />
+                {!isVersion2 && <NavBarSocialIcons />}
+                {!isVersion2 && (
+                  <Box position="relative" display="flex">
+                    <DropDownProfileMenu />
+                  </Box>
+                )}
+                {!isVersion2 && (
+                  <Box>
+                    <SignInLinkItem />
+                  </Box>
+                )}
+
+                {!isVersion2 && (
+                  <Common.ImpaktButton
+                    as="a"
+                    href="/download"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/download');
+                    }}
+                  >
+                    {t(Keys.navbar.download)}
+                  </Common.ImpaktButton>
+                )}
                 {/* {!showDarkOrLightModeButton && (
                   <Box
                     as="button"
@@ -124,22 +154,6 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
                     />
                   </Box>
                 )} */}
-                <Box position="relative" display="flex">
-                  <DropDownProfileMenu />
-                </Box>
-                <Box>
-                  <SignInLinkItem />
-                </Box>
-                <Common.ImpaktButton
-                  as="a"
-                  href="/download"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate('/download');
-                  }}
-                >
-                  {t(Keys.navbar.download)}
-                </Common.ImpaktButton>
               </HStack>
             </HStack>
           </HStack>

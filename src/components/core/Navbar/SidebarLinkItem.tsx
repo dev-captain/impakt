@@ -12,10 +12,9 @@ type Props = {
   isActive?: boolean;
   onClose?: () => void;
   target?: React.HTMLAttributeAnchorTarget;
-  isSmall?: boolean;
 };
 
-const NavbarLinkItem = ({
+const SidebarLinkItem = ({
   title,
   href,
   isActive,
@@ -25,14 +24,14 @@ const NavbarLinkItem = ({
   target,
   type,
   passiveColor,
-  isSmall = false,
 }: Props) => {
   const navigate = useNavigate();
+  // TODO Sidebar link item UI
 
   return (
     <VStack
       justifyContent="center"
-      h={{ base: '40px', md: isSmall ? '40px' : '100px' }}
+      h={{ base: '40px', md: '100px' }}
       onClick={onClose}
       cursor="pointer"
     >
@@ -96,4 +95,4 @@ const NavbarLinkItem = ({
   );
 };
 
-export default NavbarLinkItem;
+export default SidebarLinkItem;

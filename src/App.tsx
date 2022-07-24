@@ -16,10 +16,10 @@ import {
   RecoveryPassword,
   Verify,
   SignUp,
-  MemberDashboard,
   SignIn,
+  MemberDashboard,
 } from 'pages';
-import { Common } from 'components';
+import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
 
@@ -79,13 +79,18 @@ const App = () => {
       <Route path="/verify" element={<Verify />} />
 
       <Route
-        path="/dashboard"
+        path="dashboard"
         element={
           <Authentication>
             <MemberDashboard />
           </Authentication>
         }
-      />
+      >
+        <Route path="" element={<S.General />} />
+        <Route path="referrals" element={<S.Referrals />} />
+        <Route path="reward-history" element={<S.RewardHistory />} />
+        <Route path="statistics" element={<S.Statistics />} />
+      </Route>
 
       <Route path="*" element={<NotFound />} />
     </Routes>

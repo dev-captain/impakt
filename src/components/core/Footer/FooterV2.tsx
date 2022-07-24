@@ -10,7 +10,7 @@ import Keys from 'i18n/types';
 import NavBarLink from '../Navbar/NavBarLink';
 import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
 
-const ImpaktFooter = () => {
+const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
   const navigate = useNavigate();
   const { t } = useTranslation(`default`).i18n;
   // const [email, setEmail] = useState('');
@@ -120,16 +120,19 @@ const ImpaktFooter = () => {
         {/* </HStack> */}
         {/* </VStack>  */}
         <VStack w="100%">
-          <VStack w={{ base: 'auto', lg: '1200px', xl: '1200px' }}>
+          <VStack
+            w={{ base: 'auto', lg: wFull ? 'full' : '1200px', xl: wFull ? 'full' : '1200px' }}
+          >
             <HStack
               justifyContent="flex-start"
               alignItems="flex-start"
               w="full"
               paddingTop={{ base: '48px', md: '80px' }}
+              paddingLeft={{ base: '0', lg: wFull ? '48px' : '0' }}
             >
               <SimpleGrid w="full">
                 <GridItem
-                  w={{ base: '100%', sm: '100%', md: '100%', lg: '1200px' }}
+                  w={{ base: '100%', sm: '100%', md: '100%', lg: wFull ? 'full' : '1200px' }}
                   margin="auto"
                   alignItems="center"
                   justifyContent="center"
@@ -141,10 +144,10 @@ const ImpaktFooter = () => {
                     rowGap={{ base: '32px', md: '24px' }}
                     display="flex"
                     flexWrap={{ base: 'wrap', md: 'nowrap' }}
-                    justify="space-between"
+                    justify={{ base: 'space-between', lg: wFull ? 'flex-start' : 'space-between' }}
                   >
                     <HStack
-                      w="full"
+                      w={{ base: 'full', lg: wFull ? 'min-content' : 'full' }}
                       display="flex"
                       justifyContent={{ base: 'space-between', md: 'start' }}
                     >
@@ -160,8 +163,8 @@ const ImpaktFooter = () => {
                       justifyContent={{ base: 'center', md: 'flex-end' }}
                       mb={{ base: '32px !important', md: '0px !important ' }}
                       spacing="8px"
-                      pl={{ base: '0px', md: '64px' }}
-                      w="100%"
+                      pl={{ base: '0px', md: '64px', lg: wFull ? '50px' : '64px' }}
+                      w={{ base: '100%', lg: wFull ? 'min-content' : '100%' }}
                     >
                       <NavBarSocialIcons />
                       {/* {!showDarkOrLightModeButton && (
@@ -183,7 +186,7 @@ const ImpaktFooter = () => {
                 </GridItem>
               </SimpleGrid>
             </HStack>
-            <HStack w="full" padding={{ base: '0px 10px', md: '0px' }}>
+            <HStack w="full" padding={{ base: '0px 10px', md: '0px', lg: wFull ? '0 48px' : '0' }}>
               <NavBarLink IsHeader={false} />
             </HStack>
 
@@ -194,6 +197,7 @@ const ImpaktFooter = () => {
               marginTop={{ base: '32px !important', md: '0px' }}
               justifyContent={{ base: 'center', md: 'flex-start' }}
               flexDir="row"
+              paddingLeft={{ base: '0', lg: wFull ? '48px' : '0' }}
             >
               <Text color="rgba(255, 255, 255, 0.4)" textStyle="regular3">
                 {t(Keys.footer.madeBy)}
