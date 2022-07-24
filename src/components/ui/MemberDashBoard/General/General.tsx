@@ -11,6 +11,10 @@ const General: React.FC = () => {
     <Skeleton isLoaded={isLoaded}>
       <Box as="section" id="general-section">
         <Text>General</Text>
+        {/* <WelcomeModal /> */}
+        {/* <WhiteList /> */}
+        {/* TODO News Feed  */}
+        {/* TODO Topics */}
       </Box>
     </Skeleton>
   );
