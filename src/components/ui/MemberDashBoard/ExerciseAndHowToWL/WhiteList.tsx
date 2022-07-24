@@ -29,6 +29,7 @@ const WhiteList: React.FC = () => {
   const handleModal = () => {
     setIsWallet(!isWallet);
   };
+
   return (
     <VStack
       w="100%"
