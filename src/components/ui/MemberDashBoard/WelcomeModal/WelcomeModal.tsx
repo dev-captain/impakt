@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fetchActiveDays';
 import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 
+import Whitelist from '../../../../assets/svgs/Vector.svg';
+
 const WelcomeModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
