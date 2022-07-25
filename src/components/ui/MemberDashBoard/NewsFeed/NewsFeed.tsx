@@ -26,7 +26,12 @@ const NewsFeed: React.FC = () => {
           </Box>
         </HStack>
       </Box>
-      <Box color="#fff" w="full" id="news-feed-accordion-box">
+      <Box
+        _hover={{ color: 'rgba(255,255,255,1)' }}
+        color="rgba(255,255,255,0.75)"
+        w="full"
+        id="news-feed-accordion-box"
+      >
         <NewsFeedAccordion feeds={feeds} />
       </Box>
 

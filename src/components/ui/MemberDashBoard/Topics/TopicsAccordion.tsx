@@ -6,6 +6,7 @@ import {
   Box,
   AccordionPanel,
   VStack,
+  Text,
 } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
@@ -25,7 +26,7 @@ const TopicsAccordion: React.FC<TopicsAccordionProps> = ({ topics }) => {
             background="#20202E"
             borderRadius="1em"
             border="0"
-            py="1.25em"
+            py="1em"
             px="2em"
             position="relative"
             onMouseEnter={() => {
@@ -39,7 +40,15 @@ const TopicsAccordion: React.FC<TopicsAccordionProps> = ({ topics }) => {
               <Box maxW="90%">
                 <AccordionButton padding="0">
                   <Box flex="1" textAlign="left">
-                    {title}
+                    <Text
+                      color={isExpanded ? 'gold' : 'white'}
+                      transition="color .2s"
+                      fontSize="20px"
+                      lineHeight="32px"
+                      fontWeight="400"
+                    >
+                      {title}
+                    </Text>
                   </Box>
                   <Box
                     position="absolute"
@@ -53,7 +62,9 @@ const TopicsAccordion: React.FC<TopicsAccordionProps> = ({ topics }) => {
                   </Box>
                 </AccordionButton>
                 <AccordionPanel px="0" pb={4}>
-                  {description}
+                  <Text fontSize="20px" lineHeight="32px" fontWeight="400">
+                    {description}
+                  </Text>
                 </AccordionPanel>
               </Box>
             )}

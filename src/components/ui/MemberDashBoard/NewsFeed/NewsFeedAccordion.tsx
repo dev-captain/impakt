@@ -7,6 +7,7 @@ import {
   AccordionPanel,
   AccordionIcon,
   VStack,
+  Text,
 } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
@@ -39,7 +40,7 @@ const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
               <Box href={href} maxW="90%">
                 <AccordionButton padding="0">
                   <Box flex="1" textAlign="left">
-                    {title}
+                    <Text textStyle="semiBold5">{title}</Text>
                   </Box>
                   <Box
                     position="absolute"
@@ -52,8 +53,8 @@ const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
                     <I.DropIcon />
                   </Box>
                 </AccordionButton>
-                <AccordionPanel px="0" pb={4}>
-                  {description}
+                <AccordionPanel px="0">
+                  <Text textStyle="semiBold5">{description}</Text>
                 </AccordionPanel>
               </Box>
             )}
