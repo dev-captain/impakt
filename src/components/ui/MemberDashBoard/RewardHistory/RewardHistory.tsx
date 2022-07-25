@@ -1,5 +1,6 @@
 import { Box, Skeleton, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 
 const RewardHistory: React.FC = () => {
   const [isLoaded] = React.useState(true);
@@ -8,9 +9,9 @@ const RewardHistory: React.FC = () => {
   // TODO Reward history Section UI
 
   return (
-    <Skeleton isLoaded={isLoaded}>
-      <Box as="section" id="reward-history-section">
-        <Text>Reward History</Text>
+    <Skeleton w="full" isLoaded={isLoaded}>
+      <Box w="full" as="section" id="general-section">
+        <MemberDashboardSectionHeadlineText title="Reward History" />
       </Box>
     </Skeleton>
   );

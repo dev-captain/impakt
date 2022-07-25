@@ -1,5 +1,6 @@
 import { Box, Skeleton, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 
 const Statistics: React.FC = () => {
   const [isLoaded] = React.useState(true);
@@ -8,9 +9,9 @@ const Statistics: React.FC = () => {
   // TODO Statistics Section UI
 
   return (
-    <Skeleton isLoaded={isLoaded}>
-      <Box as="section" id="statistics-section">
-        <Text>Statistics</Text>
+    <Skeleton w="full" isLoaded={isLoaded}>
+      <Box w="full" as="section" id="general-section">
+        <MemberDashboardSectionHeadlineText title="Exercise Statistics" />
       </Box>
     </Skeleton>
   );
