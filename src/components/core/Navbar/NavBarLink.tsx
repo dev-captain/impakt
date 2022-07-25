@@ -35,7 +35,7 @@ const NavbarLink = ({ IsHeader }: Props) => {
 
   return (
     <HStack
-      spacing={[3, 3, 3, 5, 8, 12]}
+      spacing={[3, 3, 3, 5, 6, 12]}
       flexWrap={{ base: 'wrap', md: 'nowrap' }}
       justifyContent={{ base: 'center', md: 'start' }}
       display="flex"

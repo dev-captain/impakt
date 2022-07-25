@@ -25,6 +25,7 @@ export default {
     download: 'Download',
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
+    help: 'Help',
     signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
   },
