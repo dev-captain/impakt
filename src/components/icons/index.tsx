@@ -38,3 +38,7 @@ export { default as TopicsIcon } from './TopicsIcon';
 export { default as ReferralsIcon } from './ReferralsIcon';
 export { default as ChatIcon } from './ChatIcon';
 export { default as RewardIcon } from './RewardIcon';
+export { default as TwitterIcon } from './TwitterIcon';
+export { default as DiscordIcon } from './DiscordIcon';
+export { default as EthIcon } from './EthIcon';
+export { default as IllustrationIcon } from './IllustrationIcon';

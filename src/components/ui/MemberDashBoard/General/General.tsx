@@ -23,18 +23,12 @@ const General: React.FC = () => {
           flexWrap={{ base: 'wrap', lg: 'nowrap' }}
           w="full"
         >
-          <VStack
-            flex="1"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            rowGap="24px"
-            w="full"
-          >
+          <VStack w="full" justifyContent="flex-start" alignItems="flex-start" rowGap="24px">
             <WelcomeModal />
             <WhiteList />
           </VStack>
 
-          <VStack flex="1" rowGap="24px" w="full">
+          <VStack w="full" rowGap="24px">
             <NewsFeed />
             <Topics />
           </VStack>
