@@ -10,6 +10,7 @@ const MemberDashboardCard = forwardRef<BoxProps, 'div'>((props, ref) => {
       borderRadius="2rem"
       alignItems="start"
       w="full"
+      flexDir="column"
       ref={ref}
       {...props}
     />
