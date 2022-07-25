@@ -18,6 +18,7 @@ import {
 import useAppDispatch from '../../../../hooks/useAppDispatch';
 import useAppSelector from '../../../../hooks/useAppSelector';
 import { fetchExerciseStats } from '../../../../lib/redux/slices/fitness/actions/fetchExerciseStats';
+import MemberDashboardCard from '../MemberDashBoardCard';
 
 const Excercise: React.FC = () => {
   // const { t } = useTranslation().i18n;
@@ -31,16 +32,11 @@ const Excercise: React.FC = () => {
   }, []);
 
   return (
-    <VStack
-      w="100%"
+    <MemberDashboardCard
+      flexDir="column"
       alignItems="start"
-      padding={{ base: '30px', lg: '40px' }}
-      minH="auto"
-      maxH={{ base: 'auto' }}
       rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
-      backgroundColor="rgba(28, 28, 40, 0.65);"
-      backdropBlur="40px"
     >
       <Box
         display="flex"
@@ -106,7 +102,7 @@ const Excercise: React.FC = () => {
           </Tbody>
         </Table>
       </TableContainer>
-    </VStack>
+    </MemberDashboardCard>
   );
 };
 export default Excercise;

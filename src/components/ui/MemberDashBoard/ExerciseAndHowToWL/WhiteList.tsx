@@ -10,6 +10,7 @@ import useAppDispatch from 'hooks/useAppDispatch';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
 import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
+import MemberDashboardCard from '../MemberDashBoardCard';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
@@ -31,19 +32,15 @@ const WhiteList: React.FC = () => {
   };
 
   return (
-    <VStack
+    <MemberDashboardCard
       w="100%"
+      flexDir="column"
       alignItems="start"
-      padding={{ base: '30px', lg: '40px' }}
-      minH="auto"
-      maxH={{ base: 'auto' }}
       rowGap={{ base: '18px', lg: '32px' }}
-      letterSpacing="-0.04em !important"
-      backgroundColor="rgba(28, 28, 40, 0.65);"
-      backdropBlur="40px"
     >
       <Box
         display="flex"
+        letterSpacing="-0.04em !important"
         justifyContent="space-between"
         marginTop="0 !important"
         w="100%"
@@ -157,7 +154,7 @@ const WhiteList: React.FC = () => {
         </Box>
       </Box>
       {isWallet && <WalletAddressModal handleModal={handleModal} isModalOpen={isWallet} />}
-    </VStack>
+    </MemberDashboardCard>
   );
 };
 export default WhiteList;

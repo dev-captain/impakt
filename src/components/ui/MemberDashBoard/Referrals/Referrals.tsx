@@ -23,6 +23,7 @@ import {
   // TableContainer,
   Skeleton,
 } from '@chakra-ui/react';
+import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 // import { useAppDispatch, useAppSelector } from 'hooks';
 
 // import ReferralsAndWhiteListChallange from '../ReferralsAndWhiteListChallange/ReferralsAndWhiteListChallange';
@@ -55,9 +56,9 @@ const Referrals: React.FC = () => {
   // }, []);
 
   return (
-    <Skeleton isLoaded={isLoaded}>
-      <Box as="section" id="referrals-section">
-        <Text>Referrals</Text>
+    <Skeleton w="full" isLoaded={isLoaded}>
+      <Box w="full" as="section" id="general-section">
+        <MemberDashboardSectionHeadlineText title="Referrals" />
         {/* <ReferralsBox/>  */}
       </Box>
     </Skeleton>

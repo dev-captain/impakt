@@ -20,6 +20,7 @@ import keys from 'i18n/types';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import { useAppSelector } from '../../../../hooks';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
+import MemberDashboardCard from '../MemberDashBoardCard';
 
 interface PropsI {}
 const ReferralsBox: React.FC<PropsI> = () => {
@@ -33,19 +34,10 @@ const ReferralsBox: React.FC<PropsI> = () => {
   const referralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
 
   return (
-    <VStack
-      w="100%"
-      alignItems="start"
-      padding={{ base: '30px', lg: '40px' }}
-      minH="auto"
-      maxH={{ base: 'auto' }}
-      rowGap={{ base: '18px', lg: '32px' }}
-      letterSpacing="-0.04em !important"
-      backgroundColor="rgba(28, 28, 40, 0.65);"
-      backdropBlur="40px"
-    >
+    <MemberDashboardCard flexDir="column" rowGap={{ base: '18px', lg: '32px' }}>
       <Box
         display="flex"
+        letterSpacing="-0.04em !important"
         justifyContent="space-between"
         marginTop="0 !important"
         w="100%"
@@ -193,7 +185,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
           </Tbody>
         </Table>
       </TableContainer>
-    </VStack>
+    </MemberDashboardCard>
   );
 };
 export default ReferralsBox;

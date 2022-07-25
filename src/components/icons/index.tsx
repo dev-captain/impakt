@@ -31,3 +31,6 @@ export { default as AndroidIcon } from './AndroidIcon';
 export { default as HelpIcon } from './HelpIcon';
 export { default as DashboardIcon } from './DashboardIcon';
 export { default as LogOutIcon } from './LogOutIcon';
+export { default as NewsIcon } from './NewsIcon';
+export { default as DropIcon } from './DropIcon';
+export { default as DiscourseIcon } from './DiscourseIcon';
