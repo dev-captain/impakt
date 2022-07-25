@@ -146,7 +146,7 @@ const WhiteList: React.FC = () => {
           <Box>
             <img src={Images.Common.Goldaword} alt="Discord" width="24px" />
           </Box>
-          <Box marginLeft="16px" width={{ base: '100%', lg: '257px' }}>
+          <Box marginLeft="16px" width={{ base: '100%', lg: '285px' }}>
             <Text textStyle="regular3" fontWeight={500} color="#FEC417">
               Win WL by participating in events or buy WL on GODL marketplace
             </Text>

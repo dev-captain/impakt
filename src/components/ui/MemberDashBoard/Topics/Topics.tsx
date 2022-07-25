@@ -7,20 +7,25 @@ import TopicsAccordion from './TopicsAccordion';
 
 const Topics: React.FC = () => {
   return (
-    <MemberDashboardCard minW="341px" rowGap="1.5em">
+    <MemberDashboardCard
+      color="rgba(255,255,255,0.5)"
+      _hover={{ color: 'rgba(255,255,255,1)' }}
+      transition="color .2s"
+      rowGap="1.5em"
+    >
       <Box id="topics-headline-box">
         <HStack columnGap="1.125em">
-          <Box id="topics-headline-text-box">
+          <Box color="#fff" id="topics-headline-text-box">
             <Text textStyle="bold5" lineHeight="100%">
               Topics
             </Text>
           </Box>
-          <Box id="topics-headline-text-icon-box">
+          <Box id="topicx-icon-box">
             <I.TopicsIcon />
           </Box>
         </HStack>
       </Box>
-      <Box w="full" id="topics-accordion-box">
+      <Box color="#fff" w="full" id="topics-accordion-box">
         <TopicsAccordion topics={topics} />
       </Box>
     </MemberDashboardCard>
