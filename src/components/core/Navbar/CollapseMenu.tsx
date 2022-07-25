@@ -97,6 +97,15 @@ const CollapseMenu = ({
             isActive={path.path === 'dashboard'}
           />
         )}
+        {member && (
+          <NavbarLinkItem
+            isSmall
+            href="/"
+            onClose={onClose}
+            title={t(Keys.navbar.help)}
+            isActive={path.path === 'dashboard'}
+          />
+        )}
 
         {member && (
           <NavbarLinkItem

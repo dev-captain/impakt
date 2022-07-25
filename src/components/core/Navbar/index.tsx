@@ -12,6 +12,7 @@ import {
   PositionProps,
   Text,
   Button,
+  useToast,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -20,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -28,6 +29,8 @@ import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
+import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import NavbarButton from './NavbarButton';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -38,6 +41,8 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tik
   Images.Common;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
+  const dispatch = useAppDispatch();
+  const toast = useToast();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -169,54 +174,52 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
               </HStack>
               {isVersion2 && (
                 <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
-                  <Button
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    p="10px 16px 10px 12px"
+                  <NavbarButton
+                    href="/"
+                    onClose={() => navigate('/')}
+                    title={t(Keys.navbar.dashboard)}
                     background="rgba(255, 255, 255, 0.1)"
-                    backdropFilter="blur(40px)"
-                    borderRadius="8px"
-                    _hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
+                    hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
+                    textStyle="semiBold5"
+                    color="#FFFFFF"
+                    marginLeft="9px"
                   >
                     <I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />
-
-                    <Text textStyle="semiBold5" ml="10px">
-                      Dashboard
-                    </Text>
-                  </Button>
-                  <Button
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    p="10px 16px 10px 12px"
+                  </NavbarButton>
+                  <NavbarButton
+                    href="/"
+                    onClose={() => navigate('/')}
+                    title={t(Keys.navbar.help)}
                     background="rgba(255, 255, 255, 0.1)"
-                    backdropFilter="blur(40px)"
-                    borderRadius="8px"
-                    _hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
+                    hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
+                    textStyle="semiBold5"
+                    color="#FFFFFF"
+                    marginLeft="9px"
                   >
                     <I.HelpIcon cursor="pointer" width="16px" height="16px" />
-
-                    <Text textStyle="semiBold5" ml="8px">
-                      Help
-                    </Text>
-                  </Button>
-                  <Button
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    p="10px 16px 10px 12px"
+                  </NavbarButton>
+                  <NavbarButton
+                    href="#"
+                    title={t(Keys.navbar.signOut)}
                     background="rgba(240, 65, 83, 0.12)"
-                    backdropFilter="blur(40px)"
-                    borderRadius="8px"
-                    _hover={{ background: 'rgba(240, 65, 83, 0.12)', outline: 'none' }}
+                    hover={{ background: 'rgba(240, 65, 83, 0.12)', outline: 'none' }}
+                    textStyle="semiBold5"
+                    color="#F04153"
+                    marginLeft="9px"
+                    onClose={async () => {
+                      await dispatch(signOutMember()).unwrap();
+                      toast({
+                        title: 'Success',
+                        description: 'You have successfully logged out!',
+                        isClosable: true,
+                        duration: 8000,
+                        status: 'success',
+                      });
+                      onClose();
+                    }}
                   >
                     <I.LogOutIcon cursor="pointer" width="13px" height="13px" />
-
-                    <Text textStyle="semiBold5" color="#F04153" ml="9px">
-                      Sign Out
-                    </Text>
-                  </Button>
+                  </NavbarButton>
                 </HStack>
               )}
             </HStack>

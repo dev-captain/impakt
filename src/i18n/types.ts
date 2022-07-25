@@ -48,6 +48,7 @@ const TranslationKeys = {
     download: `${navbar}.download`,
     dashboard: `${navbar}.dashboard`,
     signOut: `${navbar}.signOut`,
+    help: `${navbar}.help`,
     signIn: `${navbar}.signIn`,
     termsOfUse: `${navbar}.termsOfUse`,
   },
