@@ -7,6 +7,7 @@ import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fe
 import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 
 import Whitelist from '../../../../assets/svgs/Vector.svg';
+import MemberDashboardCard from '../MemberDashBoardCard';
 
 const WelcomeModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -28,20 +29,17 @@ const WelcomeModal: React.FC = () => {
   }, []);
 
   return (
-    <VStack
+    <MemberDashboardCard
       w="100%"
+      flexDir="column"
       alignItems="start"
-      padding={{ base: '30px', lg: '40px' }}
-      maxH={{ base: 'auto', lg: '548px' }}
       rowGap={{ base: '18px', lg: '32px' }}
-      letterSpacing="-0.04em !important"
-      backgroundColor="rgba(28, 28, 40, 0.65);"
-      backdropBlur="40px"
     >
       <Box
         display="flex"
         alignItems="baseline"
         mt="0 !important"
+        letterSpacing="-0.04em !important"
         id="whitelist-challange-description-box-2"
       >
         <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
@@ -141,7 +139,7 @@ const WelcomeModal: React.FC = () => {
           </Box>
         </GridItem>
       </SimpleGrid>
-    </VStack>
+    </MemberDashboardCard>
   );
 };
 export default WelcomeModal;

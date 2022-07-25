@@ -1,33 +1,19 @@
-import * as React from 'react';
+import { Box, BoxProps, forwardRef } from '@chakra-ui/react';
 
-import { Common } from 'components';
-import { VStack } from '@chakra-ui/react';
-
-interface MemberDashboardCardPropsI {
-  isGradient?: boolean;
-  borderRadius?: number;
-}
-const MemberDashboardCard: React.FC<MemberDashboardCardPropsI> = ({
-  children,
-  isGradient,
-  borderRadius = { base: 24, lg: 32 },
-}) => {
+const MemberDashboardCard = forwardRef<BoxProps, 'div'>((props, ref) => {
   return (
-    <VStack
-      // bgColor={bgColor}
+    <Box
+      id="member-dashboard-card"
+      display="flex"
+      bgColor="rgba(28, 28, 40, 0.65)"
+      p={{ base: '1.5em', lg: '2em' }}
+      borderRadius="2rem"
+      alignItems="start"
       w="full"
-      // filter="drop-shadow(0px 8.55078px 17.1016px rgba(0, 0, 0, 0.12)) drop-shadow(0px 8.55078px 29.9277px rgba(0, 0, 0, 0.1))"
-      borderRadius={borderRadius}
-      position="relative"
-      overflow="hidden"
-      marginTop="0 !important"
-    >
-      {children}
-      {isGradient && (
-        <Common.Gradients secondX="875px" secondY="-31px" secondOpacity="0.8" isOrange />
-      )}
-    </VStack>
+      ref={ref}
+      {...props}
+    />
   );
-};
+});
 
 export default MemberDashboardCard;
