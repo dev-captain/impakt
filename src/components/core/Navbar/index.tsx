@@ -10,6 +10,8 @@ import {
   useMediaQuery,
   useColorMode,
   PositionProps,
+  Text,
+  Button,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -102,7 +104,12 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         border={{ base: isVersion2 ? '1px solid rgba(255,255,255,0.1)' : '0' }}
       >
         <HStack w="full" justify="space-between">
-          <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
+          <Box
+            onClick={() => navigate('/')}
+            zIndex={100}
+            pr="40px"
+            minWidth={{ base: isVersion2 ? '384px' : 'auto' }}
+          >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
             <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
           </Box>
@@ -115,7 +122,12 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           >
             <HStack w="full" align="space-between" justify="space-between">
               <NavBarLink IsHeader />
-              <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
+
+              <HStack
+                justify={{ base: 'center', md: 'flex-end' }}
+                spacing="8px"
+                pl={{ base: isVersion2 ? '0px' : '64px' }}
+              >
                 {!isVersion2 && <NavBarSocialIcons />}
                 {!isVersion2 && (
                   <Box position="relative" display="flex">
@@ -155,6 +167,58 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   </Box>
                 )} */}
               </HStack>
+              {isVersion2 && (
+                <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
+                  <Button
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    p="10px 16px 10px 12px"
+                    background="rgba(255, 255, 255, 0.1)"
+                    backdropFilter="blur(40px)"
+                    borderRadius="8px"
+                    _hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
+                  >
+                    <I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />
+
+                    <Text textStyle="semiBold5" ml="10px">
+                      Dashboard
+                    </Text>
+                  </Button>
+                  <Button
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    p="10px 16px 10px 12px"
+                    background="rgba(255, 255, 255, 0.1)"
+                    backdropFilter="blur(40px)"
+                    borderRadius="8px"
+                    _hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
+                  >
+                    <I.HelpIcon cursor="pointer" width="16px" height="16px" />
+
+                    <Text textStyle="semiBold5" ml="8px">
+                      Help
+                    </Text>
+                  </Button>
+                  <Button
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    p="10px 16px 10px 12px"
+                    background="rgba(240, 65, 83, 0.12)"
+                    backdropFilter="blur(40px)"
+                    borderRadius="8px"
+                    _hover={{ background: 'rgba(240, 65, 83, 0.12)', outline: 'none' }}
+                  >
+                    <I.LogOutIcon cursor="pointer" width="13px" height="13px" />
+
+                    <Text textStyle="semiBold5" color="#F04153" ml="9px">
+                      Sign Out
+                    </Text>
+                  </Button>
+                </HStack>
+              )}
             </HStack>
           </HStack>
           {/* <HStack

@@ -28,3 +28,6 @@ export { default as NickNameIcon } from './NickNameIcon';
 export { default as AddMemberIcon } from './AddMemberIcon';
 export { default as SendIcon } from './SendIcon';
 export { default as AndroidIcon } from './AndroidIcon';
+export { default as HelpIcon } from './HelpIcon';
+export { default as DashboardIcon } from './DashboardIcon';
+export { default as LogOutIcon } from './LogOutIcon';

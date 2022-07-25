@@ -208,7 +208,7 @@ const CollapseMenu = ({
           </Box>
           <Box w="full" display="flex" mt="2" ml="0 !important">
             <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
-              <Button marginTop="8px" width={{ base: '100%', md: 'auto' }} colorScheme="red">
+              <Button marginTop="8px" width="100%" colorScheme="red">
                 {t(Keys.navbar.download)}
               </Button>
             </Link>
