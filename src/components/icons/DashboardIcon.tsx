@@ -12,7 +12,7 @@ const DashboardIcon = (props: SVGProps<SVGSVGElement>) => (
   >
     <path
       fill="#fff"
-      fillOpacity="0.75"
+      fillOpacity="1"
       d="M5.667 11.333v-4h2.667v4h3.333V6h2L7 0 .333 6h2v5.333h3.334z"
     />
   </svg>

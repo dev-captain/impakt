@@ -34,3 +34,6 @@ export { default as LogOutIcon } from './LogOutIcon';
 export { default as NewsIcon } from './NewsIcon';
 export { default as DropIcon } from './DropIcon';
 export { default as DiscourseIcon } from './DiscourseIcon';
+export { default as ReferralsIcon } from './ReferralsIcon';
+export { default as ChatIcon } from './ChatIcon';
+export { default as RewardIcon } from './RewardIcon';
