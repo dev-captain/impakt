@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Skeleton } from '@chakra-ui/react';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
-import NewsFeed from '../NewsFeed/NewsFeed';
+import Topics from '../Topics/Topics';
 
 const General: React.FC = () => {
   const [isLoaded] = React.useState(true);
@@ -14,7 +14,8 @@ const General: React.FC = () => {
       <Box w="full" as="section" id="general-section">
         <MemberDashboardSectionHeadlineText title="General" />
         <Box w="50%">
-          <NewsFeed />
+          <Topics />
+          {/* <NewsFeed /> */}
         </Box>
         {/* <WelcomeModal /> */}
         {/* <WhiteList /> */}
