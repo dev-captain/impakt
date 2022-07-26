@@ -42,3 +42,5 @@ export { default as TwitterIcon } from './TwitterIcon';
 export { default as DiscordIcon } from './DiscordIcon';
 export { default as EthIcon } from './EthIcon';
 export { default as IllustrationIcon } from './IllustrationIcon';
+export { default as TikTokIcon } from './TikTokIcon';
+export { default as YoutubeSocialIcon } from './YoutubeSocialIcon';
