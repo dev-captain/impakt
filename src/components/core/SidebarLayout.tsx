@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { C } from 'components';
 import Navbar from './Navbar';
+import CollapseSidebar from './Navbar/CollapseSidebar';
 
 interface SidebarLayoutProps {
   isShowFooter?: boolean;
@@ -62,6 +63,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             <C.Sidebar />
             {/* TODO  Sidebar */}
           </VStack>
+
           <VStack
             ref={rightRef}
             w="full"
@@ -70,6 +72,10 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             marginLeft={{ base: '0', lg: '20vw !important' }}
             p={{ sm: '0 1em', lg: '3em 3em 0 3em' }}
           >
+            <Box w="full" mt="50px" display={{ base: 'flex', lg: ' none' }}>
+              <CollapseSidebar />
+              {/* TODO  Sidebar */}
+            </Box>
             <Outlet />
           </VStack>
         </HStack>

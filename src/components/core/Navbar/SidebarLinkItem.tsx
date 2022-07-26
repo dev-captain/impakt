@@ -31,9 +31,9 @@ const SidebarLinkItem = ({
   // TODO Sidebar link item UI
 
   return (
-    <VStack
+    <Box
       justifyContent="center"
-      h={{ base: '40px', md: '56px' }}
+      h={{ base: '48px', md: '56px' }}
       onClick={onClose}
       cursor="pointer"
       width="100%"
@@ -111,7 +111,7 @@ const SidebarLinkItem = ({
         </Box>
       )}
       {isActive && !hide}
-    </VStack>
+    </Box>
   );
 };
 

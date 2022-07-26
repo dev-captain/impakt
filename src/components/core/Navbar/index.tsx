@@ -109,7 +109,12 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         border={{ base: isVersion2 ? '1px solid rgba(255,255,255,0.1)' : '0' }}
       >
         <HStack w="full" justify="space-between">
-          <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
+          <Box
+            onClick={() => navigate('/')}
+            zIndex={100}
+            pr="40px"
+            minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
+          >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
             <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
           </Box>
