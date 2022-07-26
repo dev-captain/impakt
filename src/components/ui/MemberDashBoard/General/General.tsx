@@ -24,7 +24,13 @@ const General: React.FC = () => {
           w="full"
           flexWrap={{ base: 'wrap', lg: 'nowrap' }}
         >
-          <VStack w="full" justifyContent="flex-start" alignItems="flex-start" rowGap="24px">
+          <VStack
+            w="full"
+            mt={{ sm: '24px', lg: '0' }}
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            rowGap="24px"
+          >
             <WelcomeModal />
             <WhiteList />
           </VStack>

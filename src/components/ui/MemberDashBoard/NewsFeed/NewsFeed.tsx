@@ -4,7 +4,7 @@ import { I } from 'components';
 
 import MemberDashboardCard from '../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
-import CheckOurDiscourseButton from './CheckOurDiscourseButton';
+import { ImpaktButton } from '../../../common';
 
 const NewsFeed: React.FC = () => {
   return (
@@ -36,7 +36,20 @@ const NewsFeed: React.FC = () => {
       </Box>
 
       <Box color="#fff" w="full" id="news-feed-check-our-discourse-box">
-        <CheckOurDiscourseButton />
+        <ImpaktButton
+          size="lg"
+          variant="secondary"
+          leftIcon={
+            <Box marginRight="8px">
+              <I.DiscourseIcon />
+            </Box>
+          }
+          fontSize={{ base: '12px', md: '16px', lg: '20px' }}
+          lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
+          justifyContent={{ md: 'center', lg: 'flex-start' }}
+        >
+          Check our Discourse for more updates
+        </ImpaktButton>
       </Box>
       {/* <Box id="news-feed-headline-box">Headline</Box> */}
       {/* <Box>2</Box> */}
