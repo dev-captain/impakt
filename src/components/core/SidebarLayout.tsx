@@ -27,7 +27,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
     <Box bgColor="#060609" minH="100vh">
       {isShowNavbar && (
         <Box bgColor="#060609" as="nav" w="full" minH="80px">
-          <Navbar isVersion2 position="absolute" />
+          <Navbar isVersion2 position="fixed" />
         </Box>
       )}
       <VStack
@@ -48,7 +48,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           id="hstack"
         >
           <VStack
-            position="absolute"
+            position="fixed"
             height="100%"
             p="3em 2em"
             display={{ base: 'none', lg: 'flex' }}
