@@ -47,7 +47,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
         <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
           Referrals
         </Text>
-        <Tooltip
+        {/* <Tooltip
           hasArrow
           label={
             <Text
@@ -70,7 +70,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
             </a>
           </Box>
-        </Tooltip>
+        </Tooltip> */}
       </Box>
       <Box w="100%" id="whitelist-challange-description-box-2" sx={{ marginTop: '0px !important' }}>
         <ReferralCopyClipboard animate userId={member?.id} />

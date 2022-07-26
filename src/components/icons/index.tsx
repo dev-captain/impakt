@@ -44,3 +44,4 @@ export { default as EthIcon } from './EthIcon';
 export { default as IllustrationIcon } from './IllustrationIcon';
 export { default as TikTokIcon } from './TikTokIcon';
 export { default as YoutubeSocialIcon } from './YoutubeSocialIcon';
+export { default as InfoIcon } from './InfoIcon';
