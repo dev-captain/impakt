@@ -40,7 +40,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         color="white"
         display={{ base: 'flex', lg: ' none' }}
       >
-        <Box marginX="auto" w="92%">
+        <Box marginX="auto" w="93.5%">
           <CollapseSidebar />
         </Box>
         {/* TODO  Sidebar */}
