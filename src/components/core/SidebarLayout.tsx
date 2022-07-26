@@ -24,7 +24,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   }, [asideRef, rightDimension]);
 
   return (
-    <>
+    <Box bgColor="#060609" minH="100vh">
       {isShowNavbar && (
         <Box bgColor="#060609" as="nav" w="full" minH="80px">
           <Navbar isVersion2 position="absolute" />
@@ -44,7 +44,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           alignItems="flex-start"
           mt="0 !important"
           w="full"
-          minH="calc(100vh - 80px)"
+          minH={{ sm: 'calc(50vh)', lg: 'calc(100vh - 80px)' }}
           id="hstack"
         >
           <VStack
@@ -82,7 +82,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
       </VStack>
 
       {isShowFooter && <C.FooterV2 wFull />}
-    </>
+    </Box>
   );
 };
 export default SidebarLayout;
