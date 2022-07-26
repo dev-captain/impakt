@@ -33,6 +33,7 @@ const Excercise: React.FC = () => {
 
   return (
     <MemberDashboardCard
+      border="2px solid rgba(255,255,255,0.03)"
       flexDir="column"
       alignItems="start"
       rowGap={{ base: '18px', lg: '32px' }}

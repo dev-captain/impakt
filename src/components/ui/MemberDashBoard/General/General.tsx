@@ -17,7 +17,6 @@ const General: React.FC = () => {
       <Box w="full" as="section" id="general-section">
         <MemberDashboardSectionHeadlineText title="General" />
         <HStack
-          id="check"
           columnGap="24px"
           rowGap="24px"
           justifyContent="flex-start"
