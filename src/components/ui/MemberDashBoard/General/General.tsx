@@ -13,7 +13,7 @@ const General: React.FC = () => {
     <Skeleton w="full" isLoaded={isLoaded}>
       <Box w="full" as="section" id="general-section">
         <MemberDashboardSectionHeadlineText title="General" />
-        <Box w="50%">
+        <Box w={{ md: '50%' }}>
           <NewsFeed />
         </Box>
         {/* <WelcomeModal /> */}

@@ -29,16 +29,23 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           </Box>
         )}
         <VStack mt="0 !important" w="full" h="full">
-          <HStack justifyContent="flex-start" alignItems="flex-start" mt="0 !important" w="full">
+          <HStack
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            mt="0 !important"
+            w="full"
+            display={{ md: 'flex' }}
+          >
             <VStack
-              p="3em 2em"
-              minH="100vh"
+              p={{ base: '48px 32px 0 32px', md: '48px 32px' }}
+              minH={{ md: '100vh' }}
               minW="384px"
-              bgColor="rgba(28, 28, 40, 0.65)"
+              bgColor={{ md: 'rgba(28, 28, 40, 0.65)' }}
               as="aside"
               justifyContent="flex-start"
               alignItems="flex-start"
             >
+              ?
               <C.Sidebar />
               {/* TODO  Sidebar */}
             </VStack>
