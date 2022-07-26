@@ -7,8 +7,8 @@ const CollapseSidebar = () => {
   const path = useLocation();
 
   return (
-    <Box className="menuSidebar" width="full">
-      <Menu>
+    <Box width="full">
+      <Menu matchWidth strategy="fixed">
         <MenuButton
           as={Button}
           rightIcon={<I.DropIcon />}

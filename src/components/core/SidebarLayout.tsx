@@ -24,12 +24,27 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   }, [asideRef, rightDimension]);
 
   return (
-    <Box bgColor="#060609" minH="100vh">
+    <Box bgColor="#060609" minH="100vh" position="relative">
       {isShowNavbar && (
         <Box bgColor="#060609" as="nav" w="full" minH="80px">
           <Navbar isVersion2 position="fixed" />
         </Box>
       )}
+
+      <Box
+        w="full"
+        position="fixed"
+        h="90px"
+        zIndex="333"
+        top="127px"
+        color="white"
+        display={{ base: 'flex', lg: ' none' }}
+      >
+        <Box marginX="auto" w="92%">
+          <CollapseSidebar />
+        </Box>
+        {/* TODO  Sidebar */}
+      </Box>
       <VStack
         as="main"
         bgColor="#060609"
@@ -71,11 +86,8 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             m="0 !important"
             marginLeft={{ base: '0', lg: '20vw !important' }}
             p={{ sm: '0 1em', lg: '3em 3em 0 3em' }}
+            marginTop={{ sm: '120px !important', lg: '0px !important' }}
           >
-            <Box w="full" mt="50px" display={{ base: 'flex', lg: ' none' }}>
-              <CollapseSidebar />
-              {/* TODO  Sidebar */}
-            </Box>
             <Outlet />
           </VStack>
         </HStack>
