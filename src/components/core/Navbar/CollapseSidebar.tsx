@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import { useLocation } from 'react-router-dom';
@@ -31,7 +31,50 @@ const CollapseSidebar = ({ isLessThan991, isLargerThan380, onClose }: Props) => 
           _hover={{ backgroundColor: 'rgba(28, 28, 40, 0.65)' }}
           _focus={{ boxShadow: 'none' }}
         >
-          Actions
+          {path.pathname === '/dashboard' && (
+            <Box display="flex" alignItems="flex-end">
+              <I.DashboardIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname === '/dashboard' ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">General</Text>
+            </Box>
+          )}
+          {path.pathname === '/dashboard/referrals' && (
+            <Box display="flex" alignItems="flex-end">
+              <I.ReferralsIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname === '/dashboard/referrals' ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">Referrals</Text>
+            </Box>
+          )}
+          {path.pathname === '/dashboard/reward-history' && (
+            <Box display="flex" alignItems="flex-end">
+              <I.RewardIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname === '/dashboard/reward-history' ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">Reward history</Text>
+            </Box>
+          )}
+          {path.pathname === '/dashboard/statistics' && (
+            <Box display="flex" alignItems="flex-end">
+              <I.ChatIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname === '/dashboard/statistics' ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">Statistics</Text>
+            </Box>
+          )}
         </MenuButton>
         <MenuList w="100%" minW="100%" color="#fff" backgroundColor="#060609" borderColor="#2e2b2b">
           <MenuItem

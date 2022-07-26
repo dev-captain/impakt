@@ -104,5 +104,5 @@ code {
   transition: all 0.5s;
 }
 .menuSidebar >div {
-  width: calc(100% - 64px);
+  width: calc(100% - 32px);
 }

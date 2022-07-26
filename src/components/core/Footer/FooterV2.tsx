@@ -151,7 +151,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                       display="flex"
                       justifyContent={{ base: 'space-between', md: 'start' }}
                     >
-                      <Box onClick={() => navigate('/')} zIndex={100} mr="32px">
+                      <Box onClick={() => navigate('/')} mr="32px">
                         <I.ImpaktIcon width="111px" height="32px" />
                       </Box>
                       <Link href="/download" _hover={{ textDecoration: 'none' }}>

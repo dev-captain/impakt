@@ -33,14 +33,15 @@ const SidebarLinkItem = ({
   return (
     <Box
       justifyContent="center"
-      h={{ base: '48px', md: '56px' }}
+      // h={{ base: '48px', md: '56px' }}
       onClick={onClose}
       cursor="pointer"
       width="100%"
       background={isActive ? '#20202E' : 'none'}
       borderRadius="16px"
       alignItems="start"
-      padding="16px 18px"
+      // padding="16px 18px"
+      padding="0"
       _hover={{
         background: '#20202E',
         transition: '0.5s ease',
@@ -52,6 +53,8 @@ const SidebarLinkItem = ({
           href={href}
           display="flex"
           alignItems="center"
+          padding="16px 18px"
+          h={{ base: '48px', md: '56px' }}
           _hover={{
             transition: '0.2s ease',
             background: '#20202E',
@@ -83,6 +86,8 @@ const SidebarLinkItem = ({
           target={target}
           display="flex"
           alignItems="center"
+          padding="16px 18px"
+          h={{ base: '48px', md: '56px' }}
           onClick={() => {
             navigate(href);
           }}
