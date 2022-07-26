@@ -46,7 +46,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             display={{ md: 'flex' }}
           >
             <VStack
-              p={{ base: '48px 32px 0 32px', md: '48px 32px' }}
+              p={{ base: '48px 16px 0 16px', md: '48px 32px' }}
               minH={{ md: '100vh' }}
               minW="384px"
               bgColor={{ md: 'rgba(28, 28, 40, 0.65)' }}

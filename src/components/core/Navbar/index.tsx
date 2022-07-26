@@ -113,7 +113,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             onClick={() => navigate('/')}
             zIndex={100}
             pr="40px"
-            minWidth={{ base: isVersion2 ? '384px' : 'auto' }}
+            minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
             <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
