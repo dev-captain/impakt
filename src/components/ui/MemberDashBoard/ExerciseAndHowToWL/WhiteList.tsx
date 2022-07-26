@@ -4,13 +4,15 @@ import { getWhiteListed } from 'lib/redux/slices/whitelist/actions/getWhiteListe
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import { VStack, Box, Text, Tooltip, Link } from '@chakra-ui/react';
+import { VStack, Box, Text, Tooltip, Link, HStack } from '@chakra-ui/react';
 import useAppSelector from 'hooks/useAppSelector';
 import useAppDispatch from 'hooks/useAppDispatch';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
 import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
 import MemberDashboardCard from '../MemberDashBoardCard';
+import { ImpaktButton } from '../../../common';
+import { I } from '../../..';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
@@ -35,21 +37,75 @@ const WhiteList: React.FC = () => {
     <MemberDashboardCard
       w="100%"
       flexDir="column"
+      mt="0 !important"
       alignItems="start"
       rowGap={{ base: '18px', lg: '32px' }}
     >
       <Box
         display="flex"
+        borderRadius="24px"
         letterSpacing="-0.04em !important"
         justifyContent="space-between"
         marginTop="0 !important"
-        w="100%"
         id="whitelist-challange-description-box-2"
         position="relative"
+        bgImage={Images.backgrounds.gradientBg}
+        bgSize="cover"
+        minHeight="194px"
+        w="full"
       >
-        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
-          How to get whitelisted
-        </Text>
+        <Box
+          display="flex"
+          flexWrap="wrap-reverse"
+          justifyContent="center"
+          alignItems="center"
+          w="full"
+        >
+          <Box
+            css={{
+              '-webkit-background-clip': 'text',
+              '-webkit-text-fill-color': 'transparent',
+            }}
+            background="linear-gradient(248.29deg, rgba(89, 0, 255, 0) 65.74%, rgba(89, 0, 255, 0.35) 100%), linear-gradient(111.71deg, rgba(255, 0, 21, 0) 64.07%, rgba(255, 0, 21, 0.5) 100%), #FFFFFF;"
+            flex="1"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text
+              width="min-content"
+              fontWeight="700"
+              fontSize="48px"
+              lineHeight="56px"
+              letterSpacing="-2px"
+            >
+              How to get whitelisted
+            </Text>
+          </Box>
+          <Box
+            flex="1"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            css={{
+              '-webkit-background-clip': 'text',
+              '-webkit-text-fill-color': 'transparent',
+            }}
+            background="linear-gradient(248.29deg, rgba(89, 0, 255, 0) 65.74%, rgba(89, 0, 255, 0.35) 100%), linear-gradient(111.71deg, rgba(255, 0, 21, 0) 64.07%, rgba(255, 0, 21, 0.5) 100%), #FFFFFF;"
+          >
+            <Box>
+              <I.IllustrationIcon />
+            </Box>
+            {/* <Text
+              fontWeight="700"
+              fontSize={{ base: '32px', lg: '48px' }}
+              lineHeight={{ base: '100%', lg: '56px' }}
+              letterSpacing="-2px"
+            >
+              How to get whitelisted
+            </Text> */}
+          </Box>
+        </Box>
         <Tooltip
           hasArrow
           label="You can see me"
@@ -58,82 +114,60 @@ const WhiteList: React.FC = () => {
           closeOnClick={false}
           onClick={TooltipHandler}
         >
-          <Box
-            position="absolute"
-            right={{ base: '-14px', md: '-16px' }}
-            bottom={{ base: '22px', md: '20px' }}
-            width={{ base: '24px', md: '32px' }}
-          >
+          <Box position="absolute" top="16px" right="16px">
             <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
           </Box>
         </Tooltip>
       </Box>
       <Box w="100%" id="whitelist-challange-description-box-2" sx={{ marginTop: '0px !important' }}>
-        <Box
-          display="flex"
-          backdropBlur={40}
-          bgColor="rgba(255, 255, 255, 0.1)"
-          p="16px 24px"
-          borderRadius="16px"
-          alignItems="center"
-          mt="0px"
-        >
-          <Box>
-            <img src={Images.Common.Discord} alt="Discord" width="24px" />
-          </Box>
-          <Link
+        <Box>
+          <ImpaktButton
+            as="a"
             href="https://impakt-api-kevde-cu-2ng-ttwbrs.herokuapp.com/api/v1/iam/auth/discord/login"
-            _hover={{ textDecoration: 'none' }}
-            _focus={{ outline: 'none !important' }}
+            leftIcon={
+              <Box marginRight="8px">
+                <I.DiscordIcon />
+              </Box>
+            }
+            size="lg"
+            variant="secondary"
+            justifyContent="flex-start"
           >
-            <Box marginLeft="16px">
-              <Text textStyle="regular3" fontWeight={500}>
-                {' '}
-                {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
-              </Text>
-            </Box>
-          </Link>
+            {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
+          </ImpaktButton>
         </Box>
-        <Box
-          display="flex"
-          backdropBlur={40}
-          bgColor="rgba(255, 255, 255, 0.1)"
-          p="16px 24px"
-          borderRadius="16px"
-          alignItems="center"
-          mt="12px"
-        >
-          <Box>
-            <img src={Images.Common.Twitter} alt="Discord" width="24px" />
-          </Box>
-          <Box marginLeft="16px">
-            <Text textStyle="regular3" fontWeight={500}>
-              {' '}
-              Connect Twitter
-            </Text>
-          </Box>
+
+        <Box mt="12px">
+          <ImpaktButton
+            leftIcon={
+              <Box marginRight="8px">
+                <I.TwitterIcon />
+              </Box>
+            }
+            size="lg"
+            variant="secondary"
+            justifyContent="flex-start"
+          >
+            Connect Twitter
+          </ImpaktButton>
         </Box>
-        <Box
-          display="flex"
-          backdropBlur={40}
-          bgColor="rgba(255, 255, 255, 0.1)"
-          p="16px 24px"
-          borderRadius="16px"
-          alignItems="center"
-          mt="12px"
-          onClick={handleModal}
-          cursor="pointer"
-        >
-          <Box>
-            <img src={Images.Common.Walletad} alt="Discord" width="19px" height="32px" />
-          </Box>
-          <Box marginLeft="16px ">
-            <Text textStyle="regular3" fontWeight={500}>
-              {' '}
-              Submit wallet address
-            </Text>
-          </Box>
+
+        <Box mt="12px">
+          <ImpaktButton
+            onClick={handleModal}
+            leftIcon={
+              <Box marginRight="8px">
+                <I.EthIcon />
+              </Box>
+            }
+            size="lg"
+            variant="secondary"
+            justifyContent="flex-start"
+          >
+            Submit wallet address
+          </ImpaktButton>
         </Box>
+
         <Box
           display="flex"
           backdropBlur={40}
@@ -142,11 +176,12 @@ const WhiteList: React.FC = () => {
           borderRadius="16px"
           alignItems="center"
           mt="12px"
+          minH="88px"
         >
           <Box>
             <img src={Images.Common.Goldaword} alt="Discord" width="24px" />
           </Box>
-          <Box marginLeft="16px" width={{ base: '100%', lg: '257px' }}>
+          <Box marginLeft="16px" width={{ base: '100%', lg: '285px' }}>
             <Text textStyle="regular3" fontWeight={500} color="#FEC417">
               Win WL by participating in events or buy WL on GODL marketplace
             </Text>

@@ -8,10 +8,15 @@ import CheckOurDiscourseButton from './CheckOurDiscourseButton';
 
 const NewsFeed: React.FC = () => {
   return (
-    <MemberDashboardCard minW="341px" rowGap="1.5em">
+    <MemberDashboardCard
+      color="rgba(255,255,255,0.5)"
+      _hover={{ color: 'rgba(255,255,255,1)' }}
+      transition="color .2s"
+      rowGap="1.5em"
+    >
       <Box id="news-feed-headline-box">
         <HStack columnGap="1.125em">
-          <Box id="news-feed-headline-text-box">
+          <Box color="#fff" id="news-feed-headline-text-box">
             <Text textStyle="bold5" lineHeight="100%">
               News Feed
             </Text>
@@ -21,11 +26,16 @@ const NewsFeed: React.FC = () => {
           </Box>
         </HStack>
       </Box>
-      <Box w="full" id="news-feed-accordion-box">
+      <Box
+        _hover={{ color: 'rgba(255,255,255,1)' }}
+        color="rgba(255,255,255,0.75)"
+        w="full"
+        id="news-feed-accordion-box"
+      >
         <NewsFeedAccordion feeds={feeds} />
       </Box>
 
-      <Box w="full" id="news-feed-check-our-discourse-box">
+      <Box color="#fff" w="full" id="news-feed-check-our-discourse-box">
         <CheckOurDiscourseButton />
       </Box>
       {/* <Box id="news-feed-headline-box">Headline</Box> */}

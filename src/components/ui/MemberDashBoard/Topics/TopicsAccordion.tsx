@@ -5,29 +5,28 @@ import {
   AccordionButton,
   Box,
   AccordionPanel,
-  AccordionIcon,
   VStack,
   Text,
 } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
 
-interface NewsFeedAccordionProps {
-  feeds: { title: string; description: string; href: string }[];
+interface TopicsAccordionProps {
+  topics: { title: string; description: string }[];
 }
-const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
+const TopicsAccordion: React.FC<TopicsAccordionProps> = ({ topics }) => {
   const [index, setIndex] = React.useState<number[]>([]);
 
   return (
-    <Accordion index={index} allowToggle>
-      <VStack>
-        {feeds.map(({ title, description, href }, i) => (
+    <Accordion w="full" index={index} allowToggle>
+      <VStack w="full">
+        {topics.map(({ title, description }, i) => (
           <AccordionItem
+            w="100%"
             background="#20202E"
             borderRadius="1em"
             border="0"
-            py="1em"
-            px="1.5em"
+            p="20px 20px 20px 32px"
             position="relative"
             onMouseEnter={() => {
               setIndex([i]);
@@ -37,14 +36,22 @@ const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
             }}
           >
             {({ isExpanded }: { isExpanded: boolean }) => (
-              <Box href={href} maxW="90%">
+              <Box maxW="90%">
                 <AccordionButton padding="0">
                   <Box flex="1" textAlign="left">
-                    <Text textStyle="semiBold5">{title}</Text>
+                    <Text
+                      color={isExpanded ? 'gold' : 'white'}
+                      transition="color .2s"
+                      fontSize="20px"
+                      lineHeight="32px"
+                      fontWeight="400"
+                    >
+                      {title}
+                    </Text>
                   </Box>
                   <Box
                     position="absolute"
-                    top="25px"
+                    top="20px"
                     right="20px"
                     transform={isExpanded ? 'rotate(180deg)' : '0'}
                     transition="transform 0.2s"
@@ -53,8 +60,10 @@ const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
                     <I.DropIcon />
                   </Box>
                 </AccordionButton>
-                <AccordionPanel px="0">
-                  <Text textStyle="semiBold5">{description}</Text>
+                <AccordionPanel px="0" pb={4}>
+                  <Text fontSize="20px" lineHeight="32px" fontWeight="400">
+                    {description}
+                  </Text>
                 </AccordionPanel>
               </Box>
             )}
@@ -65,4 +74,4 @@ const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
   );
 };
 
-export default NewsFeedAccordion;
+export default TopicsAccordion;

@@ -1,4 +1,4 @@
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, HStack, useDimensions, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { C } from 'components';
@@ -13,21 +13,30 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   isShowFooter = false,
   isShowNavbar = true,
 }) => {
+  const rightRef = React.useRef<HTMLDivElement>(null);
+  const rightDimension = useDimensions(rightRef);
+  const asideRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!asideRef.current || !rightDimension) return;
+    asideRef.current.style.minHeight = `${rightDimension.borderBox.height ?? 0 + 300}px`;
+  }, [asideRef, rightDimension]);
+
   return (
     <>
+      {isShowNavbar && (
+        <Box bgColor="#060609" as="nav" w="full" minH="80px">
+          <Navbar isVersion2 position="absolute" />
+        </Box>
+      )}
       <VStack
         as="main"
         bgColor="#060609"
         color="white"
-        h="100vh"
+        position="relative"
         justifyContent="flex-start"
         alignItems="flex-start"
       >
-        {isShowNavbar && (
-          <Box w="full" minH="80px">
-            <Navbar isVersion2 position="absolute" />
-          </Box>
-        )}
         <VStack mt="0 !important" w="full" h="full">
           <HStack
             justifyContent="flex-start"
@@ -62,6 +71,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           </HStack>
         </VStack>
       </VStack>
+
       {isShowFooter && <C.FooterV2 wFull />}
     </>
   );
