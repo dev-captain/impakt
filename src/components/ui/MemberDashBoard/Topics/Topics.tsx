@@ -12,6 +12,7 @@ const Topics: React.FC = () => {
       _hover={{ color: 'rgba(255,255,255,1)' }}
       transition="color .2s"
       rowGap="1.5em"
+      mt="0 !important"
     >
       <Box id="topics-headline-box">
         <HStack columnGap="1.125em">

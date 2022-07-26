@@ -17,18 +17,20 @@ const General: React.FC = () => {
       <Box w="full" as="section" id="general-section">
         <MemberDashboardSectionHeadlineText title="General" />
         <HStack
+          id="check"
           columnGap="24px"
+          rowGap="24px"
           justifyContent="flex-start"
           alignItems="flex-start"
-          flexWrap={{ base: 'wrap', lg: 'nowrap' }}
           w="full"
+          flexWrap={{ base: 'wrap', lg: 'nowrap' }}
         >
           <VStack w="full" justifyContent="flex-start" alignItems="flex-start" rowGap="24px">
             <WelcomeModal />
             <WhiteList />
           </VStack>
 
-          <VStack w="full" rowGap="24px">
+          <VStack w="full" marginLeft="0 !important" rowGap="24px">
             <NewsFeed />
             <Topics />
           </VStack>

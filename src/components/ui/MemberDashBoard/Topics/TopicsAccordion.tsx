@@ -26,8 +26,7 @@ const TopicsAccordion: React.FC<TopicsAccordionProps> = ({ topics }) => {
             background="#20202E"
             borderRadius="1em"
             border="0"
-            py="1em"
-            px="2em"
+            p="20px 20px 20px 32px"
             position="relative"
             onMouseEnter={() => {
               setIndex([i]);

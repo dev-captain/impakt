@@ -8,6 +8,7 @@ const IllustrationIcon = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
+    {...props}
   >
     <rect y="160" width="160" height="280" transform="rotate(-90 0 160)" fill="url(#pattern0)" />
     <defs>

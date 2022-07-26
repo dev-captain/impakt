@@ -37,6 +37,7 @@ const WhiteList: React.FC = () => {
     <MemberDashboardCard
       w="100%"
       flexDir="column"
+      mt="0 !important"
       alignItems="start"
       rowGap={{ base: '18px', lg: '32px' }}
     >
@@ -46,31 +47,65 @@ const WhiteList: React.FC = () => {
         letterSpacing="-0.04em !important"
         justifyContent="space-between"
         marginTop="0 !important"
-        w="100%"
         id="whitelist-challange-description-box-2"
         position="relative"
         bgImage={Images.backgrounds.gradientBg}
         bgSize="cover"
-        height="194px"
         minHeight="194px"
-        padding="32px"
+        w="full"
       >
-        <HStack w="full">
+        <Box
+          display="flex"
+          flexWrap="wrap-reverse"
+          justifyContent="center"
+          alignItems="center"
+          w="full"
+        >
           <Box
-            w="50%"
+            css={{
+              '-webkit-background-clip': 'text',
+              '-webkit-text-fill-color': 'transparent',
+            }}
+            background="linear-gradient(248.29deg, rgba(89, 0, 255, 0) 65.74%, rgba(89, 0, 255, 0.35) 100%), linear-gradient(111.71deg, rgba(255, 0, 21, 0) 64.07%, rgba(255, 0, 21, 0.5) 100%), #FFFFFF;"
+            flex="1"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text
+              width="min-content"
+              fontWeight="700"
+              fontSize="48px"
+              lineHeight="56px"
+              letterSpacing="-2px"
+            >
+              How to get whitelisted
+            </Text>
+          </Box>
+          <Box
+            flex="1"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             css={{
               '-webkit-background-clip': 'text',
               '-webkit-text-fill-color': 'transparent',
             }}
             background="linear-gradient(248.29deg, rgba(89, 0, 255, 0) 65.74%, rgba(89, 0, 255, 0.35) 100%), linear-gradient(111.71deg, rgba(255, 0, 21, 0) 64.07%, rgba(255, 0, 21, 0.5) 100%), #FFFFFF;"
           >
-            <Text textStyle="TitleBold48">How to get whitelisted</Text>
+            <Box>
+              <I.IllustrationIcon />
+            </Box>
+            {/* <Text
+              fontWeight="700"
+              fontSize={{ base: '32px', lg: '48px' }}
+              lineHeight={{ base: '100%', lg: '56px' }}
+              letterSpacing="-2px"
+            >
+              How to get whitelisted
+            </Text> */}
           </Box>
-
-          <Box w="50%">
-            <I.IllustrationIcon />
-          </Box>
-        </HStack>
+        </Box>
         <Tooltip
           hasArrow
           label="You can see me"
@@ -141,6 +176,7 @@ const WhiteList: React.FC = () => {
           borderRadius="16px"
           alignItems="center"
           mt="12px"
+          minH="88px"
         >
           <Box>
             <img src={Images.Common.Goldaword} alt="Discord" width="24px" />

@@ -50,7 +50,8 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             position="absolute"
             height="100%"
             p="3em 2em"
-            minW="384px"
+            w="20vw"
+            minW="260px"
             bgColor="rgba(28, 28, 40, 0.65)"
             as="aside"
             justifyContent="flex-start"
@@ -65,7 +66,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             w="full"
             id="content-container"
             m="0 !important"
-            marginLeft="384px !important"
+            marginLeft="20vw !important"
             p="3em 3em 0 3em"
           >
             <Outlet />
