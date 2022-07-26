@@ -67,7 +67,14 @@ const CollapseSidebar = () => {
             </Box>
           )}
         </MenuButton>
-        <MenuList w="100%" minW="100%" color="#fff" backgroundColor="#060609" borderColor="#2e2b2b">
+        <MenuList
+          borderRadius="16px"
+          w="100%"
+          minW="100%"
+          color="#fff"
+          backgroundColor="#060609"
+          borderColor="#2e2b2b"
+        >
           <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
