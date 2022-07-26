@@ -47,6 +47,9 @@ const NewsFeed: React.FC = () => {
           fontSize={{ base: '12px', md: '16px', lg: '20px' }}
           lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
           justifyContent={{ md: 'center', lg: 'flex-start' }}
+          as="a"
+          href="https://discuss.impakt.com"
+          target="_blank"
         >
           Check our Discourse for more updates
         </ImpaktButton>
