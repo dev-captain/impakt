@@ -1,4 +1,4 @@
-import { Box, HStack, useDimensions, VStack } from '@chakra-ui/react';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { C } from 'components';
@@ -12,17 +12,8 @@ interface SidebarLayoutProps {
 
 const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   isShowFooter = false,
-  isShowNavbar = true,
+  isShowNavbar = false,
 }) => {
-  const rightRef = React.useRef<HTMLDivElement>(null);
-  const rightDimension = useDimensions(rightRef);
-  const asideRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    if (!asideRef.current || !rightDimension) return;
-    asideRef.current.style.minHeight = `${rightDimension.borderBox.height ?? 0 + 300}px`;
-  }, [asideRef, rightDimension]);
-
   return (
     <Box bgColor="#060609" minH="100vh" position="relative">
       {isShowNavbar && (
@@ -73,14 +64,12 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             as="aside"
             justifyContent="flex-start"
             alignItems="flex-start"
-            ref={asideRef}
           >
             <C.Sidebar />
             {/* TODO  Sidebar */}
           </VStack>
 
           <VStack
-            ref={rightRef}
             w="full"
             id="content-container"
             m="0 !important"

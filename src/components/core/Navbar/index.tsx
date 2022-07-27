@@ -175,8 +175,11 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
               {isVersion2 && (
                 <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
                   <NavbarButton
-                    href="/"
-                    onClose={() => navigate('/')}
+                    href="/dashboard"
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      navigate('/dashboard');
+                    }}
                     title={t(Keys.navbar.dashboard)}
                     background="rgba(255, 255, 255, 0.1)"
                     hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
@@ -187,8 +190,11 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     <I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />
                   </NavbarButton>
                   <NavbarButton
-                    href="/"
-                    onClose={() => navigate('/')}
+                    href="/contact"
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      navigate('/contact');
+                    }}
                     title={t(Keys.navbar.help)}
                     background="rgba(255, 255, 255, 0.1)"
                     hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
@@ -199,14 +205,13 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     <I.HelpIcon cursor="pointer" width="16px" height="16px" />
                   </NavbarButton>
                   <NavbarButton
-                    href="#"
                     title={t(Keys.navbar.signOut)}
                     background="rgba(240, 65, 83, 0.12)"
                     hover={{ background: 'rgba(240, 65, 83, 0.12)', outline: 'none' }}
                     textStyle="semiBold5"
                     color="#F04153"
                     marginLeft="9px"
-                    onClose={async () => {
+                    onClick={async () => {
                       await dispatch(signOutMember()).unwrap();
                       toast({
                         title: 'Success',
