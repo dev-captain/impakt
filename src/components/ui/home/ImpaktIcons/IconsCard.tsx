@@ -1,11 +1,11 @@
-import { Box, Image, Text, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Box, Image, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
-import { useParallax } from 'hooks';
+import FlipCardBox from '../../../common/FlipCard';
+import { I } from '../../..';
 
-const { Twitter, TwitterLight, Tiktok, Instagram, TiktokDark, InstagramDark } = Images.Common;
 const { UserIcon } = Images.impaktIcons;
 
 const IconsCard = ({
@@ -13,60 +13,33 @@ const IconsCard = ({
   name,
   title,
   subtitle,
+  socialMedia,
 }: {
   image: string;
   name: string;
   title: string;
-  subtitle: string;
+  subtitle?: string[];
+  socialMedia?: { platform: string; href: string }[];
 }) => {
   const cardRef = React.useRef<HTMLDivElement>(null);
   const imageBoxRef = React.useRef<HTMLDivElement>(null);
   const nameBoxRef = React.useRef<HTMLDivElement>(null);
-  const followersBoxRef = React.useRef<HTMLDivElement>(null);
-  const descriptionBoxRef = React.useRef<HTMLDivElement>(null);
-  useParallax(cardRef, [imageBoxRef, nameBoxRef, followersBoxRef, descriptionBoxRef], {
-    range: 40,
-  });
 
-  const [twitterImg, setTwitterImg] = useState(Twitter);
-  const [tiktokImg, setTiktokImg] = useState(Tiktok);
-  const [instagramImg, setInstagramImg] = useState(Instagram);
   // const bgColor = useColorModeValue('glass.800', 'glass.200');
-  const handleOnMouseOverIcons = (
-    e: React.MouseEvent<HTMLDivElement>,
-    socialImage: any,
-    hoverType: string,
-  ) => {
-    if (hoverType === 'Twitter') setTwitterImg(socialImage);
-    if (hoverType === 'Tiktok') setTiktokImg(socialImage);
-    if (hoverType === 'Instagram') setInstagramImg(socialImage);
-  };
-  const handleOnMouseLeaveIcons = (
-    e: React.MouseEvent<HTMLDivElement>,
-    socialImage: any,
-    hoverType: string,
-  ) => {
-    if (hoverType === 'Twitter') setTwitterImg(socialImage);
-    if (hoverType === 'Tiktok') setTiktokImg(socialImage);
-    if (hoverType === 'Instagram') setInstagramImg(socialImage);
-  };
   const { t } = useTranslation().i18n;
 
   return (
     <VStack
-      pl="24px"
-      pr="24px"
-      pb="24px"
       ref={cardRef}
-      width={{ base: '343px', sm: '288px', md: '288px' }}
-      h="422px"
+      minW="288px"
+      minH="418px"
       align="center"
       transitionDuration="150ms"
-      justify="space-between"
       bgColor="rgba(28, 28, 40, 0.65)"
       position="relative"
       borderRadius="32px"
       backdropFilter="blur(40px)"
+      rowGap="24px"
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <VStack pos="relative" zIndex={1} top="-19px" height="100px">
@@ -94,7 +67,6 @@ const IconsCard = ({
               src={image}
               boxSizing="border-box"
               borderRadius="24px"
-              sx={{ filter: name !== '???' ? 'blur(7px)' : 'blur(0px)' }}
             />
             {name === '???' && (
               <Image
@@ -114,43 +86,44 @@ const IconsCard = ({
         </Box>
       </VStack>
 
-      <VStack ref={nameBoxRef} align="center" justify="center" mb="0px !important">
-        <Text
-          textStyle="bold5"
-          pb="5px"
-          align="center"
-          userSelect="none"
-          color={name === '???' ? 'rgba(255,255,255,0.4)' : '#FFF'}
-          sx={{ filter: name !== '???' ? 'blur(7px)' : 'blur(0px)' }}
-        >
-          {name}
-        </Text>
-      </VStack>
       <VStack
+        mt="0 !important"
         w="full"
-        spacing={5}
-        justify={{ base: 'center', md: 'center' }}
-        mt="0px !important"
-        mb="14px !important"
-        ref={followersBoxRef}
-      >
-        <Text textStyle="semiBold16" color="#FEC417">
-          {' '}
-          {title}
-        </Text>
-      </VStack>
-      <VStack
-        width="100%"
-        maxWidth="100%"
+        rowGap="12px"
+        ref={nameBoxRef}
         align="center"
         justify="center"
-        mt="0px !important"
-        mb="10px !important"
+        mb="0px !important"
+        px="24px"
       >
-        {name !== '???' ? (
-          // <Box position="relative" data-group> // To allow the flip feature
-          <Box ref={descriptionBoxRef} position="relative" w="100%">
+        <Box mt="0 !important">
+          <Text
+            fontSize="28px"
+            fontWeight="700"
+            lineHeight="100%"
+            userSelect="none"
+            color={name === '???' ? 'rgba(255,255,255,0.4)' : '#FFF'}
+          >
+            {name}
+          </Text>
+        </Box>
+        <Box mb="12px !important" mt="0 !important">
+          <Text
+            fontSize="18px"
+            fontWeight="700"
+            letterSpacing="2px"
+            lineHeight="100%"
+            color="#FEC417"
+            textTransform="uppercase"
+          >
+            {title}
+          </Text>
+        </Box>
+
+        <Box w="full" maxW="240px">
+          <FlipCardBox isFlippable={!!socialMedia}>
             <Box
+              minH="168px"
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
               w="100%"
@@ -158,25 +131,30 @@ const IconsCard = ({
               transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
               transform="rotateX(0deg)"
               transitionDuration="1s"
+              px="8px"
+              py="8px"
               transitionProperty="transform, opacity"
               _groupHover={{
                 transform: 'rotateX(180deg)',
                 opacity: '0',
               }}
+              display="flex"
+              justifyContent={!subtitle ? 'center' : 'flex-start'}
+              alignItems={!subtitle ? 'center' : 'flex-start'}
             >
-              <Text
-                textStyle="semiBold5"
-                margin="0 !important"
-                height="168px"
-                padding="8px 12px 8px 12px"
-                box-sizing="border-box"
-                borderRadius="8px"
-                color="rgba(255, 255, 255, 0.75)"
-                whiteSpace="pre-line"
-                userSelect="none"
-                dangerouslySetInnerHTML={{ __html: subtitle }}
-                sx={{ filter: name !== '???' ? 'blur(4px)' : 'blur(0px)' }}
-              />
+              {subtitle ? (
+                <UnorderedList px="10px" type="dot">
+                  {subtitle.map((titleItem: string) => (
+                    <ListItem color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
+                      {titleItem}
+                    </ListItem>
+                  ))}
+                </UnorderedList>
+              ) : (
+                <Text fontSize="16px" lineHeight="16px" letterSpacing="2px" fontWeight="500">
+                  Revealing...
+                </Text>
+              )}
             </Box>
             <Box
               backgroundColor="rgba(255, 255, 255, 0.04)"
@@ -197,119 +175,40 @@ const IconsCard = ({
                 transform: 'rotateX(0deg)',
               }}
             >
-              <Box
-                borderRadius="8px"
-                display="flex"
-                justifyContent="center"
-                paddingY="5px"
-                marginBottom="5px"
-                cursor="pointer"
-                alignItems="center"
-                transition="0.5s"
-                backdropFilter="blur(40px)"
-                backgroundColor="rgba(255, 255, 255, 0.1)"
-                onMouseMove={(e) => handleOnMouseOverIcons(e, InstagramDark, 'Instagram')}
-                onMouseLeave={(e) => handleOnMouseLeaveIcons(e, Instagram, 'Instagram')}
-                _hover={{ backgroundColor: '#FFF', color: '#000' }}
-              >
-                <Image
-                  maxW="20px"
-                  minW="20px"
-                  h="32px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src={instagramImg}
-                  me="8px"
-                />
-                <Text>{t(keys.impaktIcons.instagram)}</Text>
-              </Box>
-              <Box
-                borderRadius="8px"
-                display="flex"
-                justifyContent="center"
-                paddingY="5px"
-                marginBottom="5px"
-                backdropFilter="blur(40px)"
-                backgroundColor="rgba(255, 255, 255, 0.1)"
-                alignItems="center"
-                cursor="pointer"
-                transition="0.5s"
-                onMouseMove={(e) => handleOnMouseOverIcons(e, TiktokDark, 'Tiktok')}
-                onMouseLeave={(e) => handleOnMouseLeaveIcons(e, Tiktok, 'Tiktok')}
-                _hover={{ backgroundColor: '#FFF', color: '#000' }}
-              >
-                <Image
-                  maxW="20px"
-                  minW="20px"
-                  h="32px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src={tiktokImg}
-                  me="8px"
-                />
-                <Text>{t(keys.impaktIcons.tiktok)}</Text>
-              </Box>
-              <Box
-                borderRadius="8px"
-                display="flex"
-                paddingY="5px"
-                marginBottom="5px"
-                justifyContent="center"
-                backdropFilter="blur(40px)"
-                backgroundColor="rgba(255, 255, 255, 0.1)"
-                alignItems="center"
-                transition="0.5s"
-                cursor="pointer"
-                onMouseMove={(e) => handleOnMouseOverIcons(e, TwitterLight, 'Twitter')}
-                onMouseLeave={(e) => handleOnMouseLeaveIcons(e, Twitter, 'Twitter')}
-                _hover={{ backgroundColor: '#FFF', color: '#000' }}
-              >
-                <Image
-                  maxW="24px"
-                  minW="19px"
-                  h="32px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src={twitterImg}
-                  me="8px"
-                />
-                <Text>{t(keys.impaktIcons.twitter)}</Text>
-              </Box>
+              {socialMedia &&
+                socialMedia.map(({ platform, href }) => (
+                  <Box
+                    as="a"
+                    href={href}
+                    borderRadius="8px"
+                    display="flex"
+                    justifyContent="center"
+                    paddingY="5px"
+                    marginBottom="5px"
+                    cursor="pointer"
+                    alignItems="center"
+                    transition="0.5s"
+                    backdropFilter="blur(40px)"
+                    backgroundColor="rgba(255, 255, 255, 0.1)"
+                    _hover={{ backgroundColor: '#FFF', color: '#000' }}
+                    rowGap="8px"
+                    columnGap="8px"
+                  >
+                    <Box>
+                      {platform === 'Instagram' && <I.IGIcon width="20px" />}
+                      {platform === 'TikTok' && <I.TikTokIcon width="20px" />}
+                      {platform === 'Facebook' && <I.FBIcon width="20px" />}
+                      {platform === 'Website' && <I.WebIcon width="20px" />}
+                      {platform === 'Twitter' && <I.WebIcon width="20px" />}
+                    </Box>
+                    <Box>
+                      <Text>{platform}</Text>
+                    </Box>
+                  </Box>
+                ))}
             </Box>
-          </Box>
-        ) : (
-          <Box ref={descriptionBoxRef} position="relative" w="100%">
-            <Box
-              backgroundColor="rgba(255, 255, 255, 0.04)"
-              borderRadius="8px"
-              w="100%"
-              border="2px solid rgba(255, 255, 255, 0.04)"
-              transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
-              transform="rotateX(0deg)"
-              transitionDuration="1s"
-              transitionProperty="transform, opacity"
-              _groupHover={{
-                transform: 'rotateX(180deg)',
-                opacity: '0',
-              }}
-            >
-              <Text
-                textStyle="semiBold5"
-                margin="0 !important"
-                height="168px"
-                padding="8px 12px 8px 12px"
-                box-sizing="border-box"
-                borderRadius="8px"
-                color="rgba(255, 255, 255, 0.75)"
-                whiteSpace="pre-line"
-                dangerouslySetInnerHTML={{ __html: subtitle }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              />
-            </Box>
-          </Box>
-        )}
+          </FlipCardBox>
+        </Box>
       </VStack>
     </VStack>
   );

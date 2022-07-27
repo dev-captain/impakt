@@ -161,33 +161,34 @@ export default {
       'Fitness experts, Health Specialists, Athletes and overall Overachievers. They are our Impakt ICONs and we are honored to have them on board our journey!',
     icons: [
       {
-        name: 'Matt Fox',
-        title: '500k followers',
-        image: Images.impaktIcons.MattFox,
-        alt: '',
-        subtitle:
-          'The Godfather of Home Workouts! Fitness expert proud father, and cancer survivor!',
-      },
-      {
-        name: '???',
+        name: 'Kelvin Gastelum',
         title: '1M+ followers',
         image: Images.impaktIcons.Icon1,
         alt: '',
-        subtitle: 'REVEALING...',
+        subtitle: ['UFC Middleweight contender', '2019 Fight of the Year award'],
+      },
+      {
+        name: 'Matt Fox',
+        title: '500k+ followers',
+        image: Images.impaktIcons.MattFox,
+        alt: '',
+        subtitle: ['Home fitness expert', 'No gym in 6 years', 'Cancer survivor'],
+        socialMedia: [
+          { platform: 'Instagram', href: 'https://www.instagram.com/mattycfox' },
+          { platform: 'TikTok', href: 'https://www.tiktok.com/@mattycfox' },
+        ],
       },
       {
         name: '???',
-        title: '???',
+        title: '50k followers',
         image: Images.impaktIcons.Icon2,
         alt: '',
-        subtitle: 'REVEALING...',
       },
       {
         name: '???',
         title: '???',
         image: Images.impaktIcons.Icon3,
         alt: '',
-        subtitle: 'REVEALING...',
       },
     ],
   },
