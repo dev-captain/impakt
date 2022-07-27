@@ -171,6 +171,11 @@ export default {
     fontWeight: '500',
     lineHeight: '15px',
   },
+  semiBold165: {
+    fontSize: '16px',
+    fontWeight: '500',
+    lineHeight: '18px',
+  },
   semiBold17: {
     fontSize: '16px',
     fontWeight: '500',

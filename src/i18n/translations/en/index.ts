@@ -166,6 +166,11 @@ export default {
         image: Images.impaktIcons.Icon1,
         alt: '',
         subtitle: ['UFC Middleweight contender', '2019 Fight of the Year award'],
+        socialMedia: [
+          { platform: 'Twitter', href: 'https://twitter.com/KelvinGastelum' },
+          { platform: 'Instagram', href: 'https://www.instagram.com/kgastelum' },
+          { platform: 'Website', href: 'https://kelvingastelum.com' },
+        ],
       },
       {
         name: 'Matt Fox',

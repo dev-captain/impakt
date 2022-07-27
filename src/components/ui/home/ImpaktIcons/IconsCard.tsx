@@ -142,7 +142,7 @@ const IconsCard = ({
               justifyContent={!subtitle ? 'center' : 'flex-start'}
               alignItems={!subtitle ? 'center' : 'flex-start'}
             >
-              {subtitle ? (
+              {subtitle && subtitle.length > 0 ? (
                 <UnorderedList px="10px" type="dot">
                   {subtitle.map((titleItem: string) => (
                     <ListItem color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
@@ -151,7 +151,13 @@ const IconsCard = ({
                   ))}
                 </UnorderedList>
               ) : (
-                <Text fontSize="16px" lineHeight="16px" letterSpacing="2px" fontWeight="500">
+                <Text
+                  textTransform="uppercase"
+                  fontSize="16px"
+                  lineHeight="16px"
+                  letterSpacing="2px"
+                  fontWeight="500"
+                >
                   Revealing...
                 </Text>
               )}
@@ -189,20 +195,21 @@ const IconsCard = ({
                     alignItems="center"
                     transition="0.5s"
                     backdropFilter="blur(40px)"
+                    color="rgba(255, 255, 255, 0.75)"
                     backgroundColor="rgba(255, 255, 255, 0.1)"
                     _hover={{ backgroundColor: '#FFF', color: '#000' }}
                     rowGap="8px"
                     columnGap="8px"
                   >
-                    <Box>
+                    <Box bgColor="transparent">
                       {platform === 'Instagram' && <I.IGIcon width="20px" />}
                       {platform === 'TikTok' && <I.TikTokIcon width="20px" />}
                       {platform === 'Facebook' && <I.FBIcon width="20px" />}
                       {platform === 'Website' && <I.WebIcon width="20px" />}
-                      {platform === 'Twitter' && <I.WebIcon width="20px" />}
+                      {platform === 'Twitter' && <I.TwitterIcon width="20px" />}
                     </Box>
                     <Box>
-                      <Text>{platform}</Text>
+                      <Text textStyle="semiBold165">{platform}</Text>
                     </Box>
                   </Box>
                 ))}
