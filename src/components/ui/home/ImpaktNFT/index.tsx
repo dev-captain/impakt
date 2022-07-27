@@ -20,6 +20,7 @@ const ImpaktNFT = () => {
     <C.HeroLayout
       // showNavbar
       minH="auto"
+      backgroundSize="100% 100%"
       pos="relative"
       bgImage={bgImage}
       removeBottomPadding

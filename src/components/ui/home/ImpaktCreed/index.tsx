@@ -13,6 +13,7 @@ const ImpaktCreed = () => {
   return (
     <C.HeroLayout
       // showNavbar
+      backgroundSize="100% 100%"
       pos="relative"
       bgImage={Images.backgrounds.creedSectionBg}
       align="flex-start"

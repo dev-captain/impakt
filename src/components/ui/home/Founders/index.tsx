@@ -7,6 +7,7 @@ import {
   VStack,
   useColorModeValue,
   Box,
+  Image,
 } from '@chakra-ui/react';
 import { C } from 'components';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +24,9 @@ const Founder = () => {
   return (
     <C.HeroLayout
       // showNavbar
-      bgImage={bgImage}
+
+      bgColor="#09090B"
+      pos="relative"
       customPadding={{
         base: '16px',
         md: '32px',
@@ -32,6 +35,14 @@ const Founder = () => {
       }}
       minH="70vh"
     >
+      <Image
+        src={bgImage}
+        objectFit="cover"
+        minW="100%"
+        bottom="65px"
+        zIndex="0"
+        position="absolute"
+      />
       <VStack
         spacing="0px"
         px="16px"

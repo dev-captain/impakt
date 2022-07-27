@@ -14,6 +14,7 @@ export const HeroLayout: React.FC<{
   addSpacer?: boolean;
   pos?: string;
   minH?: string;
+  backgroundSize?: string;
 
   showFooter?: boolean;
   showFooterV2?: boolean;
@@ -37,6 +38,7 @@ export const HeroLayout: React.FC<{
   showNavbar = false,
   addSpacer = false,
   showFooterV2 = false,
+  backgroundSize = 'cover',
 
   removeTopPadding = false,
   pos,
@@ -60,7 +62,7 @@ export const HeroLayout: React.FC<{
           minW="full"
           align={align}
           justify={justify}
-          backgroundSize="cover"
+          backgroundSize={backgroundSize}
           backgroundImage={bgImage}
           backgroundColor={bgColor || backgroundColor}
           backgroundPosition={{ base: 'top', md: 'bottom' }}
