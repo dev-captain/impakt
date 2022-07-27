@@ -23,13 +23,36 @@ import MemberDashboardCard from '../MemberDashBoardCard';
 const Excercise: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const dispatch = useAppDispatch();
+  const { convertToPascalCase } = usePascalCase();
   const member = useAppSelector((state) => state.memberAuth.member);
   const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.exerciseState);
+  const [pascalCasedExerciseStates, setPascalCasedExerciseStates] = React.useState<
+    ({
+      repetitions: any;
+      exercise: string;
+    } | null)[]
+  >();
   React.useEffect(() => {
     if (member) {
       dispatch(fetchExerciseStats(member.id));
     }
   }, []);
+
+  React.useEffect(() => {
+    if (excerciseStatistics && excerciseStatistics.length > 0) {
+      const pascalCasedExStatics = excerciseStatistics.map((stats: any) => {
+        if (stats && stats.exercise) {
+          const convertedLabel = convertToPascalCase(stats.exercise);
+
+          return { repetitions: stats.repetitions, exercise: convertedLabel };
+        }
+
+        return null;
+      });
+      setPascalCasedExerciseStates(pascalCasedExStatics);
+    }
+  }, [excerciseStatistics]);
+
   return (
     <MemberDashboardCard
       w="100%"
@@ -82,7 +105,27 @@ const Excercise: React.FC = () => {
           // sx={{ overflowY: 'overlay' }}
           // className="table_scroll"
           >
-            {excerciseStatistics &&
+            {pascalCasedExerciseStates &&
+              pascalCasedExerciseStates.length > 0 &&
+              pascalCasedExerciseStates.map(
+                (pascalCasedStatistics) =>
+                  pascalCasedStatistics && (
+                    <Tr
+                      display="table"
+                      width="100%"
+                      style={{ tableLayout: 'fixed' }}
+                      key={`${pascalCasedStatistics.exercise}-tr`}
+                    >
+                      <Td textStyle="regular3" borderBottom={0}>
+                        {pascalCasedStatistics.exercise}
+                      </Td>
+                      <Td borderBottom={0} textStyle="regular4">
+                        {pascalCasedStatistics.repetitions}
+                      </Td>
+                    </Tr>
+                  ),
+              )}
+            {/* {excerciseStatistics &&
               excerciseStatistics.map((stats: any) => {
                 return (
                   <Tr
@@ -99,7 +142,7 @@ const Excercise: React.FC = () => {
                     </Td>
                   </Tr>
                 );
-              })}
+              })} */}
           </Tbody>
         </Table>
       </TableContainer>
