@@ -283,6 +283,8 @@ export default {
       discription_list4: 'Crypto Tokens (1000 GODL = $1 USD worth of our tokens)',
       descriptionFooter:
         'Have your friends join us on the Impakt Rocket and let’s moon it together!',
+      discription_list5:
+        'GODL is our in-game currency! You`ll use it on our marketplace for Whitelist spots, NFT discounts, Token exchange and many more!',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {

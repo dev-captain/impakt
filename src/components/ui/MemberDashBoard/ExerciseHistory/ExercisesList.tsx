@@ -35,36 +35,8 @@ const ExercisesList: React.FC<ExerciseListPropsI> = ({ excerciseStatistics }) =>
       rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
     >
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        marginTop="0 !important"
-        w="100%"
-        id="whitelist-challange-description-box-2"
-      >
-        <Text textStyle={{ base: 'bold4', md: 'bold5' }} color="#FFFFFF">
-          {t(keys.memberDashboard.exerciseList.headline)}
-        </Text>
-        <Tooltip
-          hasArrow
-          label={
-            <Text
-              dangerouslySetInnerHTML={{
-                __html: t(keys.memberDashboard.exerciseList.toolTipDescription),
-              }}
-            />
-          }
-          mt="3"
-          placement="auto"
-          closeOnClick={false}
-        >
-          <Box width={{ base: '24px', md: '32px' }}>
-            <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
-          </Box>
-        </Tooltip>
-      </Box>
       <TableContainer borderRadius={10} w="100%" sx={{ marginTop: '0px !important' }}>
-        <Table variant="striped" w={{ base: '100%', md: '720px' }} colorScheme="whiteAlpha">
+        <Table variant="striped" w="100%" colorScheme="whiteAlpha" background="#1C1C28">
           <Thead style={{ display: 'table', width: '100%', tableLayout: 'fixed' }}>
             <Tr bgColor="#121216">
               <Th
@@ -73,44 +45,90 @@ const ExercisesList: React.FC<ExerciseListPropsI> = ({ excerciseStatistics }) =>
                 borderBottom={0}
                 whiteSpace="normal"
                 textTransform="capitalize"
-                textStyle="normal14"
-                width={{ base: '96px', md: '128px' }}
-                paddingX="16px"
+                width={{ base: '96px', md: '138px' }}
+                paddingX={{ base: '15px', md: '16px' }}
                 paddingBottom="0px"
-                height="48px"
+                height="58px"
               >
-                {t(keys.memberDashboard.exerciseList.date)}
+                <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
+                  {t(keys.memberDashboard.exerciseList.date)}
+                </Text>
               </Th>
               <Th
                 textAlign="start"
                 color="rgba(255, 255, 255, 0.4)"
                 borderBottom={0}
-                paddingX="16px"
+                paddingX={{ base: '15px', md: '20px' }}
                 textTransform="capitalize"
                 whiteSpace="normal"
-                textStyle="normal14"
-                width={{ base: 'auto', md: '480px' }}
+                width="auto"
                 paddingBottom="0px"
-                height="48px"
+                height="58px"
               >
-                {t(keys.memberDashboard.exerciseList.reason)}
+                <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
+                  {t(keys.memberDashboard.exerciseList.reason)}
+                </Text>
               </Th>
               <Th
                 textAlign="start"
-                textStyle="normal14"
                 color="rgba(255, 255, 255, 0.4)"
                 borderBottom={0}
+                paddingX={{ base: '15px', md: '24px' }}
                 textTransform="capitalize"
                 whiteSpace="normal"
                 paddingBottom="0px"
-                height="48px"
-                width={{ base: '88px', md: '112px' }}
+                height="58px"
+                width={{ base: '88px', sm: '118px', md: '150px' }}
               >
-                {t(keys.memberDashboard.exerciseList.godl)}
+                <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
+                  {t(keys.memberDashboard.exerciseList.godl)}
+                </Text>
               </Th>
             </Tr>
           </Thead>
-          <Tbody display="block" maxHeight="260px" className="table_scroll">
+          <Tbody display="block" maxHeight="auto" className="table_scroll" overflow="auto">
+            {/* <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
+              <Td
+                borderBottom={0}
+                width={{ base: '96px', md: '138px' }}
+                paddingY="10px"
+                paddingX="16px"
+                textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
+                color="rgba(255, 255, 255, 0.4)"
+              >
+                DD.MM.YYYY
+              </Td>
+              <Td
+                borderBottom={0}
+                paddingX="20px"
+                paddingY="10px"
+                textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
+                width="auto"
+                color="rgba(255, 255, 255, 0.75)"
+                whiteSpace="pre-line"
+              >
+                Daily challenge by referred member
+              </Td>
+              <Td
+                borderBottom={0}
+                paddingY="10px"
+                paddingX={{ base: '15px', md: '24px' }}
+                width={{ base: '88px', sm: '118px', md: '150px' }}
+              >
+                <Box display="flex">
+                  <Text
+                    backgroundColor="rgba(254, 196, 23, 0.15)"
+                    paddingX={{ base: '8px', md: '15px' }}
+                    paddingY={{ base: '4px', md: '15px' }}
+                    borderRadius="8px"
+                    textStyle={{ md: 'semiBold24', base: 'normal14' }}
+                    color="#FEC417"
+                  >
+                    +120
+                  </Text>
+                </Box>
+              </Td>
+            </Tr> */}
             {excerciseStatistics.length > 0 &&
               excerciseStatistics.map((exercise: any) => (
                 <Tr
@@ -121,20 +139,21 @@ const ExercisesList: React.FC<ExerciseListPropsI> = ({ excerciseStatistics }) =>
                 >
                   <Td
                     borderBottom={0}
-                    width={{ base: '96px', md: '128px' }}
+                    width={{ base: '96px', md: '138px' }}
                     paddingY="10px"
                     paddingX="16px"
-                    textStyle="semiBold14"
+                    textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
                     color="rgba(255, 255, 255, 0.4)"
                   >
                     {moment(exercise.date).format('DD.MM.YYYY')}
                   </Td>
                   <Td
                     borderBottom={0}
-                    paddingX="16px"
+                    paddingX="20px"
                     paddingY="10px"
-                    textStyle="semiBold14"
-                    width={{ base: 'auto', md: '480px' }}
+                    textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
+                    width="auto"
+                    color="rgba(255, 255, 255, 0.75)"
                     whiteSpace="pre-line"
                   >
                     {exercise.purpose}
@@ -142,16 +161,16 @@ const ExercisesList: React.FC<ExerciseListPropsI> = ({ excerciseStatistics }) =>
                   <Td
                     borderBottom={0}
                     paddingY="10px"
-                    paddingX="16px"
-                    textStyle="semiBold14"
-                    width={{ base: '88px', md: '112px' }}
+                    paddingX={{ base: '15px', md: '24px' }}
+                    width={{ base: '88px', sm: '118px', md: '150px' }}
                   >
                     <Box display="flex">
                       <Text
                         backgroundColor="rgba(254, 196, 23, 0.15)"
-                        paddingX="8px"
-                        paddingY="4px"
+                        paddingX={{ base: '8px', md: '15px' }}
+                        paddingY={{ base: '4px', md: '15px' }}
                         borderRadius="8px"
+                        textStyle={{ md: 'semiBold24', base: 'normal14' }}
                         color="#FEC417"
                       >
                         +{exercise.godl}

@@ -17,7 +17,7 @@ const getWhiteListed = createAsyncThunk(
       let isWhitelisted = false;
       await axios
         .create({
-          baseURL: 'https://impakt-api-kevde-cu-2ng-ttwbrs.herokuapp.com/',
+          baseURL: process.env.REACT_APP_API_BASE_URL,
           withCredentials: true,
         })
         .get('api/v1/iam/user/is-whitelisted')

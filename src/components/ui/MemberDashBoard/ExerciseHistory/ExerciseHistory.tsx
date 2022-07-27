@@ -19,21 +19,20 @@ const ExerciseHistory: React.FC = () => {
   }, []);
 
   return (
-    <MemberDashboardCard>
-      <VStack
-        rowGap="37px"
-        id="member-dasboard-whitelist-referrals-card"
-        px={{ base: '10px' }}
-        flexDir={{ base: 'column', md: 'row' }}
-        w={{ base: '100%', md: '720px' }}
-      >
-        <SimpleGrid columns={{ base: 1 }} gap={5}>
-          <Box marginLeft="0 !important">
-            <ExercisesList excerciseStatistics={excerciseStatistics} />
-          </Box>
-        </SimpleGrid>
-      </VStack>
-    </MemberDashboardCard>
+    // <MemberDashboardCard>
+    <VStack
+      rowGap="37px"
+      id="member-dasboard-whitelist-referrals-card"
+      flexDir={{ base: 'column', md: 'row' }}
+      w="100%"
+    >
+      <SimpleGrid columns={{ base: 1 }} gap={5}>
+        <Box marginLeft="0 !important">
+          <ExercisesList excerciseStatistics={excerciseStatistics} />
+        </Box>
+      </SimpleGrid>
+    </VStack>
+    // </MemberDashboardCard>
   );
 };
 export default ExerciseHistory;

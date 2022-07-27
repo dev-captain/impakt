@@ -125,7 +125,7 @@ const WhiteList: React.FC = () => {
         <Box>
           <ImpaktButton
             as="a"
-            href="https://impakt-api-kevde-cu-2ng-ttwbrs.herokuapp.com/api/v1/iam/auth/discord/login"
+            href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
             leftIcon={
               <Box marginRight="8px">
                 <I.DiscordIcon />

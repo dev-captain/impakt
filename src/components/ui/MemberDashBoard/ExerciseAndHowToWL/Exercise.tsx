@@ -30,7 +30,6 @@ const Excercise: React.FC = () => {
       dispatch(fetchExerciseStats(member.id));
     }
   }, []);
-
   return (
     <MemberDashboardCard
       w="100%"
@@ -78,10 +77,10 @@ const Excercise: React.FC = () => {
             </Tr>
           </Thead>
           <Tbody
-            display="block"
-            maxHeight="312px"
-            sx={{ overflowY: 'overlay' }}
-            className="table_scroll"
+          // display="block"
+          // maxHeight="312px"
+          // sx={{ overflowY: 'overlay' }}
+          // className="table_scroll"
           >
             {excerciseStatistics &&
               excerciseStatistics.map((stats: any) => {
@@ -93,7 +92,7 @@ const Excercise: React.FC = () => {
                     key={stats.exercisei}
                   >
                     <Td textStyle="regular3" borderBottom={0}>
-                      {usePascalCase(stats.exercise)}
+                      {stats && stats.exercise ? usePascalCase(stats.exercise) : null}
                     </Td>
                     <Td borderBottom={0} textStyle="regular4">
                       {stats.repetitions}

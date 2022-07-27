@@ -22,7 +22,7 @@ const fetchExerciseStats = createAsyncThunk(
       let exerciseStats: any = [];
       await axios
         .create({
-          baseURL: 'https://impakt-api-kevde-cu-37b-ffxoqk.herokuapp.com/',
+          baseURL: process.env.REACT_APP_API_BASE_URL,
           withCredentials: true,
         })
         .get(`api/v1/stats/fitness/${userId}/exercise`)

@@ -96,6 +96,11 @@ export default {
     fontWeight: '600',
     lineHeight: '24px',
   },
+  semiBold24: {
+    fontSize: '24px',
+    fontWeight: '600',
+    lineHeight: '23px',
+  },
   semiBold5: {
     fontSize: '16px',
     fontWeight: '500',
@@ -159,12 +164,17 @@ export default {
   semiBold12: {
     fontSize: '14px',
     fontWeight: '500',
-    lineHeight: '12px',
+    lineHeight: '20px',
   },
   semiBold14: {
     fontSize: '14px',
     fontWeight: '500',
     lineHeight: '14px',
+  },
+  semiBold20: {
+    fontSize: '20px',
+    fontWeight: '600',
+    lineHeight: '100%',
   },
   semiBold15: {
     fontSize: '15px',

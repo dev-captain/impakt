@@ -201,6 +201,8 @@ const TranslationKeys = {
       discription_list2: `${memberDashboard}.referrals.discription_list2`,
       discription_list3: `${memberDashboard}.referrals.discription_list3`,
       discription_list4: `${memberDashboard}.referrals.discription_list4`,
+      discription_list5: `${memberDashboard}.referrals.discription_list5`,
+
       descriptionFooter: `${memberDashboard}.referrals.descriptionFooter`,
     },
     yourReferralLink: `${memberDashboard}.yourReferralLink`,
