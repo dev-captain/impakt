@@ -185,8 +185,8 @@ export default {
       },
       {
         name: '???',
-        title: '50k followers',
-        image: Images.impaktIcons.Icon2,
+        title: '400k followers',
+        image: Images.impaktIcons.ThirdIcon,
         alt: '',
       },
       {

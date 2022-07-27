@@ -55,8 +55,10 @@ const IconsCard = ({
               src={image}
               boxSizing="border-box"
               borderRadius="24px"
+              width="160px"
+              height="160px"
             />
-            {name === '???' && (
+            {name === '???' && title === '???' && (
               <Image
                 rounded="lg"
                 objectFit="cover"
@@ -70,7 +72,6 @@ const IconsCard = ({
               />
             )}
           </Box>
-          <Box>{/* <UserIcon /> */}</Box>
         </Box>
       </VStack>
 

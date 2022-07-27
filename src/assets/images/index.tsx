@@ -69,6 +69,7 @@ const Images = {
   impaktIcons: {
     MattFox: require('./Matt-Fox.png'),
     KelvinGastelum: require('./Kelvin-Gastelum.png'),
+    ThirdIcon: require('./thirdIcon.png'),
     Icon1: require('./Icons/Icon1.png'),
     Icon2: require('./Icons/Icon2.png'),
     Icon3: require('./Icons/Icon3.png'),
