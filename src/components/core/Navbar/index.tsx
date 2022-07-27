@@ -104,7 +104,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         marginTop={isVersion2 && !isLessThan1280 ? '0' : '10px'}
         transition="background-color 0.5s linear"
         bgColor={bgColor}
-        backdropFilter={isScrolling ? 'blur(40px)' : 'blur(0px)'}
+        backdropFilter={isScrolling || path.path !== '' ? 'blur(40px)' : 'blur(0px)'}
         borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
       >
         <HStack w="full" justify="space-between">

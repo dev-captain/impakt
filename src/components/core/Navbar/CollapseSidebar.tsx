@@ -13,6 +13,7 @@ const CollapseSidebar = () => {
           as={Button}
           rightIcon={<I.DropIcon />}
           backgroundColor="rgba(28, 28, 40, 0.65)"
+          backdropFilter="blur(40px)"
           border="1px solid #2e2b2b"
           borderRadius="16px"
           textAlign="left"
@@ -72,10 +73,12 @@ const CollapseSidebar = () => {
           w="100%"
           minW="100%"
           color="#fff"
-          backgroundColor="#060609"
+          backgroundColor="rgba(28, 28, 40, 0.65)"
           borderColor="#2e2b2b"
+          backdropFilter="blur(40px)"
         >
           <MenuItem
+            backdropFilter="blur(40px)"
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
