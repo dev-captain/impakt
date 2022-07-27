@@ -45,3 +45,6 @@ export { default as IllustrationIcon } from './IllustrationIcon';
 export { default as TikTokIcon } from './TikTokIcon';
 export { default as YoutubeSocialIcon } from './YoutubeSocialIcon';
 export { default as InfoIcon } from './InfoIcon';
+export { default as IGIcon } from './InstagramIcon';
+export { default as FBIcon } from './FacebookIcon';
+export { default as WebIcon } from './WebIcon';

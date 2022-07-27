@@ -10,8 +10,8 @@ type Props = {
   textStyle: string;
   color: string;
   marginLeft: string;
-  href: string;
-  onClose: () => void;
+  href?: string;
+  onClick: (e: any) => void;
 };
 
 const NavbarButton = ({
@@ -22,22 +22,24 @@ const NavbarButton = ({
   textStyle,
   color,
   marginLeft,
-  onClose,
+  onClick,
   href,
 }: Props) => {
   const navigate = useNavigate();
 
   return (
     <Box
+      as="a"
       display="flex"
       justifyContent="center"
       alignItems="center"
+      href={href}
       p="10px 16px 10px 12px"
       background={background}
       backdropFilter="blur(40px)"
       borderRadius="8px"
       _hover={hover}
-      onClick={onClose}
+      onClick={onClick}
       cursor="pointer"
     >
       {children}

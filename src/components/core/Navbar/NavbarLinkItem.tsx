@@ -63,13 +63,12 @@ const NavbarLinkItem = ({
       )}
       {type !== 'LINK' && (
         <Box
-          // @ts-ignore
           href={href}
-          target={target}
-          onClick={() => {
+          as="a"
+          onClick={(e: any) => {
+            e.preventDefault();
             navigate(href);
           }}
-          as={target === '_blank' ? 'a' : 'div'}
           _hover={{
             transition: '0.2s ease',
             opacity: 1,

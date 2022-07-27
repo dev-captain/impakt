@@ -15,6 +15,7 @@ const EarnCrypto = () => {
 
   return (
     <C.HeroLayout
+      backgroundSize="100% 100%"
       customPadding={0}
       // showNavbar
       pos="relative"
