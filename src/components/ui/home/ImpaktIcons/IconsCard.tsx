@@ -1,10 +1,6 @@
 import { Box, Image, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
 import Images from 'assets/images';
-import FlipCardBox from '../../../common/FlipCard';
-import { I } from '../../..';
+import { I, Common } from 'components';
 
 const { UserIcon } = Images.impaktIcons;
 
@@ -21,16 +17,8 @@ const IconsCard = ({
   subtitle?: string[];
   socialMedia?: { platform: string; href: string }[];
 }) => {
-  const cardRef = React.useRef<HTMLDivElement>(null);
-  const imageBoxRef = React.useRef<HTMLDivElement>(null);
-  const nameBoxRef = React.useRef<HTMLDivElement>(null);
-
-  // const bgColor = useColorModeValue('glass.800', 'glass.200');
-  const { t } = useTranslation().i18n;
-
   return (
     <VStack
-      ref={cardRef}
       minW="288px"
       minH="418px"
       align="center"
@@ -43,7 +31,7 @@ const IconsCard = ({
       filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)) drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.16))"
     >
       <VStack pos="relative" zIndex={1} top="-19px" height="100px">
-        <Box ref={imageBoxRef} role="group" maxW="330px" w="full" boxShadow="sm" rounded="lg">
+        <Box role="group" maxW="330px" w="full" boxShadow="sm" rounded="lg">
           <Box
             rounded="lg"
             mt={-12}
@@ -90,7 +78,6 @@ const IconsCard = ({
         mt="0 !important"
         w="full"
         rowGap="12px"
-        ref={nameBoxRef}
         align="center"
         justify="center"
         mb="0px !important"
@@ -121,8 +108,9 @@ const IconsCard = ({
         </Box>
 
         <Box w="full" maxW="240px">
-          <FlipCardBox isFlippable={!!socialMedia}>
+          <Common.FlipCardBox isFlippable={!!socialMedia}>
             <Box
+              className="flipWebkit"
               minH="168px"
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
@@ -137,6 +125,8 @@ const IconsCard = ({
               _groupHover={{
                 transform: 'rotateX(180deg)',
                 opacity: '0',
+                zIndex: '0',
+                backfaceVisibility: 'visible',
               }}
               display="flex"
               justifyContent={!subtitle ? 'center' : 'flex-start'}
@@ -163,22 +153,26 @@ const IconsCard = ({
               )}
             </Box>
             <Box
+              className="flipWebkit"
               backgroundColor="rgba(255, 255, 255, 0.04)"
               borderRadius="8px"
               w="100%"
-              border="2px solid rgba(255, 255, 255, 0.01)"
-              padding="16px 16px"
-              transitionTimingFunction="cubic-bezier(.175, .885, .32, 1.275)"
-              transitionDuration="1s"
+              border="2px solid rgba(255, 255, 255, 0.04)"
+              padding="20px 16px"
+              transitionDuration="0.2s"
               transitionProperty="transform, opacity"
               position="absolute"
               opacity="0"
+              zIndex="-1"
               top="0px"
               left="0px"
+              style={{ backfaceVisibility: 'hidden' }}
               transform="rotateX(-180deg)"
               _groupHover={{
                 opacity: '1',
+                zIndex: '10',
                 transform: 'rotateX(0deg)',
+                backfaceVisibility: 'visible',
               }}
             >
               {socialMedia &&
@@ -214,7 +208,7 @@ const IconsCard = ({
                   </Box>
                 ))}
             </Box>
-          </FlipCardBox>
+          </Common.FlipCardBox>
         </Box>
       </VStack>
     </VStack>
