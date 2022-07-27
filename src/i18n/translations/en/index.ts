@@ -163,7 +163,7 @@ export default {
       {
         name: 'Kelvin Gastelum',
         title: '1M+ followers',
-        image: Images.impaktIcons.Icon1,
+        image: Images.impaktIcons.KelvinGastelum,
         alt: '',
         subtitle: ['UFC Middleweight contender', '2019 Fight of the Year award'],
         socialMedia: [
