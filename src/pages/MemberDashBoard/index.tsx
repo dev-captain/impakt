@@ -12,7 +12,7 @@ import { C } from 'components';
 
 const MemberDashboard: React.FC = () => {
   return (
-    <C.SidebarLayout isShowNavbar isShowFooter />
+    <C.SidebarLayout isShowNavbar />
     // <HeroLayout
     //   showNavbar
     //   minH="70vh"

@@ -13,6 +13,7 @@ const Topics: React.FC = () => {
       transition="color .2s"
       rowGap="1.5em"
       mt="0 !important"
+      mb="55px !important"
     >
       <Box id="topics-headline-box">
         <HStack columnGap="1.125em">
