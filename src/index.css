@@ -95,6 +95,7 @@ code {
   transition: all 0.5s;
   background-color: transparent;
 }
+
 .table_scroll::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.4);
   width: 4px;
@@ -103,6 +104,7 @@ code {
   visibility: visible !important;
   transition: all 0.5s;
 }
-.menuSidebar >div {
-  width: calc(100% - 32px);
-}
+
+/* .menuSidebar > div {
+  width: calc(100% - 50px);
+} */

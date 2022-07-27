@@ -4,7 +4,7 @@ import { getWhiteListed } from 'lib/redux/slices/whitelist/actions/getWhiteListe
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import { VStack, Box, Text, Tooltip, Link, HStack } from '@chakra-ui/react';
+import { VStack, Box, Text, Tooltip, Link, HStack, useMediaQuery } from '@chakra-ui/react';
 import useAppSelector from 'hooks/useAppSelector';
 import useAppDispatch from 'hooks/useAppDispatch';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
@@ -16,6 +16,7 @@ import { I } from '../../..';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
+  const [isLessThan634] = useMediaQuery('(max-width: 634px)');
   const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
@@ -78,6 +79,7 @@ const WhiteList: React.FC = () => {
               fontSize="48px"
               lineHeight="56px"
               letterSpacing="-2px"
+              padding="5px"
             >
               How to get whitelisted
             </Text>
@@ -132,6 +134,8 @@ const WhiteList: React.FC = () => {
             size="lg"
             variant="secondary"
             justifyContent="flex-start"
+            fontSize={{ base: '16px', lg: '20px' }}
+            lineHeight={{ base: '24px', lg: '32px' }}
           >
             {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
           </ImpaktButton>
@@ -147,6 +151,8 @@ const WhiteList: React.FC = () => {
             size="lg"
             variant="secondary"
             justifyContent="flex-start"
+            fontSize={{ base: '16px', lg: '20px' }}
+            lineHeight={{ base: '24px', lg: '32px' }}
           >
             Connect Twitter
           </ImpaktButton>
@@ -163,6 +169,8 @@ const WhiteList: React.FC = () => {
             size="lg"
             variant="secondary"
             justifyContent="flex-start"
+            fontSize={{ base: '16px', lg: '20px' }}
+            lineHeight={{ base: '24px', lg: '32px' }}
           >
             Submit wallet address
           </ImpaktButton>

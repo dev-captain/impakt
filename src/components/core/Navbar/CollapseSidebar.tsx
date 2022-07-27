@@ -1,23 +1,14 @@
 import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
-import * as React from 'react';
 import { I } from 'components';
 import { useLocation } from 'react-router-dom';
 import SidebarLinkItem from './SidebarLinkItem';
 
-type Props = {
-  isLessThan991: boolean;
-  isLargerThan380: boolean;
-  onClose: () => void;
-};
-const CollapseSidebar = ({ isLessThan991, isLargerThan380, onClose }: Props) => {
+const CollapseSidebar = () => {
   const path = useLocation();
+
   return (
-    <Box
-      className="menuSidebar"
-      display={!isLessThan991 ? 'none' : 'flex'}
-      width={isLargerThan380 ? '98%' : '100%'}
-    >
-      <Menu>
+    <Box width="full">
+      <Menu matchWidth strategy="fixed">
         <MenuButton
           as={Button}
           rightIcon={<I.DropIcon />}
@@ -76,18 +67,19 @@ const CollapseSidebar = ({ isLessThan991, isLargerThan380, onClose }: Props) => 
             </Box>
           )}
         </MenuButton>
-        <MenuList w="100%" minW="100%" color="#fff" backgroundColor="#060609" borderColor="#2e2b2b">
+        <MenuList
+          borderRadius="16px"
+          w="100%"
+          minW="100%"
+          color="#fff"
+          backgroundColor="#060609"
+          borderColor="#2e2b2b"
+        >
           <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
-            <SidebarLinkItem
-              hide
-              href=""
-              onClose={onClose}
-              title="General"
-              isActive={path.pathname === '/dashboard'}
-            >
+            <SidebarLinkItem hide href="" title="General" isActive={path.pathname === '/dashboard'}>
               <I.DashboardIcon
                 cursor="pointer"
                 width="26px"
@@ -103,7 +95,6 @@ const CollapseSidebar = ({ isLessThan991, isLargerThan380, onClose }: Props) => 
             <SidebarLinkItem
               hide
               href="referrals"
-              onClose={onClose}
               title="Referrals"
               isActive={path.pathname === '/dashboard/referrals'}
             >
@@ -122,7 +113,6 @@ const CollapseSidebar = ({ isLessThan991, isLargerThan380, onClose }: Props) => 
             <SidebarLinkItem
               hide
               href="reward-history"
-              onClose={onClose}
               title="Reward history"
               isActive={path.pathname === '/dashboard/reward-history'}
             >
@@ -141,7 +131,6 @@ const CollapseSidebar = ({ isLessThan991, isLargerThan380, onClose }: Props) => 
             <SidebarLinkItem
               hide
               href="statistics"
-              onClose={onClose}
               title="Statistics"
               isActive={path.pathname === '/dashboard/statistics'}
             >

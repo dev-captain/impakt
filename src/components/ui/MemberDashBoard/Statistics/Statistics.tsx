@@ -21,10 +21,11 @@ const Statistics: React.FC = () => {
           alignItems="flex-start"
           w="full"
           flexWrap={{ base: 'wrap', lg: 'nowrap' }}
+          mt={{ sm: '24px', lg: '0' }}
         >
           <VStack
-            maxW="708px"
-            w="50%"
+            maxW={{ base: 'auto', lg: '708px' }}
+            w={{ base: '100%', lg: '50%' }}
             justifyContent="flex-start"
             alignItems="flex-start"
             rowGap="24px"
