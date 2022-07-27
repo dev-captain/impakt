@@ -26,8 +26,7 @@ const ImpaktIcons = () => {
       customPadding={{
         base: '16px',
         md: '32px',
-        xl: '0px',
-        '2xl': '0px',
+        lg: '300px',
       }}
       minH="70vh"
     >
