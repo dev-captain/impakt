@@ -66,7 +66,7 @@ const getTextColor = (variant?: 'primary' | 'alert' | 'secondary') => {
     return 'rgba(240, 65, 83, 1)';
   }
 
-  return 'accentRed2';
+  return 'rgba(255, 255, 255, 1)';
 };
 
 export default ImpaktButton;
