@@ -22,6 +22,7 @@ const TopicsAccordion: React.FC<TopicsAccordionProps> = ({ topics }) => {
       <VStack w="full">
         {topics.map(({ title, description }, i) => (
           <AccordionItem
+            key={`topics-accordion-item-${i + 1}`}
             w="100%"
             background="#20202E"
             borderRadius="1em"
