@@ -30,7 +30,6 @@ import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
-import NavbarButton from './NavbarButton';
 
 interface NavbarProps {
   position?: PositionProps['position'];
