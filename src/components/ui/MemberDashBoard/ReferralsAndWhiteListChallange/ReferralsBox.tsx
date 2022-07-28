@@ -14,20 +14,15 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-
-import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import { useAppSelector } from '../../../../hooks';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import MemberDashboardCard from '../MemberDashBoardCard';
 
 interface PropsI {}
 const ReferralsBox: React.FC<PropsI> = () => {
-  const { t } = useTranslation().i18n;
-
   const member = useAppSelector((state) => state.memberAuth.member);
   const referralsRegisteredNumber = useAppSelector((state) => state.referrals.referrals.totalCount);
+  console.log(referralsRegisteredNumber, 'referralsRegisteredNumberreferralsRegisteredNumber');
   const referralsChallangesHaveDone = useAppSelector(
     (state) => state.referrals.referralsChallengesHaveDone,
   );
