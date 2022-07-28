@@ -100,10 +100,10 @@ const CollapseMenu = ({
         {member && (
           <NavbarLinkItem
             isSmall
-            href="/"
+            href="/contact"
             onClose={onClose}
             title={t(Keys.navbar.help)}
-            isActive={path.path === 'dashboard'}
+            isActive={path.path === '/contact'}
           />
         )}
 

@@ -27,7 +27,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         position="fixed"
         h="90px"
         zIndex="333"
-        top="127px"
+        top="100px"
         color="white"
         display={{ base: 'flex', lg: ' none' }}
       >
@@ -75,7 +75,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             m="0 !important"
             marginLeft={{ base: '0', lg: '20vw !important' }}
             p={{ sm: '0 1em', lg: '3em 3em 3em 3em' }}
-            marginTop={{ sm: '120px !important', lg: '0px !important' }}
+            marginTop={{ sm: '100px !important', lg: '0px !important' }}
           >
             <Outlet />
           </VStack>
