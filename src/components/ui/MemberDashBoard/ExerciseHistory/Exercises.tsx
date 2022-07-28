@@ -7,33 +7,20 @@ import {
   VStack,
   Box,
   Text,
-  // OrderedList,
-  // ListItem,
-  // Grid,
-  //   GridItem,
   Tooltip,
-  //   SimpleGrid,
   Table,
   Thead,
   Tbody,
-  // Tfoot,
   Tr,
   Th,
   Td,
-  // TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
-// import useAppSelector from '../../../../hooks/useAppSelector';
-// import useAppDispatch from '../../../../hooks/useAppDispatch';
-// import { fetchReferrals } from '../../../../lib/redux/slices/referrals/actions/fetchReferrals';
-// import { fetchReferralsChallenges } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
-// import { fetchReferralsReward } from '../../../../lib/redux/slices/referrals/actions/fetchReferralsReward';
 
 const Exercises: React.FC = () => {
   const { t } = useTranslation().i18n;
-  //   const dispatch = useAppDispatch();
-  //   const member = useAppSelector((state) => state.memberAuth.member);
+
   return (
     <VStack
       w="100%"

@@ -5,11 +5,8 @@ import {
   AccordionButton,
   Box,
   AccordionPanel,
-  AccordionIcon,
   VStack,
   Text,
-  AccordionItemProps,
-  ComponentWithAs,
 } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';

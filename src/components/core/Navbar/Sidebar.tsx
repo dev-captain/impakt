@@ -1,7 +1,7 @@
 import { useDisclosure } from '@chakra-ui/react';
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
-import { I, Common } from 'components';
+import { I } from 'components';
 import SidebarLinkItem from './SidebarLinkItem';
 
 const Sidebar: React.FC = () => {

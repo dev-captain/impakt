@@ -1,4 +1,4 @@
-import { Box, HStack, Link, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -9,7 +9,6 @@ import ExerciseHistory from '../ExerciseHistory/ExerciseHistory';
 
 const RewardHistory: React.FC = () => {
   const { t } = useTranslation().i18n;
-  const [isLoaded] = React.useState(true);
 
   return (
     <Box w="full" as="section" id="general-section">

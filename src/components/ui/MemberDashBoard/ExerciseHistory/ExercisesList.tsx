@@ -8,7 +8,6 @@ import {
   VStack,
   Box,
   Text,
-  Tooltip,
   Table,
   Thead,
   Tbody,
@@ -16,10 +15,8 @@ import {
   Th,
   Td,
   TableContainer,
-  Skeleton,
 } from '@chakra-ui/react';
-import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from 'hooks';
 
 const ExercisesList: React.FC = () => {
   const { t } = useTranslation().i18n;

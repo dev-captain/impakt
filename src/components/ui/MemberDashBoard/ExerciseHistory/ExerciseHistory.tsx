@@ -1,10 +1,6 @@
-import { VStack, HStack, Box, SimpleGrid } from '@chakra-ui/react';
-import useAppSelector from 'hooks/useAppSelector';
+import { VStack, Box, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
-import useAppDispatch from 'hooks/useAppDispatch';
-import { fetchRewardHistory } from 'lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import ExercisesList from './ExercisesList';
-import MemberDashboardCard from '../MemberDashBoardCard';
 
 const ExerciseHistory: React.FC = () => {
   return (

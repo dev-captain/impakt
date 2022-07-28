@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { usePascalCase } from 'hooks';
+import { usePascalCase, useAppSelector } from 'hooks';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
 import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react';
-import useAppSelector from '../../../../hooks/useAppSelector';
 import MemberDashboardCard from '../MemberDashBoardCard';
 
 const Excercise: React.FC = () => {

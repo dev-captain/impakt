@@ -4,13 +4,13 @@ import * as React from 'react';
 // import keys from 'i18n/types';
 
 import { Box, Text, Tooltip } from '@chakra-ui/react';
+import { I, Common } from 'components';
+
 import useAppSelector from 'hooks/useAppSelector';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
 import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import { ImpaktButton } from '../../../common';
-import { I } from '../../..';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
@@ -113,7 +113,7 @@ const WhiteList: React.FC = () => {
       </Box>
       <Box w="100%" id="whitelist-challange-description-box-2" sx={{ marginTop: '0px !important' }}>
         <Box>
-          <ImpaktButton
+          <Common.ImpaktButton
             as="a"
             href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
             leftIcon={
@@ -128,11 +128,11 @@ const WhiteList: React.FC = () => {
             lineHeight={{ base: '24px', lg: '32px' }}
           >
             {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
-          </ImpaktButton>
+          </Common.ImpaktButton>
         </Box>
 
         <Box mt="12px">
-          <ImpaktButton
+          <Common.ImpaktButton
             leftIcon={
               <Box marginRight="8px">
                 <I.TwitterIcon />
@@ -145,11 +145,11 @@ const WhiteList: React.FC = () => {
             lineHeight={{ base: '24px', lg: '32px' }}
           >
             Connect Twitter
-          </ImpaktButton>
+          </Common.ImpaktButton>
         </Box>
 
         <Box mt="12px">
-          <ImpaktButton
+          <Common.ImpaktButton
             onClick={handleModal}
             leftIcon={
               <Box marginRight="8px">
@@ -163,7 +163,7 @@ const WhiteList: React.FC = () => {
             lineHeight={{ base: '24px', lg: '32px' }}
           >
             Submit wallet address
-          </ImpaktButton>
+          </Common.ImpaktButton>
         </Box>
 
         <Box

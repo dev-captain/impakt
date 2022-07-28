@@ -1,4 +1,4 @@
-import { Box, HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import Excercise from '../ExerciseAndHowToWL/Exercise';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';

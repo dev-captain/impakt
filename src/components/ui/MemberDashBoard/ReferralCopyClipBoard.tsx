@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 
 import { I } from 'components';
-import { useHref, useLocation } from 'react-router-dom';
 
 const ReferralCopyClipboard: React.FC<{
   userId?: number;

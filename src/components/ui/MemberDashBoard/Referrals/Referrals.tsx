@@ -1,12 +1,8 @@
 import * as React from 'react';
-import { Box, Text, Skeleton, HStack, VStack, Link } from '@chakra-ui/react';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import { I } from 'components';
-import { useAppDispatch } from 'hooks';
-import { fetchReferralsChallenges } from 'lib/redux/slices/referrals/actions/fetchReferralsChallenges';
-import { fetchReferrals } from 'lib/redux/slices/referrals/actions/fetchReferrals';
-import { fetchReferralsReward } from 'lib/redux/slices/referrals/actions/fetchReferralsReward';
 import InfoSection from 'components/common/InfoSection';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 import ReferralsBox from '../ReferralsAndWhiteListChallange/ReferralsBox';

@@ -11,7 +11,6 @@ type Props = {
   passiveColor?: string;
   isActive?: boolean;
   onClose?: () => void;
-  target?: React.HTMLAttributeAnchorTarget;
   isSmall?: boolean;
 };
 
@@ -22,7 +21,6 @@ const NavbarLinkItem = ({
   hide = false,
   onClose,
   color,
-  target,
   type,
   passiveColor,
   isSmall = false,

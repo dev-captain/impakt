@@ -1,4 +1,4 @@
-import { Box, HStack, Image, useColorMode } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import { Socials } from 'data';
 import { memo } from 'react';
 import { I } from 'components';
@@ -7,9 +7,6 @@ import { I } from 'components';
 //   Images.Common;
 
 const NavBarSocialIcons = () => {
-  const { colorMode } = useColorMode();
-  const isLight = colorMode === 'light';
-
   return (
     <HStack justify={{ base: 'center', md: 'flex-end' }}>
       <Box

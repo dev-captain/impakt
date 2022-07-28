@@ -1,4 +1,4 @@
-import { Box, Text, GridItem, SimpleGrid, SkeletonText } from '@chakra-ui/react';
+import { Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
 import { useAppSelector } from 'hooks';

@@ -10,8 +10,6 @@ import {
   useMediaQuery,
   useColorMode,
   PositionProps,
-  Text,
-  Button,
   useToast,
 } from '@chakra-ui/react';
 import Images from 'assets/images';

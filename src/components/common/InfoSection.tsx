@@ -1,8 +1,6 @@
-import { Box, Flex, HStack, Tooltip, Image, VStack, Link, Text } from '@chakra-ui/react';
+import { Box, HStack, VStack, Link, Text } from '@chakra-ui/react';
 import MemberDashboardCard from 'components/ui/MemberDashBoard/MemberDashBoardCard';
 import * as React from 'react';
-
-import TooltopIcon from '../../assets/svgs/tooltipIcon.svg';
 
 interface InfoSectionPropsI {
   tooltipIcon?: any;
@@ -11,6 +9,7 @@ interface InfoSectionPropsI {
 }
 const InfoSection: React.FC<InfoSectionPropsI> = ({ tooltipIcon, tooltipText, tooltipLink }) => {
   const tooltip = tooltipText !== 'undefined' ? tooltipText : '';
+
   return (
     <HStack
       columnGap="24px"

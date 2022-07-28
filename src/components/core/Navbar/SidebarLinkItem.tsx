@@ -1,4 +1,4 @@
-import { Text, VStack, Box } from '@chakra-ui/react';
+import { Text, Box } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,9 +6,7 @@ type Props = {
   href: string;
   title: string;
   hide?: boolean;
-  color?: string;
   type?: 'LINK' | string;
-  passiveColor?: string;
   isActive?: boolean;
   onClose?: () => void;
   target?: React.HTMLAttributeAnchorTarget;
@@ -22,10 +20,8 @@ const SidebarLinkItem = ({
   isActive,
   hide = false,
   onClose,
-  color,
   target,
   type,
-  passiveColor,
   children,
   isTransparent = false,
 }: Props) => {

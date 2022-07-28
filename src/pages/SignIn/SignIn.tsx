@@ -2,7 +2,7 @@ import { useColorModeValue, VStack, Spinner, useToast } from '@chakra-ui/react';
 import { S, C } from 'components';
 import { useEffect, useCallback } from 'react';
 import Images from 'assets/images';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from 'hooks';
 
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';

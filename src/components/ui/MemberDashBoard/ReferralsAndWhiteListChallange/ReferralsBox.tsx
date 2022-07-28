@@ -12,7 +12,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from 'hooks';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import MemberDashboardCard from '../MemberDashBoardCard';
 

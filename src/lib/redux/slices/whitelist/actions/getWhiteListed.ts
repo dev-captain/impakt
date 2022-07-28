@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import axios from 'axios';
 import { UserInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 
@@ -17,17 +16,6 @@ const getWhiteListed = createAsyncThunk(
       }
 
       const { isWhitelisted } = await UserInstance.userControllerIsWhitelisted();
-
-      // let isWhitelisted = false;
-      // await axios
-      //   .create({
-      //     baseURL: process.env.REACT_APP_API_BASE_URL,
-      //     withCredentials: true,
-      //   })
-      //   .get('api/v1/iam/user/is-whitelisted')
-      //   .then((response) => {
-      //     isWhitelisted = response.data.isWhitelisted;
-      //   });
 
       return isWhitelisted;
     } catch (err: any) {
