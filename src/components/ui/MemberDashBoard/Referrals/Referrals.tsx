@@ -3,12 +3,17 @@ import { Box, Text, Skeleton, HStack, VStack, Link } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import { I } from 'components';
+import { useAppDispatch } from 'hooks';
+import { fetchReferralsChallenges } from 'lib/redux/slices/referrals/actions/fetchReferralsChallenges';
+import { fetchReferrals } from 'lib/redux/slices/referrals/actions/fetchReferrals';
+import { fetchReferralsReward } from 'lib/redux/slices/referrals/actions/fetchReferralsReward';
 import InfoSection from 'components/common/InfoSection';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 import ReferralsBox from '../ReferralsAndWhiteListChallange/ReferralsBox';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation().i18n;
+  const dispatch = useAppDispatch();
   const [isLoaded] = React.useState(true);
   // TODO fetch data
   // TODO while fetching data show skeleton by isLoaded
@@ -23,11 +28,11 @@ const Referrals: React.FC = () => {
 
   // const { t } = useTranslation().i18n;
 
-  // React.useEffect(() => {
-  //   dispatch(fetchReferrals({ count: true }));
-  //   dispatch(fetchReferralsChallenges());
-  //   dispatch(fetchReferralsReward());
-  // }, []);
+  React.useEffect(() => {
+    dispatch(fetchReferrals({ count: true }));
+    dispatch(fetchReferralsChallenges());
+    dispatch(fetchReferralsReward());
+  }, []);
 
   return (
     <Skeleton w="full" isLoaded={isLoaded}>
