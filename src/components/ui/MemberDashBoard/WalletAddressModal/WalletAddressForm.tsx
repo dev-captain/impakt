@@ -29,7 +29,13 @@ const WalletAddressForm: React.FC = () => {
       autoComplete="off"
       w="full"
     >
-      <HStack spacing={2} w="full" flexWrap={{ base: 'wrap', md: 'nowrap' }}>
+      <HStack
+        rowGap="1em"
+        columnGap="0.5em"
+        spacing={2}
+        w="full"
+        flexWrap={{ base: 'wrap', md: 'nowrap' }}
+      >
         <Box w="full">
           <Common.InputGroup
             placeholder="Enter wallet address"
@@ -38,7 +44,7 @@ const WalletAddressForm: React.FC = () => {
             leftIcon={<I.EthIcon />}
           />
         </Box>
-        <Box w="28%">
+        <Box w={{ sm: '100%', md: '28%' }} marginLeft="0 !important">
           <Common.ImpaktButton
             disabled={!getValues('walletAddress')}
             minW={{ base: '100%', md: '137px' }}
