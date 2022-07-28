@@ -1,7 +1,6 @@
 import { Box, FormControl, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
-
 import { useForm } from 'hooks';
 
 const WalletAddressForm: React.FC = () => {

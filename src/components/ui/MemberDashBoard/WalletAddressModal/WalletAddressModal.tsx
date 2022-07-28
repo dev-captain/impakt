@@ -1,10 +1,4 @@
 import {
-  Box,
-  Button,
-  HStack,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,11 +8,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import { Common } from 'components';
-import { useForm } from 'hooks';
 
-import Images from '../../../../assets/images';
-import { EthIcon } from '../../../icons';
 import WalletAddressForm from './WalletAddressForm';
 
 interface InfoModalPropsI {
