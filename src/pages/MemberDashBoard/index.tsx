@@ -2,6 +2,11 @@ import * as React from 'react';
 // import { Box, HStack, VStack } from '@chakra-ui/react';
 
 import { C } from 'components';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchGodlBalanceScore } from '../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
+import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchActiveDays';
+import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
+import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -11,6 +16,31 @@ import { C } from 'components';
 // import MemberDashboardCard from '../../components/ui/MemberDashBoard/MemberDashBoardCard';
 
 const MemberDashboard: React.FC = () => {
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchGodlBalanceScore());
+  }, []);
+
+  React.useEffect(() => {
+    if (member) {
+      dispatch(fetchActiveDays(member.id));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (member) {
+      dispatch(getWhiteListed());
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (member) {
+      dispatch(fetchRewardHistory(member.id));
+    }
+  }, []);
+
   return (
     <C.SidebarLayout isShowNavbar />
     // <HeroLayout

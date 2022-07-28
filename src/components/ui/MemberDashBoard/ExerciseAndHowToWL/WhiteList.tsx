@@ -4,9 +4,18 @@ import { getWhiteListed } from 'lib/redux/slices/whitelist/actions/getWhiteListe
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import { VStack, Box, Text, Tooltip, Link, HStack, useMediaQuery } from '@chakra-ui/react';
+import {
+  VStack,
+  Box,
+  Text,
+  Tooltip,
+  Link,
+  HStack,
+  useMediaQuery,
+  SkeletonCircle,
+  SkeletonText,
+} from '@chakra-ui/react';
 import useAppSelector from 'hooks/useAppSelector';
-import useAppDispatch from 'hooks/useAppDispatch';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
 import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
@@ -16,20 +25,15 @@ import { I } from '../../..';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
-  const [isLessThan634] = useMediaQuery('(max-width: 634px)');
-  const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuth.member);
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
+  const isWhitelistingLoading = useAppSelector(
+    (state) => state.whitelistReducer.isWhitelistingLoading,
+  );
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
   const [isWallet, setIsWallet] = React.useState(false);
   const TooltipHandler = () => {
     setIsTooltipClicked(!isTooltipClicked);
   };
-  React.useEffect(() => {
-    if (member) {
-      dispatch(getWhiteListed());
-    }
-  }, []);
   const handleModal = () => {
     setIsWallet(!isWallet);
   };
@@ -137,7 +141,9 @@ const WhiteList: React.FC = () => {
             fontSize={{ base: '16px', lg: '20px' }}
             lineHeight={{ base: '24px', lg: '32px' }}
           >
-            {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
+            <SkeletonText w="full" isLoaded={!isWhitelistingLoading} size="10">
+              {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
+            </SkeletonText>
           </ImpaktButton>
         </Box>
 

@@ -16,16 +16,18 @@ import {
   Th,
   Td,
   TableContainer,
+  Skeleton,
 } from '@chakra-ui/react';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
+import { useAppSelector } from '../../../../hooks';
 
-interface ExerciseListPropsI {
-  excerciseStatistics: object[];
-}
-
-const ExercisesList: React.FC<ExerciseListPropsI> = ({ excerciseStatistics }) => {
+const ExercisesList: React.FC = () => {
   const { t } = useTranslation().i18n;
-  //   const dispatch = useAppDispatch();
+
+  const excerciseStatistics = useAppSelector(
+    (state) => state.rewardHistoryReducer.rewardHistoryState,
+  );
+
   return (
     <VStack
       w="100%"

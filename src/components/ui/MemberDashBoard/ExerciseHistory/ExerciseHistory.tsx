@@ -7,19 +7,7 @@ import ExercisesList from './ExercisesList';
 import MemberDashboardCard from '../MemberDashBoardCard';
 
 const ExerciseHistory: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuth.member);
-  const excerciseStatistics = useAppSelector(
-    (state) => state.rewardHistoryReducer.rewardHistoryState,
-  );
-  React.useEffect(() => {
-    if (member) {
-      dispatch(fetchRewardHistory(member.id));
-    }
-  }, []);
-
   return (
-    // <MemberDashboardCard>
     <VStack
       rowGap="37px"
       id="member-dasboard-whitelist-referrals-card"
@@ -28,7 +16,7 @@ const ExerciseHistory: React.FC = () => {
     >
       <SimpleGrid columns={{ base: 1 }} gap={5}>
         <Box marginLeft="0 !important">
-          <ExercisesList excerciseStatistics={excerciseStatistics} />
+          <ExercisesList />
         </Box>
       </SimpleGrid>
     </VStack>

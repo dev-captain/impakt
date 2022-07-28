@@ -19,12 +19,16 @@ const rewardHistorySlice = createSlice({
     builder
       .addCase(fetchRewardHistory.pending, (state) => {
         state.rewardHistoryState = [];
+        state.isRewardHistoryLoading = true;
       })
       .addCase(fetchRewardHistory.fulfilled, (state, action) => {
         state.rewardHistoryState = action.payload;
+
+        state.isRewardHistoryLoading = false;
       })
       .addCase(fetchRewardHistory.rejected, (state) => {
         state.rewardHistoryState = [];
+        state.isRewardHistoryLoading = false;
       });
   },
 });
