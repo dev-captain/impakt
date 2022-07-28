@@ -18,12 +18,7 @@ const Sidebar: React.FC = () => {
         title="General"
         isActive={path.pathname === '/dashboard'}
       >
-        <I.DashboardIcon
-          cursor="pointer"
-          width="26px"
-          height="23px"
-          opacity={path.pathname === '/dashboard' ? '1' : '0.5'}
-        />
+        <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
       </SidebarLinkItem>
 
       <SidebarLinkItem
@@ -33,12 +28,7 @@ const Sidebar: React.FC = () => {
         title="Referrals"
         isActive={path.pathname === '/dashboard/referrals'}
       >
-        <I.ReferralsIcon
-          cursor="pointer"
-          width="32px"
-          height="32px"
-          opacity={path.pathname === '/dashboard/referrals' ? '1' : '0.5'}
-        />
+        <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
       </SidebarLinkItem>
 
       <SidebarLinkItem
@@ -48,12 +38,7 @@ const Sidebar: React.FC = () => {
         title="Reward history"
         isActive={path.pathname === '/dashboard/reward-history'}
       >
-        <I.RewardIcon
-          cursor="pointer"
-          width="27px"
-          height="27px"
-          opacity={path.pathname === '/dashboard/reward-history' ? '1' : '0.5'}
-        />
+        <I.RewardIcon cursor="pointer" width="27px" height="27px" />
       </SidebarLinkItem>
 
       <SidebarLinkItem
@@ -63,12 +48,7 @@ const Sidebar: React.FC = () => {
         title="Statistics"
         isActive={path.pathname === '/dashboard/statistics'}
       >
-        <I.ChatIcon
-          cursor="pointer"
-          width="27px"
-          height="23px"
-          opacity={path.pathname === '/dashboard/statistics' ? '1' : '0.5'}
-        />
+        <I.ChatIcon cursor="pointer" width="27px" height="23px" />
       </SidebarLinkItem>
     </>
   );

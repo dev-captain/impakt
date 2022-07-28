@@ -13,6 +13,7 @@ type Props = {
   onClose?: () => void;
   target?: React.HTMLAttributeAnchorTarget;
   children: React.ReactNode;
+  isTransparent?: boolean;
 };
 
 const SidebarLinkItem = ({
@@ -26,6 +27,7 @@ const SidebarLinkItem = ({
   type,
   passiveColor,
   children,
+  isTransparent = false,
 }: Props) => {
   const navigate = useNavigate();
   // TODO Sidebar link item UI
@@ -37,14 +39,17 @@ const SidebarLinkItem = ({
       onClick={onClose}
       cursor="pointer"
       width="100%"
-      background={isActive ? '#20202E' : 'none'}
+      backgroundColor={isActive && !isTransparent ? '#20202E' : 'none'}
       borderRadius="16px"
       alignItems="start"
       // padding="16px 18px"
+      color={isActive ? 'rgba(255 ,255 ,255 ,1)' : 'rgba(255 ,255 ,255 ,0.5)'}
       padding="0"
       _hover={{
-        background: '#20202E',
-        transition: '0.5s ease',
+        background: isActive && !isTransparent ? '#20202E' : 'none',
+        color: 'rgba(255 , 255 ,255 ,1)',
+        transition: 'all 0.5s ease',
+        fontWeight: '600',
       }}
     >
       {type === 'LINK' && (
@@ -58,7 +63,7 @@ const SidebarLinkItem = ({
           _hover={{
             transition: '0.2s ease',
             background: '#20202E',
-            opacity: 1,
+            color: '#fff',
             // transform: 'scale(1.15)',
           }}
         >
@@ -68,10 +73,7 @@ const SidebarLinkItem = ({
             pos="relative"
             marginLeft="14.5px"
             fontWeight={isActive ? '600' : 'normal'}
-            color={isActive ? color : passiveColor}
-            opacity={isActive ? 1 : 0.6}
             _hover={{
-              opacity: 'inherit',
               transition: 'inherit',
             }}
           >
@@ -92,25 +94,10 @@ const SidebarLinkItem = ({
             navigate(href);
           }}
           as={target === '_blank' ? 'a' : 'div'}
-          _hover={{
-            transition: '0.2s ease',
-            opacity: 1,
-            // transform: 'scale(1.15)',
-          }}
+          color="inherit"
         >
           {children}
-          <Text
-            textStyle="regular3"
-            pos="relative"
-            marginLeft="14.5px"
-            fontWeight={isActive ? '600' : 'normal'}
-            color={isActive ? color : passiveColor}
-            opacity={isActive ? 1 : 0.6}
-            _hover={{
-              opacity: 'inherit',
-              transition: 'inherit',
-            }}
-          >
+          <Text textStyle="regular3" pos="relative" marginLeft="14.5px" fontWeight="600">
             {title}
           </Text>
         </Box>

@@ -78,71 +78,59 @@ const CollapseSidebar = () => {
           backdropFilter="blur(40px)"
         >
           <MenuItem
-            backdropFilter="blur(40px)"
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
-            <SidebarLinkItem hide href="" title="General" isActive={path.pathname === '/dashboard'}>
-              <I.DashboardIcon
-                cursor="pointer"
-                width="26px"
-                height="23px"
-                opacity={path.pathname === '/dashboard' ? '1' : '0.5'}
-              />
+            <SidebarLinkItem
+              isTransparent
+              hide
+              href=""
+              title="General"
+              isActive={path.pathname === '/dashboard'}
+            >
+              <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
             </SidebarLinkItem>
           </MenuItem>
           <MenuItem
-            _active={{ backgroundColor: 'rgba(28, 28, 40, 0.65)' }}
-            _focus={{ backgroundColor: 'rgba(28, 28, 40, 0.65)' }}
+            _active={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
           >
             <SidebarLinkItem
+              isTransparent
               hide
               href="referrals"
               title="Referrals"
               isActive={path.pathname === '/dashboard/referrals'}
             >
-              <I.ReferralsIcon
-                cursor="pointer"
-                width="32px"
-                height="32px"
-                opacity={path.pathname === '/dashboard/referrals' ? '1' : '0.5'}
-              />
+              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
             </SidebarLinkItem>
           </MenuItem>
           <MenuItem
-            _active={{ backgroundColor: 'rgba(28, 28, 40, 0.65)' }}
-            _focus={{ backgroundColor: 'rgba(28, 28, 40, 0.65)' }}
+            _active={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
           >
             <SidebarLinkItem
+              isTransparent
               hide
               href="reward-history"
               title="Reward history"
               isActive={path.pathname === '/dashboard/reward-history'}
             >
-              <I.RewardIcon
-                cursor="pointer"
-                width="27px"
-                height="27px"
-                opacity={path.pathname === '/dashboard/reward-history' ? '1' : '0.5'}
-              />
+              <I.RewardIcon cursor="pointer" width="27px" height="27px" />
             </SidebarLinkItem>
           </MenuItem>
           <MenuItem
-            _active={{ backgroundColor: 'rgba(28, 28, 40, 0.65)' }}
-            _focus={{ backgroundColor: 'rgba(28, 28, 40, 0.65)' }}
+            _active={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
           >
             <SidebarLinkItem
+              isTransparent
               hide
               href="statistics"
               title="Statistics"
               isActive={path.pathname === '/dashboard/statistics'}
             >
-              <I.ChatIcon
-                cursor="pointer"
-                width="27px"
-                height="23px"
-                opacity={path.pathname === '/dashboard/statistics' ? '1' : '0.5'}
-              />
+              <I.ChatIcon cursor="pointer" width="27px" height="23px" />
             </SidebarLinkItem>
           </MenuItem>
         </MenuList>
