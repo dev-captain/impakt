@@ -14,12 +14,14 @@ interface ImpaktButtonProps {
 const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((props, ref) => {
   const bgColor = getBgColor(props.variant);
   const size = props.size ?? 'sm';
+  const textColor = getTextColor(props.variant);
 
   return (
     <Button
+      ref={ref}
       type={props.type}
       w="full"
-      color="#fff"
+      color={textColor}
       _hover={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
       transition="all .2s linear"
       px="20px"
@@ -48,6 +50,20 @@ const getBgColor = (variant?: 'primary' | 'alert' | 'secondary') => {
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 0.12)';
+  }
+
+  return 'accentRed2';
+};
+
+const getTextColor = (variant?: 'primary' | 'alert' | 'secondary') => {
+  if (variant === 'primary') {
+    return 'rgba(255, 255, 255, 1)';
+  }
+  if (variant === 'secondary') {
+    return 'rgba(255, 255, 255, 0.75)';
+  }
+  if (variant === 'alert') {
+    return 'rgba(240, 65, 83, 1)';
   }
 
   return 'accentRed2';

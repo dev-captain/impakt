@@ -138,6 +138,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     <DropDownProfileMenu />
                   </Box>
                 )}
+
                 {!isVersion2 && (
                   <Box>
                     <SignInLinkItem />
@@ -156,60 +157,37 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     {t(Keys.navbar.download)}
                   </Common.ImpaktButton>
                 )}
-                {/* {!showDarkOrLightModeButton && (
-                  <Box
-                    as="button"
-                    onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
-                  >
-                    <Image
-                      w="26px"
-                      h="26px"
-                      objectFit="contain"
-                      src={colorMode === 'dark' ? dark : light}
-                      {..._hover}
-                    />
-                  </Box>
-                )} */}
               </HStack>
+
               {isVersion2 && (
                 <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
-                  <NavbarButton
+                  <Common.ImpaktButton
                     href="/dashboard"
-                    onClick={(e: any) => {
+                    as="a"
+                    p="10px 16px 10px 12px"
+                    onClick={(e) => {
                       e.preventDefault();
-                      navigate('/dashboard');
                     }}
-                    title={t(Keys.navbar.dashboard)}
-                    background="rgba(255, 255, 255, 0.1)"
-                    hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
-                    textStyle="semiBold5"
-                    color="#FFFFFF"
-                    marginLeft="9px"
+                    leftIcon={<I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />}
+                    variant="secondary"
                   >
-                    <I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />
-                  </NavbarButton>
-                  <NavbarButton
+                    {t(Keys.navbar.dashboard)}
+                  </Common.ImpaktButton>
+
+                  <Common.ImpaktButton
                     href="/contact"
+                    as="a"
                     onClick={(e: any) => {
                       e.preventDefault();
                       navigate('/contact');
                     }}
-                    title={t(Keys.navbar.help)}
-                    background="rgba(255, 255, 255, 0.1)"
-                    hover={{ background: 'rgba(255, 255, 255, 0.1)', outline: 'none' }}
-                    textStyle="semiBold5"
-                    color="#FFFFFF"
-                    marginLeft="9px"
+                    leftIcon={<I.HelpIcon cursor="pointer" width="14.33px" height="12.33px" />}
+                    variant="secondary"
                   >
-                    <I.HelpIcon cursor="pointer" width="16px" height="16px" />
-                  </NavbarButton>
-                  <NavbarButton
-                    title={t(Keys.navbar.signOut)}
-                    background="rgba(240, 65, 83, 0.12)"
-                    hover={{ background: 'rgba(240, 65, 83, 0.12)', outline: 'none' }}
-                    textStyle="semiBold5"
-                    color="#F04153"
-                    marginLeft="9px"
+                    {t(Keys.navbar.help)}
+                  </Common.ImpaktButton>
+
+                  <Common.ImpaktButton
                     onClick={async () => {
                       await dispatch(signOutMember()).unwrap();
                       toast({
@@ -221,9 +199,11 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                       });
                       onClose();
                     }}
+                    leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}
+                    variant="alert"
                   >
-                    <I.LogOutIcon cursor="pointer" width="13px" height="13px" />
-                  </NavbarButton>
+                    {t(Keys.navbar.signOut)}
+                  </Common.ImpaktButton>
                 </HStack>
               )}
             </HStack>
