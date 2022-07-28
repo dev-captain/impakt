@@ -19,17 +19,6 @@ const fetchExerciseStats = createAsyncThunk(
       const { exerciseStats } = await FitnessInstance.fitnessStatsControllerGetExerciseStats(
         userId,
       );
-      // let exerciseStats: any = [];
-      // await axios
-      //   .create({
-      //     // baseURL: 'https://impakt-api-kevde-cu-37b-p8j2qy.herokuapp.com',
-      //     baseURL: process.env.REACT_APP_API_BASE_URL,
-      //     withCredentials: true,
-      //   })
-      //   .get(`api/v1/stats/fitness/${userId}/exercise`)
-      //   .then((response) => {
-      //     exerciseStats = response.data.exerciseStats;
-      //   });
 
       return exerciseStats;
       // return exerciseStats;

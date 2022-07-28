@@ -8,15 +8,11 @@ import MemberDashboardCard from '../MemberDashBoardCard';
 
 const WelcomeModal: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
-  const memberIsLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
   const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
-
-  const isFitnessLoading = useAppSelector((state) => state.fitnessReducer.isFitnessLoading);
-  const isGodlLoading = useAppSelector((state) => state.godl.isLoading);
 
   return (
     <MemberDashboardCard
@@ -32,16 +28,14 @@ const WelcomeModal: React.FC = () => {
         letterSpacing="-0.04em !important"
         id="whitelist-challange-description-box-2"
       >
-        <SkeletonText isLoaded={!memberIsLoading}>
-          <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
-            {memberInfo?.map((data, i) => (
-              <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
-                {i === 1 ? `#` : `Hi, `}
-                {data}
-              </span>
-            ))}
-          </Text>
-        </SkeletonText>
+        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
+          {memberInfo?.map((data, i) => (
+            <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
+              {i === 1 ? `#` : `Hi, `}
+              {data}
+            </span>
+          ))}
+        </Text>
         {isWhitelisted && (
           <Box ms={3}>
             <img src={Whitelist} alt="Whitelist" />
@@ -70,19 +64,23 @@ const WelcomeModal: React.FC = () => {
           bg="rgba(254, 196, 23, 0.15)"
           padding="12px 24px"
         >
-          <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
-            <SkeletonText isLoaded={!isGodlLoading}>
-              <Text textAlign="center" textStyle="bold5">
-                <NumberFormat
-                  thousandsGroupStyle="thousand"
-                  value={godlBalanceScore}
-                  decimalSeparator="."
-                  displayType="text"
-                  thousandSeparator
-                  allowNegative
-                />
-              </Text>
-            </SkeletonText>
+          <Box
+            color="#FEC417"
+            display="flex"
+            flexDir="column"
+            mt="0 !important"
+            id="whitelist-challange-description-box-2"
+          >
+            <Text textAlign="center" textStyle="bold5">
+              <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={godlBalanceScore}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
+            </Text>
             <Text textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               GODL Balance
             </Text>
@@ -118,11 +116,9 @@ const WelcomeModal: React.FC = () => {
           bg="rgba(9, 9, 11, 0.4)"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
-            <SkeletonText isLoaded={!isFitnessLoading}>
-              <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">
-                {activeDays}
-              </Text>
-            </SkeletonText>
+            <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">
+              {activeDays}
+            </Text>
             <Text
               color="rgba(255, 255, 255, 0.4)"
               textAlign="center"

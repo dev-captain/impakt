@@ -1,20 +1,9 @@
 import * as React from 'react';
-import { getWhiteListed } from 'lib/redux/slices/whitelist/actions/getWhiteListed';
 
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import {
-  VStack,
-  Box,
-  Text,
-  Tooltip,
-  Link,
-  HStack,
-  useMediaQuery,
-  SkeletonCircle,
-  SkeletonText,
-} from '@chakra-ui/react';
+import { Box, Text, Tooltip } from '@chakra-ui/react';
 import useAppSelector from 'hooks/useAppSelector';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
@@ -26,9 +15,6 @@ import { I } from '../../..';
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
-  const isWhitelistingLoading = useAppSelector(
-    (state) => state.whitelistReducer.isWhitelistingLoading,
-  );
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
   const [isWallet, setIsWallet] = React.useState(false);
   const TooltipHandler = () => {
@@ -141,9 +127,7 @@ const WhiteList: React.FC = () => {
             fontSize={{ base: '16px', lg: '20px' }}
             lineHeight={{ base: '24px', lg: '32px' }}
           >
-            <SkeletonText w="full" isLoaded={!isWhitelistingLoading} size="10">
-              {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
-            </SkeletonText>
+            {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
           </ImpaktButton>
         </Box>
 

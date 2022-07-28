@@ -1,8 +1,6 @@
 import {
-  VStack,
   Box,
   Text,
-  Tooltip,
   GridItem,
   SimpleGrid,
   Table,
@@ -22,7 +20,6 @@ interface PropsI {}
 const ReferralsBox: React.FC<PropsI> = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
   const referralsRegisteredNumber = useAppSelector((state) => state.referrals.referrals.totalCount);
-  console.log(referralsRegisteredNumber, 'referralsRegisteredNumberreferralsRegisteredNumber');
   const referralsChallangesHaveDone = useAppSelector(
     (state) => state.referrals.referralsChallengesHaveDone,
   );
@@ -68,7 +65,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
         </Tooltip> */}
       </Box>
       <Box w="100%" id="whitelist-challange-description-box-2" sx={{ marginTop: '0px !important' }}>
-        <ReferralCopyClipboard animate userId={member?.id} />
+        <ReferralCopyClipboard userId={member?.id} />
       </Box>
 
       <SimpleGrid
@@ -85,7 +82,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
           padding={{ base: '12px 0px', sm: '12px 10px', md: '12px 20px', lg: '12px 24px' }}
         >
           <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
-            <Text textAlign="center" textStyle="bold5">
+            <Text textStyle="bold5" textAlign="center">
               {referralsReward}
             </Text>
             <Text textAlign="center" mt="6px" textStyle="regular3">
@@ -141,6 +138,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               <Td color="#FEC417" borderBottom={0}>
                 1
               </Td>
+
               <Td borderBottom={0} textStyle="regular4">
                 {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneOneChallenge}
               </Td>
@@ -174,7 +172,9 @@ const ReferralsBox: React.FC<PropsI> = () => {
                 5+
               </Td>
               <Td textStyle="bold4" borderBottom={0}>
-                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
+                <Text>
+                  {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
+                </Text>
               </Td>
             </Tr>
           </Tbody>

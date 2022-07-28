@@ -3,28 +3,13 @@ import { usePascalCase } from 'hooks';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import {
-  VStack,
-  Box,
-  Text,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-} from '@chakra-ui/react';
-import useAppDispatch from '../../../../hooks/useAppDispatch';
+import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react';
 import useAppSelector from '../../../../hooks/useAppSelector';
-import { fetchExerciseStats } from '../../../../lib/redux/slices/fitness/actions/fetchExerciseStats';
 import MemberDashboardCard from '../MemberDashBoardCard';
 
 const Excercise: React.FC = () => {
   // const { t } = useTranslation().i18n;
-  const dispatch = useAppDispatch();
   const { convertToPascalCase } = usePascalCase();
-  const member = useAppSelector((state) => state.memberAuth.member);
   const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.exerciseState);
   const [pascalCasedExerciseStates, setPascalCasedExerciseStates] = React.useState<
     ({
@@ -32,11 +17,6 @@ const Excercise: React.FC = () => {
       exercise: string;
     } | null)[]
   >();
-  React.useEffect(() => {
-    if (member) {
-      dispatch(fetchExerciseStats(member.id));
-    }
-  }, []);
 
   React.useEffect(() => {
     if (excerciseStatistics && excerciseStatistics.length > 0) {

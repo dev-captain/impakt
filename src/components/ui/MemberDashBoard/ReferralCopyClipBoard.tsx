@@ -4,16 +4,16 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 
 import { I } from 'components';
+import { useHref, useLocation } from 'react-router-dom';
 
 const ReferralCopyClipboard: React.FC<{
   userId?: number;
   isBadge?: boolean;
-  animate?: boolean;
-}> = ({ userId, isBadge, animate }) => {
+}> = ({ userId, isBadge }) => {
   const { t } = useTranslation().i18n;
   const toast = useToast();
-  const referralLink = `impakt.com/register/${userId}`;
-  const { hasCopied, onCopy } = useClipboard(`https://${referralLink}`, { timeout: 3000 });
+  const referralLink = `${window.location.origin}/register/${userId}`;
+  const { hasCopied, onCopy } = useClipboard(referralLink, { timeout: 3000 });
 
   const copyClipBoardReferralLink = () => {
     onCopy();
