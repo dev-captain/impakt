@@ -29,7 +29,6 @@ const fetchRewardHistory = createAsyncThunk(
         })
         .get(`api/v1/godl/history/${userId}`)
         .then((response) => {
-          console.log(response.data);
           rewardHistory = response.data.data;
         });
 
