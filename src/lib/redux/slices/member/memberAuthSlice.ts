@@ -7,6 +7,8 @@ import { forgotPassword } from './actions/forgotPassword';
 import { requestVerification } from './actions/requestVerification';
 import { requestAccessToken } from './actions/requestAccessToken';
 import { signUpMember } from './actions/signUpMember';
+import { fetchMember } from './actions/fetchMember';
+import { updateMember } from './actions/updateMember';
 
 interface MemberAuthInitialI {
   member: GetUserRes | null;
@@ -26,9 +28,6 @@ const memberAuthSlice = createSlice({
   name: 'member-auth',
   initialState: memberAuthInitialState as MemberAuthInitialI,
   reducers: {
-    updateAuthMember(state: MemberAuthInitialI, action: PayloadAction<GetUserRes>) {
-      state.member = action.payload;
-    },
     cleanMemberAuthState(state: MemberAuthInitialI) {
       if (state.member || state.isLoading) {
         state.isLoading = memberAuthInitialState.isLoading;
@@ -114,10 +113,33 @@ const memberAuthSlice = createSlice({
       .addCase(requestAccessToken.rejected, (state) => {
         state.isLoading = false;
       });
+
+    builder
+      .addCase(fetchMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchMember.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.member = action.payload;
+      })
+      .addCase(fetchMember.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(updateMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateMember.fulfilled, (state, action) => {
+        state.member = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(updateMember.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 
-export const { updateAuthMember, cleanMemberAuthState, setIsMemberAuthLoading } =
-  memberAuthSlice.actions;
+export const { cleanMemberAuthState, setIsMemberAuthLoading } = memberAuthSlice.actions;
 // eslint-disable-next-line import/prefer-default-export
 export default memberAuthSlice.reducer;

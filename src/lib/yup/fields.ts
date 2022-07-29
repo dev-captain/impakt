@@ -23,4 +23,9 @@ const fourDigit = yup
   .matches(/^[0-9]+$/, ' ')
   .required(' ');
 
-export { email, password, memberName, fourDigit, passwordConfirmation };
+const walletAddress = yup
+  .string()
+  .matches(/^0x[a-fA-F0-9]{40}$/g, 'It must be valid crypto address 0x...')
+  .required('Wallet Address is required field');
+
+export { email, password, memberName, fourDigit, passwordConfirmation, walletAddress };

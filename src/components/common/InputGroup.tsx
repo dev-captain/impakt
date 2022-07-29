@@ -33,6 +33,7 @@ export interface InputGroupPropsI {
   value?: string | number | readonly string[] | undefined;
   maxLength?: number;
   autoFocus?: boolean | undefined;
+  defaultValue?: string | number | readonly string[] | undefined;
 }
 
 const InputGroup: React.FC<InputGroupPropsI> = ({
@@ -51,6 +52,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
   children,
   maxLength,
   autoFocus,
+  defaultValue,
 }) => {
   return (
     <>
@@ -129,6 +131,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
             border="none"
             _focus={{ border: '2px solid rgba(240, 65, 83, 1)' }}
             minH="60px"
+            defaultValue={defaultValue}
             maxLength={maxLength}
             type={type}
             value={value}

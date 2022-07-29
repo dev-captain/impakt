@@ -1,12 +1,10 @@
-import { PatchUserReq } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import { UserInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 
-const updateMember = createAsyncThunk(
-  'member/update',
-  async ({ id, data }: { id: number; data: PatchUserReq }, { rejectWithValue, getState }) => {
+const fetchMember = createAsyncThunk(
+  'member/fetchMember',
+  async (id: number, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin },
@@ -16,9 +14,9 @@ const updateMember = createAsyncThunk(
         return Promise.reject(new Error('Please Sign In first to continue'));
       }
 
-      const updatedMemberResponse = await UserInstance.userControllerPatchOne(id, data);
+      const member = await UserInstance.userControllerGetUser(id);
 
-      return updatedMemberResponse;
+      return member;
     } catch (err: any) {
       return rejectWithValue(err);
     }
@@ -26,4 +24,4 @@ const updateMember = createAsyncThunk(
 );
 
 // eslint-disable-next-line import/prefer-default-export
-export { updateMember };
+export { fetchMember };
