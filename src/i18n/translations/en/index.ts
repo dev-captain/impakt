@@ -14,7 +14,7 @@ export default {
     squats: 'SQUATS',
   },
   downloadPlateform: {
-    download: 'Download',
+    download: 'Download our App',
     platform: 'our App',
   },
   navbar: {

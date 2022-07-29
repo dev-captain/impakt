@@ -48,3 +48,6 @@ export { default as InfoIcon } from './InfoIcon';
 export { default as IGIcon } from './InstagramIcon';
 export { default as FBIcon } from './FacebookIcon';
 export { default as WebIcon } from './WebIcon';
+export { default as DesktopIcon } from './DesktopIcon';
+export { default as MobileIcon } from './MobileIcon';
+export { default as IosIcon } from './IosIcon';
