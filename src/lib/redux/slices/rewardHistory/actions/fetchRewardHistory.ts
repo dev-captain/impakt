@@ -23,10 +23,10 @@ const fetchRewardHistory = createAsyncThunk(
       let rewardHistory: any = [];
       await axios
         .create({
-          baseURL: 'https://impakt-api-kevde-cu-2pr-acmvdl.herokuapp.com/',
+          baseURL: 'https://impakt-api-dev.herokuapp.com/',
           withCredentials: true,
         })
-        .get(`api/v1/rewards/history/${userId}`)
+        .get(`api/v1/godl/history/${userId}`)
         .then((response) => {
           rewardHistory = response.data;
         });
