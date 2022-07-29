@@ -3,7 +3,7 @@ import { fetchRewardHistory } from './actions/fetchRewardHistory';
 
 interface rewardHistoryInitialI {
   isRewardHistoryLoading: boolean;
-  rewardHistoryState: any;
+  rewardHistoryState: { purpose: string; timestamp: Date; value: number }[];
 }
 
 const rewardHistoryInitialState: rewardHistoryInitialI = {
