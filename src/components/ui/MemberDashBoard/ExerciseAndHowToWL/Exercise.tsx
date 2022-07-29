@@ -1,38 +1,45 @@
 import * as React from 'react';
-
+import { usePascalCase, useAppSelector } from 'hooks';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import {
-  VStack,
-  Box,
-  Text,
-  // OrderedList,
-  // ListItem,
-  // Grid,
-  Table,
-  Thead,
-  Tbody,
-  // Tfoot,
-  Tr,
-  Th,
-  Td,
-  // TableCaption,
-  TableContainer,
-} from '@chakra-ui/react';
+import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react';
+import MemberDashboardCard from '../MemberDashBoardCard';
 
 const Excercise: React.FC = () => {
+  // const { t } = useTranslation().i18n;
+  const { convertToPascalCase } = usePascalCase();
+  const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.exerciseState);
+  const [pascalCasedExerciseStates, setPascalCasedExerciseStates] = React.useState<
+    ({
+      repetitions: any;
+      exercise: string;
+    } | null)[]
+  >();
+
+  React.useEffect(() => {
+    if (excerciseStatistics && excerciseStatistics.length > 0) {
+      const pascalCasedExStatics = excerciseStatistics.map((stats: any) => {
+        if (stats && stats.exercise) {
+          const convertedLabel = convertToPascalCase(stats.exercise);
+
+          return { repetitions: stats.repetitions, exercise: convertedLabel };
+        }
+
+        return null;
+      });
+      setPascalCasedExerciseStates(pascalCasedExStatics);
+    }
+  }, [excerciseStatistics]);
+
   return (
-    <VStack
+    <MemberDashboardCard
       w="100%"
+      border="2px solid rgba(255,255,255,0.03)"
+      flexDir="column"
       alignItems="start"
-      padding={{ base: '30px', lg: '40px' }}
-      minH="auto"
-      maxH={{ base: 'auto' }}
       rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
-      backgroundColor="rgba(28, 28, 40, 0.65);"
-      backdropBlur="40px"
     >
       <Box
         display="flex"
@@ -71,75 +78,54 @@ const Excercise: React.FC = () => {
               </Th>
             </Tr>
           </Thead>
-          <Tbody display="block" maxHeight="312px" sx={{ overflowY: 'overlay' }}>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Push Ups
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                124
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Burpees
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                38
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                High Knees
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                566
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Sit Ups
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                291
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Leg Raises
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                93
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Walk Outs
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                107
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Walk Outs
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                107
-              </Td>
-            </Tr>
-            <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td textStyle="regular3" borderBottom={0}>
-                Walk Outs
-              </Td>
-              <Td borderBottom={0} textStyle="regular4">
-                107
-              </Td>
-            </Tr>
+          <Tbody
+          // display="block"
+          // maxHeight="312px"
+          // sx={{ overflowY: 'overlay' }}
+          // className="table_scroll"
+          >
+            {pascalCasedExerciseStates &&
+              pascalCasedExerciseStates.length > 0 &&
+              pascalCasedExerciseStates.map(
+                (pascalCasedStatistics) =>
+                  pascalCasedStatistics && (
+                    <Tr
+                      display="table"
+                      width="100%"
+                      style={{ tableLayout: 'fixed' }}
+                      key={`${pascalCasedStatistics.exercise}-tr`}
+                    >
+                      <Td textStyle="regular3" borderBottom={0}>
+                        {pascalCasedStatistics.exercise}
+                      </Td>
+                      <Td borderBottom={0} textStyle="regular4">
+                        {pascalCasedStatistics.repetitions}
+                      </Td>
+                    </Tr>
+                  ),
+              )}
+            {/* {excerciseStatistics &&
+              excerciseStatistics.map((stats: any) => {
+                return (
+                  <Tr
+                    display="table"
+                    width="100%"
+                    style={{ tableLayout: 'fixed' }}
+                    key={stats.exercisei}
+                  >
+                    <Td textStyle="regular3" borderBottom={0}>
+                      {stats && stats.exercise ? usePascalCase(stats.exercise) : null}
+                    </Td>
+                    <Td borderBottom={0} textStyle="regular4">
+                      {stats.repetitions}
+                    </Td>
+                  </Tr>
+                );
+              })} */}
           </Tbody>
         </Table>
       </TableContainer>
-    </VStack>
+    </MemberDashboardCard>
   );
 };
 export default Excercise;

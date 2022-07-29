@@ -10,7 +10,7 @@ interface InputBoxProps {
 const InputItems: React.FC<InputBoxProps> = ({ inputItems }) => {
   return (
     <>
-      {inputItems.map((props, index) => (
+      {inputItems.map((props) => (
         <Box
           display="flex"
           flexDir={{ base: 'column', lg: 'row' }}
@@ -20,7 +20,7 @@ const InputItems: React.FC<InputBoxProps> = ({ inputItems }) => {
           rowGap="1em"
           justifyContent="space-between"
           // eslint-disable-next-line react/no-array-index-key
-          key={index}
+          key={props.name}
         >
           <Common.InputGroup {...props} />
         </Box>

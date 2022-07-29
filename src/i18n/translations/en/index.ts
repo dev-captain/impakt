@@ -25,6 +25,7 @@ export default {
     download: 'Download',
     dashboard: 'Dashboard',
     signOut: 'Sign Out',
+    help: 'Help',
     signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
   },
@@ -160,33 +161,39 @@ export default {
       'Fitness experts, Health Specialists, Athletes and overall Overachievers. They are our Impakt ICONs and we are honored to have them on board our journey!',
     icons: [
       {
+        name: 'Kelvin Gastelum',
+        title: '1M+ followers',
+        image: Images.impaktIcons.KelvinGastelum,
+        alt: '',
+        subtitle: ['UFC Middleweight contender', '2019 Fight of the Year award'],
+        socialMedia: [
+          { platform: 'Twitter', href: 'https://twitter.com/KelvinGastelum' },
+          { platform: 'Instagram', href: 'https://www.instagram.com/kgastelum' },
+          { platform: 'Website', href: 'https://kelvingastelum.com' },
+        ],
+      },
+      {
         name: 'Matt Fox',
-        title: '500k followers',
+        title: '500k+ followers',
         image: Images.impaktIcons.MattFox,
         alt: '',
-        subtitle:
-          'The Godfather of Home Workouts! Fitness expert proud father, and cancer survivor!',
+        subtitle: ['Home fitness expert', 'No gym in 6 years', 'Cancer survivor'],
+        socialMedia: [
+          { platform: 'Instagram', href: 'https://www.instagram.com/mattycfox' },
+          { platform: 'TikTok', href: 'https://www.tiktok.com/@mattycfox' },
+        ],
       },
       {
         name: '???',
-        title: '1M+ followers',
-        image: Images.impaktIcons.Icon1,
+        title: '400k followers',
+        image: Images.impaktIcons.ThirdIcon,
         alt: '',
-        subtitle: 'REVEALING...',
-      },
-      {
-        name: '???',
-        title: '???',
-        image: Images.impaktIcons.Icon2,
-        alt: '',
-        subtitle: 'REVEALING...',
       },
       {
         name: '???',
         title: '???',
         image: Images.impaktIcons.Icon3,
         alt: '',
-        subtitle: 'REVEALING...',
       },
     ],
   },
@@ -273,7 +280,7 @@ export default {
       headline: 'Referrals',
       subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong>$1 USD in Crypto</strong> and they receive <strong>$5 USD in Crypto</strong>.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">$1 USD in Crypto</strong> and they receive <strong style="color:#FEC417">$5 USD in Crypto</strong>.',
       subDescription:
         'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
       discription_list1: 'WLs',
@@ -282,6 +289,8 @@ export default {
       discription_list4: 'Crypto Tokens (1000 GODL = $1 USD worth of our tokens)',
       descriptionFooter:
         'Have your friends join us on the Impakt Rocket and let’s moon it together!',
+      discription_list5:
+        'GODL is our in-game currency! You`ll use it on our marketplace for Whitelist spots, NFT discounts, Token exchange and many more!',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {
@@ -292,6 +301,13 @@ export default {
       item1: 'All your workout scores',
       item2: "5% of your referred friends' workout scores",
       item3: "2% of your referred friends' referrals' workout scores",
+    },
+    exerciseList: {
+      headline: 'Reward History',
+      toolTipDescription: 'Tooltip here',
+      date: 'Date',
+      reason: 'Reason',
+      godl: 'GODL',
     },
   },
 };

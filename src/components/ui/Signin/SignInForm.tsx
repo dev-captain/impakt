@@ -1,25 +1,15 @@
 import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import * as yup from 'yup';
 import { Common, I } from 'components';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginReq } from '@impakt-dev/api-client';
-import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
 import { InputGroupPropsI } from '../../common/InputGroup';
-
-const signInFormYupScheme = yup.object().shape({
-  email: yup
-    .string()
-    .email('Email field should be a valid email')
-    .required('Email is required field')
-    .default(''),
-  password: yup.string().required('Password is required field'),
-});
+import signInFormYupScheme from '../../../lib/yup/schemas/signInYupScheme';
 
 const SignInForm: React.FC = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -27,22 +17,14 @@ const SignInForm: React.FC = () => {
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const dispatch = useAppDispatch();
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
-  const {
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    register,
-  } = useForm({
+
+  const { handleSubmit, errors, setValue } = useForm({
+    defaultValues: { email: '', password: '' },
     resolver: yupResolver(signInFormYupScheme),
   });
 
-  React.useEffect(() => {
-    register('email');
-    register('password');
-  }, []);
-
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name, e.target.value, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
 
   const handleSignInFormSubmit = async (data: any) => {
@@ -78,6 +60,7 @@ const SignInForm: React.FC = () => {
       name: 'email',
       label: 'Email',
       errorMsg: errors?.email?.message,
+      autoFocus: true,
     },
     {
       placeholder: '********',

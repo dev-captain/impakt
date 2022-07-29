@@ -18,3 +18,4 @@ export { default as Card } from './Card';
 export { default as InputGroup } from './InputGroup';
 export { default as InputItems } from './InputItems';
 export { default as ImpaktButton } from './ImpaktButton';
+export { default as FlipCardBox } from './FlipCardBox';

@@ -11,10 +11,10 @@ export const HeroLayout: React.FC<{
   bgColor?: string;
   spacing?: number;
   showNavbar?: boolean;
-  showDarkOrLightModeButton?: boolean;
   addSpacer?: boolean;
   pos?: string;
   minH?: string;
+  backgroundSize?: string;
 
   showFooter?: boolean;
   showFooterV2?: boolean;
@@ -38,16 +38,16 @@ export const HeroLayout: React.FC<{
   showNavbar = false,
   addSpacer = false,
   showFooterV2 = false,
+  backgroundSize = 'cover',
 
   removeTopPadding = false,
-  showDarkOrLightModeButton = true,
   pos,
 }) => {
   const backgroundColor = useColorModeValue('glass.900', 'glass.200');
 
   return (
     <>
-      {showNavbar && <Navbar showDarkOrLightModeButton={showDarkOrLightModeButton} />}
+      {showNavbar && <Navbar />}
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
         overflowY="visible"
@@ -62,7 +62,7 @@ export const HeroLayout: React.FC<{
           minW="full"
           align={align}
           justify={justify}
-          backgroundSize="cover"
+          backgroundSize={backgroundSize}
           backgroundImage={bgImage}
           backgroundColor={bgColor || backgroundColor}
           backgroundPosition={{ base: 'top', md: 'bottom' }}

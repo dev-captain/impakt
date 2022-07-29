@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 
 import NavbarLinkItem from './NavbarLinkItem';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
-import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 
 type Props = {
@@ -58,6 +57,7 @@ const CollapseMenu = ({
         mt="4px"
       >
         <NavbarLinkItem
+          isSmall
           hide
           href="/"
           onClose={onClose}
@@ -65,6 +65,7 @@ const CollapseMenu = ({
           title={t(Keys.navbar.impaktFitness)}
         />
         <NavbarLinkItem
+          isSmall
           hide
           type="LINK"
           onClose={onClose}
@@ -74,12 +75,14 @@ const CollapseMenu = ({
         />
         <NavbarLinkItem
           hide
+          isSmall
           href="/events"
           onClose={onClose}
           title={t(Keys.navbar.events)}
           isActive={path.path === 'events'}
         />
         <NavbarLinkItem
+          isSmall
           href="/contact"
           onClose={onClose}
           title={t(Keys.navbar.contactUs)}
@@ -87,15 +90,26 @@ const CollapseMenu = ({
         />
         {member && (
           <NavbarLinkItem
+            isSmall
             href="/dashboard"
             onClose={onClose}
             title={t(Keys.navbar.dashboard)}
             isActive={path.path === 'dashboard'}
           />
         )}
+        {member && (
+          <NavbarLinkItem
+            isSmall
+            href="/contact"
+            onClose={onClose}
+            title={t(Keys.navbar.help)}
+            isActive={path.path === '/contact'}
+          />
+        )}
 
         {member && (
           <NavbarLinkItem
+            isSmall
             href="#"
             onClose={async () => {
               await dispatch(signOutMember()).unwrap();
@@ -198,15 +212,12 @@ const CollapseMenu = ({
           </HStack>
         </HStack>
         <HStack w="full" align="space-between" flexDirection="column" justify="space-between">
-          <Box justifyContent="center" my="2" alignItems="center" display="flex">
-            <DropDownProfileMenu />
-          </Box>
           <Box w="full" ml="0 !important">
             <SignInLinkItem />
           </Box>
           <Box w="full" display="flex" mt="2" ml="0 !important">
             <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
-              <Button marginTop="8px" width={{ base: '100%', md: 'auto' }} colorScheme="red">
+              <Button marginTop="8px" width="100%" colorScheme="red">
                 {t(Keys.navbar.download)}
               </Button>
             </Link>

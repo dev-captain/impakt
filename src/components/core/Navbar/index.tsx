@@ -9,6 +9,8 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
+  PositionProps,
+  useToast,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -17,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -25,12 +27,19 @@ import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
+import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 
+interface NavbarProps {
+  position?: PositionProps['position'];
+  isVersion2?: boolean;
+}
 // const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
   Images.Common;
 
-const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
+const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
+  const dispatch = useAppDispatch();
+  const toast = useToast();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -67,35 +76,41 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
 
   return (
     <Box
-      pos="absolute"
+      position={position}
+      top="0"
       zIndex="99999999999"
       w="full"
-      paddingX="16px"
+      px={isVersion2 && !isLessThan1280 ? '0' : '16px'}
       display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
-      sx={{ position: 'fixed', top: '0' }}
     >
-      {isOpen && <Gradient />}
+      {isOpen && !isVersion2 && <Gradient />}
       <Flex
         w="full"
         h="100px"
-        maxW="1232px"
+        maxW={isVersion2 && !isLessThan1280 ? 'full' : '1232px'}
         flexDir="row"
         alignSelf="center"
         overflow="visible"
         color={textColor}
         position="relative"
         alignItems="center"
-        px="16px"
-        borderRadius="16px"
-        height="70px"
-        marginTop="10px"
+        px={isVersion2 && !isLessThan1280 ? '3em' : '16px'}
+        borderRadius={isVersion2 && !isLessThan1280 ? '0' : '16px'}
+        height={isVersion2 && !isLessThan1280 ? '80px' : '70px'}
+        marginTop={isVersion2 && !isLessThan1280 ? '0' : '10px'}
         transition="background-color 0.5s linear"
         bgColor={bgColor}
-        backdropFilter={isScrolling ? 'blur(40px)' : 'blur(0px)'}
+        backdropFilter={isScrolling || path.path !== '' ? 'blur(40px)' : 'blur(0px)'}
+        borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
       >
         <HStack w="full" justify="space-between">
-          <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
+          <Box
+            onClick={() => navigate('/')}
+            zIndex={100}
+            pr="40px"
+            minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
+          >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
             <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
           </Box>
@@ -108,39 +123,86 @@ const Navbar: FC<{ showDarkOrLightModeButton?: boolean }> = () => {
           >
             <HStack w="full" align="space-between" justify="space-between">
               <NavBarLink IsHeader />
-              <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
-                <NavBarSocialIcons />
-                {/* {!showDarkOrLightModeButton && (
-                  <Box
-                    as="button"
-                    onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
-                  >
-                    <Image
-                      w="26px"
-                      h="26px"
-                      objectFit="contain"
-                      src={colorMode === 'dark' ? dark : light}
-                      {..._hover}
-                    />
+
+              <HStack
+                justify={{ base: 'center', md: 'flex-end' }}
+                spacing="8px"
+                pl={{ base: isVersion2 ? '0px' : '64px' }}
+              >
+                {!isVersion2 && <NavBarSocialIcons />}
+                {!isVersion2 && (
+                  <Box position="relative" display="flex">
+                    <DropDownProfileMenu />
                   </Box>
-                )} */}
-                <Box position="relative" display="flex">
-                  <DropDownProfileMenu />
-                </Box>
-                <Box>
-                  <SignInLinkItem />
-                </Box>
-                <Common.ImpaktButton
-                  as="a"
-                  href="/download"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate('/download');
-                  }}
-                >
-                  {t(Keys.navbar.download)}
-                </Common.ImpaktButton>
+                )}
+
+                {!isVersion2 && (
+                  <Box>
+                    <SignInLinkItem />
+                  </Box>
+                )}
+
+                {!isVersion2 && (
+                  <Common.ImpaktButton
+                    as="a"
+                    href="/download"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/download');
+                    }}
+                  >
+                    {t(Keys.navbar.download)}
+                  </Common.ImpaktButton>
+                )}
               </HStack>
+
+              {isVersion2 && (
+                <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
+                  <Common.ImpaktButton
+                    href="/dashboard"
+                    as="a"
+                    p="10px 16px 10px 12px"
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                    leftIcon={<I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />}
+                    variant="secondary"
+                  >
+                    {t(Keys.navbar.dashboard)}
+                  </Common.ImpaktButton>
+
+                  <Common.ImpaktButton
+                    href="/contact"
+                    as="a"
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      navigate('/contact');
+                    }}
+                    leftIcon={<I.HelpIcon cursor="pointer" width="14.33px" height="12.33px" />}
+                    variant="secondary"
+                  >
+                    {t(Keys.navbar.help)}
+                  </Common.ImpaktButton>
+
+                  <Common.ImpaktButton
+                    onClick={async () => {
+                      await dispatch(signOutMember()).unwrap();
+                      toast({
+                        title: 'Success',
+                        description: 'You have successfully logged out!',
+                        isClosable: true,
+                        duration: 8000,
+                        status: 'success',
+                      });
+                      onClose();
+                    }}
+                    leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}
+                    variant="alert"
+                  >
+                    {t(Keys.navbar.signOut)}
+                  </Common.ImpaktButton>
+                </HStack>
+              )}
             </HStack>
           </HStack>
           {/* <HStack

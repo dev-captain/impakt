@@ -1,4 +1,4 @@
-import { Box, useToast, Text } from '@chakra-ui/react';
+import { Box, useToast, Text, useClipboard } from '@chakra-ui/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -8,25 +8,19 @@ import { I } from 'components';
 const ReferralCopyClipboard: React.FC<{
   userId?: number;
   isBadge?: boolean;
-  animate?: boolean;
-}> = ({ userId, isBadge, animate }) => {
+}> = ({ userId, isBadge }) => {
   const { t } = useTranslation().i18n;
   const toast = useToast();
-  const [isCopied, setIsCopied] = React.useState(false);
-  const referralLink = `impakt.com/register/${userId}`;
+  const referralLink = `${window.location.origin}/register/${userId}`;
+  const { hasCopied, onCopy } = useClipboard(referralLink, { timeout: 3000 });
+
   const copyClipBoardReferralLink = () => {
-    navigator.clipboard.writeText(`https://${referralLink}`);
-    if (animate) {
-      setIsCopied(true);
-      setTimeout(() => {
-        setIsCopied(false);
-      }, 5000);
-    }
+    onCopy();
     toast({
       title: 'Success',
       description: 'Referral link copied successfully!',
       isClosable: true,
-      duration: 5000,
+      duration: 3000,
       status: 'success',
     });
   };
@@ -44,13 +38,14 @@ const ReferralCopyClipboard: React.FC<{
         p="17px 24px"
         borderRadius="16px"
         alignItems="center"
+        minH="64px"
         mt="8px"
       >
         <Box>
           <Text textStyle={{ base: 'regular2', sm: 'regular3' }}>{referralLink}</Text>
         </Box>
         <Box onClick={copyClipBoardReferralLink}>
-          {isCopied ? null : <I.CopyClipBoardIcon cursor="pointer" width="25" height="28" />}
+          {hasCopied ? null : <I.CopyClipBoardIcon cursor="pointer" width="25" height="28" />}
         </Box>
       </Box>
     </>

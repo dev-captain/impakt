@@ -1,39 +1,14 @@
 import { Box, Flex, FormControl, useToast, VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
-import * as yup from 'yup';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
-
-const signUpFormYupScheme = yup.object().shape({
-  memberName: yup.string().required('Membername is required field'),
-  fourDigit: yup
-    .string()
-    .test('len', ' ', (val) => {
-      return val?.length === 4;
-    })
-    .matches(/^\d+$/, ' ')
-    .required(' '),
-  email: yup
-    .string()
-    .email('Email field should be a valid email')
-    .required('Email is required field')
-    .default(''),
-  password: yup
-    .string()
-    .required('Password is required field')
-    .min(8, 'Password is too short - should be 8 chars minimum.'),
-  passwordConfirmation: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match.')
-    .required('Confirm Password is required field'),
-});
+import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
 
 const SignUpForm: React.FC = () => {
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
@@ -53,14 +28,8 @@ const SignUpForm: React.FC = () => {
     }
   }, []);
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    register,
-    getValues,
-  } = useForm({
-    resolver: yupResolver(signUpFormYupScheme),
+  const { handleSubmit, errors, getValues, setValue } = useForm({
+    resolver: yupResolver(signUpYupScheme),
     defaultValues: {
       memberName: '',
       email: '',
@@ -71,11 +40,6 @@ const SignUpForm: React.FC = () => {
   });
 
   React.useEffect(() => {
-    register('password');
-    register('passwordConfirmation');
-    register('memberName');
-    register('fourDigit');
-    register('email');
     generateRandomFourDigitNumberString();
   }, []);
 
@@ -86,13 +50,11 @@ const SignUpForm: React.FC = () => {
 
         return;
       }
-      const aZPattern = /[a-zA-Z]/;
-      const specialCharacterPattern =
-        /[!@#æ$%^&£§*½ı÷~ğüşçöĞÜŞÇÖİ≥`()_+\-=\\[\]{};':"\\|,.<>\\/?]+/;
 
-      const isMatch = aZPattern.test(e.target.value);
-      const isMatch2 = specialCharacterPattern.test(e.target.value);
-      if (isMatch || isMatch2) return;
+      const digitRegExp = /^[0-9]+$/;
+      const isMatch = digitRegExp.test(e.target.value);
+
+      if (!isMatch) return;
 
       setValue(e.target.name as any, e.target.value, { shouldValidate: true });
 
@@ -130,12 +92,13 @@ const SignUpForm: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Nickname',
+      placeholder: 'Member name...',
+      autoFocus: true,
       leftIcon: <I.NickNameIcon />,
       onChange,
       type: 'text',
       name: 'memberName',
-      label: 'Nickname',
+      label: 'Member name',
       width: { base: '100%', lg: '75%' },
       errorMsg: errors?.memberName?.message || errors?.fourDigit?.message,
       children: (

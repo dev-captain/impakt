@@ -48,6 +48,7 @@ const TranslationKeys = {
     download: `${navbar}.download`,
     dashboard: `${navbar}.dashboard`,
     signOut: `${navbar}.signOut`,
+    help: `${navbar}.help`,
     signIn: `${navbar}.signIn`,
     termsOfUse: `${navbar}.termsOfUse`,
   },
@@ -200,6 +201,8 @@ const TranslationKeys = {
       discription_list2: `${memberDashboard}.referrals.discription_list2`,
       discription_list3: `${memberDashboard}.referrals.discription_list3`,
       discription_list4: `${memberDashboard}.referrals.discription_list4`,
+      discription_list5: `${memberDashboard}.referrals.discription_list5`,
+
       descriptionFooter: `${memberDashboard}.referrals.descriptionFooter`,
     },
     yourReferralLink: `${memberDashboard}.yourReferralLink`,
@@ -211,6 +214,13 @@ const TranslationKeys = {
       item1: `${memberDashboard}.whitelist.item1`,
       item2: `${memberDashboard}.whitelist.item2`,
       item3: `${memberDashboard}.whitelist.item3`,
+    },
+    exerciseList: {
+      headline: `${memberDashboard}.exerciseList.headline`,
+      toolTipDescription: `${memberDashboard}.exerciseList.toolTipDescription`,
+      date: `${memberDashboard}.exerciseList.date`,
+      reason: `${memberDashboard}.exerciseList.reason`,
+      godl: `${memberDashboard}.exerciseList.godl`,
     },
   },
 };

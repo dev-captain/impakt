@@ -8,6 +8,7 @@ interface InfoCardPropsI {
   isShowTooltip?: boolean;
   tooltipLabel?: string;
   onToolTipClick?: () => void;
+  wFull?: boolean;
 }
 const InfoCard: React.FC<InfoCardPropsI> = ({
   LeftLogo,
@@ -15,6 +16,7 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
   isShowTooltip,
   onToolTipClick,
   tooltipLabel,
+  wFull = false,
 }) => {
   return (
     <HStack
@@ -25,7 +27,7 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
       background="rgba(28, 28, 40, 0.65)"
       id="info-card"
       w="100%"
-      maxW="500px"
+      maxW={wFull ? 'full' : '500px'}
       justifyContent="space-between"
     >
       <HStack columnGap="0.5em" id="left">

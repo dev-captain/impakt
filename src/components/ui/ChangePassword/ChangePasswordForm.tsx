@@ -1,24 +1,13 @@
 import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import * as yup from 'yup';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
+import { useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
-
-const changePasswordFormYupScheme = yup.object().shape({
-  password: yup
-    .string()
-    .required('Password is required field')
-    .min(8, 'Password is too short - should be 8 chars minimum.'),
-  passwordConfirmation: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match.')
-    .required('Confirm Password is required field'),
-});
+import changePasswordFormYupScheme from '../../../lib/yup/schemas/changePasswordYupScheme';
 
 const apiBaseUrl = process.env.REACT_APP_API;
 
@@ -30,23 +19,14 @@ const ChangePasswordForm: React.FC = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
   const toast = useToast();
-  const {
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    register,
-    getValues,
-  } = useForm({
+
+  const { handleSubmit, setValue, errors, getValues } = useForm({
+    defaultValues: { password: '', passwordConfirmation: '' },
     resolver: yupResolver(changePasswordFormYupScheme),
   });
 
-  React.useEffect(() => {
-    register('password');
-    register('passwordConfirmation');
-  }, []);
-
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name, e.target.value, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
 
   const handleChangePasswordFormSubmit = async (data: any) => {
@@ -107,6 +87,7 @@ const ChangePasswordForm: React.FC = () => {
       label: 'Password',
       name: 'password',
       errorMsg: errors?.password?.message,
+      autoFocus: true,
     },
     {
       placeholder: '********',

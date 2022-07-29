@@ -11,7 +11,7 @@ type Props = {
   passiveColor?: string;
   isActive?: boolean;
   onClose?: () => void;
-  target?: React.HTMLAttributeAnchorTarget;
+  isSmall?: boolean;
 };
 
 const NavbarLinkItem = ({
@@ -21,16 +21,16 @@ const NavbarLinkItem = ({
   hide = false,
   onClose,
   color,
-  target,
   type,
   passiveColor,
+  isSmall = false,
 }: Props) => {
   const navigate = useNavigate();
 
   return (
     <VStack
       justifyContent="center"
-      h={{ base: '40px', md: '100px' }}
+      h={{ base: '40px', md: isSmall ? '40px' : '100px' }}
       onClick={onClose}
       cursor="pointer"
     >
@@ -61,13 +61,12 @@ const NavbarLinkItem = ({
       )}
       {type !== 'LINK' && (
         <Box
-          // @ts-ignore
           href={href}
-          target={target}
-          onClick={() => {
+          as="a"
+          onClick={(e: any) => {
+            e.preventDefault();
             navigate(href);
           }}
-          as={target === '_blank' ? 'a' : 'div'}
           _hover={{
             transition: '0.2s ease',
             opacity: 1,

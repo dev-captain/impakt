@@ -61,6 +61,11 @@ export default {
     fontWeight: '400',
     lineHeight: '36px',
   },
+  normal14: {
+    fontSize: '14px',
+    fontWeight: '600',
+    lineHeight: '16px',
+  },
   bold4: {
     fontSize: '24px',
     fontWeight: '700',
@@ -90,6 +95,11 @@ export default {
     fontSize: '16px',
     fontWeight: '600',
     lineHeight: '24px',
+  },
+  semiBold24: {
+    fontSize: '24px',
+    fontWeight: '600',
+    lineHeight: '23px',
   },
   semiBold5: {
     fontSize: '16px',
@@ -154,17 +164,27 @@ export default {
   semiBold12: {
     fontSize: '14px',
     fontWeight: '500',
-    lineHeight: '12px',
+    lineHeight: '20px',
   },
   semiBold14: {
     fontSize: '14px',
     fontWeight: '500',
     lineHeight: '14px',
   },
+  semiBold20: {
+    fontSize: '20px',
+    fontWeight: '600',
+    lineHeight: '100%',
+  },
   semiBold15: {
     fontSize: '15px',
     fontWeight: '500',
     lineHeight: '15px',
+  },
+  semiBold165: {
+    fontSize: '16px',
+    fontWeight: '500',
+    lineHeight: '18px',
   },
   semiBold17: {
     fontSize: '16px',

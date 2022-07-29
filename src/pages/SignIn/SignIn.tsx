@@ -2,13 +2,16 @@ import { useColorModeValue, VStack, Spinner, useToast } from '@chakra-ui/react';
 import { S, C } from 'components';
 import { useEffect, useCallback } from 'react';
 import Images from 'assets/images';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from 'hooks';
 
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
 
 const SignIn = () => {
+  const isThereNextParam = useLocation().search.includes('next');
+  const navigateTo = isThereNextParam ? useLocation().search.split('=')[1] : '/dashboard';
+
   const navigate = useNavigate();
   const toast = useToast();
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
@@ -78,7 +81,7 @@ const SignIn = () => {
       }
 
       if (requestAccessTokenAttemp === 0) {
-        navigate('/dashboard');
+        navigate(navigateTo);
       }
     }
   }, [member, requestAccessTokenAttemp]);

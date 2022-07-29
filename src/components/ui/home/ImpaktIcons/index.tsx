@@ -7,6 +7,7 @@ import {
   VStack,
   useColorModeValue,
   Box,
+  Image,
 } from '@chakra-ui/react';
 import { C } from 'components';
 import { useTranslation } from 'react-i18next';
@@ -22,17 +23,26 @@ const ImpaktIcons = () => {
 
   return (
     <C.HeroLayout
-      bgImage={bgImage}
+      bgColor="#09090B"
+      pos="relative"
       customPadding={{
         base: '16px',
         md: '32px',
-        xl: '0px',
-        '2xl': '0px',
+        lg: '200px',
       }}
       minH="70vh"
     >
+      <Image
+        src={bgImage}
+        objectFit="cover"
+        minW="100%"
+        bottom="65px"
+        zIndex="0"
+        position="absolute"
+      />
       <VStack
         spacing="0px"
+        zIndex="1"
         px="16px"
         maxW={{ base: '100%', lg: '1232px' }}
         w="full"

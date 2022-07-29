@@ -23,6 +23,7 @@ const Advisor = () => {
   return (
     <C.HeroLayout
       bgImage={Images.backgrounds.advisorsSectionBg}
+      backgroundSize="100% 100%"
       customPadding={{
         base: '16px',
         md: '32px',

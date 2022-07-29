@@ -32,6 +32,8 @@ export interface InputGroupPropsI {
   width?: ResponsiveValue<any>;
   value?: string | number | readonly string[] | undefined;
   maxLength?: number;
+  autoFocus?: boolean | undefined;
+  defaultValue?: string | number | readonly string[] | undefined;
 }
 
 const InputGroup: React.FC<InputGroupPropsI> = ({
@@ -49,6 +51,8 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
   value,
   children,
   maxLength,
+  autoFocus,
+  defaultValue,
 }) => {
   return (
     <>
@@ -96,6 +100,8 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
         )}
         <ChakraInputGroup
           _hover={{ color: '#fff' }}
+          _focusWithin={{ color: '#fff' }}
+          _focusVisible={{ color: '#fff' }}
           transition="all .2s ease-in"
           color="rgba(255, 255, 255, 0.5)"
           h="100% !important"
@@ -108,7 +114,6 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
               pointerEvents="none"
               minW="60px"
               h="full"
-              _focus={{ color: 'red' }}
               // color="rgba(255, 255, 255, 0.5)"
               borderEnd="1px solid rgba(255, 255, 255, 0.1)"
               marginRight="16px"
@@ -119,12 +124,14 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
 
           {inputIcon}
           <Input
+            autoFocus={autoFocus}
             name={name}
             id={name}
             h="100%"
             border="none"
             _focus={{ border: '2px solid rgba(240, 65, 83, 1)' }}
             minH="60px"
+            defaultValue={defaultValue}
             maxLength={maxLength}
             type={type}
             value={value}

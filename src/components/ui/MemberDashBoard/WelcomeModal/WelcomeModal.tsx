@@ -1,44 +1,31 @@
-import { VStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
+import { Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppSelector } from 'hooks';
 
-import { fetchActiveDays } from '../../../../lib/redux/slices/fitness/actions/fetchActiveDays';
-import { fetchGodlBalanceScore } from '../../../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
+import Whitelist from '../../../../assets/svgs/Vector.svg';
+import MemberDashboardCard from '../MemberDashBoardCard';
 
 const WelcomeModal: React.FC = () => {
-  const dispatch = useAppDispatch();
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
   const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
+  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 
-  React.useEffect(() => {
-    dispatch(fetchGodlBalanceScore());
-  }, []);
-
-  React.useEffect(() => {
-    if (member) {
-      dispatch(fetchActiveDays(member.id));
-    }
-  }, []);
-
   return (
-    <VStack
+    <MemberDashboardCard
       w="100%"
+      flexDir="column"
       alignItems="start"
-      padding={{ base: '30px', lg: '40px' }}
-      maxH={{ base: 'auto', lg: '548px' }}
       rowGap={{ base: '18px', lg: '32px' }}
-      letterSpacing="-0.04em !important"
-      backgroundColor="rgba(28, 28, 40, 0.65);"
-      backdropBlur="40px"
     >
       <Box
         display="flex"
         alignItems="baseline"
         mt="0 !important"
+        letterSpacing="-0.04em !important"
         id="whitelist-challange-description-box-2"
       >
         <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
@@ -49,17 +36,21 @@ const WelcomeModal: React.FC = () => {
             </span>
           ))}
         </Text>
-        {/* <Box ms={3}>
-          <img src={Whitelist} alt="Whitelist" />
-        </Box> */}
+        {isWhitelisted && (
+          <Box ms={3}>
+            <img src={Whitelist} alt="Whitelist" />
+          </Box>
+        )}
       </Box>
       <Box id="whitelist-challange-description-box-2 " sx={{ marginTop: '0px !important' }}>
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        {/* <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3" >
-          You are whitelisted. Congrats!
-        </Text> */}
+        {isWhitelisted && (
+          <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3">
+            You are whitelisted. Congrats!
+          </Text>
+        )}
       </Box>
 
       {/* <Grid templateColumns="repeat(2, 1fr)" gap={4}>
@@ -73,7 +64,13 @@ const WelcomeModal: React.FC = () => {
           bg="rgba(254, 196, 23, 0.15)"
           padding="12px 24px"
         >
-          <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
+          <Box
+            color="#FEC417"
+            display="flex"
+            flexDir="column"
+            mt="0 !important"
+            id="whitelist-challange-description-box-2"
+          >
             <Text textAlign="center" textStyle="bold5">
               <NumberFormat
                 thousandsGroupStyle="thousand"
@@ -119,7 +116,7 @@ const WelcomeModal: React.FC = () => {
           bg="rgba(9, 9, 11, 0.4)"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
-            <Text color="#FFFFFF" textAlign="center" textStyle="bold5">
+            <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">
               {activeDays}
             </Text>
             <Text
@@ -134,7 +131,7 @@ const WelcomeModal: React.FC = () => {
           </Box>
         </GridItem>
       </SimpleGrid>
-    </VStack>
+    </MemberDashboardCard>
   );
 };
 export default WelcomeModal;
