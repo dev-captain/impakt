@@ -20,7 +20,6 @@ const useForm = <TFieldValues extends FieldValues = FieldValues, TContext = any>
   | 'trigger'
   | 'formState'
   | 'resetField'
-  | 'reset'
   | 'unregister'
   | 'control'
   | 'register'

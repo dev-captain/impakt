@@ -11,6 +11,7 @@ import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchRe
 import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
 import { fetchReferralsReward } from '../../lib/redux/slices/referrals/actions/fetchReferralsReward';
 import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
+import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -42,11 +43,11 @@ const MemberDashboard: React.FC = () => {
     dispatch(getWhiteListed());
   }, []);
 
-  // TODO React.useEffect(() => {
-  //   if (member) {
-  //     dispatch(fetchRewardHistory(member.id));
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    if (member) {
+      dispatch(fetchRewardHistory(member.id));
+    }
+  }, []);
 
   React.useEffect(() => {
     if (!member) return;
