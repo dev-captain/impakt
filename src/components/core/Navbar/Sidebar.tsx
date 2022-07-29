@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
         <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
       </SidebarLinkItem>
 
-      <SidebarLinkItem
+      {/* <SidebarLinkItem
         hide
         href="reward-history"
         onClose={onClose}
@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
         isActive={path.pathname === '/dashboard/statistics'}
       >
         <I.ChatIcon cursor="pointer" width="27px" height="23px" />
-      </SidebarLinkItem>
+      </SidebarLinkItem> */}
     </>
   );
 };

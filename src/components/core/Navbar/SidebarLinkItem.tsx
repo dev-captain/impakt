@@ -42,7 +42,7 @@ const SidebarLinkItem = ({
       color={isActive ? 'rgba(255 ,255 ,255 ,1)' : 'rgba(255 ,255 ,255 ,0.5)'}
       padding="0"
       _hover={{
-        background: isActive && !isTransparent ? '#20202E' : 'none',
+        background: !isTransparent ? '#20202E' : 'none',
         color: 'rgba(255 , 255 ,255 ,1)',
         transition: 'all 0.5s ease',
         fontWeight: '600',
