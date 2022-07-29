@@ -10,6 +10,7 @@ import rewardHistoryReducer from '../slices/rewardHistory/rewardHistorySlice';
 import referralsReducer from '../slices/referrals/referralsSlice';
 import stateReducer from '../slices/state/stateSlice';
 import whitelistReducer from '../slices/whitelist/whitelistSlice';
+import discourseReducer from '../slices/discourse/discourseSlice';
 
 const persistConfig = {
   key: 'root',
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   referrals: referralsReducer,
   stateReducer,
   whitelistReducer,
+  discourseReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

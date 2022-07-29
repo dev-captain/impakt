@@ -12,6 +12,7 @@ import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actio
 import { fetchReferralsReward } from '../../lib/redux/slices/referrals/actions/fetchReferralsReward';
 import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
 import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
+import { fetchNews } from '../../lib/redux/slices/discourse/fetchNews';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -58,6 +59,10 @@ const MemberDashboard: React.FC = () => {
     dispatch(fetchReferrals({ count: true }));
     dispatch(fetchReferralsChallenges());
     dispatch(fetchReferralsReward());
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(fetchNews());
   }, []);
 
   return <C.SidebarLayout isShowNavbar />;
