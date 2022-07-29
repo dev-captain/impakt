@@ -98,7 +98,7 @@ const WhiteList: React.FC = () => {
             </Text> */}
           </Box>
         </Box>
-        <Tooltip
+        {/* <Tooltip
           hasArrow
           label="You can see me"
           mt="3"
@@ -109,7 +109,7 @@ const WhiteList: React.FC = () => {
           <Box position="absolute" top="16px" right="16px">
             <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
           </Box>
-        </Tooltip>
+        </Tooltip> */}
       </Box>
       <Box w="100%" id="whitelist-challange-description-box-2" sx={{ marginTop: '0px !important' }}>
         <Box>
