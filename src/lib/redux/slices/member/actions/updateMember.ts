@@ -3,14 +3,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { UserInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
-import { updateAuthMember } from '../memberAuthSlice';
 
 const updateMember = createAsyncThunk(
   'member/update',
-  async (
-    { id, data }: { id: number; data: PatchUserReq },
-    { rejectWithValue, getState, dispatch },
-  ) => {
+  async ({ id, data }: { id: number; data: PatchUserReq }, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin },
@@ -21,9 +17,8 @@ const updateMember = createAsyncThunk(
       }
 
       const updatedMemberResponse = await UserInstance.userControllerPatchOne(id, data);
-      dispatch(updateAuthMember(updatedMemberResponse));
 
-      return true;
+      return updatedMemberResponse;
     } catch (err: any) {
       return rejectWithValue(err);
     }

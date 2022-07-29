@@ -11,16 +11,15 @@ import React from 'react';
 
 import WalletAddressForm from './WalletAddressForm';
 
-interface InfoModalPropsI {
-  handleModal?: () => void;
-  isModalOpen: boolean;
+interface WalletAddressModalPropsI {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
 }
 
-const WalletAddressModal: React.FC<InfoModalPropsI> = ({ handleModal, isModalOpen }) => {
-  const { onClose } = useDisclosure();
-
+const WalletAddressModal: React.FC<WalletAddressModalPropsI> = ({ isOpen, onClose, onOpen }) => {
   return (
-    <Modal closeOnOverlayClick isOpen={isModalOpen} onClose={onClose} isCentered>
+    <Modal closeOnOverlayClick isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent maxW="720px" bgColor="#1C1C28" borderRadius="32px">
         <ModalHeader textStyle="bold4" color="#FFF" px="40px" pt="25px" pb="15px">
@@ -29,10 +28,10 @@ const WalletAddressModal: React.FC<InfoModalPropsI> = ({ handleModal, isModalOpe
         <ModalCloseButton
           color="#FFF"
           _focus={{ boxShadow: 'none !important' }}
-          onClick={handleModal}
+          onClick={onClose}
         />
         <ModalBody pt="0px" px="40px" pb="40px">
-          <WalletAddressForm />
+          <WalletAddressForm onClose={onClose} />
         </ModalBody>
       </ModalContent>
     </Modal>

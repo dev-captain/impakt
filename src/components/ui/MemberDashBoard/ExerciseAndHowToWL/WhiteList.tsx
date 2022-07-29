@@ -3,7 +3,7 @@ import * as React from 'react';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
-import { Box, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
 import useAppSelector from 'hooks/useAppSelector';
 import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 import Images from '../../../../assets/images';
@@ -14,14 +14,13 @@ import { I } from '../../..';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
+  const { onClose, isOpen, onOpen } = useDisclosure();
+
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const [isTooltipClicked, setIsTooltipClicked] = React.useState(false);
-  const [isWallet, setIsWallet] = React.useState(false);
+
   const TooltipHandler = () => {
     setIsTooltipClicked(!isTooltipClicked);
-  };
-  const handleModal = () => {
-    setIsWallet(!isWallet);
   };
 
   return (
@@ -150,7 +149,7 @@ const WhiteList: React.FC = () => {
 
         <Box mt="12px">
           <ImpaktButton
-            onClick={handleModal}
+            onClick={onOpen}
             leftIcon={
               <Box marginRight="8px">
                 <I.EthIcon />
@@ -186,7 +185,7 @@ const WhiteList: React.FC = () => {
           </Box>
         </Box>
       </Box>
-      {isWallet && <WalletAddressModal handleModal={handleModal} isModalOpen={isWallet} />}
+      {isOpen && <WalletAddressModal isOpen onOpen={onOpen} onClose={onClose} />}
     </MemberDashboardCard>
   );
 };

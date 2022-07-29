@@ -27,13 +27,13 @@ const useForm = <TFieldValues extends FieldValues = FieldValues, TContext = any>
   | 'register'
   | 'setFocus'
 > & {
-  handleSubmit: UseFormHandleSubmit<TFieldValues>;
   errors: DeepMap<DeepPartial<TFieldValues>, FieldError>;
+  isDirty: boolean;
 } => {
   const formReturn = useReactHookForm(props);
 
   const {
-    formState: { errors },
+    formState: { errors, isDirty },
     register,
     setValue,
     ...rest
@@ -44,7 +44,7 @@ const useForm = <TFieldValues extends FieldValues = FieldValues, TContext = any>
     Object.keys(props.defaultValues).forEach((field) => register(field as any));
   }, []);
 
-  return { ...rest, errors, setValue };
+  return { ...rest, errors, isDirty, setValue };
 };
 
 export default useForm;
