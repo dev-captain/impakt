@@ -11,6 +11,7 @@ import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetch
 import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchReferrals';
 import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
 import { fetchReferralsReward } from '../../lib/redux/slices/referrals/actions/fetchReferralsReward';
+import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -24,19 +25,22 @@ const MemberDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
+    if (!member) return;
+    dispatch(fetchMember(member.id));
+  }, []);
+
+  React.useEffect(() => {
     dispatch(fetchGodlBalanceScore());
   }, []);
 
   React.useEffect(() => {
-    if (member) {
-      dispatch(fetchActiveDays(member.id));
-    }
+    if (!member) return;
+    dispatch(fetchActiveDays(member.id));
   }, []);
 
   React.useEffect(() => {
-    if (member) {
-      dispatch(getWhiteListed());
-    }
+    if (!member) return;
+    dispatch(getWhiteListed());
   }, []);
 
   // React.useEffect(() => {
@@ -46,9 +50,8 @@ const MemberDashboard: React.FC = () => {
   // }, []);
 
   React.useEffect(() => {
-    if (member) {
-      dispatch(fetchExerciseStats(member.id));
-    }
+    if (!member) return;
+    dispatch(fetchExerciseStats(member.id));
   }, []);
 
   React.useEffect(() => {

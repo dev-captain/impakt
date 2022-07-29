@@ -7,6 +7,7 @@ import { forgotPassword } from './actions/forgotPassword';
 import { requestVerification } from './actions/requestVerification';
 import { requestAccessToken } from './actions/requestAccessToken';
 import { signUpMember } from './actions/signUpMember';
+import { fetchMember } from './actions/fetchMember';
 
 interface MemberAuthInitialI {
   member: GetUserRes | null;
@@ -112,6 +113,18 @@ const memberAuthSlice = createSlice({
         state.member = action.payload;
       })
       .addCase(requestAccessToken.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(fetchMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchMember.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.member = action.payload;
+      })
+      .addCase(fetchMember.rejected, (state) => {
         state.isLoading = false;
       });
   },
