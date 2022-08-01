@@ -1923,10 +1923,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@impakt-dev/api-client@^0.23.0":
-  version "0.23.0"
-  resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client/0.23.0/ad8f4f0f7051ab1db012fdc5d36b7f00fa5d82c4df507af753c107c811071189#0ec267237700dadffacb19af5dc580ba35cbdda1"
-  integrity sha512-mMAErlNVXdVM+cjmAWxMh4ZsM2ym1aTCb9wkUGA6lHNbt5zRNOR5PL/+/3lpryb980KAo+Q/qj58DUo13xzlsQ==
+"@impakt-dev/api-client@^0.25.0":
+  version "0.25.0"
+  resolved "https://npm.pkg.github.com/download/@impakt-dev/api-client/0.25.0/2931ba2d22e298a2bdb425347bd3a78d7b0f7076#2931ba2d22e298a2bdb425347bd3a78d7b0f7076"
+  integrity sha512-FiI8wjyRg4PYUgw5kCxriAeuarEKoP3GFFz9xRES3jgXfxQElxzCCd3QGItc4GNyVpVwnovihHU5Uii4mw57HQ==
   dependencies:
     es6-promise "^4.2.4"
     url-parse "^1.4.3"
@@ -3448,6 +3448,16 @@ asap@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
+
+assignment@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/assignment/-/assignment-2.0.0.tgz#ffd17b21bf5d6b22e777b989681a815456a3dd3e"
+  integrity sha512-naMULXjtgCs9SVUEtyvJNt68aF18em7/W+dhbR59kbz9cXWPEvUkCun2tqlgqRPSqZaKPpqLc5ZnwL8jVmJRvw==
+
+assignment@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/assignment/-/assignment-2.2.0.tgz#f5b5bc2d160d69986e8700cd38f567c0aabe101e"
+  integrity sha512-FFbyiLMUib4QrnB37bh+ZWajC9IFiQZj/LhPEj42UhfVD/MhPu9P5Q46vJ3qF7GcJWueINtN6ct6DcPdbIqSZw==
 
 ast-types-flow@^0.0.7:
   version "0.0.7"
@@ -6424,6 +6434,11 @@ hastscript@^7.0.0:
     property-information "^6.0.0"
     space-separated-tokens "^2.0.0"
 
+he@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/he/-/he-0.5.0.tgz#2c05ffaef90b68e860f3fd2b54ef580989277ee2"
+  integrity sha512-DoufbNNOFzwRPy8uecq+j+VCPQ+JyDelHTmSgygrA5TsR8Cbw4Qcir5sGtWiusB4BdT89nmlaVDhSJOqC/33vw==
+
 he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
@@ -6763,6 +6778,14 @@ inquirer@^7.0.4:
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
     through "^2.3.6"
+
+insane@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/insane/-/insane-2.6.1.tgz#c7dcae7b51c20346883b71078fad6ce0483c198f"
+  integrity sha512-0AJWUKG2tBvbT5JQV8dX46bqsYI/hqDUJed761hPCRsFmkc7xyJSOUlhgoPjqVpb+YQrxuIA+48yPCNyuz4GSw==
+  dependencies:
+    assignment "2.0.0"
+    he "0.5.0"
 
 internal-slot@^1.0.3:
   version "1.0.3"
@@ -11625,6 +11648,20 @@ trough@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/trough/-/trough-2.0.2.tgz#94a3aa9d5ce379fc561f6244905b3f36b7458d96"
   integrity sha512-FnHq5sTMxC0sk957wHDzRnemFnNBvt/gSY99HzK8F7UP5WAbvP70yX5bd7CjEQkN+TjdxwI7g7lJ6podqrG2/w==
+
+trunc-html@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/trunc-html/-/trunc-html-1.1.2.tgz#1e97d51f67d470b67662b1a670e6d0ea7a8edafe"
+  integrity sha512-Js2YgveyikquTFbjJ1u+GVo1kFasOtpx7gjHtU7PtF5KtX4Y72Hp4WjrndNuTCE8jxJQi8SMyzAzLqsVpO6t4Q==
+  dependencies:
+    assignment "2.2.0"
+    insane "2.6.1"
+    trunc-text "1.0.1"
+
+trunc-text@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/trunc-text/-/trunc-text-1.0.1.tgz#58f876d8ac59b224b79834bb478b8656e69622b5"
+  integrity sha512-EQ5zHSVTp1dAIjtPLSANmCrgDC9wUdbEL87jF8+9DTHVWDlVsOmGQS/yOZoKWmmP2jL/uypiaQmpd3v2s69MsA==
 
 tryer@^1.0.1:
   version "1.0.1"

@@ -10,20 +10,22 @@ import {
 } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
+import truncH from 'trunc-html';
 
-interface NewsFeedAccordionProps {
-  feeds: { title: string; description: string; href: string }[];
-}
+import { useAppSelector } from '../../../../hooks';
 
-const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
+const NewsFeedAccordion: React.FC = () => {
   const [index, setIndex] = React.useState<number[]>([]);
+  const newsFeeds = useAppSelector((state) => state.discourseReducer.news);
+  console.log(newsFeeds.map(({ description }: any) => description.replace(/<[^>]*>/g, '')));
 
   return (
     <Accordion w="full" index={index} allowToggle>
       <VStack w="full">
-        {feeds.map(({ title, description, href }, i) => (
+        {newsFeeds.map(({ title, description, id }: any, i: number) => (
           <AccordionItem
-            key={`news-accordion-item-${i + 1}`}
+            w="full"
+            key={`news-accordion-item-${id}`}
             background="#20202E"
             borderRadius="1em"
             border="0"
@@ -38,14 +40,14 @@ const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
             }}
           >
             {({ isExpanded }: { isExpanded: boolean }) => (
-              <Box href={href} maxW="90%">
+              <Box maxW="90%">
                 <AccordionButton padding="0">
                   <Box flex="1" textAlign="left">
                     <Text textStyle="semiBold5">{title}</Text>
                   </Box>
                   <Box
                     position="absolute"
-                    top="25px"
+                    top="15px"
                     right="20px"
                     transform={isExpanded ? 'rotate(180deg)' : '0'}
                     transition="transform 0.2s"
@@ -55,7 +57,15 @@ const NewsFeedAccordion: React.FC<NewsFeedAccordionProps> = ({ feeds }) => {
                   </Box>
                 </AccordionButton>
                 <AccordionPanel px="0">
-                  <Text textStyle="semiBold5">{description}</Text>
+                  <Box
+                    textStyle="semiBold5"
+                    overflow="hidden"
+                    dangerouslySetInnerHTML={{
+                      __html: `${
+                        truncH(description, 200).html
+                      }<a style="color:blue" href="https://discuss.impakt.com/t/${id}">Click here </a> to read more.`,
+                    }}
+                  />
                 </AccordionPanel>
               </Box>
             )}
