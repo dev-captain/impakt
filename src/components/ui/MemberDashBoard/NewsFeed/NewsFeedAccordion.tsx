@@ -63,7 +63,7 @@ const NewsFeedAccordion: React.FC = () => {
                     dangerouslySetInnerHTML={{
                       __html: `${
                         truncH(description, 200).html
-                      }<a style="color:blue" href="https://discuss.impakt.com/t/${id}">Click here </a> to read more.`,
+                      }<a style="color:blue" target="_blank" href="https://discuss.impakt.com/t/${id}">Click here </a> to read more.`,
                     }}
                   />
                 </AccordionPanel>

@@ -48,7 +48,7 @@ const NewsFeed: React.FC = () => {
           lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
           justifyContent={{ md: 'center', lg: 'flex-start' }}
           as="a"
-          href="https://discuss.impakt.com"
+          href="https://discuss.impakt.com/tag/news"
           target="_blank"
         >
           Check our Discourse for more updates
