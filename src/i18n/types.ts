@@ -22,6 +22,7 @@ const verification = 'verification';
 const signUp = 'signUp';
 const signIn = 'signIn';
 const memberDashboard = 'memberDashboard';
+const termsOfUse = 'termsOfUse';
 
 const TranslationKeys = {
   common: {
@@ -39,6 +40,9 @@ const TranslationKeys = {
   downloadPlateform: {
     download: `${downloadPlateform}.download`,
     platform: `${downloadPlateform}.platform`,
+  },
+  termsOfUse: {
+    title: `${termsOfUse}.title`,
   },
   navbar: {
     events: `${navbar}.events`,

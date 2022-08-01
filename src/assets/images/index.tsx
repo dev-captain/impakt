@@ -36,6 +36,7 @@ const Images = {
     gradientBgRotated: require('./gradientbgrotated.jpg'),
     light: require('./bg-light.png'),
     downloadAppBg: require('./downloadapp_bg.png'),
+    teamofuseBg: require('./teamofusebg.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),

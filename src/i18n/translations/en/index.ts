@@ -17,6 +17,9 @@ export default {
     download: 'Download our App',
     platform: 'our App',
   },
+  termsOfUse: {
+    title: 'Term of Use',
+  },
   navbar: {
     events: 'Events',
     contactUs: 'Contact Us',
