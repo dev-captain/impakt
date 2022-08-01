@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, useMediaQuery, Box } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -16,7 +16,7 @@ const DownloadPlatform = () => {
     Images.backgrounds.downloadAppBg,
   );
   // const show = useModalStore((state) => state.setDownloadPage);
-  const [isLessThan768] = useMediaQuery('(max-width: 768px)');
+  // const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
   return (
     <C.HeroLayout
@@ -25,21 +25,18 @@ const DownloadPlatform = () => {
       spacing={10}
       pos="relative"
       bgImage={bgImage}
-      align="flex-start"
-      justify="flex-start"
+      align="center"
+      justify="center"
     >
-      <VStack color={text} w="full" pt={{ base: '20px', md: '135px' }}>
+      <VStack color={text} w="full" pt={{ base: '20px', md: '0px' }}>
         <VStack maxW="1232px" w="full" px="16px">
-          <HStack
-            w="full"
-            justify="center"
-            flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
-          >
+          <HStack w="full" justify="center">
             <VStack
-              align={{ base: 'center', md: 'flex-start' }}
+              align={{ base: 'center' }}
               spacing="22px"
               w={{ base: '100%', lg: 'auto' }}
-              paddingX={{ base: isLessThan768 ? '50px' : '0', md: '40px' }}
+              paddingX={{ base: '0', md: '40px' }}
+              // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
             >
               <VStack align="inherit" marginBottom={{ base: '0', md: '15px' }}>
                 <Box
@@ -62,6 +59,7 @@ const DownloadPlatform = () => {
                 columnGap={3}
                 padding="16px"
                 borderRadius="24px"
+                order={{ base: '3', md: '2' }}
               >
                 <Box
                   width="60px"
@@ -72,24 +70,30 @@ const DownloadPlatform = () => {
                 >
                   <I.DesktopIcon opacity="1" />
                 </Box>
-                <Box>
+
+                <Common.DownloadButton
+                  width={{ base: '100%', md: '315px' }}
+                  bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                  isHorizontal
+                  iconName="Windows"
+                  title="Download for Windows"
+                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
+                  pe="auto"
+                />
+
+                <Box
+                  width={{ base: '100%', md: '282px' }}
+                  marginTop={{ base: '12px !important', md: '0px !important' }}
+                  marginStart="0px !important"
+                >
                   <Common.DownloadButton
-                    width={{ base: '100%', md: '315px' }}
-                    bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                    isHorizontal
-                    iconName="Windows"
-                    title="Download for Windows"
-                    link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
-                  />
-                </Box>
-                <Box>
-                  <Common.DownloadButton
-                    width={{ base: '100%', md: '283px' }}
+                    width={{ base: '100%', md: '282px' }}
                     bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
                     isHorizontal
                     iconName="Apple"
                     title="Download for Mac"
                     link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
+                    pe="auto"
                   />
                 </Box>
               </HStack>
@@ -101,12 +105,13 @@ const DownloadPlatform = () => {
                 columnGap={3}
                 padding="16px"
                 borderRadius="24px"
+                order={{ base: '2', md: '3' }}
               >
                 <Box
                   width="60px"
                   height="60px"
                   d={{ base: 'none', md: 'flex' }}
-                  justifyContent="center"
+                  justifyContent="center "
                   alignItems="center"
                 >
                   <I.MobileIcon opacity="1" />
@@ -119,16 +124,23 @@ const DownloadPlatform = () => {
                   iconName="Android"
                   title="Download for Android"
                   link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
+                  pe="auto"
                 />
-
-                <Common.DownloadButton
+                <Box
                   width={{ base: '100%', md: '282px' }}
-                  bg="rgba(255, 255, 255, 0.1)"
-                  isHorizontal
-                  iconName="Ios"
-                  title="iOS coming soon"
-                  link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
-                />
+                  marginTop={{ base: '12px !important', md: '0px !important' }}
+                  marginStart="0px !important"
+                >
+                  <Common.DownloadButton
+                    width={{ base: '100%', md: '282px' }}
+                    bg="rgba(255, 255, 255, 0.1)"
+                    isHorizontal
+                    iconName="Ios"
+                    title="iOS coming soon"
+                    link=""
+                    pe="none"
+                  />
+                </Box>
               </HStack>
             </VStack>
 

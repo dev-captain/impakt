@@ -7,8 +7,8 @@ type Props = {
 const DownloadTitleItem: FC<Props> = ({ title }) => {
   return (
     <Text
-      fontSize={{ base: '32px', md: '72px' }}
-      lineHeight={{ base: '36px', md: '72px' }}
+      fontSize={{ base: '32px', md: '80px', lg: '96px' }}
+      lineHeight={{ base: '100%', md: '100%' }}
       textStyle={{ base: 'black7', md: 'black8' }}
       textAlign={{ base: 'center', md: 'left' }}
       marginTop="0 !important"
