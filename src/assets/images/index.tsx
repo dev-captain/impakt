@@ -37,6 +37,7 @@ const Images = {
     light: require('./bg-light.png'),
     downloadAppBg: require('./downloadapp_bg.png'),
     teamofuseBg: require('./teamofusebg.png'),
+    whitelistBg: require('./Whitelistbg.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),
@@ -76,6 +77,10 @@ const Images = {
     Icon2: require('./Icons/Icon2.png'),
     Icon3: require('./Icons/Icon3.png'),
     UserIcon: require('./Icons/UserIcon.png'),
+  },
+  nft: {
+    oscar: require('./nft/Oscar.png'),
+    nft_bg: require('./nft/nft_bg.png'),
   },
 };
 
