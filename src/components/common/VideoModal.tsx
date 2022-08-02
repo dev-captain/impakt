@@ -107,16 +107,22 @@ function VideoModal() {
             >
               <GridItem colSpan={1} w="full">
                 <Common.DownloadButton
+                  bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                  width={{ base: 'auto' }}
                   iconName="Windows"
                   title="Download Windows"
                   link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Windows/Impakt_Windows_Installer_v1.0.0.zip"
+                  pe="auto"
                 />
               </GridItem>
               <GridItem colSpan={1} w="full">
                 <Common.DownloadButton
+                  bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                  width={{ base: 'auto' }}
                   iconName="Apple"
                   title="Download Mac"
                   link="https://impakt-build-artifacts.s3.us-east-2.amazonaws.com/Mac/Impakt_Mac_v1.0.0.zip"
+                  pe="auto"
                 />
               </GridItem>
             </SimpleGrid>

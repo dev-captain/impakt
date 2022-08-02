@@ -8,7 +8,7 @@ const DownloadSCreen = () => {
       <C.Seo />
 
       <div id="download-platform">
-        <S.DownloadPlatfrom />
+        <S.TermsOfUseContent />
       </div>
 
       {/* <div id="subscription-form">

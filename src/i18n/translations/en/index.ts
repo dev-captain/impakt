@@ -14,8 +14,11 @@ export default {
     squats: 'SQUATS',
   },
   downloadPlateform: {
-    download: 'Download',
+    download: 'Download our App',
     platform: 'our App',
+  },
+  termsOfUse: {
+    title: 'Term of Use',
   },
   navbar: {
     events: 'Events',

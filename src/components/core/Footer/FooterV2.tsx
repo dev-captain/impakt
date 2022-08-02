@@ -35,6 +35,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
             alignItems="flex-start"
             w={{ base: 'auto', lg: '1200px', xl: '1200px' }}
             paddingBottom={{ base: '48px', lg: '80px' }}
+            paddingTop={{ base: '80px', lg: '160px' }}
             borderBottom="1px solid rgba(255, 255, 255, 0.1)"
           >
             <SimpleGrid>
