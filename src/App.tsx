@@ -18,7 +18,7 @@ import {
   SignUp,
   SignIn,
   MemberDashboard,
-  TermsOfUse,
+  // TermsOfUse,
 } from 'pages';
 import { Common, S } from 'components';
 
@@ -78,7 +78,7 @@ const App = () => {
 
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
-      <Route path="/terms-of-use" element={<TermsOfUse />} />
+      {/* <Route path="/terms-of-use" element={<TermsOfUse />} /> */}
 
       <Route
         path="dashboard"

@@ -71,11 +71,11 @@ const NavbarLink = ({ IsHeader }: Props) => {
       />
       {!IsHeader && (
         <NavbarLinkItem
-          href="/terms-of-use"
+          type="LINK"
+          href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
           onClose={onClose}
           passiveColor={passiveColor}
           title={t(Keys.navbar.termsOfUse)}
-          isActive={path.path === 'terms-of-use'}
         />
       )}
       {/* <Button variant="ghost" onClick={() => changeLanguage('en')}>
