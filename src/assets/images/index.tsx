@@ -81,6 +81,12 @@ const Images = {
   nft: {
     oscar: require('./nft/Oscar.png'),
     nft_bg: require('./nft/nft_bg.png'),
+    nft_genesis_bg: require('./nft/nftgenesisbg.png'),
+    nft_genesis_mobile_bg: require('./nft/nftgenesisMobilebg.png'),
+    nft_card1: require('./nft/nft_card1.png'),
+    nft_card2: require('./nft/nft_card2.png'),
+    nft_card3: require('./nft/nft_card3.png'),
+    nft_card4: require('./nft/nft_card4.png'),
   },
 };
 
