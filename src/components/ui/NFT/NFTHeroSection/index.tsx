@@ -37,6 +37,7 @@ const NFTHeroSection = () => {
       bgImage={bgImage}
       align="center"
       justify="center"
+
     >
       <VStack w="full" pt={{ base: '20px', md: '40px' }}>
         <VStack maxW="1232px" w="full" px="16px">
@@ -103,7 +104,7 @@ const NFTHeroSection = () => {
                       navigate('/download');
                     }}
                   >
-                    How To Whitelist?
+                    How to Whitelist?
                   </Common.ImpaktButton>
                 </Box>
               </Box>
