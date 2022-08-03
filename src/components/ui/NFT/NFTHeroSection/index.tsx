@@ -37,7 +37,7 @@ const NFTHeroSection = () => {
       bgImage={bgImage}
       align="center"
       justify="center"
-
+      backgroungRepeat="no-repeat"
     >
       <VStack w="full" pt={{ base: '20px', md: '40px' }}>
         <VStack maxW="1232px" w="full" px="16px">

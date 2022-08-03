@@ -66,7 +66,6 @@ export const HeroLayout: React.FC<{
           justify={justify}
           backgroundSize={backgroundSize}
           backgroundImage={bgImage}
-          backgroundRepeat="no-repeat"
           backgroundColor={bgColor || backgroundColor}
           paddingTop={removeTopPadding ? 0 : '100px'}
           backgroundRepeat={backgroungRepeat}
