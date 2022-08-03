@@ -17,7 +17,6 @@ const fetchLatestNews = createAsyncThunk('discourse/fetchNews', async (_, { reje
     );
 
     const datas = resAllTopics.map(({ data }) => data.data);
-    console.log('datas', datas);
 
     return datas;
   } catch (err: any) {

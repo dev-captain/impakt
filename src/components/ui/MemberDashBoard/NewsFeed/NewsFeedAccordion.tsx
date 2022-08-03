@@ -17,7 +17,6 @@ import { useAppSelector } from '../../../../hooks';
 const NewsFeedAccordion: React.FC = () => {
   const [index, setIndex] = React.useState<number[]>([]);
   const newsFeeds = useAppSelector((state) => state.discourseReducer.news);
-  console.log(newsFeeds.map(({ description }: any) => description.replace(/<[^>]*>/g, '')));
 
   return (
     <Accordion w="full" index={index} allowToggle>
