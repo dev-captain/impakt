@@ -50,9 +50,9 @@ const TermsofUseContent = () => {
                 <Box
                   bgClip="text"
                   color="white"
-                  css={{
-                    '-webkit-background-clip': 'text',
-                    '-webkit-text-fill-color': 'transparent',
+                  sx={{
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
                   }}
                   background="linear-gradient(
                     330deg

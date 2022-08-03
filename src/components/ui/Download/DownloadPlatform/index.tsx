@@ -42,9 +42,9 @@ const DownloadPlatform = () => {
                 <Box
                   bgClip="text"
                   color="white"
-                  css={{
-                    '-webkit-background-clip': 'text',
-                    '-webkit-text-fill-color': 'transparent',
+                  sx={{
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
                   }}
                   background="linear-gradient(0deg, rgba(212, 35, 89, 0.35) 14.58%, rgba(212, 35, 89, 0) 45.1%), #FFFFFF"
                 >
