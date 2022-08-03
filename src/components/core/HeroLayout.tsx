@@ -67,9 +67,10 @@ export const HeroLayout: React.FC<{
           backgroundSize={backgroundSize}
           backgroundImage={bgImage}
           backgroundColor={bgColor || backgroundColor}
-          paddingTop={removeTopPadding ? 0 : '100px'}
+          backgroundPosition={{ base: 'top', md: 'bottom' }}
           backgroundRepeat={backgroungRepeat}
           backgroundBlendMode={backgroundBlendMode}
+          paddingTop={removeTopPadding ? 0 : '100px'}
           paddingBottom={
             customPadding || {
               base: removeBottomPadding ? 0 : '60px',
