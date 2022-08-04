@@ -35,6 +35,8 @@ const TermsofUseContent = () => {
       justify="flex-start"
       bgColor="#121216"
       backgroundSize="contain"
+      backgroungRepeat="no-repeat"
+      bgPosition="top"
     >
       <VStack color={text} w="full" pt={{ base: '20px', md: '72px' }}>
         <VStack maxW="1232px" w="full" px="16px">
