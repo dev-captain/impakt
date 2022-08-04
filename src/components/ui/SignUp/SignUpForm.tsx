@@ -204,7 +204,11 @@ const SignUpForm: React.FC = () => {
             By clicking on &apos;Create Account&apos; you agree to our
             <Box
               as="a"
-              href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+              href="/terms-of-use"
+              onClick={(e: any) => {
+                e.preventDefault();
+                navigate('/terms-of-use');
+              }}
               mx="3px"
               tabIndex={-1}
               cursor="pointer"
@@ -215,7 +219,7 @@ const SignUpForm: React.FC = () => {
             and
             <Box
               as="a"
-              href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+              href="https://knowledgebase.impakt.com/category/privacy-notice/privacy-notice-article"
               mx="3px"
               cursor="pointer"
               textColor="impaktRed"
