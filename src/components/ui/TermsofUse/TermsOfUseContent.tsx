@@ -75,6 +75,11 @@ const TermsofUseContent = () => {
                 padding={{ base: '35px 30px', lg: '72px 46px' }}
                 borderRadius="24px"
                 order={{ base: '3', md: '2' }}
+                _hover={{
+                  border: '2px solid rgba(240, 65, 83, 0.28)',
+                  transition: 'border 0.2s linear',
+                }}
+                border="2px solid rgba(255,255,255,0.05)"
               >
                 <Box>
                   <Text
