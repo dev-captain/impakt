@@ -37,7 +37,7 @@ const NFTGenesis = () => {
       bgColor="#121216"
     >
       <VStack w="full">
-        <VStack maxW="1232px" w="full" px="16px">
+        <VStack maxW="1200px" w="full" px="16px">
           <HStack
             flexDir={{ base: 'column', md: 'row' }}
             columnGap="auto"

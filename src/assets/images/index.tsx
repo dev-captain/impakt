@@ -87,6 +87,16 @@ const Images = {
     nft_card2: require('./nft/nft_card2.png'),
     nft_card3: require('./nft/nft_card3.png'),
     nft_card4: require('./nft/nft_card4.png'),
+    dynamicNftBg: require('./nft/dynamicNftBg.png'),
+    gold: require('./nft/Gold.png'),
+    goldThumb: require('./nft/GoldThumb.png'),
+    goldRect: require('./nft/goldRect.png'),
+    platinum: require('./nft/Platinum.png'),
+    platinuThumb: require('./nft/PlatinumThumb.png'),
+    platinumRect: require('./nft/platinumRect.png'),
+    bronze: require('./nft/Bronze.png'),
+    bronzethumb: require('./nft/BronzeThumb.png'),
+    bronzeRect: require('./nft/platinumRect.png'),
   },
 };
 

@@ -37,10 +37,9 @@ const NFTHeroSection = () => {
       bgImage={bgImage}
       align="center"
       justify="center"
-
     >
       <VStack w="full" pt={{ base: '20px', md: '40px' }}>
-        <VStack maxW="1232px" w="full" px="16px">
+        <VStack maxW="1200px" w="full" px="16px">
           <HStack
             flexDir={{ base: 'column', md: 'row' }}
             columnGap="auto"
@@ -75,7 +74,7 @@ const NFTHeroSection = () => {
                   marginTop="0 !important"
                   paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
                 >
-                  NFT Designed in Partnership with an Oscar Winner.
+                  {t(Keys.NFTGeneral.title)}
                 </Text>
                 <Text
                   fontSize={{ base: '32px', md: '50px', lg: '64px' }}
@@ -85,7 +84,7 @@ const NFTHeroSection = () => {
                   marginTop="20px"
                   paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
                 >
-                  A Dynamic NFT.
+                  {t(Keys.NFTGeneral.subTitle)}
                 </Text>
               </Box>
               <Box marginBottom={{ base: '24px !important', lg: '44px !important' }}>
@@ -104,7 +103,7 @@ const NFTHeroSection = () => {
                       navigate('/download');
                     }}
                   >
-                    How to Whitelist?
+                    {t(Keys.NFTGeneral.howToWhiteList)}
                   </Common.ImpaktButton>
                 </Box>
               </Box>
@@ -119,7 +118,7 @@ const NFTHeroSection = () => {
                 <Common.InfoCard LeftLogo={<I.RichIcon2 />}>
                   <VStack alignItems="flex-start" color="white">
                     <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
-                      {t(Keys.computerVision.aiDescription)}
+                      {t(Keys.NFTGeneral.cardInfo)}
                     </Text>
                   </VStack>
                 </Common.InfoCard>

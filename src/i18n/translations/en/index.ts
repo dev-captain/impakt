@@ -313,6 +313,12 @@ export default {
       godl: 'GODL',
     },
   },
+  NFTGeneral: {
+    title: 'NFT Designed in Partnership with an Oscar Winner.',
+    subTitle: 'A Dynamic NFT.',
+    howToWhiteList: 'How to Whitelist?',
+    cardInfo: 'Our AI technology recognizes your gestures & movements in real time',
+  },
   NFTGenesis: {
     Title: 'Impakt Genesis NFT',
     description:
@@ -335,6 +341,32 @@ export default {
       {
         image: Images.nft.nft_card4,
         description: 'A dynamic NFT where high in-game score = high rarity',
+      },
+    ],
+  },
+  DynamicNFT: {
+    title: 'A Dynamic NFT?',
+    description:
+      'How will this work with Impakt Genesis? Simple, the highest rarities like Platinum, Diamond and Legend, can only be obtained by exercising daily! Hoping for a high rarity at reveal won&apos;t help. You&apos;ll have to sweat for it!',
+    cardInfo: 'More sweat, higher rarity!',
+    plans: [
+      {
+        title: 'GOLD',
+        image: Images.nft.gold,
+        imageThumb: Images.nft.goldThumb,
+        imageRect: Images.nft.goldRect,
+      },
+      {
+        title: 'Silver',
+        image: Images.nft.platinum,
+        imageThumb: Images.nft.platinuThumb,
+        imageRect: Images.nft.platinumRect,
+      },
+      {
+        title: 'Bronze',
+        image: Images.nft.bronze,
+        imageThumb: Images.nft.bronzethumb,
+        imageRect: Images.nft.bronzeRect,
       },
     ],
   },

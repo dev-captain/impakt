@@ -19,6 +19,7 @@ export { default as DefaultImpaktProfileIcon } from './DefaultImpaktProfileIcon'
 export { default as ScrollIcon } from './Scroll';
 export { default as RichIconK } from './RichIconK';
 export { default as RichIcon } from './RichIcon';
+export { default as RichIconBody } from './RichIconBody';
 export { default as RichIcon2 } from './RichIcon2';
 export { default as CopyClipBoardIcon } from './CopyClipBoardIcon';
 export { default as Email } from './Email';
@@ -51,3 +52,4 @@ export { default as WebIcon } from './WebIcon';
 export { default as DesktopIcon } from './DesktopIcon';
 export { default as MobileIcon } from './MobileIcon';
 export { default as IosIcon } from './IosIcon';
+export { default as DynamicNftIcon } from './DynamicNftIcon';
