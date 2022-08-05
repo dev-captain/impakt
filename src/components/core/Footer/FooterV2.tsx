@@ -155,9 +155,9 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                       <Box onClick={() => navigate('/')} mr="32px">
                         <I.ImpaktIcon width="111px" height="32px" />
                       </Box>
-                      <Link href="/download" _hover={{ textDecoration: 'none' }}>
+                      <Box onClick={() => navigate('/download')}>
                         <Common.ImpaktButton>{t(Keys.footer.downloadApp)}</Common.ImpaktButton>
-                      </Link>
+                      </Box>
                     </HStack>
 
                     <HStack
