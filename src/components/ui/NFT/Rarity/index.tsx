@@ -12,6 +12,7 @@ const Rarity = () => {
   const bgImage = useColorModeValue(Images.nft.rarityBg, Images.nft.rarityBg);
   //   const { t } = useTranslation(`default`).i18n;
   const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
+
   return (
     <C.HeroLayout
       showNavbar
@@ -22,7 +23,7 @@ const Rarity = () => {
       align="center"
       justify="center"
       removeTopPadding
-      backgroundSize={isLessThan1040 ? 'cover' : 'contain'}
+      backgroundSize="cover"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#121216"

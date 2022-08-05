@@ -6,25 +6,25 @@ const Whitelist = () => {
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
       <S.NFTHeroSection />
-      {/* <> */}
       <section>
         <S.NFTGenesis />
       </section>
-      <section>
-        <S.NFTCongrats />
-      </section>
-      <div>
-        <S.NFTGenesis />
-      </div>
+
       <div>
         <S.DynamicNFT />
       </div>
+
       <div>
         <S.Rarity />
       </div>
+
       <div>
         <S.NFTOffer />
       </div>
+
+      <section>
+        <S.NFTCongrats />
+      </section>
 
       <div>
         <ImpaktFooter />

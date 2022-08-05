@@ -16,6 +16,7 @@ import { C, Common, I } from 'components';
 import GenesisCard from './GenesisCard';
 
 const NFTGenesis = () => {
+  const [isLessThanMd] = useMediaQuery('(max-width:992px)');
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.nft.nft_genesis_bg, Images.nft.nft_genesis_bg);
   const bgImageMobile = Images.nft.nft_genesis_mobile_bg;
@@ -66,7 +67,6 @@ const NFTGenesis = () => {
                     fontSize={{ base: '32px', md: '35px', lg: '48px' }}
                     lineHeight={{ base: '100%', md: '100%' }}
                     textStyle={{ base: 'black7', md: 'black8' }}
-                    textAlign={{ base: 'center', md: 'left' }}
                     marginTop="0 !important"
                     letterSpacing="-1.5px"
                     paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
@@ -75,7 +75,6 @@ const NFTGenesis = () => {
                   </Text>
                   <Text
                     textStyle={{ base: 'semiBold5', md: 'regular18' }}
-                    textAlign={{ base: 'center', md: 'left' }}
                     marginTop="32px"
                     color="rgba(255, 255, 255, 0.85)"
                   >
@@ -92,7 +91,15 @@ const NFTGenesis = () => {
                 w="full"
                 marginTop="0px !important"
               >
-                <Common.InfoCard wFull LeftLogo={<I.RichIconK />}>
+                <Common.InfoCard
+                  wFull
+                  LeftLogo={
+                    <I.RichIconK
+                      width={isLessThanMd ? '40' : ''}
+                      height={isLessThanMd ? '36' : ''}
+                    />
+                  }
+                >
                   <VStack alignItems="flex-start" color="white">
                     <Text
                       textStyle={{ base: 'semiBold5', md: 'regular18' }}

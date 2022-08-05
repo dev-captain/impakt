@@ -19,6 +19,7 @@ import { useParallax } from 'hooks';
 // import Gradient from './Gradient';
 
 const NFTHeroSection = () => {
+  const [isLessThanMd] = useMediaQuery('(max-width:992px)');
   const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.nft_bg, Images.nft.nft_bg);
   const { oscar } = Images.nft;
@@ -26,7 +27,6 @@ const NFTHeroSection = () => {
   const cardRef = React.useRef<HTMLDivElement>(null);
   const imageBoxRef = React.useRef<HTMLImageElement>(null);
   useParallax(cardRef, [imageBoxRef], { range: 25 });
-  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
     <C.HeroLayout
@@ -58,7 +58,7 @@ const NFTHeroSection = () => {
               bgClip="text"
               w={{ base: '81%', lg: '100%' }}
               color="white"
-              marginBottom={{ base: '0px', md: '32px' }}
+              marginBottom={{ base: '0px', md: '39px' }}
               sx={{
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -89,7 +89,7 @@ const NFTHeroSection = () => {
                 A Dynamic NFT.
               </Text>
             </Box>
-            <Box>
+            <Box mb={{ base: '0px', lg: '1em' }}>
               <Common.ImpaktButton
                 as="a"
                 height={{ base: '50px', md: '64px' }}
@@ -107,22 +107,23 @@ const NFTHeroSection = () => {
                 How to Whitelist?
               </Common.ImpaktButton>
             </Box>
-            <Box
-              display={{ base: 'flex', md: 'block' }}
-              justifyContent={{ base: 'center', lg: 'flex-start' }}
-              alignItems={{ base: 'flex-start', lg: 'flex-start' }}
-              id="our-ai-card-box"
-              w="full"
-              marginTop="0px !important"
+            <Common.InfoCard
+              alignItems="center"
+              LeftLogo={
+                <Box position="relative" top="10px">
+                  <I.RichIcon2
+                    width={isLessThanMd ? '40px' : '80'}
+                    height={isLessThanMd ? '36px' : ''}
+                  />
+                </Box>
+              }
             >
-              <Common.InfoCard LeftLogo={<I.RichIcon2 />}>
-                <VStack justifyContent="flex-start" alignItems="flex-start" color="white">
-                  <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
-                    {t(Keys.computerVision.aiDescription)}
-                  </Text>
-                </VStack>
-              </Common.InfoCard>
-            </Box>
+              <VStack justifyContent="flex-start" alignItems="flex-start" color="white">
+                <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
+                  {t(Keys.computerVision.aiDescription)}
+                </Text>
+              </VStack>
+            </Common.InfoCard>
           </VStack>
           <Box
             right="-95px"
@@ -133,6 +134,7 @@ const NFTHeroSection = () => {
             alignItems="flex-start"
             alignSelf={{ base: 'center', lg: 'unset' }}
             marginBottom={{ base: '0', md: '15px' }}
+            paddingX="2.45em"
           >
             <Image ref={imageBoxRef} src={oscar} />
           </Box>

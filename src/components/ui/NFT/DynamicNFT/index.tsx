@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
-import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { C, Common, I } from 'components';
 import PlansCarousel from './plansCarousel';
@@ -10,8 +10,10 @@ import PlansCarousel from './plansCarousel';
 const DynamicNFT = () => {
   // const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.dynamicNftBg, Images.nft.dynamicNftBg);
+  const [isLessThanMd] = useMediaQuery('(max-width:992px)');
   const { t } = useTranslation(`default`).i18n;
   // const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
+
   return (
     <C.HeroLayout
       showNavbar
@@ -77,7 +79,14 @@ const DynamicNFT = () => {
                 w="100%"
                 marginTop="10px !important"
               >
-                <Common.InfoCard LeftLogo={<I.RichIconBody />}>
+                <Common.InfoCard
+                  LeftLogo={
+                    <I.RichIconBody
+                      width={isLessThanMd ? '40px' : '100px'}
+                      height={isLessThanMd ? '36px' : '91px'}
+                    />
+                  }
+                >
                   <VStack alignItems="flex-start" color="white">
                     <Text color="#FEC417" textStyle={{ base: 'semiBold5', md: 'bold20' }}>
                       {t(Keys.DynamicNFT.cardInfo)}
