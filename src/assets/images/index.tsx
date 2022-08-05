@@ -88,6 +88,7 @@ const Images = {
     nft_card3: require('./nft/nft_card3.png'),
     nft_card4: require('./nft/nft_card4.png'),
     dynamicNftBg: require('./nft/dynamicNftBg.png'),
+    rarityBg: require('./nft/rarityBg.png'),
     gold: require('./nft/Gold.png'),
     goldThumb: require('./nft/GoldThumb.png'),
     goldRect: require('./nft/goldRect.png'),
@@ -97,6 +98,8 @@ const Images = {
     bronze: require('./nft/Bronze.png'),
     bronzethumb: require('./nft/BronzeThumb.png'),
     bronzeRect: require('./nft/platinumRect.png'),
+    nftOffer: require('./nft/NftOffer.png'),
+    nftOfferBg: require('./nft/NftofferBg.png'),
   },
 };
 

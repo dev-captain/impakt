@@ -12,6 +12,12 @@ const Whitelist = () => {
         <div>
           <S.DynamicNFT />
         </div>
+        <div>
+          <S.Rarity />
+        </div>
+        <div>
+          <S.NFTOffer />
+        </div>
       </>
     </Container>
   );
