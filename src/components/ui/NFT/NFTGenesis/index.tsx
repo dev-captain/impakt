@@ -22,6 +22,7 @@ const NFTGenesis = () => {
   const [isLessThan1040] = useMediaQuery('(max-width: 1080px)');
   let Genesis = useState<object[]>();
   Genesis = t('NFTGenesis.Genesis', { returnObjects: true });
+
   return (
     <C.HeroLayout
       //   showNavbar
@@ -36,8 +37,8 @@ const NFTGenesis = () => {
       backgroundBlendMode="lighten"
       bgColor="#121216"
     >
-      <VStack w="full">
-        <VStack maxW="1232px" w="full" px="16px">
+      <VStack px={{ base: '1em', lg: '0' }} w="full">
+        <VStack maxW="1200px" w="full">
           <HStack
             flexDir={{ base: 'column', md: 'row' }}
             columnGap="auto"
@@ -47,7 +48,7 @@ const NFTGenesis = () => {
           >
             <VStack
               align={{ base: 'center', md: 'flex-end' }}
-              spacing="22px"
+              justifyContent="space-between"
               w="100%"
               flexDir={{ base: 'column', md: 'row' }}
               paddingX={{ base: '0' }}
@@ -56,7 +57,7 @@ const NFTGenesis = () => {
             >
               <Box
                 color="white"
-                width={{ base: '100%', md: '50%' }}
+                width={{ base: '100%', md: '43%' }}
                 marginBottom={{ base: '24px', md: '0px' }}
               >
                 <Box width={{ base: '100%', md: '468px' }}>
@@ -85,7 +86,7 @@ const NFTGenesis = () => {
                 display={{ base: 'flex', md: 'block' }}
                 justifyContent={{ base: 'center', lg: 'flex-start' }}
                 alignItems={{ base: 'flex-start', lg: 'flex-start' }}
-                width={{ base: '100%', md: '50%' }}
+                width={{ base: '100%', md: '48%' }}
                 id="our-ai-card-box"
                 w="full"
                 marginTop="0px !important"

@@ -6,9 +6,12 @@ const Whitelist = () => {
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
       <S.NFTHeroSection />
       {/* <> */}
-      <div>
+      <section>
         <S.NFTGenesis />
-      </div>
+      </section>
+      <section>
+        <S.NFTCongrats />
+      </section>
       {/* </> */}
     </Container>
   );

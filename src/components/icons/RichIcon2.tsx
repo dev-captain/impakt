@@ -2,8 +2,8 @@ import { SVGProps } from 'react';
 
 const RichIcon2 = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    width="80"
-    height="71"
+    width="80px"
+    height="71px"
     viewBox="0 0 100 93"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

@@ -22,6 +22,7 @@ export const HeroLayout: React.FC<{
   customPadding?: string | any;
   removeBottomPadding?: boolean;
   bgPosition?: string;
+  background?: string;
   removeTopPadding?: boolean;
   children: React.ReactNode;
   align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
@@ -46,6 +47,7 @@ export const HeroLayout: React.FC<{
   removeTopPadding = false,
   pos,
   bgPosition,
+  background,
 }) => {
   const backgroundColor = useColorModeValue('glass.900', 'glass.200');
 
@@ -66,6 +68,7 @@ export const HeroLayout: React.FC<{
           minW="full"
           align={align}
           justify={justify}
+          background={background}
           backgroundSize={backgroundSize}
           backgroundImage={bgImage}
           backgroundColor={bgColor || backgroundColor}

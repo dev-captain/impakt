@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Tooltip, Image } from '@chakra-ui/react';
+import { Box, Flex, HStack, Tooltip, Image, forwardRef, BoxProps } from '@chakra-ui/react';
 import * as React from 'react';
 
 import TooltopIcon from '../../assets/svgs/tooltipIcon.svg';
@@ -10,16 +10,10 @@ interface InfoCardPropsI {
   onToolTipClick?: () => void;
   wFull?: boolean;
 }
-const InfoCard: React.FC<InfoCardPropsI> = ({
-  LeftLogo,
-  children,
-  isShowTooltip,
-  onToolTipClick,
-  tooltipLabel,
-  wFull = false,
-}) => {
+const InfoCard = forwardRef<BoxProps & InfoCardPropsI, 'div'>((props, ref) => {
   return (
     <HStack
+      ref={ref}
       paddingX={{ base: '12px', lg: '19px' }}
       paddingY={{ base: '12px', lg: '16px' }}
       borderRadius="16px"
@@ -27,22 +21,23 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
       background="rgba(28, 28, 40, 0.65)"
       id="info-card"
       w="100%"
-      maxW={wFull ? 'full' : '500px'}
+      maxW={props.wFull ? 'full' : '500px'}
       justifyContent="space-between"
+      {...props}
     >
       <HStack columnGap="0.5em" id="left">
-        {LeftLogo && <Box>{LeftLogo}</Box>}
+        {props.LeftLogo && <Box>{props.LeftLogo}</Box>}
         <Box id="description" ml="0 !important">
-          {children}
+          {props.children}
         </Box>
       </HStack>
       <Flex id="right" ml="0px !important">
-        {isShowTooltip && (
+        {props.isShowTooltip && (
           <Box ml="10px" cursor="pointer" id="tooltip">
             <Tooltip
               p="20px 20px"
-              label={tooltipLabel}
-              onClick={onToolTipClick}
+              label={props.tooltipLabel}
+              onClick={props.onToolTipClick}
               textStyle="semiBold16 "
               hasArrow
               mt="3"
@@ -61,6 +56,6 @@ const InfoCard: React.FC<InfoCardPropsI> = ({
       </Flex>
     </HStack>
   );
-};
+});
 
 export default InfoCard;

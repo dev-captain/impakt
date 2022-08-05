@@ -38,6 +38,7 @@ const Images = {
     downloadAppBg: require('./downloadapp_bg.png'),
     teamofuseBg: require('./teamofusebg.png'),
     whitelistBg: require('./Whitelistbg.png'),
+    nftBg2: require('./nft/nft_bg2.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),
