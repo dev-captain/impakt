@@ -22,6 +22,8 @@ const verification = 'verification';
 const signUp = 'signUp';
 const signIn = 'signIn';
 const memberDashboard = 'memberDashboard';
+const NFTGenesis = 'NFTGenesis';
+const termsOfUse = 'termsOfUse';
 
 const TranslationKeys = {
   common: {
@@ -39,6 +41,9 @@ const TranslationKeys = {
   downloadPlateform: {
     download: `${downloadPlateform}.download`,
     platform: `${downloadPlateform}.platform`,
+  },
+  termsOfUse: {
+    title: `${termsOfUse}.title`,
   },
   navbar: {
     events: `${navbar}.events`,
@@ -222,6 +227,11 @@ const TranslationKeys = {
       reason: `${memberDashboard}.exerciseList.reason`,
       godl: `${memberDashboard}.exerciseList.godl`,
     },
+  },
+  NFTGenesis: {
+    Title: `${NFTGenesis}.Title`,
+    description: `${NFTGenesis}.description`,
+    infoDescription: `${NFTGenesis}.infoDescription`,
   },
 };
 

@@ -48,9 +48,9 @@ const SocialFitnessGamified: React.FC = ({ children }) => {
                 id="hero-headline-box"
                 backgroundClip="text"
                 textAlign={{ base: 'center', lg: 'unset' }}
-                css={{
-                  '-webkit-background-clip': 'text',
-                  '-webkit-text-fill-color': 'transparent',
+                sx={{
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
                 }}
                 background="linear-gradient(302.56deg, rgba(140, 48, 155, 0.44) 3.86%, rgba(140, 48, 155, 0) 52.18%), linear-gradient(57.44deg, rgba(56, 4, 193, 0.55) -14.75%, rgba(56, 4, 193, 0) 32.81%), #FFFFFF;"
               >

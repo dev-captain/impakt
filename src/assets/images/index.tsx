@@ -35,6 +35,9 @@ const Images = {
     gradientBg: require('./gradientbg.jpg'),
     gradientBgRotated: require('./gradientbgrotated.jpg'),
     light: require('./bg-light.png'),
+    downloadAppBg: require('./downloadapp_bg.png'),
+    teamofuseBg: require('./teamofusebg.png'),
+    whitelistBg: require('./Whitelistbg.png'),
   },
 
   motionCapture: require('./motion-capture.webp'),
@@ -74,6 +77,16 @@ const Images = {
     Icon2: require('./Icons/Icon2.png'),
     Icon3: require('./Icons/Icon3.png'),
     UserIcon: require('./Icons/UserIcon.png'),
+  },
+  nft: {
+    oscar: require('./nft/Oscar.png'),
+    nft_bg: require('./nft/nft_bg.png'),
+    nft_genesis_bg: require('./nft/nftgenesisbg.png'),
+    nft_genesis_mobile_bg: require('./nft/nftgenesisMobilebg.png'),
+    nft_card1: require('./nft/nft_card1.png'),
+    nft_card2: require('./nft/nft_card2.png'),
+    nft_card3: require('./nft/nft_card3.png'),
+    nft_card4: require('./nft/nft_card4.png'),
   },
 };
 

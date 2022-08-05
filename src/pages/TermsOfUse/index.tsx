@@ -1,14 +1,14 @@
 import { Container } from '@chakra-ui/layout';
 import { C, S } from 'components';
 
-const DownloadSCreen = () => {
+const TermsOfUse = () => {
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
       {/* <Common.VideoModal /> */}
       <C.Seo />
 
       <div id="download-platform">
-        <S.DownloadPlatfrom />
+        <S.TermsOfUseContent />
       </div>
 
       {/* <div id="subscription-form">
@@ -19,4 +19,4 @@ const DownloadSCreen = () => {
   );
 };
 
-export default DownloadSCreen;
+export default TermsOfUse;

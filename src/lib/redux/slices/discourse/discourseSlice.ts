@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchNews } from './fetchNews';
+import { fetchLatestNews } from './fetchLatestNews';
 
 interface DiscourseInitialI {
   isDiscourseLoading: boolean;
@@ -17,14 +17,14 @@ const discourseSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchNews.pending, (state) => {
+      .addCase(fetchLatestNews.pending, (state) => {
         state.isDiscourseLoading = true;
       })
-      .addCase(fetchNews.fulfilled, (state, action) => {
+      .addCase(fetchLatestNews.fulfilled, (state, action) => {
         state.news = action.payload;
         state.isDiscourseLoading = false;
       })
-      .addCase(fetchNews.rejected, (state) => {
+      .addCase(fetchLatestNews.rejected, (state) => {
         state.isDiscourseLoading = false;
       });
   },

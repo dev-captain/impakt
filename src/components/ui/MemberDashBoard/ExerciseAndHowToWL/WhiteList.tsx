@@ -45,9 +45,9 @@ const WhiteList: React.FC = () => {
           w="full"
         >
           <Box
-            css={{
-              '-webkit-background-clip': 'text',
-              '-webkit-text-fill-color': 'transparent',
+            sx={{
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
             }}
             background="linear-gradient(248.29deg, rgba(89, 0, 255, 0) 65.74%, rgba(89, 0, 255, 0.35) 100%), linear-gradient(111.71deg, rgba(255, 0, 21, 0) 64.07%, rgba(255, 0, 21, 0.5) 100%), #FFFFFF;"
             flex="1"
@@ -71,9 +71,9 @@ const WhiteList: React.FC = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            css={{
-              '-webkit-background-clip': 'text',
-              '-webkit-text-fill-color': 'transparent',
+            sx={{
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
             }}
             background="linear-gradient(248.29deg, rgba(89, 0, 255, 0) 65.74%, rgba(89, 0, 255, 0.35) 100%), linear-gradient(111.71deg, rgba(255, 0, 21, 0) 64.07%, rgba(255, 0, 21, 0.5) 100%), #FFFFFF;"
           >

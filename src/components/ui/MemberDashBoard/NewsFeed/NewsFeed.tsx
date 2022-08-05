@@ -32,7 +32,7 @@ const NewsFeed: React.FC = () => {
         w="full"
         id="news-feed-accordion-box"
       >
-        <NewsFeedAccordion feeds={feeds} />
+        <NewsFeedAccordion />
       </Box>
 
       <Box color="#fff" w="full" id="news-feed-check-our-discourse-box">
@@ -48,7 +48,7 @@ const NewsFeed: React.FC = () => {
           lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
           justifyContent={{ md: 'center', lg: 'flex-start' }}
           as="a"
-          href="https://discuss.impakt.com"
+          href="https://discuss.impakt.com/tag/news"
           target="_blank"
         >
           Check our Discourse for more updates
@@ -59,29 +59,29 @@ const NewsFeed: React.FC = () => {
     </MemberDashboardCard>
   );
 };
-const feeds = [
-  {
-    title:
-      'When Apple released the first Macs with the M1 processor (the first generation of Apple silicon), it also introduced a whole new architecture to run apps on the Mac. So to take full advantage ...',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    href: '',
-  },
+// const feeds = [
+//   {
+//     title:
+//       'When Apple released the first Macs with the M1 processor (the first generation of Apple silicon), it also introduced a whole new architecture to run apps on the Mac. So to take full advantage ...',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     href: '',
+//   },
 
-  {
-    title:
-      'When Apple released the first Macs with the M1 processor (the first generation of Apple silicon), it also introduced a whole new architecture to run apps on the Mac. So to take full advantage ...',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    href: '',
-  },
+//   {
+//     title:
+//       'When Apple released the first Macs with the M1 processor (the first generation of Apple silicon), it also introduced a whole new architecture to run apps on the Mac. So to take full advantage ...',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     href: '',
+//   },
 
-  {
-    title:
-      'When Apple released the first Macs with the M1 processor (the first generation of Apple silicon), it also introduced a whole new architecture to run apps on the Mac. So to take full advantage ...',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    href: '',
-  },
-];
+//   {
+//     title:
+//       'When Apple released the first Macs with the M1 processor (the first generation of Apple silicon), it also introduced a whole new architecture to run apps on the Mac. So to take full advantage ...',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     href: '',
+//   },
+// ];
 export default NewsFeed;

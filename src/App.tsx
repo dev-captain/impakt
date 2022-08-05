@@ -18,6 +18,8 @@ import {
   SignUp,
   SignIn,
   MemberDashboard,
+  // NFT,
+  TermsOfUse,
 } from 'pages';
 import { Common, S } from 'components';
 
@@ -77,6 +79,8 @@ const App = () => {
 
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
+      {/* <Route path="/nft" element={<NFT />} /> */}
+      <Route path="/terms-of-use" element={<TermsOfUse />} />
 
       <Route
         path="dashboard"

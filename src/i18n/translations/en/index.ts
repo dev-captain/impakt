@@ -14,8 +14,11 @@ export default {
     squats: 'SQUATS',
   },
   downloadPlateform: {
-    download: 'Download',
+    download: 'Download our App',
     platform: 'our App',
+  },
+  termsOfUse: {
+    title: 'Term of Use',
   },
   navbar: {
     events: 'Events',
@@ -309,5 +312,30 @@ export default {
       reason: 'Reason',
       godl: 'GODL',
     },
+  },
+  NFTGenesis: {
+    Title: 'Impakt Genesis NFT',
+    description:
+      'The Impakt Genesis is our first 10,000 unique NFTs collection. That&apos;s why, the Genesis will always stay special in design and utility.',
+    infoDescription:
+      'For the Impakt Genesis to stay special, it needs to be special to begin with. And we made sure of that! Keep reading and find out how we did it!',
+    Genesis: [
+      {
+        image: Images.nft.nft_card1,
+        description: 'What you earn this summer, others will earn in 1 year!',
+      },
+      {
+        image: Images.nft.nft_card2,
+        description: 'In-game Avadroid coming with every Genesis NFT',
+      },
+      {
+        image: Images.nft.nft_card3,
+        description: 'Designed by Oscar winner  Chris Armasden',
+      },
+      {
+        image: Images.nft.nft_card4,
+        description: 'A dynamic NFT where high in-game score = high rarity',
+      },
+    ],
   },
 };

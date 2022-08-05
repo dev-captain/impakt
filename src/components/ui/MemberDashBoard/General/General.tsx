@@ -3,7 +3,7 @@ import { Box, HStack, VStack } from '@chakra-ui/react';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 // import Topics from '../Topics/Topics';
 import WelcomeModal from '../WelcomeModal/WelcomeModal';
-// import NewsFeed from '../NewsFeed/NewsFeed';
+import NewsFeed from '../NewsFeed/NewsFeed';
 // import WhiteList from '../ExerciseAndHowToWL/WhiteList';
 
 const General: React.FC = () => {
@@ -36,7 +36,7 @@ const General: React.FC = () => {
         </VStack>
 
         <VStack w="full" marginLeft="0 !important" rowGap="24px">
-          {/* <NewsFeed /> */}
+          <NewsFeed />
           {/* <Topics /> */}
         </VStack>
         {/* <VStack></VStack> */}
