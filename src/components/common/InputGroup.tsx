@@ -142,7 +142,6 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
             textStyle="regular201"
             isInvalid={!!errorMsg}
             borderRadius="12px"
-            mr={children ? '0.5em' : '0'}
             onChange={onChange}
             _autofill={{
               textFillColor: '#c6c6c6',
