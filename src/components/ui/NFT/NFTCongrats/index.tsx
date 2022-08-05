@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { Box, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, Text, useMediaQuery, VStack } from '@chakra-ui/react';
 import { C, Common } from 'components';
 import Images from 'assets/images';
 
 const NFTCongrats: React.FC = () => {
+  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
+
   return (
     <C.HeroLayout
       backgroundSize="100% 100%"
-      bgImage={Images.backgrounds.nftBg2}
+      bgImage={isLessThan1280 ? 'unset' : Images.backgrounds.nftBg2}
+      bgColor="rgba(14, 14, 17, 1)"
       align="flex-start"
       justify="flex-start"
     >
@@ -16,11 +19,12 @@ const NFTCongrats: React.FC = () => {
           <VStack rowGap="2em" w="full" id="nft-accordion-container">
             <HStack w="full">
               <Text
-                letterSpacing="-1.5px"
+                letterSpacing={{ base: '-0.5px', md: '-1.5px' }}
                 fontWeight="700"
-                fontSize="48px"
-                lineHeight="56px"
+                fontSize={{ base: '32px', md: '48px' }}
+                lineHeight={{ base: '100%', md: '56px' }}
                 color="#fff"
+                /* or 32px */
               >
                 Here are some common questions...
               </Text>
@@ -43,25 +47,20 @@ const NFTCongrats: React.FC = () => {
             </HStack>
           </VStack>
           <VStack rowGap="56px" w="full">
-            <VStack textAlign={{ base: 'center', lg: 'unset' }} display="flex">
+            <VStack
+              w={{ base: '90%', md: '73%' }}
+              textAlign={{ base: 'center', lg: 'unset' }}
+              display="flex"
+            >
               <Text
-                letterSpacing={{ base: '-0.5px', lg: '1-5px' }}
+                letterSpacing={{ base: '-0.5px', md: '1-5px' }}
                 fontWeight="700"
-                fontSize={{ base: '32px', lg: '48px' }}
-                lineHeight={{ base: '100%', lg: '56px' }}
+                fontSize={{ base: '32px', md: '48px' }}
+                lineHeight={{ base: '32px', md: '56px' }}
                 color="#fff"
               >
-                Congrats! You read the whole thing
-              </Text>
-
-              <Text
-                letterSpacing={{ base: '-0.5px', lg: '1-5px' }}
-                fontWeight="700"
-                fontSize={{ base: '32px', lg: '48px' }}
-                lineHeight={{ base: '100%', lg: '56px' }}
-                color="#fff"
-              >
-                right? Now let&apos;s get to the Whitelist!
+                {isLessThan1280 ? 'Congratulations! ' : 'Congrats! '}
+                You read the whole thing, right? Now let&apos;s get to the Whitelist!
               </Text>
             </VStack>
             <Box>
@@ -69,7 +68,7 @@ const NFTCongrats: React.FC = () => {
                 as="a"
                 height="64px"
                 textStyle="regular201"
-                minW={{ base: '168px', lg: '224px' }}
+                minW={{ base: '225px', lg: '228px' }}
                 href="/download"
                 borderRadius="12px"
                 boxShadow="0px 0px 0px 6px rgba(240, 65, 83, 0.3)"
