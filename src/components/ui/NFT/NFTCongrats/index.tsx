@@ -30,6 +30,8 @@ const NFTCongrats: React.FC = () => {
               mt="0 !important"
               columnGap="3em"
               rowGap="0.5em"
+              justifyContent="flex-start"
+              alignItems="flex-start"
               w="full"
             >
               <VStack w="full">
@@ -84,43 +86,44 @@ const NFTCongrats: React.FC = () => {
 const accordionItems1: { title: string; description: string }[] = [
   {
     title: 'Which blockchain?',
-    description: '',
+    description: 'ETH',
   },
 
   {
     title: 'Whitelist period?',
-    description: '',
+    description: 'June 1st - July 1st',
   },
 
   {
     title: 'Impakt pass mint date?',
-    description: '',
+    description: 'ETA July 4th',
   },
 
   {
     title: 'Impakt pass mint price?',
-    description: '',
+    description: 'First 10,000 for free! 0.3 ETH after the Genesis mint.',
   },
 ];
 const accordionItems2: { title: string; description: string }[] = [
   {
     title: 'Impakt pass mint date?',
-    description: '',
+    description: 'ETA July 8th 2022',
   },
 
   {
     title: 'Impakt pass mint price?',
-    description: '',
+    description: 'Will updated soon',
   },
 
   {
     title: 'Impakt genesis reveal date?',
-    description: '',
+    description: 'ETA July 10th 2022',
   },
 
   {
     title: 'What is special about genesis?',
-    description: '',
+    description:
+      'Impakt Genesis is our first ever collection. Further collections will never match the Genesis full utility.',
   },
 ];
 export default NFTCongrats;

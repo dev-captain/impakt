@@ -21,13 +21,17 @@ const ImpaktAccordion: React.FC<ImpaktAccordionPropsI> = ({ items }) => {
       <VStack w="full">
         {items.map(({ title, description }, i) => (
           <AccordionItem
+            /* Glass */
+
             key={`accordion-item-${i + 1}`}
             w="100%"
             background="#20202E"
             borderRadius="1em"
-            border="0"
+            border="1px solid rgba(256,256,256,0.1)"
             p="20px 20px 20px 32px"
             position="relative"
+            backdropFilter="blur(40px)"
+            bgColor="rgba(28, 28, 40, 0.65)"
             onMouseEnter={() => {
               setIndex([i]);
             }}
@@ -61,7 +65,12 @@ const ImpaktAccordion: React.FC<ImpaktAccordionPropsI> = ({ items }) => {
                   </Box>
                 </AccordionButton>
                 <AccordionPanel px="0" pb={4}>
-                  <Text fontSize="20px" lineHeight="32px" fontWeight="400">
+                  <Text
+                    fontWeight="500"
+                    fontSize="18px"
+                    lineHeight="120%"
+                    color="rgba(255, 255, 255, 0.85)"
+                  >
                     {description}
                   </Text>
                 </AccordionPanel>
