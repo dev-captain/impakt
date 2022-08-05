@@ -28,16 +28,16 @@ const NFTOffer = () => {
       spacing={10}
       pos="relative"
       //   bgImage={bgImage}
-
-      align="center"
-      justify="center"
+      removeTopPadding
+      justify="flex-start"
+      align="flex-start"
       backgroundSize="auto"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#121216"
     >
-      <VStack w="full">
-        <VStack maxW="1200px" w="full" px="16px">
+      <VStack px={{ base: '1em', lg: '0' }} w="full">
+        <VStack maxW="1200px" w="full">
           <HStack
             flexDir={{ base: 'column' }}
             columnGap="auto"

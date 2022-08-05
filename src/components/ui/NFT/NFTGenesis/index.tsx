@@ -27,6 +27,7 @@ const NFTGenesis = () => {
   return (
     <C.HeroLayout
       //   showNavbar
+      customTopPadding="80px"
       minH="70vh"
       spacing={10}
       pos="relative"
@@ -38,6 +39,7 @@ const NFTGenesis = () => {
       backgroundBlendMode="lighten"
       bgColor="#121216"
       removeBottomPadding={isLessThan1040}
+      customPadding="100px"
     >
       <VStack px={{ base: '1em', lg: '0' }} w="full">
         <VStack maxW="1200px" w="full">

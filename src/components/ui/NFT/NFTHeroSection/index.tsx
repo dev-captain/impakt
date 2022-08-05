@@ -31,8 +31,7 @@ const NFTHeroSection = () => {
   return (
     <C.HeroLayout
       showNavbar
-      minH="96vh"
-      removeBottomPadding
+      minH="100vh"
       pos="relative"
       bgImage={bgImage}
       justify="flex-start"
@@ -126,9 +125,9 @@ const NFTHeroSection = () => {
             </Common.InfoCard>
           </VStack>
           <Box
-            right="-95px"
+            right="-150px"
             position={{ base: 'unset', md: 'absolute' }}
-            top="-30px"
+            top="-2vw"
             ref={cardRef}
             align="inherit"
             alignItems="flex-start"

@@ -18,19 +18,19 @@ const DynamicNFT = () => {
     <C.HeroLayout
       showNavbar
       minH="70vh"
-      spacing={10}
       pos="relative"
+      align="flex-end"
+      justify="flex-end"
       bgImage={bgImage}
-      align="center"
-      justify="center"
-      removeTopPadding
-      backgroundSize="auto"
+      backgroundSize="100% 100%"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#121216"
+      customTopPadding="20px"
+      customPadding="100px"
     >
-      <VStack w="full" pt={{ base: '0px', md: '80px' }}>
-        <VStack maxW="1200px" w="full" px="16px">
+      <VStack w="full" px={{ base: '1em', lg: '0' }}>
+        <VStack maxW="1200px" w="full">
           <HStack
             flexDir={{ base: 'column', md: 'row' }}
             columnGap="auto"
@@ -43,7 +43,6 @@ const DynamicNFT = () => {
               spacing="22px"
               w="100%"
               paddingX={{ base: '0' }}
-              marginTop="50px"
 
               // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
             >

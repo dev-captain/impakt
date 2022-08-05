@@ -17,42 +17,28 @@ const Rarity = () => {
     <C.HeroLayout
       showNavbar
       minH="70vh"
-      spacing={10}
       pos="relative"
       bgImage={bgImage}
-      align="center"
-      justify="center"
-      removeTopPadding
-      backgroundSize="cover"
+      align="flex-start"
+      justify="flex-start"
+      backgroundSize="100% 100%"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#121216"
-      removeBottomPadding={isLessThan1040}
+      removeTopPadding
+      customPadding="126px"
     >
-      <VStack w="full" pt={{ base: '0px', md: '80px' }}>
-        <VStack maxW="1200px" w="full" px="16px">
-          <HStack
-            flexDir={{ base: 'column' }}
-            columnGap="auto"
-            rowGap={{ base: '30px' }}
-            alignItems="center"
-            w="full"
-          >
+      <VStack px={{ base: '1em', lg: '0' }} w="full">
+        <VStack maxW="1200px" w="full">
+          <HStack flexDir="column" columnGap="auto" rowGap="30px" alignItems="center" w="full">
             <VStack
               align="flex-start"
+              justifyContent="flex-start"
               spacing="22px"
               w="100%"
               paddingX={{ base: '0' }}
-              marginTop="50px"
-
-              // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
             >
-              <Box
-                bgClip="text"
-                color="white"
-                marginBottom={{ base: '0px', md: '16px' }}
-                width={{ base: '100%', md: '788px' }}
-              >
+              <Box bgClip="text" color="white" width={{ base: '100%', md: '788px' }}>
                 <Text
                   textStyle={{ base: 'bold5', md: 'TitleBold48' }}
                   textAlign="left"
@@ -64,7 +50,7 @@ const Rarity = () => {
                 <Text
                   textStyle={{ base: 'semiBold5', md: 'regular18' }}
                   textAlign="left"
-                  marginTop="32px"
+                  marginTop="25px"
                   color="rgba(255, 255, 255, 0.85)"
                   //   dangerouslySetInnerHTML={{ __html: t(Keys.DynamicNFT.description) }}
                 >

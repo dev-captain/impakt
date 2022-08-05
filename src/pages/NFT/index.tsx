@@ -1,10 +1,9 @@
-import { Container } from '@chakra-ui/react';
-import { S } from 'components';
-import { ImpaktFooter } from '../../components/ui';
+import { Box, Container } from '@chakra-ui/react';
+import { C, S } from 'components';
 
 const Whitelist = () => {
   return (
-    <Container spacing={0} p={0} minW="full" m={0} bgColor="">
+    <Container spacing={0} backgroundColor="" p={0} minW="full" m={0} bgColor="">
       <S.NFTHeroSection />
       <section>
         <S.NFTGenesis />
@@ -23,12 +22,13 @@ const Whitelist = () => {
       </div>
 
       <section>
-        <S.NFTCongrats />
+        <S.NftCommonQuestion />
       </section>
 
-      <div>
-        <ImpaktFooter />
-      </div>
+      <section>
+        <S.NFTCongrats />
+      </section>
+      <C.FooterV2 />
     </Container>
   );
 };

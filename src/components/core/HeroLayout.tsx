@@ -19,6 +19,7 @@ export const HeroLayout: React.FC<{
   backgroundBlendMode?: string;
   showFooter?: boolean;
   showFooterV2?: boolean;
+  customTopPadding?: string | any;
   customPadding?: string | any;
   removeBottomPadding?: boolean;
   bgPosition?: string;
@@ -44,6 +45,7 @@ export const HeroLayout: React.FC<{
   backgroundSize = 'cover',
   backgroungRepeat,
   backgroundBlendMode,
+  customTopPadding,
   removeTopPadding = false,
   pos,
   bgPosition,
@@ -75,7 +77,7 @@ export const HeroLayout: React.FC<{
           backgroundPosition={{ base: bgPosition ?? 'top', md: bgPosition ?? 'bottom' }}
           backgroundRepeat={backgroungRepeat}
           backgroundBlendMode={backgroundBlendMode}
-          paddingTop={removeTopPadding ? 0 : '100px'}
+          paddingTop={customTopPadding || { base: removeTopPadding ? '0 !important' : '100px' }}
           paddingBottom={
             customPadding || {
               base: removeBottomPadding ? 0 : '60px',
