@@ -28,7 +28,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
       minH="auto !important"
       justify="flex-start"
     >
-      <VStack width="100%">
+      <VStack as="footer" width="100%">
         {/* <VStack w="100%">
           <HStack
             justifyContent="center"

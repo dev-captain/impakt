@@ -38,7 +38,7 @@ const NFTHeroSection = () => {
       justify="flex-start"
       align="flex-start"
     >
-      <VStack px={{ base: '1em', lg: '0' }} mt="76px" w="full">
+      <VStack px={{ base: '1em', lg: '0' }} mt={{ base: '38px', lg: '76px' }} w="full">
         <HStack
           rowGap="24px"
           flexDir={{ base: 'column-reverse', lg: 'row' }}
@@ -56,6 +56,7 @@ const NFTHeroSection = () => {
           >
             <Box
               bgClip="text"
+              w={{ base: '81%', lg: '100%' }}
               color="white"
               marginBottom={{ base: '0px', md: '32px' }}
               sx={{
@@ -67,8 +68,7 @@ const NFTHeroSection = () => {
             >
               <Text
                 fontSize={{ base: '32px', md: '50px', lg: '64px' }}
-                lineHeight={{ base: '100%', md: '100%' }}
-                textStyle={{ base: 'black7', md: 'black8' }}
+                lineHeight="100%"
                 textAlign={{ base: 'center', md: 'left' }}
                 marginTop="0 !important"
                 paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
@@ -89,13 +89,14 @@ const NFTHeroSection = () => {
                 A Dynamic NFT.
               </Text>
             </Box>
-            <Box marginBottom={{ base: '24px !important', lg: '44px !important' }}>
+            <Box>
               <Common.ImpaktButton
                 as="a"
-                height="64px"
+                height={{ base: '50px', md: '64px' }}
                 textStyle="regular201"
                 borderRadius="12px"
                 minW={{ base: '168px', lg: '224px' }}
+                maxW={{ base: '168px', lg: '224px' }}
                 href="/download"
                 onClick={(e) => {
                   e.preventDefault();
