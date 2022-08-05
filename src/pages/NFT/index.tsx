@@ -14,9 +14,21 @@ const Whitelist = () => {
         <S.NFTCongrats />
       </section>
       <div>
+        <S.NFTGenesis />
+      </div>
+      <div>
+        <S.DynamicNFT />
+      </div>
+      <div>
+        <S.Rarity />
+      </div>
+      <div>
+        <S.NFTOffer />
+      </div>
+
+      <div>
         <ImpaktFooter />
       </div>
-      {/* </> */}
     </Container>
   );
 };

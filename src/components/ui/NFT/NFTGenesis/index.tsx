@@ -36,6 +36,7 @@ const NFTGenesis = () => {
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#121216"
+      removeBottomPadding={isLessThan1040}
     >
       <VStack px={{ base: '1em', lg: '0' }} w="full">
         <VStack maxW="1200px" w="full">
