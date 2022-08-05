@@ -141,7 +141,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                 >
                   <HStack
                     w="full"
-                    padding={{ base: '0px 10px', md: '0px' }}
+                    padding={{ base: '0px 16px', md: '0px' }}
                     rowGap={{ base: '32px', md: '24px' }}
                     display="flex"
                     flexWrap={{ base: 'wrap', md: 'nowrap' }}
@@ -187,7 +187,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                 </GridItem>
               </SimpleGrid>
             </HStack>
-            <HStack w="full" padding={{ base: '0px 10px', md: '0px', lg: wFull ? '0 48px' : '0' }}>
+            <HStack w="full" padding={{ base: '0px 16px', md: '0px', lg: wFull ? '0 48px' : '0' }}>
               <NavBarLink IsHeader={false} />
             </HStack>
 

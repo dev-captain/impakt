@@ -1,5 +1,6 @@
 import { Container } from '@chakra-ui/react';
 import { S } from 'components';
+import { ImpaktFooter } from '../../components/ui';
 
 const Whitelist = () => {
   return (
@@ -12,6 +13,9 @@ const Whitelist = () => {
       <section>
         <S.NFTCongrats />
       </section>
+      <div>
+        <ImpaktFooter />
+      </div>
       {/* </> */}
     </Container>
   );
