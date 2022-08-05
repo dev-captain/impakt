@@ -5,12 +5,16 @@ import Keys from 'i18n/types';
 import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { C, Common, I } from 'components';
+import { useParallax } from 'hooks';
 import PlansCarousel from './plansCarousel';
 
 const DynamicNFT = () => {
   // const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.dynamicNftBg, Images.nft.dynamicNftBg);
   const { t } = useTranslation(`default`).i18n;
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const imageBoxRef = React.useRef<HTMLDivElement>(null);
+  useParallax(cardRef, [imageBoxRef], { range: 25 });
   // const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
   return (
     <C.HeroLayout
@@ -87,6 +91,7 @@ const DynamicNFT = () => {
               </Box>
             </VStack>
             <VStack
+              ref={cardRef}
               align={{ base: 'center' }}
               spacing="22px"
               w={{ base: '100%', md: '80%', lg: '100%' }}
@@ -98,7 +103,12 @@ const DynamicNFT = () => {
               marginStart="0px !important"
               // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
             >
-              <Box align="inherit" alignItems="flex-start" marginBottom={{ base: '0', md: '15px' }}>
+              <Box
+                align="inherit"
+                alignItems="flex-start"
+                marginBottom={{ base: '0', md: '15px' }}
+                ref={imageBoxRef}
+              >
                 <PlansCarousel />
               </Box>
             </VStack>
