@@ -20,6 +20,7 @@ const NFTOffer = () => {
   const bgImage = useColorModeValue(Images.nft.nftOfferBg, Images.nft.nftOfferBg);
   //   const { t } = useTranslation(`default`).i18n;
   const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
+
   return (
     <C.HeroLayout
       showNavbar
