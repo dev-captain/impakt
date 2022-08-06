@@ -5,22 +5,10 @@ import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
+import { I } from 'components';
+import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
 
-const SmallScreenFooter = ({
-  bgColor,
-  logo,
-  textColor,
-  twitter,
-  discord,
-  youtube,
-}: {
-  bgColor: string;
-  logo: string;
-  textColor: string;
-  twitter: string;
-  discord: string;
-  youtube: string;
-}) => {
+const SmallScreenFooter = ({ bgColor, textColor }: { bgColor: string; textColor: string }) => {
   const { t } = useTranslation().i18n;
   const navigate = useNavigate();
   const _hover = {
@@ -42,42 +30,11 @@ const SmallScreenFooter = ({
     >
       <VStack w="full">
         <HStack align="flex-start" justify="space-between" w="full">
-          <Image onClick={() => navigate('/')} src={logo} />
-          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="8px" pl="64px">
-            <Box as="a" target="_blank" href={Socials.twitter}>
-              <Image
-                minW="32px"
-                h="32px"
-                maxW="30px"
-                opacity={0.6}
-                objectFit="contain"
-                src={twitter}
-                {..._hover}
-              />
-            </Box>
-            <Box as="a" target="_blank" href={Socials.discord}>
-              <Image
-                minW="32px"
-                h="30px"
-                maxW="30px"
-                opacity={0.6}
-                objectFit="contain"
-                src={discord}
-                {..._hover}
-              />
-            </Box>
-            <Box as="a" target="_blank" href={Socials.youtube}>
-              <Image
-                minW="32px"
-                h="30px"
-                maxW="30px"
-                opacity={0.6}
-                objectFit="contain"
-                src={youtube}
-                {..._hover}
-              />
-            </Box>
-          </HStack>
+          <Box cursor="pointer" onClick={() => navigate('/')} mr="32px">
+            <I.ImpaktIcon width="111px" height="32px" />
+          </Box>
+
+          <NavBarSocialIcons />
         </HStack>
         <HStack align="flex-start" justify="flex-start" w="full" spacing="40px" />
         <VStack spacing="8px" align="flex-start" w="full">
@@ -90,11 +47,20 @@ const SmallScreenFooter = ({
           <Text fontSize="12px" lineHeight="16px" opacity="0.6">
             {t(keys.footer.allRightReserved)}
           </Text>
-          <Link href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use">
-            <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
-              {t(keys.footer.termOfUse)}
-            </Text>
-          </Link>
+          <Box onClick={() => navigate('/terms-of-use')}>
+            <Box
+              as="a"
+              href="/terms-of-use"
+              onClick={(e: any) => {
+                e.preventDefault();
+                navigate('/terms-of-use');
+              }}
+            >
+              <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
+                {t(keys.footer.termOfUse)}
+              </Text>
+            </Box>
+          </Box>
         </VStack>
       </VStack>
     </VStack>
