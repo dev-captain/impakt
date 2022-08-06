@@ -129,7 +129,7 @@ const SendMessage = () => {
                   placeholder={t(keys.contact.topicOfMessage)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
                 />
-                <Common.TextareaField
+                {/* <Common.TextareaField
                   isOutlined
                   name="message"
                   fontSize="14px"
@@ -137,7 +137,7 @@ const SendMessage = () => {
                   textStyle="regular2"
                   placeholder={t(keys.contact.yourMessage)}
                   _placeholder={{ color: textColor, fontSize: '14px' }}
-                />
+                /> */}
                 <Box {...ContactProps.gradients.first} />
                 <Box {...ContactProps.gradients.second} />
               </VStack>

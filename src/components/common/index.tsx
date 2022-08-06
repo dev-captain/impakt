@@ -11,7 +11,7 @@ export { default as Logo } from './Logo';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as SmallLogo } from './SmallLogo';
 export { default as Spacer } from './Spacer';
-export { default as TextareaField } from './TextareaField';
+export { default as ImpaktTextareaField } from './ImpaktTextareaField';
 export { default as TextField } from './TextField';
 export { default as VideoModal } from './VideoModal';
 export { default as Card } from './Card';

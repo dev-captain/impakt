@@ -70,6 +70,7 @@ export const Videos = {
   impaktGames: 'assets/videos/tutorial-video.mp4',
   heroVideo: 'assets/videos/herovideo.mov',
   stars: 'assets/videos/stars.mov',
+  backgroundBeachVideo: 'assets/videos/backgroundbeach.mp4',
 };
 
 export const Socials = {
