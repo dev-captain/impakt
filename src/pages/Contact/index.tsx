@@ -1,5 +1,3 @@
-// import DiscordSupport from './component/DiscordSupport';
-// import SendMessage from './component/SendMessage';
 import { Container } from '@chakra-ui/react';
 import { S } from 'components';
 import DiscordSupport from '../../components/ui/ContactUs/DiscordSupport';
@@ -12,10 +10,5 @@ const ContactPage = () => {
     </Container>
   );
 };
-
-/* // <VStack spacing={0} bgColor={bgColor}>
-    //   <SendMessage />
-    //   <DiscordSupport />
-    // </VStack> */
 
 export default ContactPage;
