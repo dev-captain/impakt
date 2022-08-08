@@ -1,5 +1,4 @@
 import { useColorMode } from '@chakra-ui/react';
-import Images from 'assets/images';
 import BigScreenFooter from './BigScreenFooter';
 import SmallScreenFooter from './SmallScreenFooter';
 

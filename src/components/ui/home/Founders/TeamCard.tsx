@@ -1,6 +1,4 @@
-import { Box, Image, Text, VStack, Link } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import Images from 'assets/images';
+import { Box, Image, Text, VStack } from '@chakra-ui/react';
 import PersonalSocialMediaWrapper from '../../../common/PersonalSocialMediaWrapper';
 
 // import colors from 'theme/colors';

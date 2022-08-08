@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Tooltip, Image, forwardRef, BoxProps } from '@chakra-ui/react';
+import { Box, Flex, HStack, Tooltip, forwardRef, BoxProps } from '@chakra-ui/react';
 import { I } from 'components';
 
 interface InfoCardPropsI {

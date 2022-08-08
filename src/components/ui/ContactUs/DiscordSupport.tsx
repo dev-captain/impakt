@@ -1,14 +1,5 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import {
-  Box,
-  GridItem,
-  HStack,
-  Image,
-  SimpleGrid,
-  Text,
-  useColorModeValue,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -17,7 +8,6 @@ import { Videos } from '../../../data';
 const DiscordSupport = () => {
   const { t } = useTranslation().i18n;
   const mode = useColorModeValue('dark', 'light');
-  const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   return (

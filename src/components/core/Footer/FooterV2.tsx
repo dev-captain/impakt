@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { memo } from 'react';
-import { VStack, HStack, Box, Text, GridItem, SimpleGrid, Link } from '@chakra-ui/react';
+import { memo } from 'react';
+import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
