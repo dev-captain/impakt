@@ -20,6 +20,7 @@ import {
   MemberDashboard,
   NFT,
   TermsOfUse,
+  Whitelist,
 } from 'pages';
 import { Common, S } from 'components';
 
@@ -80,6 +81,7 @@ const App = () => {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
       <Route path="/nft" element={<NFT />} />
+      <Route path="/whitelist" element={<Whitelist />} />
       <Route path="/terms-of-use" element={<TermsOfUse />} />
 
       <Route
