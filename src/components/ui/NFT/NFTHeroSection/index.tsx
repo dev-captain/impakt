@@ -60,9 +60,9 @@ const NFTHeroSection = () => {
                 bgClip="text"
                 color="white"
                 marginBottom={{ base: '0px', md: '32px' }}
-                css={{
-                  '-webkit-background-clip': 'text',
-                  '-webkit-text-fill-color': 'transparent',
+                sx={{
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
                 }}
                 background="linear-gradient(279.09deg, rgba(195, 45, 255, 0.35) 16.95%, rgba(195, 45, 255, 0) 45.26%), linear-gradient(80.91deg, rgba(192, 72, 74, 0.35) 1.01%, rgba(192, 72, 74, 0) 18%), #FFFFFF"
               >

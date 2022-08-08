@@ -1,14 +1,20 @@
 import * as React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
-import Topics from '../Topics/Topics';
+// import Topics from '../Topics/Topics';
 import WelcomeModal from '../WelcomeModal/WelcomeModal';
 import NewsFeed from '../NewsFeed/NewsFeed';
-import WhiteList from '../ExerciseAndHowToWL/WhiteList';
+// import WhiteList from '../ExerciseAndHowToWL/WhiteList';
 
 const General: React.FC = () => {
   return (
-    <Box minH="calc(100vh + 150px)" overflow="hidden" w="full" as="section" id="general-section">
+    <Box
+      // minH="100vh"
+      // overflow="hidden"
+      w="full"
+      as="section"
+      id="general-section"
+    >
       <MemberDashboardSectionHeadlineText title="General" />
       <HStack
         columnGap="24px"
@@ -26,12 +32,12 @@ const General: React.FC = () => {
           rowGap="24px"
         >
           <WelcomeModal />
-          <WhiteList />
+          {/* <WhiteList /> */}
         </VStack>
 
         <VStack w="full" marginLeft="0 !important" rowGap="24px">
           <NewsFeed />
-          <Topics />
+          {/* <Topics /> */}
         </VStack>
         {/* <VStack></VStack> */}
       </HStack>

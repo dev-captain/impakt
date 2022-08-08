@@ -16,6 +16,7 @@ const DynamicNFT = () => {
   const imageBoxRef = React.useRef<HTMLDivElement>(null);
   useParallax(cardRef, [imageBoxRef], { range: 25 });
   // const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
+
   return (
     <C.HeroLayout
       showNavbar

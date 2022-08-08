@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-// import moment from 'moment';
+import moment from 'moment';
 
 import {
   VStack,
@@ -16,14 +16,28 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
-// import { useAppSelector } from 'hooks';
+import { useAppSelector, usePascalCase } from 'hooks';
 
 const ExercisesList: React.FC = () => {
   const { t } = useTranslation().i18n;
 
-  // const excerciseStatistics = useAppSelector(
-  //   (state) => state.rewardHistoryReducer.rewardHistoryState,
-  // );
+  const { convertToPascalCase } = usePascalCase();
+  const rewardHistoryStatistics = useAppSelector(
+    (state) => state.rewardHistoryReducer.rewardHistoryState,
+  );
+  const [pascalCasedRewardHistoryStatistics, setPascalCasedRewardHistoryStatistics] =
+    React.useState<typeof rewardHistoryStatistics>([]);
+
+  React.useEffect(() => {
+    if (rewardHistoryStatistics && rewardHistoryStatistics.length > 0) {
+      const pascalCasedExStatics = rewardHistoryStatistics.map((stats) => {
+        const convertedPurpose = convertToPascalCase(stats.purpose);
+
+        return { ...stats, purpose: convertedPurpose };
+      });
+      setPascalCasedRewardHistoryStatistics(pascalCasedExStatics);
+    }
+  }, [rewardHistoryStatistics]);
 
   return (
     <VStack
@@ -130,58 +144,61 @@ const ExercisesList: React.FC = () => {
             </Tr> */}
             {/* {excerciseStatistics.length > 0 && */}
             {/* excerciseStatistics.map((exercise: any) => ( */}
-            {dummyExercisesListData.map(({ date, godl, purpose }) => (
-              <Tr
-                display="table"
-                width="100%"
-                style={{ tableLayout: 'fixed' }}
-                // key={exercise.date}
-              >
-                <Td
-                  borderBottom={0}
-                  width={{ base: '96px', md: '138px' }}
-                  paddingY="10px"
-                  paddingX="16px"
-                  textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
-                  color="rgba(255, 255, 255, 0.4)"
-                >
-                  {date}
-                  {/* {moment(exercise.date).format('DD.MM.YYYY')} */}
-                </Td>
-                <Td
-                  borderBottom={0}
-                  paddingX="20px"
-                  paddingY="10px"
-                  textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
-                  width="auto"
-                  color="rgba(255, 255, 255, 0.75)"
-                  whiteSpace="pre-line"
-                >
-                  {purpose}
-                  {/* {exercise.purpose} */}
-                </Td>
-                <Td
-                  borderBottom={0}
-                  paddingY="10px"
-                  paddingX={{ base: '15px', md: '24px' }}
-                  width={{ base: '88px', sm: '118px', md: '150px' }}
-                >
-                  <Box display="flex">
-                    <Text
-                      backgroundColor="rgba(254, 196, 23, 0.15)"
-                      paddingX={{ base: '8px', md: '15px' }}
-                      paddingY={{ base: '4px', md: '15px' }}
-                      borderRadius="8px"
-                      textStyle={{ md: 'semiBold24', base: 'normal14' }}
-                      color="#FEC417"
+            {pascalCasedRewardHistoryStatistics.length > 0 &&
+              pascalCasedRewardHistoryStatistics.map(
+                ({ purpose, timestamp, value }) =>
+                  value !== 0 && (
+                    <Tr
+                      display="table"
+                      width="100%"
+                      style={{ tableLayout: 'fixed' }}
+                      // key={exercise.date}
                     >
-                      +{godl}
-                      {/* {exercise.godl} */}
-                    </Text>
-                  </Box>
-                </Td>
-              </Tr>
-            ))}
+                      <Td
+                        borderBottom={0}
+                        width={{ base: '96px', md: '138px' }}
+                        paddingY="10px"
+                        paddingX="16px"
+                        textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
+                        color="rgba(255, 255, 255, 0.4)"
+                      >
+                        {moment(timestamp).format('DD.MM.YYYY')}
+                      </Td>
+                      <Td
+                        borderBottom={0}
+                        paddingX="20px"
+                        paddingY="10px"
+                        textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
+                        width="auto"
+                        color="rgba(255, 255, 255, 0.75)"
+                        whiteSpace="pre-line"
+                      >
+                        {purpose}
+                        {/* {exercise.purpose} */}
+                      </Td>
+                      <Td
+                        borderBottom={0}
+                        paddingY="10px"
+                        paddingX={{ base: '15px', md: '24px' }}
+                        width={{ base: '88px', sm: '118px', md: '150px' }}
+                      >
+                        <Box display="flex">
+                          <Text
+                            backgroundColor="rgba(254, 196, 23, 0.15)"
+                            paddingX={{ base: '8px', md: '15px' }}
+                            paddingY={{ base: '4px', md: '15px' }}
+                            borderRadius="8px"
+                            textStyle={{ md: 'semiBold24', base: 'normal14' }}
+                            color="#FEC417"
+                          >
+                            +{value}
+                            {/* {exercise.godl} */}
+                          </Text>
+                        </Box>
+                      </Td>
+                    </Tr>
+                  ),
+              )}
             {/* ))} */}
           </Tbody>
         </Table>
@@ -190,13 +207,13 @@ const ExercisesList: React.FC = () => {
   );
 };
 
-const dummyExercisesListData = [
-  { purpose: 'Test reason 1', date: '28.07.2022', godl: 500 },
-  { purpose: 'Test reason 2', date: '27.06.2022', godl: 700 },
-  { purpose: 'Test reason 3', date: '26.05.2022', godl: 800 },
-  { purpose: 'Test reason 4', date: '25.04.2022', godl: 1000 },
-  { purpose: 'Test reason 5', date: '24.03.2022', godl: 500 },
-  { purpose: 'Test reason 6', date: '23.02.2022', godl: 200 },
-];
+// const dummyExercisesListData = [
+//   { purpose: 'Test reason 1', date: '28.07.2022', godl: 500 },
+//   { purpose: 'Test reason 2', date: '27.06.2022', godl: 700 },
+//   { purpose: 'Test reason 3', date: '26.05.2022', godl: 800 },
+//   { purpose: 'Test reason 4', date: '25.04.2022', godl: 1000 },
+//   { purpose: 'Test reason 5', date: '24.03.2022', godl: 500 },
+//   { purpose: 'Test reason 6', date: '23.02.2022', godl: 200 },
+// ];
 
 export default ExercisesList;

@@ -12,9 +12,9 @@ const RecoverPassword: React.FC = () => {
     <VStack w="full">
       <VStack w="full">
         <Box
-          css={{
-            '-webkit-background-clip': 'text',
-            '-webkit-text-fill-color': 'transparent',
+          sx={{
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
           background="linear-gradient(79.07deg, rgba(223, 0, 220, 0.3) 0%, rgba(223, 0, 220, 0) 58.09%), linear-gradient(280.93deg, rgba(255, 11, 34, 0.3) 0%, rgba(255, 11, 34, 0) 58.09%), #FFFFFF;"
           minH={{ base: '0', md: '80px' }}

@@ -35,6 +35,8 @@ const TermsofUseContent = () => {
       justify="flex-start"
       bgColor="#121216"
       backgroundSize="contain"
+      backgroungRepeat="no-repeat"
+      bgPosition="top"
     >
       <VStack color={text} w="full" pt={{ base: '20px', md: '72px' }}>
         <VStack maxW="1232px" w="full" px="16px">
@@ -50,9 +52,9 @@ const TermsofUseContent = () => {
                 <Box
                   bgClip="text"
                   color="white"
-                  css={{
-                    '-webkit-background-clip': 'text',
-                    '-webkit-text-fill-color': 'transparent',
+                  sx={{
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
                   }}
                   background="linear-gradient(
                     330deg
@@ -73,6 +75,11 @@ const TermsofUseContent = () => {
                 padding={{ base: '35px 30px', lg: '72px 46px' }}
                 borderRadius="24px"
                 order={{ base: '3', md: '2' }}
+                _hover={{
+                  border: '2px solid rgba(240, 65, 83, 0.28)',
+                  transition: 'border 0.2s linear',
+                }}
+                border="2px solid rgba(255,255,255,0.05)"
               >
                 <Box>
                   <Text

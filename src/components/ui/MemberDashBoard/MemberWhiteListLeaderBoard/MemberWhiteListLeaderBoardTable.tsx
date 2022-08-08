@@ -19,7 +19,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
       overflowY="auto"
       overflowX={isLessThan1200 ? 'scroll' : 'hidden'}
       maxH="522px"
-      css={{
+      sx={{
         '&::-webkit-scrollbar': {
           width: '7px !important',
         },
@@ -38,7 +38,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
       w="full"
     >
       <Table
-        css={{
+        sx={{
           tableLayout: 'fixed',
         }}
         variant="unstyled"
@@ -46,7 +46,7 @@ const MemberWhiteListLeaderBoardTable: React.FC<MemberWhiteListLeaderBoardTableP
         {showTableHead && (
           <Thead backgroundColor="#121D2D">
             <Tr
-              css={{
+              sx={{
                 fontSize: '20px !important',
                 lineHeight: '30px !important',
               }}

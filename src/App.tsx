@@ -18,7 +18,7 @@ import {
   SignUp,
   SignIn,
   MemberDashboard,
-  NFT,
+  // NFT,
   TermsOfUse,
 } from 'pages';
 import { Common, S } from 'components';
@@ -79,7 +79,7 @@ const App = () => {
 
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
-      <Route path="/nft" element={<NFT />} />
+      {/* <Route path="/nft" element={<NFT />} /> */}
       <Route path="/terms-of-use" element={<TermsOfUse />} />
 
       <Route
@@ -92,8 +92,8 @@ const App = () => {
       >
         <Route path="" element={<S.General />} />
         <Route path="referrals" element={<S.Referrals />} />
-        <Route path="reward-history" element={<S.RewardHistory />} />
-        <Route path="statistics" element={<S.Statistics />} />
+        {/* <Route path="reward-history" element={<S.RewardHistory />} /> */}
+        {/* <Route path="statistics" element={<S.Statistics />} /> */}
       </Route>
 
       <Route path="*" element={<NotFound />} />

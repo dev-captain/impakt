@@ -105,11 +105,11 @@ const CollapseSidebar = () => {
               <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
             </SidebarLinkItem>
           </MenuItem>
-          <MenuItem
+          {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
-          >
-            <SidebarLinkItem
+          > */}
+          {/* <SidebarLinkItem
               isTransparent
               hide
               href="reward-history"
@@ -117,9 +117,9 @@ const CollapseSidebar = () => {
               isActive={path.pathname === '/dashboard/reward-history'}
             >
               <I.RewardIcon cursor="pointer" width="27px" height="27px" />
-            </SidebarLinkItem>
-          </MenuItem>
-          <MenuItem
+            </SidebarLinkItem> */}
+          {/* </MenuItem> */}
+          {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
@@ -132,7 +132,7 @@ const CollapseSidebar = () => {
             >
               <I.ChatIcon cursor="pointer" width="27px" height="23px" />
             </SidebarLinkItem>
-          </MenuItem>
+          </MenuItem> */}
         </MenuList>
       </Menu>
     </Box>

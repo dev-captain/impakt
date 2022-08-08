@@ -5,13 +5,14 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { fetchGodlBalanceScore } from '../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchActiveDays';
-import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
-import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
+// import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
+// import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
 import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchReferrals';
 import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
 import { fetchReferralsReward } from '../../lib/redux/slices/referrals/actions/fetchReferralsReward';
 import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
-import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
+// import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
+import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -38,26 +39,30 @@ const MemberDashboard: React.FC = () => {
     dispatch(fetchActiveDays(member.id));
   }, []);
 
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(getWhiteListed());
-  }, []);
+  // React.useEffect(() => {
+  //   if (!member) return;
+  //   dispatch(getWhiteListed());
+  // }, []);
 
-  React.useEffect(() => {
-    if (member) {
-      dispatch(fetchRewardHistory(member.id));
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (member) {
+  //     dispatch(fetchRewardHistory(member.id));
+  //   }
+  // }, []);
 
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(fetchExerciseStats(member.id));
-  }, []);
+  // React.useEffect(() => {
+  //   if (!member) return;
+  //   dispatch(fetchExerciseStats(member.id));
+  // }, []);
 
   React.useEffect(() => {
     dispatch(fetchReferrals({ count: true }));
     dispatch(fetchReferralsChallenges());
     dispatch(fetchReferralsReward());
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(fetchLatestNews());
   }, []);
 
   return <C.SidebarLayout isShowNavbar />;
