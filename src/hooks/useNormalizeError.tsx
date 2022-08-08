@@ -8,7 +8,7 @@ const useNormalizeError = () => {
       return PLEASE_LOGIN_FIRST;
     }
 
-    return errAuthMsg;
+    return 'Something went wrong';
   };
 
   return { normalizeAuthErrorHandler };

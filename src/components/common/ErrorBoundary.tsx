@@ -11,26 +11,27 @@ const ErrorBoundary: React.FC<any> = ({ children }) => {
 
   React.useEffect(() => {
     if (searchParams.has('error')) {
-      if (searchParams.get('error') === 'AxiosError') {
-        if (searchParams.has('error_description')) {
-          navigate(`/dashboard?error_description=${searchParams.get('error_description')}`);
+      if (searchParams.has('error_description')) {
+        const errorDescription = searchParams.get('error_description')!;
+        if (searchParams.get('error') === 'AxiosError') {
+          const normalizedAuthErrMessage = normalizeAuthErrorHandler(errorDescription);
+          toast({
+            title: 'Error',
+            description: normalizedAuthErrMessage,
+            isClosable: true,
+            duration: 8000,
+            status: 'error',
+          });
         } else {
-          navigate(`/dashboard?error_description=Something+went+wrong`);
+          toast({
+            title: 'Error',
+            description: errorDescription,
+            isClosable: true,
+            duration: 8000,
+            status: 'error',
+          });
         }
       }
-    }
-
-    if (searchParams.has('error_description')) {
-      const normalizedAuthErrMessage = normalizeAuthErrorHandler(
-        searchParams.get('error_description')!,
-      );
-      toast({
-        title: 'Error',
-        description: normalizedAuthErrMessage,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
       navigate('/dashboard');
     }
   }, []);
