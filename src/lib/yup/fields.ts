@@ -25,7 +25,7 @@ const fourDigit = yup
 
 const walletAddress = yup
   .string()
-  .matches(/^0x[a-fA-F0-9]{40}$/g, 'It must be valid crypto address 0x...')
+  .matches(/^0x[a-fA-F0-9]{40}$/g, 'It must be valid crypto address 0x... (ETH)')
   .required('Wallet Address is required field');
 
 const topic = yup.string().required('Topic is required field');
