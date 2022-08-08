@@ -1,7 +1,5 @@
 import { Box, Flex, HStack, Tooltip, Image, forwardRef, BoxProps } from '@chakra-ui/react';
-import * as React from 'react';
-
-import TooltopIcon from '../../assets/svgs/tooltipIcon.svg';
+import { I } from 'components';
 
 interface InfoCardPropsI {
   LeftLogo?: any;
@@ -38,7 +36,7 @@ const InfoCard = forwardRef<BoxProps & InfoCardPropsI, 'div'>((props, ref) => {
               p="20px 20px"
               label={props.tooltipLabel}
               onClick={props.onToolTipClick}
-              textStyle="semiBold16 "
+              textStyle="semiBold16"
               hasArrow
               mt="3"
               textAlign="center"
@@ -47,8 +45,8 @@ const InfoCard = forwardRef<BoxProps & InfoCardPropsI, 'div'>((props, ref) => {
               placement="top"
               closeOnClick={false}
             >
-              <Box>
-                <Image src={TooltopIcon} alt="TooltopIcon" width={{ base: '24px', lg: '32px' }} />
+              <Box color="rgba(255,255,255,0.1) !important">
+                <I.TooltipIcon width={{ base: '24px', lg: '32px' }} height="auto" />
               </Box>
             </Tooltip>
           </Box>
