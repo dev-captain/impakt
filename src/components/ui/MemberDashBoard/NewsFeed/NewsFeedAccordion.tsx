@@ -59,12 +59,16 @@ const NewsFeedAccordion: React.FC = () => {
                   <Box
                     textStyle="semiBold5"
                     overflow="hidden"
+                    sx={{ a: { color: 'gold', marginLeft: '3px' } }}
                     dangerouslySetInnerHTML={{
-                      __html: `${
-                        truncH(description, 200).html
-                      }<a style="color:blue" target="_blank" href="https://discuss.impakt.com/t/${id}">Click here </a> to read more.`,
+                      __html: `${truncH(description, 200).html}`,
                     }}
                   />
+                  <Box as="a" href={`https://discuss.impakt.com/t/${id}`}>
+                    <Text fontWeight="700" color="impaktRed">
+                      Click here to read more
+                    </Text>
+                  </Box>
                 </AccordionPanel>
               </Box>
             )}
