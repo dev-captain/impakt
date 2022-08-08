@@ -25,6 +25,7 @@ import {
 import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -88,7 +89,9 @@ const App = () => {
         path="dashboard"
         element={
           <Authentication>
-            <MemberDashboard />
+            <ErrorBoundary>
+              <MemberDashboard />
+            </ErrorBoundary>
           </Authentication>
         }
       >
