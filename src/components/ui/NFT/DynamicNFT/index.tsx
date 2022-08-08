@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
-import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { C, Common, I } from 'components';
 import { useParallax } from 'hooks';
@@ -11,6 +11,7 @@ import PlansCarousel from './plansCarousel';
 const DynamicNFT = () => {
   // const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.dynamicNftBg, Images.nft.dynamicNftBg);
+  const [isLessThanMd] = useMediaQuery('(max-width:992px)');
   const { t } = useTranslation(`default`).i18n;
   const cardRef = React.useRef<HTMLDivElement>(null);
   const imageBoxRef = React.useRef<HTMLDivElement>(null);
@@ -21,19 +22,19 @@ const DynamicNFT = () => {
     <C.HeroLayout
       showNavbar
       minH="70vh"
-      spacing={10}
       pos="relative"
+      align="flex-end"
+      justify="flex-end"
       bgImage={bgImage}
-      align="center"
-      justify="center"
-      removeTopPadding
-      backgroundSize="auto"
+      backgroundSize="100% 100%"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#121216"
+      customTopPadding="20px"
+      customPadding="100px"
     >
-      <VStack w="full" pt={{ base: '0px', md: '80px' }}>
-        <VStack maxW="1200px" w="full" px="16px">
+      <VStack w="full" px={{ base: '1em', lg: '0' }}>
+        <VStack maxW="1200px" w="full">
           <HStack
             flexDir={{ base: 'column', md: 'row' }}
             columnGap="auto"
@@ -46,7 +47,6 @@ const DynamicNFT = () => {
               spacing="22px"
               w="100%"
               paddingX={{ base: '0' }}
-              marginTop="50px"
 
               // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
             >
@@ -82,7 +82,14 @@ const DynamicNFT = () => {
                 w="100%"
                 marginTop="10px !important"
               >
-                <Common.InfoCard LeftLogo={<I.RichIconBody />}>
+                <Common.InfoCard
+                  LeftLogo={
+                    <I.RichIconBody
+                      width={isLessThanMd ? '40px' : '100px'}
+                      height={isLessThanMd ? '36px' : '91px'}
+                    />
+                  }
+                >
                   <VStack alignItems="flex-start" color="white">
                     <Text color="#FEC417" textStyle={{ base: 'semiBold5', md: 'bold20' }}>
                       {t(Keys.DynamicNFT.cardInfo)}

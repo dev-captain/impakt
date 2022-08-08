@@ -53,3 +53,5 @@ export { default as DesktopIcon } from './DesktopIcon';
 export { default as MobileIcon } from './MobileIcon';
 export { default as IosIcon } from './IosIcon';
 export { default as DynamicNftIcon } from './DynamicNftIcon';
+export { default as LinkedInIcon } from './LinkedInIcon';
+export { default as TooltipIcon } from './TooltipIcon';

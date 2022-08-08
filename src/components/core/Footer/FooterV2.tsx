@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { memo } from 'react';
-import { VStack, HStack, Box, Text, GridItem, SimpleGrid, Link } from '@chakra-ui/react';
+import { memo } from 'react';
+import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
       minH="auto !important"
       justify="flex-start"
     >
-      <VStack width="100%">
+      <VStack as="footer" width="100%">
         {/* <VStack w="100%">
           <HStack
             justifyContent="center"
@@ -141,7 +141,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                 >
                   <HStack
                     w="full"
-                    padding={{ base: '0px 10px', md: '0px' }}
+                    padding={{ base: '0px 16px', md: '0px' }}
                     rowGap={{ base: '32px', md: '24px' }}
                     display="flex"
                     flexWrap={{ base: 'wrap', md: 'nowrap' }}
@@ -155,9 +155,9 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                       <Box onClick={() => navigate('/')} mr="32px">
                         <I.ImpaktIcon width="111px" height="32px" />
                       </Box>
-                      <Link href="/download" _hover={{ textDecoration: 'none' }}>
+                      <Box onClick={() => navigate('/download')}>
                         <Common.ImpaktButton>{t(Keys.footer.downloadApp)}</Common.ImpaktButton>
-                      </Link>
+                      </Box>
                     </HStack>
 
                     <HStack
@@ -187,7 +187,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                 </GridItem>
               </SimpleGrid>
             </HStack>
-            <HStack w="full" padding={{ base: '0px 10px', md: '0px', lg: wFull ? '0 48px' : '0' }}>
+            <HStack w="full" padding={{ base: '0px 16px', md: '0px', lg: wFull ? '0 48px' : '0' }}>
               <NavBarLink IsHeader={false} />
             </HStack>
 

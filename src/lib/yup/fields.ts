@@ -28,4 +28,17 @@ const walletAddress = yup
   .matches(/^0x[a-fA-F0-9]{40}$/g, 'It must be valid crypto address 0x...')
   .required('Wallet Address is required field');
 
-export { email, password, memberName, fourDigit, passwordConfirmation, walletAddress };
+const topic = yup.string().required('Topic is required field');
+
+const message = yup.string().required('Message is required field');
+
+export {
+  email,
+  password,
+  memberName,
+  fourDigit,
+  passwordConfirmation,
+  walletAddress,
+  topic,
+  message,
+};
