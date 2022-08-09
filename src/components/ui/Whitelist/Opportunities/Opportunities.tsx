@@ -5,7 +5,7 @@ import Images from 'assets/images';
 
 import { VStack, HStack, Box, Text, GridItem, Grid, useColorModeValue } from '@chakra-ui/react';
 import { C, I } from 'components';
-import OpportunitiesCard from './opportunitiesCard';
+import OpportunitiesCard from './OpportunitiesCard';
 
 const Opportunities = () => {
   const bgImage = useColorModeValue(
