@@ -62,18 +62,7 @@ const Rarity = () => {
                 </Text>
               </Box>
             </VStack>
-            <VStack
-              align={{ base: 'center' }}
-              spacing="22px"
-              w={{ base: '100%' }}
-              backdropFilter="blur(40px)"
-              borderRadius="16px"
-              background="#1b1b26"
-              marginStart="0px !important"
-              display={isLessThan1040 ? 'none' : 'flex'}
-            >
-              <RarityTable />
-            </VStack>
+            <RarityTable />
           </HStack>
         </VStack>
       </VStack>
