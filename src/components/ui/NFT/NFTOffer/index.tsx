@@ -131,7 +131,7 @@ const NFTOffer = () => {
                 marginStart="0px !important"
               >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
-                  <OfferCard bRadius="16px" h="84px">
+                  <OfferCard bRadius="16px" pLeft="25px" justifyC="center" h="84px">
                     Access to exclusive NFTs
                   </OfferCard>
                   <OfferCard pLeft="25px" bRadius="16px" h="84px">
@@ -182,7 +182,7 @@ const NFTOffer = () => {
                   <OfferCard bRadius="16px" h="84px" tStyle="semibold20" justifyC="center">
                     Free NFT air drops
                   </OfferCard>
-                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
+                  <OfferCard pLeft="25px" bRadius="16px" justifyC="center" h="84px">
                     Access to impakt exclusive experience
                   </OfferCard>
                 </HStack>
