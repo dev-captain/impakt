@@ -176,10 +176,10 @@ const NFTOffer = () => {
                 marginTop="0px !important"
               >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
-                  <OfferCard bRadius="16px" h="84px">
+                  <OfferCard bRadius="16px" h="84px" tStyle="semibold20" justifyC="center">
                     Higher earngings
                   </OfferCard>
-                  <OfferCard bRadius="16px" h="84px">
+                  <OfferCard bRadius="16px" h="84px" tStyle="semibold20" justifyC="center">
                     Free NFT air drops
                   </OfferCard>
                   <OfferCard pLeft="25px" bRadius="16px" h="84px">

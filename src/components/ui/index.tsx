@@ -9,3 +9,4 @@ export * from './ChangePassword';
 export * from './TermsofUse';
 export * from './NFT';
 export * from './ContactUs';
+export * from './Whitelist';

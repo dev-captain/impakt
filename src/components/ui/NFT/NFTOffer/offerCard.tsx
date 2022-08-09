@@ -10,6 +10,9 @@ type Props = {
   pLeft?: string;
   bdFilter?: string;
   bgColor?: string;
+  p?: string;
+  justifyC?: string;
+  tStyle?: string;
 };
 
 const OfferCard = ({
@@ -21,6 +24,9 @@ const OfferCard = ({
   pBottom,
   children,
   bgColor = 'rgba(28, 28, 40, 0.65)',
+  justifyC,
+  tStyle,
+  p,
 }: Props) => {
   return (
     <Box
@@ -32,13 +38,15 @@ const OfferCard = ({
       paddingTop={pTop}
       paddingLeft={{ base: pLeft, md: '0' }}
       paddingBottom={pBottom}
+      padding={p}
       width="100%"
       display="flex"
       alignItems="center"
-      justifyContent="center"
+      justifyContent={justifyC}
       marginStart="0px !important"
     >
-      <Text color="rgba(255, 255, 255, 0.75)" textStyle="semibold20">
+      {/* <Text color="rgba(255, 255, 255, 0.75)" textStyle="semibold20"> */}
+      <Text color="rgba(255, 255, 255, 0.75)" textStyle={tStyle}>
         {children}
       </Text>
     </Box>

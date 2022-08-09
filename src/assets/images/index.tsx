@@ -82,6 +82,10 @@ const Images = {
     nftOffer: require('./nft/NftOffer.png'),
     nftOfferBg: require('./nft/NftofferBg.png'),
   },
+  whitelist: {
+    nftpass: require('./whitelist/NftPass.png'),
+    opportunitiesBg: require('./whitelist/opportunitiesBg.png'),
+  },
 };
 
 export default Images;
