@@ -18,7 +18,7 @@ const PassNft = () => {
       backgroundSize="auto"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
-      bgColor="#121216"
+      bgColor="#0A0A0B"
     >
       <VStack w="full" px="16px">
         <VStack position="relative" maxW="1200px" w="full">
