@@ -20,8 +20,8 @@ const PassNft = () => {
       backgroundBlendMode="lighten"
       bgColor="#121216"
     >
-      <VStack w="full">
-        <VStack maxW="1200px" w="full" px="16px">
+      <VStack w="full" px="16px">
+        <VStack position="relative" maxW="1200px" w="full">
           <HStack
             flexDir={{ base: 'column' }}
             columnGap="auto"
@@ -35,6 +35,9 @@ const PassNft = () => {
             backgroundPosition="right"
             backgroundRepeat="no-repeat"
             backgroundColor="#1C1C28"
+            zIndex="1"
+            position="relative"
+            top="-230px"
           >
             <VStack align="flex-start" spacing="22px" w="100%" paddingX={{ base: '0' }}>
               <Box

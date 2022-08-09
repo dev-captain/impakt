@@ -85,6 +85,7 @@ const Images = {
   whitelist: {
     nftpass: require('./whitelist/NftPass.png'),
     opportunitiesBg: require('./whitelist/opportunitiesBg.png'),
+    whitelistHero: require('./whitelist/whitelist-hero-illustration.png'),
   },
 };
 

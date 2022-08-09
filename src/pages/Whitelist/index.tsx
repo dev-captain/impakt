@@ -4,14 +4,16 @@ import { S } from 'components';
 const Whitelist = () => {
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      <>
-        <div>
-          <S.PassNft />
-        </div>
-        <div>
-          <S.Opportunities />
-        </div>
-      </>
+      <div>
+        <S.WhitelistHero />
+      </div>
+
+      <div>
+        <S.PassNft />
+      </div>
+      <div>
+        <S.Opportunities />
+      </div>
     </Container>
   );
 };
