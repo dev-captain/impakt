@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+* {
+  box-sizing: border-box;
+}
 html {
   scroll-behavior: smooth;
   scrollbar-width: none !important;
@@ -151,11 +154,10 @@ code {
 .carousel .thumb.selected {
   width: 66px !important;
 }
-.carousel .slide{
+.carousel .slide {
   opacity: 0;
   transition: all 2s;
 }
-.carousel .slide.selected{
-    opacity: 1;
+.carousel .slide.selected {
+  opacity: 1;
 }
-

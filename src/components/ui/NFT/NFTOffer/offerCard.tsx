@@ -7,17 +7,30 @@ type Props = {
   pTop?: string;
   pBottom?: string;
   children?: React.ReactNode;
+  pLeft?: string;
+  bdFilter?: string;
+  bgColor?: string;
 };
 
-const OfferCard = ({ bRadius, h, pTop, pBottom, children }: Props) => {
+const OfferCard = ({
+  bdFilter = 'blur(40px)',
+  bRadius,
+  h,
+  pLeft,
+  pTop,
+  pBottom,
+  children,
+  bgColor = 'rgba(28, 28, 40, 0.65)',
+}: Props) => {
   return (
     <Box
-      backgroundColor="rgba(28, 28, 40, 0.65)"
-      backdropFilter=" blur(40px)"
+      backgroundColor={bgColor}
+      backdropFilter={bdFilter}
       borderRadius={bRadius}
-      border="1px solid rgba(255, 255, 255, 0.2)"
+      border="1px solid rgba(255, 255, 255, 0.1)"
       height={h}
       paddingTop={pTop}
+      paddingLeft={{ base: pLeft, md: '0' }}
       paddingBottom={pBottom}
       width="100%"
       display="flex"

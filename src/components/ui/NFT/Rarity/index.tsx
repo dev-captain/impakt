@@ -26,7 +26,7 @@ const Rarity = () => {
       backgroundBlendMode="lighten"
       bgColor="#121216"
       removeTopPadding
-      customPadding="126px"
+      customPadding="96px"
     >
       <VStack px={{ base: '1em', lg: '0' }} w="full">
         <VStack maxW="1200px" w="full">

@@ -61,6 +61,7 @@ const RarityTable = () => {
           borderRadius={index + 1 === items.length ? '0 0 1em 1em' : '0'}
           key={`${rarity + index}-row`}
           bgColor={(index + 1) % 2 === 0 ? '#20202E' : '#1C1C28'}
+          minH="42px"
           h={{ base: '42px', md: '73px' }}
           m="0!important"
           color="rgba(255,255,255,0.7)"
@@ -114,15 +115,15 @@ const RarityTable = () => {
           </HStack>
           <Box
             display="flex"
-            paddingRight="35px"
+            paddingRight={{ base: '32px', md: '35px' }}
             justifyContent="flex-end"
             alignItems="center"
             maxW="538px"
             w="full"
             minW="149px"
           >
-            <Box w={{ base: '85%', md: '55%' }}>
-              <Text>{perks}</Text>
+            <Box w={{ base: '86%', md: '56%' }}>
+              <Text fontStyle="normal">{perks}</Text>
             </Box>
           </Box>
         </HStack>

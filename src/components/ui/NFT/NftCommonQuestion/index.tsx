@@ -12,7 +12,7 @@ const NFTCommonQuestion: React.FC = () => {
       backgroundSize="100% 100%"
       backgroungRepeat="no-repeat"
       bgPosition="top"
-      customTopPadding={isLessThan1280 ? '100px' : '150px'}
+      customTopPadding={isLessThan1280 ? '40px' : '150px'}
       removeBottomPadding={!isLessThan1280}
       bgImage={isLessThan1280 ? 'unset' : Images.backgrounds.nftBg2}
       align="flex-start"

@@ -41,20 +41,37 @@ const NFTOffer = () => {
           <HStack
             flexDir={{ base: 'column' }}
             columnGap="auto"
+            id="bg"
             rowGap={{ base: '30px' }}
             alignItems="center"
+            border="2px solid rgba(255,255,255,0.1)"
             w="full"
-            p={{ base: '0px', md: '40px' }}
+            p="40px"
+            bgColor="#1C1C28"
             borderRadius="32px"
-            backgroundImage={isLessThan1040 ? 'none' : bgImage}
+            backgroundImage={bgImage}
+            bgSize={{ base: 'cover', md: 'auto' }}
             backgroundPosition="right"
             backgroundRepeat="no-repeat"
-            backgroundColor={isLessThan1040 ? 'none' : '#1C1C28'}
+            position="relative"
           >
+            <Box
+              w="35%"
+              display={{ base: 'block', md: 'none' }}
+              h="100%"
+              left="-1"
+              top="0"
+              zIndex="0"
+              margin="0 !important"
+              position="absolute"
+              borderRadius="32px"
+              bg="radial-gradient(100% 129.69% at 0% 0%, #1C1C28 0%, rgba(28, 28, 40, 0) 100%), linear-gradient(90deg, #1C1C28 0%, rgba(28, 28, 40, 0.05) 44.09%)"
+            />
             <VStack
               align="flex-start"
               spacing="22px"
               w="100%"
+              zIndex="1"
               paddingX={{ base: '0' }}
 
               // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
@@ -105,23 +122,28 @@ const NFTOffer = () => {
               marginStart="0px !important"
               marginTop="30px"
               width="100%"
+              id="yo"
               gap="7px"
-              display={isLessThan1040 ? 'none' : 'flex'}
             >
-              <Box width={{ base: '100%', md: '425px' }} marginStart="0px !important">
+              <Box
+                order={{ base: '3', md: 'unset' }}
+                width={{ base: '100%', md: '425px' }}
+                marginStart="0px !important"
+              >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
-                  <OfferCard bRadius="16px" h="84px">
+                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
                     Access to exclusive NFTs
                   </OfferCard>
-                  <OfferCard bRadius="16px" h="84px">
+                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
                     Access to exclusive alpha/invest
                   </OfferCard>
-                  <OfferCard bRadius="16px" h="84px">
+                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
                     Access to exclusive IRL/Virtual Event
                   </OfferCard>
                 </HStack>
               </Box>
               <Box
+                order={{ base: '1', md: 'unset' }}
                 width={{ base: '100%', md: '273px' }}
                 padding="24px"
                 backgroundColor="rgba(28, 28, 40, 0.65)"
@@ -136,12 +158,23 @@ const NFTOffer = () => {
                   <Box marginStart="0px !important">
                     <Image src={Images.nft.nftOffer} />
                   </Box>
-                  <OfferCard bRadius="8px" h="auto" pTop="14px" pBottom="14px">
+                  <OfferCard
+                    bgColor="transparent"
+                    bdFilter="0"
+                    bRadius="8px"
+                    h="auto"
+                    pTop="14px"
+                    pBottom="14px"
+                  >
                     Free Avadroid NFT
                   </OfferCard>
                 </HStack>
               </Box>
-              <Box width={{ base: '100%', md: '425px' }} marginTop="0px !important">
+              <Box
+                order={{ base: '2', md: 'unset' }}
+                width={{ base: '100%', md: '425px' }}
+                marginTop="0px !important"
+              >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
                   <OfferCard bRadius="16px" h="84px">
                     Higher earngings
@@ -149,7 +182,7 @@ const NFTOffer = () => {
                   <OfferCard bRadius="16px" h="84px">
                     Free NFT air drops
                   </OfferCard>
-                  <OfferCard bRadius="16px" h="84px">
+                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
                     Access to impakt exclusive experience
                   </OfferCard>
                 </HStack>
