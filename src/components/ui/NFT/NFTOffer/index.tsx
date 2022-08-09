@@ -131,7 +131,7 @@ const NFTOffer = () => {
                 marginStart="0px !important"
               >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
-                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
+                  <OfferCard bRadius="16px" h="84px">
                     Access to exclusive NFTs
                   </OfferCard>
                   <OfferCard pLeft="25px" bRadius="16px" h="84px">
@@ -155,8 +155,8 @@ const NFTOffer = () => {
                 height="283px"
               >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
-                  <Box marginStart="0px !important">
-                    <Image src={Images.nft.nftOffer} />
+                  <Box marginStart="0px !important" minW="230px" maxH="171px">
+                    <Image w="100%" src={Images.nft.nftOffer} />
                   </Box>
                   <OfferCard
                     bgColor="transparent"

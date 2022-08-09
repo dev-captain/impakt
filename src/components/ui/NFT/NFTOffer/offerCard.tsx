@@ -24,8 +24,8 @@ const OfferCard = ({
   pBottom,
   children,
   bgColor = 'rgba(28, 28, 40, 0.65)',
-  justifyC,
-  tStyle,
+  justifyC = 'center',
+  tStyle = 'semiBold20',
   p,
 }: Props) => {
   return (
