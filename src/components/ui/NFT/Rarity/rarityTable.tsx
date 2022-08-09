@@ -60,7 +60,7 @@ const RarityTable = () => {
           lineHeight={{ base: '12px', md: '21.6px' }}
           borderRadius={index + 1 === items.length ? '0 0 1em 1em' : '0'}
           key={`${rarity + index}-row`}
-          bgColor={index + (1 % 2) === 0 ? '#20202E' : '#1C1C28'}
+          bgColor={(index + 1) % 2 === 0 ? '#20202E' : '#1C1C28'}
           h={{ base: '42px', md: '73px' }}
           m="0!important"
           color="rgba(255,255,255,0.7)"
