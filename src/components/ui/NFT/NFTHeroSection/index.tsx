@@ -88,8 +88,8 @@ const NFTHeroSection = () => {
                 A Dynamic NFT.
               </Text>
             </Box>
-            <Box mb={{ base: '0px', lg: '1em' }}>
-              <Common.ImpaktButton
+            <Box mb={{ base: '0px', lg: '1em' }} />
+            {/* <Common.ImpaktButton
                 as="a"
                 height={{ base: '50px', md: '64px' }}
                 textStyle="regular201"
@@ -104,8 +104,8 @@ const NFTHeroSection = () => {
                 boxShadow="0px 0px 0px 6px rgba(240, 65, 83, 0.3)"
               >
                 How to Whitelist?
-              </Common.ImpaktButton>
-            </Box>
+              </Common.ImpaktButton> */}
+            {/* </Box> */}
             <Common.InfoCard
               alignItems="center"
               LeftLogo={

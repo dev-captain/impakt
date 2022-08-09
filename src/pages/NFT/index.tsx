@@ -25,9 +25,9 @@ const Whitelist = () => {
         <S.NftCommonQuestion />
       </section>
 
-      <section>
+      {/* <section>
         <S.NFTCongrats />
-      </section>
+      </section> */}
       <C.FooterV2 />
     </Container>
   );
