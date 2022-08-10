@@ -11,6 +11,10 @@ const Whitelist = () => {
       <div>
         <S.PassNft />
       </div>
+
+      <div>
+        <S.ImapktPass />
+      </div>
       <div>
         <S.Opportunities />
       </div>

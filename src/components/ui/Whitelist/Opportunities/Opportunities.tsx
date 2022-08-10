@@ -29,6 +29,7 @@ const Opportunities = () => {
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       customTopPadding={{ base: '50px', md: '100px' }}
+      bgColor="#0A0A0B"
     >
       <VStack w="full" p="0 12px">
         <VStack

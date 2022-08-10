@@ -20,6 +20,7 @@ const ImapktPass = () => {
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       customTopPadding="0px"
+      bgColor="#0A0A0B"
     >
       <VStack w="full">
         <VStack maxW="1200px" w="full" pt="48px">
