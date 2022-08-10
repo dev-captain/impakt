@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { C, Common, I } from 'components';
-import { VStack, Box, Grid, GridItem, Text, useColorModeValue } from '@chakra-ui/react';
+import { VStack, Box, Grid, GridItem, Text, useColorModeValue, HStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 
 const ImapktPass = () => {
@@ -19,16 +19,15 @@ const ImapktPass = () => {
       backgroundSize="auto"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
-      customTopPadding="0px"
       bgColor="#0A0A0B"
     >
-      <VStack w="full">
-        <VStack maxW="1200px" w="full" pt="48px">
-          <Grid templateColumns="repeat(2, 1fr)" gap="48px">
-            <GridItem
+      <VStack w="full" px="1em">
+        <VStack maxW="1200px" w="full">
+          <HStack flexDir={{ base: 'column', lg: 'row' }} rowGap="48px" columnGap="48px">
+            <Box
               w="100%"
               backgroundColor="rgba(28, 28, 40, 0.65)"
-              p="40px"
+              p={{ base: '20px', lg: '40px' }}
               borderRadius="32px"
             >
               <Box>
@@ -103,15 +102,17 @@ const ImapktPass = () => {
                   Follow us on TikTok
                 </Common.ImpaktButton>
               </Box>
-            </GridItem>
-            <GridItem
+            </Box>
+            <Box
               w="100%"
+              m="0 !important"
               backgroundColor="rgba(28, 28, 40, 0.65)"
-              p="40px"
+              p={{ base: '20px', lg: '40px' }}
               borderRadius="32px"
               display="flex"
               flexDirection="column"
               justifyContent="space-between"
+              alignSelf="stretch"
             >
               <Box>
                 <Text as="h1" color="#fff" fontWeight="700" fontSize="32px">
@@ -132,7 +133,7 @@ const ImapktPass = () => {
                   the leaderboard! Let’s get started!
                 </Text>
               </Box>
-              <Box>
+              <Box mt={{ base: '1em', lg: '0' }}>
                 <Common.ImpaktButton
                   as="a"
                   leftIcon={
@@ -149,8 +150,8 @@ const ImapktPass = () => {
                   Install the Impakt app
                 </Common.ImpaktButton>
               </Box>
-            </GridItem>
-          </Grid>
+            </Box>
+          </HStack>
         </VStack>
       </VStack>
     </C.HeroLayout>
