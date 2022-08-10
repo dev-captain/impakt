@@ -60,13 +60,19 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ titles, contents })
                   <Text display="inline-block">{place}</Text>
                 </Td>
                 <Td>
-                  <HStack pos="relative">
+                  <HStack w="full" alignItems="baseline" pos="relative">
                     {index <= 2 && (
-                      <Box pos="relative" color={getColor(index)}>
+                      <Box
+                        pos="absolute"
+                        left="-3em"
+                        ml="0 !important"
+                        w="min-content"
+                        color={getColor(index)}
+                      >
                         <StarIcon />
                       </Box>
                     )}
-                    <Box right="1em">
+                    <Box ml="0 !important">
                       <Text>{member}</Text>
                     </Box>
                   </HStack>

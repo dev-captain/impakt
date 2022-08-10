@@ -13,7 +13,8 @@ const WhitelistHero: React.FC = () => {
       pos="relative"
       align="center"
       justify="center"
-      bgColor="#121216"
+      bgColor="#0A0A0B"
+      removeBottomPadding
       removeTopPadding
     >
       <Box

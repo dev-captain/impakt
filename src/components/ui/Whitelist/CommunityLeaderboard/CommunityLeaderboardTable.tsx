@@ -63,5 +63,48 @@ const dummyCommunityLeaderboardTableItems = [
     community: 'Neo Tokyo',
     score: '32,000',
   },
+  {
+    place: '4',
+    member: 'RatSpeare',
+    community: 'Neo Tokyo',
+    score: '32,000',
+  },
+
+  {
+    place: '5',
+    member: 'RatSpeare',
+    community: 'Neo Tokyo',
+    score: '32,000',
+  },
+  {
+    place: '6',
+    member: 'RatSpeare',
+    community: 'Neo Tokyo',
+    score: '32,000',
+  },
+  {
+    place: '7',
+    member: 'RatSpeare',
+    community: 'Neo Tokyo',
+    score: '32,000',
+  },
+  {
+    place: '8',
+    member: 'RatSpeare',
+    community: 'Neo Tokyo',
+    score: '32,000',
+  },
+  {
+    place: '9',
+    member: 'RatSpeare',
+    community: 'Neo Tokyo',
+    score: '32,000',
+  },
+  {
+    place: '10',
+    member: 'RatSpeare',
+    community: 'Neo Tokyo',
+    score: '32,000',
+  },
 ];
 export default CommunityLeaderboardTable;

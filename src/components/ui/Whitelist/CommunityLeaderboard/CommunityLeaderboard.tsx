@@ -6,14 +6,25 @@ import CommunityLeaderboardHeadlineText from './CommunityLeaderboardHeadlineText
 
 const CommunityLeaderboard: React.FC = () => {
   return (
-    <C.HeroLayout showNavbar minH="100vh" align="flex-start" justify="flex-start" bgColor="#0A0A0B">
+    <C.HeroLayout
+      showNavbar
+      removeTopPadding
+      minH="100vh"
+      align="flex-start"
+      justify="flex-start"
+      bgColor="#0A0A0B"
+    >
       <VStack w="full" px="16px">
         <VStack maxW="1200px" w="full">
           <VStack rowGap="1.5em" w="full">
-            <Box w="60%" id="community-leaderboard-headline-box">
+            <Box
+              w={{ base: '100%', lg: '60%' }}
+              textAlign={{ base: 'center', lg: 'left' }}
+              id="community-leaderboard-headline-box"
+            >
               <CommunityLeaderboardHeadlineText />
             </Box>
-            <Box w="60%">
+            <Box w={{ base: '100%', lg: '60%' }}>
               <CommunityLeaderboardTable />
             </Box>
           </VStack>
