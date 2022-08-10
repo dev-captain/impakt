@@ -83,7 +83,14 @@ const App = () => {
       <Route path="/verify" element={<Verify />} />
       <Route path="/nft" element={<NFT />} />
       <Route path="/whitelist" element={<Whitelist />} />
-      <Route path="/terms-of-use" element={<TermsOfUse />} />
+      <Route
+        path="/terms-of-use"
+        element={
+          <Common.ScrollToTop>
+            <TermsOfUse />
+          </Common.ScrollToTop>
+        }
+      />
 
       <Route
         path="dashboard"

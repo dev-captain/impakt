@@ -14,6 +14,10 @@ const Whitelist = () => {
       <div>
         <S.Opportunities />
       </div>
+
+      <div>
+        <S.CommunityLeaderboard />
+      </div>
     </Container>
   );
 };
