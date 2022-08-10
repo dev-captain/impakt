@@ -50,7 +50,9 @@ const PassNft = () => {
                   textStyle={{ base: 'bold5', md: 'TitleBold48' }}
                   textAlign="left"
                   marginTop="0 !important"
-                  paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
+                  paddingTop={{ base: '20px', sm: '10px', md: '0px' }}
+                  paddingLeft={{ base: '20px', sm: '10px', md: '0px' }}
+                  fontSize={{ base: '25px', md: '32px' }}
                 >
                   The Impakt Pass NFT!
                 </Text>
@@ -72,10 +74,12 @@ const PassNft = () => {
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
                   >
-                    First 10,000 will be a{' '}
-                    <Box as="span" color="#FEC417">
-                      free mint!
-                    </Box>
+                    <Text fontSize={{ base: '16px', md: '20px' }}>
+                      First 10,000 will be a{' '}
+                      <Box as="span" color="#FEC417">
+                        free mint!
+                      </Box>
+                    </Text>
                   </OfferCard>
 
                   <OfferCard
@@ -84,11 +88,13 @@ const PassNft = () => {
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
                   >
-                    First 10,000 act as{' '}
-                    <Box as="span" color="#FEC417">
-                      whitelist spots
-                    </Box>{' '}
-                    for the Impakt Genesis Mint!
+                    <Text fontSize={{ base: '16px', md: '20px' }}>
+                      First 10,000 act as{' '}
+                      <Box as="span" color="#FEC417">
+                        whitelist spots
+                      </Box>{' '}
+                      for the Impakt Genesis Mint!
+                    </Text>
                   </OfferCard>
                   <OfferCard
                     bRadius="16px"
@@ -96,14 +102,16 @@ const PassNft = () => {
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
                   >
-                    <Box as="span" color="#FEC417">
-                      Permanent{' '}
-                    </Box>
-                    utility:{' '}
-                    <Box as="span" color="#FEC417">
-                      3x{' '}
-                    </Box>
-                    higher earn rate in the Impakt app (vs. non NFT holders).
+                    <Text fontSize={{ base: '16px', md: '20px' }}>
+                      <Box as="span" color="#FEC417">
+                        Permanent{' '}
+                      </Box>
+                      utility:{' '}
+                      <Box as="span" color="#FEC417">
+                        3x{' '}
+                      </Box>
+                      higher earn rate in the Impakt app (vs. non NFT holders).
+                    </Text>
                   </OfferCard>
                   <OfferCard
                     bRadius="16px"
@@ -111,10 +119,12 @@ const PassNft = () => {
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
                   >
-                    <Box as="span" color="#FEC417">
-                      Unlimited{' '}
-                    </Box>
-                    supply after Impakt Genesis Mint.
+                    <Text fontSize={{ base: '16px', md: '20px' }}>
+                      <Box as="span" color="#FEC417">
+                        Unlimited{' '}
+                      </Box>
+                      supply after Impakt Genesis Mint.
+                    </Text>
                   </OfferCard>
                   <OfferCard
                     bRadius="16px"
@@ -122,11 +132,13 @@ const PassNft = () => {
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
                   >
-                    Mint price{' '}
-                    <Box as="span" color="#FEC417">
-                      after{' '}
-                    </Box>
-                    first 10,000: 0.3 ETH.
+                    <Text fontSize={{ base: '16px', md: '20px' }}>
+                      Mint price{' '}
+                      <Box as="span" color="#FEC417">
+                        after{' '}
+                      </Box>
+                      first 10,000: 0.3 ETH.
+                    </Text>
                   </OfferCard>
                 </HStack>
               </Box>
