@@ -131,13 +131,11 @@ const NFTOffer = () => {
                 marginStart="0px !important"
               >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
-                  <OfferCard bRadius="16px" pLeft="25px" justifyC="center" h="84px">
-                    Access to exclusive NFTs
-                  </OfferCard>
-                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
+                  <OfferCard pl={{ base: '25px', lg: '0' }}>Access to exclusive NFTs</OfferCard>
+                  <OfferCard pl={{ base: '25px', lg: '0' }}>
                     Access to exclusive alpha/invest
                   </OfferCard>
-                  <OfferCard pLeft="25px" bRadius="16px" h="84px">
+                  <OfferCard pl={{ base: '25px', lg: '0' }}>
                     Access to exclusive IRL/Virtual Event
                   </OfferCard>
                 </HStack>
@@ -160,11 +158,11 @@ const NFTOffer = () => {
                   </Box>
                   <OfferCard
                     bgColor="transparent"
-                    bdFilter="0"
-                    bRadius="8px"
+                    backdropFilter="0"
+                    borderRadius="0.5em"
                     h="auto"
-                    pTop="14px"
-                    pBottom="14px"
+                    pt="14px"
+                    pb="14px"
                   >
                     Free Avadroid NFT
                   </OfferCard>
@@ -176,13 +174,9 @@ const NFTOffer = () => {
                 marginTop="0px !important"
               >
                 <HStack flexDir={{ base: 'column' }} gap="16px" width="100%">
-                  <OfferCard bRadius="16px" h="84px" tStyle="semibold20" justifyC="center">
-                    Higher earngings
-                  </OfferCard>
-                  <OfferCard bRadius="16px" h="84px" tStyle="semibold20" justifyC="center">
-                    Free NFT air drops
-                  </OfferCard>
-                  <OfferCard pLeft="25px" bRadius="16px" justifyC="center" h="84px">
+                  <OfferCard>Higher earngings</OfferCard>
+                  <OfferCard>Free NFT air drops</OfferCard>
+                  <OfferCard pl={{ base: '25px', lg: '0' }}>
                     Access to impakt exclusive experience
                   </OfferCard>
                 </HStack>

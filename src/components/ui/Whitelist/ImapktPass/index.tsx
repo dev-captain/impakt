@@ -10,6 +10,9 @@ const ImapktPass = () => {
     <C.HeroLayout
       showNavbar
       minH="unset"
+      removeTopPadding
+      removeBottomPadding
+      customTopPadding="50px"
       spacing={10}
       pos="relative"
       align="center"

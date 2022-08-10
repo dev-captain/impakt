@@ -70,8 +70,8 @@ const PassNft = () => {
               <Box width={{ base: '100%', md: '496px' }} marginStart="0px !important">
                 <HStack flexDir={{ base: 'column' }} gap="8px" width="100%">
                   <OfferCard
-                    bRadius="16px"
                     p="12px 16px"
+                    justifyContent="flex-start"
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
                   >
@@ -84,7 +84,7 @@ const PassNft = () => {
                   </OfferCard>
 
                   <OfferCard
-                    bRadius="16px"
+                    justifyContent="flex-start"
                     p="12px 16px"
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
@@ -98,7 +98,7 @@ const PassNft = () => {
                     </Text>
                   </OfferCard>
                   <OfferCard
-                    bRadius="16px"
+                    justifyContent="flex-start"
                     p="12px 16px"
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
@@ -115,8 +115,8 @@ const PassNft = () => {
                     </Text>
                   </OfferCard>
                   <OfferCard
-                    bRadius="16px"
                     p="12px 16px"
+                    justifyContent="flex-start"
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
                   >
@@ -128,7 +128,7 @@ const PassNft = () => {
                     </Text>
                   </OfferCard>
                   <OfferCard
-                    bRadius="16px"
+                    justifyContent="flex-start"
                     p="12px 16px"
                     bgColor="rgba(255, 255, 255, 0.04)"
                     tStyle="regular20"
