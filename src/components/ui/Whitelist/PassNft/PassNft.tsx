@@ -19,6 +19,7 @@ const PassNft = () => {
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#0A0A0B"
+      removeBottomPadding
     >
       <VStack w="full" px="16px">
         <VStack position="relative" maxW="1200px" w="full">
@@ -28,10 +29,10 @@ const PassNft = () => {
             rowGap={{ base: '30px' }}
             alignItems="center"
             w="full"
-            p={{ base: '0px', md: '40px' }}
+            p={{ base: '20px', md: '40px' }}
             borderRadius="32px"
             backgroundImage={bgImage}
-            backgroundSize="contain"
+            backgroundSize={{ base: 'cover', lg: 'contain' }}
             backgroundPosition="right"
             backgroundRepeat="no-repeat"
             backgroundColor="#1C1C28"

@@ -31,7 +31,7 @@ const WhitelistHero: React.FC = () => {
       />
       <VStack zIndex="2" w="full" px="16px">
         <VStack maxW="1200px" w="full">
-          <HStack w="full" columnGap="48px">
+          <HStack flexDir={{ base: 'column', lg: 'row' }} w="full" columnGap="48px">
             <Box w="full" id="whitelist-hero-left">
               <VStack
                 w="full"
@@ -40,7 +40,9 @@ const WhitelistHero: React.FC = () => {
                 rowGap="2em"
               >
                 <VStack
-                  align="flex-start"
+                  mt={{ base: '100px', lg: '0' }}
+                  alignSelf={{ base: 'center', lg: 'flex-start' }}
+                  align={{ base: 'center', lg: 'flex-start' }}
                   justify="flex-start"
                   rowGap=""
                   bgClip="text"
@@ -61,28 +63,37 @@ const WhitelistHero: React.FC = () => {
                   <Text>Get Fit.</Text>
                   <Text>Get Whitelisted.</Text>
                 </VStack>
-                <VStack w="full" alignItems="flex-start">
-                  <Box
-                    w="max-content"
-                    display="flex"
-                    backdropBlur={40}
-                    bgColor="rgba(254, 196, 23, 0.15);"
-                    p="12px 16px"
-                    borderRadius="16px"
-                    alignItems="center"
+                <VStack
+                  w={{ base: 'full', lg: 'max-content' }}
+                  backdropBlur={40}
+                  bgColor="rgba(254, 196, 23, 0.15);"
+                  p="12px 16px"
+                  borderRadius="16px"
+                  alignItems={{ base: 'center', lg: 'flex-start' }}
+                  textAlign={{ base: 'center', lg: 'left' }}
+                  align={{ base: 'center', lg: 'flex-start' }}
+                >
+                  <Text
+                    textStyle="bold5"
+                    letterSpacing="-0.5px"
+                    lineHeight="100% !important"
+                    color="#FEC417"
                   >
-                    <Text
-                      textStyle="bold5"
-                      letterSpacing="-0.5px"
-                      lineHeight="100% !important"
-                      color="#FEC417"
-                    >
-                      Get a free Impakt Pass NFT!
-                    </Text>
-                  </Box>
+                    Get a free Impakt Pass NFT!
+                  </Text>
                 </VStack>
-                <VStack mt="0 !important" rowGap="1em">
-                  <Box w="full" id="whitelist-hero-headline-box">
+                <VStack
+                  alignSelf={{ base: 'center', lg: 'flex-start' }}
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
+                  mt="0 !important"
+                  rowGap="1em"
+                >
+                  <Box
+                    w="full"
+                    textAlign={{ base: 'center', lg: 'left' }}
+                    id="whitelist-hero-headline-box"
+                  >
                     <Text textStyle="semiBold20" color="whiteAlpha.800">
                       ETA July 8th 2022
                     </Text>
@@ -118,6 +129,9 @@ const WhitelistHero: React.FC = () => {
               </VStack>
             </Box>
             <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
               mixBlendMode="overlay"
               marginLeft="0 !important"
               w="full"
