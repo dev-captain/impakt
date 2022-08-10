@@ -2,15 +2,7 @@ import { memo } from 'react';
 // import { useTranslation } from 'react-i18next';
 // import Keys from 'i18n/types';
 
-import {
-  VStack,
-  HStack,
-  useColorModeValue,
-  Box,
-  Text,
-  Image,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Text, Image } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { C } from 'components';
 import OfferCard from './offerCard';
@@ -18,8 +10,6 @@ import OfferCard from './offerCard';
 const NFTOffer = () => {
   // const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.nftOfferBg, Images.nft.nftOfferBg);
-  //   const { t } = useTranslation(`default`).i18n;
-  const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
 
   return (
     <C.HeroLayout

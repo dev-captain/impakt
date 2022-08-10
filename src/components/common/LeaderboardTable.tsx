@@ -2,13 +2,11 @@ import { StarIcon } from '@chakra-ui/icons';
 import {
   TableContainer,
   Table,
-  TableCaption,
   Thead,
   Tr,
   Th,
   Tbody,
   Td,
-  Tfoot,
   Text,
   HStack,
   Box,

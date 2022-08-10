@@ -12,7 +12,6 @@ import {
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { C, Common, I } from 'components';
-import { useNavigate } from 'react-router-dom';
 import { useParallax } from 'hooks';
 // import useModalStore from 'hooks/store/useModalStore';
 // import DownloadTitleItem from './DownloadTitleItem';
@@ -20,7 +19,6 @@ import { useParallax } from 'hooks';
 
 const NFTHeroSection = () => {
   const [isLessThanMd] = useMediaQuery('(max-width:992px)');
-  const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.nft_bg, Images.nft.nft_bg);
   const { oscar } = Images.nft;
   const { t } = useTranslation(`default`).i18n;

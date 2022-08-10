@@ -1,17 +1,4 @@
-import {
-  baseStyle,
-  Box,
-  HStack,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 import { memo } from 'react';
 
 const RarityTable = () => {

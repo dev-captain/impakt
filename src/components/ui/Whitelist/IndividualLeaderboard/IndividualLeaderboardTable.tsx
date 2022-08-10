@@ -1,4 +1,4 @@
-import { Text, VStack, Box } from '@chakra-ui/react';
+import { VStack, Box } from '@chakra-ui/react';
 import * as React from 'react';
 import { I, Common } from 'components';
 import { useForm } from 'hooks';

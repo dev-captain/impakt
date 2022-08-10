@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { C, Common, I } from 'components';
-import { VStack, Box, Grid, GridItem, Text, useColorModeValue, HStack } from '@chakra-ui/react';
+import { VStack, Box, Text, useColorModeValue, HStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 
 const ImapktPass = () => {

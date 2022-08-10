@@ -2,7 +2,7 @@ import { memo } from 'react';
 // import { useTranslation } from 'react-i18next';
 // import Keys from 'i18n/types';
 
-import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { C } from 'components';
 import RarityTable from './rarityTable';
@@ -11,7 +11,6 @@ const Rarity = () => {
   // const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.rarityBg, Images.nft.rarityBg);
   //   const { t } = useTranslation(`default`).i18n;
-  const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
 
   return (
     <C.HeroLayout
