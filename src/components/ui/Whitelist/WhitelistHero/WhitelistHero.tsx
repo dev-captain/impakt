@@ -2,6 +2,7 @@ import * as React from 'react';
 import { C } from 'components';
 import { VStack, Image, Text, Box, HStack } from '@chakra-ui/react';
 import Images from '../../../../assets/images';
+import CounterItem from '../CounterItem';
 
 const WhitelistHero: React.FC = () => {
   return (
@@ -80,7 +81,24 @@ const WhitelistHero: React.FC = () => {
                     </Text>
                   </Box>
                 </VStack>
-                <Box h="116px" />
+                <VStack mt="0 !important" rowGap="1em">
+                  <Box w="full" id="whitelist-hero-headline-box">
+                    <Text textStyle="semiBold20" color="whiteAlpha.800">
+                      ETA July 8th 2022
+                    </Text>
+                  </Box>
+                  <HStack
+                    p="0.5em"
+                    borderRadius="16px"
+                    background="rgba(18, 18, 22, 0.4)"
+                    id="whitelist-hero-counter-box"
+                    mt="0 !important"
+                  >
+                    <CounterItem titleFontSize="40px" value="32" w="64px" h="64px" label="DAYS" />
+                    <CounterItem titleFontSize="40px" value="10" w="64px" h="64px" label="HRS" />
+                    <CounterItem titleFontSize="40px" value="24" w="64px" h="64px" label="MINS" />
+                  </HStack>
+                </VStack>
                 {/* <Common.ImpaktButton
                 as="a"
                 height={{ base: '50px', md: '64px' }}

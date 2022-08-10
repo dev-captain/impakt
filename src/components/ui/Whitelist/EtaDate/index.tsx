@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
 import { C } from 'components';
 import moment from 'moment';
+import CounterItem from '../CounterItem';
 
 const EtaDate = () => {
   const date = moment('07/08/2022').format('MMMM Do YYYY');
@@ -64,60 +65,9 @@ const EtaDate = () => {
                 gap="12px"
                 paddingBottom="20px"
               >
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  flexDirection="column"
-                  border="2px solid #4C2E54"
-                  width="80px"
-                  height="85px"
-                  justifyContent="center"
-                  background="#121216"
-                  borderRadius="10px"
-                >
-                  <Text fontSize={{ base: '35px', md: '48px' }} color="white">
-                    32
-                  </Text>
-                  <Text fontSize="12px" color="#717173" marginTop={{ base: '-8px', md: '-14px' }}>
-                    DAYS
-                  </Text>
-                </Box>
-                <Box
-                  justifyContent="center"
-                  display="flex"
-                  alignItems="center"
-                  width="80px"
-                  height="85px"
-                  flexDirection="column"
-                  border="2px solid #4C2E54"
-                  background="#121216"
-                  borderRadius="10px"
-                >
-                  <Text fontSize={{ base: '35px', md: '48px' }} color="white">
-                    10
-                  </Text>
-                  <Text fontSize="12px" color="#717173" marginTop={{ base: '-8px', md: '-14px' }}>
-                    HRS
-                  </Text>
-                </Box>
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  flexDirection="column"
-                  border="2px solid #4C2E54"
-                  background="#121216"
-                  width="80px"
-                  height="85px"
-                  justifyContent="center"
-                  borderRadius="10px"
-                >
-                  <Text fontSize={{ base: '35px', md: '48px' }} color="white">
-                    24
-                  </Text>
-                  <Text fontSize="12px" color="#717173" marginTop={{ base: '-8px', md: '-14px' }}>
-                    MINS
-                  </Text>
-                </Box>
+                <CounterItem value="32" label="DAYS" />
+                <CounterItem value="10" label="HRS" />
+                <CounterItem value="24" label="MINS" />
               </Box>
             </VStack>
           </HStack>
