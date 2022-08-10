@@ -18,7 +18,6 @@ const Opportunities = () => {
 
   return (
     <C.HeroLayout
-      showNavbar
       minH="70vh"
       spacing={10}
       pos="relative"

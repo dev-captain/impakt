@@ -8,7 +8,6 @@ const IndividualLeaderboard: React.FC = () => {
   return (
     <C.HeroLayout
       showFooterV2
-      showNavbar
       minH="100vh"
       align="flex-start"
       justify="flex-start"

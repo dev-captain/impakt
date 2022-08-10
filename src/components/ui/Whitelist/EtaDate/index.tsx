@@ -9,7 +9,6 @@ const EtaDate = () => {
 
   return (
     <C.HeroLayout
-      showNavbar
       minH="unset"
       spacing={10}
       pos="relative"

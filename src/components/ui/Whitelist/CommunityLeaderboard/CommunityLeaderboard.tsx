@@ -7,7 +7,6 @@ import CommunityLeaderboardHeadlineText from './CommunityLeaderboardHeadlineText
 const CommunityLeaderboard: React.FC = () => {
   return (
     <C.HeroLayout
-      showNavbar
       removeTopPadding
       minH="100vh"
       align="flex-start"

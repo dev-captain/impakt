@@ -8,7 +8,6 @@ const ImapktPass = () => {
 
   return (
     <C.HeroLayout
-      showNavbar
       minH="unset"
       removeTopPadding
       removeBottomPadding
