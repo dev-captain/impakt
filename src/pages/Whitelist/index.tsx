@@ -22,6 +22,10 @@ const Whitelist = () => {
       <div>
         <S.CommunityLeaderboard />
       </div>
+
+      <div>
+        <S.IndividualLeaderboard />
+      </div>
     </Container>
   );
 };

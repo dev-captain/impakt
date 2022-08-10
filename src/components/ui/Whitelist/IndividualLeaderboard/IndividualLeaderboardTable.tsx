@@ -5,7 +5,7 @@ import { useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../../common/InputGroup';
 
-const CommunityLeaderboardTable: React.FC = () => {
+const IndividualLeaderboardTable: React.FC = () => {
   const { setValue } = useForm({
     defaultValues: { searchCommunity: '' },
   });
@@ -20,7 +20,7 @@ const CommunityLeaderboardTable: React.FC = () => {
       leftIcon: <I.SearchIcon />,
       onChange,
       type: 'search',
-      name: 'searchCommunity',
+      name: 'searchIndividual',
     },
   ];
 
@@ -107,4 +107,4 @@ const dummyCommunityLeaderboardTableItems = [
     score: '32,000',
   },
 ];
-export default CommunityLeaderboardTable;
+export default IndividualLeaderboardTable;
