@@ -4,7 +4,7 @@ import { memo } from 'react';
 import Images from 'assets/images';
 
 import { VStack, HStack, Box, Text, GridItem, Grid, useColorModeValue } from '@chakra-ui/react';
-import { C, I } from 'components';
+import { C, I, S } from 'components';
 import OpportunitiesCard from './opportunitiesCard';
 
 const Opportunities = () => {
@@ -15,6 +15,7 @@ const Opportunities = () => {
   // const navigate = useNavigate();
   //   const { t } = useTranslation(`default`).i18n;
   //   const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
+
   return (
     <C.HeroLayout
       showNavbar
@@ -27,8 +28,9 @@ const Opportunities = () => {
       backgroundSize="auto"
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
+      customTopPadding={{ base: '50px', md: '100px' }}
     >
-      <VStack w="full">
+      <VStack w="full" p="0 12px">
         <VStack
           maxW="1200px"
           w="full"
@@ -45,14 +47,7 @@ const Opportunities = () => {
             p={{ base: '0px', md: '40px' }}
             borderRadius="32px"
           >
-            <VStack
-              align="flex-start"
-              spacing="22px"
-              w="100%"
-              paddingX={{ base: '0' }}
-
-              // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
-            >
+            <VStack align="flex-start" spacing="22px" w="100%" paddingX={{ base: '0' }}>
               <Box
                 bgClip="text"
                 color="white"
@@ -64,11 +59,17 @@ const Opportunities = () => {
                   textAlign="left"
                   marginTop="0 !important"
                   marginBottom="24px"
-                  paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
+                  paddingTop={{ base: '20px', sm: '20px', md: '0px' }}
+                  paddingleft={{ base: '20px', sm: '20px', md: '0px' }}
+                  fontSize={{ base: '25px', md: '32px' }}
                 >
                   Other whitelist Opportunities
                 </Text>
-                <Text fontSize="20px" fontWeight="400" color="rgba(255, 255, 255, 0.75);">
+                <Text
+                  fontSize={{ base: '16px', md: '20px' }}
+                  fontWeight="400"
+                  color="rgba(255, 255, 255, 0.75);"
+                >
                   Not used to sweating for a whitelist? We have something for everyone! Whitelist
                   opportunities will be ongoing on Twitter, Discord and Gleam!
                 </Text>
@@ -82,7 +83,14 @@ const Opportunities = () => {
               gap="7px"
               display="flex"
             >
-              <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+              <Grid
+                templateColumns={{
+                  base: 'repeat(1, 1fr)',
+                  mb: 'repeat(2, 1fr)',
+                  md: 'repeat(3, 1fr)',
+                }}
+                gap={3}
+              >
                 <GridItem>
                   <OpportunitiesCard
                     icon={<I.GleamIcon />}
@@ -90,11 +98,16 @@ const Opportunities = () => {
                     href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
                     mBottom="16px"
                   >
-                    Join our Gleam campaign for a chance at one of the{' '}
-                    <Box as="span" color="#FEC417">
-                      2,000
-                    </Box>{' '}
-                    whitelist spots!
+                    <Text
+                      fontSize={{ base: '16px', md: '20px' }}
+                      height={{ base: '72px', md: '90px' }}
+                    >
+                      Join our Gleam campaign for a chance at one of the{' '}
+                      <Box as="span" color="#FEC417">
+                        2,000
+                      </Box>{' '}
+                      whitelist spots!
+                    </Text>
                   </OpportunitiesCard>
                 </GridItem>
                 <GridItem>
@@ -102,12 +115,17 @@ const Opportunities = () => {
                     icon={<I.TwitterIcon />}
                     iconText="Whitelist via Twitter"
                     href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
-                    mBottom="46px"
+                    mBottom="16px"
                   >
-                    <Box as="span" color="#FEC417">
-                      Notifications on!
-                    </Box>{' '}
-                    Flash whitelist giveaways will appear!
+                    <Text
+                      fontSize={{ base: '16px', md: '20px' }}
+                      height={{ base: '72px', md: '90px' }}
+                    >
+                      <Box as="span" color="#FEC417">
+                        Notifications on!
+                      </Box>{' '}
+                      Flash whitelist giveaways will appear!
+                    </Text>
                   </OpportunitiesCard>
                 </GridItem>
                 <GridItem>
@@ -117,70 +135,25 @@ const Opportunities = () => {
                     href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
                     mBottom="16px"
                   >
-                    Don&apos;t miss our Discord games & giveaways, all for those
-                    <Box as="span" color="#FEC417">
-                      {' '}
-                      whitelist
-                    </Box>{' '}
-                    spots!
+                    <Text
+                      fontSize={{ base: '16px', md: '20px' }}
+                      height={{ base: '72px', md: '90px' }}
+                    >
+                      Don&apos;t miss our Discord games & giveaways, all for those
+                      <Box as="span" color="#FEC417">
+                        {' '}
+                        whitelist
+                      </Box>{' '}
+                      spots!
+                    </Text>
                   </OpportunitiesCard>
                 </GridItem>
               </Grid>
             </VStack>
           </HStack>
         </VStack>
+        <S.EtaDate />
       </VStack>
-      {/* <VStack w="full">
-        <VStack
-          maxW="1200px"
-          w="full"
-          px="16px"
-          bgColor="rgba(28, 28, 40, 0.65)"
-          borderRadius="32px"
-        >
-          <HStack
-            flexDir={{ base: 'column' }}
-            columnGap="auto"
-            rowGap={{ base: '30px' }}
-            alignItems="center"
-            w="full"
-            p={{ base: '0px', md: '40px' }}
-            borderRadius="32px"
-          >
-            <VStack
-              align="center"
-              spacing="22px"
-              w="100%"
-              paddingX={{ base: '0' }}
-
-              // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
-            >
-              <Box bgClip="text" color="white" marginBottom={{ base: '0px', md: '0' }}>
-                <Text
-                  textStyle={{ base: 'bold5', md: 'TitleBold48' }}
-                  marginTop="0 !important"
-                  //   marginBottom="32px"
-                  paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
-                >
-                  ETA July 8th 2022
-                </Text>
-              </Box>
-            </VStack>
-            <VStack
-              flexDir={{ base: 'column', md: 'row' }}
-              marginStart="0px !important"
-              marginTop="30px"
-              width="100%"
-              gap="7px"
-              display={isLessThan1040 ? 'none' : 'flex'}
-            >
-              <Box>
-                  <Text>32</Text>
-              </Box>
-            </VStack>
-          </HStack>
-        </VStack>
-      </VStack> */}
     </C.HeroLayout>
   );
 };
