@@ -19,12 +19,9 @@ const RoadMap = () => {
       showFooterV2
       removeTopPadding
       bgColor="#0A0A0B"
-      minH="100vh"
       bgImage={Images.backgrounds.gradientBgRotated}
       pos="relative"
-      backgroungRepeat="no-repeat"
       backgroundSize="cover"
-      spacing={10}
       justify="center"
       align="center"
     >
@@ -35,7 +32,6 @@ const RoadMap = () => {
           overflow="hidden"
           justifyContent={{ base: 'flex-start', lg: 'center' }}
           alignItems={{ base: 'flex-start', lg: 'center' }}
-          p={{ base: 0, md: 8 }}
           pos="relative"
         >
           <HStack
