@@ -2,8 +2,11 @@ import { memo } from 'react';
 import { C, Common, I } from 'components';
 import { VStack, Box, Text, useColorModeValue, HStack } from '@chakra-ui/react';
 import Images from 'assets/images';
+import { useNavigate } from 'react-router-dom';
+import { Socials } from '../../../../data';
 
 const ImapktPass = () => {
+  const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.whitelist.impaktIconBg, Images.whitelist.impaktIconBg);
 
   return (
@@ -41,6 +44,8 @@ const ImapktPass = () => {
                 </Text>
                 <Common.ImpaktButton
                   as="a"
+                  target="_blank"
+                  href={`${Socials.discord}`}
                   leftIcon={
                     <Box marginRight="8px">
                       <I.DiscordIcon />
@@ -56,6 +61,8 @@ const ImapktPass = () => {
                   Join our Discord
                 </Common.ImpaktButton>
                 <Common.ImpaktButton
+                  target="_blank"
+                  href={`${Socials.twitter}`}
                   as="a"
                   leftIcon={
                     <Box marginRight="8px">
@@ -73,6 +80,8 @@ const ImapktPass = () => {
                 </Common.ImpaktButton>
                 <Common.ImpaktButton
                   as="a"
+                  target="_blank"
+                  href={`${Socials.instagram}`}
                   leftIcon={
                     <Box marginRight="8px">
                       <I.IGIcon />
@@ -89,6 +98,8 @@ const ImapktPass = () => {
                 </Common.ImpaktButton>
                 <Common.ImpaktButton
                   as="a"
+                  target="_blank"
+                  href={`${Socials.tiktok}`}
                   leftIcon={
                     <Box marginRight="8px">
                       <I.TikTokIcon />
@@ -138,6 +149,11 @@ const ImapktPass = () => {
               <Box mt={{ base: '1em', lg: '0' }}>
                 <Common.ImpaktButton
                   as="a"
+                  href="/download"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/download');
+                  }}
                   leftIcon={
                     <Box marginRight="8px">
                       <I.DownloadIcon />
