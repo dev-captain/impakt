@@ -26,6 +26,10 @@ const Whitelist = () => {
       <div>
         <S.IndividualLeaderboard />
       </div>
+
+      <div>
+        <S.Roadmap />
+      </div>
     </Container>
   );
 };

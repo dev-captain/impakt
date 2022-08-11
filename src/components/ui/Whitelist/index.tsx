@@ -5,3 +5,4 @@ export { default as CommunityLeaderboard } from 'components/ui/Whitelist/Communi
 export { default as IndividualLeaderboard } from 'components/ui/Whitelist/IndividualLeaderboard/IndividualLeaderboard';
 export { default as EtaDate } from 'components/ui/Whitelist/EtaDate';
 export { default as ImapktPass } from 'components/ui/Whitelist/ImapktPass';
+export { default as Roadmap } from 'components/ui/Whitelist/Roadmap/RoadmapSection';

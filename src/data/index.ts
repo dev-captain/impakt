@@ -254,9 +254,9 @@ export const RoadmapInfo = [
         isDone: true,
       },
     ],
-    height: '124px',
+    height: '0px',
     isCompleted: true,
-    lineHeight: '124px',
+    lineHeight: '88px',
     pinLineHeight: '60px',
   },
   {
@@ -268,14 +268,18 @@ export const RoadmapInfo = [
       },
       {
         title: 'q1_2',
-        isDone: false,
+        isDone: true,
       },
       {
         title: 'q1_3',
-        isDone: false,
+        isDone: true,
+      },
+      {
+        title: 'q1_4',
+        isDone: true,
       },
     ],
-    height: '184px',
+    height: '150px',
     lineHeight: '124px',
     isCompleted: true,
     pinLineHeight: '100px',
@@ -285,15 +289,24 @@ export const RoadmapInfo = [
     items: [
       {
         title: 'q2_1',
-        isDone: false,
+        isDone: true,
       },
       {
         title: 'q2_2',
-        isDone: false,
+        isDone: true,
+      },
+      {
+        title: 'q2_3',
+        isDone: true,
+      },
+
+      {
+        title: 'q2_4',
+        isDone: true,
       },
     ],
-    height: '241px',
-    isCompleted: false,
+    height: '220px',
+    isCompleted: true,
     lineHeight: '184px',
     pinLineHeight: '130px',
   },
@@ -302,6 +315,25 @@ export const RoadmapInfo = [
     items: [
       {
         title: 'q3_1',
+        isDone: false,
+      },
+
+      {
+        title: 'q3_2',
+        isDone: false,
+      },
+
+      {
+        title: 'q3_3',
+        isDone: false,
+      },
+
+      {
+        title: 'q3_4',
+        isDone: false,
+      },
+      {
+        title: 'q3_5',
         isDone: false,
       },
     ],

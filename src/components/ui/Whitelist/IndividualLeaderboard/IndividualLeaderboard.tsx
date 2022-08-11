@@ -6,13 +6,7 @@ import IndividualLeaderboardHeadlineText from './IndividualLeaderboardHeadlineTe
 
 const IndividualLeaderboard: React.FC = () => {
   return (
-    <C.HeroLayout
-      showFooterV2
-      minH="100vh"
-      align="flex-start"
-      justify="flex-start"
-      bgColor="#0A0A0B"
-    >
+    <C.HeroLayout minH="100vh" align="flex-start" justify="flex-start" bgColor="#0A0A0B">
       <VStack w="full" px="16px">
         <VStack maxW="1200px" w="full">
           <VStack rowGap="1.5em" w="full">
