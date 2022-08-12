@@ -3,12 +3,16 @@ const contact = 'contact';
 const events = 'events';
 const ourRoadmap = 'ourRoadmap';
 const ourAdvisor = 'ourAdvisor';
-const ourAdvisorTitle = 'ourAdvisorTitle';
+const impaktAdvisor = 'impaktAdvisor';
 const Founder = 'Founder';
 const ourTeam = 'ourTeam';
+const impaktIcons = 'impaktIcons';
 const navbar = 'navbar';
 const burnAndEarn = 'burnAndEarn';
+const impaktNFT = 'impaktNFT';
+const impaktCreed = 'impaktCreed';
 const computerVision = 'computerVision';
+const toolTip = 'toolTip';
 const impaktGamesHero = 'impaktGamesHero';
 const contactUs = 'contactUs';
 const footer = 'footer';
@@ -18,6 +22,10 @@ const verification = 'verification';
 const signUp = 'signUp';
 const signIn = 'signIn';
 const memberDashboard = 'memberDashboard';
+const NFTGenesis = 'NFTGenesis';
+const NFTGeneral = 'NFTGeneral';
+const DynamicNFT = 'DynamicNFT';
+const termsOfUse = 'termsOfUse';
 
 const TranslationKeys = {
   common: {
@@ -28,10 +36,16 @@ const TranslationKeys = {
     social: `${impaktGamesHero}.social`,
     fitness: `${impaktGamesHero}.fitness`,
     gamified: `${impaktGamesHero}.gamified`,
+    workout: `${impaktGamesHero}.workout`,
+    excercise: `${impaktGamesHero}.excercise`,
+    squats: `${impaktGamesHero}.squats`,
   },
   downloadPlateform: {
     download: `${downloadPlateform}.download`,
     platform: `${downloadPlateform}.platform`,
+  },
+  termsOfUse: {
+    title: `${termsOfUse}.title`,
   },
   navbar: {
     events: `${navbar}.events`,
@@ -41,6 +55,7 @@ const TranslationKeys = {
     download: `${navbar}.download`,
     dashboard: `${navbar}.dashboard`,
     signOut: `${navbar}.signOut`,
+    help: `${navbar}.help`,
     signIn: `${navbar}.signIn`,
     termsOfUse: `${navbar}.termsOfUse`,
   },
@@ -48,21 +63,45 @@ const TranslationKeys = {
     computerVision: `${computerVision}.computerVision`,
     technology: `${computerVision}.technology`,
     description: `${computerVision}.description`,
+    description1: `${computerVision}.description1`,
+    aiDescription: `${computerVision}.aiDescription`,
     hardwareCard: `${computerVision}.hardwareCard`,
     cameraCard: `${computerVision}.cameraCard`,
+  },
+  toolTip: {
+    downloadLabel: `${toolTip}.downloadLabel`,
+    godlBonus: `${toolTip}.godlBonus`,
+    earningCrypto: `${toolTip}.earningCrypto`,
+    description: `${toolTip}.description`,
   },
   burnAndEarn: {
     earn: `${burnAndEarn}.earn`,
     burnAnd: `${burnAndEarn}.burnAnd`,
     description: `${burnAndEarn}.description`,
   },
+  impaktNFT: {
+    impaktDesign: `${impaktNFT}.impaktDesign`,
+    impaktlabel: `${impaktNFT}.impaktlabel`,
+    impaktChris: `${impaktNFT}.impaktChris`,
+    description: `${impaktNFT}.description`,
+    description1: `${impaktNFT}.description1`,
+    careerdescription: `${impaktNFT}.careerdescription`,
+    careerdescription1: `${impaktNFT}.careerdescription1`,
+  },
+  impaktCreed: {
+    creed: `${impaktCreed}.creed`,
+    creedLabel: `${impaktCreed}.creedLabel`,
+    description: `${impaktCreed}.description`,
+    description2: `${impaktCreed}.description2`,
+    description1: `${impaktCreed}.description1`,
+  },
   ourAdvisor: {
     our: `${ourAdvisor}.our`,
     advisor: `${ourAdvisor}.advisor`,
   },
-  ourAdvisorTitle: {
-    adviser: `${ourAdvisorTitle}.adviser`,
-    Title: `${ourAdvisorTitle}.Title`,
+  impaktAdvisor: {
+    adviser: `${impaktAdvisor}.adviser`,
+    Title: `${impaktAdvisor}.Title`,
   },
   Founder: {
     builders: `${Founder}.builders`,
@@ -71,6 +110,14 @@ const TranslationKeys = {
   ourTeam: {
     our: `${ourTeam}.our`,
     team: `${ourTeam}.team`,
+  },
+  impaktIcons: {
+    influential: `${impaktIcons}.influential`,
+    Title: `${impaktIcons}.Title`,
+    description: `${impaktIcons}.description`,
+    twitter: `${impaktIcons}.twitter`,
+    tiktok: `${impaktIcons}.tiktok`,
+    instagram: `${impaktIcons}.instagram`,
   },
   ourRoadmap: {
     our: `${ourRoadmap}.our`,
@@ -113,6 +160,9 @@ const TranslationKeys = {
     termOfUse: `${footer}.termOfUse`,
     allRightReserved: `${footer}.allRightReserved`,
     downloadApp: `${footer}.downloadApp`,
+    getImpakt: `${footer}.getImpakt`,
+    unsubscribe: `${footer}.unsubscribe`,
+    stayUpdated: `${footer}.stayUpdated`,
   },
   password: {
     recovery: `${password}.recovery`,
@@ -158,6 +208,8 @@ const TranslationKeys = {
       discription_list2: `${memberDashboard}.referrals.discription_list2`,
       discription_list3: `${memberDashboard}.referrals.discription_list3`,
       discription_list4: `${memberDashboard}.referrals.discription_list4`,
+      discription_list5: `${memberDashboard}.referrals.discription_list5`,
+
       descriptionFooter: `${memberDashboard}.referrals.descriptionFooter`,
     },
     yourReferralLink: `${memberDashboard}.yourReferralLink`,
@@ -170,6 +222,29 @@ const TranslationKeys = {
       item2: `${memberDashboard}.whitelist.item2`,
       item3: `${memberDashboard}.whitelist.item3`,
     },
+    exerciseList: {
+      headline: `${memberDashboard}.exerciseList.headline`,
+      toolTipDescription: `${memberDashboard}.exerciseList.toolTipDescription`,
+      date: `${memberDashboard}.exerciseList.date`,
+      reason: `${memberDashboard}.exerciseList.reason`,
+      godl: `${memberDashboard}.exerciseList.godl`,
+    },
+  },
+  NFTGeneral: {
+    title: `${NFTGeneral}.title`,
+    subTitle: `${NFTGeneral}.subTitle`,
+    howToWhiteList: `${NFTGeneral}.howToWhiteList`,
+    cardInfo: `${NFTGeneral}.cardInfo`,
+  },
+  NFTGenesis: {
+    Title: `${NFTGenesis}.Title`,
+    description: `${NFTGenesis}.description`,
+    infoDescription: `${NFTGenesis}.infoDescription`,
+  },
+  DynamicNFT: {
+    title: `${DynamicNFT}.title`,
+    description: `${DynamicNFT}.description`,
+    cardInfo: `${DynamicNFT}.cardInfo`,
   },
 };
 

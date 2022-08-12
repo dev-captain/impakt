@@ -1,7 +1,5 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
-import GradientButton from 'components/core/GradientButton';
-import TextField from 'components/core/TextField';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C, Common } from 'components';
 import React, { useState } from 'react';
 import { validateEmail } from 'utils';
 import { useTranslation } from 'react-i18next';
@@ -29,14 +27,12 @@ const SubscriptionForm = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = () => {
-    console.log('values', values);
-  };
+  const onSubmit = () => {};
 
   const isDisabled = !values.email || !validateEmail(values.email);
 
   return (
-    <HeroLayout minH="20vh">
+    <C.HeroLayout minH="20vh">
       <VStack
         position="relative"
         color={textColor}
@@ -84,7 +80,7 @@ const SubscriptionForm = () => {
           marginTop="0 !important"
         >
           <VStack spacing="16px" w={{ base: 'full', md: '424px' }} borderRadius={16}>
-            <TextField
+            <Common.TextField
               name="email"
               isOutlined
               fontSize="14px"
@@ -102,7 +98,7 @@ const SubscriptionForm = () => {
             display="flex"
             fontSize={16}
           >
-            <GradientButton
+            <Common.GradientButton
               py="24px"
               w={{ base: 'full', md: '424px' }}
               radius="16px"
@@ -114,7 +110,7 @@ const SubscriptionForm = () => {
           </VStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

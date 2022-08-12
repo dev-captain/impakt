@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Image } from '@chakra-ui/react';
-import DefaultImpaktProfileIcon from '../../../icons/DefaultImpaktProfileIcon';
+import { I } from 'components';
 
 interface MemberDashBoardUserImagePropsI {
   imageSrc?: string;
@@ -11,7 +11,7 @@ const MemberDashBoardUserImage: React.FC<MemberDashBoardUserImagePropsI> = ({ im
       {imageSrc ? (
         <Image w="100%" height="100%" objectFit="contain" src={imageSrc} />
       ) : (
-        <DefaultImpaktProfileIcon />
+        <I.DefaultImpaktProfileIcon />
       )}
     </Box>
   );

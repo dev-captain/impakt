@@ -32,8 +32,14 @@ const NavbarLink = ({ IsHeader }: Props) => {
       onClose();
     }
   }, [isLessThan1040, onClose]);
+
   return (
-    <HStack spacing={[0, 0, 3, 5, 8, 12]}>
+    <HStack
+      spacing={[3, 3, 3, 5, 6, 12]}
+      flexWrap={{ base: 'wrap', md: 'nowrap' }}
+      justifyContent={{ base: 'center', md: 'start' }}
+      display="flex"
+    >
       <NavbarLinkItem
         href="/"
         title={t(Keys.navbar.impaktFitness)}
@@ -65,11 +71,11 @@ const NavbarLink = ({ IsHeader }: Props) => {
       />
       {!IsHeader && (
         <NavbarLinkItem
-          type="LINK"
-          href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+          href="/terms-of-use"
           onClose={onClose}
           passiveColor={passiveColor}
           title={t(Keys.navbar.termsOfUse)}
+          isActive={path.path === 'terms-of-use'}
         />
       )}
       {/* <Button variant="ghost" onClick={() => changeLanguage('en')}>

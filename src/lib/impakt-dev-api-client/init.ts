@@ -12,10 +12,11 @@ import {
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
+import theme from '../../theme/index';
 
 const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
 
-const toast = createStandaloneToast();
+const toast = createStandaloneToast({ theme });
 
 export const configuration = createConfiguration({
   baseServer: {

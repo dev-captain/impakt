@@ -55,8 +55,8 @@ const NftCard: React.FC<PropsI> = () => {
       backgroundSize="cover"
       id="nft-card-box"
       position="relative"
-      w="497px"
-      h="300px"
+      w={{ base: '284px', md: '445px', lg: '497px' }}
+      h={{ base: '171px', md: '263px', lg: '300px' }}
       transitionDuration="300ms"
       zIndex={2}
       transitionProperty="transform, box-shadow"

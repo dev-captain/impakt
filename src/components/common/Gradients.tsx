@@ -46,7 +46,7 @@ const GradientEllipse1 = ({
   );
 };
 
-export default ({
+const Gradients = ({
   isOrange,
   secondX,
   secondY,
@@ -69,3 +69,4 @@ export default ({
     </Box>
   );
 };
+export { GradientEllipse1, Gradients };

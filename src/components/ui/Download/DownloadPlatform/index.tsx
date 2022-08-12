@@ -1,85 +1,152 @@
 import { memo } from 'react';
-import {
-  VStack,
-  HStack,
-  useColorModeValue,
-  Image,
-  useMediaQuery,
-  Box,
-  SimpleGrid,
-  GridItem,
-  Text,
-} from '@chakra-ui/react';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { VStack, HStack, useColorModeValue, Box } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import DownloadButton from 'components/core/DownloadButton';
-import Play from 'components/icons/Play';
-import useModalStore from 'hooks/store/useModalStore';
+import { I, C, Common } from 'components';
+// import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
-import Gradient from './Gradient';
+// import Gradient from './Gradient';
 
 const DownloadPlatform = () => {
   const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
-  const bgImage = useColorModeValue(Images.backgrounds.defaultBg, Images.backgrounds.light);
-  const show = useModalStore((state) => state.setDownloadPage);
-  const [isLessThan768] = useMediaQuery('(max-width: 768px)');
+  const bgImage = useColorModeValue(
+    Images.backgrounds.downloadAppBg,
+    Images.backgrounds.downloadAppBg,
+  );
+  // const show = useModalStore((state) => state.setDownloadPage);
+  // const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
   return (
-    <HeroLayout
+    <C.HeroLayout
       showNavbar
       minH="70vh"
       spacing={10}
       pos="relative"
       bgImage={bgImage}
-      align="flex-start"
-      justify="flex-start"
+      align="center"
+      justify="center"
     >
-      <VStack color={text} w="full" pt={{ base: '20px', md: '135px' }}>
+      <VStack color={text} w="full" pt={{ base: '20px', md: '0px' }}>
         <VStack maxW="1232px" w="full" px="16px">
-          <HStack
-            w="full"
-            justify="space-between"
-            flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
-          >
+          <HStack w="full" justify="center">
             <VStack
-              align={{ base: 'center', md: 'flex-start' }}
+              align={{ base: 'center' }}
               spacing="22px"
               w={{ base: '100%', lg: 'auto' }}
-              paddingX={{ base: isLessThan768 ? '50px' : '0', md: '40px' }}
+              paddingX={{ base: '0', md: '40px' }}
+              // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
             >
               <VStack align="inherit" marginBottom={{ base: '0', md: '15px' }}>
-                <DownloadTitleItem title={t(keys.downloadPlateform.download)} />
-                <DownloadTitleItem title={t(keys.downloadPlateform.platform)} />
+                <Box
+                  bgClip="text"
+                  color="white"
+                  sx={{
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                  background="linear-gradient(0deg, rgba(212, 35, 89, 0.35) 14.58%, rgba(212, 35, 89, 0) 45.1%), #FFFFFF"
+                >
+                  <DownloadTitleItem title={t(keys.downloadPlateform.download)} />
+                </Box>
               </VStack>
-              <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={5} columnGap={5} w="100%">
-                <GridItem w="100%">
-                  <DownloadButton
-                    isHorizontal
-                    iconName="Windows"
-                    title="Download for Windows"
-                    link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
-                  />
-                </GridItem>
-                <GridItem w="full">
-                  <DownloadButton
+              <HStack
+                flexWrap={{ base: 'wrap', lg: 'nowrap' }}
+                background="rgba(28, 28, 40, 0.65)"
+                display="flex"
+                spacing={2}
+                columnGap={3}
+                padding="16px"
+                borderRadius="24px"
+                order={{ base: '3', md: '2' }}
+              >
+                <Box
+                  width="60px"
+                  height="60px"
+                  d={{ base: 'none', md: 'flex' }}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <I.DesktopIcon opacity="1" />
+                </Box>
+
+                <Common.DownloadButton
+                  width={{ base: '100%', md: '315px' }}
+                  bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                  isHorizontal
+                  iconName="Windows"
+                  title="Download for Windows"
+                  link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.exe"
+                  pe="auto"
+                />
+
+                <Box
+                  width={{ base: '100%', md: '282px' }}
+                  marginTop={{ base: '12px !important', md: '0px !important' }}
+                  marginStart="0px !important"
+                >
+                  <Common.DownloadButton
+                    width={{ base: '100%', md: '282px' }}
+                    bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
                     isHorizontal
                     iconName="Apple"
                     title="Download for Mac"
                     link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
+                    pe="auto"
                   />
-                </GridItem>
-              </SimpleGrid>
-              <Box w="full" textAlign="center">
-                <Text textStyle="regular201">iOS/Android coming soon</Text>
-              </Box>
+                </Box>
+              </HStack>
+              <HStack
+                flexWrap={{ base: 'wrap', lg: 'nowrap' }}
+                background="rgba(28, 28, 40, 0.65)"
+                display="flex"
+                spacing={2}
+                columnGap={3}
+                padding="16px"
+                borderRadius="24px"
+                order={{ base: '2', md: '3' }}
+              >
+                <Box
+                  width="60px"
+                  height="60px"
+                  d={{ base: 'none', md: 'flex' }}
+                  justifyContent="center "
+                  alignItems="center"
+                >
+                  <I.MobileIcon opacity="1" />
+                </Box>
+
+                <Common.DownloadButton
+                  width={{ base: '100%', md: '319px' }}
+                  bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                  isHorizontal
+                  iconName="Android"
+                  title="Download for Android"
+                  link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
+                  pe="auto"
+                />
+                <Box
+                  width={{ base: '100%', md: '282px' }}
+                  marginTop={{ base: '12px !important', md: '0px !important' }}
+                  marginStart="0px !important"
+                >
+                  <Common.DownloadButton
+                    width={{ base: '100%', md: '282px' }}
+                    bg="rgba(255, 255, 255, 0.1)"
+                    isHorizontal
+                    iconName="Ios"
+                    title="iOS coming soon"
+                    link=""
+                    pe="none"
+                  />
+                </Box>
+              </HStack>
             </VStack>
 
-            <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
+            {/* <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
               <VStack pos="absolute" zIndex={2}>
-                <Play />
+                <I.Play />
               </VStack>
               <Image
                 src={Images.downloadlaptop}
@@ -92,11 +159,11 @@ const DownloadPlatform = () => {
                 zIndex={1}
               />
               <Gradient />
-            </VStack>
+            </VStack> */}
           </HStack>
         </VStack>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

@@ -16,11 +16,16 @@ import {
   RecoveryPassword,
   Verify,
   SignUp,
+  SignIn,
+  MemberDashboard,
+  NFT,
+  TermsOfUse,
+  Whitelist,
 } from 'pages';
-import MemberDashboard from './pages/MemberDashBoard';
-import SignIn from './pages/SignIn/SignIn';
+import { Common, S } from 'components';
+
 import Authentication from './middlewares/Authentication';
-import ScrollToTop from './components/core/ScrollToTop';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -48,9 +53,9 @@ const App = () => {
       <Route
         path="/"
         element={
-          <ScrollToTop>
+          <Common.ScrollToTop>
             <Home />
-          </ScrollToTop>
+          </Common.ScrollToTop>
         }
       />
 
@@ -76,15 +81,32 @@ const App = () => {
 
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
-
+      <Route path="/nft" element={<NFT />} />
+      <Route path="/whitelist" element={<Whitelist />} />
       <Route
-        path="/dashboard"
+        path="/terms-of-use"
         element={
-          <Authentication>
-            <MemberDashboard />
-          </Authentication>
+          <Common.ScrollToTop>
+            <TermsOfUse />
+          </Common.ScrollToTop>
         }
       />
+
+      <Route
+        path="dashboard"
+        element={
+          <Authentication>
+            <ErrorBoundary>
+              <MemberDashboard />
+            </ErrorBoundary>
+          </Authentication>
+        }
+      >
+        <Route path="" element={<S.General />} />
+        <Route path="referrals" element={<S.Referrals />} />
+        {/* <Route path="reward-history" element={<S.RewardHistory />} /> */}
+        {/* <Route path="statistics" element={<S.Statistics />} /> */}
+      </Route>
 
       <Route path="*" element={<NotFound />} />
     </Routes>

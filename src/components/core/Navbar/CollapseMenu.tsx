@@ -1,37 +1,24 @@
-import { VStack, Collapse, useToast, HStack, Box, Image } from '@chakra-ui/react';
+import { VStack, Collapse, useToast, HStack, Box, Link, Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { I } from 'components';
+
 import NavbarLinkItem from './NavbarLinkItem';
-import useAppSelector from '../../../hooks/useAppSelector';
-import useAppDispatch from '../../../hooks/useAppDispatch';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import SignInLinkItem from './SignInLinkItem';
 
 type Props = {
-  bg: string;
   isOpen: boolean;
   textColor: string;
   onClose: () => void;
   isLessThan1040: boolean;
-  twitter: string;
-  discord: string;
-  hover: object;
-  youtube: string;
 };
 
-const CollapseMenu = ({
-  isOpen,
-  onClose,
-  bg,
-  textColor,
-  isLessThan1040,
-  twitter,
-  discord,
-  hover,
-  youtube,
-}: Props) => {
+const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const member = useAppSelector((state) => state.memberAuth.member);
@@ -41,8 +28,19 @@ const CollapseMenu = ({
 
   return (
     <Collapse in={isOpen} animateOpacity>
-      <VStack spacing={0} paddingBottom={8} bg={bg} h="100vh" zIndex={900} color={textColor}>
+      <VStack
+        spacing={0}
+        paddingBottom={8}
+        bg="#1C1C28"
+        marginTop="0px"
+        borderRadius="12px"
+        zIndex={900}
+        color={textColor}
+        padding="16px"
+        mt="4px"
+      >
         <NavbarLinkItem
+          isSmall
           hide
           href="/"
           onClose={onClose}
@@ -50,6 +48,7 @@ const CollapseMenu = ({
           title={t(Keys.navbar.impaktFitness)}
         />
         <NavbarLinkItem
+          isSmall
           hide
           type="LINK"
           onClose={onClose}
@@ -59,12 +58,14 @@ const CollapseMenu = ({
         />
         <NavbarLinkItem
           hide
+          isSmall
           href="/events"
           onClose={onClose}
           title={t(Keys.navbar.events)}
           isActive={path.path === 'events'}
         />
         <NavbarLinkItem
+          isSmall
           href="/contact"
           onClose={onClose}
           title={t(Keys.navbar.contactUs)}
@@ -72,15 +73,26 @@ const CollapseMenu = ({
         />
         {member && (
           <NavbarLinkItem
+            isSmall
             href="/dashboard"
             onClose={onClose}
             title={t(Keys.navbar.dashboard)}
             isActive={path.path === 'dashboard'}
           />
         )}
+        {member && (
+          <NavbarLinkItem
+            isSmall
+            href="/contact"
+            onClose={onClose}
+            title={t(Keys.navbar.help)}
+            isActive={path.path === '/contact'}
+          />
+        )}
 
         {member && (
           <NavbarLinkItem
+            isSmall
             href="#"
             onClose={async () => {
               await dispatch(signOutMember()).unwrap();
@@ -98,13 +110,13 @@ const CollapseMenu = ({
           />
         )}
 
-        {!member && (
+        {/* {!member && (
           <NavbarLinkItem
             href="/signin"
             title={t(Keys.navbar.signIn)}
             isActive={path.path === 'signin'}
           />
-        )}
+        )} */}
 
         <HStack
           align="center"
@@ -112,6 +124,8 @@ const CollapseMenu = ({
           justify="flex-end"
           flex={{ base: 1, md: 'auto' }}
           display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
+          marginBottom="24px !important"
+          marginTop="20px !important"
         >
           <HStack
             pl={{ base: 0, md: '64px' }}
@@ -119,38 +133,53 @@ const CollapseMenu = ({
             justify={{ base: 'center', md: 'flex-end' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
-            <Box as="a" target="_blank" href={Socials.twitter}>
-              <Image
-                maxW="35"
-                w="35px"
-                h="35px"
-                opacity={0.6}
-                objectFit="contain"
-                src={twitter}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.twitter}
+            >
+              <I.TwitterIcon />
             </Box>
-            <Box as="a" target="_blank" href={Socials.discord}>
-              <Image
-                maxW="32"
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={discord}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.discord}
+            >
+              <I.DiscordIcon />
             </Box>
-            <Box as="a" target="_blank" href={Socials.youtube}>
-              <Image
-                maxW="32"
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={youtube}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.tiktok}
+            >
+              <I.TikTokIcon />
+            </Box>
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.youtube}
+            >
+              <I.YoutubeSocialIcon />
             </Box>
             {/* {path.path !== 'dashboard' && (
               <Box
@@ -168,6 +197,18 @@ const CollapseMenu = ({
               </Box>
             )} */}
           </HStack>
+        </HStack>
+        <HStack w="full" align="space-between" flexDirection="column" justify="space-between">
+          <Box w="full" ml="0 !important">
+            <SignInLinkItem />
+          </Box>
+          <Box w="full" display="flex" mt="2" ml="0 !important">
+            <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
+              <Button marginTop="8px" width="100%" colorScheme="red">
+                {t(Keys.navbar.download)}
+              </Button>
+            </Link>
+          </Box>
         </HStack>
       </VStack>
     </Collapse>

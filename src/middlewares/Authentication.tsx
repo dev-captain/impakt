@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import useAppSelector from '../hooks/useAppSelector';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'hooks';
 
 const Authentication: React.FC = ({ children }) => {
   const member = useAppSelector((state) => state.memberAuth.member);
   const navigate = useNavigate();
+  const location = useLocation();
 
   React.useEffect(() => {
     if (!member) {
-      navigate('/signin');
+      navigate(`/signin?next=${location.pathname}`);
     }
   }, [member]);
 

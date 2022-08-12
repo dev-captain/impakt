@@ -8,7 +8,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
-import HeroLayout from 'components/layouts/HeroLayout';
+import { C } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { layoutPadding } from 'theme';
 import NotFoundCard from './component/NotFoundCard';
@@ -20,7 +20,7 @@ const NotFound = () => {
   const [isLessThan900] = useMediaQuery('(max-width: 900px)');
 
   return (
-    <HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter bgImage={bgImage}>
+    <C.HeroLayout align="flex-start" justify="flex-start" showNavbar showFooter bgImage={bgImage}>
       <VStack minH="60vh" px={layoutPadding} color={text} w="full" align="center" justify="center">
         <HStack
           w="full"
@@ -48,7 +48,7 @@ const NotFound = () => {
           </Text>
         </Button>
       </VStack>
-    </HeroLayout>
+    </C.HeroLayout>
   );
 };
 

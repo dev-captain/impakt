@@ -1,21 +1,25 @@
 import * as React from 'react';
-import { Button, Text } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { Common } from 'components';
 
-import useAppSelector from '../../../hooks/useAppSelector';
+import { useAppSelector } from 'hooks';
 
 const SignInButton: React.FC = () => {
+  const navigate = useNavigate();
   const member = useAppSelector((state) => state.memberAuth.member);
 
   return !member ? (
-    <Button
-      backgroundColor="rgba(255, 255, 255, 0.1)"
-      backdropFilter="blur(40px)"
-      _hover={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
+    <Common.ImpaktButton
       as="a"
+      variant="secondary"
       href="/signin"
+      onClick={(e) => {
+        e.preventDefault();
+        navigate('/signin');
+      }}
     >
-      <Text>Sign In</Text>
-    </Button>
+      Sign In
+    </Common.ImpaktButton>
   ) : null;
 };
 export default SignInButton;
