@@ -105,6 +105,21 @@ const CollapseSidebar = () => {
               <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
             </SidebarLinkItem>
           </MenuItem>
+
+          <MenuItem
+            _active={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
+          >
+            <SidebarLinkItem
+              isTransparent
+              hide
+              href="groups"
+              title="Groups"
+              isActive={path.pathname === '/dashboard/groups'}
+            >
+              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
+            </SidebarLinkItem>
+          </MenuItem>
           {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}

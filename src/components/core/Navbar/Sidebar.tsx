@@ -31,6 +31,16 @@ const Sidebar: React.FC = () => {
         <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
       </SidebarLinkItem>
 
+      <SidebarLinkItem
+        isTransparent
+        hide
+        href="groups"
+        title="Groups"
+        isActive={path.pathname === '/dashboard/groups'}
+      >
+        <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
+      </SidebarLinkItem>
+
       {/* <SidebarLinkItem
         hide
         href="reward-history"
