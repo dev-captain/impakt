@@ -104,6 +104,9 @@ const App = () => {
       >
         <Route path="" element={<S.General />} />
         <Route path="referrals" element={<S.Referrals />} />
+        <Route path="groups" element={<S.Group />}>
+          <Route path=":id" element={<S.Group />} />
+        </Route>
         {/* <Route path="reward-history" element={<S.RewardHistory />} /> */}
         {/* <Route path="statistics" element={<S.Statistics />} /> */}
       </Route>
