@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
 import { C } from 'components';
 import moment from 'moment';
@@ -76,4 +75,4 @@ const EtaDate = () => {
   );
 };
 
-export default memo(EtaDate);
+export default EtaDate;

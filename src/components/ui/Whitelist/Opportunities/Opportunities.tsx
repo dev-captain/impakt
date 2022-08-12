@@ -3,7 +3,16 @@ import { memo } from 'react';
 // import Keys from 'i18n/types';
 import Images from 'assets/images';
 
-import { VStack, HStack, Box, Text, GridItem, Grid, useColorModeValue } from '@chakra-ui/react';
+import {
+  VStack,
+  HStack,
+  Box,
+  Text,
+  GridItem,
+  Grid,
+  useColorModeValue,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import { S, C, I } from 'components';
 import OpportunitiesCard from './OpportunitiesCard';
 
@@ -15,6 +24,8 @@ const Opportunities = () => {
   // const navigate = useNavigate();
   //   const { t } = useTranslation(`default`).i18n;
   //   const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
+  const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
+  const [isLessThan768] = useMediaQuery('(max-width: 600px)');
 
   return (
     <C.HeroLayout
@@ -85,9 +96,8 @@ const Opportunities = () => {
             >
               <Grid
                 templateColumns={{
-                  base: 'repeat(1, 1fr)',
-                  mb: 'repeat(2, 1fr)',
-                  md: 'repeat(3, 1fr)',
+                  base: isLessThan768 ? 'repeat(1, 1fr)' : 'repeat(2, 1fr)',
+                  md: isLessThan1040 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
                 }}
                 gap={3}
               >
