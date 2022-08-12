@@ -9,7 +9,6 @@ const Authentication: React.FC = ({ children }) => {
 
   React.useEffect(() => {
     if (!member) {
-      console.log(location.pathname);
       navigate(`/signin?next=${location.pathname}`);
     }
   }, [member]);

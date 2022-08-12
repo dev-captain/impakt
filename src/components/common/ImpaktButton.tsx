@@ -24,6 +24,7 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
       color={textColor}
       _hover={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
       transition="all .2s linear"
+      cursor="pointer"
       px="20px"
       fontWeight="500"
       bg={bgColor}

@@ -1,41 +1,24 @@
-import { VStack, Collapse, useToast, HStack, Box, Image, Link, Button } from '@chakra-ui/react';
+import { VStack, Collapse, useToast, HStack, Box, Link, Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
 import { useAppDispatch, useAppSelector } from 'hooks';
+import { I } from 'components';
 
 import NavbarLinkItem from './NavbarLinkItem';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 import SignInLinkItem from './SignInLinkItem';
 
 type Props = {
-  bg: string;
   isOpen: boolean;
   textColor: string;
   onClose: () => void;
   isLessThan1040: boolean;
-  twitter: string;
-  tiktok: string;
-  discord: string;
-  hover: object;
-  youtube: string;
-
-  isScrolling: boolean;
 };
 
-const CollapseMenu = ({
-  isOpen,
-  onClose,
-  textColor,
-  isLessThan1040,
-  twitter,
-  discord,
-  hover,
-  youtube,
-  tiktok,
-}: Props) => {
+const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const member = useAppSelector((state) => state.memberAuth.member);
@@ -150,49 +133,53 @@ const CollapseMenu = ({
             justify={{ base: 'center', md: 'flex-end' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
-            <Box me="24px !important" as="a" target="_blank" href={Socials.twitter}>
-              <Image
-                maxW="35"
-                w="35px"
-                h="35px"
-                opacity={0.6}
-                objectFit="contain"
-                src={twitter}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.twitter}
+            >
+              <I.TwitterIcon />
             </Box>
-            <Box me="24px !important" as="a" target="_blank" href={Socials.discord}>
-              <Image
-                maxW="32"
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={discord}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.discord}
+            >
+              <I.DiscordIcon />
             </Box>
-            <Box me="24px !important" as="a" target="_blank" href={Socials.tiktok}>
-              <Image
-                maxW="21px"
-                minW="24px"
-                h="24px"
-                opacity={0.6}
-                objectFit="contain"
-                src={tiktok}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.tiktok}
+            >
+              <I.TikTokIcon />
             </Box>
-            <Box as="a" target="_blank" href={Socials.youtube}>
-              <Image
-                maxW="32"
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={youtube}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.youtube}
+            >
+              <I.YoutubeSocialIcon />
             </Box>
             {/* {path.path !== 'dashboard' && (
               <Box

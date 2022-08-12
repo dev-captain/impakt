@@ -4,7 +4,7 @@ import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlin
 // import Topics from '../Topics/Topics';
 import WelcomeModal from '../WelcomeModal/WelcomeModal';
 import NewsFeed from '../NewsFeed/NewsFeed';
-// import WhiteList from '../ExerciseAndHowToWL/WhiteList';
+import WhiteList from '../ExerciseAndHowToWL/WhiteList';
 
 const General: React.FC = () => {
   return (
@@ -32,7 +32,7 @@ const General: React.FC = () => {
           rowGap="24px"
         >
           <WelcomeModal />
-          {/* <WhiteList /> */}
+          <WhiteList />
         </VStack>
 
         <VStack w="full" marginLeft="0 !important" rowGap="24px">

@@ -125,6 +125,8 @@ const WhiteList: React.FC = () => {
 
         <Box mt="12px">
           <Common.ImpaktButton
+            as="a"
+            href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/twitter`}
             leftIcon={
               <Box marginRight="8px">
                 <I.TwitterIcon />

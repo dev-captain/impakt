@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+* {
+  box-sizing: border-box;
+}
 html {
   scroll-behavior: smooth;
   scrollbar-width: none !important;
@@ -105,6 +108,60 @@ code {
   transition: all 0.5s;
 }
 
-/* .menuSidebar > div {
-  width: calc(100% - 50px);
-} */
+/* NFT Slider */
+
+.carousel .thumb {
+  border: none !important;
+  margin-right: 36px !important;
+  position: relative;
+  overflow: visible !important;
+}
+.carousel .thumb::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #000;
+  bottom: -24px;
+  left: 27px;
+  display: none;
+}
+.carousel .thumb.selected::after {
+  display: block !important;
+}
+.carousel .thumb:nth-child(1)::after {
+  background: url('./assets/images/nft/goldRect.png');
+}
+.carousel .thumb:nth-child(2)::after {
+  background: url('./assets/images/nft/platinumRect.png');
+}
+.carousel .thumb:nth-child(3)::after {
+  background: url('./assets/images/nft/bronzeRect.png');
+}
+.carousel .thumbs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  height: 70px !important;
+}
+.carousel .thumbs-wrapper {
+  overflow: visible !important;
+}
+.carousel .thumbs .thumb {
+  width: 49px !important;
+}
+.carousel .thumb.selected {
+  width: 66px !important;
+}
+.carousel .slide {
+  opacity: 0;
+  transition: all 2s;
+}
+.carousel .slide.selected {
+  opacity: 1;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}

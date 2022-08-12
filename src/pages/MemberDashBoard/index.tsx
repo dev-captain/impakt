@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { fetchGodlBalanceScore } from '../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchActiveDays';
-// import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
+import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
 // import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
 import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchReferrals';
 import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
@@ -39,10 +39,10 @@ const MemberDashboard: React.FC = () => {
     dispatch(fetchActiveDays(member.id));
   }, []);
 
-  // React.useEffect(() => {
-  //   if (!member) return;
-  //   dispatch(getWhiteListed());
-  // }, []);
+  React.useEffect(() => {
+    if (!member) return;
+    dispatch(getWhiteListed());
+  }, []);
 
   // React.useEffect(() => {
   //   if (member) {

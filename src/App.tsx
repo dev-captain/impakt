@@ -18,12 +18,14 @@ import {
   SignUp,
   SignIn,
   MemberDashboard,
-  // NFT,
+  NFT,
   TermsOfUse,
+  Whitelist,
 } from 'pages';
 import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -79,14 +81,24 @@ const App = () => {
 
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
-      {/* <Route path="/nft" element={<NFT />} /> */}
-      <Route path="/terms-of-use" element={<TermsOfUse />} />
+      <Route path="/nft" element={<NFT />} />
+      <Route path="/whitelist" element={<Whitelist />} />
+      <Route
+        path="/terms-of-use"
+        element={
+          <Common.ScrollToTop>
+            <TermsOfUse />
+          </Common.ScrollToTop>
+        }
+      />
 
       <Route
         path="dashboard"
         element={
           <Authentication>
-            <MemberDashboard />
+            <ErrorBoundary>
+              <MemberDashboard />
+            </ErrorBoundary>
           </Authentication>
         }
       >

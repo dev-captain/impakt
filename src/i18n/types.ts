@@ -23,6 +23,8 @@ const signUp = 'signUp';
 const signIn = 'signIn';
 const memberDashboard = 'memberDashboard';
 const NFTGenesis = 'NFTGenesis';
+const NFTGeneral = 'NFTGeneral';
+const DynamicNFT = 'DynamicNFT';
 const termsOfUse = 'termsOfUse';
 
 const TranslationKeys = {
@@ -228,10 +230,21 @@ const TranslationKeys = {
       godl: `${memberDashboard}.exerciseList.godl`,
     },
   },
+  NFTGeneral: {
+    title: `${NFTGeneral}.title`,
+    subTitle: `${NFTGeneral}.subTitle`,
+    howToWhiteList: `${NFTGeneral}.howToWhiteList`,
+    cardInfo: `${NFTGeneral}.cardInfo`,
+  },
   NFTGenesis: {
     Title: `${NFTGenesis}.Title`,
     description: `${NFTGenesis}.description`,
     infoDescription: `${NFTGenesis}.infoDescription`,
+  },
+  DynamicNFT: {
+    title: `${DynamicNFT}.title`,
+    description: `${DynamicNFT}.description`,
+    cardInfo: `${DynamicNFT}.cardInfo`,
   },
 };
 

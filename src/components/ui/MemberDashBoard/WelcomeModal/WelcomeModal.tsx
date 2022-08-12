@@ -3,8 +3,8 @@ import * as React from 'react';
 import NumberFormat from 'react-number-format';
 import { useAppSelector } from 'hooks';
 
-import Whitelist from '../../../../assets/svgs/Vector.svg';
 import MemberDashboardCard from '../MemberDashBoardCard';
+import { I } from '../../..';
 
 const WelcomeModal: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
@@ -23,7 +23,7 @@ const WelcomeModal: React.FC = () => {
     >
       <Box
         display="flex"
-        alignItems="baseline"
+        alignItems="center"
         mt="0 !important"
         letterSpacing="-0.04em !important"
         id="whitelist-challange-description-box-2"
@@ -37,8 +37,8 @@ const WelcomeModal: React.FC = () => {
           ))}
         </Text>
         {isWhitelisted && (
-          <Box ms={3}>
-            <img src={Whitelist} alt="Whitelist" />
+          <Box color="impaktRed" ms={3}>
+            <I.HeartIcon />
           </Box>
         )}
       </Box>
