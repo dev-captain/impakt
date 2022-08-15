@@ -38,8 +38,8 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
       </Box>
       <VStack
         as="main"
-        bgColor="#060609"
-        color="white"
+        bgColor="#CDCDCD"
+        color="#000"
         position="relative"
         justifyContent="flex-start"
         alignItems="flex-start"
@@ -60,7 +60,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             display={{ base: 'none', lg: 'flex' }}
             w={{ base: 0, lg: '20vw' }}
             minW={{ base: 0, lg: '260px' }}
-            bgColor="rgba(28, 28, 40, 0.65)"
+            bgColor="white"
             as="aside"
             justifyContent="flex-start"
             alignItems="flex-start"

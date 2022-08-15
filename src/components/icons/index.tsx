@@ -59,3 +59,4 @@ export { default as GleamIcon } from './GleamIcon';
 export { default as HeartIcon } from './HeartIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as DownloadIcon } from './DownloadIcon';
+export { default as PeopleIcon } from './PeopleIcon';

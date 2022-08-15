@@ -88,7 +88,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         height={isVersion2 && !isLessThan1280 ? '80px' : '70px'}
         marginTop={isVersion2 && !isLessThan1280 ? '0' : '10px'}
         transition="background-color 0.5s linear"
-        bgColor={bgColor}
+        bgColor={isVersion2 ? 'white' : bgColor}
         backdropFilter={isScrolling || path.path !== '' ? 'blur(40px)' : 'blur(0px)'}
         borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
       >
@@ -100,37 +100,36 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
+            <I.ImpaktIcon isBlack={isVersion2} cursor="pointer" width="111px" height="32px" />
           </Box>
           <HStack
             justify="flex-end"
             align="center"
             w="full"
-            spacing={[0, 0, 3, 5, 8, 12]}
+            ml="0 !important"
+            // spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
           >
-            <HStack w="full" align="space-between" justify="space-between">
-              <NavBarLink IsHeader />
+            <HStack w="full" align="space-between" id="yo" justify="space-between">
+              <Box display="flex" ml="0 !important" justifyContent="center" w="full">
+                <NavBarLink IsHeader />
+              </Box>
 
-              <HStack
-                justify={{ base: 'center', md: 'flex-end' }}
-                spacing="8px"
-                pl={{ base: isVersion2 ? '0px' : '64px' }}
-              >
-                {!isVersion2 && <NavBarSocialIcons />}
-                {!isVersion2 && (
+              {!isVersion2 && (
+                <HStack
+                  justify={{ base: 'center', md: 'flex-end' }}
+                  spacing="8px"
+                  pl={{ base: isVersion2 ? '0px' : '64px' }}
+                >
+                  <NavBarSocialIcons />
                   <Box position="relative" display="flex">
                     <DropDownProfileMenu />
                   </Box>
-                )}
 
-                {!isVersion2 && (
                   <Box>
                     <SignInLinkItem />
                   </Box>
-                )}
 
-                {!isVersion2 && (
                   <Common.ImpaktButton
                     as="a"
                     href="/download"
@@ -141,8 +140,8 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   >
                     {t(Keys.navbar.download)}
                   </Common.ImpaktButton>
-                )}
-              </HStack>
+                </HStack>
+              )}
 
               {isVersion2 && (
                 <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
@@ -154,7 +153,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                       e.preventDefault();
                     }}
                     leftIcon={<I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />}
-                    variant="secondary"
+                    variant="white"
                   >
                     {t(Keys.navbar.dashboard)}
                   </Common.ImpaktButton>
@@ -167,7 +166,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                       navigate('/contact');
                     }}
                     leftIcon={<I.HelpIcon cursor="pointer" width="14.33px" height="12.33px" />}
-                    variant="secondary"
+                    variant="white"
                   >
                     {t(Keys.navbar.help)}
                   </Common.ImpaktButton>

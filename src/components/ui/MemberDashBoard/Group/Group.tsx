@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, HStack } from '@chakra-ui/react';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
-import EventCalendar from './EventCalendar/EventCalendar';
 // import Topics from '../Topics/Topics';
 
 const Group: React.FC = () => {
@@ -13,7 +12,7 @@ const Group: React.FC = () => {
       as="section"
       id="general-section"
     >
-      <MemberDashboardSectionHeadlineText title="Group" />
+      <MemberDashboardSectionHeadlineText title="Your Groups" />
       <HStack
         columnGap="24px"
         rowGap="24px"
@@ -22,7 +21,6 @@ const Group: React.FC = () => {
         w="full"
         flexWrap={{ base: 'wrap', lg: 'nowrap' }}
       >
-        <EventCalendar />
         {/* here is the components */}
       </HStack>
     </Box>
