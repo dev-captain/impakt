@@ -23,6 +23,15 @@ const Sidebar: React.FC = () => {
 
       <SidebarLinkItem
         hide
+        href="groups"
+        title="Groups"
+        isActive={path.pathname === '/dashboard/groups'}
+      >
+        <I.PeopleIcon cursor="pointer" width="32px" height="32px" />
+      </SidebarLinkItem>
+
+      <SidebarLinkItem
+        hide
         href="referrals"
         onClose={onClose}
         title="Referrals"
@@ -32,16 +41,6 @@ const Sidebar: React.FC = () => {
       </SidebarLinkItem>
 
       <SidebarLinkItem
-        isTransparent
-        hide
-        href="groups"
-        title="Groups"
-        isActive={path.pathname === '/dashboard/groups'}
-      >
-        <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
-      </SidebarLinkItem>
-
-      {/* <SidebarLinkItem
         hide
         href="reward-history"
         onClose={onClose}
@@ -59,7 +58,7 @@ const Sidebar: React.FC = () => {
         isActive={path.pathname === '/dashboard/statistics'}
       >
         <I.ChatIcon cursor="pointer" width="27px" height="23px" />
-      </SidebarLinkItem> */}
+      </SidebarLinkItem>
     </>
   );
 };

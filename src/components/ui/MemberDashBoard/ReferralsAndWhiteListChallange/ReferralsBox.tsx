@@ -26,7 +26,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
   const referralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
 
   return (
-    <MemberDashboardCard flexDir="column" rowGap={{ base: '18px', lg: '32px' }}>
+    <MemberDashboardCard color="#000" flexDir="column" rowGap={{ base: '18px', lg: '32px' }}>
       <Box
         display="flex"
         letterSpacing="-0.04em !important"
@@ -36,7 +36,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
         id="whitelist-challange-description-box-2"
         position="relative"
       >
-        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
+        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#000">
           Referrals
         </Text>
         {/* <Tooltip
@@ -96,7 +96,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
           borderRadius="20px"
           padding={{ base: '12px 0px', sm: '12px 10px', md: '12px 20px', lg: '12px 24px' }}
           h="auto"
-          bg="rgba(9, 9, 11, 0.4)"
+          bg="#000"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text color="#FFFFFF" textAlign="center" textStyle="bold5">

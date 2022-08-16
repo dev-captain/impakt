@@ -11,7 +11,6 @@ type Props = {
   onClose?: () => void;
   target?: React.HTMLAttributeAnchorTarget;
   children: React.ReactNode;
-  isTransparent?: boolean;
 };
 
 const SidebarLinkItem = ({
@@ -23,7 +22,6 @@ const SidebarLinkItem = ({
   target,
   type,
   children,
-  isTransparent = false,
 }: Props) => {
   const navigate = useNavigate();
   // TODO Sidebar link item UI
@@ -31,21 +29,21 @@ const SidebarLinkItem = ({
   return (
     <Box
       justifyContent="center"
-      // h={{ base: '48px', md: '56px' }}
+      h="48px"
       onClick={onClose}
       cursor="pointer"
       width="100%"
-      backgroundColor={isActive && !isTransparent ? '#20202E' : 'none'}
-      borderRadius="16px"
+      backgroundColor="transparent"
       alignItems="start"
       // padding="16px 18px"
-      color={isActive ? 'rgba(255 ,255 ,255 ,1)' : 'rgba(255 ,255 ,255 ,0.5)'}
+      color={isActive ? 'fitnessSky' : 'rgba(78, 96, 112, 0.5)'}
+      borderLeft={isActive ? '4px solid #5C7FFF' : '0'}
       padding="0"
       _hover={{
-        background: !isTransparent ? '#20202E' : 'none',
-        color: 'rgba(255 , 255 ,255 ,1)',
-        transition: 'all 0.5s ease',
+        color: 'fitnessSky',
+        transition: 'all 0.1s ease',
         fontWeight: '600',
+        borderLeft: '4px solid #5C7FFF',
       }}
     >
       {type === 'LINK' && (

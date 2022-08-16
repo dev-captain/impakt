@@ -28,9 +28,9 @@ const WelcomeModal: React.FC = () => {
         letterSpacing="-0.04em !important"
         id="whitelist-challange-description-box-2"
       >
-        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
+        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#000">
           {memberInfo?.map((data, i) => (
-            <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
+            <span key={data} style={{ color: `${i === 1 ? 'gray' : '#000'}` }}>
               {i === 1 ? `#` : `Hi, `}
               {data}
             </span>
@@ -61,7 +61,7 @@ const WelcomeModal: React.FC = () => {
           w={{ base: '100%', md: '48%', lg: 'auto', xl: 'auto' }}
           h="auto"
           borderRadius="20px"
-          bg="rgba(254, 196, 23, 0.15)"
+          bg="rgba(254, 196, 23, 0.1)"
           padding="12px 24px"
         >
           <Box
@@ -113,7 +113,7 @@ const WelcomeModal: React.FC = () => {
           borderRadius="20px"
           padding="12px 24px"
           h="auto"
-          bg="rgba(9, 9, 11, 0.4)"
+          bg="rgba(9, 9, 11, 1)"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">

@@ -4,7 +4,7 @@ import * as React from 'react';
 interface ImpaktButtonProps {
   size?: 'sm' | 'lg';
   as?: As<any>;
-  variant?: 'primary' | 'secondary' | 'alert';
+  variant?: 'primary' | 'secondary' | 'alert' | 'white';
   leftIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   href?: string;
@@ -42,7 +42,7 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
   );
 });
 
-const getBgColor = (variant?: 'primary' | 'alert' | 'secondary') => {
+const getBgColor = (variant?: 'primary' | 'alert' | 'secondary' | 'white') => {
   if (variant === 'primary') {
     return 'accentRed2';
   }
@@ -53,10 +53,14 @@ const getBgColor = (variant?: 'primary' | 'alert' | 'secondary') => {
     return 'rgba(240, 65, 83, 0.12)';
   }
 
+  if (variant === 'white') {
+    return 'rgba(255,255,255,1)';
+  }
+
   return 'accentRed2';
 };
 
-const getTextColor = (variant?: 'primary' | 'alert' | 'secondary') => {
+const getTextColor = (variant?: 'primary' | 'alert' | 'secondary' | 'white') => {
   if (variant === 'primary') {
     return 'rgba(255, 255, 255, 1)';
   }
@@ -65,6 +69,10 @@ const getTextColor = (variant?: 'primary' | 'alert' | 'secondary') => {
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 1)';
+  }
+
+  if (variant === 'white') {
+    return 'fitnessGray';
   }
 
   return 'rgba(255, 255, 255, 1)';

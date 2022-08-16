@@ -81,13 +81,7 @@ const CollapseSidebar = () => {
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
-            <SidebarLinkItem
-              isTransparent
-              hide
-              href=""
-              title="General"
-              isActive={path.pathname === '/dashboard'}
-            >
+            <SidebarLinkItem hide href="" title="General" isActive={path.pathname === '/dashboard'}>
               <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
             </SidebarLinkItem>
           </MenuItem>
@@ -96,7 +90,6 @@ const CollapseSidebar = () => {
             _focus={{ backgroundColor: 'transparent' }}
           >
             <SidebarLinkItem
-              isTransparent
               hide
               href="referrals"
               title="Referrals"
@@ -111,7 +104,6 @@ const CollapseSidebar = () => {
             _focus={{ backgroundColor: 'transparent' }}
           >
             <SidebarLinkItem
-              isTransparent
               hide
               href="groups"
               title="Groups"

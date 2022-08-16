@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { Box, HStack } from '@chakra-ui/react';
-import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
-// import Topics from '../Topics/Topics';
+import * as React from 'react';
+import MemberDashboardSectionHeadlineText from '../../MemberDashboardSectionHeadlineText';
 
-const Group: React.FC = () => {
+const GroupDetails: React.FC = () => {
   return (
     <Box
       // minH="100vh"
@@ -12,7 +11,7 @@ const Group: React.FC = () => {
       as="section"
       id="general-section"
     >
-      <MemberDashboardSectionHeadlineText title="Your Groups" />
+      <MemberDashboardSectionHeadlineText title="Group Detail Page" />
       <HStack
         columnGap="24px"
         rowGap="24px"
@@ -26,4 +25,4 @@ const Group: React.FC = () => {
     </Box>
   );
 };
-export default Group;
+export default GroupDetails;
