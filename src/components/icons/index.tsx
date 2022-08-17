@@ -63,3 +63,8 @@ export { default as PeopleIcon } from './PeopleIcon';
 export { default as CheckIcon } from './CheckIcon';
 export { default as UnionIcon } from './UnionIcon';
 export { default as BackIcon } from './BackIcon';
+export { default as FireIcon } from './FireIcon';
+export { default as SettingIcon } from './SettingIcon';
+export { default as AppIcon } from './AppIcon';
+export { default as CalenderIcon } from './CalenderIcon';
+export { default as PlayChallengeIcon } from './PlayChallengeIcon';

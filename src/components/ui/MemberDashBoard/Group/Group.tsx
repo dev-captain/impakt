@@ -59,13 +59,13 @@ const Group: React.FC = () => {
           }}
           gap={5}
         >
-          <GridItem w="100%">
+          <GridItem w="100%" minHeight="275">
             <GroupsCard member="705" img={Images.group.img} name="Dance Fit" />
           </GridItem>
-          <GridItem w="100%">
+          <GridItem w="100%" minHeight="275">
             <GroupsCard member="9" img={Images.group.img} name="My Squad" />
           </GridItem>
-          <GridItem w="100%" height="100%">
+          <GridItem w="100%" minHeight="275">
             <AddGroup />
           </GridItem>
         </Grid>

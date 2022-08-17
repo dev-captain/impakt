@@ -1,6 +1,8 @@
 import { Box, HStack } from '@chakra-ui/react';
+import Images from 'assets/images';
 import * as React from 'react';
-import MemberDashboardSectionHeadlineText from '../../MemberDashboardSectionHeadlineText';
+import Banner from '../../Banner';
+import MemberList from '../../MemberList';
 
 const GroupDetails: React.FC = () => {
   return (
@@ -11,16 +13,10 @@ const GroupDetails: React.FC = () => {
       as="section"
       id="general-section"
     >
-      <MemberDashboardSectionHeadlineText title="Group Detail Page" />
-      <HStack
-        columnGap="24px"
-        rowGap="24px"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        w="full"
-        flexWrap={{ base: 'wrap', lg: 'nowrap' }}
-      >
+      <HStack w="100%" display="block">
         {/* here is the components */}
+        <Banner img={Images.group.cover} />
+        <MemberList />
       </HStack>
     </Box>
   );

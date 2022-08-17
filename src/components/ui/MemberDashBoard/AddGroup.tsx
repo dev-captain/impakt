@@ -6,14 +6,13 @@ import { useNavigate } from 'react-router-dom';
 const AddGroup = () => {
   const navigate = useNavigate();
   const [isLessThan1650] = useMediaQuery('(max-width: 1650px)');
-  const [isLessThan992] = useMediaQuery('(max-width: 992px)');
 
   return (
     <Box
       display="flex"
       backgroundColor="#fff"
       borderRadius="24px"
-      padding={isLessThan992 ? '120px 0' : '0'}
+      padding={{ base: '100px 0', md: '0' }}
       height="100%"
       alignItems="center"
       justifyContent="center"
