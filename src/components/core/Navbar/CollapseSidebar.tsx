@@ -34,6 +34,17 @@ const CollapseSidebar = () => {
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
+          {path.pathname === '/dashboard/groups' && (
+            <Box display="flex" alignItems="flex-end">
+              <I.PeopleIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname === '/dashboard/groups' ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">Groups</Text>
+            </Box>
+          )}
           {path.pathname === '/dashboard/referrals' && (
             <Box display="flex" alignItems="flex-end">
               <I.ReferralsIcon

@@ -88,6 +88,10 @@ const Images = {
     whitelistHero: require('./whitelist/whitelist-hero-illustration.png'),
     impaktIconBg: require('./whitelist/impaktIconBg.png'),
   },
+  group: {
+    img: require('./group/img.png'),
+    ellipse: require('./group/Ellipse.png'),
+  },
 };
 
 export default Images;

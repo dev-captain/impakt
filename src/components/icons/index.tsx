@@ -60,3 +60,6 @@ export { default as HeartIcon } from './HeartIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as DownloadIcon } from './DownloadIcon';
 export { default as PeopleIcon } from './PeopleIcon';
+export { default as CheckIcon } from './CheckIcon';
+export { default as UnionIcon } from './UnionIcon';
+export { default as BackIcon } from './BackIcon';
