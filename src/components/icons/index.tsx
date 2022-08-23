@@ -68,3 +68,4 @@ export { default as SettingIcon } from './SettingIcon';
 export { default as AppIcon } from './AppIcon';
 export { default as CalenderIcon } from './CalenderIcon';
 export { default as PlayChallengeIcon } from './PlayChallengeIcon';
+export { default as CloseIcon } from './CloseIcon';

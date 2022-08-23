@@ -14,6 +14,7 @@ const MemberList: React.FC = () => {
         w={isLessThan576 ? 'full' : '342px'}
         p={{ base: '16px', md: '24px' }}
         marginTop="26px"
+        marginLeft="auto"
         marginBottom="20px"
       >
         <Box>

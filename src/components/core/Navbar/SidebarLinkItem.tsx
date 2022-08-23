@@ -11,6 +11,7 @@ type Props = {
   onClose?: () => void;
   target?: React.HTMLAttributeAnchorTarget;
   children: React.ReactNode;
+  collaps: boolean;
 };
 
 const SidebarLinkItem = ({
@@ -22,6 +23,7 @@ const SidebarLinkItem = ({
   target,
   type,
   children,
+  collaps,
 }: Props) => {
   const navigate = useNavigate();
   // TODO Sidebar link item UI
@@ -37,7 +39,7 @@ const SidebarLinkItem = ({
       alignItems="start"
       // padding="16px 18px"
       color={isActive ? 'fitnessSky' : 'rgba(78, 96, 112, 0.5)'}
-      borderLeft={isActive ? '4px solid #5C7FFF' : '0'}
+      borderLeft={isActive ? '4px solid #5C7FFF' : '4px solid transparent'}
       padding="0"
       _hover={{
         color: 'fitnessSky',
@@ -82,7 +84,7 @@ const SidebarLinkItem = ({
           target={target}
           display="flex"
           alignItems="center"
-          padding="16px 18px"
+          padding={collaps === true ? '16px 24px' : '16px 48px'}
           h={{ base: '48px', md: '56px' }}
           onClick={() => {
             navigate(href);
@@ -91,7 +93,13 @@ const SidebarLinkItem = ({
           color="inherit"
         >
           {children}
-          <Text textStyle="regular3" pos="relative" marginLeft="14.5px" fontWeight="600">
+          <Text
+            textStyle="regular3"
+            pos="relative"
+            marginLeft="14.5px"
+            fontWeight="600"
+            display={collaps === true ? 'none' : 'block'}
+          >
             {title}
           </Text>
         </Box>
