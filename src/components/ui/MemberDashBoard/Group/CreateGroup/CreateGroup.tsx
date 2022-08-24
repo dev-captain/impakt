@@ -10,16 +10,53 @@ import {
   Text,
   Input,
   useMediaQuery,
+  useToast,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import { I } from 'components';
+import { useAppDispatch, useAppSelector } from '../../../../../hooks';
+import { createGroup } from '../../../../../lib/redux/slices/groups/actions/createGroup';
+import { fetchMyGroups } from '../../../../../lib/redux/slices/groups/actions/fetchMyGroups';
 
 const CreateGroup: React.FC = () => {
+  const [friendlyName, setFriendlyName] = React.useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useAppDispatch();
+  const toast = useToast();
+
+  const member = useAppSelector((state) => state.memberAuth.member);
   const navigate = useNavigate();
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
+  const handleOnCreate = async () => {
+    try {
+      if (!member) return;
+      await dispatch(createGroup(friendlyName)).unwrap();
+      await dispatch(fetchMyGroups(member.id));
+      toast({
+        title: 'Success',
+        description: 'Your password was changed, you can now login in the Impakt app.',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (e: any) {
+      console.error(e);
+      toast({
+        title: 'Error',
+        description: e.response.data.message,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
+    navigate('/dashboard/groups');
+  };
+
+  const onFriendlyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFriendlyName(e.target.value);
+  };
   React.useEffect(() => {
     onOpen();
   }, []);
@@ -53,6 +90,7 @@ const CreateGroup: React.FC = () => {
             Group name:
           </Text>
           <Input
+            onChange={onFriendlyNameChange}
             placeholder="Group by Demidues"
             size="md"
             backgroundColor="#EEF4F6"
@@ -96,6 +134,7 @@ const CreateGroup: React.FC = () => {
             _hover={{ backgroundColor: '#29323B' }}
             _active={{ backgroundColor: '#29323B' }}
             borderRadius="16px"
+            onClick={handleOnCreate}
             fontSize={{ md: '18px' }}
             fontWeight="700"
           >
