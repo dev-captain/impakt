@@ -2,6 +2,7 @@ import { Box, Button, Image, Text, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
+import { useAppSelector } from 'hooks';
 
 interface BannerProps {
   img: any;
@@ -10,6 +11,9 @@ interface BannerProps {
 const Banner: React.FC<BannerProps> = ({ img }) => {
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
   const [isLessThan576] = useMediaQuery('(max-width: 576px)');
+
+  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
 
   return (
     <Box>
@@ -28,7 +32,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
               fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
               color="29323B"
             >
-              Matt Fox’s Bodyweight Training
+              {activeGroup?.friendlyName}
             </Text>
             <Box
               display={isLessThan576 ? 'block' : 'flex'}
@@ -46,15 +50,19 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                 marginRight="16px"
                 fontSize={isLessThan576 ? '14px' : '16px'}
               >
-                <I.PeopleIcon width={isLessThan576 ? '14px' : '18px'} marginRight="8px" />2 354
+                <I.PeopleIcon width={isLessThan576 ? '14px' : '18px'} marginRight="8px" />
+                {activeGroup?.memberCount}
               </Button>
               <Box display="flex" alignItems="center" marginTop={isLessThan576 ? '20px' : '0'}>
                 <Box display="flex" position="relative">
-                  <Image src={Images.group.ellipse} zIndex="10" />
+                  {members.slice(0, 5).map(() => (
+                    <Image src={Images.group.ellipse} zIndex="10" />
+                  ))}
+                  {/* <Image src={Images.group.ellipse} zIndex="10" />
                   <Image src={Images.group.ellipse} zIndex="9" position="absolute" left="27px" />
                   <Image src={Images.group.ellipse} zIndex="8" position="absolute" left="53px" />
                   <Image src={Images.group.ellipse} zIndex="7" position="absolute" left="79px" />
-                  <Image src={Images.group.ellipse} position="absolute" left="105px" />
+                  <Image src={Images.group.ellipse} position="absolute" left="105px" /> */}
                 </Box>
                 <Text fontSize="18px" color="#5C7FFF" fontWeight="500" marginLeft="112px">
                   friends

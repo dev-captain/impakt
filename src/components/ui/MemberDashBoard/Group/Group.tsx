@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { Box, Grid, GridItem, HStack, useMediaQuery } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import Images from 'assets/images';
 import { I } from 'components';
+import { useAppSelector } from 'hooks';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 import MemberDashboardSectionHeadlineJoinedGroup from '../MemberDashboardSectionHeadlineJoinedGroup';
 import GroupsCard from '../GroupsCard';
 import AddGroup from '../AddGroup';
-import { useAppSelector } from '../../../../hooks';
 // import Topics from '../Topics/Topics';
 
 const Group: React.FC = () => {
+  const navigate = useNavigate();
   const [isLessThan1440] = useMediaQuery('(max-width: 1440px)');
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
   const [isLessThan576] = useMediaQuery('(max-width: 576px)');
@@ -61,8 +63,17 @@ const Group: React.FC = () => {
           }}
           gap={5}
         >
-          {myGroups.map(({ memberCount, friendlyName }) => (
-            <GridItem w="100%" minHeight="275">
+          {myGroups.map(({ memberCount, friendlyName, id }) => (
+            <GridItem
+              cursor="pointer"
+              as="a"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/dashboard/groups/group/${id}`);
+              }}
+              w="100%"
+              minHeight="275"
+            >
               <GroupsCard member={memberCount ?? 0} img={Images.group.img} name={friendlyName} />
             </GridItem>
           ))}

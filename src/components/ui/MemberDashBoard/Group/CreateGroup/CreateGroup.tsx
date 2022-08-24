@@ -15,7 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import { I } from 'components';
-import { useAppDispatch, useAppSelector } from '../../../../../hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { createGroup } from '../../../../../lib/redux/slices/groups/actions/createGroup';
 import { fetchMyGroups } from '../../../../../lib/redux/slices/groups/actions/fetchMyGroups';
 
