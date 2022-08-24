@@ -11,11 +11,12 @@ import referralsReducer from '../slices/referrals/referralsSlice';
 import stateReducer from '../slices/state/stateSlice';
 import whitelistReducer from '../slices/whitelist/whitelistSlice';
 import discourseReducer from '../slices/discourse/discourseSlice';
+import groupsReducer from '../slices/groups/groupsSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['memberAuth', 'stateReducer'],
+  blacklist: ['memberAuth', 'stateReducer', 'groupsReducer'],
 };
 
 export const memberAuthPersistConfig = {
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   stateReducer,
   whitelistReducer,
   discourseReducer,
+  groupsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

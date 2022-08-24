@@ -6,12 +6,14 @@ import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlin
 import MemberDashboardSectionHeadlineJoinedGroup from '../MemberDashboardSectionHeadlineJoinedGroup';
 import GroupsCard from '../GroupsCard';
 import AddGroup from '../AddGroup';
+import { useAppSelector } from '../../../../hooks';
 // import Topics from '../Topics/Topics';
 
 const Group: React.FC = () => {
   const [isLessThan1440] = useMediaQuery('(max-width: 1440px)');
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
   const [isLessThan576] = useMediaQuery('(max-width: 576px)');
+  const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
 
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">
@@ -59,12 +61,11 @@ const Group: React.FC = () => {
           }}
           gap={5}
         >
-          <GridItem w="100%" minHeight="275">
-            <GroupsCard member="705" img={Images.group.img} name="Dance Fit" />
-          </GridItem>
-          <GridItem w="100%" minHeight="275">
-            <GroupsCard member="9" img={Images.group.img} name="My Squad" />
-          </GridItem>
+          {myGroups.map(({ memberCount, friendlyName }) => (
+            <GridItem w="100%" minHeight="275">
+              <GroupsCard member={memberCount ?? 0} img={Images.group.img} name={friendlyName} />
+            </GridItem>
+          ))}
           <GridItem w="100%" minHeight="275">
             <AddGroup />
           </GridItem>

@@ -13,6 +13,7 @@ import { fetchReferralsReward } from '../../lib/redux/slices/referrals/actions/f
 import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
 // import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
+import { fetchMyGroups } from '../../lib/redux/slices/groups/actions/fetchMyGroups';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -63,6 +64,11 @@ const MemberDashboard: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchLatestNews());
+  }, []);
+
+  React.useEffect(() => {
+    if (!member) return;
+    dispatch(fetchMyGroups(member.id));
   }, []);
 
   return <C.SidebarLayout isShowNavbar />;

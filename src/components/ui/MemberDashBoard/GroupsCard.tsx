@@ -4,7 +4,7 @@ import { Box, Text, Image, Button, useMediaQuery } from '@chakra-ui/react';
 import Images from 'assets/images';
 
 interface GroupsCardPropsI {
-  member: string;
+  member: number;
   img: any;
   name: string;
 }
