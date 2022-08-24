@@ -6,6 +6,7 @@ import { fetchGroupDetailById } from './actions/fetchGroupDetailById';
 import { fetchMembersOfGroup } from './actions/fetchMembersOfGroup';
 import { fetchMyGroups } from './actions/fetchMyGroups';
 import { joinGroup } from './actions/joinGroup';
+import { updateGroup } from './actions/updateGroup';
 
 export type GetGroupRes = {
   id: number;
@@ -96,6 +97,18 @@ const groupsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteGroup.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(updateGroup.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateGroup.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.activeGroup = action.payload;
+      })
+      .addCase(updateGroup.rejected, (state) => {
         state.isLoading = false;
       });
 

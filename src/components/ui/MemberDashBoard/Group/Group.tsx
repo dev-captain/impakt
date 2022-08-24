@@ -16,27 +16,29 @@ const Group: React.FC = () => {
   const [isLessThan768] = useMediaQuery('(max-width: 768px)');
   const [isLessThan576] = useMediaQuery('(max-width: 576px)');
   const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const ownedGroups = myGroups.filter((groups) => groups.ownerId === member?.id);
 
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">
       <Box display="flex" gap={isLessThan1440 ? '44px' : '48px'} borderBottom="2px solid #E0E0E0">
         <MemberDashboardSectionHeadlineText title="Your Groups" />
         <MemberDashboardSectionHeadlineJoinedGroup
-          value="2"
+          value={myGroups.length.toString()}
           icon={<I.PeopleIcon />}
           name="Joined Groups"
           color="#1C1C28"
           width="60px"
         />
         <MemberDashboardSectionHeadlineJoinedGroup
-          value="47"
+          value="0"
           icon={<I.RewardIcon color="#D92D85" />}
           name="Challenges completed"
           color="#D92D85"
           width="94px"
         />
         <MemberDashboardSectionHeadlineJoinedGroup
-          value="0"
+          value={ownedGroups.length.toString()}
           icon={<I.AddMemberIcon color="#5714EC" width="32px" height="32px" />}
           name="Groupscreated"
           color="#5714EC"

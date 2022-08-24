@@ -3,16 +3,17 @@ import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
 import { GetGroupRes } from '../groupsSlice';
+import { fetchMyGroups } from './fetchMyGroups';
 
 const joinGroup = createAsyncThunk(
   'groups/join-group',
-  async (groupId: string, { rejectWithValue, getState }) => {
+  async (groupId: string, { rejectWithValue, getState, dispatch }) => {
     try {
       const {
-        memberAuth: { isLogin },
+        memberAuth: { isLogin, member },
       } = getState() as RootState;
 
-      if (!isLogin) {
+      if (!isLogin || !member) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
       const getMyGroupRes = await axios
@@ -20,6 +21,8 @@ const joinGroup = createAsyncThunk(
         .patch(`/api/v1/groups/${groupId}/join`);
 
       const payload = getMyGroupRes.data as GetGroupRes;
+
+      await dispatch(fetchMyGroups(member.id));
 
       return payload;
     } catch (err: any) {

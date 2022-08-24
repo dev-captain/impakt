@@ -5,9 +5,12 @@ import { API_SERVER_BASE_URL } from '../../../../axios/api';
 import { RootState } from '../../../store';
 import { fetchMyGroups } from './fetchMyGroups';
 
-const deleteGroup = createAsyncThunk(
-  'groups/delete',
-  async (groupId: number, { rejectWithValue, getState, dispatch }) => {
+const updateGroup = createAsyncThunk(
+  'groups/update',
+  async (
+    { groupId, friendlyName }: { groupId?: number; friendlyName?: string },
+    { rejectWithValue, getState, dispatch },
+  ) => {
     try {
       const {
         memberAuth: { isLogin, member },
@@ -16,13 +19,14 @@ const deleteGroup = createAsyncThunk(
       if (!isLogin || !member) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
-      await axios
+
+      const result = await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .delete(`/api/v1/groups/${groupId}`);
+        .patch(`/api/v1/groups/${groupId}`, { friendlyName });
 
       await dispatch(fetchMyGroups(member.id));
 
-      return true;
+      return result.data;
     } catch (err: any) {
       return rejectWithValue(err);
     }
@@ -30,4 +34,4 @@ const deleteGroup = createAsyncThunk(
 );
 
 // eslint-disable-next-line import/prefer-default-export
-export { deleteGroup };
+export { updateGroup };

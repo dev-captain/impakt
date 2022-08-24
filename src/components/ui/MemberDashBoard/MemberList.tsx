@@ -1,4 +1,13 @@
-import { Box, Button, Text, Image, useMediaQuery, CircularProgress } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Text,
+  Image,
+  useMediaQuery,
+  CircularProgress,
+  useClipboard,
+  useToast,
+} from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
 import Images from 'assets/images';
@@ -7,6 +16,7 @@ import { fetchMembersOfGroup } from '../../../lib/redux/slices/groups/actions/fe
 
 const MemberList: React.FC = () => {
   const [isLessThan576] = useMediaQuery('(max-width: 576px)');
+  const toast = useToast();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
@@ -16,6 +26,19 @@ const MemberList: React.FC = () => {
       dispatch(fetchMembersOfGroup(activeGroup.id));
     }
   }, []);
+
+  const groupReferralLink = `${window.location.origin}/dashboard/groups/join-group/${activeGroup?.id}`;
+  const { onCopy } = useClipboard(groupReferralLink, { timeout: 3000 });
+  const onCopyHandle = () => {
+    onCopy();
+    toast({
+      title: 'Success',
+      description: 'Group referral link copied successfully!',
+      isClosable: true,
+      duration: 3000,
+      status: 'success',
+    });
+  };
 
   if (isLoading) return <CircularProgress isIndeterminate />;
 
@@ -39,6 +62,7 @@ const MemberList: React.FC = () => {
               <I.SettingIcon color="#B0C3D6" width="20px" />
             </Box>
             <Button
+              onClick={onCopyHandle}
               backgroundColor="#1C1C28"
               fontWeight="700"
               color="#fff"

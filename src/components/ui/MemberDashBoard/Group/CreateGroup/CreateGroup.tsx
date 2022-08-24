@@ -36,7 +36,7 @@ const CreateGroup: React.FC = () => {
       await dispatch(fetchMyGroups(member.id));
       toast({
         title: 'Success',
-        description: 'Your password was changed, you can now login in the Impakt app.',
+        description: 'Group created successfully.',
         isClosable: true,
         duration: 8000,
         status: 'success',
