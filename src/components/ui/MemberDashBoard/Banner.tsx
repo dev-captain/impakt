@@ -15,6 +15,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
+  console.log(activeGroup?.ownerId);
 
   return (
     <>
@@ -50,13 +51,13 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                   fontSize={{ base: '14px', md: '16px' }}
                 >
                   <I.PeopleIcon width={{ md: '18px', base: '14px' }} marginRight="8px" />
-                  {activeGroup?.memberCount}
+                  {activeGroup?.memberCount ? activeGroup.memberCount - 1 : 0}
                 </Button>
                 <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
                   <Box display="flex" position="relative">
                     {members.slice(0, 5).map(
                       ({ id, username }) =>
-                        id !== activeGroup?.ownerId && (
+                        member?.id !== id && (
                           <Tooltip label={`${username}`}>
                             <Image
                               cursor="pointer"
