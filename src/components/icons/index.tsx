@@ -69,3 +69,6 @@ export { default as AppIcon } from './AppIcon';
 export { default as CalenderIcon } from './CalenderIcon';
 export { default as PlayChallengeIcon } from './PlayChallengeIcon';
 export { default as CloseIcon } from './CloseIcon';
+export { default as FullScreenIcon } from './FullScreenIcon';
+export { default as CommentIcon } from './CommentIcon';
+export { default as ClockIcon } from './ClockIcon';

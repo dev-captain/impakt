@@ -9,7 +9,6 @@ import {
   useDisclosure,
   Text,
   Input,
-  useMediaQuery,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
@@ -18,7 +17,6 @@ import { I } from 'components';
 const CreateGroup: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
   React.useEffect(() => {
     onOpen();
@@ -34,10 +32,10 @@ const CreateGroup: React.FC = () => {
       }}
     >
       <ModalOverlay />
-      <ModalContent minWidth={isLessThan768 ? 'auto' : '720px'} margin="0 20px">
+      <ModalContent minWidth={{ md: '720px', base: 'auto' }} margin="0 20px">
         <ModalHeader
           color="#29323B"
-          fontSize={{ base: isLessThan768 ? '30px' : '48px', lg: '48px' }}
+          fontSize={{ lg: '48px', md: '48px', base: '30px' }}
           paddingBottom="0"
           fontWeight="700"
           textAlign="center"

@@ -1,5 +1,5 @@
 import { C, Common, I } from 'components';
-import { VStack, Box, Text, useColorModeValue, HStack, useMediaQuery } from '@chakra-ui/react';
+import { VStack, Box, Text, useColorModeValue, HStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useNavigate } from 'react-router-dom';
 import { Socials } from '../../../../data';
@@ -7,7 +7,6 @@ import { Socials } from '../../../../data';
 const ImpaktPass = () => {
   const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.whitelist.impaktIconBg, Images.whitelist.impaktIconBg);
-  const [isLessThan768] = useMediaQuery('(max-width: 768px)');
 
   return (
     <C.HeroLayout
@@ -28,7 +27,7 @@ const ImpaktPass = () => {
     >
       <VStack w="full" px="1em">
         <VStack maxW="1200px" w="full">
-          <HStack flexDir={isLessThan768 ? 'column' : 'row'} rowGap="48px" columnGap="48px">
+          <HStack flexDir={{ md: 'row', base: 'column' }} rowGap="48px" columnGap="48px">
             <Box
               w="100%"
               backgroundColor="rgba(28, 28, 40, 0.65)"
