@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { I } from 'components';
-import { Box, Text, Image, Button, useMediaQuery } from '@chakra-ui/react';
+import { Box, Text, Image, Button } from '@chakra-ui/react';
 import Images from 'assets/images';
 
 interface GroupsCardPropsI {
@@ -9,27 +9,39 @@ interface GroupsCardPropsI {
   name: string;
 }
 const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name }) => {
-  const [isLessThan1650] = useMediaQuery('(max-width: 1650px)');
-
   return (
-    <Box display={{ lg: 'block' }} backgroundColor="#fff" borderRadius="24px">
-      <Image src={img} objectFit="cover" minW="100%" zIndex="0" borderRadius="24px 24px 0 0" />
-      <Box padding={isLessThan1650 ? '12px' : '24px'}>
+    <Box
+      display="flex"
+      backgroundColor="#fff"
+      borderRadius="24px"
+      minH="300px"
+      flexDirection="column"
+      justifyContent="space-between"
+    >
+      <Image
+        src={img}
+        objectFit="cover"
+        w="100%"
+        minW="100%"
+        zIndex="0"
+        borderRadius="24px 24px 0 0"
+      />
+      <Box padding={{ lgx: '16px', base: '12px' }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Text
             as="h1"
             textStyle="TitleBold64"
-            fontSize={isLessThan1650 ? '16px' : '20px'}
+            fontSize={{ lgx: '20px', base: '16px' }}
             color="#1C1C28"
           >
             {name}
           </Text>
           <Box display="flex" alignItems="center">
-            <I.PeopleIcon width={isLessThan1650 ? '26px' : '32px'} />
+            <I.PeopleIcon width={{ lgx: '32px', base: '26px' }} />
             <Text
               as="h1"
               textStyle="TitleBold64"
-              fontSize={isLessThan1650 ? '16px' : '20px'}
+              fontSize={{ lgx: '20px', base: '16px' }}
               color="#1C1C28"
               marginLeft="6px"
             >
@@ -48,9 +60,9 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name }) => {
             border="1px solid #1C1C28"
             borderRadius="8px"
             color="#1C1C28"
-            width={isLessThan1650 ? '100px' : '120px'}
+            width={{ lgx: '112px', base: '100px' }}
             justifyContent="space-around"
-            fontSize={isLessThan1650 ? '14px' : '16px'}
+            fontSize={{ lgx: '16px', base: '14px' }}
             backgroundColor="transparent"
             _hover={{ backgroundColor: 'transparent' }}
             _active={{ backgroundColor: 'transparent' }}

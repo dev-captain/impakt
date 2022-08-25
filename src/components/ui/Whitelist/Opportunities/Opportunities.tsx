@@ -3,16 +3,7 @@ import { memo } from 'react';
 // import Keys from 'i18n/types';
 import Images from 'assets/images';
 
-import {
-  VStack,
-  HStack,
-  Box,
-  Text,
-  GridItem,
-  Grid,
-  useColorModeValue,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { VStack, HStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import { S, C, I } from 'components';
 import OpportunitiesCard from './OpportunitiesCard';
 
@@ -24,8 +15,6 @@ const Opportunities = () => {
   // const navigate = useNavigate();
   //   const { t } = useTranslation(`default`).i18n;
   //   const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
-  const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
-  const [isLessThan768] = useMediaQuery('(max-width: 600px)');
 
   return (
     <C.HeroLayout
@@ -87,21 +76,15 @@ const Opportunities = () => {
               </Box>
             </VStack>
             <VStack
-              flexDir={{ base: 'column', md: 'row' }}
+              flexDir="row"
               marginStart="0px !important"
               marginTop="30px"
               width="100%"
               gap="7px"
               display="flex"
             >
-              <Grid
-                templateColumns={{
-                  base: isLessThan768 ? 'repeat(1, 1fr)' : 'repeat(2, 1fr)',
-                  md: isLessThan1040 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-                }}
-                gap={3}
-              >
-                <GridItem>
+              <Box display={{ md: 'flex' }} gap={3} w="100%">
+                <Box mt={{ md: '0', base: '20px' }}>
                   <OpportunitiesCard
                     icon={<I.GleamIcon />}
                     iconText="Whitelist via Gleam"
@@ -119,8 +102,8 @@ const Opportunities = () => {
                       whitelist spots!
                     </Text>
                   </OpportunitiesCard>
-                </GridItem>
-                <GridItem>
+                </Box>
+                <Box mt={{ md: '0', base: '20px' }}>
                   <OpportunitiesCard
                     icon={<I.TwitterIcon />}
                     iconText="Whitelist via Twitter"
@@ -137,8 +120,8 @@ const Opportunities = () => {
                       Flash whitelist giveaways will appear!
                     </Text>
                   </OpportunitiesCard>
-                </GridItem>
-                <GridItem>
+                </Box>
+                <Box mt={{ md: '0', base: '20px' }}>
                   <OpportunitiesCard
                     icon={<I.DiscordIcon />}
                     iconText="Whitelist via Discord"
@@ -157,8 +140,8 @@ const Opportunities = () => {
                       spots!
                     </Text>
                   </OpportunitiesCard>
-                </GridItem>
-              </Grid>
+                </Box>
+              </Box>
             </VStack>
           </HStack>
         </VStack>

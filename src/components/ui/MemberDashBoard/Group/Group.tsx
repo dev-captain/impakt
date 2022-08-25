@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Grid, GridItem, HStack, useMediaQuery } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import Images from 'assets/images';
 import { I } from 'components';
@@ -12,16 +12,13 @@ import AddGroup from '../AddGroup';
 
 const Group: React.FC = () => {
   const navigate = useNavigate();
-  const [isLessThan1440] = useMediaQuery('(max-width: 1440px)');
-  const [isLessThan768] = useMediaQuery('(max-width: 768px)');
-  const [isLessThan576] = useMediaQuery('(max-width: 576px)');
   const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
   const member = useAppSelector((state) => state.memberAuth.member);
   const ownedGroups = myGroups.filter((groups) => groups.ownerId === member?.id);
 
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">
-      <Box display="flex" gap={isLessThan1440 ? '44px' : '48px'} borderBottom="2px solid #E0E0E0">
+      <Box display="flex" gap={{ lgx: '48px', base: '44px' }} borderBottom="2px solid #E0E0E0">
         <MemberDashboardSectionHeadlineText title="Your Groups" />
         <MemberDashboardSectionHeadlineJoinedGroup
           value={myGroups.length.toString()}
@@ -46,43 +43,67 @@ const Group: React.FC = () => {
         />
       </Box>
       <HStack
-        columnGap="24px"
+        columnGap={{ md: '24px' }}
         rowGap="24px"
         justifyContent="flex-start"
         alignItems="flex-start"
         w="full"
-        mt="30px"
-        flexWrap={{ base: 'wrap', lg: 'nowrap' }}
+        margin="30px 0"
+        flexWrap={{ sm: 'wrap' }}
+        display={{ sm: 'flex' }}
       >
         {/* here is the components */}
-        <Grid
-          width="100%"
-          paddingBottom="30px"
-          templateColumns={{
-            sm: isLessThan576 ? 'repeat(1, 1fr)' : 'repeat(2, 1fr)',
-            md: isLessThan768 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-            lg: isLessThan1440 ? 'repeat(3, 1fr)' : 'repeat(4, 1fr)',
+        {myGroups.map(({ memberCount, friendlyName, id }) => (
+          <Box
+            key={`group-${id}`}
+            cursor="pointer"
+            as="a"
+            onClick={(e: any) => {
+              e.preventDefault();
+              navigate(`/dashboard/groups/group/${id}`);
+            }}
+            w={{
+              base: '100%',
+              sm: '49%',
+              md: '31%',
+              lgx: '23%',
+            }}
+          >
+            <GroupsCard member={memberCount ?? 0} img={Images.group.img} name={friendlyName} />
+          </Box>
+        ))}
+        {/* <Box
+          w={{
+            base: '100%',
+            sm: '49%',
+            md: '31%',
+            lgx: '23%',
           }}
-          gap={5}
         >
-          {myGroups.map(({ memberCount, friendlyName, id }) => (
-            <GridItem
-              cursor="pointer"
-              as="a"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(`/dashboard/groups/group/${id}`);
-              }}
-              w="100%"
-              minHeight="275"
-            >
-              <GroupsCard member={memberCount ?? 0} img={Images.group.img} name={friendlyName} />
-            </GridItem>
-          ))}
-          <GridItem w="100%" minHeight="275">
-            <AddGroup />
-          </GridItem>
-        </Grid>
+          <GroupsCard member="705" img={Images.group.img} name="Dance Fit" />
+        </Box>
+        <Box
+          marginStart="0 !important"
+          w={{
+            base: '100%',
+            sm: '49%',
+            md: '31%',
+            lgx: '23%',
+          }}
+        >
+          <GroupsCard member="705" img={Images.group.img} name="Dance Fit" />
+        </Box> */}
+        <Box
+          marginStart="0 !important"
+          w={{
+            base: '100%',
+            sm: '49%',
+            md: '31%',
+            lgx: '23%',
+          }}
+        >
+          <AddGroup />
+        </Box>
       </HStack>
     </Box>
   );

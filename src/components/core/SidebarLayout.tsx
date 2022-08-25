@@ -42,7 +42,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
       </Box>
       <VStack
         as="main"
-        bgColor="#CDCDCD"
+        bgColor="#EEF4F6"
         color="#000"
         position="relative"
         justifyContent="flex-start"

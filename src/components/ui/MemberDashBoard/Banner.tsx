@@ -1,4 +1,4 @@
-import { Box, Button, Image, Text, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import { Box, Button, Image, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
@@ -11,8 +11,6 @@ interface BannerProps {
 
 const Banner: React.FC<BannerProps> = ({ img }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [isLessThan768] = useMediaQuery('(max-width: 768px)');
-  const [isLessThan576] = useMediaQuery('(max-width: 576px)');
 
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
@@ -22,11 +20,11 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
     <>
       <Box>
         <Box backgroundColor="#fff" borderRadius="24px" w="full" p={{ base: '16px', md: '32px' }}>
-          <Image src={img} />
+          <Image src={img} minH="100px" />
           <Box>
             <Box
               marginTop="32px"
-              display={isLessThan768 ? 'block' : 'flex'}
+              display={{ md: 'flex', base: 'block' }}
               justifyContent="space-between"
               alignItems="center"
               mb="24px"
@@ -38,10 +36,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
               >
                 {activeGroup?.friendlyName}
               </Text>
-              <Box
-                display={isLessThan576 ? 'block' : 'flex'}
-                marginTop={isLessThan768 ? '20px' : '0'}
-              >
+              <Box display={{ md: 'flex', base: 'block' }} marginTop={{ md: '0', base: '20px' }}>
                 <Button
                   backgroundColor="#E7ECFF"
                   borderRadius="8px"
@@ -52,34 +47,49 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                   _focus={{ boxShadow: 'none' }}
                   color="#5C7FFF"
                   marginRight="16px"
-                  fontSize={isLessThan576 ? '14px' : '16px'}
+                  fontSize={{ base: '14px', md: '16px' }}
                 >
-                  <I.PeopleIcon width={isLessThan576 ? '14px' : '18px'} marginRight="8px" />
+                  <I.PeopleIcon width={{ md: '18px', base: '14px' }} marginRight="8px" />
                   {activeGroup?.memberCount}
                 </Button>
-                <Box display="flex" alignItems="center" marginTop={isLessThan576 ? '20px' : '0'}>
+                <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
                   <Box display="flex" position="relative">
-                    {members.slice(0, 5).map(() => (
-                      <Image src={Images.group.ellipse} zIndex="10" />
-                    ))}
+                    {members.slice(0, 5).map(
+                      ({ id, username }) =>
+                        id !== activeGroup?.ownerId && (
+                          <Tooltip label={`${username}`}>
+                            <Image
+                              cursor="pointer"
+                              mr="5px"
+                              src={Images.group.ellipse}
+                              zIndex="10"
+                            />
+                          </Tooltip>
+                        ),
+                    )}
                     {/* <Image src={Images.group.ellipse} zIndex="10" />
-                  <Image src={Images.group.ellipse} zIndex="9" position="absolute" left="27px" />
-                  <Image src={Images.group.ellipse} zIndex="8" position="absolute" left="53px" />
-                  <Image src={Images.group.ellipse} zIndex="7" position="absolute" left="79px" />
-                  <Image src={Images.group.ellipse} position="absolute" left="105px" /> */}
+                    <Image src={Images.group.ellipse} zIndex="9" position="absolute" left="27px" />
+                    <Image src={Images.group.ellipse} zIndex="8" position="absolute" left="53px" />
+                    <Image src={Images.group.ellipse} zIndex="7" position="absolute" left="79px" />
+                    <Image src={Images.group.ellipse} position="absolute" left="105px" /> */}
                   </Box>
-                  <Text fontSize="18px" color="#5C7FFF" fontWeight="500" marginLeft="112px">
+                  <Text
+                    fontSize="18px"
+                    color="#5C7FFF"
+                    fontWeight="500"
+                    // marginLeft="112px"
+                  >
                     friends
                   </Text>
                 </Box>
               </Box>
             </Box>
             <Box
-              display={isLessThan768 ? 'block' : 'flex'}
+              display={{ md: 'flex', base: 'block' }}
               justifyContent="space-between"
               alignItems="center"
             >
-              <Box display={isLessThan576 ? 'block' : 'flex'}>
+              <Box display={{ md: 'flex', base: 'block' }}>
                 <Box
                   border="1px solid #D3E2F0"
                   borderRadius="12px"
@@ -107,8 +117,8 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                   borderRadius="12px"
                   width={{ base: 'auto', md: '200px' }}
                   p="6px 12px"
-                  marginLeft={isLessThan576 ? '0' : '12px'}
-                  marginTop={isLessThan576 ? '12px' : '0'}
+                  marginLeft={{ md: '12px', base: '0' }}
+                  marginTop={{ md: '0', base: '12px' }}
                 >
                   <Box display="flex" alignItems="center">
                     <I.AppIcon />
@@ -131,8 +141,8 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                   borderRadius="12px"
                   width={{ base: 'auto', md: '232px' }}
                   p="6px 12px"
-                  marginLeft={isLessThan576 ? '0' : '12px'}
-                  marginTop={isLessThan576 ? '12px' : '0'}
+                  marginLeft={{ md: '12px', base: '0' }}
+                  marginTop={{ md: '0', base: '12px' }}
                 >
                   <Box display="flex" alignItems="center">
                     <I.CalenderIcon />
@@ -151,7 +161,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                   </Box>
                 </Box>
               </Box>
-              <Box marginTop={isLessThan768 ? '20px' : '0'}>
+              <Box marginTop={{ md: '0', base: '20px' }}>
                 <Button
                   backgroundColor="#F4F7F9"
                   borderRadius="8px"
@@ -161,9 +171,9 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                 >
                   <I.SearchIcon color="#4E6070" width="22px" />
                 </Button>
+
                 {activeGroup?.ownerId === member?.id && (
                   <Button
-                    onClick={onOpen}
                     marginLeft="8px"
                     backgroundColor="#F4F7F9"
                     borderRadius="8px"
@@ -171,6 +181,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                     justifyContent="space-evenly"
                     width="123px"
                     height="40px"
+                    onClick={onOpen}
                     color="#4E6070"
                     _focus={{ boxShadow: 'none' }}
                   >

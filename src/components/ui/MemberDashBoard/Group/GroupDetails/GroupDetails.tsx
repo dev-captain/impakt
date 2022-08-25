@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Banner from '../../Banner';
 import MemberList from '../../MemberList';
+import Forums from '../../Forums';
 
 const GroupDetails: React.FC = () => {
   const [isNotFound, setIsNotFound] = React.useState(false);
@@ -40,7 +41,17 @@ const GroupDetails: React.FC = () => {
       <HStack w="100%" display="block">
         {/* here is the components */}
         <Banner img={Images.group.cover} />
-        <MemberList />
+        <Box
+          marginStart="0 !important"
+          display="flex"
+          w="full"
+          gap="20px"
+          flexDirection={{ base: 'column', md: 'unset' }}
+        >
+          <MemberList />
+          <Forums />
+          <MemberList />
+        </Box>
       </HStack>
     </Box>
   );

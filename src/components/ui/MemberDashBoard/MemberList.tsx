@@ -3,7 +3,6 @@ import {
   Button,
   Text,
   Image,
-  useMediaQuery,
   CircularProgress,
   useClipboard,
   useToast,
@@ -15,7 +14,6 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchMembersOfGroup } from '../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 
 const MemberList: React.FC = () => {
-  const [isLessThan576] = useMediaQuery('(max-width: 576px)');
   const toast = useToast();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
@@ -43,11 +41,10 @@ const MemberList: React.FC = () => {
   if (isLoading) return <CircularProgress isIndeterminate />;
 
   return (
-    <Box marginStart="0 !important">
+    <Box marginStart="0 !important" width={{ base: '100%', md: '30%', lgx: '25%' }}>
       <Box
         backgroundColor="#fff"
         borderRadius="24px"
-        w={isLessThan576 ? 'full' : '342px'}
         p={{ base: '16px', md: '24px' }}
         marginTop="26px"
         marginLeft="auto"
@@ -91,12 +88,22 @@ const MemberList: React.FC = () => {
           <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="16px">
             <Box display="flex" alignItems="center">
               <Image src={Images.group.ellipse} zIndex="10" />
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginLeft="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginLeft="16px"
+              >
                 MattFox
               </Text>
             </Box>
             <Box display="flex" alignItems="center">
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginRight="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginRight="16px"
+              >
                 Creator
               </Text>
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
@@ -105,12 +112,22 @@ const MemberList: React.FC = () => {
           <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="16px">
             <Box display="flex" alignItems="center">
               <Image src={Images.group.ellipse} zIndex="10" />
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginLeft="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginLeft="16px"
+              >
                 Demideus
               </Text>
             </Box>
             <Box display="flex" alignItems="center">
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginRight="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginRight="16px"
+              >
                 Admin
               </Text>
               <Box backgroundColor="#E2EDF7" width="8px" height="8px" borderRadius="50%" />
@@ -129,7 +146,12 @@ const MemberList: React.FC = () => {
           <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="16px">
             <Box display="flex" alignItems="center">
               <Image src={Images.group.ellipse} zIndex="10" />
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginLeft="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginLeft="16px"
+              >
                 Dahaka
               </Text>
             </Box>
@@ -140,7 +162,12 @@ const MemberList: React.FC = () => {
           <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="16px">
             <Box display="flex" alignItems="center">
               <Image src={Images.group.ellipse} zIndex="10" />
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginLeft="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginLeft="16px"
+              >
                 0dd431c8
               </Text>
             </Box>
@@ -150,7 +177,12 @@ const MemberList: React.FC = () => {
           </Box> */}
           {/* <Box backgroundColor="#E2EDF7" w="full" height="1px" margin="20px 0" />
           <Box display="flex" marginTop="24px" justifyContent="space-between" alignItems="center">
-            <Text textTransform="uppercase" color="#728BA3" fontSize="16px" fontWeight="600">
+            <Text
+              textTransform="uppercase"
+              color="#728BA3"
+              fontSize={{ lgx: '18px', md: '14px' }}
+              fontWeight="600"
+            >
               members
             </Text>
             <I.SearchIcon color="#B0C3D6" width="20px" />
@@ -158,12 +190,22 @@ const MemberList: React.FC = () => {
           <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="16px">
             <Box display="flex" alignItems="center">
               <Image src={Images.group.ellipse} zIndex="10" />
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginLeft="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginLeft="16px"
+              >
                 Ani D.
               </Text>
             </Box>
             <Box display="flex" alignItems="center">
-              <Text color="#4E6070" fontSize="18px" fontWeight="500" marginRight="16px">
+              <Text
+                color="#4E6070"
+                fontSize={{ lgx: '18px', md: '14px' }}
+                fontWeight="500"
+                marginRight="16px"
+              >
                 31 250
               </Text>
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
@@ -173,7 +215,12 @@ const MemberList: React.FC = () => {
             <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="16px">
               <Box display="flex" alignItems="center">
                 <Image src={Images.group.ellipse} zIndex="10" />
-                <Text color="#4E6070" fontSize="18px" fontWeight="500" marginLeft="16px">
+                <Text
+                  color="#4E6070"
+                  fontSize={{ lgx: '18px', md: '14px' }}
+                  fontWeight="500"
+                  marginLeft="16px"
+                >
                   {firstName ?? username}
                 </Text>
               </Box>
