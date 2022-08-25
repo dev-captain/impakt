@@ -1,21 +1,49 @@
-import { Box, Button, Image, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Image, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
-import { useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { useNavigate } from 'react-router-dom';
 import GroupDetailSettingsModal from './Group/GroupDetails/GroupDetailsSettingsModal';
+import { leaveGroup } from '../../../lib/redux/slices/groups/actions/leaveGroup';
 
 interface BannerProps {
   img: any;
 }
 
 const Banner: React.FC<BannerProps> = ({ img }) => {
+  const toast = useToast();
+  const navigate = useNavigate();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const dispatch = useAppDispatch();
 
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
-  console.log(activeGroup?.ownerId);
+  const handleLeaveGroup = async () => {
+    try {
+      if (activeGroup) {
+        await dispatch(leaveGroup(activeGroup.id)).unwrap();
+        toast({
+          title: 'Success',
+          description: `Left from Group successfully`,
+          isClosable: true,
+          duration: 8000,
+          status: 'success',
+        });
+      }
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: `${e.response.data.message}`,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
+
+    navigate('/dashboard/groups');
+  };
 
   return (
     <>
@@ -38,6 +66,21 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                 {activeGroup?.friendlyName}
               </Text>
               <Box display={{ md: 'flex', base: 'block' }} marginTop={{ md: '0', base: '20px' }}>
+                <Button
+                  backgroundColor="impaktRed"
+                  borderRadius="8px"
+                  height="34px"
+                  _hover={{ backgroundColor: 'impaktRed' }}
+                  _active={{ backgroundColor: 'impaktRed' }}
+                  _focus={{ boxShadow: 'none' }}
+                  color="white"
+                  marginRight="16px"
+                  fontSize={{ base: '14px', md: '16px' }}
+                  onClick={handleLeaveGroup}
+                >
+                  <I.LogOutIcon width={{ md: '18px', base: '14px' }} marginRight="8px" />
+                  Leave Group
+                </Button>
                 <Button
                   backgroundColor="#E7ECFF"
                   borderRadius="8px"
