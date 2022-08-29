@@ -119,13 +119,7 @@ const WelcomeModal: React.FC = () => {
             <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">
               {activeDays}
             </Text>
-            <Text
-              color="rgba(255, 255, 255, 0.4)"
-              textAlign="center"
-              mt="2px"
-              textStyle="regular3"
-              fontWeight={500}
-            >
+            <Text color="#fff" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Active days
             </Text>
           </Box>

@@ -71,6 +71,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
       px={isVersion2 && !isLessThan1280 ? '0' : '16px'}
       display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
+      background={isVersion2 ? '#eef4f6' : bgColor}
     >
       {isOpen && !isVersion2 && <Gradient />}
       <Flex
@@ -270,6 +271,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             isOpen={isOpen}
             onToggle={onToggle}
             isLessThan1280={isLessThan1280}
+            isVersion2={isVersion2}
           />
         </HStack>
       </Flex>

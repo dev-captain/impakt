@@ -115,6 +115,7 @@ const WhiteList: React.FC = () => {
             }
             size="lg"
             variant="white"
+            color="#fff"
             bgColor="black"
             justifyContent="flex-start"
             fontSize={{ base: '16px', lg: '20px' }}
@@ -135,6 +136,7 @@ const WhiteList: React.FC = () => {
             }
             size="lg"
             variant="white"
+            color="#fff"
             bgColor="black"
             justifyContent="flex-start"
             fontSize={{ base: '16px', lg: '20px' }}
@@ -154,6 +156,7 @@ const WhiteList: React.FC = () => {
             }
             size="lg"
             variant="white"
+            color="#fff"
             bgColor="black"
             justifyContent="flex-start"
             fontSize={{ base: '16px', lg: '20px' }}

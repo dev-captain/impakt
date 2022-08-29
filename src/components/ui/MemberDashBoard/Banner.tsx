@@ -1,4 +1,4 @@
-import { Box, Button, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Image, Text, AvatarGroup, Avatar } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
@@ -8,10 +8,33 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ img }) => {
+  const imgs = [
+    {
+      name: 'Ryan Florence',
+      post: Images.group.ellipse,
+    },
+    {
+      name: 'Ryan Florence',
+      post: Images.group.ellipse,
+    },
+    {
+      name: 'Ryan Florence',
+      post: Images.group.ellipse,
+    },
+    {
+      name: 'Ryan Florence',
+      post: Images.group.ellipse,
+    },
+    {
+      name: 'Ryan Florence',
+      post: Images.group.ellipse,
+    },
+  ];
+
   return (
     <Box>
       <Box backgroundColor="#fff" borderRadius="24px" w="full" p={{ base: '16px', md: '32px' }}>
-        <Image src={img} minH="100px" />
+        <Image src={img} minH="100px" minWidth="100%" />
         <Box>
           <Box
             marginTop="32px"
@@ -43,14 +66,12 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                 <I.PeopleIcon width={{ md: '18px', base: '14px' }} marginRight="8px" />2 354
               </Button>
               <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
-                <Box display="flex" position="relative">
-                  <Image src={Images.group.ellipse} zIndex="10" />
-                  <Image src={Images.group.ellipse} zIndex="9" position="absolute" left="27px" />
-                  <Image src={Images.group.ellipse} zIndex="8" position="absolute" left="53px" />
-                  <Image src={Images.group.ellipse} zIndex="7" position="absolute" left="79px" />
-                  <Image src={Images.group.ellipse} position="absolute" left="105px" />
-                </Box>
-                <Text fontSize="18px" color="#5C7FFF" fontWeight="500" marginLeft="112px">
+                <AvatarGroup size="sm" max={3} spacing="-0.50rem">
+                  {imgs.map((p: any) => (
+                    <Avatar name={p.name} src={p.post} />
+                  ))}
+                </AvatarGroup>
+                <Text fontSize="18px" color="#5C7FFF" fontWeight="500" marginLeft="12px">
                   friends
                 </Text>
               </Box>

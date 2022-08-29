@@ -102,7 +102,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
             <Text color="#FFFFFF" textAlign="center" textStyle="bold5">
               {referralsRegisteredNumber ?? 0}
             </Text>
-            <Text color="rgba(255, 255, 255, 0.4)" textAlign="center" mt="6px" textStyle="regular3">
+            <Text color="#fff" textAlign="center" mt="6px" textStyle="regular3">
               registered <br />
               with your link
             </Text>
@@ -115,7 +115,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
             <Tr bgColor="#121216">
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4) "
+                color="#fff"
                 borderBottom={0}
                 whiteSpace="normal"
                 textTransform="capitalize"
@@ -124,7 +124,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4)"
+                color="#fff"
                 borderBottom={0}
                 textTransform="capitalize"
                 whiteSpace="normal"
