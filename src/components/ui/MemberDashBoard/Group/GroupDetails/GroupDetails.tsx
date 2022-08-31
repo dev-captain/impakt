@@ -4,6 +4,7 @@ import * as React from 'react';
 import Banner from '../../Banner';
 import MemberList from '../../MemberList';
 import Forums from '../../Forums';
+import EventCalendar from '../EventCalendar/EventCalendar';
 
 const GroupDetails: React.FC = () => {
   return (
@@ -24,7 +25,8 @@ const GroupDetails: React.FC = () => {
           gap="20px"
           flexDirection={{ base: 'column', md: 'unset' }}
         >
-          <MemberList />
+          {/* <MemberList /> */}
+          <EventCalendar />
           <Forums />
           <MemberList />
         </Box>

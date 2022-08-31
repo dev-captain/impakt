@@ -1,4 +1,25 @@
-import { Box, Button, Image, Text, AvatarGroup, Avatar } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Image,
+  Text,
+  AvatarGroup,
+  Avatar,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+  FormControl,
+  Input,
+} from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
@@ -8,6 +29,7 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ img }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const imgs = [
     {
       name: 'Ryan Florence',
@@ -142,7 +164,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                 </Box>
               </Box>
             </Box>
-            <Box marginTop={{ md: '0', base: '20px' }}>
+            <Box marginTop={{ md: '0', base: '20px' }} display="flex">
               <Button
                 backgroundColor="#F4F7F9"
                 borderRadius="8px"
@@ -152,20 +174,58 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
               >
                 <I.SearchIcon color="#4E6070" width="22px" />
               </Button>
-              <Button
-                marginLeft="8px"
-                backgroundColor="#F4F7F9"
-                borderRadius="8px"
-                p="0"
-                justifyContent="space-evenly"
-                width="123px"
-                height="40px"
-                color="#4E6070"
-                _focus={{ boxShadow: 'none' }}
-              >
-                <I.SettingIcon width="16px" />
-                Settings
-              </Button>
+              <Menu>
+                <Button
+                  as={MenuButton}
+                  marginLeft="8px"
+                  backgroundColor="#F4F7F9"
+                  borderRadius="8px"
+                  p="0"
+                  justifyContent="space-evenly"
+                  width="123px"
+                  height="40px"
+                  color="#4E6070"
+                  _focus={{ boxShadow: 'none' }}
+                >
+                  <Text transform="translate(10px, 10px)">
+                    <I.SettingIcon width="16px" />
+                  </Text>
+                  <Text transform="translate(10px,-11px)">Settings</Text>
+                </Button>
+                <MenuList padding="12px">
+                  <MenuItem onClick={onOpen} gap="11px" padding="8px 10px">
+                    <I.PeopleIcon width="16px" color="#4E6070" />
+                    Invite
+                  </MenuItem>
+                  <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                    <ModalOverlay />
+                    <ModalContent margin="0 20px">
+                      <ModalHeader>Invite People</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <FormControl>
+                          <Input placeholder="Search People" />
+                        </FormControl>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                  <MenuItem gap="11px" padding="8px 10px">
+                    <I.PinIcon width="16px" color="#4E6070" />
+                    Pin Group
+                  </MenuItem>
+                  <MenuItem gap="11px" padding="8px 10px">
+                    <I.InfoIcon width="16px" color="#4E6070" />
+                    Report
+                  </MenuItem>
+                  <MenuItem gap="11px" padding="8px 10px">
+                    <I.LogOutIcon width="16px" color="#F04153" />
+                    Leave Group
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </Box>
           </Box>
         </Box>
