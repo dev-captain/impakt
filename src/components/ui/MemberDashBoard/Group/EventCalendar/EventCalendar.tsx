@@ -115,12 +115,16 @@ const EventCalendar: React.FC = () => {
   const [tomorrow, setTomorrow] = useState(false);
   const [time] = useState('10:00');
   const [name, setName] = useState();
+  const [error, setError] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const showCalendar = () => {
+    const d: any = '';
     setSelectedMonth(selectedMonth);
     setSelectedDay(selectedDay);
     onClose();
+    setName(d);
+    setError('');
   };
 
   const renderMonthLabel = () => {
@@ -185,23 +189,26 @@ const EventCalendar: React.FC = () => {
     const monthEvents = selectedMonthEvents;
     const currentSelectedDate = selectedDay;
 
-    const newEvents = [];
+    if (!name) {
+      setError('please enter event name');
+    } else {
+      const newEvents = [];
+      const newEvent = {
+        title: name,
+        date: currentSelectedDate,
+        dynamic: false,
+      };
 
-    const newEvent = {
-      title: name,
-      date: currentSelectedDate,
-      dynamic: false,
-    };
+      newEvents.push(newEvent);
 
-    newEvents.push(newEvent);
+      // eslint-disable-next-line no-plusplus
+      for (let i: number = 0; i < newEvents.length; i++) {
+        (monthEvents as any).push(newEvents[i]);
+      }
 
-    // eslint-disable-next-line no-plusplus
-    for (let i: number = 0; i < newEvents.length; i++) {
-      (monthEvents as any).push(newEvents[i]);
+      setSelectedMonthEvents(monthEvents);
+      showCalendar();
     }
-
-    setSelectedMonthEvents(monthEvents);
-    showCalendar();
   };
 
   const goToCurrentMonthView = () => {
@@ -220,10 +227,12 @@ const EventCalendar: React.FC = () => {
   };
 
   const refresh = () => {
+    const d: any = '';
     onClose();
     setToday(false);
     setTomorrow(false);
     setSelectedDay(moment().startOf('day'));
+    setName(d);
   };
 
   return (
@@ -371,14 +380,15 @@ const EventCalendar: React.FC = () => {
       <Modal isOpen={isOpen} onClose={() => refresh()} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add Event</ModalHeader>
+          {/* <ModalHeader>Add Event</ModalHeader> */}
+          <ModalHeader>{!today && !tomorrow ? 'Add Event' : 'Event'}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Text display="flex" justifyContent="center" marginBottom="5px" fontWeight="600">
               {moment(selectedDay).format('DD MMMM YYYY')}
             </Text>
             <Events selectedDay={selectedDay} selectedMonthEvents={selectedMonthEvents} />
-            {!today && !tomorrow ? (
+            {!today && !tomorrow && (
               <>
                 <FormControl>
                   <FormLabel>Event name</FormLabel>
@@ -387,6 +397,9 @@ const EventCalendar: React.FC = () => {
                     value={name}
                     onChange={(e: any) => handleChange(e)}
                   />
+                  <Text color="red" fontSize="14px">
+                    {error}
+                  </Text>
                 </FormControl>
                 <FormControl mt={4}>
                   <FormLabel>Data and Time</FormLabel>
@@ -398,17 +411,13 @@ const EventCalendar: React.FC = () => {
                   />
                 </FormControl>
               </>
-            ) : (
-              ''
             )}
           </ModalBody>
           <ModalFooter>
-            {!today && !tomorrow ? (
+            {!today && !tomorrow && (
               <Button colorScheme="blue" mr={3} onClick={() => handleAdd()}>
                 Save
               </Button>
-            ) : (
-              ''
             )}
             <Button onClick={() => refresh()}>Cancel</Button>
           </ModalFooter>
