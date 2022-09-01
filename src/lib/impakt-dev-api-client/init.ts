@@ -93,5 +93,6 @@ export const configuration = createConfiguration({
 export const authInstance = new AuthApi(configuration);
 export const godlInstance = new GodlApi(configuration);
 export const UserInstance = new UsersApi(configuration);
+UserInstance.userControllerGetUsers(undefined, undefined, undefined);
 export const FitnessInstance = new FitnessStatsApi(configuration);
 export const ReferralsInstance = new ReferralsApi(configuration);

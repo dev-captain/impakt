@@ -10,3 +10,4 @@ export { default as useWindowSize } from 'hooks/useWindowSize';
 export { default as useForm } from 'hooks/useForm';
 export { default as usePascalCase } from 'hooks/usePascalCase';
 export { default as useNormalizeError } from 'hooks/useNormalizeError';
+export { default as useDebounce } from 'hooks/useDebounce';

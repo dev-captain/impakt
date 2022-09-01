@@ -108,7 +108,7 @@ const App = () => {
           <Route path="" element={<S.Group />} />
           <Route path="create-group" element={<S.CreateGroup />} />
           <Route path="group/:id" element={<S.GroupDetail />} />
-          <Route path="join-group/:id" element={<S.JoinGroup />} />
+          {/* <Route path="join-group/:id" element={<S.JoinGroup />} /> */}
         </Route>
         <Route path="reward-history" element={<S.RewardHistory />} />
         <Route path="statistics" element={<S.Statistics />} />

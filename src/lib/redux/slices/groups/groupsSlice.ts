@@ -5,6 +5,7 @@ import { deleteGroup } from './actions/deleteGroup';
 import { fetchGroupDetailById } from './actions/fetchGroupDetailById';
 import { fetchMembersOfGroup } from './actions/fetchMembersOfGroup';
 import { fetchMyGroups } from './actions/fetchMyGroups';
+import { inviteMember } from './actions/inviteMember';
 import { joinGroup } from './actions/joinGroup';
 import { updateGroup } from './actions/updateGroup';
 
@@ -115,6 +116,17 @@ const groupsSlice = createSlice({
     builder.addCase(fetchMembersOfGroup.fulfilled, (state, action) => {
       state.membersOfGroup = action.payload;
     });
+
+    builder
+      .addCase(inviteMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(inviteMember.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(inviteMember.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 

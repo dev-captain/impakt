@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
-import Banner from '../../Banner';
+import Banner from './Banner';
 import MemberList from '../../MemberList';
 import Forums from '../../Forums';
 import EventCalendar from '../EventCalendar/EventCalendar';

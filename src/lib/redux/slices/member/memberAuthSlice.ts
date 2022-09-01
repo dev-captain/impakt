@@ -9,9 +9,11 @@ import { requestAccessToken } from './actions/requestAccessToken';
 import { signUpMember } from './actions/signUpMember';
 import { fetchMember } from './actions/fetchMember';
 import { updateMember } from './actions/updateMember';
+import { fetchMembers } from './actions/fetchMembers';
 
 interface MemberAuthInitialI {
   member: GetUserRes | null;
+  memberSearch: GetUserRes[];
   isLogin: boolean;
   isLoading: boolean;
   requestAccessTokenAttemptCount: number;
@@ -19,6 +21,7 @@ interface MemberAuthInitialI {
 
 const memberAuthInitialState: MemberAuthInitialI = {
   member: null,
+  memberSearch: [],
   isLoading: false,
   isLogin: false,
   requestAccessTokenAttemptCount: 0,
@@ -135,6 +138,18 @@ const memberAuthSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateMember.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(fetchMembers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchMembers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.memberSearch = action.payload;
+      })
+      .addCase(fetchMembers.rejected, (state) => {
         state.isLoading = false;
       });
   },

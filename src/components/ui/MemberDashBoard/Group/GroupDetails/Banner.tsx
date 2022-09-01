@@ -1,33 +1,22 @@
 import {
-  Avatar,
-  AvatarGroup,
   Box,
   Button,
-  FormControl,
   Image,
-  Input,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Text,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
-import Images from 'assets/images';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import { leaveGroup } from '../../../lib/redux/slices/groups/actions/leaveGroup';
-import { deleteGroup } from '../../../lib/redux/slices/groups/actions/deleteGroup';
+import { leaveGroup } from '../../../../../lib/redux/slices/groups/actions/leaveGroup';
+import { deleteGroup } from '../../../../../lib/redux/slices/groups/actions/deleteGroup';
+import SearchUserModal from './SearchUserModal/SearchUserModal';
 
 interface BannerProps {
   img: any;
@@ -239,21 +228,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                       Invite
                     </MenuItem>
                   )}
-                  <Modal onClose={onClose} isOpen={isOpen} isCentered>
-                    <ModalOverlay />
-                    <ModalContent margin="0 20px">
-                      <ModalHeader>Invite People</ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody>
-                        <FormControl>
-                          <Input placeholder="Search People" />
-                        </FormControl>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal>
+                  <SearchUserModal onClose={onClose} isOpen={isOpen} />
                   <MenuItem gap="11px" padding="8px 10px">
                     <I.PinIcon width="16px" color="#4E6070" />
                     Pin Group
