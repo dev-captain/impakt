@@ -25,12 +25,7 @@ const NewsFeed: React.FC = () => {
           </Box>
         </HStack>
       </Box>
-      <Box
-        _hover={{ color: 'rgba(255,255,255,1)' }}
-        color="rgba(255,255,255,0.75)"
-        w="full"
-        id="news-feed-accordion-box"
-      >
+      <Box color="#fff" w="full" id="news-feed-accordion-box">
         <NewsFeedAccordion />
       </Box>
 
@@ -46,6 +41,7 @@ const NewsFeed: React.FC = () => {
           }
           fontSize={{ base: '12px', md: '16px', lg: '20px' }}
           lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
+          color="#fff"
           justifyContent={{ md: 'center', lg: 'flex-start' }}
           as="a"
           href="https://discuss.impakt.com/tag/news"

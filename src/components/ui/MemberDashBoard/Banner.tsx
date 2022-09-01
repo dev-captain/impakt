@@ -1,20 +1,43 @@
-import { Box, Button, Image, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
+import {
+  Avatar,
+  AvatarGroup,
+  Box,
+  Button,
+  FormControl,
+  Image,
+  Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import GroupDetailSettingsModal from './Group/GroupDetails/GroupDetailsSettingsModal';
 import { leaveGroup } from '../../../lib/redux/slices/groups/actions/leaveGroup';
+import { deleteGroup } from '../../../lib/redux/slices/groups/actions/deleteGroup';
 
 interface BannerProps {
   img: any;
 }
 
 const Banner: React.FC<BannerProps> = ({ img }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const toast = useToast();
   const navigate = useNavigate();
-  const { isOpen, onClose, onOpen } = useDisclosure();
   const dispatch = useAppDispatch();
 
   const member = useAppSelector((state) => state.memberAuth.member);
@@ -35,7 +58,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
     } catch (e: any) {
       toast({
         title: 'Error',
-        description: `${e.response.data.message}`,
+        description: `You can't leave your owned group`,
         isClosable: true,
         duration: 8000,
         status: 'error',
@@ -45,201 +68,221 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
     navigate('/dashboard/groups');
   };
 
+  const handleGroupDelete = async () => {
+    try {
+      if (activeGroup?.id) {
+        await dispatch(deleteGroup(activeGroup.id)).unwrap();
+        toast({
+          title: 'Success',
+          description: `Group is deleted successfully`,
+          isClosable: true,
+          duration: 8000,
+          status: 'success',
+        });
+        navigate('/dashboard/groups');
+      }
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: `${e.response.data.message}`,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
+  };
+
   return (
-    <>
-      <Box>
-        <Box backgroundColor="#fff" borderRadius="24px" w="full" p={{ base: '16px', md: '32px' }}>
-          <Image src={img} minH="100px" />
-          <Box>
-            <Box
-              marginTop="32px"
-              display={{ md: 'flex', base: 'block' }}
-              justifyContent="space-between"
-              alignItems="center"
-              mb="24px"
+    <Box>
+      <Box backgroundColor="#fff" borderRadius="24px" w="full" p={{ base: '16px', md: '32px' }}>
+        <Image src={img} minH="100px" minWidth="100%" />
+        <Box>
+          <Box
+            marginTop="32px"
+            display={{ md: 'flex', base: 'block' }}
+            justifyContent="space-between"
+            alignItems="center"
+            mb="24px"
+          >
+            <Text
+              textStyle="TitleBold64"
+              fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
+              color="29323B"
             >
-              <Text
-                textStyle="TitleBold64"
-                fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
-                color="29323B"
+              {activeGroup?.friendlyName}
+            </Text>
+            <Box display={{ md: 'flex', base: 'block' }} marginTop={{ md: '0', base: '20px' }}>
+              <Button
+                backgroundColor="#E7ECFF"
+                borderRadius="8px"
+                width="107px"
+                height="34px"
+                _hover={{ backgroundColor: '#E7ECFF' }}
+                _active={{ backgroundColor: '#E7ECFF' }}
+                _focus={{ boxShadow: 'none' }}
+                color="#5C7FFF"
+                marginRight="16px"
+                fontSize={{ base: '14px', md: '16px' }}
               >
-                {activeGroup?.friendlyName}
-              </Text>
-              <Box display={{ md: 'flex', base: 'block' }} marginTop={{ md: '0', base: '20px' }}>
-                <Button
-                  backgroundColor="impaktRed"
-                  borderRadius="8px"
-                  height="34px"
-                  _hover={{ backgroundColor: 'impaktRed' }}
-                  _active={{ backgroundColor: 'impaktRed' }}
-                  _focus={{ boxShadow: 'none' }}
-                  color="white"
-                  marginRight="16px"
-                  fontSize={{ base: '14px', md: '16px' }}
-                  onClick={handleLeaveGroup}
-                >
-                  <I.LogOutIcon width={{ md: '18px', base: '14px' }} marginRight="8px" />
-                  Leave Group
-                </Button>
-                <Button
-                  backgroundColor="#E7ECFF"
-                  borderRadius="8px"
-                  width="107px"
-                  height="34px"
-                  _hover={{ backgroundColor: '#E7ECFF' }}
-                  _active={{ backgroundColor: '#E7ECFF' }}
-                  _focus={{ boxShadow: 'none' }}
-                  color="#5C7FFF"
-                  marginRight="16px"
-                  fontSize={{ base: '14px', md: '16px' }}
-                >
-                  <I.PeopleIcon width={{ md: '18px', base: '14px' }} marginRight="8px" />
-                  {activeGroup?.memberCount ? activeGroup.memberCount - 1 : 0}
-                </Button>
-                <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
-                  <Box display="flex" position="relative">
-                    {members.slice(0, 5).map(
-                      ({ id, username }) =>
-                        member?.id !== id && (
-                          <Tooltip label={`${username}`}>
-                            <Image
-                              cursor="pointer"
-                              mr="5px"
-                              src={Images.group.ellipse}
-                              zIndex="10"
-                            />
-                          </Tooltip>
-                        ),
-                    )}
-                    {/* <Image src={Images.group.ellipse} zIndex="10" />
-                    <Image src={Images.group.ellipse} zIndex="9" position="absolute" left="27px" />
-                    <Image src={Images.group.ellipse} zIndex="8" position="absolute" left="53px" />
-                    <Image src={Images.group.ellipse} zIndex="7" position="absolute" left="79px" />
-                    <Image src={Images.group.ellipse} position="absolute" left="105px" /> */}
+                <I.PeopleIcon width={{ md: '18px', base: '14px' }} marginRight="8px" />
+                {members.length}
+              </Button>
+              {/* <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
+                <AvatarGroup size="sm" max={3} spacing="-0.50rem">
+                  {members.map(({ firstName, username }) => (
+                    <Avatar name={firstName ?? username} src={Images.group.ellipse} />
+                  ))}
+                </AvatarGroup>
+                <Text fontSize="18px" color="#5C7FFF" fontWeight="500" marginLeft="12px">
+                  friends
+                </Text>
+              </Box> */}
+            </Box>
+          </Box>
+          <Box
+            display={{ md: 'flex', base: 'block' }}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box display={{ md: 'flex', base: 'block' }}>
+              <Box
+                border="1px solid #D3E2F0"
+                borderRadius="12px"
+                width={{ base: 'auto', md: '200px' }}
+                p="6px 12px"
+              >
+                <Box display="flex" alignItems="center">
+                  <I.FireIcon />
+                  <Box marginLeft="12px">
+                    <Text color="#B0C3D6" fontSize="12px" fontWeight="700">
+                      top challenge
+                    </Text>
+                    <Text color="#4E6070" fontSize={{ base: '14px', md: '20px' }} fontWeight="600">
+                      Hero Cardio
+                    </Text>
                   </Box>
-                  <Text
-                    fontSize="18px"
-                    color="#5C7FFF"
-                    fontWeight="500"
-                    // marginLeft="112px"
-                  >
-                    friends
-                  </Text>
+                </Box>
+              </Box>
+              <Box
+                border="1px solid #D3E2F0"
+                borderRadius="12px"
+                width={{ base: 'auto', md: '200px' }}
+                p="6px 12px"
+                marginLeft={{ md: '12px', base: '0' }}
+                marginTop={{ md: '0', base: '12px' }}
+              >
+                <Box display="flex" alignItems="center">
+                  <I.AppIcon />
+                  <Box marginLeft="12px">
+                    <Text color="#B0C3D6" fontSize="12px" fontWeight="700">
+                      top program
+                    </Text>
+                    <Text color="#4E6070" fontSize={{ base: '14px', md: '20px' }} fontWeight="600">
+                      Home Abs
+                    </Text>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                border="1px solid #D3E2F0"
+                borderRadius="12px"
+                width={{ base: 'auto', md: '232px' }}
+                p="6px 12px"
+                marginLeft={{ md: '12px', base: '0' }}
+                marginTop={{ md: '0', base: '12px' }}
+              >
+                <Box display="flex" alignItems="center">
+                  <I.CalenderIcon />
+                  <Box marginLeft="12px">
+                    <Text color="#B0C3D6" fontSize="12px" fontWeight="700">
+                      next event
+                    </Text>
+                    <Text color="#4E6070" fontSize={{ base: '14px', md: '20px' }} fontWeight="600">
+                      Power Training
+                    </Text>
+                  </Box>
                 </Box>
               </Box>
             </Box>
-            <Box
-              display={{ md: 'flex', base: 'block' }}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box display={{ md: 'flex', base: 'block' }}>
-                <Box
-                  border="1px solid #D3E2F0"
-                  borderRadius="12px"
-                  width={{ base: 'auto', md: '200px' }}
-                  p="6px 12px"
-                >
-                  <Box display="flex" alignItems="center">
-                    <I.FireIcon />
-                    <Box marginLeft="12px">
-                      <Text color="#B0C3D6" fontSize="12px" fontWeight="700">
-                        top challenge
-                      </Text>
-                      <Text
-                        color="#4E6070"
-                        fontSize={{ base: '14px', md: '20px' }}
-                        fontWeight="600"
-                      >
-                        Hero Cardio
-                      </Text>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  border="1px solid #D3E2F0"
-                  borderRadius="12px"
-                  width={{ base: 'auto', md: '200px' }}
-                  p="6px 12px"
-                  marginLeft={{ md: '12px', base: '0' }}
-                  marginTop={{ md: '0', base: '12px' }}
-                >
-                  <Box display="flex" alignItems="center">
-                    <I.AppIcon />
-                    <Box marginLeft="12px">
-                      <Text color="#B0C3D6" fontSize="12px" fontWeight="700">
-                        top program
-                      </Text>
-                      <Text
-                        color="#4E6070"
-                        fontSize={{ base: '14px', md: '20px' }}
-                        fontWeight="600"
-                      >
-                        Home Abs
-                      </Text>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  border="1px solid #D3E2F0"
-                  borderRadius="12px"
-                  width={{ base: 'auto', md: '232px' }}
-                  p="6px 12px"
-                  marginLeft={{ md: '12px', base: '0' }}
-                  marginTop={{ md: '0', base: '12px' }}
-                >
-                  <Box display="flex" alignItems="center">
-                    <I.CalenderIcon />
-                    <Box marginLeft="12px">
-                      <Text color="#B0C3D6" fontSize="12px" fontWeight="700">
-                        next event
-                      </Text>
-                      <Text
-                        color="#4E6070"
-                        fontSize={{ base: '14px', md: '20px' }}
-                        fontWeight="600"
-                      >
-                        Power Training
-                      </Text>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-              <Box marginTop={{ md: '0', base: '20px' }}>
+            <Box marginTop={{ md: '0', base: '20px' }} display="flex">
+              <Button
+                backgroundColor="#F4F7F9"
+                borderRadius="8px"
+                height="40px"
+                width="40px"
+                _focus={{ boxShadow: 'none' }}
+              >
+                <I.SearchIcon color="#4E6070" width="22px" />
+              </Button>
+              <Menu>
                 <Button
+                  as={MenuButton}
+                  marginLeft="8px"
                   backgroundColor="#F4F7F9"
                   borderRadius="8px"
+                  p="0"
+                  justifyContent="space-evenly"
+                  width="123px"
                   height="40px"
-                  width="40px"
+                  color="#4E6070"
                   _focus={{ boxShadow: 'none' }}
                 >
-                  <I.SearchIcon color="#4E6070" width="22px" />
-                </Button>
-
-                {activeGroup?.ownerId === member?.id && (
-                  <Button
-                    marginLeft="8px"
-                    backgroundColor="#F4F7F9"
-                    borderRadius="8px"
-                    p="0"
-                    justifyContent="space-evenly"
-                    width="123px"
-                    height="40px"
-                    onClick={onOpen}
-                    color="#4E6070"
-                    _focus={{ boxShadow: 'none' }}
-                  >
+                  <Text transform="translate(10px, 10px)">
                     <I.SettingIcon width="16px" />
-                    Settings
-                  </Button>
-                )}
-              </Box>
+                  </Text>
+                  <Text transform="translate(10px,-11px)">Settings</Text>
+                </Button>
+                <MenuList padding="12px">
+                  {activeGroup?.ownerId === member?.id && (
+                    <MenuItem onClick={onOpen} gap="11px" padding="8px 10px">
+                      <I.PeopleIcon width="16px" color="#4E6070" />
+                      Invite
+                    </MenuItem>
+                  )}
+                  <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                    <ModalOverlay />
+                    <ModalContent margin="0 20px">
+                      <ModalHeader>Invite People</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <FormControl>
+                          <Input placeholder="Search People" />
+                        </FormControl>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                  <MenuItem gap="11px" padding="8px 10px">
+                    <I.PinIcon width="16px" color="#4E6070" />
+                    Pin Group
+                  </MenuItem>
+                  <MenuItem gap="11px" padding="8px 10px">
+                    <I.InfoIcon width="16px" color="#4E6070" />
+                    Report
+                  </MenuItem>
+
+                  {activeGroup?.ownerId === member?.id && (
+                    <MenuItem onClick={handleGroupDelete} gap="11px" padding="8px 10px">
+                      <I.LogOutIcon width="16px" color="#F04153" />
+                      Delete Group
+                    </MenuItem>
+                  )}
+
+                  {activeGroup?.ownerId !== member?.id && (
+                    <MenuItem onClick={handleLeaveGroup} gap="11px" padding="8px 10px">
+                      <I.LogOutIcon width="16px" color="#F04153" />
+                      Leave Group
+                    </MenuItem>
+                  )}
+                </MenuList>
+              </Menu>
             </Box>
           </Box>
         </Box>
       </Box>
-      <GroupDetailSettingsModal onClose={onClose} isOpen={isOpen} />
-    </>
+    </Box>
   );
 };
 export default Banner;

@@ -81,9 +81,10 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
                   color="#4E6070"
                   width="24px"
                   height="32px"
+                  cursor="pointer"
                 />
               ) : (
-                <I.CloseIcon onClick={() => setIsClose(!isClose)} />
+                <I.CloseIcon onClick={() => setIsClose(!isClose)} cursor="pointer" />
               )}
             </Box>
             <C.Sidebar collaps={isClose} />
@@ -94,7 +95,10 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             w="full"
             id="content-container"
             m="0 !important"
-            marginLeft={{ base: '0', lg: '20vw !important' }}
+            marginLeft={{
+              base: '0',
+              lg: isClose === false ? '20vw !important' : '10vw !important',
+            }}
             p={{ sm: '0 1em', lg: '3em 3em 3em 3em' }}
             marginTop={{ sm: '100px !important', lg: '0px !important' }}
           >

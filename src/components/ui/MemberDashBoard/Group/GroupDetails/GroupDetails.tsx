@@ -7,6 +7,7 @@ import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/act
 import Banner from '../../Banner';
 import MemberList from '../../MemberList';
 import Forums from '../../Forums';
+import EventCalendar from '../EventCalendar/EventCalendar';
 
 const GroupDetails: React.FC = () => {
   const [isNotFound, setIsNotFound] = React.useState(false);
@@ -48,7 +49,8 @@ const GroupDetails: React.FC = () => {
           gap="20px"
           flexDirection={{ base: 'column', md: 'unset' }}
         >
-          <MemberList />
+          {/* <MemberList /> */}
+          <EventCalendar />
           <Forums />
           <MemberList />
         </Box>

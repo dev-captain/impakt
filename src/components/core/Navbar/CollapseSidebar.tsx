@@ -99,7 +99,7 @@ const CollapseSidebar = () => {
               isActive={path.pathname === '/dashboard'}
               collaps
             >
-              <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
+              <I.DashboardIcon cursor="pointer" width="26px" height="23px" color="#fff" />
             </SidebarLinkItem>
           </MenuItem>
           <MenuItem
@@ -113,7 +113,7 @@ const CollapseSidebar = () => {
               isActive={path.pathname === '/dashboard/referrals'}
               collaps
             >
-              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
+              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#fff" />
             </SidebarLinkItem>
           </MenuItem>
 
@@ -128,7 +128,7 @@ const CollapseSidebar = () => {
               isActive={path.pathname === '/dashboard/groups'}
               collaps
             >
-              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
+              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#fff" />
             </SidebarLinkItem>
           </MenuItem>
           {/* <MenuItem

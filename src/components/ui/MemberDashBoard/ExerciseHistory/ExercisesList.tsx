@@ -54,7 +54,7 @@ const ExercisesList: React.FC = () => {
             <Tr bgColor="#121216">
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4) "
+                color="#fff"
                 borderBottom={0}
                 whiteSpace="normal"
                 textTransform="capitalize"
@@ -69,7 +69,7 @@ const ExercisesList: React.FC = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4)"
+                color="#fff"
                 borderBottom={0}
                 paddingX={{ base: '15px', md: '20px' }}
                 textTransform="capitalize"
@@ -84,7 +84,7 @@ const ExercisesList: React.FC = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4)"
+                color="#fff"
                 borderBottom={0}
                 paddingX={{ base: '15px', md: '24px' }}
                 textTransform="capitalize"
