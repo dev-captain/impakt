@@ -73,3 +73,5 @@ export { default as FullScreenIcon } from './FullScreenIcon';
 export { default as CommentIcon } from './CommentIcon';
 export { default as ClockIcon } from './ClockIcon';
 export { default as PinIcon } from './PinIcon';
+export { default as TickMarkIcon } from './TickMarkIcon';
+export { default as FrameIcon } from './FrameIcon';
