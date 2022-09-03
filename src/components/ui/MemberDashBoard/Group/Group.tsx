@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, HStack, Text } from '@chakra-ui/react';
+import { Box, Button, HStack, Text, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import Images from 'assets/images';
 import { I } from 'components';
@@ -14,14 +14,34 @@ import { answerToGroupRequest } from '../../../../lib/redux/slices/groups/action
 
 const Group: React.FC = () => {
   const navigate = useNavigate();
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
   const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
   const groupRequests = useAppSelector((state) => state.groupsReducer.groupRequests);
   const member = useAppSelector((state) => state.memberAuth.member);
   const ownedGroups = myGroups.filter((groups) => groups.ownerId === member?.id);
+
   const handleRequestToJoinGroup = async (groupId: number) => {
-    await dispatch(sendGroupRequestToJoin(groupId));
+    try {
+      await dispatch(sendGroupRequestToJoin(groupId)).unwrap();
+
+      toast({
+        title: 'Success',
+        description: 'Request sent successfully',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: e.response.data.message,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
   };
 
   const handleAnswerToJoinGroup = async (
@@ -29,7 +49,24 @@ const Group: React.FC = () => {
     requestId: number,
     fromUserId: number,
   ) => {
-    await dispatch(answerToGroupRequest({ status: answer, requestId, fromUserId }));
+    try {
+      await dispatch(answerToGroupRequest({ status: answer, requestId, fromUserId })).unwrap();
+      toast({
+        title: 'Success',
+        description: `Request is ${answer.toLowerCase()} successfully`,
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: e.response.data.message,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
   };
 
   return (
@@ -235,7 +272,6 @@ const Group: React.FC = () => {
                         onClick={() => handleRequestToJoinGroup(d.id)}
                         borderRadius="8px"
                         color="#1C1C28"
-                        width={{ lgx: '112px', base: '100px' }}
                         justifyContent="space-around"
                         fontSize={{ lgx: '16px', base: '14px' }}
                         backgroundColor="transparent"
@@ -243,8 +279,8 @@ const Group: React.FC = () => {
                         _active={{ backgroundColor: 'transparent' }}
                         _focus={{ boxShadow: 'none' }}
                       >
-                        <I.CheckIcon />
-                        Join
+                        <I.CheckIcon mr="5px" />
+                        Send request to join
                       </Button>
                     </GroupsCard>
                   </Box>
