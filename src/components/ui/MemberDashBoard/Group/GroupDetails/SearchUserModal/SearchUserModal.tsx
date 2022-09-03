@@ -43,7 +43,6 @@ const SearchUserModal: React.FC<SearchUserPropsI> = ({ isOpen, onClose }) => {
       });
       onClose();
     } catch (error: any) {
-      console.log(error);
       toast({
         title: 'Error',
         description: error?.response.data.message,

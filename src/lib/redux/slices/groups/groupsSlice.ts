@@ -1,13 +1,17 @@
 import { GetUserRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
+import { sendGroupRequestToJoin } from './actions/sendGroupRequestToJoin';
 import { createGroup } from './actions/createGroup';
 import { deleteGroup } from './actions/deleteGroup';
 import { fetchGroupDetailById } from './actions/fetchGroupDetailById';
+import { fetchGroupRequests } from './actions/fetchGroupRequests';
+import { fetchGroups } from './actions/fetchGroups';
 import { fetchMembersOfGroup } from './actions/fetchMembersOfGroup';
 import { fetchMyGroups } from './actions/fetchMyGroups';
 import { inviteMember } from './actions/inviteMember';
 import { joinGroup } from './actions/joinGroup';
 import { updateGroup } from './actions/updateGroup';
+import { answerToGroupRequest } from './actions/answerToGroupRequest';
 
 export type GetGroupRes = {
   id: number;
@@ -20,11 +24,22 @@ export type GetGroupRes = {
   memberCount?: number;
 };
 
+export type GetGroupRequestResV2 = {
+  id: number;
+  createdAt: string;
+  fromUserId: number;
+  status: string;
+  Group: GetGroupRes;
+  from: GetUserRes;
+};
+
 interface GroupsInitialI {
   isLoading: boolean;
   myGroups: GetGroupRes[];
   activeGroup: GetGroupRes | null;
   membersOfGroup: GetUserRes[];
+  groupRequests: GetGroupRequestResV2[];
+  exploreGroups: GetGroupRes[];
 }
 
 const godlInitialState: GroupsInitialI = {
@@ -32,6 +47,8 @@ const godlInitialState: GroupsInitialI = {
   myGroups: [],
   activeGroup: null,
   membersOfGroup: [],
+  groupRequests: [],
+  exploreGroups: [],
 };
 
 const groupsSlice = createSlice({
@@ -91,6 +108,18 @@ const groupsSlice = createSlice({
       });
 
     builder
+      .addCase(fetchGroups.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchGroups.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.exploreGroups = action.payload;
+      })
+      .addCase(fetchGroups.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
       .addCase(deleteGroup.pending, (state) => {
         state.isLoading = true;
       })
@@ -125,6 +154,40 @@ const groupsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(inviteMember.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(fetchGroupRequests.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchGroupRequests.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.groupRequests = action.payload;
+      })
+      .addCase(fetchGroupRequests.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(sendGroupRequestToJoin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(sendGroupRequestToJoin.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(sendGroupRequestToJoin.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(answerToGroupRequest.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(answerToGroupRequest.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(answerToGroupRequest.rejected, (state) => {
         state.isLoading = false;
       });
   },
