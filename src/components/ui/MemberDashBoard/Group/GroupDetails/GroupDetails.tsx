@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useParams } from 'react-router-dom';
@@ -11,10 +11,14 @@ import Forums from '../../Forums';
 import EventCalendar from '../EventCalendar/EventCalendar';
 
 const GroupDetails: React.FC = () => {
+  const [show, setShow] = React.useState<null | string>(null);
   const [isNotFound, setIsNotFound] = React.useState(false);
   const groupParam = useParams();
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
+  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const member = useAppSelector((state) => state.memberAuth.member);
+
   const getGroupDetail = async () => {
     try {
       if (groupParam?.id) {
@@ -29,10 +33,16 @@ const GroupDetails: React.FC = () => {
     getGroupDetail();
   }, []);
 
-  const [show, setShow] = useState(false);
+  React.useEffect(() => {
+    const showTip = localStorage.getItem('showTip');
+    if (showTip) {
+      setShow(showTip);
+    }
+  }, []);
 
   const hide = () => {
-    setShow(true);
+    localStorage.setItem('showTip', 'false');
+    setShow('false');
   };
 
   if (isLoading) return <CircularProgress isIndeterminate />;
@@ -46,7 +56,7 @@ const GroupDetails: React.FC = () => {
       as="section"
       id="general-section"
     >
-      {!show ? (
+      {(!localStorage.getItem('showTip') || !show) && activeGroup?.ownerId === member?.id ? (
         <GroupWelcome data={() => hide()} />
       ) : (
         <HStack w="100%" display="block">
