@@ -29,14 +29,14 @@ const GroupDetails: React.FC = () => {
     getGroupDetail();
   }, []);
 
-  if (isLoading) return <CircularProgress isIndeterminate />;
-  if (isNotFound) return <Text>404 Group not found</Text>;
-
   const [show, setShow] = useState(false);
 
   const hide = () => {
     setShow(true);
   };
+
+  if (isLoading) return <CircularProgress isIndeterminate />;
+  if (isNotFound) return <Text>404 Group not found</Text>;
 
   return (
     <Box
