@@ -1,11 +1,11 @@
 import {
   Box,
-  Button,
+  // Button,
   Text,
   Image,
   CircularProgress,
-  useClipboard,
-  useToast,
+  // useClipboard,
+  // useToast,
 } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchMembersOfGroup } from '../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 
 const MemberList: React.FC = () => {
-  const toast = useToast();
+  // const toast = useToast();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
@@ -25,18 +25,18 @@ const MemberList: React.FC = () => {
     }
   }, []);
 
-  const groupReferralLink = `${window.location.origin}/dashboard/groups/join-group/${activeGroup?.id}`;
-  const { onCopy } = useClipboard(groupReferralLink, { timeout: 3000 });
-  const onCopyHandle = () => {
-    onCopy();
-    toast({
-      title: 'Success',
-      description: 'Group referral link copied successfully!',
-      isClosable: true,
-      duration: 3000,
-      status: 'success',
-    });
-  };
+  // const groupReferralLink = `${window.location.origin}/dashboard/groups/join-group/${activeGroup?.id}`;
+  // const { onCopy } = useClipboard(groupReferralLink, { timeout: 3000 });
+  // const onCopyHandle = () => {
+  //   onCopy();
+  //   toast({
+  //     title: 'Success',
+  //     description: 'Group referral link copied successfully!',
+  //     isClosable: true,
+  //     duration: 3000,
+  //     status: 'success',
+  //   });
+  // };
 
   if (isLoading) return <CircularProgress isIndeterminate />;
 
@@ -58,7 +58,7 @@ const MemberList: React.FC = () => {
               </Text>
               <I.SettingIcon color="#B0C3D6" width="20px" />
             </Box>
-            <Button
+            {/* <Button
               onClick={onCopyHandle}
               backgroundColor="#1C1C28"
               fontWeight="700"
@@ -74,7 +74,7 @@ const MemberList: React.FC = () => {
               justifyContent="space-evenly"
             >
               <I.UnionIcon />
-            </Button>
+            </Button> */}
           </Box>
           {/* <Text
             textTransform="uppercase"

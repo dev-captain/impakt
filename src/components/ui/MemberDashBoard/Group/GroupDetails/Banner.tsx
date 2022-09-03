@@ -23,7 +23,7 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ img }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -194,7 +194,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
               </Box>
             </Box>
             <Box marginTop={{ md: '0', base: '20px' }} display="flex">
-              <Button
+              {/* <Button
                 backgroundColor="#F4F7F9"
                 borderRadius="8px"
                 height="40px"
@@ -202,7 +202,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                 _focus={{ boxShadow: 'none' }}
               >
                 <I.SearchIcon color="#4E6070" width="22px" />
-              </Button>
+              </Button> */}
               <Menu>
                 <Button
                   as={MenuButton}
@@ -222,21 +222,21 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                   <Text transform="translate(10px,-11px)">Settings</Text>
                 </Button>
                 <MenuList padding="12px" zIndex="999">
-                  {activeGroup?.ownerId === member?.id && (
+                  {/* {activeGroup?.ownerId === member?.id && (
                     <MenuItem onClick={onOpen} gap="11px" padding="8px 10px">
                       <I.PeopleIcon width="16px" color="#4E6070" />
                       Invite
                     </MenuItem>
-                  )}
+                  )} */}
                   <SearchUserModal onClose={onClose} isOpen={isOpen} />
-                  <MenuItem gap="11px" padding="8px 10px">
+                  {/* <MenuItem gap="11px" padding="8px 10px">
                     <I.PinIcon width="16px" color="#4E6070" />
                     Pin Group
-                  </MenuItem>
-                  <MenuItem gap="11px" padding="8px 10px">
+                  </MenuItem> */}
+                  {/* <MenuItem gap="11px" padding="8px 10px">
                     <I.InfoIcon width="16px" color="#4E6070" />
                     Report
-                  </MenuItem>
+                  </MenuItem> */}
 
                   {activeGroup?.ownerId === member?.id && (
                     <MenuItem onClick={handleGroupDelete} gap="11px" padding="8px 10px">
