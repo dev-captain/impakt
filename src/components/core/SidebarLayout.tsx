@@ -33,7 +33,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         zIndex="333"
         top="100px"
         color="white"
-        display={{ base: 'flex', lg: ' none' }}
+        display={{ base: 'initial', lg: ' none' }}
       >
         <Box marginX="16px">
           <CollapseSidebar />

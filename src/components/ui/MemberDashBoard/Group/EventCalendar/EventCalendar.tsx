@@ -111,9 +111,7 @@ const EventCalendar: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState(moment());
   const [selectedDay, setSelectedDay] = useState(moment().startOf('day'));
   const [selectedMonthEvents, setSelectedMonthEvents] = useState(initialiseEvents());
-  const [today, setToday] = useState(false);
-  const [tomorrow, setTomorrow] = useState(false);
-  const [time] = useState('10:00');
+  const [time] = useState(moment().format('HH:mm'));
   const [name, setName] = useState();
   const [error, setError] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -148,7 +146,6 @@ const EventCalendar: React.FC = () => {
   const select = (day: any) => {
     setSelectedMonth(day.date);
     setSelectedDay(moment(day.date).clone());
-    onOpen();
   };
 
   const renderWeeks = () => {
@@ -212,14 +209,11 @@ const EventCalendar: React.FC = () => {
   };
 
   const goToCurrentMonthView = () => {
-    setToday(true);
-    onOpen();
+    setSelectedDay(moment().startOf('day'));
   };
 
   const goToTomorrow = () => {
     setSelectedDay(moment().startOf('day').add(1, 'day'));
-    onOpen();
-    setTomorrow(true);
   };
 
   const handleChange = (e: any) => {
@@ -229,10 +223,8 @@ const EventCalendar: React.FC = () => {
   const refresh = () => {
     const d: any = '';
     onClose();
-    setToday(false);
-    setTomorrow(false);
-    setSelectedDay(moment().startOf('day'));
     setName(d);
+    setError('');
   };
 
   return (
@@ -344,7 +336,6 @@ const EventCalendar: React.FC = () => {
         </Button>
       </Box>
       <Box
-        borderRadius=" 0 0 10px 10px"
         display=" flex"
         align-items=" center"
         justifyContent=" space-between"
@@ -377,48 +368,44 @@ const EventCalendar: React.FC = () => {
           Done
         </Button>
       </Box>
+      <Box
+        backgroundColor=" #ffffff"
+        width=" 100%"
+        padding=" 20px 20px"
+        borderRadius=" 0 0 10px 10px"
+      >
+        <Events selectedDay={selectedDay} selectedMonthEvents={selectedMonthEvents} />
+      </Box>
       <Modal isOpen={isOpen} onClose={() => refresh()} isCentered>
         <ModalOverlay />
         <ModalContent>
-          {/* <ModalHeader>Add Event</ModalHeader> */}
-          <ModalHeader>{!today && !tomorrow ? 'Add Event' : 'Event'}</ModalHeader>
+          <ModalHeader>Add Event</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Text display="flex" justifyContent="center" marginBottom="5px" fontWeight="600">
               {moment(selectedDay).format('DD MMMM YYYY')}
             </Text>
-            <Events selectedDay={selectedDay} selectedMonthEvents={selectedMonthEvents} />
-            {!today && !tomorrow && (
-              <>
-                <FormControl>
-                  <FormLabel>Event name</FormLabel>
-                  <Input
-                    placeholder="Event name"
-                    value={name}
-                    onChange={(e: any) => handleChange(e)}
-                  />
-                  <Text color="red" fontSize="14px">
-                    {error}
-                  </Text>
-                </FormControl>
-                <FormControl mt={4}>
-                  <FormLabel>Data and Time</FormLabel>
-                  <TimePicker
-                    value={time}
-                    onChange={(e: any) =>
-                      setSelectedDay(moment(selectedDay).startOf('day').add(e, 'h'))
-                    }
-                  />
-                </FormControl>
-              </>
-            )}
+            <FormControl>
+              <FormLabel>Event name</FormLabel>
+              <Input placeholder="Event name" value={name} onChange={(e: any) => handleChange(e)} />
+              <Text color="red" fontSize="14px">
+                {error}
+              </Text>
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Data and Time</FormLabel>
+              <TimePicker
+                value={time}
+                onChange={(e: any) =>
+                  setSelectedDay(moment(selectedDay).startOf('day').add(e, 'h'))
+                }
+              />
+            </FormControl>
           </ModalBody>
           <ModalFooter>
-            {!today && !tomorrow && (
-              <Button colorScheme="blue" mr={3} onClick={() => handleAdd()}>
-                Save
-              </Button>
-            )}
+            <Button colorScheme="blue" mr={3} onClick={() => handleAdd()}>
+              Save
+            </Button>
             <Button onClick={() => refresh()}>Cancel</Button>
           </ModalFooter>
         </ModalContent>

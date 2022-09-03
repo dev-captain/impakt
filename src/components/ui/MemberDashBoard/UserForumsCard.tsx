@@ -25,7 +25,7 @@ const UserForumsCard: React.FC<UserForumsPropsI> = ({ name, msg, title, msgNo, v
         </Text>
         <Box display="flex" alignItems="center" gap="10px">
           <Box display="flex" alignItems="center">
-            <I.CommentIcon color="#B0C3D6" width="20px" />
+            <I.CommentIcon color="#B0C3D6" width="20px" height="20px" />
             <Text
               color="#B0C3D6"
               fontSize={{ lgx: '16px', base: '14px' }}

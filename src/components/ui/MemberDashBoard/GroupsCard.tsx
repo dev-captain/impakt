@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { I } from 'components';
-import { Box, Text, Image, Button } from '@chakra-ui/react';
-import Images from 'assets/images';
+import { Box, Text, Image } from '@chakra-ui/react';
 
 interface GroupsCardPropsI {
   member?: number;

@@ -221,7 +221,7 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
                   </Text>
                   <Text transform="translate(10px,-11px)">Settings</Text>
                 </Button>
-                <MenuList padding="12px">
+                <MenuList padding="12px" zIndex="999">
                   {activeGroup?.ownerId === member?.id && (
                     <MenuItem onClick={onOpen} gap="11px" padding="8px 10px">
                       <I.PeopleIcon width="16px" color="#4E6070" />
