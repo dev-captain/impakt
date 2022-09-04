@@ -2,7 +2,7 @@ import { Box, Text, Button } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
 // import Images from 'assets/images';
-import UserForumsCard from './UserForumsCard';
+import UserForumsCard from '../../../../UserForumsCard';
 
 const Forums: React.FC = () => {
   return (

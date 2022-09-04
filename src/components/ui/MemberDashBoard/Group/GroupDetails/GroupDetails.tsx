@@ -5,10 +5,8 @@ import { useParams } from 'react-router-dom';
 import GroupWelcome from '../../GroupWelcome';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
+import Content from './Content/Content';
 import Banner from './Banner/Banner';
-import MemberList from '../../MemberList';
-import Forums from '../../Forums';
-import EventCalendar from './EventCalendar/EventCalendar';
 
 const GroupDetails: React.FC = () => {
   const [show, setShow] = React.useState<null | string>(null);
@@ -54,19 +52,8 @@ const GroupDetails: React.FC = () => {
         <GroupWelcome data={() => hide()} />
       ) : (
         <HStack w="100%" display="block">
-          {/* here is the components */}
           <Banner img={Images.group.cover} />
-          <Box
-            marginStart="0 !important"
-            display="flex"
-            w="full"
-            gap="20px"
-            flexDirection={{ base: 'column', md: 'unset' }}
-          >
-            <EventCalendar />
-            <Forums />
-            <MemberList />
-          </Box>
+          <Content />
         </HStack>
       )}
     </Box>

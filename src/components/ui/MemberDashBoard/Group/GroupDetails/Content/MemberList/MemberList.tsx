@@ -11,7 +11,7 @@ import { I } from 'components';
 import * as React from 'react';
 import Images from 'assets/images';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { fetchMembersOfGroup } from '../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
+import { fetchMembersOfGroup } from '../../../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 
 const MemberList: React.FC = () => {
   // const toast = useToast();
