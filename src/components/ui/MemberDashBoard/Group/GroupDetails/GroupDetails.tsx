@@ -49,7 +49,7 @@ const GroupDetails: React.FC = () => {
   return (
     <Box w="full" as="section" id="general-section">
       {(!localStorage.getItem('showTip') || !show) && activeGroup?.ownerId === member?.id ? (
-        <GroupWelcome data={() => hide()} />
+        <GroupWelcome hideGroupWelcome={hide} />
       ) : (
         <HStack w="100%" display="block">
           <Banner img={Images.group.cover} />

@@ -3,11 +3,14 @@ import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
 import { ChevronRightIcon, CloseIcon } from '@chakra-ui/icons';
+import { useAppSelector } from '../../../hooks';
 
 interface BannerProps {
-  data: any;
+  hideGroupWelcome: () => void;
 }
-const GroupWelcome: React.FC<BannerProps> = ({ data }) => {
+const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
+  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+
   return (
     <Box>
       <Box backgroundColor="#fff" borderRadius="24px" w="full" p={{ base: '16px', md: '32px' }}>
@@ -24,7 +27,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ data }) => {
               fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
               color="29323B"
             >
-              Group by Demideus
+              {activeGroup?.friendlyName}
             </Text>
             <Box
               display={{ base: 'block', md: 'flex' }}
@@ -41,7 +44,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ data }) => {
                   marginLeft="12px"
                   color="#5C7FFF"
                 >
-                  0
+                  {activeGroup?.memberCount}
                 </Text>
                 <Text
                   as="h1"
@@ -54,7 +57,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ data }) => {
                   People joined
                 </Text>
               </Box>
-              <Box display="flex" alignItems="center" mt={{ base: '20px', md: '0' }}>
+              {/* <Box display="flex" alignItems="center" mt={{ base: '20px', md: '0' }}>
                 <I.RewardIcon color="#000" />
                 <Text
                   as="h1"
@@ -76,7 +79,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ data }) => {
                 >
                   Challenges completed
                 </Text>
-              </Box>
+              </Box> */}
             </Box>
           </Box>
         </Box>
@@ -235,7 +238,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ data }) => {
           _hover={{ background: 'transparent' }}
           _active={{ background: 'transparent' }}
           _focus={{ boxShadow: 'none' }}
-          onClick={() => data()}
+          onClick={() => hideGroupWelcome()}
         >
           <CloseIcon w={3} h={3} color="#000" boxSize="12px" marginRight="16px" />
           Hide tips
