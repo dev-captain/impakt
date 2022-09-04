@@ -64,7 +64,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             display={{ base: 'none', lg: 'flex' }}
             w={{ base: 0, lg: isClose ? '80px' : '20vw' }}
             minW={{ base: 0, lg: isClose ? '80px' : '260px' }}
-            transition="width .5s ease-in, min-width .5s linear"
+            transition="width .2s ease-in, min-width .2s linear"
             bgColor="white"
             as="aside"
             justifyContent="flex-start"
@@ -100,7 +100,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
               base: '0',
               lg: !isClose ? '20vw !important' : '5vw !important',
             }}
-            transition="margin-left .5s ease-in"
+            transition="margin-left .2s ease-in"
             p={{ sm: '0 1em', lg: '3em 3em 3em 3em' }}
             marginTop={{ sm: '100px !important', lg: '0px !important' }}
           >

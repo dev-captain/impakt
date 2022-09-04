@@ -99,7 +99,7 @@ const SidebarLinkItem = ({
             marginLeft="14.5px"
             fontWeight="600"
             opacity={{ lg: collaps === true ? '0' : '1' }}
-            transition="opacity .5s ease-in-out"
+            transition="opacity .1s ease-in-out"
           >
             {title}
           </Text>
