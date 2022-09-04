@@ -68,7 +68,7 @@ const ExploreGroupCardWrapper: React.FC = () => {
                   border="1px solid #1C1C28"
                   justifyContent="space-around"
                   fontSize="16px"
-                  leftIcon={<I.UnionIcon />}
+                  leftIcon={<I.UnionIcon width="12px" />}
                 >
                   Join
                 </Common.ImpaktButton>
