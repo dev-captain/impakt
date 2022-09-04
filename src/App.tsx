@@ -25,6 +25,7 @@ import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -106,7 +107,14 @@ const App = () => {
         <Route path="groups">
           <Route path="" element={<S.Group />} />
           <Route path="create-group" element={<S.CreateGroup />} />
-          <Route path="group/:id" element={<S.GroupDetail />} />
+          <Route
+            path="group/:id"
+            element={
+              <GroupDetailMiddleWare>
+                <S.GroupDetail />
+              </GroupDetailMiddleWare>
+            }
+          />
         </Route>
         <Route path="reward-history" element={<S.RewardHistory />} />
         <Route path="statistics" element={<S.Statistics />} />
