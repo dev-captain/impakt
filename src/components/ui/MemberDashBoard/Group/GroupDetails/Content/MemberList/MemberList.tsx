@@ -210,8 +210,14 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-          {members.map(({ firstName, username }) => (
-            <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="16px">
+          {members.map(({ id, firstName, username }) => (
+            <Box
+              key={`${id}-box`}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              marginTop="16px"
+            >
               <Box display="flex" alignItems="center">
                 <Image src={Images.group.ellipse} zIndex="10" />
                 <Text

@@ -1,5 +1,5 @@
 import { Box, Text, Button } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { I } from 'components';
 import * as React from 'react';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from 'assets/images';

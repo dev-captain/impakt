@@ -101,7 +101,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <I.ImpaktIcon isBlack={isVersion2} cursor="pointer" width="111px" height="32px" />
+            <I.ImpaktIcon isblack={`${isVersion2}`} cursor="pointer" width="111px" height="32px" />
           </Box>
           <HStack
             justify="flex-end"

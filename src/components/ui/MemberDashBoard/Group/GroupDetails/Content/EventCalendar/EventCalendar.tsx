@@ -166,6 +166,7 @@ const EventCalendar: React.FC = () => {
     while (!done) {
       weeks.push(
         <Week
+          key={count}
           previousCurrentNextView={previousCurrentNextView.clone()}
           currentMonthView={currentMonthView}
           monthEvents={monthEvents}
@@ -250,11 +251,11 @@ const EventCalendar: React.FC = () => {
             background-color=" rgb(243, 243, 243)"
             color=" rgb(62, 62, 62)"
             padding=" 6px 9px"
-            font-weight=" 600"
+            fontWeight=" 600"
             border=" none"
             outline=" none"
             border-radius=" 5px"
-            font-size=" 15px"
+            fontSize=" 15px"
             onClick={() => goToCurrentMonthView()}
           >
             Today
@@ -263,11 +264,11 @@ const EventCalendar: React.FC = () => {
             background-color=" rgb(243, 243, 243)"
             color=" rgb(62, 62, 62)"
             padding=" 6px 9px"
-            font-weight=" 600"
+            fontWeight=" 600"
             border=" none"
             outline=" none"
             border-radius=" 5px"
-            font-size=" 15px"
+            fontSize=" 15px"
             onClick={() => goToTomorrow()}
           >
             Tomorrow
@@ -275,11 +276,11 @@ const EventCalendar: React.FC = () => {
           <Button
             color=" rgb(62, 62, 62)"
             padding=" 6px 9px"
-            font-weight=" 600"
+            fontWeight=" 600"
             border=" none"
             outline=" none"
             border-radius=" 5px"
-            font-size=" 15px"
+            fontSize=" 15px"
             background-color=" rgb(243, 243, 243)"
           >
             In 2 Days
@@ -348,9 +349,9 @@ const EventCalendar: React.FC = () => {
           color="grey"
           width="49%"
           padding=" 15px"
-          font-size=" 16px"
+          fontSize=" 16px"
           border-radius=" 8px"
-          font-weight=" 600"
+          fontWeight=" 600"
           cursor=" pointer"
         >
           Remove
@@ -360,9 +361,9 @@ const EventCalendar: React.FC = () => {
           color="white"
           width="49%"
           padding=" 15px"
-          font-size=" 16px"
+          fontSize=" 16px"
           border-radius=" 8px"
-          font-weight=" 600"
+          fontWeight=" 600"
           cursor=" pointer"
         >
           Done

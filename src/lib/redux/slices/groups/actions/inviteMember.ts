@@ -26,8 +26,6 @@ const inviteMember = createAsyncThunk(
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
         .post(`/api/v1/groups/invite/${groupId}`, { toUserId });
 
-      console.log('here');
-
       return true;
     } catch (err: any) {
       return rejectWithValue(err);

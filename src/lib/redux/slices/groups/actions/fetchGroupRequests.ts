@@ -20,7 +20,6 @@ const fetchGroupRequests = createAsyncThunk(
         .get(`/api/v1/groups/all-requests`);
 
       const payload = getGroupRequestsRes.data as GetGroupRequestResV2[];
-      console.log(payload);
 
       return payload;
     } catch (err: any) {

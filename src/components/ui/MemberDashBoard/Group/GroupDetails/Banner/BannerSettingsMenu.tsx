@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Menu, MenuButton, MenuItem, MenuList, Text, useToast } from '@chakra-ui/react';
+import { Menu, MenuButton, MenuItem, MenuList, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 import { I } from 'components';

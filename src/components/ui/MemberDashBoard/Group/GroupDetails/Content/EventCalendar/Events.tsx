@@ -23,7 +23,7 @@ const Events: React.FC<EventProps> = ({ selectedMonthEvents, selectedDay }) => {
   return (
     <Box>
       {arr.map((a: any) => (
-        <Box key={a?.i} display="flex" marginBottom="10px">
+        <Box key={`${a.date}-yo`} display="flex" marginBottom="10px">
           <Text width="20%" fontSize="15px">
             {a?.date?.format('HH:mm') !== '00:00'
               ? a?.date?.format('HH:mm')

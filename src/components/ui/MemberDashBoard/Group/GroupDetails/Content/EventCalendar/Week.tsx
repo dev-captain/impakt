@@ -44,7 +44,7 @@ const Week: React.FC<WeekProps> = ({
       hasEvents: dayHasEvents,
     };
 
-    days.push(<Day day={day} selected={selectedSet} select={selectSet} />);
+    days.push(<Day key={i} day={day} selected={selectedSet} select={selectSet} />);
     date = date.clone();
     date.add(1, 'd');
   }
