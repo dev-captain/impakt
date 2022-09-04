@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { Box, HStack, useToast, Text } from '@chakra-ui/react';
+import { Box, HStack, useToast } from '@chakra-ui/react';
+
 import { Common, I } from 'components';
 import Images from 'assets/images';
 import GroupsCard from '../../../GroupsCard';

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Box, VStack } from '@chakra-ui/react';
+
 import MyGroupCardWrapper from './MyGroupCard/MyGroupCardWrapper';
 import MyGroupCardWrapperHeader from './MyGroupCard/MyGroupCardWrapperHeader';
 import GroupRequestCardWrapperHeader from './GroupRequestCard/GroupRequestCardWrapperHeader';

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { I } from '../../../../..';
+
+import { I } from 'components';
 import MyGroupCardWrapperHeaderStatisticTag from './MyGroupCardWrapperHeaderStatisticTag';
 import GroupCardWrapperHeader from '../GroupCardWrapperHeader';
 
