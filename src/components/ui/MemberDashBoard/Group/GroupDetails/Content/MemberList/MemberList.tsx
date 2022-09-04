@@ -12,6 +12,7 @@ import * as React from 'react';
 import Images from 'assets/images';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchMembersOfGroup } from '../../../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
+import MemberDashboardCard from '../../../../MemberDashBoardCard';
 
 const MemberList: React.FC = () => {
   // const toast = useToast();
@@ -42,11 +43,9 @@ const MemberList: React.FC = () => {
 
   return (
     <Box marginStart="0 !important" width={{ base: '100%', md: '30%', lgx: '25%' }}>
-      <Box
-        backgroundColor="#fff"
-        borderRadius="24px"
+      <MemberDashboardCard
         p={{ base: '16px', md: '24px' }}
-        marginTop="26px"
+        marginTop={{ base: 0, md: '26px' }}
         marginLeft="auto"
         marginBottom="20px"
       >
@@ -227,7 +226,7 @@ const MemberList: React.FC = () => {
             </Box>
           ))}
         </Box>
-      </Box>
+      </MemberDashboardCard>
     </Box>
   );
 };
