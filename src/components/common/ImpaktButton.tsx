@@ -1,10 +1,18 @@
 import { As, Button, ButtonProps, forwardRef } from '@chakra-ui/react';
 import * as React from 'react';
 
+type ImpaktButtonVariantType =
+  | 'primary'
+  | 'secondary'
+  | 'alert'
+  | 'white'
+  | 'black'
+  | 'transparent';
+
 interface ImpaktButtonProps {
   size?: 'sm' | 'lg';
   as?: As<any>;
-  variant?: 'primary' | 'secondary' | 'alert' | 'white';
+  variant?: ImpaktButtonVariantType;
   leftIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   href?: string;
@@ -42,7 +50,7 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
   );
 });
 
-const getBgColor = (variant?: 'primary' | 'alert' | 'secondary' | 'white') => {
+const getBgColor = (variant?: ImpaktButtonVariantType) => {
   if (variant === 'primary') {
     return 'accentRed2';
   }
@@ -57,10 +65,18 @@ const getBgColor = (variant?: 'primary' | 'alert' | 'secondary' | 'white') => {
     return 'rgba(255,255,255,1)';
   }
 
+  if (variant === 'black') {
+    return '#1C1C28';
+  }
+
+  if (variant === 'transparent') {
+    return 'transparent';
+  }
+
   return 'accentRed2';
 };
 
-const getTextColor = (variant?: 'primary' | 'alert' | 'secondary' | 'white') => {
+const getTextColor = (variant?: ImpaktButtonVariantType) => {
   if (variant === 'primary') {
     return 'rgba(255, 255, 255, 1)';
   }
@@ -73,6 +89,14 @@ const getTextColor = (variant?: 'primary' | 'alert' | 'secondary' | 'white') => 
 
   if (variant === 'white') {
     return 'fitnessGray';
+  }
+
+  if (variant === 'black') {
+    return '#fff';
+  }
+
+  if (variant === 'transparent') {
+    return '#000';
   }
 
   return 'rgba(255, 255, 255, 1)';

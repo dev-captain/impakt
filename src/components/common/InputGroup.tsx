@@ -34,6 +34,7 @@ export interface InputGroupPropsI {
   maxLength?: number;
   autoFocus?: boolean | undefined;
   defaultValue?: string | number | readonly string[] | undefined;
+  whiteMode?: boolean;
 }
 
 const InputGroup: React.FC<InputGroupPropsI> = ({
@@ -53,6 +54,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
   maxLength,
   autoFocus,
   defaultValue,
+  whiteMode,
 }) => {
   return (
     <>
@@ -70,7 +72,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
             justifyContent="space-between"
             display="flex"
             w="full"
-            color="rgba(255, 255, 255, 0.85)"
+            color={whiteMode ? 'rgba(78, 96, 112, 1)' : 'rgba(255, 255, 255, 0.85)'}
             textStyle="semiBold6"
             lineHeight="120%"
           >
@@ -106,7 +108,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
           color="rgba(255, 255, 255, 0.5)"
           h="100% !important"
           border="none"
-          background="#121216"
+          background={whiteMode ? '#EEF4F6' : '#121216'}
           borderRadius="12px"
         >
           {leftIcon && (
@@ -114,7 +116,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
               pointerEvents="none"
               minW="60px"
               h="full"
-              // color="rgba(255, 255, 255, 0.5)"
+              color="rgba(255, 255, 255, 0.5)"
               borderEnd="1px solid rgba(255, 255, 255, 0.1)"
               marginRight="16px"
             >
@@ -127,9 +129,10 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
             autoFocus={autoFocus}
             name={name}
             id={name}
+            color={whiteMode ? 'rgba(41, 50, 59, 1)' : '#fff'}
             h="100%"
             border="none"
-            _focus={{ border: '2px solid rgba(240, 65, 83, 1)' }}
+            _focus={{ border: whiteMode ? '' : '2px solid rgba(240, 65, 83, 1)' }}
             minH="60px"
             defaultValue={defaultValue}
             maxLength={maxLength}

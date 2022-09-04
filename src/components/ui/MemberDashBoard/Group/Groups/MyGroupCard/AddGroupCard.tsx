@@ -1,13 +1,12 @@
-import * as React from 'react';
-import { Box, Button } from '@chakra-ui/react';
-import { I } from 'components';
+import { I, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
+import MemberDashboardCard from '../../../MemberDashBoardCard';
 
-const AddGroup = () => {
+const AddGroupCard = () => {
   const navigate = useNavigate();
 
   return (
-    <Box
+    <MemberDashboardCard
       display="flex"
       backgroundColor="#fff"
       borderRadius="24px"
@@ -17,23 +16,21 @@ const AddGroup = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Button
-        backgroundColor="#1C1C28"
+      <Common.ImpaktButton
+        variant="black"
         width={{ lgx: '238px', base: '200px' }}
         height={{ lgx: '64px', base: '58px' }}
         fontWeight="700"
-        color="#fff"
-        _hover={{ backgroundColor: '#1C1C28' }}
-        _active={{ backgroundColor: '#1C1C28' }}
         borderRadius="16px"
         _focus={{ boxShadow: 'none' }}
         justifyContent="space-evenly"
         fontSize={{ lgx: '20px', base: '16px' }}
         onClick={() => navigate('/dashboard/groups/create-group')}
+        leftIcon={<I.UnionIcon />}
       >
-        <I.UnionIcon /> Create Group
-      </Button>
-    </Box>
+        Create Group
+      </Common.ImpaktButton>
+    </MemberDashboardCard>
   );
 };
-export default AddGroup;
+export default AddGroupCard;

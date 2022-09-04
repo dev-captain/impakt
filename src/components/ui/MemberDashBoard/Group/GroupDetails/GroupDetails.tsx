@@ -8,7 +8,7 @@ import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/act
 import Banner from './Banner';
 import MemberList from '../../MemberList';
 import Forums from '../../Forums';
-import EventCalendar from '../EventCalendar/EventCalendar';
+import EventCalendar from './EventCalendar/EventCalendar';
 
 const GroupDetails: React.FC = () => {
   const [show, setShow] = React.useState<null | string>(null);
