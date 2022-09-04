@@ -14,9 +14,9 @@ import * as React from 'react';
 import { I } from 'components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import { leaveGroup } from '../../../../../lib/redux/slices/groups/actions/leaveGroup';
-import { deleteGroup } from '../../../../../lib/redux/slices/groups/actions/deleteGroup';
-import SearchUserModal from './SearchUserModal/SearchUserModal';
+import { leaveGroup } from '../../../../../../lib/redux/slices/groups/actions/leaveGroup';
+import { deleteGroup } from '../../../../../../lib/redux/slices/groups/actions/deleteGroup';
+import SearchUserModal from '../SearchUserModal/SearchUserModal';
 
 interface BannerProps {
   img: any;

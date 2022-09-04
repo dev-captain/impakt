@@ -97,7 +97,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             m="0 !important"
             marginLeft={{
               base: '0',
-              lg: isClose === false ? '20vw !important' : '10vw !important',
+              lg: isClose === false ? '20vw !important' : '5vw !important',
             }}
             p={{ sm: '0 1em', lg: '3em 3em 3em 3em' }}
             marginTop={{ sm: '100px !important', lg: '0px !important' }}

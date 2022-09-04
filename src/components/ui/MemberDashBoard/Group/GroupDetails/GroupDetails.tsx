@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import GroupWelcome from '../../GroupWelcome';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
-import Banner from './Banner';
+import Banner from './Banner/Banner';
 import MemberList from '../../MemberList';
 import Forums from '../../Forums';
 import EventCalendar from './EventCalendar/EventCalendar';
@@ -49,13 +49,7 @@ const GroupDetails: React.FC = () => {
   if (isNotFound) return <Text>404 Group not found</Text>;
 
   return (
-    <Box
-      // minH="100vh"
-      // overflow="hidden"
-      w="full"
-      as="section"
-      id="general-section"
-    >
+    <Box w="full" as="section" id="general-section">
       {(!localStorage.getItem('showTip') || !show) && activeGroup?.ownerId === member?.id ? (
         <GroupWelcome data={() => hide()} />
       ) : (
