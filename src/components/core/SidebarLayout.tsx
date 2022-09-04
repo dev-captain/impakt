@@ -62,8 +62,9 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             height="100%"
             p="3em 0"
             display={{ base: 'none', lg: 'flex' }}
-            w={{ base: 0, lg: isClose === true ? '80px' : '20vw' }}
-            minW={{ base: 0, lg: isClose === true ? '80px' : '260px' }}
+            w={{ base: 0, lg: isClose ? '80px' : '20vw' }}
+            minW={{ base: 0, lg: isClose ? '80px' : '260px' }}
+            transition="width .5s ease-in, min-width .5s linear"
             bgColor="white"
             as="aside"
             justifyContent="flex-start"
@@ -72,8 +73,8 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             <Box
               width="100%"
               display="flex"
-              justifyContent={isClose === true ? 'center' : 'end'}
-              paddingRight={isClose === true ? '0' : '24px'}
+              justifyContent={isClose ? 'center' : 'end'}
+              paddingRight={isClose ? '0' : '24px'}
             >
               {isClose === true ? (
                 <HamburgerIcon
@@ -97,8 +98,9 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             m="0 !important"
             marginLeft={{
               base: '0',
-              lg: isClose === false ? '20vw !important' : '5vw !important',
+              lg: !isClose ? '20vw !important' : '5vw !important',
             }}
+            transition="margin-left .5s ease-in"
             p={{ sm: '0 1em', lg: '3em 3em 3em 3em' }}
             marginTop={{ sm: '100px !important', lg: '0px !important' }}
           >

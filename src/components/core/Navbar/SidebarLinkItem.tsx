@@ -98,8 +98,8 @@ const SidebarLinkItem = ({
             pos="relative"
             marginLeft="14.5px"
             fontWeight="600"
-            color={collaps === true ? '#fff' : ''}
-            display={{ lg: collaps === true ? 'none' : 'block' }}
+            opacity={{ lg: collaps === true ? '0' : '1' }}
+            transition="opacity .5s ease-in-out"
           >
             {title}
           </Text>
