@@ -11,12 +11,21 @@ const Groups: React.FC = () => {
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">
       <VStack alignItems="flex-start" rowGap="1em" justifyContent="flex-start" w="full">
-        <MyGroupCardWrapperHeader />
-        <MyGroupCardWrapper />
-        <GroupRequestCardWrapperHeader />
-        <GroupRequestCardWrapper />
-        <ExploreGroupCardWrapperHeader />
-        <ExploreGroupCardWrapper />
+        {/* Your groups section */}
+        <Box as="section" id="your-groups-section">
+          <MyGroupCardWrapperHeader />
+          <MyGroupCardWrapper />
+        </Box>
+        {/* Request section  */}
+        <Box as="section" id="requests-section">
+          <GroupRequestCardWrapperHeader />
+          <GroupRequestCardWrapper />
+        </Box>
+        {/* Explore section  */}
+        <Box as="section" id="explore-group-section">
+          <ExploreGroupCardWrapperHeader />
+          <ExploreGroupCardWrapper />
+        </Box>
       </VStack>
     </Box>
   );

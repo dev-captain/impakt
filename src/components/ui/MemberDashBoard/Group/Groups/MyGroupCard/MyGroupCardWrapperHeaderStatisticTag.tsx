@@ -2,16 +2,20 @@ import * as React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 // import { I } from 'components';
 
-interface MemberDashBoardSectionHeadlineJoinedGroupPropsI {
+interface MyGroupCardWrapperHeaderStatisticTagropsI {
   value: string;
   icon: any;
   name: string;
   color: string;
   width: string;
 }
-const MemberDashboardSectionHeadlineJoinedGroup: React.FC<
-  MemberDashBoardSectionHeadlineJoinedGroupPropsI
-> = ({ value, icon, name, color, width }) => {
+const MyGroupCardWrapperHeaderStatisticTag: React.FC<MyGroupCardWrapperHeaderStatisticTagropsI> = ({
+  value,
+  icon,
+  name,
+  color,
+  width,
+}) => {
   return (
     <Box display={{ sm: 'none', lg: 'flex' }} alignItems="center" mb="2em">
       {icon}
@@ -38,4 +42,4 @@ const MemberDashboardSectionHeadlineJoinedGroup: React.FC<
     </Box>
   );
 };
-export default MemberDashboardSectionHeadlineJoinedGroup;
+export default MyGroupCardWrapperHeaderStatisticTag;
