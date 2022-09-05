@@ -3,21 +3,22 @@ import {
   Box,
   Button,
   FormControl,
-  FormLabel,
   Input,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
   useDisclosure,
+  Flex,
 } from '@chakra-ui/react';
+import { useForm } from 'hooks';
 import { ChevronLeftIcon, AddIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Common } from 'components';
+import { InputGroupPropsI } from 'components/common/InputGroup';
 import moment from 'moment';
-import TimePicker from 'react-time-picker';
 import Week from './Week';
 import Events from './Events';
 import DayNames from './DayNames';
@@ -111,18 +112,20 @@ const EventCalendar: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState(moment());
   const [selectedDay, setSelectedDay] = useState(moment().startOf('day'));
   const [selectedMonthEvents, setSelectedMonthEvents] = useState(initialiseEvents());
-  const [time] = useState(moment().format('HH:mm'));
-  const [name, setName] = useState();
-  const [error, setError] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const { handleSubmit, errors, setValue } = useForm({
+    defaultValues: { friendlyName: '' },
+  });
+
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+  };
+
   const showCalendar = () => {
-    const d: any = '';
     setSelectedMonth(selectedMonth);
     setSelectedDay(selectedDay);
     onClose();
-    setName(d);
-    setError('');
   };
 
   const renderMonthLabel = () => {
@@ -152,21 +155,21 @@ const EventCalendar: React.FC = () => {
     const currentMonthView = selectedMonth;
     const currentSelectedDay = selectedDay;
     const monthEvents = selectedMonthEvents;
+    const num = ['', '', '', '', ''];
 
-    const weeks = [];
-    let done = false;
+    const weeks: any = [];
     const previousCurrentNextView = currentMonthView
       .clone()
       .startOf('month')
       .subtract(1, 'd')
       .day('Monday');
-    let count: number = 0;
     let monthIndex = previousCurrentNextView.month();
+    console.log('monthIndex :', monthIndex);
 
-    while (!done) {
+    num.forEach(() => {
       weeks.push(
         <Week
-          key={count}
+          // key={count}
           previousCurrentNextView={previousCurrentNextView.clone()}
           currentMonthView={currentMonthView}
           monthEvents={monthEvents}
@@ -175,38 +178,31 @@ const EventCalendar: React.FC = () => {
         />,
       );
       previousCurrentNextView.add(1, 'w');
-      // eslint-disable-next-line no-plusplus
-      done = count++ > 2 && monthIndex !== previousCurrentNextView.month();
       monthIndex = previousCurrentNextView.month();
-    }
+    });
 
     return weeks;
   };
 
-  const handleAdd = () => {
+  const handleAdd = async (data: any) => {
+    const { friendlyName } = data as { friendlyName: string };
     const monthEvents = selectedMonthEvents;
     const currentSelectedDate = selectedDay;
+    const newEvents = [];
+    const newEvent = {
+      title: friendlyName,
+      date: currentSelectedDate,
+      dynamic: false,
+    };
 
-    if (!name) {
-      setError('please enter event name');
-    } else {
-      const newEvents = [];
-      const newEvent = {
-        title: name,
-        date: currentSelectedDate,
-        dynamic: false,
-      };
+    newEvents.push(newEvent);
 
-      newEvents.push(newEvent);
+    newEvents.forEach((d: any) => {
+      (monthEvents as any).push(d);
+    });
 
-      // eslint-disable-next-line no-plusplus
-      for (let i: number = 0; i < newEvents.length; i++) {
-        (monthEvents as any).push(newEvents[i]);
-      }
-
-      setSelectedMonthEvents(monthEvents);
-      showCalendar();
-    }
+    setSelectedMonthEvents(monthEvents);
+    showCalendar();
   };
 
   const goToCurrentMonthView = () => {
@@ -217,16 +213,22 @@ const EventCalendar: React.FC = () => {
     setSelectedDay(moment().startOf('day').add(1, 'day'));
   };
 
-  const handleChange = (e: any) => {
-    setName(e.target.value);
+  const refresh = () => {
+    onClose();
   };
 
-  const refresh = () => {
-    const d: any = '';
-    onClose();
-    setName(d);
-    setError('');
-  };
+  const inputItems: InputGroupPropsI[] = [
+    {
+      placeholder: 'Group by Demidues',
+      onChange,
+      type: 'text',
+      name: 'friendlyName',
+      label: 'Group name',
+      errorMsg: errors?.friendlyName?.message,
+      autoFocus: true,
+      whiteMode: true,
+    },
+  ];
 
   return (
     <Box
@@ -333,40 +335,7 @@ const EventCalendar: React.FC = () => {
           onClick={() => onOpen()}
         >
           <AddIcon marginRight=" 25px" fontSize="16px" />
-          Add reminder
-        </Button>
-      </Box>
-      <Box
-        display=" flex"
-        align-items=" center"
-        justifyContent=" space-between"
-        width=" 100%"
-        backgroundColor=" #ffffff"
-        padding=" 10px 20px 20px 20px"
-      >
-        <Button
-          backgroundColor="#f2f4f5"
-          color="grey"
-          width="49%"
-          padding=" 15px"
-          fontSize=" 16px"
-          border-radius=" 8px"
-          fontWeight=" 600"
-          cursor=" pointer"
-        >
-          Remove
-        </Button>
-        <Button
-          backgroundColor="#0090fc"
-          color="white"
-          width="49%"
-          padding=" 15px"
-          fontSize=" 16px"
-          border-radius=" 8px"
-          fontWeight=" 600"
-          cursor=" pointer"
-        >
-          Done
+          Add event
         </Button>
       </Box>
       <Box
@@ -386,29 +355,67 @@ const EventCalendar: React.FC = () => {
             <Text display="flex" justifyContent="center" marginBottom="5px" fontWeight="600">
               {moment(selectedDay).format('DD MMMM YYYY')}
             </Text>
-            <FormControl>
-              <FormLabel>Event name</FormLabel>
-              <Input placeholder="Event name" value={name} onChange={(e: any) => handleChange(e)} />
-              <Text color="red" fontSize="14px">
-                {error}
-              </Text>
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Data and Time</FormLabel>
-              <TimePicker
-                value={time}
-                onChange={(e: any) =>
-                  setSelectedDay(moment(selectedDay).startOf('day').add(e, 'h'))
-                }
+            <FormControl
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              flexDir="column"
+              m="0 !important"
+              rowGap="24px"
+              as="form"
+              onSubmit={handleSubmit(handleAdd)}
+              autoComplete="off"
+              w="full"
+            >
+              <Common.InputItems inputItems={inputItems} />
+              <Input
+                placeholder="date and time"
+                border="0"
+                _focus={{ border: '0' }}
+                background="#eef4f6"
+                height="60px"
+                borderRadius="12px"
+                paddingLeft="32px"
+                fontSize="16px"
+                // color="#a0aec0"
+                fontWeight="500"
               />
+              <Flex justifyContent="space-between" w="full">
+                <Common.ImpaktButton
+                  variant="transparent"
+                  _hover={{ backgroundColor: '#000', color: '#fff' }}
+                  _active={{ backgroundColor: 'transparent' }}
+                  _focus={{ boxShadow: 'none' }}
+                  border="2px solid #29323B"
+                  borderRadius="16px"
+                  color="#29323B"
+                  w={{ md: '120px', base: '100px' }}
+                  h={{ md: '54px', base: '44px' }}
+                  fontSize={{ md: '16px' }}
+                  fontWeight="700"
+                  mr={3}
+                  justifyContent="space-evenly"
+                  onClick={() => refresh()}
+                >
+                  Cancel
+                </Common.ImpaktButton>
+                <Common.ImpaktButton
+                  variant="black"
+                  colorScheme="#fff"
+                  w={{ md: '120px', base: '100px' }}
+                  h={{ md: '54px', base: '44px' }}
+                  backgroundColor="#3182ce"
+                  borderRadius="16px"
+                  type="submit"
+                  fontSize={{ md: '16px' }}
+                  fontWeight="700"
+                  onSubmit={() => handleSubmit(handleAdd)}
+                >
+                  Add
+                </Common.ImpaktButton>
+              </Flex>
             </FormControl>
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => handleAdd()}>
-              Save
-            </Button>
-            <Button onClick={() => refresh()}>Cancel</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </Box>

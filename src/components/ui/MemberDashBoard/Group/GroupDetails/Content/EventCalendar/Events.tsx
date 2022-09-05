@@ -11,14 +11,12 @@ interface EventProps {
 const Events: React.FC<EventProps> = ({ selectedMonthEvents, selectedDay }) => {
   const data = selectedMonthEvents.map((e: any) => e);
 
-  const arr = [];
-
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < data.length; i++) {
+  const arr: any = [];
+  data.forEach((d: any, i: number) => {
     if (selectedMonthEvents[i]?.date?.isSame(selectedDay, 'day')) {
-      arr.push(data[i]);
+      arr.push(d);
     }
-  }
+  });
 
   return (
     <Box>

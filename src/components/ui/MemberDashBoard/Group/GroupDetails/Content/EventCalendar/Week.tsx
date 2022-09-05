@@ -19,21 +19,22 @@ const Week: React.FC<WeekProps> = ({
   monthEvents,
 }) => {
   // Declare a new state variable, which we'll call "count"
-  const days = [];
+  const days: any = [];
   let date = previousCurrentNextView;
   const currentMonthViewSet = currentMonthView;
   const selectedSet = selected;
   const selectSet = select;
   const monthEventsSet = monthEvents;
+  const num = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-  for (let i: number = 0; i < 7; i += 1) {
+  num.forEach((i: any) => {
     let dayHasEvents = false;
 
-    for (let j: number = 0; j < monthEventsSet.length; j += 1) {
-      if (monthEventsSet[j]?.date?.isSame(date, 'day')) {
+    monthEventsSet.forEach((data: any) => {
+      if (data?.date?.isSame(date, 'day')) {
         dayHasEvents = true;
       }
-    }
+    });
 
     const day = {
       name: date.format('dd').substring(0, 1),
@@ -47,7 +48,7 @@ const Week: React.FC<WeekProps> = ({
     days.push(<Day key={i} day={day} selected={selectedSet} select={selectSet} />);
     date = date.clone();
     date.add(1, 'd');
-  }
+  });
 
   return (
     <Box
