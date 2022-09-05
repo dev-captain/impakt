@@ -25,7 +25,7 @@ import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
-import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
+// import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -110,9 +110,9 @@ const App = () => {
           <Route
             path="group/:id"
             element={
-              <GroupDetailMiddleWare>
-                <S.GroupDetail />
-              </GroupDetailMiddleWare>
+              // <GroupDetailMiddleWare>
+              <S.GroupDetail />
+              // </GroupDetailMiddleWare>
             }
           />
         </Route>

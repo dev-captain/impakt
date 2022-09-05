@@ -49,6 +49,7 @@ const ExploreGroupCardWrapper: React.FC = () => {
       {/* here is the components */}
       {exploreGroups.map((d) => (
         <Box
+          key={d.id}
           w={{
             base: '100%',
             sm: '49%',
@@ -60,17 +61,22 @@ const ExploreGroupCardWrapper: React.FC = () => {
             <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
               <Box maxW="99px" maxH="38px">
                 <Common.ImpaktButton
-                  variant="transparent"
-                  _hover={{ backgroundColor: '#000', color: '#fff' }}
-                  onClick={() => handleRequestToJoinGroup(d.id)}
+                  variant={d.GroupRequest.length ? 'black' : 'transparent'}
+                  _hover={{
+                    backgroundColor: d.GroupRequest.length ? '#fff' : '#000',
+                    color: d.GroupRequest.length ? '#000' : '#fff',
+                  }}
+                  onClick={() => (!d.GroupRequest.length ? handleRequestToJoinGroup(d.id) : null)}
                   borderRadius="8px"
                   fontWeight="600"
                   border="1px solid #1C1C28"
                   justifyContent="space-around"
                   fontSize="16px"
-                  leftIcon={<I.UnionIcon width="12px" />}
+                  leftIcon={
+                    d.GroupRequest.length ? <Box display="none" /> : <I.UnionIcon width="12px" />
+                  }
                 >
-                  Join
+                  {d.GroupRequest.length ? 'Pending...' : 'Join'}
                 </Common.ImpaktButton>
               </Box>
             </Box>

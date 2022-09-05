@@ -22,6 +22,7 @@ export type GetGroupRes = {
   conversationId?: string;
   coverImageUrl?: string;
   memberCount?: number;
+  GroupRequest: { status: string }[];
 };
 
 export type GetGroupRequestResV2 = {
