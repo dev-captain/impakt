@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   FormControl,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -115,10 +114,15 @@ const EventCalendar: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { handleSubmit, errors, setValue } = useForm({
-    defaultValues: { friendlyName: '' },
+    defaultValues: { friendlyName: '', time: '' },
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (e.target.name === 'time') {
+      setSelectedDay(moment(selectedDay).startOf('day').add(e.target.value, 'h'));
+
+      return;
+    }
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
 
@@ -163,13 +167,10 @@ const EventCalendar: React.FC = () => {
       .startOf('month')
       .subtract(1, 'd')
       .day('Monday');
-    let monthIndex = previousCurrentNextView.month();
-    console.log('monthIndex :', monthIndex);
 
     num.forEach(() => {
       weeks.push(
         <Week
-          // key={count}
           previousCurrentNextView={previousCurrentNextView.clone()}
           currentMonthView={currentMonthView}
           monthEvents={monthEvents}
@@ -178,7 +179,6 @@ const EventCalendar: React.FC = () => {
         />,
       );
       previousCurrentNextView.add(1, 'w');
-      monthIndex = previousCurrentNextView.month();
     });
 
     return weeks;
@@ -219,12 +219,22 @@ const EventCalendar: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Group by Demidues',
+      placeholder: 'Enter Evant Name',
       onChange,
       type: 'text',
       name: 'friendlyName',
-      label: 'Group name',
+      label: 'Event name',
       errorMsg: errors?.friendlyName?.message,
+      autoFocus: true,
+      whiteMode: true,
+    },
+    {
+      placeholder: 'Enter Date and Time',
+      onChange,
+      type: 'time',
+      name: 'time',
+      label: 'Date and Time',
+      errorMsg: errors?.time?.message,
       autoFocus: true,
       whiteMode: true,
     },
@@ -325,33 +335,33 @@ const EventCalendar: React.FC = () => {
       <Box width=" 100%;" height=" 70%;" background=" #ffffff;">
         {renderWeeks()}
       </Box>
-      <Box backgroundColor=" #ffffff" width=" 100%" padding=" 20px 20px">
+      <Box
+        backgroundColor=" #ffffff"
+        width=" 100%"
+        padding=" 20px 20px"
+        borderRadius="0 0 10px 10px"
+      >
         <Button
           background="white"
           _hover={{ backgroundColor: 'white' }}
+          _active={{ backgroundColor: 'white' }}
+          _focus={{ boxShadow: '0', background: 'white' }}
           padding="0"
           fontSize="15px"
           color="rgb(102, 102, 102)"
           onClick={() => onOpen()}
         >
-          <AddIcon marginRight=" 25px" fontSize="16px" />
+          <AddIcon marginRight="14px" fontSize="16px" />
           Add event
         </Button>
-      </Box>
-      <Box
-        backgroundColor=" #ffffff"
-        width=" 100%"
-        padding=" 20px 20px"
-        borderRadius=" 0 0 10px 10px"
-      >
         <Events selectedDay={selectedDay} selectedMonthEvents={selectedMonthEvents} />
       </Box>
       <Modal isOpen={isOpen} onClose={() => refresh()} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent w={{ base: '92%', md: '100%' }}>
           <ModalHeader>Add Event</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody p={{ base: '20px', md: 6 }}>
             <Text display="flex" justifyContent="center" marginBottom="5px" fontWeight="600">
               {moment(selectedDay).format('DD MMMM YYYY')}
             </Text>
@@ -368,18 +378,6 @@ const EventCalendar: React.FC = () => {
               w="full"
             >
               <Common.InputItems inputItems={inputItems} />
-              <Input
-                placeholder="date and time"
-                border="0"
-                _focus={{ border: '0' }}
-                background="#eef4f6"
-                height="60px"
-                borderRadius="12px"
-                paddingLeft="32px"
-                fontSize="16px"
-                // color="#a0aec0"
-                fontWeight="500"
-              />
               <Flex justifyContent="space-between" w="full">
                 <Common.ImpaktButton
                   variant="transparent"
@@ -409,7 +407,6 @@ const EventCalendar: React.FC = () => {
                   type="submit"
                   fontSize={{ md: '16px' }}
                   fontWeight="700"
-                  onSubmit={() => handleSubmit(handleAdd)}
                 >
                   Add
                 </Common.ImpaktButton>
