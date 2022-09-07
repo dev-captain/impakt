@@ -14,7 +14,7 @@ const MyGroupCardWrapperHeader: React.FC = () => {
     <GroupCardWrapperHeader title="Your Groups">
       <MyGroupCardWrapperHeaderStatisticTag
         value={myGroups.length.toString()}
-        icon={<I.PeopleIcon />}
+        icon={<I.PeopleIcon width="32px" height="32px" />}
         name="Joined Groups"
         color="#1C1C28"
         width="60px"

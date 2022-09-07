@@ -6,7 +6,11 @@ import GroupStatisticLabel from './GroupStatisticsLabel';
 const groupStatisticLabelItems = [
   { Icon: () => <I.FireIcon />, labelTitle: 'top challenge', labelDescription: 'Hero Cardio' },
   { Icon: () => <I.AppIcon />, labelTitle: 'top program', labelDescription: 'Home Abs' },
-  { Icon: () => <I.CalenderIcon />, labelTitle: 'next event', labelDescription: 'Power Training' },
+  {
+    Icon: () => <I.CalenderIcon color="#5C7FFF" />,
+    labelTitle: 'next event',
+    labelDescription: 'Power Training',
+  },
 ];
 
 const BannerPanelLeft: React.FC = () => {

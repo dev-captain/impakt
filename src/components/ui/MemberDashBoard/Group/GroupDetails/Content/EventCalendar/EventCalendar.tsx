@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Box,
-  Button,
   FormControl,
   Modal,
   ModalBody,
@@ -14,13 +13,13 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { useForm } from 'hooks';
-import { ChevronLeftIcon, AddIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Common } from 'components';
 import { InputGroupPropsI } from 'components/common/InputGroup';
 import moment from 'moment';
 import Week from './Week';
-import Events from './Events';
 import DayNames from './DayNames';
+import EventsOverview from './EventsOverview';
 
 const initialiseEvents = () => {
   const allEvents = [];
@@ -111,7 +110,7 @@ const EventCalendar: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState(moment());
   const [selectedDay, setSelectedDay] = useState(moment().startOf('day'));
   const [selectedMonthEvents, setSelectedMonthEvents] = useState(initialiseEvents());
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
 
   const { handleSubmit, errors, setValue } = useForm({
     defaultValues: { friendlyName: '', time: '' },
@@ -205,14 +204,6 @@ const EventCalendar: React.FC = () => {
     showCalendar();
   };
 
-  const goToCurrentMonthView = () => {
-    setSelectedDay(moment().startOf('day'));
-  };
-
-  const goToTomorrow = () => {
-    setSelectedDay(moment().startOf('day').add(1, 'day'));
-  };
-
   const refresh = () => {
     onClose();
   };
@@ -252,54 +243,7 @@ const EventCalendar: React.FC = () => {
     >
       <Box width="100%" height="30%" color="white" display="flex" flexWrap="wrap">
         <Box
-          backgroundColor="white"
-          borderRadius="10px 10px 0 0"
-          width="100%"
-          display="flex"
-          gap="5px"
-          padding="20px 20px"
-        >
-          <Button
-            background-color=" rgb(243, 243, 243)"
-            color=" rgb(62, 62, 62)"
-            padding=" 6px 9px"
-            fontWeight=" 600"
-            border=" none"
-            outline=" none"
-            border-radius=" 5px"
-            fontSize=" 15px"
-            onClick={() => goToCurrentMonthView()}
-          >
-            Today
-          </Button>
-          <Button
-            background-color=" rgb(243, 243, 243)"
-            color=" rgb(62, 62, 62)"
-            padding=" 6px 9px"
-            fontWeight=" 600"
-            border=" none"
-            outline=" none"
-            border-radius=" 5px"
-            fontSize=" 15px"
-            onClick={() => goToTomorrow()}
-          >
-            Tomorrow
-          </Button>
-          <Button
-            color=" rgb(62, 62, 62)"
-            padding=" 6px 9px"
-            fontWeight=" 600"
-            border=" none"
-            outline=" none"
-            border-radius=" 5px"
-            fontSize=" 15px"
-            background-color=" rgb(243, 243, 243)"
-          >
-            In 2 Days
-          </Button>
-        </Box>
-        <Box
-          padding="10px 20px"
+          padding="15px 20px"
           height="70%"
           width="100%"
           whiteSpace="nowrap"
@@ -341,20 +285,7 @@ const EventCalendar: React.FC = () => {
         padding=" 20px 20px"
         borderRadius="0 0 10px 10px"
       >
-        <Button
-          background="white"
-          _hover={{ backgroundColor: 'white' }}
-          _active={{ backgroundColor: 'white' }}
-          _focus={{ boxShadow: '0', background: 'white' }}
-          padding="0"
-          fontSize="15px"
-          color="rgb(102, 102, 102)"
-          onClick={() => onOpen()}
-        >
-          <AddIcon marginRight="14px" fontSize="16px" />
-          Add event
-        </Button>
-        <Events selectedDay={selectedDay} selectedMonthEvents={selectedMonthEvents} />
+        <EventsOverview />
       </Box>
       <Modal isOpen={isOpen} onClose={() => refresh()} isCentered>
         <ModalOverlay />
