@@ -6,7 +6,7 @@ import {
   RequestContext,
   HttpMethod,
   ResponseContext,
-  GodlAccountApi,
+  GodlApi,
   FitnessStatsApi,
   ReferralsApi,
 } from '@impakt-dev/api-client';
@@ -90,7 +90,7 @@ export const configuration = createConfiguration({
 });
 
 export const authInstance = new AuthApi(configuration);
-export const godlInstance = new GodlAccountApi(configuration);
+export const godlInstance = new GodlApi(configuration);
 export const UserInstance = new UsersApi(configuration);
 export const FitnessInstance = new FitnessStatsApi(configuration);
 export const ReferralsInstance = new ReferralsApi(configuration);
