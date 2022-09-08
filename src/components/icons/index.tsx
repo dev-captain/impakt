@@ -77,7 +77,7 @@ export { default as TickMarkIcon } from './TickMarkIcon';
 export { default as FrameIcon } from './FrameIcon';
 export { default as MenuIcon } from './MenuIcon';
 export { default as DateIcon } from './DateIcon';
-export { default as ArowIcon } from './ArowIcon';
+export { default as ArrowIcon } from './ArowIcon';
 export { default as CoolIcon } from './CoolIcon';
 export { default as PenIcon } from './PenIcon';
 export { default as TextIcon } from './TextIcon';

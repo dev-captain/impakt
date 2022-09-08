@@ -1,15 +1,14 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
+import moment from 'moment';
 
 interface DayProps {
   day: any;
-  selected: any;
-  select: any;
+  selected: moment.Moment;
+  select: Function;
 }
 
 const Day: React.FC<DayProps> = ({ day, selected, select }) => {
-  // Declare a new state variable, which we'll call "count"
-
   return (
     <Box
       display="flex"

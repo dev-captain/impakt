@@ -1,6 +1,6 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 
-const ArowIcon = (props: IconProps) => (
+const ArrowIcon = (props: IconProps) => (
   <Icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" {...props}>
     <path
       fill="currentColor"
@@ -11,4 +11,4 @@ const ArowIcon = (props: IconProps) => (
   </Icon>
 );
 
-export default ArowIcon;
+export default ArrowIcon;

@@ -7,8 +7,8 @@ interface WeekProps {
   previousCurrentNextView: moment.Moment;
   currentMonthView: moment.Moment;
   selected: moment.Moment;
-  select: any;
-  monthEvents: any;
+  select: Function;
+  monthEvents: any[];
 }
 
 const Week: React.FC<WeekProps> = ({
@@ -19,7 +19,7 @@ const Week: React.FC<WeekProps> = ({
   monthEvents,
 }) => {
   // Declare a new state variable, which we'll call "count"
-  const days: any = [];
+  const days: Object[] = [];
   let date = previousCurrentNextView;
   const currentMonthViewSet = currentMonthView;
   const selectedSet = selected;
@@ -27,10 +27,10 @@ const Week: React.FC<WeekProps> = ({
   const monthEventsSet = monthEvents;
   const num = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-  num.forEach((i: any) => {
+  num.forEach(() => {
     let dayHasEvents = false;
 
-    monthEventsSet.forEach((data: any) => {
+    monthEventsSet.forEach((data) => {
       if (data?.date?.isSame(date, 'day')) {
         dayHasEvents = true;
       }
@@ -45,7 +45,7 @@ const Week: React.FC<WeekProps> = ({
       hasEvents: dayHasEvents,
     };
 
-    days.push(<Day key={i} day={day} selected={selectedSet} select={selectSet} />);
+    days.push(<Day day={day} selected={selectedSet} select={selectSet} />);
     date = date.clone();
     date.add(1, 'd');
   });

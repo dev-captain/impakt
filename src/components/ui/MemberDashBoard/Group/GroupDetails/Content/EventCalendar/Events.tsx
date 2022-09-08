@@ -4,15 +4,15 @@ import moment from 'moment';
 import { DeleteIcon } from '@chakra-ui/icons';
 
 interface EventProps {
-  selectedMonthEvents: any;
+  selectedMonthEvents: any[];
   selectedDay: moment.Moment;
 }
 
 const Events: React.FC<EventProps> = ({ selectedMonthEvents, selectedDay }) => {
-  const data = selectedMonthEvents.map((e: any) => e);
+  const data = selectedMonthEvents.map((e: Object) => e);
 
-  const arr: any = [];
-  data.forEach((d: any, i: number) => {
+  const arr: any[] = [];
+  data.forEach((d, i) => {
     if (selectedMonthEvents[i]?.date?.isSame(selectedDay, 'day')) {
       arr.push(d);
     }
@@ -20,7 +20,7 @@ const Events: React.FC<EventProps> = ({ selectedMonthEvents, selectedDay }) => {
 
   return (
     <Box>
-      {arr.map((a: any) => (
+      {arr.map((a) => (
         <Box key={`${a.date}-yo`} display="flex" width="100%" marginBottom="10px">
           <Text fontSize="15px" w="70px">
             {a?.date?.format('HH:mm') !== '00:00'

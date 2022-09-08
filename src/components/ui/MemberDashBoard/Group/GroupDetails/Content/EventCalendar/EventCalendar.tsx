@@ -21,91 +21,6 @@ import Week from './Week';
 import DayNames from './DayNames';
 import EventsOverview from './EventsOverview';
 
-const initialiseEvents = () => {
-  const allEvents = [];
-
-  const event1 = {
-    title:
-      'Press the Add button and enter a name for your event. P.S you can delete me by pressing me!',
-    date: moment(),
-    dynamic: false,
-  };
-
-  const event2 = {
-    title: 'Event 2 - Meeting',
-    date: moment().startOf('day').subtract(2, 'd').add(2, 'h'),
-    dynamic: false,
-  };
-
-  const event3 = {
-    title: 'Event 3 - Cinema',
-    date: moment().startOf('day').subtract(7, 'd').add(18, 'h'),
-    dynamic: false,
-  };
-
-  const event4 = {
-    title: 'Event 4 - Theater',
-    date: moment().startOf('day').subtract(16, 'd').add(20, 'h'),
-    dynamic: false,
-  };
-
-  const event5 = {
-    title: 'Event 5 - Drinks',
-    date: moment().startOf('day').subtract(2, 'd').add(12, 'h'),
-    dynamic: false,
-  };
-
-  const event6 = {
-    title: 'Event 6 - Diving',
-    date: moment().startOf('day').subtract(2, 'd').add(13, 'h'),
-    dynamic: false,
-  };
-
-  const event7 = {
-    title: 'Event 7 - Tennis',
-    date: moment().startOf('day').subtract(2, 'd').add(14, 'h'),
-    dynamic: false,
-  };
-
-  const event8 = {
-    title: 'Event 8 - Swimmming',
-    date: moment().startOf('day').subtract(2, 'd').add(17, 'h'),
-    dynamic: false,
-  };
-
-  const event9 = {
-    title: 'Event 9 - Chilling',
-    date: moment().startOf('day').subtract(2, 'd').add(16, 'h'),
-    dynamic: false,
-  };
-
-  const event10 = {
-    title: 'Hello World',
-    date: moment().startOf('day').add(5, 'h'),
-    dynamic: false,
-  };
-
-  const event11 = {
-    title: 'Tomorrow Event',
-    date: moment().startOf('day').add(1, 'day'),
-    dynamic: false,
-  };
-
-  allEvents.push(event1);
-  allEvents.push(event2);
-  allEvents.push(event3);
-  allEvents.push(event4);
-  allEvents.push(event5);
-  allEvents.push(event6);
-  allEvents.push(event7);
-  allEvents.push(event8);
-  allEvents.push(event9);
-  allEvents.push(event10);
-  allEvents.push(event11);
-
-  return allEvents;
-};
-
 const EventCalendar: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState(moment());
   const [selectedDay, setSelectedDay] = useState(moment().startOf('day'));
@@ -113,7 +28,7 @@ const EventCalendar: React.FC = () => {
   const { isOpen, onClose } = useDisclosure();
 
   const { handleSubmit, errors, setValue } = useForm({
-    defaultValues: { friendlyName: '', time: '' },
+    defaultValues: { eventTitle: '', time: '' },
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -160,7 +75,7 @@ const EventCalendar: React.FC = () => {
     const monthEvents = selectedMonthEvents;
     const num = ['', '', '', '', ''];
 
-    const weeks: any = [];
+    const weeks: object[] = [];
     const previousCurrentNextView = currentMonthView
       .clone()
       .startOf('month')
@@ -174,7 +89,7 @@ const EventCalendar: React.FC = () => {
           currentMonthView={currentMonthView}
           monthEvents={monthEvents}
           selected={currentSelectedDay}
-          select={(day: any) => select(day)}
+          select={(day: String) => select(day)}
         />,
       );
       previousCurrentNextView.add(1, 'w');
@@ -183,21 +98,21 @@ const EventCalendar: React.FC = () => {
     return weeks;
   };
 
-  const handleAdd = async (data: any) => {
-    const { friendlyName } = data as { friendlyName: string };
+  const handleAdd = async (data: Object) => {
+    const { eventTitle } = data as { eventTitle: string };
     const monthEvents = selectedMonthEvents;
     const currentSelectedDate = selectedDay;
     const newEvents = [];
     const newEvent = {
-      title: friendlyName,
+      title: eventTitle,
       date: currentSelectedDate,
       dynamic: false,
     };
 
     newEvents.push(newEvent);
 
-    newEvents.forEach((d: any) => {
-      (monthEvents as any).push(d);
+    newEvents.forEach((d: Object) => {
+      (monthEvents as object[]).push(d);
     });
 
     setSelectedMonthEvents(monthEvents);
@@ -213,9 +128,9 @@ const EventCalendar: React.FC = () => {
       placeholder: 'Enter Evant Name',
       onChange,
       type: 'text',
-      name: 'friendlyName',
+      name: 'eventTitle',
       label: 'Event name',
-      errorMsg: errors?.friendlyName?.message,
+      errorMsg: errors?.eventTitle?.message,
       autoFocus: true,
       whiteMode: true,
     },
@@ -253,6 +168,7 @@ const EventCalendar: React.FC = () => {
           justifyContent="space-between"
           backgroundColor="white"
           color="#616161"
+          borderRadius="10px 10px 0 0"
         >
           <ChevronLeftIcon
             fontSize="30px"
@@ -351,3 +267,88 @@ const EventCalendar: React.FC = () => {
 };
 
 export default EventCalendar;
+
+const initialiseEvents = () => {
+  const allEvents = [];
+
+  const event1 = {
+    title:
+      'Press the Add button and enter a name for your event. P.S you can delete me by pressing me!',
+    date: moment(),
+    dynamic: false,
+  };
+
+  const event2 = {
+    title: 'Event 2 - Meeting',
+    date: moment().startOf('day').subtract(2, 'd').add(2, 'h'),
+    dynamic: false,
+  };
+
+  const event3 = {
+    title: 'Event 3 - Cinema',
+    date: moment().startOf('day').subtract(7, 'd').add(18, 'h'),
+    dynamic: false,
+  };
+
+  const event4 = {
+    title: 'Event 4 - Theater',
+    date: moment().startOf('day').subtract(16, 'd').add(20, 'h'),
+    dynamic: false,
+  };
+
+  const event5 = {
+    title: 'Event 5 - Drinks',
+    date: moment().startOf('day').subtract(2, 'd').add(12, 'h'),
+    dynamic: false,
+  };
+
+  const event6 = {
+    title: 'Event 6 - Diving',
+    date: moment().startOf('day').subtract(2, 'd').add(13, 'h'),
+    dynamic: false,
+  };
+
+  const event7 = {
+    title: 'Event 7 - Tennis',
+    date: moment().startOf('day').subtract(2, 'd').add(14, 'h'),
+    dynamic: false,
+  };
+
+  const event8 = {
+    title: 'Event 8 - Swimmming',
+    date: moment().startOf('day').subtract(2, 'd').add(17, 'h'),
+    dynamic: false,
+  };
+
+  const event9 = {
+    title: 'Event 9 - Chilling',
+    date: moment().startOf('day').subtract(2, 'd').add(16, 'h'),
+    dynamic: false,
+  };
+
+  const event10 = {
+    title: 'Hello World',
+    date: moment().startOf('day').add(5, 'h'),
+    dynamic: false,
+  };
+
+  const event11 = {
+    title: 'Tomorrow Event',
+    date: moment().startOf('day').add(1, 'day'),
+    dynamic: false,
+  };
+
+  allEvents.push(event1);
+  allEvents.push(event2);
+  allEvents.push(event3);
+  allEvents.push(event4);
+  allEvents.push(event5);
+  allEvents.push(event6);
+  allEvents.push(event7);
+  allEvents.push(event8);
+  allEvents.push(event9);
+  allEvents.push(event10);
+  allEvents.push(event11);
+
+  return allEvents;
+};
