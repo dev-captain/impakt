@@ -1,43 +1,78 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import moment from 'moment';
 
 interface DayProps {
-  day: any;
-  selected: moment.Moment;
-  select: Function;
+  isToday: boolean;
+  isCurrentMonth: boolean;
+  isDaySelected: boolean;
+  dayNumber: number;
+  events: any;
+  selectDay: () => void;
 }
 
-const Day: React.FC<DayProps> = ({ day, selected, select }) => {
+const DayComponent: React.FC<DayProps> = ({
+  isToday,
+  isCurrentMonth,
+  dayNumber,
+  events,
+  isDaySelected,
+  selectDay,
+}) => {
+  const getColor = () => {
+    if (isDaySelected && !isToday) return '#fff';
+    if (events.length !== 0) return '#0090fc';
+
+    return 'black';
+  };
+  const dots: Object[] = [];
+  events.forEach((d: any, i: number) => {
+    if (i < 3) {
+      dots.push('.');
+    }
+  });
+
   return (
     <Box
+      margin="0 !important"
       display="flex"
       height="100%"
-      width="52px"
       justifyContent="center"
       alignItems="center"
-      onClick={() => select(day)}
+      cursor="pointer"
+      onClick={selectDay}
     >
       <Box
+        width="52px"
+        minW="52px"
+        height="50px"
         padding={{ base: '5px 8px', md: '10px 13px' }}
         display=" flex"
         fontSize={{ base: '13px', md: '16px' }}
-        justifyContent=" center"
+        justifyContent=" start"
         alignItems=" center"
         borderRadius={{ base: '10px', md: '16px' }}
         fontWeight=" 600"
         transition=".3s"
-        _hover={{ backgroundColor: '#0090fc', color: 'white', transition: '.3s' }}
-        border={day.isToday ? '2px solid #90caf9' : '2px solid #ffffff'}
-        background={day?.date?.isSame(selected) ? '#0090fc' : '#ffffff'}
-        // eslint-disable-next-line no-nested-ternary
-        color={day.date.isSame(selected) ? '#fff' : day.hasEvents ? '#0090fc' : 'black'}
-        opacity={day.isCurrentMonth ? '1' : '.5'}
+        _hover={{
+          backgroundColor: '#0090fc',
+          color: 'white',
+          transition: '.3s',
+        }}
+        border={isToday ? '2px solid #90caf9' : '2px solid #ffffff'}
+        background={isDaySelected && !isToday ? '#0090fc' : '#ffffff'}
+        color={getColor()}
+        opacity={isCurrentMonth ? '1' : '.5'}
+        flexDirection="column"
       >
-        {day.number}
+        <Box>{dayNumber}</Box>
+        <Box display="flex" marginTop="-15px" fontSize="22px">
+          {dots.map((a: any) => (
+            <Box>{events.length !== 0 && a}</Box>
+          ))}
+        </Box>
       </Box>
     </Box>
   );
 };
 
-export default Day;
+export default DayComponent;

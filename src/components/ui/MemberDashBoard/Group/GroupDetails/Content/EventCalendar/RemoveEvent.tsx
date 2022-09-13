@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { I, Common } from 'components';
 import { DeleteIcon, ChevronLeftIcon } from '@chakra-ui/icons';
+import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { I, Common } from 'components';
 
-interface EventProps {
-  data: Function;
-}
+const RemoveEvent: React.FC = () => {
+  const { goBackToOverViewScreen } = useEventCalendarContext();
 
-const RemoveEvent: React.FC<EventProps> = ({ data }) => {
   return (
     <>
       <Box>
@@ -18,7 +17,7 @@ const RemoveEvent: React.FC<EventProps> = ({ data }) => {
             backgroundColor=" #ffffff"
             borderRadius=" 8px"
             cursor=" pointer"
-            onClick={() => data('first')}
+            onClick={() => goBackToOverViewScreen()}
             marginRight="5px"
           />
           <Box textAlign="center" marginLeft={{ base: '50px', md: '35px' }}>

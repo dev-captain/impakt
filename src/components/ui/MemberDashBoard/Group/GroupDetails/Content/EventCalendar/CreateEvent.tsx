@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { I, Common } from 'components';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { I, Common } from 'components';
+import { useEventCalendarContext } from 'context/EventCalendarContext';
 
-interface CreateEventProps {
-  data: Function;
-}
+const CreateEvent: React.FC = () => {
+  const { goBackToOverViewScreen } = useEventCalendarContext();
 
-const CreateEvent: React.FC<CreateEventProps> = ({ data }) => {
   return (
     <>
       <Box>
@@ -18,7 +17,7 @@ const CreateEvent: React.FC<CreateEventProps> = ({ data }) => {
             backgroundColor=" #ffffff"
             borderRadius=" 8px"
             cursor=" pointer"
-            onClick={() => data('first')}
+            onClick={() => goBackToOverViewScreen()}
             marginRight="5px"
           />
           <Text color="#29323B" fontWeight="600" fontSize="20px">

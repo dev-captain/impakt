@@ -1,4 +1,5 @@
 import Images from 'assets/images';
+import { Day, EventInput, Month } from 'dayspan';
 
 export const RoadMapData: {
   date: string;
@@ -421,3 +422,105 @@ export const CommunityData = [
   'Moonriver',
   'Cronos',
 ];
+
+export const event1Data = JSON.stringify({
+  title: 'Good morning',
+  description: 'This is description',
+  link: 'impakt.com/e/ehF47bc11',
+  memberCount: 29,
+});
+
+export const event2Data = JSON.stringify({
+  title: 'Power Training',
+  description: 'This is description 2',
+  link: 'impakt.com/e/ehF47bc9',
+  memberCount: 29,
+});
+
+export const event3Data = JSON.stringify({
+  title: 'Event 3 - Cinema',
+  description: 'This is description 3',
+  link: 'impakt.com/e/ehF47bc4',
+  memberCount: 15,
+});
+
+export const event4Data = JSON.stringify({
+  title: 'Event 4 - Theater',
+  description: 'This is description 4',
+  link: 'impakt.com/e/ehF47bca',
+  memberCount: 99,
+});
+
+export const event5Data = JSON.stringify({
+  title: 'Event 5 - Theater',
+  description: 'This is description 5',
+  link: 'impakt.com/e/ehF47bca',
+  memberCount: 15,
+});
+
+export const getDummyEvents = () => {
+  const allEvents: EventInput<string, any>[] = [];
+
+  const event1: EventInput<string, any> = {
+    id: 1,
+    data: event1Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 11),
+      times: [Day.build(2022, Month.SEPTEMBER, 11, 9)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event2: EventInput<string, any> = {
+    id: 2,
+    data: event2Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 11),
+      times: [Day.build(2022, Month.SEPTEMBER, 11, 13)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event3 = {
+    id: 3,
+    data: event3Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 1),
+      times: [Day.build(2022, Month.SEPTEMBER, 1, 13)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event4 = {
+    id: 4,
+    data: event4Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 2),
+      times: [Day.build(2022, Month.SEPTEMBER, 2, 13)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event5 = {
+    id: 4,
+    data: event5Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 7),
+      times: [Day.build(2022, Month.SEPTEMBER, 7, 13)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  allEvents.push(event1);
+  allEvents.push(event2);
+  allEvents.push(event3);
+  allEvents.push(event4);
+  allEvents.push(event5);
+
+  return allEvents;
+};
