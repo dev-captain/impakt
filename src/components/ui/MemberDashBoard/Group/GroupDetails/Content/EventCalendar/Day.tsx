@@ -6,30 +6,26 @@ interface DayProps {
   isCurrentMonth: boolean;
   isDaySelected: boolean;
   dayNumber: number;
-  events: any;
+  eventsCounts: number;
   selectDay: () => void;
+  dote: string;
 }
 
 const DayComponent: React.FC<DayProps> = ({
   isToday,
   isCurrentMonth,
   dayNumber,
-  events,
+  eventsCounts,
   isDaySelected,
   selectDay,
+  dote,
 }) => {
   const getColor = () => {
     if (isDaySelected && !isToday) return '#fff';
-    if (events.length !== 0) return '#0090fc';
+    if (eventsCounts !== 0) return '#0090fc';
 
     return 'black';
   };
-  const dots: Object[] = [];
-  events.forEach((d: any, i: number) => {
-    if (i < 3) {
-      dots.push('.');
-    }
-  });
 
   return (
     <Box
@@ -66,9 +62,7 @@ const DayComponent: React.FC<DayProps> = ({
       >
         <Box>{dayNumber}</Box>
         <Box display="flex" marginTop="-15px" fontSize="22px">
-          {dots.map((a: any) => (
-            <Box>{events.length !== 0 && a}</Box>
-          ))}
+          <Box>{dote}</Box>
         </Box>
       </Box>
     </Box>

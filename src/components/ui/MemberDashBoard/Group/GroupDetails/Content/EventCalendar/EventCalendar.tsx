@@ -103,7 +103,8 @@ const EventCalendar: React.FC = () => {
               isToday={day.currentDay}
               isDaySelected={day.selectedDay}
               dayNumber={day.dayOfMonth}
-              events={day.events}
+              eventsCounts={day.events.length}
+              dote={day.events.length <= 3 ? '.'.repeat(day.events.length) : '...'}
               selectDay={() => setSelectedDay(day)}
             />
           ))}

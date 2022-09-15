@@ -428,6 +428,7 @@ export const event1Data = JSON.stringify({
   description: 'This is description',
   link: 'impakt.com/e/ehF47bc11',
   memberCount: 29,
+  chellanges: 'Hero cardio',
 });
 
 export const event2Data = JSON.stringify({
@@ -435,6 +436,7 @@ export const event2Data = JSON.stringify({
   description: 'This is description 2',
   link: 'impakt.com/e/ehF47bc9',
   memberCount: 29,
+  chellanges: 'Hero cardio',
 });
 
 export const event3Data = JSON.stringify({
@@ -442,6 +444,7 @@ export const event3Data = JSON.stringify({
   description: 'This is description 3',
   link: 'impakt.com/e/ehF47bc4',
   memberCount: 15,
+  chellanges: 'Hero cardio',
 });
 
 export const event4Data = JSON.stringify({
@@ -449,6 +452,7 @@ export const event4Data = JSON.stringify({
   description: 'This is description 4',
   link: 'impakt.com/e/ehF47bca',
   memberCount: 99,
+  chellanges: 'Hero cardio',
 });
 
 export const event5Data = JSON.stringify({
@@ -456,6 +460,7 @@ export const event5Data = JSON.stringify({
   description: 'This is description 5',
   link: 'impakt.com/e/ehF47bca',
   memberCount: 15,
+  chellanges: 'Hero cardio',
 });
 
 export const getDummyEvents = () => {
@@ -524,3 +529,7 @@ export const getDummyEvents = () => {
 
   return allEvents;
 };
+
+export const ChallengeOption = ['Hero Cardio', 'Event', 'Fitness', 'Exercises', 'Quize'];
+
+export const ChallengeTab = ['My Routines', 'My Challenges', 'Impakt', 'ICONs', 'Community'];

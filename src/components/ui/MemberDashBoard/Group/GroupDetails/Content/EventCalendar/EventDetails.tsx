@@ -96,12 +96,20 @@ const EventDetails: React.FC = () => {
             </Text>
           )}
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" mb="12px">
           <Box w="34px">
             <I.ArrowIcon w="15px" height="15px" color="#728BA3" />
           </Box>
           <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
             {`${JSON.parse(eventObj.data).link} `}
+          </Text>
+        </Box>
+        <Box display="flex" alignItems="center">
+          <Box w="34px">
+            <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
+          </Box>
+          <Text color="#4E6070" fontSize="16px" fontWeight="500" maxW="258px">
+            {JSON.parse(eventObj.data).chellanges}
           </Text>
         </Box>
       </Box>

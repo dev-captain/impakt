@@ -77,22 +77,20 @@ const ShowEvents: React.FC = () => {
           /> */}
         {/* </Box> */}
       </Box>
-      {selectedDayEvents.length === 0 && (
-        <Common.ImpaktButton
-          variant="black"
-          colorScheme="#fff"
-          h={{ md: '48px', base: '40px' }}
-          backgroundColor="#29323B"
-          borderRadius="8px"
-          type="submit"
-          fontSize={{ md: '16px' }}
-          fontWeight="700"
-          onClick={() => goToOverViewScreen('create')}
-        >
-          <AddIcon marginRight="11px" fontSize="10px" />
-          Create
-        </Common.ImpaktButton>
-      )}
+      <Common.ImpaktButton
+        variant="black"
+        colorScheme="#fff"
+        h={{ md: '48px', base: '40px' }}
+        backgroundColor="#29323B"
+        borderRadius="8px"
+        type="submit"
+        fontSize={{ md: '16px' }}
+        fontWeight="700"
+        onClick={() => goToOverViewScreen('create')}
+      >
+        <AddIcon marginRight="11px" fontSize="10px" />
+        Create
+      </Common.ImpaktButton>
     </>
   );
 };

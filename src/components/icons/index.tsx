@@ -81,3 +81,7 @@ export { default as ArrowIcon } from './ArowIcon';
 export { default as CoolIcon } from './CoolIcon';
 export { default as PenIcon } from './PenIcon';
 export { default as TextIcon } from './TextIcon';
+export { default as ChallengeIcon } from './ChallengeIcon';
+export { default as HandIcon } from './HandIcon';
+export { default as PlayIcon } from './PlayIcon';
+export { default as AlarmIcon } from './AlarmIcon';
