@@ -48,7 +48,7 @@ const DayNames: React.FC = () => {
         justifyContent="center"
         alignItems="center"
         width="52px"
-        transition=" ll 0.4s ease-in-out 0s"
+        transition="all 0.4s ease-in-out 0s"
         color="rgb(170, 170, 170)"
       >
         We

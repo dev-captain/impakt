@@ -7,7 +7,6 @@ import { useEventCalendarContext } from 'context/EventCalendarContext';
 
 const EventDetails: React.FC = () => {
   const [isGoing, setIsGoing] = React.useState(true);
-  const [isLive] = React.useState(false);
   const [isAdmin] = React.useState(true);
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
     useEventCalendarContext();
@@ -31,7 +30,9 @@ const EventDetails: React.FC = () => {
             <Text color="#29323B" fontWeight="600" fontSize="20px" marginRight="50px">
               {JSON.parse(eventObj.data).title}
             </Text>
-            {isLive && (
+            {new Time(Number(eventObj.schedule.times.map((h) => h.hour))).matchesHour(
+              new Time(Number(Day.now().format('HH'))),
+            ) && (
               <Box background="#5C7FFF" borderRadius="16px" textAlign="center" p="2px 14px">
                 <Text color="#fff" fontWeight="700">
                   LIVE

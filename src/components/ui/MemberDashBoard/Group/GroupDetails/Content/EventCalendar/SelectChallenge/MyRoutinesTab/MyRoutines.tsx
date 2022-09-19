@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
+import { ChallengeList } from 'data';
 import ChallengesCard from './ChallengesCard';
 
 const MyRoutines: React.FC = () => {
@@ -23,31 +24,9 @@ const MyRoutines: React.FC = () => {
         },
       }}
     >
-      <ChallengesCard
-        title="Daily Challenge"
-        challenge="8"
-        time="5 min"
-        play="256"
-        like="72"
-        timmer={{ h: '08', m: '32', s: '44' }}
-        name="Impakt"
-      />
-      <ChallengesCard title="Good Morning" challenge="22" time="18 min" name="Demideus" />
-      <ChallengesCard
-        title="Power v3"
-        challenge="16"
-        time="12 min"
-        play="8"
-        timmer={{ h: '08', m: '32', s: '44' }}
-        name="Demideus"
-      />
-      <ChallengesCard
-        title="Power v3"
-        challenge="16"
-        time="19 min"
-        timmer={{ h: '08', m: '32', s: '44' }}
-        name="Demideus"
-      />
+      {ChallengeList.map((t) => (
+        <ChallengesCard data={t} />
+      ))}
     </Box>
   );
 };

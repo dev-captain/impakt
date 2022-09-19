@@ -85,3 +85,4 @@ export { default as ChallengeIcon } from './ChallengeIcon';
 export { default as HandIcon } from './HandIcon';
 export { default as PlayIcon } from './PlayIcon';
 export { default as AlarmIcon } from './AlarmIcon';
+export { default as UploadIcon } from './UploadIcon';

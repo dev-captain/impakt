@@ -482,7 +482,7 @@ export const getDummyEvents = () => {
     data: event2Data,
     schedule: {
       on: Day.build(2022, Month.SEPTEMBER, 11),
-      times: [Day.build(2022, Month.SEPTEMBER, 11, 13)],
+      times: [Day.build(2022, Month.SEPTEMBER, 11, 15)],
       duration: 1,
       durationUnit: 'hours',
     },
@@ -530,6 +530,39 @@ export const getDummyEvents = () => {
   return allEvents;
 };
 
-export const ChallengeOption = ['Hero Cardio', 'Event', 'Fitness', 'Exercises', 'Quize'];
+export const ChallengeList = [
+  {
+    title: 'Daily Challenge',
+    challenge: '8',
+    time: '5 min',
+    play: '256',
+    like: '72',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Impakt',
+  },
+  {
+    title: 'Good Morning',
+    challenge: '22',
+    time: '18 min',
+    name: 'Demideus',
+  },
+  {
+    title: 'Power v3',
+    challenge: '16',
+    time: '12 min',
+    play: '8',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Demideus',
+  },
+  {
+    title: 'Power v3',
+    challenge: '16',
+    time: '19 min',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Demideus',
+  },
+];
 
 export const ChallengeTab = ['My Routines', 'My Challenges', 'Impakt', 'ICONs', 'Community'];
+
+export const GroupSettingTab = ['Edit group', 'Permissions', 'Requests', 'Members list'];

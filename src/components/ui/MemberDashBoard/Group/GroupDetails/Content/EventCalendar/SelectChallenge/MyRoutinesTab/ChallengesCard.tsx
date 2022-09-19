@@ -3,24 +3,21 @@ import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
 
 interface ChallengesCardProps {
-  title?: String;
-  challenge?: String;
-  time?: String;
-  play?: String;
-  like?: String;
-  timmer?: any;
-  name?: String;
+  data?: Object;
 }
 
-const ChallengesCard: React.FC<ChallengesCardProps> = ({
-  title,
-  challenge,
-  time,
-  play,
-  like,
-  timmer,
-  name,
-}) => {
+const ChallengesCard: React.FC<ChallengesCardProps> = ({ data }) => {
+  console.log('data :', data);
+  const { title, challenge, time, play, like, timmer, name } = data as {
+    title: string;
+    challenge: string;
+    time: string;
+    play: string;
+    like: string;
+    timmer: Object;
+    name: string;
+  };
+
   return (
     <Box
       padding={{ base: '12px', md: '24px' }}
