@@ -15,6 +15,7 @@ import {
 import React from 'react';
 import { GroupSettingTab } from 'data';
 import EditGroupTab from './EditGroupTab';
+import PermissionTab from './PermissionTab';
 
 interface GroupSettingModalProps {
   open: boolean;
@@ -27,9 +28,9 @@ const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
       <ModalOverlay />
       <ModalContent
         w={{ base: '92%', md: '100%' }}
-        minW={{ base: '92%', md: '720px' }}
+        minW={{ base: '92%', md: '750px' }}
         mt="140px"
-        h={{ md: 'auto', base: '650px' }}
+        h="auto"
         overflowY="auto"
         borderRadius="32px"
         padding={{ base: '14px', md: '32px' }}
@@ -67,8 +68,8 @@ const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
               <TabPanel p="0" mt="24px">
                 <EditGroupTab />
               </TabPanel>
-              <TabPanel>
-                <p>My Challenges</p>
+              <TabPanel p="0" mt="24px">
+                <PermissionTab />
               </TabPanel>
               <TabPanel p="0" mt="24px">
                 <p>ICONs</p>

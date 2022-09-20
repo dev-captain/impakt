@@ -46,11 +46,6 @@ const ShowEvents: React.FC = () => {
                   goToOverViewScreen('event');
                 }}
               >
-                {console.log(
-                  new Time(eventObj.time.start.date.getHours()).matchesHour(
-                    new Time(Number(Day.now().format('HH'))),
-                  ),
-                )}
                 <Text fontSize="14px" fontWeight="600">
                   {JSON.parse(eventObj.event.data).title}
                 </Text>

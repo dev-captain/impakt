@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, AvatarGroup, Box, FormControl, Img, Text } from '@chakra-ui/react';
+import { Avatar, AvatarGroup, Box, FormControl, Img, Input, Text } from '@chakra-ui/react';
 import { useForm } from 'hooks';
 import { InputGroupPropsI } from 'components/common/InputGroup';
 import { Common, I } from 'components';
@@ -7,6 +7,7 @@ import Images from 'assets/images';
 import { CloseIcon } from '@chakra-ui/icons';
 
 const EditGroupTab: React.FC = () => {
+  const [preview, setPreview] = React.useState<any>();
   const { errors, setValue } = useForm({
     defaultValues: { eventTitle: '', eventDescription: '' },
   });
@@ -28,8 +29,31 @@ const EditGroupTab: React.FC = () => {
     },
   ];
 
+  const onImageChange = (e: any) => {
+    const [file] = e.target.files;
+    setPreview(URL.createObjectURL(file));
+  };
+
   return (
-    <Box>
+    <Box
+      height={{ base: '550px', md: 'aut0' }}
+      overflowY="auto"
+      paddingRight="8px"
+      css={{
+        '&::-webkit-scrollbar': {
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          width: '6px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          visibility: 'initial',
+          width: '10px',
+          background: '#D3E2F0',
+          borderRadius: '24px',
+        },
+      }}
+    >
       <FormControl
         display="flex"
         justifyContent="center"
@@ -69,7 +93,7 @@ const EditGroupTab: React.FC = () => {
             borderRadius="16px"
             width="384px"
           >
-            <Img src={Images.group.upload} width="100%" />
+            <Img src={!preview ? Images.group.upload : preview} width="100%" />
             <Box
               display="flex"
               justifyContent="space-between"
@@ -133,20 +157,31 @@ const EditGroupTab: React.FC = () => {
             Cover image:
           </Text>
           <Box display="flex" flexDirection="column">
-            <Common.ImpaktButton
-              variant="black"
-              color="#29323B"
-              w="160px"
-              h="42px"
-              backgroundColor="#EEF4F6"
-              borderRadius="8px"
-              type="submit"
-              fontSize={{ md: '16px' }}
-              fontWeight="600"
-            >
-              <I.UploadIcon color="#29323B" width="12px" height="12px" />
-              <Text ml="11px">Upload</Text>
-            </Common.ImpaktButton>
+            <Box position="relative">
+              <Common.ImpaktButton
+                variant="black"
+                color="#29323B"
+                w="160px"
+                h="42px"
+                backgroundColor="#EEF4F6"
+                borderRadius="8px"
+                type="submit"
+                fontSize={{ md: '16px' }}
+                fontWeight="600"
+              >
+                <I.UploadIcon color="#29323B" width="12px" height="12px" />
+                <Text ml="11px">Upload</Text>
+              </Common.ImpaktButton>
+              <Input
+                type="file"
+                vlaue={preview}
+                width="160px"
+                position="absolute"
+                left="0"
+                opacity="0"
+                onChange={(e) => onImageChange(e)}
+              />
+            </Box>
             <Common.ImpaktButton
               mt="8px"
               variant="black"
@@ -158,6 +193,7 @@ const EditGroupTab: React.FC = () => {
               type="submit"
               fontSize={{ md: '16px' }}
               fontWeight="600"
+              onClick={() => setPreview('')}
             >
               <CloseIcon color="#29323B" width="10px" height="10px" mr="11px" />
               Remove

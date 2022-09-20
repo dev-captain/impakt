@@ -58,6 +58,7 @@ const TranslationKeys = {
     help: `${navbar}.help`,
     signIn: `${navbar}.signIn`,
     termsOfUse: `${navbar}.termsOfUse`,
+    notification: `${navbar}.notification`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,

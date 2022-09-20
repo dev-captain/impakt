@@ -83,6 +83,15 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         {member && (
           <NavbarLinkItem
             isSmall
+            href="/dashboard/notification"
+            onClose={onClose}
+            title={t(Keys.navbar.notification)}
+            isActive={path.path === '/notification'}
+          />
+        )}
+        {member && (
+          <NavbarLinkItem
+            isSmall
             href="/contact"
             onClose={onClose}
             title={t(Keys.navbar.help)}

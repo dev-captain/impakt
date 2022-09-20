@@ -7,7 +7,6 @@ interface ChallengesCardProps {
 }
 
 const ChallengesCard: React.FC<ChallengesCardProps> = ({ data }) => {
-  console.log('data :', data);
   const { title, challenge, time, play, like, timmer, name } = data as {
     title: string;
     challenge: string;

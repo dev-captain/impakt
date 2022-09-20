@@ -471,7 +471,7 @@ export const getDummyEvents = () => {
     data: event1Data,
     schedule: {
       on: Day.build(2022, Month.SEPTEMBER, 11),
-      times: [Day.build(2022, Month.SEPTEMBER, 11, 9)],
+      times: [Day.build(2022, Month.SEPTEMBER, 11, 8)],
       duration: 1,
       durationUnit: 'hours',
     },

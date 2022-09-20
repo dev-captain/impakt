@@ -158,7 +158,21 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   >
                     {t(Keys.navbar.dashboard)}
                   </Common.ImpaktButton>
-
+                  <Common.ImpaktButton
+                    href="/dashboard/notification"
+                    as="a"
+                    p="10px 16px 10px 12px"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/dashboard/notification');
+                    }}
+                    leftIcon={
+                      <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
+                    }
+                    variant="white"
+                  >
+                    {t(Keys.navbar.notification)}
+                  </Common.ImpaktButton>
                   <Common.ImpaktButton
                     href="/contact"
                     as="a"
