@@ -563,6 +563,17 @@ export const ChallengeList = [
   },
 ];
 
-export const ChallengeTab = ['My Routines', 'My Challenges', 'Impakt', 'ICONs', 'Community'];
+export const ChallengeTab = [
+  'My Routines',
+  // 'My Challenges',
+  // 'Impakt',
+  // 'ICONs',
+  // 'Community'
+];
 
-export const GroupSettingTab = ['Edit group', 'Permissions', 'Requests', 'Members list'];
+export const GroupSettingTab = [
+  'Edit group',
+  'Permissions',
+  // 'Requests',
+  // 'Members list'
+];

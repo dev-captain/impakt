@@ -124,7 +124,13 @@ const CreateEvent: React.FC = () => {
             <Box w="34px">
               <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
             </Box>
-            <Text color="#4E6070" fontSize="16px" fontWeight="500" onClick={() => onOpen()}>
+            <Text
+              color="#4E6070"
+              fontSize="16px"
+              fontWeight="500"
+              cursor="pointer"
+              onClick={() => onOpen()}
+            >
               Select challenge
             </Text>
           </Box>

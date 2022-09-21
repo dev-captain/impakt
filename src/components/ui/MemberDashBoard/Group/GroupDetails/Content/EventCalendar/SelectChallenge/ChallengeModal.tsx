@@ -98,9 +98,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close }) => {
               <TabPanel p="0" mt="24px">
                 <MyRoutines />
               </TabPanel>
-              <TabPanel>
-                <p>My Challenges</p>
-              </TabPanel>
               <TabPanel p="0" mt="24px">
                 <ChallengeDetails
                   time="19 min"
@@ -109,6 +106,9 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close }) => {
                   play="256"
                   like="72"
                 />
+              </TabPanel>
+              <TabPanel>
+                <p>My Challenges</p>
               </TabPanel>
               <TabPanel>
                 <p>ICONs</p>
