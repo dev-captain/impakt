@@ -12,7 +12,7 @@ const CollapseSidebar = () => {
         <MenuButton
           as={Button}
           rightIcon={<I.DropIcon />}
-          backgroundColor="rgba(28, 28, 40, 0.65)"
+          backgroundColor="glass.600"
           backdropFilter="blur(40px)"
           border="1px solid #2e2b2b"
           borderRadius="16px"

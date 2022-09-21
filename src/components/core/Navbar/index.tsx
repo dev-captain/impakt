@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -27,7 +27,7 @@ import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
-import NotificatiobDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
+import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -36,14 +36,13 @@ interface NavbarProps {
 // const { dark, light } = Images;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
-  const [drawer, setDrawer] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
@@ -165,7 +164,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     p="10px 16px 10px 12px"
                     onClick={(e) => {
                       e.preventDefault();
-                      setDrawer(true);
+                      onOpen();
                     }}
                     leftIcon={
                       <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
@@ -290,13 +289,15 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           />
         </HStack>
       </Flex>
-      <CollapseMenu
-        isOpen={isOpen}
-        onClose={onClose}
-        textColor={textColor}
-        isLessThan1040={isLessThan1280}
-      />
-      <NotificatiobDrawer open={drawer} close={() => setDrawer(false)} />
+      {isLessThan1280 && (
+        <CollapseMenu
+          isOpen={isOpen}
+          onClose={onClose}
+          textColor={textColor}
+          isLessThan1040={isLessThan1280}
+        />
+      )}
+      {!isLessThan1280 && <NotificationDrawer open={isOpen} close={() => onClose()} />}
     </Box>
   );
 };
