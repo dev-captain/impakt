@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -27,6 +27,7 @@ import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import NotificatiobDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -35,6 +36,7 @@ interface NavbarProps {
 // const { dark, light } = Images;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
+  const [drawer, setDrawer] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -159,12 +161,11 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     {t(Keys.navbar.dashboard)}
                   </Common.ImpaktButton>
                   <Common.ImpaktButton
-                    href="/dashboard/notification"
                     as="a"
                     p="10px 16px 10px 12px"
                     onClick={(e) => {
                       e.preventDefault();
-                      navigate('/dashboard/notification');
+                      setDrawer(true);
                     }}
                     leftIcon={
                       <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
@@ -295,6 +296,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         textColor={textColor}
         isLessThan1040={isLessThan1280}
       />
+      <NotificatiobDrawer open={drawer} close={() => setDrawer(false)} />
     </Box>
   );
 };

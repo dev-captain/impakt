@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Drawer,
@@ -9,27 +8,19 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Text,
-  useDisclosure,
 } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { CloseIcon } from '@chakra-ui/icons';
 import NoitificationCard from './NotificationCard';
 
-const NoitificationDrawer: React.FC = () => {
-  const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+interface NoitificationDrawerProps {
+  open: boolean;
+  close: () => void;
+}
 
-  React.useEffect(() => {
-    onOpen();
-  }, []);
-
-  const close = () => {
-    onClose();
-    navigate('/dashboard');
-  };
-
+const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }) => {
   return (
-    <Drawer isOpen={isOpen} placement="right" onClose={() => close()}>
+    <Drawer isOpen={open} placement="right" onClose={() => close()}>
       <DrawerOverlay />
       <DrawerContent top="80px !important" maxWidth={{ md: '384px', base: '300px' }}>
         <Box
@@ -105,10 +96,10 @@ const NoitificationDrawer: React.FC = () => {
           }}
         >
           <Box>
-            <NoitificationCard name="Dahaka" />
-            <NoitificationCard name="Alp047" />
-            <NoitificationCard name="Dahaka" />
-            <NoitificationCard name="Alp047" />
+            <NoitificationCard name="Dahaka" GroupName="Bodyweight Training" />
+            <NoitificationCard name="Alp047" GroupName="Power Training" />
+            <NoitificationCard name="Dahaka" GroupName="Good Morning" />
+            <NoitificationCard name="Alp047" GroupName="Bodyweight Training" />
           </Box>
         </DrawerBody>
       </DrawerContent>

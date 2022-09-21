@@ -110,7 +110,6 @@ const App = () => {
         </Route>
         <Route path="reward-history" element={<S.RewardHistory />} />
         <Route path="statistics" element={<S.Statistics />} />
-        <Route path="notification" element={<S.Notification />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

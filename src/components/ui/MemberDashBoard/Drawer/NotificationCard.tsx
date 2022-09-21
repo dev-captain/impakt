@@ -5,9 +5,10 @@ import { CloseIcon } from '@chakra-ui/icons';
 
 interface NoitificationCardProps {
   name: string;
+  GroupName: string;
 }
 
-const NoitificationCard: React.FC<NoitificationCardProps> = ({ name }) => {
+const NoitificationCard: React.FC<NoitificationCardProps> = ({ name, GroupName }) => {
   return (
     <Box
       mt="16px"
@@ -24,7 +25,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({ name }) => {
       </Text>
       <Box color="#728BA3" display="flex" alignItems="center" mt="16px">
         <I.PeopleIcon width="20px" mr="12px" />
-        <Text fontWeight="600">Bodyweight Training</Text>
+        <Text fontWeight="600">{GroupName}</Text>
       </Box>
       <Box mt="16px" display="flex" justifyContent="space-between" width="100%">
         <Common.ImpaktButton

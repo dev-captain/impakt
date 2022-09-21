@@ -55,7 +55,7 @@ const EditGroupTab: React.FC = () => {
       }}
     >
       <FormControl
-        display="flex"
+        display={{ md: 'flex', base: 'block' }}
         justifyContent="center"
         flexDir="row"
         alignItems="flex-end"
@@ -67,10 +67,11 @@ const EditGroupTab: React.FC = () => {
       >
         <Common.InputItems inputItems={inputItems} />
         <Common.ImpaktButton
+          mt={{ md: 0, base: '10px' }}
           variant="black"
           colorScheme="#fff"
-          w="147px"
-          ml="16px"
+          w={{ md: '147px', base: '100%' }}
+          ml={{ md: '16px', base: '0' }}
           h="60px"
           backgroundColor="#29323B"
           borderRadius="8px"
@@ -81,7 +82,7 @@ const EditGroupTab: React.FC = () => {
           Save
         </Common.ImpaktButton>
       </FormControl>
-      <Box mt="24px" display="flex">
+      <Box mt="24px" display={{ md: 'flex', base: 'block' }}>
         <Box>
           <Text color="#4E6070" fontSize="18px" fontWeight="500" mb="16px">
             Preview:
@@ -91,7 +92,7 @@ const EditGroupTab: React.FC = () => {
             boxShadow="0px 0px 16px rgba(41, 50, 59, 0.1)"
             padding="16px"
             borderRadius="16px"
-            width="384px"
+            width={{ md: '384px', base: '100%' }}
           >
             <Img src={!preview ? Images.group.upload : preview} width="100%" />
             <Box
@@ -101,7 +102,7 @@ const EditGroupTab: React.FC = () => {
               mt="16px"
               mb="20px"
             >
-              <Text color="#29323B" fontSize="20px" fontWeight="600">
+              <Text color="#29323B" fontSize={{ md: '20px', base: '14px' }} fontWeight="600">
                 Group by Demideus{' '}
               </Text>
               <Box
@@ -152,7 +153,7 @@ const EditGroupTab: React.FC = () => {
             </Box>
           </Box>
         </Box>
-        <Box ml="24px">
+        <Box ml={{ md: '24px', base: '0' }} mt={{ md: 0, base: '20px' }}>
           <Text color="#4E6070" fontSize="18px" fontWeight="500" mb="16px">
             Cover image:
           </Text>
@@ -174,7 +175,6 @@ const EditGroupTab: React.FC = () => {
               </Common.ImpaktButton>
               <Input
                 type="file"
-                vlaue={preview}
                 width="160px"
                 position="absolute"
                 left="0"
