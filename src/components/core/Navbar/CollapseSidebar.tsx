@@ -11,10 +11,11 @@ const CollapseSidebar = () => {
       <Menu matchWidth strategy="fixed">
         <MenuButton
           as={Button}
-          rightIcon={<I.DropIcon />}
-          backgroundColor="rgba(28, 28, 40, 0.65)"
-          backdropFilter="blur(40px)"
-          border="1px solid #2e2b2b"
+          rightIcon={<I.DropIcon color="glass.1000" />}
+          backgroundColor="glass.0"
+          border="1px solid"
+          borderColor="glass.1000"
+          color="glass.1000"
           borderRadius="16px"
           textAlign="left"
           h="64px"

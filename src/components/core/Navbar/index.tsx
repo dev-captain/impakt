@@ -27,6 +27,7 @@ import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -41,7 +42,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
@@ -158,7 +159,20 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   >
                     {t(Keys.navbar.dashboard)}
                   </Common.ImpaktButton>
-
+                  <Common.ImpaktButton
+                    as="a"
+                    p="10px 16px 10px 12px"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onOpen();
+                    }}
+                    leftIcon={
+                      <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
+                    }
+                    variant="white"
+                  >
+                    {t(Keys.navbar.notification)}
+                  </Common.ImpaktButton>
                   <Common.ImpaktButton
                     href="/contact"
                     as="a"
@@ -275,12 +289,15 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           />
         </HStack>
       </Flex>
-      <CollapseMenu
-        isOpen={isOpen}
-        onClose={onClose}
-        textColor={textColor}
-        isLessThan1040={isLessThan1280}
-      />
+      {isLessThan1280 && (
+        <CollapseMenu
+          isOpen={isOpen}
+          onClose={onClose}
+          textColor={textColor}
+          isLessThan1040={isLessThan1280}
+        />
+      )}
+      {!isLessThan1280 && <NotificationDrawer open={isOpen} close={() => onClose()} />}
     </Box>
   );
 };

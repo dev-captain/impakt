@@ -1,10 +1,10 @@
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
 import { C } from 'components';
-import moment from 'moment';
+import { Day, Month } from 'dayspan';
 import CounterItem from '../CounterItem';
 
 const EtaDate = () => {
-  const date = moment('07/08/2022').format('MMMM Do YYYY');
+  const date = Day.build(2022, Month.JULY, 11).format('MMMM Do YYYY');
 
   return (
     <C.HeroLayout

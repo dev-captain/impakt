@@ -93,6 +93,7 @@ const Images = {
     ellipse: require('./group/Ellipse.png'),
     cover: require('./group/cover.jpg'),
     group: require('./group/group.jpg'),
+    upload: require('./group/Upload.png'),
   },
 };
 

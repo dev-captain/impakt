@@ -9,7 +9,7 @@ const PlayChallengeIcon = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 11 14"
     {...props}
   >
-    <path fill="#5C7FFF" d="M0 0v14l11-7L0 0z" />
+    <path fill="currentColor" d="M0 0v14l11-7L0 0z" />
   </svg>
 );
 

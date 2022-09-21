@@ -5,3 +5,4 @@ export { default as General } from 'components/ui/MemberDashBoard/General/Genera
 export { default as Group } from 'components/ui/MemberDashBoard/Group/Groups/Groups';
 export { default as CreateGroup } from 'components/ui/MemberDashBoard/Group/Groups/CreateGroupModal/CreateGroupModal';
 export { default as GroupDetail } from 'components/ui/MemberDashBoard/Group/GroupDetails/GroupDetails';
+export { default as Notification } from 'components/ui/MemberDashBoard/Drawer/NoitificationDrawer';

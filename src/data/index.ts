@@ -1,4 +1,5 @@
 import Images from 'assets/images';
+import { Day, EventInput, Month } from 'dayspan';
 
 export const RoadMapData: {
   date: string;
@@ -420,4 +421,159 @@ export const CommunityData = [
   'Telos',
   'Moonriver',
   'Cronos',
+];
+
+export const event1Data = JSON.stringify({
+  title: 'Good morning',
+  description: 'This is description',
+  link: 'impakt.com/e/ehF47bc11',
+  memberCount: 29,
+  chellanges: 'Hero cardio',
+});
+
+export const event2Data = JSON.stringify({
+  title: 'Power Training',
+  description: 'This is description 2',
+  link: 'impakt.com/e/ehF47bc9',
+  memberCount: 29,
+  chellanges: 'Hero cardio',
+});
+
+export const event3Data = JSON.stringify({
+  title: 'Event 3 - Cinema',
+  description: 'This is description 3',
+  link: 'impakt.com/e/ehF47bc4',
+  memberCount: 15,
+  chellanges: 'Hero cardio',
+});
+
+export const event4Data = JSON.stringify({
+  title: 'Event 4 - Theater',
+  description: 'This is description 4',
+  link: 'impakt.com/e/ehF47bca',
+  memberCount: 99,
+  chellanges: 'Hero cardio',
+});
+
+export const event5Data = JSON.stringify({
+  title: 'Event 5 - Theater',
+  description: 'This is description 5',
+  link: 'impakt.com/e/ehF47bca',
+  memberCount: 15,
+  chellanges: 'Hero cardio',
+});
+
+export const getDummyEvents = () => {
+  const allEvents: EventInput<string, any>[] = [];
+
+  const event1: EventInput<string, any> = {
+    id: 1,
+    data: event1Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 11),
+      times: [Day.build(2022, Month.SEPTEMBER, 11, 8)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event2: EventInput<string, any> = {
+    id: 2,
+    data: event2Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 11),
+      times: [Day.build(2022, Month.SEPTEMBER, 11, 15)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event3 = {
+    id: 3,
+    data: event3Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 1),
+      times: [Day.build(2022, Month.SEPTEMBER, 1, 13)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event4 = {
+    id: 4,
+    data: event4Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 2),
+      times: [Day.build(2022, Month.SEPTEMBER, 2, 13)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  const event5 = {
+    id: 4,
+    data: event5Data,
+    schedule: {
+      on: Day.build(2022, Month.SEPTEMBER, 7),
+      times: [Day.build(2022, Month.SEPTEMBER, 7, 13)],
+      duration: 1,
+      durationUnit: 'hours',
+    },
+  };
+
+  allEvents.push(event1);
+  allEvents.push(event2);
+  allEvents.push(event3);
+  allEvents.push(event4);
+  allEvents.push(event5);
+
+  return allEvents;
+};
+
+export const ChallengeList = [
+  {
+    title: 'Daily Challenge',
+    challenge: '8',
+    time: '5 min',
+    play: '256',
+    like: '72',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Impakt',
+  },
+  {
+    title: 'Good Morning',
+    challenge: '22',
+    time: '18 min',
+    name: 'Demideus',
+  },
+  {
+    title: 'Power v3',
+    challenge: '16',
+    time: '12 min',
+    play: '8',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Demideus',
+  },
+  {
+    title: 'Power v3',
+    challenge: '16',
+    time: '19 min',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Demideus',
+  },
+];
+
+export const ChallengeTab = [
+  'My Routines',
+  // 'My Challenges',
+  // 'Impakt',
+  // 'ICONs',
+  // 'Community'
+];
+
+export const GroupSettingTab = [
+  'Edit group',
+  'Permissions',
+  // 'Requests',
+  // 'Members list'
 ];

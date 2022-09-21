@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import moment from 'moment';
+import { Day } from 'dayspan';
 
 import {
   VStack,
@@ -162,7 +162,11 @@ const ExercisesList: React.FC = () => {
                         textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
                         color="rgba(255, 255, 255, 0.4)"
                       >
-                        {moment(timestamp).format('DD.MM.YYYY')}
+                        {Day.build(
+                          timestamp.getFullYear(),
+                          timestamp.getMonth(),
+                          timestamp.getDate(),
+                        ).format('DD.MM.YYYY')}
                       </Td>
                       <Td
                         borderBottom={0}
