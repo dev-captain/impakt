@@ -4,7 +4,6 @@ import { sendGroupRequestToJoin } from './actions/sendGroupRequestToJoin';
 import { createGroup } from './actions/createGroup';
 import { deleteGroup } from './actions/deleteGroup';
 import { fetchGroupDetailById } from './actions/fetchGroupDetailById';
-import { fetchGroupRequests } from './actions/fetchGroupRequests';
 import { fetchGroups } from './actions/fetchGroups';
 import { fetchMembersOfGroup } from './actions/fetchMembersOfGroup';
 import { fetchMyGroups } from './actions/fetchMyGroups';
@@ -155,18 +154,6 @@ const groupsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(inviteMember.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(fetchGroupRequests.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchGroupRequests.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.groupRequests = action.payload;
-      })
-      .addCase(fetchGroupRequests.rejected, (state) => {
         state.isLoading = false;
       });
 

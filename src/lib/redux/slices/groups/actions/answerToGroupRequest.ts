@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { fetchGroupRequests } from './fetchGroupRequests';
 import { fetchMyGroups } from './fetchMyGroups';
 
 const answerToGroupRequest = createAsyncThunk(
@@ -28,7 +27,6 @@ const answerToGroupRequest = createAsyncThunk(
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
         .patch(`/api/v1/groups/answer-request/${requestId}`, { status, fromUserId });
 
-      await dispatch(fetchGroupRequests());
       await dispatch(fetchMyGroups(member.id));
 
       return true;
