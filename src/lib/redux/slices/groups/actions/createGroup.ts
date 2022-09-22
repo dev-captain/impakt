@@ -18,7 +18,7 @@ const createGroup = createAsyncThunk(
       }
       const createGroupRes = await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .post('/api/v1/groups', { friendlyName: groupName });
+        .post('/api/v1/groups', { groupName });
 
       createGroupRes.data as GetGroupRes;
 

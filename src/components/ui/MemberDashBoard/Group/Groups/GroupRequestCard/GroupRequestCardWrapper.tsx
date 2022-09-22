@@ -60,7 +60,7 @@ const GroupRequestCardWrapper: React.FC = () => {
             lgx: '23%',
           }}
         >
-          <GroupsCard img={Images.group.img} name={req.Group.friendlyName}>
+          <GroupsCard img={Images.group.img} name={req.Group.groupName}>
             <VStack justifyContent="flex-start" alignItems="flex-start">
               <Text>{req.from.username} </Text>
               <HStack>

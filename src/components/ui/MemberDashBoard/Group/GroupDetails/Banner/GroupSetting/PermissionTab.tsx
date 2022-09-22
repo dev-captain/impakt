@@ -25,7 +25,7 @@ const PermissionTab: React.FC = () => {
           },
         }}
       >
-        <PermissionCard title="Who can find a group in a public search:" />
+        <PermissionCard title="Is your group public or private?" />
       </Box>
       <Box mt="20px" textAlign="end">
         <Common.ImpaktButton

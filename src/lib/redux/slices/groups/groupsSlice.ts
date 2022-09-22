@@ -14,7 +14,7 @@ import { answerToGroupRequest } from './actions/answerToGroupRequest';
 
 export type GetGroupRes = {
   id: number;
-  friendlyName: string;
+  groupName: string;
   ownerId: number;
   createdAt: string;
   updatedAt: string;

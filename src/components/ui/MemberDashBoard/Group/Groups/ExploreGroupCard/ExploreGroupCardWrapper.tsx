@@ -57,26 +57,34 @@ const ExploreGroupCardWrapper: React.FC = () => {
             lgx: '23%',
           }}
         >
-          <GroupsCard img={Images.group.img} member={d.memberCount} name={d.friendlyName}>
+          <GroupsCard img={Images.group.img} member={d.memberCount} name={d.groupName}>
             <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
               <Box maxW="99px" maxH="38px">
                 <Common.ImpaktButton
-                  variant={d.GroupRequest.length ? 'black' : 'transparent'}
+                  variant={
+                    d.GroupRequest?.map((g) => g.status === 'Pending') ? 'black' : 'transparent'
+                  }
                   _hover={{
-                    backgroundColor: d.GroupRequest.length ? '#fff' : '#000',
-                    color: d.GroupRequest.length ? '#000' : '#fff',
+                    backgroundColor: d.GroupRequest?.map((g) => g.status === 'Pending')
+                      ? '#fff'
+                      : '#000',
+                    color: d.GroupRequest?.map((g) => g.status === 'Pending') ? '#000' : '#fff',
                   }}
-                  onClick={() => (!d.GroupRequest.length ? handleRequestToJoinGroup(d.id) : null)}
+                  onClick={() => handleRequestToJoinGroup(d.id)}
                   borderRadius="8px"
                   fontWeight="600"
                   border="1px solid #1C1C28"
                   justifyContent="space-around"
                   fontSize="16px"
                   leftIcon={
-                    d.GroupRequest.length ? <Box display="none" /> : <I.UnionIcon width="12px" />
+                    d.GroupRequest?.map((g) => g.status === 'Pending') ? (
+                      <Box display="none" />
+                    ) : (
+                      <I.UnionIcon width="12px" />
+                    )
                   }
                 >
-                  {d.GroupRequest.length ? 'Pending...' : 'Join'}
+                  {d.GroupRequest?.map((g) => g.status === 'Pending') ? 'Pending...' : 'Join'}
                 </Common.ImpaktButton>
               </Box>
             </Box>
