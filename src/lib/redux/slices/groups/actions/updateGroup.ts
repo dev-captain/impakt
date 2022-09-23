@@ -8,7 +8,7 @@ import { fetchMyGroups } from './fetchMyGroups';
 const updateGroup = createAsyncThunk(
   'groups/update',
   async (
-    { groupId, friendlyName }: { groupId?: number; friendlyName?: string },
+    { groupId, groupName, status }: { groupId?: number; groupName?: string; status: boolean },
     { rejectWithValue, getState, dispatch },
   ) => {
     try {
@@ -22,7 +22,7 @@ const updateGroup = createAsyncThunk(
 
       const result = await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .patch(`/api/v1/groups/${groupId}`, { friendlyName });
+        .patch(`/api/v1/groups/${groupId}`, { groupName, private: status });
 
       await dispatch(fetchMyGroups(member.id));
 

@@ -23,6 +23,7 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name, children })
         w="100%"
         minW="100%"
         zIndex="0"
+        h="172px"
         borderRadius="24px 24px 0 0"
       />
       <Box padding={{ lgx: '16px', base: '12px' }}>

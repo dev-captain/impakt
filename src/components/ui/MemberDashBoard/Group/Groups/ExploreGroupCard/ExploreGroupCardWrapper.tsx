@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { Box, HStack, useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from 'components';
 import Images from 'assets/images';
+import { joinGroup } from 'lib/redux/slices/groups/actions/joinGroup';
 import GroupsCard from '../../../GroupsCard';
 import { sendGroupRequestToJoin } from '../../../../../../lib/redux/slices/groups/actions/sendGroupRequestToJoin';
 
@@ -11,6 +13,7 @@ const ExploreGroupCardWrapper: React.FC = () => {
   const dispatch = useAppDispatch();
   const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleRequestToJoinGroup = async (groupId: number) => {
     try {
@@ -19,6 +22,28 @@ const ExploreGroupCardWrapper: React.FC = () => {
       toast({
         title: 'Success',
         description: 'Request sent successfully',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: e.response.data.message,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
+  };
+
+  const joinedGroup = async (groupId: string) => {
+    try {
+      await dispatch(joinGroup(groupId)).unwrap();
+
+      toast({
+        title: 'Success',
+        description: 'Joined successfully',
         isClosable: true,
         duration: 8000,
         status: 'success',
@@ -56,35 +81,42 @@ const ExploreGroupCardWrapper: React.FC = () => {
             md: '31%',
             lgx: '23%',
           }}
+          onClick={(e: any) => {
+            e.preventDefault();
+            // eslint-disable-next-line no-unused-expressions
+            !d.private && navigate(`/dashboard/groups/group/${d.id}`);
+          }}
         >
-          <GroupsCard img={Images.group.img} member={d.memberCount} name={d.groupName}>
+          <GroupsCard
+            img={
+              d.CurrentCoverImage.source
+                ? `https://impakt-image-data-dev.s3.amazonaws.com/images/8479333ebdd04821b69cff7ba9c70f35.png`
+                : Images.group.img
+            }
+            member={d.memberCount}
+            name={d.groupName}
+          >
             <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
               <Box maxW="99px" maxH="38px">
                 <Common.ImpaktButton
-                  variant={
-                    d.GroupRequest?.map((g) => g.status === 'Pending') ? 'black' : 'transparent'
-                  }
+                  variant={d.private ? 'black' : 'transparent'}
                   _hover={{
-                    backgroundColor: d.GroupRequest?.map((g) => g.status === 'Pending')
-                      ? '#fff'
-                      : '#000',
-                    color: d.GroupRequest?.map((g) => g.status === 'Pending') ? '#000' : '#fff',
+                    backgroundColor: d.private ? '#fff' : '#000',
+                    color: d.private ? '#000' : '#fff',
                   }}
-                  onClick={() => handleRequestToJoinGroup(d.id)}
+                  onClick={
+                    d.private
+                      ? () => handleRequestToJoinGroup(d.id)
+                      : () => joinedGroup(String(d.id))
+                  }
                   borderRadius="8px"
                   fontWeight="600"
                   border="1px solid #1C1C28"
                   justifyContent="space-around"
                   fontSize="16px"
-                  leftIcon={
-                    d.GroupRequest?.map((g) => g.status === 'Pending') ? (
-                      <Box display="none" />
-                    ) : (
-                      <I.UnionIcon width="12px" />
-                    )
-                  }
+                  leftIcon={d.private ? <Box display="none" /> : <I.UnionIcon width="12px" />}
                 >
-                  {d.GroupRequest?.map((g) => g.status === 'Pending') ? 'Pending...' : 'Join'}
+                  {d.private ? 'Pending...' : 'Join'}
                 </Common.ImpaktButton>
               </Box>
             </Box>

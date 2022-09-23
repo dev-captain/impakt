@@ -22,6 +22,8 @@ export type GetGroupRes = {
   coverImageUrl?: string;
   memberCount?: number;
   GroupRequest: { status: string }[];
+  private: boolean;
+  CurrentCoverImage: { source: string };
 };
 
 export type GetGroupRequestResV2 = {
