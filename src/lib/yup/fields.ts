@@ -35,7 +35,7 @@ const message = yup.string().required('Message is required field');
 const groupName = yup
   .string()
   .required('Field is required')
-  .matches(/^[A-Za-z0-9_.]+$/, 'Special character are not allow');
+  .matches(/^[A-Za-z0-9_. ]+$/, 'Special character are not allow');
 
 export {
   email,
