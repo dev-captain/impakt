@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { GetGroupRes } from '../groupsSlice';
+import { GetGroupRes } from '../types';
 
 const createGroup = createAsyncThunk(
   'groups/create',

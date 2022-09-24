@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { GetGroupRes } from '../groupsSlice';
+import { GetGroupRes } from '../types';
 import { fetchMyGroups } from './fetchMyGroups';
 
 const joinGroup = createAsyncThunk(

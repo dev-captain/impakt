@@ -1,4 +1,3 @@
-import { GetUserRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
 import { sendGroupRequestToJoin } from './actions/sendGroupRequestToJoin';
 import { createGroup } from './actions/createGroup';
@@ -11,38 +10,7 @@ import { inviteMember } from './actions/inviteMember';
 import { joinGroup } from './actions/joinGroup';
 import { updateGroup } from './actions/updateGroup';
 import { answerToGroupRequest } from './actions/answerToGroupRequest';
-
-export type GetGroupRes = {
-  id: number;
-  groupName: string;
-  ownerId: number;
-  createdAt: string;
-  updatedAt: string;
-  conversationId?: string;
-  coverImageUrl?: string;
-  memberCount?: number;
-  GroupRequest: { status: string }[];
-  private: boolean;
-  CurrentCoverImage: { source: string };
-};
-
-export type GetGroupRequestResV2 = {
-  id: number;
-  createdAt: string;
-  fromUserId: number;
-  status: string;
-  Group: GetGroupRes;
-  from: GetUserRes;
-};
-
-interface GroupsInitialI {
-  isLoading: boolean;
-  myGroups: GetGroupRes[];
-  activeGroup: GetGroupRes | null;
-  membersOfGroup: GetUserRes[];
-  groupRequests: GetGroupRequestResV2[];
-  exploreGroups: GetGroupRes[];
-}
+import { GroupsInitialI } from './types';
 
 const godlInitialState: GroupsInitialI = {
   isLoading: false,
