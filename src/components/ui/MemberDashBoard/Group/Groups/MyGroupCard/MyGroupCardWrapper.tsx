@@ -24,12 +24,12 @@ const MyGroupCardWrapper: React.FC = () => {
     >
       {myGroups.map((m) => (
         <Box
-          key={`group-${m.id}`}
+          key={`group-${m.groupId}`}
           cursor="pointer"
           as="a"
           onClick={(e: any) => {
             e.preventDefault();
-            navigate(`/dashboard/groups/group/${m.id}`);
+            navigate(`/dashboard/groups/group/${m.groupId}`);
           }}
           w={{
             base: '100%',
@@ -38,7 +38,11 @@ const MyGroupCardWrapper: React.FC = () => {
             lgx: '23%',
           }}
         >
-          <GroupsCard member={m.memberCount ?? 0} img={Images.group.img} name={m.groupName}>
+          <GroupsCard
+            member={m.Group.memberCount ?? 0}
+            img={Images.group.img}
+            name={m.Group.groupName}
+          >
             <Common.ImpaktButton
               variant="transparent"
               _hover={{ backgroundColor: '#000', color: '#fff' }}

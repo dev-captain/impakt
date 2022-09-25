@@ -8,10 +8,10 @@ import { deleteGroup } from '../../../../../../lib/redux/slices/groups/actions/d
 import { leaveGroup } from '../../../../../../lib/redux/slices/groups/actions/leaveGroup';
 import { ImpaktButton } from '../../../../../common';
 import GroupSettingModal from './GroupSetting/GroupSettingModal';
+import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
 
 const BannerSettingsMenu: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const member = useAppSelector((state) => state.memberAuth.member);
   const toast = useToast();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -102,14 +102,14 @@ const BannerSettingsMenu: React.FC = () => {
                     Report
                   </MenuItem> */}
 
-          {activeGroup?.ownerId === member?.id && (
+          {activeGroup?.role === GroupRole.Creator && (
             <MenuItem onClick={handleGroupDelete} gap="11px" padding="8px 10px">
               <I.LogOutIcon width="16px" color="#F04153" />
               Delete Group
             </MenuItem>
           )}
 
-          {activeGroup?.ownerId !== member?.id && (
+          {activeGroup?.role === GroupRole.Creator && (
             <MenuItem onClick={handleLeaveGroup} gap="11px" padding="8px 10px">
               <I.LogOutIcon width="16px" color="#F04153" />
               Leave Group

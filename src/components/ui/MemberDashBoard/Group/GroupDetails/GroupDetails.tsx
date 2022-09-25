@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
+import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
+import { GroupRole } from '../../../../../lib/redux/slices/groups/types';
 
 const GroupDetails: React.FC = () => {
   const [show, setShow] = React.useState<null | string>(null);
@@ -27,7 +29,14 @@ const GroupDetails: React.FC = () => {
     }
   };
 
+  const getGroupRole = async () => {
+    if (member && groupParam?.id) {
+      await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
+    }
+  };
+
   React.useEffect(() => {
+    getGroupRole();
     getGroupDetail();
   }, []);
 
@@ -48,7 +57,7 @@ const GroupDetails: React.FC = () => {
 
   return (
     <Box w="full" as="section" id="general-section">
-      {(!localStorage.getItem('showTip') || !show) && activeGroup?.ownerId === member?.id ? (
+      {(!localStorage.getItem('showTip') || !show) && activeGroup?.role === GroupRole.Creator ? (
         <GroupWelcome hideGroupWelcome={hide} />
       ) : (
         <HStack w="100%" display="block">

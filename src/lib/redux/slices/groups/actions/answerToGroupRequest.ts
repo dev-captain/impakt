@@ -2,16 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
+import { fetchGroupRequests } from './fetchGroupRequests';
 import { fetchMyGroups } from './fetchMyGroups';
 
 const answerToGroupRequest = createAsyncThunk(
   'groups/answer-group-request-to-join',
   async (
     {
+      groupId,
       status,
-      requestId,
-      fromUserId,
-    }: { status: 'Accepted' | 'Declined'; requestId: number; fromUserId: number },
+      requestorId,
+    }: { groupId: number; status: 'Accepted' | 'Declined'; requestorId: number },
     { rejectWithValue, dispatch, getState },
   ) => {
     try {
@@ -25,9 +26,10 @@ const answerToGroupRequest = createAsyncThunk(
 
       await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .patch(`/api/v1/groups/answer-request/${requestId}`, { status, fromUserId });
+        .patch(`/api/v1/groups/answer-request/${groupId}`, { status, requestorId });
 
       await dispatch(fetchMyGroups(member.id));
+      await dispatch(fetchGroupRequests());
 
       return true;
     } catch (err: any) {

@@ -6,11 +6,12 @@ import { fetchGroupDetailById } from './actions/fetchGroupDetailById';
 import { fetchGroups } from './actions/fetchGroups';
 import { fetchMembersOfGroup } from './actions/fetchMembersOfGroup';
 import { fetchMyGroups } from './actions/fetchMyGroups';
-import { inviteMember } from './actions/inviteMember';
 import { joinGroup } from './actions/joinGroup';
 import { updateGroup } from './actions/updateGroup';
 import { answerToGroupRequest } from './actions/answerToGroupRequest';
 import { GroupsInitialI } from './types';
+import { fetchGroupRoleById } from './actions/fetchGroupRoleById';
+import { fetchGroupRequests } from './actions/fetchGroupRequests';
 
 const godlInitialState: GroupsInitialI = {
   isLoading: false,
@@ -78,6 +79,17 @@ const groupsSlice = createSlice({
       });
 
     builder
+      .addCase(fetchGroupRoleById.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchGroupRoleById.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(fetchGroupRoleById.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
       .addCase(fetchGroups.pending, (state) => {
         state.isLoading = true;
       })
@@ -86,6 +98,18 @@ const groupsSlice = createSlice({
         state.exploreGroups = action.payload;
       })
       .addCase(fetchGroups.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(fetchGroupRequests.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchGroupRequests.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.groupRequests = action.payload;
+      })
+      .addCase(fetchGroupRequests.rejected, (state) => {
         state.isLoading = false;
       });
 
@@ -115,17 +139,6 @@ const groupsSlice = createSlice({
     builder.addCase(fetchMembersOfGroup.fulfilled, (state, action) => {
       state.membersOfGroup = action.payload;
     });
-
-    builder
-      .addCase(inviteMember.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(inviteMember.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(inviteMember.rejected, (state) => {
-        state.isLoading = false;
-      });
 
     builder
       .addCase(sendGroupRequestToJoin.pending, (state) => {

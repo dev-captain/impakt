@@ -1,10 +1,23 @@
 import { GetUserRes } from '@impakt-dev/api-client';
 
+export enum GroupRole {
+  Creator = 'Creator',
+  Owner = 'Owner',
+  Admin = 'Admin',
+  Moderator = 'Moderator',
+  Member = 'Member',
+  None = 'None',
+}
+
 export enum UserRequestStatus {
   Pending = 'Pending',
   Accepted = 'Accepted',
   Declined = 'Declined',
   Cancelled = 'Cancelled',
+}
+
+export interface GetUploadFileRes {
+  source: string;
 }
 
 export type GetGroupRes = {
@@ -17,7 +30,7 @@ export type GetGroupRes = {
   memberCount?: number;
   private: boolean;
   deleted: boolean;
-  CurrentCoverImage: { source: string };
+  CurrentCoverImage: GetUploadFileRes;
 };
 
 export type GetGroupRequestResV2 = {
@@ -33,9 +46,16 @@ export type GetGroupRequestResV2 = {
 
 export interface GroupsInitialI {
   isLoading: boolean;
-  myGroups: GetGroupRes[];
-  activeGroup: GetGroupRes | null;
+  myGroups: GetMyGroupsRes[];
+  activeGroup: (GetGroupRes & { role?: GetMyGroupsRes['role'] }) | null;
   membersOfGroup: GetUserRes[];
   groupRequests: GetGroupRequestResV2[];
   exploreGroups: GetGroupRes[];
+}
+
+export interface GetMyGroupsRes {
+  groupId: number;
+  userId: number;
+  role: GroupRole;
+  Group: GetGroupRes;
 }

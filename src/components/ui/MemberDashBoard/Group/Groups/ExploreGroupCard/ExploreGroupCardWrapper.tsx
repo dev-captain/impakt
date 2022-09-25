@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-nested-ternary */
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { Box, HStack, useToast } from '@chakra-ui/react';
@@ -10,14 +12,20 @@ import GroupsCard from '../../../GroupsCard';
 import { sendGroupRequestToJoin } from '../../../../../../lib/redux/slices/groups/actions/sendGroupRequestToJoin';
 
 const ExploreGroupCardWrapper: React.FC = () => {
+  const [reRender, setRerender] = React.useState(0);
   const dispatch = useAppDispatch();
+  const member = useAppSelector((state) => state.memberAuth.member);
   const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
   const toast = useToast();
   const navigate = useNavigate();
 
   const handleRequestToJoinGroup = async (groupId: number) => {
+    if (!member) return;
     try {
       await dispatch(sendGroupRequestToJoin(groupId)).unwrap();
+      localStorage.setItem(`${groupId + member.id.toString()}`, 'Pending');
+
+      setRerender((prevState) => prevState + 1);
 
       toast({
         title: 'Success',
@@ -72,57 +80,67 @@ const ExploreGroupCardWrapper: React.FC = () => {
       display={{ sm: 'flex' }}
     >
       {/* here is the components */}
-      {exploreGroups.map((d) => (
-        <Box
-          key={d.id}
-          w={{
-            base: '100%',
-            sm: '49%',
-            md: '31%',
-            lgx: '23%',
-          }}
-          onClick={(e: any) => {
-            e.preventDefault();
-            // eslint-disable-next-line no-unused-expressions
-            !d.private && navigate(`/dashboard/groups/group/${d.id}`);
-          }}
-        >
-          <GroupsCard
-            img={
-              d.CurrentCoverImage.source
-                ? `https://impakt-image-data-dev.s3.amazonaws.com/images/8479333ebdd04821b69cff7ba9c70f35.png`
-                : Images.group.img
-            }
-            member={d.memberCount}
-            name={d.groupName}
+      {exploreGroups.map((d) => {
+        console.log(localStorage.getItem(d.id.toString()));
+
+        return (
+          <Box
+            key={d.id}
+            w={{
+              base: '100%',
+              sm: '49%',
+              md: '31%',
+              lgx: '23%',
+            }}
+            onClick={(e: any) => {
+              e.preventDefault();
+              // eslint-disable-next-line no-unused-expressions
+              if (!d.private) {
+                navigate(`/dashboard/groups/group/${d.id}`);
+              }
+            }}
           >
-            <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
-              <Box maxW="99px" maxH="38px">
-                <Common.ImpaktButton
-                  variant={d.private ? 'black' : 'transparent'}
-                  _hover={{
-                    backgroundColor: d.private ? '#fff' : '#000',
-                    color: d.private ? '#000' : '#fff',
-                  }}
-                  onClick={
-                    d.private
-                      ? () => handleRequestToJoinGroup(d.id)
-                      : () => joinedGroup(String(d.id))
-                  }
-                  borderRadius="8px"
-                  fontWeight="600"
-                  border="1px solid #1C1C28"
-                  justifyContent="space-around"
-                  fontSize="16px"
-                  leftIcon={d.private ? <Box display="none" /> : <I.UnionIcon width="12px" />}
-                >
-                  {d.private ? 'Pending...' : 'Join'}
-                </Common.ImpaktButton>
+            <GroupsCard
+              img={
+                d.CurrentCoverImage.source
+                  ? `https://impakt-image-data-dev.s3.amazonaws.com/images/8479333ebdd04821b69cff7ba9c70f35.png`
+                  : Images.group.img
+              }
+              member={d.memberCount}
+              name={d.groupName}
+            >
+              <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
+                <Box maxW="99px" maxH="38px">
+                  <Common.ImpaktButton
+                    variant={d.private ? 'black' : 'transparent'}
+                    _hover={{
+                      backgroundColor: d.private ? '#fff' : '#000',
+                      color: d.private ? '#000' : '#fff',
+                    }}
+                    onClick={
+                      d.private
+                        ? () => handleRequestToJoinGroup(d.id)
+                        : () => joinedGroup(String(d.id))
+                    }
+                    borderRadius="8px"
+                    fontWeight="600"
+                    border="1px solid #1C1C28"
+                    justifyContent="space-around"
+                    fontSize="16px"
+                    leftIcon={d.private ? <Box display="none" /> : <I.UnionIcon width="12px" />}
+                  >
+                    {d.private
+                      ? localStorage.getItem(`${d.id + member!.id.toString()}`) === 'Pending'
+                        ? 'Pending...'
+                        : 'Join'
+                      : 'Join'}
+                  </Common.ImpaktButton>
+                </Box>
               </Box>
-            </Box>
-          </GroupsCard>
-        </Box>
-      ))}
+            </GroupsCard>
+          </Box>
+        );
+      })}
     </HStack>
   );
 };

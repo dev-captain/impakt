@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { GetMyGroupsRes } from '../types';
+import { GetGroupRequestResV2 } from '../types';
 
-const fetchMyGroups = createAsyncThunk(
-  'groups/my-groups',
-  async (userId: number, { rejectWithValue, getState }) => {
+const fetchGroupRequests = createAsyncThunk(
+  'groups/group-requests',
+  async (_, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin },
@@ -15,11 +15,11 @@ const fetchMyGroups = createAsyncThunk(
       if (!isLogin) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
-      const getMyGroupRes = await axios
+      const getGroupRequests = await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .get(`/api/v1/groups/member-groups/${userId}`);
+        .get(`/api/v1/groups/group-requests`);
 
-      const payload = getMyGroupRes.data as GetMyGroupsRes[];
+      const payload = getGroupRequests.data as GetGroupRequestResV2[];
 
       return payload;
     } catch (err: any) {
@@ -29,4 +29,4 @@ const fetchMyGroups = createAsyncThunk(
 );
 
 // eslint-disable-next-line import/prefer-default-export
-export { fetchMyGroups };
+export { fetchGroupRequests };
