@@ -5,7 +5,7 @@ import { Common, I } from 'components';
 import { useAppSelector } from 'hooks';
 
 export const BannerHeaderRight: React.FC = () => {
-  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
+  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.Members);
 
   return (
     <Box
@@ -28,7 +28,7 @@ export const BannerHeaderRight: React.FC = () => {
         fontSize={{ base: '14px', md: '16px' }}
         leftIcon={<I.PeopleIcon width={{ md: '18px', base: '14px' }} />}
       >
-        {members.length}
+        {members?.length}
       </Common.ImpaktButton>
       {/* <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
                 <AvatarGroup size="sm" max={3} spacing="-0.50rem">

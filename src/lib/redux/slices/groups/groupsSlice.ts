@@ -17,7 +17,7 @@ const godlInitialState: GroupsInitialI = {
   isLoading: false,
   myGroups: [],
   activeGroup: null,
-  membersOfGroup: [],
+  membersOfGroup: null,
   groupRequests: [],
   exploreGroups: [],
 };
@@ -28,7 +28,7 @@ const groupsSlice = createSlice({
   reducers: {
     cleanActiveGroup(state: GroupsInitialI) {
       state.activeGroup = null;
-      state.membersOfGroup = [];
+      state.membersOfGroup = null;
     },
   },
   extraReducers: (builder) => {

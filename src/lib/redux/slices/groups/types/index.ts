@@ -48,7 +48,7 @@ export interface GroupsInitialI {
   isLoading: boolean;
   myGroups: GetMyGroupsRes[];
   activeGroup: (GetGroupRes & { role?: GetMyGroupsRes['role'] }) | null;
-  membersOfGroup: GetUserRes[];
+  membersOfGroup: GetMembersOfGroupRes | null;
   groupRequests: GetGroupRequestResV2[];
   exploreGroups: GetGroupRes[];
 }
@@ -58,4 +58,17 @@ export interface GetMyGroupsRes {
   userId: number;
   role: GroupRole;
   Group: GetGroupRes;
+}
+
+export interface GetMembersOfGroupRes {
+  id: number;
+  groupName: string;
+  createdAt: string | null;
+  updatedAt: string | null;
+  Members: {
+    User: GetUserRes;
+    joinedAt: string;
+    leftAt: null;
+    role: GroupRole;
+  }[];
 }

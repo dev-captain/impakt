@@ -9,6 +9,7 @@ import Content from './Content/Content';
 import Banner from './Banner/Banner';
 import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
 import { GroupRole } from '../../../../../lib/redux/slices/groups/types';
+import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 
 const GroupDetails: React.FC = () => {
   const [show, setShow] = React.useState<null | string>(null);
@@ -35,9 +36,20 @@ const GroupDetails: React.FC = () => {
     }
   };
 
+  const getMembers = async () => {
+    if (groupParam?.id) {
+      console.log('yo');
+      await dispatch(fetchMembersOfGroup(parseInt(groupParam.id, 10)));
+    }
+  };
+
   React.useEffect(() => {
     getGroupRole();
     getGroupDetail();
+  }, []);
+
+  React.useEffect(() => {
+    getMembers();
   }, []);
 
   React.useEffect(() => {
@@ -61,7 +73,7 @@ const GroupDetails: React.FC = () => {
         <GroupWelcome hideGroupWelcome={hide} />
       ) : (
         <HStack w="100%" display="block">
-          <Banner img={Images.group.cover} />
+          <Banner />
           <Content />
         </HStack>
       )}

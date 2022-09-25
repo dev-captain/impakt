@@ -17,27 +17,7 @@ import MemberDashboardCard from '../../../../MemberDashBoardCard';
 const MemberList: React.FC = () => {
   // const toast = useToast();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
-  const dispatch = useAppDispatch();
-  React.useEffect(() => {
-    if (activeGroup) {
-      dispatch(fetchMembersOfGroup(activeGroup.id));
-    }
-  }, []);
-
-  // const groupReferralLink = `${window.location.origin}/dashboard/groups/join-group/${activeGroup?.id}`;
-  // const { onCopy } = useClipboard(groupReferralLink, { timeout: 3000 });
-  // const onCopyHandle = () => {
-  //   onCopy();
-  //   toast({
-  //     title: 'Success',
-  //     description: 'Group referral link copied successfully!',
-  //     isClosable: true,
-  //     duration: 3000,
-  //     status: 'success',
-  //   });
-  // };
 
   if (isLoading) return <CircularProgress isIndeterminate />;
 
@@ -210,9 +190,9 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-          {members.map(({ id, firstName, username }) => (
+          {members?.Members.map(({ User }) => (
             <Box
-              key={`${id}-box`}
+              key={`${User.id}-box`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -226,7 +206,7 @@ const MemberList: React.FC = () => {
                   fontWeight="500"
                   marginLeft="16px"
                 >
-                  {firstName ?? username}
+                  {User.firstName ?? User.username}
                 </Text>
               </Box>
             </Box>
