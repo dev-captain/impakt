@@ -72,26 +72,23 @@ const groupsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchGroupDetailById.fulfilled, (state, action) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.activeGroup = action.payload;
       })
       .addCase(fetchGroupDetailById.rejected, (state) => {
         state.isLoading = false;
       });
 
-    builder
-      .addCase(fetchGroupRoleById.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchGroupRoleById.fulfilled, (state, action) => {
-        state.isLoading = false;
-        if (state.activeGroup) {
-          state.activeGroup.role = action.payload.role;
-        }
-      })
-      .addCase(fetchGroupRoleById.rejected, (state) => {
-        state.isLoading = false;
-      });
+    builder.addCase(fetchGroupRoleById.fulfilled, (state, action) => {
+      state.isLoading = false;
+      if (state.activeGroup) {
+        state.activeGroup.role = action.payload.role;
+      }
+    });
+
+    builder.addCase(fetchGroupRoleById.rejected, (state) => {
+      state.isLoading = false;
+    });
 
     builder
       .addCase(fetchGroups.pending, (state) => {

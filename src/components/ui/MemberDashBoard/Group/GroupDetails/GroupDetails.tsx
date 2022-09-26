@@ -21,13 +21,13 @@ const GroupDetails: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
 
   const getGroupDetail = async () => {
-    try {
-      if (groupParam?.id) {
+    if (groupParam?.id) {
+      try {
         await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
-        await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
+      } catch (e) {
+        setIsNotFound(true);
       }
-    } catch (e) {
-      setIsNotFound(true);
+      await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
     }
   };
 

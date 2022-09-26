@@ -48,7 +48,6 @@ const ExploreGroupCardWrapper: React.FC = () => {
   const joinedGroup = async (groupId: string) => {
     try {
       await dispatch(joinGroup(groupId)).unwrap();
-
       toast({
         title: 'Success',
         description: 'Joined successfully',
