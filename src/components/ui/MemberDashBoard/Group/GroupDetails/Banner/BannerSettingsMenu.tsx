@@ -15,61 +15,8 @@ import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
 
 const BannerSettingsMenu: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  // const toast = useToast();
-  // const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // const dispatch = useAppDispatch();
-  // const handleGroupDelete = async () => {
-  //   try {
-  //     if (activeGroup?.id) {
-  //       await dispatch(deleteGroup(activeGroup.id)).unwrap();
-  //       toast({
-  //         title: 'Success',
-  //         description: `Group is deleted successfully`,
-  //         isClosable: true,
-  //         duration: 8000,
-  //         status: 'success',
-  //       });
-  //       navigate('/dashboard/groups');
-  //     }
-  //   } catch (e: any) {
-  //     toast({
-  //       title: 'Error',
-  //       description: `${e.response.data.message}`,
-  //       isClosable: true,
-  //       duration: 8000,
-  //       status: 'error',
-  //     });
-  //   }
-  // };
-
-  // const handleLeaveGroup = async () => {
-  //   try {
-  //     if (activeGroup) {
-  //       await dispatch(leaveGroup(activeGroup.id)).unwrap();
-  //       toast({
-  //         title: 'Success',
-  //         description: `Left from Group successfully`,
-  //         isClosable: true,
-  //         duration: 8000,
-  //         status: 'success',
-  //       });
-  //     }
-  //   } catch (e: any) {
-  //     toast({
-  //       title: 'Error',
-  //       description: `You can't leave your owned group`,
-  //       isClosable: true,
-  //       duration: 8000,
-  //       status: 'error',
-  //     });
-  //   }
-
-  //   navigate('/dashboard/groups');
-  // };
-
-  if (activeGroup?.role !== GroupRole.Creator) return null;
+  const isCreator = activeGroup?.role === GroupRole.Creator;
 
   return (
     <>
@@ -86,14 +33,13 @@ const BannerSettingsMenu: React.FC = () => {
           px="1em"
           py="12px"
           _focus={{ boxShadow: 'none' }}
-          leftIcon={<I.SettingIcon width="16px" />}
+          leftIcon={isCreator ? <I.SettingIcon width="16px" /> : undefined}
           onClick={() => {
-            if (activeGroup?.role === GroupRole.Creator) {
-              onOpen();
-            }
+            onOpen();
           }}
         >
-          Settings
+          {isCreator ? 'Settings' : null}
+          {!isCreator && <I.SettingIcon width="16px" />}
         </ImpaktButton>
         {/* {activeGroup?.role !== GroupRole.Creator && ( */}
         {/* <MenuList padding="12px" zIndex="999"> */}
