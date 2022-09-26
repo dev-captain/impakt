@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -36,6 +36,7 @@ interface NavbarProps {
 // const { dark, light } = Images;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
+  const [notify] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -167,7 +168,12 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                       onOpen();
                     }}
                     leftIcon={
-                      <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
+                      // <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
+                      notify ? (
+                        <I.NotifyIcon cursor="pointer" width="14.33px" height="14.33px" />
+                      ) : (
+                        <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
+                      )
                     }
                     variant="white"
                   >
