@@ -3,14 +3,10 @@ import axios from 'axios';
 import { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { fetchMyGroups } from './fetchMyGroups';
 
-const updateGroup = createAsyncThunk(
-  'groups/update',
-  async (
-    { groupId, groupName, status }: { groupId: number; groupName?: string; status?: boolean },
-    { rejectWithValue, getState, dispatch },
-  ) => {
+const updateGroupCoverImage = createAsyncThunk(
+  'groups/update-cover-image',
+  async ({ body, groupId }: { body: FormData; groupId: number }, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin, member },
@@ -21,10 +17,12 @@ const updateGroup = createAsyncThunk(
       }
 
       const result = await axios
-        .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .patch(`/api/v1/groups/${groupId}`, { groupName, private: status });
-
-      await dispatch(fetchMyGroups(member.id));
+        .create({
+          baseURL: API_SERVER_BASE_URL,
+          withCredentials: true,
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        .patch(`/api/v1/groups/${groupId}/cover-image`, body);
 
       return result.data;
     } catch (err: any) {
@@ -34,4 +32,4 @@ const updateGroup = createAsyncThunk(
 );
 
 // eslint-disable-next-line import/prefer-default-export
-export { updateGroup };
+export { updateGroupCoverImage };

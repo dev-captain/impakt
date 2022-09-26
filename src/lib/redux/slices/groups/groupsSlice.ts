@@ -12,6 +12,7 @@ import { answerToGroupRequest } from './actions/answerToGroupRequest';
 import { GroupsInitialI } from './types';
 import { fetchGroupRoleById } from './actions/fetchGroupRoleById';
 import { fetchGroupRequests } from './actions/fetchGroupRequests';
+import { updateGroupCoverImage } from './actions/updateGroupCoverImage';
 
 const godlInitialState: GroupsInitialI = {
   isLoading: false,
@@ -71,7 +72,7 @@ const groupsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchGroupDetailById.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading = true;
         state.activeGroup = action.payload;
       })
       .addCase(fetchGroupDetailById.rejected, (state) => {
@@ -82,8 +83,11 @@ const groupsSlice = createSlice({
       .addCase(fetchGroupRoleById.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchGroupRoleById.fulfilled, (state) => {
+      .addCase(fetchGroupRoleById.fulfilled, (state, action) => {
         state.isLoading = false;
+        if (state.activeGroup) {
+          state.activeGroup.role = action.payload.role;
+        }
       })
       .addCase(fetchGroupRoleById.rejected, (state) => {
         state.isLoading = false;
@@ -133,6 +137,18 @@ const groupsSlice = createSlice({
         state.activeGroup = action.payload;
       })
       .addCase(updateGroup.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(updateGroupCoverImage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateGroupCoverImage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.activeGroup = action.payload;
+      })
+      .addCase(updateGroupCoverImage.rejected, (state) => {
         state.isLoading = false;
       });
 

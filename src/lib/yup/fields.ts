@@ -37,6 +37,22 @@ const groupName = yup
   .required('Field is required')
   .matches(/^[A-Za-z0-9_. ]+$/, 'Special character are not allow');
 
+export const ALLOW_IMAGE_FILE: string[] = ['image/png', 'image/jpeg'];
+
+const file = yup
+  .mixed()
+  .required('File is required')
+  .test(
+    'fileSize',
+    'File too large',
+    (value) => value === null || (value && value.size <= 1 * 1024 * 1024),
+  )
+  .test(
+    'fileFormat',
+    'Unsupported file type',
+    (value) => value === null || (value && ALLOW_IMAGE_FILE.includes(value.type)),
+  );
+
 export {
   email,
   password,
@@ -47,4 +63,5 @@ export {
   topic,
   message,
   groupName,
+  file,
 };

@@ -1,70 +1,75 @@
 import * as React from 'react';
 import { Menu, MenuButton, MenuItem, MenuList, useToast, useDisclosure } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import { I } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { deleteGroup } from '../../../../../../lib/redux/slices/groups/actions/deleteGroup';
-import { leaveGroup } from '../../../../../../lib/redux/slices/groups/actions/leaveGroup';
+import {
+  // useAppDispatch,
+  useAppSelector,
+} from 'hooks';
+// import { deleteGroup } from '../../../../../../lib/redux/slices/groups/actions/deleteGroup';
+// import { leaveGroup } from '../../../../../../lib/redux/slices/groups/actions/leaveGroup';
 import { ImpaktButton } from '../../../../../common';
 import GroupSettingModal from './GroupSetting/GroupSettingModal';
 import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
 
 const BannerSettingsMenu: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const toast = useToast();
-  const navigate = useNavigate();
+  // const toast = useToast();
+  // const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const dispatch = useAppDispatch();
-  const handleGroupDelete = async () => {
-    try {
-      if (activeGroup?.id) {
-        await dispatch(deleteGroup(activeGroup.id)).unwrap();
-        toast({
-          title: 'Success',
-          description: `Group is deleted successfully`,
-          isClosable: true,
-          duration: 8000,
-          status: 'success',
-        });
-        navigate('/dashboard/groups');
-      }
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: `${e.response.data.message}`,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
-    }
-  };
+  // const dispatch = useAppDispatch();
+  // const handleGroupDelete = async () => {
+  //   try {
+  //     if (activeGroup?.id) {
+  //       await dispatch(deleteGroup(activeGroup.id)).unwrap();
+  //       toast({
+  //         title: 'Success',
+  //         description: `Group is deleted successfully`,
+  //         isClosable: true,
+  //         duration: 8000,
+  //         status: 'success',
+  //       });
+  //       navigate('/dashboard/groups');
+  //     }
+  //   } catch (e: any) {
+  //     toast({
+  //       title: 'Error',
+  //       description: `${e.response.data.message}`,
+  //       isClosable: true,
+  //       duration: 8000,
+  //       status: 'error',
+  //     });
+  //   }
+  // };
 
-  const handleLeaveGroup = async () => {
-    try {
-      if (activeGroup) {
-        await dispatch(leaveGroup(activeGroup.id)).unwrap();
-        toast({
-          title: 'Success',
-          description: `Left from Group successfully`,
-          isClosable: true,
-          duration: 8000,
-          status: 'success',
-        });
-      }
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: `You can't leave your owned group`,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
-    }
+  // const handleLeaveGroup = async () => {
+  //   try {
+  //     if (activeGroup) {
+  //       await dispatch(leaveGroup(activeGroup.id)).unwrap();
+  //       toast({
+  //         title: 'Success',
+  //         description: `Left from Group successfully`,
+  //         isClosable: true,
+  //         duration: 8000,
+  //         status: 'success',
+  //       });
+  //     }
+  //   } catch (e: any) {
+  //     toast({
+  //       title: 'Error',
+  //       description: `You can't leave your owned group`,
+  //       isClosable: true,
+  //       duration: 8000,
+  //       status: 'error',
+  //     });
+  //   }
 
-    navigate('/dashboard/groups');
-  };
+  //   navigate('/dashboard/groups');
+  // };
+
+  if (activeGroup?.role !== GroupRole.Creator) return null;
 
   return (
     <>
@@ -82,40 +87,42 @@ const BannerSettingsMenu: React.FC = () => {
           py="12px"
           _focus={{ boxShadow: 'none' }}
           leftIcon={<I.SettingIcon width="16px" />}
-          onClick={() => onOpen()}
+          onClick={() => {
+            if (activeGroup?.role === GroupRole.Creator) {
+              onOpen();
+            }
+          }}
         >
           Settings
         </ImpaktButton>
-        <MenuList padding="12px" zIndex="999">
-          {/* {activeGroup?.ownerId === member?.id && (
+        {/* {activeGroup?.role !== GroupRole.Creator && ( */}
+        {/* <MenuList padding="12px" zIndex="999"> */}
+        {/* {activeGroup?.role === GroupRole.Creator && (
+            <MenuItem onClick={handleGroupDelete} gap="11px" padding="8px 10px">
+              <I.LogOutIcon width="16px" color="#F04153" />
+              Delete Group
+            </MenuItem>
+          )} */}
+        {/* <MenuItem onClick={handleLeaveGroup} gap="11px" padding="8px 10px">
+              <I.LogOutIcon width="16px" color="#F04153" />
+              Leave Group
+            </MenuItem> */}
+        {/* </MenuList> */}
+        {/* )} */}
+        {/* {activeGroup?.ownerId === member?.id && (
                     <MenuItem onClick={onOpen} gap="11px" padding="8px 10px">
                       <I.PeopleIcon width="16px" color="#4E6070" />
                       Invite
                     </MenuItem>
                   )} */}
-          {/* <MenuItem gap="11px" padding="8px 10px">
+        {/* <MenuItem gap="11px" padding="8px 10px">
                     <I.PinIcon width="16px" color="#4E6070" />
                     Pin Group
                   </MenuItem> */}
-          {/* <MenuItem gap="11px" padding="8px 10px">
+        {/* <MenuItem gap="11px" padding="8px 10px">
                     <I.InfoIcon width="16px" color="#4E6070" />
                     Report
                   </MenuItem> */}
-
-          {activeGroup?.role === GroupRole.Creator && (
-            <MenuItem onClick={handleGroupDelete} gap="11px" padding="8px 10px">
-              <I.LogOutIcon width="16px" color="#F04153" />
-              Delete Group
-            </MenuItem>
-          )}
-
-          {activeGroup?.role === GroupRole.Creator && (
-            <MenuItem onClick={handleLeaveGroup} gap="11px" padding="8px 10px">
-              <I.LogOutIcon width="16px" color="#F04153" />
-              Leave Group
-            </MenuItem>
-          )}
-        </MenuList>
       </Menu>
       <GroupSettingModal open={isOpen} close={() => onClose()} />
     </>

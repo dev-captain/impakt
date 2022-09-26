@@ -2,6 +2,7 @@ import { Image } from '@chakra-ui/react';
 import * as React from 'react';
 import { useAppSelector } from 'hooks';
 import Images from '../../../../../../assets/images';
+import { getImageFromS3AsUrl } from '../../../../../../utils';
 
 const BannerImage: React.FC = () => {
   const isCurrentImageExist = useAppSelector(
@@ -11,22 +12,17 @@ const BannerImage: React.FC = () => {
     (state) => state.groupsReducer.activeGroup?.CurrentCoverImage,
   );
 
-  const getImageSrc = () => {
-    const sourceBaseUrl =
-      // eslint-disable-next-line no-constant-condition
-      process.env.NODE_ENV === 'development' || 'test'
-        ? 'https://impakt-image-data-dev.s3.amazonaws.com/'
-        : '';
-    const imageUrl = `${sourceBaseUrl}${currentCoverImageSource?.source}`;
-
-    return imageUrl;
-  };
-
   return (
     <Image
-      src={isCurrentImageExist ? getImageSrc() : Images.group.cover}
+      src={
+        isCurrentImageExist
+          ? getImageFromS3AsUrl(currentCoverImageSource!.source)
+          : Images.group.cover
+      }
       minH="100px"
       minWidth="100%"
+      maxH="304px"
+      objectFit="cover"
     />
   );
 };

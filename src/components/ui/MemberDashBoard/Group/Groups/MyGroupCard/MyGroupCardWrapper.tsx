@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../../../GroupsCard';
 import AddGroupCard from './AddGroupCard';
+import { getImageFromS3AsUrl } from '../../../../../../utils';
 
 const MyGroupCardWrapper: React.FC = () => {
   const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
@@ -40,7 +41,11 @@ const MyGroupCardWrapper: React.FC = () => {
         >
           <GroupsCard
             member={m.Group.memberCount ?? 0}
-            img={Images.group.img}
+            img={
+              m.Group.currentCoverImageId
+                ? getImageFromS3AsUrl(m.Group.CurrentCoverImage.source)
+                : Images.group.img
+            }
             name={m.Group.groupName}
           >
             <Common.ImpaktButton

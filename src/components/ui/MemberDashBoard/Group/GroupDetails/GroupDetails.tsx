@@ -24,27 +24,20 @@ const GroupDetails: React.FC = () => {
     try {
       if (groupParam?.id) {
         await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
+        await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
       }
     } catch (e) {
       setIsNotFound(true);
     }
   };
 
-  const getGroupRole = async () => {
-    if (member && groupParam?.id) {
-      await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
-    }
-  };
-
   const getMembers = async () => {
     if (groupParam?.id) {
-      console.log('yo');
-      await dispatch(fetchMembersOfGroup(parseInt(groupParam.id, 10)));
+      await dispatch(fetchMembersOfGroup(groupParam.id)).unwrap();
     }
   };
 
   React.useEffect(() => {
-    getGroupRole();
     getGroupDetail();
   }, []);
 

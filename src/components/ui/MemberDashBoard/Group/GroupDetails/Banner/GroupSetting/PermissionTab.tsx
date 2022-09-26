@@ -13,6 +13,13 @@ const PermissionTab: React.FC = () => {
   const navigate = useNavigate();
   const groupParam = useParams();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  React.useEffect(() => {
+    if (activeGroup?.private) {
+      setValue('Private');
+    } else {
+      setValue('Public');
+    }
+  }, [activeGroup]);
 
   const handleOnUpdate = async (status: boolean, groupName: string, groupId: number) => {
     try {
@@ -62,7 +69,7 @@ const PermissionTab: React.FC = () => {
             Is your group public or private?
           </Text>
           <Box display="flex" width="100%" mt="12px">
-            <RadioGroup onChange={setValue} value={value}>
+            <RadioGroup onChange={(v) => setValue(v)} value={value}>
               <Stack direction="row">
                 <Radio value="Public">Public</Radio>
                 <Radio value="Private">Private</Radio>
