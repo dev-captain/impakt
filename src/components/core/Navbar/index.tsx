@@ -47,7 +47,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
-  const notifies = useAppSelector((state) => state.groupsReducer.groupRequests).length;
+  const notifies = useAppSelector((state) => state.groupsReducer.groupRequests)?.length;
 
   useEffect(() => {
     if (!isLessThan1280) {

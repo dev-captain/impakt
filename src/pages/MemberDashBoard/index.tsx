@@ -26,6 +26,7 @@ import { fetchGroupRequests } from '../../lib/redux/slices/groups/actions/fetchG
 
 const MemberDashboard: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
+  const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
@@ -70,17 +71,12 @@ const MemberDashboard: React.FC = () => {
 
   React.useEffect(() => {
     if (!member) return;
-    dispatch(fetchMyGroups(member.id));
+    dispatch(fetchMyGroups(member.id)).then(() => dispatch(fetchGroupRequests()));
   }, []);
 
   React.useEffect(() => {
     if (!member) return;
     dispatch(fetchGroups({ explore: true }));
-  }, []);
-
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(fetchGroupRequests());
   }, []);
 
   return <C.SidebarLayout isShowNavbar />;

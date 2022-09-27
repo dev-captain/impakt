@@ -21,6 +21,7 @@ interface NoitificationDrawerProps {
 
 const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }) => {
   const requests = useAppSelector((state) => state.groupsReducer.groupRequests);
+  // console.log(requests);
 
   return (
     <Drawer isOpen={open} placement="right" onClose={() => close()}>
@@ -99,19 +100,17 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
           }}
         >
           <Box>
-            {requests.length ? (
-              requests.map(
-                ({ id, status, requestorId, requesteeId, RequesteeGroup, requestor }) => (
-                  <NoitificationCard
-                    key={id}
-                    status={status}
-                    requestorId={requestorId}
-                    groupId={requesteeId}
-                    name={requestor.firstName ?? requestor.username}
-                    GroupName={RequesteeGroup.groupName}
-                  />
-                ),
-              )
+            {requests?.length ? (
+              requests?.map(({ id, status, requestorId, requesteeId, Group, requestor }) => (
+                <NoitificationCard
+                  key={id}
+                  status={status}
+                  requestorId={requestorId}
+                  groupId={requesteeId}
+                  name={requestor.firstName ?? requestor.username}
+                  GroupName={Group.groupName}
+                />
+              ))
             ) : (
               <Text color="gray.300">No notifications</Text>
             )}

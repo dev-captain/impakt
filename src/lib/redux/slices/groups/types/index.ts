@@ -41,7 +41,7 @@ export type GetGroupRequestResV2 = {
   requestorId: number;
   requesteeId: number;
   requestor: GetUserRes;
-  RequesteeGroup: GetGroupRes;
+  Group: GetGroupRes;
 };
 
 export interface GroupsInitialI {
