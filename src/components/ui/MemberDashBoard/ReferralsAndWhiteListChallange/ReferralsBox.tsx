@@ -23,7 +23,8 @@ const ReferralsBox: React.FC<PropsI> = () => {
   const referralsChallangesHaveDone = useAppSelector(
     (state) => state.referrals.referralsChallengesHaveDone,
   );
-  const referralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
+  const godlReferralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
+  const koinReferralReward = useAppSelector((state) => state.referrals.koinRewardedByReferrals);
 
   return (
     <MemberDashboardCard flexDir="column" rowGap={{ base: '18px', lg: '32px' }}>
@@ -83,7 +84,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
         >
           <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textStyle="bold5" textAlign="center">
-              0
+              {koinReferralReward}
             </Text>
             <Text textAlign="center" mt="6px" textStyle="regular3">
               Koins earneds
@@ -91,7 +92,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
             </Text>
           </Box>
         </GridItem>
-        {referralsReward > 0 && (
+        {godlReferralsReward > 0 && (
           <GridItem
             w="100%"
             h="auto"
@@ -101,7 +102,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
           >
             <Box mt="0 !important" id="whitelist-challange-description-box-2">
               <Text textStyle="bold5" textAlign="center">
-                {referralsReward}
+                {godlReferralsReward}
               </Text>
               <Text
                 color="rgba(255, 255, 255, 0.4)"
