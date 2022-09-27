@@ -48,7 +48,7 @@ const BannerSettingsMenu: React.FC = () => {
   return (
     <>
       <Menu>
-        {activeGroup?.role ? (
+        {activeGroup?.role && activeGroup.role !== GroupRole.None ? (
           <ImpaktButton
             variant="transparent"
             as={MenuButton}
