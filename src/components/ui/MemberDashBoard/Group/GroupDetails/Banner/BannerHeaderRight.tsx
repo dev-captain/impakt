@@ -3,9 +3,12 @@ import { Box } from '@chakra-ui/react';
 
 import { Common, I } from 'components';
 import { useAppSelector } from 'hooks';
+import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
 
 export const BannerHeaderRight: React.FC = () => {
-  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.Members);
+  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.Members)?.filter(
+    ({ role }) => role !== GroupRole.None,
+  );
 
   return (
     <Box

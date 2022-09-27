@@ -21,6 +21,8 @@ const fetchMyGroups = createAsyncThunk(
 
       const payload = getMyGroupRes.data as GetMyGroupsRes[];
 
+      payload.forEach(({ groupId }) => localStorage.removeItem(`${groupId + userId.toString()}`));
+
       return payload;
     } catch (err: any) {
       return rejectWithValue(err);

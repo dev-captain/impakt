@@ -80,19 +80,19 @@ const ExploreGroupCardWrapper: React.FC = () => {
     >
       {/* here is the components */}
       {exploreGroups.map((d) => {
-        console.log(localStorage.getItem(d.id.toString()));
-
         return (
           <Box
             key={d.id}
+            cursor={!d.private ? 'pointer' : ''}
             w={{
               base: '100%',
               sm: '49%',
               md: '31%',
               lgx: '23%',
             }}
-            onClick={(e: any) => {
+            onClick={(e: React.MouseEvent) => {
               e.preventDefault();
+              e.stopPropagation();
               // eslint-disable-next-line no-unused-expressions
               if (!d.private) {
                 navigate(`/dashboard/groups/group/${d.id}`);
@@ -116,11 +116,14 @@ const ExploreGroupCardWrapper: React.FC = () => {
                       backgroundColor: d.private ? '#fff' : '#000',
                       color: d.private ? '#000' : '#fff',
                     }}
-                    onClick={
-                      d.private
-                        ? () => handleRequestToJoinGroup(d.id)
-                        : () => joinedGroup(String(d.id))
-                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (d.private) {
+                        return handleRequestToJoinGroup(d.id);
+                      }
+
+                      return joinedGroup(String(d.id));
+                    }}
                     borderRadius="8px"
                     fontWeight="600"
                     border="1px solid #1C1C28"

@@ -13,6 +13,7 @@ import Images from 'assets/images';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchMembersOfGroup } from '../../../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
+import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const MemberList: React.FC = () => {
   // const toast = useToast();
@@ -29,7 +30,7 @@ const MemberList: React.FC = () => {
         marginLeft="auto"
         marginBottom="20px"
       >
-        <Box>
+        <Box w="full">
           <Box display="flex" justifyContent="space-between" alignItems="center">
             <Box display="flex" alignItems="center">
               <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
@@ -190,27 +191,36 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-          {members?.Members.map(({ User }) => (
-            <Box
-              key={`${User.id}-box`}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              marginTop="16px"
-            >
-              <Box display="flex" alignItems="center">
-                <Image src={Images.group.ellipse} zIndex="10" />
-                <Text
-                  color="#4E6070"
-                  fontSize={{ lgx: '18px', md: '14px' }}
-                  fontWeight="500"
-                  marginLeft="16px"
+          {members?.Members.map(
+            ({ role, User }) =>
+              role !== GroupRole.None && (
+                <Box
+                  key={`${User.id}-box`}
+                  display="flex"
+                  justifyContent="space-between"
+                  marginTop="16px"
                 >
-                  {User.firstName ?? User.username}
-                </Text>
-              </Box>
-            </Box>
-          ))}
+                  <Box display="flex" alignItems="center">
+                    <Image src={Images.group.ellipse} zIndex="10" />
+                    <Text
+                      color="#4E6070"
+                      fontSize={{ lgx: '18px', md: '14px' }}
+                      fontWeight="500"
+                      marginLeft="16px"
+                    >
+                      {User.firstName ?? User.username}
+                    </Text>
+                  </Box>
+
+                  <Box marginLeft="1em" display="flex" alignItems="center">
+                    <Text color="#4E6070" fontSize={{ lgx: '18px', md: '14px' }} fontWeight="500">
+                      {role}
+                    </Text>
+                    {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
+                  </Box>
+                </Box>
+              ),
+          )}
         </Box>
       </MemberDashboardCard>
     </Box>
