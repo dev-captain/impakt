@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
         <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
       </SidebarLinkItem>
 
-      {/* <SidebarLinkItem
+      <SidebarLinkItem
         hide
         href="reward-history"
         onClose={onClose}
@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
         <I.RewardIcon cursor="pointer" width="27px" height="27px" />
       </SidebarLinkItem>
 
-      <SidebarLinkItem
+      {/* <SidebarLinkItem
         hide
         href="statistics"
         onClose={onClose}

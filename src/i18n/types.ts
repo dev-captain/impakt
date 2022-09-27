@@ -226,6 +226,7 @@ const TranslationKeys = {
       date: `${memberDashboard}.exerciseList.date`,
       reason: `${memberDashboard}.exerciseList.reason`,
       godl: `${memberDashboard}.exerciseList.godl`,
+      koin: `${memberDashboard}.exerciseList.koin`,
     },
   },
   NFTGenesis: {

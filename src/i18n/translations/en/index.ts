@@ -293,7 +293,7 @@ export default {
       descriptionFooter:
         'Have your friends join us on the Impakt Rocket and let’s moon it together!',
       discription_list5:
-        'GODL is our in-game currency! You`ll use it on our marketplace for Whitelist spots, NFT discounts, Token exchange and many more!',
+        'Koin is the virtual currency within the world of Impakt. You`ll use it to customize your character by purchasing skins, items, pets, and much more.',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {
@@ -311,6 +311,7 @@ export default {
       date: 'Date',
       reason: 'Reason',
       godl: 'GODL',
+      koin: 'Koins',
     },
   },
   NFTGenesis: {
