@@ -64,17 +64,11 @@ const WelcomeModal: React.FC = () => {
           h="auto"
           bg="rgba(254, 196, 23, 0.15)"
         >
-          <Box mt="0 !important" id="whitelist-challange-description-box-2">
-            <Text color="#FFFFFF" textAlign="center" textStyle="bold5">
+          <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
+            <Text textAlign="center" textStyle="bold5">
               0
             </Text>
-            <Text
-              color="rgba(255, 255, 255, 0.4)"
-              textAlign="center"
-              mt="2px"
-              textStyle="regular3"
-              fontWeight={500}
-            >
+            <Text textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Koin Balance
             </Text>
           </Box>

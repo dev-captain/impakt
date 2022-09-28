@@ -84,10 +84,10 @@ const ReferralsBox: React.FC<PropsI> = () => {
         >
           <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textStyle="bold5" textAlign="center">
-              {koinReferralReward}
+              {koinReferralReward || '0'}
             </Text>
             <Text textAlign="center" mt="6px" textStyle="regular3">
-              Koins earneds
+              Koins earned
               <br /> from referrals
             </Text>
           </Box>
