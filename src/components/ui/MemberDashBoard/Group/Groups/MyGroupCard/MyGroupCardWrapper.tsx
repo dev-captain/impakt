@@ -43,7 +43,7 @@ const MyGroupCardWrapper: React.FC = () => {
             member={m.Group.memberCount ?? 0}
             img={
               m.Group.currentCoverImageId
-                ? getImageFromS3AsUrl(m.Group.CurrentCoverImage.source)
+                ? getImageFromS3AsUrl(m.Group.CurrentCoverImage!.source)
                 : Images.group.img
             }
             name={m.Group.groupName}

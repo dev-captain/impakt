@@ -71,7 +71,7 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
 
   const getBanner = () => {
     if (activeGroup?.currentCoverImageId && !preview) {
-      return getImageFromS3AsUrl(activeGroup.CurrentCoverImage.source);
+      return getImageFromS3AsUrl(activeGroup.CurrentCoverImage!.source);
     }
 
     if (!preview) {

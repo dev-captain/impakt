@@ -23,7 +23,6 @@ const ExploreGroupCardWrapper: React.FC = () => {
     if (!member) return;
     try {
       await dispatch(sendGroupRequestToJoin(groupId)).unwrap();
-      localStorage.setItem(`${groupId + member.id.toString()}`, 'Pending');
 
       setRerender((prevState) => prevState + 1);
 
@@ -101,7 +100,7 @@ const ExploreGroupCardWrapper: React.FC = () => {
           >
             <GroupsCard
               img={
-                d.CurrentCoverImage.source
+                d.CurrentCoverImage?.source
                   ? `https://impakt-image-data-dev.s3.amazonaws.com/images/8479333ebdd04821b69cff7ba9c70f35.png`
                   : Images.group.img
               }
@@ -131,11 +130,7 @@ const ExploreGroupCardWrapper: React.FC = () => {
                     fontSize="16px"
                     leftIcon={d.private ? <Box display="none" /> : <I.UnionIcon width="12px" />}
                   >
-                    {d.private
-                      ? localStorage.getItem(`${d.id + member!.id.toString()}`) === 'Pending'
-                        ? 'Pending...'
-                        : 'Join'
-                      : 'Join'}
+                    {d.private ? (d.Request?.status ? d.Request.status : 'Join') : 'Join'}
                   </Common.ImpaktButton>
                 </Box>
               </Box>

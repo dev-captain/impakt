@@ -30,7 +30,15 @@ export type GetGroupRes = {
   memberCount?: number;
   private: boolean;
   deleted: boolean;
-  CurrentCoverImage: GetUploadFileRes;
+  CurrentCoverImage?: GetUploadFileRes;
+};
+
+export type ExploreGroupRes = {
+  Request?: GetGroupRequestRes;
+} & GetGroupRes;
+
+export type GetGroupRequestRes = {
+  status: UserRequestStatus;
 };
 
 export type GetGroupRequestResV2 = {
@@ -50,7 +58,7 @@ export interface GroupsInitialI {
   activeGroup: (GetGroupRes & { role?: GetMyGroupsRes['role'] }) | null;
   membersOfGroup: GetMembersOfGroupRes | null;
   groupRequests: GetGroupRequestResV2[];
-  exploreGroups: GetGroupRes[];
+  exploreGroups: ExploreGroupRes[];
 }
 
 export interface GetMyGroupsRes {
