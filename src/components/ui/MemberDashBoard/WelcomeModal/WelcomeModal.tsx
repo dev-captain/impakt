@@ -10,6 +10,7 @@ const WelcomeModal: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
   const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
+  const koinBalanceScore = useAppSelector((state) => state.koin.koinBalanceScore);
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
@@ -66,7 +67,7 @@ const WelcomeModal: React.FC = () => {
         >
           <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textAlign="center" textStyle="bold5">
-              0
+              {koinBalanceScore ?? 0}
             </Text>
             <Text textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Koin Balance
