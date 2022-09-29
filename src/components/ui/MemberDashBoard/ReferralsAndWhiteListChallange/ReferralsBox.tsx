@@ -96,7 +96,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
           borderRadius="20px"
           padding={{ base: '12px 0px', sm: '12px 10px', md: '12px 20px', lg: '12px 24px' }}
           h="auto"
-          bg="#000"
+          bg="#20202E"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text color="#FFFFFF" textAlign="center" textStyle="bold5">
@@ -110,7 +110,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
         </GridItem>
       </SimpleGrid>
       <TableContainer borderRadius={10} w="100%" sx={{ marginTop: '0px !important' }}>
-        <Table variant="striped" colorScheme="whiteAlpha">
+        <Table variant="striped" colorScheme="blackAlpha">
           <Thead style={{ display: 'table', width: '100%', tableLayout: 'fixed' }}>
             <Tr bgColor="#121216">
               <Th

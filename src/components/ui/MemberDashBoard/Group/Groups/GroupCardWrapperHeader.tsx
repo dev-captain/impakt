@@ -12,7 +12,7 @@ const GroupCardWrapperHeader: React.FC<GroupCardWrapperHeaderPropsI> = ({ title,
       display="flex"
       w="full"
       gap={{ lgx: '48px', base: '44px' }}
-      borderBottom="2px solid #E0E0E0"
+      // borderBottom="2px solid #E0E0E0"
     >
       <MemberDashboardSectionHeadlineText title={title} />
       {children}

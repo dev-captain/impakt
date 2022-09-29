@@ -38,7 +38,7 @@ const MyGroupCardWrapper: React.FC = () => {
             lgx: '23%',
           }}
         >
-          <GroupsCard member={memberCount ?? 0} img={Images.group.img} name={friendlyName}>
+          <GroupsCard member={memberCount ?? 0} img={Images.group.logo} name={friendlyName}>
             <Common.ImpaktButton
               variant="transparent"
               _hover={{ backgroundColor: '#000', color: '#fff' }}

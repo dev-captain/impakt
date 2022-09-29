@@ -1,39 +1,12 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { Box, HStack, useToast } from '@chakra-ui/react';
+import { Box, Button, HStack } from '@chakra-ui/react';
 
-import { Common, I } from 'components';
-import Images from 'assets/images';
-import GroupsCard from '../../../GroupsCard';
-import { sendGroupRequestToJoin } from '../../../../../../lib/redux/slices/groups/actions/sendGroupRequestToJoin';
+import GroupCardWrapperHeader from '../GroupCardWrapperHeader';
+import ExplorePrivateSection from './ExplorePrivateSection';
+import ExplorePublicSection from './ExplorePublicSection';
 
 const ExploreGroupCardWrapper: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
-  const toast = useToast();
-
-  const handleRequestToJoinGroup = async (groupId: number) => {
-    try {
-      await dispatch(sendGroupRequestToJoin(groupId)).unwrap();
-
-      toast({
-        title: 'Success',
-        description: 'Request sent successfully',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
-    }
-  };
-  if (exploreGroups.length === 0) return null;
+  const [status, setStatus] = React.useState<String>('public');
 
   return (
     <HStack
@@ -47,36 +20,55 @@ const ExploreGroupCardWrapper: React.FC = () => {
       display={{ sm: 'flex' }}
     >
       {/* here is the components */}
-      {exploreGroups.map((d) => (
-        <Box
-          w={{
-            base: '100%',
-            sm: '49%',
-            md: '31%',
-            lgx: '23%',
-          }}
-        >
-          <GroupsCard img={Images.group.img} member={d.memberCount} name={d.friendlyName}>
-            <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
-              <Box maxW="99px" maxH="38px">
-                <Common.ImpaktButton
-                  variant="transparent"
-                  _hover={{ backgroundColor: '#000', color: '#fff' }}
-                  onClick={() => handleRequestToJoinGroup(d.id)}
-                  borderRadius="8px"
-                  fontWeight="600"
-                  border="1px solid #1C1C28"
-                  justifyContent="space-around"
-                  fontSize="16px"
-                  leftIcon={<I.UnionIcon width="12px" />}
-                >
-                  Join
-                </Common.ImpaktButton>
-              </Box>
-            </Box>
-          </GroupsCard>
+      <Box
+        w="full"
+        as="section"
+        id="explore-group-section"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Box>
+          <GroupCardWrapperHeader title="Explore Groups" />
         </Box>
-      ))}
+        <Box margin="20px 0">
+          <Button
+            color={status === 'public' ? '#fff' : '#000'}
+            bg={status === 'public' ? '#29323B' : '#fff'}
+            _hover={{
+              backgroundColor: status === 'private' ? '#fff' : '#29323B',
+              color: status === 'private' ? '#000' : '#fff',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            w="120px"
+            h="38px"
+            borderRadius="8px 0 0 8px"
+            onClick={() => {
+              setStatus('public');
+            }}
+          >
+            Public
+          </Button>
+          <Button
+            bg={status === 'private' ? '#29323B' : '#fff'}
+            color={status === 'private' ? '#fff' : '#000'}
+            _hover={{
+              backgroundColor: status === 'public' ? '#fff' : '#29323B',
+              color: status === 'public' ? '#000' : '#fff',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            w="120px"
+            h="38px"
+            borderRadius="0 8px 8px 0"
+            onClick={() => {
+              setStatus('private');
+            }}
+          >
+            Private
+          </Button>
+        </Box>
+      </Box>
+      {status === 'private' ? <ExplorePrivateSection /> : <ExplorePublicSection />}
     </HStack>
   );
 };

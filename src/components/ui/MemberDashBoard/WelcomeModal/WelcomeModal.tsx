@@ -113,7 +113,7 @@ const WelcomeModal: React.FC = () => {
           borderRadius="20px"
           padding="12px 24px"
           h="auto"
-          bg="rgba(9, 9, 11, 1)"
+          bg="#20202E"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">

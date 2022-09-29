@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
         <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
       </SidebarLinkItem>
 
-      <SidebarLinkItem
+      {/* <SidebarLinkItem
         hide
         href="reward-history"
         onClose={onClose}
@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
         collaps={collaps}
       >
         <I.ChatIcon cursor="pointer" width="27px" height="23px" />
-      </SidebarLinkItem>
+      </SidebarLinkItem> */}
     </>
   );
 };

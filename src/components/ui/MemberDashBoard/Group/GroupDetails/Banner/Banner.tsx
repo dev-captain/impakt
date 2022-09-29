@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react';
 import BannerImage from './BannerImage';
 import BannerHeaderLeft from './BannerHeaderLeft';
 import BannerHeaderRight from './BannerHeaderRight';
-import BannerPanelLeft from './BannerPanelLeft';
+// import BannerPanelLeft from './BannerPanelLeft';
 import BannerPanelRight from './BannerPanelRight';
 
 interface BannerProps {
@@ -28,12 +28,8 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
             <BannerHeaderLeft />
             <BannerHeaderRight />
           </Box>
-          <Box
-            display={{ md: 'flex', base: 'block' }}
-            justifyContent="space-between"
-            alignItems="flex-end"
-          >
-            <BannerPanelLeft />
+          <Box display={{ md: 'flex', base: 'block' }} justifyContent="end" alignItems="flex-end">
+            {/* <BannerPanelLeft /> */}
             <BannerPanelRight />
           </Box>
         </Box>

@@ -31,7 +31,7 @@ export default {
     help: 'Help',
     signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
-    notification: 'Notification',
+    notification: 'Notifications',
   },
   computerVision: {
     computerVision: 'COMPUTER VISION',
