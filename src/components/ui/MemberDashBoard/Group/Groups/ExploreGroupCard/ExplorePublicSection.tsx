@@ -35,8 +35,7 @@ const ExplorePublicSection: React.FC = () => {
                 lgx: '23%',
               }}
             >
-              {/* <GroupsCard img={Images.group.img} member={Number(2)} name={a.name}> */}
-              <GroupsCard img={Images.group.img} member={Number(2)} name={a.name}>
+              <GroupsCard img={Images.group.logo} member={Number(2)} name={a.name}>
                 <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
                   <Box maxW="99px" maxH="38px">
                     <Common.ImpaktButton

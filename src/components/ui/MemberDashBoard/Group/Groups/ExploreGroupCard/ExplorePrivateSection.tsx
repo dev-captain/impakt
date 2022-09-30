@@ -61,15 +61,15 @@ const ExplorePrivateSection: React.FC = () => {
               }}
             >
               <Box position="relative">
-                <GroupsCard img={Images.group.img} member={Number(2)} name={a.name}>
-                  <Box position="absolute" top="10px" left="12px">
+                <GroupsCard img={Images.group.logo} member={Number(2)} name={a.name}>
+                  <Box position="absolute" top="24px" left="24px">
                     <LockIcon
-                      bg="#29323B"
+                      bg="#29323b"
                       color="white"
                       height="40px"
                       width="40px"
                       padding="12px"
-                      border-radius="4px"
+                      borderRadius="4px"
                     />
                   </Box>
                   <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
