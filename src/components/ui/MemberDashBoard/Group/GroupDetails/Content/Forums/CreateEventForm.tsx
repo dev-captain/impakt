@@ -22,7 +22,13 @@ const CreateEventForm: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const dispatch = useAppDispatch();
   const { handleSubmit, errors, setValue } = useForm({
-    defaultValues: { eventTitle: '', eventDescription: '', eventStartTime: '', eventEndTime: '' },
+    defaultValues: {
+      eventTitle: '',
+      eventDescription: '',
+      eventStartTime: '',
+      eventEndTime: '',
+      assocId: NaN,
+    },
     resolver: yupResolver(createEventYupScheme),
   });
 
@@ -150,7 +156,6 @@ const CreateEventForm: React.FC = () => {
             <Input
               name="eventStartTime"
               onChange={onChange}
-              isInvalid={!!errors?.eventStartTime}
               pr="0"
               border="0"
               _focus={{ border: 0 }}
@@ -164,7 +169,6 @@ const CreateEventForm: React.FC = () => {
             <Input
               name="eventEndTime"
               onChange={onChange}
-              isInvalid={!!errors?.eventEndTime}
               border="0"
               _focus={{ border: 0 }}
               size="md"
@@ -180,19 +184,25 @@ const CreateEventForm: React.FC = () => {
             />
           </Box>
         </Box>
-        <Box display="flex" alignItems="center" mb="12px" w="100%">
-          <Box w="34px">
-            <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
+        <Box display="flex" flexDir="column" alignItems="flex-start" mb="12px" w="100%">
+          <Box display="flex">
+            <Box w="34px">
+              <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
+            </Box>
+            <Text
+              color="#4E6070"
+              fontSize="16px"
+              fontWeight="500"
+              cursor="pointer"
+              onClick={() => onOpen()}
+            >
+              Select challenge
+            </Text>
           </Box>
-          <Text
-            color="#4E6070"
-            fontSize="16px"
-            fontWeight="500"
-            cursor="pointer"
-            onClick={() => onOpen()}
-          >
-            Select challenge
-          </Text>
+
+          <Box>
+            <Common.InputErrorMessage errorMsg={errors?.assocId?.message} />
+          </Box>
         </Box>
         <Common.ImpaktButton
           variant="black"
@@ -209,7 +219,7 @@ const CreateEventForm: React.FC = () => {
         </Common.ImpaktButton>
       </FormControl>
 
-      <ChallengeModal open={isOpen} close={() => onClose()} />
+      <ChallengeModal setValue={setValue} open={isOpen} close={() => onClose()} />
     </>
   );
 };

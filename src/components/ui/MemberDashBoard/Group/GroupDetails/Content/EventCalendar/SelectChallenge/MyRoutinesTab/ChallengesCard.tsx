@@ -4,9 +4,11 @@ import { Common, I } from 'components';
 
 interface ChallengesCardProps {
   data?: Object;
+  setAssocId: () => void;
+  onClose: () => void;
 }
 
-const ChallengesCard: React.FC<ChallengesCardProps> = ({ data }) => {
+const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClose }) => {
   const { title, challenge, time, play, like, timmer, name } = data as {
     title: string;
     challenge: string;
@@ -162,7 +164,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data }) => {
           gap="12px"
           mt={{ base: '10px', md: 0 }}
         >
-          <Common.ImpaktButton
+          {/* <Common.ImpaktButton
             variant="black"
             color="#29323B"
             h="38px"
@@ -174,8 +176,12 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data }) => {
             fontWeight="700"
           >
             <Text>Preview</Text>
-          </Common.ImpaktButton>
+          </Common.ImpaktButton> */}
           <Common.ImpaktButton
+            onClick={() => {
+              setAssocId();
+              onClose();
+            }}
             variant="black"
             w="114px !important"
             colorScheme="#fff"

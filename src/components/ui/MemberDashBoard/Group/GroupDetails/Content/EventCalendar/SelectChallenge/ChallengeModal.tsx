@@ -17,15 +17,23 @@ import {
 import { I } from 'components';
 import React from 'react';
 import { ChallengeTab } from 'data';
+import { UseFormSetValue } from 'react-hook-form';
 import MyRoutines from './MyRoutinesTab/MyRoutines';
 import ChallengeDetails from './ImpaktTab/ChallengeDetails';
 
 interface ChallengeModalProps {
   open: boolean;
   close: () => void;
+  setValue: UseFormSetValue<{
+    eventTitle: string;
+    eventDescription: string;
+    eventStartTime: string;
+    eventEndTime: string;
+    assocId: number;
+  }>;
 }
 
-const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close }) => {
+const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }) => {
   return (
     <Modal isOpen={open} onClose={() => close()} isCentered>
       <ModalOverlay />
@@ -97,7 +105,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close }) => {
             </TabList>
             <TabPanels>
               <TabPanel p="0" mt="24px">
-                <MyRoutines />
+                <MyRoutines onClose={() => close()} setValue={setValue} />
               </TabPanel>
               <TabPanel p="0" mt="24px">
                 <ChallengeDetails

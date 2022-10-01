@@ -56,6 +56,10 @@ const file = yup
 const eventTitle = yup.string().required('Event title is required field');
 const eventDescription = yup.string().required('Event description is required field');
 const eventTime = yup.string().required('Event time is required field');
+const assocId = yup
+  .number()
+  .required('Challenge is required please select one...')
+  .typeError('Challenge is required please select one...');
 
 export {
   email,
@@ -71,4 +75,5 @@ export {
   eventTitle,
   eventDescription,
   eventTime,
+  assocId,
 };

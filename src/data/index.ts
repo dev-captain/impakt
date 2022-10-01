@@ -534,6 +534,7 @@ export const getDummyEvents = () => {
 
 export const ChallengeList = [
   {
+    id: 1,
     title: 'Daily Challenge',
     challenge: '8',
     time: '5 min',
@@ -543,12 +544,14 @@ export const ChallengeList = [
     name: 'Impakt',
   },
   {
+    id: 2,
     title: 'Good Morning',
     challenge: '22',
     time: '18 min',
     name: 'Demideus',
   },
   {
+    id: 3,
     title: 'Power v3',
     challenge: '16',
     time: '12 min',
@@ -557,6 +560,7 @@ export const ChallengeList = [
     name: 'Demideus',
   },
   {
+    id: 5,
     title: 'Power v3',
     challenge: '16',
     time: '19 min',
