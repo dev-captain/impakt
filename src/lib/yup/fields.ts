@@ -53,6 +53,10 @@ const file = yup
     (value) => value === null || (value && ALLOW_IMAGE_FILE.includes(value.type)),
   );
 
+const eventTitle = yup.string().required('Event title is required field');
+const eventDescription = yup.string().required('Event description is required field');
+const eventTime = yup.string().required('Event time is required field');
+
 export {
   email,
   password,
@@ -64,4 +68,7 @@ export {
   message,
   groupName,
   file,
+  eventTitle,
+  eventDescription,
+  eventTime,
 };

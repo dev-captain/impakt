@@ -54,7 +54,7 @@ const ShowEvents: React.FC = () => {
                       {JSON.parse(eventObj.event.data).title}
                     </Text>
                     <Text fontSize="12px" fontWeight="500">
-                      {eventObj.event.schedule?.times[0].format('h:mma ')}-
+                      {eventObj.event.schedule?.times[0].format('h:mma ')}-{' '}
                       {eventObj.event.schedule?.times[1].format('h:mma ')}
                     </Text>
                   </Box>

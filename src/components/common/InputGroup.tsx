@@ -12,6 +12,7 @@ import {
 import { Link as ReactRouterLink } from 'react-router-dom';
 
 import * as React from 'react';
+import InputErrorMessage from './InputErrorMessage';
 
 export interface InputGroupPropsI {
   name: string;
@@ -159,17 +160,7 @@ const InputGroup: React.FC<InputGroupPropsI> = ({
           )}
         </ChakraInputGroup>
 
-        {errorMsg && (
-          <Box w="full" mt="5px" ml="10px">
-            <Text
-              bgClip="text"
-              textStyle="regular12"
-              bgGradient="linear(to-r, rgba(220, 20, 60, 1), rgba(178, 34, 34, 1))"
-            >
-              {errorMsg}
-            </Text>
-          </Box>
-        )}
+        <InputErrorMessage errorMsg={errorMsg} />
       </Box>
       {children}
     </>

@@ -1,15 +1,19 @@
-import { FormControl, Box, Input, Text, useDisclosure } from '@chakra-ui/react';
+import { FormControl, Box, Input, Text, useDisclosure, useToast } from '@chakra-ui/react';
 import { Day, Time } from 'dayspan';
 import * as React from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { Common, I } from 'components';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../../../../../common/InputGroup';
 import ChallengeModal from '../EventCalendar/SelectChallenge/ChallengeModal';
 import { createEvent } from '../../../../../../../lib/redux/slices/events/actions/createEvent';
 import { normalizeCalendarData } from '../../../../../../../utils';
+import createEventYupScheme from '../../../../../../../lib/yup/schemas/createEventYupSchema';
 
 const CreateEventForm: React.FC = () => {
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getSelectedDay, addEvent } = useEventCalendarContext();
   const date = getSelectedDay();
@@ -18,11 +22,14 @@ const CreateEventForm: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const dispatch = useAppDispatch();
   const { handleSubmit, errors, setValue } = useForm({
-    defaultValues: { eventTitle: '', eventDescription: '', eventStartTime: 0, eventEndTime: 0 },
+    defaultValues: { eventTitle: '', eventDescription: '', eventStartTime: '', eventEndTime: '' },
+    resolver: yupResolver(createEventYupScheme),
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value as any, {
+      shouldValidate: true,
+    });
   };
 
   const handleAdd = async (data: Object) => {
@@ -42,18 +49,27 @@ const CreateEventForm: React.FC = () => {
       assocId: 1,
     };
 
-    const parsedStartTimeTime = Time.fromString(eventStartTime);
+    const parsedStartTime = Time.fromString(eventStartTime);
     const parsedEndTime = Time.fromString(eventEndTime);
+    const isStartTimeLessThanEndTime =
+      parsedStartTime.toMilliseconds() < parsedEndTime.toMilliseconds();
 
     const schedule = {
-      start: new Date(
-        new Date(date.date).setHours(parsedStartTimeTime.hour, parsedStartTimeTime.minute),
-      ).toISOString(),
-      end: new Date(
-        new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
-      ).toISOString(),
+      start: isStartTimeLessThanEndTime
+        ? new Date(
+            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
+          ).toISOString()
+        : new Date(
+            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
+          ).toISOString(),
+      end: isStartTimeLessThanEndTime
+        ? new Date(
+            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
+          ).toISOString()
+        : new Date(
+            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
+          ).toISOString(),
     };
-
     const bEpayload = { data: eventData, schedule };
 
     try {
@@ -62,23 +78,23 @@ const CreateEventForm: React.FC = () => {
       ).unwrap();
       const normalizedData1 = normalizeCalendarData(data1);
       addEvent(normalizedData1);
-    } catch (e) {
-      console.error(e);
+
+      toast({
+        title: 'Success',
+        description: 'Event created successfully.',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: e.response.data.message,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
     }
-
-    // const newEvent: EventInput<string, any> = {
-    //   id: 10,
-    //   data: eventData,
-    //   schedule: {
-    //     on: Day.build(date.year, date.month, date.dayOfMonth),
-    //     times: [Day.build(date.year, date.month, date.dayOfMonth, 9)],
-    //     duration: 1,
-    //     durationUnit: 'hours',
-    //   },
-    // };
-
-    // setSelectedDay(date);
-    // goToOverViewScreen('first');
   };
 
   const inputItems: InputGroupPropsI[] = [
@@ -126,34 +142,43 @@ const CreateEventForm: React.FC = () => {
             {Day.build(date.year, date.month, date.dayOfMonth).format('dddd, MMMM D')}
           </Text>
         </Box>
-        <Box display="flex" w="60%" alignItems="center">
-          <Box w="34px">
-            <I.ClockIcon width="20px" height="20px" color="#728BA3" />
+        <Box display="flex" flexDir="column">
+          <Box w="60%" alignItems="center" display="flex">
+            <Box w="34px">
+              <I.ClockIcon width="20px" height="20px" color="#728BA3" />
+            </Box>
+            <Input
+              name="eventStartTime"
+              onChange={onChange}
+              isInvalid={!!errors?.eventStartTime}
+              pr="0"
+              border="0"
+              _focus={{ border: 0 }}
+              size="md"
+              sx={{
+                '&::-webkit-calendar-picker-indicator': { background: 'none', display: 'none' },
+              }}
+              type="time"
+            />
+            -
+            <Input
+              name="eventEndTime"
+              onChange={onChange}
+              isInvalid={!!errors?.eventEndTime}
+              border="0"
+              _focus={{ border: 0 }}
+              size="md"
+              sx={{
+                '&::-webkit-calendar-picker-indicator': { background: 'none', display: 'none' },
+              }}
+              type="time"
+            />
           </Box>
-          <Input
-            name="eventStartTime"
-            onChange={onChange}
-            pr="0"
-            border="0"
-            _focus={{ border: 0 }}
-            size="md"
-            sx={{
-              '&::-webkit-calendar-picker-indicator': { background: 'none', display: 'none' },
-            }}
-            type="time"
-          />
-          -
-          <Input
-            name="eventEndTime"
-            onChange={onChange}
-            border="0"
-            _focus={{ border: 0 }}
-            size="md"
-            sx={{
-              '&::-webkit-calendar-picker-indicator': { background: 'none', display: 'none' },
-            }}
-            type="time"
-          />
+          <Box>
+            <Common.InputErrorMessage
+              errorMsg={errors?.eventStartTime?.message || errors?.eventEndTime?.message}
+            />
+          </Box>
         </Box>
         <Box display="flex" alignItems="center" mb="12px" w="100%">
           <Box w="34px">
