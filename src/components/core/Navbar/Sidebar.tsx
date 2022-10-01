@@ -39,9 +39,9 @@ const Sidebar: React.FC = () => {
         isActive={path.pathname === '/dashboard/reward-history'}
       >
         <I.RewardIcon cursor="pointer" width="27px" height="27px" />
-      </SidebarLinkItem>
+      </SidebarLinkItem> */}
 
-      <SidebarLinkItem
+      {/* <SidebarLinkItem
         hide
         href="statistics"
         onClose={onClose}

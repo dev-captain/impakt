@@ -1,14 +1,17 @@
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import { I } from 'components';
+import { useAppSelector } from 'hooks';
 import InfoSection from 'components/common/InfoSection';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 import ExerciseHistory from '../ExerciseHistory/ExerciseHistory';
+import Exercises from '../ExerciseHistory/Exercises';
 
 const RewardHistory: React.FC = () => {
   const { t } = useTranslation().i18n;
+  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
 
   return (
     <Box w="full" as="section" id="general-section">
@@ -34,7 +37,39 @@ const RewardHistory: React.FC = () => {
           alignItems="flex-start"
           rowGap="24px"
         >
-          <ExerciseHistory />
+          {godlBalanceScore > 0 ? (
+            <Tabs>
+              <TabList border="0">
+                <Tab
+                  _focus={{ boxShadow: 'none' }}
+                  _active={{ background: 'transparent' }}
+                  _selected={{ color: '#fff', borderColor: '#fff' }}
+                  color="#ffffff66"
+                >
+                  Koins
+                </Tab>
+                <Tab
+                  _focus={{ boxShadow: 'none' }}
+                  _active={{ background: 'transparent' }}
+                  _selected={{ color: '#fff', borderColor: '#fff' }}
+                  color="#ffffff66"
+                >
+                  GODL
+                </Tab>
+              </TabList>
+
+              <TabPanels>
+                <TabPanel>
+                  <ExerciseHistory />
+                </TabPanel>
+                <TabPanel>
+                  <Exercises />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          ) : (
+            <ExerciseHistory />
+          )}
         </VStack>
       </HStack>
     </Box>

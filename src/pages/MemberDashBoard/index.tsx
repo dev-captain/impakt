@@ -9,10 +9,12 @@ import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchAct
 // import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
 import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchReferrals';
 import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
-import { fetchReferralsReward } from '../../lib/redux/slices/referrals/actions/fetchReferralsReward';
 import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
 // import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
+import { fetchKoinBalanceScore } from '../../lib/redux/slices/koin/actions/fetchKoinBalanceScore';
+import { fetchReferralsRewardGodl } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardGodl';
+import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardKoin';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -32,6 +34,7 @@ const MemberDashboard: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchGodlBalanceScore());
+    dispatch(fetchKoinBalanceScore());
   }, []);
 
   React.useEffect(() => {
@@ -58,7 +61,8 @@ const MemberDashboard: React.FC = () => {
   React.useEffect(() => {
     dispatch(fetchReferrals({ count: true }));
     dispatch(fetchReferralsChallenges());
-    dispatch(fetchReferralsReward());
+    dispatch(fetchReferralsRewardGodl());
+    dispatch(fetchReferralsRewardKoin());
   }, []);
 
   React.useEffect(() => {

@@ -2,12 +2,14 @@ import { ReferralReferreeChallengesRes, ReferreesOfReferrerRes } from '@impakt-d
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchReferrals } from './actions/fetchReferrals';
 import { fetchReferralsChallenges } from './actions/fetchReferralsChallenges';
-import { fetchReferralsReward } from './actions/fetchReferralsReward';
+import { fetchReferralsRewardGodl } from './actions/fetchReferralsRewardGodl';
+import { fetchReferralsRewardKoin } from './actions/fetchReferralsRewardKoin';
 
 interface ReferralsInitialI {
   referrals: ReferreesOfReferrerRes;
   referralsChallengesHaveDone: ReferralReferreeChallengesRes;
   godlRewardedByReferrals: number;
+  koinRewardedByReferrals: number;
   isReferralsLoading: boolean;
 }
 
@@ -21,6 +23,7 @@ const referralsInitialState: ReferralsInitialI = {
     numberOfReferreesWhoHaveDoneTwoChallenges: 0,
   },
   godlRewardedByReferrals: 0,
+  koinRewardedByReferrals: 0,
   isReferralsLoading: false,
 };
 
@@ -54,10 +57,23 @@ const referralsSlice = createSlice({
       });
 
     builder
-      .addCase(fetchReferralsReward.pending, (state) => {
+      .addCase(fetchReferralsRewardGodl.pending, (state) => {
         state.isReferralsLoading = true;
       })
-      .addCase(fetchReferralsReward.fulfilled, (state, action) => {
+      .addCase(fetchReferralsRewardGodl.fulfilled, (state, action) => {
+        state.isReferralsLoading = false;
+        state.godlRewardedByReferrals = action.payload;
+        // }
+      })
+      .addCase(fetchReferralsRewardGodl.rejected, (state) => {
+        state.isReferralsLoading = false;
+      });
+
+    builder
+      .addCase(fetchReferralsRewardKoin.pending, (state) => {
+        state.isReferralsLoading = true;
+      })
+      .addCase(fetchReferralsRewardKoin.fulfilled, (state, action) => {
         state.isReferralsLoading = false;
         if (
           action.payload === 0 &&
@@ -66,10 +82,10 @@ const referralsSlice = createSlice({
         ) {
           state.godlRewardedByReferrals = state.referrals.confirmedCount * 1000;
         } else {
-          state.godlRewardedByReferrals = action.payload;
+          state.koinRewardedByReferrals = action.payload;
         }
       })
-      .addCase(fetchReferralsReward.rejected, (state) => {
+      .addCase(fetchReferralsRewardKoin.rejected, (state) => {
         state.isReferralsLoading = false;
       });
   },

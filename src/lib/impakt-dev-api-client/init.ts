@@ -9,6 +9,7 @@ import {
   GodlApi,
   FitnessStatsApi,
   ReferralsApi,
+  CoinApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
@@ -92,6 +93,7 @@ export const configuration = createConfiguration({
 
 export const authInstance = new AuthApi(configuration);
 export const godlInstance = new GodlApi(configuration);
+export const koinInstance = new CoinApi(configuration);
 export const UserInstance = new UsersApi(configuration);
 export const FitnessInstance = new FitnessStatsApi(configuration);
 export const ReferralsInstance = new ReferralsApi(configuration);
