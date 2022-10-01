@@ -12,11 +12,13 @@ import stateReducer from '../slices/state/stateSlice';
 import whitelistReducer from '../slices/whitelist/whitelistSlice';
 import discourseReducer from '../slices/discourse/discourseSlice';
 import groupsReducer from '../slices/groups/groupsSlice';
+import calendarReducer from '../slices/calendar/calendarSlice';
+import eventsReducer from '../slices/events/eventsSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['memberAuth', 'stateReducer', 'groupsReducer'],
+  blacklist: ['memberAuth', 'stateReducer', 'groupsReducer', 'calendarReducer', 'eventsReducer'],
 };
 
 export const memberAuthPersistConfig = {
@@ -36,6 +38,8 @@ const rootReducer = combineReducers({
   whitelistReducer,
   discourseReducer,
   groupsReducer,
+  calendarReducer,
+  eventsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

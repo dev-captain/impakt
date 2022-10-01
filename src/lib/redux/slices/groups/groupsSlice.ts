@@ -31,6 +31,11 @@ const groupsSlice = createSlice({
       state.activeGroup = null;
       state.membersOfGroup = null;
     },
+
+    setActiveGroupCalendar(state: GroupsInitialI) {
+      state.activeGroup = null;
+      state.membersOfGroup = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -131,7 +136,10 @@ const groupsSlice = createSlice({
       })
       .addCase(updateGroup.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.activeGroup = action.payload;
+        if (state.activeGroup) {
+          state.activeGroup.groupName = action.payload.groupName;
+          state.activeGroup.private = action.payload.private;
+        }
       })
       .addCase(updateGroup.rejected, (state) => {
         state.isLoading = false;
@@ -143,7 +151,9 @@ const groupsSlice = createSlice({
       })
       .addCase(updateGroupCoverImage.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.activeGroup = action.payload;
+        if (state.activeGroup) {
+          state.activeGroup!.CurrentCoverImage!.source = action.payload.ImageKey;
+        }
       })
       .addCase(updateGroupCoverImage.rejected, (state) => {
         state.isLoading = false;

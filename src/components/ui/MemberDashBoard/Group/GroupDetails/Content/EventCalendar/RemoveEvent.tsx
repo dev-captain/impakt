@@ -3,9 +3,29 @@ import { Box, Text } from '@chakra-ui/react';
 import { DeleteIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { I, Common } from 'components';
+import { Time } from 'dayspan';
+import { useAppDispatch } from 'hooks';
+import { deleteEvent } from '../../../../../../../lib/redux/slices/events/actions/deleteEvent';
+import { CalendarType } from '../../../../../../../lib/redux/slices/calendar/types';
 
 const RemoveEvent: React.FC = () => {
-  const { goBackToOverViewScreen } = useEventCalendarContext();
+  const { goBackToOverViewScreen, getSelectedDayEvent, removeEvent } = useEventCalendarContext();
+  const eventObj = getSelectedDayEvent();
+  const dispatch = useAppDispatch();
+  const removeHandle = async () => {
+    if (!eventObj) return;
+    try {
+      await dispatch(
+        deleteEvent({ eventId: eventObj.event.id, type: CalendarType.Group }),
+      ).unwrap();
+      removeEvent(eventObj.event);
+      // locally delete event
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  if (!eventObj) return null;
 
   return (
     <>
@@ -31,13 +51,21 @@ const RemoveEvent: React.FC = () => {
         </Box>
         <Box background="#FEE1E3" p="8px" color="#C41F30" opacity="0.5" borderRadius="8px" mb="3px">
           <Text fontSize="14px" fontWeight="600">
-            Good morning
+            {JSON.parse(eventObj.data).title}
           </Text>
           <Text fontSize="12px" fontWeight="500">
-            09:00 AM - 10:00 AM
+            {Time.build(
+              eventObj.schedule.start.date.getHours(),
+              eventObj.schedule.start.date.getMinutes(),
+            ).format('h:mma ')}
+            -
+            {Time.build(
+              eventObj.schedule.end.date.getHours(),
+              eventObj.schedule.end.date.getMinutes(),
+            ).format(' h:mma')}
           </Text>
         </Box>
-        <Box
+        {/* <Box
           p="8px"
           color="#C41F30"
           opacity="0.5"
@@ -49,7 +77,7 @@ const RemoveEvent: React.FC = () => {
           <Text fontSize="12px" fontWeight="500">
             24 members
           </Text>
-        </Box>
+        </Box> */}
       </Box>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Common.ImpaktButton
@@ -63,6 +91,7 @@ const RemoveEvent: React.FC = () => {
           fontWeight="700"
           marginRight="5px"
           _hover={{ backgroundColor: '#F84153' }}
+          onClick={removeHandle}
         >
           <DeleteIcon width="18px" color="#fff" marginRight="5px" />
           Yes, delete
@@ -76,6 +105,7 @@ const RemoveEvent: React.FC = () => {
           fontSize={{ md: '16px' }}
           fontWeight="700"
           color="#29323B"
+          onClick={goBackToOverViewScreen}
           _hover={{ backgroundColor: '#EEF4F6' }}
         >
           <DeleteIcon width="18px" color="#29323B" marginRight="5px" />

@@ -7,8 +7,6 @@ import { Common } from 'components';
 import { InputGroupPropsI } from '../../../../../../common/InputGroup';
 import createGroupYupScheme from '../../../../../../../lib/yup/schemas/createGroupYupScheme';
 import { updateGroup } from '../../../../../../../lib/redux/slices/groups/actions/updateGroup';
-import { fetchGroupDetailById } from '../../../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
-import { fetchGroupRoleById } from '../../../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
 
 const UpdateGroupNameForm: React.FC = () => {
   const group = useAppSelector((state) => state.groupsReducer.activeGroup);
@@ -38,8 +36,6 @@ const UpdateGroupNameForm: React.FC = () => {
     if (!group?.id) return;
     try {
       await dispatch(updateGroup({ groupId: group.id, groupName }));
-      await dispatch(fetchGroupDetailById(group.id.toString())).unwrap();
-      await dispatch(fetchGroupRoleById(group.id.toString())).unwrap();
       toast({
         title: 'Success',
         description: 'Group name updated successfully.',

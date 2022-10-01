@@ -55,8 +55,10 @@ const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
           <Tabs mt="10px">
             <TabList border="0" flexWrap="wrap">
               {activeGroup?.role === GroupRole.Creator
-                ? GroupSettingTab.map((tab) => (
+                ? GroupSettingTab.map((tab, index) => (
                     <Tab
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={`tab-settings-${index}`}
                       _focus={{ boxShadow: 'none' }}
                       _active={{ background: 'transparent', color: '#29323B' }}
                       color="#728BA3"
@@ -69,8 +71,10 @@ const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
                       {tab}
                     </Tab>
                   ))
-                : GroupSettingsMemberTabs.map((tab) => (
+                : GroupSettingsMemberTabs.map((tab, index) => (
                     <Tab
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={`tab-settings-${index}`}
                       _focus={{ boxShadow: 'none' }}
                       _active={{ background: 'transparent', color: '#29323B' }}
                       color="#728BA3"

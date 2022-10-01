@@ -10,6 +10,7 @@ const fetchGroupDetailById = createAsyncThunk(
     try {
       const {
         memberAuth: { isLogin },
+        groupsReducer: { activeGroup },
       } = getState() as RootState;
 
       if (!isLogin) {
@@ -20,6 +21,10 @@ const fetchGroupDetailById = createAsyncThunk(
         .get(`/api/v1/groups/${groupId}`);
 
       const payload = getMyGroupRes.data as GetGroupRes;
+
+      if (activeGroup?.role) {
+        return { ...payload, role: activeGroup.role };
+      }
 
       return payload;
     } catch (err: any) {

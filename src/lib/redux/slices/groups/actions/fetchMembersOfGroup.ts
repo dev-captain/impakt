@@ -6,7 +6,7 @@ import { GetMembersOfGroupRes } from '../types';
 
 const fetchMembersOfGroup = createAsyncThunk(
   'groups/members-of-group',
-  async (groupId: string, { rejectWithValue, getState }) => {
+  async (groupId: number, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin },

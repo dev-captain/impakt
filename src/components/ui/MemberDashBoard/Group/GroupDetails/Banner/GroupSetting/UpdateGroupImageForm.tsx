@@ -61,9 +61,6 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
     formData.append('file', data.file);
     try {
       await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id })).unwrap();
-      // eslint-disable-next-line no-undef
-      await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
-      await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
     } catch (e) {
       console.log(e);
     }

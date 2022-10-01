@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
-import Images from 'assets/images';
 import { useParams } from 'react-router-dom';
 import GroupWelcome from '../../GroupWelcome';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
@@ -10,6 +9,8 @@ import Banner from './Banner/Banner';
 import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
 import { GroupRole } from '../../../../../lib/redux/slices/groups/types';
 import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
+import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
+import { CalendarType } from '../../../../../lib/redux/slices/calendar/types';
 
 const GroupDetails: React.FC = () => {
   const [show, setShow] = React.useState<null | string>(null);
@@ -18,31 +19,24 @@ const GroupDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const member = useAppSelector((state) => state.memberAuth.member);
 
   const getGroupDetail = async () => {
     if (groupParam?.id) {
       try {
-        await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
+        const group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
+        await dispatch(fetchGroupRoleById(group.id));
+        await dispatch(fetchMembersOfGroup(group.id)).unwrap();
+        await dispatch(
+          fetchCalendarById({ calendarId: group.calendarId, type: CalendarType.Group }),
+        );
       } catch (e) {
         setIsNotFound(true);
       }
-      await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
-    }
-  };
-
-  const getMembers = async () => {
-    if (groupParam?.id) {
-      await dispatch(fetchMembersOfGroup(groupParam.id)).unwrap();
     }
   };
 
   React.useEffect(() => {
     getGroupDetail();
-  }, []);
-
-  React.useEffect(() => {
-    getMembers();
   }, []);
 
   React.useEffect(() => {

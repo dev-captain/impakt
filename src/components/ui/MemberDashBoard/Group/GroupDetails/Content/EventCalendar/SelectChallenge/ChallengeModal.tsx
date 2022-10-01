@@ -79,8 +79,9 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close }) => {
         <ModalBody p="0">
           <Tabs mt="30px">
             <TabList border="0" flexWrap="wrap">
-              {ChallengeTab.map((tab) => (
+              {ChallengeTab.map((tab, index) => (
                 <Tab
+                  id={`tab-${index}`}
                   _focus={{ boxShadow: 'none' }}
                   _active={{ background: 'transparent', color: '#29323B' }}
                   color="#728BA3"

@@ -5,12 +5,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Day } from 'dayspan';
 
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { getDummyEvents } from 'data';
 import DayNames from './DayNames';
 import EventsOverview from './EventsOverview';
 import DayComponent from './Day';
+import useNormalizedCalendarData from '../../../../../../../hooks/useNormalizedCalendarData';
+import { getDummyEvents } from '../../../../../../../data';
 
 const EventCalendar: React.FC = () => {
+  const activeGroupCalendar = useNormalizedCalendarData();
   const runInitCalendarRef = useRef(true);
   const {
     addEvents,
@@ -21,11 +23,15 @@ const EventCalendar: React.FC = () => {
     moveToPreviousMonth,
     getStartDayOfCurrentMonth,
     setSelectedDay,
+    setActiveEventId,
   } = useEventCalendarContext();
 
   const initCalendar = () => {
-    const dummyEvents = getDummyEvents();
-    addEvents(dummyEvents);
+    if (activeGroupCalendar) {
+      addEvents(activeGroupCalendar.Events);
+    }
+    // const dummyEvents = getDummyEvents();
+    // addEvents(dummyEvents);
     setSelectedDay(Day.today());
   };
 
@@ -37,7 +43,7 @@ const EventCalendar: React.FC = () => {
     return () => {
       runInitCalendarRef.current = true;
     };
-  }, []);
+  }, [activeGroupCalendar]);
 
   return (
     <Box
@@ -99,13 +105,14 @@ const EventCalendar: React.FC = () => {
         <>
           {getDaysOfCurrentMonth().map((day) => (
             <DayComponent
+              key={day.dayIdentifier}
               isCurrentMonth={day.sameMonth(getStartDayOfCurrentMonth())}
               isToday={day.currentDay}
               isDaySelected={day.selectedDay}
               dayNumber={day.dayOfMonth}
               eventsCounts={day.events.length}
               dote={day.events.length <= 3 ? '.'.repeat(day.events.length) : '...'}
-              selectDay={() => setSelectedDay(day)}
+              selectDay={() => setSelectedDay(day)} // selectedDay
             />
           ))}
         </>

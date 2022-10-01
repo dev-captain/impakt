@@ -26,6 +26,7 @@ export type GetGroupRes = {
   createdAt: string;
   updatedAt: string;
   conversationId?: string;
+  calendarId: number;
   currentCoverImageId?: string;
   memberCount?: number;
   private: boolean;

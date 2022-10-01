@@ -3,9 +3,12 @@ import { Calendar, CalendarDay, CalendarEvent, Day, EventInput, DayInput } from 
 
 interface EventCalendarContext {
   addEvents: (events: EventInput<string, any>[]) => void;
+  addEvent: (event: EventInput<string, any>) => void;
+  removeEvent: (event: EventInput<string, any>) => void;
   setSelectedDay: (day: Day) => Calendar<string, any>;
   getSelectedDay: () => Day;
   getSelectedDayEvents: () => CalendarEvent<string, any>[];
+  setActiveEventId: React.Dispatch<React.SetStateAction<number | undefined>>;
   moveToNextMonth: () => void;
   moveToPreviousMonth: () => void;
   getCurrentMonthLabel: () => string;
@@ -15,8 +18,6 @@ interface EventCalendarContext {
   getCurrentOverviewScreen: () => OverViewScreenTypes;
   goToOverViewScreen: (screenName: OverViewScreenTypes) => void;
   goBackToOverViewScreen: () => void;
-  setSelectedEventsOfDay: (dayInput: DayInput) => void;
-  setSelectedEventOfDay: (event: CalendarEvent<string, any>) => void;
   getSelectedDayEvent: () => CalendarEvent<string, any> | undefined;
 }
 
@@ -42,12 +43,8 @@ export const EventCalendarContextProvider: React.FC<{
   const [calendarOverViewScreen, setCalendarOverViewScreen] = React.useState<OverViewScreenTypes[]>(
     ['first'],
   );
-  const [selectedEvents, setSelectedEvents] = React.useState<CalendarEvent<string, any>[]>([]);
-
-  const [selectedEvent, setSelectedEvent] = React.useState<CalendarEvent<string, any>>();
-
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const [_, setReRenderCalendarCount] = React.useState<number>(0);
+  const [activeEventId, setActiveEventId] = React.useState<number>();
 
   const reRenderCalendar = () => {
     setReRenderCalendarCount((prev) => prev + 1);
@@ -58,43 +55,53 @@ export const EventCalendarContextProvider: React.FC<{
     reRenderCalendar();
   };
 
+  const addEvent = (event: EventInput<string, any>) => {
+    calendarRef.current.addEvent(event);
+    goToOverViewScreen('first');
+    reRenderCalendar();
+  };
+
+  const removeEvent = (event: EventInput<string, any>) => {
+    calendarRef.current.removeEvent(event);
+    goToOverViewScreen('first');
+    reRenderCalendar();
+  };
+
   const getSelectedDay = () => {
     return calendarRef.current.selection?.start;
   };
 
   const getSelectedDayEvent = () => {
-    return selectedEvent;
+    return calendarRef.current
+      .getDay(getSelectedDay())
+      ?.events.find((event) => event.event.id === activeEventId);
   };
 
   const getSelectedDayEvents = () => {
-    return selectedEvents;
-  };
-
-  const setSelectedEventsOfDay = (dayInput: DayInput) => {
-    setSelectedEvents(calendarRef.current.getDay(dayInput).events);
-  };
-
-  const setSelectedEventOfDay = (event: CalendarEvent<string, any>) => {
-    setSelectedEvent(event);
+    return calendarRef.current.getDay(getSelectedDay())?.events.sort((a, b) => {
+      return a.time.start.time - b.time.start.time;
+    });
   };
 
   const setSelectedDay = (day: Day) => {
     const selectedDay = calendarRef.current.select(day);
-    setSelectedEventsOfDay(day);
     if (getCurrentOverviewScreen() !== 'first') {
       goToOverViewScreen('first');
     }
+    reRenderCalendar();
 
     return selectedDay;
   };
 
   const moveToNextMonth = () => {
     calendarRef.current.next();
+    goToOverViewScreen('empty');
     reRenderCalendar();
   };
 
   const moveToPreviousMonth = () => {
     calendarRef.current.prev();
+    goToOverViewScreen('empty');
     reRenderCalendar();
   };
 
@@ -109,6 +116,8 @@ export const EventCalendarContextProvider: React.FC<{
   };
 
   const getDaysOfCurrentMonth = () => {
+    console.log(calendarRef.current.days);
+
     return calendarRef.current.days;
   };
 
@@ -136,12 +145,13 @@ export const EventCalendarContextProvider: React.FC<{
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         addEvents,
+        addEvent,
         setSelectedDay,
+        setActiveEventId,
+        removeEvent,
         getSelectedDay,
         getSelectedDayEvent,
         getSelectedDayEvents,
-        setSelectedEventOfDay,
-        setSelectedEventsOfDay,
         moveToNextMonth,
         moveToPreviousMonth,
         getCurrentMonthLabel,

@@ -1,3 +1,6 @@
+import { Day } from 'dayspan';
+import { CalendarDtoV1, CalendarEventDtoV1Response } from '../lib/redux/slices/calendar/types';
+
 export const horizontalScrollBy = (ref: any, size = 0) => {
   ref?.current?.scrollBy({
     top: 0,
@@ -39,4 +42,39 @@ export const getImageFromS3AsUrl = (currentCoverImageSource: string) => {
 
   return imageUrl;
 };
+
+export const normalizeCalendarDataMap = (data: CalendarDtoV1) => {
+  const convertEventDataToStringfy = data.Events.map((c) => {
+    return {
+      ...c,
+      schedule: {
+        ...c.schedule,
+        duration: 0,
+        on: c.schedule.start,
+        times: [Day.fromString(c.schedule.start), Day.fromString(c.schedule.end)],
+      },
+      data: JSON.stringify(c.data),
+    };
+  });
+
+  const outPutData = { ...data, Events: convertEventDataToStringfy };
+
+  return outPutData;
+};
+
+export const normalizeCalendarData = (data: CalendarEventDtoV1Response) => {
+  const output = {
+    ...data,
+    schedule: {
+      ...data.schedule,
+      duration: 0,
+      on: data.schedule.start,
+      times: [Day.fromString(data.schedule.start), Day.fromString(data.schedule.end)],
+    },
+    data: JSON.stringify(data.data),
+  };
+
+  return output;
+};
+
 export default {};

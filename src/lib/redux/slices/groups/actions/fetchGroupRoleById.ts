@@ -6,7 +6,7 @@ import { GroupRole } from '../types';
 
 const fetchGroupRoleById = createAsyncThunk(
   'groups/fetch-group-role-by-id',
-  async (groupId: string, { rejectWithValue, getState }) => {
+  async (groupId: number, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin },

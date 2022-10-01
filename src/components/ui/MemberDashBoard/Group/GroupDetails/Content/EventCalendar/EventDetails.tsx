@@ -13,6 +13,8 @@ const EventDetails: React.FC = () => {
   const eventObj = getSelectedDayEvent();
   if (!eventObj) return null;
 
+  // console.log('detail', eventObj);
+
   return (
     <>
       <Box>
@@ -66,18 +68,11 @@ const EventDetails: React.FC = () => {
             <I.ClockIcon color="#728BA3" width="16px" height="16px" />
           </Box>
           <Text color="#4E6070" fontSize="16px" fontWeight="500">
-            {Time.build(
-              eventObj.schedule.start.date.getHours(),
-              eventObj.schedule.start.date.getMinutes(),
-            ).format('h:mma ')}
-            -
-            {Time.build(
-              eventObj.schedule.end.date.getHours(),
-              eventObj.schedule.end.date.getMinutes(),
-            ).format(' h:mma')}
+            {eventObj.event.schedule?.times[0].format('h:mma ')}-{' '}
+            {eventObj.event.schedule?.times[1].format('h:mma ')}
           </Text>
         </Box>
-        <Box display="flex" alignItems="center" mb="12px">
+        {/* <Box display="flex" alignItems="center" mb="12px">
           <Box w="34px">
             <I.PeopleIcon width="20px" height="20px" color="#728BA3" />
           </Box>
@@ -96,21 +91,21 @@ const EventDetails: React.FC = () => {
               {` ${JSON.parse(eventObj.data).memberCount} members more`}
             </Text>
           )}
-        </Box>
-        <Box display="flex" alignItems="center" mb="12px">
+        </Box> */}
+        {/* <Box display="flex" alignItems="center" mb="12px">
           <Box w="34px">
             <I.ArrowIcon w="15px" height="15px" color="#728BA3" />
           </Box>
           <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
             {`${JSON.parse(eventObj.data).link} `}
           </Text>
-        </Box>
+        </Box> */}
         <Box display="flex" alignItems="center">
           <Box w="34px">
             <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
           </Box>
           <Text color="#4E6070" fontSize="16px" fontWeight="500" maxW="258px">
-            {JSON.parse(eventObj.data).chellanges}
+            {JSON.parse(eventObj.data).chellanges ?? 'Challenge'}
           </Text>
         </Box>
       </Box>

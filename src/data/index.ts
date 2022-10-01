@@ -1,5 +1,5 @@
 import Images from 'assets/images';
-import { Day, EventInput, Month } from 'dayspan';
+import { Day, EventInput, Month, Time } from 'dayspan';
 
 export const RoadMapData: {
   date: string;
@@ -470,10 +470,12 @@ export const getDummyEvents = () => {
     id: 1,
     data: event1Data,
     schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 11),
-      times: [Day.build(2022, Month.SEPTEMBER, 11, 8)],
-      duration: 1,
-      durationUnit: 'hours',
+      on: Day.fromString('2022-10-01T20:00:00.000Z'),
+      duration: 0,
+      times: [
+        Day.fromString('2022-10-01T20:00:00.000Z'),
+        Day.fromString('2022-10-01T20:59:00.000Z'),
+      ],
     },
   };
 
@@ -522,10 +524,10 @@ export const getDummyEvents = () => {
   };
 
   allEvents.push(event1);
-  allEvents.push(event2);
-  allEvents.push(event3);
-  allEvents.push(event4);
-  allEvents.push(event5);
+  // allEvents.push(event2);
+  // allEvents.push(event3);
+  // allEvents.push(event4);
+  // allEvents.push(event5);
 
   return allEvents;
 };

@@ -7,11 +7,13 @@ import { useEventCalendarContext } from 'context/EventCalendarContext';
 import TimeIndicator from './TimeIndicator';
 
 const ShowEvents: React.FC = () => {
-  const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setSelectedEventOfDay } =
+  const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
     useEventCalendarContext();
   const selectedDay = getSelectedDay();
   const selectedDayEvents = getSelectedDayEvents();
+
   if (!selectedDay) return null;
+  console.log(selectedDayEvents);
 
   return (
     <>
@@ -23,47 +25,42 @@ const ShowEvents: React.FC = () => {
             )}
           </Text>
         </Box>
-        {selectedDayEvents.length === 0 ? (
+        {selectedDayEvents?.length === 0 ? (
           <Box background="#EEF4F6" p="16px" color="#728BA3" borderRadius="8px" mb="3px">
             <Text fontSize="14px" fontWeight="600" opacity="0.5">
               No upcoming events
             </Text>
           </Box>
         ) : (
-          selectedDayEvents.map((eventObj: any) => (
-            <>
-              {new Time(eventObj.time.start.date.getHours()) >=
-                new Time(Number(Day.now().format('HH'))) && <TimeIndicator />}
-              <Box
-                key={eventObj.id}
-                background="#E7ECFF"
-                p="8px"
-                color="#4364D9"
-                borderRadius="8px"
-                mb="3px"
-                onClick={() => {
-                  setSelectedEventOfDay(eventObj.event);
-                  goToOverViewScreen('event');
-                }}
-              >
-                <Text fontSize="14px" fontWeight="600">
-                  {JSON.parse(eventObj.event.data).title}
-                </Text>
-                <Text fontSize="12px" fontWeight="500">
-                  {/* {event.schedule.times.} */}
-                  {Time.build(
-                    eventObj.time.start.date.getHours(),
-                    eventObj.time.start.date.getMinutes(),
-                  ).format('h:mma ')}
-                  -
-                  {Time.build(
-                    eventObj.time.end.date.getHours(),
-                    eventObj.time.end.date.getMinutes(),
-                  ).format(' h:mma')}
-                </Text>
-              </Box>
-            </>
-          ))
+          selectedDayEvents?.map(
+            (eventObj) =>
+              eventObj.day.time === eventObj.event.schedule.start.time && (
+                <Box key={eventObj.id}>
+                  {/* {new Time(eventObj.time.start.date.getHours()) >=
+                new Time(Number(Day.now().format('HH'))) && <TimeIndicator />} */}
+                  <Box
+                    key={eventObj.id}
+                    background="#E7ECFF"
+                    p="8px"
+                    color="#4364D9"
+                    borderRadius="8px"
+                    mb="3px"
+                    onClick={() => {
+                      goToOverViewScreen('event');
+                      setActiveEventId(eventObj.event.id);
+                    }}
+                  >
+                    <Text fontSize="14px" fontWeight="600">
+                      {JSON.parse(eventObj.event.data).title}
+                    </Text>
+                    <Text fontSize="12px" fontWeight="500">
+                      {eventObj.event.schedule?.times[0].format('h:mma ')}-
+                      {eventObj.event.schedule?.times[1].format('h:mma ')}
+                    </Text>
+                  </Box>
+                </Box>
+              ),
+          )
         )}
         {/* <Box display="flex" alignItems="center" mb="3px">
           <Box background="#5C7FFF" w="8px" h="8px" borderRadius="50%" marginLeft="-6px" />
