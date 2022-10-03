@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, CircularProgress, HStack } from '@chakra-ui/react';
+import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useParams } from 'react-router-dom';
 import GroupWelcome from '../../GroupWelcome';
@@ -44,14 +44,7 @@ const GroupDetails: React.FC = () => {
   };
 
   if (isLoading) return <CircularProgress isIndeterminate />;
-  // if (isNotFound) return <Text>404 Group not found</Text>;
-  if (isNotFound)
-    return (
-      <HStack w="100%" display="block">
-        <Banner img={Images.group.cover} />
-        <Content />
-      </HStack>
-    );
+  if (isNotFound) return <Text>404 Group not found</Text>;
 
   return (
     <Box w="full" as="section" id="general-section">
