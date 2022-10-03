@@ -1,22 +1,35 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
+import { GetChallengeRes } from '@impakt-dev/api-client';
+import { Day, Time } from 'dayspan';
+import { useAppSelector } from '../../../../../../../../../hooks';
+import { convertMsToHM } from '../../../../../../../../../utils';
 
 interface ChallengesCardProps {
-  data?: Object;
+  data: GetChallengeRes;
   setAssocId: () => void;
+  setAssocName: () => void;
   onClose: () => void;
 }
 
-const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClose }) => {
-  const { title, challenge, time, play, like, timmer, name } = data as {
-    title: string;
-    challenge: string;
-    time: string;
-    play: string;
-    like: string;
-    timmer: Object;
-    name: string;
+const ChallengesCard: React.FC<ChallengesCardProps> = ({
+  data,
+  setAssocName,
+  setAssocId,
+  onClose,
+}) => {
+  const { name, likes, routine, validUntil, validFrom } = data;
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const isValidDate = validFrom ? Day.fromDate(validFrom)!.time < Day.now().time : false;
+  console.log(Day.fromDate(validFrom)!.time, Day.now().time);
+  const getTimeDifference = () => {
+    if (!isValidDate) return { h: 0, m: 0, s: 0 };
+
+    const milliseconds = Day.fromDate(validUntil)?.millisBetween(Day.fromDate(validFrom)!) ?? 0;
+    const { h, m, s } = convertMsToHM(milliseconds);
+
+    return { h, m, s };
   };
 
   return (
@@ -33,7 +46,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClo
         lineHeight={{ base: '35px', md: 0 }}
       >
         <Text color="#29323B" fontSize={{ base: '18px', md: '24px' }} fontWeight="600">
-          {title}
+          {name}
         </Text>
         <Box display="flex" gap="6px" flexWrap="wrap">
           <Box
@@ -50,7 +63,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClo
               ml="10px"
               fontSize={{ base: '13px', md: '16px' }}
             >
-              {challenge}
+              22 {/* {challenge} */}
             </Text>
           </Box>
           <Box
@@ -67,10 +80,10 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClo
               ml="10px"
               fontSize={{ base: '13px', md: '16px' }}
             >
-              {time}
+              {routine.estimatedTime}
             </Text>
           </Box>
-          {play && (
+          {/* {play && (
             <Box
               display="flex"
               alignItems="center"
@@ -88,8 +101,8 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClo
                 {play}
               </Text>
             </Box>
-          )}
-          {like && (
+          )} */}
+          {likes && (
             <Box
               display="flex"
               alignItems="center"
@@ -104,7 +117,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClo
                 ml="10px"
                 fontSize={{ base: '13px', md: '16px' }}
               >
-                {like}
+                {likes}
               </Text>
             </Box>
           )}
@@ -125,36 +138,34 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClo
           flexWrap="wrap"
           alignItems="center"
         >
-          {timmer && (
-            <>
-              <Text
-                background="#EEF4F6"
-                borderRadius="4px"
-                p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}
-              >
-                08
-              </Text>
-              <Text m="0 6px">:</Text>
-              <Text
-                background="#EEF4F6"
-                borderRadius="4px"
-                p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}
-              >
-                32
-              </Text>
-              <Text m="0 6px">:</Text>
-              <Text
-                background="#EEF4F6"
-                borderRadius="4px"
-                p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}
-                mr="16px"
-              >
-                44
-              </Text>
-            </>
-          )}
+          <>
+            <Text
+              background="#EEF4F6"
+              borderRadius="4px"
+              p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}
+            >
+              {getTimeDifference().h}
+            </Text>
+            <Text m="0 6px">:</Text>
+            <Text
+              background="#EEF4F6"
+              borderRadius="4px"
+              p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}
+            >
+              {getTimeDifference().m}
+            </Text>
+            <Text m="0 6px">:</Text>
+            <Text
+              background="#EEF4F6"
+              borderRadius="4px"
+              p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}
+              mr="16px"
+            >
+              {getTimeDifference().s}
+            </Text>
+          </>
           <Text color="#728BA3" fontWeight="500">
-            {`by ${name}`}
+            {`by ${member?.firstName ?? member?.username}`}
           </Text>
         </Box>
         <Box
@@ -180,6 +191,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, setAssocId, onClo
           <Common.ImpaktButton
             onClick={() => {
               setAssocId();
+              setAssocName();
               onClose();
             }}
             variant="black"

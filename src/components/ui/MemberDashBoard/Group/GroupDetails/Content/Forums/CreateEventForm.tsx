@@ -21,13 +21,14 @@ const CreateEventForm: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const dispatch = useAppDispatch();
-  const { handleSubmit, errors, setValue } = useForm({
+  const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {
       eventTitle: '',
       eventDescription: '',
       eventStartTime: '',
       eventEndTime: '',
       assocId: NaN,
+      assocName: '',
     },
     resolver: yupResolver(createEventYupScheme),
   });
@@ -41,18 +42,21 @@ const CreateEventForm: React.FC = () => {
   const handleAdd = async (data: Object) => {
     if (!activeGroup) return;
 
-    const { eventTitle, eventDescription, eventStartTime, eventEndTime } = data as {
+    const { eventTitle, eventDescription, eventStartTime, eventEndTime, assocId } = data as {
       eventTitle: string;
       eventDescription: string;
       eventStartTime: string;
       eventEndTime: string;
+      assocId: number;
     };
+
+    console.log(assocId);
 
     const eventData = {
       title: eventTitle,
       description: eventDescription,
       creatorId: member?.id,
-      assocId: 1,
+      assocId,
     };
 
     const parsedStartTime = Time.fromString(eventStartTime);
@@ -196,7 +200,7 @@ const CreateEventForm: React.FC = () => {
               cursor="pointer"
               onClick={() => onOpen()}
             >
-              Select challenge
+              {getValues('assocName').length > 0 ? getValues('assocName') : 'Select challenge'}
             </Text>
           </Box>
 

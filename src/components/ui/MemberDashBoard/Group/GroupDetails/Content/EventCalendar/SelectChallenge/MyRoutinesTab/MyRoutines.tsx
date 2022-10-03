@@ -4,6 +4,7 @@ import { UseFormSetValue } from 'react-hook-form';
 import { ChallengeList } from 'data';
 
 import ChallengesCard from './ChallengesCard';
+import { useAppSelector } from '../../../../../../../../../hooks';
 
 const MyRoutines: React.FC<{
   setValue: UseFormSetValue<{
@@ -12,9 +13,16 @@ const MyRoutines: React.FC<{
     eventStartTime: string;
     eventEndTime: string;
     assocId: number;
+    assocName: string;
   }>;
   onClose: () => void;
 }> = ({ setValue, onClose }) => {
+  const availableGroupChallenges = useAppSelector(
+    (state) => state.challengesReducer.availableGroupChallenges,
+  );
+
+  if (!availableGroupChallenges.length) return null;
+
   return (
     <Box
       height="530px"
@@ -35,11 +43,12 @@ const MyRoutines: React.FC<{
         },
       }}
     >
-      {ChallengeList.map((t) => (
+      {availableGroupChallenges.map((t) => (
         <ChallengesCard
           key={t.id}
           onClose={onClose}
           setAssocId={() => setValue('assocId', t.id, { shouldValidate: true })}
+          setAssocName={() => setValue('assocName', t.name, { shouldValidate: true })}
           data={t}
         />
       ))}

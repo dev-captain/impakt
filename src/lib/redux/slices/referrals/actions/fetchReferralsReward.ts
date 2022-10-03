@@ -14,13 +14,13 @@ const fetchReferralsReward = createAsyncThunk(
         return Promise.reject(new Error('Please Sign In first to continue'));
       }
 
-      let countAmount = 0;
-      const referralsRes =
-        await ReferralsInstance.referralControllerGetRewardTransactionsByReferrals();
+      const countAmount = 0;
+      // const referralsRes =
+      //   await ReferralsInstance.referralControllerGetRewardTransactionsByReferrals();
 
-      referralsRes.forEach(({ amount }) => {
-        countAmount += amount;
-      });
+      // referralsRes.forEach(({ amount }) => {
+      //   countAmount += amount;
+      // });
 
       return countAmount;
     } catch (err: any) {

@@ -1923,10 +1923,10 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@impakt-dev/api-client@^0.30.16-1169":
-  version "0.30.16-1169"
-  resolved "https://gitlab.com/api/v4/projects/38621431/packages/npm/@impakt-dev/api-client/-/@impakt-dev/api-client-0.30.16-1169.tgz"
-  integrity sha1-+kTlxw9LyxrcAWnQFxMpd2LWxVg=
+"@impakt-dev/api-client@^0.31.5-1264":
+  version "0.31.5-1264"
+  resolved "https://gitlab.com/api/v4/projects/38621431/packages/npm/@impakt-dev/api-client/-/@impakt-dev/api-client-0.31.5-1264.tgz#9a6aacb3db5dc6e8cc089817a78181e998a93b1a"
+  integrity sha1-mmqss9tdxujMCJgXp4GB6ZipOxo=
   dependencies:
     es6-promise "^4.2.4"
     url-parse "^1.4.3"
@@ -5225,7 +5225,7 @@ es-to-primitive@^1.2.1:
 
 es6-promise@^4.2.4:
   version "4.2.8"
-  resolved "https://registry.npmjs.org/es6-promise/-/es6-promise-4.2.8.tgz"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
   integrity sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==
 
 escalade@^3.1.1:
@@ -9979,7 +9979,7 @@ qs@6.9.6:
 
 querystringify@^2.1.1:
   version "2.2.0"
-  resolved "https://registry.npmjs.org/querystringify/-/querystringify-2.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
   integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
 queue-microtask@^1.2.2:
@@ -12133,7 +12133,7 @@ url-parse-lax@^3.0.0:
 
 url-parse@^1.4.3:
   version "1.5.10"
-  resolved "https://registry.npmjs.org/url-parse/-/url-parse-1.5.10.tgz"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.10.tgz#9d3c2f736c1d75dd3bd2be507dcc111f1e2ea9c1"
   integrity sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==
   dependencies:
     querystringify "^2.1.1"

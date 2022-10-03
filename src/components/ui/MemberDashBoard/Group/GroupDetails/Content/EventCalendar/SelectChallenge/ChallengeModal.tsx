@@ -29,6 +29,7 @@ interface ChallengeModalProps {
     eventDescription: string;
     eventStartTime: string;
     eventEndTime: string;
+    assocName: string;
     assocId: number;
   }>;
 }
@@ -49,7 +50,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }
             Select Challenge
           </Text>
           <Box position="relative" w="100%" display={{ base: 'none', md: 'block' }}>
-            <Input
+            {/* <Input
               placeholder="Search"
               background="#EEF4F6"
               border="0"
@@ -61,7 +62,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }
               pl="48px"
               w="86%"
             />
-            <I.SearchIcon position="absolute" top="5px" left="48px" width="24px" color="#29323B" />
+            <I.SearchIcon position="absolute" top="5px" left="48px" width="24px" color="#29323B" /> */}
           </Box>
           <ModalCloseButton
             color="#728BA3"

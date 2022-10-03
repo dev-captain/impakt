@@ -4,14 +4,25 @@ import { ChevronLeftIcon, CloseIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { useAppSelector } from '../../../../../../../hooks';
+import { assocId } from '../../../../../../../lib/yup/fields';
 
 const EventDetails: React.FC = () => {
   const [isGoing, setIsGoing] = React.useState(true);
   const [isAdmin] = React.useState(true);
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
     useEventCalendarContext();
+
   const eventObj = getSelectedDayEvent();
   if (!eventObj) return null;
+
+  const challanges = useAppSelector((state) => state.challengesReducer.availableGroupChallenges);
+
+  const challange = useAppSelector(
+    (state) => state.challengesReducer.availableGroupChallenges,
+  ).find(({ id }) => id === JSON.parse(eventObj.data).assocId);
+
+  console.log(challange, challanges, JSON.parse(eventObj.data));
 
   // console.log('detail', eventObj);
 
@@ -105,7 +116,7 @@ const EventDetails: React.FC = () => {
             <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
           </Box>
           <Text color="#4E6070" fontSize="16px" fontWeight="500" maxW="258px">
-            {JSON.parse(eventObj.data).chellanges ?? 'Challenge'}
+            {challange?.name ?? 'Challenge'}
           </Text>
         </Box>
       </Box>

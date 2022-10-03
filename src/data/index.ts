@@ -570,8 +570,8 @@ export const ChallengeList = [
 ];
 
 export const ChallengeTab = [
-  'My Routines',
-  // 'My Challenges',
+  // 'My Routines',
+  'My Challenges',
   // 'Impakt',
   // 'ICONs',
   // 'Community'

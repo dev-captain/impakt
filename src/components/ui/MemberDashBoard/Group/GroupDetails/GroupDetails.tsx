@@ -11,6 +11,7 @@ import { GroupRole } from '../../../../../lib/redux/slices/groups/types';
 import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
 import { CalendarType } from '../../../../../lib/redux/slices/calendar/types';
+import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
 
 const GroupDetails: React.FC = () => {
   const [show, setShow] = React.useState<null | string>(null);
@@ -24,11 +25,15 @@ const GroupDetails: React.FC = () => {
     if (groupParam?.id) {
       try {
         const group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
-        await dispatch(fetchGroupRoleById(group.id));
+        const roleD = await dispatch(fetchGroupRoleById(group.id)).unwrap();
         await dispatch(fetchMembersOfGroup(group.id)).unwrap();
         await dispatch(
           fetchCalendarById({ calendarId: group.calendarId, type: CalendarType.Group }),
         );
+        // fetch my challanges for modal if user creator
+        if (roleD.role === GroupRole.Creator) {
+          await dispatch(fetchAvailableChallengesForGroup());
+        }
       } catch (e) {
         setIsNotFound(true);
       }
