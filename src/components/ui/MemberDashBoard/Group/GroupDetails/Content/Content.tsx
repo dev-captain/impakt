@@ -4,6 +4,7 @@ import { EventCalendarContextProvider } from 'context/EventCalendarContext';
 import Forums from './Forums/Forums';
 import MemberList from './MemberList/MemberList';
 import EventCalendar from './EventCalendar/EventCalendar';
+import GroupChat from './GroupChat/GroupChat';
 // import EventCalendar from './Calendar/EventCalendar';
 
 const Content: React.FC = () => {
@@ -19,7 +20,10 @@ const Content: React.FC = () => {
       <EventCalendarContextProvider>
         <EventCalendar />
       </EventCalendarContextProvider>
-      <Forums />
+      <Box width="100%">
+        <GroupChat />
+        <Forums />
+      </Box>
       <MemberList />
     </Box>
   );

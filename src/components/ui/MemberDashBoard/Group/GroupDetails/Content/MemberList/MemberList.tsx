@@ -42,7 +42,7 @@ const MemberList: React.FC = () => {
   if (isLoading) return <CircularProgress isIndeterminate />;
 
   return (
-    <Box marginStart="0 !important" width={{ base: '100%', md: '30%', lgx: '25%' }}>
+    <Box marginStart="0 !important" width={{ base: '100%', md: '30%', lgx: '55%' }}>
       <MemberDashboardCard
         p={{ base: '16px', md: '24px' }}
         marginTop={{ base: 0, md: '26px' }}

@@ -7,7 +7,7 @@ import UserForumsCard from './UserForumsCard';
 
 const Forums: React.FC = () => {
   return (
-    <Box marginStart="0 !important" width={{ base: '100%', md: '40%', lgx: '50%' }}>
+    <Box marginStart="0 !important" width={{ base: '100%', md: '100%', lgx: '100%' }}>
       <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto" marginTop="26px">
         <Box w="full">
           <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
