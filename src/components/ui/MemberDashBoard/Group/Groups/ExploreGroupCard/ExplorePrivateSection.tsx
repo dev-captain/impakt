@@ -70,7 +70,11 @@ const ExplorePrivateSection: React.FC = () => {
         >
           <Box position="relative">
             <GroupsCard
-              img={getImageFromS3AsUrl(g.CurrentCoverImage?.source) ?? Images.group.logo}
+              img={
+                g.CurrentCoverImage?.source
+                  ? getImageFromS3AsUrl(g.CurrentCoverImage?.source)
+                  : Images.group.logo
+              }
               member={g.memberCount}
               name={g.groupName}
             >

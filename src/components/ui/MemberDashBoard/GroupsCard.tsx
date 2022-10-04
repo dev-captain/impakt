@@ -8,8 +8,6 @@ interface GroupsCardPropsI {
   name: string;
 }
 const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name, children }) => {
-  console.log(img);
-
   return (
     <Box
       display="flex"
@@ -20,6 +18,7 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name, children })
       _hover={{ boxShadow: '0px 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
     >
       <Image
+        alt="Group thumbnail"
         src={img}
         objectFit="cover"
         w="100%"

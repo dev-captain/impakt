@@ -35,6 +35,8 @@ const message = yup.string().required('Message is required field');
 const groupName = yup
   .string()
   .required('Field is required')
+  .min(2, 'Group name must be at least 2 characters')
+  .max(20, 'Group name must be at most 20 characters...')
   .matches(/^[A-Za-z0-9_. ]+$/, 'Special character are not allow');
 
 export const ALLOW_IMAGE_FILE: string[] = ['image/png', 'image/jpeg'];
