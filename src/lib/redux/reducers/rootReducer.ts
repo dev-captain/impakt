@@ -12,6 +12,7 @@ import stateReducer from '../slices/state/stateSlice';
 import whitelistReducer from '../slices/whitelist/whitelistSlice';
 import discourseReducer from '../slices/discourse/discourseSlice';
 import groupsReducer from '../slices/groups/groupsSlice';
+import koinReducer from '../slices/koin/koinSlice';
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   memberAuth: persistReducer(memberAuthPersistConfig, memberAuth),
   knowledgeBase: knowledgeBaseReducer,
   godl: godlReducer,
+  koin: koinReducer,
   fitnessReducer,
   rewardHistoryReducer,
   referrals: referralsReducer,

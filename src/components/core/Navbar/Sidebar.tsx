@@ -56,9 +56,9 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
         collaps={collaps}
       >
         <I.RewardIcon cursor="pointer" width="27px" height="27px" />
-      </SidebarLinkItem>
+      </SidebarLinkItem> */}
 
-      <SidebarLinkItem
+      {/* <SidebarLinkItem
         hide
         href="statistics"
         onClose={onClose}
