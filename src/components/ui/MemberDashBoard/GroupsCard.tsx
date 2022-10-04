@@ -15,7 +15,7 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name, children })
       borderRadius="24px"
       minH="300px"
       flexDirection="column"
-      justifyContent="space-between"
+      _hover={{ boxShadow: '0px 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
     >
       <Image
         src={img}
@@ -25,6 +25,7 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name, children })
         zIndex="0"
         h="172px"
         borderRadius="24px 24px 0 0"
+        padding={{ lgx: '16px 16px 0 16px', base: '12px 12px 0 12px' }}
       />
       <Box padding={{ lgx: '16px', base: '12px' }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">

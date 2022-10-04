@@ -33,7 +33,7 @@ const NewsFeed: React.FC = () => {
         <Common.ImpaktButton
           size="lg"
           variant="white"
-          bgColor="black"
+          bgColor="#2E2E36"
           leftIcon={
             <Box marginRight="8px">
               <I.DiscourseIcon />

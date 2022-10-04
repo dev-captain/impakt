@@ -30,6 +30,7 @@ export const BannerHeaderRight: React.FC = () => {
         marginRight="16px"
         fontSize={{ base: '14px', md: '16px' }}
         leftIcon={<I.PeopleIcon width={{ md: '18px', base: '14px' }} />}
+        cursor="auto"
       >
         {members?.length}
       </Common.ImpaktButton>

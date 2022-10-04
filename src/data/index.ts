@@ -586,3 +586,30 @@ export const GroupSettingTab = [
   // 'Requests',
   // 'Members list'
 ].concat(GroupSettingsMemberTabs);
+
+export const GroupDetails = [
+  {
+    name: 'Morning',
+    private: 'true',
+  },
+  {
+    name: 'Private',
+    private: 'true',
+  },
+  {
+    name: 'Public',
+    private: 'false',
+  },
+  {
+    name: 'news',
+    private: 'true',
+  },
+  {
+    name: 'sport',
+    private: 'false',
+  },
+  {
+    name: 'std.10',
+    private: 'false',
+  },
+];

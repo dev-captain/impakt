@@ -14,10 +14,11 @@ const BannerImage: React.FC = () => {
 
   return (
     <Image
+      cursor="pointer"
       src={
         isCurrentImageExist
           ? getImageFromS3AsUrl(currentCoverImageSource!.source)
-          : Images.group.cover
+          : Images.group.cover2
       }
       minH="100px"
       minWidth="100%"

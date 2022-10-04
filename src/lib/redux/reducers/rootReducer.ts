@@ -15,6 +15,7 @@ import groupsReducer from '../slices/groups/groupsSlice';
 import calendarReducer from '../slices/calendar/calendarSlice';
 import eventsReducer from '../slices/events/eventsSlice';
 import challengesReducer from '../slices/challenges/challengesSlice';
+import koinReducer from '../slices/koin/koinSlice';
 
 const persistConfig = {
   key: 'root',
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   memberAuth: persistReducer(memberAuthPersistConfig, memberAuth),
   knowledgeBase: knowledgeBaseReducer,
   godl: godlReducer,
+  koin: koinReducer,
   fitnessReducer,
   rewardHistoryReducer,
   referrals: referralsReducer,

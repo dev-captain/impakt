@@ -10,6 +10,7 @@ const WelcomeModal: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
   const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
+  const koinBalanceScore = useAppSelector((state) => state.koin.koinBalanceScore);
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
@@ -58,34 +59,51 @@ const WelcomeModal: React.FC = () => {
       </Grid> */}
       <SimpleGrid display="flex" flexWrap="wrap" width={{ base: '100%' }} gap={{ base: 3, lg: 4 }}>
         <GridItem
-          w={{ base: '100%', md: '48%', lg: 'auto', xl: 'auto' }}
-          h="auto"
+          w={{ base: '100%', md: '48%', lg: '155px', xl: '155px' }}
           borderRadius="20px"
-          bg="rgba(254, 196, 23, 0.1)"
           padding="12px 24px"
+          h="auto"
+          bg="rgba(254, 196, 23, 0.15)"
         >
-          <Box
-            color="#FEC417"
-            display="flex"
-            flexDir="column"
-            mt="0 !important"
-            id="whitelist-challange-description-box-2"
-          >
+          <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textAlign="center" textStyle="bold5">
-              <NumberFormat
-                thousandsGroupStyle="thousand"
-                value={godlBalanceScore}
-                decimalSeparator="."
-                displayType="text"
-                thousandSeparator
-                allowNegative
-              />
+              {koinBalanceScore ?? 0}
             </Text>
             <Text textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
-              GODL Balance
+              Koin Balance
             </Text>
           </Box>
         </GridItem>
+        {godlBalanceScore > 0 && (
+          <GridItem
+            w={{ base: '100%', md: '48%', lg: 'auto', xl: 'auto' }}
+            h="auto"
+            borderRadius="20px"
+            bg="rgba(9, 9, 11, 0.4)"
+            padding="12px 24px"
+          >
+            <Box
+              display="flex"
+              flexDir="column"
+              mt="0 !important"
+              id="whitelist-challange-description-box-2"
+            >
+              <Text textAlign="center" textStyle="bold5">
+                <NumberFormat
+                  thousandsGroupStyle="thousand"
+                  value={godlBalanceScore}
+                  decimalSeparator="."
+                  displayType="text"
+                  thousandSeparator
+                  allowNegative
+                />
+              </Text>
+              <Text textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
+                GODL Balance
+              </Text>
+            </Box>
+          </GridItem>
+        )}
         {/* <GridItem
           w={{ base: '100%', md: '48%', lg: '155px', xl: '155px' }}
           borderRadius="20px"
@@ -113,7 +131,7 @@ const WelcomeModal: React.FC = () => {
           borderRadius="20px"
           padding="12px 24px"
           h="auto"
-          bg="rgba(9, 9, 11, 1)"
+          bg="#20202E"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">

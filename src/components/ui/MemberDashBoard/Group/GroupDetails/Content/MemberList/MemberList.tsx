@@ -7,7 +7,7 @@ import {
   // useClipboard,
   // useToast,
 } from '@chakra-ui/react';
-import { I } from 'components';
+// import { I } from 'components';
 import * as React from 'react';
 import Images from 'assets/images';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -36,7 +36,7 @@ const MemberList: React.FC = () => {
               <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
                 Members
               </Text>
-              <I.SettingIcon color="#B0C3D6" width="20px" />
+              {/* <I.SettingIcon color="#B0C3D6" width="20px" /> */}
             </Box>
             {/* <Button
               onClick={onCopyHandle}

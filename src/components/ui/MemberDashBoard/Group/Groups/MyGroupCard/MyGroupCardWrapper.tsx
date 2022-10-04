@@ -44,7 +44,7 @@ const MyGroupCardWrapper: React.FC = () => {
             img={
               m.Group.currentCoverImageId
                 ? getImageFromS3AsUrl(m.Group.CurrentCoverImage!.source)
-                : Images.group.img
+                : Images.group.logo
             }
             name={m.Group.groupName}
           >

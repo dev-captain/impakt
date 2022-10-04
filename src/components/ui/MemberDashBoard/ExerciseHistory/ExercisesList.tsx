@@ -94,7 +94,7 @@ const ExercisesList: React.FC = () => {
                 width={{ base: '88px', sm: '118px', md: '150px' }}
               >
                 <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
-                  {t(keys.memberDashboard.exerciseList.godl)}
+                  {t(keys.memberDashboard.exerciseList.koin)}
                 </Text>
               </Th>
             </Tr>

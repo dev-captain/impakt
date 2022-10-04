@@ -94,6 +94,8 @@ const Images = {
     cover: require('./group/cover.jpg'),
     group: require('./group/group.jpg'),
     upload: require('./group/Upload.png'),
+    logo: require('./group/logo.png'),
+    cover2: require('./group/Cover2.png'),
   },
 };
 

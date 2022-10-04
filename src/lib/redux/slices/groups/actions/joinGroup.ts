@@ -8,7 +8,7 @@ import { fetchMyGroups } from './fetchMyGroups';
 
 const joinGroup = createAsyncThunk(
   'groups/join-group',
-  async (groupId: string, { rejectWithValue, getState, dispatch }) => {
+  async (groupId: number, { rejectWithValue, getState, dispatch }) => {
     try {
       const {
         memberAuth: { isLogin, member },

@@ -72,7 +72,7 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
     }
 
     if (!preview) {
-      return Images.group.upload;
+      return Images.group.logo;
     }
 
     return preview;

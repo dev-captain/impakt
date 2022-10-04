@@ -14,7 +14,6 @@ import { joinGroup } from '../../../../../../lib/redux/slices/groups/actions/joi
 
 const BannerSettingsMenu: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const member = useAppSelector((state) => state.memberAuth.member);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const BannerSettingsMenu: React.FC = () => {
   const jointoGroup = async () => {
     if (!activeGroup) return;
     try {
-      await dispatch(joinGroup(activeGroup.id.toString())).unwrap();
+      await dispatch(joinGroup(activeGroup.id)).unwrap();
       toast({
         title: 'Success',
         description: 'Joined successfully',

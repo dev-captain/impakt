@@ -34,7 +34,7 @@ const ReferralCopyClipboard: React.FC<{
         ml={isBadge ? '0.8em' : '0px !important'}
         display="flex"
         justifyContent="space-between"
-        bgColor="rgba(9, 9, 11, 0.4);"
+        bgColor="#121216"
         p="17px 24px"
         borderRadius="16px"
         alignItems="center"
@@ -42,7 +42,9 @@ const ReferralCopyClipboard: React.FC<{
         mt="8px"
       >
         <Box>
-          <Text textStyle={{ base: 'regular2', sm: 'regular3' }}>{referralLink}</Text>
+          <Text textStyle={{ base: 'regular2', sm: 'regular3' }} color="#fff">
+            {referralLink}
+          </Text>
         </Box>
         <Box onClick={copyClipBoardReferralLink}>
           {hasCopied ? null : <I.CopyClipBoardIcon cursor="pointer" width="25" height="28" />}

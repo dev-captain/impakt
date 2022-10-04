@@ -31,7 +31,7 @@ export default {
     help: 'Help',
     signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
-    notification: 'Notification',
+    notification: 'Notifications',
   },
   computerVision: {
     computerVision: 'COMPUTER VISION',
@@ -296,7 +296,7 @@ export default {
       headline: 'Referrals',
       subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">$1 USD in Crypto</strong> and they receive <strong style="color:#FEC417">$5 USD in Crypto</strong>.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">1000 Koin</strong> and they receive <strong style="color:#FEC417">5000 Koin</strong>.',
       subDescription:
         'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
       discription_list1: 'WLs',
@@ -306,7 +306,7 @@ export default {
       descriptionFooter:
         'Have your friends join us on the Impakt Rocket and let’s moon it together!',
       discription_list5:
-        'GODL is our in-game currency! You`ll use it on our marketplace for Whitelist spots, NFT discounts, Token exchange and many more!',
+        'Koin is the virtual currency within the world of Impakt. You`ll use it to customize your character by purchasing skins, items, pets, and much more.',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {
@@ -324,6 +324,7 @@ export default {
       date: 'Date',
       reason: 'Reason',
       godl: 'GODL',
+      koin: 'Koins',
     },
   },
   NFTGeneral: {

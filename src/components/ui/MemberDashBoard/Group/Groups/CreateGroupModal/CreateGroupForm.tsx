@@ -51,7 +51,7 @@ const CreateGroupForm: React.FC<CreateGroupFormPropsI> = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Group by Demidues',
+      placeholder: 'My cool fitness group',
       onChange,
       type: 'text',
       name: 'groupName',
