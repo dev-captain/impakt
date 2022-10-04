@@ -50,8 +50,6 @@ const CreateEventForm: React.FC = () => {
       assocId: number;
     };
 
-    console.log(assocId);
-
     const eventData = {
       title: eventTitle,
       description: eventDescription,

@@ -105,7 +105,6 @@ const UpdateEventForm: React.FC = () => {
         status: 'success',
       });
     } catch (e: any) {
-      console.log(e);
       toast({
         title: 'Error',
         description: e.response.data.message,

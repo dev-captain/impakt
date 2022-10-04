@@ -22,7 +22,6 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
   const { name, likes, routine, validUntil, validFrom } = data;
   const member = useAppSelector((state) => state.memberAuth.member);
   const isValidDate = validFrom ? Day.fromDate(validFrom)!.time < Day.now().time : false;
-  console.log(Day.fromDate(validFrom)!.time, Day.now().time);
   const getTimeDifference = () => {
     if (!isValidDate) return { h: 0, m: 0, s: 0 };
 

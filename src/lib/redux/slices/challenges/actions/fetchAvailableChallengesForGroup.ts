@@ -19,7 +19,6 @@ const fetchAvailableChallengesForGroup = createAsyncThunk(
       }
 
       const admin = membersOfGroup?.Members.filter(({ role }) => role === GroupRole.Creator)[0];
-      console.log(admin);
 
       const myChallengesRes = await ChallengeInstance.challengesControllerGetMany(
         undefined,
