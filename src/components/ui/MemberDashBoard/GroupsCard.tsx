@@ -8,6 +8,8 @@ interface GroupsCardPropsI {
   name: string;
 }
 const GroupsCard: React.FC<GroupsCardPropsI> = ({ member, img, name, children }) => {
+  console.log(img);
+
   return (
     <Box
       display="flex"

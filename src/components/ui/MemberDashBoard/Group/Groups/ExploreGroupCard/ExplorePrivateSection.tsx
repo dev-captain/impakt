@@ -8,6 +8,8 @@ import Images from 'assets/images';
 
 import GroupsCard from '../../../GroupsCard';
 import { sendGroupRequestToJoin } from '../../../../../../lib/redux/slices/groups/actions/sendGroupRequestToJoin';
+import { getImageFromS3AsUrl } from '../../../../../../utils';
+import { UserRequestStatus } from '../../../../../../lib/redux/slices/groups/types';
 
 const ExplorePrivateSection: React.FC = () => {
   const toast = useToast();
@@ -68,11 +70,7 @@ const ExplorePrivateSection: React.FC = () => {
         >
           <Box position="relative">
             <GroupsCard
-              img={
-                g.CurrentCoverImage?.source
-                  ? `https:impakt-image-data-dev.s3.amazonaws.com/images/8479333ebdd04821b69cff7ba9c70f35.png`
-                  : Images.group.logo
-              }
+              img={getImageFromS3AsUrl(g.CurrentCoverImage?.source) ?? Images.group.logo}
               member={g.memberCount}
               name={g.groupName}
             >
@@ -89,16 +87,30 @@ const ExplorePrivateSection: React.FC = () => {
               <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
                 <Box maxH="38px">
                   <Common.ImpaktButton
-                    variant="transparent"
-                    _hover={{ backgroundColor: '#000', color: '#fff' }}
-                    onClick={() => handleRequestToJoinGroup(g.id)}
+                    variant={
+                      g.Request?.status !== UserRequestStatus.Pending ? 'transparent' : 'black'
+                    }
+                    _hover={{
+                      backgroundColor:
+                        g.Request?.status !== UserRequestStatus.Pending ? '#000' : '#000',
+                      color: '#fff',
+                    }}
+                    onClick={() => {
+                      if (g.Request?.status !== UserRequestStatus.Pending) {
+                        handleRequestToJoinGroup(g.id);
+                      }
+                    }}
                     borderRadius="8px"
                     fontWeight="600"
                     justifyContent="space-around"
                     fontSize="16px"
-                    background="#EEF4F6"
+                    background={
+                      g.Request?.status !== UserRequestStatus.Pending ? '#EEF4F6' : '#000'
+                    }
                   >
-                    Request to join
+                    {g.Request?.status !== UserRequestStatus.Pending
+                      ? 'Request to join'
+                      : 'Pending'}
                   </Common.ImpaktButton>
                 </Box>
               </Box>

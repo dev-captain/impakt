@@ -3,10 +3,14 @@ import axios from 'axios';
 import { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
+import { fetchGroupDetailById } from './fetchGroupDetailById';
 
 const updateGroupCoverImage = createAsyncThunk(
   'groups/update-cover-image',
-  async ({ body, groupId }: { body: FormData; groupId: number }, { rejectWithValue, getState }) => {
+  async (
+    { body, groupId }: { body: FormData; groupId: number },
+    { rejectWithValue, getState, dispatch },
+  ) => {
     try {
       const {
         memberAuth: { isLogin, member },
@@ -23,6 +27,7 @@ const updateGroupCoverImage = createAsyncThunk(
           headers: { 'Content-Type': 'multipart/form-data' },
         })
         .patch(`/api/v1/groups/${groupId}/cover-image`, body);
+      await dispatch(fetchGroupDetailById(groupId.toString()));
 
       return result.data as { ImageKey: string };
     } catch (err: any) {

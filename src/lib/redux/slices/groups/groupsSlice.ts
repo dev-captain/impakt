@@ -150,10 +150,14 @@ const groupsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateGroupCoverImage.fulfilled, (state, action) => {
-        if (state.activeGroup && action.payload.ImageKey) {
-          state.activeGroup.CurrentCoverImage!.source = action.payload.ImageKey;
-        }
         state.isLoading = false;
+        if (!state.activeGroup) return;
+
+        if (!state.activeGroup.CurrentCoverImage) {
+          state.activeGroup.CurrentCoverImage = { source: '' };
+        }
+
+        state.activeGroup.CurrentCoverImage.source = action.payload.ImageKey;
       })
       .addCase(updateGroupCoverImage.rejected, (state) => {
         state.isLoading = false;

@@ -31,7 +31,7 @@ export type GetGroupRes = {
   memberCount?: number;
   private: boolean;
   deleted: boolean;
-  CurrentCoverImage?: GetUploadFileRes;
+  CurrentCoverImage: GetUploadFileRes;
 };
 
 export type ExploreGroupRes = {

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 import GroupsCard from '../../../GroupsCard';
 import { joinGroup } from '../../../../../../lib/redux/slices/groups/actions/joinGroup';
+import { getImageFromS3AsUrl } from '../../../../../../utils';
 
 const ExplorePublicSection: React.FC = () => {
   const navigate = useNavigate();
@@ -67,11 +68,7 @@ const ExplorePublicSection: React.FC = () => {
           }}
         >
           <GroupsCard
-            img={
-              g.CurrentCoverImage?.source
-                ? `https:impakt-image-data-dev.s3.amazonaws.com/images/8479333ebdd04821b69cff7ba9c70f35.png`
-                : Images.group.logo
-            }
+            img={getImageFromS3AsUrl(g.CurrentCoverImage?.source) ?? Images.group.logo}
             member={g.memberCount}
             name={g.groupName}
           >

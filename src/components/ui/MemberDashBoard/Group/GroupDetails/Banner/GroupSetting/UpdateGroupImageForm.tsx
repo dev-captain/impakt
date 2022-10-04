@@ -12,8 +12,6 @@ import uploadImageScheme from '../../../../../../../lib/yup/schemas/uploadImageS
 import { ALLOW_IMAGE_FILE } from '../../../../../../../lib/yup/fields';
 import { updateGroupCoverImage } from '../../../../../../../lib/redux/slices/groups/actions/updateGroupCoverImage';
 import { getImageFromS3AsUrl } from '../../../../../../../utils';
-import { fetchGroupRoleById } from '../../../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
-import { fetchGroupDetailById } from '../../../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 
 interface PropsI {}
 const UpdateGroupImageForm: React.FC<PropsI> = () => {
@@ -68,7 +66,7 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
     const formData = new FormData();
     formData.append('file', data.file);
     try {
-      await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id })).unwrap();
+      await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id }));
     } catch (e) {
       console.log(e);
     }
