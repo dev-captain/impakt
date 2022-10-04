@@ -20,7 +20,7 @@ const EventDetails: React.FC = () => {
 
   const challange = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
-  ).find(({ id }) => id === JSON.parse(eventObj.data).assocId);
+  ).find(({ challenge }) => challenge.id === JSON.parse(eventObj.data).assocId);
 
   // console.log('detail', eventObj);
 
@@ -114,7 +114,7 @@ const EventDetails: React.FC = () => {
             <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
           </Box>
           <Text color="#4E6070" fontSize="16px" fontWeight="500" maxW="258px">
-            {challange?.name ?? 'Challenge'}
+            {challange?.challenge.name ?? 'Challenge'}
           </Text>
         </Box>
       </Box>

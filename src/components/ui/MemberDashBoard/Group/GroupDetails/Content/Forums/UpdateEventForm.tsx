@@ -24,14 +24,14 @@ const UpdateEventForm: React.FC = () => {
 
   const challange = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
-  ).find(({ id }) => id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId);
+  ).find((d) => d.challenge.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId);
 
   const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {
       eventTitle: JSON.parse(getSelectedDayEvent()!.event?.data).title ?? '',
       eventDescription: JSON.parse(getSelectedDayEvent()!.event?.data).description ?? '',
       assocId: JSON.parse(getSelectedDayEvent()!.event?.data).assocId ?? '',
-      assocName: challange?.name ?? '',
+      assocName: challange?.challenge.name ?? '',
       eventStartTime: getSelectedDayEvent()?.event.schedule?.times[0].toString() ?? '',
       eventEndTime: getSelectedDayEvent()?.event.schedule?.times[1].toString() ?? '',
     },
@@ -253,7 +253,7 @@ const UpdateEventForm: React.FC = () => {
         </Common.ImpaktButton>
       </FormControl>
 
-      <ChallengeModal setValue={setValue} open={isOpen} close={() => onClose()} />
+      <ChallengeModal key="2" setValue={setValue} open={isOpen} close={() => onClose()} />
     </>
   );
 };

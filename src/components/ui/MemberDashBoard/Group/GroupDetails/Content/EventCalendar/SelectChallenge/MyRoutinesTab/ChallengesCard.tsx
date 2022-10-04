@@ -1,13 +1,21 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
-import { GetChallengeRes } from '@impakt-dev/api-client';
+import {
+  ChallengeAttemptStatsRes,
+  GetChallengeLikesRes,
+  GetChallengeRes,
+} from '@impakt-dev/api-client';
 import { Day, Time } from 'dayspan';
 import { useAppSelector } from '../../../../../../../../../hooks';
 import { convertMsToHM } from '../../../../../../../../../utils';
 
 interface ChallengesCardProps {
-  data: GetChallengeRes;
+  data: {
+    challenge: GetChallengeRes;
+    attempts: ChallengeAttemptStatsRes;
+    likes: GetChallengeLikesRes;
+  };
   setAssocId: () => void;
   setAssocName: () => void;
   onClose: () => void;
@@ -19,13 +27,17 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
   setAssocId,
   onClose,
 }) => {
-  const { name, likes, routine, validUntil, validFrom } = data;
+  const { challenge, likes, attempts } = data;
+
   const member = useAppSelector((state) => state.memberAuth.member);
-  const isValidDate = validFrom ? Day.fromDate(validFrom)!.time < Day.now().time : false;
+  const isValidDate = challenge.validFrom
+    ? Day.fromDate(challenge.validFrom)!.time < Day.now().time
+    : false;
   const getTimeDifference = () => {
     if (!isValidDate) return { h: 0, m: 0, s: 0 };
 
-    const milliseconds = Day.fromDate(validUntil)?.millisBetween(Day.fromDate(validFrom)!) ?? 0;
+    const milliseconds =
+      Day.fromDate(challenge.validUntil)?.millisBetween(Day.fromDate(challenge.validFrom)!) ?? 0;
     const { h, m, s } = convertMsToHM(milliseconds);
 
     return { h, m, s };
@@ -45,7 +57,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
         lineHeight={{ base: '35px', md: 0 }}
       >
         <Text color="#29323B" fontSize={{ base: '18px', md: '24px' }} fontWeight="600">
-          {name}
+          {challenge.name}
         </Text>
         <Box display="flex" gap="6px" flexWrap="wrap">
           <Box
@@ -62,7 +74,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
               ml="10px"
               fontSize={{ base: '13px', md: '16px' }}
             >
-              22 {/* {challenge} */}
+              {attempts.successAttempts} {/* {challenge} */}
             </Text>
           </Box>
           <Box
@@ -79,7 +91,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
               ml="10px"
               fontSize={{ base: '13px', md: '16px' }}
             >
-              {routine.estimatedTime}
+              {challenge.routine.estimatedTime}
             </Text>
           </Box>
           {/* {play && (
@@ -116,7 +128,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
                 ml="10px"
                 fontSize={{ base: '13px', md: '16px' }}
               >
-                {likes}
+                {likes.count}
               </Text>
             </Box>
           )}

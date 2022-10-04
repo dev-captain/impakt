@@ -90,6 +90,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }
             <TabList border="0" flexWrap="wrap">
               {ChallengeTab.map((tab, index) => (
                 <Tab
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={`tab-${index}`}
                   id={`tab-${index}`}
                   _focus={{ boxShadow: 'none' }}
                   _active={{ background: 'transparent', color: '#29323B' }}

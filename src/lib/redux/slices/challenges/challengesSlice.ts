@@ -1,9 +1,17 @@
-import { GetChallengeRes } from '@impakt-dev/api-client';
+import {
+  ChallengeAttemptStatsRes,
+  GetChallengeLikesRes,
+  GetChallengeRes,
+} from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchAvailableChallengesForGroup } from './actions/fetchAvailableChallengesForGroup';
 
 interface ChallengesInitialI {
-  availableGroupChallenges: GetChallengeRes[];
+  availableGroupChallenges: {
+    challenge: GetChallengeRes;
+    attempts: ChallengeAttemptStatsRes;
+    likes: GetChallengeLikesRes;
+  }[];
   isMyChallengesLoading: boolean;
 }
 

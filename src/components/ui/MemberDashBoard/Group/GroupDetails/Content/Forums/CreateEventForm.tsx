@@ -221,7 +221,7 @@ const CreateEventForm: React.FC = () => {
         </Common.ImpaktButton>
       </FormControl>
 
-      <ChallengeModal setValue={setValue} open={isOpen} close={() => onClose()} />
+      <ChallengeModal key="1" setValue={setValue} open={isOpen} close={() => onClose()} />
     </>
   );
 };

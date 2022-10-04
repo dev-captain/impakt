@@ -28,7 +28,6 @@ import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actio
 
 const MemberDashboard: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
-  const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {

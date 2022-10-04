@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { ChallengeInstance } from '../../../../impakt-dev-api-client/init';
+import {
+  AttemptInstance,
+  ChallengeInstance,
+  LikeInstance,
+} from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
 import { GroupRole } from '../../groups/types';
@@ -30,7 +34,22 @@ const fetchAvailableChallengesForGroup = createAsyncThunk(
         admin?.User.id,
       );
 
-      return myChallengesRes;
+      const challengesLikePromises = myChallengesRes.map(({ id }) =>
+        LikeInstance.likeControllerGetChallengeLikes(id),
+      );
+
+      const attemptsOnPromises = myChallengesRes.map(async ({ id }) =>
+        AttemptInstance.challengeStatsControllerGetChallengeAttemptsForAllUsers(id),
+      );
+
+      const challengesLikes = await Promise.all([...challengesLikePromises]);
+      const attempts = await Promise.all([...attemptsOnPromises]);
+
+      const res = myChallengesRes.map((d, index) => {
+        return { challenge: { ...d }, attempts: attempts[index], likes: challengesLikes[index] };
+      });
+
+      return res;
     } catch (err: any) {
       return rejectWithValue(err);
     }

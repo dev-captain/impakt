@@ -20,6 +20,7 @@ const MyRoutines: React.FC<{
   const availableGroupChallenges = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
   );
+  console.log(availableGroupChallenges);
 
   if (!availableGroupChallenges.length) return null;
 
@@ -45,10 +46,10 @@ const MyRoutines: React.FC<{
     >
       {availableGroupChallenges.map((t) => (
         <ChallengesCard
-          key={t.id}
+          key={t.challenge.id}
           onClose={onClose}
-          setAssocId={() => setValue('assocId', t.id, { shouldValidate: true })}
-          setAssocName={() => setValue('assocName', t.name, { shouldValidate: true })}
+          setAssocId={() => setValue('assocId', t.challenge.id, { shouldValidate: true })}
+          setAssocName={() => setValue('assocName', t.challenge.name, { shouldValidate: true })}
           data={t}
         />
       ))}
