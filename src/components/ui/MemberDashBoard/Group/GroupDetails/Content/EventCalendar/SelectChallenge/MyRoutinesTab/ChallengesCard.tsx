@@ -6,7 +6,7 @@ import {
   GetChallengeLikesRes,
   GetChallengeRes,
 } from '@impakt-dev/api-client';
-import { Day, Time } from 'dayspan';
+import { Day } from 'dayspan';
 import { useAppSelector } from '../../../../../../../../../hooks';
 import { convertMsToHM } from '../../../../../../../../../utils';
 

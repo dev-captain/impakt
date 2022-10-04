@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Day, EventInput } from 'dayspan';
 
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 import { CalendarDtoV1, CalendarType } from '../types/index';

@@ -7,10 +7,7 @@ import { CalendarType } from '../../calendar/types';
 
 const deleteEvent = createAsyncThunk(
   'events/delete',
-  async (
-    { eventId, type }: { eventId: number; type: CalendarType },
-    { rejectWithValue, getState, dispatch },
-  ) => {
+  async ({ eventId }: { eventId: number; type: CalendarType }, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin, member },

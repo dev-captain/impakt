@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { EventInput } from 'dayspan';
 import { fetchCalendarById } from './actions/fetchCalendarById';
 import { CalendarDtoV1, CalendarType } from './types';
 

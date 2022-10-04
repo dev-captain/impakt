@@ -9,7 +9,6 @@ import { answerToGroupRequest } from '../../../../lib/redux/slices/groups/action
 interface NoitificationCardProps {
   name: string;
   GroupName: string;
-  status: UserRequestStatus;
   requestorId: number;
   groupId: number;
 }
@@ -17,7 +16,6 @@ interface NoitificationCardProps {
 const NoitificationCard: React.FC<NoitificationCardProps> = ({
   name,
   GroupName,
-  status,
   requestorId,
   groupId,
 }) => {

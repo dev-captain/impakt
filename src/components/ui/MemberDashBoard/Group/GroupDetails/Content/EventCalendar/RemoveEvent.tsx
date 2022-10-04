@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { DeleteIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { I, Common } from 'components';
+import { Common } from 'components';
 import { Time } from 'dayspan';
 import { useAppDispatch } from 'hooks';
 import { deleteEvent } from '../../../../../../../lib/redux/slices/events/actions/deleteEvent';
@@ -14,15 +14,9 @@ const RemoveEvent: React.FC = () => {
   const dispatch = useAppDispatch();
   const removeHandle = async () => {
     if (!eventObj) return;
-    try {
-      await dispatch(
-        deleteEvent({ eventId: eventObj.event.id, type: CalendarType.Group }),
-      ).unwrap();
-      removeEvent(eventObj.event);
-      // locally delete event
-    } catch (e) {
-      console.error(e);
-    }
+    await dispatch(deleteEvent({ eventId: eventObj.event.id, type: CalendarType.Group })).unwrap();
+    removeEvent(eventObj.event);
+    // locally delete event
   };
 
   if (!eventObj) return null;

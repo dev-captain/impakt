@@ -5,7 +5,6 @@ import {
   FormLabel,
   Box,
   InputRightElement,
-  Text,
   ResponsiveValue,
   Link,
 } from '@chakra-ui/react';

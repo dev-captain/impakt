@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { UseFormSetValue } from 'react-hook-form';
-import { ChallengeList } from 'data';
 
 import ChallengesCard from './ChallengesCard';
 import { useAppSelector } from '../../../../../../../../../hooks';
@@ -20,8 +19,6 @@ const MyRoutines: React.FC<{
   const availableGroupChallenges = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
   );
-  console.log(availableGroupChallenges);
-
   if (!availableGroupChallenges.length) return null;
 
   return (

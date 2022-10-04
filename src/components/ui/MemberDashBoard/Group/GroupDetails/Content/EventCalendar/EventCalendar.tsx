@@ -9,7 +9,7 @@ import DayNames from './DayNames';
 import EventsOverview from './EventsOverview';
 import DayComponent from './Day';
 import useNormalizedCalendarData from '../../../../../../../hooks/useNormalizedCalendarData';
-import { getDummyEvents } from '../../../../../../../data';
+// import { getDummyEvents } from '../../../../../../../data';
 
 const EventCalendar: React.FC = () => {
   const activeGroupCalendar = useNormalizedCalendarData();
@@ -23,7 +23,6 @@ const EventCalendar: React.FC = () => {
     moveToPreviousMonth,
     getStartDayOfCurrentMonth,
     setSelectedDay,
-    setActiveEventId,
   } = useEventCalendarContext();
 
   const initCalendar = () => {

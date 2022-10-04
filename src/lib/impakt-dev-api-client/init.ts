@@ -13,7 +13,6 @@ import {
   ChallengesApi,
   CalendarApi,
   LikesApi,
-  ChallengeAttemptStatsRes,
   DefaultApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';

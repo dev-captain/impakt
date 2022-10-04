@@ -1,5 +1,5 @@
 import Images from 'assets/images';
-import { Day, EventInput, Month, Time } from 'dayspan';
+import { Day, EventInput } from 'dayspan';
 
 export const RoadMapData: {
   date: string;
@@ -480,49 +480,49 @@ export const getDummyEvents = () => {
     },
   };
 
-  const event2: EventInput<string, any> = {
-    id: 2,
-    data: event2Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 11),
-      times: [Day.build(2022, Month.SEPTEMBER, 11, 15)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event2: EventInput<string, any> = {
+  //   id: 2,
+  //   data: event2Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 11),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 11, 15)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
-  const event3 = {
-    id: 3,
-    data: event3Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 1),
-      times: [Day.build(2022, Month.SEPTEMBER, 1, 13)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event3 = {
+  //   id: 3,
+  //   data: event3Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 1),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 1, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
-  const event4 = {
-    id: 4,
-    data: event4Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 2),
-      times: [Day.build(2022, Month.SEPTEMBER, 2, 13)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event4 = {
+  //   id: 4,
+  //   data: event4Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 2),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 2, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
-  const event5 = {
-    id: 4,
-    data: event5Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 7),
-      times: [Day.build(2022, Month.SEPTEMBER, 7, 13)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event5 = {
+  //   id: 4,
+  //   data: event5Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 7),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 7, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
   allEvents.push(event1);
   // allEvents.push(event2);

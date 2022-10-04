@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useRef } from 'react';
-import { Calendar, CalendarDay, CalendarEvent, Day, EventInput, DayInput } from 'dayspan';
+import { Calendar, CalendarDay, CalendarEvent, Day, EventInput } from 'dayspan';
 
 interface EventCalendarContext {
   addEvents: (events: EventInput<string, any>[]) => void;
@@ -44,7 +44,8 @@ export const EventCalendarContextProvider: React.FC<{
   const [calendarOverViewScreen, setCalendarOverViewScreen] = React.useState<OverViewScreenTypes[]>(
     ['first'],
   );
-  const [_, setReRenderCalendarCount] = React.useState<number>(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+  const [reRerender, setReRenderCalendarCount] = React.useState<number>(0);
   const [activeEventId, setActiveEventId] = React.useState<number>();
 
   const reRenderCalendar = () => {

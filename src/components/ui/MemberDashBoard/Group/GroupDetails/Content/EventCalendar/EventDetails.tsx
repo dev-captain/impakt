@@ -1,15 +1,14 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { ChevronLeftIcon, CloseIcon, DeleteIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { useAppSelector } from '../../../../../../../hooks';
-import { assocId } from '../../../../../../../lib/yup/fields';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const EventDetails: React.FC = () => {
-  const [isGoing, setIsGoing] = React.useState(true);
+  // const [isGoing, setIsGoing] = React.useState(true);
   const isAdmin =
     useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
@@ -21,8 +20,6 @@ const EventDetails: React.FC = () => {
   const challange = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
   ).find(({ challenge }) => challenge.id === JSON.parse(eventObj.data).assocId);
-
-  // console.log('detail', eventObj);
 
   return (
     <>

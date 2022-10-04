@@ -10,8 +10,7 @@ import {
 // import { I } from 'components';
 import * as React from 'react';
 import Images from 'assets/images';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { fetchMembersOfGroup } from '../../../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
+import { useAppSelector } from 'hooks';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 

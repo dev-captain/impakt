@@ -8,7 +8,7 @@ const updateEventBE = createAsyncThunk(
   async (
     {
       eventId,
-      calendarId,
+      // calendarId,
       patchCalendarEventReq,
     }: {
       eventId: number;

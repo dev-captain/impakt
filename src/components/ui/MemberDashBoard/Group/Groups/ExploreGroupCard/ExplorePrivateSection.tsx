@@ -14,6 +14,7 @@ import { UserRequestStatus } from '../../../../../../lib/redux/slices/groups/typ
 const ExplorePrivateSection: React.FC = () => {
   const toast = useToast();
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const [reRender, setRerender] = React.useState(0);
   const member = useAppSelector((state) => state.memberAuth.member);
   const explorePrivateGroups = useAppSelector((state) => state.groupsReducer.exploreGroups).filter(

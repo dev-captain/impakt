@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { normalizeCalendarData } from '../../../../../utils';
 import { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';

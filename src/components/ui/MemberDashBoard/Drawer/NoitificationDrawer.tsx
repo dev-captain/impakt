@@ -101,10 +101,9 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
         >
           <Box>
             {requests?.length ? (
-              requests?.map(({ id, status, requestorId, requesteeId, Group, requestor }) => (
+              requests?.map(({ id, requestorId, requesteeId, Group, requestor }) => (
                 <NoitificationCard
                   key={id}
-                  status={status}
                   requestorId={requestorId}
                   groupId={requesteeId}
                   name={requestor.firstName ?? requestor.username}

@@ -17,7 +17,6 @@ const ShowEvents: React.FC = () => {
   const selectedDayEvents = getSelectedDayEvents();
 
   if (!selectedDay) return null;
-  console.log(selectedDayEvents);
 
   return (
     <>
