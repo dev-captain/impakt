@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 import { deleteGroup } from '../../../../../../../lib/redux/slices/groups/actions/deleteGroup';
 import { leaveGroup } from '../../../../../../../lib/redux/slices/groups/actions/leaveGroup';
+import { SignOutIcon, TrashIcon } from '../../../../../../icons';
 
 const GeneralSettings: React.FC = () => {
   const toast = useToast();
@@ -83,22 +84,17 @@ const GeneralSettings: React.FC = () => {
         },
       }}
     >
-      <Common.ImpaktButton
-        mt={{ md: 0, base: '10px' }}
-        variant="primary"
-        colorScheme="#fff"
-        w={{ md: '147px', base: '100%' }}
-        ml={{ md: '16px', base: '0' }}
-        h="60px"
-        backgroundColor="#29323B"
-        borderRadius="8px"
-        type="submit"
-        fontSize={{ md: '16px' }}
-        onClick={activeGroup?.role === GroupRole.Creator ? handleGroupDelete : handleLeaveGroup}
-        fontWeight="700"
-      >
-        {activeGroup?.role === GroupRole.Creator ? 'Delete Group' : 'Leave Group'}
-      </Common.ImpaktButton>
+      <Box maxW="227px">
+        <Common.ImpaktButton
+          padding="0"
+          minH="60px"
+          onClick={activeGroup?.role === GroupRole.Creator ? handleGroupDelete : handleLeaveGroup}
+          variant="alert"
+          leftIcon={activeGroup?.role === GroupRole.Creator ? <TrashIcon /> : <SignOutIcon />}
+        >
+          {activeGroup?.role === GroupRole.Creator ? 'Delete Group' : 'Leave Group'}
+        </Common.ImpaktButton>
+      </Box>
     </Box>
   );
 };

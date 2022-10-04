@@ -88,3 +88,4 @@ export { default as AlarmIcon } from './AlarmIcon';
 export { default as UploadIcon } from './UploadIcon';
 export { default as NotificationIcon } from './NotificationIcon';
 export { default as NotifyIcon } from './NotifyIcon';
+export { default as TrashIcon } from './TrashIcon';
