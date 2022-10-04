@@ -59,14 +59,14 @@ const GroupDetails: React.FC = () => {
 
   return (
     <Box w="full" as="section" id="general-section">
-      {(!localStorage.getItem('showTip') || !show) && activeGroup?.role === GroupRole.Creator ? (
+      {/* {(!localStorage.getItem('showTip') || !show) && activeGroup?.role === GroupRole.Creator ? (
         <GroupWelcome hideGroupWelcome={hide} />
-      ) : (
-        <HStack w="100%" display="block">
-          <Banner />
-          <Content />
-        </HStack>
-      )}
+      ) : ( */}
+      <HStack w="100%" display="block">
+        <Banner />
+        <Content />
+      </HStack>
+      {/* )} */}
     </Box>
   );
 };

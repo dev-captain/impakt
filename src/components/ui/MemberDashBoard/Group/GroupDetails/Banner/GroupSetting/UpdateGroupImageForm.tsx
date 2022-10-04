@@ -3,7 +3,7 @@ import { Avatar, AvatarGroup, Box, Img, Input, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Common, I } from 'components';
 
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { useParams } from 'react-router-dom';
 
@@ -23,8 +23,17 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
   const groupMemberCount = useAppSelector(
     (state) => state.groupsReducer.membersOfGroup?.Members,
   )?.length;
-  const uploadImageRef = React.useRef<HTMLInputElement | null>(null);
-  const [preview, setPreview] = React.useState<any>();
+  const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
+  const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    if (activeGroup?.CurrentCoverImage?.source) {
+      setBannerImage(getImageFromS3AsUrl(activeGroup.CurrentCoverImage.source));
+
+      return;
+    }
+    setBannerImage(Images.group.logo);
+  }, []);
 
   const { handleSubmit, reset, errors, setValue } = useForm({
     resolver: yupResolver(uploadImageScheme),
@@ -36,20 +45,19 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
       const file = e.target.files[0];
       setValue(e.target.name as any, file as any, { shouldValidate: true });
       if (ALLOW_IMAGE_FILE.includes(file.type)) {
-        setPreview(URL.createObjectURL(file));
+        setBannerImage(URL.createObjectURL(file));
       }
     }
   };
 
   const resetUploadImage = () => {
-    setPreview('');
-    getBanner();
+    setBannerImage(Images.group.logo);
     reset({ file: null });
   };
 
   const openUploadImageFileInput = () => {
-    if (uploadImageRef.current) {
-      uploadImageRef.current.click();
+    if (uploadImageInputRef.current) {
+      uploadImageInputRef.current.click();
     }
   };
 
@@ -66,16 +74,9 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
     }
   };
 
-  const getBanner = () => {
-    if (activeGroup?.currentCoverImageId && !preview) {
-      return getImageFromS3AsUrl(activeGroup.CurrentCoverImage!.source);
-    }
-
-    if (!preview) {
-      return Images.group.logo;
-    }
-
-    return preview;
+  const setBannerImage = (source: any) => {
+    if (!uploadImageRef.current) return;
+    uploadImageRef.current.src = source;
   };
 
   return (
@@ -99,10 +100,11 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
           <Img
             minH="100px"
             maxH="300px"
+            alt="Impakt group cover image"
             onClick={openUploadImageFileInput}
             cursor="pointer"
-            src={getBanner()}
             width="100%"
+            ref={uploadImageRef}
           />
 
           {errors?.file && (
@@ -202,7 +204,7 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
         </Box>
       </Box>
       <Input
-        ref={uploadImageRef}
+        ref={uploadImageInputRef}
         name="file"
         id="file"
         type="file"
