@@ -6,23 +6,21 @@ import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { useAppSelector } from '../../../../../../../hooks';
 import { assocId } from '../../../../../../../lib/yup/fields';
+import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const EventDetails: React.FC = () => {
   const [isGoing, setIsGoing] = React.useState(true);
-  const [isAdmin] = React.useState(true);
+  const isAdmin =
+    useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
     useEventCalendarContext();
 
   const eventObj = getSelectedDayEvent();
   if (!eventObj) return null;
 
-  const challanges = useAppSelector((state) => state.challengesReducer.availableGroupChallenges);
-
   const challange = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
   ).find(({ id }) => id === JSON.parse(eventObj.data).assocId);
-
-  console.log(challange, challanges, JSON.parse(eventObj.data));
 
   // console.log('detail', eventObj);
 
@@ -122,7 +120,7 @@ const EventDetails: React.FC = () => {
       </Box>
 
       <Box display="flex" gap="8px">
-        <Common.ImpaktButton
+        {/* <Common.ImpaktButton
           variant="black"
           color={isGoing ? '#fff' : '#29323B'}
           h={{ md: '48px', base: '40px' }}
@@ -136,16 +134,18 @@ const EventDetails: React.FC = () => {
           {isGoing && <I.CoolIcon fontSize="10px" />}
           {!isGoing && <CloseIcon width="16px" height="16px" />}
           <Text marginLeft="10px">{isGoing ? 'Going' : 'Not Going'} </Text>
-        </Common.ImpaktButton>
+        </Common.ImpaktButton> */}
         {isAdmin && (
           <>
             <Common.ImpaktButton
               variant="black"
+              onClick={() => goToOverViewScreen('update')}
               w="48px"
               h={{ md: '48px', base: '40px' }}
               backgroundColor="#EEF4F6"
               borderRadius="8px"
               type="submit"
+              color="#29323B"
               fontSize={{ md: '16px' }}
               fontWeight="700"
             >

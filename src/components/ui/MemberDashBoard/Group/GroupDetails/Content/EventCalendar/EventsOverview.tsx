@@ -5,6 +5,7 @@ import ShowEvents from './ShowEvents';
 import CreateEvent from './CreateEvent';
 import EventDetails from './EventDetails';
 import RemoveEvent from './RemoveEvent';
+import UpdateEvent from './UpdateEvent';
 
 const EventsOverview: React.FC = () => {
   const { getCurrentOverviewScreen } = useEventCalendarContext();
@@ -26,6 +27,7 @@ const EventsOverview: React.FC = () => {
         {screen === 'empty' && null}
         {screen === 'first' && <ShowEvents />}
         {screen === 'create' && <CreateEvent />}
+        {screen === 'update' && <UpdateEvent />}
         {screen === 'event' && <EventDetails />}
         {screen === 'remove' && <RemoveEvent />}
       </Box>

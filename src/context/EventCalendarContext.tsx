@@ -4,6 +4,7 @@ import { Calendar, CalendarDay, CalendarEvent, Day, EventInput, DayInput } from 
 interface EventCalendarContext {
   addEvents: (events: EventInput<string, any>[]) => void;
   addEvent: (event: EventInput<string, any>) => void;
+  updateEvent: (event: EventInput<string, any>) => void;
   removeEvent: (event: EventInput<string, any>) => void;
   setSelectedDay: (day: Day) => Calendar<string, any>;
   getSelectedDay: () => Day;
@@ -23,7 +24,7 @@ interface EventCalendarContext {
 
 // eslint-disable-next-line no-redeclare
 const EventCalendarContext = createContext<EventCalendarContext | null>(null);
-type OverViewScreenTypes = 'empty' | 'first' | 'create' | 'event' | 'remove';
+type OverViewScreenTypes = 'empty' | 'first' | 'create' | 'event' | 'remove' | 'update';
 
 export function useEventCalendarContext() {
   const context = useContext(EventCalendarContext);
@@ -52,6 +53,14 @@ export const EventCalendarContextProvider: React.FC<{
 
   const addEvents = (events: EventInput<string, any>[]) => {
     calendarRef.current.addEvents(events);
+    reRenderCalendar();
+  };
+
+  const updateEvent = (event: EventInput<string, any>) => {
+    if (!getSelectedDayEvent()) return;
+    calendarRef.current.removeEvent(getSelectedDayEvent()?.event);
+    calendarRef.current.addEvent(event);
+    goToOverViewScreen('first');
     reRenderCalendar();
   };
 
@@ -116,8 +125,6 @@ export const EventCalendarContextProvider: React.FC<{
   };
 
   const getDaysOfCurrentMonth = () => {
-    console.log(calendarRef.current.days);
-
     return calendarRef.current.days;
   };
 
@@ -145,6 +152,7 @@ export const EventCalendarContextProvider: React.FC<{
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         addEvents,
+        updateEvent,
         addEvent,
         setSelectedDay,
         setActiveEventId,

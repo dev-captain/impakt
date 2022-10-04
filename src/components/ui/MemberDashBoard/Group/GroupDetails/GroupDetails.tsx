@@ -31,9 +31,7 @@ const GroupDetails: React.FC = () => {
           fetchCalendarById({ calendarId: group.calendarId, type: CalendarType.Group }),
         );
         // fetch my challanges for modal if user creator
-        if (roleD.role === GroupRole.Creator) {
-          await dispatch(fetchAvailableChallengesForGroup());
-        }
+        await dispatch(fetchAvailableChallengesForGroup());
       } catch (e) {
         setIsNotFound(true);
       }

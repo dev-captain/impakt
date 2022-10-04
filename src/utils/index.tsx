@@ -59,7 +59,25 @@ export const normalizeCalendarDataMap = (data: CalendarDtoV1) => {
 
   const outPutData = { ...data, Events: convertEventDataToStringfy };
 
+  console.log(outPutData);
+
   return outPutData;
+};
+
+const excludeGetMax = (excludes: string[]) => {
+  const output = excludes.slice().sort((a, b) => {
+    return Day.fromString(a).time - Day.fromString(b).time;
+  });
+
+  return output;
+};
+
+const excludeGetMin = (excludes: string[]) => {
+  const output = excludes.slice().sort((a, b) => {
+    return Day.fromString(b).time - Day.fromString(a).time;
+  });
+
+  return output;
 };
 
 export const normalizeCalendarData = (data: CalendarEventDtoV1Response) => {
@@ -73,6 +91,7 @@ export const normalizeCalendarData = (data: CalendarEventDtoV1Response) => {
     },
     data: JSON.stringify(data.data),
   };
+  console.log(output);
 
   return output;
 };

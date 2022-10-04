@@ -1,12 +1,16 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
-import { Day, Time } from 'dayspan';
+import { Day } from 'dayspan';
 import { Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import TimeIndicator from './TimeIndicator';
+import { useAppSelector } from '../../../../../../../hooks';
+import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const ShowEvents: React.FC = () => {
+  const isAdmin =
+    useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
+
   const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
     useEventCalendarContext();
   const selectedDay = getSelectedDay();
@@ -67,20 +71,22 @@ const ShowEvents: React.FC = () => {
           <Box backgroundColor="#5C7FFF" borderRadius="0px 8px 8px 0px" h="2px" w="100%" />
         </Box> */}
       </Box>
-      <Common.ImpaktButton
-        variant="black"
-        colorScheme="#fff"
-        h={{ md: '48px', base: '40px' }}
-        backgroundColor="#29323B"
-        borderRadius="8px"
-        type="submit"
-        fontSize={{ md: '16px' }}
-        fontWeight="700"
-        onClick={() => goToOverViewScreen('create')}
-      >
-        <AddIcon marginRight="11px" fontSize="10px" />
-        Create
-      </Common.ImpaktButton>
+      {isAdmin && (
+        <Common.ImpaktButton
+          variant="black"
+          colorScheme="#fff"
+          h={{ md: '48px', base: '40px' }}
+          backgroundColor="#29323B"
+          borderRadius="8px"
+          type="submit"
+          fontSize={{ md: '16px' }}
+          fontWeight="700"
+          onClick={() => goToOverViewScreen('create')}
+        >
+          <AddIcon marginRight="11px" fontSize="10px" />
+          Create
+        </Common.ImpaktButton>
+      )}
     </>
   );
 };

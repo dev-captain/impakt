@@ -472,6 +472,7 @@ export const getDummyEvents = () => {
     schedule: {
       on: Day.fromString('2022-10-01T20:00:00.000Z'),
       duration: 0,
+      exclude: ['2022-10-01T20:30:00.000Z'],
       times: [
         Day.fromString('2022-10-01T20:00:00.000Z'),
         Day.fromString('2022-10-01T20:59:00.000Z'),

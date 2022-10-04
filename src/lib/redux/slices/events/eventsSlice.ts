@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createEvent } from './actions/createEvent';
 import { deleteEvent } from './actions/deleteEvent';
+import { updateEventBE } from './actions/updateEvent';
 
 interface EventsInitialI {
   isLoading: boolean;
@@ -23,6 +24,17 @@ const eventsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(createEvent.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(updateEventBE.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateEventBE.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(updateEventBE.rejected, (state) => {
         state.isLoading = false;
       });
 
