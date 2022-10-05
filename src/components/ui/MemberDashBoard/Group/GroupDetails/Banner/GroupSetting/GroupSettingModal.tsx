@@ -13,9 +13,12 @@ import {
   TabPanel,
 } from '@chakra-ui/react';
 import React from 'react';
-import { GroupSettingTab } from 'data';
+import { GroupSettingsMemberTabs, GroupSettingTab } from 'data';
+import { useAppSelector } from 'hooks';
 import EditGroupTab from './EditGroupTab';
 import PermissionTab from './PermissionTab';
+import GeneralSettings from './GeneralSettings';
+import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 interface GroupSettingModalProps {
   open: boolean;
@@ -23,6 +26,8 @@ interface GroupSettingModalProps {
 }
 
 const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
+  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+
   return (
     <Modal isOpen={open} onClose={() => close()} isCentered>
       <ModalOverlay />
@@ -49,31 +54,56 @@ const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
         <ModalBody p="0">
           <Tabs mt="10px">
             <TabList border="0" flexWrap="wrap">
-              {GroupSettingTab.map((tab) => (
-                <Tab
-                  _focus={{ boxShadow: 'none' }}
-                  _active={{ background: 'transparent', color: '#29323B' }}
-                  color="#728BA3"
-                  _selected={{ color: '#29323B', borderColor: '#29323B' }}
-                  fontWeight="500"
-                  p="8px 0"
-                  marginRight="24px"
-                  fontSize={{ base: '14px', md: '16px' }}
-                >
-                  {tab}
-                </Tab>
-              ))}
+              {activeGroup?.role === GroupRole.Creator
+                ? GroupSettingTab.map((tab) => (
+                    <Tab
+                      _focus={{ boxShadow: 'none' }}
+                      _active={{ background: 'transparent', color: '#29323B' }}
+                      color="#728BA3"
+                      _selected={{ color: '#29323B', borderColor: '#29323B' }}
+                      fontWeight="500"
+                      p="8px 0"
+                      marginRight="24px"
+                      fontSize={{ base: '14px', md: '16px' }}
+                    >
+                      {tab}
+                    </Tab>
+                  ))
+                : GroupSettingsMemberTabs.map((tab) => (
+                    <Tab
+                      _focus={{ boxShadow: 'none' }}
+                      _active={{ background: 'transparent', color: '#29323B' }}
+                      color="#728BA3"
+                      _selected={{ color: '#29323B', borderColor: '#29323B' }}
+                      fontWeight="500"
+                      p="8px 0"
+                      marginRight="24px"
+                      fontSize={{ base: '14px', md: '16px' }}
+                    >
+                      {tab}
+                    </Tab>
+                  ))}
             </TabList>
             <TabPanels>
               <TabPanel p="0" mt="24px">
-                <EditGroupTab />
+                <GeneralSettings />
+                {/* <p>ICONs</p> */}
               </TabPanel>
-              <TabPanel p="0" mt="24px">
-                <PermissionTab />
-              </TabPanel>
-              <TabPanel p="0" mt="24px">
-                <p>ICONs</p>
-              </TabPanel>
+              {activeGroup?.role === GroupRole.Creator && (
+                <TabPanel p="0" mt="24px">
+                  <EditGroupTab />
+                </TabPanel>
+              )}
+
+              {activeGroup?.role === GroupRole.Creator && (
+                <TabPanel p="0" mt="24px">
+                  <PermissionTab />
+                </TabPanel>
+              )}
+
+              {/* <TabPanel p="0" mt="24px">
+                <GeneralSettings />
+              </TabPanel> */}
               <TabPanel>
                 <p>ICONs</p>
               </TabPanel>

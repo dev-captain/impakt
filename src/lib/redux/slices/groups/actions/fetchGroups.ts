@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { GetGroupRes } from '../groupsSlice';
+import { ExploreGroupRes } from '../types';
 
 const fetchGroups = createAsyncThunk(
   'groups/fetch-groups',
@@ -19,7 +19,7 @@ const fetchGroups = createAsyncThunk(
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
         .get(`/api/v1/groups?explore=${explore}`);
 
-      const payload = getMyGroupRes.data as GetGroupRes[];
+      const payload = getMyGroupRes.data as ExploreGroupRes[];
 
       return payload;
     } catch (err: any) {

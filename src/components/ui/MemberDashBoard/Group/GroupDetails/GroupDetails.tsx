@@ -1,12 +1,15 @@
 import React from 'react';
 import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
-import Images from 'assets/images';
+// import Images from 'assets/images';
 import { useParams } from 'react-router-dom';
 import GroupWelcome from '../../GroupWelcome';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
+import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
+import { GroupRole } from '../../../../../lib/redux/slices/groups/types';
+import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 
 const GroupDetails: React.FC = () => {
   const [show, setShow] = React.useState<null | string>(null);
@@ -15,20 +18,31 @@ const GroupDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const member = useAppSelector((state) => state.memberAuth.member);
+  // const member = useAppSelector((state) => state.memberAuth.member);
 
   const getGroupDetail = async () => {
-    try {
-      if (groupParam?.id) {
+    if (groupParam?.id) {
+      try {
         await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
+      } catch (e) {
+        setIsNotFound(true);
       }
-    } catch (e) {
-      setIsNotFound(true);
+      await dispatch(fetchGroupRoleById(groupParam.id)).unwrap();
+    }
+  };
+
+  const getMembers = async () => {
+    if (groupParam?.id) {
+      await dispatch(fetchMembersOfGroup(groupParam.id)).unwrap();
     }
   };
 
   React.useEffect(() => {
     getGroupDetail();
+  }, []);
+
+  React.useEffect(() => {
+    getMembers();
   }, []);
 
   React.useEffect(() => {
@@ -48,11 +62,11 @@ const GroupDetails: React.FC = () => {
 
   return (
     <Box w="full" as="section" id="general-section">
-      {(!localStorage.getItem('showTip') || !show) && activeGroup?.ownerId === member?.id ? (
+      {(!localStorage.getItem('showTip') || !show) && activeGroup?.role === GroupRole.Creator ? (
         <GroupWelcome hideGroupWelcome={hide} />
       ) : (
         <HStack w="100%" display="block">
-          <Banner img={Images.group.cover} />
+          <Banner />
           <Content />
         </HStack>
       )}

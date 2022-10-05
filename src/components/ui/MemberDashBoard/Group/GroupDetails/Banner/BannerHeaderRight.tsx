@@ -3,9 +3,12 @@ import { Box } from '@chakra-ui/react';
 
 import { Common, I } from 'components';
 import { useAppSelector } from 'hooks';
+import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
 
 export const BannerHeaderRight: React.FC = () => {
-  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
+  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.Members)?.filter(
+    ({ role }) => role !== GroupRole.None,
+  );
 
   return (
     <Box
@@ -29,7 +32,7 @@ export const BannerHeaderRight: React.FC = () => {
         leftIcon={<I.PeopleIcon width={{ md: '18px', base: '14px' }} />}
         cursor="auto"
       >
-        {members.length}
+        {members?.length}
       </Common.ImpaktButton>
       {/* <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
                 <AvatarGroup size="sm" max={3} spacing="-0.50rem">

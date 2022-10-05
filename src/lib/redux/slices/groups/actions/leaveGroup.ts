@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { GetGroupRes } from '../groupsSlice';
+import { GetGroupRes } from '../types';
+import { fetchGroups } from './fetchGroups';
 import { fetchMyGroups } from './fetchMyGroups';
 
 const leaveGroup = createAsyncThunk(
@@ -23,6 +24,7 @@ const leaveGroup = createAsyncThunk(
       const payload = getMyGroupRes.data as GetGroupRes;
 
       await dispatch(fetchMyGroups(member.id));
+      await dispatch(fetchGroups({ explore: true }));
 
       return payload;
     } catch (err: any) {

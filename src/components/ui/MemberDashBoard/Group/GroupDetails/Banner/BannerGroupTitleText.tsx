@@ -12,7 +12,7 @@ const BannerGroupTitleText: React.FC = () => {
       fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
       color="29323B"
     >
-      {activeGroup?.friendlyName}
+      {activeGroup?.groupName}
     </Text>
   );
 };

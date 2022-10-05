@@ -18,7 +18,7 @@ const AddGroupCard = () => {
     >
       <Common.ImpaktButton
         variant="black"
-        width={{ lgx: '238px', base: '200px' }}
+        width={{ lgx: '238px', base: '200px', sm: '200px' }}
         height={{ lgx: '64px', base: '58px' }}
         fontWeight="700"
         borderRadius="16px"

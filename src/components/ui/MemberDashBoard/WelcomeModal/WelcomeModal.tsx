@@ -113,13 +113,13 @@ const WelcomeModal: React.FC = () => {
           borderRadius="20px"
           padding="12px 24px"
           h="auto"
-          bg="#20202E"
+          bg="#F5F8FA"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
-            <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">
+            <Text Text color="#29323B" textAlign="center" textStyle="bold5">
               {activeDays}
             </Text>
-            <Text color="#fff" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
+            <Text color="#728BA3" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Active days
             </Text>
           </Box>

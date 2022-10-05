@@ -2,31 +2,26 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
+import { GroupRole } from '../types';
 
-const inviteMember = createAsyncThunk(
-  'groups/invite-member',
-  async (
-    { groupId, toUserId }: { groupId: number; toUserId: number },
-    { rejectWithValue, getState },
-  ) => {
+const fetchGroupRoleById = createAsyncThunk(
+  'groups/fetch-group-role-by-id',
+  async (groupId: string, { rejectWithValue, getState }) => {
     try {
       const {
-        memberAuth: { isLogin, member },
+        memberAuth: { isLogin },
       } = getState() as RootState;
 
-      if (!isLogin || !member) {
+      if (!isLogin) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
-
-      if (member.id === toUserId) {
-        return Promise.reject(new Error('Forbidden...'));
-      }
-
-      await axios
+      const getMyRoleOnGroup = await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .post(`/api/v1/groups/invite/${groupId}`, { toUserId });
+        .get(`/api/v1/groups/ami/role/${groupId}`);
 
-      return true;
+      const payload = getMyRoleOnGroup.data as { role: GroupRole };
+
+      return payload;
     } catch (err: any) {
       return rejectWithValue(err);
     }
@@ -34,4 +29,4 @@ const inviteMember = createAsyncThunk(
 );
 
 // eslint-disable-next-line import/prefer-default-export
-export { inviteMember };
+export { fetchGroupRoleById };

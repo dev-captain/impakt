@@ -565,13 +565,16 @@ export const ChallengeList = [
 
 export const ChallengeTab = [
   'My Routines',
-  // 'My Challenges',
+  'My Challenges',
   // 'Impakt',
   // 'ICONs',
   // 'Community'
 ];
 
+export const GroupSettingsMemberTabs = ['General'];
+
 export const GroupSettingTab = [
+  'General',
   'Edit group',
   'Permissions',
   // 'Requests',

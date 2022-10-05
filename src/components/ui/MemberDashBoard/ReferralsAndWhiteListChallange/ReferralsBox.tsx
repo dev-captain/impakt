@@ -26,7 +26,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
   const referralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
 
   return (
-    <MemberDashboardCard color="#000" flexDir="column" rowGap={{ base: '18px', lg: '32px' }}>
+    <MemberDashboardCard color="#4E6070" flexDir="column" rowGap={{ base: '18px', lg: '32px' }}>
       <Box
         display="flex"
         letterSpacing="-0.04em !important"
@@ -36,9 +36,9 @@ const ReferralsBox: React.FC<PropsI> = () => {
         id="whitelist-challange-description-box-2"
         position="relative"
       >
-        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#000">
+        {/* <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#000">
           Referrals
-        </Text>
+        </Text> */}
         {/* <Tooltip
           hasArrow
           label={
@@ -96,13 +96,13 @@ const ReferralsBox: React.FC<PropsI> = () => {
           borderRadius="20px"
           padding={{ base: '12px 0px', sm: '12px 10px', md: '12px 20px', lg: '12px 24px' }}
           h="auto"
-          bg="#20202E"
+          bg="#F5F8FA"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
-            <Text color="#FFFFFF" textAlign="center" textStyle="bold5">
+            <Text color="#29323B" textAlign="center" textStyle="bold5">
               {referralsRegisteredNumber ?? 0}
             </Text>
-            <Text color="#fff" textAlign="center" mt="6px" textStyle="regular3">
+            <Text color="#728BA3" textAlign="center" mt="6px" textStyle="regular3">
               registered <br />
               with your link
             </Text>
@@ -110,9 +110,9 @@ const ReferralsBox: React.FC<PropsI> = () => {
         </GridItem>
       </SimpleGrid>
       <TableContainer borderRadius={10} w="100%" sx={{ marginTop: '0px !important' }}>
-        <Table variant="striped" colorScheme="blackAlpha">
+        <Table variant="striped" colorScheme="gray">
           <Thead style={{ display: 'table', width: '100%', tableLayout: 'fixed' }}>
-            <Tr bgColor="#121216">
+            <Tr bgColor="#4E6070">
               <Th
                 textAlign="start"
                 color="#fff"
@@ -135,7 +135,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
           </Thead>
           <Tbody display="block" maxHeight="260px" sx={{ overflowY: 'overlay' }}>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
+              <Td color="#4E6070" borderBottom={0}>
                 1
               </Td>
 
@@ -144,7 +144,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
+              <Td color="#4E6070" borderBottom={0}>
                 2
               </Td>
               <Td borderBottom={0} textStyle="regular4">
@@ -152,7 +152,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
+              <Td color="#4E6070" borderBottom={0}>
                 3
               </Td>
               <Td borderBottom={0} textStyle="regular4">
@@ -160,7 +160,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" borderBottom={0}>
+              <Td color="#4E6070" borderBottom={0}>
                 4
               </Td>
               <Td textStyle="regular4" borderBottom={0}>
@@ -168,7 +168,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
-              <Td color="#FEC417" textStyle="bold4" borderBottom={0}>
+              <Td color="#4E6070" textStyle="bold4" borderBottom={0}>
                 5+
               </Td>
               <Td textStyle="bold4" borderBottom={0}>

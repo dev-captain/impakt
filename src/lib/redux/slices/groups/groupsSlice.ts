@@ -1,52 +1,24 @@
-import { GetUserRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
 import { sendGroupRequestToJoin } from './actions/sendGroupRequestToJoin';
 import { createGroup } from './actions/createGroup';
 import { deleteGroup } from './actions/deleteGroup';
 import { fetchGroupDetailById } from './actions/fetchGroupDetailById';
-import { fetchGroupRequests } from './actions/fetchGroupRequests';
 import { fetchGroups } from './actions/fetchGroups';
 import { fetchMembersOfGroup } from './actions/fetchMembersOfGroup';
 import { fetchMyGroups } from './actions/fetchMyGroups';
-import { inviteMember } from './actions/inviteMember';
 import { joinGroup } from './actions/joinGroup';
 import { updateGroup } from './actions/updateGroup';
 import { answerToGroupRequest } from './actions/answerToGroupRequest';
-
-export type GetGroupRes = {
-  id: number;
-  friendlyName: string;
-  ownerId: number;
-  createdAt: string;
-  updatedAt: string;
-  conversationId?: string;
-  coverImageUrl?: string;
-  memberCount?: number;
-};
-
-export type GetGroupRequestResV2 = {
-  id: number;
-  createdAt: string;
-  fromUserId: number;
-  status: string;
-  Group: GetGroupRes;
-  from: GetUserRes;
-};
-
-interface GroupsInitialI {
-  isLoading: boolean;
-  myGroups: GetGroupRes[];
-  activeGroup: GetGroupRes | null;
-  membersOfGroup: GetUserRes[];
-  groupRequests: GetGroupRequestResV2[];
-  exploreGroups: GetGroupRes[];
-}
+import { GroupsInitialI } from './types';
+import { fetchGroupRoleById } from './actions/fetchGroupRoleById';
+import { fetchGroupRequests } from './actions/fetchGroupRequests';
+import { updateGroupCoverImage } from './actions/updateGroupCoverImage';
 
 const godlInitialState: GroupsInitialI = {
   isLoading: false,
   myGroups: [],
   activeGroup: null,
-  membersOfGroup: [],
+  membersOfGroup: null,
   groupRequests: [],
   exploreGroups: [],
 };
@@ -57,7 +29,7 @@ const groupsSlice = createSlice({
   reducers: {
     cleanActiveGroup(state: GroupsInitialI) {
       state.activeGroup = null;
-      state.membersOfGroup = [];
+      state.membersOfGroup = null;
     },
   },
   extraReducers: (builder) => {
@@ -107,6 +79,17 @@ const groupsSlice = createSlice({
         state.isLoading = false;
       });
 
+    builder.addCase(fetchGroupRoleById.fulfilled, (state, action) => {
+      state.isLoading = false;
+      if (state.activeGroup) {
+        state.activeGroup.role = action.payload.role;
+      }
+    });
+
+    builder.addCase(fetchGroupRoleById.rejected, (state) => {
+      state.isLoading = false;
+    });
+
     builder
       .addCase(fetchGroups.pending, (state) => {
         state.isLoading = true;
@@ -116,6 +99,18 @@ const groupsSlice = createSlice({
         state.exploreGroups = action.payload;
       })
       .addCase(fetchGroups.rejected, (state) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(fetchGroupRequests.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchGroupRequests.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.groupRequests = action.payload;
+      })
+      .addCase(fetchGroupRequests.rejected, (state) => {
         state.isLoading = false;
       });
 
@@ -142,32 +137,21 @@ const groupsSlice = createSlice({
         state.isLoading = false;
       });
 
+    builder
+      .addCase(updateGroupCoverImage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateGroupCoverImage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.activeGroup = action.payload;
+      })
+      .addCase(updateGroupCoverImage.rejected, (state) => {
+        state.isLoading = false;
+      });
+
     builder.addCase(fetchMembersOfGroup.fulfilled, (state, action) => {
       state.membersOfGroup = action.payload;
     });
-
-    builder
-      .addCase(inviteMember.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(inviteMember.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(inviteMember.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(fetchGroupRequests.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchGroupRequests.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.groupRequests = action.payload;
-      })
-      .addCase(fetchGroupRequests.rejected, (state) => {
-        state.isLoading = false;
-      });
 
     builder
       .addCase(sendGroupRequestToJoin.pending, (state) => {

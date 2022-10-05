@@ -36,7 +36,7 @@ interface NavbarProps {
 // const { dark, light } = Images;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
-  const [notify] = useState(false);
+  const [notify, setNotify] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -47,6 +47,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
   const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  const notifies = useAppSelector((state) => state.groupsReducer.groupRequests)?.length;
 
   useEffect(() => {
     if (!isLessThan1280) {
@@ -57,8 +58,13 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   useEffect(() => {
     if (path.path === 'dashboard') {
       setColorMode('light');
+      if (notifies) {
+        setNotify(true);
+      } else {
+        setNotify(false);
+      }
     }
-  }, [path.path]);
+  }, [path.path, notifies]);
 
   const isLight = colorMode === 'light';
   const textColor = isLight ? 'glass.100' : 'glass.700';

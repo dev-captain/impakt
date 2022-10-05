@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { Flex, FormControl, useToast } from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
 import { createGroup } from '../../../../../../lib/redux/slices/groups/actions/createGroup';
 import { fetchMyGroups } from '../../../../../../lib/redux/slices/groups/actions/fetchMyGroups';
 import { InputGroupPropsI } from '../../../../../common/InputGroup';
+import createGroupYupScheme from '../../../../../../lib/yup/schemas/createGroupYupScheme';
 
 interface CreateGroupFormPropsI {}
 const CreateGroupForm: React.FC<CreateGroupFormPropsI> = () => {
   const { handleSubmit, errors, setValue } = useForm({
-    defaultValues: { friendlyName: '' },
+    resolver: yupResolver(createGroupYupScheme),
+    defaultValues: { groupName: '' },
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -21,11 +24,11 @@ const CreateGroupForm: React.FC<CreateGroupFormPropsI> = () => {
   const navigate = useNavigate();
   const member = useAppSelector((state) => state.memberAuth.member);
 
-  const handleOnCreate = async (data: any) => {
-    const { friendlyName } = data as { friendlyName: string };
+  const handleOnCreate = async (data: object) => {
+    const { groupName } = data as { groupName: string };
     try {
       if (!member) return;
-      await dispatch(createGroup(friendlyName)).unwrap();
+      await dispatch(createGroup(groupName)).unwrap();
       await dispatch(fetchMyGroups(member.id));
       toast({
         title: 'Success',
@@ -51,9 +54,9 @@ const CreateGroupForm: React.FC<CreateGroupFormPropsI> = () => {
       placeholder: 'My cool fitness group',
       onChange,
       type: 'text',
-      name: 'friendlyName',
+      name: 'groupName',
       label: 'Group name',
-      errorMsg: errors?.friendlyName?.message,
+      errorMsg: errors?.groupName?.message,
       autoFocus: true,
       whiteMode: true,
     },

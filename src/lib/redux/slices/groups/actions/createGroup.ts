@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { GetGroupRes } from '../groupsSlice';
+import { GetGroupRes } from '../types';
 
 const createGroup = createAsyncThunk(
   'groups/create',
@@ -18,7 +18,7 @@ const createGroup = createAsyncThunk(
       }
       const createGroupRes = await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .post('/api/v1/groups', { friendlyName: groupName });
+        .post('/api/v1/groups', { groupName });
 
       createGroupRes.data as GetGroupRes;
 

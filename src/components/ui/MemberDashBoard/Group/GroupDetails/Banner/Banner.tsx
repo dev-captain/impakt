@@ -7,15 +7,11 @@ import BannerHeaderRight from './BannerHeaderRight';
 // import BannerPanelLeft from './BannerPanelLeft';
 import BannerPanelRight from './BannerPanelRight';
 
-interface BannerProps {
-  img: any;
-}
-
-const Banner: React.FC<BannerProps> = ({ img }) => {
+const Banner: React.FC = () => {
   return (
     <Box>
       <Box backgroundColor="#fff" borderRadius="24px" w="full" p={{ base: '16px', md: '32px' }}>
-        <BannerImage src={img} />
+        <BannerImage />
         <Box>
           <Box
             marginTop="32px"

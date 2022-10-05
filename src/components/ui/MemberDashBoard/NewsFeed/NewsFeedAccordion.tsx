@@ -25,7 +25,7 @@ const NewsFeedAccordion: React.FC = () => {
           <AccordionItem
             w="full"
             key={`news-accordion-item-${id}`}
-            background="#20202E"
+            background="#F5F8FA"
             borderRadius="1em"
             border="0"
             py="1em"

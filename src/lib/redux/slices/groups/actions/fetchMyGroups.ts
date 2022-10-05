@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 
 import { RootState } from '../../../store';
-import { GetGroupRes } from '../groupsSlice';
+import { GetMyGroupsRes } from '../types';
 
 const fetchMyGroups = createAsyncThunk(
   'groups/my-groups',
@@ -19,7 +19,9 @@ const fetchMyGroups = createAsyncThunk(
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
         .get(`/api/v1/groups/member-groups/${userId}`);
 
-      const payload = getMyGroupRes.data as GetGroupRes[];
+      const payload = getMyGroupRes.data as GetMyGroupsRes[];
+
+      payload.forEach(({ groupId }) => localStorage.removeItem(`${groupId + userId.toString()}`));
 
       return payload;
     } catch (err: any) {

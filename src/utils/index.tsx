@@ -28,4 +28,15 @@ export function sleep(ms: number) {
     setTimeout(resolve, ms);
   });
 }
+
+export const getImageFromS3AsUrl = (currentCoverImageSource: string) => {
+  const sourceBaseUrl =
+    // eslint-disable-next-line no-constant-condition
+    process.env.NODE_ENV === 'development' || 'test'
+      ? 'https://impakt-upload-file-data-dev.s3.amazonaws.com/'
+      : '';
+  const imageUrl = `${sourceBaseUrl}${currentCoverImageSource}`;
+
+  return imageUrl;
+};
 export default {};

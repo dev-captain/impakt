@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-nested-ternary */
 import * as React from 'react';
 import { Box, Button, HStack } from '@chakra-ui/react';
 

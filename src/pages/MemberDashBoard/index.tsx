@@ -14,8 +14,8 @@ import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
 // import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
 import { fetchMyGroups } from '../../lib/redux/slices/groups/actions/fetchMyGroups';
-import { fetchGroupRequests } from '../../lib/redux/slices/groups/actions/fetchGroupRequests';
 import { fetchGroups } from '../../lib/redux/slices/groups/actions/fetchGroups';
+import { fetchGroupRequests } from '../../lib/redux/slices/groups/actions/fetchGroupRequests';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -26,6 +26,7 @@ import { fetchGroups } from '../../lib/redux/slices/groups/actions/fetchGroups';
 
 const MemberDashboard: React.FC = () => {
   const member = useAppSelector((state) => state.memberAuth.member);
+  // const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
@@ -70,12 +71,7 @@ const MemberDashboard: React.FC = () => {
 
   React.useEffect(() => {
     if (!member) return;
-    dispatch(fetchMyGroups(member.id));
-  }, []);
-
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(fetchGroupRequests());
+    dispatch(fetchMyGroups(member.id)).then(() => dispatch(fetchGroupRequests()));
   }, []);
 
   React.useEffect(() => {

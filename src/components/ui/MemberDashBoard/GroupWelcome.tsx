@@ -27,7 +27,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
               fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
               color="29323B"
             >
-              {activeGroup?.friendlyName}
+              {activeGroup?.groupName}
             </Text>
             <Box
               display={{ base: 'block', md: 'flex' }}

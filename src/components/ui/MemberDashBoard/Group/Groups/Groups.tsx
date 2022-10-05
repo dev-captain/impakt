@@ -4,8 +4,6 @@ import { Box, VStack } from '@chakra-ui/react';
 
 import MyGroupCardWrapper from './MyGroupCard/MyGroupCardWrapper';
 import MyGroupCardWrapperHeader from './MyGroupCard/MyGroupCardWrapperHeader';
-import GroupRequestCardWrapperHeader from './GroupRequestCard/GroupRequestCardWrapperHeader';
-import GroupRequestCardWrapper from './GroupRequestCard/GroupRequestCardWrapper';
 import ExploreGroupCardWrapper from './ExploreGroupCard/ExploreGroupCardWrapper';
 
 const Groups: React.FC = () => {
@@ -18,11 +16,6 @@ const Groups: React.FC = () => {
         <Box w="full" as="section" id="your-groups-section">
           <MyGroupCardWrapperHeader />
           <MyGroupCardWrapper />
-        </Box>
-        {/* Request section  */}
-        <Box w="full" as="section" id="requests-section">
-          <GroupRequestCardWrapperHeader />
-          <GroupRequestCardWrapper />
         </Box>
         {/* Explore section  */}
         {/* {exploreGroups.length && ( */}
