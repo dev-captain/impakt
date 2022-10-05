@@ -9,10 +9,11 @@ import {
   GodlApi,
   FitnessStatsApi,
   ReferralsApi,
+  CoinApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
-import theme from '../../theme/index';
+import theme from '../../theme';
 
 const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
 
@@ -92,6 +93,7 @@ export const configuration = createConfiguration({
 
 export const authInstance = new AuthApi(configuration);
 export const godlInstance = new GodlApi(configuration);
+export const koinInstance = new CoinApi(configuration);
 export const UserInstance = new UsersApi(configuration);
 UserInstance.userControllerGetUsers(undefined, undefined, undefined);
 export const FitnessInstance = new FitnessStatsApi(configuration);

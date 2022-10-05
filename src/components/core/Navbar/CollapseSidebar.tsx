@@ -57,7 +57,7 @@ const CollapseSidebar = () => {
               <Text marginLeft="10px">Referrals</Text>
             </Box>
           )}
-          {path.pathname === '/dashboard/reward-history' && (
+          {/* {path.pathname === '/dashboard/reward-history' && (
             <Box display="flex" alignItems="flex-end">
               <I.RewardIcon
                 cursor="pointer"
@@ -67,7 +67,7 @@ const CollapseSidebar = () => {
               />
               <Text marginLeft="10px">Reward history</Text>
             </Box>
-          )}
+          )} */}
           {path.pathname === '/dashboard/statistics' && (
             <Box display="flex" alignItems="flex-end">
               <I.ChatIcon
@@ -135,8 +135,8 @@ const CollapseSidebar = () => {
           {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
-          > */}
-          {/* <SidebarLinkItem
+          >
+            <SidebarLinkItem
               isTransparent
               hide
               href="reward-history"
@@ -144,8 +144,8 @@ const CollapseSidebar = () => {
               isActive={path.pathname === '/dashboard/reward-history'}
             >
               <I.RewardIcon cursor="pointer" width="27px" height="27px" />
-            </SidebarLinkItem> */}
-          {/* </MenuItem> */}
+            </SidebarLinkItem>
+          </MenuItem> */}
           {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
