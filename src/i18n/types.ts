@@ -253,6 +253,12 @@ const TranslationKeys = {
     MyChallengeMsg: {
       description: `${Message}.MyChallengeMsg.description`,
     },
+    PublicToolTip: {
+      description: `${Message}.PublicToolTip.description`,
+    },
+    PrivateToolTip: {
+      description: `${Message}.PrivateToolTip.description`,
+    },
   },
 };
 
