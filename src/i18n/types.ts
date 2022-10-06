@@ -26,6 +26,7 @@ const NFTGenesis = 'NFTGenesis';
 const NFTGeneral = 'NFTGeneral';
 const DynamicNFT = 'DynamicNFT';
 const termsOfUse = 'termsOfUse';
+const Message = 'Message';
 
 const TranslationKeys = {
   common: {
@@ -247,6 +248,17 @@ const TranslationKeys = {
     title: `${DynamicNFT}.title`,
     description: `${DynamicNFT}.description`,
     cardInfo: `${DynamicNFT}.cardInfo`,
+  },
+  Message: {
+    MyChallengeMsg: {
+      description: `${Message}.MyChallengeMsg.description`,
+    },
+    PublicToolTip: {
+      description: `${Message}.PublicToolTip.description`,
+    },
+    PrivateToolTip: {
+      description: `${Message}.PrivateToolTip.description`,
+    },
   },
 };
 

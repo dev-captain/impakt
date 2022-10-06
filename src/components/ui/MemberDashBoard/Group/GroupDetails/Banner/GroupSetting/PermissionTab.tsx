@@ -1,13 +1,16 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { Box, Radio, RadioGroup, Stack, Text, useToast } from '@chakra-ui/react';
+import { Box, Button, Text, Tooltip, useToast } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Common } from 'components';
+import { useTranslation } from 'react-i18next';
+import { Common, I } from 'components';
 import { updateGroup } from 'lib/redux/slices/groups/actions/updateGroup';
+import keys from 'i18n/types';
 
 const PermissionTab: React.FC = () => {
   const [value, setValue] = React.useState('Public');
 
+  const { t } = useTranslation().i18n;
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -65,16 +68,69 @@ const PermissionTab: React.FC = () => {
         }}
       >
         <Box border="2px solid #EEF4F6" p="16px" borderRadius="16px" mb="16px">
-          <Text color="#29323B" fontSize={{ md: '18px', base: '12px' }} fontWeight="500">
-            Is your group public or private?
-          </Text>
+          <Box display="flex" justifyContent="space-between" alignItem="center">
+            <Text color="#29323B" fontSize={{ md: '18px', base: '12px' }} fontWeight="500">
+              Is your group public or private?
+            </Text>
+            <Tooltip
+              bg="#FFFFFF"
+              borderRadius="16px"
+              width="900px"
+              boxShadow="0px 4px 6px -2px rgba(0, 0, 0, 0.12)"
+              hasArrow
+              label={
+                <Text
+                  color="#4E6070"
+                  padding="5px"
+                  dangerouslySetInnerHTML={{
+                    __html: t(keys.Message.PublicToolTip.description),
+                  }}
+                />
+              }
+              mt="3"
+              placement="auto"
+              closeOnClick={false}
+            >
+              <Box>
+                <I.InfoIcon />
+              </Box>
+            </Tooltip>
+          </Box>
           <Box display="flex" width="100%" mt="12px">
-            <RadioGroup onChange={(v) => setValue(v)} value={value}>
-              <Stack direction="row">
-                <Radio value="Public">Public</Radio>
-                <Radio value="Private">Private</Radio>
-              </Stack>
-            </RadioGroup>
+            <Button
+              color={value === 'Public' ? '#29323B' : '#728BA3'}
+              bg={value === 'Public' ? '#EEF4F6' : '#fff'}
+              _hover={{
+                backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
+                color: value === 'Private' ? '#728BA3' : '#29323B',
+              }}
+              _focus={{ boxShadow: 'none' }}
+              w="120px"
+              h="38px"
+              borderRadius="8px"
+              onClick={() => {
+                setValue('Public');
+              }}
+            >
+              Public
+            </Button>
+            <Button
+              bg={value === 'Private' ? '#EEF4F6' : '#fff'}
+              color={value === 'Private' ? '#29323B' : '#728BA3'}
+              _hover={{
+                backgroundColor: value === 'Public' ? 'transparent' : '#EEF4F6',
+                color: value === 'Public' ? '#728BA3' : '#29323B',
+              }}
+              _focus={{ boxShadow: 'none' }}
+              w="120px"
+              h="38px"
+              borderRadius="8px"
+              onClick={() => {
+                setValue('Private');
+              }}
+            >
+              Private
+            </Button>
           </Box>
         </Box>
       </Box>

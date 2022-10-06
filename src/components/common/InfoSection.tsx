@@ -49,7 +49,7 @@ const InfoSection: React.FC<InfoSectionPropsI> = ({ tooltipIcon, tooltipText, to
             <Text
               textStyle="semiBold5"
               margin="0px 10px"
-              color="rgba(0,0,0,75);"
+              color="#4E6070"
               dangerouslySetInnerHTML={{
                 __html: tooltip,
               }}

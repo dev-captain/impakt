@@ -89,6 +89,10 @@ const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
                   ))}
             </TabList>
             <TabPanels>
+              <TabPanel p="0" mt="24px">
+                <GeneralSettings />
+                {/* <p>ICONs</p> */}
+              </TabPanel>
               {activeGroup?.role === GroupRole.Creator && (
                 <TabPanel p="0" mt="24px">
                   <EditGroupTab />
@@ -101,10 +105,9 @@ const GroupSettingModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
                 </TabPanel>
               )}
 
-              <TabPanel p="0" mt="24px">
+              {/* <TabPanel p="0" mt="24px">
                 <GeneralSettings />
-                {/* <p>ICONs</p> */}
-              </TabPanel>
+              </TabPanel> */}
               <TabPanel>
                 <p>ICONs</p>
               </TabPanel>

@@ -16,10 +16,12 @@ import {
 } from '@chakra-ui/react';
 import { I } from 'components';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import keys from 'i18n/types';
 import { ChallengeTab } from 'data';
 import { UseFormSetValue } from 'react-hook-form';
 import MyRoutines from './MyRoutinesTab/MyRoutines';
-import ChallengeDetails from './ImpaktTab/ChallengeDetails';
+// import ChallengeDetails from './ImpaktTab/ChallengeDetails';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -35,6 +37,8 @@ interface ChallengeModalProps {
 }
 
 const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }) => {
+  const { t } = useTranslation().i18n;
+
   return (
     <Modal isOpen={open} onClose={() => close()} isCentered>
       <ModalOverlay />
@@ -111,13 +115,24 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }
                 <MyRoutines onClose={() => close()} setValue={setValue} />
               </TabPanel>
               <TabPanel p="0" mt="24px">
-                <ChallengeDetails
+                {/* <ChallengeDetails
                   time="19 min"
                   timmer={{ h: '08', m: '32', s: '44' }}
                   name="Impakt"
                   play="256"
                   like="72"
-                />
+                /> */}
+                <Text>
+                  {t(keys.Message.MyChallengeMsg.description)}{' '}
+                  <span>
+                    <Text as="a" href="/download" color="#3c88d3">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Download
+                    </Text>
+                  </span>
+                </Text>
+                {/* <Text as="a" href="/download" color="#3c88d3">
+                  Download
+                </Text> */}
               </TabPanel>
               <TabPanel>
                 <p>My Challenges</p>

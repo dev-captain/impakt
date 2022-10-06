@@ -578,14 +578,15 @@ export const ChallengeTab = [
   // 'Community'
 ];
 
-export const GroupSettingsMemberTabs = ['General Settings'];
+export const GroupSettingsMemberTabs = ['General'];
 
 export const GroupSettingTab = [
+  'General',
   'Edit group',
   'Permissions',
   // 'Requests',
   // 'Members list'
-].concat(GroupSettingsMemberTabs);
+];
 
 export const GroupDetails = [
   {

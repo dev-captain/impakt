@@ -58,13 +58,15 @@ const ExplorePrivateSection: React.FC = () => {
       margin="30px 0"
       flexWrap={{ sm: 'wrap' }}
       display={{ sm: 'flex' }}
+      marginStart="0 !important"
     >
       {/* here is the components */}
       {explorePrivateGroups.map((g) => (
         <Box
+          marginStart="0 !important"
           w={{
             base: '100%',
-            sm: '49%',
+            sm: '100%',
             md: '31%',
             lgx: '23%',
           }}

@@ -296,7 +296,7 @@ export default {
       headline: 'Referrals',
       subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">1000 Koin</strong> and they receive <strong style="color:#FEC417">5000 Koin</strong>.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#4E6070">1000 Koin</strong> and they receive <strong style="color:#4E6070">5000 Koin</strong>.',
       subDescription:
         'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
       discription_list1: 'WLs',
@@ -383,5 +383,19 @@ export default {
         imageRect: Images.nft.bronzeRect,
       },
     ],
+  },
+  Message: {
+    MyChallengeMsg: {
+      description:
+        'You haven`t created any challenges yet. Download our desktop app and create your first challenge now',
+    },
+    PublicToolTip: {
+      description:
+        '<b>Public:</b><br />Recommended for growing a following.<br />&nbsp;&nbsp;-Anyone can find your group<br />&nbsp;&nbsp;-Anyone can join(no approval needed)<br />&nbsp;&nbsp;-Anyone can view group content<br /><br /><b>Private:</b><br />Recommended for closed circles (e.g. friends, family)<br />&nbsp;-Only group members can view group content<br />&nbsp;&nbsp;-People can only join if you manually accept their join request',
+    },
+    PrivateToolTip: {
+      description:
+        'Only group members can view group content<br />People can only join if you manually accept their join request',
+    },
   },
 };
