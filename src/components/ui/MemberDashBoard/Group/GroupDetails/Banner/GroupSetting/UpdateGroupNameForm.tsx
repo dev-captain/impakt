@@ -12,12 +12,15 @@ const UpdateGroupNameForm: React.FC = () => {
   const group = useAppSelector((state) => state.groupsReducer.activeGroup);
   const dispatch = useAppDispatch();
   const toast = useToast();
-  const { handleSubmit, errors, setValue } = useForm({
+  const { handleSubmit, errors, setValue, getValues, isDirty } = useForm({
     resolver: yupResolver(createGroupYupScheme),
-    defaultValues: { groupName: '' },
+    defaultValues: { groupName: group?.groupName },
   });
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+    setValue(e.target.name as any, e.target.value as any, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
   };
   const inputItems: InputGroupPropsI[] = [
     {
@@ -29,28 +32,31 @@ const UpdateGroupNameForm: React.FC = () => {
       errorMsg: errors?.groupName?.message,
       autoFocus: false,
       whiteMode: true,
+      defaultValue: getValues('groupName'),
     },
   ];
   const handleUpdateGroupNameChanges = async (data: object) => {
     const { groupName } = data as { groupName: string };
     if (!group?.id) return;
-    try {
-      await dispatch(updateGroup({ groupId: group.id, groupName }));
-      toast({
-        title: 'Success',
-        description: 'Group name updated successfully.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
+    if (isDirty) {
+      try {
+        await dispatch(updateGroup({ groupId: group.id, groupName }));
+        toast({
+          title: 'Success',
+          description: 'Group name updated successfully.',
+          isClosable: true,
+          duration: 8000,
+          status: 'success',
+        });
+      } catch (e: any) {
+        toast({
+          title: 'Error',
+          description: e.response.data.message,
+          isClosable: true,
+          duration: 8000,
+          status: 'error',
+        });
+      }
     }
   };
 

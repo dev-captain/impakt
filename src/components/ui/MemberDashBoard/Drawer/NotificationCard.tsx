@@ -27,8 +27,6 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
     await dispatch(answerToGroupRequest({ requestorId, status: currentStatus, groupId })).unwrap();
   };
 
-  console.log(status);
-
   return (
     <Box
       mt="16px"
