@@ -7,13 +7,13 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 // import { deleteGroup } from '../../../../../../lib/redux/slices/groups/actions/deleteGroup';
 // import { leaveGroup } from '../../../../../../lib/redux/slices/groups/actions/leaveGroup';
-import { ImpaktButton } from '../../../../../common';
 import GroupSettingModal from './GroupSetting/GroupSettingModal';
 import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
 import { joinGroup } from '../../../../../../lib/redux/slices/groups/actions/joinGroup';
 
 const BannerSettingsMenu: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -44,11 +44,13 @@ const BannerSettingsMenu: React.FC = () => {
     }
   };
 
+  if (isRoleLoading) return null;
+
   return (
     <>
       <Menu>
         {activeGroup?.role && activeGroup.role !== GroupRole.None ? (
-          <ImpaktButton
+          <Common.ImpaktButton
             variant="transparent"
             as={MenuButton}
             backgroundColor="#F4F7F9"
@@ -67,7 +69,7 @@ const BannerSettingsMenu: React.FC = () => {
           >
             {isCreator ? 'Settings' : null}
             {!isCreator && <I.SettingIcon width="16px" />}
-          </ImpaktButton>
+          </Common.ImpaktButton>
         ) : (
           <Common.ImpaktButton
             variant="black"

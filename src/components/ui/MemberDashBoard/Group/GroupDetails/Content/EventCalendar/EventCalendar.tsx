@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, HStack, Skeleton } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 import { Day } from 'dayspan';
@@ -9,9 +9,15 @@ import DayNames from './DayNames';
 import EventsOverview from './EventsOverview';
 import DayComponent from './Day';
 import useNormalizedCalendarData from '../../../../../../../hooks/useNormalizedCalendarData';
+import { useAppSelector } from '../../../../../../../hooks';
 // import { getDummyEvents } from '../../../../../../../data';
 
 const EventCalendar: React.FC = () => {
+  const isGroupCalendarLoading = useAppSelector(
+    (state) => state.calendarReducer.isGroupCalendarLoading,
+  );
+  console.log(isGroupCalendarLoading);
+
   const activeGroupCalendar = useNormalizedCalendarData();
   const runInitCalendarRef = useRef(true);
   const {
@@ -90,6 +96,7 @@ const EventCalendar: React.FC = () => {
         </Box>
         <DayNames />
       </Box>
+
       <HStack
         width=" 100%;"
         height=" 70%;"
@@ -116,14 +123,16 @@ const EventCalendar: React.FC = () => {
           ))}
         </>
       </HStack>
-      <Box
-        backgroundColor=" #ffffff"
-        width=" 100%"
-        padding=" 20px 20px"
-        borderRadius="0 0 10px 10px"
-      >
-        <EventsOverview />
-      </Box>
+      <Skeleton isLoaded={!isGroupCalendarLoading} display="flex" id="ske">
+        <Box
+          backgroundColor=" #ffffff"
+          width=" 100%"
+          padding=" 20px 20px"
+          borderRadius="0 0 10px 10px"
+        >
+          <EventsOverview />
+        </Box>
+      </Skeleton>
     </Box>
   );
 };

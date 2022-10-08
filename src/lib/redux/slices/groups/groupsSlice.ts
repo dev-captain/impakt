@@ -14,8 +14,10 @@ import { fetchGroupRoleById } from './actions/fetchGroupRoleById';
 import { fetchGroupRequests } from './actions/fetchGroupRequests';
 import { updateGroupCoverImage } from './actions/updateGroupCoverImage';
 
-const godlInitialState: GroupsInitialI = {
+const groupsInitialStateI: GroupsInitialI = {
   isLoading: false,
+  isRoleLoading: true,
+  isMembersLoading: true,
   myGroups: [],
   activeGroup: null,
   membersOfGroup: null,
@@ -25,11 +27,14 @@ const godlInitialState: GroupsInitialI = {
 
 const groupsSlice = createSlice({
   name: 'groups',
-  initialState: godlInitialState as GroupsInitialI,
+  initialState: groupsInitialStateI as GroupsInitialI,
   reducers: {
     cleanActiveGroup(state: GroupsInitialI) {
       state.activeGroup = null;
       state.membersOfGroup = null;
+      state.isLoading = false;
+      state.isRoleLoading = true;
+      state.isMembersLoading = true;
     },
 
     setActiveGroupCalendar(state: GroupsInitialI) {
@@ -84,16 +89,19 @@ const groupsSlice = createSlice({
         state.isLoading = false;
       });
 
-    builder.addCase(fetchGroupRoleById.fulfilled, (state, action) => {
-      state.isLoading = false;
-      if (state.activeGroup) {
-        state.activeGroup.role = action.payload.role;
-      }
-    });
-
-    builder.addCase(fetchGroupRoleById.rejected, (state) => {
-      state.isLoading = false;
-    });
+    builder
+      .addCase(fetchGroupRoleById.pending, (state) => {
+        state.isRoleLoading = true;
+      })
+      .addCase(fetchGroupRoleById.fulfilled, (state, action) => {
+        state.isRoleLoading = false;
+        if (state.activeGroup) {
+          state.activeGroup.role = action.payload.role;
+        }
+      })
+      .addCase(fetchGroupRoleById.rejected, (state) => {
+        state.isRoleLoading = false;
+      });
 
     builder
       .addCase(fetchGroups.pending, (state) => {
@@ -163,9 +171,17 @@ const groupsSlice = createSlice({
         state.isLoading = false;
       });
 
-    builder.addCase(fetchMembersOfGroup.fulfilled, (state, action) => {
-      state.membersOfGroup = action.payload;
-    });
+    builder
+      .addCase(fetchMembersOfGroup.pending, (state) => {
+        state.isMembersLoading = true;
+      })
+      .addCase(fetchMembersOfGroup.fulfilled, (state, action) => {
+        state.isMembersLoading = false;
+        state.membersOfGroup = action.payload;
+      })
+      .addCase(fetchMembersOfGroup.rejected, (state) => {
+        state.isMembersLoading = false;
+      });
 
     builder
       .addCase(sendGroupRequestToJoin.pending, (state) => {

@@ -20,11 +20,19 @@ const calendarSlice = createSlice({
   name: 'calendar',
   initialState: calendarInitialState as CalendarInitialI,
   reducers: {
+    cleanCalendar(state: CalendarInitialI) {
+      state.isGroupCalendarLoading = false;
+      state.isPersonalCalendarLoading = false;
+      state.activeGroupCalendar = null;
+      state.activePersonalCalendar = null;
+    },
     setIsGroupCalendarLoading: (state) => {
+      console.log('before', state.isGroupCalendarLoading);
       state.isGroupCalendarLoading = !state.isGroupCalendarLoading;
+      console.log('after', state.isGroupCalendarLoading);
     },
     setIsPersonalCalendarLoading: (state) => {
-      state.isGroupCalendarLoading = !state.isPersonalCalendarLoading;
+      state.isPersonalCalendarLoading = !state.isPersonalCalendarLoading;
     },
   },
   extraReducers: (builder) => {
@@ -32,12 +40,14 @@ const calendarSlice = createSlice({
       if (action.payload.type === CalendarType.Group) {
         state.activeGroupCalendar = action.payload;
       } else if (action.payload.type === CalendarType.Personal) {
+        state.isPersonalCalendarLoading = false;
         state.activePersonalCalendar = action.payload;
       }
     });
   },
 });
 
-export const { setIsGroupCalendarLoading, setIsPersonalCalendarLoading } = calendarSlice.actions;
+export const { cleanCalendar, setIsGroupCalendarLoading, setIsPersonalCalendarLoading } =
+  calendarSlice.actions;
 // eslint-disable-next-line import/prefer-default-export
 export default calendarSlice.reducer;

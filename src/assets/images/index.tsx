@@ -91,11 +91,10 @@ const Images = {
   group: {
     img: require('./group/img.png'),
     ellipse: require('./group/Ellipse.png'),
-    cover: require('./group/cover.jpg'),
+    cover: require('./group/cover.png'),
     group: require('./group/group.jpg'),
     upload: require('./group/Upload.png'),
     logo: require('./group/logo.png'),
-    cover2: require('./group/Cover2.png'),
   },
 };
 

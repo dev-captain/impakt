@@ -55,6 +55,8 @@ export type GetGroupRequestResV2 = {
 
 export interface GroupsInitialI {
   isLoading: boolean;
+  isRoleLoading: boolean;
+  isMembersLoading: boolean;
   myGroups: GetMyGroupsRes[];
   activeGroup: (GetGroupRes & { role?: GetMyGroupsRes['role'] }) | null;
   membersOfGroup: GetMembersOfGroupRes | null;

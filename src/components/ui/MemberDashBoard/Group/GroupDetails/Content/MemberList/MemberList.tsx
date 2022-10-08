@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   CircularProgress,
+  Skeleton,
   // useClipboard,
   // useToast,
 } from '@chakra-ui/react';
@@ -16,28 +17,27 @@ import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const MemberList: React.FC = () => {
   // const toast = useToast();
-  const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
+  const isMemberLoading = useAppSelector((state) => state.groupsReducer.isMembersLoading);
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup);
-
-  if (isLoading) return <CircularProgress isIndeterminate />;
 
   return (
     <Box marginStart="0 !important" width={{ base: '100%', md: '30%', lgx: '25%' }}>
-      <MemberDashboardCard
-        p={{ base: '16px', md: '24px' }}
-        marginTop={{ base: 0, md: '26px' }}
-        marginLeft="auto"
-        marginBottom="20px"
-      >
-        <Box w="full">
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Box display="flex" alignItems="center">
-              <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
-                Members
-              </Text>
-              {/* <I.SettingIcon color="#B0C3D6" width="20px" /> */}
-            </Box>
-            {/* <Button
+      <Skeleton isLoaded={!isMemberLoading}>
+        <MemberDashboardCard
+          p={{ base: '16px', md: '24px' }}
+          marginTop={{ base: 0, md: '26px' }}
+          marginLeft="auto"
+          marginBottom="20px"
+        >
+          <Box w="full">
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Box display="flex" alignItems="center">
+                <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
+                  Members
+                </Text>
+                {/* <I.SettingIcon color="#B0C3D6" width="20px" /> */}
+              </Box>
+              {/* <Button
               onClick={onCopyHandle}
               backgroundColor="#1C1C28"
               fontWeight="700"
@@ -54,8 +54,8 @@ const MemberList: React.FC = () => {
             >
               <I.UnionIcon />
             </Button> */}
-          </Box>
-          {/* <Text
+            </Box>
+            {/* <Text
             textTransform="uppercase"
             color="#728BA3"
             fontSize="16px"
@@ -154,7 +154,7 @@ const MemberList: React.FC = () => {
               <I.PlayChallengeIcon />
             </Box>
           </Box> */}
-          {/* <Box backgroundColor="#E2EDF7" w="full" height="1px" margin="20px 0" />
+            {/* <Box backgroundColor="#E2EDF7" w="full" height="1px" margin="20px 0" />
           <Box display="flex" marginTop="24px" justifyContent="space-between" alignItems="center">
             <Text
               textTransform="uppercase"
@@ -190,38 +190,39 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-          {members?.Members.map(
-            ({ role, User }) =>
-              role !== GroupRole.None && (
-                <Box
-                  key={`${User.id}-box`}
-                  display="flex"
-                  justifyContent="space-between"
-                  marginTop="16px"
-                >
-                  <Box display="flex" alignItems="center">
-                    <Image src={Images.group.ellipse} zIndex="10" />
-                    <Text
-                      color="#4E6070"
-                      fontSize={{ lgx: '18px', md: '14px' }}
-                      fontWeight="500"
-                      marginLeft="16px"
-                    >
-                      {User.firstName ?? User.username}
-                    </Text>
-                  </Box>
+            {members?.Members.map(
+              ({ role, User }) =>
+                role !== GroupRole.None && (
+                  <Box
+                    key={`${User.id}-box`}
+                    display="flex"
+                    justifyContent="space-between"
+                    marginTop="16px"
+                  >
+                    <Box display="flex" alignItems="center">
+                      <Image src={Images.group.ellipse} zIndex="10" />
+                      <Text
+                        color="#4E6070"
+                        fontSize={{ lgx: '18px', md: '14px' }}
+                        fontWeight="500"
+                        marginLeft="16px"
+                      >
+                        {User.firstName ?? User.username}
+                      </Text>
+                    </Box>
 
-                  <Box marginLeft="1em" display="flex" alignItems="center">
-                    <Text color="#4E6070" fontSize={{ lgx: '18px', md: '14px' }} fontWeight="500">
-                      {role}
-                    </Text>
-                    {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
+                    <Box marginLeft="1em" display="flex" alignItems="center">
+                      <Text color="#4E6070" fontSize={{ lgx: '18px', md: '14px' }} fontWeight="500">
+                        {role}
+                      </Text>
+                      {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
+                    </Box>
                   </Box>
-                </Box>
-              ),
-          )}
-        </Box>
-      </MemberDashboardCard>
+                ),
+            )}
+          </Box>
+        </MemberDashboardCard>
+      </Skeleton>
     </Box>
   );
 };

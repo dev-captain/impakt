@@ -10,6 +10,8 @@ import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/acti
 import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
 import { CalendarType } from '../../../../../lib/redux/slices/calendar/types';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
+import { cleanActiveGroup } from '../../../../../lib/redux/slices/groups/groupsSlice';
+import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
 
 const GroupDetails: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
@@ -21,23 +23,33 @@ const GroupDetails: React.FC = () => {
 
   const getGroupDetail = async () => {
     if (groupParam?.id) {
+      let group: any;
       try {
-        const group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
-        await dispatch(fetchGroupRoleById(group.id)).unwrap();
-        await dispatch(fetchMembersOfGroup(group.id)).unwrap();
-        await dispatch(
-          fetchCalendarById({ calendarId: group.calendarId, type: CalendarType.Group }),
-        );
-        // fetch my challanges for modal if user creator
-        await dispatch(fetchAvailableChallengesForGroup());
+        group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
       } catch (e) {
         setIsNotFound(true);
+      } finally {
+        try {
+          await dispatch(fetchGroupRoleById(group.id));
+        } finally {
+          await dispatch(
+            fetchCalendarById({ calendarId: group.calendarId, type: CalendarType.Group }),
+          );
+          await dispatch(fetchAvailableChallengesForGroup());
+          await dispatch(fetchMembersOfGroup(group.id));
+          // fetch my challanges for modal if user creator
+        }
       }
     }
   };
 
   React.useEffect(() => {
     getGroupDetail();
+    return () => {
+      console.log('runned');
+      dispatch(cleanActiveGroup());
+      dispatch(cleanCalendar());
+    };
   }, []);
 
   React.useEffect(() => {
