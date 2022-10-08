@@ -16,7 +16,7 @@ import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendar
 const GroupDetails: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [show, setShow] = React.useState<null | string>(null);
-  const [isNotFound, setIsNotFound] = React.useState(false);
+  const [isNotFound, setIsNotFound] = React.useState<string>('');
   const groupParam = useParams();
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
@@ -26,8 +26,14 @@ const GroupDetails: React.FC = () => {
       let group: any;
       try {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
-      } catch (e) {
-        setIsNotFound(true);
+      } catch (e: any) {
+        console.log(e.response.status);
+        if (e.response.status === 404) setIsNotFound('404 GROUP NOT FOUND');
+        else {
+          setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
+        }
+
+        console.log(e.response.status);
       } finally {
         try {
           await dispatch(fetchGroupRoleById(group.id));
@@ -65,7 +71,7 @@ const GroupDetails: React.FC = () => {
   // };
 
   if (isLoading) return <CircularProgress isIndeterminate />;
-  if (isNotFound) return <Text>404 Group not found</Text>;
+  if (isNotFound.length > 0) return <Text>{isNotFound}</Text>;
 
   return (
     <Box w="full" as="section" id="general-section">
