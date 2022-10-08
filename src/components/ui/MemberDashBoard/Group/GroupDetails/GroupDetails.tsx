@@ -28,7 +28,8 @@ const GroupDetails: React.FC = () => {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
       } catch (e: any) {
         console.log(e.response.status);
-        if (e.response.status === 404) setIsNotFound('404 GROUP NOT FOUND');
+        if (e.response.status === 404)
+          setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
         else {
           setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
         }
@@ -71,7 +72,12 @@ const GroupDetails: React.FC = () => {
   // };
 
   if (isLoading) return <CircularProgress isIndeterminate />;
-  if (isNotFound.length > 0) return <Text>{isNotFound}</Text>;
+  if (isNotFound.length > 0)
+    return (
+      <Text fontWeight="hairline" fontSize="2xl">
+        {isNotFound}
+      </Text>
+    );
 
   return (
     <Box w="full" as="section" id="general-section">
