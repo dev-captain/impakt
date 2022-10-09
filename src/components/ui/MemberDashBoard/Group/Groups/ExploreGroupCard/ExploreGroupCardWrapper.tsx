@@ -56,7 +56,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
     <>
       {exploreGroup.map((g) => (
         <Box
-          cursor={isPrivate ? 'unset' : 'pointer'}
+          cursor={g.private ? 'unset' : 'pointer'}
           marginStart="0 !important"
           w={{
             base: '100%',
@@ -67,7 +67,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            if (!isPrivate) {
+            if (!g.private) {
               navigate(`/dashboard/groups/group/${g.id}`);
             }
           }}
@@ -84,7 +84,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
             isPrivateGroup={g.private}
           >
             <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
-              <Box maxW={isPrivate ? 'unset' : '99px'} maxH="38px">
+              <Box maxW={g.private ? 'unset' : '99px'} maxH="38px">
                 <Common.ImpaktButton
                   borderRadius="8px"
                   fontWeight="600"
@@ -93,14 +93,14 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                   fontSize="16px"
                   _hover={{ backgroundColor: '#000', color: '#fff' }}
                   variant={
-                    isPrivate
+                    g.private
                       ? g.Request?.status !== UserRequestStatus.Pending
                         ? 'transparent'
                         : 'black'
                       : 'transparent'
                   }
                   onClick={() => {
-                    if (isPrivate) {
+                    if (g.private) {
                       if (g.Request?.status !== UserRequestStatus.Pending) {
                         handleGroupCardButtonClick(g.id);
 
@@ -111,9 +111,9 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                     }
                     handleGroupCardButtonClick(g.id);
                   }}
-                  leftIcon={isPrivate ? undefined : <I.UnionIcon width="12px" />}
+                  leftIcon={g.private ? undefined : <I.UnionIcon width="12px" />}
                 >
-                  {isPrivate
+                  {g.private
                     ? g.Request?.status !== UserRequestStatus.Pending
                       ? 'Request to join'
                       : 'Pending'
