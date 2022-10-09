@@ -4,8 +4,8 @@ import { Common, I } from 'components';
 import { useAppSelector } from 'hooks';
 import { DeleteIcon } from '@chakra-ui/icons';
 
-import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
-import ConformationModal from './ConformationModal';
+import { GroupRole } from '../../../../../../../../../../lib/redux/slices/groups/types';
+import ConfirmationModal from './ConfirmationModal';
 
 const GeneralSettings: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
@@ -56,7 +56,7 @@ const GeneralSettings: React.FC = () => {
           {activeGroup?.role === GroupRole.Creator ? 'Delete Group' : 'Leave Group'}
         </Common.ImpaktButton>
       </Box>
-      <ConformationModal open={isOpen} close={() => onClose()} />
+      <ConfirmationModal open={isOpen} close={() => onClose()} />
     </>
   );
 };

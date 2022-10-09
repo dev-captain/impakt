@@ -5,7 +5,7 @@ import { I } from 'components';
 interface MemberCountPropsI {
   count: number;
 }
-const MemberCount: React.FC<MemberCountPropsI> = ({ count }) => {
+const GroupCardMemberCount: React.FC<MemberCountPropsI> = ({ count }) => {
   return (
     <Box display="flex" alignItems="center">
       <I.PeopleIcon width={{ lgx: '32px', base: '26px' }} />
@@ -22,4 +22,4 @@ const MemberCount: React.FC<MemberCountPropsI> = ({ count }) => {
   );
 };
 
-export default MemberCount;
+export default GroupCardMemberCount;

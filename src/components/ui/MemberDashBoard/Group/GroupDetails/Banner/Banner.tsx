@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Box } from '@chakra-ui/react';
 
 import BannerImage from './BannerImage';
-import BannerHeaderLeft from './BannerHeaderLeft';
-import BannerHeaderRight from './BannerHeaderRight';
+import BannerHeaderLeft from './Header/BannerHeaderLeft';
+import BannerHeaderRight from './Header/BannerHeaderRight';
 // import BannerPanelLeft from './BannerPanelLeft';
-import BannerPanelRight from './BannerPanelRight';
+import BannerPanelRight from './Panel/BannerPanelRight';
 
 const Banner: React.FC = () => {
   return (

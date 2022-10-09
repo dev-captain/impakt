@@ -13,9 +13,9 @@ import { DeleteIcon } from '@chakra-ui/icons';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
-import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
-import { deleteGroup } from '../../../../../../../lib/redux/slices/groups/actions/deleteGroup';
-import { leaveGroup } from '../../../../../../../lib/redux/slices/groups/actions/leaveGroup';
+import { GroupRole } from '../../../../../../../../../../lib/redux/slices/groups/types';
+import { deleteGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/deleteGroup';
+import { leaveGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/leaveGroup';
 
 interface GroupSettingModalProps {
   open: boolean;

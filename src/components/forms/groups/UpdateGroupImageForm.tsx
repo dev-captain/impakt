@@ -7,11 +7,11 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { useParams } from 'react-router-dom';
 
-import Images from '../../../../../../../assets/images';
-import uploadImageScheme from '../../../../../../../lib/yup/schemas/uploadImageScheme';
-import { ALLOW_IMAGE_FILE } from '../../../../../../../lib/yup/fields';
-import { updateGroupCoverImage } from '../../../../../../../lib/redux/slices/groups/actions/updateGroupCoverImage';
-import { getImageFromS3AsUrl } from '../../../../../../../utils';
+import Images from '../../../assets/images';
+import uploadImageScheme from '../../../lib/yup/schemas/uploadImageScheme';
+import { ALLOW_IMAGE_FILE } from '../../../lib/yup/fields';
+import { updateGroupCoverImage } from '../../../lib/redux/slices/groups/actions/updateGroupCoverImage';
+import { getImageFromS3AsUrl } from '../../../utils';
 
 interface PropsI {}
 const UpdateGroupImageForm: React.FC<PropsI> = () => {

@@ -3,7 +3,7 @@ import { Box, Skeleton } from '@chakra-ui/react';
 
 import { Common, I } from 'components';
 import { useAppSelector } from 'hooks';
-import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
+import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 export const BannerHeaderRight: React.FC = () => {
   const isMembersLoading = useAppSelector((state) => state.groupsReducer.isMembersLoading);

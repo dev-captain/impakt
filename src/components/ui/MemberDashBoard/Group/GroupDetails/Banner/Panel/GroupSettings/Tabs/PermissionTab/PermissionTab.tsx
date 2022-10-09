@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Common, I } from 'components';
 import { updateGroup } from 'lib/redux/slices/groups/actions/updateGroup';
 import keys from 'i18n/types';
+import PermissionCard from './PermissionCard';
 
 const PermissionTab: React.FC = () => {
   const [value, setValue] = React.useState('Public');
@@ -67,72 +68,45 @@ const PermissionTab: React.FC = () => {
           },
         }}
       >
-        <Box border="2px solid #EEF4F6" p="16px" borderRadius="16px" mb="16px">
-          <Box display="flex" justifyContent="space-between" alignItem="center">
-            <Text color="#29323B" fontSize={{ md: '18px', base: '12px' }} fontWeight="500">
-              Is your group public or private?
-            </Text>
-            <Tooltip
-              bg="#FFFFFF"
-              borderRadius="16px"
-              width="900px"
-              boxShadow="0px 4px 6px -2px rgba(0, 0, 0, 0.12)"
-              hasArrow
-              label={
-                <Text
-                  color="#4E6070"
-                  padding="5px"
-                  dangerouslySetInnerHTML={{
-                    __html: t(keys.Message.PublicToolTip.description),
-                  }}
-                />
-              }
-              mt="3"
-              placement="auto"
-              closeOnClick={false}
-            >
-              <Box>
-                <I.InfoIcon />
-              </Box>
-            </Tooltip>
-          </Box>
-          <Box display="flex" width="100%" mt="12px">
-            <Button
-              color={value === 'Public' ? '#29323B' : '#728BA3'}
-              bg={value === 'Public' ? '#EEF4F6' : '#fff'}
-              _hover={{
-                backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
-                color: value === 'Private' ? '#728BA3' : '#29323B',
-              }}
-              _focus={{ boxShadow: 'none' }}
-              w="120px"
-              h="38px"
-              borderRadius="8px"
-              onClick={() => {
-                setValue('Public');
-              }}
-            >
-              Public
-            </Button>
-            <Button
-              bg={value === 'Private' ? '#EEF4F6' : '#fff'}
-              color={value === 'Private' ? '#29323B' : '#728BA3'}
-              _hover={{
-                backgroundColor: value === 'Public' ? 'transparent' : '#EEF4F6',
-                color: value === 'Public' ? '#728BA3' : '#29323B',
-              }}
-              _focus={{ boxShadow: 'none' }}
-              w="120px"
-              h="38px"
-              borderRadius="8px"
-              onClick={() => {
-                setValue('Private');
-              }}
-            >
-              Private
-            </Button>
-          </Box>
-        </Box>
+        <PermissionCard
+          title="Is your group public or private?"
+          helperText={t(keys.Message.PublicToolTip.description)}
+        >
+          <Button
+            color={value === 'Public' ? '#29323B' : '#728BA3'}
+            bg={value === 'Public' ? '#EEF4F6' : '#fff'}
+            _hover={{
+              backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
+              color: value === 'Private' ? '#728BA3' : '#29323B',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            w="120px"
+            h="38px"
+            borderRadius="8px"
+            onClick={() => {
+              setValue('Public');
+            }}
+          >
+            Public
+          </Button>
+          <Button
+            bg={value === 'Private' ? '#EEF4F6' : '#fff'}
+            color={value === 'Private' ? '#29323B' : '#728BA3'}
+            _hover={{
+              backgroundColor: value === 'Public' ? 'transparent' : '#EEF4F6',
+              color: value === 'Public' ? '#728BA3' : '#29323B',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            w="120px"
+            h="38px"
+            borderRadius="8px"
+            onClick={() => {
+              setValue('Private');
+            }}
+          >
+            Private
+          </Button>
+        </PermissionCard>
       </Box>
       <Box mt="20px" textAlign="end">
         <Common.ImpaktButton

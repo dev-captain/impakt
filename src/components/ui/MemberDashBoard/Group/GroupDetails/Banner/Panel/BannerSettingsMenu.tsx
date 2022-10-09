@@ -5,11 +5,9 @@ import { Menu, MenuButton, useToast, useDisclosure } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-// import { deleteGroup } from '../../../../../../lib/redux/slices/groups/actions/deleteGroup';
-// import { leaveGroup } from '../../../../../../lib/redux/slices/groups/actions/leaveGroup';
-import GroupSettingModal from './GroupSetting/GroupSettingModal';
-import { GroupRole } from '../../../../../../lib/redux/slices/groups/types';
-import { joinGroup } from '../../../../../../lib/redux/slices/groups/actions/joinGroup';
+import { joinGroup } from '../../../../../../../lib/redux/slices/groups/actions/joinGroup';
+import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
+import GroupSettingModal from './GroupSettings/GroupSettingModal';
 
 const BannerSettingsMenu: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
@@ -46,10 +44,12 @@ const BannerSettingsMenu: React.FC = () => {
 
   if (isRoleLoading) return null;
 
+  const isRoleDefined = activeGroup?.role && activeGroup.role !== GroupRole.None;
+
   return (
     <>
       <Menu>
-        {activeGroup?.role && activeGroup.role !== GroupRole.None ? (
+        {isRoleDefined ? (
           <Common.ImpaktButton
             variant="transparent"
             as={MenuButton}
@@ -88,35 +88,6 @@ const BannerSettingsMenu: React.FC = () => {
             Join
           </Common.ImpaktButton>
         )}
-
-        {/* {activeGroup?.role !== GroupRole.Creator && ( */}
-        {/* <MenuList padding="12px" zIndex="999"> */}
-        {/* {activeGroup?.role === GroupRole.Creator && (
-            <MenuItem onClick={handleGroupDelete} gap="11px" padding="8px 10px">
-              <I.LogOutIcon width="16px" color="#F04153" />
-              Delete Group
-            </MenuItem>
-          )} */}
-        {/* <MenuItem onClick={handleLeaveGroup} gap="11px" padding="8px 10px">
-              <I.LogOutIcon width="16px" color="#F04153" />
-              Leave Group
-            </MenuItem> */}
-        {/* </MenuList> */}
-        {/* )} */}
-        {/* {activeGroup?.ownerId === member?.id && (
-                    <MenuItem onClick={onOpen} gap="11px" padding="8px 10px">
-                      <I.PeopleIcon width="16px" color="#4E6070" />
-                      Invite
-                    </MenuItem>
-                  )} */}
-        {/* <MenuItem gap="11px" padding="8px 10px">
-                    <I.PinIcon width="16px" color="#4E6070" />
-                    Pin Group
-                  </MenuItem> */}
-        {/* <MenuItem gap="11px" padding="8px 10px">
-                    <I.InfoIcon width="16px" color="#4E6070" />
-                    Report
-                  </MenuItem> */}
       </Menu>
       <GroupSettingModal open={isOpen} close={() => onClose()} />
     </>

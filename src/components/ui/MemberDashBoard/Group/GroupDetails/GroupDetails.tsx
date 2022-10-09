@@ -14,8 +14,7 @@ import { cleanActiveGroup } from '../../../../../lib/redux/slices/groups/groupsS
 import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
 
 const GroupDetails: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-  const [show, setShow] = React.useState<null | string>(null);
+  // const [show, setShow] = React.useState<null | string>(null);
   const [isNotFound, setIsNotFound] = React.useState<string>('');
   const groupParam = useParams();
   const dispatch = useAppDispatch();
@@ -27,14 +26,11 @@ const GroupDetails: React.FC = () => {
       try {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
       } catch (e: any) {
-        console.log(e.response.status);
         if (e.response.status === 404)
           setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
         else {
           setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
         }
-
-        console.log(e.response.status);
       } finally {
         try {
           await dispatch(fetchGroupRoleById(group.id));
@@ -52,19 +48,19 @@ const GroupDetails: React.FC = () => {
 
   React.useEffect(() => {
     getGroupDetail();
+
     return () => {
-      console.log('runned');
       dispatch(cleanActiveGroup());
       dispatch(cleanCalendar());
     };
   }, []);
 
-  React.useEffect(() => {
-    const showTip = localStorage.getItem('showTip');
-    if (showTip) {
-      setShow(showTip);
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   const showTip = localStorage.getItem('showTip');
+  //   if (showTip) {
+  //     setShow(showTip);
+  //   }
+  // }, []);
 
   // const hide = () => {
   //   localStorage.setItem('showTip', 'false');

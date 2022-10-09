@@ -4,9 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl, useToast } from '@chakra-ui/react';
 
 import { Common } from 'components';
-import { InputGroupPropsI } from '../../../../../../common/InputGroup';
-import createGroupYupScheme from '../../../../../../../lib/yup/schemas/createGroupYupScheme';
-import { updateGroup } from '../../../../../../../lib/redux/slices/groups/actions/updateGroup';
+import { InputGroupPropsI } from '../../common/InputGroup';
+import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
+import { updateGroup } from '../../../lib/redux/slices/groups/actions/updateGroup';
 
 const UpdateGroupNameForm: React.FC = () => {
   const group = useAppSelector((state) => state.groupsReducer.activeGroup);

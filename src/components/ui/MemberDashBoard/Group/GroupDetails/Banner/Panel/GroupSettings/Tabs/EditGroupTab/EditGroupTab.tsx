@@ -1,8 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 
-import UpdateGroupNameForm from './UpdateGroupNameForm';
-import UpdateGroupImageForm from './UpdateGroupImageForm';
+import { Forms } from 'components';
 
 const EditGroupTab: React.FC = () => {
   return (
@@ -25,8 +24,8 @@ const EditGroupTab: React.FC = () => {
         },
       }}
     >
-      <UpdateGroupNameForm />
-      <UpdateGroupImageForm />
+      <Forms.UpdateGroupNameForm />
+      <Forms.UpdateGroupImageForm />
     </Box>
   );
 };
