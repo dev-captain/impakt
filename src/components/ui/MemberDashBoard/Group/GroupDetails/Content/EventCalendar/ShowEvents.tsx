@@ -4,7 +4,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import { Day } from 'dayspan';
 import { Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { useAppSelector } from '../../../../../../../hooks';
+import { useAppSelector } from 'hooks';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const ShowEvents: React.FC = () => {

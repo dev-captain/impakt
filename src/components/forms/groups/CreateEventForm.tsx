@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
-import { InputGroupPropsI } from '../../../../../../common/InputGroup';
-import ChallengeModal from '../EventCalendar/SelectChallenge/ChallengeModal';
-import { createEvent } from '../../../../../../../lib/redux/slices/events/actions/createEvent';
-import { normalizeCalendarData } from '../../../../../../../utils';
-import createEventYupScheme from '../../../../../../../lib/yup/schemas/createEventYupSchema';
+import { useEventCalendarContext } from '../../../context/EventCalendarContext';
+import { InputGroupPropsI } from '../../common/InputGroup';
+import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
+import { createEvent } from '../../../lib/redux/slices/events/actions/createEvent';
+import { normalizeCalendarData } from '../../../utils';
+import createEventYupScheme from '../../../lib/yup/schemas/createEventYupSchema';
 
 const CreateEventForm: React.FC = () => {
   const toast = useToast();

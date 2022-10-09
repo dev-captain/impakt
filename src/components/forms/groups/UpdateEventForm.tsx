@@ -4,11 +4,11 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { Common, I } from 'components';
 
-import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
-import { InputGroupPropsI } from '../../../../../../common/InputGroup';
-import ChallengeModal from '../EventCalendar/SelectChallenge/ChallengeModal';
-import { normalizeCalendarData, padTo2Digits } from '../../../../../../../utils';
-import { updateEventBE } from '../../../../../../../lib/redux/slices/events/actions/updateEvent';
+import { useEventCalendarContext } from '../../../context/EventCalendarContext';
+import { InputGroupPropsI } from '../../common/InputGroup';
+import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
+import { normalizeCalendarData, padTo2Digits } from '../../../utils';
+import { updateEventBE } from '../../../lib/redux/slices/events/actions/updateEvent';
 
 const UpdateEventForm: React.FC = () => {
   const toast = useToast();

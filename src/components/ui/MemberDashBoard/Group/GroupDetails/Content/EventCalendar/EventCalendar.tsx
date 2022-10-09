@@ -10,26 +10,17 @@ import EventsOverview from './EventsOverview';
 import DayComponent from './Day';
 import useNormalizedCalendarData from '../../../../../../../hooks/useNormalizedCalendarData';
 import { useAppSelector } from '../../../../../../../hooks';
+import CalendarDays from './CalendarDays';
 // import { getDummyEvents } from '../../../../../../../data';
 
 const EventCalendar: React.FC = () => {
   const isGroupCalendarLoading = useAppSelector(
     (state) => state.calendarReducer.isGroupCalendarLoading,
   );
-  console.log(isGroupCalendarLoading);
 
   const activeGroupCalendar = useNormalizedCalendarData();
   const runInitCalendarRef = useRef(true);
-  const {
-    addEvents,
-    getCurrentMonthLabel,
-    getCurrentYear,
-    getDaysOfCurrentMonth,
-    moveToNextMonth,
-    moveToPreviousMonth,
-    getStartDayOfCurrentMonth,
-    setSelectedDay,
-  } = useEventCalendarContext();
+  const { addEvents, setSelectedDay } = useEventCalendarContext();
 
   const initCalendar = () => {
     if (activeGroupCalendar) {
@@ -60,70 +51,8 @@ const EventCalendar: React.FC = () => {
       borderRadius="10px"
       marginTop="10px"
     >
-      <Box width="100%" height="30%" color="white" display="flex" flexWrap="wrap">
-        <Box
-          padding="15px 20px"
-          height="70%"
-          width="100%"
-          whiteSpace="nowrap"
-          fontSize="1.2em"
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          backgroundColor="white"
-          color="#616161"
-          borderRadius="10px 10px 0 0"
-        >
-          <ChevronLeftIcon
-            fontSize="30px"
-            padding="3px"
-            backgroundColor=" #ffffff"
-            boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
-            borderRadius=" 8px"
-            cursor=" pointer"
-            onClick={moveToPreviousMonth}
-          />
-          <Box>{[getCurrentMonthLabel(), getCurrentYear()].join(' ')}</Box>
-          <ChevronRightIcon
-            fontSize="30px"
-            padding="3px"
-            backgroundColor=" #ffffff"
-            boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
-            borderRadius=" 8px"
-            cursor=" pointer"
-            onClick={moveToNextMonth}
-          />
-        </Box>
-        <DayNames />
-      </Box>
-
-      <HStack
-        width=" 100%;"
-        height=" 70%;"
-        flexWrap="wrap"
-        display="flex"
-        justifyContent="center"
-        alignItems="flex-start"
-        background=" #ffffff"
-        padding={{ base: '0 12px', md: '16px 15px 10px 12px' }}
-      >
-        {/* {renderWeeks()} */}
-        <>
-          {getDaysOfCurrentMonth().map((day) => (
-            <DayComponent
-              key={day.dayIdentifier}
-              isCurrentMonth={day.sameMonth(getStartDayOfCurrentMonth())}
-              isToday={day.currentDay}
-              isDaySelected={day.selectedDay}
-              dayNumber={day.dayOfMonth}
-              eventsCounts={day.events.length}
-              dote={day.events.length <= 3 ? '.'.repeat(day.events.length) : '...'}
-              selectDay={() => setSelectedDay(day)} // selectedDay
-            />
-          ))}
-        </>
-      </HStack>
-      <Skeleton isLoaded={!isGroupCalendarLoading} display="flex" id="ske">
+      <CalendarDays />
+      <Skeleton w="full" isLoaded={!isGroupCalendarLoading} display="flex">
         <Box
           backgroundColor=" #ffffff"
           width=" 100%"

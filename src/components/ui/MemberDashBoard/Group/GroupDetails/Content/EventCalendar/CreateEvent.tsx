@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import CreateEventForm from '../Forums/CreateEventForm';
+import { Forms } from 'components';
 
 const CreateEvent: React.FC = () => {
   const { goBackToOverViewScreen } = useEventCalendarContext();
@@ -23,7 +23,7 @@ const CreateEvent: React.FC = () => {
           Create event
         </Text>
       </Box>
-      <CreateEventForm />
+      <Forms.CreateEventForm />
     </Box>
   );
 };
