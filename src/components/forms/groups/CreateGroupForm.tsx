@@ -9,8 +9,7 @@ import { fetchMyGroups } from '../../../lib/redux/slices/groups/actions/fetchMyG
 import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
 
-interface CreateGroupFormPropsI {}
-const CreateGroupForm: React.FC<CreateGroupFormPropsI> = () => {
+const CreateGroupForm: React.FC = ({ children }) => {
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
     defaultValues: { groupName: '' },
@@ -77,27 +76,7 @@ const CreateGroupForm: React.FC<CreateGroupFormPropsI> = () => {
     >
       <Common.InputItems inputItems={inputItems} />
       <Flex justifyContent="space-between" w="full">
-        <Common.ImpaktButton
-          variant="transparent"
-          _hover={{ backgroundColor: '#000', color: '#fff' }}
-          _active={{ backgroundColor: 'transparent' }}
-          _focus={{ boxShadow: 'none' }}
-          border="2px solid #29323B"
-          borderRadius="16px"
-          color="#29323B"
-          w={{ md: '152px', base: '120px' }}
-          h={{ md: '64px', base: '54px' }}
-          fontSize={{ md: '18px' }}
-          fontWeight="700"
-          mr={3}
-          justifyContent="space-evenly"
-          onClick={() => {
-            navigate('/dashboard/groups');
-          }}
-          leftIcon={<I.BackIcon />}
-        >
-          Back
-        </Common.ImpaktButton>
+        {children}
         <Common.ImpaktButton
           variant="black"
           colorScheme="#fff"

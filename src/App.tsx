@@ -106,7 +106,7 @@ const App = () => {
         <Route path="referrals" element={<S.Referrals />} />
         <Route path="groups">
           <Route path="" element={<S.Group />} />
-          <Route path="create-group" element={<S.CreateGroup />} />
+          <Route path="create-group" element={<S.CreateGroup isStandalone />} />
           <Route
             path="group/:id"
             element={

@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { joinGroup } from '../../../../../../../lib/redux/slices/groups/actions/joinGroup';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
+import GroupsModal from '../../../GroupsModal';
+import GroupSettingsTabs from './GroupSettings/Tabs/GroupSettingsTabs';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
 
 const BannerSettingsMenu: React.FC = () => {
@@ -89,7 +91,7 @@ const BannerSettingsMenu: React.FC = () => {
           </Common.ImpaktButton>
         )}
       </Menu>
-      <GroupSettingModal open={isOpen} close={() => onClose()} />
+      <GroupSettingModal open={isOpen} close={onClose} />
     </>
   );
 };
