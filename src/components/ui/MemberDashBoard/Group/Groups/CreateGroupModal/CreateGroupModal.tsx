@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
-import CreateGroupForm from './CreateGroupForm';
+import { Forms } from 'components';
 
 const CreateGroupModal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,7 +53,7 @@ const CreateGroupModal: React.FC = () => {
               colleagues, and just like-minded people.
             </Text>
           </Box>
-          <CreateGroupForm />
+          <Forms.CreateGroupForm />
         </ModalBody>
       </ModalContent>
     </Modal>

@@ -1,79 +1,131 @@
+/* eslint-disable no-nested-ternary */
+import { Box, useToast } from '@chakra-ui/react';
 import * as React from 'react';
-import { Box, Button, HStack } from '@chakra-ui/react';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { Common, I } from 'components';
+import { useNavigate } from 'react-router-dom';
 
-import GroupCardWrapperHeader from '../GroupCardWrapperHeader';
-import ExplorePrivateSection from './ExplorePrivateSection';
-import ExplorePublicSection from './ExplorePublicSection';
+import Images from '../../../../../../assets/images';
+import { getImageFromS3AsUrl } from '../../../../../../utils';
+import GroupsCard from '../GroupsCard';
+import { sendGroupRequestToJoin } from '../../../../../../lib/redux/slices/groups/actions/sendGroupRequestToJoin';
+import { joinGroup } from '../../../../../../lib/redux/slices/groups/actions/joinGroup';
+import { UserRequestStatus } from '../../../../../../lib/redux/slices/groups/types';
 
-import { useAppSelector } from '../../../../../../hooks';
+interface ExploreGroupCardWrapperPropsI {
+  status: 'private' | 'public';
+}
+const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const isPrivate = status === 'private';
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const toast = useToast();
 
-const ExploreGroupCardWrapper: React.FC = () => {
-  const [status, setStatus] = React.useState<'public' | 'private'>('public');
-  const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
-  if (exploreGroups.length === 0) return null;
+  const exploreGroup = useAppSelector((state) => state.groupsReducer.exploreGroups).filter(
+    (d) => d.private === isPrivate,
+  );
+
+  const handleGroupCardButtonClick = async (groupId: number) => {
+    try {
+      if (isPrivate) {
+        if (!member) return;
+        await dispatch(sendGroupRequestToJoin(groupId)).unwrap();
+      } else {
+        await dispatch(joinGroup(groupId)).unwrap();
+      }
+      toast({
+        title: 'Success',
+        description: isPrivate ? 'Request sent successfully' : 'Joined successfully',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: e.response.data.message,
+        isClosable: true,
+        duration: 8000,
+        status: 'error',
+      });
+    }
+  };
 
   return (
-    <HStack
-      columnGap={{ md: '24px' }}
-      rowGap="24px"
-      justifyContent="flex-start"
-      alignItems="flex-start"
-      w="full"
-      margin="30px 0"
-      flexWrap={{ sm: 'wrap' }}
-      display={{ sm: 'flex' }}
-    >
-      {/* here is the components */}
-      <Box
-        w="full"
-        as="section"
-        id="explore-group-section"
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Box>
-          <GroupCardWrapperHeader title="Explore Groups" />
-        </Box>
-        <Box margin="20px 0">
-          <Button
-            color={status === 'public' ? '#fff' : '#000'}
-            bg={status === 'public' ? '#29323B' : '#fff'}
-            _hover={{
-              backgroundColor: status === 'private' ? '#fff' : '#29323B',
-              color: status === 'private' ? '#000' : '#fff',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="8px 0 0 8px"
-            onClick={() => {
-              setStatus('public');
-            }}
+    <>
+      {exploreGroup.map((g) => (
+        <Box
+          cursor={isPrivate ? 'unset' : 'pointer'}
+          marginStart="0 !important"
+          w={{
+            base: '100%',
+            sm: '100%',
+            md: '31%',
+            lgx: '23%',
+          }}
+          onClick={(e: React.MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!isPrivate) {
+              navigate(`/dashboard/groups/group/${g.id}`);
+            }
+          }}
+          position="relative"
+        >
+          <GroupsCard
+            img={
+              g.CurrentCoverImage?.source
+                ? getImageFromS3AsUrl(g.CurrentCoverImage?.source)
+                : Images.group.logo
+            }
+            member={g.memberCount}
+            name={g.groupName}
+            isPrivateGroup={g.private}
           >
-            Public
-          </Button>
-          <Button
-            bg={status === 'private' ? '#29323B' : '#fff'}
-            color={status === 'private' ? '#fff' : '#000'}
-            _hover={{
-              backgroundColor: status === 'public' ? '#fff' : '#29323B',
-              color: status === 'public' ? '#000' : '#fff',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="0 8px 8px 0"
-            onClick={() => {
-              setStatus('private');
-            }}
-          >
-            Private
-          </Button>
+            <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
+              <Box maxW={isPrivate ? 'unset' : '99px'} maxH="38px">
+                <Common.ImpaktButton
+                  borderRadius="8px"
+                  fontWeight="600"
+                  border="1px solid #1C1C28"
+                  justifyContent="space-around"
+                  fontSize="16px"
+                  _hover={{ backgroundColor: '#000', color: '#fff' }}
+                  variant={
+                    isPrivate
+                      ? g.Request?.status !== UserRequestStatus.Pending
+                        ? 'transparent'
+                        : 'black'
+                      : 'transparent'
+                  }
+                  onClick={() => {
+                    if (isPrivate) {
+                      if (g.Request?.status !== UserRequestStatus.Pending) {
+                        handleGroupCardButtonClick(g.id);
+
+                        return;
+                      }
+
+                      return;
+                    }
+                    handleGroupCardButtonClick(g.id);
+                  }}
+                  leftIcon={isPrivate ? undefined : <I.UnionIcon width="12px" />}
+                >
+                  {isPrivate
+                    ? g.Request?.status !== UserRequestStatus.Pending
+                      ? 'Request to join'
+                      : 'Pending'
+                    : 'Join'}
+                </Common.ImpaktButton>
+              </Box>
+            </Box>
+          </GroupsCard>
         </Box>
-      </Box>
-      {status === 'private' ? <ExplorePrivateSection /> : <ExplorePublicSection />}
-    </HStack>
+      ))}
+    </>
   );
 };
+
 export default ExploreGroupCardWrapper;

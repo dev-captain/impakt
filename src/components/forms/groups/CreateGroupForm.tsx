@@ -4,10 +4,10 @@ import { Flex, FormControl, useToast } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
-import { createGroup } from '../../../../../../lib/redux/slices/groups/actions/createGroup';
-import { fetchMyGroups } from '../../../../../../lib/redux/slices/groups/actions/fetchMyGroups';
-import { InputGroupPropsI } from '../../../../../common/InputGroup';
-import createGroupYupScheme from '../../../../../../lib/yup/schemas/createGroupYupScheme';
+import { createGroup } from '../../../lib/redux/slices/groups/actions/createGroup';
+import { fetchMyGroups } from '../../../lib/redux/slices/groups/actions/fetchMyGroups';
+import { InputGroupPropsI } from '../../common/InputGroup';
+import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
 
 interface CreateGroupFormPropsI {}
 const CreateGroupForm: React.FC<CreateGroupFormPropsI> = () => {

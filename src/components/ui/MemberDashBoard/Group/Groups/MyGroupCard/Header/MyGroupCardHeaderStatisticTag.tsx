@@ -9,7 +9,7 @@ interface MyGroupCardWrapperHeaderStatisticTagropsI {
   color: string;
   width: string;
 }
-const MyGroupCardWrapperHeaderStatisticTag: React.FC<MyGroupCardWrapperHeaderStatisticTagropsI> = ({
+const MyGroupCardHeaderStatisticTag: React.FC<MyGroupCardWrapperHeaderStatisticTagropsI> = ({
   value,
   icon,
   name,
@@ -42,4 +42,4 @@ const MyGroupCardWrapperHeaderStatisticTag: React.FC<MyGroupCardWrapperHeaderSta
     </Box>
   );
 };
-export default MyGroupCardWrapperHeaderStatisticTag;
+export default MyGroupCardHeaderStatisticTag;

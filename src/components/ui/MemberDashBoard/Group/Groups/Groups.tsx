@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Box, VStack } from '@chakra-ui/react';
 // import { useAppSelector } from 'hooks';
 
-import MyGroupCardWrapper from './MyGroupCard/MyGroupCardWrapper';
-import MyGroupCardWrapperHeader from './MyGroupCard/MyGroupCardWrapperHeader';
-import ExploreGroupCardWrapper from './ExploreGroupCard/ExploreGroupCardWrapper';
+import ExploreGroupCard from './ExploreGroupCard/ExploreGroupCard';
+import MyGroupCard from './MyGroupCard/MyGroupCard';
+import MyGroupCardHeader from './MyGroupCard/Header/MyGroupCardHeader';
 
 const Groups: React.FC = () => {
   // const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
@@ -12,17 +12,15 @@ const Groups: React.FC = () => {
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">
       <VStack alignItems="flex-start" rowGap="1em" justifyContent="flex-start" w="full">
-        {/* Your groups section */}
+        {/* Your groups  section */}
         <Box w="full" as="section" id="your-groups-section">
-          <MyGroupCardWrapperHeader />
-          <MyGroupCardWrapper />
+          <MyGroupCardHeader />
+          <MyGroupCard />
         </Box>
-        {/* Explore section  */}
-        {/* {exploreGroups.length && ( */}
+        {/* Explore Group section */}
         <Box w="full" as="section" id="explore-group-section">
-          <ExploreGroupCardWrapper />
+          <ExploreGroupCard />
         </Box>
-        {/* )} */}
       </VStack>
     </Box>
   );
