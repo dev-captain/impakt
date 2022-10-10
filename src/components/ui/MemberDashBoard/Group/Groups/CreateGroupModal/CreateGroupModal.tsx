@@ -76,6 +76,20 @@ const CreateGroupModal: React.FC<CreateGroupModalPropsI> = ({ isStandalone, onCl
         >
           Back
         </Common.ImpaktButton>
+        <Common.ImpaktButton
+          onClick={close}
+          variant="black"
+          colorScheme="#fff"
+          w={{ md: '135px', base: '130px' }}
+          h={{ md: '64px', base: '54px' }}
+          backgroundColor="#29323B"
+          borderRadius="16px"
+          type="submit"
+          fontSize={{ md: '18px' }}
+          fontWeight="700"
+        >
+          Create
+        </Common.ImpaktButton>
       </Forms.CreateGroupForm>
     </GroupsModal>
   );

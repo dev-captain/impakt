@@ -77,19 +77,6 @@ const CreateGroupForm: React.FC = ({ children }) => {
       <Common.InputItems inputItems={inputItems} />
       <Flex justifyContent="space-between" w="full">
         {children}
-        <Common.ImpaktButton
-          variant="black"
-          colorScheme="#fff"
-          w={{ md: '135px', base: '130px' }}
-          h={{ md: '64px', base: '54px' }}
-          backgroundColor="#29323B"
-          borderRadius="16px"
-          type="submit"
-          fontSize={{ md: '18px' }}
-          fontWeight="700"
-        >
-          Create
-        </Common.ImpaktButton>
       </Flex>
     </FormControl>
   );
