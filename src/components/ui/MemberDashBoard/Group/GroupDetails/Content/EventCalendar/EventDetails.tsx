@@ -4,11 +4,15 @@ import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { useAppSelector } from '../../../../../../../hooks';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
+import { useAppSelector } from '../../../../../../../hooks';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const eventIdParam = useParams().eventId;
   const isAdmin =
     useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
@@ -31,7 +35,12 @@ const EventDetails: React.FC = () => {
             backgroundColor=" #ffffff"
             borderRadius=" 8px"
             cursor=" pointer"
-            onClick={() => goBackToOverViewScreen()}
+            onClick={() => {
+              if (eventIdParam) {
+                navigate(location.pathname.substring(0, location.pathname.indexOf('/event')));
+              }
+              goBackToOverViewScreen();
+            }}
             marginRight="5px"
           />
           <Box display="flex" justifyContent="space-between" alignContent="center">

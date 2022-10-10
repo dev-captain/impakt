@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef } from 'react';
 import { Calendar, CalendarDay, CalendarEvent, Day, EventInput } from 'dayspan';
+import { useParams } from 'react-router-dom';
+import useNormalizedCalendarData from '../hooks/useNormalizedCalendarData';
 
 interface EventCalendarContext {
   addEvents: (events: EventInput<string, any>[]) => void;
@@ -40,6 +42,9 @@ export function useEventCalendarContext() {
 export const EventCalendarContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
+  const eventQuery = useParams()?.eventId;
+  const activeGroupCalendar = useNormalizedCalendarData();
+  const runInitCalendarRef = useRef(true);
   const calendarRef = useRef(Calendar.months<string, any>());
   const [calendarOverViewScreen, setCalendarOverViewScreen] = React.useState<OverViewScreenTypes[]>(
     ['first'],
@@ -147,6 +152,37 @@ export const EventCalendarContextProvider: React.FC<{
       setCalendarOverViewScreen([...calendarOverViewScreen]);
     }
   };
+
+  const initCalendar = () => {
+    if (activeGroupCalendar) {
+      addEvents(activeGroupCalendar.Events);
+    }
+    // const dummyEvents = getDummyEvents();
+    // addEvents(dummyEvents);
+    if (eventQuery) {
+      const findTheEventQuery = activeGroupCalendar?.Events.find(
+        ({ id }) => id === parseInt(eventQuery, 10),
+      );
+      if (findTheEventQuery && findTheEventQuery.visible) {
+        setSelectedDay(Day.fromString(findTheEventQuery.schedule.start));
+        goToOverViewScreen('event');
+        setActiveEventId(findTheEventQuery.id);
+
+        return;
+      }
+    }
+    setSelectedDay(Day.today());
+  };
+
+  useEffect(() => {
+    if (runInitCalendarRef.current) {
+      initCalendar();
+    }
+
+    return () => {
+      runInitCalendarRef.current = true;
+    };
+  }, [activeGroupCalendar]);
 
   return (
     <EventCalendarContext.Provider

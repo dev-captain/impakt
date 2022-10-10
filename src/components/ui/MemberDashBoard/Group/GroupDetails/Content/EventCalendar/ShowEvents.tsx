@@ -5,9 +5,11 @@ import { Day } from 'dayspan';
 import { Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { useAppSelector } from 'hooks';
+import { useNavigate } from 'react-router-dom';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const ShowEvents: React.FC = () => {
+  const navigate = useNavigate();
   const isAdmin =
     useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
 
@@ -51,6 +53,7 @@ const ShowEvents: React.FC = () => {
                     onClick={() => {
                       goToOverViewScreen('event');
                       setActiveEventId(eventObj.event.id);
+                      navigate(`event/${eventObj.event.id}`);
                     }}
                   >
                     <Text fontSize="14px" fontWeight="600">

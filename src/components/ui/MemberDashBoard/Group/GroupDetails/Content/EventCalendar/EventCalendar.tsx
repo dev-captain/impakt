@@ -18,29 +18,6 @@ const EventCalendar: React.FC = () => {
     (state) => state.calendarReducer.isGroupCalendarLoading,
   );
 
-  const activeGroupCalendar = useNormalizedCalendarData();
-  const runInitCalendarRef = useRef(true);
-  const { addEvents, setSelectedDay } = useEventCalendarContext();
-
-  const initCalendar = () => {
-    if (activeGroupCalendar) {
-      addEvents(activeGroupCalendar.Events);
-    }
-    // const dummyEvents = getDummyEvents();
-    // addEvents(dummyEvents);
-    setSelectedDay(Day.today());
-  };
-
-  useEffect(() => {
-    if (runInitCalendarRef.current) {
-      initCalendar();
-    }
-
-    return () => {
-      runInitCalendarRef.current = true;
-    };
-  }, [activeGroupCalendar]);
-
   return (
     <Box
       height="100%"

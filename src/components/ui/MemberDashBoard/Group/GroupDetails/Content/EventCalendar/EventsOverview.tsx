@@ -4,7 +4,6 @@ import { useEventCalendarContext } from 'context/EventCalendarContext';
 import ShowEvents from './ShowEvents';
 import EventDetails from './EventDetails';
 import RemoveEvent from './RemoveEvent';
-import UpdateEvent from './UpdateEvent';
 import EventModify from './EventModify';
 
 const EventsOverview: React.FC = () => {
