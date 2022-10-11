@@ -4,14 +4,16 @@ import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 import { useAppSelector } from '../../../../../../../hooks';
+import { deepLinkToApp } from '../../../../../../../data';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
-  const isAdmin =
-    useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
+  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const isAdmin = activeGroup?.role === GroupRole.Creator;
+
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
     useEventCalendarContext();
 
@@ -21,6 +23,8 @@ const EventDetails: React.FC = () => {
   const challange = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
   ).find(({ challenge }) => challenge.id === JSON.parse(eventObj.data).assocId);
+
+  const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
 
   return (
     <>
@@ -101,14 +105,16 @@ const EventDetails: React.FC = () => {
             </Text>
           )}
         </Box> */}
-        {/* <Box display="flex" alignItems="center" mb="12px">
+        <Box display="flex" alignItems="center" mb="12px">
           <Box w="34px">
             <I.ArrowIcon w="15px" height="15px" color="#728BA3" />
           </Box>
-          <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
-            {`${JSON.parse(eventObj.data).link} `}
-          </Text>
-        </Box> */}
+          <a href={deepLink}>
+            <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
+              Click to join event
+            </Text>
+          </a>
+        </Box>
         <Box display="flex" alignItems="center">
           <Box w="34px">
             <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />

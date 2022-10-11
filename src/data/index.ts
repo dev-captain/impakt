@@ -614,3 +614,6 @@ export const GroupDetails = [
     private: 'false',
   },
 ];
+
+export const deepLinkToApp = (groupId?: number, eventId?: number) =>
+  `impakt://join-event?groupId=${groupId}&eventId=${eventId}`;
