@@ -26,7 +26,7 @@ const EventsOverview: React.FC = () => {
         {screen === 'empty' && null}
         {screen === 'first' && <ShowEvents />}
         {screen === 'create' && <EventModify title="Create event" type="create" />}
-        {screen === 'update' && <EventModify title="Create event" type="update" />}
+        {screen === 'update' && <EventModify title="Update event" type="update" />}
         {screen === 'event' && <EventDetails />}
         {screen === 'remove' && <RemoveEvent />}
       </Box>

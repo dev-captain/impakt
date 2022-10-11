@@ -10,9 +10,6 @@ import { useAppSelector } from '../../../../../../../hooks';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const eventIdParam = useParams().eventId;
   const isAdmin =
     useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
@@ -36,9 +33,6 @@ const EventDetails: React.FC = () => {
             borderRadius=" 8px"
             cursor=" pointer"
             onClick={() => {
-              if (eventIdParam) {
-                navigate(location.pathname.substring(0, location.pathname.indexOf('/event')));
-              }
               goBackToOverViewScreen();
             }}
             marginRight="5px"

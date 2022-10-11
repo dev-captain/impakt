@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useRef } from 'react';
 import { Calendar, CalendarDay, CalendarEvent, Day, EventInput } from 'dayspan';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useNormalizedCalendarData from '../hooks/useNormalizedCalendarData';
 
 interface EventCalendarContext {
@@ -43,6 +43,8 @@ export const EventCalendarContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const eventQuery = useParams()?.eventId;
+  const navigate = useNavigate();
+  const location = useLocation();
   const activeGroupCalendar = useNormalizedCalendarData();
   const runInitCalendarRef = useRef(true);
   const calendarRef = useRef(Calendar.months<string, any>());
@@ -79,6 +81,7 @@ export const EventCalendarContextProvider: React.FC<{
   const removeEvent = (event: EventInput<string, any>) => {
     calendarRef.current.removeEvent(event);
     goToOverViewScreen('first');
+    removeEventQueryFromLocation();
     reRenderCalendar();
   };
 
@@ -150,6 +153,18 @@ export const EventCalendarContextProvider: React.FC<{
     if (calendarOverViewScreen.length > 1) {
       calendarOverViewScreen.pop();
       setCalendarOverViewScreen([...calendarOverViewScreen]);
+    }
+    // side effect
+    removeEventQueryFromLocation();
+  };
+
+  const removeEventQueryFromLocation = () => {
+    if (
+      eventQuery &&
+      (calendarOverViewScreen[calendarOverViewScreen.length - 1] === 'first' ||
+        calendarOverViewScreen[calendarOverViewScreen.length - 1] === 'remove')
+    ) {
+      navigate(location.pathname.substring(0, location.pathname.indexOf('/event')));
     }
   };
 
