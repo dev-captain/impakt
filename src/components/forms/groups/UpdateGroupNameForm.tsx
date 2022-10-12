@@ -49,13 +49,14 @@ const UpdateGroupNameForm: React.FC = () => {
           status: 'success',
         });
       } catch (e: any) {
-        toast({
-          title: 'Error',
-          description: e.response.data.message,
-          isClosable: true,
-          duration: 8000,
-          status: 'error',
-        });
+        console.log(e);
+        // toast({
+        //   title: 'Error',
+        //   description: e.response.data.message,
+        //   isClosable: true,
+        //   duration: 8000,
+        //   status: 'error',
+        // });
       }
     }
   };

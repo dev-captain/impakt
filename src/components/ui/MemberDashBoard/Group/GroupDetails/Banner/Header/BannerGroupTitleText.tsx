@@ -6,6 +6,8 @@ import { useAppSelector } from 'hooks';
 const BannerGroupTitleText: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
 
+  console.log('name', activeGroup);
+
   return (
     <Text
       textStyle="TitleBold64"

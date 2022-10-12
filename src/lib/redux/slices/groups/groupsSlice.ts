@@ -23,6 +23,7 @@ const groupsInitialStateI: GroupsInitialI = {
   membersOfGroup: null,
   groupRequests: [],
   exploreGroups: [],
+  role: null,
 };
 
 const groupsSlice = createSlice({
@@ -35,6 +36,7 @@ const groupsSlice = createSlice({
       state.isLoading = false;
       state.isRoleLoading = true;
       state.isMembersLoading = true;
+      state.role = null;
     },
 
     setActiveGroupCalendar(state: GroupsInitialI) {
@@ -96,7 +98,7 @@ const groupsSlice = createSlice({
       .addCase(fetchGroupRoleById.fulfilled, (state, action) => {
         state.isRoleLoading = false;
         if (state.activeGroup) {
-          state.activeGroup.role = action.payload.role;
+          state.role = action.payload.role;
         }
       })
       .addCase(fetchGroupRoleById.rejected, (state) => {
@@ -144,9 +146,14 @@ const groupsSlice = createSlice({
       })
       .addCase(updateGroup.fulfilled, (state, action) => {
         state.isLoading = false;
+
         if (state.activeGroup) {
-          state.activeGroup.groupName = action.payload.groupName;
-          state.activeGroup.private = action.payload.private;
+          state.activeGroup = {
+            ...state.activeGroup,
+            groupName: action.payload.groupName,
+            // eslint-disable-next-line no-underscore-dangle
+            _private: action.payload._private,
+          };
         }
       })
       .addCase(updateGroup.rejected, (state) => {
@@ -160,12 +167,10 @@ const groupsSlice = createSlice({
       .addCase(updateGroupCoverImage.fulfilled, (state, action) => {
         state.isLoading = false;
         if (!state.activeGroup) return;
-
-        if (!state.activeGroup.CurrentCoverImage) {
-          state.activeGroup.CurrentCoverImage = { source: '' };
-        }
-
-        state.activeGroup.CurrentCoverImage.source = action.payload.ImageKey;
+        state.activeGroup = {
+          ...state.activeGroup,
+          currentCoverImage: { source: action.payload.imageKey },
+        };
       })
       .addCase(updateGroupCoverImage.rejected, (state) => {
         state.isLoading = false;

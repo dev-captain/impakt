@@ -26,7 +26,7 @@ const GroupDetails: React.FC = () => {
       try {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
       } catch (e: any) {
-        if (e.response.status === 404)
+        if (e.statusCode === 404)
           setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
         else {
           setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');

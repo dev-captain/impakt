@@ -6,19 +6,17 @@ import { Common, I } from 'components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { joinGroup } from '../../../../../../../lib/redux/slices/groups/actions/joinGroup';
-import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
-import GroupsModal from '../../../GroupsModal';
-import GroupSettingsTabs from './GroupSettings/Tabs/GroupSettingsTabs';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
 
 const BannerSettingsMenu: React.FC = () => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const role = useAppSelector((state) => state.groupsReducer.role);
   const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const isCreator = activeGroup?.role === GroupRole.Creator;
+  const isCreator = role === 'Creator';
 
   const jointoGroup = async () => {
     if (!activeGroup) return;
@@ -46,7 +44,7 @@ const BannerSettingsMenu: React.FC = () => {
 
   if (isRoleLoading) return null;
 
-  const isRoleDefined = activeGroup?.role && activeGroup.role !== GroupRole.None;
+  const isRoleDefined = role && role !== 'None';
 
   return (
     <>

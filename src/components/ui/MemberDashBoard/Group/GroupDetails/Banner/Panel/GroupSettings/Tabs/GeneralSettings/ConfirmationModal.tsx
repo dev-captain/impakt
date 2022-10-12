@@ -4,7 +4,6 @@ import { DeleteIcon } from '@chakra-ui/icons';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
-import { GroupRole } from '../../../../../../../../../../lib/redux/slices/groups/types';
 import { deleteGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/deleteGroup';
 import { leaveGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/leaveGroup';
 import GroupsModal from '../../../../../../GroupsModal';
@@ -16,11 +15,12 @@ interface GroupSettingModalProps {
 
 const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const role = useAppSelector((state) => state.groupsReducer.role);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const toast = useToast();
-  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.Members)?.filter(
-    ({ role }) => role !== GroupRole.None,
+  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.members)?.filter(
+    (m) => m.role !== 'None',
   );
 
   const handleGroupDelete = async () => {
@@ -76,7 +76,7 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
     <GroupsModal
       modalTitle={{
         text:
-          activeGroup?.role !== GroupRole.Creator
+          role !== 'Creator'
             ? 'Are you sure you want to leave?'
             : 'Are you sure you want to delete group?',
       }}
@@ -86,7 +86,7 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
     >
       <Box display="flex" justifyContent="center" alignItems="center" mt="24px">
         <Box>
-          {activeGroup?.role === GroupRole.Creator && (
+          {role === 'Creator' && (
             <Box display="flex" alignItems="center" justifyContent="center" marginBottom="24px">
               <I.PeopleIcon color="#F84153" />
               <Text color="#F84153" fontSize="24px" fontWeight="700" marginLeft="12px">
@@ -108,15 +108,15 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
             borderRadius="8px"
             type="submit"
             fontSize={{ md: '20px' }}
-            onClick={activeGroup?.role === GroupRole.Creator ? handleGroupDelete : handleLeaveGroup}
+            onClick={role === 'Creator' ? handleGroupDelete : handleLeaveGroup}
             fontWeight="700"
           >
-            {activeGroup?.role === GroupRole.Creator ? (
+            {role === 'Creator' ? (
               <DeleteIcon width="24px" height="24px" marginRight="20px" />
             ) : (
               <I.LeaveIcon width="24px" height="24px" marginRight="20px" />
             )}
-            {activeGroup?.role === GroupRole.Creator ? 'Delete' : 'Leave'}
+            {role === 'Creator' ? 'Delete' : 'Leave'}
           </Common.ImpaktButton>
         </Box>
       </Box>

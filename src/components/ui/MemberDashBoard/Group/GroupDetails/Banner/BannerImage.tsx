@@ -9,8 +9,9 @@ const BannerImage: React.FC = () => {
     (state) => state.groupsReducer.activeGroup?.currentCoverImageId,
   );
   const currentCoverImageSource = useAppSelector(
-    (state) => state.groupsReducer.activeGroup?.CurrentCoverImage,
+    (state) => state.groupsReducer.activeGroup?.currentCoverImage,
   );
+  console.log(isCurrentImageExist, currentCoverImageSource);
 
   return (
     <Image

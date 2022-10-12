@@ -13,7 +13,6 @@ import * as React from 'react';
 import Images from 'assets/images';
 import { useAppSelector } from 'hooks';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
-import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const MemberList: React.FC = () => {
   // const toast = useToast();
@@ -190,11 +189,11 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-            {members?.Members.map(
-              ({ role, User }) =>
-                role !== GroupRole.None && (
+            {members?.members.map(
+              ({ role, user }) =>
+                role !== 'None' && (
                   <Box
-                    key={`${User.id}-box`}
+                    key={`${user.id}-box`}
                     display="flex"
                     justifyContent="space-between"
                     marginTop="16px"
@@ -207,7 +206,7 @@ const MemberList: React.FC = () => {
                         fontWeight="500"
                         marginLeft="16px"
                       >
-                        {User.firstName ?? User.username}
+                        {user.firstName ?? user.username}
                       </Text>
                     </Box>
 

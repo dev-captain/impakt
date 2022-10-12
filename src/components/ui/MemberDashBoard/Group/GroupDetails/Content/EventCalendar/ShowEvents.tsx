@@ -6,12 +6,10 @@ import { Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const ShowEvents: React.FC = () => {
   const navigate = useNavigate();
-  const isAdmin =
-    useAppSelector((state) => state.groupsReducer.activeGroup)?.role === GroupRole.Creator;
+  const isAdmin = useAppSelector((state) => state.groupsReducer.role) === 'Creator';
 
   const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
     useEventCalendarContext();

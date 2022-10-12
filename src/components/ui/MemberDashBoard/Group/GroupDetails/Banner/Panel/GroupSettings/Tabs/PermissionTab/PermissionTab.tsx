@@ -18,7 +18,8 @@ const PermissionTab: React.FC = () => {
   const groupParam = useParams();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   React.useEffect(() => {
-    if (activeGroup?.private) {
+    // eslint-disable-next-line no-underscore-dangle
+    if (activeGroup?._private) {
       setValue('Private');
     } else {
       setValue('Public');

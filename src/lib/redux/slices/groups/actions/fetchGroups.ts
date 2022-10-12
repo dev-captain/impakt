@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
+import { GroupsInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
-import { ExploreGroupRes } from '../types';
 
 const fetchGroups = createAsyncThunk(
   'groups/fetch-groups',
@@ -15,11 +14,13 @@ const fetchGroups = createAsyncThunk(
       if (!isLogin) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
-      const getMyGroupRes = await axios
-        .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .get(`/api/v1/groups?explore=${explore}`);
+      const getMyGroupRes = await GroupsInstance.groupsControllerV1ExploreGroups(
+        undefined,
+        undefined,
+        explore,
+      );
 
-      const payload = getMyGroupRes.data as ExploreGroupRes[];
+      const payload = getMyGroupRes;
 
       return payload;
     } catch (err: any) {
