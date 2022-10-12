@@ -12,6 +12,29 @@ export default {
     workout: 'Work out! Get fit! Get paid!',
     excercise: 'EXERCISE',
     squats: 'SQUATS',
+    body: 'Fitness is for all.',
+    body1:
+      'The Impakt App your phone or your webcam. That`s all you need to enter the Impakt world. No expensive equipment, no payments required. Our body motion tracking technology takes care of everything.',
+    evolving: 'I am always evolving.',
+    evolvingMsg:
+      'Faster, stronger, healthier. All these benefits will be reflected by our avatars. Obtainable from challenges or acquirable via Koin, our avatar cosmetics reflect our fitness journey.',
+    fitnessJourneyTitle: 'My fitness journey.',
+    fitnessJourneyDescription:
+      'Remember counting the seconds on the treadmill? Remember the pure boredom? Not in Impakt! Fitness must be fun, challenging, and entertaining.Through gamification and constant updates, Impakt keeps us engaged and motivated. Our fitness journey is never over, and neither is Impakt. We are constantly evolving. Together.',
+    athletesTitle: 'Elite athletes are already on board.',
+    athletesDescription:
+      'Fitness experts, health specialists, and pro athletes. They are our Impakt ICONs and we are honored to have them on board our journey!',
+    impaktTeamTitle: 'The Impakt team',
+    impaktTeamDescription:
+      'We`re proud to have each and every member on board. A perfect mix of cultures, experiences and abilities.',
+    privacyTitle: 'Privacy.',
+    privacyTitle1: 'I choose how',
+    privacyTitle2: 'the world sees me.',
+    privacyDescription:
+      'Camera on or camera off? It`s always our choice. We can show our real selves or go with our own digital identity.',
+    humanTitle: 'The human need of connecting with others.',
+    humanDescription:
+      'We connect through shared experiences and goals! And what better goal than being fit & healthy to bring us together?',
   },
   downloadPlateform: {
     download: 'Download our App',
@@ -336,6 +359,151 @@ export default {
       {
         image: Images.nft.nft_card4,
         description: 'A dynamic NFT where high in-game score = high rarity',
+      },
+    ],
+  },
+  Evolving: {
+    // builders: 'IMPAKT BUILDERS',
+    Title: 'I am always evolving.',
+  },
+  athletes: {
+    builders: 'IMPAKT BUILDERS',
+    Title: 'The Founders',
+    team: [
+      {
+        name: 'Kelvin Gastelum',
+        title: 'CEO',
+        image: Images.kelvinImg.kelvinImg,
+        alt: '',
+        subtitle: 'UFC Middleweight contender',
+        subtitle1: '2019 Fight of the Year award',
+        subtitle2: 'The Ultimate Fighter 17 winner',
+        twitterLink: 'https://twitter.com/demideuszin',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '1M+ Followers',
+        data: [
+          'UFC Middleweight contender',
+          '2019 Fight of the Year award',
+          'The Ultimate Fighter 17 winner',
+        ],
+      },
+      {
+        name: 'Matt Fox',
+        title: 'President',
+        image: Images.kelvinImg.photoMatt,
+        alt: '',
+        subtitle: 'Home fitness expert',
+        subtitle1: 'No gym in 6 years',
+        subtitle2: 'Cancer surviror',
+        subtitle3: 'Nominated fitness influencer of 2020',
+        twitterLink: 'https://twitter.com/shabamanation?s=21&t=WPEL7jC2IhTtV1U-9I-_Kw',
+        linkedInLink: 'https://www.linkedin.com/in/john-keh',
+        facebookLink: '',
+        followers: '500k+ Followers',
+        data: [
+          'Home fitness expert',
+          'No gym in 6 years',
+          'Cancer surviror',
+          'Nominated fitness influencer of 2020',
+        ],
+      },
+      {
+        name: 'Uyen Ha',
+        title: 'CTO',
+        image: Images.kelvinImg.photoUyen,
+        alt: '',
+        subtitle: 'ONE Championship fighter',
+        subtitle1: 'Former Australian National  Team wrestler',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '100k+ Followers',
+        data: ['ONE Championship fighter', 'Former Australian National  Team wrestler'],
+      },
+    ],
+  },
+  leadershipData: {
+    data: [
+      {
+        title: 'Winston Zin',
+        name: 'Demideus',
+        post: 'Founder/CEO',
+        img: Images.team.demideus,
+      },
+      {
+        title: 'John Keh',
+        name: 'Valtec',
+        post: 'Founder/President',
+        img: Images.team.valtec,
+      },
+      {
+        title: 'Hakim Bawa',
+        name: 'Dahaka',
+        post: 'Founder/CTO',
+        img: Images.team.dahaka,
+      },
+    ],
+  },
+  advisorData: {
+    data: [
+      {
+        title: 'Twitch Founder',
+        name: 'Kevin Lin',
+        post: 'Impakt Advisor',
+        img: Images.advisor.kevin,
+      },
+      {
+        title: 'Netscape CTO',
+        name: 'Tim Howes',
+        post: 'Impakt Advisor',
+        img: Images.advisor.tim,
+      },
+      {
+        title: 'Guitar Hero Founder',
+        name: 'Kai Huang',
+        post: 'Impakt Advisor',
+        img: Images.advisor.kai,
+      },
+    ],
+  },
+  teamData: {
+    data: [
+      {
+        title: 'John',
+        name: 'Duke Nuke',
+        post: 'Sales/Partnerships & Strategy',
+        img: Images.team.duke,
+      },
+      {
+        title: 'Ursina',
+        name: 'RatSpeare',
+        post: 'Product Management & Strategy',
+        img: Images.team.ratSpeare,
+      },
+      {
+        title: 'Roman',
+        name: 'JSolo',
+        post: 'Product Design & Strategy',
+        img: Images.team.JSolo,
+      },
+      {
+        title: 'Guney',
+        name: 'Requiem Aeternam',
+        post: 'Unity Engineering & Strategy',
+        img: Images.team.requiem,
+      },
+      {
+        title: 'Andrei',
+        name: 'Berila',
+        post: 'Marketing/Sales & Strategy',
+        img: Images.team.berila,
+      },
+      {
+        title: 'Chris',
+        name: 'CatRoutines',
+        post: 'TechSupport/Community & Strategy',
+        img: Images.team.catRoutines,
       },
     ],
   },

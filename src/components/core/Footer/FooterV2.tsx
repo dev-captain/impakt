@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { memo } from 'react';
-import { VStack, HStack, Box, Text, GridItem, SimpleGrid, Link } from '@chakra-ui/react';
+import { memo } from 'react';
+import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-// import Email from 'components/icons/Email';
-// import useNewsletter from 'hooks/useNewsletter';
-import NavBarLink from '../Navbar/NavBarLink';
-import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
+import NavBarLink from '../NewNavbar/NavBarLink';
+import NavBarSocialIcons from '../NewNavbar/NavBarSocialIcons';
 
 const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
   const navigate = useNavigate();
@@ -23,12 +21,12 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
     <C.HeroLayout
       pos="relative"
       removeTopPadding
-      bgColor="#09090B"
+      bgColor="#fff"
       align="center"
       minH="auto !important"
       justify="flex-start"
     >
-      <VStack width="100%">
+      <VStack as="footer" width="100%">
         {/* <VStack w="100%">
           <HStack
             justifyContent="center"
@@ -121,19 +119,18 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
         {/* </HStack> */}
         {/* </VStack>  */}
         <VStack w="100%">
-          <VStack
-            w={{ base: 'auto', lg: wFull ? 'full' : '1200px', xl: wFull ? 'full' : '1200px' }}
-          >
+          <VStack w={{ base: '100%', lgx: '1400px' }} padding="0 20px">
             <HStack
               justifyContent="flex-start"
               alignItems="flex-start"
               w="full"
+              display="flex"
               paddingTop={{ base: '48px', md: '80px' }}
               paddingLeft={{ base: '0', lg: wFull ? '48px' : '0' }}
             >
               <SimpleGrid w="full">
                 <GridItem
-                  w={{ base: '100%', sm: '100%', md: '100%', lg: wFull ? 'full' : '1200px' }}
+                  w="full"
                   margin="auto"
                   alignItems="center"
                   justifyContent="center"
@@ -141,69 +138,93 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                 >
                   <HStack
                     w="full"
-                    padding={{ base: '0px 10px', md: '0px' }}
+                    padding="0px"
                     rowGap={{ base: '32px', md: '24px' }}
                     display="flex"
-                    flexWrap={{ base: 'wrap', md: 'nowrap' }}
                     justify={{ base: 'space-between', lg: wFull ? 'flex-start' : 'space-between' }}
                   >
                     <HStack
-                      w={{ base: 'full', lg: wFull ? 'min-content' : 'full' }}
-                      display="flex"
-                      justifyContent={{ base: 'space-between', md: 'start' }}
+                      w="full"
+                      display={{ base: 'block', md: 'flex' }}
+                      justifyContent={{ base: 'space-between', md: 'space-between' }}
                     >
                       <Box onClick={() => navigate('/')} mr="32px">
                         <I.ImpaktIcon width="111px" height="32px" />
                       </Box>
-                      <Link href="/download" _hover={{ textDecoration: 'none' }}>
-                        <Common.ImpaktButton>{t(Keys.footer.downloadApp)}</Common.ImpaktButton>
-                      </Link>
-                    </HStack>
-
-                    <HStack
-                      justifyContent={{ base: 'center', md: 'flex-end' }}
-                      mb={{ base: '32px !important', md: '0px !important ' }}
-                      spacing="8px"
-                      pl={{ base: '0px', md: '64px', lg: wFull ? '50px' : '64px' }}
-                      w={{ base: '100%', lg: wFull ? 'min-content' : '100%' }}
-                    >
-                      <NavBarSocialIcons />
-                      {/* {!showDarkOrLightModeButton && (
-                        <Box
-                          as="button"
-                          onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
-                        >
-                          <Image
-                            w="26px"
-                            h="26px"
-                            objectFit="contain"
-                            src={colorMode === 'dark' ? dark : light}
-                            {...hover}
-                          />
+                      <Box
+                        display="flex"
+                        gap="8px"
+                        flexWrap="wrap"
+                        marginLeft="0 !important"
+                        mt={{ base: '20px !important', md: '0' }}
+                      >
+                        <Box onClick={() => navigate('/download')}>
+                          <Common.ImpaktButton
+                            color="#F04153"
+                            bg="#FDE8EA"
+                            gap="8px"
+                            padding="10px 14px"
+                          >
+                            {/* {t(Keys.footer.downloadApp)} */}
+                            <I.DownloadIcon width="16px" />
+                            Developer? SDK Here!
+                          </Common.ImpaktButton>
                         </Box>
-                      )} */}
+                        <Box onClick={() => navigate('/download')}>
+                          <Common.ImpaktButton
+                            color="#F04153"
+                            bg="#FDE8EA"
+                            gap="14px"
+                            padding="10px 14px"
+                          >
+                            {/* {t(Keys.footer.downloadApp)} */}
+                            <I.DownloadIcon width="16px" />
+                            Get The App
+                          </Common.ImpaktButton>
+                        </Box>
+                        <Box onClick={() => navigate('/download')}>
+                          <Common.ImpaktButton
+                            color="#fff"
+                            bg="#6B6B73"
+                            gap="8px"
+                            padding="10px 14px"
+                          >
+                            {/* {t(Keys.footer.downloadApp)} */}
+                            <I.NotifyIcon width="16px" />I Want Updates
+                          </Common.ImpaktButton>
+                        </Box>
+                      </Box>
                     </HStack>
                   </HStack>
                 </GridItem>
               </SimpleGrid>
             </HStack>
-            <HStack w="full" padding={{ base: '0px 10px', md: '0px', lg: wFull ? '0 48px' : '0' }}>
+            <HStack w="full" padding={{ base: '0px', lg: wFull ? '0 48px' : '0' }}>
               <NavBarLink IsHeader={false} />
+            </HStack>
+            <HStack
+              justifyContent={{ base: 'center', md: 'center' }}
+              margin="auto"
+              spacing="8px"
+              pl={{ base: '0px', md: '64px', lg: wFull ? '50px' : '64px' }}
+              w={{ base: '100%', lg: wFull ? 'min-content' : '100%' }}
+            >
+              <NavBarSocialIcons />
             </HStack>
 
             <HStack
               display={{ base: 'block', md: 'flex' }}
-              textAlign={{ base: 'center', md: 'start' }}
+              textAlign={{ base: 'center', md: 'center' }}
               w="full"
-              marginTop={{ base: '32px !important', md: '0px' }}
-              justifyContent={{ base: 'center', md: 'flex-start' }}
+              marginTop={{ base: '32px !important', md: '53px !important' }}
+              justifyContent={{ base: 'center', md: 'center' }}
               flexDir="row"
               paddingLeft={{ base: '0', lg: wFull ? '48px' : '0' }}
             >
-              <Text color="rgba(255, 255, 255, 0.4)" textStyle="regular3">
+              <Text color="#747474" textStyle="regular3">
                 {t(Keys.footer.madeBy)}
               </Text>
-              <Text color="rgba(255, 255, 255, 0.4)" textStyle="regular3">
+              <Text color="#747474" textStyle="regular3">
                 {t(Keys.footer.allRightReserved)}
               </Text>
             </HStack>

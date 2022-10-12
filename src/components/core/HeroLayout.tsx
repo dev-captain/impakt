@@ -3,7 +3,7 @@ import React from 'react';
 import { ImpaktFooter } from '../ui';
 
 import Footer from './Footer/FooterV1';
-import Navbar from './Navbar';
+import NewNavbar from './NewNavbar';
 
 // eslint-disable-next-line import/prefer-default-export
 export const HeroLayout: React.FC<{
@@ -51,7 +51,7 @@ export const HeroLayout: React.FC<{
 
   return (
     <>
-      {showNavbar && <Navbar />}
+      {showNavbar && <NewNavbar />}
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
         overflowY="visible"

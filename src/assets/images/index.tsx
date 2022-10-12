@@ -5,6 +5,7 @@ const Images = {
   dark: require('./dark.png'),
   light: require('./light.png'),
   star: require('./star.png'),
+  background: require('./Background.png'),
   Common: {
     Logo: require('./logo.png'),
     HighResLogo: require('./high-res-impakt-logo.png'),
@@ -61,8 +62,13 @@ const Images = {
     // cap: require('./team/cap.png'),
     dahaka: require('./team/dahaka.png'),
     demideus: require('./team/demideus.png'),
-    // duke: require('./team/duke.png'),
+    duke: require('./team/duke.png'),
     valtec: require('./team/valtec.png'),
+    ratSpeare: require('./team/ratSpeare.png'),
+    berila: require('./team/berila.png'),
+    catRoutines: require('./team/catRoutines.png'),
+    JSolo: require('./team/JSolo.png'),
+    requiem: require('./team/requiem.png'),
     // dukeOfDeadfall: require('./team/duke-of-deadfall.png'),
   },
   contactUs: {
@@ -87,6 +93,24 @@ const Images = {
     nft_card2: require('./nft/nft_card2.png'),
     nft_card3: require('./nft/nft_card3.png'),
     nft_card4: require('./nft/nft_card4.png'),
+  },
+  evolving: {
+    evolving: require('./evolving.png'),
+  },
+  Journey: {
+    Journey: require('./JourneyImg.png'),
+    Journey1: require('./JourneyImg1.png'),
+    Journey2: require('./JourneyImg2.png'),
+  },
+  kelvinImg: {
+    kelvinImg: require('./kelvinImg.png'),
+    photoMatt: require('./Photo_Matt.png'),
+    photoUyen: require('./Photo_Uyen.png'),
+  },
+  Privacy: {
+    PrivacyImg1: require('./PrivacyImg1.png'),
+    PrivacyImg2: require('./PrivacyImg2.png'),
+    PrivacyImg3: require('./PrivacyImg3.png'),
   },
 };
 
