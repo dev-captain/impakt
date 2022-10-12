@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, ComponentWithAs, Text, Tooltip, TooltipProps } from '@chakra-ui/react';
+import { Box, Text, Tooltip } from '@chakra-ui/react';
 import { I } from 'components';
 // import { Common } from 'components';
 

@@ -1,4 +1,4 @@
-import { Image, Skeleton } from '@chakra-ui/react';
+import { Image } from '@chakra-ui/react';
 import * as React from 'react';
 import { useAppSelector } from 'hooks';
 import Images from '../../../../../../assets/images';
@@ -11,7 +11,6 @@ const BannerImage: React.FC = () => {
   const currentCoverImageSource = useAppSelector(
     (state) => state.groupsReducer.activeGroup?.currentCoverImage,
   );
-  console.log(isCurrentImageExist, currentCoverImageSource);
 
   return (
     <Image

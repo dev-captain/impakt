@@ -18,7 +18,6 @@ const joinGroup = createAsyncThunk(
       }
 
       const payload = await GroupsMemberInstance.groupsMemberControllerV1JoinGroup(groupId);
-      console.log('pay', payload);
 
       await dispatch(fetchMyGroups(member.id));
       await dispatch(fetchGroups({ explore: true }));

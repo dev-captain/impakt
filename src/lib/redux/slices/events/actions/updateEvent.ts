@@ -1,6 +1,5 @@
 import { PatchCalendarEventReq } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 import { CalendarInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';

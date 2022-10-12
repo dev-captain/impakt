@@ -22,7 +22,6 @@ const createEvent = createAsyncThunk(
         calendarId,
         payload,
       );
-      console.log('create res', res);
 
       return res;
     } catch (err: any) {

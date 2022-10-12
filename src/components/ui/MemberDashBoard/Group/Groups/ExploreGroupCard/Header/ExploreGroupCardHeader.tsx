@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 import GroupCardWrapperHeader from '../../GroupCardHeader';
 import ExploreGroupCardPrivatePublicToggleButton from './ExploreGroupCardPrivatePublicToggleButton';

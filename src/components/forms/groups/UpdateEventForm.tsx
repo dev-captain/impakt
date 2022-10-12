@@ -55,57 +55,47 @@ const UpdateEventForm: React.FC = () => {
       eventStartTime: string;
       eventEndTime: string;
     };
-    try {
-      const parsedStartTime = Time.fromString(eventStartTime);
-      const parsedEndTime = Time.fromString(eventEndTime);
-      const isStartTimeLessThanEndTime =
-        parsedStartTime.toMilliseconds() < parsedEndTime.toMilliseconds();
+    const parsedStartTime = Time.fromString(eventStartTime);
+    const parsedEndTime = Time.fromString(eventEndTime);
+    const isStartTimeLessThanEndTime =
+      parsedStartTime.toMilliseconds() < parsedEndTime.toMilliseconds();
 
-      const schedule = {
-        start: isStartTimeLessThanEndTime
-          ? new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute))
-          : new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute)),
-        end: isStartTimeLessThanEndTime
-          ? new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute))
-          : new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute)),
-      };
+    const schedule = {
+      start: isStartTimeLessThanEndTime
+        ? new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute))
+        : new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute)),
+      end: isStartTimeLessThanEndTime
+        ? new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute))
+        : new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute)),
+    };
 
-      const data1 = await dispatch(
-        updateEventBE({
-          calendarId: activeGroup?.calendarId,
-          eventId: getSelectedDayEvent()?.event.id,
-          patchCalendarEventReq: {
-            assocId,
-            description: eventDescription,
-            title: eventTitle,
-            reschedule: {
-              endDateTime: schedule.end,
-              startDateTime: schedule.start,
-              on: schedule.start,
-            },
+    const data1 = await dispatch(
+      updateEventBE({
+        calendarId: activeGroup?.calendarId,
+        eventId: getSelectedDayEvent()?.event.id,
+        patchCalendarEventReq: {
+          assocId,
+          description: eventDescription,
+          title: eventTitle,
+          reschedule: {
+            endDateTime: schedule.end,
+            startDateTime: schedule.start,
+            on: schedule.start,
           },
-        }),
-      ).unwrap();
-      const normalizedData1 = normalizeCalendarDataEvent(data1);
+        },
+      }),
+    ).unwrap();
+    const normalizedData1 = normalizeCalendarDataEvent(data1);
 
-      updateEvent(normalizedData1);
+    updateEvent(normalizedData1);
 
-      toast({
-        title: 'Success',
-        description: 'Event updated successfully.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
-    }
+    toast({
+      title: 'Success',
+      description: 'Event updated successfully.',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   };
 
   const inputItems: InputGroupPropsI[] = [

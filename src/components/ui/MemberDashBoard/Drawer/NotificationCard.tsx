@@ -4,7 +4,6 @@ import { Common, I } from 'components';
 import { CloseIcon } from '@chakra-ui/icons';
 import { PatchGroupRequestReqStatusEnum } from '@impakt-dev/api-client';
 import { useAppDispatch } from 'hooks';
-import { UserRequestStatus } from '../../../../lib/redux/slices/groups/types';
 import { answerToGroupRequest } from '../../../../lib/redux/slices/groups/actions/answerToGroupRequest';
 
 interface NoitificationCardProps {

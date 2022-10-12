@@ -5,7 +5,6 @@ import {
   GetGroupRequestResV2,
   GetGroupRes,
   GetMembersOfGroupRes,
-  GetUserRes,
 } from '@impakt-dev/api-client';
 
 export enum UserRequestStatus {

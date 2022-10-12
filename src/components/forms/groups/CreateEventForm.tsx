@@ -72,30 +72,20 @@ const CreateEventForm: React.FC = () => {
     };
     const bEpayload = { data: eventData, schedule };
 
-    try {
-      const data1 = await dispatch(
-        createEvent({ calendarId: activeGroup?.calendarId, payload: bEpayload }),
-      ).unwrap();
-      const normalizedData1 = normalizeCalendarDataEvent(data1);
-      addEvent(normalizedData1);
+    const data1 = await dispatch(
+      createEvent({ calendarId: activeGroup?.calendarId, payload: bEpayload }),
+    ).unwrap();
 
-      toast({
-        title: 'Success',
-        description: 'Event created successfully.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (e: any) {
-      console.log(e);
-      // toast({
-      //   title: 'Error',
-      //   description: e.response.data.message,
-      //   isClosable: true,
-      //   duration: 8000,
-      //   status: 'error',
-      // });
-    }
+    const normalizedData1 = normalizeCalendarDataEvent(data1);
+    addEvent(normalizedData1);
+
+    toast({
+      title: 'Success',
+      description: 'Event created successfully.',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   };
 
   const inputItems: InputGroupPropsI[] = [

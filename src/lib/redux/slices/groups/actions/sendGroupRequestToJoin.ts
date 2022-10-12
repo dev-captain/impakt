@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
 import { GroupsRequestInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';

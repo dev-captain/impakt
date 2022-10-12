@@ -55,7 +55,6 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
 
   const openUploadImageFileInput = () => {
     if (uploadImageInputRef.current) {
-      console.log('bruh?', uploadImageInputRef.current);
       uploadImageInputRef.current.click();
     }
   };
@@ -66,7 +65,7 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
 
     const formData = new FormData();
     formData.append('file', data.file);
-    await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id }));
+    await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id })).unwrap();
   };
 
   const setBannerImage = (source: any) => {

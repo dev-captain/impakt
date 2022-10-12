@@ -39,25 +39,14 @@ const UpdateGroupNameForm: React.FC = () => {
     const { groupName } = data as { groupName: string };
     if (!group?.id) return;
     if (isDirty) {
-      try {
-        await dispatch(updateGroup({ groupId: group.id, groupName }));
-        toast({
-          title: 'Success',
-          description: 'Group name updated successfully.',
-          isClosable: true,
-          duration: 8000,
-          status: 'success',
-        });
-      } catch (e: any) {
-        console.log(e);
-        // toast({
-        //   title: 'Error',
-        //   description: e.response.data.message,
-        //   isClosable: true,
-        //   duration: 8000,
-        //   status: 'error',
-        // });
-      }
+      await dispatch(updateGroup({ groupId: group.id, groupName })).unwrap();
+      toast({
+        title: 'Success',
+        description: 'Group name updated successfully.',
+        isClosable: true,
+        duration: 8000,
+        status: 'success',
+      });
     }
   };
 
