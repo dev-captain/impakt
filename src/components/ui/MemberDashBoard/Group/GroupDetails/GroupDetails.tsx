@@ -8,7 +8,6 @@ import Banner from './Banner/Banner';
 import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
 import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
-import { CalendarType } from '../../../../../lib/redux/slices/calendar/types';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
 import { cleanActiveGroup } from '../../../../../lib/redux/slices/groups/groupsSlice';
 import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
@@ -35,9 +34,7 @@ const GroupDetails: React.FC = () => {
         try {
           await dispatch(fetchGroupRoleById(group.id));
         } finally {
-          await dispatch(
-            fetchCalendarById({ calendarId: group.calendarId, type: CalendarType.Group }),
-          );
+          await dispatch(fetchCalendarById({ calendarId: group.calendarId, type: 'Group' }));
           await dispatch(fetchAvailableChallengesForGroup());
           await dispatch(fetchMembersOfGroup(group.id));
           // fetch my challanges for modal if user creator

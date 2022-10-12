@@ -1,34 +1,26 @@
-import { Day } from 'dayspan';
+import { CalendarDtoV1TypeEnum } from '@impakt-dev/api-client';
+import { Schedule, ScheduleInput } from 'dayspan';
 import React from 'react';
-import { CalendarType } from '../lib/redux/slices/calendar/types';
-import { normalizeCalendarDataMap } from '../utils';
+import { normalizeCalendarDataMap } from '../utils/dayspan';
 import useAppSelector from './useAppSelector';
 
 const useNormalizedCalendarData = () => {
   const activeGroupCalendar = useAppSelector((state) => state.calendarReducer.activeGroupCalendar);
   const [normalizedCalendarData, setNormalizedCalendarData] = React.useState<{
-    Events: {
-      schedule: {
-        on: string;
-        times: Day[];
-        start: string;
-        end: string;
-        maxOccurrences?: number;
-        cancel: string[];
-        exclude: string[];
-        dayOfWeek: number[];
-      };
-      data: string;
-      id: number;
+    events: {
+      id?: any;
+      data?: string | undefined;
+      schedule: Schedule<any> | ScheduleInput<any>;
       visible: boolean;
     }[];
     id: number;
-    type: CalendarType;
+    type: CalendarDtoV1TypeEnum;
   } | null>(null);
 
   React.useEffect(() => {
     if (activeGroupCalendar) {
-      setNormalizedCalendarData(normalizeCalendarDataMap(activeGroupCalendar));
+      const data = normalizeCalendarDataMap(activeGroupCalendar);
+      setNormalizedCalendarData(data);
     }
   }, [activeGroupCalendar]);
 

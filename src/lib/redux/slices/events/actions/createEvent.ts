@@ -1,13 +1,13 @@
+import { PostCalendarEventReq } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { API_SERVER_BASE_URL } from '../../../../axios/api';
+import { CalendarInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
 
 const createEvent = createAsyncThunk(
   'events/create',
   async (
-    { calendarId, payload }: { calendarId: number; payload: any },
+    { calendarId, payload }: { calendarId: number; payload: PostCalendarEventReq },
     { rejectWithValue, getState },
   ) => {
     try {
@@ -18,11 +18,13 @@ const createEvent = createAsyncThunk(
       if (!isLogin || !member) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
-      const res = await axios
-        .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .post(`/api/v1/calendar/${calendarId}/events`, payload);
+      const res = await CalendarInstance.calendarEventControllerCreateCalendarEvent(
+        calendarId,
+        payload,
+      );
+      console.log('create res', res);
 
-      return res.data;
+      return res;
     } catch (err: any) {
       return rejectWithValue(err);
     }

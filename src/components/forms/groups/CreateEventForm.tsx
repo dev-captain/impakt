@@ -9,8 +9,8 @@ import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
 import { createEvent } from '../../../lib/redux/slices/events/actions/createEvent';
-import { normalizeCalendarData } from '../../../utils';
 import createEventYupScheme from '../../../lib/yup/schemas/createEventYupSchema';
+import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 
 const CreateEventForm: React.FC = () => {
   const toast = useToast();
@@ -53,7 +53,7 @@ const CreateEventForm: React.FC = () => {
     const eventData = {
       title: eventTitle,
       description: eventDescription,
-      creatorId: member?.id,
+      creatorId: member!.id,
       assocId,
     };
 
@@ -64,19 +64,11 @@ const CreateEventForm: React.FC = () => {
 
     const schedule = {
       start: isStartTimeLessThanEndTime
-        ? new Date(
-            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
-          ).toISOString()
-        : new Date(
-            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
-          ).toISOString(),
+        ? new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute))
+        : new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute)),
       end: isStartTimeLessThanEndTime
-        ? new Date(
-            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
-          ).toISOString()
-        : new Date(
-            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
-          ).toISOString(),
+        ? new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute))
+        : new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute)),
     };
     const bEpayload = { data: eventData, schedule };
 
@@ -84,7 +76,7 @@ const CreateEventForm: React.FC = () => {
       const data1 = await dispatch(
         createEvent({ calendarId: activeGroup?.calendarId, payload: bEpayload }),
       ).unwrap();
-      const normalizedData1 = normalizeCalendarData(data1);
+      const normalizedData1 = normalizeCalendarDataEvent(data1);
       addEvent(normalizedData1);
 
       toast({
@@ -95,13 +87,14 @@ const CreateEventForm: React.FC = () => {
         status: 'success',
       });
     } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
+      console.log(e);
+      // toast({
+      //   title: 'Error',
+      //   description: e.response.data.message,
+      //   isClosable: true,
+      //   duration: 8000,
+      //   status: 'error',
+      // });
     }
   };
 

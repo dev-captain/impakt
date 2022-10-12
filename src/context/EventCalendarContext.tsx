@@ -66,6 +66,7 @@ export const EventCalendarContextProvider: React.FC<{
 
   const updateEvent = (event: EventInput<string, any>) => {
     if (!getSelectedDayEvent()) return;
+
     calendarRef.current.removeEvent(getSelectedDayEvent()?.event);
     calendarRef.current.addEvent(event);
     goToOverViewScreen('first');
@@ -170,16 +171,17 @@ export const EventCalendarContextProvider: React.FC<{
 
   const initCalendar = () => {
     if (activeGroupCalendar) {
-      addEvents(activeGroupCalendar.Events);
+      addEvents(activeGroupCalendar.events);
     }
     // const dummyEvents = getDummyEvents();
     // addEvents(dummyEvents);
     if (eventQuery) {
-      const findTheEventQuery = activeGroupCalendar?.Events.find(
+      const findTheEventQuery = activeGroupCalendar?.events.find(
         ({ id }) => id === parseInt(eventQuery, 10),
       );
-      if (findTheEventQuery && findTheEventQuery.visible) {
-        setSelectedDay(Day.fromString(findTheEventQuery.schedule.start));
+
+      if (findTheEventQuery && findTheEventQuery.visible && findTheEventQuery.schedule.start) {
+        setSelectedDay(Day.fromString(findTheEventQuery.schedule.start.toString()));
         goToOverViewScreen('event');
         setActiveEventId(findTheEventQuery.id);
 

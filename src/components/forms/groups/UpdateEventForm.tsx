@@ -7,8 +7,9 @@ import { Common, I } from 'components';
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
-import { normalizeCalendarData, padTo2Digits } from '../../../utils';
+import { padTo2Digits } from '../../../utils';
 import { updateEventBE } from '../../../lib/redux/slices/events/actions/updateEvent';
+import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 
 const UpdateEventForm: React.FC = () => {
   const toast = useToast();
@@ -62,19 +63,11 @@ const UpdateEventForm: React.FC = () => {
 
       const schedule = {
         start: isStartTimeLessThanEndTime
-          ? new Date(
-              new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
-            ).toISOString()
-          : new Date(
-              new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
-            ).toISOString(),
+          ? new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute))
+          : new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute)),
         end: isStartTimeLessThanEndTime
-          ? new Date(
-              new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
-            ).toISOString()
-          : new Date(
-              new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
-            ).toISOString(),
+          ? new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute))
+          : new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute)),
       };
 
       const data1 = await dispatch(
@@ -93,7 +86,7 @@ const UpdateEventForm: React.FC = () => {
           },
         }),
       ).unwrap();
-      const normalizedData1 = normalizeCalendarData(data1 as any);
+      const normalizedData1 = normalizeCalendarDataEvent(data1);
 
       updateEvent(normalizedData1);
 
