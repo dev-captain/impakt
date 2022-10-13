@@ -56,3 +56,4 @@ export { default as NotifyIcon } from './NotifyIcon';
 export { default as SignInIcon } from './SignInIcon';
 export { default as CameraIcon } from './CameraIcon';
 export { default as SoundOffIcon } from './SoundOffIcon';
+export { default as SoundOnIcon } from './SoundOnIcon';

@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { Box, HStack, Text, useMediaQuery } from '@chakra-ui/react';
-import React, { memo } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -46,6 +46,20 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
     const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
     const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
     const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
+    const videoRef = useRef<null | HTMLVideoElement>(null);
+    const [sound, setSound] = useState(true);
+    const [opacityText, setOpacityText] = useState(1);
+
+    const play = () => {
+      videoRef?.current?.play();
+      setOpacityText(0);
+    };
+
+    const handleMute = () => {
+      setSound(!sound);
+      if (!videoRef.current) return;
+      videoRef.current.muted = !videoRef.current.muted;
+    };
 
     return isLessThan1280 ? (
       <>
@@ -134,13 +148,13 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
         <Box position="relative">
           <DesktopVideo
             x={borderX}
-            ref={ref}
+            ref={videoRef}
             y={borderY}
             isMobile
             isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
-            autoPlay
+            // autoPlay
             // loop
-            muted
+            // muted
             playsInline
             onLoadedData={() => {
               dispatch(setIsLoaded(true));
@@ -155,15 +169,17 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
             left="50%"
             transform="translate(-50%,-50%)"
           >
-            <Text
-              fontSize="80px"
-              fontWeight="700"
-              letterSpacing="-2px"
-              color="white"
-              textAlign="center"
-            >
-              Impakt Fitness World
-            </Text>
+            {opacityText === 1 && (
+              <Text
+                fontSize="80px"
+                fontWeight="700"
+                letterSpacing="-2px"
+                color="white"
+                textAlign="center"
+              >
+                Impakt Fitness World
+              </Text>
+            )}
             <Common.ImpaktButton
               variant="secondary"
               w={{ base: '130px', md: '348px' }}
@@ -177,29 +193,29 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
               margin="auto"
               display="flex"
               gap="5px"
-              onClick={() => window.scrollTo(0, 1050)}
+              onClick={() => play()}
             >
               Enter
               <ArrowForwardIcon />
             </Common.ImpaktButton>
+            <Common.ImpaktButton
+              position="absolute"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              variant="secondary"
+              border="0"
+              w="auto"
+              display="flex"
+              marginTop="25px"
+              backgroundColor="transparent"
+              _hover={{ backgroundColor: 'transparent' }}
+              _focus={{ backgroundColor: 'transparent' }}
+              _active={{ backgroundColor: 'transparent' }}
+              onClick={() => handleMute()}
+            >
+              {sound ? <I.SoundOnIcon width="auto" /> : <I.SoundOffIcon width="auto" />}
+            </Common.ImpaktButton>
           </Box>
-          <Common.ImpaktButton
-            position="absolute"
-            bottom={{ md: '58px', base: '-12px' }}
-            left="50%"
-            transform="translate(-50%, -50%)"
-            variant="secondary"
-            border="0"
-            w="auto"
-            display="flex"
-            margin="auto"
-            backgroundColor="transparent"
-            _hover={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-            _active={{ backgroundColor: 'transparent' }}
-          >
-            <I.SoundOffIcon width="auto" />
-          </Common.ImpaktButton>
         </Box>
         <Box>
           <SocialFitnessGamified>
