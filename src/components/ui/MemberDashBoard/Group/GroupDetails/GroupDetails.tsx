@@ -9,8 +9,14 @@ import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actio
 import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
-import { cleanActiveGroup } from '../../../../../lib/redux/slices/groups/groupsSlice';
+import {
+  cleanActiveGroup,
+  setRoleAsNone,
+} from '../../../../../lib/redux/slices/groups/groupsSlice';
 import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
+import { fetchPosts } from '../../../../../lib/redux/slices/forum/post_actions/fetchPosts';
+import { cleanForums } from '../../../../../lib/redux/slices/forum/postsSlice';
+import { fetchAmIMemberOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchAmIMemberOfGroup';
 
 const GroupDetails: React.FC = () => {
   // const [show, setShow] = React.useState<null | string>(null);
@@ -32,8 +38,14 @@ const GroupDetails: React.FC = () => {
         }
       } finally {
         try {
-          await dispatch(fetchGroupRoleById(group.id));
+          const amIMemberOfGroup = await dispatch(fetchAmIMemberOfGroup(group.id)).unwrap();
+          if (amIMemberOfGroup) {
+            await dispatch(fetchGroupRoleById(group.id));
+          } else {
+            dispatch(setRoleAsNone());
+          }
         } finally {
+          await dispatch(fetchPosts({ referenceType: 'Group', referenceId: group.id }));
           await dispatch(fetchCalendarById({ calendarId: group.calendarId, type: 'Group' }));
           await dispatch(fetchAvailableChallengesForGroup());
           await dispatch(fetchMembersOfGroup(group.id));
@@ -48,6 +60,7 @@ const GroupDetails: React.FC = () => {
 
     return () => {
       dispatch(cleanActiveGroup());
+      dispatch(cleanForums());
       dispatch(cleanCalendar());
     };
   }, []);

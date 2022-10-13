@@ -60,6 +60,7 @@ const assocId = yup
   .number()
   .required('Challenge is required please select one...')
   .typeError('Challenge is required please select one...');
+const post = yup.string().required('Post content is required field...');
 
 export {
   email,
@@ -76,4 +77,5 @@ export {
   eventDescription,
   eventTime,
   assocId,
+  post,
 };

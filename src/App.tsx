@@ -25,6 +25,7 @@ import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import ForumDetailModal from './components/ui/MemberDashBoard/Group/GroupDetails/Content/Forums/ForumsDetail/ForumDetailModal';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 
 const App = () => {
@@ -110,6 +111,7 @@ const App = () => {
           <Route path="group">
             <Route path=":id" element={<S.GroupDetail />}>
               <Route path="event/:eventId" />
+              <Route path="post/:postId" />
             </Route>
           </Route>
         </Route>

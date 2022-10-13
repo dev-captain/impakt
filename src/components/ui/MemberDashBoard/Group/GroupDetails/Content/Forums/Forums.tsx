@@ -1,11 +1,19 @@
 import { Box, Text, Button } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
+import { useAppSelector } from 'hooks';
+import { Day } from 'dayspan';
+
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from 'assets/images';
 import UserForumsCard from './UserForumsCard';
+import CreatePostCard from './CreatePostCard';
 
 const Forums: React.FC = () => {
+  const role = useAppSelector((state) => state.groupsReducer.role);
+  const posts = useAppSelector((state) => state.postsReducer.posts);
+  const isCreator = role === 'Creator';
+
   return (
     <Box marginStart="0 !important" width={{ base: '100%', md: '40%', lgx: '50%' }}>
       <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto" marginTop="26px">
@@ -24,15 +32,17 @@ const Forums: React.FC = () => {
               </Button>
             </Box>
           </Box>
-          {forumCardDummyData.map(({ name, msg, title, msgNo, view, time }) => (
+          {isCreator && <CreatePostCard />}
+          {posts.map(({ id, creator, content, createdAt }) => (
             <UserForumsCard
-              key={name}
-              name={name}
-              msg={msg}
-              title={title}
-              msgNo={msgNo}
-              view={view}
-              time={time}
+              key={id}
+              id={id}
+              name={creator?.firstName ?? creator?.username}
+              msg={content}
+              title={content}
+              // msgNo={comment.}
+              // view={view}
+              time={`${Day.now().hoursBetween(Day.fromString(createdAt.toISOString()))}h`}
             />
           ))}
         </Box>
@@ -40,31 +50,31 @@ const Forums: React.FC = () => {
     </Box>
   );
 };
-const forumCardDummyData = [
-  {
-    name: 'KittenSpy',
-    msg: 'Should be good 9am UTC?',
-    title: 'Best time for Morning routines',
-    msgNo: '18',
-    view: '44',
-    time: '2h',
-  },
-  {
-    name: 'NoIdea',
-    msg: 'more Cardio pls',
-    title: 'What exercises you’d like to see?',
-    msgNo: '12',
-    view: '14',
-    time: '8h',
-  },
-  {
-    name: 'Modern47',
-    msg: 'same for me...',
-    title: 'How to find time for fitness?',
-    msgNo: '66',
-    view: '152',
-    time: '4d',
-  },
-];
+// const forumCardDummyData = [
+//   {
+//     name: 'KittenSpy',
+//     msg: 'Should be good 9am UTC?',
+//     title: 'Best time for Morning routines',
+//     msgNo: '18',
+//     view: '44',
+//     time: '2h',
+//   },
+//   {
+//     name: 'NoIdea',
+//     msg: 'more Cardio pls',
+//     title: 'What exercises you’d like to see?',
+//     msgNo: '12',
+//     view: '14',
+//     time: '8h',
+//   },
+//   {
+//     name: 'Modern47',
+//     msg: 'same for me...',
+//     title: 'How to find time for fitness?',
+//     msgNo: '66',
+//     view: '152',
+//     time: '4d',
+//   },
+// ];
 
 export default Forums;
