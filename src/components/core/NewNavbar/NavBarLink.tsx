@@ -11,7 +11,7 @@ type Props = {
 };
 
 const NavbarLink = ({ IsHeader }: Props) => {
-  const { colorMode, setColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const location = useLocation();
   const isLight = colorMode === 'light';
   const { t } = useTranslation(`default`).i18n;
