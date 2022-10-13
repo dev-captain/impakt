@@ -50,6 +50,7 @@
     "react-hooks/exhaustive-deps": 0,
     "@typescript-eslint/no-unused-vars": ["error"],
     "no-unused-vars": "error",
+    "no-console": "error",
     "no-param-reassign": [
       "error",
       {

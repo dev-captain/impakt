@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import {
-  Home,
+  // Home,
   KnowledgeBase,
   NotFound,
   Event,
@@ -19,6 +19,7 @@ import {
   MemberDashboard,
   // NFT,
   TermsOfUse,
+  Landing,
 } from 'pages';
 import { Common, S } from 'components';
 
@@ -51,11 +52,10 @@ const App = () => {
         path="/"
         element={
           <Common.ScrollToTop>
-            <Home />
+            <Landing />
           </Common.ScrollToTop>
         }
       />
-
       <Route path="/knowledge-base" element={<KnowledgeBase />}>
         <Route path=":article" element={<KnowledgeBase />} />
       </Route>
