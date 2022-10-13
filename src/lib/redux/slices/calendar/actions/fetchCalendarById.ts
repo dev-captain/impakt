@@ -1,10 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { CalendarDtoV1TypeEnum } from '@impakt-dev/api-client';
 
-import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
-
 import { RootState } from '../../../store';
 import { setIsGroupCalendarLoading, setIsPersonalCalendarLoading } from '../calendarSlice';
+import { CalendarInstance2 } from '../../../../impakt-dev-api-client/init';
 
 const fetchCalendarById = createAsyncThunk(
   'calendar/fetch-calendar-by-id',
@@ -23,28 +22,27 @@ const fetchCalendarById = createAsyncThunk(
 
       dispatch(delegateLoadingAccordingToCalendarType[type]);
       // will delete next line once the client package ready
-      const calendarRes = await axios
-        .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .get(`/api/calendar/calendar/${calendarId}`);
+      const calendarRes = await CalendarInstance2.calendarControllerGetCalendar(calendarId);
+
       // will delete next line once the client package ready
-      const tmpconvert = calendarRes.data.Events.map((d: any) => {
-        return {
-          ...d,
-          schedule: {
-            ...d.schedule,
-            start: new Date(d.schedule.start),
-            end: new Date(d.schedule.end),
-          },
-        };
-      });
+      // const tmpconvert = calendarRes.data.Events.map((d: any) => {
+      //   return {
+      //     ...d,
+      //     schedule: {
+      //       ...d.schedule,
+      //       start: new Date(d.schedule.start),
+      //       end: new Date(d.schedule.end),
+      //     },
+      //   };
+      // });
       // will delete next line once the client package ready
-      const calendarData = { ...calendarRes.data, events: tmpconvert };
+      // const calendarData = { ...calendarRes.data, events: tmpconvert };
       dispatch(delegateLoadingAccordingToCalendarType[type]);
 
       // will delete next line once the client package ready
-      delete calendarData.Events;
+      // delete calendarData.Events;
 
-      return calendarData;
+      return calendarRes;
     } catch (err: any) {
       dispatch(delegateLoadingAccordingToCalendarType[type]);
 

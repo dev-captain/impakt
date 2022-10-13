@@ -17,6 +17,7 @@ import {
   GroupsApi,
   GroupsMemberApi,
   GroupsRequestApi,
+  CalendarEventsDataModelApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
@@ -111,6 +112,7 @@ export const FitnessInstance = new FitnessStatsApi(configuration);
 export const ReferralsInstance = new ReferralsApi(configuration);
 export const ChallengeInstance = new ChallengesApi(configuration);
 export const CalendarInstance = new CalendarApi(configuration);
+export const CalendarInstance2 = new CalendarEventsDataModelApi(configuration);
 export const LikeInstance = new LikesApi(configuration);
 export const AttemptInstance = new DefaultApi(configuration);
 export const GroupsInstance = new GroupsApi(configuration);
