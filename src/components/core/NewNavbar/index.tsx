@@ -9,7 +9,7 @@ import {
   useDisclosure,
   useMediaQuery,
   useColorMode,
-  PositionProps,
+  // PositionProps,
   useToast,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
@@ -25,19 +25,19 @@ import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
-import NavBarLink from './NavBarLink';
+// import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 
 interface NavbarProps {
-  position?: PositionProps['position'];
+  // position?: PositionProps['position'];
   isVersion2?: boolean;
 }
 // const { dark, light } = Images;
 const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
   Images.Common;
 
-const NewNavbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
+const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -114,7 +114,7 @@ const NewNavbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) 
             minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <I.ImpaktIcon cursor="pointer" width="111px" height="32px" />
+            <I.ImpaktIcon cursor="pointer" width="111px" height="32px" color="#000" />
           </Box>
           <HStack
             justify="flex-end"

@@ -161,6 +161,7 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
               margin="auto"
               display="flex"
               gap="5px"
+              onClick={() => window.scrollTo(0, 1050)}
             >
               Enter
               <ArrowForwardIcon />

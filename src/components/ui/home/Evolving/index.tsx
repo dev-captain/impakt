@@ -84,6 +84,7 @@ const Evolving = () => {
                   gap="8px"
                   padding="10px 14px"
                   _hover={{ bg: '#000', color: '#fff' }}
+                  disabled
                 >
                   What is Koin?
                 </Common.ImpaktButton>

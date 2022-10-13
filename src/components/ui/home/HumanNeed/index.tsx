@@ -96,6 +96,7 @@ const HumanNeed = () => {
             mb={{ lg: '112px', base: '40px' }}
             padding="10px 14px"
             _hover={{ bg: '#000', color: '#fff' }}
+            disabled
           >
             Explore groups!
           </Common.ImpaktButton>

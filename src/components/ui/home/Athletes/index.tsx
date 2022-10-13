@@ -129,6 +129,7 @@ const Athletes = () => {
                   gap="8px"
                   padding="10px 14px"
                   _hover={{ bg: '#000', color: '#fff' }}
+                  disabled
                 >
                   Apply Here
                 </Common.ImpaktButton>

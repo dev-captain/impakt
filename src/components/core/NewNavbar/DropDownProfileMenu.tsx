@@ -34,8 +34,8 @@ const DropDownProfileMenu: React.FC = () => {
         w="100%"
         minW="162px"
         border="1px solid white"
-        color="white"
-        backgroundColor={isLessThan1280 ? 'rgba(28, 28, 40, 1)' : 'transparent !important'}
+        color="#fff"
+        backgroundColor={isLessThan1280 ? 'rgba(28, 28, 40, 1)' : '#364A63 !important'}
         padding="0"
         borderRadius="8px"
       >
