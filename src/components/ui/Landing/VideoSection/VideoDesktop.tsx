@@ -4,7 +4,7 @@ import React, { memo } from 'react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { Common, S } from 'components';
+import { Common, I, S } from 'components';
 import SocialFitnessGamified from 'components/ui/home/HeroSection/SocialFitnessGamified';
 
 import { Videos } from '../../../../data';
@@ -55,7 +55,6 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
               dispatch(setIsLoaded(true));
             }}
             ref={ref}
-            autoPlay
             loop
             muted
             {...props}
@@ -66,7 +65,7 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
           <Box
             zIndex="20"
             position="absolute"
-            top="50%"
+            top={{ base: '36%', md: '50%' }}
             left="50%"
             transform="translate(-50%,-50%)"
           >
@@ -97,6 +96,23 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
               <ArrowForwardIcon />
             </Common.ImpaktButton>
           </Box>
+          <Common.ImpaktButton
+            position="absolute"
+            bottom={{ md: '58px', base: '-12px' }}
+            left="50%"
+            transform="translate(-50%, -50%)"
+            variant="secondary"
+            border="0"
+            w="auto"
+            display="flex"
+            margin="auto"
+            backgroundColor="transparent"
+            _hover={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
+            _active={{ backgroundColor: 'transparent' }}
+          >
+            <I.SoundOffIcon width="28px" />
+          </Common.ImpaktButton>
         </Box>
         <Box>
           <SocialFitnessGamified>
@@ -123,7 +139,7 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
             isMobile
             isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
             autoPlay
-            loop
+            // loop
             muted
             playsInline
             onLoadedData={() => {
@@ -167,6 +183,23 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
               <ArrowForwardIcon />
             </Common.ImpaktButton>
           </Box>
+          <Common.ImpaktButton
+            position="absolute"
+            bottom={{ md: '58px', base: '-12px' }}
+            left="50%"
+            transform="translate(-50%, -50%)"
+            variant="secondary"
+            border="0"
+            w="auto"
+            display="flex"
+            margin="auto"
+            backgroundColor="transparent"
+            _hover={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
+            _active={{ backgroundColor: 'transparent' }}
+          >
+            <I.SoundOffIcon width="auto" />
+          </Common.ImpaktButton>
         </Box>
         <Box>
           <SocialFitnessGamified>

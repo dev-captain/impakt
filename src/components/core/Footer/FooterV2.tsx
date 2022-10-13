@@ -158,7 +158,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                         marginLeft="0 !important"
                         mt={{ base: '20px !important', md: '0' }}
                       >
-                        <Box onClick={() => navigate('/download')}>
+                        <Box>
                           <Common.ImpaktButton
                             color="#F04153"
                             bg="#FDE8EA"
@@ -182,7 +182,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                             Get The App
                           </Common.ImpaktButton>
                         </Box>
-                        <Box onClick={() => navigate('/download')}>
+                        <Box onClick={() => navigate('/register')}>
                           <Common.ImpaktButton
                             color="#fff"
                             bg="#6B6B73"

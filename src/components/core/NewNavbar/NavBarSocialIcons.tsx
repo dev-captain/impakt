@@ -9,7 +9,7 @@ import { I } from 'components';
 const NavBarSocialIcons = () => {
   return (
     <HStack justify={{ base: 'center', md: 'flex-end' }}>
-      <Box
+      {/* <Box
         me="16px !important"
         _hover={{ color: 'rgba(28, 28, 40, 0.65)', transform: 'scale(1.25)' }}
         as="a"
@@ -19,7 +19,7 @@ const NavBarSocialIcons = () => {
         transition="color .2s , transform 0.2s ease"
       >
         <I.DiscordIcon width="20px" height="20px" />
-      </Box>
+      </Box> */}
 
       <Box
         me="16px !important"
@@ -50,11 +50,11 @@ const NavBarSocialIcons = () => {
         _hover={{ color: 'rgba(28, 28, 40, 0.65)', transform: 'scale(1.25)' }}
         as="a"
         target="_blank"
-        href={Socials.youtube}
+        href={Socials.insta}
         color=" rgba(28, 28, 40, 0.65)"
         transition="color .2s , transform 0.2s ease"
       >
-        <I.YoutubeSocialIcon width="20px" height="20px" />
+        <I.IGIcon width="20px" height="20px" />
       </Box>
     </HStack>
   );

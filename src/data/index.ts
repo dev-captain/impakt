@@ -79,6 +79,7 @@ export const Socials = {
   twitter: 'https://twitter.com/impaktlife',
   discord: 'https://discord.gg/eVQJ8XRa9S',
   tiktok: 'http://tiktok.com/@impaktlife',
+  insta: 'https://www.instagram.com/impakt.life/',
 };
 
 export const Categories = [

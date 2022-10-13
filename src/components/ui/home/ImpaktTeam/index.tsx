@@ -10,10 +10,10 @@ const ImpaktTeam = () => {
   const { t } = useTranslation().i18n;
   let leadership = useState<object[]>();
   let advisorTeam = useState<object[]>();
-  let Team = useState<object[]>();
+  // let Team = useState<object[]>();
   leadership = t('leadershipData.data', { returnObjects: true });
   advisorTeam = t('advisorData.data', { returnObjects: true });
-  Team = t('teamData.data', { returnObjects: true });
+  // Team = t('teamData.data', { returnObjects: true });
 
   return (
     <>
@@ -73,57 +73,76 @@ const ImpaktTeam = () => {
             </VStack>
           </VStack>
         </VStack>
-        <VStack width="100%" padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}>
-          <Text
-            width="100%"
-            color="#728BA3"
-            fontSize="21px"
-            fontWeight="700"
-            textTransform="uppercase"
-          >
-            Leadership
-          </Text>
-          <Box
-            width="100%"
-            display="flex"
-            flexWrap="wrap"
-            gap={{ md: '40px', base: '20px' }}
-            justifyContent="flex-start"
-            alignItems="flex-start"
-          >
-            {leadership.map((d: any) => (
-              <Card img={d.img} title={d.title} name={d.name} post={d.post} />
-            ))}
+        <Box width="100%" padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}>
+          <Box width="100%" display="flex" justifyContent="center" flexDirection="column">
+            <Box
+              width="100%"
+              display="flex"
+              flexWrap="wrap"
+              gap={{ md: '40px', base: '20px' }}
+              alignItems="flex-end"
+              justifyContent="center"
+            >
+              {leadership.map((d: any) => (
+                <Box width={{ lg: '31%', md: '30%', base: '100%' }}>
+                  <Text
+                    width="100%"
+                    color="#728BA3"
+                    fontSize="21px"
+                    fontWeight="700"
+                    textTransform="uppercase"
+                  >
+                    {d.semititle}
+                  </Text>
+                  <Card
+                    img={d.img}
+                    company={d.company}
+                    title={d.title}
+                    fname={d.fname}
+                    lname={d.lname}
+                    post={d.post}
+                  />
+                </Box>
+              ))}
+            </Box>
           </Box>
-        </VStack>
+        </Box>
         <VStack
           width="100%"
           padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}
           mt="50px !important"
         >
-          <Text
-            width="100%"
-            color="#728BA3"
-            fontSize="21px"
-            fontWeight="700"
-            textTransform="uppercase"
-          >
-            Advisors
-          </Text>
           <Box
             width="100%"
+            alignItems="flex-end"
             display="flex"
             flexWrap="wrap"
             gap={{ md: '40px', base: '20px' }}
-            justifyContent="flex-start"
-            alignItems="flex-start"
           >
             {advisorTeam.map((d: any) => (
-              <Card img={d.img} title={d.title} name={d.name} post={d.post} />
+              <Box width={{ lg: '31%', md: '30%', base: '100%' }}>
+                <Text
+                  width="100%"
+                  color="#728BA3"
+                  fontSize="21px"
+                  fontWeight="700"
+                  textTransform="uppercase"
+                >
+                  {d.semititle}
+                </Text>
+                <Card
+                  img={d.img}
+                  company={d.company}
+                  title={d.job}
+                  fname={d.fname}
+                  lname={d.lname}
+                  post={d.post}
+                />
+              </Box>
             ))}
           </Box>
         </VStack>
-        <VStack
+        {/* <VStack
           width="100%"
           padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}
           mt="50px !important"
@@ -149,7 +168,7 @@ const ImpaktTeam = () => {
               <Card img={d.img} title={d.title} name={d.name} post={d.post} />
             ))}
           </Box>
-        </VStack>
+        </VStack> */}
       </C.HeroLayout>
       <Box bgColor="#F0F7FF" textAlign="center" padding={{ md: '126px 16px', base: '70px 16px' }}>
         <Text

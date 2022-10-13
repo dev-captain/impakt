@@ -2,13 +2,15 @@ import * as React from 'react';
 import { Text, Box, Image } from '@chakra-ui/react';
 
 interface CardProps {
-  img: any;
+  img?: any;
+  company: string;
   title: string;
-  name: string;
+  fname: string;
+  lname: string;
   post: string;
 }
 
-const Card: React.FC<CardProps> = ({ img, title, name, post }) => {
+const Card: React.FC<CardProps> = ({ img, company, title, fname, lname, post }) => {
   return (
     <Box
       boxShadow="0px 8px 15px 3px rgba(0, 0, 0, 0.05)"
@@ -17,36 +19,57 @@ const Card: React.FC<CardProps> = ({ img, title, name, post }) => {
       padding={{ lg: '21px 0 21px 35px', base: '20px' }}
       display="flex"
       alignItems="center"
-      width={{ lg: '31%', md: '30%', base: '100%' }}
+      width="100%"
       maxWidth={{ md: '476px', base: 'initial' }}
     >
       <Box>
-        <Image
-          src={img}
-          borderRadius="50%"
-          width={{ lg: '126px', base: '70px' }}
-          minWidth={{ lg: '126px', base: '70px' }}
-          height={{ lg: '126px', base: '70px' }}
-        />
+        {img && (
+          <Image
+            src={img}
+            borderRadius="50%"
+            width={{ lg: '126px', base: '70px' }}
+            minWidth={{ lg: '126px', base: '70px' }}
+            height={{ lg: '126px', base: '70px' }}
+          />
+        )}
       </Box>
       <Box ml="16px">
+        <Text
+          color="#728BA3"
+          fontSize={{ lg: '24px', base: '18px' }}
+          lineHeight="100%"
+          fontWeight="600"
+          mt="7px"
+        >
+          <Text as="span" color="#1C1C28">
+            {fname}
+          </Text>{' '}
+          {lname}
+        </Text>
         <Text
           color="#728BA3"
           fontWeight="500"
           fontSize={{ lg: '18px', base: '16px' }}
           lineHeight="100%"
+          mt="10px"
         >
-          {title}
+          {title}{' '}
+          <Text as="span" color="#1C1C28">
+            {company}
+          </Text>
         </Text>
-        <Text
+        {/* <Text
           color="#1C1C28"
           fontSize={{ lg: '24px', base: '18px' }}
           lineHeight="100%"
           fontWeight="600"
           mt="7px"
         >
-          {name}
-        </Text>
+          {fname}{' '}
+          <Text as="span" color="#728BA3">
+            {lname}
+          </Text>
+        </Text> */}
         <Text
           color="#1C1C2899"
           mt={{ lg: '16px', base: '8px' }}

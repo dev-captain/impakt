@@ -10,13 +10,11 @@ const TeamCard = ({
   image,
   name,
   title,
-  followers,
   data,
 }: {
   image: string;
   name: string;
   title: string;
-  followers: string;
   data: any;
 }) => {
   // const [twitterImg, setTwitterImg] = useState(Twitter);
@@ -75,7 +73,7 @@ const TeamCard = ({
           {name}
         </Text>
       </VStack>
-      <VStack
+      {/* <VStack
         w="full"
         spacing={5}
         justify={{ base: 'center', md: 'center' }}
@@ -91,7 +89,7 @@ const TeamCard = ({
           {' '}
           {followers}
         </Text>
-      </VStack>
+      </VStack> */}
       <Box height="1px" background="#000" width="152px" margin="24px auto" />
       <VStack
         width="100%"
