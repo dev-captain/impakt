@@ -85,7 +85,7 @@ const Athletes = () => {
               alignContent="center"
               alignItems="center"
               columnGap={{ base: '8px', sm: '16px', md: '20px !important', xl: '24px' }}
-              rowGap={{ base: '24px', md: '115px', xl: '16px' }}
+              rowGap={{ base: '24px', md: '35px', xl: '16px' }}
             >
               {Team.map((advisor: any) => {
                 return (

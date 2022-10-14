@@ -23,6 +23,7 @@ const DesktopVideo = styled.video<{
   isMobile: boolean;
 }>`
   object-fit: cover;
+  width: 100%;
   margin: 0 !important;
   border-radius: 0px 0px 10px 10px;
 `;
@@ -51,8 +52,8 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
     const [opacityText, setOpacityText] = useState(1);
 
     const play = () => {
-      videoRef?.current?.play();
       setOpacityText(0);
+      videoRef?.current?.play();
     };
 
     const handleMute = () => {
@@ -170,17 +171,54 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
             transform="translate(-50%,-50%)"
           >
             {opacityText === 1 && (
-              <Text
-                fontSize="80px"
-                fontWeight="700"
-                letterSpacing="-2px"
-                color="white"
-                textAlign="center"
-              >
-                Impakt Fitness World
-              </Text>
+              <>
+                <Text
+                  fontSize="80px"
+                  fontWeight="700"
+                  letterSpacing="-2px"
+                  color="white"
+                  textAlign="center"
+                >
+                  Impakt Fitness World
+                </Text>
+                <Common.ImpaktButton
+                  variant="secondary"
+                  w={{ base: '130px', md: '348px' }}
+                  h={{ base: '44px', md: '75px' }}
+                  backgroundColor="transparent"
+                  borderRadius="10px"
+                  type="submit"
+                  border="3px solid white"
+                  fontSize={{ base: '14px', md: '21.7856px' }}
+                  fontWeight="600"
+                  margin="auto"
+                  display="flex"
+                  gap="5px"
+                  onClick={() => play()}
+                >
+                  Enter
+                  <ArrowForwardIcon />
+                </Common.ImpaktButton>
+                <Common.ImpaktButton
+                  position="absolute"
+                  left="50%"
+                  transform="translate(-50%, -50%)"
+                  variant="secondary"
+                  border="0"
+                  w="auto"
+                  display="flex"
+                  marginTop="25px"
+                  backgroundColor="transparent"
+                  _hover={{ backgroundColor: 'transparent' }}
+                  _focus={{ backgroundColor: 'transparent' }}
+                  _active={{ backgroundColor: 'transparent' }}
+                  onClick={() => handleMute()}
+                >
+                  {sound ? <I.SoundOnIcon width="auto" /> : <I.SoundOffIcon width="auto" />}
+                </Common.ImpaktButton>
+              </>
             )}
-            <Common.ImpaktButton
+            {/* <Common.ImpaktButton
               variant="secondary"
               w={{ base: '130px', md: '348px' }}
               h={{ base: '44px', md: '75px' }}
@@ -214,7 +252,7 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
               onClick={() => handleMute()}
             >
               {sound ? <I.SoundOnIcon width="auto" /> : <I.SoundOffIcon width="auto" />}
-            </Common.ImpaktButton>
+            </Common.ImpaktButton> */}
           </Box>
         </Box>
         <Box>

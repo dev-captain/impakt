@@ -49,9 +49,10 @@ const TeamCard = ({
               rounded="lg"
               objectFit="cover"
               src={image}
-              width={{ md: 'auto', base: '130px' }}
+              width={{ md: '189px', base: '130px' }}
+              height={{ md: '189px', base: '130px' }}
               boxSizing="border-box"
-              borderRadius="24px"
+              borderRadius="50%"
             />
           </Box>
         </Box>

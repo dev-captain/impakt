@@ -106,6 +106,8 @@ const Images = {
     kelvinImg: require('./kelvinImg.png'),
     photoMatt: require('./Photo_Matt.png'),
     photoUyen: require('./Photo_Uyen.png'),
+    photoAaron: require('./Photo_Aaron.png'),
+    photoLevi: require('./Photo_Levi.png'),
   },
   Privacy: {
     PrivacyImg1: require('./PrivacyImg1.png'),

@@ -98,7 +98,7 @@ const HumanNeed = () => {
             _hover={{ bg: '#000', color: '#fff' }}
             disabled
           >
-            Explore groups!
+            Explore
           </Common.ImpaktButton>
         </Box>
       </Box>

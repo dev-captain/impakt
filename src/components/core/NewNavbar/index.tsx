@@ -172,6 +172,8 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
                         bg="#FDE8EA"
                         gap="8px"
                         padding="10px 14px"
+                        disabled
+                        _hover={{ backgroundColor: '#FDE8EA', color: '#F04153' }}
                       >
                         <I.DownloadIcon width="16px" />
                         Developer? SDK Here!

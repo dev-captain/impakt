@@ -164,6 +164,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                             bg="#FDE8EA"
                             gap="8px"
                             padding="10px 14px"
+                            disabled
                           >
                             {/* {t(Keys.footer.downloadApp)} */}
                             <I.DownloadIcon width="16px" />
@@ -206,7 +207,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
               justifyContent={{ base: 'center', md: 'center' }}
               margin="auto"
               spacing="8px"
-              pl={{ base: '0px', md: '64px', lg: wFull ? '50px' : '64px' }}
+              p="0"
               w={{ base: '100%', lg: wFull ? 'min-content' : '100%' }}
             >
               <NavBarSocialIcons />

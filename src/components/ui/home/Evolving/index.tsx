@@ -9,7 +9,7 @@ import {
   Box,
   Image,
 } from '@chakra-ui/react';
-import { C, Common } from 'components';
+import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Images from 'assets/images';
@@ -75,7 +75,7 @@ const Evolving = () => {
                 >
                   {t(keys.impaktGamesHero.evolvingMsg)}
                 </Text>
-                <Common.ImpaktButton
+                {/* <Common.ImpaktButton
                   color="#ffffff"
                   bg="#000000"
                   height="50px"
@@ -87,7 +87,7 @@ const Evolving = () => {
                   disabled
                 >
                   What is Koin?
-                </Common.ImpaktButton>
+                </Common.ImpaktButton> */}
                 <Image
                   src={Images.evolving.evolving}
                   objectFit="cover"
