@@ -136,8 +136,8 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
           </SocialFitnessGamified>
           <S.FitnessJourney />
           <S.Privacy />
-          <S.Evolving />
-          <S.HumanNeed />
+          {/* <S.Evolving /> */}
+          {/* <S.HumanNeed /> */}
           <S.Athletes />
           <S.ImpaktTeam />
           <ImpaktFooter />
@@ -225,8 +225,8 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
           </SocialFitnessGamified>
           <S.FitnessJourney />
           <S.Privacy />
-          <S.Evolving />
-          <S.HumanNeed />
+          {/* <S.Evolving /> */}
+          {/* <S.HumanNeed /> */}
           <S.Athletes />
           <S.ImpaktTeam />
           <ImpaktFooter />
