@@ -83,21 +83,21 @@ const ImpaktTeam = () => {
               alignItems="flex-end"
               justifyContent="center"
             >
+              <Text
+                width="100%"
+                color="#35485a"
+                fontSize="26px"
+                fontWeight="700"
+                textTransform="uppercase"
+                textAlign="center"
+              >
+                Angels
+              </Text>
               {leadership.map((d: any) => (
                 <Box width={{ lg: '31%', md: '30%', base: '100%' }}>
-                  <Text
-                    width="100%"
-                    color="#728BA3"
-                    fontSize="21px"
-                    fontWeight="700"
-                    textTransform="uppercase"
-                  >
-                    {d.semititle}
-                  </Text>
                   <Card
-                    img={d.img}
                     company={d.company}
-                    title={d.title}
+                    title={d.job}
                     fname={d.fname}
                     lname={d.lname}
                     post={d.post}
@@ -119,19 +119,19 @@ const ImpaktTeam = () => {
             flexWrap="wrap"
             gap={{ md: '40px', base: '20px' }}
           >
+            <Text
+              width="100%"
+              color="#35485a"
+              fontSize="26px"
+              fontWeight="700"
+              textTransform="uppercase"
+              textAlign="center"
+            >
+              Advisors
+            </Text>
             {advisorTeam.map((d: any) => (
               <Box width={{ lg: '31%', md: '30%', base: '100%' }}>
-                <Text
-                  width="100%"
-                  color="#728BA3"
-                  fontSize="21px"
-                  fontWeight="700"
-                  textTransform="uppercase"
-                >
-                  {d.semititle}
-                </Text>
                 <Card
-                  img={d.img}
                   company={d.company}
                   title={d.job}
                   fname={d.fname}

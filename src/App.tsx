@@ -67,7 +67,15 @@ const App = () => {
 
       <Route path="/onboarding" element={<Onboarding />} />
 
-      <Route path="/contact" element={<Contact />} />
+      <Route
+        path="/contact"
+        element={
+          <Common.ScrollToTop>
+            <Contact />
+          </Common.ScrollToTop>
+        }
+      />
+      {/* <Route path="/contact" element={<Contact />} /> */}
       <Route path="/leader-board" element={<LeaderBoard />} />
       <Route path="/download" element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />

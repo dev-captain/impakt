@@ -2,22 +2,63 @@ import { useState } from 'react';
 import {
   GridItem,
   HStack,
-  SimpleGrid,
+  // SimpleGrid,
   Text,
   VStack,
   useColorModeValue,
   Box,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { C, Common } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import TeamCard from './TeamCard';
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1280,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      },
+    },
+  ],
+};
 
 const Athletes = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const { t } = useTranslation().i18n;
   let Team = useState<object[]>();
   Team = t('athletes.team', { returnObjects: true });
+  const navigate = useNavigate();
 
   return (
     <C.HeroLayout
@@ -29,21 +70,15 @@ const Athletes = () => {
         xl: '100px',
         '2xl': '0px',
       }}
-      minH="70vh"
+      // minH="70vh"
     >
-      <VStack
-        spacing="0px"
-        px="16px"
-        maxW={{ base: '100%', lg: '1232px' }}
-        w="full"
-        color={textColor}
-      >
-        <VStack>
+      <VStack spacing="0px" px="16px" maxW="100%" w="full" color={textColor}>
+        <VStack width="100%">
           <VStack
             spacing="24px"
             align={{ base: 'flex-start', md: 'auto' }}
             justifyContent="center"
-            maxW={{ base: '100%', lg: '1232px' }}
+            maxW="100%"
             pb="16px"
           >
             <VStack
@@ -79,37 +114,32 @@ const Athletes = () => {
                 </Text>
               </Box>
             </VStack>
-            <SimpleGrid
-              w="full"
-              columns={{ base: 1, md: 3 }}
-              alignContent="center"
-              alignItems="center"
-              columnGap={{ base: '8px', sm: '16px', md: '20px !important', xl: '24px' }}
-              rowGap={{ base: '24px', md: '35px', xl: '16px' }}
-            >
-              {Team.map((advisor: any) => {
-                return (
-                  <GridItem
-                    key={advisor.name}
-                    w="full"
-                    height="100%"
-                    p="42px 24px 24px"
-                    align="center"
-                    transitionDuration="150ms"
-                    justify="space-between"
-                    bgColor="#fff"
-                    position="relative"
-                    borderRadius="20px"
-                    backdropFilter="blur(40px)"
-                    boxShadow="0px 8px 15px 3px rgba(0, 0, 0, 0.05)"
-                  >
-                    <HStack w="full" align="center" justify="center">
-                      <TeamCard {...advisor} />
-                    </HStack>
-                  </GridItem>
-                );
-              })}
-            </SimpleGrid>
+            <Box w="full" maxW="1200px" alignItems="center">
+              <Slider {...settings}>
+                {Team.map((advisor: any) => {
+                  return (
+                    <GridItem
+                      key={advisor.name}
+                      w="full"
+                      height="100%"
+                      p="42px 24px 24px"
+                      align="center"
+                      transitionDuration="150ms"
+                      justify="space-between"
+                      bgColor="#fff"
+                      position="relative"
+                      borderRadius="20px"
+                      backdropFilter="blur(40px)"
+                      boxShadow="0px 8px 15px 3px rgba(0, 0, 0, 0.05)"
+                    >
+                      <HStack w="full" align="center" justify="center">
+                        <TeamCard {...advisor} />
+                      </HStack>
+                    </GridItem>
+                  );
+                })}
+              </Slider>
+            </Box>
             <VStack width="100%" mt="78px !important" mb="56px !important">
               <Box textAlign="center">
                 <Text
@@ -129,7 +159,8 @@ const Athletes = () => {
                   gap="8px"
                   padding="10px 14px"
                   _hover={{ bg: '#000', color: '#fff' }}
-                  disabled
+                  // disabled
+                  onClick={() => navigate('/contact')}
                 >
                   Apply Here
                 </Common.ImpaktButton>

@@ -114,6 +114,9 @@ const Images = {
     PrivacyImg2: require('./PrivacyImg2.png'),
     PrivacyImg3: require('./PrivacyImg3.png'),
   },
+  home: {
+    HomeImage: require('./HomeImage.png'),
+  },
 };
 
 export default Images;

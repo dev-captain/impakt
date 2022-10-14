@@ -166,7 +166,7 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
                     marginLeft="0 !important"
                     flexWrap={{ base: 'wrap', lg: 'nowrap' }}
                   >
-                    <Box>
+                    {/* <Box>
                       <Common.ImpaktButton
                         color="#F04153"
                         bg="#FDE8EA"
@@ -178,7 +178,7 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
                         <I.DownloadIcon width="16px" />
                         Developer? SDK Here!
                       </Common.ImpaktButton>
-                    </Box>
+                    </Box> */}
                     <Box onClick={() => navigate('/download')}>
                       <Common.ImpaktButton
                         color="#F04153"

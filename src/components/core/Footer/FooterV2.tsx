@@ -158,7 +158,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                         marginLeft="0 !important"
                         mt={{ base: '20px !important', md: '0' }}
                       >
-                        <Box>
+                        {/* <Box>
                           <Common.ImpaktButton
                             color="#F04153"
                             bg="#FDE8EA"
@@ -166,11 +166,10 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                             padding="10px 14px"
                             disabled
                           >
-                            {/* {t(Keys.footer.downloadApp)} */}
                             <I.DownloadIcon width="16px" />
                             Developer? SDK Here!
                           </Common.ImpaktButton>
-                        </Box>
+                        </Box> */}
                         <Box onClick={() => navigate('/download')}>
                           <Common.ImpaktButton
                             color="#F04153"

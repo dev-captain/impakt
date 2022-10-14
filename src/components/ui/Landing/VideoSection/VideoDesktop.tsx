@@ -62,6 +62,10 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
       videoRef.current.muted = !videoRef.current.muted;
     };
 
+    const endVideo = () => {
+      window.scrollTo(0, 1050);
+    };
+
     return isLessThan1280 ? (
       <>
         <Box position="relative">
@@ -136,9 +140,9 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
             </HStack>
           </SocialFitnessGamified>
           <S.FitnessJourney />
-          <S.Privacy />
+          {/* <S.Privacy />
           <S.Evolving />
-          <S.HumanNeed />
+          <S.HumanNeed /> */}
           <S.Athletes />
           <S.ImpaktTeam />
           <ImpaktFooter />
@@ -153,13 +157,11 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
             y={borderY}
             isMobile
             isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
-            // autoPlay
-            // loop
-            // muted
             playsInline
             onLoadedData={() => {
               dispatch(setIsLoaded(true));
             }}
+            onEnded={() => endVideo()}
           >
             <Source src={Videos.newVideo} type="video/mp4" />
           </DesktopVideo>
@@ -218,41 +220,6 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
                 </Common.ImpaktButton>
               </>
             )}
-            {/* <Common.ImpaktButton
-              variant="secondary"
-              w={{ base: '130px', md: '348px' }}
-              h={{ base: '44px', md: '75px' }}
-              backgroundColor="transparent"
-              borderRadius="10px"
-              type="submit"
-              border="3px solid white"
-              fontSize={{ base: '14px', md: '21.7856px' }}
-              fontWeight="600"
-              margin="auto"
-              display="flex"
-              gap="5px"
-              onClick={() => play()}
-            >
-              Enter
-              <ArrowForwardIcon />
-            </Common.ImpaktButton>
-            <Common.ImpaktButton
-              position="absolute"
-              left="50%"
-              transform="translate(-50%, -50%)"
-              variant="secondary"
-              border="0"
-              w="auto"
-              display="flex"
-              marginTop="25px"
-              backgroundColor="transparent"
-              _hover={{ backgroundColor: 'transparent' }}
-              _focus={{ backgroundColor: 'transparent' }}
-              _active={{ backgroundColor: 'transparent' }}
-              onClick={() => handleMute()}
-            >
-              {sound ? <I.SoundOnIcon width="auto" /> : <I.SoundOffIcon width="auto" />}
-            </Common.ImpaktButton> */}
           </Box>
         </Box>
         <Box>
@@ -262,9 +229,9 @@ const VideoDesktop = React.forwardRef<HTMLVideoElement, React.ComponentPropsWith
             </HStack>
           </SocialFitnessGamified>
           <S.FitnessJourney />
-          <S.Privacy />
+          {/* <S.Privacy />
           <S.Evolving />
-          <S.HumanNeed />
+          <S.HumanNeed /> */}
           <S.Athletes />
           <S.ImpaktTeam />
           <ImpaktFooter />
