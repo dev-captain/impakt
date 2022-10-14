@@ -25,7 +25,6 @@ import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
-import ForumDetailModal from './components/ui/MemberDashBoard/Group/GroupDetails/Content/Forums/ForumsDetail/ForumDetailModal';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 
 const App = () => {

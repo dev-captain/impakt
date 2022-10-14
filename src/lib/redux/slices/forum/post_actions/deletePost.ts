@@ -21,13 +21,9 @@ const deletePost = createAsyncThunk(
         return Promise.reject(new Error('Please Sign In first to continue'));
       }
 
-      const posts = await PostsInstance.postControllerV1DeleteOne(
-        referenceType,
-        referenceId,
-        postId,
-      );
+      await PostsInstance.postControllerV1DeleteOne(referenceType, referenceId, postId);
 
-      return posts;
+      return { id: postId };
     } catch (err: any) {
       return rejectWithValue(err);
     }

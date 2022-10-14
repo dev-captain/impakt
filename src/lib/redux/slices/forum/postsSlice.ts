@@ -59,6 +59,7 @@ const postSlices = createSlice({
       })
       .addCase(deletePost.fulfilled, (state, action) => {
         state.posts = state.posts.filter((post) => post.id !== action.payload.id);
+        state.postDetails = state.postDetails.filter((post) => post.id !== action.payload.id);
         state.isPostsLoading = false;
       })
       .addCase(deletePost.rejected, (state) => {

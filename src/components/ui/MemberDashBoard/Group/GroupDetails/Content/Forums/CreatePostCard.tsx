@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Box,
   Text,
-  SkeletonText,
   SkeletonCircle,
   HStack,
   Skeleton,
@@ -70,17 +69,28 @@ const CreatePostCard: React.FC = () => {
                   w="40px"
                   h="40px"
                 />
-                <SkeletonText
-                  endColor="#EEF4F6"
-                  startColor="#EEF4F6"
-                  fadeDuration={0}
-                  speed={0}
-                  borderRadius="100px"
-                  w="60%"
-                  mt="4"
-                  noOfLines={2}
-                  spacing="4"
-                />
+                <VStack w="full" align="flex-start" justifyContent="flex-start">
+                  <Skeleton
+                    endColor="#EEF4F6"
+                    startColor="#EEF4F6"
+                    fadeDuration={0}
+                    speed={0}
+                    borderRadius="100px"
+                    height="10px"
+                    w="60%"
+                    isLoaded={false}
+                  />
+                  <Skeleton
+                    endColor="#EEF4F6"
+                    startColor="#EEF4F6"
+                    fadeDuration={0}
+                    speed={0}
+                    borderRadius="100px"
+                    height="10px"
+                    w="70%"
+                    isLoaded={false}
+                  />
+                </VStack>
               </HStack>
               <HStack m="0 !important" justifyContent="flex-start" alignItems="flex-start">
                 <AddIcon mr="10px" mb="5px" boxSize="15px" border="5px" color="#728BA3" />
