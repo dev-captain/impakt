@@ -1,20 +1,18 @@
 import { GetPostRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
+import { createComment } from './comment_actions/createComment';
 import { createPost } from './post_actions/createPost';
 import { deletePost } from './post_actions/deletePost';
-import { fetchPostDetail } from './post_actions/fetchPostDetail';
 import { fetchPosts } from './post_actions/fetchPosts';
 import { updatePost } from './post_actions/updatePost';
 
 interface PostsInitialState {
   posts: GetPostRes[];
-  postDetails: GetPostRes[];
   isPostsLoading: boolean;
 }
 
 const postsInitialState: PostsInitialState = {
   posts: [],
-  postDetails: [],
   isPostsLoading: false,
 };
 
@@ -24,7 +22,6 @@ const postSlices = createSlice({
   reducers: {
     cleanForums(state: PostsInitialState) {
       state.posts = [];
-      state.postDetails = [];
       state.isPostsLoading = false;
     },
   },
@@ -59,7 +56,6 @@ const postSlices = createSlice({
       })
       .addCase(deletePost.fulfilled, (state, action) => {
         state.posts = state.posts.filter((post) => post.id !== action.payload.id);
-        state.postDetails = state.postDetails.filter((post) => post.id !== action.payload.id);
         state.isPostsLoading = false;
       })
       .addCase(deletePost.rejected, (state) => {
@@ -72,10 +68,8 @@ const postSlices = createSlice({
       })
       .addCase(updatePost.fulfilled, (state, action) => {
         const a = state.posts.findIndex((post) => post.id === action.payload.id);
-        const b = state.postDetails.findIndex((post) => post.id === action.payload.id);
-        if (a !== -1 && b !== -1) {
+        if (a !== -1) {
           state.posts[a] = action.payload;
-          state.posts[b] = action.payload;
         }
         state.isPostsLoading = false;
       })
@@ -84,14 +78,21 @@ const postSlices = createSlice({
       });
 
     builder
-      .addCase(fetchPostDetail.pending, (state) => {
+      .addCase(createComment.pending, (state) => {
         state.isPostsLoading = true;
       })
-      .addCase(fetchPostDetail.fulfilled, (state, action) => {
-        state.postDetails = [...state.postDetails, action.payload];
+      .addCase(createComment.fulfilled, (state, action) => {
+        const a = state.posts.findIndex((post) => post.id === action.payload.postId);
+        if (a !== -1) {
+          state.posts[a] = {
+            ...state.posts[a],
+            comment: [...state.posts[a].comment, action.payload],
+          };
+        }
+        // state.postDetails = [...state.postDetails, action.payload];
         state.isPostsLoading = false;
       })
-      .addCase(fetchPostDetail.rejected, (state) => {
+      .addCase(createComment.rejected, (state) => {
         state.isPostsLoading = false;
       });
   },

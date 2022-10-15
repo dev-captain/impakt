@@ -5,29 +5,15 @@ import { Box } from '@chakra-ui/react';
 import { Common } from 'components';
 import { DeleteIcon } from '@chakra-ui/icons';
 
-import { fetchPostDetail } from '../../../../../../../../lib/redux/slices/forum/post_actions/fetchPostDetail';
 import { deletePost } from '../../../../../../../../lib/redux/slices/forum/post_actions/deletePost';
 
 const ForumDetail: React.FC = () => {
   const { postId } = useParams();
-  const postDetails = useAppSelector((state) => state.postsReducer.postDetails);
+  const postDetails = useAppSelector((state) => state.postsReducer.posts);
   const activePostDetails = postDetails.find((post) => post.id === Number(postId));
   const group = useAppSelector((state) => state.groupsReducer.activeGroup);
   const dispatch = useAppDispatch();
 
-  const getPostDetails = async () => {
-    if (postId && group) {
-      if (!postDetails.find((post) => post.id === Number(postId))) {
-        await dispatch(
-          fetchPostDetail({
-            referenceType: 'Group',
-            referenceId: group.id,
-            postId: Number(postId),
-          }),
-        ).unwrap();
-      }
-    }
-  };
   const deletePostFromDb = async () => {
     if (!group || !activePostDetails) return;
 
@@ -35,10 +21,6 @@ const ForumDetail: React.FC = () => {
       deletePost({ referenceType: 'Group', referenceId: group.id, postId: activePostDetails.id }),
     ).unwrap();
   };
-
-  React.useEffect(() => {
-    getPostDetails();
-  }, []);
 
   if (!activePostDetails) return null;
 

@@ -12,6 +12,7 @@ import CreatePostCard from './CreatePostCard';
 const Forums: React.FC = () => {
   const role = useAppSelector((state) => state.groupsReducer.role);
   const posts = useAppSelector((state) => state.postsReducer.posts);
+  console.log(posts);
   const isCreator = role === 'Creator';
   console.log(posts);
 
@@ -34,14 +35,14 @@ const Forums: React.FC = () => {
             </Box>
           </Box>
           {isCreator && <CreatePostCard />}
-          {posts.map(({ id, creator, content, createdAt }) => (
+          {posts.map(({ id, creator, content, createdAt, comment }) => (
             <UserForumsCard
               key={id}
               id={id}
               name={creator?.firstName ?? creator?.username}
               msg={content}
               title={content}
-              // msgNo={comment.}
+              msgNo={comment.length}
               // view={view}
               time={`${Day.now().hoursBetween(Day.fromString(createdAt.toISOString()))}h`}
             />

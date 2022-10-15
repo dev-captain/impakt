@@ -1,22 +1,24 @@
 import * as React from 'react';
-import { Box, Text, Image, useDisclosure, HStack } from '@chakra-ui/react';
+import { Box, Text, Image, useDisclosure, HStack, Button } from '@chakra-ui/react';
 import { I } from 'components';
 import Images from 'assets/images';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { DeleteIcon } from '@chakra-ui/icons';
 
 import { deletePost } from '../../../../../../../lib/redux/slices/forum/post_actions/deletePost';
+import CommentBox from './CommentBox';
 
 interface UserForumsPropsI {
   id: number;
   name: string;
   msg: string;
   title: string;
-  // msgNo: string;
+  msgNo: number;
   // view: string;
   time: string;
 }
-const UserForumsCard: React.FC<UserForumsPropsI> = ({ id, name, msg, title, time }) => {
+const UserForumsCard: React.FC<UserForumsPropsI> = ({ id, name, msg, title, time, msgNo }) => {
+  const { onOpen, onClose, isOpen } = useDisclosure();
   // const postParam = useParams();
   const role = useAppSelector((state) => state.groupsReducer.role);
   const dispatch = useAppDispatch();
@@ -60,15 +62,15 @@ const UserForumsCard: React.FC<UserForumsPropsI> = ({ id, name, msg, title, time
         </Text>
         <Box display="flex" alignItems="center" gap="10px">
           <Box display="flex" alignItems="center">
-            {/* <I.CommentIcon color="#B0C3D6" width="20px" height="20px" /> */}
-            {/* <Text
+            <I.CommentIcon color="#B0C3D6" width="20px" height="20px" />
+            <Text
               color="#B0C3D6"
               fontSize={{ lgx: '16px', base: '14px' }}
               fontWeight="500"
               marginLeft="3px"
             >
               {msgNo}
-            </Text> */}
+            </Text>
           </Box>
           {/* <Box display="flex" alignItems="center">
             <I.Eye color="#B0C3D6" width="20px" />
@@ -118,17 +120,29 @@ const UserForumsCard: React.FC<UserForumsPropsI> = ({ id, name, msg, title, time
             </Text>
           </Box>
         </Box>
-        {isCreator && (
-          <HStack
-            cursor="pointer"
-            m="0 !important"
-            justifyContent="flex-start"
-            onClick={deletePostFromDb}
-            alignItems="flex-start"
-          >
-            <DeleteIcon mr="10px" mb="5px" boxSize="15px" border="5px" color="#728BA3" />
-          </HStack>
-        )}
+        <Box>
+          {/* {isCreator && (
+            <HStack
+              cursor="pointer"
+              m="0 !important"
+              justifyContent="flex-start"
+              onClick={deletePostFromDb}
+              alignItems="flex-start"
+            >
+              <DeleteIcon mr="10px" mb="5px" boxSize="15px" border="5px" color="#728BA3" />
+            </HStack>
+          )} */}
+
+          <CommentBox postId={id}>
+            <Button
+              background="transparent"
+              _hover={{ backgroundColor: 'transparent' }}
+              padding="0"
+            >
+              <I.CommentIcon color="#728BA3" width="25px" height="25px" />
+            </Button>
+          </CommentBox>
+        </Box>
       </Box>
     </Box>
     /* <ForumDetailModal open={isOpen} close={onClose} /> */

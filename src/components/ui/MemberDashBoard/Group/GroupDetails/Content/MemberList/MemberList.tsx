@@ -198,7 +198,7 @@ const MemberList: React.FC = () => {
                     marginTop="16px"
                   >
                     <Box display="flex" alignItems="center">
-                      <Image src={Images.group.ellipse} zIndex="10" />
+                      <Image src={Images.group.ellipse} zIndex="0" />
                       <Text
                         color="#4E6070"
                         fontSize={{ lgx: '18px', md: '14px' }}
