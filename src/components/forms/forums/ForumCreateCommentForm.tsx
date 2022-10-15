@@ -34,7 +34,7 @@ const ForumCreateCommentForm = React.forwardRef<
     onChange,
     type: 'text',
     name: 'comment',
-    label: 'Your comment',
+    label: 'Comment',
     whiteMode: true,
   };
 

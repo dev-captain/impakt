@@ -10,7 +10,8 @@ interface ForumDetailModalProps {
 const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
   return (
     <GroupsModal
-      modalTitle={{ text: 'Post Details' }}
+      size="full"
+      modalTitle={{ text: 'Forums' }}
       isOpen={open}
       onClose={close}
       showCloseButton

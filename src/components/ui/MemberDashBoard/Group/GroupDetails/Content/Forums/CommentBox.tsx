@@ -12,9 +12,6 @@ import ForumCreateCommentForm from '../../../../../../forms/forums/ForumCreateCo
 const CommentBox: React.FC<{ postId: number }> = ({ children, postId }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const initialFocusRef = useRef<HTMLInputElement | null>(null);
-  useEffect(() => {
-    console.log(initialFocusRef);
-  }, [initialFocusRef]);
 
   return (
     <Popover

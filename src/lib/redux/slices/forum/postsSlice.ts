@@ -1,6 +1,7 @@
 import { GetPostRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
 import { createComment } from './comment_actions/createComment';
+import { deleteComment } from './comment_actions/deleteComment';
 import { createPost } from './post_actions/createPost';
 import { deletePost } from './post_actions/deletePost';
 import { fetchPosts } from './post_actions/fetchPosts';
@@ -93,6 +94,27 @@ const postSlices = createSlice({
         state.isPostsLoading = false;
       })
       .addCase(createComment.rejected, (state) => {
+        state.isPostsLoading = false;
+      });
+
+    builder
+      .addCase(deleteComment.pending, (state) => {
+        state.isPostsLoading = true;
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        const a = state.posts.findIndex((post) => post.id === action.payload.postId);
+        if (a !== -1 && action.payload.success) {
+          state.posts[a] = {
+            ...state.posts[a],
+            comment: state.posts[a].comment.filter(
+              (comment) => comment.id !== action.payload.commentId,
+            ),
+          };
+        }
+        // state.postDetails = [...state.postDetails, action.payload];
+        state.isPostsLoading = false;
+      })
+      .addCase(deleteComment.rejected, (state) => {
         state.isPostsLoading = false;
       });
   },

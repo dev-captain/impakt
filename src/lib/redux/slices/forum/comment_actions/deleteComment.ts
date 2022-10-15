@@ -19,7 +19,7 @@ const deleteComment = createAsyncThunk(
 
       const comments = await PostsInstance.commentControllerV1DeleteOne(postId, commentId);
 
-      return comments;
+      return { ...comments, commentId, postId };
     } catch (err: any) {
       return rejectWithValue(err);
     }

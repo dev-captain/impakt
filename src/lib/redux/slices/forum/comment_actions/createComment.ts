@@ -11,16 +11,25 @@ const createComment = createAsyncThunk(
   ) => {
     try {
       const {
-        memberAuth: { isLogin },
+        memberAuth: { isLogin, member },
       } = getState() as RootState;
 
-      if (!isLogin) {
+      if (!isLogin || !member) {
         return Promise.reject(new Error('Please Sign In first to continue'));
       }
 
       const comments = await PostsInstance.commentControllerV1CreateOne(postId, createCommentDto);
 
-      return { postId, ...comments };
+      return {
+        postId,
+        ...comments,
+        creator: {
+          ...comments.creator,
+          id: member.id,
+          firstName: member.firstName,
+          username: member.username,
+        },
+      };
     } catch (err: any) {
       return rejectWithValue(err);
     }
