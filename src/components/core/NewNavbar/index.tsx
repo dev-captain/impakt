@@ -47,7 +47,7 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  // const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
 
   useEffect(() => {
     if (!isLessThan1280) {
@@ -66,7 +66,11 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
   const discord = isLight ? Discord : DiscordLight;
   const twitter = isLight ? Twitter : TwitterLight;
   const textColor = isLight ? 'glass.100' : 'glass.700';
-  const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  const bgColor =
+    path.path !== ''
+      ? // || isScrolling
+        'rgba(28, 28, 40, 0.65)'
+      : 'transparent';
   const _hover = {
     _hover: {
       transition: '0.2s ease',
@@ -103,7 +107,10 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
         // marginTop={isVersion2 && !isLessThan1280 ? '0' : '10px'}
         transition="background-color 0.5s linear"
         bgColor="#fff"
-        backdropFilter={isScrolling || path.path !== '' ? 'blur(40px)' : 'blur(0px)'}
+        backdropFilter={
+          // isScrolling ||
+          path.path !== '' ? 'blur(40px)' : 'blur(0px)'
+        }
         borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
       >
         <HStack w="full" justify="space-between">
@@ -341,7 +348,8 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
         hover={_hover}
         youtube={youtube}
         tiktok={Tiktok}
-        isScrolling={isScrolling}
+        // isScrolling={isScrolling}
+        isScrolling
       />
     </Box>
   );

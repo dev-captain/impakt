@@ -5,11 +5,11 @@ import styled, { css, keyframes } from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { Videos } from '../../../../data';
-import {
-  setIsAnimated,
-  setIsLoaded,
-  setIsScrolling,
-} from '../../../../lib/redux/slices/state/stateSlice';
+// import {
+//   setIsAnimated,
+//   setIsLoaded,
+//   setIsScrolling,
+// } from '../../../../lib/redux/slices/state/stateSlice';
 
 const rotate = ({ x, y }: { x: number; y: number }) => keyframes`
   0% {
@@ -65,16 +65,17 @@ const Source = styled.source``;
 const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithoutRef<'video'>>(
   (props, ref) => {
     const dispatch = useAppDispatch();
-    const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
-    const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
-    const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
-    const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
+    // const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+    // const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+    // const borderX = useAppSelector((state) => state.stateReducer.heroVideo.borderX);
+    // const borderY = useAppSelector((state) => state.stateReducer.heroVideo.borderY);
     const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
-    return isLessThan1280 ? (
+    return (
+      // isLessThan1280 ?
       <MobileVideo
         onLoadedData={() => {
-          dispatch(setIsLoaded(true));
+          // dispatch(setIsLoaded(true));
         }}
         ref={ref}
         autoPlay
@@ -85,32 +86,32 @@ const HeroVideo = React.forwardRef<HTMLVideoElement, React.ComponentPropsWithout
       >
         <Source src={Videos.heroVideo} type="video/mp4" />
       </MobileVideo>
-    ) : (
-      <DesktopVideo
-        x={borderX}
-        ref={ref}
-        y={borderY}
-        isMobile
-        isAnimated={isLessThan1280 || isAnimated}
-        onWheel={() => {
-          if (!isScrolling) {
-            dispatch(setIsScrolling());
-            setTimeout(() => {
-              dispatch(setIsAnimated());
-            }, 1070);
-          }
-        }}
-        isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
-        autoPlay
-        loop
-        muted
-        playsInline
-        onLoadedData={() => {
-          dispatch(setIsLoaded(true));
-        }}
-      >
-        <Source src={Videos.heroVideo} type="video/mp4" />
-      </DesktopVideo>
+      // ) : (
+      //   // <DesktopVideo
+      //   //   // x={borderX}
+      //   //   ref={ref}
+      //   //   // y={borderY}
+      //   //   isMobile
+      //   //   // isAnimated={isLessThan1280 || isAnimated}
+      //   //   onWheel={() => {
+      //   //     // if (!isScrolling) {
+      //   //     //   dispatch(setIsScrolling());
+      //   //     //   setTimeout(() => {
+      //   //     //     dispatch(setIsAnimated());
+      //   //     //   }, 1070);
+      //   //     // }
+      //   //   }}
+      //   //   // isScrolling={(isScrolling && !isAnimated) || isLessThan1280}
+      //   //   autoPlay
+      //   //   loop
+      //   //   muted
+      //   //   playsInline
+      //   //   onLoadedData={() => {
+      //   //     // dispatch(setIsLoaded(true));
+      //   //   }}
+      //   // >
+      //   //   <Source src={Videos.heroVideo} type="video/mp4" />
+      //   // </DesktopVideo>
     );
   },
 );

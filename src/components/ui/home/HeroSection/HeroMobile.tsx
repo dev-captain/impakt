@@ -12,7 +12,7 @@ import SocialFitnessGamified from './SocialFitnessGamified';
 
 const HeroMobile: React.FC = () => {
   const [isSmall] = useMediaQuery('(max-width: 1036px)');
-  const isVideoLoaded = useAppSelector((state) => state.stateReducer.heroVideo.isLoaded);
+  // const isVideoLoaded = useAppSelector((state) => state.stateReducer.heroVideo.isLoaded);
   const heroVideoRef = React.useRef<HTMLVideoElement>(null);
   React.useEffect(() => {
     return () => {
@@ -35,7 +35,7 @@ const HeroMobile: React.FC = () => {
             <Box display="flex" w="100%" h="100%" zIndex="0" position="relative">
               <img width="100%" src={Images.Common.Window} alt="_" />
             </Box>
-            {!isVideoLoaded && (
+            {/* {!isVideoLoaded && (
               <Box
                 bgColor="#000"
                 top={isSmall ? '3.6vw' : '2.813vw'}
@@ -55,7 +55,7 @@ const HeroMobile: React.FC = () => {
                   Loading...
                 </Text>
               </Box>
-            )}
+            )} */}
             <HeroVideo
               ref={heroVideoRef}
               style={{
@@ -101,7 +101,7 @@ const HeroMobile: React.FC = () => {
             <Box display="flex" w="100%" h="100%" zIndex="0" position="relative">
               <img width="100%" src={Images.Common.Window} alt="_" />
             </Box>
-            {!isVideoLoaded && (
+            {/* {!isVideoLoaded && (
               <Box
                 bgColor="#000"
                 top={isSmall ? '3.6vw' : '2.813vw'}
@@ -121,7 +121,7 @@ const HeroMobile: React.FC = () => {
                   Loading...
                 </Text>
               </Box>
-            )}
+            )} */}
             <HeroVideo
               ref={heroVideoRef}
               style={{

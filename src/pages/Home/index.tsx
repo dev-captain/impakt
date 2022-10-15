@@ -3,14 +3,14 @@ import { S, I } from 'components';
 import { useAppSelector } from 'hooks';
 
 const HomePage = () => {
-  const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
-  const isVideoLoaded = useAppSelector((state) => state.stateReducer.heroVideo.isLoaded);
+  // const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+  // const isVideoLoaded = useAppSelector((state) => state.stateReducer.heroVideo.isLoaded);
 
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">
-      {!isVideoLoaded && !isLessThan1280 && (
+      {/* {!isVideoLoaded && !isLessThan1280 && (
         <Box
           bgColor="#000"
           top="0"
@@ -29,7 +29,7 @@ const HomePage = () => {
             Loading...
           </Text>
         </Box>
-      )}
+      )} */}
       <Box
         background="linear-gradient(180deg, rgba(18, 18, 22, 0.95) 6%, rgba(18, 18, 22, 0) 100%);"
         zIndex="99999"
@@ -42,7 +42,7 @@ const HomePage = () => {
       />
       <S.HeroSection />
 
-      {(isAnimated || isLessThan1280) && (
+      {/* {(isAnimated || isLessThan1280) && (
         <>
           <div>
             <S.EarnCrypto />
@@ -67,7 +67,7 @@ const HomePage = () => {
             <S.ImpaktFooter />
           </div>
         </>
-      )}
+      )} */}
 
       {/* <div id="join-challange">
         <LeaderBoard />

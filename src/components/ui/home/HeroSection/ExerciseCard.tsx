@@ -18,7 +18,7 @@ const ExerciseCard: React.FC = () => {
   const { t } = useTranslation(`default`).i18n;
   const [circularProgressValue, setCircularProgressValue] = React.useState(0);
   const [displayValue, setDisplayValue] = React.useState(24);
-  const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
+  // const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   const accentRedtextColor = useColorModeValue('accentR1', 'accentR1');
   const cardsRef = React.useRef<HTMLDivElement | null>(null);
   const exerciseHeadlineTextBox = React.useRef<HTMLDivElement | null>(null);
@@ -30,108 +30,110 @@ const ExerciseCard: React.FC = () => {
   });
 
   // eslint-disable-next-line consistent-return
-  React.useEffect(() => {
-    if (isAnimated) {
-      const interval = setInterval(() => {
-        setDisplayValue((prevState) => {
-          if (prevState === 0) {
-            return 24;
-          }
+  // React.useEffect(() => {
+  //   if (isAnimated) {
+  //     const interval = setInterval(() => {
+  //       setDisplayValue((prevState) => {
+  //         if (prevState === 0) {
+  //           return 24;
+  //         }
 
-          return prevState - 1;
-        });
+  //         return prevState - 1;
+  //       });
 
-        setCircularProgressValue((prevState) => {
-          if (prevState >= 100) {
-            return 0;
-          }
+  //       setCircularProgressValue((prevState) => {
+  //         if (prevState >= 100) {
+  //           return 0;
+  //         }
 
-          return prevState + 4.16666666667;
-        });
-      }, 1920);
+  //         return prevState + 4.16666666667;
+  //       });
+  //     }, 1920);
 
-      return () => clearInterval(interval);
-    }
-  }, [isAnimated]);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [isAnimated]);
 
-  return !isAnimated ? null : (
-    <Common.AnimationAlways animationType="move" xValue={50}>
-      {/* <Box left="-50%" top="-50%" w="1024px" zIndex="-5" h="768px" id="area" position="absolute" /> */}
-      <VStack
-        zIndex={99999}
-        w="234px"
-        ref={cardsRef}
-        h="294px"
-        borderRadius="24px"
-        backdropFilter="blur(60px)"
-        background="rgba(0, 2, 10, 0.4)"
-        rowGap="25px"
-        justifyContent="flex-start"
-      >
-        <Box
-          background="linear-gradient(90deg, #F04153 0%, rgba(240, 65, 83, 0) 100%)"
-          padding="4px"
-          borderRadius="24px 24px 0px 0"
-          w="full"
-          id="exercise-card-header"
-          textAlign="center"
-          justifyContent="center"
-          ref={exerciseHeadlineTextBox}
-        >
-          <Text
-            fontSize="14.61px"
-            color="rgba(255, 255, 255, 0.8)"
-            fontWeight={700}
-            lineHeight="135%"
-          >
-            {t(Keys.impaktGamesHero.excercise)}
-          </Text>
-        </Box>
-        <HStack
-          ref={exerciseNameBox}
-          columnGap="10px"
-          mt="0 !important"
-          id="exercise-card-activity-description"
-        >
-          <I.AccelerationIcon />
-          <Text color="#FFFFFF" textStyle="normal5">
-            {t(Keys.impaktGamesHero.squats)}
-          </Text>
-        </HStack>
-        <Box
-          ref={exerciseProgressBox}
-          position="relative"
-          mt="0 !important"
-          id="exercise-cardprogress-bar-box"
-        >
-          <Box position="relative">
-            <CircularProgress
-              w="100%"
-              h="100%"
-              size="150px"
-              thickness="9.5"
-              trackColor={accentRedtextColor}
-              color="rgba(0,0,0,0.5)"
-              value={circularProgressValue}
-            >
-              <CircularProgressLabel
-                letterSpacing="1px"
-                fontWeight={500}
-                lineHeight="100%"
-                fontSize="56px"
-                color="#FFFFFF"
-              >
-                {displayValue}
-              </CircularProgressLabel>
-            </CircularProgress>
-          </Box>{' '}
-          <Box position="absolute" left="2px" top="2.4">
-            <I.SegmentedProgress />
-          </Box>
-        </Box>{' '}
-      </VStack>{' '}
-    </Common.AnimationAlways>
-  );
+  // !isAnimated ?
+  return null;
+  // : (
+  //   <Common.AnimationAlways animationType="move" xValue={50}>
+  //     {/* <Box left="-50%" top="-50%" w="1024px" zIndex="-5" h="768px" id="area" position="absolute" /> */}
+  //     <VStack
+  //       zIndex={99999}
+  //       w="234px"
+  //       ref={cardsRef}
+  //       h="294px"
+  //       borderRadius="24px"
+  //       backdropFilter="blur(60px)"
+  //       background="rgba(0, 2, 10, 0.4)"
+  //       rowGap="25px"
+  //       justifyContent="flex-start"
+  //     >
+  //       <Box
+  //         background="linear-gradient(90deg, #F04153 0%, rgba(240, 65, 83, 0) 100%)"
+  //         padding="4px"
+  //         borderRadius="24px 24px 0px 0"
+  //         w="full"
+  //         id="exercise-card-header"
+  //         textAlign="center"
+  //         justifyContent="center"
+  //         ref={exerciseHeadlineTextBox}
+  //       >
+  //         <Text
+  //           fontSize="14.61px"
+  //           color="rgba(255, 255, 255, 0.8)"
+  //           fontWeight={700}
+  //           lineHeight="135%"
+  //         >
+  //           {t(Keys.impaktGamesHero.excercise)}
+  //         </Text>
+  //       </Box>
+  //       <HStack
+  //         ref={exerciseNameBox}
+  //         columnGap="10px"
+  //         mt="0 !important"
+  //         id="exercise-card-activity-description"
+  //       >
+  //         <I.AccelerationIcon />
+  //         <Text color="#FFFFFF" textStyle="normal5">
+  //           {t(Keys.impaktGamesHero.squats)}
+  //         </Text>
+  //       </HStack>
+  //       <Box
+  //         ref={exerciseProgressBox}
+  //         position="relative"
+  //         mt="0 !important"
+  //         id="exercise-cardprogress-bar-box"
+  //       >
+  //         <Box position="relative">
+  //           <CircularProgress
+  //             w="100%"
+  //             h="100%"
+  //             size="150px"
+  //             thickness="9.5"
+  //             trackColor={accentRedtextColor}
+  //             color="rgba(0,0,0,0.5)"
+  //             value={circularProgressValue}
+  //           >
+  //             <CircularProgressLabel
+  //               letterSpacing="1px"
+  //               fontWeight={500}
+  //               lineHeight="100%"
+  //               fontSize="56px"
+  //               color="#FFFFFF"
+  //             >
+  //               {displayValue}
+  //             </CircularProgressLabel>
+  //           </CircularProgress>
+  //         </Box>{' '}
+  //         <Box position="absolute" left="2px" top="2.4">
+  //           <I.SegmentedProgress />
+  //         </Box>
+  //       </Box>{' '}
+  //     </VStack>{' '}
+  //   </Common.AnimationAlways>
+  // );
 };
 
 export default ExerciseCard;
