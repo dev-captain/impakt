@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { Box, Text } from '@chakra-ui/react';
 import React, { memo, useRef, useState } from 'react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
@@ -27,8 +26,10 @@ const VideoDesktop: React.FC = () => {
   };
 
   const endVideo = () => {
-    if (!videoBoxRef.current) return;
-    window.scrollTo(0, videoBoxRef.current.offsetHeight);
+    setTimeout(() => {
+      if (!videoBoxRef.current) return;
+      window.scrollTo(0, videoBoxRef.current.offsetHeight);
+    }, 500);
   };
 
   return (
