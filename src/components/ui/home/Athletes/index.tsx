@@ -12,52 +12,16 @@ import { useNavigate } from 'react-router-dom';
 import { C, Common } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import Slider from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import TeamCard from './TeamCard';
 
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  autoplay: true,
-  autoplaySpeed: 2000,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1280,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: true,
-        autoplaySpeed: 2000,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: true,
-        autoplaySpeed: 2000,
-      },
-    },
-  ],
-};
-
 const Athletes = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const { t } = useTranslation().i18n;
-  let Team = useState<object[]>();
-  Team = t('athletes.team', { returnObjects: true });
+  const Team = t('athletes.team', { returnObjects: true }) as object[];
+
   const navigate = useNavigate();
 
   return (
@@ -122,6 +86,8 @@ const Athletes = () => {
                       key={advisor.name}
                       w="full"
                       height="100%"
+                      maxW="350px"
+                      maxH="560px"
                       p="42px 24px 24px"
                       align="center"
                       transitionDuration="150ms"
@@ -172,5 +138,43 @@ const Athletes = () => {
     </C.HeroLayout>
   );
 };
+
+const settings = {
+  className: '',
+  dots: false,
+  infinite: true,
+  speed: 0,
+  autoplay: false,
+  autoplaySpeed: 2000,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1280,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      },
+    },
+  ],
+} as Settings;
 
 export default Athletes;

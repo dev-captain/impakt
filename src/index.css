@@ -104,8 +104,20 @@ code {
   visibility: visible !important;
   transition: all 0.5s;
 }
-.slick-list {margin: 0 -20px;}
-.slick-slide>div {padding: 0 20px;}
+.slick-list {
+  margin: 0 -20px;
+}
+.slick-slide > div {
+  padding: 0 20px;
+  width: 350px;
+  height: 560px;
+}
+@media screen and (min-width: 1280px) {
+  .slick-slide > div {
+    padding: 0 20px;
+  }
+}
+
 /* .menuSidebar > div {
   width: calc(100% - 50px);
 } */

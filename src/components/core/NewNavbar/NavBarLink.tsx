@@ -41,20 +41,20 @@ const NavbarLink = ({ IsHeader }: Props) => {
       display="flex"
       gap="20px"
     >
-      <NavbarLinkItem
+      {/* <NavbarLinkItem
         href="/"
         title={t(Keys.navbar.impaktFitness)}
         isActive={path.path === '/'}
         color={activeColor || textColor}
         passiveColor={passiveColor}
-      />
-      <NavbarLinkItem
+      /> */}
+      {/* <NavbarLinkItem
         href="/events"
         onClose={onClose}
         passiveColor={passiveColor}
         title={t(Keys.navbar.events)}
         isActive={path.path === 'events'}
-      />
+      /> */}
       <NavbarLinkItem
         href="/contact"
         onClose={onClose}

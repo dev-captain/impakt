@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Text, VStack, useColorModeValue, Box } from '@chakra-ui/react';
+import { Text, VStack, useColorModeValue, Box, HStack } from '@chakra-ui/react';
 import { C, Common } from 'components';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import Card from './Card';
 
 const ImpaktTeam = () => {
+  const navigate = useNavigate();
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const { t } = useTranslation().i18n;
   let leadership = useState<object[]>();
@@ -73,12 +75,19 @@ const ImpaktTeam = () => {
             </VStack>
           </VStack>
         </VStack>
-        <Box width="100%" padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}>
-          <Box width="100%" display="flex" justifyContent="center" flexDirection="column">
+        <Box display="flex" width="100%" padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}>
+          <Box
+            width="100%"
+            maxW="1544px"
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+          >
             <Box
               width="100%"
               display="flex"
               flexWrap="wrap"
+              maxW="1911px"
               gap={{ md: '40px', base: '20px' }}
               alignItems="flex-end"
               justifyContent="center"
@@ -113,6 +122,7 @@ const ImpaktTeam = () => {
           mt="50px !important"
         >
           <Box
+            maxW="1544px"
             width="100%"
             alignItems="flex-end"
             display="flex"
@@ -188,7 +198,7 @@ const ImpaktTeam = () => {
           gap="8px"
           padding="10px 14px"
           _hover={{ bg: '#000', color: '#fff' }}
-          disabled
+          onClick={() => navigate('/register')}
         >
           Join Now
         </Common.ImpaktButton>

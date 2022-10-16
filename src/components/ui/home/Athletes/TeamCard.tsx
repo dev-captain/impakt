@@ -4,7 +4,7 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
   return (
     <VStack>
       <VStack pos="relative" zIndex={1}>
-        <Box role="group" maxW="330px" w="full" boxShadow="sm" rounded="lg">
+        <Box maxW="330px" w="full" boxShadow="sm" rounded="lg">
           <Box>
             <Image
               rounded="lg"
@@ -45,7 +45,7 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
         mt="0px !important"
         mb="10px !important"
       >
-        <Box position="relative" data-group>
+        <Box position="relative">
           <Box
             className="flipWebkit"
             borderRadius="8px"
@@ -62,14 +62,6 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
           >
             {data.map((d: any) => (
               <Box display="flex" height="72px">
-                <Box
-                  backgroundColor="#4E6070"
-                  width="5px"
-                  height="5px"
-                  marginRight="10px"
-                  borderRadius="50%"
-                  mt="8px"
-                />
                 <Text
                   textStyle="semiBold5"
                   margin="0 !important"
