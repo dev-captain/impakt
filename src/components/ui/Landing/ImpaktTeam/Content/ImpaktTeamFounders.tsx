@@ -9,13 +9,18 @@ const ImpaktTeamFounders: React.FC = () => {
   const leadership = t('leadershipData.data', { returnObjects: true }) as object[];
 
   return (
-    <Box display="flex" width="100%" padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}>
+    <Box
+      display="flex"
+      justifyContent="center"
+      width="100%"
+      padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}
+    >
       <Box width="100%" maxW="1544px" display="flex" justifyContent="center" flexDirection="column">
         <Box
           width="100%"
           display="flex"
           flexWrap="wrap"
-          maxW="1911px"
+          maxW="1544px"
           gap={{ md: '40px', base: '20px' }}
           alignItems="flex-end"
           justifyContent="center"
