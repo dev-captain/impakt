@@ -95,12 +95,12 @@ const ImpaktTeam = () => {
               <Text
                 width="100%"
                 color="#35485a"
-                fontSize="26px"
+                fontSize="36px"
                 fontWeight="700"
                 textTransform="uppercase"
                 textAlign="center"
               >
-                Angels
+                Founders
               </Text>
               {leadership.map((d: any) => (
                 <Box width={{ lg: '31%', md: '30%', base: '100%' }}>
@@ -132,7 +132,7 @@ const ImpaktTeam = () => {
             <Text
               width="100%"
               color="#35485a"
-              fontSize="26px"
+              fontSize="36px"
               fontWeight="700"
               textTransform="uppercase"
               textAlign="center"
