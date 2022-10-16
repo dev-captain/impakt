@@ -40,7 +40,7 @@ const HomePage = () => {
         left="0"
         height="23%"
       />
-      <S.HeroSection />
+      {/* <S.HeroSection /> */}
 
       {/* {(isAnimated || isLessThan1280) && (
         <>

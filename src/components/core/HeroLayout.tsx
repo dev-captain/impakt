@@ -14,6 +14,7 @@ export const HeroLayout: React.FC<{
   bgColor?: string;
   spacing?: number;
   showNavbar?: boolean;
+  showNavbar2?: boolean;
   addSpacer?: boolean;
   pos?: string;
   minH?: string;
@@ -43,6 +44,7 @@ export const HeroLayout: React.FC<{
   showNavbar = false,
   addSpacer = false,
   showFooterV2 = false,
+  showNavbar2 = false,
   backgroundSize = 'cover',
   backgroungRepeat,
   backgroundBlendMode,
@@ -51,11 +53,11 @@ export const HeroLayout: React.FC<{
   bgPosition,
 }) => {
   const backgroundColor = useColorModeValue('glass.900', 'glass.200');
-  const location = useLocation();
 
   return (
     <>
-      {showNavbar ? location.pathname === '/' ? <NewNavbar /> : <Navbar /> : ''}
+      {showNavbar && <Navbar />}
+      {showNavbar2 && <Navbar />}
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
         overflowY="visible"
