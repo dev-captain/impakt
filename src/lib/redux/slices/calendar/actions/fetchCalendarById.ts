@@ -25,7 +25,7 @@ const fetchCalendarById = createAsyncThunk(
 
       const calendarRes = await axios
         .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .get(`/api/calendar/calendar/${calendarId}`);
+        .get(`/api/v1/calendar/calendar/${calendarId}`);
 
       const calendarData = calendarRes.data as CalendarDtoV1;
       dispatch(delegateLoadingAccordingToCalendarType[type]);
