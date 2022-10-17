@@ -27,11 +27,24 @@ const HeroVideo: React.FC = () => {
     setTimeout(() => {
       if (!videoBoxRef.current) return;
       window.scrollTo(0, videoBoxRef.current.offsetHeight);
+      videoBoxRef.current.style.opacity = '0';
     }, 500);
+
+    setTimeout(() => {
+      if (!videoBoxRef.current) return;
+      videoBoxRef.current.style.display = 'none';
+    }, 1500);
   };
 
   return (
-    <Box id="hero-video-box" ref={videoBoxRef} maxH="100vh" position="relative">
+    <Box
+      bgColor="#F4F7F9 !important"
+      id="hero-video-box"
+      transition="all .2s linear"
+      ref={videoBoxRef}
+      maxH="100vh"
+      position="relative"
+    >
       <Box
         id="hero-video"
         as="video"
