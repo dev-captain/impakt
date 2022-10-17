@@ -3,7 +3,7 @@ import { Text, Box } from '@chakra-ui/react';
 
 interface CardProps {
   company: string;
-  title: string;
+  title?: string;
   fname: string;
   lname: string;
   post: string;
@@ -33,18 +33,26 @@ const Card: React.FC<CardProps> = ({ company, title, fname, lname, post }) => {
           </Text>{' '}
           {lname}
         </Text>
-        <Text
-          color="#728BA3"
-          fontWeight="500"
-          fontSize={{ lg: '18px', base: '16px' }}
-          lineHeight="100%"
-          mt="10px"
-        >
-          {title}{' '}
+        {title && (
+          <Text
+            color="#728BA3"
+            fontWeight="500"
+            fontSize={{ lg: '18px', base: '16px' }}
+            lineHeight="100%"
+            mt="10px"
+          >
+            {title}{' '}
+            <Text as="span" color="#1C1C28">
+              {company}
+            </Text>
+          </Text>
+        )}
+
+        {!title && (
           <Text as="span" color="#1C1C28">
             {company}
           </Text>
-        </Text>
+        )}
         <Text
           color="#1C1C2899"
           mt={{ lg: '16px', base: '8px' }}

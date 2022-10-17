@@ -37,13 +37,7 @@ const ImpaktTeamFounders: React.FC = () => {
           </Text>
           {leadership.map((d: any) => (
             <Box width={{ lg: '31%', md: '30%', base: '100%' }}>
-              <Card
-                company={d.company}
-                title={d.job}
-                fname={d.fname}
-                lname={d.lname}
-                post={d.post}
-              />
+              <Card company={d.company} fname={d.fname} lname={d.lname} post={d.post} />
             </Box>
           ))}
         </Box>
