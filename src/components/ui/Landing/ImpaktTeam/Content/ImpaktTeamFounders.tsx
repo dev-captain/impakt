@@ -13,7 +13,7 @@ const ImpaktTeamFounders: React.FC = () => {
       display="flex"
       justifyContent="center"
       width="100%"
-      padding={{ lgx: '0 188px', lg: '0 50px', base: '0 16px' }}
+      padding={{ lgx: '0 350px', lg: '0 50px', base: '0 16px' }}
     >
       <Box width="100%" maxW="1544px" display="flex" justifyContent="center" flexDirection="column">
         <Box
@@ -36,8 +36,14 @@ const ImpaktTeamFounders: React.FC = () => {
             Founders
           </Text>
           {leadership.map((d: any) => (
-            <Box width={{ lg: '31%', md: '30%', base: '100%' }}>
-              <Card company={d.company} fname={d.fname} lname={d.lname} post={d.post} />
+            <Box width={{ lg: '27%', md: '30%', base: '100%' }}>
+              <Card
+                company={d.company}
+                fname={d.fname}
+                lname={d.lname}
+                post={d.post}
+                image={d.img}
+              />
             </Box>
           ))}
         </Box>

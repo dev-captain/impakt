@@ -1,12 +1,12 @@
-import { Box, Text, Container, useMediaQuery } from '@chakra-ui/react';
-import { S, I } from 'components';
-import { useAppSelector } from 'hooks';
+import { Box, Container } from '@chakra-ui/react';
+// import { S, I } from 'components';
+// import { useAppSelector } from 'hooks';
 
 const HomePage = () => {
   // const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);
   // const isVideoLoaded = useAppSelector((state) => state.stateReducer.heroVideo.isLoaded);
 
-  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
+  // const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
 
   return (
     <Container spacing={0} p={0} minW="full" m={0} bgColor="">

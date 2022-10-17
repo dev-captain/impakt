@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch } from 'hooks';
 
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';

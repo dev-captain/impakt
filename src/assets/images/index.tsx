@@ -107,6 +107,7 @@ const Images = {
     photoMatt: require('./Photo_Matt.png'),
     photoUyen: require('./Photo_Uyen.png'),
     photoAaron: require('./Photo_Aaron.png'),
+    photoAaron2: require('./Photo_Aaron2.png'),
     photoLevi: require('./Photo_Levi.png'),
   },
   Privacy: {
@@ -116,6 +117,8 @@ const Images = {
   },
   home: {
     HomeImage: require('./HomeImage.png'),
+    hakim: require('./Hakim.png'),
+    wiston: require('./wiston.png'),
   },
 };
 

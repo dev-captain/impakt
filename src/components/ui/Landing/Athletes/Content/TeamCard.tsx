@@ -1,18 +1,17 @@
 import { Box, Image, Text, VStack } from '@chakra-ui/react';
-import LandingLine from '../../LandingLine';
 
 const TeamCard = ({ image, name, data }: { image: string; name: string; data: any }) => {
   return (
     <VStack>
       <VStack pos="relative" zIndex={1}>
-        <Box maxW="330px" w="full" boxShadow="sm" rounded="lg">
+        <Box maxW="330px" w="full" rounded="lg">
           <Box>
             <Image
               rounded="lg"
               objectFit="cover"
               src={image}
-              width={{ md: '189px', base: '130px' }}
-              height={{ md: '189px', base: '130px' }}
+              width={{ md: '221px', base: '130px' }}
+              height={{ md: '221px', base: '130px' }}
               boxSizing="border-box"
               borderRadius="50%"
             />
@@ -24,18 +23,17 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
         justify="center"
         mt="0 !important"
         fontWeight="600"
-        mb="10px !important"
-        height="120px"
+        // mb="10px !important"
+        // height="120px"
       >
         <Text
           align="center"
-          mt="20px"
-          fontSize={{ lg: '36px', base: '26px' }}
+          my="20px"
+          fontSize={{ lg: '31px', base: '26px' }}
           color="#1C1C28"
           lineHeight="100%"
         >
           {name}
-          <LandingLine dir="h" />
         </Text>
       </VStack>
       <VStack
@@ -54,7 +52,7 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
             style={{ backfaceVisibility: 'hidden' }}
             position="relative"
             zIndex="10"
-            padding="12px 16px 12px 16px"
+            // padding="12px 0px 12px 0px"
             box-sizing="border-box"
             transform="rotateX(0deg)"
             transitionDuration="0.2s"
@@ -62,7 +60,7 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
             mt="2px"
           >
             {data.map((d: any) => (
-              <Box display="flex" height="72px">
+              <Box display="flex" height="36px">
                 <Text
                   textStyle="semiBold5"
                   margin="0 !important"
@@ -70,9 +68,9 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
                   whiteSpace="pre-line"
                   dangerouslySetInnerHTML={{ __html: d }}
                   mt="20px"
-                  textAlign="start"
+                  textAlign="center"
                   fontSize={{ md: '16px', base: '14px' }}
-                  mb={{ md: '16px !important', base: '4px !impotant' }}
+                  // mb={{ md: '16px !important', base: '4px !impotant' }}
                 />
               </Box>
             ))}

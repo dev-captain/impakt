@@ -1,6 +1,8 @@
 import { Box } from '@chakra-ui/react';
 import React, { memo, useRef, useState } from 'react';
 
+// import { useAppSelector } from 'hooks';
+import Images from 'assets/images';
 import { Videos } from '../../../../data';
 import SoundsButton from './SoundsButton';
 import HeroVideoText from './HeroVideoText';

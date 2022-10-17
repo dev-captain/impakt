@@ -18,10 +18,9 @@ const AthletesSlider: React.FC = () => {
           <GridItem
             key={advisor.name}
             w="full"
-            height="100%"
             maxW="350px"
             maxH="560px"
-            p="42px 24px 24px"
+            p="24px 24px 24px"
             align="center"
             transitionDuration="150ms"
             justify="space-between"
@@ -45,8 +44,8 @@ const settings = {
   className: '',
   dots: false,
   infinite: true,
-  speed: 0,
-  autoplay: false,
+  speed: 500,
+  autoplay: true,
   autoplaySpeed: 2000,
   slidesToShow: 3,
   slidesToScroll: 1,

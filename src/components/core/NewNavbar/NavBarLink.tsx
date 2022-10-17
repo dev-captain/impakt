@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
-import { HStack, useColorMode, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import { HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import NavbarLinkItem from './NavbarLinkItem';
 
@@ -11,15 +11,15 @@ type Props = {
 };
 
 const NavbarLink = ({ IsHeader }: Props) => {
-  const { colorMode } = useColorMode();
+  // const { colorMode } = useColorMode();
   const location = useLocation();
-  const isLight = colorMode === 'light';
+  // const isLight = colorMode === 'light';
   const { t } = useTranslation(`default`).i18n;
   const { onClose } = useDisclosure();
   const path = parsePathname(location.pathname);
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
-  const textColor = isLight ? 'glass.100' : 'glass.700';
-  const activeColor = isLight ? 'glass.100' : 'glass.900';
+  // const textColor = isLight ? 'glass.100' : 'glass.700';
+  // const activeColor = isLight ? 'glass.100' : 'glass.900';
   const passiveColor = location.pathname.includes('dashboard') ? 'fitnessGray' : '#545454';
   // useEffect(() => {
   //   if (path.path === 'dashboard') {
