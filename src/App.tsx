@@ -10,7 +10,6 @@ import {
   Event,
   Contact,
   Onboarding,
-  LeaderBoard,
   DownloadSCreen,
   ChangePassword,
   RecoveryPassword,
@@ -67,16 +66,7 @@ const App = () => {
 
       <Route path="/onboarding" element={<Onboarding />} />
 
-      <Route
-        path="/contact"
-        element={
-          <Common.ScrollToTop>
-            <Contact />
-          </Common.ScrollToTop>
-        }
-      />
-      {/* <Route path="/contact" element={<Contact />} /> */}
-      <Route path="/leader-board" element={<LeaderBoard />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/download" element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />

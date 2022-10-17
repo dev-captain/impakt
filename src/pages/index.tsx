@@ -5,7 +5,6 @@ export { default as NotFound } from './NotFound';
 export { default as Event } from './Event';
 export { default as Contact } from './Contact';
 export { default as Onboarding } from './Onboarding';
-export { default as LeaderBoard } from './LeaderBoard';
 export { default as DownloadSCreen } from './Download';
 export { default as TermsOfUse } from './TermsOfUse';
 export { default as RecoveryPassword } from './Password/RecoveryPassword';
