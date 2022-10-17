@@ -6,11 +6,10 @@ interface CardProps {
   title?: string;
   fname: string;
   lname: string;
-  post: string;
   image: any;
 }
 
-const Card: React.FC<CardProps> = ({ company, title, fname, lname, post, image }) => {
+const Card: React.FC<CardProps> = ({ company, title, fname, lname, image }) => {
   return (
     <Box
       padding={{ lg: '26px 0', base: '20px' }}

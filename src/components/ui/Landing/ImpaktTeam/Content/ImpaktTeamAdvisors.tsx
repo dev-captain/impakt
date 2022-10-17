@@ -34,14 +34,7 @@ const ImpaktTeamAdvisors: React.FC = () => {
         </Text>
         {advisorTeam.map((d: any) => (
           <Box width={{ lg: '27%', md: '30%', base: '100%' }}>
-            <Card
-              company={d.company}
-              title={d.job}
-              fname={d.fname}
-              lname={d.lname}
-              post={d.post}
-              image={d.img}
-            />
+            <Card company={d.company} title={d.job} fname={d.fname} lname={d.lname} image={d.img} />
           </Box>
         ))}
       </Box>
