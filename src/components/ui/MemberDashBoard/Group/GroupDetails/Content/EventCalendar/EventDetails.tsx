@@ -109,11 +109,25 @@ const EventDetails: React.FC = () => {
           <Box w="34px">
             <I.ArrowIcon w="15px" height="15px" color="#728BA3" />
           </Box>
-          <a href={deepLink}>
-            <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
-              Click to join event
-            </Text>
-          </a>
+          {/* <j
+            onClick={(e) => {
+              e.preventDefault();
+              window.location = deepLink as any;
+            }}
+            href={deepLink}
+          > */}
+          <Text
+            onClick={() => {
+              console.log('hey');
+              window.location = deepLink as any;
+            }}
+            color="#5C7FFF"
+            fontSize="16px"
+            fontWeight="500"
+          >
+            Click to join event
+          </Text>
+          {/* </j> */}
         </Box>
         <Box display="flex" alignItems="center">
           <Box w="34px">

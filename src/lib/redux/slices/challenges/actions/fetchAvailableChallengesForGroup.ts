@@ -28,6 +28,7 @@ const fetchAvailableChallengesForGroup = createAsyncThunk(
         undefined,
         undefined,
         undefined,
+        undefined,
         true,
         true,
         undefined,
