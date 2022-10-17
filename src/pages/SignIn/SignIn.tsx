@@ -1,4 +1,4 @@
-import { useColorModeValue, VStack, Spinner, useToast } from '@chakra-ui/react';
+import { useColorModeValue, Text, VStack, Spinner, useToast } from '@chakra-ui/react';
 import { S, C } from 'components';
 import { useEffect, useCallback } from 'react';
 import Images from 'assets/images';
@@ -7,6 +7,7 @@ import { useAppSelector, useAppDispatch } from 'hooks';
 
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
+import { deepLinkToApp } from '../../data';
 
 const SignIn = () => {
   const isThereNextParam = useLocation().search.includes('next');
@@ -22,6 +23,7 @@ const SignIn = () => {
     (state) => state.memberAuth.requestAccessTokenAttemptCount,
   );
 
+  const deepLink = deepLinkToApp(1, 4);
   const dispatch = useAppDispatch();
 
   const requestAccessTokenAsync = useCallback(async () => {
@@ -108,6 +110,30 @@ const SignIn = () => {
         {member && queryString.DiscourseConnect && <Spinner size="xl" />}
         {!member && <S.SignIn />}
       </VStack>
+
+      <a
+        onClick={(e) => {
+          e.preventDefault();
+          // eslint-disable-next-line func-names
+          const timeout = window.setTimeout(function () {
+            navigate('/download');
+            toast({
+              title: 'Error',
+              description: 'You have to install this app on your device',
+              isClosable: true,
+              duration: 8000,
+              status: 'error',
+            });
+          }, 1000);
+
+          window.location = deepLink as any;
+        }}
+        href={deepLink}
+      >
+        <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
+          Click to join event
+        </Text>
+      </a>
     </C.HeroLayout>
   );
 };

@@ -1,18 +1,20 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useToast } from '@chakra-ui/react';
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 import { useAppSelector } from '../../../../../../../hooks';
 import { deepLinkToApp } from '../../../../../../../data';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
+  const navigate = useNavigate();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const isAdmin = activeGroup?.role === GroupRole.Creator;
+  const toast = useToast();
 
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
     useEventCalendarContext();
@@ -109,25 +111,29 @@ const EventDetails: React.FC = () => {
           <Box w="34px">
             <I.ArrowIcon w="15px" height="15px" color="#728BA3" />
           </Box>
-          {/* <j
+          <a
             onClick={(e) => {
               e.preventDefault();
+              // eslint-disable-next-line func-names
+              const timeout = window.setTimeout(function () {
+                navigate('/download');
+                toast({
+                  title: 'Error',
+                  description: 'You have to install this app on your device',
+                  isClosable: true,
+                  duration: 8000,
+                  status: 'error',
+                });
+              }, 1000);
+
               window.location = deepLink as any;
             }}
             href={deepLink}
-          > */}
-          <Text
-            onClick={() => {
-              console.log('hey');
-              window.location = deepLink as any;
-            }}
-            color="#5C7FFF"
-            fontSize="16px"
-            fontWeight="500"
           >
-            Click to join event
-          </Text>
-          {/* </j> */}
+            <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
+              Click to join event
+            </Text>
+          </a>
         </Box>
         <Box display="flex" alignItems="center">
           <Box w="34px">
