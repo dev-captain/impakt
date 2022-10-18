@@ -394,7 +394,7 @@ export const journeyData = [
   {
     img: Images.Journey.Journey,
     title: 'We need variety',
-    description: 'Choose from 20+ exercises. More added constantly.',
+    description: 'Choose from 40+ exercises. More added constantly.',
   },
   {
     img: Images.Journey.Journey1,
