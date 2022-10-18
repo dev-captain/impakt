@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { Box, Text, CircularProgress, HStack, useToast } from '@chakra-ui/react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Content from './Content/Content';
@@ -12,19 +12,39 @@ import { CalendarType } from '../../../../../lib/redux/slices/calendar/types';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
 import { cleanActiveGroup } from '../../../../../lib/redux/slices/groups/groupsSlice';
 import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
+import { deepLinkToApp } from '../../../../../data';
 
 const GroupDetails: React.FC = () => {
   // const [show, setShow] = React.useState<null | string>(null);
   const [isNotFound, setIsNotFound] = React.useState<string>('');
   const groupParam = useParams();
+  const [searchParams] = useSearchParams();
+  const joinFlag = searchParams.get('join') ?? false;
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
+  const navigate = useNavigate();
+  const toast = useToast();
 
   const getGroupDetail = async () => {
     if (groupParam?.id) {
       let group: any;
       try {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
+        if (joinFlag && groupParam.eventId) {
+          const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
+          const timeout = window.setTimeout(function () {
+            navigate('/download');
+            toast({
+              title: 'Error',
+              description: 'You have to install this app on your device',
+              isClosable: true,
+              duration: 8000,
+              status: 'error',
+            });
+          }, 1000);
+
+          window.location = deepLink as any;
+        }
       } catch (e: any) {
         if (e.response.status === 404)
           setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
