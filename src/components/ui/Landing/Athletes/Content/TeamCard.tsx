@@ -2,7 +2,7 @@ import { Box, Image, Text, VStack } from '@chakra-ui/react';
 
 const TeamCard = ({ image, name, data }: { image: string; name: string; data: any }) => {
   return (
-    <VStack>
+    <VStack id="team-card" w="full">
       <VStack pos="relative" zIndex={1}>
         <Box maxW="330px" w="full" rounded="lg">
           <Box>

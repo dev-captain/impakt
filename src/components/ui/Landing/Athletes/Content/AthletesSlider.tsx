@@ -28,7 +28,7 @@ const AthletesSlider: React.FC = () => {
             position="relative"
             borderRadius="20px"
             backdropFilter="blur(40px)"
-            boxShadow="0px 8px 15px 3px rgba(0, 0, 0, 0.05)"
+            boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.5)"
           >
             <HStack w="full" align="center" justify="center">
               <TeamCard {...advisor} />
@@ -45,7 +45,7 @@ const settings = {
   dots: false,
   infinite: true,
   speed: 1000,
-  autoplay: true,
+  autoplay: false,
   autoplaySpeed: 1500,
   slidesToShow: 3,
   slidesToScroll: 1,
