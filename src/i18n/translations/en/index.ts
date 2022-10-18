@@ -26,7 +26,7 @@ export default {
       'Fitness experts, health specialists, and pro athletes. They are our Impakt ICONs and we are honored to have them on board our journey!',
     impaktTeamTitle: 'The Impakt team',
     impaktTeamDescription:
-      'We`re proud to have each and every member on board. A perfect mix of cultures, experiences and abilities.',
+      "We' re proud  to have each and every member on board. A perfect mix of cultures, experiences and abilities.",
     privacyTitle: 'Privacy.',
     privacyTitle1: 'I choose how',
     privacyTitle2: 'the world sees me.',
