@@ -49,7 +49,7 @@ const ImpaktTeamFounders: React.FC = () => {
               position="relative"
               borderRadius="20px"
               backdropFilter="blur(40px)"
-              boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.5)"
+              boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
             >
               <HStack w="full" align="center" justify="center">
                 <Card company={d.company} fname={d.fname} lname={d.lname} image={d.img} />

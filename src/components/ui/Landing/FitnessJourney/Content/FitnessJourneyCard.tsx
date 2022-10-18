@@ -16,7 +16,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ img, title, des
       borderRadius="14px"
       flexDirection="column"
       mt={{ md: '0', base: '20px' }}
-      boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.5)"
+      boxShadow="0px 8px 15px -4px rgba(0, 0, 0, 0.8)"
       backdropFilter="blur(40px)"
     >
       <Image
