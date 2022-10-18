@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, Box, Image } from '@chakra-ui/react';
+import { Text, Box, Image, VStack } from '@chakra-ui/react';
 
 interface CardProps {
   company: string;
@@ -11,26 +11,22 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ company, title, fname, lname, image }) => {
   return (
-    <Box
-      padding={{ lg: '26px 0', base: '20px' }}
-      backgroundColor="#fff"
-      width="100%"
-      maxWidth={{ md: '310px', base: 'initial' }}
-      textAlign="center"
-      borderRadius="30px"
-    >
-      <Box>
-        <Image
-          rounded="lg"
-          objectFit="cover"
-          src={image}
-          width={{ md: '150px', base: '130px' }}
-          height={{ md: '150px', base: '130px' }}
-          boxSizing="border-box"
-          margin="auto"
-          borderRadius="50%"
-        />
-      </Box>
+    <VStack>
+      <VStack pos="relative" zIndex={1}>
+        <Box maxW="330px" w="full" rounded="lg">
+          <Box>
+            <Image
+              rounded="lg"
+              objectFit="cover"
+              src={image}
+              width={{ md: '221px', base: '130px' }}
+              height={{ md: '221px', base: '130px' }}
+              boxSizing="border-box"
+              borderRadius="50%"
+            />
+          </Box>
+        </Box>
+      </VStack>
       <Box>
         <Text
           color="#728BA3"
@@ -65,7 +61,7 @@ const Card: React.FC<CardProps> = ({ company, title, fname, lname, image }) => {
           </Text>
         )}
       </Box>
-    </Box>
+    </VStack>
   );
 };
 

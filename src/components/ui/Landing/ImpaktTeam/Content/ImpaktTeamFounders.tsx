@@ -1,4 +1,4 @@
-import { Text, Box } from '@chakra-ui/react';
+import { Text, Box, GridItem, HStack, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from '../Card';
@@ -9,40 +9,56 @@ const ImpaktTeamFounders: React.FC = () => {
   const leadership = t('leadershipData.data', { returnObjects: true }) as object[];
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      width="100%"
-      padding={{ lgx: '0 350px', lg: '0 50px', base: '0 16px' }}
-    >
-      <Box width="100%" maxW="1544px" display="flex" justifyContent="center" flexDirection="column">
-        <Box
+    <VStack width="100%" mt="50px !important" padding={{ base: '1em', md: '0' }} k>
+      <Box
+        width="100%"
+        display="flex"
+        justifyContent="center"
+        flexWrap="wrap"
+        gap={{ md: '40px', base: '20px' }}
+      >
+        <Text
           width="100%"
-          display="flex"
-          flexWrap="wrap"
-          maxW="1544px"
-          gap={{ md: '40px', base: '20px' }}
-          alignItems="flex-end"
-          justifyContent="center"
+          color="#35485a"
+          fontSize="36px"
+          fontWeight="700"
+          textTransform="uppercase"
+          textAlign="center"
         >
-          <Text
-            width="100%"
-            color="#35485a"
-            fontSize="36px"
-            fontWeight="700"
-            textTransform="uppercase"
-            textAlign="center"
-          >
-            Founders
-          </Text>
+          Founders
+        </Text>
+        <HStack
+          w="full"
+          justifyContent={{ base: 'center', lg: 'center' }}
+          flexWrap="wrap"
+          rowGap="50px"
+          columnGap="50px"
+        >
           {leadership.map((d: any) => (
-            <Box width={{ lg: '27%', md: '30%', base: '100%' }}>
-              <Card company={d.company} fname={d.fname} lname={d.lname} image={d.img} />
-            </Box>
+            <GridItem
+              marginLeft="0 !important"
+              key={d.name}
+              w="full"
+              maxW="318px"
+              maxH="560px"
+              p="24px 24px 24px"
+              align="center"
+              transitionDuration="150ms"
+              justify="space-between"
+              bgColor="#fff"
+              position="relative"
+              borderRadius="20px"
+              backdropFilter="blur(40px)"
+              boxShadow="0px 8px 15px 3px rgba(0, 0, 0, 0.05)"
+            >
+              <HStack w="full" align="center" justify="center">
+                <Card company={d.company} fname={d.fname} lname={d.lname} image={d.img} />
+              </HStack>
+            </GridItem>
           ))}
-        </Box>
+        </HStack>
       </Box>
-    </Box>
+    </VStack>
   );
 };
 
