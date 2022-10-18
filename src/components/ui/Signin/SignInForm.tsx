@@ -1,4 +1,4 @@
-import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
+import { Box, FormControl, ScaleFade, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { LoginReq } from '@impakt-dev/api-client';
@@ -42,13 +42,26 @@ const SignInForm: React.FC = () => {
 
     await dispatch(signInMember(signInPayload)).unwrap();
 
-    toast({
-      title: 'Success',
-      description: 'Welcome !',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
+    <ScaleFade initialScale={1}>
+      {toast({
+        title: 'Success',
+        description: 'Welcome !',
+        isClosable: true,
+        status: 'success',
+        duration: 8000,
+        variant: 'glass',
+        position: 'top-right',
+        containerStyle: {
+          background: 'rgba(255, 255, 255, 0.5)',
+          border: '1px solid #fff',
+          boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
+          backdropFilter: 'blur(15px)',
+          color: '#000',
+          borderRadius: '16px',
+          width: '360px',
+        },
+      })}
+    </ScaleFade>;
   };
 
   const inputItems: InputGroupPropsI[] = [

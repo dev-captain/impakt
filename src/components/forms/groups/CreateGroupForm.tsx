@@ -33,7 +33,17 @@ const CreateGroupForm: React.FC = ({ children }) => {
       description: 'Group created successfully.',
       isClosable: true,
       duration: 8000,
-      status: 'success',
+      variant: 'glass',
+      position: 'top-right',
+      containerStyle: {
+        background: 'rgba(255, 255, 255, 0.5)',
+        border: '1px solid #fff',
+        boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
+        backdropFilter: 'blur(15px)',
+        color: '#000',
+        borderRadius: '16px',
+        width: '360px',
+      },
     });
     navigate('/dashboard/groups');
   };

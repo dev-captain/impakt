@@ -1,4 +1,4 @@
-import { VStack, Collapse, useToast, HStack, Box, Link, Button } from '@chakra-ui/react';
+import { VStack, Collapse, useToast, HStack, Box, Link, Button, ScaleFade } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
@@ -105,13 +105,26 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             href="#"
             onClose={async () => {
               await dispatch(signOutMember()).unwrap();
-              toast({
-                title: 'Success',
-                description: 'You have successfully logged out!',
-                isClosable: true,
-                duration: 8000,
-                status: 'success',
-              });
+              <ScaleFade initialScale={1}>
+                {toast({
+                  title: 'Success',
+                  description: 'You have successfully logged out!',
+                  isClosable: true,
+                  duration: 8000,
+                  status: 'success',
+                  variant: 'glass',
+                  position: 'top-right',
+                  containerStyle: {
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
+                    backdropFilter: 'blur(40px)',
+                    color: '#fff',
+                    borderRadius: '16px',
+                    width: '360px',
+                  },
+                })}
+              </ScaleFade>;
               onClose();
             }}
             title={t(Keys.navbar.signOut)}

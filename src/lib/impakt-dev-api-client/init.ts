@@ -21,6 +21,7 @@ import {
   PostsApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
+import { VrGlass } from 'components/icons';
 import axios from '../axios/api';
 import theme from '../../theme';
 
@@ -75,18 +76,42 @@ export const configuration = createConfiguration({
                     if (Array.isArray(error.message)) {
                       error.message.forEach((message) => {
                         toast({
+                          id: 'error-msg',
                           description: message,
                           status: 'error',
-                          duration: 4000,
+                          duration: 4000000,
                           isClosable: true,
+                          position: 'top-right',
+                          variant: 'glass',
+                          containerStyle: {
+                            background: 'rgba(255, 255, 255, 0.1)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
+                            backdropFilter: 'blur(40px)',
+                            color: '#fff',
+                            borderRadius: '16px',
+                            width: '360px',
+                          },
                         });
                       });
                     } else {
                       toast({
+                        id: 'error-msg',
                         description: error.message,
                         status: 'error',
-                        duration: 4000,
+                        duration: 4000000,
                         isClosable: true,
+                        position: 'top-right',
+                        variant: 'glass',
+                        containerStyle: {
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)',
+                          boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
+                          backdropFilter: 'blur(40px)',
+                          color: '#fff',
+                          borderRadius: '16px',
+                          width: '360px',
+                        },
                       });
                     }
                   }

@@ -1,4 +1,4 @@
-import { Box, HStack, VStack, Link, Text } from '@chakra-ui/react';
+import { Box, HStack, VStack, Link, Text, Tooltip } from '@chakra-ui/react';
 import MemberDashboardCard from 'components/ui/MemberDashBoard/MemberDashBoardCard';
 import * as React from 'react';
 
@@ -45,7 +45,28 @@ const InfoSection: React.FC<InfoSectionPropsI> = ({ tooltipIcon, tooltipText, to
             position="relative"
             sx={{ svg: { minW: '20px', opacity: 0.5 } }}
           >
-            <Link href={tooltipLink}>{tooltipIcon}</Link>
+            {/* <Link href={tooltipLink}>{tooltipIcon}</Link> */}
+            <Tooltip
+              bg="#FFFFFF"
+              borderRadius="16px"
+              width="900px"
+              boxShadow="0px 4px 6px -2px rgba(0, 0, 0, 0.12)"
+              hasArrow
+              label={
+                <Text
+                  color="#4E6070"
+                  padding="5px"
+                  dangerouslySetInnerHTML={{
+                    __html: tooltipText,
+                  }}
+                />
+              }
+              mt="3"
+              placement="top"
+              closeOnClick={false}
+            >
+              <Link href={tooltipLink}>{tooltipIcon}</Link>
+            </Tooltip>
             <Text
               textStyle="semiBold5"
               margin="0px 10px"

@@ -34,7 +34,18 @@ const PermissionTab: React.FC = () => {
         description: 'Group Status Changed successfully.',
         isClosable: true,
         duration: 8000,
+        variant: 'glass',
         status: 'success',
+        position: 'top-right',
+        containerStyle: {
+          background: 'rgba(255, 255, 255, 0.5)',
+          border: '1px solid #fff',
+          boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
+          backdropFilter: 'blur(15px)',
+          color: '#000',
+          borderRadius: '16px',
+          width: '360px',
+        },
       });
     } catch (e: any) {
       toast({
@@ -43,6 +54,7 @@ const PermissionTab: React.FC = () => {
         isClosable: true,
         duration: 8000,
         status: 'error',
+        position: 'top-right',
       });
     }
     navigate('/dashboard/groups');
