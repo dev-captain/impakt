@@ -14,7 +14,7 @@ export default {
     squats: 'SQUATS',
     body: 'Fitness is for all.',
     body1:
-      'The Impakt App your phone or your webcam. That`s all you need to enter the Impakt world. No expensive equipment, no payments required. Our body motion tracking technology takes care of everything.',
+      "The Impakt App, your phone, or your webcam. That's all you need to enter the Impakt world. No expensive equipment, no payment required. Our body motion tracking technology takes care of everything.",
     evolving: 'I am always evolving.',
     evolvingMsg:
       'Faster, stronger, healthier. All these benefits will be reflected by our avatars. Obtainable from challenges or acquirable via Koin, our avatar cosmetics reflect our fitness journey.',
