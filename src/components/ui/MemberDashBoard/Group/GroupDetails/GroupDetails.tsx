@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, CircularProgress, HStack, useToast } from '@chakra-ui/react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Content from './Content/Content';
@@ -18,8 +18,7 @@ const GroupDetails: React.FC = () => {
   // const [show, setShow] = React.useState<null | string>(null);
   const [isNotFound, setIsNotFound] = React.useState<string>('');
   const groupParam = useParams();
-  const [searchParams] = useSearchParams();
-  const joinFlag = searchParams.get('join') ?? false;
+  const isJoin = groupParam.id && groupParam.eventId && useLocation().pathname.includes('join');
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
   const navigate = useNavigate();
@@ -30,9 +29,11 @@ const GroupDetails: React.FC = () => {
       let group: any;
       try {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
-        if (joinFlag && groupParam.eventId) {
+        if (isJoin && groupParam.eventId) {
           const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
-          const timeout = window.setTimeout(function () {
+          window.location = deepLink as any;
+
+          window.setTimeout(function () {
             navigate('/download');
             toast({
               title: 'Error',
@@ -41,9 +42,7 @@ const GroupDetails: React.FC = () => {
               duration: 8000,
               status: 'error',
             });
-          }, 1000);
-
-          window.location = deepLink as any;
+          }, 2000);
         }
       } catch (e: any) {
         if (e.response.status === 404)
