@@ -2,9 +2,10 @@ import { Box, Flex, FormControl, useToast, VStack, Text, useMediaQuery } from '@
 import * as React from 'react';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { PostUserReq } from '@impakt-dev/api-client';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
@@ -15,6 +16,7 @@ const SignUpForm: React.FC = () => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const [isShowPassword, setIsShowPassword] = useState(false);
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const toast = useToast();
@@ -70,7 +72,8 @@ const SignUpForm: React.FC = () => {
       password,
       email,
       referrerId: activeReferrerId,
-    };
+      minigameBonus: searchParams.get('minigamebonus') === 'true' ? true : false ?? false,
+    } as PostUserReq;
 
     await dispatch(signUpMember(payload)).unwrap();
 
