@@ -39,20 +39,20 @@ const ImpaktTeamFounders: React.FC = () => {
               marginLeft="0 !important"
               key={d.name}
               w="full"
-              maxW="318px"
+              maxW="275px"
               maxH="560px"
               p="24px 24px 24px"
               align="center"
               transitionDuration="150ms"
               justify="space-between"
-              bgColor="#fff"
+              // bgColor="#fff"
               position="relative"
               borderRadius="20px"
               backdropFilter="blur(40px)"
-              boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
+              // boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
             >
               <HStack w="full" align="center" justify="center">
-                <Card company={d.company} fname={d.fname} lname={d.lname} image={d.img} />
+                <Card company={d.company} fname={d.fname} lname={d.lname} />
               </HStack>
             </GridItem>
           ))}
