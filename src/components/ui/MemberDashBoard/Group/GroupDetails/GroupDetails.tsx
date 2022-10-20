@@ -18,7 +18,12 @@ const GroupDetails: React.FC = () => {
   // const [show, setShow] = React.useState<null | string>(null);
   const [isNotFound, setIsNotFound] = React.useState<string>('');
   const groupParam = useParams();
-  const isJoin = groupParam.id && groupParam.eventId && useLocation().pathname.includes('join');
+  const isJoin =
+    groupParam.id &&
+    groupParam.eventId &&
+    groupParam.eventId !== 'join' &&
+    useLocation().pathname.includes('join');
+
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
   const navigate = useNavigate();
@@ -31,9 +36,10 @@ const GroupDetails: React.FC = () => {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
         if (isJoin && groupParam.eventId) {
           const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
-          window.location = deepLink as any;
 
-          window.setTimeout(function () {
+          const now = new Date().valueOf();
+          setTimeout(function () {
+            if (new Date().valueOf() - now > 100) return;
             navigate('/download');
             toast({
               title: 'Error',
@@ -42,7 +48,11 @@ const GroupDetails: React.FC = () => {
               duration: 8000,
               status: 'error',
             });
-          }, 2000);
+          }, 5000);
+
+          window.location = deepLink as any;
+
+          // window.setTimeout(function () {
         }
       } catch (e: any) {
         if (e.response.status === 404)
