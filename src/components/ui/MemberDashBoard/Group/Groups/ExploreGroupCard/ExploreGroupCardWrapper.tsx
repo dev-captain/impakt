@@ -77,9 +77,10 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
         >
           <GroupsCard
             img={
-              g.currentCoverImage?.source
-                ? getImageFromS3AsUrl(g.currentCoverImage?.source)
-                : Images.group.logo
+              // g.currentCoverImage?.source
+              //   ? getImageFromS3AsUrl(g.currentCoverImage?.source)
+              // :
+              Images.group.logo
             }
             member={g.memberCount}
             name={g.groupName}
