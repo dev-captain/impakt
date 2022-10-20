@@ -25,23 +25,15 @@ const HeroVideo: React.FC = () => {
   };
 
   const endVideo = () => {
-    setTimeout(() => {
-      if (!videoBoxRef.current) return;
-      window.scrollTo(0, videoBoxRef.current.offsetHeight);
-      videoBoxRef.current.style.opacity = '0';
-    }, 500);
-
-    setTimeout(() => {
-      if (!videoBoxRef.current) return;
-      videoBoxRef.current.style.display = 'none';
-    }, 1500);
+    if (!videoBoxRef.current) return;
+    videoBoxRef.current.style.maxHeight = '0';
   };
 
   return (
     <Box
       bgColor="#F4F7F9 !important"
       id="hero-video-box"
-      transition="all .2s linear"
+      transition="all 0.4s ease-out"
       ref={videoBoxRef}
       maxH="100vh"
       position="relative"
@@ -53,8 +45,11 @@ const HeroVideo: React.FC = () => {
         minW="100%"
         objectFit="cover"
         ref={videoRef}
-        playsInline
+        src={Videos.newVideo}
+        autoPlay
+        controls={false}
         onEnded={() => endVideo()}
+        playsInline
       >
         <Box as="source" src={Videos.newVideo} type="video/mp4" />
       </Box>
