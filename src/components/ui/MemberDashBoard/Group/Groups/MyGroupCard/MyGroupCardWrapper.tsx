@@ -33,9 +33,10 @@ const MyGroupCardHeader: React.FC = () => {
             <GroupsCard
               member={m.group.memberCount ?? 0}
               img={
-                m.group.currentCoverImageId
-                  ? getImageFromS3AsUrl(m.group.currentCoverImage!.source)
-                  : Images.group.logo
+                // m.group.currentCoverImageId
+                //   ? getImageFromS3AsUrl(m.group.currentCoverImage!.source)
+                // :
+                Images.group.logo
               }
               name={m.group.groupName}
               // eslint-disable-next-line no-underscore-dangle
