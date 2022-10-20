@@ -38,6 +38,7 @@ const ImpaktTeamFounders: React.FC = () => {
           flexWrap="wrap"
           rowGap={{ base: '0', lg: '50px' }}
           columnGap="50px"
+          margin="40px 0"
         >
           {leadership.map((d: any) => (
             <GridItem
@@ -45,19 +46,20 @@ const ImpaktTeamFounders: React.FC = () => {
               key={d.name}
               w="full"
               maxW="275px"
+              margin="20px 0 !important"
               maxH="560px"
               p="24px 24px 24px"
               align="center"
               transitionDuration="150ms"
               justify="space-between"
-              // bgColor="#fff"
+              bgColor="#fff"
               position="relative"
               borderRadius="20px"
               backdropFilter="blur(40px)"
-              // boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
+              boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
             >
               <HStack w="full" align="center" justify="center">
-                <Card company={d.company} fname={d.fname} lname={d.lname} />
+                <Card company={d.company} fname={d.fname} lname={d.lname} image={d.img} />
               </HStack>
             </GridItem>
           ))}

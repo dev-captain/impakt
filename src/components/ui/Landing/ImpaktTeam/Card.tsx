@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { Text, Box, VStack } from '@chakra-ui/react';
+import { Text, Box, VStack, Image } from '@chakra-ui/react';
 
 interface CardProps {
   company: string;
   title?: string;
   fname: string;
   lname: string;
-  // image: any;
+  image: any;
 }
 
-const Card: React.FC<CardProps> = ({ company, title, fname, lname }) => {
+const Card: React.FC<CardProps> = ({ company, title, fname, lname, image }) => {
   return (
     <VStack>
-      {/* <VStack pos="relative" zIndex={1}>
+      <VStack pos="relative" zIndex={1}>
         <Box maxW="330px" w="full" rounded="lg">
           <Box>
             <Image
@@ -26,7 +26,7 @@ const Card: React.FC<CardProps> = ({ company, title, fname, lname }) => {
             />
           </Box>
         </Box>
-      </VStack> */}
+      </VStack>
       <Box>
         <Text
           color="#728BA3"

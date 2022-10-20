@@ -37,10 +37,12 @@ const ImpaktTeamAdvisors: React.FC = () => {
           flexWrap="wrap"
           rowGap={{ base: '0', lg: '50px' }}
           columnGap="50px"
+          margin="40px 0"
         >
           {advisorTeam.map((d: any) => (
             <GridItem
               marginLeft="0 !important"
+              margin="20px 0 !important"
               key={d.name}
               w="full"
               maxW="275px"
@@ -49,11 +51,11 @@ const ImpaktTeamAdvisors: React.FC = () => {
               align="center"
               transitionDuration="150ms"
               justify="space-between"
-              // bgColor="#fff"
+              bgColor="#fff"
               position="relative"
               borderRadius="20px"
               backdropFilter="blur(40px)"
-              // boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
+              boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
             >
               <HStack w="full" align="center" justify="center">
                 <Card
@@ -61,7 +63,7 @@ const ImpaktTeamAdvisors: React.FC = () => {
                   title={d.job}
                   fname={d.fname}
                   lname={d.lname}
-                  // image={d.img}
+                  image={d.img}
                 />
               </HStack>
             </GridItem>
