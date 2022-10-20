@@ -5,7 +5,7 @@
       {
         "appID": "WJ6C73996T.com.impakt.Minigames",
         "paths": [
-          "/ios"
+          "/dashboard/groups/group/*/event/*"
         ]
       }
     ]

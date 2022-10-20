@@ -1,17 +1,20 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useToast } from '@chakra-ui/react';
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../../../hooks';
 import { deepLinkToApp } from '../../../../../../../data';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
+  const navigate = useNavigate();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const role = useAppSelector((state) => state.groupsReducer.role);
   const isAdmin = role === 'Creator';
+  const toast = useToast();
 
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
     useEventCalendarContext();
@@ -108,7 +111,25 @@ const EventDetails: React.FC = () => {
           <Box w="34px">
             <I.ArrowIcon w="15px" height="15px" color="#728BA3" />
           </Box>
-          <a href={deepLink}>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              // eslint-disable-next-line func-names
+              const timeout = window.setTimeout(function () {
+                navigate('/download');
+                toast({
+                  title: 'Error',
+                  description: 'You have to install this app on your device',
+                  isClosable: true,
+                  duration: 8000,
+                  status: 'error',
+                });
+              }, 1000);
+
+              window.location = deepLink as any;
+            }}
+            href={deepLink}
+          >
             <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
               Click to join event
             </Text>

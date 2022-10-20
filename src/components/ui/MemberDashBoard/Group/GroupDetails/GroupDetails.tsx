@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { Box, Text, CircularProgress, HStack, useToast } from '@chakra-ui/react';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Content from './Content/Content';
@@ -17,19 +17,48 @@ import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendar
 import { fetchPosts } from '../../../../../lib/redux/slices/forum/post_actions/fetchPosts';
 import { cleanForums } from '../../../../../lib/redux/slices/forum/postsSlice';
 import { fetchAmIMemberOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchAmIMemberOfGroup';
+import { deepLinkToApp } from '../../../../../data';
 
 const GroupDetails: React.FC = () => {
   // const [show, setShow] = React.useState<null | string>(null);
   const [isNotFound, setIsNotFound] = React.useState<string>('');
   const groupParam = useParams();
+  const isJoin =
+    groupParam.id &&
+    groupParam.eventId &&
+    groupParam.eventId !== 'join' &&
+    useLocation().pathname.includes('join');
+
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
+  const navigate = useNavigate();
+  const toast = useToast();
 
   const getGroupDetail = async () => {
     if (groupParam?.id) {
       let group: any;
       try {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
+        if (isJoin && groupParam.eventId) {
+          const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
+
+          const now = new Date().valueOf();
+          setTimeout(function () {
+            if (new Date().valueOf() - now > 100) return;
+            navigate('/download');
+            toast({
+              title: 'Error',
+              description: 'You have to install this app on your device',
+              isClosable: true,
+              duration: 8000,
+              status: 'error',
+            });
+          }, 5000);
+
+          window.location = deepLink as any;
+
+          // window.setTimeout(function () {
+        }
       } catch (e: any) {
         if (e.statusCode === 404)
           setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
