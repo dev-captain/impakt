@@ -8,6 +8,8 @@ import {
   ModalCloseButton,
   ModalBody,
   TextProps,
+  ModalBodyProps,
+  ModalProps,
 } from '@chakra-ui/react';
 
 interface GroupsModalPropsI {
@@ -18,6 +20,7 @@ interface GroupsModalPropsI {
     style?: TextProps;
   };
   showCloseButton?: boolean;
+  size?: ModalProps['size'];
 }
 
 const GroupsModal: React.FC<GroupsModalPropsI> = ({
@@ -26,17 +29,18 @@ const GroupsModal: React.FC<GroupsModalPropsI> = ({
   modalTitle,
   children,
   showCloseButton,
+  size,
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal size={size} isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent
         w={{ base: '92%', md: '100%' }}
         minW={{ base: '92%', md: '750px' }}
-        mt="140px"
-        h="auto"
+        mt={size === 'full' ? '100px' : '140px'}
+        h={size === 'full' ? '100px' : 'auto'}
         overflowY="auto"
-        borderRadius="32px"
+        borderRadius={size === 'full' ? '0' : '32px'}
         padding={{ base: '14px', md: '32px' }}
       >
         <Box display="flex" justifyContent="space-between" alignItems="center">

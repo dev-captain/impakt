@@ -13,6 +13,7 @@ import { GroupsInitialI } from './types';
 import { fetchGroupRoleById } from './actions/fetchGroupRoleById';
 import { fetchGroupRequests } from './actions/fetchGroupRequests';
 import { updateGroupCoverImage } from './actions/updateGroupCoverImage';
+import { fetchAmIMemberOfGroup } from './actions/fetchAmIMemberOfGroup';
 
 const groupsInitialStateI: GroupsInitialI = {
   isLoading: false,
@@ -42,6 +43,10 @@ const groupsSlice = createSlice({
     setActiveGroupCalendar(state: GroupsInitialI) {
       state.activeGroup = null;
       state.membersOfGroup = null;
+    },
+
+    setRoleAsNone(state: GroupsInitialI) {
+      state.role = 'None';
     },
   },
   extraReducers: (builder) => {
@@ -130,6 +135,17 @@ const groupsSlice = createSlice({
       });
 
     builder
+      .addCase(fetchAmIMemberOfGroup.pending, (state) => {
+        state.isRoleLoading = true;
+      })
+      .addCase(fetchAmIMemberOfGroup.fulfilled, (state) => {
+        state.isRoleLoading = false;
+      })
+      .addCase(fetchAmIMemberOfGroup.rejected, (state) => {
+        state.isRoleLoading = false;
+      });
+
+    builder
       .addCase(deleteGroup.pending, (state) => {
         state.isLoading = true;
       })
@@ -212,6 +228,6 @@ const groupsSlice = createSlice({
   },
 });
 
-export const { cleanActiveGroup } = groupsSlice.actions;
+export const { cleanActiveGroup, setRoleAsNone } = groupsSlice.actions;
 // eslint-disable-next-line import/prefer-default-export
 export default groupsSlice.reducer;

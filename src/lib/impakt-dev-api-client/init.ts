@@ -18,6 +18,7 @@ import {
   GroupsMemberApi,
   GroupsRequestApi,
   CalendarEventsDataModelApi,
+  PostsApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
@@ -118,3 +119,4 @@ export const AttemptInstance = new DefaultApi(configuration);
 export const GroupsInstance = new GroupsApi(configuration);
 export const GroupsMemberInstance = new GroupsMemberApi(configuration);
 export const GroupsRequestInstance = new GroupsRequestApi(configuration);
+export const PostsInstance = new PostsApi(configuration);
