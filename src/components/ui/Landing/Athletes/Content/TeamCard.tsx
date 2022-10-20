@@ -18,18 +18,11 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
           </Box>
         </Box>
       </VStack>
-      <VStack
-        align="center"
-        justify="center"
-        mt="0 !important"
-        fontWeight="600"
-        // mb="10px !important"
-        // height="120px"
-      >
+      <VStack align="center" justify="center" mt="0 !important" fontWeight="600">
         <Text
           align="center"
           my="20px"
-          fontSize={{ lg: '31px', base: '26px' }}
+          fontSize={{ lg: '31px', base: '24px' }}
           color="#1C1C28"
           lineHeight="100%"
         >

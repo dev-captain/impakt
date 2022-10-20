@@ -8,13 +8,17 @@ const ImpaktTeamAdvisors: React.FC = () => {
   const advisorTeam = t('advisorData.data', { returnObjects: true }) as object[];
 
   return (
-    <VStack width="100%" mt="50px !important" padding={{ base: '1em', md: '0' }} k>
+    <VStack
+      width="100%"
+      mt={{ base: '20px !important', lg: '50px !important' }}
+      padding={{ base: '1em', md: '0' }}
+    >
       <Box
         width="100%"
         display="flex"
         justifyContent="center"
         flexWrap="wrap"
-        gap={{ md: '40px', base: '20px' }}
+        // gap={{ md: '40px', base: '20px' }}
       >
         <Text
           width="100%"
@@ -31,7 +35,7 @@ const ImpaktTeamAdvisors: React.FC = () => {
           maxW="1400px"
           justifyContent={{ base: 'center', lg: 'center' }}
           flexWrap="wrap"
-          rowGap="50px"
+          rowGap={{ base: '0', lg: '50px' }}
           columnGap="50px"
         >
           {advisorTeam.map((d: any) => (

@@ -33,7 +33,7 @@ const Card: React.FC<CardProps> = ({ company, title, fname, lname }) => {
           fontSize={{ lg: '24px', base: '18px' }}
           lineHeight="100%"
           fontWeight="600"
-          mt="26px"
+          mt="10px"
         >
           <Text as="span" color="#1C1C28">
             {fname}

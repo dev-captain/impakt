@@ -109,8 +109,9 @@ code {
 }
 .slick-slide > div {
   padding: 0 20px;
-  width: 350px;
-  height: 560px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
 }
 @media screen and (min-width: 1280px) {
   .slick-slide > div {

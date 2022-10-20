@@ -51,7 +51,7 @@ const settings = {
   slidesToScroll: 1,
   responsive: [
     {
-      breakpoint: 1280,
+      breakpoint: 991,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
@@ -65,7 +65,6 @@ const settings = {
     {
       breakpoint: 600,
       settings: {
-        centerMode: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         dots: false,

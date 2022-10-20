@@ -9,13 +9,18 @@ const ImpaktTeamFounders: React.FC = () => {
   const leadership = t('leadershipData.data', { returnObjects: true }) as object[];
 
   return (
-    <VStack width="100%" mt="50px !important" padding={{ base: '1em', md: '0' }} k>
+    <VStack
+      width="100%"
+      mt={{ base: '20px !important', lg: '50px !important' }}
+      padding={{ base: '1em', md: '0' }}
+      k
+    >
       <Box
         width="100%"
         display="flex"
         justifyContent="center"
         flexWrap="wrap"
-        gap={{ md: '40px', base: '20px' }}
+        // gap={{ md: '40px', base: '20px' }}
       >
         <Text
           width="100%"
@@ -31,7 +36,7 @@ const ImpaktTeamFounders: React.FC = () => {
           w="full"
           justifyContent={{ base: 'center', lg: 'center' }}
           flexWrap="wrap"
-          rowGap="50px"
+          rowGap={{ base: '0', lg: '50px' }}
           columnGap="50px"
         >
           {leadership.map((d: any) => (
