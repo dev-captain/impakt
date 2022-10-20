@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { Flex, FormControl, useToast } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { Common, I } from 'components';
+import { Common } from 'components';
 import { createGroup } from '../../../lib/redux/slices/groups/actions/createGroup';
 import { fetchMyGroups } from '../../../lib/redux/slices/groups/actions/fetchMyGroups';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -25,26 +25,16 @@ const CreateGroupForm: React.FC = ({ children }) => {
 
   const handleOnCreate = async (data: object) => {
     const { groupName } = data as { groupName: string };
-    try {
-      if (!member) return;
-      await dispatch(createGroup(groupName)).unwrap();
-      await dispatch(fetchMyGroups(member.id));
-      toast({
-        title: 'Success',
-        description: 'Group created successfully.',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
-    }
+    if (!member) return;
+    await dispatch(createGroup(groupName)).unwrap();
+    await dispatch(fetchMyGroups(member.id)).unwrap();
+    toast({
+      title: 'Success',
+      description: 'Group created successfully.',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
     navigate('/dashboard/groups');
   };
 

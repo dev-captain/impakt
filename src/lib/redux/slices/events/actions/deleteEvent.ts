@@ -1,13 +1,15 @@
+import { CalendarDtoV1TypeEnum } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { API_SERVER_BASE_URL } from '../../../../axios/api';
+import { CalendarInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
-import { CalendarType } from '../../calendar/types';
 
 const deleteEvent = createAsyncThunk(
   'events/delete',
-  async ({ eventId }: { eventId: number; type: CalendarType }, { rejectWithValue, getState }) => {
+  async (
+    { eventId }: { eventId: number; type: CalendarDtoV1TypeEnum },
+    { rejectWithValue, getState },
+  ) => {
     try {
       const {
         memberAuth: { isLogin, member },
@@ -16,9 +18,8 @@ const deleteEvent = createAsyncThunk(
       if (!isLogin || !member) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
-      await axios
-        .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .delete(`/api/v1/calendar/events/${eventId}`);
+
+      await CalendarInstance.calendarEventControllerDeleteCalendarEvent(eventId);
 
       return true;
     } catch (err: any) {

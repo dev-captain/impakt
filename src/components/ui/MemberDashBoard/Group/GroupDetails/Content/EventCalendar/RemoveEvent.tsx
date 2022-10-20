@@ -6,7 +6,6 @@ import { Common } from 'components';
 import { Time } from 'dayspan';
 import { useAppDispatch } from 'hooks';
 import { deleteEvent } from '../../../../../../../lib/redux/slices/events/actions/deleteEvent';
-import { CalendarType } from '../../../../../../../lib/redux/slices/calendar/types';
 
 const RemoveEvent: React.FC = () => {
   const { goBackToOverViewScreen, getSelectedDayEvent, removeEvent } = useEventCalendarContext();
@@ -14,7 +13,7 @@ const RemoveEvent: React.FC = () => {
   const dispatch = useAppDispatch();
   const removeHandle = async () => {
     if (!eventObj) return;
-    await dispatch(deleteEvent({ eventId: eventObj.event.id, type: CalendarType.Group })).unwrap();
+    await dispatch(deleteEvent({ eventId: eventObj.event.id, type: 'Group' })).unwrap();
     removeEvent(eventObj.event);
     // locally delete event
   };

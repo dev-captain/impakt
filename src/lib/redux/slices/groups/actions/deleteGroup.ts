@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { API_SERVER_BASE_URL } from '../../../../axios/api';
+import { GroupsInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
 import { fetchMyGroups } from './fetchMyGroups';
@@ -16,10 +15,7 @@ const deleteGroup = createAsyncThunk(
       if (!isLogin || !member) {
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
-      await axios
-        .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .delete(`/api/v1/groups/${groupId}`);
-
+      await GroupsInstance.groupsControllerV1Remove(groupId);
       await dispatch(fetchMyGroups(member.id));
 
       return true;

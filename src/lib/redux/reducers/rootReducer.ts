@@ -16,6 +16,7 @@ import calendarReducer from '../slices/calendar/calendarSlice';
 import eventsReducer from '../slices/events/eventsSlice';
 import challengesReducer from '../slices/challenges/challengesSlice';
 import koinReducer from '../slices/koin/koinSlice';
+import postsReducer from '../slices/forum/postsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -28,6 +29,7 @@ const persistConfig = {
     'eventsReducer',
     'myChallenges',
     'challengesReducer',
+    'postsReducer',
   ],
 };
 
@@ -52,6 +54,7 @@ const rootReducer = combineReducers({
   calendarReducer,
   eventsReducer,
   challengesReducer,
+  postsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

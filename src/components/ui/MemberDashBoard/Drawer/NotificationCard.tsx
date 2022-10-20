@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { CloseIcon } from '@chakra-ui/icons';
-import { useAppDispatch } from '../../../../hooks';
-import { UserRequestStatus } from '../../../../lib/redux/slices/groups/types';
+import { PatchGroupRequestReqStatusEnum } from '@impakt-dev/api-client';
+import { useAppDispatch } from 'hooks';
 import { answerToGroupRequest } from '../../../../lib/redux/slices/groups/actions/answerToGroupRequest';
 
 interface NoitificationCardProps {
@@ -21,9 +21,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const acceptOrDeclineRequestToJoin = async (
-    currentStatus: UserRequestStatus.Accepted | UserRequestStatus.Declined,
-  ) => {
+  const acceptOrDeclineRequestToJoin = async (currentStatus: PatchGroupRequestReqStatusEnum) => {
     await dispatch(answerToGroupRequest({ requestorId, status: currentStatus, groupId })).unwrap();
   };
 
@@ -55,7 +53,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
           borderRadius="8px"
           type="submit"
           fontWeight="600"
-          onClick={() => acceptOrDeclineRequestToJoin(UserRequestStatus.Accepted)}
+          onClick={() => acceptOrDeclineRequestToJoin('Accepted')}
         >
           <I.CheckIcon width="16px" height="16px" />
           <Text fontSize={{ md: '16px', base: '14px' }} ml="11px">
@@ -72,7 +70,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
           fontSize={{ md: '16px', base: '14px' }}
           type="submit"
           fontWeight="600"
-          onClick={() => acceptOrDeclineRequestToJoin(UserRequestStatus.Declined)}
+          onClick={() => acceptOrDeclineRequestToJoin('Declined')}
         >
           <CloseIcon color="#29323B" width="10px" height="10px" mr="11px" />
           Decline

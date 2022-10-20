@@ -4,11 +4,10 @@ import { I } from 'components';
 import { useAppSelector } from 'hooks';
 import MyGroupCardWrapperHeaderStatisticTag from './MyGroupCardHeaderStatisticTag';
 import GroupCardWrapperHeader from '../../GroupCardHeader';
-import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 
 const MyGroupCardHeader: React.FC = () => {
   const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
-  const ownedGroup = myGroups.filter((group) => group.role === GroupRole.Creator);
+  const ownedGroup = myGroups.filter((group) => group.role === 'Creator');
 
   return (
     <GroupCardWrapperHeader title="Your Groups">

@@ -19,14 +19,14 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
   const groupParam = useParams();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const groupMemberCount = useAppSelector(
-    (state) => state.groupsReducer.membersOfGroup?.Members,
+    (state) => state.groupsReducer.membersOfGroup?.members,
   )?.length;
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    if (activeGroup?.CurrentCoverImage?.source) {
-      setBannerImage(getImageFromS3AsUrl(activeGroup.CurrentCoverImage.source));
+    if (activeGroup?.currentCoverImage?.source) {
+      setBannerImage(getImageFromS3AsUrl(activeGroup.currentCoverImage.source));
 
       return;
     }
@@ -65,7 +65,7 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
 
     const formData = new FormData();
     formData.append('file', data.file);
-    await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id }));
+    await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id })).unwrap();
   };
 
   const setBannerImage = (source: any) => {

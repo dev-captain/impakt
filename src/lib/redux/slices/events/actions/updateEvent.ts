@@ -1,5 +1,6 @@
+import { PatchCalendarEventReq } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
+import { CalendarInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
 
@@ -8,21 +9,22 @@ const updateEventBE = createAsyncThunk(
   async (
     {
       eventId,
-      // calendarId,
+      calendarId,
       patchCalendarEventReq,
     }: {
       eventId: number;
       calendarId: number;
-      patchCalendarEventReq: {
-        description: string;
-        title: string;
-        assocId: number;
-        reschedule?: {
-          on: string;
-          startDateTime: string;
-          endDateTime: string;
-        };
-      };
+      patchCalendarEventReq: PatchCalendarEventReq;
+      // patchCalendarEventReq: {
+      //   description: string;
+      //   title: string;
+      //   assocId: number;
+      //   reschedule?: {
+      //     on: string;
+      //     startDateTime: string;
+      //     endDateTime: string;
+      //   };
+      // };
     },
     { rejectWithValue, getState },
   ) => {
@@ -35,11 +37,13 @@ const updateEventBE = createAsyncThunk(
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
 
-      const res = await axios
-        .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-        .patch(`/api/v1/calendar/events/${eventId}`, patchCalendarEventReq);
+      const res = await CalendarInstance.calendarEventControllerUpdateCalendarEvent(
+        eventId,
+        calendarId,
+        patchCalendarEventReq,
+      );
 
-      return res.data;
+      return res;
     } catch (err: any) {
       return rejectWithValue(err);
     }

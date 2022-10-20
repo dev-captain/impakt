@@ -110,6 +110,7 @@ const App = () => {
           <Route path="group">
             <Route path=":id" element={<S.GroupDetail />}>
               <Route path="event/:eventId" />
+              <Route path="post/:postId" />
               <Route path="event/:eventId/join" />
             </Route>
           </Route>

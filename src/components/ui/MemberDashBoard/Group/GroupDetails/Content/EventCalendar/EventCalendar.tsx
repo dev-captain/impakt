@@ -1,14 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { Box, HStack, Skeleton } from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import React from 'react';
+import { Box, Skeleton } from '@chakra-ui/react';
 
-import { Day } from 'dayspan';
-
-import { useEventCalendarContext } from 'context/EventCalendarContext';
-import DayNames from './DayNames';
 import EventsOverview from './EventsOverview';
-import DayComponent from './Day';
-import useNormalizedCalendarData from '../../../../../../../hooks/useNormalizedCalendarData';
 import { useAppSelector } from '../../../../../../../hooks';
 import CalendarDays from './CalendarDays';
 // import { getDummyEvents } from '../../../../../../../data';

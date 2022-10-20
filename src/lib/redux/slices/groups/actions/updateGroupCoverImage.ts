@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { API_SERVER_BASE_URL } from '../../../../axios/api';
+import { GroupsInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
 import { fetchGroupDetailById } from './fetchGroupDetailById';
@@ -20,16 +19,20 @@ const updateGroupCoverImage = createAsyncThunk(
         return Promise.reject(new Error('Please sign in first to continue...'));
       }
 
-      const result = await axios
-        .create({
-          baseURL: API_SERVER_BASE_URL,
-          withCredentials: true,
-          headers: { 'Content-Type': 'multipart/form-data' },
-        })
-        .patch(`/api/v1/groups/${groupId}/cover-image`, body);
+      // const result = await axios
+      //   .create({
+      //     baseURL: API_SERVER_BASE_URL,
+      //     withCredentials: true,
+      //     headers: { 'Content-Type': 'multipart/form-data' },
+      //   })
+      //   .patch(`/api/v1/groups/${groupId}/cover-image`, body);
+      const result = await GroupsInstance.groupsControllerV1PatchGroupCoverImage(
+        groupId,
+        body.get('file'),
+      );
       await dispatch(fetchGroupDetailById(groupId.toString()));
 
-      return result.data as { ImageKey: string };
+      return result;
     } catch (err: any) {
       return rejectWithValue(err);
     }

@@ -8,10 +8,15 @@ import Banner from './Banner/Banner';
 import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
 import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
-import { CalendarType } from '../../../../../lib/redux/slices/calendar/types';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
-import { cleanActiveGroup } from '../../../../../lib/redux/slices/groups/groupsSlice';
+import {
+  cleanActiveGroup,
+  setRoleAsNone,
+} from '../../../../../lib/redux/slices/groups/groupsSlice';
 import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
+import { fetchPosts } from '../../../../../lib/redux/slices/forum/post_actions/fetchPosts';
+import { cleanForums } from '../../../../../lib/redux/slices/forum/postsSlice';
+import { fetchAmIMemberOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchAmIMemberOfGroup';
 import { deepLinkToApp } from '../../../../../data';
 
 const GroupDetails: React.FC = () => {
@@ -55,18 +60,22 @@ const GroupDetails: React.FC = () => {
           // window.setTimeout(function () {
         }
       } catch (e: any) {
-        if (e.response.status === 404)
+        if (e.statusCode === 404)
           setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
         else {
           setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
         }
       } finally {
         try {
-          await dispatch(fetchGroupRoleById(group.id));
+          const amIMemberOfGroup = await dispatch(fetchAmIMemberOfGroup(group.id)).unwrap();
+          if (amIMemberOfGroup) {
+            await dispatch(fetchGroupRoleById(group.id));
+          } else {
+            dispatch(setRoleAsNone());
+          }
         } finally {
-          await dispatch(
-            fetchCalendarById({ calendarId: group.calendarId, type: CalendarType.Group }),
-          );
+          await dispatch(fetchPosts({ referenceType: 'Group', referenceId: group.id }));
+          await dispatch(fetchCalendarById({ calendarId: group.calendarId, type: 'Group' }));
           await dispatch(fetchAvailableChallengesForGroup());
           await dispatch(fetchMembersOfGroup(group.id));
           // fetch my challanges for modal if user creator
@@ -80,6 +89,7 @@ const GroupDetails: React.FC = () => {
 
     return () => {
       dispatch(cleanActiveGroup());
+      dispatch(cleanForums());
       dispatch(cleanCalendar());
     };
   }, []);

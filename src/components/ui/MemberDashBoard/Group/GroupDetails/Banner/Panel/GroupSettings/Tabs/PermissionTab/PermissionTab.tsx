@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { Box, Button, Text, Tooltip, useToast } from '@chakra-ui/react';
+import { Box, Button, Text, useToast } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Common, I } from 'components';
+import { Common } from 'components';
 import { updateGroup } from 'lib/redux/slices/groups/actions/updateGroup';
 import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
@@ -18,7 +18,8 @@ const PermissionTab: React.FC = () => {
   const groupParam = useParams();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   React.useEffect(() => {
-    if (activeGroup?.private) {
+    // eslint-disable-next-line no-underscore-dangle
+    if (activeGroup?._private) {
       setValue('Private');
     } else {
       setValue('Public');

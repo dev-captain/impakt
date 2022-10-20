@@ -3,18 +3,17 @@ import * as React from 'react';
 import { useAppSelector } from 'hooks';
 
 import { GroupSettingTab, GroupSettingsMemberTabs } from '../../../../../../../../../data';
-import { GroupRole } from '../../../../../../../../../lib/redux/slices/groups/types';
 import EditGroupTab from './EditGroupTab/EditGroupTab';
 import GeneralSettings from './GeneralSettings/GeneralSettings';
 import PermissionTab from './PermissionTab/PermissionTab';
 
 const GroupSettingsTabs: React.FC = () => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const role = useAppSelector((state) => state.groupsReducer.role);
 
   return (
     <Tabs mt="10px">
       <TabList border="0" flexWrap="wrap">
-        {activeGroup?.role === GroupRole.Creator
+        {role === 'Creator'
           ? GroupSettingTab.map((tab, index) => (
               <Tab
                 // eslint-disable-next-line react/no-array-index-key
@@ -53,13 +52,13 @@ const GroupSettingsTabs: React.FC = () => {
           <GeneralSettings />
           {/* <p>ICONs</p> */}
         </TabPanel>
-        {activeGroup?.role === GroupRole.Creator && (
+        {role === 'Creator' && (
           <TabPanel p="0" mt="24px">
             <EditGroupTab />
           </TabPanel>
         )}
 
-        {activeGroup?.role === GroupRole.Creator && (
+        {role === 'Creator' && (
           <TabPanel p="0" mt="24px">
             <PermissionTab />
           </TabPanel>

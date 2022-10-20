@@ -1,12 +1,10 @@
 import { Box, useDisclosure } from '@chakra-ui/react';
 import { I, Common } from 'components';
-import { useNavigate } from 'react-router-dom';
 import MemberDashboardCard from '../../../MemberDashBoardCard';
 import CreateGroupModal from '../CreateGroupModal/CreateGroupModal';
 
 const AddGroupCard = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const navigate = useNavigate();
 
   return (
     <>

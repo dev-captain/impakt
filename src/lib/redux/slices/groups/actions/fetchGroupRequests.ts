@@ -1,8 +1,8 @@
+import { GetGroupRequestResV2 } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { API_SERVER_BASE_URL } from '../../../../axios/api';
+import { GroupsRequestInstance } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
-import { GetGroupRequestResV2 } from '../types';
 
 const fetchGroupRequests = createAsyncThunk(
   'groups/group-requests',
@@ -18,16 +18,15 @@ const fetchGroupRequests = createAsyncThunk(
       }
       if (myGroups?.length > 0) {
         const callMap = myGroups.map(async ({ groupId }) =>
-          axios
-            .create({ baseURL: API_SERVER_BASE_URL, withCredentials: true })
-            .get(`/api/v1/groups/group-requests/${groupId}`),
+          GroupsRequestInstance.groupsRequestControllerV1GetGroupRequests(groupId),
         );
+
         const getGroupRequests = await Promise.all(callMap);
         if (getGroupRequests.length > 0) {
           const dataExist: GetGroupRequestResV2[] = [];
-          getGroupRequests.forEach(({ data }) => {
-            if (data.length > 0) {
-              dataExist.push(data[0]);
+          getGroupRequests.forEach((d) => {
+            if (d.length > 0) {
+              dataExist.push(d[0]);
             }
           });
 

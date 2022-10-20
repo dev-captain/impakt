@@ -1,4 +1,4 @@
-import { Image, Skeleton } from '@chakra-ui/react';
+import { Image } from '@chakra-ui/react';
 import * as React from 'react';
 import { useAppSelector } from 'hooks';
 import Images from '../../../../../../assets/images';
@@ -9,7 +9,7 @@ const BannerImage: React.FC = () => {
     (state) => state.groupsReducer.activeGroup?.currentCoverImageId,
   );
   const currentCoverImageSource = useAppSelector(
-    (state) => state.groupsReducer.activeGroup?.CurrentCoverImage,
+    (state) => state.groupsReducer.activeGroup?.currentCoverImage,
   );
 
   return (

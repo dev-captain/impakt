@@ -4,11 +4,10 @@ import { Common, I } from 'components';
 import { useAppSelector } from 'hooks';
 import { DeleteIcon } from '@chakra-ui/icons';
 
-import { GroupRole } from '../../../../../../../../../../lib/redux/slices/groups/types';
 import ConfirmationModal from './ConfirmationModal';
 
 const GeneralSettings: React.FC = () => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const role = useAppSelector((state) => state.groupsReducer.role);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -48,12 +47,12 @@ const GeneralSettings: React.FC = () => {
           onClick={() => onOpen()}
           fontWeight="600"
         >
-          {activeGroup?.role === GroupRole.Creator ? (
+          {role === 'Creator' ? (
             <DeleteIcon width="24px" height="24px" marginRight="20px" />
           ) : (
             <I.LeaveIcon width="24px" height="24px" marginRight="20px" />
           )}
-          {activeGroup?.role === GroupRole.Creator ? 'Delete Group' : 'Leave Group'}
+          {role === 'Creator' ? 'Delete Group' : 'Leave Group'}
         </Common.ImpaktButton>
       </Box>
       <ConfirmationModal open={isOpen} close={() => onClose()} />

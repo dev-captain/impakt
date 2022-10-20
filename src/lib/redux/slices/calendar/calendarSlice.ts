@@ -1,6 +1,6 @@
+import { CalendarDtoV1 } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCalendarById } from './actions/fetchCalendarById';
-import { CalendarDtoV1, CalendarType } from './types';
 
 interface CalendarInitialI {
   isGroupCalendarLoading: boolean;
@@ -27,9 +27,7 @@ const calendarSlice = createSlice({
       state.activePersonalCalendar = null;
     },
     setIsGroupCalendarLoading: (state) => {
-      console.log('before', state.isGroupCalendarLoading);
       state.isGroupCalendarLoading = !state.isGroupCalendarLoading;
-      console.log('after', state.isGroupCalendarLoading);
     },
     setIsPersonalCalendarLoading: (state) => {
       state.isPersonalCalendarLoading = !state.isPersonalCalendarLoading;
@@ -37,9 +35,9 @@ const calendarSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCalendarById.fulfilled, (state, action) => {
-      if (action.payload.type === CalendarType.Group) {
+      if (action.payload.type === 'Group') {
         state.activeGroupCalendar = action.payload;
-      } else if (action.payload.type === CalendarType.Personal) {
+      } else if (action.payload.type === 'Personal') {
         state.isPersonalCalendarLoading = false;
         state.activePersonalCalendar = action.payload;
       }

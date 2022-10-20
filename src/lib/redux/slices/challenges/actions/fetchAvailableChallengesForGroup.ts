@@ -7,7 +7,6 @@ import {
 } from '../../../../impakt-dev-api-client/init';
 
 import { RootState } from '../../../store';
-import { GroupRole } from '../../groups/types';
 
 const fetchAvailableChallengesForGroup = createAsyncThunk(
   'calendar/fetch-available-challenges-for-group',
@@ -22,7 +21,7 @@ const fetchAvailableChallengesForGroup = createAsyncThunk(
         return Promise.reject(new Error('Please Sign In first to continue'));
       }
 
-      const admin = membersOfGroup?.Members.filter(({ role }) => role === GroupRole.Creator)[0];
+      const admin = membersOfGroup?.members.filter(({ role }) => role === 'Creator')[0];
 
       const myChallengesRes = await ChallengeInstance.challengesControllerGetMany(
         undefined,
@@ -32,7 +31,7 @@ const fetchAvailableChallengesForGroup = createAsyncThunk(
         true,
         true,
         undefined,
-        admin?.User.id,
+        admin?.user.id,
       );
 
       const challengesLikePromises = myChallengesRes.map(({ id }) =>

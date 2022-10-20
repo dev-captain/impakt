@@ -5,7 +5,6 @@ import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { useNavigate } from 'react-router-dom';
-import { GroupRole } from '../../../../../../../lib/redux/slices/groups/types';
 import { useAppSelector } from '../../../../../../../hooks';
 import { deepLinkToApp } from '../../../../../../../data';
 
@@ -13,7 +12,8 @@ const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
   const navigate = useNavigate();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const isAdmin = activeGroup?.role === GroupRole.Creator;
+  const role = useAppSelector((state) => state.groupsReducer.role);
+  const isAdmin = role === 'Creator';
   const toast = useToast();
 
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =

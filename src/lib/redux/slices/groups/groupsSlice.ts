@@ -13,6 +13,7 @@ import { GroupsInitialI } from './types';
 import { fetchGroupRoleById } from './actions/fetchGroupRoleById';
 import { fetchGroupRequests } from './actions/fetchGroupRequests';
 import { updateGroupCoverImage } from './actions/updateGroupCoverImage';
+import { fetchAmIMemberOfGroup } from './actions/fetchAmIMemberOfGroup';
 
 const groupsInitialStateI: GroupsInitialI = {
   isLoading: false,
@@ -23,6 +24,7 @@ const groupsInitialStateI: GroupsInitialI = {
   membersOfGroup: null,
   groupRequests: [],
   exploreGroups: [],
+  role: null,
 };
 
 const groupsSlice = createSlice({
@@ -35,11 +37,16 @@ const groupsSlice = createSlice({
       state.isLoading = false;
       state.isRoleLoading = true;
       state.isMembersLoading = true;
+      state.role = null;
     },
 
     setActiveGroupCalendar(state: GroupsInitialI) {
       state.activeGroup = null;
       state.membersOfGroup = null;
+    },
+
+    setRoleAsNone(state: GroupsInitialI) {
+      state.role = 'None';
     },
   },
   extraReducers: (builder) => {
@@ -96,7 +103,7 @@ const groupsSlice = createSlice({
       .addCase(fetchGroupRoleById.fulfilled, (state, action) => {
         state.isRoleLoading = false;
         if (state.activeGroup) {
-          state.activeGroup.role = action.payload.role;
+          state.role = action.payload.role;
         }
       })
       .addCase(fetchGroupRoleById.rejected, (state) => {
@@ -128,6 +135,17 @@ const groupsSlice = createSlice({
       });
 
     builder
+      .addCase(fetchAmIMemberOfGroup.pending, (state) => {
+        state.isRoleLoading = true;
+      })
+      .addCase(fetchAmIMemberOfGroup.fulfilled, (state) => {
+        state.isRoleLoading = false;
+      })
+      .addCase(fetchAmIMemberOfGroup.rejected, (state) => {
+        state.isRoleLoading = false;
+      });
+
+    builder
       .addCase(deleteGroup.pending, (state) => {
         state.isLoading = true;
       })
@@ -144,9 +162,14 @@ const groupsSlice = createSlice({
       })
       .addCase(updateGroup.fulfilled, (state, action) => {
         state.isLoading = false;
+
         if (state.activeGroup) {
-          state.activeGroup.groupName = action.payload.groupName;
-          state.activeGroup.private = action.payload.private;
+          state.activeGroup = {
+            ...state.activeGroup,
+            groupName: action.payload.groupName,
+            // eslint-disable-next-line no-underscore-dangle
+            _private: action.payload._private,
+          };
         }
       })
       .addCase(updateGroup.rejected, (state) => {
@@ -160,12 +183,10 @@ const groupsSlice = createSlice({
       .addCase(updateGroupCoverImage.fulfilled, (state, action) => {
         state.isLoading = false;
         if (!state.activeGroup) return;
-
-        if (!state.activeGroup.CurrentCoverImage) {
-          state.activeGroup.CurrentCoverImage = { source: '' };
-        }
-
-        state.activeGroup.CurrentCoverImage.source = action.payload.ImageKey;
+        state.activeGroup = {
+          ...state.activeGroup,
+          currentCoverImage: { source: action.payload.imageKey },
+        };
       })
       .addCase(updateGroupCoverImage.rejected, (state) => {
         state.isLoading = false;
@@ -207,6 +228,6 @@ const groupsSlice = createSlice({
   },
 });
 
-export const { cleanActiveGroup } = groupsSlice.actions;
+export const { cleanActiveGroup, setRoleAsNone } = groupsSlice.actions;
 // eslint-disable-next-line import/prefer-default-export
 export default groupsSlice.reducer;
