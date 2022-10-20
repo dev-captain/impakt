@@ -37,6 +37,7 @@ const HeroVideo: React.FC = () => {
       ref={videoBoxRef}
       maxH="100vh"
       position="relative"
+      backgroundColor="#000"
     >
       <Box
         id="hero-video"
