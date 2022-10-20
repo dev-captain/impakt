@@ -6,7 +6,7 @@ import CommentBox from './CommentBox';
 
 interface PostCardPropsI {
   id: number;
-  name: string;
+  name?: string;
   msg: string;
   title: string;
   msgNo: number;

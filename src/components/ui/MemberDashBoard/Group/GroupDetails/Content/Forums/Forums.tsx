@@ -12,9 +12,7 @@ import CreatePostCard from './CreatePostCard';
 const Forums: React.FC = () => {
   const role = useAppSelector((state) => state.groupsReducer.role);
   const posts = useAppSelector((state) => state.postsReducer.posts);
-  console.log(posts);
   const isCreator = role === 'Creator';
-  console.log(posts);
 
   return (
     <Box marginStart="0 !important" width={{ base: '100%', md: '40%', lgx: '50%' }}>

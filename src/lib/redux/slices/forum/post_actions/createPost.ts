@@ -30,7 +30,9 @@ const createPost = createAsyncThunk(
 
       return {
         ...posts,
-        creator: { ...posts.creator, firstName: member!.firstName, username: member!.username },
+        creator: {
+          ...member!,
+        },
       };
     } catch (err: any) {
       return rejectWithValue(err);

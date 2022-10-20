@@ -48,7 +48,7 @@ const ForumDetail: React.FC = () => {
           Day.fromString(activePostDetails.createdAt.toISOString()),
         )}h`}
       >
-        {member?.id === activePostDetails.creator.id && (
+        {member?.id === activePostDetails.creator?.id && (
           <Common.ImpaktButton
             mt={{ md: 0, base: '10px' }}
             color="#B0C3D6"

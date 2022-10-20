@@ -13,7 +13,7 @@ import PostCard from './PostCard';
 
 interface UserForumsPropsI {
   id: number;
-  name: string;
+  name?: string;
   msg: string;
   title: string;
   msgNo: number;
@@ -46,7 +46,7 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
     navigate(`post/${props.id}`);
   };
 
-  return (
+  return !props.name ? null : (
     <>
       <PostCard onClick={navigateToPost} {...props}>
         <CommentBox postId={props.id}>
