@@ -30,6 +30,7 @@ const HeroVideo: React.FC = () => {
   };
   useEffect(() => {
     if (videoRef.current) {
+      // pollyfill fix for ios require auto play true with playsInline but we don't want to play auto : hacky solution
       videoRef.current.pause();
     }
   }, []);
