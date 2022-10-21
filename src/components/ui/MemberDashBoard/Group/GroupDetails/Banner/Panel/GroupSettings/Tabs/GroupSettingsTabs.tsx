@@ -48,10 +48,6 @@ const GroupSettingsTabs: React.FC = () => {
             ))}
       </TabList>
       <TabPanels>
-        <TabPanel p="0" mt="24px">
-          <GeneralSettings />
-          {/* <p>ICONs</p> */}
-        </TabPanel>
         {role === 'Creator' && (
           <TabPanel p="0" mt="24px">
             <EditGroupTab />
@@ -63,6 +59,11 @@ const GroupSettingsTabs: React.FC = () => {
             <PermissionTab />
           </TabPanel>
         )}
+
+        <TabPanel p="0" mt="24px">
+          <GeneralSettings />
+          {/* <p>ICONs</p> */}
+        </TabPanel>
 
         {/* <TabPanel p="0" mt="24px">
                 <GeneralSettings />
