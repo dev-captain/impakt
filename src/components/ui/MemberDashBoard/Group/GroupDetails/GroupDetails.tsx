@@ -42,18 +42,18 @@ const GroupDetails: React.FC = () => {
         if (isJoin && groupParam.eventId) {
           const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
 
-          const now = new Date().valueOf();
-          setTimeout(function () {
-            if (new Date().valueOf() - now > 100) return;
-            navigate('/download');
-            toast({
-              title: 'Error',
-              description: 'You have to install this app on your device',
-              isClosable: true,
-              duration: 8000,
-              status: 'error',
-            });
-          }, 5000);
+          // const now = new Date().valueOf();
+          // setTimeout(function () {
+          //   if (new Date().valueOf() - now > 100) return;
+          //   navigate('/download');
+          //   toast({
+          //     title: 'Error',
+          //     description: 'You have to install this app on your device',
+          //     isClosable: true,
+          //     duration: 8000,
+          //     status: 'error',
+          //   });
+          // }, 5000);
 
           window.location = deepLink as any;
 

@@ -115,16 +115,16 @@ const EventDetails: React.FC = () => {
             onClick={(e) => {
               e.preventDefault();
               // eslint-disable-next-line func-names
-              const timeout = window.setTimeout(function () {
-                navigate('/download');
-                toast({
-                  title: 'Error',
-                  description: 'You have to install this app on your device',
-                  isClosable: true,
-                  duration: 8000,
-                  status: 'error',
-                });
-              }, 1000);
+              // const timeout = window.setTimeout(function () {
+              //   navigate('/download');
+              //   toast({
+              //     title: 'Error',
+              //     description: 'You have to install this app on your device',
+              //     isClosable: true,
+              //     duration: 8000,
+              //     status: 'error',
+              //   });
+              // }, 1000);
 
               window.location = deepLink as any;
             }}
