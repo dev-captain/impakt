@@ -15,7 +15,7 @@ const ImpaktTeamMemberCounter: React.FC = () => {
       >
         TEAM MEMBERS
       </Text>
-      <CountUp start={0} end={40} duration={5} separator=" " enableScrollSpy prefix="" suffix="+ ">
+      <CountUp start={0} end={40} duration={1} separator=" " enableScrollSpy prefix="" suffix="+ ">
         {({ countUpRef }) => (
           <Box
             as="span"
