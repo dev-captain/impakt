@@ -15,15 +15,28 @@ const Card: React.FC<CardProps> = ({ company, title, fname, lname, image }) => {
       <VStack pos="relative" zIndex={1}>
         <Box maxW="330px" w="full" rounded="lg">
           <Box>
-            <Image
-              rounded="lg"
-              objectFit="cover"
-              src={image}
-              width={{ md: '221px', base: '130px' }}
-              height={{ md: '221px', base: '130px' }}
-              boxSizing="border-box"
-              borderRadius="50%"
-            />
+            {fname === 'Winston' || fname === 'Hakim' ? (
+              <Box
+                rounded="lg"
+                objectFit="cover"
+                backgroundImage={image}
+                width={{ md: '221px', base: '130px' }}
+                height={{ md: '221px', base: '130px' }}
+                boxSizing="border-box"
+                borderRadius="50%"
+                backgroundRepeat="round"
+              />
+            ) : (
+              <Image
+                rounded="lg"
+                objectFit="cover"
+                src={image}
+                width={{ md: '221px', base: '130px' }}
+                height={{ md: '221px', base: '130px' }}
+                boxSizing="border-box"
+                borderRadius="50%"
+              />
+            )}
           </Box>
         </Box>
       </VStack>

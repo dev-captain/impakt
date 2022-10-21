@@ -10,7 +10,6 @@ const SoundsButton: FC<SoundsButtonPropsI> = ({ onClick, isOn }) => {
   return (
     <Common.ImpaktButton
       bottom="0"
-      position="absolute"
       left="50%"
       transform="translate(-50%, -50%)"
       variant="secondary"

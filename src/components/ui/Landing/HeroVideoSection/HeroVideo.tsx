@@ -76,8 +76,8 @@ const HeroVideo: React.FC = () => {
             <HeroVideoEnterButton onClick={play} />
           </>
         )}
+        <SoundsButton onClick={handleMute} isOn={sound} />
       </Box>
-      <SoundsButton onClick={handleMute} isOn={sound} />
     </Box>
   );
 };
