@@ -21,8 +21,9 @@ import {
   PostsApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
+import { VrGlass } from 'components/icons';
 import axios from '../axios/api';
-import theme from '../../theme';
+import theme, { toastDarkLayout } from '../../theme';
 
 const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
 
@@ -75,18 +76,26 @@ export const configuration = createConfiguration({
                     if (Array.isArray(error.message)) {
                       error.message.forEach((message) => {
                         toast({
+                          id: 'error-msg',
                           description: message,
                           status: 'error',
                           duration: 4000,
                           isClosable: true,
+                          position: 'top-right',
+                          variant: 'glass',
+                          containerStyle: toastDarkLayout,
                         });
                       });
                     } else {
                       toast({
+                        id: 'error-msg',
                         description: error.message,
                         status: 'error',
                         duration: 4000,
                         isClosable: true,
+                        position: 'top-right',
+                        variant: 'glass',
+                        containerStyle: toastDarkLayout,
                       });
                     }
                   }

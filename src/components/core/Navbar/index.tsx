@@ -11,6 +11,7 @@ import {
   useColorMode,
   PositionProps,
   useToast,
+  ScaleFade,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
@@ -20,6 +21,7 @@ import Keys from 'i18n/types';
 import { I, Common } from 'components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 
+import { toastDarkLayout } from 'theme';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -201,13 +203,18 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   <Common.ImpaktButton
                     onClick={async () => {
                       await dispatch(signOutMember()).unwrap();
-                      toast({
-                        title: 'Success',
-                        description: 'You have successfully logged out!',
-                        isClosable: true,
-                        duration: 8000,
-                        status: 'success',
-                      });
+                      <ScaleFade initialScale={1}>
+                        {toast({
+                          title: 'Success',
+                          description: 'You have successfully logged out!',
+                          isClosable: true,
+                          duration: 8000,
+                          status: 'success',
+                          variant: 'glass',
+                          position: 'top-right',
+                          containerStyle: toastDarkLayout,
+                        })}
+                      </ScaleFade>;
                       onClose();
                     }}
                     leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}

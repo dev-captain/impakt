@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { Common, I } from 'components';
 
+import { toastLayout } from 'theme';
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
@@ -95,6 +96,9 @@ const UpdateEventForm: React.FC = () => {
       isClosable: true,
       duration: 8000,
       status: 'success',
+      variant: 'glass',
+      position: 'top-right',
+      containerStyle: toastLayout,
     });
   };
 

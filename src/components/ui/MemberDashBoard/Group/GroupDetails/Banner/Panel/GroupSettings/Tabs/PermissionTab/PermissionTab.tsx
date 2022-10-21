@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
 import { updateGroup } from 'lib/redux/slices/groups/actions/updateGroup';
+import { toastLayout } from 'theme';
 import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
 
@@ -34,7 +35,10 @@ const PermissionTab: React.FC = () => {
         description: 'Group Status Changed successfully.',
         isClosable: true,
         duration: 8000,
+        variant: 'glass',
         status: 'success',
+        position: 'top-right',
+        containerStyle: toastLayout,
       });
     } catch (e: any) {
       toast({
@@ -43,6 +47,7 @@ const PermissionTab: React.FC = () => {
         isClosable: true,
         duration: 8000,
         status: 'error',
+        position: 'top-right',
       });
     }
     navigate('/dashboard/groups');

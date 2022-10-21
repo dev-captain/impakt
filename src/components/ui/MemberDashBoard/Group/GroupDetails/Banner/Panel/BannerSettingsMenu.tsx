@@ -27,7 +27,20 @@ const BannerSettingsMenu: React.FC = () => {
         description: 'Joined successfully',
         isClosable: true,
         duration: 8000,
+        variant: 'glass',
         status: 'success',
+        position: 'top-right',
+        containerStyle: {
+          background: 'rgba(255, 255, 255, 0.5)',
+          border: '1px solid #fff',
+          boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
+          backdropFilter: 'blur(15px)',
+          color: '#000',
+          borderRadius: '16px',
+          position: 'absolute',
+          top: '90px',
+          width: '360px',
+        },
       });
 
       navigate('/dashboard/groups');
@@ -38,6 +51,7 @@ const BannerSettingsMenu: React.FC = () => {
         isClosable: true,
         duration: 8000,
         status: 'error',
+        position: 'top-right',
       });
     }
   };
