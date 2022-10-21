@@ -151,8 +151,8 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                       display="flex"
                       justifyContent={{ base: 'space-between', md: 'start' }}
                     >
-                      <Box onClick={() => navigate('/')} mr="32px">
-                        <I.ImpaktIcon width="111px" height="32px" />
+                      <Box mr="32px">
+                        <I.ImpaktIcon variant="lg" w="111px" whiteMode />
                       </Box>
                       <Box onClick={() => navigate('/download')}>
                         <Common.ImpaktButton>{t(Keys.footer.downloadApp)}</Common.ImpaktButton>

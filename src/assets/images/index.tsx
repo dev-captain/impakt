@@ -7,6 +7,16 @@ const Images = {
   star: require('./star.png'),
   background: require('./Background.png'),
   Common: {
+    logo: {
+      white: {
+        sm: require('./logo/white/Logo-32.png'),
+        md: require('./logo/white/Logo-64.png'),
+        lg: require('./logo/white/Logo-128.png'),
+      },
+      sm: require('./logo/Logo-32x32.png'),
+      md: require('./logo/Logo-64x64.png'),
+      lg: require('./logo/Logo-128x128.png'),
+    },
     Logo: require('./logo.png'),
     HighResLogo: require('./high-res-impakt-logo.png'),
     LogoLight: require('./logo-light.png'),

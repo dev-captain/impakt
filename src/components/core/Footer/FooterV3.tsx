@@ -149,7 +149,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                       justifyContent={{ base: 'space-between', md: 'space-between' }}
                     >
                       <Box onClick={() => navigate('/')} mr="32px">
-                        <I.ImpaktIcon width="111px" height="32px" />
+                        <I.ImpaktIcon variant="lg" width="111px" />
                       </Box>
                       <Box
                         display="flex"
