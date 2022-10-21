@@ -95,7 +95,7 @@ const SignUpForm: React.FC = () => {
       // },
     });
 
-    navigate('/signin');
+    navigate('/download');
   };
 
   const generateRandomFourDigitNumberString = () => {

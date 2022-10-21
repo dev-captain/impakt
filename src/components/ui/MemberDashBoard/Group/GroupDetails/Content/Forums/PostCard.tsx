@@ -9,7 +9,7 @@ interface PostCardPropsI {
   name: string;
   msg: string;
   title: string;
-  msgNo?: number;
+  msgNo: number;
   // view: string;
   time: string;
   onClick?: () => void;
