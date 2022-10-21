@@ -63,7 +63,7 @@ const BigScreenFooter = ({ bgColor, logo, textColor, twitter, youtube, discord }
                   <Text fontSize="12px" lineHeight="16px" opacity="0.6">
                     {t(keys.footer.allRightReserved)}
                   </Text>
-                  <Link href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use">
+                  <Link href="/terms-of-use">
                     <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
                       {t(keys.footer.termOfUse)}
                     </Text>

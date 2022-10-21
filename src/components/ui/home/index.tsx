@@ -1,4 +1,3 @@
-export { default as HeroSection } from 'components/ui/home/HeroSection';
 export { default as EarnCrypto } from 'components/ui/home/EarnCrypto';
 export { default as ImpaktNFT } from 'components/ui/home/ImpaktNFT';
 export { default as ImpaktCreed } from 'components/ui/home/ImpaktCreed';
@@ -6,9 +5,3 @@ export { default as Founder } from 'components/ui/home/Founders';
 export { default as Advisor } from 'components/ui/home/Advisors';
 export { default as ImpaktIcons } from 'components/ui/home/ImpaktIcons';
 export { default as ImpaktFooter } from 'components/core/Footer/FooterV2';
-export { default as Evolving } from 'components/ui/home/Evolving';
-export { default as FitnessJourney } from 'components/ui/home/FitnessJourney';
-export { default as Athletes } from 'components/ui/home/Athletes';
-export { default as ImpaktTeam } from 'components/ui/home/ImpaktTeam';
-export { default as Privacy } from 'components/ui/home/Privacy';
-export { default as HumanNeed } from 'components/ui/home/HumanNeed';

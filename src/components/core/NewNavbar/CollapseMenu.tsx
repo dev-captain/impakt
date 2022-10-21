@@ -1,6 +1,6 @@
 import { VStack, Collapse, useToast, HStack, Box, Image } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
@@ -38,6 +38,7 @@ const CollapseMenu = ({
   tiktok,
 }: Props) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const toast = useToast();
   const member = useAppSelector((state) => state.memberAuth.member);
   const location = useLocation();
@@ -213,13 +214,17 @@ const CollapseMenu = ({
           </HStack>
         </HStack>
         <HStack w="full" align="space-between" flexDirection="column" justify="space-between">
-          <Box>
+          {/* <Box>
             <Common.ImpaktButton color="#F04153" bg="#FDE8EA" gap="8px" padding="10px 14px">
               <I.DownloadIcon width="16px" />
               Developer? SDK Here!
             </Common.ImpaktButton>
-          </Box>
-          <Box marginLeft="0 !important" marginTop="10px !important">
+          </Box> */}
+          <Box
+            onClick={() => navigate('/download')}
+            marginLeft="0 !important"
+            marginTop="10px !important"
+          >
             <Common.ImpaktButton color="#F04153" bg="#FDE8EA" gap="14px" padding="10px 14px">
               <I.DownloadIcon width="16px" />
               Get The App

@@ -8,4 +8,4 @@ export * from './RecoverPassword';
 export * from './ChangePassword';
 export * from './TermsofUse';
 export * from './NFT';
-export * from './Landing';
+export * as Landing from './Landing';

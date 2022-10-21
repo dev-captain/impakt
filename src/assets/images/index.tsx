@@ -7,6 +7,16 @@ const Images = {
   star: require('./star.png'),
   background: require('./Background.png'),
   Common: {
+    logo: {
+      white: {
+        sm: require('./logo/white/Logo-32.png'),
+        md: require('./logo/white/Logo-64.png'),
+        lg: require('./logo/white/Logo-128.png'),
+      },
+      sm: require('./logo/Logo-32x32.png'),
+      md: require('./logo/Logo-64x64.png'),
+      lg: require('./logo/Logo-128x128.png'),
+    },
     Logo: require('./logo.png'),
     HighResLogo: require('./high-res-impakt-logo.png'),
     LogoLight: require('./logo-light.png'),
@@ -106,11 +116,19 @@ const Images = {
     kelvinImg: require('./kelvinImg.png'),
     photoMatt: require('./Photo_Matt.png'),
     photoUyen: require('./Photo_Uyen.png'),
+    photoAaron: require('./Photo_Aaron.png'),
+    photoAaron2: require('./Photo_Aaron2.png'),
+    photoLevi: require('./Photo_Levi.png'),
   },
   Privacy: {
     PrivacyImg1: require('./PrivacyImg1.png'),
     PrivacyImg2: require('./PrivacyImg2.png'),
     PrivacyImg3: require('./PrivacyImg3.png'),
+  },
+  home: {
+    HomeImage: require('./HomeImage.png'),
+    hakim: require('./Hakim.png'),
+    wiston: require('./wiston.png'),
   },
 };
 

@@ -8,7 +8,7 @@ import godlReducer from '../slices/godl/godlSlice';
 import fitnessReducer from '../slices/fitness/fitnessSlice';
 import rewardHistoryReducer from '../slices/rewardHistory/rewardHistorySlice';
 import referralsReducer from '../slices/referrals/referralsSlice';
-import stateReducer from '../slices/state/stateSlice';
+// import stateReducer from '../slices/state/stateSlice';
 import whitelistReducer from '../slices/whitelist/whitelistSlice';
 import discourseReducer from '../slices/discourse/discourseSlice';
 import koinReducer from '../slices/koin/koinSlice';
@@ -33,7 +33,7 @@ const rootReducer = combineReducers({
   fitnessReducer,
   rewardHistoryReducer,
   referrals: referralsReducer,
-  stateReducer,
+  // stateReducer,
   whitelistReducer,
   discourseReducer,
 });
