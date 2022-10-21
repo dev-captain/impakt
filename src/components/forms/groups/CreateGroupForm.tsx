@@ -4,6 +4,7 @@ import { Flex, FormControl, useToast } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Common } from 'components';
+import { toastLayout } from 'theme';
 import { createGroup } from '../../../lib/redux/slices/groups/actions/createGroup';
 import { fetchMyGroups } from '../../../lib/redux/slices/groups/actions/fetchMyGroups';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -32,18 +33,11 @@ const CreateGroupForm: React.FC = ({ children }) => {
       title: 'Success',
       description: 'Group created successfully.',
       isClosable: true,
-      duration: 8000,
+      duration: 800000,
+      status: 'success',
       variant: 'glass',
       position: 'top-right',
-      containerStyle: {
-        background: 'rgba(255, 255, 255, 0.5)',
-        border: '1px solid #fff',
-        boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-        backdropFilter: 'blur(15px)',
-        color: '#000',
-        borderRadius: '16px',
-        width: '360px',
-      },
+      containerStyle: toastLayout,
     });
     navigate('/dashboard/groups');
   };

@@ -23,7 +23,7 @@ import {
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import { VrGlass } from 'components/icons';
 import axios from '../axios/api';
-import theme from '../../theme';
+import theme, { toastDarkLayout } from '../../theme';
 
 const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
 
@@ -79,19 +79,11 @@ export const configuration = createConfiguration({
                           id: 'error-msg',
                           description: message,
                           status: 'error',
-                          duration: 4000000,
+                          duration: 4000,
                           isClosable: true,
                           position: 'top-right',
                           variant: 'glass',
-                          containerStyle: {
-                            background: 'rgba(255, 255, 255, 0.1)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
-                            backdropFilter: 'blur(40px)',
-                            color: '#fff',
-                            borderRadius: '16px',
-                            width: '360px',
-                          },
+                          containerStyle: toastDarkLayout,
                         });
                       });
                     } else {
@@ -99,19 +91,11 @@ export const configuration = createConfiguration({
                         id: 'error-msg',
                         description: error.message,
                         status: 'error',
-                        duration: 4000000,
+                        duration: 4000,
                         isClosable: true,
                         position: 'top-right',
                         variant: 'glass',
-                        containerStyle: {
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
-                          backdropFilter: 'blur(40px)',
-                          color: '#fff',
-                          borderRadius: '16px',
-                          width: '360px',
-                        },
+                        containerStyle: toastDarkLayout,
                       });
                     }
                   }

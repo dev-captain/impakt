@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl, useToast } from '@chakra-ui/react';
 
 import { Common } from 'components';
+import { toastLayout } from 'theme';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
 import { updateGroup } from '../../../lib/redux/slices/groups/actions/updateGroup';
@@ -44,8 +45,11 @@ const UpdateGroupNameForm: React.FC = () => {
         title: 'Success',
         description: 'Group name updated successfully.',
         isClosable: true,
-        duration: 8000,
         status: 'success',
+        duration: 8000,
+        variant: 'glass',
+        position: 'top-right',
+        containerStyle: toastLayout,
       });
     }
   };

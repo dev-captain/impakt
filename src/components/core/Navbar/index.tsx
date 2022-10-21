@@ -21,6 +21,7 @@ import Keys from 'i18n/types';
 import { I, Common } from 'components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 
+import { toastDarkLayout } from 'theme';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -102,25 +103,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         backdropFilter={isScrolling || path.path !== '' ? 'blur(40px)' : 'blur(0px)'}
         borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
       >
-        {/* {toast({
-          title: 'Success',
-          description: 'You have successfully logged out!',
-          isClosable: true,
-          duration: 10000,
-          // status: 'success',
-          variant: 'glass',
-          position: 'top-right',
-          containerStyle: {
-            background: 'rgba(255, 255, 255, 0.1)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
-            backdropFilter: 'blur(40px)',
-            color: '#fff',
-            borderRadius: '16px',
-            position: 'absolute',
-            top: '90px',
-          },
-        })} */}
         <HStack w="full" justify="space-between">
           <Box
             onClick={() => navigate('/')}
@@ -230,15 +212,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                           status: 'success',
                           variant: 'glass',
                           position: 'top-right',
-                          containerStyle: {
-                            background: 'rgba(255, 255, 255, 0.1)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
-                            backdropFilter: 'blur(40px)',
-                            color: '#fff',
-                            borderRadius: '16px',
-                            width: '360px',
-                          },
+                          containerStyle: toastDarkLayout,
                         })}
                       </ScaleFade>;
                       onClose();

@@ -7,6 +7,7 @@ import { Socials } from 'data';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { I } from 'components';
 
+import { toastDarkLayout } from 'theme';
 import NavbarLinkItem from './NavbarLinkItem';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 import SignInLinkItem from './SignInLinkItem';
@@ -114,15 +115,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
                   status: 'success',
                   variant: 'glass',
                   position: 'top-right',
-                  containerStyle: {
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
-                    backdropFilter: 'blur(40px)',
-                    color: '#fff',
-                    borderRadius: '16px',
-                    width: '360px',
-                  },
+                  containerStyle: toastDarkLayout,
                 })}
               </ScaleFade>;
               onClose();

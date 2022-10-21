@@ -87,7 +87,7 @@ const postSlices = createSlice({
         if (a !== -1) {
           state.posts[a] = {
             ...state.posts[a],
-            comment: [...state.posts[a].comment, action.payload],
+            comment: [...state.posts[a]?.comment, action.payload],
           };
         }
         // state.postDetails = [...state.postDetails, action.payload];

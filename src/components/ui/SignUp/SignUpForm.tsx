@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 
+import { toastLayout } from 'theme';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
 import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
@@ -27,6 +28,7 @@ const SignUpForm: React.FC = () => {
       setActiveReferrerId(referrerNumberId);
     }
   }, []);
+  console.log('toastLayout :', toastLayout);
 
   const { handleSubmit, errors, getValues, setValue } = useForm({
     resolver: yupResolver(signUpYupScheme),
@@ -81,15 +83,16 @@ const SignUpForm: React.FC = () => {
       duration: 8000,
       variant: 'glass',
       position: 'top-right',
-      containerStyle: {
-        background: 'rgba(255, 255, 255, 0.5)',
-        border: '1px solid #fff',
-        boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-        backdropFilter: 'blur(15px)',
-        color: '#000',
-        borderRadius: '16px',
-        width: '360px',
-      },
+      containerStyle: toastLayout,
+      // containerStyle: {
+      //   background: 'rgba(255, 255, 255, 0.5)',
+      //   border: '1px solid #fff',
+      //   boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
+      //   backdropFilter: 'blur(15px)',
+      //   color: '#000',
+      //   borderRadius: '16px',
+      //   width: '360px',
+      // },
     });
 
     navigate('/signin');

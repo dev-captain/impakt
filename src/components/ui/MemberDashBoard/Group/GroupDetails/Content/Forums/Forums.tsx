@@ -42,7 +42,7 @@ const Forums: React.FC = () => {
               name={creator?.firstName ?? creator?.username}
               msg={content}
               title={content}
-              msgNo={comment.length}
+              msgNo={comment?.length}
               // view={view}
               time={`${Day.now().hoursBetween(Day.fromString(createdAt.toISOString()))}h`}
             />

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
 import { updateGroup } from 'lib/redux/slices/groups/actions/updateGroup';
+import { toastLayout } from 'theme';
 import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
 
@@ -37,15 +38,7 @@ const PermissionTab: React.FC = () => {
         variant: 'glass',
         status: 'success',
         position: 'top-right',
-        containerStyle: {
-          background: 'rgba(255, 255, 255, 0.5)',
-          border: '1px solid #fff',
-          boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-          backdropFilter: 'blur(15px)',
-          color: '#000',
-          borderRadius: '16px',
-          width: '360px',
-        },
+        containerStyle: toastLayout,
       });
     } catch (e: any) {
       toast({

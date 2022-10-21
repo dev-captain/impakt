@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { toastLayout } from 'theme';
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -51,15 +52,7 @@ const SignInForm: React.FC = () => {
         duration: 8000,
         variant: 'glass',
         position: 'top-right',
-        containerStyle: {
-          background: 'rgba(255, 255, 255, 0.5)',
-          border: '1px solid #fff',
-          boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-          backdropFilter: 'blur(15px)',
-          color: '#000',
-          borderRadius: '16px',
-          width: '360px',
-        },
+        containerStyle: toastLayout,
       })}
     </ScaleFade>;
   };

@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { I } from 'components';
 import { useAppDispatch, useAppSelector } from 'hooks';
 
+import { toastDarkLayout } from 'theme';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 
 const DropDownProfileMenu: React.FC = () => {
@@ -63,6 +64,9 @@ const DropDownProfileMenu: React.FC = () => {
               isClosable: true,
               duration: 8000,
               status: 'success',
+              variant: 'glass',
+              position: 'top-right',
+              containerStyle: toastDarkLayout,
             });
           }}
           icon={<I.SignOutIcon />}

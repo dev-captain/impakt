@@ -4,6 +4,7 @@ import { DeleteIcon } from '@chakra-ui/icons';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
+import { toastLayout } from 'theme';
 import { deleteGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/deleteGroup';
 import { leaveGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/leaveGroup';
 import GroupsModal from '../../../../../../GroupsModal';
@@ -32,27 +33,24 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
           description: `Group is deleted successfully`,
           isClosable: true,
           duration: 8000,
+          status: 'success',
           variant: 'glass',
           position: 'top-right',
-          containerStyle: {
-            background: 'rgba(255, 255, 255, 0.5)',
-            border: '1px solid #fff',
-            boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-            backdropFilter: 'blur(15px)',
-            color: '#000',
-            borderRadius: '16px',
-            width: '360px',
-          },
+          containerStyle: toastLayout,
         });
         navigate('/dashboard/groups');
       }
     } catch (e: any) {
       toast({
+        id: 'error-msg',
         title: 'Error',
         description: `${e.response.data.message}`,
         isClosable: true,
         duration: 8000,
         status: 'error',
+        variant: 'glass',
+        position: 'top-right',
+        containerStyle: toastLayout,
       });
     }
   };
@@ -67,15 +65,22 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
           isClosable: true,
           duration: 8000,
           status: 'success',
+          variant: 'glass',
+          position: 'top-right',
+          containerStyle: toastLayout,
         });
       }
     } catch (e: any) {
       toast({
+        id: 'error-msg',
         title: 'Error',
         description: `You can't leave your owned group`,
         isClosable: true,
         duration: 8000,
         status: 'error',
+        variant: 'glass',
+        position: 'top-right',
+        containerStyle: toastLayout,
       });
     }
 
