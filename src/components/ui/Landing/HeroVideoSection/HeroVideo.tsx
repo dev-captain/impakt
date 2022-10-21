@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 
 // import { useAppSelector } from 'hooks';
 import { Videos } from '../../../../data';
@@ -28,6 +28,11 @@ const HeroVideo: React.FC = () => {
     if (!videoBoxRef.current) return;
     videoBoxRef.current.style.maxHeight = '0';
   };
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, []);
 
   return (
     <Box
@@ -47,8 +52,8 @@ const HeroVideo: React.FC = () => {
         objectFit="cover"
         ref={videoRef}
         src={Videos.newVideo}
-        autoPlay
         controls={false}
+        autoPlay
         onEnded={() => endVideo()}
         playsInline
       >
