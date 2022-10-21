@@ -28,7 +28,7 @@ const fetchAvailableChallengesForGroup = createAsyncThunk(
         undefined,
         undefined,
         undefined,
-        true,
+        false,
         true,
         undefined,
         admin?.user.id,
