@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, Box, VStack, Image } from '@chakra-ui/react';
+import { Text, Box, VStack } from '@chakra-ui/react';
 
 interface CardProps {
   company: string;
@@ -15,28 +15,16 @@ const Card: React.FC<CardProps> = ({ company, title, fname, lname, image }) => {
       <VStack pos="relative" zIndex={1}>
         <Box maxW="330px" w="full" rounded="lg">
           <Box>
-            {fname === 'Winston' || fname === 'Hakim' ? (
-              <Box
-                rounded="lg"
-                objectFit="cover"
-                backgroundImage={image}
-                width={{ md: '221px', base: '130px' }}
-                height={{ md: '221px', base: '130px' }}
-                boxSizing="border-box"
-                borderRadius="50%"
-                backgroundRepeat="round"
-              />
-            ) : (
-              <Image
-                rounded="lg"
-                objectFit="cover"
-                src={image}
-                width={{ md: '221px', base: '130px' }}
-                height={{ md: '221px', base: '130px' }}
-                boxSizing="border-box"
-                borderRadius="50%"
-              />
-            )}
+            <Box
+              rounded="lg"
+              objectFit="cover"
+              backgroundImage={image}
+              width={{ md: '221px', base: '130px' }}
+              height={{ md: '221px', base: '130px' }}
+              boxSizing="border-box"
+              borderRadius="50%"
+              backgroundRepeat="round"
+            />
           </Box>
         </Box>
       </VStack>
@@ -62,17 +50,11 @@ const Card: React.FC<CardProps> = ({ company, title, fname, lname, image }) => {
             mt="10px"
           >
             {title}{' '}
-            <Text as="span" color="#1C1C28">
-              {company}
-            </Text>
           </Text>
         )}
-
-        {!title && (
-          <Text as="span" color="#1C1C28">
-            {company}
-          </Text>
-        )}
+        <Text as="span" color="#1C1C28">
+          {company}
+        </Text>
       </Box>
     </VStack>
   );

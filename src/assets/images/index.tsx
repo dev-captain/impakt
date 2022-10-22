@@ -65,8 +65,13 @@ const Images = {
   },
   advisor: {
     kevin: require('./advisor/kevin.png'),
+    chris: require('./advisor/chris3.png'),
     tim: require('./advisor/tim.png'),
     kai: require('./advisor/kai.png'),
+  },
+  partners: {
+    john: require('./partners/john.png'),
+    jeremy: require('./partners/jeremy.jpg'),
   },
   team: {
     // cap: require('./team/cap.png'),
