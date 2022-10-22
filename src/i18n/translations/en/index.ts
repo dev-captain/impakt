@@ -382,7 +382,7 @@ export default {
         linkedInLink: '',
         facebookLink: '',
         followers: '1M+ Followers',
-        data: ['UFC Fighter and Champion of UFC Ultimate Fighter 17'],
+        data: ['UFC Fighter and Winner of UFC Ultimate Fighter 17'],
       },
       {
         name: 'Matt Fox',
@@ -480,6 +480,38 @@ export default {
         fname: 'Kai',
         lname: 'Huang',
         img: Images.advisor.kai,
+      },
+      {
+        company: '6x Oscar Nomination',
+        job: 'Oscar Winner in VFX',
+        fname: 'Chris',
+        lname: 'Armsden',
+        img: Images.advisor.chris,
+      },
+    ],
+  },
+  officalPartners: {
+    data: [
+      {
+        company: 'WCFN',
+        job: 'Founder of',
+        fname: 'John',
+        lname: 'Graham',
+        img: Images.partners.john,
+      },
+      // {
+      //   company: 'Nike',
+      //   job: 'Former Athlete',
+      //   fname: 'John',
+      //   lname: 'Graham',
+      //   img: Images.advisor.kai,
+      // },
+      {
+        company: 'Chains.com',
+        job: 'Director APAC of',
+        fname: 'Jeremy',
+        lname: 'Chou',
+        img: Images.partners.jeremy,
       },
     ],
   },
