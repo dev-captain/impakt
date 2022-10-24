@@ -38,6 +38,7 @@
       }
     ],
     "no-use-before-define": "off",
+    "no-redeclare": "off",
     "import/extensions": ["error", "never"],
     "react/prop-types": 0,
     "no-shadow": "off",

@@ -80,10 +80,11 @@
     "eject": "react-scripts eject",
     "lint:watch": "esw src -w --ext ts,tsx,jsx,js --color",
     "lint": "eslint  \"./src/**/*.{ts,tsx,jsx,js}\"",
-    "lint:fix": "yarn lint --fix ",
+    "lint:fix": "yarn eslint  \"./src/**/*.{ts,tsx,jsx,js}\" --fix ",
     "validate": "yarn prettier --check \"./src/**/*.{ts,tsx,js,jsx}\" && yarn lint",
     "format": "prettier --write \"./src/**/*.{ts,tsx,js,jsx}\"",
-    "format:test": "prettier --write \"./src/**/*.spec.{ts,tsx,js,jsx}\""
+    "format:test": "prettier --write \"./src/**/*.spec.{ts,tsx,js,jsx}\"",
+    "generate-client":"orval --tslint"
   },
   "husky": {
     "hooks": {

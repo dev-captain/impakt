@@ -22,6 +22,7 @@ const NFTGenesis = () => {
   const [isLessThan1040] = useMediaQuery('(max-width: 1080px)');
   let Genesis = useState<object[]>();
   Genesis = t('NFTGenesis.Genesis', { returnObjects: true });
+
   return (
     <C.HeroLayout
       //   showNavbar
