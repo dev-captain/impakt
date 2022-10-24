@@ -28,7 +28,7 @@ const ImpaktTeamAdvisors: React.FC = () => {
           textTransform="uppercase"
           textAlign="center"
         >
-          Advisors
+          Select Advisors
         </Text>
         <HStack
           w="full"

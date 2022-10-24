@@ -70,7 +70,7 @@ const Images = {
     kai: require('./advisor/kai.png'),
   },
   partners: {
-    john: require('./partners/john.png'),
+    john: require('./partners/john.jpg'),
     jeremy: require('./partners/jeremy.jpg'),
   },
   team: {
