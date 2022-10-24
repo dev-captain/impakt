@@ -6,5 +6,5 @@
  */
 
 export type UploadControllerUploadFileBody = {
-  file?: unknown;
+  file?: Blob;
 };
