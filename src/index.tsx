@@ -7,11 +7,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './lib/redux/store';
 import { PusherContextProvider } from './context/PusherContext';
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,7 +25,9 @@ ReactDOM.render(
             <BrowserRouter>
               <ChakraProvider theme={theme}>
                 <ColorModeScript initialColorMode="light" />
-                <App />
+                <QueryClientProvider client={queryClient}>
+                  <App />
+                </QueryClientProvider>
               </ChakraProvider>
             </BrowserRouter>
           </HelmetProvider>

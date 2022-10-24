@@ -7,11 +7,13 @@
     "@chakra-ui/react": "^1.7.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@faker-js/faker": "^7.6.0",
     "@hookform/resolvers": "^2.8.8",
-    "@impakt-dev/api-client": "^0.31.0-alpha-1-1239",
+    "@impakt-dev/api-client": "^0.36.1-1388",
     "@reduxjs/toolkit": "^1.8.2",
     "@rematch/core": "^2.2.0",
     "@splidejs/react-splide": "^0.7.12",
+    "@tanstack/react-query": "^4.13.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -29,6 +31,7 @@
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.3",
     "moment": "^2.29.4",
+    "msw": "^0.47.4",
     "pusher-js": "^7.1.1-beta",
     "react": "^17.0.2",
     "react-countup": "^6.3.2",
@@ -84,7 +87,7 @@
     "validate": "yarn prettier --check \"./src/**/*.{ts,tsx,js,jsx}\" && yarn lint",
     "format": "prettier --write \"./src/**/*.{ts,tsx,js,jsx}\"",
     "format:test": "prettier --write \"./src/**/*.spec.{ts,tsx,js,jsx}\"",
-    "generate-client":"orval --tslint"
+    "generate-client": "orval && yarn eslint  \"./src/lib/impakt-dev-api-client/**/*.{ts,tsx,jsx,js}\" --fix  "
   },
   "husky": {
     "hooks": {
