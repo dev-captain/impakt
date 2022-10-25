@@ -7,6 +7,7 @@ import { useAppSelector, useAppDispatch } from 'hooks';
 
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
+import { usePersistedAuthStore } from '../../lib/zustand';
 
 const SignIn = () => {
   const isThereNextParam = useLocation().search.includes('next');
@@ -17,7 +18,7 @@ const SignIn = () => {
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const requestAccessTokenAttemp = useAppSelector(
     (state) => state.memberAuth.requestAccessTokenAttemptCount,
   );
@@ -84,7 +85,7 @@ const SignIn = () => {
         navigate(navigateTo);
       }
     }
-  }, [member, requestAccessTokenAttemp]);
+  }, [requestAccessTokenAttemp]);
 
   return (
     <C.HeroLayout

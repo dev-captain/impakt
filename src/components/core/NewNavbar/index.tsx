@@ -10,16 +10,14 @@ import {
   useMediaQuery,
   useColorMode,
   // PositionProps,
-  useToast,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { parsePathname } from 'utils';
+import { parsePathname, renderToast } from 'utils';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppDispatch } from 'hooks';
 
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -27,7 +25,8 @@ import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import { useAuthControllerLogout } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
+import { usePersistedAuthStore } from '../../../lib/zustand';
 
 interface NavbarProps {
   // position?: PositionProps['position'];
@@ -38,8 +37,8 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tik
   Images.Common;
 
 const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
-  const dispatch = useAppDispatch();
-  const toast = useToast();
+  const signOut = useAuthControllerLogout();
+  const { setMember } = usePersistedAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -237,15 +236,11 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
 
                   <Common.ImpaktButton
                     onClick={async () => {
-                      await dispatch(signOutMember()).unwrap();
-                      toast({
-                        title: 'Success',
-                        description: 'You have successfully logged out!',
-                        isClosable: true,
-                        duration: 8000,
-                        status: 'success',
+                      await signOut.mutateAsync().then(() => {
+                        renderToast('success', 'You have successfully logged out!');
+                        setMember(null);
+                        onClose();
                       });
-                      onClose();
                     }}
                     leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}
                     variant="alert"

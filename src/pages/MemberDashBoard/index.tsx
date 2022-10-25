@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { C } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch } from 'hooks';
 
 import { fetchGodlBalanceScore } from '../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchActiveDays';
@@ -15,6 +15,7 @@ import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNew
 import { fetchKoinBalanceScore } from '../../lib/redux/slices/koin/actions/fetchKoinBalanceScore';
 import { fetchReferralsRewardGodl } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardGodl';
 import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardKoin';
+import { usePersistedAuthStore } from '../../lib/zustand';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -24,7 +25,7 @@ import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actio
 // import MemberDashboardCard from '../../components/ui/MemberDashBoard/MemberDashBoardCard';
 
 const MemberDashboard: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {

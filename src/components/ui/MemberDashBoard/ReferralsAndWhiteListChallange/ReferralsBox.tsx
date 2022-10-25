@@ -15,10 +15,11 @@ import * as React from 'react';
 import { useAppSelector } from 'hooks';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import MemberDashboardCard from '../MemberDashBoardCard';
+import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 interface PropsI {}
 const ReferralsBox: React.FC<PropsI> = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const referralsRegisteredNumber = useAppSelector((state) => state.referrals.referrals.totalCount);
   const referralsChallangesHaveDone = useAppSelector(
     (state) => state.referrals.referralsChallengesHaveDone,

@@ -7,12 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { updateMember } from '../../../../lib/redux/slices/member/actions/updateMember';
 import walletAddressFormYupScheme from '../../../../lib/yup/schemas/walletAddressScheme';
 import { InputGroupPropsI } from '../../../common/InputGroup';
+import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 const WalletAddressForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [showPasswordSection, setShowPasswordSection] = React.useState(false);
   const [isShowPassword, setIsShowPassword] = React.useState(false);
 
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const toast = useToast();
   const dispatch = useAppDispatch();

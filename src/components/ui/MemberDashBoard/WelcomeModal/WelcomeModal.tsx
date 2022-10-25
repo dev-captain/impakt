@@ -5,9 +5,10 @@ import { useAppSelector } from 'hooks';
 
 import Whitelist from '../../../../assets/svgs/Vector.svg';
 import MemberDashboardCard from '../MemberDashBoardCard';
+import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 const WelcomeModal: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
   const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
   const koinBalanceScore = useAppSelector((state) => state.koin.koinBalanceScore);

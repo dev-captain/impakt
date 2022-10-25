@@ -5,16 +5,24 @@ import { LoginReq } from '@impakt-dev/api-client';
 import { useState } from 'react';
 import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { parseUrlQueryParamsToKeyValuePairs, renderToast } from '../../../utils';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import signInFormYupScheme from '../../../lib/yup/schemas/signInYupScheme';
 import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
+import { usePersistedAuthStore } from '../../../lib/zustand';
 
 const SignInForm: React.FC = () => {
+  const navigate = useNavigate();
+  const isThereNextParam = useLocation().search.includes('next');
+  const navigateTo = isThereNextParam ? useLocation().search.split('=')[1] : '/dashboard';
   const signIn = useAuthControllerLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
+  const { setMember } = usePersistedAuthStore();
+
+  // const navigate = useNavigate();
 
   const { handleSubmit, errors, setValue } = useForm({
     defaultValues: { email: '', password: '' },
@@ -40,8 +48,10 @@ const SignInForm: React.FC = () => {
     signIn.mutate(
       { data: { ...signInPayload } },
       {
-        onSuccess: () => {
+        onSuccess: (member) => {
+          setMember(member);
           renderToast('success', 'Welcome');
+          navigate(navigateTo);
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong');

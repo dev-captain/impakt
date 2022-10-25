@@ -1,14 +1,14 @@
-import { VStack, Collapse, useToast, HStack, Box, Image, Link, Button } from '@chakra-ui/react';
+import { VStack, Collapse, HStack, Box, Image, Link, Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { parsePathname } from 'utils';
+import { parsePathname, renderToast } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
-import { useAppDispatch, useAppSelector } from 'hooks';
 
 import NavbarLinkItem from './NavbarLinkItem';
-import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 import SignInLinkItem from './SignInLinkItem';
+import { useAuthControllerLogout } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
+import { usePersistedAuthStore } from '../../../lib/zustand';
 
 type Props = {
   bg: string;
@@ -36,9 +36,8 @@ const CollapseMenu = ({
   youtube,
   tiktok,
 }: Props) => {
-  const dispatch = useAppDispatch();
-  const toast = useToast();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const signOut = useAuthControllerLogout();
+  const { setMember, member } = usePersistedAuthStore();
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;
@@ -112,15 +111,11 @@ const CollapseMenu = ({
             isSmall
             href="#"
             onClose={async () => {
-              await dispatch(signOutMember()).unwrap();
-              toast({
-                title: 'Success',
-                description: 'You have successfully logged out!',
-                isClosable: true,
-                duration: 8000,
-                status: 'success',
+              await signOut.mutateAsync().then(() => {
+                renderToast('success', 'You have successfully logged out!');
+                setMember(null);
+                onClose();
               });
-              onClose();
             }}
             title={t(Keys.navbar.signOut)}
             isActive={path.path === '#'}
