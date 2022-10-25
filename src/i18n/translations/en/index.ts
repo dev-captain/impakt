@@ -482,7 +482,7 @@ export default {
         img: Images.advisor.kai,
       },
       {
-        company: '6x Oscar Nomination',
+        company: '6 Oscar Nomination',
         job: 'Oscar Winner in VFX',
         fname: 'Chris',
         lname: 'Armsden',
