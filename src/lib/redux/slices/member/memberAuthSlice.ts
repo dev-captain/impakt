@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GetUserRes } from '@impakt-dev/api-client';
 
-import { signInMember } from './actions/signInMember';
-import { signOutMember } from './actions/signOutMember';
 import { forgotPassword } from './actions/forgotPassword';
 import { requestVerification } from './actions/requestVerification';
 import { requestAccessToken } from './actions/requestAccessToken';
@@ -48,34 +46,6 @@ const memberAuthSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(signUpMember.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(signInMember.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(signInMember.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.member = action.payload;
-        state.isLogin = true;
-      })
-      .addCase(signInMember.rejected, (state) => {
-        state.isLoading = false;
-        state.member = null;
-        state.isLogin = false;
-      });
-
-    builder
-      .addCase(signOutMember.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(signOutMember.fulfilled, (state) => {
-        state.isLoading = false;
-        state.member = null;
-        state.isLogin = false;
-      })
-      .addCase(signOutMember.rejected, (state) => {
         state.isLoading = false;
       });
 
