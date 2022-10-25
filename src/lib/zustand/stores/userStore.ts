@@ -1,11 +1,12 @@
 import { StateCreator } from 'zustand';
+import { GetUserRes } from '../../impakt-dev-api-client/react-query/types';
 
 export interface UserSlice {
-  bears: number;
-  addBear: () => void;
+  user: GetUserRes | null;
+  setUser: (user: GetUserRes) => void;
 }
 
 export const createUserSlice: StateCreator<UserSlice> = (set) => ({
-  bears: 0,
-  addBear: () => set((state) => ({ bears: state.bears + 1 })),
+  user: null,
+  setUser: (user) => set(() => ({ user })),
 });
