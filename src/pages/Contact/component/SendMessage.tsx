@@ -104,6 +104,7 @@ const SendMessage = () => {
               <VStack w="full" spacing="16px">
                 <Common.TextField
                   name="name"
+                  value={values.name}
                   isOutlined
                   fontSize="14px"
                   onChange={onChange}
@@ -113,6 +114,7 @@ const SendMessage = () => {
                 />
                 <Common.TextField
                   name="email"
+                  value={values.email}
                   isOutlined
                   fontSize="14px"
                   onChange={onChange}
@@ -122,6 +124,7 @@ const SendMessage = () => {
                 />
                 <Common.TextField
                   isOutlined
+                  value={values.subject}
                   name="subject"
                   fontSize="14px"
                   onChange={onChange}
@@ -133,6 +136,7 @@ const SendMessage = () => {
                   isOutlined
                   name="message"
                   fontSize="14px"
+                  value={values.message}
                   onChange={onChange}
                   textStyle="regular2"
                   placeholder={t(keys.contact.yourMessage)}
