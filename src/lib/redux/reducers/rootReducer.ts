@@ -3,7 +3,6 @@ import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 
 import knowledgeBaseReducer from '../slices/knowledgeBase/knowledgeBaseSlice';
-import godlReducer from '../slices/godl/godlSlice';
 import fitnessReducer from '../slices/fitness/fitnessSlice';
 import rewardHistoryReducer from '../slices/rewardHistory/rewardHistorySlice';
 import referralsReducer from '../slices/referrals/referralsSlice';
@@ -20,7 +19,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   knowledgeBase: knowledgeBaseReducer,
-  godl: godlReducer,
   koin: koinReducer,
   fitnessReducer,
   rewardHistoryReducer,
