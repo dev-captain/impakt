@@ -2,9 +2,11 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 import { authSlice, AuthSlice } from './stores/authStore';
 import { godlSlice, GodlSlice } from './stores/godlStore';
+import { KoinSlice, koinSlice } from './stores/koinStore';
 
-export const useStore = create<GodlSlice>()((...a) => ({
+export const useStore = create<GodlSlice & KoinSlice>()((...a) => ({
   ...godlSlice(...a),
+  ...koinSlice(...a),
 }));
 
 export const usePersistedAuthStore = create<AuthSlice>()(

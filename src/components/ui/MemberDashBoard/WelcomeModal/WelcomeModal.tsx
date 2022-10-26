@@ -10,8 +10,7 @@ import { usePersistedAuthStore, useStore } from '../../../../lib/zustand';
 const WelcomeModal: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
-  const { godlBalanceScore } = useStore();
-  const koinBalanceScore = useAppSelector((state) => state.koin.koinBalanceScore);
+  const { godlBalanceScore, koinBalanceScore } = useStore();
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');

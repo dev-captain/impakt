@@ -33,8 +33,11 @@ const MemberDashboard: React.FC = () => {
 
   React.useEffect(() => {
     store.setGodlBalanceScore(fetchGodlBalanceScore.data?.balance ?? 0);
-    console.log(fetchKoinBalanceScore);
   }, [fetchGodlBalanceScore.data]);
+
+  React.useEffect(() => {
+    store.setKoinBalanceScore(fetchKoinBalanceScore.data?.balance ?? 0);
+  }, [fetchKoinBalanceScore.data]);
 
   React.useEffect(() => {
     if (!member) return;
