@@ -1,22 +1,21 @@
-import { Box, FormControl, HStack, useToast, Text } from '@chakra-ui/react';
+import { Box, FormControl, HStack, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { updateMember } from '../../../../lib/redux/slices/member/actions/updateMember';
 import walletAddressFormYupScheme from '../../../../lib/yup/schemas/walletAddressScheme';
 import { InputGroupPropsI } from '../../../common/InputGroup';
 import { usePersistedAuthStore } from '../../../../lib/zustand';
+import { useUserControllerPatchOne } from '../../../../lib/impakt-dev-api-client/react-query/users/users';
+import { renderToast } from '../../../../utils';
 
 const WalletAddressForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [showPasswordSection, setShowPasswordSection] = React.useState(false);
   const [isShowPassword, setIsShowPassword] = React.useState(false);
 
   const { member } = usePersistedAuthStore();
-  const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
-  const toast = useToast();
-  const dispatch = useAppDispatch();
+  const updateMember = useUserControllerPatchOne();
 
   const { handleSubmit, errors, getValues, setValue, isDirty } = useForm({
     defaultValues: {
@@ -43,17 +42,17 @@ const WalletAddressForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   }) => {
     if (!member) return;
     if (isDirty) {
-      await dispatch(
-        updateMember({ id: member.id, data: { cryptoWallet: walletAddress, password } }),
-      ).unwrap();
-
-      toast({
-        title: 'Success',
-        description: '“Your crypto wallet address has been updated successfully.” ',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
+      updateMember.mutate(
+        { id: member.id, data: { cryptoWallet: walletAddress, password } },
+        {
+          onSuccess: () => {
+            renderToast('success', 'Your crypto wallet address has been updated successfully.');
+          },
+          onError: (err) => {
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          },
+        },
+      );
 
       onClose();
     }
@@ -160,8 +159,8 @@ const WalletAddressForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           {showPasswordSection ? (
             <Common.ImpaktButton
               marginTop="15px"
-              isLoading={isMemberAuthLoading}
-              disabled={!isDirty || !!errors.walletAddress || isMemberAuthLoading}
+              isLoading={updateMember.isLoading}
+              disabled={!isDirty || !!errors.walletAddress || updateMember.isLoading}
               minW={{ base: '100%', md: '137px' }}
               size="lg"
               type="submit"
@@ -170,8 +169,8 @@ const WalletAddressForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             </Common.ImpaktButton>
           ) : (
             <Common.ImpaktButton
-              isLoading={isMemberAuthLoading}
-              disabled={!isDirty || !!errors.walletAddress || isMemberAuthLoading}
+              isLoading={updateMember.isLoading}
+              disabled={!isDirty || !!errors.walletAddress || updateMember.isLoading}
               minW={{ base: '100%', md: '137px' }}
               size="lg"
               type="button"
