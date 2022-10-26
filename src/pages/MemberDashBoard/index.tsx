@@ -10,11 +10,11 @@ import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchRe
 import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
 // import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
-import { fetchKoinBalanceScore } from '../../lib/redux/slices/koin/actions/fetchKoinBalanceScore';
 import { fetchReferralsRewardGodl } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardGodl';
 import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardKoin';
 import { usePersistedAuthStore, useStore } from '../../lib/zustand';
 import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
+import { useCoinAccountControllerV1GetAccount } from '../../lib/impakt-dev-api-client/react-query/coin/coin';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -27,11 +27,13 @@ const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const store = useStore();
   const fetchGodlBalanceScore = useGodlAccountControllerGetAccount();
+  const fetchKoinBalanceScore = useCoinAccountControllerV1GetAccount();
+
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     store.setGodlBalanceScore(fetchGodlBalanceScore.data?.balance ?? 0);
-    dispatch(fetchKoinBalanceScore());
+    console.log(fetchKoinBalanceScore);
   }, [fetchGodlBalanceScore.data]);
 
   React.useEffect(() => {
