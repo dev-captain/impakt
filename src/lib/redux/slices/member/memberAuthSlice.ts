@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GetUserRes } from '@impakt-dev/api-client';
 
 import { requestAccessToken } from './actions/requestAccessToken';
-import { fetchMember } from './actions/fetchMember';
 import { updateMember } from './actions/updateMember';
 
 interface MemberAuthInitialI {
@@ -45,18 +44,6 @@ const memberAuthSlice = createSlice({
         state.member = action.payload;
       })
       .addCase(requestAccessToken.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(fetchMember.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchMember.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.member = action.payload;
-      })
-      .addCase(fetchMember.rejected, (state) => {
         state.isLoading = false;
       });
 

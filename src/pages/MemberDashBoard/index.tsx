@@ -9,7 +9,6 @@ import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchAct
 // import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
 import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchReferrals';
 import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
-import { fetchMember } from '../../lib/redux/slices/member/actions/fetchMember';
 // import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
 import { fetchKoinBalanceScore } from '../../lib/redux/slices/koin/actions/fetchKoinBalanceScore';
@@ -27,11 +26,6 @@ import { usePersistedAuthStore } from '../../lib/zustand';
 const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(fetchMember(member.id));
-  }, []);
 
   React.useEffect(() => {
     dispatch(fetchGodlBalanceScore());
