@@ -1,21 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// import { FitnessInstance } from '../../../../impakt-dev-api-client/init';
-import { RootState } from '../../../store';
-
 const fetchRewardHistory = createAsyncThunk(
   'fitness/fetch-reward-history',
-  async (userId: number, { rejectWithValue, getState }) => {
+  async (userId: number, { rejectWithValue }) => {
     try {
-      const {
-        memberAuth: { isLogin },
-      } = getState() as RootState;
-
-      if (!isLogin) {
-        return Promise.reject(new Error('Please Sign In first to continue'));
-      }
-
       // const { exerciseStats } = await FitnessInstance.fitnessStatsControllerGetExerciseStats(
       //   userId,
       // );

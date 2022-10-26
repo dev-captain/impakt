@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 
-import memberAuth from '../slices/member/memberAuthSlice';
 import knowledgeBaseReducer from '../slices/knowledgeBase/knowledgeBaseSlice';
 import godlReducer from '../slices/godl/godlSlice';
 import fitnessReducer from '../slices/fitness/fitnessSlice';
@@ -16,17 +15,10 @@ import koinReducer from '../slices/koin/koinSlice';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['memberAuth', 'stateReducer'],
-};
-
-export const memberAuthPersistConfig = {
-  key: 'memberAuth',
-  storage,
-  blacklist: ['isLoading', 'requestAccessTokenAttemptCount'],
+  blacklist: ['stateReducer'],
 };
 
 const rootReducer = combineReducers({
-  memberAuth: persistReducer(memberAuthPersistConfig, memberAuth),
   knowledgeBase: knowledgeBaseReducer,
   godl: godlReducer,
   koin: koinReducer,

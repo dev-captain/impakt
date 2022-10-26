@@ -1,18 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ReferralsInstance } from '../../../../impakt-dev-api-client/init';
-import { RootState } from '../../../store';
 
 const fetchReferrals = createAsyncThunk(
   'referrals/fetchReferrals',
-  async ({ count }: { count: boolean }, { rejectWithValue, getState }) => {
+  async ({ count }: { count: boolean }, { rejectWithValue }) => {
     try {
-      const {
-        memberAuth: { isLogin },
-      } = getState() as RootState;
-
-      if (!isLogin) {
-        return Promise.reject(new Error('Please Sign In first to continue'));
-      }
       const referralsRes = await ReferralsInstance.referralControllerGetReferrees(count);
 
       return referralsRes;

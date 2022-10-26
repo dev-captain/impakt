@@ -1,20 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { godlInstance } from '../../../../impakt-dev-api-client/init';
-import { RootState } from '../../../store';
 
 const fetchGodlBalanceScore = createAsyncThunk(
   'godl/balance-score',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const {
-        memberAuth: { isLogin },
-      } = getState() as RootState;
-
-      if (!isLogin) {
-        return Promise.reject(new Error('Please sign in first to continue...'));
-      }
-
       const godl = await godlInstance.godlAccountControllerGetAccount();
 
       return godl.balance;

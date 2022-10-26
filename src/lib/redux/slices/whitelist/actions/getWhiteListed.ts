@@ -1,20 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { UserInstance } from '../../../../impakt-dev-api-client/init';
-import { RootState } from '../../../store';
 
 const getWhiteListed = createAsyncThunk(
   'fitness/get-whitelisted',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const {
-        memberAuth: { isLogin },
-      } = getState() as RootState;
-
-      if (!isLogin) {
-        return Promise.reject(new Error('Please Sign In first to continue'));
-      }
-
       const { isWhitelisted } = await UserInstance.userControllerIsWhitelisted();
 
       return isWhitelisted;
