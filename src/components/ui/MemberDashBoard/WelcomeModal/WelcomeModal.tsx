@@ -5,12 +5,12 @@ import { useAppSelector } from 'hooks';
 
 import Whitelist from '../../../../assets/svgs/Vector.svg';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import { usePersistedAuthStore } from '../../../../lib/zustand';
+import { usePersistedAuthStore, useStore } from '../../../../lib/zustand';
 
 const WelcomeModal: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
-  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
+  const { godlBalanceScore } = useStore();
   const koinBalanceScore = useAppSelector((state) => state.koin.koinBalanceScore);
   const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;

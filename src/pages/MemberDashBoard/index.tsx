@@ -13,7 +13,7 @@ import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNew
 import { fetchKoinBalanceScore } from '../../lib/redux/slices/koin/actions/fetchKoinBalanceScore';
 import { fetchReferralsRewardGodl } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardGodl';
 import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardKoin';
-import { usePersistedAuthStore } from '../../lib/zustand';
+import { usePersistedAuthStore, useStore } from '../../lib/zustand';
 import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
@@ -25,10 +25,12 @@ import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-cli
 
 const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
+  const store = useStore();
   const fetchGodlBalanceScore = useGodlAccountControllerGetAccount();
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
+    store.setGodlBalanceScore(fetchGodlBalanceScore.data?.balance ?? 0);
     dispatch(fetchKoinBalanceScore());
   }, [fetchGodlBalanceScore.data]);
 
