@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchGodlBalanceScore } from './actions/fetchGodlBalanceScore';
-
 interface GodlInitialI {
   isLoading: boolean;
   godlBalanceScore: number;
@@ -20,19 +18,6 @@ const godlSlice = createSlice({
       state.godlBalanceScore = 0;
       state.isLoading = false;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchGodlBalanceScore.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchGodlBalanceScore.fulfilled, (state, action) => {
-        state.godlBalanceScore = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(fetchGodlBalanceScore.rejected, (state) => {
-        state.isLoading = false;
-      });
   },
 });
 

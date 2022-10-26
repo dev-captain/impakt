@@ -3,7 +3,6 @@ import * as React from 'react';
 import { C } from 'components';
 import { useAppDispatch } from 'hooks';
 
-import { fetchGodlBalanceScore } from '../../lib/redux/slices/godl/actions/fetchGodlBalanceScore';
 import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchActiveDays';
 // import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
 // import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
@@ -15,6 +14,7 @@ import { fetchKoinBalanceScore } from '../../lib/redux/slices/koin/actions/fetch
 import { fetchReferralsRewardGodl } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardGodl';
 import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardKoin';
 import { usePersistedAuthStore } from '../../lib/zustand';
+import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -25,12 +25,12 @@ import { usePersistedAuthStore } from '../../lib/zustand';
 
 const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
+  const fetchGodlBalanceScore = useGodlAccountControllerGetAccount();
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchGodlBalanceScore());
     dispatch(fetchKoinBalanceScore());
-  }, []);
+  }, [fetchGodlBalanceScore.data]);
 
   React.useEffect(() => {
     if (!member) return;
