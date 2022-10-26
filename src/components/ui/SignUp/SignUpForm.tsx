@@ -17,7 +17,6 @@ const SignUpForm: React.FC = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  // const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const createUser = useUserControllerCreate();
 
   React.useEffect(() => {
