@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
-// import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
 import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
 import { useUserControllerCreate } from '../../../lib/impakt-dev-api-client/react-query/users/users';
 import { renderToast } from '../../../utils';

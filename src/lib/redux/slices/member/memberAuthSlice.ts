@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GetUserRes } from '@impakt-dev/api-client';
 
-import { forgotPassword } from './actions/forgotPassword';
-import { requestVerification } from './actions/requestVerification';
 import { requestAccessToken } from './actions/requestAccessToken';
-import { signUpMember } from './actions/signUpMember';
 import { fetchMember } from './actions/fetchMember';
 import { updateMember } from './actions/updateMember';
 
@@ -38,39 +35,6 @@ const memberAuthSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(signUpMember.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(signUpMember.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(signUpMember.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(forgotPassword.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(forgotPassword.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(forgotPassword.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(requestVerification.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(requestVerification.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(requestVerification.rejected, (state) => {
-        state.isLoading = false;
-      });
-
     builder
       .addCase(requestAccessToken.pending, (state) => {
         state.isLoading = true;
