@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ReferralsInstance } from '../../../../impakt-dev-api-client/init';
 import { RootState } from '../../../store';
 
-const fetchReferralsReward = createAsyncThunk(
-  'referrals/fetchReferralsReward',
+const fetchReferralsRewardKoin = createAsyncThunk(
+  'referrals/fetchReferralsRewardKoin',
   async (_, { rejectWithValue, getState }) => {
     try {
       const {
@@ -15,8 +15,7 @@ const fetchReferralsReward = createAsyncThunk(
       }
 
       let countAmount = 0;
-      const referralsRes =
-        await ReferralsInstance.referralControllerGetRewardTransactionsByReferrals();
+      const referralsRes = await ReferralsInstance.referralControllerGetReferralRewardsForCoin();
 
       referralsRes.forEach(({ amount }) => {
         countAmount += amount;
@@ -30,4 +29,4 @@ const fetchReferralsReward = createAsyncThunk(
 );
 
 // eslint-disable-next-line import/prefer-default-export
-export { fetchReferralsReward };
+export { fetchReferralsRewardKoin };

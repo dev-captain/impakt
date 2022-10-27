@@ -1,4 +1,4 @@
-import { VStack, Collapse, useToast, HStack, Box, Link, Button } from '@chakra-ui/react';
+import { VStack, Collapse, useToast, HStack, Box, Link, Button, ScaleFade } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
@@ -7,6 +7,7 @@ import { Socials } from 'data';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { I } from 'components';
 
+import { toastDarkLayout } from 'theme';
 import NavbarLinkItem from './NavbarLinkItem';
 import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 import SignInLinkItem from './SignInLinkItem';
@@ -83,6 +84,15 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         {member && (
           <NavbarLinkItem
             isSmall
+            href=""
+            onClose={onClose}
+            title={t(Keys.navbar.notification)}
+            isActive={path.path === '/notification'}
+          />
+        )}
+        {member && (
+          <NavbarLinkItem
+            isSmall
             href="/contact"
             onClose={onClose}
             title={t(Keys.navbar.help)}
@@ -96,13 +106,18 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             href="#"
             onClose={async () => {
               await dispatch(signOutMember()).unwrap();
-              toast({
-                title: 'Success',
-                description: 'You have successfully logged out!',
-                isClosable: true,
-                duration: 8000,
-                status: 'success',
-              });
+              <ScaleFade initialScale={1}>
+                {toast({
+                  title: 'Success',
+                  description: 'You have successfully logged out!',
+                  isClosable: true,
+                  duration: 8000,
+                  status: 'success',
+                  variant: 'glass',
+                  position: 'top-right',
+                  containerStyle: toastDarkLayout,
+                })}
+              </ScaleFade>;
               onClose();
             }}
             title={t(Keys.navbar.signOut)}

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import moment from 'moment';
+import { Day } from 'dayspan';
 
 import {
   VStack,
@@ -54,7 +54,7 @@ const ExercisesList: React.FC = () => {
             <Tr bgColor="#121216">
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4) "
+                color="#fff"
                 borderBottom={0}
                 whiteSpace="normal"
                 textTransform="capitalize"
@@ -69,7 +69,7 @@ const ExercisesList: React.FC = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4)"
+                color="#fff"
                 borderBottom={0}
                 paddingX={{ base: '15px', md: '20px' }}
                 textTransform="capitalize"
@@ -84,7 +84,7 @@ const ExercisesList: React.FC = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4)"
+                color="#fff"
                 borderBottom={0}
                 paddingX={{ base: '15px', md: '24px' }}
                 textTransform="capitalize"
@@ -94,7 +94,7 @@ const ExercisesList: React.FC = () => {
                 width={{ base: '88px', sm: '118px', md: '150px' }}
               >
                 <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
-                  {t(keys.memberDashboard.exerciseList.godl)}
+                  {t(keys.memberDashboard.exerciseList.koin)}
                 </Text>
               </Th>
             </Tr>
@@ -162,7 +162,11 @@ const ExercisesList: React.FC = () => {
                         textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
                         color="rgba(255, 255, 255, 0.4)"
                       >
-                        {moment(timestamp).format('DD.MM.YYYY')}
+                        {Day.build(
+                          timestamp.getFullYear(),
+                          timestamp.getMonth(),
+                          timestamp.getDate(),
+                        ).format('DD.MM.YYYY')}
                       </Td>
                       <Td
                         borderBottom={0}

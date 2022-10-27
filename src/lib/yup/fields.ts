@@ -32,6 +32,36 @@ const topic = yup.string().required('Topic is required field');
 
 const message = yup.string().required('Message is required field');
 
+const groupName = yup
+  .string()
+  .required('Field is required')
+  .min(1, 'Group name must be at least 1 characters');
+
+export const ALLOW_IMAGE_FILE: string[] = ['image/png', 'image/jpeg'];
+
+const file = yup
+  .mixed()
+  .required('File is required')
+  .test(
+    'fileSize',
+    'File too large',
+    (value) => value === null || (value && value.size <= 1 * 1024 * 1024),
+  )
+  .test(
+    'fileFormat',
+    'Unsupported file type',
+    (value) => value === null || (value && ALLOW_IMAGE_FILE.includes(value.type)),
+  );
+
+const eventTitle = yup.string().required('Event title is required field');
+const eventDescription = yup.string().required('Event description is required field');
+const eventTime = yup.string().required('Event time is required field');
+const assocId = yup
+  .number()
+  .required('Challenge is required please select one...')
+  .typeError('Challenge is required please select one...');
+const post = yup.string().required('Post content is required field...');
+
 export {
   email,
   password,
@@ -41,4 +71,11 @@ export {
   walletAddress,
   topic,
   message,
+  groupName,
+  file,
+  eventTitle,
+  eventDescription,
+  eventTime,
+  assocId,
+  post,
 };

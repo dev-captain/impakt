@@ -1,4 +1,4 @@
-import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
+import { Box, FormControl, ScaleFade, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { LoginReq } from '@impakt-dev/api-client';
@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { toastLayout } from 'theme';
 import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -42,13 +43,18 @@ const SignInForm: React.FC = () => {
 
     await dispatch(signInMember(signInPayload)).unwrap();
 
-    toast({
-      title: 'Success',
-      description: 'Welcome !',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
+    <ScaleFade initialScale={1}>
+      {toast({
+        title: 'Success',
+        description: 'Welcome !',
+        isClosable: true,
+        status: 'success',
+        duration: 8000,
+        variant: 'glass',
+        position: 'top-right',
+        containerStyle: toastLayout,
+      })}
+    </ScaleFade>;
   };
 
   const inputItems: InputGroupPropsI[] = [

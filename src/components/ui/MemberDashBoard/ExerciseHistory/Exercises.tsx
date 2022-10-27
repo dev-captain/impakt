@@ -7,7 +7,6 @@ import {
   VStack,
   Box,
   Text,
-  Tooltip,
   Table,
   Thead,
   Tbody,
@@ -16,7 +15,6 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
-import TooltopIcon from '../../../../assets/svgs/tooltipIcon.svg';
 
 const Exercises: React.FC = () => {
   const { t } = useTranslation().i18n;
@@ -30,34 +28,6 @@ const Exercises: React.FC = () => {
       rowGap={{ base: '18px', lg: '32px' }}
       letterSpacing="-0.04em !important"
     >
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        marginTop="0 !important"
-        w="100%"
-        id="whitelist-challange-description-box-2"
-      >
-        <Text textStyle={{ base: 'bold4', md: 'bold5' }} color="#FFFFFF">
-          {t(keys.memberDashboard.exerciseList.headline)}
-        </Text>
-        <Tooltip
-          hasArrow
-          label={
-            <Text
-              dangerouslySetInnerHTML={{
-                __html: t(keys.memberDashboard.exerciseList.toolTipDescription),
-              }}
-            />
-          }
-          mt="3"
-          placement="auto"
-          closeOnClick={false}
-        >
-          <Box width={{ base: '24px', md: '32px' }}>
-            <img src={TooltopIcon} alt="TooltopIcon" sizes="10px" />
-          </Box>
-        </Tooltip>
-      </Box>
       <TableContainer borderRadius={10} w="100%" sx={{ marginTop: '0px !important' }}>
         <Table variant="striped" w={{ base: '100%', md: '720px' }} colorScheme="whiteAlpha">
           <Thead style={{ display: 'table', width: '100%', tableLayout: 'fixed' }}>

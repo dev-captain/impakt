@@ -11,10 +11,11 @@ const CollapseSidebar = () => {
       <Menu matchWidth strategy="fixed">
         <MenuButton
           as={Button}
-          rightIcon={<I.DropIcon />}
-          backgroundColor="rgba(28, 28, 40, 0.65)"
-          backdropFilter="blur(40px)"
-          border="1px solid #2e2b2b"
+          rightIcon={<I.DropIcon color="glass.1000" />}
+          backgroundColor="glass.0"
+          border="1px solid"
+          borderColor="glass.1000"
+          color="glass.1000"
           borderRadius="16px"
           textAlign="left"
           h="64px"
@@ -34,6 +35,17 @@ const CollapseSidebar = () => {
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
+          {path.pathname === '/dashboard/groups' && (
+            <Box display="flex" alignItems="flex-end">
+              <I.PeopleIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname === '/dashboard/groups' ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">Groups</Text>
+            </Box>
+          )}
           {path.pathname === '/dashboard/referrals' && (
             <Box display="flex" alignItems="flex-end">
               <I.ReferralsIcon
@@ -45,7 +57,7 @@ const CollapseSidebar = () => {
               <Text marginLeft="10px">Referrals</Text>
             </Box>
           )}
-          {path.pathname === '/dashboard/reward-history' && (
+          {/* {path.pathname === '/dashboard/reward-history' && (
             <Box display="flex" alignItems="flex-end">
               <I.RewardIcon
                 cursor="pointer"
@@ -55,7 +67,7 @@ const CollapseSidebar = () => {
               />
               <Text marginLeft="10px">Reward history</Text>
             </Box>
-          )}
+          )} */}
           {path.pathname === '/dashboard/statistics' && (
             <Box display="flex" alignItems="flex-end">
               <I.ChatIcon
@@ -82,13 +94,13 @@ const CollapseSidebar = () => {
             _focus={{ backgroundColor: 'transparent' }}
           >
             <SidebarLinkItem
-              isTransparent
               hide
               href=""
               title="General"
               isActive={path.pathname === '/dashboard'}
+              collaps
             >
-              <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
+              <I.DashboardIcon cursor="pointer" width="26px" height="23px" color="#fff" />
             </SidebarLinkItem>
           </MenuItem>
           <MenuItem
@@ -96,20 +108,35 @@ const CollapseSidebar = () => {
             _focus={{ backgroundColor: 'transparent' }}
           >
             <SidebarLinkItem
-              isTransparent
               hide
               href="referrals"
               title="Referrals"
               isActive={path.pathname === '/dashboard/referrals'}
+              collaps
             >
-              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
+              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#fff" />
+            </SidebarLinkItem>
+          </MenuItem>
+
+          <MenuItem
+            _active={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
+          >
+            <SidebarLinkItem
+              hide
+              href="groups"
+              title="Groups"
+              isActive={path.pathname === '/dashboard/groups'}
+              collaps
+            >
+              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#fff" />
             </SidebarLinkItem>
           </MenuItem>
           {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
-          > */}
-          {/* <SidebarLinkItem
+          >
+            <SidebarLinkItem
               isTransparent
               hide
               href="reward-history"
@@ -117,8 +144,8 @@ const CollapseSidebar = () => {
               isActive={path.pathname === '/dashboard/reward-history'}
             >
               <I.RewardIcon cursor="pointer" width="27px" height="27px" />
-            </SidebarLinkItem> */}
-          {/* </MenuItem> */}
+            </SidebarLinkItem>
+          </MenuItem> */}
           {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}

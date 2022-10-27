@@ -26,6 +26,7 @@ const NFTGenesis = 'NFTGenesis';
 const NFTGeneral = 'NFTGeneral';
 const DynamicNFT = 'DynamicNFT';
 const termsOfUse = 'termsOfUse';
+const Message = 'Message';
 
 const TranslationKeys = {
   common: {
@@ -58,6 +59,7 @@ const TranslationKeys = {
     help: `${navbar}.help`,
     signIn: `${navbar}.signIn`,
     termsOfUse: `${navbar}.termsOfUse`,
+    notification: `${navbar}.notification`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,
@@ -228,6 +230,7 @@ const TranslationKeys = {
       date: `${memberDashboard}.exerciseList.date`,
       reason: `${memberDashboard}.exerciseList.reason`,
       godl: `${memberDashboard}.exerciseList.godl`,
+      koin: `${memberDashboard}.exerciseList.koin`,
     },
   },
   NFTGeneral: {
@@ -245,6 +248,17 @@ const TranslationKeys = {
     title: `${DynamicNFT}.title`,
     description: `${DynamicNFT}.description`,
     cardInfo: `${DynamicNFT}.cardInfo`,
+  },
+  Message: {
+    MyChallengeMsg: {
+      description: `${Message}.MyChallengeMsg.description`,
+    },
+    PublicToolTip: {
+      description: `${Message}.PublicToolTip.description`,
+    },
+    PrivateToolTip: {
+      description: `${Message}.PrivateToolTip.description`,
+    },
   },
 };
 

@@ -31,6 +31,7 @@ export default {
     help: 'Help',
     signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
+    notification: 'Notifications',
   },
   computerVision: {
     computerVision: 'COMPUTER VISION',
@@ -295,7 +296,7 @@ export default {
       headline: 'Referrals',
       subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">$1 USD in Crypto</strong> and they receive <strong style="color:#FEC417">$5 USD in Crypto</strong>.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#4E6070">1000 Koin</strong> and they receive <strong style="color:#4E6070">5000 Koin</strong>.',
       subDescription:
         'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
       discription_list1: 'WLs',
@@ -305,7 +306,7 @@ export default {
       descriptionFooter:
         'Have your friends join us on the Impakt Rocket and let’s moon it together!',
       discription_list5:
-        'GODL is our in-game currency! You`ll use it on our marketplace for Whitelist spots, NFT discounts, Token exchange and many more!',
+        'Koin is the virtual currency within the world of Impakt. You`ll use it to customize your character by purchasing skins, items, pets, and much more.',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {
@@ -323,6 +324,7 @@ export default {
       date: 'Date',
       reason: 'Reason',
       godl: 'GODL',
+      koin: 'Koins',
     },
   },
   NFTGeneral: {
@@ -381,5 +383,19 @@ export default {
         imageRect: Images.nft.bronzeRect,
       },
     ],
+  },
+  Message: {
+    MyChallengeMsg: {
+      description:
+        'You haven`t created any challenges yet. Download our desktop app and create your first challenge now',
+    },
+    PublicToolTip: {
+      description:
+        '<b>Public:</b><br /><br />Recommended for growing a following.<br />&nbsp;&nbsp;•Anyone can find your group<br />&nbsp;&nbsp;•Anyone can join(no approval needed)<br />&nbsp;&nbsp;•Anyone can view group content<br /><br /><b>Private:</b><br />Recommended for closed circles (e.g. friends, family)<br />&nbsp;•Only group members can view group content<br />&nbsp;&nbsp;•People can only join if you manually accept their join request',
+    },
+    PrivateToolTip: {
+      description:
+        'Only group members can view group content<br />People can only join if you manually accept their join request',
+    },
   },
 };

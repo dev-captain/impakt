@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'i18n';
 import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
@@ -26,6 +25,7 @@ import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
+// import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 
 const App = () => {
   const { setColorMode } = useColorMode();
@@ -104,8 +104,19 @@ const App = () => {
       >
         <Route path="" element={<S.General />} />
         <Route path="referrals" element={<S.Referrals />} />
-        {/* <Route path="reward-history" element={<S.RewardHistory />} /> */}
-        {/* <Route path="statistics" element={<S.Statistics />} /> */}
+        <Route path="groups">
+          <Route path="" element={<S.Group />} />
+          <Route path="create-group" element={<S.CreateGroup isStandalone />} />
+          <Route path="group">
+            <Route path=":id" element={<S.GroupDetail />}>
+              <Route path="event/:eventId" />
+              <Route path="post/:postId" />
+              <Route path="event/:eventId/join" />
+            </Route>
+          </Route>
+        </Route>
+        <Route path="reward-history" element={<S.RewardHistory />} />
+        <Route path="statistics" element={<S.Statistics />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

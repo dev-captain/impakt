@@ -8,7 +8,6 @@ import textStyles from './textStyles';
 
 const breakpoints = createBreakpoints({
   sm: '0',
-  mb: '599px',
   md: '992px',
   lg: '1281px',
   lgx: '1560px',
@@ -43,6 +42,26 @@ export const layoutPadding = {
   md: '48px',
   xl: '120px',
   '2xl': '240px',
+};
+
+export const toastLayout = {
+  background: 'rgba(255, 255, 255, 0.5)',
+  border: '1px solid #fff',
+  boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
+  backdropFilter: 'blur(15px)',
+  color: '#000',
+  borderRadius: '16px',
+  width: '360px',
+};
+
+export const toastDarkLayout = {
+  background: 'rgba(255, 255, 255, 0.1)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
+  boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
+  backdropFilter: 'blur(40px)',
+  color: '#fff',
+  borderRadius: '16px',
+  width: '360px',
 };
 
 export default extendTheme(theme);

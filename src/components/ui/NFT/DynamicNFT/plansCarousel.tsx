@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+// import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { Text } from '@chakra-ui/react';
 

@@ -114,7 +114,9 @@ const WhiteList: React.FC = () => {
               </Box>
             }
             size="lg"
-            variant="secondary"
+            variant="white"
+            color="#fff"
+            bgColor="black"
             justifyContent="flex-start"
             fontSize={{ base: '16px', lg: '20px' }}
             lineHeight={{ base: '24px', lg: '32px' }}
@@ -133,7 +135,9 @@ const WhiteList: React.FC = () => {
               </Box>
             }
             size="lg"
-            variant="secondary"
+            variant="white"
+            color="#fff"
+            bgColor="black"
             justifyContent="flex-start"
             fontSize={{ base: '16px', lg: '20px' }}
             lineHeight={{ base: '24px', lg: '32px' }}
@@ -151,7 +155,9 @@ const WhiteList: React.FC = () => {
               </Box>
             }
             size="lg"
-            variant="secondary"
+            variant="white"
+            color="#fff"
+            bgColor="black"
             justifyContent="flex-start"
             fontSize={{ base: '16px', lg: '20px' }}
             lineHeight={{ base: '24px', lg: '32px' }}
@@ -163,7 +169,7 @@ const WhiteList: React.FC = () => {
         <Box
           display="flex"
           backdropBlur={40}
-          bgColor="rgba(254, 196, 23, 0.15);"
+          bgColor="rgba(254, 196, 23, 0.100);"
           p="16px 24px"
           borderRadius="16px"
           alignItems="center"
