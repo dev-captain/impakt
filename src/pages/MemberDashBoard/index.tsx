@@ -6,12 +6,8 @@ import { useAppDispatch } from 'hooks';
 import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchActiveDays';
 // import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
 // import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
-import { fetchReferrals } from '../../lib/redux/slices/referrals/actions/fetchReferrals';
-import { fetchReferralsChallenges } from '../../lib/redux/slices/referrals/actions/fetchReferralsChallenges';
 // import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
-import { fetchReferralsRewardGodl } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardGodl';
-import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actions/fetchReferralsRewardKoin';
 import { usePersistedAuthStore, usePersistedBalanceScoreStore } from '../../lib/zustand';
 import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
 import { useCoinAccountControllerV1GetAccount } from '../../lib/impakt-dev-api-client/react-query/coin/coin';
@@ -30,8 +26,12 @@ const MemberDashboard: React.FC = () => {
   const store = usePersistedBalanceScoreStore();
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount();
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount();
-  // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
+  // const fetchReferrals = useReferralControllerGetReferrees({ count: true });
+  // const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone();
+  // const fetchReferralsRewardGodl= useReferralControllerGetReferralRewardsForGodl();
+  // const fetchReferralsRewardKoin= useReferralControllerGetReferralRewardsForCoin();
+  // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
 
   const dispatch = useAppDispatch();
 
@@ -57,12 +57,12 @@ const MemberDashboard: React.FC = () => {
   //   dispatch(fetchExerciseStats(member.id));
   // }, []);
 
-  React.useEffect(() => {
-    dispatch(fetchReferrals({ count: true }));
-    dispatch(fetchReferralsChallenges());
-    dispatch(fetchReferralsRewardGodl());
-    dispatch(fetchReferralsRewardKoin());
-  }, []);
+  // React.useEffect(() => {
+  //   // dispatch(fetchReferrals({ count: true }));
+  //   // dispatch(fetchReferralsChallenges());
+  //   // dispatch(fetchReferralsRewardGodl());
+  //   // dispatch(fetchReferralsRewardKoin());
+  // }, []);
 
   React.useEffect(() => {
     dispatch(fetchLatestNews());

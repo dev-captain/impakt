@@ -1,7 +1,5 @@
 import { ReferralReferreeChallengesRes, ReferreesOfReferrerRes } from '@impakt-dev/api-client';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchReferrals } from './actions/fetchReferrals';
-import { fetchReferralsChallenges } from './actions/fetchReferralsChallenges';
 import { fetchReferralsRewardGodl } from './actions/fetchReferralsRewardGodl';
 import { fetchReferralsRewardKoin } from './actions/fetchReferralsRewardKoin';
 
@@ -32,30 +30,6 @@ const referralsSlice = createSlice({
   initialState: referralsInitialState as ReferralsInitialI,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchReferrals.pending, (state) => {
-        state.isReferralsLoading = true;
-      })
-      .addCase(fetchReferrals.fulfilled, (state, action) => {
-        state.referrals = action.payload;
-        state.isReferralsLoading = false;
-      })
-      .addCase(fetchReferrals.rejected, (state) => {
-        state.isReferralsLoading = false;
-      });
-
-    builder
-      .addCase(fetchReferralsChallenges.pending, (state) => {
-        state.isReferralsLoading = true;
-      })
-      .addCase(fetchReferralsChallenges.fulfilled, (state, action) => {
-        state.referralsChallengesHaveDone = action.payload;
-        state.isReferralsLoading = false;
-      })
-      .addCase(fetchReferralsChallenges.rejected, (state) => {
-        state.isReferralsLoading = false;
-      });
-
     builder
       .addCase(fetchReferralsRewardGodl.pending, (state) => {
         state.isReferralsLoading = true;
