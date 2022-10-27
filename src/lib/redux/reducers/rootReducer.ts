@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 
-import fitnessReducer from '../slices/fitness/fitnessSlice';
 // import stateReducer from '../slices/state/stateSlice';
 import discourseReducer from '../slices/discourse/discourseSlice';
 
@@ -13,8 +12,6 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  fitnessReducer,
-  // stateReducer,
   discourseReducer,
 });
 

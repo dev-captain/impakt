@@ -7,6 +7,7 @@ import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNew
 import {
   usePersistedAuthStore,
   usePersistedBalanceScoreStore,
+  usePersistedFitnessStore,
   usePersistedReferralsStore,
 } from '../../lib/zustand';
 import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
@@ -34,6 +35,7 @@ const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const store = usePersistedBalanceScoreStore();
   const referralsStore = usePersistedReferralsStore();
+  const fitnessStore = usePersistedFitnessStore();
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount();
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount();
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
@@ -59,6 +61,12 @@ const MemberDashboard: React.FC = () => {
       store.setKoinBalanceScore(fetchKoinBalanceScoreQuery.data?.balance ?? 0);
     }
   }, [fetchKoinBalanceScoreQuery.isFetched]);
+
+  React.useEffect(() => {
+    if (fetchActiveDays.isFetched && fetchActiveDays.data) {
+      fitnessStore.setActiveDays(fetchActiveDays.data?.value);
+    }
+  }, [fetchActiveDays.isFetched]);
 
   // React.useEffect(() => {
   //   if (!member) return;

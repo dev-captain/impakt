@@ -1,15 +1,18 @@
 import { Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
-import { useAppSelector } from 'hooks';
 
 import Whitelist from '../../../../assets/svgs/Vector.svg';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import { usePersistedAuthStore, usePersistedBalanceScoreStore } from '../../../../lib/zustand';
+import {
+  usePersistedAuthStore,
+  usePersistedBalanceScoreStore,
+  usePersistedFitnessStore,
+} from '../../../../lib/zustand';
 
 const WelcomeModal: React.FC = () => {
   const { member } = usePersistedAuthStore();
-  const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
+  const { activeDays } = usePersistedFitnessStore();
   const { godlBalanceScore, koinBalanceScore } = usePersistedBalanceScoreStore();
   console.log(godlBalanceScore, koinBalanceScore);
   const { isWhitelistedCollection } = usePersistedAuthStore();
