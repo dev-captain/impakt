@@ -4,7 +4,6 @@ import persistReducer from 'redux-persist/es/persistReducer';
 
 import knowledgeBaseReducer from '../slices/knowledgeBase/knowledgeBaseSlice';
 import fitnessReducer from '../slices/fitness/fitnessSlice';
-import rewardHistoryReducer from '../slices/rewardHistory/rewardHistorySlice';
 import referralsReducer from '../slices/referrals/referralsSlice';
 // import stateReducer from '../slices/state/stateSlice';
 import whitelistReducer from '../slices/whitelist/whitelistSlice';
@@ -19,7 +18,6 @@ const persistConfig = {
 const rootReducer = combineReducers({
   knowledgeBase: knowledgeBaseReducer,
   fitnessReducer,
-  rewardHistoryReducer,
   referrals: referralsReducer,
   // stateReducer,
   whitelistReducer,

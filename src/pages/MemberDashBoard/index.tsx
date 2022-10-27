@@ -15,6 +15,7 @@ import { fetchReferralsRewardKoin } from '../../lib/redux/slices/referrals/actio
 import { usePersistedAuthStore, usePersistedBalanceScoreStore } from '../../lib/zustand';
 import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
 import { useCoinAccountControllerV1GetAccount } from '../../lib/impakt-dev-api-client/react-query/coin/coin';
+// import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -28,6 +29,7 @@ const MemberDashboard: React.FC = () => {
   const store = usePersistedBalanceScoreStore();
   const fetchGodlBalanceScore = useGodlAccountControllerGetAccount();
   const fetchKoinBalanceScore = useCoinAccountControllerV1GetAccount();
+  // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
 
   const dispatch = useAppDispatch();
 
@@ -55,7 +57,7 @@ const MemberDashboard: React.FC = () => {
 
   // React.useEffect(() => {
   //   if (member) {
-  //     dispatch(fetchRewardHistory(member.id));
+  //     fetchRewardHistory('User', member.id);
   //   }
   // }, []);
 

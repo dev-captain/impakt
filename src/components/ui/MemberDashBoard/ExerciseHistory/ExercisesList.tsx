@@ -2,42 +2,42 @@ import * as React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import moment from 'moment';
+// import moment from 'moment';
 
 import {
   VStack,
-  Box,
+  // Box,
   Text,
   Table,
   Thead,
   Tbody,
   Tr,
   Th,
-  Td,
+  // Td,
   TableContainer,
 } from '@chakra-ui/react';
-import { useAppSelector, usePascalCase } from 'hooks';
+// import { useAppSelector, usePascalCase } from 'hooks';
 
 const ExercisesList: React.FC = () => {
   const { t } = useTranslation().i18n;
 
-  const { convertToPascalCase } = usePascalCase();
-  const rewardHistoryStatistics = useAppSelector(
-    (state) => state.rewardHistoryReducer.rewardHistoryState,
-  );
-  const [pascalCasedRewardHistoryStatistics, setPascalCasedRewardHistoryStatistics] =
-    React.useState<typeof rewardHistoryStatistics>([]);
+  // const { convertToPascalCase } = usePascalCase();
+  // const rewardHistoryStatistics = useAppSelector(
+  //   (state) => state.rewardHistoryReducer.rewardHistoryState,
+  // );
+  // const [pascalCasedRewardHistoryStatistics, setPascalCasedRewardHistoryStatistics] =
+  //   React.useState<typeof rewardHistoryStatistics>([]);
 
-  React.useEffect(() => {
-    if (rewardHistoryStatistics && rewardHistoryStatistics.length > 0) {
-      const pascalCasedExStatics = rewardHistoryStatistics.map((stats) => {
-        const convertedPurpose = convertToPascalCase(stats.purpose);
+  // React.useEffect(() => {
+  //   if (rewardHistoryStatistics && rewardHistoryStatistics.length > 0) {
+  //     const pascalCasedExStatics = rewardHistoryStatistics.map((stats) => {
+  //       const convertedPurpose = convertToPascalCase(stats.purpose);
 
-        return { ...stats, purpose: convertedPurpose };
-      });
-      setPascalCasedRewardHistoryStatistics(pascalCasedExStatics);
-    }
-  }, [rewardHistoryStatistics]);
+  //       return { ...stats, purpose: convertedPurpose };
+  //     });
+  //     setPascalCasedRewardHistoryStatistics(pascalCasedExStatics);
+  //   }
+  // }, [rewardHistoryStatistics]);
 
   return (
     <VStack
@@ -144,7 +144,7 @@ const ExercisesList: React.FC = () => {
             </Tr> */}
             {/* {excerciseStatistics.length > 0 && */}
             {/* excerciseStatistics.map((exercise: any) => ( */}
-            {pascalCasedRewardHistoryStatistics.length > 0 &&
+            {/* {pascalCasedRewardHistoryStatistics.length > 0 &&
               pascalCasedRewardHistoryStatistics.map(
                 ({ purpose, timestamp, value }) =>
                   value !== 0 && (
@@ -175,7 +175,7 @@ const ExercisesList: React.FC = () => {
                       >
                         {purpose}
                         {/* {exercise.purpose} */}
-                      </Td>
+            {/* </Td>
                       <Td
                         borderBottom={0}
                         paddingY="10px"
@@ -191,14 +191,13 @@ const ExercisesList: React.FC = () => {
                             textStyle={{ md: 'semiBold24', base: 'normal14' }}
                             color="#FEC417"
                           >
-                            +{value}
-                            {/* {exercise.godl} */}
-                          </Text>
+                            +{value} */}
+            {/* {exercise.godl} */}
+            {/* </Text>
                         </Box>
                       </Td>
-                    </Tr>
-                  ),
-              )}
+                    </Tr> */}
+            {/* ), */}
             {/* ))} */}
           </Tbody>
         </Table>
