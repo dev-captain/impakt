@@ -8,11 +8,11 @@ import InfoSection from 'components/common/InfoSection';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 import ExerciseHistory from '../ExerciseHistory/ExerciseHistory';
 import Exercises from '../ExerciseHistory/Exercises';
-import { useStore } from '../../../../lib/zustand';
+import { usePersistedBalanceScoreStore } from '../../../../lib/zustand';
 
 const RewardHistory: React.FC = () => {
   const { t } = useTranslation().i18n;
-  const { godlBalanceScore } = useStore();
+  const { godlBalanceScore } = usePersistedBalanceScoreStore();
 
   return (
     <Box w="full" as="section" id="general-section">
