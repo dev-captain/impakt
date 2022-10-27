@@ -1,26 +1,11 @@
 import { StateCreator } from 'zustand';
-import { GetUserRes } from '../../impakt-dev-api-client/react-query/types';
+import { GetUserRes, IsWhitelistedRes } from '../../impakt-dev-api-client/react-query/types';
 
 export interface AuthSlice {
   member: GetUserRes | null;
-  isWhitelistedCollection: {
-    isWhitelisted: boolean;
-    isDiscordConnected: boolean;
-    isTwitterConnected: boolean;
-    isWalletConnected: boolean;
-  };
+  isWhitelistedCollection: IsWhitelistedRes;
   setMember: (member: GetUserRes | null) => void;
-  setIsWhitelistedCollection: ({
-    isWhitelisted,
-    isDiscordConnected,
-    isTwitterConnected,
-    isWalletConnected,
-  }: {
-    isWhitelisted: boolean;
-    isDiscordConnected: boolean;
-    isTwitterConnected: boolean;
-    isWalletConnected: boolean;
-  }) => void;
+  setIsWhitelistedCollection: (isWhitelistedCollection: IsWhitelistedRes) => void;
 }
 
 export const authSlice: StateCreator<AuthSlice> = (set) => ({
