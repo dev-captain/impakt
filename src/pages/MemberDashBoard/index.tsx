@@ -1,12 +1,11 @@
 import * as React from 'react';
 
 import { C } from 'components';
-import { useAppDispatch } from 'hooks';
 
-import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
 import {
   usePersistedAuthStore,
   usePersistedBalanceScoreStore,
+  usePersistedDiscourseStore,
   usePersistedFitnessStore,
   usePersistedReferralsStore,
 } from '../../lib/zustand';
@@ -19,6 +18,7 @@ import {
   useReferralControllerGetReferrees,
 } from '../../lib/impakt-dev-api-client/react-query/referrals/referrals';
 import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api-client/react-query/fitness-stats/fitness-stats';
+import { useDiscourse } from '../../hooks/useDiscourse';
 
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
@@ -36,6 +36,9 @@ const MemberDashboard: React.FC = () => {
   const store = usePersistedBalanceScoreStore();
   const referralsStore = usePersistedReferralsStore();
   const fitnessStore = usePersistedFitnessStore();
+  const discourseStore = usePersistedDiscourseStore();
+  const discourse = useDiscourse();
+
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount();
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount();
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
@@ -47,8 +50,6 @@ const MemberDashboard: React.FC = () => {
   const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl();
   const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin();
   const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member!.id);
-
-  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     if (fetchGodlBalanceScoreQuery.isFetched) {
@@ -108,8 +109,10 @@ const MemberDashboard: React.FC = () => {
   }, [fetchReferralsRewardKoin.isFetched]);
 
   React.useEffect(() => {
-    dispatch(fetchLatestNews());
-  }, []);
+    if (discourse.isDiscourseFetched) {
+      discourseStore.setNews(discourse.news);
+    }
+  }, [discourse.news]);
 
   return <C.SidebarLayout isShowNavbar />;
 };
