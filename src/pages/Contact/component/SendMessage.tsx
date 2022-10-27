@@ -30,12 +30,12 @@ const SendMessage = () => {
     email: '',
     message: '',
     name: '',
-    subject: 'Landing Page',
+    subject: '',
     isSubscribed: false,
   });
 
   const resetFields = () => {
-    setValues({ email: '', message: '', name: '', subject: 'Landing Page', isSubscribed: false });
+    setValues({ email: '', message: '', name: '', subject: '', isSubscribed: false });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
