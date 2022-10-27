@@ -3,10 +3,6 @@ import * as React from 'react';
 import { C } from 'components';
 import { useAppDispatch } from 'hooks';
 
-import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchActiveDays';
-// import { getWhiteListed } from '../../lib/redux/slices/whitelist/actions/getWhiteListed';
-// import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
-// import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
 import {
   usePersistedAuthStore,
@@ -21,6 +17,8 @@ import {
   useReferralControllerGetReferreeHowManyChallengesDone,
   useReferralControllerGetReferrees,
 } from '../../lib/impakt-dev-api-client/react-query/referrals/referrals';
+import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api-client/react-query/fitness-stats/fitness-stats';
+
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
@@ -40,10 +38,13 @@ const MemberDashboard: React.FC = () => {
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount();
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
   // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
+  // const fetchExerciseStats = useFitnessStatsControllerGetExerciseStats();
+
   const fetchReferrals = useReferralControllerGetReferrees({ count: true });
   const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone();
   const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl();
   const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin();
+  const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member!.id);
 
   const dispatch = useAppDispatch();
 
@@ -58,11 +59,6 @@ const MemberDashboard: React.FC = () => {
       store.setKoinBalanceScore(fetchKoinBalanceScoreQuery.data?.balance ?? 0);
     }
   }, [fetchKoinBalanceScoreQuery.isFetched]);
-
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(fetchActiveDays(member.id));
-  }, []);
 
   // React.useEffect(() => {
   //   if (!member) return;
