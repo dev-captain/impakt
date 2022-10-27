@@ -12,20 +12,21 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { useAppSelector } from 'hooks';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import { usePersistedAuthStore } from '../../../../lib/zustand';
+import { usePersistedAuthStore, usePersistedReferralsStore } from '../../../../lib/zustand';
 
-interface PropsI {}
-const ReferralsBox: React.FC<PropsI> = () => {
+const ReferralsBox: React.FC = () => {
   const { member } = usePersistedAuthStore();
-  const referralsRegisteredNumber = useAppSelector((state) => state.referrals.referrals.totalCount);
-  const referralsChallangesHaveDone = useAppSelector(
-    (state) => state.referrals.referralsChallengesHaveDone,
-  );
-  const godlReferralsReward = useAppSelector((state) => state.referrals.godlRewardedByReferrals);
-  const koinReferralReward = useAppSelector((state) => state.referrals.koinRewardedByReferrals);
+  const referralStore = usePersistedReferralsStore();
+  const { referralsChallengesHaveDone } = referralStore;
+  const referralsRegisteredNumber = referralStore.referrals?.totalCount;
+  const godlRewardedByReferrals = referralStore.referrals?.confirmedCount
+    ? referralStore.referrals.confirmedCount * 1000
+    : referralStore.godlRewardedByReferrals;
+  const koinRewardedByReferrals = referralStore.referrals?.confirmedCount
+    ? 0
+    : referralStore.koinRewardedByReferrals;
 
   return (
     <MemberDashboardCard flexDir="column" rowGap={{ base: '18px', lg: '32px' }}>
@@ -85,7 +86,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
         >
           <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textStyle="bold5" textAlign="center">
-              {koinReferralReward || '0'}
+              {koinRewardedByReferrals || '0'}
             </Text>
             <Text textAlign="center" mt="6px" textStyle="regular3">
               Koins earned
@@ -93,7 +94,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
             </Text>
           </Box>
         </GridItem>
-        {godlReferralsReward > 0 && (
+        {godlRewardedByReferrals > 0 && (
           <GridItem
             w="100%"
             h="auto"
@@ -103,7 +104,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
           >
             <Box mt="0 !important" id="whitelist-challange-description-box-2">
               <Text textStyle="bold5" textAlign="center">
-                {godlReferralsReward}
+                {godlRewardedByReferrals}
               </Text>
               <Text
                 color="rgba(255, 255, 255, 0.4)"
@@ -166,7 +167,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               </Td>
 
               <Td borderBottom={0} textStyle="regular4">
-                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneOneChallenge}
+                {referralsChallengesHaveDone.numberOfReferreesWhoHaveDoneOneChallenge}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
@@ -174,7 +175,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
                 2
               </Td>
               <Td borderBottom={0} textStyle="regular4">
-                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneTwoChallenges}
+                {referralsChallengesHaveDone.numberOfReferreesWhoHaveDoneTwoChallenges}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
@@ -182,7 +183,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
                 3
               </Td>
               <Td borderBottom={0} textStyle="regular4">
-                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneThreeChallenges}
+                {referralsChallengesHaveDone.numberOfReferreesWhoHaveDoneThreeChallenges}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
@@ -190,7 +191,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
                 4
               </Td>
               <Td textStyle="regular4" borderBottom={0}>
-                {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFourChallenges}
+                {referralsChallengesHaveDone.numberOfReferreesWhoHaveDoneFourChallenges}
               </Td>
             </Tr>
             <Tr display="table" width="100%" style={{ tableLayout: 'fixed' }}>
@@ -199,7 +200,7 @@ const ReferralsBox: React.FC<PropsI> = () => {
               </Td>
               <Td textStyle="bold4" borderBottom={0}>
                 <Text>
-                  {referralsChallangesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
+                  {referralsChallengesHaveDone.numberOfReferreesWhoHaveDoneFiveChallenges}
                 </Text>
               </Td>
             </Tr>

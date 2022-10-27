@@ -8,9 +8,20 @@ import { fetchActiveDays } from '../../lib/redux/slices/fitness/actions/fetchAct
 // import { fetchExerciseStats } from '../../lib/redux/slices/fitness/actions/fetchExerciseStats';
 // import { fetchRewardHistory } from '../../lib/redux/slices/rewardHistory/actions/fetchRewardHistory';
 import { fetchLatestNews } from '../../lib/redux/slices/discourse/fetchLatestNews';
-import { usePersistedAuthStore, usePersistedBalanceScoreStore } from '../../lib/zustand';
+import {
+  usePersistedAuthStore,
+  usePersistedBalanceScoreStore,
+  usePersistedReferralsStore,
+} from '../../lib/zustand';
 import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
 import { useCoinAccountControllerV1GetAccount } from '../../lib/impakt-dev-api-client/react-query/coin/coin';
+import {
+  useReferralControllerGetReferralRewardsForCoin,
+  useReferralControllerGetReferralRewardsForGodl,
+  useReferralControllerGetReferreeHowManyChallengesDone,
+  useReferralControllerGetReferrees,
+} from '../../lib/impakt-dev-api-client/react-query/referrals/referrals';
+// import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
 // import ExerciseHistory from 'components/ui/MemberDashBoard/ExerciseHistory/ExerciseHistory';
 // import HeroLayout from '../../components/layouts/HeroLayout';
@@ -24,14 +35,15 @@ import { useCoinAccountControllerV1GetAccount } from '../../lib/impakt-dev-api-c
 const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const store = usePersistedBalanceScoreStore();
+  const referralsStore = usePersistedReferralsStore();
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount();
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount();
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
-  // const fetchReferrals = useReferralControllerGetReferrees({ count: true });
-  // const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone();
-  // const fetchReferralsRewardGodl= useReferralControllerGetReferralRewardsForGodl();
-  // const fetchReferralsRewardKoin= useReferralControllerGetReferralRewardsForCoin();
   // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
+  const fetchReferrals = useReferralControllerGetReferrees({ count: true });
+  const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone();
+  const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl();
+  const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin();
 
   const dispatch = useAppDispatch();
 
@@ -57,12 +69,39 @@ const MemberDashboard: React.FC = () => {
   //   dispatch(fetchExerciseStats(member.id));
   // }, []);
 
-  // React.useEffect(() => {
-  //   // dispatch(fetchReferrals({ count: true }));
-  //   // dispatch(fetchReferralsChallenges());
-  //   // dispatch(fetchReferralsRewardGodl());
-  //   // dispatch(fetchReferralsRewardKoin());
-  // }, []);
+  React.useEffect(() => {
+    if (fetchReferrals.isFetched && fetchReferrals.data) {
+      referralsStore.setReferrals(fetchReferrals.data);
+    }
+  }, [fetchReferrals.isFetched]);
+
+  React.useEffect(() => {
+    if (fetchReferralsChallenges.isFetched && fetchReferralsChallenges.data) {
+      referralsStore.setReferralsChallengesHaveDone(fetchReferralsChallenges.data);
+    }
+  }, [fetchReferralsChallenges.isFetched]);
+
+  React.useEffect(() => {
+    if (fetchReferralsRewardGodl.isFetched) {
+      let countAmount = 0;
+      fetchReferralsRewardGodl.data?.forEach(({ amount }) => {
+        // eslint-disable-next-line operator-assignment
+        countAmount = countAmount + amount;
+      });
+      referralsStore.setGodlRewardedByReferrals(countAmount);
+    }
+  }, [fetchReferralsRewardGodl.isFetched]);
+
+  React.useEffect(() => {
+    if (fetchReferralsRewardKoin.isFetched) {
+      let countAmount = 0;
+      fetchReferralsRewardKoin.data?.forEach(({ amount }) => {
+        // eslint-disable-next-line operator-assignment
+        countAmount = countAmount + amount;
+      });
+      referralsStore.setKoinRewardedByReferrals(countAmount);
+    }
+  }, [fetchReferralsRewardKoin.isFetched]);
 
   React.useEffect(() => {
     dispatch(fetchLatestNews());
