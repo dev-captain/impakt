@@ -15,11 +15,9 @@ const BannerImage: React.FC = () => {
   return (
     <Image
       src={
-        // eslint-disable-next-line no-nested-ternary
-        // isCurrentImageExist
-        //   ? getImageFromS3AsUrl(currentCoverImageSource!.source)
-        //   :
-        Images.group.cover
+        isCurrentImageExist
+          ? getImageFromS3AsUrl(currentCoverImageSource!.source)
+          : Images.group.cover
       }
       loading="lazy"
       minH="100px"

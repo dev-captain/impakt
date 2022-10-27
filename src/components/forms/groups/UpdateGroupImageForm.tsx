@@ -25,11 +25,11 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    // if (activeGroup?.currentCoverImage?.source) {
-    //   setBannerImage(getImageFromS3AsUrl(activeGroup.currentCoverImage.source));
+    if (activeGroup?.currentCoverImage?.source) {
+      setBannerImage(getImageFromS3AsUrl(activeGroup.currentCoverImage.source));
 
-    //   return;
-    // }
+      return;
+    }
     setBannerImage(Images.group.logo);
   }, []);
 
