@@ -5,7 +5,6 @@ import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   // Home,
-  KnowledgeBase,
   NotFound,
   Event,
   Contact,
@@ -56,9 +55,6 @@ const App = () => {
           </Common.ScrollToTop>
         }
       />
-      <Route path="/knowledge-base" element={<KnowledgeBase />}>
-        <Route path=":article" element={<KnowledgeBase />} />
-      </Route>
 
       <Route path="/events" element={<Event />}>
         <Route path=":slug" element={<Event />} />

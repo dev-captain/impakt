@@ -423,7 +423,7 @@ export default {
         linkedInLink: '',
         facebookLink: '',
         followers: '100k+ Followers',
-        data: ['Competitive Bodybuilder'],
+        data: ["Men's Physique Competitor and Health Chef"],
       },
       {
         name: 'Aaron Burke',
@@ -436,7 +436,7 @@ export default {
         linkedInLink: '',
         facebookLink: '',
         followers: '100k+ Followers',
-        data: ['Competitive Bodybuilder'],
+        data: ['NPC Bodybuilder and Lifestyle Coach'],
       },
     ],
   },
@@ -482,7 +482,7 @@ export default {
         img: Images.advisor.kai,
       },
       {
-        company: '6x Oscar Nomination',
+        company: '6 Oscar Nominations',
         job: 'Oscar Winner in VFX',
         fname: 'Chris',
         lname: 'Armsden',

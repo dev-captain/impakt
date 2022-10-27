@@ -4,6 +4,7 @@ import { Textarea } from '@chakra-ui/react';
 type FieldProps = {
   name?: string;
   textStyle?: any;
+  value?: string;
   borderColor?: string;
   _placeholder?: any;
   isOutlined?: boolean;
@@ -22,6 +23,7 @@ const TextareaField = ({
   placeholderColor,
   _placeholder,
   fontSize,
+  value,
   ...rest
 }: FieldProps) => {
   return (
@@ -42,6 +44,7 @@ const TextareaField = ({
             }
           : {}
       }
+      value={value}
       resize="none"
       onChange={onChange}
       borderRadius="12px"
