@@ -12,7 +12,7 @@ const WelcomeModal: React.FC = () => {
   const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
   const { godlBalanceScore, koinBalanceScore } = usePersistedBalanceScoreStore();
   console.log(godlBalanceScore, koinBalanceScore);
-  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
+  const { isWhitelistedCollection } = usePersistedAuthStore();
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 
@@ -38,7 +38,7 @@ const WelcomeModal: React.FC = () => {
             </span>
           ))}
         </Text>
-        {isWhitelisted && (
+        {isWhitelistedCollection.isWhitelisted && (
           <Box ms={3}>
             <img src={Whitelist} alt="Whitelist" />
           </Box>
@@ -48,7 +48,7 @@ const WelcomeModal: React.FC = () => {
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        {isWhitelisted && (
+        {isWhitelistedCollection.isWhitelisted && (
           <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3">
             You are whitelisted. Congrats!
           </Text>
