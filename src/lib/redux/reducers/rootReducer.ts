@@ -3,7 +3,6 @@ import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 
 import fitnessReducer from '../slices/fitness/fitnessSlice';
-import referralsReducer from '../slices/referrals/referralsSlice';
 // import stateReducer from '../slices/state/stateSlice';
 import discourseReducer from '../slices/discourse/discourseSlice';
 
@@ -15,7 +14,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   fitnessReducer,
-  referrals: referralsReducer,
   // stateReducer,
   discourseReducer,
 });
