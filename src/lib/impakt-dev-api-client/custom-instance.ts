@@ -21,11 +21,9 @@ export const customInstance = <T>(
         originalRequest.retry = true;
         await AXIOS_INSTANCE_REFRESH_TOKEN.post('/api/v1/iam/auth/refresh');
         AXIOS_INSTANCE(originalRequest);
-
-        return;
       }
 
-      Promise.reject(error);
+      throw error;
     },
   );
 
@@ -33,7 +31,7 @@ export const customInstance = <T>(
     ...config,
     ...options,
     cancelToken: source.token,
-  }).then(({ data }) => data);
+  }).then((response) => response?.data);
 
   // @ts-ignore
   promise.cancel = () => {

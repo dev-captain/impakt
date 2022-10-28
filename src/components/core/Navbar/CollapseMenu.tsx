@@ -111,7 +111,7 @@ const CollapseMenu = ({
             isSmall
             href="#"
             onClose={async () => {
-              await signOut.mutateAsync().then(() => {
+              await signOut.mutateAsync().finally(() => {
                 renderToast('success', 'You have successfully logged out!');
                 setMember(null);
                 onClose();

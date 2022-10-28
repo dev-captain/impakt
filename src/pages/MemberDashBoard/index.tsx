@@ -49,7 +49,7 @@ const MemberDashboard: React.FC = () => {
   const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone();
   const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl();
   const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin();
-  const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member!.id);
+  const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any);
 
   React.useEffect(() => {
     if (fetchGodlBalanceScoreQuery.isFetched) {

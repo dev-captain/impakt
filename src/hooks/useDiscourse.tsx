@@ -14,7 +14,6 @@ export const useDiscourse = () => {
   );
 
   const resAllTopics = async () => {
-    console.log('here', fetchLatestNews);
     const res = await Promise.all(
       fetchLatestNews.data?.data.data.map((topicId: number) => {
         return axios.get(
@@ -29,7 +28,6 @@ export const useDiscourse = () => {
 
   React.useEffect(() => {
     if (fetchLatestNews.isFetched) {
-      console.log('yo');
       resAllTopics();
     }
   }, [fetchLatestNews.isFetched]);

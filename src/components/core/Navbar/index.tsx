@@ -190,7 +190,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
 
                   <Common.ImpaktButton
                     onClick={async () => {
-                      await signOut.mutateAsync().then(() => {
+                      await signOut.mutateAsync().finally(() => {
                         renderToast('success', 'You have successfully logged out!');
                         setMember(null);
                         onClose();

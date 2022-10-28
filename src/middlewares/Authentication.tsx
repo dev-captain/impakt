@@ -4,6 +4,7 @@ import { usePersistedAuthStore } from '../lib/zustand';
 
 const Authentication: React.FC = ({ children }) => {
   const { member } = usePersistedAuthStore();
+
   const navigate = useNavigate();
   const location = useLocation();
 

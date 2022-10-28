@@ -55,7 +55,7 @@ const DropDownProfileMenu: React.FC = () => {
           paddingX="21px"
           borderRadius="0px 0px 8px 8px"
           onClick={async () => {
-            await signOut.mutateAsync().then(() => {
+            await signOut.mutateAsync().finally(() => {
               renderToast('success', 'You have successfully logged out!');
               setMember(null);
             });
