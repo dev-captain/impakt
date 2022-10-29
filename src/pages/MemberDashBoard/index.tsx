@@ -19,6 +19,7 @@ import {
 } from '../../lib/impakt-dev-api-client/react-query/referrals/referrals';
 import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api-client/react-query/fitness-stats/fitness-stats';
 import { useDiscourse } from '../../hooks/useDiscourse';
+import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
@@ -40,50 +41,54 @@ const MemberDashboard: React.FC = () => {
   const discourse = useDiscourse();
 
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
-    query: { staleTime: Infinity, cacheTime: Infinity },
+    query: getDefaultQueryOptions(),
   });
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount({
-    query: { staleTime: Infinity, cacheTime: Infinity },
+    query: getDefaultQueryOptions(),
   });
+  console.log(fetchKoinBalanceScoreQuery.data, fetchGodlBalanceScoreQuery.data);
+
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
   // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
   // const fetchExerciseStats = useFitnessStatsControllerGetExerciseStats();
 
   const fetchReferrals = useReferralControllerGetReferrees(
     { count: true },
-    { query: { staleTime: Infinity, cacheTime: Infinity } },
+    { query: getDefaultQueryOptions() },
   );
   const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone({
-    query: { staleTime: Infinity, cacheTime: Infinity },
+    query: getDefaultQueryOptions(),
   });
   const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl({
-    query: { staleTime: Infinity, cacheTime: Infinity },
+    query: getDefaultQueryOptions(),
   });
   const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin({
-    query: { staleTime: Infinity, cacheTime: Infinity },
+    query: { staleTime: Infinity },
   });
   const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any, {
-    query: { staleTime: Infinity, cacheTime: Infinity },
+    query: { staleTime: Infinity },
   });
 
   React.useEffect(() => {
     if (fetchGodlBalanceScoreQuery.isFetched) {
+      console.log('fetched godl', fetchGodlBalanceScoreQuery.data?.balance);
       store.setGodlBalanceScore(fetchGodlBalanceScoreQuery.data?.balance ?? 0);
     }
-  }, [fetchGodlBalanceScoreQuery.isFetched]);
+  }, [fetchGodlBalanceScoreQuery.data]);
 
   React.useEffect(() => {
+    console.log(fetchKoinBalanceScoreQuery.isRefetching);
     if (fetchKoinBalanceScoreQuery.isFetched) {
-      console.log('örmedimi', fetchKoinBalanceScoreQuery.data?.balance);
+      console.log('fetched koin', fetchKoinBalanceScoreQuery.data?.balance);
       store.setKoinBalanceScore(fetchKoinBalanceScoreQuery.data?.balance ?? 0);
     }
-  }, [fetchKoinBalanceScoreQuery.isFetched]);
+  }, [fetchKoinBalanceScoreQuery.data]);
 
   React.useEffect(() => {
     if (fetchActiveDays.isFetched && fetchActiveDays.data) {
       fitnessStore.setActiveDays(fetchActiveDays.data?.value);
     }
-  }, [fetchActiveDays.isFetched]);
+  }, [fetchActiveDays.data]);
 
   // React.useEffect(() => {
   //   if (!member) return;
@@ -94,7 +99,7 @@ const MemberDashboard: React.FC = () => {
     if (fetchReferrals.isFetched && fetchReferrals.data) {
       referralsStore.setReferrals(fetchReferrals.data);
     }
-  }, [fetchReferrals.isFetched]);
+  }, [fetchReferrals.data]);
 
   React.useEffect(() => {
     if (fetchReferralsChallenges.isFetched && fetchReferralsChallenges.data) {
@@ -111,7 +116,7 @@ const MemberDashboard: React.FC = () => {
       });
       referralsStore.setGodlRewardedByReferrals(countAmount);
     }
-  }, [fetchReferralsRewardGodl.isFetched]);
+  }, [fetchReferralsRewardGodl.data]);
 
   React.useEffect(() => {
     if (fetchReferralsRewardKoin.isFetched) {
