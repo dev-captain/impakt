@@ -7,10 +7,10 @@ export const useLogout = () => {
   const { setMember } = usePersistedAuthStore();
 
   const logout = async () => {
+    setMember(null);
+    clearMemberLocalStorages();
     await signOut.mutateAsync().finally(() => {
       renderToast('success', 'You have successfully logged out!');
-      setMember(null);
-      clearMemberLocalStorages();
     });
   };
 
