@@ -14,7 +14,6 @@ const WelcomeModal: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const { activeDays } = usePersistedFitnessStore();
   const { godlBalanceScore, koinBalanceScore } = usePersistedBalanceScoreStore();
-  console.log(godlBalanceScore, koinBalanceScore);
   const { isWhitelistedCollection } = usePersistedAuthStore();
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');

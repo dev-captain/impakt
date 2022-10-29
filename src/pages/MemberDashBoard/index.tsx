@@ -43,10 +43,10 @@ const MemberDashboard: React.FC = () => {
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
     query: getDefaultQueryOptions(),
   });
+
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount({
     query: getDefaultQueryOptions(),
   });
-  console.log(fetchKoinBalanceScoreQuery.data, fetchGodlBalanceScoreQuery.data);
 
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
   // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
@@ -63,23 +63,20 @@ const MemberDashboard: React.FC = () => {
     query: getDefaultQueryOptions(),
   });
   const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin({
-    query: { staleTime: Infinity },
+    query: getDefaultQueryOptions(),
   });
   const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any, {
-    query: { staleTime: Infinity },
+    query: getDefaultQueryOptions(),
   });
 
   React.useEffect(() => {
     if (fetchGodlBalanceScoreQuery.isFetched) {
-      console.log('fetched godl', fetchGodlBalanceScoreQuery.data?.balance);
       store.setGodlBalanceScore(fetchGodlBalanceScoreQuery.data?.balance ?? 0);
     }
   }, [fetchGodlBalanceScoreQuery.data]);
 
   React.useEffect(() => {
-    console.log(fetchKoinBalanceScoreQuery.isRefetching);
     if (fetchKoinBalanceScoreQuery.isFetched) {
-      console.log('fetched koin', fetchKoinBalanceScoreQuery.data?.balance);
       store.setKoinBalanceScore(fetchKoinBalanceScoreQuery.data?.balance ?? 0);
     }
   }, [fetchKoinBalanceScoreQuery.data]);

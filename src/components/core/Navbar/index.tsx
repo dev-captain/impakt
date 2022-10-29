@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { parsePathname, renderToast } from 'utils';
+import { parsePathname } from 'utils';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
@@ -25,8 +25,7 @@ import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import { useAuthControllerLogout } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
-import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useLogout } from '../../../hooks/useLogout';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -37,8 +36,7 @@ const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tik
   Images.Common;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
-  const signOut = useAuthControllerLogout();
-  const { setMember } = usePersistedAuthStore();
+  const logout = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -190,9 +188,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
 
                   <Common.ImpaktButton
                     onClick={async () => {
-                      await signOut.mutateAsync().finally(() => {
-                        renderToast('success', 'You have successfully logged out!');
-                        setMember(null);
+                      await logout().finally(() => {
                         onClose();
                       });
                     }}

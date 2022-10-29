@@ -1,15 +1,15 @@
 import { VStack, Collapse, HStack, Box, Image } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { parsePathname, renderToast } from 'utils';
+import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
 
 import { Common, I } from 'components';
 import NavbarLinkItem from './NavbarLinkItem';
 import SignInLinkItem from './SignInLinkItem';
-import { useAuthControllerLogout } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
 import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useLogout } from '../../../hooks/useLogout';
 
 type Props = {
   bg: string;
@@ -38,8 +38,8 @@ const CollapseMenu = ({
   tiktok,
 }: Props) => {
   const navigate = useNavigate();
-  const signOut = useAuthControllerLogout();
-  const { setMember, member } = usePersistedAuthStore();
+  const logout = useLogout();
+  const { member } = usePersistedAuthStore();
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;
@@ -113,9 +113,7 @@ const CollapseMenu = ({
             isSmall
             href="#"
             onClose={async () => {
-              await signOut.mutateAsync().then(() => {
-                renderToast('success', 'You have successfully logged out!');
-                setMember(null);
+              await logout().finally(() => {
                 onClose();
               });
             }}

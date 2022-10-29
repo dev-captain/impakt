@@ -4,9 +4,11 @@ export interface GodlSlice {
   godlBalanceScore: number;
   setGodlBalanceScore: (newGodlBalanceScore: number) => void;
 }
+const initialGodlSlice = { godlBalanceScore: 0 };
 
 export const godlSlice: StateCreator<GodlSlice> = (set) => ({
-  godlBalanceScore: 0,
+  ...initialGodlSlice,
   setGodlBalanceScore: (newGodlBalanceScore) =>
     set(() => ({ godlBalanceScore: newGodlBalanceScore })),
+  reset: () => set(initialGodlSlice),
 });

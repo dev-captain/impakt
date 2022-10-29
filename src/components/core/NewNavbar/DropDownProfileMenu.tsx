@@ -12,13 +12,11 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { I } from 'components';
 
-import { useAuthControllerLogout } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
 import { usePersistedAuthStore } from '../../../lib/zustand';
-import { renderToast } from '../../../utils';
+import { useLogout } from '../../../hooks/useLogout';
 
 const DropDownProfileMenu: React.FC = () => {
-  const signOut = useAuthControllerLogout();
-  const { setMember } = usePersistedAuthStore();
+  const logout = useLogout();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { member } = usePersistedAuthStore();
   const navigate = useNavigate();
@@ -56,10 +54,7 @@ const DropDownProfileMenu: React.FC = () => {
           paddingX="21px"
           borderRadius="0px 0px 8px 8px"
           onClick={async () => {
-            await signOut.mutateAsync().finally(() => {
-              renderToast('success', 'You have successfully logged out!');
-              setMember(null);
-            });
+            await logout();
           }}
           icon={<I.SignOutIcon />}
           _hover={{ color: '#fff !important', backgroundColor: '#364A63' }}

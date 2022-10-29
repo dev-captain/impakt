@@ -79,3 +79,9 @@ export const usePersistedDiscourseStore = create<DiscourseSlice>()(
     },
   ),
 );
+
+export const clearMemberLocalStorages = () => {
+  usePersistedBalanceScoreStore.setState({ godlBalanceScore: 0, koinBalanceScore: 0 });
+  usePersistedReferralsStore.persist.clearStorage();
+  usePersistedFitnessStore.persist.clearStorage();
+};
