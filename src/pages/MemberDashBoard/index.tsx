@@ -39,17 +39,32 @@ const MemberDashboard: React.FC = () => {
   const discourseStore = usePersistedDiscourseStore();
   const discourse = useDiscourse();
 
-  const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount();
-  const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount();
+  const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
+    query: { staleTime: Infinity, cacheTime: Infinity },
+  });
+  const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount({
+    query: { staleTime: Infinity, cacheTime: Infinity },
+  });
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
   // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
   // const fetchExerciseStats = useFitnessStatsControllerGetExerciseStats();
 
-  const fetchReferrals = useReferralControllerGetReferrees({ count: true });
-  const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone();
-  const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl();
-  const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin();
-  const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any);
+  const fetchReferrals = useReferralControllerGetReferrees(
+    { count: true },
+    { query: { staleTime: Infinity, cacheTime: Infinity } },
+  );
+  const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone({
+    query: { staleTime: Infinity, cacheTime: Infinity },
+  });
+  const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl({
+    query: { staleTime: Infinity, cacheTime: Infinity },
+  });
+  const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin({
+    query: { staleTime: Infinity, cacheTime: Infinity },
+  });
+  const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any, {
+    query: { staleTime: Infinity, cacheTime: Infinity },
+  });
 
   React.useEffect(() => {
     if (fetchGodlBalanceScoreQuery.isFetched) {
@@ -59,6 +74,7 @@ const MemberDashboard: React.FC = () => {
 
   React.useEffect(() => {
     if (fetchKoinBalanceScoreQuery.isFetched) {
+      console.log('örmedimi', fetchKoinBalanceScoreQuery.data?.balance);
       store.setKoinBalanceScore(fetchKoinBalanceScoreQuery.data?.balance ?? 0);
     }
   }, [fetchKoinBalanceScoreQuery.isFetched]);
