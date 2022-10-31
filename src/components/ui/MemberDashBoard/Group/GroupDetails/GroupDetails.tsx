@@ -40,6 +40,7 @@ const GroupDetails: React.FC = () => {
         if (isJoin && groupParam.eventId) {
           const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
           window.location = deepLink as any;
+
         }
       } catch (e: any) {
         if (e.statusCode === 404)
