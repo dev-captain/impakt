@@ -20,7 +20,7 @@ const useContactUs = () => {
   const [isSuccessful, setIsSuccessful] = useState(false);
   const toast = useToast();
 
-  const sendData = async (data: ContactUs, resetFields: () => void) => {
+  const sendData = async (data: ContactUs) => {
     setLoading(true);
     setError(null);
     setIsSuccessful(false);
@@ -40,7 +40,6 @@ const useContactUs = () => {
 
       await freshDeskAwsApiGateWayAxiosInstance.post('/tickets/', payload);
 
-      resetFields();
       setIsSuccessful(true);
       setLoading(false);
       toast({
