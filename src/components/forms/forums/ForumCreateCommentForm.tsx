@@ -25,7 +25,7 @@ const ForumCreateCommentForm = React.forwardRef<
     await dispatch(
       createComment({
         postId: props.postId,
-        createCommentDto: { content: data.comment, parentCommentId: props.postId },
+        createCommentDto: { content: data.comment },
       }),
     ).unwrap();
     props.onClose();
