@@ -3,13 +3,11 @@ import { useEffect } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import {
-  Home,
-  KnowledgeBase,
+  // Home,
   NotFound,
   Event,
   Contact,
   Onboarding,
-  LeaderBoard,
   DownloadSCreen,
   ChangePassword,
   RecoveryPassword,
@@ -20,6 +18,7 @@ import {
   NFT,
   TermsOfUse,
   Whitelist,
+  Landing,
 } from 'pages';
 import { Common, S } from 'components';
 
@@ -54,14 +53,10 @@ const App = () => {
         path="/"
         element={
           <Common.ScrollToTop>
-            <Home />
+            <Landing />
           </Common.ScrollToTop>
         }
       />
-
-      <Route path="/knowledge-base" element={<KnowledgeBase />}>
-        <Route path=":article" element={<KnowledgeBase />} />
-      </Route>
 
       <Route path="/events" element={<Event />}>
         <Route path=":slug" element={<Event />} />
@@ -70,7 +65,6 @@ const App = () => {
       <Route path="/onboarding" element={<Onboarding />} />
 
       <Route path="/contact" element={<Contact />} />
-      <Route path="/leader-board" element={<LeaderBoard />} />
       <Route path="/download" element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />

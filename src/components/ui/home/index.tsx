@@ -1,4 +1,3 @@
-export { default as HeroSection } from 'components/ui/home/HeroSection';
 export { default as EarnCrypto } from 'components/ui/home/EarnCrypto';
 export { default as ImpaktNFT } from 'components/ui/home/ImpaktNFT';
 export { default as ImpaktCreed } from 'components/ui/home/ImpaktCreed';

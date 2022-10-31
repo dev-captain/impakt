@@ -107,7 +107,6 @@ const WhiteList: React.FC = () => {
         <Box>
           <Common.ImpaktButton
             as="a"
-            href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
             leftIcon={
               <Box marginRight="8px">
                 <I.DiscordIcon />

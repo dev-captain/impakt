@@ -107,15 +107,29 @@ code {
   visibility: visible !important;
   transition: all 0.5s;
 }
-#chakra-toast-manager-top-right{
+.slick-list {
+  margin: 0 -20px;
+}
+.slick-slide > div {
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+@media screen and (min-width: 1280px) {
+  .slick-slide > div {
+    padding: 0 20px;
+  }
+}
+#chakra-toast-manager-top-right {
   top: 90px !important;
   margin-right: 0.5rem;
 }
-.chakra-alert__icon svg{
-  color: #4CBFA6;
+.chakra-alert__icon svg {
+  color: #4cbfa6;
 }
-#error-msg .chakra-alert__icon svg{
-  color: #F84153;
+#error-msg .chakra-alert__icon svg {
+  color: #f84153;
 }
 /* NFT Slider */
 

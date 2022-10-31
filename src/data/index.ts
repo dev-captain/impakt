@@ -71,7 +71,7 @@ export const Videos = {
   impaktGames: 'assets/videos/tutorial-video.mp4',
   heroVideo: 'assets/videos/herovideo.mov',
   stars: 'assets/videos/stars.mov',
-  backgroundBeachVideo: 'assets/videos/backgroundbeach.mp4',
+  newVideo: 'assets/videos/Trailer.mp4',
 };
 
 export const Socials = {
@@ -80,7 +80,7 @@ export const Socials = {
   twitter: 'https://twitter.com/impaktlife',
   discord: 'https://discord.gg/eVQJ8XRa9S',
   tiktok: 'http://tiktok.com/@impaktlife',
-  instagram: 'https://www.instagram.com/impakt.life/',
+  insta: 'https://www.instagram.com/impakt.life/',
 };
 
 export const Categories = [
@@ -617,3 +617,48 @@ export const GroupDetails = [
 
 export const deepLinkToApp = (groupId?: number, eventId?: number) =>
   `impakt://join-event?groupId=${groupId}&eventId=${eventId}`;
+
+export const journeyData = [
+  {
+    img: Images.Journey.Journey,
+    title: 'We need variety',
+    description: 'Choose from 40+ exercises. More added constantly.',
+  },
+  {
+    img: Images.Journey.Journey1,
+    title: 'Starting at the base',
+    description: 'Routines customized to our starting fitness level.',
+  },
+  {
+    img: Images.Journey.Journey2,
+    title: 'Challenging ourselves & others',
+    description: 'Complete Impakt challenges and compete with others.',
+  },
+];
+
+export const AthletesData = [
+  {
+    name: 'Kelvin Gastelum',
+    title: 'CEO',
+    image: Images.team.demideus,
+    alt: '',
+    subtitle:
+      '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.\nPrevious 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
+  },
+  {
+    name: 'Matt Fox',
+    title: 'President',
+    image: Images.team.valtec,
+    alt: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> of building technology companies.\nPrevious roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
+  },
+  {
+    name: 'Uyen Ha',
+    title: 'CTO',
+    image: Images.team.dahaka,
+    alt: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.\nManaging a team of <span style="color:#FFF;">20+</span> engineers & product managers',
+  },
+];

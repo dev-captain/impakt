@@ -55,14 +55,7 @@ const BigScreenFooter = ({ bgColor, textColor }: Props) => {
                   <Text fontSize="12px" lineHeight="16px" opacity="0.6">
                     {t(keys.footer.allRightReserved)}
                   </Text>
-                  <Box
-                    as="a"
-                    href="/terms-of-use"
-                    onClick={(e: any) => {
-                      e.preventDefault();
-                      navigate('/terms-of-use');
-                    }}
-                  >
+                  <Link href="/terms-of-use">
                     <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
                       {t(keys.footer.termOfUse)}
                     </Text>

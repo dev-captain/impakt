@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch } from 'hooks';
 
 import { toastDarkLayout } from 'theme';
 import CollapseMenu from './CollapseMenu';
@@ -48,7 +48,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  // const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
   const notifies = useAppSelector((state) => state.groupsReducer.groupRequests)?.length;
 
   useEffect(() => {
@@ -70,7 +70,14 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
 
   const isLight = colorMode === 'light';
   const textColor = isLight ? 'glass.100' : 'glass.700';
-  const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  // const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  const bgColor = path.path !== '' ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  const _hover = {
+    _hover: {
+      transition: '0.2s ease',
+      transform: 'scale(1.25)',
+    },
+  };
 
   return (
     <Box
@@ -99,8 +106,12 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         height={isVersion2 && !isLessThan1280 ? '80px' : '70px'}
         marginTop={isVersion2 && !isLessThan1280 ? '0' : '10px'}
         transition="background-color 0.5s linear"
-        bgColor={isVersion2 ? 'white' : bgColor}
-        backdropFilter={isScrolling || path.path !== '' ? 'blur(40px)' : 'blur(0px)'}
+        bgColor={bgColor}
+        backdropFilter={
+          // isScrolling
+          // ||
+          path.path !== '' ? 'blur(40px)' : 'blur(0px)'
+        }
         borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
       >
         <HStack w="full" justify="space-between">
@@ -111,7 +122,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <I.ImpaktIcon isblack={`${isVersion2}`} cursor="pointer" width="111px" height="32px" />
+            <I.ImpaktIcon variant="lg" whiteMode w="128px" />
           </Box>
           <HStack
             justify="flex-end"
@@ -308,15 +319,20 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           />
         </HStack>
       </Flex>
-      {isLessThan1280 && (
-        <CollapseMenu
-          isOpen={isOpen}
-          onClose={onClose}
-          textColor={textColor}
-          isLessThan1040={isLessThan1280}
-        />
-      )}
-      {!isLessThan1280 && <NotificationDrawer open={isOpen} close={() => onClose()} />}
+      <CollapseMenu
+        isOpen={isOpen}
+        onClose={onClose}
+        bg={bgColor}
+        textColor={textColor}
+        isLessThan1040={isLessThan1280}
+        twitter={twitter}
+        discord={discord}
+        hover={_hover}
+        youtube={youtube}
+        tiktok={Tiktok}
+        // isScrolling={isScrolling}
+        isScrolling
+      />
     </Box>
   );
 };
