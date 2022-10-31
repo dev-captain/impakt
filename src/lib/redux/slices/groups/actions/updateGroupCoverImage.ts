@@ -26,9 +26,11 @@ const updateGroupCoverImage = createAsyncThunk(
       //     headers: { 'Content-Type': 'multipart/form-data' },
       //   })
       //   .patch(`/api/v1/groups/${groupId}/cover-image`, body);
+      const file = body.get('file');
+
       const result = await GroupsInstance.groupsControllerV1PatchGroupCoverImage(
         groupId,
-        body.get('file'),
+        file as any,
       );
       await dispatch(fetchGroupDetailById(groupId.toString()));
 

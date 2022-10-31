@@ -11,7 +11,6 @@ import Images from '../../../assets/images';
 import uploadImageScheme from '../../../lib/yup/schemas/uploadImageScheme';
 import { ALLOW_IMAGE_FILE } from '../../../lib/yup/fields';
 import { updateGroupCoverImage } from '../../../lib/redux/slices/groups/actions/updateGroupCoverImage';
-import { getImageFromS3AsUrl } from '../../../utils';
 
 interface PropsI {}
 const UpdateGroupImageForm: React.FC<PropsI> = () => {
@@ -25,8 +24,8 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    if (activeGroup?.currentCoverImage?.source) {
-      setBannerImage(getImageFromS3AsUrl(activeGroup.currentCoverImage.source));
+    if (activeGroup?.currentCoverImage) {
+      setBannerImage(activeGroup.currentCoverImage);
 
       return;
     }

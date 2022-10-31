@@ -17,7 +17,7 @@ import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendar
 import { fetchPosts } from '../../../../../lib/redux/slices/forum/post_actions/fetchPosts';
 import { cleanForums } from '../../../../../lib/redux/slices/forum/postsSlice';
 import { fetchAmIMemberOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchAmIMemberOfGroup';
-// import { deepLinkToApp } from '../../../../../data';
+import { deepLinkToApp } from '../../../../../data';
 
 const GroupDetails: React.FC = () => {
   // const [show, setShow] = React.useState<null | string>(null);
@@ -31,8 +31,6 @@ const GroupDetails: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
-  const navigate = useNavigate();
-  const toast = useToast();
 
   const getGroupDetail = async () => {
     if (groupParam?.id) {
@@ -40,21 +38,8 @@ const GroupDetails: React.FC = () => {
       try {
         group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
         if (isJoin && groupParam.eventId) {
-          // const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
-          // const now = new Date().valueOf();
-          // setTimeout(function () {
-          //   if (new Date().valueOf() - now > 100) return;
-          //   navigate('/download');
-          //   toast({
-          //     title: 'Error',
-          //     description: 'You have to install this app on your device',
-          //     isClosable: true,
-          //     duration: 8000,
-          //     status: 'error',
-          //   });
-          // }, 5000);
-          // window.location = deepLink as any;
-          // window.setTimeout(function () {
+          const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
+          window.location = deepLink as any;
         }
       } catch (e: any) {
         if (e.statusCode === 404)

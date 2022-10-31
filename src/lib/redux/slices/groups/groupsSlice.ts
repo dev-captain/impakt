@@ -185,7 +185,7 @@ const groupsSlice = createSlice({
         if (!state.activeGroup) return;
         state.activeGroup = {
           ...state.activeGroup,
-          currentCoverImage: { source: action.payload.imageKey },
+          currentCoverImage: action.payload.imageKey,
         };
       })
       .addCase(updateGroupCoverImage.rejected, (state) => {

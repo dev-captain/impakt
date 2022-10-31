@@ -1,17 +1,16 @@
 import React from 'react';
-import { Box, Text, useToast } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../../../hooks';
-// import { deepLinkToApp } from '../../../../../../../data';
+import { deepLinkToApp } from '../../../../../../../data';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
   // const navigate = useNavigate();
-  // const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const role = useAppSelector((state) => state.groupsReducer.role);
   const isAdmin = role === 'Creator';
   // const toast = useToast();
@@ -26,7 +25,7 @@ const EventDetails: React.FC = () => {
     (state) => state.challengesReducer.availableGroupChallenges,
   ).find(({ challenge }) => challenge.id === JSON.parse(eventObj.data).assocId);
 
-  // const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
+  const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
 
   return (
     <>
@@ -111,20 +110,9 @@ const EventDetails: React.FC = () => {
           <Box w="34px">
             <I.ArrowIcon w="15px" height="15px" color="#728BA3" />
           </Box>
-          {/* <a
+          <a
             onClick={(e) => {
               e.preventDefault();
-              // eslint-disable-next-line func-names
-              // const timeout = window.setTimeout(function () {
-              //   navigate('/download');
-              //   toast({
-              //     title: 'Error',
-              //     description: 'You have to install this app on your device',
-              //     isClosable: true,
-              //     duration: 8000,
-              //     status: 'error',
-              //   });
-              // }, 1000);
 
               window.location = deepLink as any;
             }}
@@ -133,7 +121,7 @@ const EventDetails: React.FC = () => {
             <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
               Click to join event
             </Text>
-          </a> */}
+          </a>
         </Box>
         <Box display="flex" alignItems="center">
           <Box w="34px">
