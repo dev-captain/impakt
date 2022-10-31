@@ -72,6 +72,7 @@ export const Videos = {
   heroVideo: 'assets/videos/herovideo.mov',
   stars: 'assets/videos/stars.mov',
   newVideo: 'assets/videos/Trailer.mp4',
+  backgroundBeachVideo: 'assets/videos/backgroundbeach.mp4',
 };
 
 export const Socials = {

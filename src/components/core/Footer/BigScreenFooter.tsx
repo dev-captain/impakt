@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { VStack, Text, SimpleGrid, GridItem, HStack, Box } from '@chakra-ui/react';
+import { VStack, Text, SimpleGrid, GridItem, HStack, Box, Link } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -59,7 +59,7 @@ const BigScreenFooter = ({ bgColor, textColor }: Props) => {
                     <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
                       {t(keys.footer.termOfUse)}
                     </Text>
-                  </Box>
+                  </Link>
                 </VStack>
               </VStack>
             </GridItem>

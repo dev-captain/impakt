@@ -80,7 +80,7 @@ const ImpaktPass = () => {
                 <Common.ImpaktButton
                   as="a"
                   target="_blank"
-                  href={`${Socials.instagram}`}
+                  href={`${Socials.insta}`}
                   leftIcon={
                     <Box marginRight="8px">
                       <I.IGIcon />

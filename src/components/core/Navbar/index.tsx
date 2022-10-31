@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { toastDarkLayout } from 'theme';
 import CollapseMenu from './CollapseMenu';
@@ -71,13 +71,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const isLight = colorMode === 'light';
   const textColor = isLight ? 'glass.100' : 'glass.700';
   // const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
-  const bgColor = path.path !== '' ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
-  const _hover = {
-    _hover: {
-      transition: '0.2s ease',
-      transform: 'scale(1.25)',
-    },
-  };
+  const bgColor = isVersion2 ? '#fff' : 'rgba(28, 28, 40, 0.65)';
 
   return (
     <Box
@@ -88,7 +82,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
       px={isVersion2 && !isLessThan1280 ? '0' : '16px'}
       display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
-      background={isVersion2 ? '#eef4f6' : bgColor}
+      background={isVersion2 ? '#eef4f6' : 'transparent'}
     >
       {isOpen && !isVersion2 && <Gradient />}
       <Flex
@@ -122,7 +116,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <I.ImpaktIcon variant="lg" whiteMode w="128px" />
+            <I.ImpaktIcon whiteMode={!isVersion2} variant="lg" w="128px" />
           </Box>
           <HStack
             justify="flex-end"
@@ -319,20 +313,15 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           />
         </HStack>
       </Flex>
-      <CollapseMenu
-        isOpen={isOpen}
-        onClose={onClose}
-        bg={bgColor}
-        textColor={textColor}
-        isLessThan1040={isLessThan1280}
-        twitter={twitter}
-        discord={discord}
-        hover={_hover}
-        youtube={youtube}
-        tiktok={Tiktok}
-        // isScrolling={isScrolling}
-        isScrolling
-      />
+      {isLessThan1280 && (
+        <CollapseMenu
+          isOpen={isOpen}
+          onClose={onClose}
+          textColor={textColor}
+          isLessThan1040={isLessThan1280}
+        />
+      )}
+      {!isLessThan1280 && <NotificationDrawer open={isOpen} close={() => onClose()} />}
     </Box>
   );
 };
@@ -342,6 +331,7 @@ export default Navbar;
 const Gradient = () => {
   return (
     <Box
+      id="gradient"
       zIndex={10}
       bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
       opacity="0.4"

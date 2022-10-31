@@ -12,7 +12,6 @@ import {
   // PositionProps,
   useToast,
 } from '@chakra-ui/react';
-import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import { useTranslation } from 'react-i18next';
@@ -34,8 +33,6 @@ interface NavbarProps {
   isVersion2?: boolean;
 }
 // const { dark, light } = Images;
-const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
-  Images.Common;
 
 const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
   const dispatch = useAppDispatch();
@@ -62,21 +59,18 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
   }, [path.path]);
 
   const isLight = colorMode === 'light';
-  const youtube = isLight ? Youtube : YoutubeLight;
-  const discord = isLight ? Discord : DiscordLight;
-  const twitter = isLight ? Twitter : TwitterLight;
   const textColor = isLight ? 'glass.100' : 'glass.700';
-  const bgColor =
-    path.path !== ''
-      ? // || isScrolling
-        'rgba(28, 28, 40, 0.65)'
-      : 'transparent';
-  const _hover = {
-    _hover: {
-      transition: '0.2s ease',
-      transform: 'scale(1.25)',
-    },
-  };
+  // const bgColor =
+  //   path.path !== ''
+  //     ? // || isScrolling
+  //       'rgba(28, 28, 40, 0.65)'
+  //     : 'transparent';
+  // const _hover = {
+  //   _hover: {
+  //     transition: '0.2s ease',
+  //     transform: 'scale(1.25)',
+  //   },
+  // };
 
   return (
     <Box
@@ -340,16 +334,8 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
       <CollapseMenu
         isOpen={isOpen}
         onClose={onClose}
-        bg={bgColor}
         textColor={textColor}
         isLessThan1040={isLessThan1280}
-        twitter={twitter}
-        discord={discord}
-        hover={_hover}
-        youtube={youtube}
-        tiktok={Tiktok}
-        // isScrolling={isScrolling}
-        isScrolling
       />
     </Box>
   );
