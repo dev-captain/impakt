@@ -2,7 +2,6 @@ import { Image } from '@chakra-ui/react';
 import * as React from 'react';
 import { useAppSelector } from 'hooks';
 import Images from '../../../../../../assets/images';
-import { getImageFromS3AsUrl } from '../../../../../../utils';
 
 const BannerImage: React.FC = () => {
   const isCurrentImageExist = useAppSelector(
@@ -14,13 +13,7 @@ const BannerImage: React.FC = () => {
 
   return (
     <Image
-      src={
-        // eslint-disable-next-line no-nested-ternary
-        // isCurrentImageExist
-        //   ? getImageFromS3AsUrl(currentCoverImageSource!.source)
-        //   :
-        Images.group.cover
-      }
+      src={isCurrentImageExist ? currentCoverImageSource : Images.group.cover}
       loading="lazy"
       minH="100px"
       minWidth="100%"

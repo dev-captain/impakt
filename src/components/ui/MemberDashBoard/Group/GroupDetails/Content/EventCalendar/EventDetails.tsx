@@ -1,10 +1,9 @@
 import React from 'react';
-import { Box, Text, useToast } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../../../hooks';
 import { deepLinkToApp } from '../../../../../../../data';
 
@@ -114,17 +113,6 @@ const EventDetails: React.FC = () => {
           <a
             onClick={(e) => {
               e.preventDefault();
-              // eslint-disable-next-line func-names
-              // const timeout = window.setTimeout(function () {
-              //   navigate('/download');
-              //   toast({
-              //     title: 'Error',
-              //     description: 'You have to install this app on your device',
-              //     isClosable: true,
-              //     duration: 8000,
-              //     status: 'error',
-              //   });
-              // }, 1000);
 
               window.location = deepLink as any;
             }}

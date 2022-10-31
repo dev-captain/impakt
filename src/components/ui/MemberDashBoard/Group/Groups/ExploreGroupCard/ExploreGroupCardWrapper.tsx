@@ -7,7 +7,6 @@ import { Common, I } from 'components';
 import { useNavigate } from 'react-router-dom';
 
 import Images from '../../../../../../assets/images';
-import { getImageFromS3AsUrl } from '../../../../../../utils';
 import GroupsCard from '../GroupsCard';
 import { sendGroupRequestToJoin } from '../../../../../../lib/redux/slices/groups/actions/sendGroupRequestToJoin';
 import { joinGroup } from '../../../../../../lib/redux/slices/groups/actions/joinGroup';
@@ -76,12 +75,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           position="relative"
         >
           <GroupsCard
-            img={
-              // g.currentCoverImage?.source
-              //   ? getImageFromS3AsUrl(g.currentCoverImage?.source)
-              // :
-              Images.group.logo
-            }
+            img={g.currentCoverImage ? g.currentCoverImage : Images.group.logo}
             member={g.memberCount}
             name={g.groupName}
             isPrivateGroup={g._private}

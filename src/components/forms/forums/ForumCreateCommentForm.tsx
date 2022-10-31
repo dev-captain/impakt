@@ -22,9 +22,11 @@ const ForumCreateCommentForm = React.forwardRef<
 
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
-    console.log(data.comment);
     await dispatch(
-      createComment({ postId: props.postId, createCommentDto: { content: data.comment } }),
+      createComment({
+        postId: props.postId,
+        createCommentDto: { content: data.comment },
+      }),
     ).unwrap();
     props.onClose();
   };

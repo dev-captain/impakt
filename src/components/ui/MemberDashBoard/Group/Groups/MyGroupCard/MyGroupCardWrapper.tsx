@@ -5,7 +5,6 @@ import { Common, I } from 'components';
 import { useNavigate } from 'react-router-dom';
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
-import { getImageFromS3AsUrl } from '../../../../../../utils';
 
 const MyGroupCardHeader: React.FC = () => {
   const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
@@ -32,12 +31,7 @@ const MyGroupCardHeader: React.FC = () => {
           <Box position="relative">
             <GroupsCard
               member={m.group.memberCount ?? 0}
-              img={
-                // m.group.currentCoverImageId
-                //   ? getImageFromS3AsUrl(m.group.currentCoverImage!.source)
-                // :
-                Images.group.logo
-              }
+              img={m.group.currentCoverImageId ? m.group.currentCoverImage : Images.group.logo}
               name={m.group.groupName}
               // eslint-disable-next-line no-underscore-dangle
               isPrivateGroup={m.group._private}
