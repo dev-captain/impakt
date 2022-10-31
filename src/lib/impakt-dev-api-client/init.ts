@@ -21,7 +21,6 @@ import {
   PostsApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
-import { VrGlass } from 'components/icons';
 import axios from '../axios/api';
 import theme, { toastDarkLayout } from '../../theme';
 

@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { Box, Text, Image, useDisclosure, HStack, Button } from '@chakra-ui/react';
+import { useDisclosure, Button } from '@chakra-ui/react';
 import { I } from 'components';
-import Images from 'assets/images';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { DeleteIcon } from '@chakra-ui/icons';
+// import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { deletePost } from '../../../../../../../lib/redux/slices/forum/post_actions/deletePost';
+// import { deletePost } from '../../../../../../../lib/redux/slices/forum/post_actions/deletePost';
 import CommentBox from './CommentBox';
 import ForumDetailModal from './ForumsDetail/ForumDetailModal';
 import PostCard from './PostCard';
@@ -23,9 +21,8 @@ interface UserForumsPropsI {
 const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const postParam = useParams();
-  const role = useAppSelector((state) => state.groupsReducer.role);
-  const dispatch = useAppDispatch();
-  const group = useAppSelector((state) => state.groupsReducer.activeGroup);
+  // const dispatch = useAppDispatch();
+  // const group = useAppSelector((state) => state.groupsReducer.activeGroup);
   const isStandalone = postParam.postId ? parseInt(postParam.postId, 10) === props.id : false;
   const navigate = useNavigate();
 
@@ -35,12 +32,12 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
     }
   }, [postParam]);
 
-  const deletePostFromDb = async () => {
-    if (!group) return;
-    await dispatch(
-      deletePost({ referenceType: 'Group', referenceId: group.id, postId: props.id }),
-    ).unwrap();
-  };
+  // const deletePostFromDb = async () => {
+  //   if (!group) return;
+  //   await dispatch(
+  //     deletePost({ referenceType: 'Group', referenceId: group.id, postId: props.id }),
+  //   ).unwrap();
+  // };
 
   const navigateToPost = () => {
     navigate(`post/${props.id}`);

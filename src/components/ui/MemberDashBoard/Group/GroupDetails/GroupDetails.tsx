@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Text, CircularProgress, HStack, useToast } from '@chakra-ui/react';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
+import { useLocation, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Content from './Content/Content';

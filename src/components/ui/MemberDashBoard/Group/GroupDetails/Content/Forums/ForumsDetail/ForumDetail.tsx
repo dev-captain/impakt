@@ -66,34 +66,32 @@ const ForumDetail: React.FC = () => {
         <ForumCreateCommentForm postId={activePostDetails.id} onClose={() => null} />
       </Box>
       {activePostDetails.comment.length > 0 ? (
-        activePostDetails.comment.map(
-          ({ childComments, content, creatorId, post, createdAt, creator, id }) => (
-            <PostCard
-              w="50%"
-              id={id}
-              name={creator?.firstName ?? creator?.username}
-              msg={content}
-              title={content}
-              msgNo={0}
-              // view={view}
-              time={`${Day.now().hoursBetween(Day.fromString(createdAt.toISOString()))}h`}
-            >
-              {creator?.id === member?.id && (
-                <Common.ImpaktButton
-                  mt={{ md: 0, base: '10px' }}
-                  color="#B0C3D6"
-                  onClick={() => deleteCommentFromDb(id)}
-                  bg="#fff"
-                  borderRadius="8px"
-                  type="submit"
-                  fontWeight="600"
-                >
-                  <DeleteIcon width="1em" height="1em" />
-                </Common.ImpaktButton>
-              )}
-            </PostCard>
-          ),
-        )
+        activePostDetails.comment.map(({ content, createdAt, creator, id }) => (
+          <PostCard
+            w="50%"
+            id={id}
+            name={creator?.firstName ?? creator?.username}
+            msg={content}
+            title={content}
+            msgNo={0}
+            // view={view}
+            time={`${Day.now().hoursBetween(Day.fromString(createdAt.toISOString()))}h`}
+          >
+            {creator?.id === member?.id && (
+              <Common.ImpaktButton
+                mt={{ md: 0, base: '10px' }}
+                color="#B0C3D6"
+                onClick={() => deleteCommentFromDb(id)}
+                bg="#fff"
+                borderRadius="8px"
+                type="submit"
+                fontWeight="600"
+              >
+                <DeleteIcon width="1em" height="1em" />
+              </Common.ImpaktButton>
+            )}
+          </PostCard>
+        ))
       ) : (
         <Text color="gray.500">No comment yet</Text>
       )}

@@ -1,8 +1,7 @@
-import { Box, Button, LayoutProps, Text, Image } from '@chakra-ui/react';
+import { Box, LayoutProps, Text, Image } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import Images from '../../../../../../../assets/images';
-import CommentBox from './CommentBox';
 
 interface PostCardPropsI {
   id: number;
@@ -28,6 +27,7 @@ const PostCard: React.FC<PostCardPropsI> = ({
 }) => {
   return (
     <Box
+      id={id.toString()}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();

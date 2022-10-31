@@ -28,7 +28,6 @@ const SignUpForm: React.FC = () => {
       setActiveReferrerId(referrerNumberId);
     }
   }, []);
-  console.log('toastLayout :', toastLayout);
 
   const { handleSubmit, errors, getValues, setValue } = useForm({
     resolver: yupResolver(signUpYupScheme),
