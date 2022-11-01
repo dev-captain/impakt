@@ -11,6 +11,8 @@ export interface GetLikeRes {
   userId: number;
   objectId: number;
   type: GetLikeResType;
+  /** Unicode string represnting a certain emoji */
+  reaction: string;
   createdAt: string;
   updatedAt: string;
 }

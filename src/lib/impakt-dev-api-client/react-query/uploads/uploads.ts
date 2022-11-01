@@ -14,9 +14,7 @@ import type {
   QueryKey,
 } from '@tanstack/react-query';
 import type {
-  GetUploadUrlRes,
   HttpExceptionSchema,
-  UploadControllerGetUploadUrlParams,
   UploadControllerUploadFileBody,
   UploadControllerUploadFileParams,
 } from '../types';
@@ -31,34 +29,34 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
   ? P
   : never;
 
-export const uploadControllerGetUploadUrl = (
-  params: UploadControllerGetUploadUrlParams,
+export const uploadControllerGetFilePublicUrl = (
+  id: number,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
-  return customInstance<GetUploadUrlRes>(
-    { url: `/api/v1/uploads/upload-url`, method: 'get', params, signal },
+  return customInstance<void>(
+    { url: `/api/v1/uploads/uploads/${id}`, method: 'get', signal },
     options,
   );
 };
 
-export const getUploadControllerGetUploadUrlQueryKey = (
-  params: UploadControllerGetUploadUrlParams,
-) => [`/api/v1/uploads/upload-url`, ...(params ? [params] : [])];
+export const getUploadControllerGetFilePublicUrlQueryKey = (id: number) => [
+  `/api/v1/uploads/uploads/${id}`,
+];
 
-export type UploadControllerGetUploadUrlQueryResult = NonNullable<
-  Awaited<ReturnType<typeof uploadControllerGetUploadUrl>>
+export type UploadControllerGetFilePublicUrlQueryResult = NonNullable<
+  Awaited<ReturnType<typeof uploadControllerGetFilePublicUrl>>
 >;
-export type UploadControllerGetUploadUrlQueryError = ErrorType<HttpExceptionSchema>;
+export type UploadControllerGetFilePublicUrlQueryError = ErrorType<HttpExceptionSchema>;
 
-export const useUploadControllerGetUploadUrl = <
-  TData = Awaited<ReturnType<typeof uploadControllerGetUploadUrl>>,
+export const useUploadControllerGetFilePublicUrl = <
+  TData = Awaited<ReturnType<typeof uploadControllerGetFilePublicUrl>>,
   TError = ErrorType<HttpExceptionSchema>,
 >(
-  params: UploadControllerGetUploadUrlParams,
+  id: number,
   options?: {
     query?: UseQueryOptions<
-      Awaited<ReturnType<typeof uploadControllerGetUploadUrl>>,
+      Awaited<ReturnType<typeof uploadControllerGetFilePublicUrl>>,
       TError,
       TData
     >;
@@ -67,17 +65,19 @@ export const useUploadControllerGetUploadUrl = <
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getUploadControllerGetUploadUrlQueryKey(params);
+  const queryKey = queryOptions?.queryKey ?? getUploadControllerGetFilePublicUrlQueryKey(id);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof uploadControllerGetUploadUrl>>> = ({
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof uploadControllerGetFilePublicUrl>>> = ({
     signal,
-  }) => uploadControllerGetUploadUrl(params, requestOptions, signal);
+  }) => uploadControllerGetFilePublicUrl(id, requestOptions, signal);
 
-  const query = useQuery<Awaited<ReturnType<typeof uploadControllerGetUploadUrl>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  ) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery<
+    Awaited<ReturnType<typeof uploadControllerGetFilePublicUrl>>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!id, ...queryOptions }) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
 
   query.queryKey = queryKey;
 
@@ -90,13 +90,11 @@ export const uploadControllerUploadFile = (
   options?: SecondParameter<typeof customInstance>,
 ) => {
   const formData = new FormData();
-  if (uploadControllerUploadFileBody.file !== undefined) {
-    formData.append('file', uploadControllerUploadFileBody.file);
-  }
+  formData.append('file', uploadControllerUploadFileBody.file);
 
   return customInstance<boolean>(
     {
-      url: `/api/v1/uploads/upload-file`,
+      url: `/api/v1/uploads/uploads`,
       method: 'post',
       headers: { 'Content-Type': 'multipart/form-data' },
       data: formData,

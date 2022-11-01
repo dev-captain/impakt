@@ -293,14 +293,12 @@ export const groupsControllerV1PatchGroupCoverImage = (
   options?: SecondParameter<typeof customInstance>,
 ) => {
   const formData = new FormData();
-  if (groupsControllerV1PatchGroupCoverImageBody.file !== undefined) {
-    formData.append('file', groupsControllerV1PatchGroupCoverImageBody.file);
-  }
+  formData.append('file', groupsControllerV1PatchGroupCoverImageBody.file);
 
   return customInstance<GetUploadImageRes>(
     {
       url: `/api/v1/groups/${groupId}/cover-image`,
-      method: 'patch',
+      method: 'post',
       headers: { 'Content-Type': 'multipart/form-data' },
       data: formData,
     },

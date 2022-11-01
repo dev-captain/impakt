@@ -136,3 +136,54 @@ export const useLikeControllerCreateChallengeLike = <
     TContext
   >(mutationFn, mutationOptions);
 };
+export const likeControllerCreatePostLike = (
+  createLikeReq: CreateLikeReq,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<GetLikeRes>(
+    {
+      url: `/api/v1/likes/post`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: createLikeReq,
+    },
+    options,
+  );
+};
+
+export type LikeControllerCreatePostLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof likeControllerCreatePostLike>>
+>;
+export type LikeControllerCreatePostLikeMutationBody = CreateLikeReq;
+export type LikeControllerCreatePostLikeMutationError = ErrorType<HttpExceptionSchema>;
+
+export const useLikeControllerCreatePostLike = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof likeControllerCreatePostLike>>,
+    TError,
+    { data: CreateLikeReq },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof likeControllerCreatePostLike>>,
+    { data: CreateLikeReq }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return likeControllerCreatePostLike(data, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof likeControllerCreatePostLike>>,
+    TError,
+    { data: CreateLikeReq },
+    TContext
+  >(mutationFn, mutationOptions);
+};

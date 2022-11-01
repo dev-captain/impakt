@@ -17,9 +17,9 @@ import type {
   CalendarDtoV1,
   HttpExceptionSchema,
   CalendarEventDtoV1Response,
-  PostCalendarEventReq,
   PatchCalendarEventReq,
   DeleteAnEventRes,
+  PostCalendarEventReq,
   CalendarEventRescheduleRes,
   EventRescheduleReq,
   CancelCalendarEventReq,
@@ -145,59 +145,62 @@ export const useCalendarControllerGetCalendarListView = <
   return query;
 };
 
-export const calendarEventControllerCreateCalendarEvent = (
-  calendarId: number,
-  postCalendarEventReq: PostCalendarEventReq,
+export const calendarEventControllerFindOneCalendarEvent = (
+  eventId: number,
   options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
 ) => {
   return customInstance<CalendarEventDtoV1Response>(
-    {
-      url: `/api/v1/calendar/${calendarId}/events`,
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      data: postCalendarEventReq,
-    },
+    { url: `/api/v1/calendar/events/${eventId}`, method: 'get', signal },
     options,
   );
 };
 
-export type CalendarEventControllerCreateCalendarEventMutationResult = NonNullable<
-  Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>
+export const getCalendarEventControllerFindOneCalendarEventQueryKey = (eventId: number) => [
+  `/api/v1/calendar/events/${eventId}`,
+];
+
+export type CalendarEventControllerFindOneCalendarEventQueryResult = NonNullable<
+  Awaited<ReturnType<typeof calendarEventControllerFindOneCalendarEvent>>
 >;
-export type CalendarEventControllerCreateCalendarEventMutationBody = PostCalendarEventReq;
-export type CalendarEventControllerCreateCalendarEventMutationError =
-  ErrorType<HttpExceptionSchema>;
+export type CalendarEventControllerFindOneCalendarEventQueryError = ErrorType<HttpExceptionSchema>;
 
-export const useCalendarEventControllerCreateCalendarEvent = <
+export const useCalendarEventControllerFindOneCalendarEvent = <
+  TData = Awaited<ReturnType<typeof calendarEventControllerFindOneCalendarEvent>>,
   TError = ErrorType<HttpExceptionSchema>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>,
+>(
+  eventId: number,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof calendarEventControllerFindOneCalendarEvent>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getCalendarEventControllerFindOneCalendarEventQueryKey(eventId);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof calendarEventControllerFindOneCalendarEvent>>
+  > = ({ signal }) => calendarEventControllerFindOneCalendarEvent(eventId, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof calendarEventControllerFindOneCalendarEvent>>,
     TError,
-    { calendarId: number; data: PostCalendarEventReq },
-    TContext
-  >;
-  request?: SecondParameter<typeof customInstance>;
-}) => {
-  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>,
-    { calendarId: number; data: PostCalendarEventReq }
-  > = (props) => {
-    const { calendarId, data } = props ?? {};
-
-    return calendarEventControllerCreateCalendarEvent(calendarId, data, requestOptions);
+    TData
+  >(queryKey, queryFn, { enabled: !!eventId, ...queryOptions }) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
   };
 
-  return useMutation<
-    Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>,
-    TError,
-    { calendarId: number; data: PostCalendarEventReq },
-    TContext
-  >(mutationFn, mutationOptions);
+  query.queryKey = queryKey;
+
+  return query;
 };
+
 export const calendarEventControllerUpdateCalendarEvent = (
   eventId: number,
   patchCalendarEventReq: PatchCalendarEventReq,
@@ -295,6 +298,59 @@ export const useCalendarEventControllerDeleteCalendarEvent = <
     Awaited<ReturnType<typeof calendarEventControllerDeleteCalendarEvent>>,
     TError,
     { eventId: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const calendarEventControllerCreateCalendarEvent = (
+  calendarId: number,
+  postCalendarEventReq: PostCalendarEventReq,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<CalendarEventDtoV1Response>(
+    {
+      url: `/api/v1/calendar/${calendarId}/events`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: postCalendarEventReq,
+    },
+    options,
+  );
+};
+
+export type CalendarEventControllerCreateCalendarEventMutationResult = NonNullable<
+  Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>
+>;
+export type CalendarEventControllerCreateCalendarEventMutationBody = PostCalendarEventReq;
+export type CalendarEventControllerCreateCalendarEventMutationError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useCalendarEventControllerCreateCalendarEvent = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>,
+    TError,
+    { calendarId: number; data: PostCalendarEventReq },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>,
+    { calendarId: number; data: PostCalendarEventReq }
+  > = (props) => {
+    const { calendarId, data } = props ?? {};
+
+    return calendarEventControllerCreateCalendarEvent(calendarId, data, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof calendarEventControllerCreateCalendarEvent>>,
+    TError,
+    { calendarId: number; data: PostCalendarEventReq },
     TContext
   >(mutationFn, mutationOptions);
 };

@@ -5,7 +5,7 @@ module.exports = {
       target: 'src/lib/impakt-dev-api-client/react-query/client.ts',
       schemas: 'src/lib/impakt-dev-api-client/react-query/types',
       client: 'react-query',
-      mock: true,
+      mock: false,
       override: {
         mutator: {
           path: 'src/lib/impakt-dev-api-client/custom-instance.ts',

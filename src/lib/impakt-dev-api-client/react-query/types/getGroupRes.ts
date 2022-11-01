@@ -4,7 +4,6 @@
  * Impakt API
  * OpenAPI spec version: 1.0.0
  */
-import type { GetUploadFileRes } from './getUploadFileRes';
 
 export interface GetGroupRes {
   id: number;
@@ -17,5 +16,5 @@ export interface GetGroupRes {
   calendarId: number;
   private: boolean;
   deleted: boolean;
-  CurrentCoverImage: GetUploadFileRes;
+  CurrentCoverImage: string;
 }

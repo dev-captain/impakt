@@ -6,5 +6,5 @@
  */
 
 export type GroupsControllerV1PatchGroupCoverImageBody = {
-  file?: Blob;
+  file: Blob;
 };

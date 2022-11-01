@@ -19,6 +19,7 @@ import type {
   PostControllerV1GetManyParams,
   CreatePostDto,
   UpdatePostDto,
+  DeletePostRes,
   GetCommentRes,
   CreateCommentDto,
   UpdateCommentDto,
@@ -260,7 +261,7 @@ export const postControllerV1DeleteOne = (
   postId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
-  return customInstance<GetPostRes>(
+  return customInstance<DeletePostRes>(
     { url: `/api/v1/posts/${referenceType}/${referenceId}/${postId}`, method: 'delete' },
     options,
   );

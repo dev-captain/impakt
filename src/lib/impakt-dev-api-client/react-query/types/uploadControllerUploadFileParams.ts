@@ -4,6 +4,9 @@
  * Impakt API
  * OpenAPI spec version: 1.0.0
  */
-import type { UploadControllerUploadFileFileType } from './uploadControllerUploadFileFileType';
+import type { UploadControllerUploadFileReference } from './uploadControllerUploadFileReference';
 
-export type UploadControllerUploadFileParams = { fileType: UploadControllerUploadFileFileType };
+export type UploadControllerUploadFileParams = {
+  reference: UploadControllerUploadFileReference;
+  referenceId: number;
+};

@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface GetUploadFileRes {
-  /** Uploaded image source */
-  source: string;
+export interface DeletePostRes {
+  success: boolean;
 }

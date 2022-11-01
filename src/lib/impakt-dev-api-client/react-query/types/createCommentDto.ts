@@ -8,4 +8,6 @@
 export interface CreateCommentDto {
   /** This is the comment content */
   content: string;
+  /** This is the Id of a comment that a reply is applied to, when provided, content is added as a reply */
+  parentCommentId?: number | null;
 }
