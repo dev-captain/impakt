@@ -9,7 +9,7 @@
     "@emotion/styled": "^11",
     "@faker-js/faker": "^7.6.0",
     "@hookform/resolvers": "^2.8.8",
-    "@impakt-dev/api-client": "^0.36.1-1388",
+    "@impakt-dev/api-client": "^0.39.0-1421",
     "@reduxjs/toolkit": "^1.8.2",
     "@rematch/core": "^2.2.0",
     "@splidejs/react-splide": "^0.7.12",

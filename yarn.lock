@@ -1928,10 +1928,10 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@impakt-dev/api-client@^0.36.1-1388":
-  version "0.36.1-1388"
-  resolved "https://gitlab.com/api/v4/projects/38621431/packages/npm/@impakt-dev/api-client/-/@impakt-dev/api-client-0.36.1-1388.tgz#04f8b4c11d32b3e93ca9cbcf8c4f58557ccc97b2"
-  integrity sha1-BPi0wR0ys+k8qcvPjE9YVXzMl7I=
+"@impakt-dev/api-client@^0.39.0-1421":
+  version "0.39.0-1421"
+  resolved "https://gitlab.com/api/v4/projects/38621431/packages/npm/@impakt-dev/api-client/-/@impakt-dev/api-client-0.39.0-1421.tgz#a43463c07e109c71f1719a646ccbaea2d6d89a73"
+  integrity sha1-pDRjwH4QnHHxcZpkbMuuotbYmnM=
   dependencies:
     es6-promise "^4.2.4"
     url-parse "^1.4.3"
