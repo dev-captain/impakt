@@ -4,9 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
-import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
-import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
 import { deepLinkToApp } from '../../../../../data';
 import {
   useGroupsControllerV1FindGroupMembers,
@@ -18,10 +16,20 @@ import {
 } from '../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { getDefaultQueryOptions } from '../../../../../lib/impakt-dev-api-client/utils';
 import { usePostControllerV1GetMany } from '../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
-import { usePersistedGroupStore } from '../../../../../lib/zustand';
+import {
+  usePersistedCalendarStore,
+  usePersistedForumStore,
+  usePersistedGroupStore,
+} from '../../../../../lib/zustand';
+import {
+  calendarControllerGetCalendar,
+  useCalendarControllerGetCalendar,
+} from '../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 
 const GroupDetails: React.FC = () => {
   const { setActiveGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
+  const { setCalendar } = usePersistedCalendarStore();
+  const { setPosts } = usePersistedForumStore();
 
   const groupParam = useParams();
   const isJoin =
@@ -34,12 +42,13 @@ const GroupDetails: React.FC = () => {
 
   const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '0', 10), {
     query: { ...getDefaultQueryOptions(), enabled: false },
-  }); // TODO Update activeGroup on zustand
+  });
+
   const fetchMembersOfGroup = useGroupsControllerV1FindGroupMembers(
     parseInt(groupParam?.id ?? '0', 10),
     {},
     { query: { ...getDefaultQueryOptions(), enabled: false } },
-  ); // TODO update membersOfGroup on zustand
+  );
 
   const fetchAmIMemberOfGroup = useGroupsMemberControllerV1AmIMemberOfGroup(
     parseInt(groupParam?.id ?? '0', 10),
@@ -49,9 +58,14 @@ const GroupDetails: React.FC = () => {
   const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup(
     parseInt(groupParam?.id ?? '0', 10),
     { query: { ...getDefaultQueryOptions(), enabled: false } },
-  ); // TODO update role on zustand
+  );
 
-  const fetchPosts = usePostControllerV1GetMany('Group', parseInt(groupParam?.id ?? '0', 10)); // TODO update posts on zustand
+  const fetchPosts = usePostControllerV1GetMany(
+    'Group',
+    parseInt(groupParam?.id ?? '0', 10),
+    {},
+    { query: { ...getDefaultQueryOptions(), enabled: false } },
+  );
 
   const [isNotFound, setIsNotFound] = React.useState<string>('');
 
@@ -91,10 +105,17 @@ const GroupDetails: React.FC = () => {
             if (membersOfGroup.isSuccess) {
               setMembersOfGroup(membersOfGroup.data);
             }
+
             const posts = await fetchPosts.refetch();
-            await dispatch(
-              fetchCalendarById({ calendarId: groupDetailQuery.data.calendarId, type: 'Group' }),
-            );
+            if (posts.isSuccess) {
+              setPosts(posts.data ?? []);
+            }
+
+            const calendar = await calendarControllerGetCalendar(groupDetailQuery.data.calendarId);
+            setCalendar(calendar);
+
+            // Todo update calendar data on zustand
+
             await dispatch(fetchAvailableChallengesForGroup());
           }
         }
