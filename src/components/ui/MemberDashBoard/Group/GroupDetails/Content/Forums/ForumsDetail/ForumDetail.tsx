@@ -10,13 +10,14 @@ import PostCard from '../PostCard';
 import ForumCreateCommentForm from '../../../../../../../forms/forums/ForumCreateCommentForm';
 import { Common } from '../../../../../../..';
 import { deleteComment } from '../../../../../../../../lib/redux/slices/forum/comment_actions/deleteComment';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../../lib/zustand';
 
 const ForumDetail: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const { postId } = useParams();
   const postDetails = useAppSelector((state) => state.postsReducer.posts);
   const activePostDetails = postDetails.find((post) => post.id === Number(postId));
-  const group = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const group = usePersistedGroupStore().activeGroup;
   const dispatch = useAppDispatch();
 
   const deletePostFromDb = async () => {

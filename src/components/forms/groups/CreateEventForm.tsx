@@ -11,6 +11,7 @@ import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/
 import { createEvent } from '../../../lib/redux/slices/events/actions/createEvent';
 import createEventYupScheme from '../../../lib/yup/schemas/createEventYupSchema';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 
 const CreateEventForm: React.FC = () => {
   const toast = useToast();
@@ -18,8 +19,8 @@ const CreateEventForm: React.FC = () => {
   const { getSelectedDay, addEvent } = useEventCalendarContext();
   const date = getSelectedDay();
 
-  const member = useAppSelector((state) => state.memberAuth.member);
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { member } = usePersistedAuthStore();
+  const { activeGroup } = usePersistedGroupStore();
   const dispatch = useAppDispatch();
   const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {

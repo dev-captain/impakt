@@ -3,17 +3,17 @@ import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
 // import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from 'components';
-import { useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../../utils';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const BannerSettingsMenu: React.FC = () => {
   const joinGroup = useGroupsMemberControllerV1JoinGroup();
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const role = useAppSelector((state) => state.groupsReducer.role);
-  const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
+  const { activeGroup } = usePersistedGroupStore();
+  const { role } = usePersistedGroupStore();
+  // const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isCreator = role === 'Creator';
@@ -36,7 +36,7 @@ const BannerSettingsMenu: React.FC = () => {
     );
   };
 
-  if (isRoleLoading) return null;
+  // if (isRoleLoading) return null;
 
   const isRoleDefined = role && role !== 'None';
 

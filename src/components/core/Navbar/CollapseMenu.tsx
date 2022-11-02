@@ -1,10 +1,9 @@
-import { VStack, Collapse, HStack, Box, Image, Link, Button } from '@chakra-ui/react';
+import { VStack, Collapse, HStack, Box, Link, Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
-import { useAppDispatch, useAppSelector } from 'hooks';
 import { I } from 'components';
 
 import { toastDarkLayout } from 'theme';

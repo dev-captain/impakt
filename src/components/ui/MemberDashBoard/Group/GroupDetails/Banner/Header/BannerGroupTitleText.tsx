@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Text } from '@chakra-ui/react';
 
-import { useAppSelector } from 'hooks';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const BannerGroupTitleText: React.FC = () => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
 
   return (
     <Text

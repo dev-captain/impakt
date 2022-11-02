@@ -1,15 +1,11 @@
 import { Image } from '@chakra-ui/react';
 import * as React from 'react';
-import { useAppSelector } from 'hooks';
 import Images from '../../../../../../assets/images';
+import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 const BannerImage: React.FC = () => {
-  const isCurrentImageExist = useAppSelector(
-    (state) => state.groupsReducer.activeGroup?.currentCoverImageId,
-  );
-  const currentCoverImageSource = useAppSelector(
-    (state) => state.groupsReducer.activeGroup?.currentCoverImage,
-  );
+  const isCurrentImageExist = usePersistedGroupStore().activeGroup?.currentCoverImageId;
+  const currentCoverImageSource = usePersistedGroupStore().activeGroup?.currentCoverImage;
 
   return (
     <Image

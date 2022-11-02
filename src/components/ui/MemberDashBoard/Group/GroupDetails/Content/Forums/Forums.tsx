@@ -8,9 +8,10 @@ import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from 'assets/images';
 import UserForumsCard from './UserForumsCard';
 import CreatePostCard from './CreatePostCard';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const Forums: React.FC = () => {
-  const role = useAppSelector((state) => state.groupsReducer.role);
+  const { role } = usePersistedGroupStore();
   const posts = useAppSelector((state) => state.postsReducer.posts);
   const isCreator = role === 'Creator';
 

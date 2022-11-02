@@ -12,6 +12,7 @@ import { UserRequestStatus } from '../../../../../../lib/redux/slices/groups/typ
 import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../utils';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 interface ExploreGroupCardWrapperPropsI {
   status: 'private' | 'public';
@@ -19,13 +20,13 @@ interface ExploreGroupCardWrapperPropsI {
 const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
   const joinGroup = useGroupsMemberControllerV1JoinGroup();
   const sendGroupRequestToJoin = useGroupsRequestControllerV1SendRequestToJoinGroup();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const isPrivate = status === 'private';
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const toast = useToast();
 
-  const exploreGroup = useAppSelector((state) => state.groupsReducer.exploreGroups).filter(
+  const exploreGroup = usePersistedGroupStore().exploreGroups.filter(
     // eslint-disable-next-line no-underscore-dangle
     (d) => d._private === isPrivate,
   );

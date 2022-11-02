@@ -20,6 +20,7 @@ import {
 import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api-client/react-query/fitness-stats/fitness-stats';
 import { useDiscourse } from '../../hooks/useDiscourse';
 import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
+import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';

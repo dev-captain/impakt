@@ -11,15 +11,15 @@ import Images from '../../../assets/images';
 import uploadImageScheme from '../../../lib/yup/schemas/uploadImageScheme';
 import { ALLOW_IMAGE_FILE } from '../../../lib/yup/fields';
 import { useGroupsControllerV1PatchGroupCoverImage } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 interface PropsI {}
 const UpdateGroupImageForm: React.FC<PropsI> = () => {
   const updateGroupCoverImage = useGroupsControllerV1PatchGroupCoverImage();
   const groupParam = useParams();
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const groupMemberCount = useAppSelector(
-    (state) => state.groupsReducer.membersOfGroup?.members,
-  )?.length;
+  const { activeGroup } = usePersistedGroupStore();
+  const groupMemberCount = usePersistedGroupStore().membersOfGroup?.members?.length;
+
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
 

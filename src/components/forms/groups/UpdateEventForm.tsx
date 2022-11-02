@@ -11,6 +11,7 @@ import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/
 import { padTo2Digits } from '../../../utils';
 import { updateEventBE } from '../../../lib/redux/slices/events/actions/updateEvent';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 const UpdateEventForm: React.FC = () => {
   const toast = useToast();
@@ -19,7 +20,7 @@ const UpdateEventForm: React.FC = () => {
   const { getSelectedDay, getSelectedDayEvent, updateEvent } = useEventCalendarContext();
   const date = getSelectedDay();
 
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
   const dispatch = useAppDispatch();
 
   if (!getSelectedDayEvent()) return null;

@@ -6,10 +6,6 @@ import Content from './Content/Content';
 import Banner from './Banner/Banner';
 import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
-import {
-  cleanActiveGroup,
-  setRoleAsNone,
-} from '../../../../../lib/redux/slices/groups/groupsSlice';
 import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
 import { fetchPosts } from '../../../../../lib/redux/slices/forum/post_actions/fetchPosts';
 import { cleanForums } from '../../../../../lib/redux/slices/forum/postsSlice';
@@ -41,7 +37,7 @@ const GroupDetails: React.FC = () => {
     useLocation().pathname.includes('join');
 
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
+  // const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
 
   const getGroupDetail = async () => {
     if (groupParam?.id) {
@@ -80,7 +76,7 @@ const GroupDetails: React.FC = () => {
     getGroupDetail();
 
     return () => {
-      dispatch(cleanActiveGroup());
+      // dispatch(cleanActiveGroup());
       dispatch(cleanForums());
       dispatch(cleanCalendar());
     };
@@ -98,7 +94,7 @@ const GroupDetails: React.FC = () => {
   //   setShow('false');
   // };
 
-  if (isLoading) return <CircularProgress isIndeterminate />;
+  // if (isLoading) return <CircularProgress isIndeterminate />;
   if (isNotFound.length > 0)
     return (
       <Text fontWeight="hairline" fontSize="2xl">

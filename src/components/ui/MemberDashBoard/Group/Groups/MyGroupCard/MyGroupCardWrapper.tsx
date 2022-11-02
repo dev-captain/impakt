@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useAppSelector } from 'hooks';
 import { Box } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { useNavigate } from 'react-router-dom';
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
+import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 const MyGroupCardHeader: React.FC = () => {
-  const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
+  const { myGroups } = usePersistedGroupStore();
   const navigate = useNavigate();
 
   return (

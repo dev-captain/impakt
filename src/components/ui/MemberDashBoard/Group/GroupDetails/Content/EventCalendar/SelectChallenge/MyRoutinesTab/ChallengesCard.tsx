@@ -7,8 +7,8 @@ import {
   GetChallengeRes,
 } from '@impakt-dev/api-client';
 import { Day } from 'dayspan';
-import { useAppSelector } from '../../../../../../../../../hooks';
 import { convertMsToHM } from '../../../../../../../../../utils';
+import { usePersistedAuthStore } from '../../../../../../../../../lib/zustand';
 
 interface ChallengesCardProps {
   data: {
@@ -29,7 +29,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
 }) => {
   const { challenge, likes, attempts } = data;
 
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const isValidDate = challenge.validFrom
     ? Day.fromDate(challenge.validFrom)!.time < Day.now().time
     : false;

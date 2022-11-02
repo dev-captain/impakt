@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useAppDispatch, useForm } from 'hooks';
 import { Flex, FormControl, useToast } from '@chakra-ui/react';
 import { Common } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { createPost } from '../../../lib/redux/slices/forum/post_actions/createPost';
 import createPostYupScheme from '../../../lib/yup/schemas/createPostYupScheme';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 
 const CreatePostForm: React.FC = ({ children }) => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
+
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createPostYupScheme),
     defaultValues: { post: '' },
@@ -19,7 +21,7 @@ const CreatePostForm: React.FC = ({ children }) => {
   };
   const dispatch = useAppDispatch();
   const toast = useToast();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
 
   const handleOnCreate = async (data: object) => {
     const { post } = data as { post: string };

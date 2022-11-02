@@ -41,7 +41,6 @@ const NewNavbar: FC<NavbarProps> = ({ isVersion2 = false }) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-  // const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
 
   useEffect(() => {
     if (!isLessThan1280) {

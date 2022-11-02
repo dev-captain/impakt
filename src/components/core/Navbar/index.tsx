@@ -26,7 +26,7 @@ import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import { useLogout } from '../../../hooks/useLogout';
 import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
-import { useAppSelector } from '../../../hooks';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -44,8 +44,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-  // const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
-  const notifies = useAppSelector((state) => state.groupsReducer.groupRequests)?.length;
+  const notifies = usePersistedGroupStore().groupRequests.length;
 
   useEffect(() => {
     if (!isLessThan1280) {

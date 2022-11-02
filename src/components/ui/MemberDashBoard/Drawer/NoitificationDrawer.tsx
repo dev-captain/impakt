@@ -10,9 +10,9 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { I } from 'components';
-import { useAppSelector } from 'hooks';
 
 import NoitificationCard from './NotificationCard';
+import { usePersistedGroupStore } from '../../../../lib/zustand';
 
 interface NoitificationDrawerProps {
   open: boolean;
@@ -20,7 +20,7 @@ interface NoitificationDrawerProps {
 }
 
 const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }) => {
-  const requests = useAppSelector((state) => state.groupsReducer.groupRequests);
+  const requests = usePersistedGroupStore().groupRequests;
   // console.log(requests);
 
   return (

@@ -4,12 +4,13 @@ import { I } from 'components';
 import Images from 'assets/images';
 import { ChevronRightIcon, CloseIcon } from '@chakra-ui/icons';
 import { useAppSelector } from '../../../hooks';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 interface BannerProps {
   hideGroupWelcome: () => void;
 }
 const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
 
   return (
     <Box>

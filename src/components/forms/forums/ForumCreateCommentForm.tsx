@@ -2,9 +2,10 @@ import { FormControl, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Common, I } from 'components';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch } from '../../../hooks';
 import { createComment } from '../../../lib/redux/slices/forum/comment_actions/createComment';
 import { InputGroupPropsI } from '../../common/InputGroup';
+import { usePersistedAuthStore } from '../../../lib/zustand';
 
 const ForumCreateCommentForm = React.forwardRef<
   HTMLInputElement,
@@ -18,7 +19,7 @@ const ForumCreateCommentForm = React.forwardRef<
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
   const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
 
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;

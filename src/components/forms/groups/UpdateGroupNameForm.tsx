@@ -9,15 +9,16 @@ import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
 import { useGroupsControllerV1PatchGroup } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../utils';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 const UpdateGroupNameForm: React.FC = () => {
   const updateGroup = useGroupsControllerV1PatchGroup();
-  const group = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
   const dispatch = useAppDispatch();
   const toast = useToast();
   const { handleSubmit, errors, setValue, getValues, isDirty } = useForm({
     resolver: yupResolver(createGroupYupScheme),
-    defaultValues: { groupName: group?.groupName },
+    defaultValues: { groupName: activeGroup?.groupName },
   });
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, {
@@ -40,10 +41,10 @@ const UpdateGroupNameForm: React.FC = () => {
   ];
   const handleUpdateGroupNameChanges = async (data: object) => {
     const { groupName } = data as { groupName: string };
-    if (!group?.id) return;
+    if (!activeGroup?.id) return;
     if (isDirty) {
       updateGroup.mutate(
-        { groupId: group.id, data: { groupName } },
+        { groupId: activeGroup.id, data: { groupName } },
         {
           onSuccess: () => {
             renderToast('success', 'Group name updated successfully.');
@@ -53,7 +54,7 @@ const UpdateGroupNameForm: React.FC = () => {
           },
         },
       );
-      // TODO update active group on zustand
+      // TODO update active activeGroupon zustand
     }
   };
 

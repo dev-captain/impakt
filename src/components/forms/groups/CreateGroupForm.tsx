@@ -8,6 +8,7 @@ import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
 import { useGroupsControllerV1Create } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../utils';
+import { usePersistedAuthStore } from '../../../lib/zustand';
 
 const CreateGroupForm: React.FC = ({ children }) => {
   const createGroup = useGroupsControllerV1Create();
@@ -21,7 +22,7 @@ const CreateGroupForm: React.FC = ({ children }) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
   const navigate = useNavigate();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
 
   const handleOnCreate = async (data: object) => {
     const { groupName } = data as { groupName: string };

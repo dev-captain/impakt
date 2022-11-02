@@ -5,9 +5,12 @@ import { Box, VStack } from '@chakra-ui/react';
 import ExploreGroupCard from './ExploreGroupCard/ExploreGroupCard';
 import MyGroupCard from './MyGroupCard/MyGroupCard';
 import MyGroupCardHeader from './MyGroupCard/Header/MyGroupCardHeader';
+import { usePersistedAuthStore } from '../../../../../lib/zustand';
+import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 
 const Groups: React.FC = () => {
-  // const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
+  const { member } = usePersistedAuthStore();
+  const fetchMyGroups = useGroupsMemberControllerV1GetGroupsByUserId(member!.id);
 
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">

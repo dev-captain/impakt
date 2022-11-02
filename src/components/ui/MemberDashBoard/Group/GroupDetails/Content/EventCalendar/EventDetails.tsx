@@ -6,12 +6,13 @@ import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { useAppSelector } from '../../../../../../../hooks';
 import { deepLinkToApp } from '../../../../../../../data';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
   // const navigate = useNavigate();
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const role = useAppSelector((state) => state.groupsReducer.role);
+  const { activeGroup } = usePersistedGroupStore();
+  const { role } = usePersistedGroupStore();
   const isAdmin = role === 'Creator';
   // const toast = useToast();
 

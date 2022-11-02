@@ -8,6 +8,7 @@ import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
 import { useGroupsControllerV1PatchGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../../../../../../../../utils';
+import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
 
 const PermissionTab: React.FC = () => {
   const updateGroup = useGroupsControllerV1PatchGroup();
@@ -17,7 +18,7 @@ const PermissionTab: React.FC = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const groupParam = useParams();
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
   React.useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
     if (activeGroup?._private) {

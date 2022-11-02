@@ -8,6 +8,7 @@ import GroupsModal from '../../../../../../GroupsModal';
 import { useGroupsControllerV1Remove } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../../../../../../../../utils';
 import { useGroupsMemberControllerV1LeaveGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
 
 interface GroupSettingModalProps {
   open: boolean;
@@ -17,10 +18,10 @@ interface GroupSettingModalProps {
 const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
   const deleteGroup = useGroupsControllerV1Remove();
   const leaveGroup = useGroupsMemberControllerV1LeaveGroup();
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const role = useAppSelector((state) => state.groupsReducer.role);
+  const { activeGroup } = usePersistedGroupStore();
+  const { role } = usePersistedGroupStore();
   const navigate = useNavigate();
-  const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.members)?.filter(
+  const members = usePersistedGroupStore().membersOfGroup?.members?.filter(
     (m) => m.role !== 'None',
   );
 
