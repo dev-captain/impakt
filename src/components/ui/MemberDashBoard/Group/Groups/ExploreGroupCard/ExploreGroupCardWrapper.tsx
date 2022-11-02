@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
-import { UserRequestStatus } from '../../../../../../lib/redux/slices/groups/types';
+import { GetGroupRequestResStatus } from '../../../../../../lib/impakt-dev-api-client/react-query/types';
+
 import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../utils';
@@ -104,14 +105,14 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                   _hover={{ backgroundColor: '#000', color: '#fff' }}
                   variant={
                     g.private
-                      ? g.Request?.status !== UserRequestStatus.Pending
+                      ? g.Request?.status !== GetGroupRequestResStatus.Pending
                         ? 'transparent'
                         : 'black'
                       : 'transparent'
                   }
                   onClick={() => {
                     if (g.private) {
-                      if (g.Request?.status !== UserRequestStatus.Pending) {
+                      if (g.Request?.status !== GetGroupRequestResStatus.Pending) {
                         handleGroupCardButtonClick(g.id);
 
                         return;
@@ -124,7 +125,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                   leftIcon={g.private ? undefined : <I.UnionIcon width="12px" />}
                 >
                   {g.private
-                    ? g.Request?.status !== UserRequestStatus.Pending
+                    ? g.Request?.status !== GetGroupRequestResStatus.Pending
                       ? 'Request to join'
                       : 'Pending'
                     : 'Join'}

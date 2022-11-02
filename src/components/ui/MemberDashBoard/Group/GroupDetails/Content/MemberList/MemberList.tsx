@@ -188,11 +188,11 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-          {members?.members.map(
-            ({ role, user }) =>
+          {members?.Members.map(
+            ({ role, User }) =>
               role !== 'None' && (
                 <Box
-                  key={`${user.id}-box`}
+                  key={`${User.id}-box`}
                   display="flex"
                   justifyContent="space-between"
                   marginTop="16px"
@@ -205,7 +205,7 @@ const MemberList: React.FC = () => {
                       fontWeight="500"
                       marginLeft="16px"
                     >
-                      {user.firstName ?? user.username}
+                      {User.firstName ?? User.username}
                     </Text>
                   </Box>
 

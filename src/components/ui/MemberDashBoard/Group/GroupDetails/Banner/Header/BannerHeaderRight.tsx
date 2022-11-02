@@ -6,7 +6,7 @@ import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 export const BannerHeaderRight: React.FC = () => {
   // const isMembersLoading = useAppSelector((state) => state.groupsReducer.isMembersLoading);
-  const members = usePersistedGroupStore().membersOfGroup?.members?.filter(
+  const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
     ({ role }: any) => role !== 'None',
   );
 

@@ -21,7 +21,7 @@ const PermissionTab: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
   React.useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
-    if (activeGroup?._private) {
+    if (activeGroup?.private) {
       setValue('Private');
     } else {
       setValue('Public');

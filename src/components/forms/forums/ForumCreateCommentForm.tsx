@@ -3,14 +3,16 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Common, I } from 'components';
 import { useAppDispatch } from '../../../hooks';
-import { createComment } from '../../../lib/redux/slices/forum/comment_actions/createComment';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useCommentControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
+import { renderToast } from '../../../utils';
 
 const ForumCreateCommentForm = React.forwardRef<
   HTMLInputElement,
   { onClose: () => void; postId: number }
 >((props, ref) => {
+  const createComment = useCommentControllerV1CreateOne();
   const { handleSubmit, setValue } = useForm({
     defaultValues: { comment: '' },
   });
@@ -23,13 +25,33 @@ const ForumCreateCommentForm = React.forwardRef<
 
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
-    await dispatch(
-      createComment({
+
+    createComment.mutate(
+      {
         postId: props.postId,
-        createCommentDto: { content: data.comment },
-      }),
-    ).unwrap();
-    props.onClose();
+        data: {
+          content: data.comment,
+        },
+      },
+      {
+        onSuccess: () => {
+          // TODO zustand update related post comments array
+          // const a = state.posts.findIndex((post) => post.id === action.payload.postId);
+          // if (a !== -1) {
+          //   state.posts[a] = {
+          //     ...state.posts[a],
+          //     comment: [...state.posts[a].comment, action.payload],
+          //   };
+          // }
+
+          renderToast('success', 'Comment deleted successfully.');
+          props.onClose();
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
 
   const inputItems: InputGroupPropsI = {

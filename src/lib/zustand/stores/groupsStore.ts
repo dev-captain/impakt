@@ -1,27 +1,28 @@
 import { StateCreator } from 'zustand';
-import {
-  GetGroupMemberResRoleEnum,
-  GetGroupRequestResV2,
-  GetGroupRes,
-  GetMembersOfGroupRes,
-} from '@impakt-dev/api-client';
+import { GetGroupMemberResRoleEnum, GetGroupRequestResV2 } from '@impakt-dev/api-client';
 import {
   GetGroupMemberResWithGroupRes,
   ExploreGroupRes,
+  GetGroupRes,
+  GetGroupMemberResRole,
+  GetMembersOfGroupRes,
 } from '../../impakt-dev-api-client/react-query/types';
 
 export interface GroupsSlice {
   myGroups: GetGroupMemberResWithGroupRes[];
   setMyGroups: (groups: GetGroupMemberResWithGroupRes[]) => void;
   activeGroup: GetGroupRes | null;
+  setActiveGroup: (group: GetGroupRes) => void;
   membersOfGroup: GetMembersOfGroupRes | null;
+  setMembersOfGroup: (membersOfGroup: GetMembersOfGroupRes) => void;
   groupRequests: GetGroupRequestResV2[];
   setGroupRequests: (groupRequests: GetGroupRequestResV2[]) => void;
   exploreGroups: ExploreGroupRes[];
   setExploreGroups: (exploreGroups: ExploreGroupRes[]) => void;
   addToMyGroups: (groups: GetGroupMemberResWithGroupRes) => void;
 
-  role: GetGroupMemberResRoleEnum | null;
+  role: GetGroupMemberResRole | null;
+  setRole: (role: GetGroupMemberResRole) => void;
 }
 
 export const groupsStore: StateCreator<GroupsSlice> = (set, get) => ({
@@ -42,5 +43,17 @@ export const groupsStore: StateCreator<GroupsSlice> = (set, get) => ({
   },
   setExploreGroups: (exploreGroups) => {
     set({ exploreGroups });
+  },
+
+  setActiveGroup: (activeGroup) => {
+    set({ activeGroup });
+  },
+
+  setMembersOfGroup: (membersOfGroup) => {
+    set({ membersOfGroup });
+  },
+
+  setRole: (role) => {
+    set({ role });
   },
 });

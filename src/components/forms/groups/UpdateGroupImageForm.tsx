@@ -18,14 +18,14 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
   const updateGroupCoverImage = useGroupsControllerV1PatchGroupCoverImage();
   const groupParam = useParams();
   const { activeGroup } = usePersistedGroupStore();
-  const groupMemberCount = usePersistedGroupStore().membersOfGroup?.members?.length;
+  const groupMemberCount = usePersistedGroupStore().membersOfGroup?.Members?.length;
 
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    if (activeGroup?.currentCoverImage) {
-      setBannerImage(activeGroup.currentCoverImage);
+    if (activeGroup?.CurrentCoverImage) {
+      setBannerImage(activeGroup.CurrentCoverImage);
 
       return;
     }

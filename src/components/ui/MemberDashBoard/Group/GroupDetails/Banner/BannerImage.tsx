@@ -5,7 +5,7 @@ import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 const BannerImage: React.FC = () => {
   const isCurrentImageExist = usePersistedGroupStore().activeGroup?.currentCoverImageId;
-  const currentCoverImageSource = usePersistedGroupStore().activeGroup?.currentCoverImage;
+  const currentCoverImageSource = usePersistedGroupStore().activeGroup?.CurrentCoverImage;
 
   return (
     <Image

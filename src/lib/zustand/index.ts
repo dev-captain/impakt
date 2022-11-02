@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 import { authSlice, AuthSlice } from './stores/authStore';
 import { DiscourseSlice, discourseStore } from './stores/discourseStore';
 import { fitnessSlice, FitnessSlice } from './stores/fitnessStore';
+import { ForumSlice, forumStore } from './stores/forumStore';
 import { godlSlice, GodlSlice } from './stores/godlStore';
 import { GroupsSlice, groupsStore } from './stores/groupsStore';
 import { KoinSlice, koinSlice } from './stores/koinStore';
@@ -88,6 +89,20 @@ export const usePersistedGroupStore = create<GroupsSlice>()(
     }),
     {
       name: 'groups-storage',
+      serialize: (state) => btoa(JSON.stringify(state)),
+      deserialize: (str) => JSON.parse(atob(str)),
+      getStorage: () => localStorage,
+    },
+  ),
+);
+
+export const usePersistedForumStore = create<ForumSlice>()(
+  persist(
+    (set, get, ...a) => ({
+      ...forumStore(set, get, ...a),
+    }),
+    {
+      name: 'forums-storage',
       serialize: (state) => btoa(JSON.stringify(state)),
       deserialize: (str) => JSON.parse(atob(str)),
       getStorage: () => localStorage,

@@ -21,7 +21,7 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
   const { activeGroup } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
   const navigate = useNavigate();
-  const members = usePersistedGroupStore().membersOfGroup?.members?.filter(
+  const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
     (m) => m.role !== 'None',
   );
 
