@@ -1,4 +1,4 @@
-import { VStack, Collapse, HStack, Box, Image } from '@chakra-ui/react';
+import { VStack, Collapse, HStack, Box, Image, Link, Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';

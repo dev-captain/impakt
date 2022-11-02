@@ -18,7 +18,6 @@ import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
 
-import { toastDarkLayout } from 'theme';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -27,6 +26,7 @@ import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
 import { useLogout } from '../../../hooks/useLogout';
 import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
+import { useAppSelector } from '../../../hooks';
 
 interface NavbarProps {
   position?: PositionProps['position'];

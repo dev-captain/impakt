@@ -2,8 +2,6 @@ import { CalendarDtoV1TypeEnum } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { CalendarInstance } from '../../../../impakt-dev-api-client/init';
 
-import { RootState } from '../../../store';
-
 const deleteEvent = createAsyncThunk(
   'events/delete',
   async (
@@ -13,7 +11,7 @@ const deleteEvent = createAsyncThunk(
     try {
       const {
         memberAuth: { isLogin, member },
-      } = getState() as RootState;
+      } = getState() as any;
 
       if (!isLogin || !member) {
         return Promise.reject(new Error('Please sign in first to continue...'));

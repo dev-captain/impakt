@@ -6,8 +6,6 @@ import {
   LikeInstance,
 } from '../../../../impakt-dev-api-client/init';
 
-import { RootState } from '../../../store';
-
 const fetchAvailableChallengesForGroup = createAsyncThunk(
   'calendar/fetch-available-challenges-for-group',
   async (_, { rejectWithValue, getState }) => {
@@ -15,7 +13,7 @@ const fetchAvailableChallengesForGroup = createAsyncThunk(
       const {
         memberAuth: { isLogin },
         groupsReducer: { membersOfGroup },
-      } = getState() as RootState;
+      } = getState() as any;
 
       if (!isLogin) {
         return Promise.reject(new Error('Please Sign In first to continue'));

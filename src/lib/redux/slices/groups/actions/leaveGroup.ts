@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { GroupsMemberInstance } from '../../../../impakt-dev-api-client/init';
 
-import { RootState } from '../../../store';
 import { fetchGroups } from './fetchGroups';
 import { fetchMyGroups } from './fetchMyGroups';
 
@@ -11,7 +10,7 @@ const leaveGroup = createAsyncThunk(
     try {
       const {
         memberAuth: { isLogin, member },
-      } = getState() as RootState;
+      } = getState() as any;
 
       if (!isLogin || !member) {
         return Promise.reject(new Error('Please sign in first to continue...'));

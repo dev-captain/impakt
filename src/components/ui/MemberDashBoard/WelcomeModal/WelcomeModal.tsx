@@ -42,7 +42,7 @@ const WelcomeModal: React.FC = () => {
         </Text>
         {isWhitelistedCollection.isWhitelisted && (
           <Box ms={3}>
-            <img src={Whitelist} alt="Whitelist" />
+            <I.HeartIcon />
           </Box>
         )}
       </Box>

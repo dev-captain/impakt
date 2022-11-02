@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { PostsInstance } from '../../../../impakt-dev-api-client/init';
-import { RootState } from '../../../store';
 
 const deleteComment = createAsyncThunk(
   'posts/deleteComment',
@@ -11,7 +10,7 @@ const deleteComment = createAsyncThunk(
     try {
       const {
         memberAuth: { isLogin },
-      } = getState() as RootState;
+      } = getState() as any;
 
       if (!isLogin) {
         return Promise.reject(new Error('Please Sign In first to continue'));

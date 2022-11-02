@@ -132,15 +132,15 @@ const MemberDashboard: React.FC = () => {
     }
   }, [discourse.news]);
 
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(fetchMyGroups(member.id)).then(() => dispatch(fetchGroupRequests()));
-  }, []);
+  // React.useEffect(() => {
+  //   if (!member) return;
+  //   dispatch(fetchMyGroups(member.id)).then(() => dispatch(fetchGroupRequests()));
+  // }, []);
 
-  React.useEffect(() => {
-    if (!member) return;
-    dispatch(fetchGroups({ explore: true }));
-  }, []);
+  // React.useEffect(() => {
+  //   if (!member) return;
+  //   dispatch(fetchGroups({ explore: true }));
+  // }, []);
 
   return <C.SidebarLayout isShowNavbar />;
 };

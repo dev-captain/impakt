@@ -7,7 +7,7 @@ import { useAppSelector } from 'hooks';
 export const BannerHeaderRight: React.FC = () => {
   const isMembersLoading = useAppSelector((state) => state.groupsReducer.isMembersLoading);
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.members)?.filter(
-    ({ role }) => role !== 'None',
+    ({ role }: any) => role !== 'None',
   );
 
   return (

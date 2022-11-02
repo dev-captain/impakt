@@ -2,8 +2,6 @@ import { GetGroupRequestResV2 } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { GroupsRequestInstance } from '../../../../impakt-dev-api-client/init';
 
-import { RootState } from '../../../store';
-
 const fetchGroupRequests = createAsyncThunk(
   'groups/group-requests',
   async (_, { rejectWithValue, getState }) => {
@@ -11,7 +9,7 @@ const fetchGroupRequests = createAsyncThunk(
       const {
         memberAuth: { isLogin },
         groupsReducer: { myGroups },
-      } = getState() as RootState;
+      } = getState() as any;
 
       if (!isLogin) {
         return Promise.reject(new Error('Please sign in first to continue...'));

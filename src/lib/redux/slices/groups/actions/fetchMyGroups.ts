@@ -1,15 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { GroupsMemberInstance } from '../../../../impakt-dev-api-client/init';
 
-import { RootState } from '../../../store';
-
 const fetchMyGroups = createAsyncThunk(
   'groups/my-groups',
   async (userId: number, { rejectWithValue, getState }) => {
     try {
       const {
         memberAuth: { isLogin },
-      } = getState() as RootState;
+      } = getState() as any;
 
       if (!isLogin) {
         return Promise.reject(new Error('Please sign in first to continue...'));

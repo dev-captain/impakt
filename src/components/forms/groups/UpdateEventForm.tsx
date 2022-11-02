@@ -26,7 +26,7 @@ const UpdateEventForm: React.FC = () => {
 
   const challange = useAppSelector(
     (state) => state.challengesReducer.availableGroupChallenges,
-  ).find((d) => d.challenge.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId);
+  ).find((d: any) => d.challenge.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId);
 
   const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {

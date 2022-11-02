@@ -1,7 +1,6 @@
 import { CreatePostDto } from '@impakt-dev/api-client';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { PostsInstance } from '../../../../impakt-dev-api-client/init';
-import { RootState } from '../../../store';
 
 const createPost = createAsyncThunk(
   'posts/createPost',
@@ -16,7 +15,7 @@ const createPost = createAsyncThunk(
     try {
       const {
         memberAuth: { isLogin, member },
-      } = getState() as RootState;
+      } = getState() as any;
 
       if (!isLogin) {
         return Promise.reject(new Error('Please Sign In first to continue'));
