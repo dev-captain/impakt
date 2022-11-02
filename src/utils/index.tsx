@@ -1,3 +1,9 @@
+import { createStandaloneToast } from '@chakra-ui/react';
+
+import theme from '../theme';
+
+const toast = createStandaloneToast({ theme });
+
 export const horizontalScrollBy = (ref: any, size = 0) => {
   ref?.current?.scrollBy({
     top: 0,
@@ -60,5 +66,15 @@ export const convertMsToHM = (milliseconds: number) => {
 
   return { h: padTo2Digits(hours), m: padTo2Digits(minutes), s: padTo2Digits(seconds) };
 };
+
+export function renderToast(type: 'error' | 'success', description: string) {
+  return toast({
+    title: type === 'error' ? 'Error' : 'Success',
+    description,
+    isClosable: true,
+    duration: 8000,
+    status: type,
+  });
+}
 
 export default {};

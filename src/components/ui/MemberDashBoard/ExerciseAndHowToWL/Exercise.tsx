@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { usePascalCase, useAppSelector } from 'hooks';
+import { usePascalCase } from 'hooks';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
 import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react';
 import MemberDashboardCard from '../MemberDashBoardCard';
+import { usePersistedFitnessStore } from '../../../../lib/zustand';
 
 const Excercise: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const { convertToPascalCase } = usePascalCase();
-  const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.exerciseState);
+  const excerciseStatistics = usePersistedFitnessStore();
   const [pascalCasedExerciseStates, setPascalCasedExerciseStates] = React.useState<
     ({
       repetitions: any;
@@ -18,8 +19,8 @@ const Excercise: React.FC = () => {
   >();
 
   React.useEffect(() => {
-    if (excerciseStatistics && excerciseStatistics.length > 0) {
-      const pascalCasedExStatics = excerciseStatistics.map((stats: any) => {
+    if (excerciseStatistics.exerciseState.length > 0) {
+      const pascalCasedExStatics = excerciseStatistics.exerciseState.map((stats: any) => {
         if (stats && stats.exercise) {
           const convertedLabel = convertToPascalCase(stats.exercise);
 
@@ -30,7 +31,7 @@ const Excercise: React.FC = () => {
       });
       setPascalCasedExerciseStates(pascalCasedExStatics);
     }
-  }, [excerciseStatistics]);
+  }, [excerciseStatistics.exerciseState]);
 
   return (
     <MemberDashboardCard

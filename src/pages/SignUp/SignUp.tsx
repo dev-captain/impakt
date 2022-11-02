@@ -3,11 +3,10 @@ import { C, S } from 'components';
 import React from 'react';
 import Images from 'assets/images';
 import { useNavigate } from 'react-router-dom';
-
-import { useAppSelector } from 'hooks';
+import { usePersistedAuthStore } from '../../lib/zustand';
 
 const SignUp = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');

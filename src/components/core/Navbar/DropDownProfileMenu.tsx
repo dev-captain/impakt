@@ -6,23 +6,21 @@ import {
   MenuItem,
   HStack,
   MenuDivider,
-  useToast,
   useMediaQuery,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { I } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { toastDarkLayout } from 'theme';
-import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useLogout } from '../../../hooks/useLogout';
 
 const DropDownProfileMenu: React.FC = () => {
+  const logout = useLogout();
+  const { member } = usePersistedAuthStore();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
-  const member = useAppSelector((state) => state.memberAuth.member);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const toast = useToast();
 
   return member ? (
     <Menu placement="bottom" boundary="scrollParent" autoSelect={false}>
@@ -57,17 +55,7 @@ const DropDownProfileMenu: React.FC = () => {
           paddingX="21px"
           borderRadius="0px 0px 8px 8px"
           onClick={async () => {
-            await dispatch(signOutMember()).unwrap();
-            toast({
-              title: 'Success',
-              description: 'You have successfully logged out!',
-              isClosable: true,
-              duration: 8000,
-              status: 'success',
-              variant: 'glass',
-              position: 'top-right',
-              containerStyle: toastDarkLayout,
-            });
+            await logout();
           }}
           icon={<I.SignOutIcon />}
           _hover={{ color: '#fff !important', backgroundColor: '#364A63' }}

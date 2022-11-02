@@ -1,17 +1,20 @@
 import { Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
-import { useAppSelector } from 'hooks';
 
 import MemberDashboardCard from '../MemberDashBoardCard';
+import {
+  usePersistedAuthStore,
+  usePersistedBalanceScoreStore,
+  usePersistedFitnessStore,
+} from '../../../../lib/zustand';
 import { I } from '../../..';
 
 const WelcomeModal: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
-  const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
-  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
-  const koinBalanceScore = useAppSelector((state) => state.koin.koinBalanceScore);
-  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
+  const { member } = usePersistedAuthStore();
+  const { activeDays } = usePersistedFitnessStore();
+  const { godlBalanceScore, koinBalanceScore } = usePersistedBalanceScoreStore();
+  const { isWhitelistedCollection } = usePersistedAuthStore();
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 
@@ -37,9 +40,9 @@ const WelcomeModal: React.FC = () => {
             </span>
           ))}
         </Text>
-        {isWhitelisted && (
-          <Box color="impaktRed" ms={3}>
-            <I.HeartIcon />
+        {isWhitelistedCollection.isWhitelisted && (
+          <Box ms={3}>
+            <img src={Whitelist} alt="Whitelist" />
           </Box>
         )}
       </Box>
@@ -47,7 +50,7 @@ const WelcomeModal: React.FC = () => {
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        {isWhitelisted && (
+        {isWhitelistedCollection.isWhitelisted && (
           <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3">
             You are whitelisted. Congrats!
           </Text>
