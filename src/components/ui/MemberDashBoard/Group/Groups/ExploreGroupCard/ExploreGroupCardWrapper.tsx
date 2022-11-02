@@ -8,14 +8,17 @@ import { useNavigate } from 'react-router-dom';
 
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
-import { sendGroupRequestToJoin } from '../../../../../../lib/redux/slices/groups/actions/sendGroupRequestToJoin';
-import { joinGroup } from '../../../../../../lib/redux/slices/groups/actions/joinGroup';
 import { UserRequestStatus } from '../../../../../../lib/redux/slices/groups/types';
+import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
+import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { renderToast } from '../../../../../../utils';
 
 interface ExploreGroupCardWrapperPropsI {
   status: 'private' | 'public';
 }
 const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
+  const joinGroup = useGroupsMemberControllerV1JoinGroup();
+  const sendGroupRequestToJoin = useGroupsRequestControllerV1SendRequestToJoinGroup();
   const member = useAppSelector((state) => state.memberAuth.member);
   const isPrivate = status === 'private';
   const navigate = useNavigate();
@@ -28,28 +31,40 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
   );
 
   const handleGroupCardButtonClick = async (groupId: number) => {
-    try {
-      if (isPrivate) {
-        if (!member) return;
-        await dispatch(sendGroupRequestToJoin(groupId)).unwrap();
-      } else {
-        await dispatch(joinGroup(groupId)).unwrap();
-      }
-      toast({
-        title: 'Success',
-        description: isPrivate ? 'Request sent successfully' : 'Joined successfully',
-        isClosable: true,
-        duration: 8000,
-        status: 'success',
-      });
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-      });
+    if (isPrivate) {
+      if (!member) return;
+      sendGroupRequestToJoin.mutate(
+        { groupId },
+        {
+          onSuccess: () => {
+            renderToast('success', 'Request sent successfully');
+            navigate('/dashboard/groups');
+            // await dispatch(fetchMyGroups(member.id));
+            // await dispatch(fetchGroups({ explore: true }));
+          },
+          onError: (err) => {
+            renderToast('success', err.response?.data.message ?? 'Something went wrong');
+          },
+        },
+      );
+      // await dispatch(fetchGroups({ explore: true }));
+    } else {
+      joinGroup.mutate(
+        { groupId },
+        {
+          onSuccess: () => {
+            renderToast('success', 'Joined successfully');
+            navigate('/dashboard/groups');
+            // await dispatch(fetchMyGroups(member.id));
+            // await dispatch(fetchGroups({ explore: true }));
+          },
+          onError: (err) => {
+            renderToast('success', err.response?.data.message ?? 'Something went wrong');
+          },
+        },
+      );
+      // await dispatch(fetchMyGroups(member.id));
+      // await dispatch(fetchGroups({ explore: true }));
     }
   };
 

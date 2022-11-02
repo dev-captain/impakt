@@ -2,11 +2,8 @@ import React from 'react';
 import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
-import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
-import { fetchGroupRoleById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupRoleById';
-import { fetchMembersOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchMembersOfGroup';
 import { fetchCalendarById } from '../../../../../lib/redux/slices/calendar/actions/fetchCalendarById';
 import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
 import {
@@ -16,11 +13,25 @@ import {
 import { cleanCalendar } from '../../../../../lib/redux/slices/calendar/calendarSlice';
 import { fetchPosts } from '../../../../../lib/redux/slices/forum/post_actions/fetchPosts';
 import { cleanForums } from '../../../../../lib/redux/slices/forum/postsSlice';
-import { fetchAmIMemberOfGroup } from '../../../../../lib/redux/slices/groups/actions/fetchAmIMemberOfGroup';
 import { deepLinkToApp } from '../../../../../data';
+import {
+  useGroupsControllerV1FindGroupMembers,
+  useGroupsControllerV1FindOne,
+} from '../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import {
+  useGroupsMemberControllerV1AmIMemberOfGroup,
+  useGroupsMemberControllerV1AmIRoleOnGroup,
+} from '../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 
 const GroupDetails: React.FC = () => {
   // const [show, setShow] = React.useState<null | string>(null);
+  // TODO enabled check here;
+
+  // const fetchGroupDetailById = useGroupsControllerV1FindOne() // TODO Update activeGroup on zustand
+  // const fetchMembersOfGroup = useGroupsControllerV1FindGroupMembers(); // TODO update membersOfGroup on zustand
+  // const fetchAmIMemberOfGroup = useGroupsMemberControllerV1AmIMemberOfGroup();
+  // const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup() // TODO update role on zustand
+
   const [isNotFound, setIsNotFound] = React.useState<string>('');
   const groupParam = useParams();
   const isJoin =
@@ -36,7 +47,7 @@ const GroupDetails: React.FC = () => {
     if (groupParam?.id) {
       let group: any;
       try {
-        group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
+        // group = await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
         if (isJoin && groupParam.eventId) {
           const deepLink = deepLinkToApp(group.id, parseInt(groupParam.eventId, 10));
           window.location = deepLink as any;
@@ -49,17 +60,16 @@ const GroupDetails: React.FC = () => {
         }
       } finally {
         try {
-          const amIMemberOfGroup = await dispatch(fetchAmIMemberOfGroup(group.id)).unwrap();
-          if (amIMemberOfGroup) {
-            await dispatch(fetchGroupRoleById(group.id));
-          } else {
-            dispatch(setRoleAsNone());
-          }
+          // const amIMemberOfGroup = await dispatch(fetchAmIMemberOfGroup(group.id)).unwrap();
+          // if (amIMemberOfGroup) {
+          // await dispatch(fetchGroupRoleById(group.id));
+          // } else {
+          // dispatch(setRoleAsNone());
+          // }
         } finally {
           await dispatch(fetchPosts({ referenceType: 'Group', referenceId: group.id }));
           await dispatch(fetchCalendarById({ calendarId: group.calendarId, type: 'Group' }));
           await dispatch(fetchAvailableChallengesForGroup());
-          await dispatch(fetchMembersOfGroup(group.id));
           // fetch my challanges for modal if user creator
         }
       }

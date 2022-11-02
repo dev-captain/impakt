@@ -1,13 +1,13 @@
 import React from 'react';
-import { Box, Text, useToast } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
-import { toastLayout } from 'theme';
-import { deleteGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/deleteGroup';
-import { leaveGroup } from '../../../../../../../../../../lib/redux/slices/groups/actions/leaveGroup';
 import GroupsModal from '../../../../../../GroupsModal';
+import { useGroupsControllerV1Remove } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { renderToast } from '../../../../../../../../../../utils';
+import { useGroupsMemberControllerV1LeaveGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 
 interface GroupSettingModalProps {
   open: boolean;
@@ -15,76 +15,48 @@ interface GroupSettingModalProps {
 }
 
 const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
+  const deleteGroup = useGroupsControllerV1Remove();
+  const leaveGroup = useGroupsMemberControllerV1LeaveGroup();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const role = useAppSelector((state) => state.groupsReducer.role);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const toast = useToast();
   const members = useAppSelector((state) => state.groupsReducer.membersOfGroup?.members)?.filter(
     (m) => m.role !== 'None',
   );
 
   const handleGroupDelete = async () => {
-    try {
-      if (activeGroup?.id) {
-        await dispatch(deleteGroup(activeGroup.id)).unwrap();
-        toast({
-          title: 'Success',
-          description: `Group is deleted successfully`,
-          isClosable: true,
-          duration: 8000,
-          status: 'success',
-          variant: 'glass',
-          position: 'top-right',
-          containerStyle: toastLayout,
-        });
-        navigate('/dashboard/groups');
-      }
-    } catch (e: any) {
-      toast({
-        id: 'error-msg',
-        title: 'Error',
-        description: `${e.response.data.message}`,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-        variant: 'glass',
-        position: 'top-right',
-        containerStyle: toastLayout,
-      });
+    // TODO Delete group from my groups on zustand
+    if (activeGroup?.id) {
+      deleteGroup.mutate(
+        { groupId: activeGroup.id },
+        {
+          onSuccess: () => {
+            renderToast('success', `Group is deleted successfully`);
+            navigate('/dashboard/groups');
+          },
+          onError: (err) => {
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          },
+        },
+      );
     }
   };
 
   const handleLeaveGroup = async () => {
-    try {
-      if (activeGroup) {
-        await dispatch(leaveGroup(activeGroup.id)).unwrap();
-        toast({
-          title: 'Success',
-          description: `Left from Group successfully`,
-          isClosable: true,
-          duration: 8000,
-          status: 'success',
-          variant: 'glass',
-          position: 'top-right',
-          containerStyle: toastLayout,
-        });
-      }
-    } catch (e: any) {
-      toast({
-        id: 'error-msg',
-        title: 'Error',
-        description: `You can't leave your owned group`,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-        variant: 'glass',
-        position: 'top-right',
-        containerStyle: toastLayout,
-      });
+    if (activeGroup) {
+      leaveGroup.mutate(
+        { groupId: activeGroup.id },
+        {
+          onSuccess: () => {
+            renderToast('success', `Left from Group successfully`);
+            navigate('/dashboard/groups');
+          },
+          onError: (err) => {
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          },
+        },
+      );
     }
-
-    navigate('/dashboard/groups');
   };
 
   return (
@@ -122,6 +94,7 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
             h="60px"
             borderRadius="8px"
             type="submit"
+            isLoading={role === 'Creator' ? deleteGroup.isLoading : leaveGroup.isLoading}
             fontSize={{ md: '20px' }}
             onClick={role === 'Creator' ? handleGroupDelete : handleLeaveGroup}
             fontWeight="700"

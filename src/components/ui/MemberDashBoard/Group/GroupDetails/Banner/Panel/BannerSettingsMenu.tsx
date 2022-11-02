@@ -1,59 +1,39 @@
 import * as React from 'react';
-import { Menu, MenuButton, useToast, useDisclosure } from '@chakra-ui/react';
+import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
 // import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import { joinGroup } from '../../../../../../../lib/redux/slices/groups/actions/joinGroup';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
+import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { renderToast } from '../../../../../../../utils';
 
 const BannerSettingsMenu: React.FC = () => {
+  const joinGroup = useGroupsMemberControllerV1JoinGroup();
   const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
   const role = useAppSelector((state) => state.groupsReducer.role);
   const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
-  const dispatch = useAppDispatch();
-  const toast = useToast();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isCreator = role === 'Creator';
 
   const jointoGroup = async () => {
     if (!activeGroup) return;
-    try {
-      await dispatch(joinGroup(activeGroup.id)).unwrap();
-      toast({
-        title: 'Success',
-        description: 'Joined successfully',
-        isClosable: true,
-        duration: 8000,
-        variant: 'glass',
-        status: 'success',
-        position: 'top-right',
-        containerStyle: {
-          background: 'rgba(255, 255, 255, 0.5)',
-          border: '1px solid #fff',
-          boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-          backdropFilter: 'blur(15px)',
-          color: '#000',
-          borderRadius: '16px',
-          position: 'absolute',
-          top: '90px',
-          width: '360px',
+    joinGroup.mutate(
+      { groupId: activeGroup.id },
+      {
+        onSuccess: () => {
+          renderToast('success', 'Joined successfully');
+          navigate('/dashboard/groups');
+          // await dispatch(fetchMyGroups(member.id));
+          // await dispatch(fetchGroups({ explore: true }));
         },
-      });
-
-      navigate('/dashboard/groups');
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-        position: 'top-right',
-      });
-    }
+        onError: (err) => {
+          renderToast('success', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
 
   if (isRoleLoading) return null;

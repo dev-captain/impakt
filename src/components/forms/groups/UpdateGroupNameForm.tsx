@@ -7,9 +7,11 @@ import { Common } from 'components';
 import { toastLayout } from 'theme';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
-import { updateGroup } from '../../../lib/redux/slices/groups/actions/updateGroup';
+import { useGroupsControllerV1PatchGroup } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { renderToast } from '../../../utils';
 
 const UpdateGroupNameForm: React.FC = () => {
+  const updateGroup = useGroupsControllerV1PatchGroup();
   const group = useAppSelector((state) => state.groupsReducer.activeGroup);
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -40,17 +42,18 @@ const UpdateGroupNameForm: React.FC = () => {
     const { groupName } = data as { groupName: string };
     if (!group?.id) return;
     if (isDirty) {
-      await dispatch(updateGroup({ groupId: group.id, groupName })).unwrap();
-      toast({
-        title: 'Success',
-        description: 'Group name updated successfully.',
-        isClosable: true,
-        status: 'success',
-        duration: 8000,
-        variant: 'glass',
-        position: 'top-right',
-        containerStyle: toastLayout,
-      });
+      updateGroup.mutate(
+        { groupId: group.id, data: { groupName } },
+        {
+          onSuccess: () => {
+            renderToast('success', 'Group name updated successfully.');
+          },
+          onError: (err) => {
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          },
+        },
+      );
+      // TODO update active group on zustand
     }
   };
 

@@ -1,19 +1,19 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppSelector } from 'hooks';
 import { Box, Button, Text, useToast } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
-import { updateGroup } from 'lib/redux/slices/groups/actions/updateGroup';
-import { toastLayout } from 'theme';
 import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
+import { useGroupsControllerV1PatchGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { renderToast } from '../../../../../../../../../../utils';
 
 const PermissionTab: React.FC = () => {
+  const updateGroup = useGroupsControllerV1PatchGroup();
   const [value, setValue] = React.useState('Public');
 
   const { t } = useTranslation().i18n;
-  const dispatch = useAppDispatch();
   const toast = useToast();
   const navigate = useNavigate();
   const groupParam = useParams();
@@ -27,30 +27,22 @@ const PermissionTab: React.FC = () => {
     }
   }, [activeGroup]);
 
-  const handleOnUpdate = async (status: boolean, groupName: string, groupId: number) => {
-    try {
-      await dispatch(updateGroup({ status, groupName, groupId })).unwrap();
-      toast({
-        title: 'Success',
-        description: 'Group Status Changed successfully.',
-        isClosable: true,
-        duration: 8000,
-        variant: 'glass',
-        status: 'success',
-        position: 'top-right',
-        containerStyle: toastLayout,
-      });
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-        position: 'top-right',
-      });
-    }
-    navigate('/dashboard/groups');
+  const handleOnUpdate = async () => {
+    // TODO update active group
+    updateGroup.mutate(
+      {
+        data: { groupName: String(activeGroup?.groupName), private: value !== 'Public' },
+        groupId: Number(groupParam?.id),
+      },
+      {
+        onSuccess: () => {
+          renderToast('success', 'Group Status Changed successfully.');
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
 
   return (
@@ -125,13 +117,8 @@ const PermissionTab: React.FC = () => {
           type="submit"
           fontSize={{ md: '16px' }}
           fontWeight="500"
-          onClick={() =>
-            handleOnUpdate(
-              value !== 'Public',
-              String(activeGroup?.groupName),
-              Number(groupParam?.id),
-            )
-          }
+          isLoading={updateGroup.isLoading}
+          onClick={() => handleOnUpdate()}
         >
           <Text
             ml={{ md: '11px', base: '6px' }}

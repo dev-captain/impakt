@@ -3,8 +3,7 @@ import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { CloseIcon } from '@chakra-ui/icons';
 import { PatchGroupRequestReqStatusEnum } from '@impakt-dev/api-client';
-import { useAppDispatch } from 'hooks';
-import { answerToGroupRequest } from '../../../../lib/redux/slices/groups/actions/answerToGroupRequest';
+import { useGroupsRequestControllerV1AnswerRequestToJoinGroup } from '../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 
 interface NoitificationCardProps {
   name: string;
@@ -19,10 +18,12 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
   requestorId,
   groupId,
 }) => {
-  const dispatch = useAppDispatch();
+  const answerToGroupRequest = useGroupsRequestControllerV1AnswerRequestToJoinGroup();
 
   const acceptOrDeclineRequestToJoin = async (currentStatus: PatchGroupRequestReqStatusEnum) => {
-    await dispatch(answerToGroupRequest({ requestorId, status: currentStatus, groupId })).unwrap();
+    answerToGroupRequest.mutate({ data: { requestorId, status: currentStatus }, groupId });
+    // await dispatch(fetchMyGroups(member.id));
+    // await dispatch(fetchGroupRequests());
   };
 
   return (
@@ -53,6 +54,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
           borderRadius="8px"
           type="submit"
           fontWeight="600"
+          isLoading={answerToGroupRequest.isLoading}
           onClick={() => acceptOrDeclineRequestToJoin('Accepted')}
         >
           <I.CheckIcon width="16px" height="16px" />

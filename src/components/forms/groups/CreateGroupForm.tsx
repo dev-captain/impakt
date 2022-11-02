@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
-import { Flex, FormControl, useToast } from '@chakra-ui/react';
+import { useAppSelector, useForm } from 'hooks';
+import { Flex, FormControl } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Common } from 'components';
-import { toastLayout } from 'theme';
-import { createGroup } from '../../../lib/redux/slices/groups/actions/createGroup';
-import { fetchMyGroups } from '../../../lib/redux/slices/groups/actions/fetchMyGroups';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
+import { useGroupsControllerV1Create } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { renderToast } from '../../../utils';
 
 const CreateGroupForm: React.FC = ({ children }) => {
+  const createGroup = useGroupsControllerV1Create();
+
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
     defaultValues: { groupName: '' },
@@ -19,27 +20,26 @@ const CreateGroupForm: React.FC = ({ children }) => {
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
-  const dispatch = useAppDispatch();
-  const toast = useToast();
   const navigate = useNavigate();
   const member = useAppSelector((state) => state.memberAuth.member);
 
   const handleOnCreate = async (data: object) => {
     const { groupName } = data as { groupName: string };
     if (!member) return;
-    await dispatch(createGroup(groupName)).unwrap();
-    await dispatch(fetchMyGroups(member.id)).unwrap();
-    toast({
-      title: 'Success',
-      description: 'Group created successfully.',
-      isClosable: true,
-      duration: 800000,
-      status: 'success',
-      variant: 'glass',
-      position: 'top-right',
-      containerStyle: toastLayout,
-    });
-    navigate('/dashboard/groups');
+    // TODO zustand add new group into my groups
+    createGroup.mutate(
+      { data: { groupName } },
+      {
+        onSuccess: () => {
+          renderToast('success', 'Group created successfully.');
+          navigate('/dashboard/groups');
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
+    // await dispatch(fetchMyGroups(member.id)).unwrap();
   };
 
   const inputItems: InputGroupPropsI[] = [

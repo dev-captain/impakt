@@ -32,6 +32,36 @@ import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 // import { useUserControllerIsWhitelisted } from '../../lib/impakt-dev-api-client/react-query/users/users';
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 
+// TODO next on is temp please move it to react query after its backend logic refactored.
+/* const useFetchGroupRequests = () => {
+  // TODO get the myGroups from zustand.
+  const fetchGroupRequests = () => {
+    if (myGroups?.length > 0) {
+      const callMap = myGroups.map(async ({ groupId }) =>
+        GroupsRequestInstance.groupsRequestControllerV1GetGroupRequests(groupId),
+      );
+
+      const getGroupRequests = await Promise.all(callMap);
+      if (getGroupRequests.length > 0) {
+        const dataExist: GetGroupRequestResV2[] = [];
+        getGroupRequests.forEach((d) => {
+          if (d.length > 0) {
+            dataExist.push(d[0]);
+          }
+        });
+
+        const payload = dataExist;
+
+        return payload;
+      }
+    }
+  };
+  React.useEffect(()=>{
+    fetchGroupRequests()
+  },[myGroups])
+};
+*/
+
 const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const store = usePersistedBalanceScoreStore();
@@ -51,6 +81,7 @@ const MemberDashboard: React.FC = () => {
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
   // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
   // const fetchExerciseStats = useFitnessStatsControllerGetExerciseStats();
+  // const fetchGroups = useGroupsControllerV1ExploreGroups() // TODO update zustand explore groups
 
   const fetchReferrals = useReferralControllerGetReferrees(
     { count: true },
