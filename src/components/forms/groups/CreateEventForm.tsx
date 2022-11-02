@@ -8,12 +8,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
-import { createEvent } from '../../../lib/redux/slices/events/actions/createEvent';
 import createEventYupScheme from '../../../lib/yup/schemas/createEventYupSchema';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
+import { useCalendarEventControllerCreateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
+import { renderToast } from '../../../utils';
 
 const CreateEventForm: React.FC = () => {
+  const createEvent = useCalendarEventControllerCreateCalendarEvent();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getSelectedDay, addEvent } = useEventCalendarContext();
@@ -65,28 +67,35 @@ const CreateEventForm: React.FC = () => {
 
     const schedule = {
       start: isStartTimeLessThanEndTime
-        ? new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute))
-        : new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute)),
+        ? new Date(
+            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
+          ).toISOString()
+        : new Date(
+            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
+          ).toISOString(),
       end: isStartTimeLessThanEndTime
-        ? new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute))
-        : new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute)),
+        ? new Date(
+            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
+          ).toISOString()
+        : new Date(
+            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
+          ).toISOString(),
     };
     const bEpayload = { data: eventData, schedule };
 
-    const data1 = await dispatch(
-      createEvent({ calendarId: activeGroup?.calendarId, payload: bEpayload }),
-    ).unwrap();
-
-    const normalizedData1 = normalizeCalendarDataEvent(data1);
-    addEvent(normalizedData1);
-
-    toast({
-      title: 'Success',
-      description: 'Event created successfully.',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
+    createEvent.mutate(
+      { calendarId: activeGroup.calendarId, data: { ...bEpayload } },
+      {
+        onSuccess: (event) => {
+          const normalizedData1 = normalizeCalendarDataEvent(event);
+          addEvent(normalizedData1);
+          renderToast('success', 'Event created successfully.');
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
 
   const inputItems: InputGroupPropsI[] = [

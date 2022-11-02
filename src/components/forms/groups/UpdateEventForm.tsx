@@ -1,27 +1,25 @@
-import { FormControl, Box, Input, Text, useDisclosure, useToast } from '@chakra-ui/react';
+import { FormControl, Box, Input, Text, useDisclosure } from '@chakra-ui/react';
 import { Day, Time } from 'dayspan';
 import * as React from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useAppSelector, useForm } from 'hooks';
 import { Common, I } from 'components';
 
-import { toastLayout } from 'theme';
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
-import { padTo2Digits } from '../../../utils';
-import { updateEventBE } from '../../../lib/redux/slices/events/actions/updateEvent';
+import { padTo2Digits, renderToast } from '../../../utils';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 import { usePersistedGroupStore } from '../../../lib/zustand';
+import { useCalendarEventControllerUpdateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 
 const UpdateEventForm: React.FC = () => {
-  const toast = useToast();
+  const updateEventBe = useCalendarEventControllerUpdateCalendarEvent();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getSelectedDay, getSelectedDayEvent, updateEvent } = useEventCalendarContext();
   const date = getSelectedDay();
 
   const { activeGroup } = usePersistedGroupStore();
-  const dispatch = useAppDispatch();
 
   if (!getSelectedDayEvent()) return null;
 
@@ -64,18 +62,25 @@ const UpdateEventForm: React.FC = () => {
 
     const schedule = {
       start: isStartTimeLessThanEndTime
-        ? new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute))
-        : new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute)),
+        ? new Date(
+            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
+          ).toISOString()
+        : new Date(
+            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
+          ).toISOString(),
       end: isStartTimeLessThanEndTime
-        ? new Date(new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute))
-        : new Date(new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute)),
+        ? new Date(
+            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
+          ).toISOString()
+        : new Date(
+            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
+          ).toISOString(),
     };
 
-    const data1 = await dispatch(
-      updateEventBE({
-        calendarId: activeGroup?.calendarId,
+    updateEventBe.mutate(
+      {
         eventId: getSelectedDayEvent()?.event.id,
-        patchCalendarEventReq: {
+        data: {
           assocId,
           description: eventDescription,
           title: eventTitle,
@@ -85,22 +90,15 @@ const UpdateEventForm: React.FC = () => {
             on: schedule.start,
           },
         },
-      }),
-    ).unwrap();
-    const normalizedData1 = normalizeCalendarDataEvent(data1);
-
-    updateEvent(normalizedData1);
-
-    toast({
-      title: 'Success',
-      description: 'Event updated successfully.',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-      variant: 'glass',
-      position: 'top-right',
-      containerStyle: toastLayout,
-    });
+      },
+      {
+        onSuccess: (updatedEventData) => {
+          const normalizedData1 = normalizeCalendarDataEvent(updatedEventData);
+          updateEvent(normalizedData1);
+          renderToast('success', 'Event updated successfully.');
+        },
+      },
+    );
   };
 
   const inputItems: InputGroupPropsI[] = [

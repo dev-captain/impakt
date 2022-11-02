@@ -4,17 +4,22 @@ import { DeleteIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { Common } from 'components';
 import { Time } from 'dayspan';
-import { useAppDispatch } from 'hooks';
-import { deleteEvent } from '../../../../../../../lib/redux/slices/events/actions/deleteEvent';
+import { useCalendarEventControllerDeleteCalendarEvent } from '../../../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 
 const RemoveEvent: React.FC = () => {
+  const deleteEvent = useCalendarEventControllerDeleteCalendarEvent();
   const { goBackToOverViewScreen, getSelectedDayEvent, removeEvent } = useEventCalendarContext();
   const eventObj = getSelectedDayEvent();
-  const dispatch = useAppDispatch();
   const removeHandle = async () => {
     if (!eventObj) return;
-    await dispatch(deleteEvent({ eventId: eventObj.event.id, type: 'Group' })).unwrap();
-    removeEvent(eventObj.event);
+    deleteEvent.mutate(
+      { eventId: eventObj.event.id },
+      {
+        onSuccess: () => {
+          removeEvent(eventObj.event);
+        },
+      },
+    );
     // locally delete event
   };
 

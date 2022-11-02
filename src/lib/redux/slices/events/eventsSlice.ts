@@ -1,7 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createEvent } from './actions/createEvent';
-import { deleteEvent } from './actions/deleteEvent';
-import { updateEventBE } from './actions/updateEvent';
 
 interface EventsInitialI {
   isLoading: boolean;
@@ -15,40 +12,6 @@ const eventsSlice = createSlice({
   name: 'events',
   initialState: eventsInitialState as EventsInitialI,
   reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(createEvent.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(createEvent.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(createEvent.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(updateEventBE.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(updateEventBE.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(updateEventBE.rejected, (state) => {
-        state.isLoading = false;
-      });
-
-    builder
-      .addCase(deleteEvent.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(deleteEvent.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(deleteEvent.rejected, (state) => {
-        state.isLoading = false;
-      });
-  },
 });
 // eslint-disable-next-line import/prefer-default-export
 export default eventsSlice.reducer;
