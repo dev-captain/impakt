@@ -8,10 +8,11 @@ import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
 import { useGroupsControllerV1Create } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../utils';
-import { usePersistedAuthStore } from '../../../lib/zustand';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 
 const CreateGroupForm: React.FC = ({ children }) => {
   const createGroup = useGroupsControllerV1Create();
+  const { addToMyGroups } = usePersistedGroupStore();
 
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
@@ -31,7 +32,16 @@ const CreateGroupForm: React.FC = ({ children }) => {
     createGroup.mutate(
       { data: { groupName } },
       {
-        onSuccess: () => {
+        onSuccess: (groupData) => {
+          addToMyGroups({
+            groupId: groupData.id,
+            userId: member.id,
+            bannedAt: null,
+            joinedAt: new Date().toISOString(),
+            leftAt: null,
+            role: 'Creator',
+            Group: { ...groupData, memberCount: 1 },
+          });
           renderToast('success', 'Group created successfully.');
           navigate('/dashboard/groups');
         },

@@ -8,6 +8,7 @@ import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 const MyGroupCardHeader: React.FC = () => {
   const { myGroups } = usePersistedGroupStore();
+  console.log(myGroups);
   const navigate = useNavigate();
 
   return (
@@ -30,11 +31,11 @@ const MyGroupCardHeader: React.FC = () => {
         >
           <Box position="relative">
             <GroupsCard
-              member={m.group.memberCount ?? 0}
-              img={m.group.currentCoverImageId ? m.group.currentCoverImage : Images.group.logo}
-              name={m.group.groupName}
+              member={m.Group?.memberCount ?? 0}
+              img={m.Group?.currentCoverImageId ? m.Group?.CurrentCoverImage : Images.group.logo}
+              name={m.Group?.groupName}
               // eslint-disable-next-line no-underscore-dangle
-              isPrivateGroup={m.group._private}
+              isPrivateGroup={m.Group?.private}
             >
               <Common.ImpaktButton
                 variant="transparent"

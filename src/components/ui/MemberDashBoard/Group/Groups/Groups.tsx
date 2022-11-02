@@ -9,9 +9,6 @@ import { usePersistedAuthStore } from '../../../../../lib/zustand';
 import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 
 const Groups: React.FC = () => {
-  const { member } = usePersistedAuthStore();
-  const fetchMyGroups = useGroupsMemberControllerV1GetGroupsByUserId(member!.id);
-
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">
       <VStack alignItems="flex-start" rowGap="1em" justifyContent="flex-start" w="full">

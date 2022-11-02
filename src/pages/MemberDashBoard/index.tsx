@@ -1,12 +1,14 @@
 import * as React from 'react';
 
 import { C } from 'components';
+import { GetGroupRequestResV2 } from '@impakt-dev/api-client';
 
 import {
   usePersistedAuthStore,
   usePersistedBalanceScoreStore,
   usePersistedDiscourseStore,
   usePersistedFitnessStore,
+  usePersistedGroupStore,
   usePersistedReferralsStore,
 } from '../../lib/zustand';
 import { useGodlAccountControllerGetAccount } from '../../lib/impakt-dev-api-client/react-query/godl/godl';
@@ -21,6 +23,9 @@ import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api
 import { useDiscourse } from '../../hooks/useDiscourse';
 import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { GroupsRequestInstance } from '../../lib/impakt-dev-api-client/init';
+import { GetGroupMemberResWithGroupRes } from '../../lib/impakt-dev-api-client/react-query/types';
+import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-client/react-query/groups/groups';
 
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
@@ -33,43 +38,16 @@ import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../lib/impakt-d
 // import { useUserControllerIsWhitelisted } from '../../lib/impakt-dev-api-client/react-query/users/users';
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 
-// TODO next on is temp please move it to react query after its backend logic refactored.
-/* const useFetchGroupRequests = () => {
-  // TODO get the myGroups from zustand.
-  const fetchGroupRequests = () => {
-    if (myGroups?.length > 0) {
-      const callMap = myGroups.map(async ({ groupId }) =>
-        GroupsRequestInstance.groupsRequestControllerV1GetGroupRequests(groupId),
-      );
-
-      const getGroupRequests = await Promise.all(callMap);
-      if (getGroupRequests.length > 0) {
-        const dataExist: GetGroupRequestResV2[] = [];
-        getGroupRequests.forEach((d) => {
-          if (d.length > 0) {
-            dataExist.push(d[0]);
-          }
-        });
-
-        const payload = dataExist;
-
-        return payload;
-      }
-    }
-  };
-  React.useEffect(()=>{
-    fetchGroupRequests()
-  },[myGroups])
-};
-*/
-
 const MemberDashboard: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const store = usePersistedBalanceScoreStore();
   const referralsStore = usePersistedReferralsStore();
+  const groupsStore = usePersistedGroupStore();
   const fitnessStore = usePersistedFitnessStore();
   const discourseStore = usePersistedDiscourseStore();
   const discourse = useDiscourse();
+  // TODO next line is temp please move it to react query after its backend logic refactored.
+  const { fetchGroupRequests } = useFetchGroupRequests();
 
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
     query: getDefaultQueryOptions(),
@@ -82,7 +60,6 @@ const MemberDashboard: React.FC = () => {
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
   // const fetchRewardHistory = useRewardHistoryControllerV1GetRewardHistory();
   // const fetchExerciseStats = useFitnessStatsControllerGetExerciseStats();
-  // const fetchGroups = useGroupsControllerV1ExploreGroups() // TODO update zustand explore groups
 
   const fetchReferrals = useReferralControllerGetReferrees(
     { count: true },
@@ -100,6 +77,15 @@ const MemberDashboard: React.FC = () => {
   const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any, {
     query: getDefaultQueryOptions(),
   });
+
+  const fetchMyGroups = useGroupsMemberControllerV1GetGroupsByUserId(member?.id as any, {
+    query: getDefaultQueryOptions(),
+  });
+
+  const fetchExploreGroups = useGroupsControllerV1ExploreGroups(
+    { explore: true },
+    { query: getDefaultQueryOptions() },
+  ); // TODO update zustand explore groups
 
   React.useEffect(() => {
     if (fetchGodlBalanceScoreQuery.isFetched) {
@@ -164,10 +150,18 @@ const MemberDashboard: React.FC = () => {
     }
   }, [discourse.news]);
 
-  // React.useEffect(() => {
-  //   if (!member) return;
-  //   dispatch(fetchMyGroups(member.id)).then(() => dispatch(fetchGroupRequests()));
-  // }, []);
+  React.useEffect(() => {
+    if (fetchMyGroups.isFetched && fetchMyGroups.data) {
+      groupsStore.setMyGroups(fetchMyGroups.data);
+      fetchGroupRequests(fetchMyGroups.data);
+    }
+  }, [fetchMyGroups.isFetched]);
+
+  React.useEffect(() => {
+    if (fetchExploreGroups.isFetched && fetchExploreGroups.data) {
+      groupsStore.setExploreGroups(fetchExploreGroups.data);
+    }
+  }, [fetchExploreGroups.isFetched]);
 
   // React.useEffect(() => {
   //   if (!member) return;
@@ -175,6 +169,40 @@ const MemberDashboard: React.FC = () => {
   // }, []);
 
   return <C.SidebarLayout isShowNavbar />;
+};
+
+const useFetchGroupRequests = () => {
+  const { setGroupRequests } = usePersistedGroupStore();
+
+  const fetchGroupRequests = async (myGroups: GetGroupMemberResWithGroupRes[]) => {
+    if (myGroups?.length > 0) {
+      const callMap = myGroups.map(async ({ groupId }) =>
+        GroupsRequestInstance.groupsRequestControllerV1GetGroupRequests(groupId),
+      );
+
+      const getGroupRequests = await Promise.all(callMap);
+      if (getGroupRequests.length > 0) {
+        const dataExist: GetGroupRequestResV2[] = [];
+        getGroupRequests.forEach((d) => {
+          if (d.length > 0) {
+            dataExist.push(d[0]);
+          }
+        });
+
+        const payload = dataExist;
+
+        setGroupRequests(payload);
+
+        return payload;
+      }
+
+      return null;
+    }
+
+    return null;
+  };
+
+  return { fetchGroupRequests };
 };
 
 export default MemberDashboard;

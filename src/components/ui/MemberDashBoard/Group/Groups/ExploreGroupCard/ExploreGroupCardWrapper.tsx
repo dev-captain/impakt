@@ -1,8 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
-import { Box, useToast } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
 import { Common, I } from 'components';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,12 +22,10 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
   const { member } = usePersistedAuthStore();
   const isPrivate = status === 'private';
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const toast = useToast();
 
   const exploreGroup = usePersistedGroupStore().exploreGroups.filter(
     // eslint-disable-next-line no-underscore-dangle
-    (d) => d._private === isPrivate,
+    (d) => d.private === isPrivate,
   );
 
   const handleGroupCardButtonClick = async (groupId: number) => {
@@ -73,7 +70,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
     <>
       {exploreGroup.map((g) => (
         <Box
-          cursor={g._private ? 'unset' : 'pointer'}
+          cursor={g.private ? 'unset' : 'pointer'}
           marginStart="0 !important"
           w={{
             base: '100%',
@@ -84,20 +81,20 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            if (!g._private) {
+            if (!g.private) {
               navigate(`/dashboard/groups/group/${g.id}`);
             }
           }}
           position="relative"
         >
           <GroupsCard
-            img={g.currentCoverImage ? g.currentCoverImage : Images.group.logo}
+            img={g.CurrentCoverImage ? g.CurrentCoverImage : Images.group.logo}
             member={g.memberCount}
             name={g.groupName}
-            isPrivateGroup={g._private}
+            isPrivateGroup={g.private}
           >
             <Box w="full" display="flex" alignItems="flex-end" justifyContent="flex-end">
-              <Box maxW={g._private ? 'unset' : '99px'} maxH="38px">
+              <Box maxW={g.private ? 'unset' : '99px'} maxH="38px">
                 <Common.ImpaktButton
                   borderRadius="8px"
                   fontWeight="600"
@@ -106,15 +103,15 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                   fontSize="16px"
                   _hover={{ backgroundColor: '#000', color: '#fff' }}
                   variant={
-                    g._private
-                      ? g.request?.status !== UserRequestStatus.Pending
+                    g.private
+                      ? g.Request?.status !== UserRequestStatus.Pending
                         ? 'transparent'
                         : 'black'
                       : 'transparent'
                   }
                   onClick={() => {
-                    if (g._private) {
-                      if (g.request?.status !== UserRequestStatus.Pending) {
+                    if (g.private) {
+                      if (g.Request?.status !== UserRequestStatus.Pending) {
                         handleGroupCardButtonClick(g.id);
 
                         return;
@@ -124,10 +121,10 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                     }
                     handleGroupCardButtonClick(g.id);
                   }}
-                  leftIcon={g._private ? undefined : <I.UnionIcon width="12px" />}
+                  leftIcon={g.private ? undefined : <I.UnionIcon width="12px" />}
                 >
-                  {g._private
-                    ? g.request?.status !== UserRequestStatus.Pending
+                  {g.private
+                    ? g.Request?.status !== UserRequestStatus.Pending
                       ? 'Request to join'
                       : 'Pending'
                     : 'Join'}
