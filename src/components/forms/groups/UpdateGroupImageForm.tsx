@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Common, I } from 'components';
 
 import React, { useEffect } from 'react';
-import { useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { useParams } from 'react-router-dom';
 
 import Images from '../../../assets/images';

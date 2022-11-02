@@ -2,6 +2,7 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 import { authSlice, AuthSlice } from './stores/authStore';
 import { calendarStore, CalendarStore } from './stores/calendarStore';
+import { ChallengeStore, challengeStore } from './stores/challengeStore';
 import { DiscourseSlice, discourseStore } from './stores/discourseStore';
 import { fitnessSlice, FitnessSlice } from './stores/fitnessStore';
 import { ForumSlice, forumStore } from './stores/forumStore';
@@ -118,6 +119,20 @@ export const usePersistedCalendarStore = create<CalendarStore>()(
     }),
     {
       name: 'calendar-storage',
+      serialize: (state) => btoa(JSON.stringify(state)),
+      deserialize: (str) => JSON.parse(atob(str)),
+      getStorage: () => localStorage,
+    },
+  ),
+);
+
+export const usePersistedChallengeStore = create<ChallengeStore>()(
+  persist(
+    (set, get, ...a) => ({
+      ...challengeStore(set, get, ...a),
+    }),
+    {
+      name: 'challenge-storage',
       serialize: (state) => btoa(JSON.stringify(state)),
       deserialize: (str) => JSON.parse(atob(str)),
       getStorage: () => localStorage,

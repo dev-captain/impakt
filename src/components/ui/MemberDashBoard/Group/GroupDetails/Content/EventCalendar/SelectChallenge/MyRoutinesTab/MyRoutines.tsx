@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import { UseFormSetValue } from 'react-hook-form';
 
 import ChallengesCard from './ChallengesCard';
-import { useAppSelector } from '../../../../../../../../../hooks';
+import { usePersistedChallengeStore } from '../../../../../../../../../lib/zustand';
 
 const MyRoutines: React.FC<{
   setValue: UseFormSetValue<{
@@ -16,9 +16,7 @@ const MyRoutines: React.FC<{
   }>;
   onClose: () => void;
 }> = ({ setValue, onClose }) => {
-  const availableGroupChallenges = useAppSelector(
-    (state) => state.challengesReducer.availableGroupChallenges,
-  );
+  const { availableGroupChallenges } = usePersistedChallengeStore();
   if (!availableGroupChallenges.length) return null;
 
   return (

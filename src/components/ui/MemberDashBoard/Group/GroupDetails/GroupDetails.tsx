@@ -1,10 +1,8 @@
 import React from 'react';
 import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
-import { fetchAvailableChallengesForGroup } from '../../../../../lib/redux/slices/challenges/actions/fetchAvailableChallengesForGroup';
 import { deepLinkToApp } from '../../../../../data';
 import {
   useGroupsControllerV1FindGroupMembers,
@@ -18,6 +16,7 @@ import { getDefaultQueryOptions } from '../../../../../lib/impakt-dev-api-client
 import { usePostControllerV1GetMany } from '../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
 import {
   usePersistedCalendarStore,
+  usePersistedChallengeStore,
   usePersistedForumStore,
   usePersistedGroupStore,
 } from '../../../../../lib/zustand';
@@ -25,6 +24,15 @@ import {
   calendarControllerGetCalendar,
   useCalendarControllerGetCalendar,
 } from '../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
+import {
+  AttemptInstance,
+  ChallengeInstance,
+  LikeInstance,
+} from '../../../../../lib/impakt-dev-api-client/init';
+import { GetMembersOfGroupRes } from '../../../../../lib/impakt-dev-api-client/react-query/types';
+import { likeControllerGetChallengeLikes } from '../../../../../lib/impakt-dev-api-client/react-query/likes/likes';
+import { challengeStatsControllerGetChallengeAttemptsForAllUsers } from '../../../../../lib/impakt-dev-api-client/react-query/default/default';
+import { challengesControllerGetMany } from '../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 
 const GroupDetails: React.FC = () => {
   const { setActiveGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
@@ -38,7 +46,9 @@ const GroupDetails: React.FC = () => {
     groupParam.eventId !== 'join' &&
     useLocation().pathname.includes('join');
   // const [show, setShow] = React.useState<null | string>(null);
-  // TODO enabled check here;
+
+  // TODO once backend refactored for challenges will be moved to react-query
+  const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
 
   const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '0', 10), {
     query: { ...getDefaultQueryOptions(), enabled: false },
@@ -69,7 +79,6 @@ const GroupDetails: React.FC = () => {
 
   const [isNotFound, setIsNotFound] = React.useState<string>('');
 
-  const dispatch = useAppDispatch();
   // const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
 
   const getGroupDetail = async () => {
@@ -104,6 +113,7 @@ const GroupDetails: React.FC = () => {
             const membersOfGroup = await fetchMembersOfGroup.refetch();
             if (membersOfGroup.isSuccess) {
               setMembersOfGroup(membersOfGroup.data);
+              fetchAvailableChallengesForGroup(membersOfGroup.data);
             }
 
             const posts = await fetchPosts.refetch();
@@ -115,8 +125,6 @@ const GroupDetails: React.FC = () => {
             setCalendar(calendar);
 
             // Todo update calendar data on zustand
-
-            await dispatch(fetchAvailableChallengesForGroup());
           }
         }
       }
@@ -159,5 +167,37 @@ const GroupDetails: React.FC = () => {
       {/* )} */}
     </Box>
   );
+};
+
+// TODO once the backend refactored for this feat it will moved to react query
+const useFetchAvailableChallenges = () => {
+  const { setAvailableGroupChallenges } = usePersistedChallengeStore();
+  const fetchAvailableChallengesForGroup = async (membersOfGroup: GetMembersOfGroupRes) => {
+    const admin = membersOfGroup.Members.filter(({ role }) => role === 'Creator')[0];
+
+    const myChallengesRes = await challengesControllerGetMany({
+      validOnly: false,
+      Routine: true,
+      creatorId: admin.User.id,
+    });
+
+    const challengesLikePromises = myChallengesRes.map(({ id }) =>
+      likeControllerGetChallengeLikes(id),
+    );
+
+    const attemptsOnPromises = myChallengesRes.map(async ({ id }) =>
+      challengeStatsControllerGetChallengeAttemptsForAllUsers(id),
+    );
+
+    const challengesLikes = await Promise.all([...challengesLikePromises]);
+    const attempts = await Promise.all([...attemptsOnPromises]);
+
+    const res = myChallengesRes.map((d, index) => {
+      return { challenge: { ...d }, attempts: attempts[index], likes: challengesLikes[index] };
+    });
+    setAvailableGroupChallenges(res);
+  };
+
+  return { fetchAvailableChallengesForGroup };
 };
 export default GroupDetails;

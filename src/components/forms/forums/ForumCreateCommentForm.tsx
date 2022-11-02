@@ -2,7 +2,6 @@ import { FormControl, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Common, I } from 'components';
-import { useAppDispatch } from '../../../hooks';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useCommentControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
@@ -20,7 +19,6 @@ const ForumCreateCommentForm = React.forwardRef<
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
-  const dispatch = useAppDispatch();
   const { member } = usePersistedAuthStore();
 
   const handleOnCommentCreate = async (data: { comment: string }) => {

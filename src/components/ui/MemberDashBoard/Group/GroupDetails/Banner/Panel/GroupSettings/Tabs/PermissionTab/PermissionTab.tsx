@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAppSelector } from 'hooks';
 import { Box, Button, Text, useToast } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

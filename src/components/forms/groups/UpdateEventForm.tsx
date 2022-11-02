@@ -1,7 +1,7 @@
 import { FormControl, Box, Input, Text, useDisclosure } from '@chakra-ui/react';
 import { Day, Time } from 'dayspan';
 import * as React from 'react';
-import { useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { Common, I } from 'components';
 
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
@@ -9,7 +9,7 @@ import { InputGroupPropsI } from '../../common/InputGroup';
 import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
 import { padTo2Digits, renderToast } from '../../../utils';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
-import { usePersistedGroupStore } from '../../../lib/zustand';
+import { usePersistedChallengeStore, usePersistedGroupStore } from '../../../lib/zustand';
 import { useCalendarEventControllerUpdateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 
 const UpdateEventForm: React.FC = () => {
@@ -23,9 +23,9 @@ const UpdateEventForm: React.FC = () => {
 
   if (!getSelectedDayEvent()) return null;
 
-  const challange = useAppSelector(
-    (state) => state.challengesReducer.availableGroupChallenges,
-  ).find((d: any) => d.challenge.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId);
+  const challange = usePersistedChallengeStore().availableGroupChallenges.find(
+    (d) => d.challenge.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId,
+  );
 
   const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {

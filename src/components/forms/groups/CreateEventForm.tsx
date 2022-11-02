@@ -1,7 +1,7 @@
 import { FormControl, Box, Input, Text, useDisclosure, useToast } from '@chakra-ui/react';
 import { Day, Time } from 'dayspan';
 import * as React from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -16,14 +16,12 @@ import { renderToast } from '../../../utils';
 
 const CreateEventForm: React.FC = () => {
   const createEvent = useCalendarEventControllerCreateCalendarEvent();
-  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getSelectedDay, addEvent } = useEventCalendarContext();
   const date = getSelectedDay();
 
   const { member } = usePersistedAuthStore();
   const { activeGroup } = usePersistedGroupStore();
-  const dispatch = useAppDispatch();
   const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {
       eventTitle: '',

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
-import { useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
 import GroupsModal from '../../../../../../GroupsModal';

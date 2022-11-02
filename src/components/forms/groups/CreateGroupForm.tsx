@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { Flex, FormControl } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';

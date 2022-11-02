@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { HStack } from '@chakra-ui/react';
-import { useAppSelector } from 'hooks';
 
 import ExploreGroupCardHeader from './Header/ExploreGroupCardHeader';
 import ExploreGroupCardWrapper from './ExploreGroupCardWrapper';

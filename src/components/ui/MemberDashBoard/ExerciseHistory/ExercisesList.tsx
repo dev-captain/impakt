@@ -16,15 +16,12 @@ import {
   // Td,
   TableContainer,
 } from '@chakra-ui/react';
-// import { useAppSelector, usePascalCase } from 'hooks';
+// import {  usePascalCase } from 'hooks';
 
 const ExercisesList: React.FC = () => {
   const { t } = useTranslation().i18n;
 
   // const { convertToPascalCase } = usePascalCase();
-  // const rewardHistoryStatistics = useAppSelector(
-  //   (state) => state.rewardHistoryReducer.rewardHistoryState,
-  // );
   // const [pascalCasedRewardHistoryStatistics, setPascalCasedRewardHistoryStatistics] =
   //   React.useState<typeof rewardHistoryStatistics>([]);
 
