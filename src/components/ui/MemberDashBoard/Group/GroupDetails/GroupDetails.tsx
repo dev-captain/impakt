@@ -37,36 +37,64 @@ const GroupDetails: React.FC = () => {
     groupParam.eventId &&
     groupParam.eventId !== 'join' &&
     useLocation().pathname.includes('join');
+  const isNaNParam = parseInt(groupParam.id ?? '-asd', 10);
   // const [show, setShow] = React.useState<null | string>(null);
 
   // TODO once backend refactored for challenges will be moved to react-query
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
-
   const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true },
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, retry: false },
   });
 
   const fetchMembersOfGroup = useGroupsControllerV1FindGroupMembers(
     parseInt(groupParam?.id ?? '0', 10),
     {},
-    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
+    {
+      query: {
+        ...getDefaultQueryOptions(),
+        refetchOnMount: true,
+        retry: false,
+        enabled: fetchGroupDetailById.isSuccess,
+      },
+    },
   );
 
   const fetchAmIMemberOfGroup = useGroupsMemberControllerV1AmIMemberOfGroup(
     parseInt(groupParam?.id ?? '0', 10),
-    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
+    {
+      query: {
+        ...getDefaultQueryOptions(),
+        refetchOnMount: true,
+        retry: false,
+        enabled: fetchGroupDetailById.isSuccess,
+      },
+    },
   );
 
   const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup(
     parseInt(groupParam?.id ?? '0', 10),
-    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
+    {
+      query: {
+        ...getDefaultQueryOptions(),
+        refetchOnMount: true,
+        retry: false,
+        enabled: fetchGroupDetailById.isSuccess,
+      },
+    },
   );
 
   const fetchPosts = usePostControllerV1GetMany(
     'Group',
     parseInt(groupParam?.id ?? '0', 10),
     {},
-    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
+    {
+      query: {
+        ...getDefaultQueryOptions(),
+        refetchOnMount: true,
+        retry: false,
+        enabled: fetchGroupDetailById.isSuccess,
+      },
+    },
   );
 
   const [isNotFound, setIsNotFound] = React.useState<string>('');
@@ -74,22 +102,6 @@ const GroupDetails: React.FC = () => {
   // const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
 
   const getGroupDetail = async () => {
-    if (fetchGroupDetailById.isError) {
-      if (fetchGroupDetailById.error.response?.status === 404) {
-        setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
-      } else {
-        setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
-      }
-
-      return;
-    }
-    console.log(
-      fetchGroupDetailById.isSuccess,
-      fetchAmIMemberOfGroup.isSuccess,
-      fetchGroupRoleById.isSuccess,
-      fetchMembersOfGroup.isSuccess,
-      fetchPosts.isSuccess,
-    );
     if (
       fetchGroupDetailById.isSuccess &&
       fetchAmIMemberOfGroup.isSuccess &&
@@ -118,27 +130,35 @@ const GroupDetails: React.FC = () => {
     }
   };
 
+  // Good path flow init
   React.useEffect(() => {
-    if (
-      fetchGroupDetailById.isFetched &&
-      fetchAmIMemberOfGroup.isFetched &&
-      fetchGroupRoleById.isFetched &&
-      fetchMembersOfGroup.isFetched &&
-      fetchPosts.isFetched
-    ) {
-      getGroupDetail();
-    }
+    getGroupDetail();
   }, [
-    fetchGroupDetailById.isFetched,
-    fetchAmIMemberOfGroup.isFetched,
-    fetchGroupRoleById.isFetched,
-    fetchMembersOfGroup.isFetched,
-    fetchPosts.isFetched,
+    fetchGroupDetailById.isSuccess,
+    fetchAmIMemberOfGroup.isSuccess,
+    fetchGroupRoleById.isSuccess,
+    fetchMembersOfGroup.isSuccess,
+    fetchPosts.isSuccess,
   ]);
 
+  // Bad paths flow init
   React.useEffect(() => {
+    if (Number.isNaN(isNaNParam)) {
+      setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
+    }
+
     return () => setActiveGroup(null);
   }, []);
+
+  React.useEffect(() => {
+    if (fetchGroupDetailById.isError) {
+      if (fetchGroupDetailById.error.response?.status === 404) {
+        setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
+      } else {
+        setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
+      }
+    }
+  }, [fetchGroupDetailById.isError]);
 
   // React.useEffect(() => {
   //   const showTip = localStorage.getItem('showTip');
@@ -151,8 +171,6 @@ const GroupDetails: React.FC = () => {
   //   localStorage.setItem('showTip', 'false');
   //   setShow('false');
   // };
-  console.log(fetchGroupDetailById.isLoading, fetchGroupDetailById.isRefetching);
-  if (fetchGroupDetailById.isLoading || fetchGroupDetailById.isRefetching) return null;
 
   if (isNotFound.length > 0)
     return (
@@ -160,6 +178,8 @@ const GroupDetails: React.FC = () => {
         {isNotFound}
       </Text>
     );
+
+  if (fetchGroupDetailById.isLoading || fetchGroupDetailById.isRefetching) return null;
 
   return (
     <Box w="full" as="section" id="general-section">
