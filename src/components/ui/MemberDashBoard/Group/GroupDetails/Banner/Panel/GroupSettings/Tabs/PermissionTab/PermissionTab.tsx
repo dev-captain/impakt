@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button, Text, useToast } from '@chakra-ui/react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Button, Text } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
 import keys from 'i18n/types';
@@ -14,10 +14,8 @@ const PermissionTab: React.FC = () => {
   const [value, setValue] = React.useState('Public');
 
   const { t } = useTranslation().i18n;
-  const toast = useToast();
-  const navigate = useNavigate();
   const groupParam = useParams();
-  const { activeGroup } = usePersistedGroupStore();
+  const { activeGroup, setActiveGroup, setMyGroups, myGroups } = usePersistedGroupStore();
   React.useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
     if (activeGroup?.private) {
@@ -28,15 +26,24 @@ const PermissionTab: React.FC = () => {
   }, [activeGroup]);
 
   const handleOnUpdate = async () => {
-    // TODO update active group
+    if (!activeGroup?.id) return;
     updateGroup.mutate(
       {
-        data: { groupName: String(activeGroup?.groupName), private: value !== 'Public' },
+        data: { private: value !== 'Public' },
         groupId: Number(groupParam?.id),
       },
       {
-        onSuccess: () => {
+        onSuccess: (newStatus) => {
           renderToast('success', 'Group Status Changed successfully.');
+          setActiveGroup({ ...activeGroup, private: newStatus.private });
+          const shallowOfMyGroups = [...myGroups];
+          const indexOfGroup = shallowOfMyGroups.findIndex(
+            (group) => group.groupId === activeGroup.id,
+          );
+          if (indexOfGroup !== -1) {
+            shallowOfMyGroups[indexOfGroup].Group.private = newStatus.private;
+            setMyGroups(shallowOfMyGroups);
+          }
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong');
@@ -118,6 +125,7 @@ const PermissionTab: React.FC = () => {
           fontSize={{ md: '16px' }}
           fontWeight="500"
           isLoading={updateGroup.isLoading}
+          isDisabled={updateGroup.isLoading}
           onClick={() => handleOnUpdate()}
         >
           <Text
