@@ -17,7 +17,8 @@ interface GroupSettingModalProps {
 const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
   const deleteGroup = useGroupsControllerV1Remove();
   const leaveGroup = useGroupsMemberControllerV1LeaveGroup();
-  const { activeGroup } = usePersistedGroupStore();
+  const { activeGroup, myGroups, setMyGroups, exploreGroups, setExploreGroups } =
+    usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
   const navigate = useNavigate();
   const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
@@ -25,13 +26,17 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
   );
 
   const handleGroupDelete = async () => {
-    // TODO Delete group from my groups on zustand
     if (activeGroup?.id) {
       deleteGroup.mutate(
         { groupId: activeGroup.id },
         {
           onSuccess: () => {
             renderToast('success', `Group is deleted successfully`);
+            const distractFromMyGroup = myGroups.filter(
+              (myGroup) => myGroup.groupId !== activeGroup.id,
+            );
+            setMyGroups(distractFromMyGroup);
+            // TODO update explore group on zustand
             navigate('/dashboard/groups');
           },
           onError: (err) => {
@@ -49,6 +54,10 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
         {
           onSuccess: () => {
             renderToast('success', `Left from Group successfully`);
+            const distractFromMyGroup = myGroups.filter(
+              (myGroup) => myGroup.groupId !== activeGroup.id,
+            );
+            setMyGroups(distractFromMyGroup);
             navigate('/dashboard/groups');
           },
           onError: (err) => {
@@ -94,6 +103,7 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) =>
             h="60px"
             borderRadius="8px"
             type="submit"
+            isDisabled={role === 'Creator' ? deleteGroup.isLoading : leaveGroup.isLoading}
             isLoading={role === 'Creator' ? deleteGroup.isLoading : leaveGroup.isLoading}
             fontSize={{ md: '20px' }}
             onClick={role === 'Creator' ? handleGroupDelete : handleLeaveGroup}
