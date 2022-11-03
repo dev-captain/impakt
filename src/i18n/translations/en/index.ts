@@ -444,14 +444,14 @@ export default {
     data: [
       {
         company: 'Impakt',
-        job: 'Founder / CEO',
+        job: 'CEO',
         fname: 'Winston',
         lname: 'Zin',
         img: Images.home.wiston,
       },
       {
         company: 'Impakt',
-        job: 'Founder / CTO',
+        job: 'CTO',
         fname: 'Hakim',
         lname: 'Bawa',
         img: Images.home.hakim,
