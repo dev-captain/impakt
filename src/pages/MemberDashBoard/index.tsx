@@ -39,6 +39,7 @@ import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-cli
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 
 const MemberDashboard: React.FC = () => {
+  console.log('yo');
   const { member } = usePersistedAuthStore();
   const store = usePersistedBalanceScoreStore();
   const referralsStore = usePersistedReferralsStore();
@@ -88,22 +89,22 @@ const MemberDashboard: React.FC = () => {
   ); // TODO update zustand explore groups
 
   React.useEffect(() => {
-    if (fetchGodlBalanceScoreQuery.isFetched) {
+    if (fetchGodlBalanceScoreQuery.isSuccess) {
       store.setGodlBalanceScore(fetchGodlBalanceScoreQuery.data?.balance ?? 0);
     }
-  }, [fetchGodlBalanceScoreQuery.data]);
+  }, [fetchGodlBalanceScoreQuery.isSuccess]);
 
   React.useEffect(() => {
-    if (fetchKoinBalanceScoreQuery.isFetched) {
+    if (fetchKoinBalanceScoreQuery.isSuccess) {
       store.setKoinBalanceScore(fetchKoinBalanceScoreQuery.data?.balance ?? 0);
     }
-  }, [fetchKoinBalanceScoreQuery.data]);
+  }, [fetchKoinBalanceScoreQuery.isSuccess]);
 
   React.useEffect(() => {
-    if (fetchActiveDays.isFetched && fetchActiveDays.data) {
+    if (fetchActiveDays.isSuccess) {
       fitnessStore.setActiveDays(fetchActiveDays.data?.value);
     }
-  }, [fetchActiveDays.data]);
+  }, [fetchActiveDays.isSuccess]);
 
   // React.useEffect(() => {
   //   if (!member) return;
@@ -111,19 +112,19 @@ const MemberDashboard: React.FC = () => {
   // }, []);
 
   React.useEffect(() => {
-    if (fetchReferrals.isFetched && fetchReferrals.data) {
+    if (fetchReferrals.isSuccess) {
       referralsStore.setReferrals(fetchReferrals.data);
     }
-  }, [fetchReferrals.data]);
+  }, [fetchReferrals.isSuccess]);
 
   React.useEffect(() => {
-    if (fetchReferralsChallenges.isFetched && fetchReferralsChallenges.data) {
+    if (fetchReferralsChallenges.isSuccess) {
       referralsStore.setReferralsChallengesHaveDone(fetchReferralsChallenges.data);
     }
-  }, [fetchReferralsChallenges.isFetched]);
+  }, [fetchReferralsChallenges.isSuccess]);
 
   React.useEffect(() => {
-    if (fetchReferralsRewardGodl.isFetched) {
+    if (fetchReferralsRewardGodl.isSuccess) {
       let countAmount = 0;
       fetchReferralsRewardGodl.data?.forEach(({ amount }) => {
         // eslint-disable-next-line operator-assignment
@@ -131,10 +132,10 @@ const MemberDashboard: React.FC = () => {
       });
       referralsStore.setGodlRewardedByReferrals(countAmount);
     }
-  }, [fetchReferralsRewardGodl.data]);
+  }, [fetchReferralsRewardGodl.isSuccess]);
 
   React.useEffect(() => {
-    if (fetchReferralsRewardKoin.isFetched) {
+    if (fetchReferralsRewardKoin.isSuccess) {
       let countAmount = 0;
       fetchReferralsRewardKoin.data?.forEach(({ amount }) => {
         // eslint-disable-next-line operator-assignment
@@ -142,7 +143,7 @@ const MemberDashboard: React.FC = () => {
       });
       referralsStore.setKoinRewardedByReferrals(countAmount);
     }
-  }, [fetchReferralsRewardKoin.isFetched]);
+  }, [fetchReferralsRewardKoin.isSuccess]);
 
   React.useEffect(() => {
     if (discourse.isDiscourseFetched) {
@@ -151,17 +152,17 @@ const MemberDashboard: React.FC = () => {
   }, [discourse.news]);
 
   React.useEffect(() => {
-    if (fetchMyGroups.isFetched && fetchMyGroups.data) {
+    if (fetchMyGroups.isSuccess) {
       groupsStore.setMyGroups(fetchMyGroups.data);
       fetchGroupRequests(fetchMyGroups.data);
     }
-  }, [fetchMyGroups.isFetched]);
+  }, [fetchMyGroups.isSuccess]);
 
   React.useEffect(() => {
-    if (fetchExploreGroups.isFetched && fetchExploreGroups.data) {
+    if (fetchExploreGroups.isSuccess) {
       groupsStore.setExploreGroups(fetchExploreGroups.data);
     }
-  }, [fetchExploreGroups.isFetched]);
+  }, [fetchExploreGroups.isSuccess]);
 
   // React.useEffect(() => {
   //   if (!member) return;
