@@ -12,7 +12,7 @@ export interface GroupsSlice {
   myGroups: GetGroupMemberResWithGroupRes[];
   setMyGroups: (groups: GetGroupMemberResWithGroupRes[]) => void;
   activeGroup: GetGroupRes | null;
-  setActiveGroup: (group: GetGroupRes) => void;
+  setActiveGroup: (group: GetGroupRes | null) => void;
   membersOfGroup: GetMembersOfGroupRes | null;
   setMembersOfGroup: (membersOfGroup: GetMembersOfGroupRes) => void;
   groupRequests: GetGroupRequestResV2[];

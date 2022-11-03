@@ -40,6 +40,8 @@ const BannerSettingsMenu: React.FC = () => {
 
   const isRoleDefined = role && role !== 'None';
 
+  if (!activeGroup) return null;
+
   return (
     <>
       <Menu>

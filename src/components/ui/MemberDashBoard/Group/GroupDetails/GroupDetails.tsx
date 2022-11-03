@@ -20,15 +20,7 @@ import {
   usePersistedForumStore,
   usePersistedGroupStore,
 } from '../../../../../lib/zustand';
-import {
-  calendarControllerGetCalendar,
-  useCalendarControllerGetCalendar,
-} from '../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
-import {
-  AttemptInstance,
-  ChallengeInstance,
-  LikeInstance,
-} from '../../../../../lib/impakt-dev-api-client/init';
+import { calendarControllerGetCalendar } from '../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 import { GetMembersOfGroupRes } from '../../../../../lib/impakt-dev-api-client/react-query/types';
 import { likeControllerGetChallengeLikes } from '../../../../../lib/impakt-dev-api-client/react-query/likes/likes';
 import { challengeStatsControllerGetChallengeAttemptsForAllUsers } from '../../../../../lib/impakt-dev-api-client/react-query/default/default';
@@ -50,31 +42,31 @@ const GroupDetails: React.FC = () => {
   // TODO once backend refactored for challenges will be moved to react-query
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
 
-  const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '0', 10), {
-    query: { ...getDefaultQueryOptions(), enabled: false },
+  const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true },
   });
 
   const fetchMembersOfGroup = useGroupsControllerV1FindGroupMembers(
     parseInt(groupParam?.id ?? '0', 10),
     {},
-    { query: { ...getDefaultQueryOptions(), enabled: false } },
+    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
   );
 
   const fetchAmIMemberOfGroup = useGroupsMemberControllerV1AmIMemberOfGroup(
     parseInt(groupParam?.id ?? '0', 10),
-    { query: { ...getDefaultQueryOptions(), enabled: false } },
+    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
   );
 
   const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup(
     parseInt(groupParam?.id ?? '0', 10),
-    { query: { ...getDefaultQueryOptions(), enabled: false } },
+    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
   );
 
   const fetchPosts = usePostControllerV1GetMany(
     'Group',
     parseInt(groupParam?.id ?? '0', 10),
     {},
-    { query: { ...getDefaultQueryOptions(), enabled: false } },
+    { query: { ...getDefaultQueryOptions(), refetchOnMount: true } },
   );
 
   const [isNotFound, setIsNotFound] = React.useState<string>('');
@@ -82,57 +74,70 @@ const GroupDetails: React.FC = () => {
   // const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
 
   const getGroupDetail = async () => {
-    if (groupParam.id) {
-      const groupDetailQuery = await fetchGroupDetailById.refetch();
-
-      if (groupDetailQuery.isRefetchError) {
-        if (groupDetailQuery.error.response?.status === 404) {
-          setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
-        } else {
-          setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
-        }
-
-        return;
+    if (fetchGroupDetailById.isError) {
+      if (fetchGroupDetailById.error.response?.status === 404) {
+        setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
+      } else {
+        setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
       }
 
-      if (groupDetailQuery.isSuccess) {
+      return;
+    }
+    console.log(
+      fetchGroupDetailById.isSuccess,
+      fetchAmIMemberOfGroup.isSuccess,
+      fetchGroupRoleById.isSuccess,
+      fetchMembersOfGroup.isSuccess,
+      fetchPosts.isSuccess,
+    );
+    if (
+      fetchGroupDetailById.isSuccess &&
+      fetchAmIMemberOfGroup.isSuccess &&
+      fetchGroupRoleById.isSuccess &&
+      fetchMembersOfGroup.isSuccess &&
+      fetchPosts.isSuccess
+    ) {
+      if (isJoin && groupParam.eventId) {
         // if join link just use the deeplink
-        if (isJoin && groupParam.eventId) {
-          const deepLink = deepLinkToApp(
-            groupDetailQuery.data.id,
-            parseInt(groupParam.eventId, 10),
-          );
-          window.location = deepLink as any;
-        }
-        setActiveGroup(groupDetailQuery.data);
-        const amIMemberOfGroup = await fetchAmIMemberOfGroup.refetch();
-        if (amIMemberOfGroup) {
-          const role = await fetchGroupRoleById.refetch();
-          if (role.isSuccess) {
-            setRole(role.data.role);
-            const membersOfGroup = await fetchMembersOfGroup.refetch();
-            if (membersOfGroup.isSuccess) {
-              setMembersOfGroup(membersOfGroup.data);
-              fetchAvailableChallengesForGroup(membersOfGroup.data);
-            }
-
-            const posts = await fetchPosts.refetch();
-            if (posts.isSuccess) {
-              setPosts(posts.data ?? []);
-            }
-
-            const calendar = await calendarControllerGetCalendar(groupDetailQuery.data.calendarId);
-            setCalendar(calendar);
-
-            // Todo update calendar data on zustand
-          }
-        }
+        const deepLink = deepLinkToApp(
+          fetchGroupDetailById.data.id,
+          parseInt(groupParam.eventId, 10),
+        );
+        window.location = deepLink as any;
       }
+
+      fetchAvailableChallengesForGroup(fetchMembersOfGroup.data);
+      const calendar = await calendarControllerGetCalendar(fetchGroupDetailById.data.calendarId);
+
+      setActiveGroup(fetchGroupDetailById.data);
+      setRole(fetchGroupRoleById.data.role);
+      setMembersOfGroup(fetchMembersOfGroup.data);
+      setCalendar(calendar);
+      setPosts(fetchPosts.data ?? []);
+      // Todo update calendar data on zustand
     }
   };
 
   React.useEffect(() => {
-    getGroupDetail();
+    if (
+      fetchGroupDetailById.isFetched &&
+      fetchAmIMemberOfGroup.isFetched &&
+      fetchGroupRoleById.isFetched &&
+      fetchMembersOfGroup.isFetched &&
+      fetchPosts.isFetched
+    ) {
+      getGroupDetail();
+    }
+  }, [
+    fetchGroupDetailById.isFetched,
+    fetchAmIMemberOfGroup.isFetched,
+    fetchGroupRoleById.isFetched,
+    fetchMembersOfGroup.isFetched,
+    fetchPosts.isFetched,
+  ]);
+
+  React.useEffect(() => {
+    return () => setActiveGroup(null);
   }, []);
 
   // React.useEffect(() => {
@@ -146,8 +151,9 @@ const GroupDetails: React.FC = () => {
   //   localStorage.setItem('showTip', 'false');
   //   setShow('false');
   // };
+  console.log(fetchGroupDetailById.isLoading, fetchGroupDetailById.isRefetching);
+  if (fetchGroupDetailById.isLoading || fetchGroupDetailById.isRefetching) return null;
 
-  // if (isLoading) return <CircularProgress isIndeterminate />;
   if (isNotFound.length > 0)
     return (
       <Text fontWeight="hairline" fontSize="2xl">
