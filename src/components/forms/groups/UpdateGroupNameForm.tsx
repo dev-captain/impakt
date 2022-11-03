@@ -12,7 +12,7 @@ import { usePersistedGroupStore } from '../../../lib/zustand';
 
 const UpdateGroupNameForm: React.FC = () => {
   const updateGroup = useGroupsControllerV1PatchGroup();
-  const { activeGroup } = usePersistedGroupStore();
+  const { activeGroup, setActiveGroup, myGroups, setMyGroups } = usePersistedGroupStore();
   const { handleSubmit, errors, setValue, getValues, isDirty } = useForm({
     resolver: yupResolver(createGroupYupScheme),
     defaultValues: { groupName: activeGroup?.groupName },
@@ -43,8 +43,17 @@ const UpdateGroupNameForm: React.FC = () => {
       updateGroup.mutate(
         { groupId: activeGroup.id, data: { groupName } },
         {
-          onSuccess: () => {
+          onSuccess: (newActiveGroup) => {
             renderToast('success', 'Group name updated successfully.');
+            setActiveGroup({ ...activeGroup, groupName: newActiveGroup.groupName });
+            const shallowOfMyGroups = [...myGroups];
+            const indexOfGroup = shallowOfMyGroups.findIndex(
+              (group) => group.groupId === activeGroup.id,
+            );
+            if (indexOfGroup !== -1) {
+              shallowOfMyGroups[indexOfGroup].Group.groupName = groupName;
+              setMyGroups(shallowOfMyGroups);
+            }
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');
@@ -70,6 +79,8 @@ const UpdateGroupNameForm: React.FC = () => {
     >
       <Common.InputItems inputItems={inputItems} />
       <Common.ImpaktButton
+        isLoading={updateGroup.isLoading}
+        disabled={updateGroup.isLoading}
         mt={{ md: 0, base: '10px' }}
         variant="black"
         colorScheme="#fff"

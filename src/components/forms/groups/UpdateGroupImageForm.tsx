@@ -12,12 +12,13 @@ import uploadImageScheme from '../../../lib/yup/schemas/uploadImageScheme';
 import { ALLOW_IMAGE_FILE } from '../../../lib/yup/fields';
 import { useGroupsControllerV1PatchGroupCoverImage } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { usePersistedGroupStore } from '../../../lib/zustand';
+import { renderToast } from '../../../utils';
 
 interface PropsI {}
 const UpdateGroupImageForm: React.FC<PropsI> = () => {
   const updateGroupCoverImage = useGroupsControllerV1PatchGroupCoverImage();
   const groupParam = useParams();
-  const { activeGroup } = usePersistedGroupStore();
+  const { activeGroup, setActiveGroup, myGroups, setMyGroups } = usePersistedGroupStore();
   const groupMemberCount = usePersistedGroupStore().membersOfGroup?.Members?.length;
 
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
@@ -64,7 +65,27 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
 
     const formData = new FormData();
     formData.append('file', data.file);
-    updateGroupCoverImage.mutate({ data: { file: formData as any }, groupId: activeGroup.id });
+
+    updateGroupCoverImage.mutate(
+      { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
+      {
+        onSuccess: (newImage) => {
+          renderToast('success', 'Group cover image updated successfully.');
+          setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
+          const shallowOfMyGroups = [...myGroups];
+          const indexOfGroup = shallowOfMyGroups.findIndex(
+            (group) => group.groupId === activeGroup.id,
+          );
+          if (indexOfGroup !== -1) {
+            shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
+            setMyGroups(shallowOfMyGroups);
+          }
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
     // TODO update zustand active group
   };
 

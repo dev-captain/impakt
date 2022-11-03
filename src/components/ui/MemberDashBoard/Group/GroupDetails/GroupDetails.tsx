@@ -43,7 +43,13 @@ const GroupDetails: React.FC = () => {
   // TODO once backend refactored for challenges will be moved to react-query
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
   const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, retry: false },
+    query: {
+      ...getDefaultQueryOptions(),
+      refetchOnMount: true,
+      retry: false,
+      staleTime: 0,
+      cacheTime: 0,
+    },
   });
 
   const fetchMembersOfGroup = useGroupsControllerV1FindGroupMembers(
@@ -121,6 +127,8 @@ const GroupDetails: React.FC = () => {
       fetchAvailableChallengesForGroup(fetchMembersOfGroup.data);
       const calendar = await calendarControllerGetCalendar(fetchGroupDetailById.data.calendarId);
 
+      console.log(fetchGroupDetailById.data);
+
       setActiveGroup(fetchGroupDetailById.data);
       setRole(fetchGroupRoleById.data.role);
       setMembersOfGroup(fetchMembersOfGroup.data);
@@ -134,7 +142,7 @@ const GroupDetails: React.FC = () => {
   React.useEffect(() => {
     getGroupDetail();
   }, [
-    fetchGroupDetailById.isSuccess,
+    fetchGroupDetailById.isFetching,
     fetchAmIMemberOfGroup.isSuccess,
     fetchGroupRoleById.isSuccess,
     fetchMembersOfGroup.isSuccess,
