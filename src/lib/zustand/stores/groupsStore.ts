@@ -23,6 +23,7 @@ export interface GroupsSlice {
 
   role: GetGroupMemberResRole | null;
   setRole: (role: GetGroupMemberResRole) => void;
+  setClear: () => void;
 }
 
 export const groupsStore: StateCreator<GroupsSlice> = (set, get) => ({
@@ -55,5 +56,15 @@ export const groupsStore: StateCreator<GroupsSlice> = (set, get) => ({
 
   setRole: (role) => {
     set({ role });
+  },
+  setClear: () => {
+    set({
+      exploreGroups: [],
+      activeGroup: null,
+      groupRequests: [],
+      myGroups: [],
+      role: null,
+      membersOfGroup: null,
+    });
   },
 });

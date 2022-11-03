@@ -19,6 +19,7 @@ export const customInstance = <T>(
       if (error.response?.status === 401 && !originalRequest.retry) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         originalRequest.retry = true;
+        console.log('italy');
         await AXIOS_INSTANCE_REFRESH_TOKEN.post('/api/v1/iam/auth/refresh');
         AXIOS_INSTANCE(originalRequest);
       }
@@ -59,7 +60,7 @@ AXIOS_INSTANCE_REFRESH_TOKEN.interceptors.response.use(
     return response;
   },
   (error: any) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 || error.response.status === 400) {
       authStorePersisted.persist.clearStorage();
       window.location.href = '/signin';
     }

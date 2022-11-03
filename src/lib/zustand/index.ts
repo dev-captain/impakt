@@ -91,8 +91,8 @@ export const usePersistedGroupStore = create<GroupsSlice>()(
     }),
     {
       name: 'groups-storage',
-      serialize: (state) => btoa(JSON.stringify(state)),
-      deserialize: (str) => JSON.parse(atob(str)),
+      serialize: (state) => JSON.stringify(state),
+      deserialize: (str) => JSON.parse(str),
       getStorage: () => localStorage,
     },
   ),
@@ -144,4 +144,5 @@ export const clearMemberLocalStorages = () => {
   usePersistedBalanceScoreStore.setState({ godlBalanceScore: 0, koinBalanceScore: 0 });
   usePersistedReferralsStore.persist.clearStorage();
   usePersistedFitnessStore.persist.clearStorage();
+  usePersistedGroupStore.persist.clearStorage();
 };

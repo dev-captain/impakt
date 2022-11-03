@@ -39,7 +39,6 @@ import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-cli
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 
 const MemberDashboard: React.FC = () => {
-  console.log('yo');
   const { member } = usePersistedAuthStore();
   const store = usePersistedBalanceScoreStore();
   const referralsStore = usePersistedReferralsStore();
@@ -152,22 +151,17 @@ const MemberDashboard: React.FC = () => {
   }, [discourse.news]);
 
   React.useEffect(() => {
-    if (fetchMyGroups.isSuccess) {
+    if (fetchMyGroups.isFetchedAfterMount && fetchMyGroups.isSuccess) {
       groupsStore.setMyGroups(fetchMyGroups.data);
       fetchGroupRequests(fetchMyGroups.data);
     }
-  }, [fetchMyGroups.isSuccess]);
+  }, [fetchExploreGroups.isFetchedAfterMount]);
 
   React.useEffect(() => {
-    if (fetchExploreGroups.isSuccess) {
+    if (fetchExploreGroups.isFetchedAfterMount && fetchExploreGroups.isSuccess) {
       groupsStore.setExploreGroups(fetchExploreGroups.data);
     }
-  }, [fetchExploreGroups.isSuccess]);
-
-  // React.useEffect(() => {
-  //   if (!member) return;
-  //   dispatch(fetchGroups({ explore: true }));
-  // }, []);
+  }, [fetchExploreGroups.isFetchedAfterMount]);
 
   return <C.SidebarLayout isShowNavbar />;
 };

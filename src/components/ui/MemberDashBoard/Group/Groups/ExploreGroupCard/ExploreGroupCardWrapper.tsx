@@ -13,6 +13,7 @@ import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../../../
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../utils';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../lib/zustand';
+import { exploreGroupToMyGroupsTransformation } from '../../../../../../lib/impakt-dev-api-client/utils';
 
 interface ExploreGroupCardWrapperPropsI {
   status: 'private' | 'public';
@@ -24,7 +25,9 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
   const isPrivate = status === 'private';
   const navigate = useNavigate();
 
-  const exploreGroup = usePersistedGroupStore().exploreGroups.filter(
+  const { exploreGroups, setExploreGroups, addToMyGroups } = usePersistedGroupStore();
+
+  const exploreGroup = exploreGroups.filter(
     // eslint-disable-next-line no-underscore-dangle
     (d) => d.private === isPrivate,
   );
@@ -35,35 +38,48 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
       sendGroupRequestToJoin.mutate(
         { groupId },
         {
-          onSuccess: () => {
+          onSuccess: (d) => {
             renderToast('success', 'Request sent successfully');
             navigate('/dashboard/groups');
-            // await dispatch(fetchMyGroups(member.id));
-            // await dispatch(fetchGroups({ explore: true }));
+            const shallowExploreGroups = [...exploreGroup];
+            const indexOfExploreGroup = shallowExploreGroups.findIndex(
+              (group) => group.id === groupId,
+            );
+            if (indexOfExploreGroup !== -1) {
+              shallowExploreGroups[indexOfExploreGroup].Request = d;
+              setExploreGroups(shallowExploreGroups);
+            }
           },
           onError: (err) => {
-            renderToast('success', err.response?.data.message ?? 'Something went wrong');
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
           },
         },
       );
-      // await dispatch(fetchGroups({ explore: true }));
     } else {
       joinGroup.mutate(
         { groupId },
         {
           onSuccess: () => {
             renderToast('success', 'Joined successfully');
-            navigate('/dashboard/groups');
-            // await dispatch(fetchMyGroups(member.id));
-            // await dispatch(fetchGroups({ explore: true }));
+            const shallowExploreGroups = [...exploreGroups];
+            const exploreItem = shallowExploreGroups.find((group) => group.id === groupId);
+            const distractGroupFromExploreList = shallowExploreGroups.filter(
+              (group) => group.id !== groupId,
+            );
+            setExploreGroups(distractGroupFromExploreList);
+            if (exploreItem) {
+              const myGroupObj = exploreGroupToMyGroupsTransformation(exploreItem, member?.id);
+              addToMyGroups({
+                ...myGroupObj,
+                Group: { ...myGroupObj.Group, memberCount: myGroupObj.Group.memberCount + 1 },
+              });
+            }
           },
           onError: (err) => {
-            renderToast('success', err.response?.data.message ?? 'Something went wrong');
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
           },
         },
       );
-      // await dispatch(fetchMyGroups(member.id));
-      // await dispatch(fetchGroups({ explore: true }));
     }
   };
 
@@ -71,6 +87,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
     <>
       {exploreGroup.map((g) => (
         <Box
+          key={g.id}
           cursor={g.private ? 'unset' : 'pointer'}
           marginStart="0 !important"
           w={{
@@ -102,6 +119,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                   border="1px solid #1C1C28"
                   justifyContent="space-around"
                   fontSize="16px"
+                  isDisabled={sendGroupRequestToJoin.isLoading}
                   _hover={{ backgroundColor: '#000', color: '#fff' }}
                   variant={
                     g.private
@@ -110,7 +128,8 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
                         : 'black'
                       : 'transparent'
                   }
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     if (g.private) {
                       if (g.Request?.status !== GetGroupRequestResStatus.Pending) {
                         handleGroupCardButtonClick(g.id);

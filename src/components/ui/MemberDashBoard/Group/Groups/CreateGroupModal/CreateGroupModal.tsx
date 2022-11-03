@@ -56,41 +56,7 @@ const CreateGroupModal: React.FC<CreateGroupModalPropsI> = ({ isStandalone, onCl
           and just like-minded people.
         </Text>
       </Box>
-      <Forms.CreateGroupForm>
-        <Common.ImpaktButton
-          variant="transparent"
-          _hover={{ backgroundColor: '#000', color: '#fff' }}
-          _active={{ backgroundColor: 'transparent' }}
-          _focus={{ boxShadow: 'none' }}
-          border="2px solid #29323B"
-          borderRadius="16px"
-          color="#29323B"
-          w={{ md: '152px', base: '120px' }}
-          h={{ md: '64px', base: '54px' }}
-          fontSize={{ md: '18px' }}
-          fontWeight="700"
-          mr={3}
-          justifyContent="space-evenly"
-          onClick={close}
-          leftIcon={<I.BackIcon />}
-        >
-          Back
-        </Common.ImpaktButton>
-        <Common.ImpaktButton
-          onClick={close}
-          variant="black"
-          colorScheme="#fff"
-          w={{ md: '135px', base: '130px' }}
-          h={{ md: '64px', base: '54px' }}
-          backgroundColor="#29323B"
-          borderRadius="16px"
-          type="submit"
-          fontSize={{ md: '18px' }}
-          fontWeight="700"
-        >
-          Create
-        </Common.ImpaktButton>
-      </Forms.CreateGroupForm>
+      <Forms.CreateGroupForm onClose={close as any} />
     </GroupsModal>
   );
 };
