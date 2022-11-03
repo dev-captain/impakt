@@ -124,6 +124,7 @@ const Images = {
     photoAaron: require('./Photo_Aaron.png'),
     photoAaron2: require('./Photo_Aaron2.png'),
     photoLevi: require('./Photo_Levi.png'),
+    photoGriffin: require('./Photo_Griffin.png'),
   },
   Privacy: {
     PrivacyImg1: require('./PrivacyImg1.png'),
