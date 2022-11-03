@@ -443,15 +443,15 @@ export default {
   leadershipData: {
     data: [
       {
-        company: 'CEO',
-        job: 'Founder/',
+        company: 'Impakt',
+        job: 'CEO',
         fname: 'Winston',
         lname: 'Zin',
         img: Images.home.wiston,
       },
       {
-        company: 'CTO',
-        job: 'Founder/',
+        company: 'Impakt',
+        job: 'CTO',
         fname: 'Hakim',
         lname: 'Bawa',
         img: Images.home.hakim,
@@ -480,6 +480,13 @@ export default {
         fname: 'Kai',
         lname: 'Huang',
         img: Images.advisor.kai,
+      },
+      {
+        company: 'Athlete Development',
+        job: 'VP of',
+        fname: 'Forrest',
+        lname: 'Griffin',
+        img: Images.kelvinImg.photoGriffin,
       },
       {
         company: '6 Oscar Nominations',

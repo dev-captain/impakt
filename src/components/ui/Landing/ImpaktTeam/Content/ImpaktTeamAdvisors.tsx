@@ -32,7 +32,7 @@ const ImpaktTeamAdvisors: React.FC = () => {
         </Text>
         <HStack
           w="full"
-          maxW="1400px"
+          maxW="1100px"
           justifyContent={{ base: 'center', lg: 'center' }}
           flexWrap="wrap"
           rowGap={{ base: '0', lg: '50px' }}
