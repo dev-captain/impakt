@@ -482,8 +482,8 @@ export default {
         img: Images.advisor.kai,
       },
       {
-        company: 'Athlete Development',
-        job: 'VP of',
+        company: 'UFC',
+        job: 'VP of Athlete Development',
         fname: 'Forrest',
         lname: 'Griffin',
         img: Images.kelvinImg.photoGriffin,
