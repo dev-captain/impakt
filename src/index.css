@@ -125,12 +125,7 @@ code {
   top: 90px !important;
   margin-right: 0.5rem;
 }
-.chakra-alert__icon svg {
-  color: #4cbfa6;
-}
-#error-msg .chakra-alert__icon svg {
-  color: #f84153;
-}
+
 /* NFT Slider */
 
 .carousel .thumb {

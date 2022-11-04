@@ -1,5 +1,15 @@
-import { createStandaloneToast, ToastId } from '@chakra-ui/react';
-
+import {
+  Alert,
+  AlertDescription,
+  AlertDialogCloseButton,
+  AlertIcon,
+  AlertTitle,
+  Button,
+  CloseButton,
+  createStandaloneToast,
+  ToastId,
+  VStack,
+} from '@chakra-ui/react';
 import theme, { toastDarkLayout, toastLayout } from '../theme';
 
 const toast = createStandaloneToast({ theme });
@@ -76,30 +86,50 @@ export function renderToast(
   description: string,
   whiteOrDarkMode: 'white' | 'dark' | undefined = 'white',
 ) {
+  if (whiteOrDarkMode === 'white' && previousMode === 'dark' && previousToastId) {
+    toast.close(previousToastId);
+  }
+
   if (toastCounter === 3) {
     // display max 3 toast together
     toastCounter = 0;
     toast.closeAll();
   }
 
-  if (whiteOrDarkMode === 'white' && previousMode === 'dark' && previousToastId) {
-    toast.close(previousToastId);
-  }
-
   const toastWillBeDisplayed = toast({
     title: type === 'error' ? 'Error' : 'Success',
+
     description,
     isClosable: true,
     duration: 8000,
     status: type,
     position: 'top-right',
     variant: 'glass',
-    containerStyle: whiteOrDarkMode === 'white' ? toastLayout : toastDarkLayout,
+    // containerStyle: whiteOrDarkMode === 'white' ? toastLayout : toastDarkLayout,
+    render: ({ onClose }) => (
+      <Alert
+        style={whiteOrDarkMode === 'white' ? { ...toastLayout } : { ...toastDarkLayout }}
+        status={type}
+      >
+        <AlertIcon color={type === 'error' ? '#f84153' : '#4cbfa6'} />
+        <VStack gap="0" justifyContent="left" align="left">
+          <AlertTitle margin="0 !important"> {type === 'error' ? 'Error' : 'Success'} </AlertTitle>
+          <AlertDescription margin="0 !important">{description}</AlertDescription>
+        </VStack>
+        <CloseButton
+          alignSelf="flex-start"
+          position="absolute"
+          right={2}
+          top={1}
+          onClick={onClose}
+        />
+      </Alert>
+    ),
   });
 
+  toastCounter += 1;
   previousToastId = toastWillBeDisplayed;
   previousMode = whiteOrDarkMode;
-  toastCounter += 1;
 
   return toastWillBeDisplayed;
 }
