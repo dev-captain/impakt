@@ -7,11 +7,21 @@ import { useNavigate } from 'react-router-dom';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../../utils';
-import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { exploreGroupToMyGroupsTransformation } from '../../../../../../../lib/impakt-dev-api-client/utils';
 
 const BannerSettingsMenu: React.FC = () => {
   const joinGroup = useGroupsMemberControllerV1JoinGroup();
-  const { activeGroup } = usePersistedGroupStore();
+  const { member } = usePersistedAuthStore();
+  const {
+    activeGroup,
+    exploreGroups,
+    setExploreGroups,
+    addToMyGroups,
+    setMembersOfGroup,
+    membersOfGroup,
+    setRole,
+  } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
   // const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const navigate = useNavigate();
@@ -25,7 +35,38 @@ const BannerSettingsMenu: React.FC = () => {
       {
         onSuccess: () => {
           renderToast('success', 'Joined successfully');
-          navigate('/dashboard/groups');
+          const shallowExploreGroups = [...exploreGroups];
+          const exploreItem = shallowExploreGroups.find((group) => group.id === activeGroup.id);
+          const distractGroupFromExploreList = shallowExploreGroups.filter(
+            (group) => group.id !== activeGroup.id,
+          );
+          setExploreGroups(distractGroupFromExploreList);
+          if (exploreItem) {
+            const myGroupObj = exploreGroupToMyGroupsTransformation(exploreItem, member?.id);
+            addToMyGroups({
+              ...myGroupObj,
+              Group: { ...myGroupObj.Group, memberCount: myGroupObj.Group.memberCount + 1 },
+            });
+          }
+          if (membersOfGroup && member) {
+            setMembersOfGroup({
+              ...membersOfGroup,
+              Members: [
+                ...membersOfGroup.Members,
+                {
+                  joinedAt: new Date().toISOString(),
+                  userId: member?.id,
+                  bannedAt: null,
+                  groupId: activeGroup.id,
+                  leftAt: null,
+                  role: 'Member',
+                  User: { ...member },
+                },
+              ],
+            });
+            setRole('Member');
+          }
+
           // await dispatch(fetchMyGroups(member.id));
           // await dispatch(fetchGroups({ explore: true }));
         },
