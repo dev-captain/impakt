@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Common, I } from 'components';
 import { InputGroupPropsI } from '../../common/InputGroup';
-import { usePersistedAuthStore } from '../../../lib/zustand';
+import { usePersistedAuthStore, usePersistedForumStore } from '../../../lib/zustand';
 import { useCommentControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
 import { renderToast } from '../../../utils';
 
@@ -20,6 +20,7 @@ const ForumCreateCommentForm = React.forwardRef<
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
   const { member } = usePersistedAuthStore();
+  const { posts, setPosts, setActivePost } = usePersistedForumStore();
 
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
@@ -32,17 +33,37 @@ const ForumCreateCommentForm = React.forwardRef<
         },
       },
       {
-        onSuccess: () => {
-          // TODO zustand update related post comments array
-          // const a = state.posts.findIndex((post) => post.id === action.payload.postId);
-          // if (a !== -1) {
-          //   state.posts[a] = {
-          //     ...state.posts[a],
-          //     comment: [...state.posts[a].comment, action.payload],
-          //   };
-          // }
+        onSuccess: (newComment) => {
+          const shallowOfPosts = [...posts];
+          const a = shallowOfPosts.findIndex((post) => post.id === props.postId);
+          if (a !== -1) {
+            shallowOfPosts[a] = {
+              ...shallowOfPosts[a],
+              Comment: [
+                ...shallowOfPosts[a].Comment,
+                {
+                  ...newComment,
+                  Creator: { ...member },
+                },
+              ],
+            };
+            setPosts(shallowOfPosts);
+            const activePost = posts.find((postsd) => postsd.id === props.postId);
+            if (activePost) {
+              setActivePost({
+                ...activePost,
+                Comment: [
+                  ...activePost.Comment,
+                  {
+                    ...newComment,
+                    Creator: { ...member },
+                  },
+                ],
+              });
+            }
+          }
 
-          renderToast('success', 'Comment deleted successfully.');
+          renderToast('success', 'Comment added successfully.');
           props.onClose();
         },
         onError: (err) => {

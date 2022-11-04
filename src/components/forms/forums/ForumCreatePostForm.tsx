@@ -31,22 +31,17 @@ const CreatePostForm: React.FC = ({ children }) => {
   const handleOnCreate = async (data: object) => {
     const { post } = data as { post: string };
     if (!member || !activeGroup) return;
-    createPost.mutate(
-      {
+    try {
+      const postData = await createPost.mutateAsync({
         referenceType: 'Group',
         data: { content: post },
         referenceId: activeGroup.id,
-      },
-      {
-        onSuccess: (postData) => {
-          addToPosts(postData);
-          renderToast('success', 'Post created successfully.');
-        },
-        onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
-        },
-      },
-    );
+      });
+      addToPosts({ ...postData, Creator: { ...member } });
+      renderToast('success', 'Post created successfully.');
+    } catch (e: any) {
+      renderToast('error', e.response?.data.message ?? 'Something went wrong');
+    }
   };
 
   const inputItems: InputGroupPropsI[] = [
