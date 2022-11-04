@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
+import { renderToast } from '../utils';
 
 interface ContactUs {
   email: string;
@@ -42,22 +43,12 @@ const useContactUs = () => {
 
       setIsSuccessful(true);
       setLoading(false);
-      toast({
-        description: 'You sent a message successfully.',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
+      renderToast('success', 'You sent a message successfully.', 'dark');
     } catch (err) {
       setError(err);
       setIsSuccessful(false);
       setLoading(false);
-      toast({
-        description: 'Something went wrong. Please check information and try again.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
+      renderToast('error', 'Something went wrong. Please check information and try again.', 'dark');
     }
   };
 
