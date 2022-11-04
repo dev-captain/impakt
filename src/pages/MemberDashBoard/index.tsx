@@ -52,11 +52,11 @@ const MemberDashboard: React.FC = () => {
   const { fetchGroupRequests } = useFetchGroupRequests();
 
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
-    query: getDefaultQueryOptions(),
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
   });
 
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount({
-    query: getDefaultQueryOptions(),
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
   });
 
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
