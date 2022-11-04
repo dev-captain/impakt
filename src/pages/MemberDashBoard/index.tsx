@@ -65,19 +65,21 @@ const MemberDashboard: React.FC = () => {
 
   const fetchReferrals = useReferralControllerGetReferrees(
     { count: true },
-    { query: getDefaultQueryOptions() },
+    {
+      query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    },
   );
   const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone({
-    query: getDefaultQueryOptions(),
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
   });
   const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl({
-    query: getDefaultQueryOptions(),
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
   });
   const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin({
-    query: getDefaultQueryOptions(),
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
   });
   const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any, {
-    query: getDefaultQueryOptions(),
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
   });
 
   const fetchMyGroups = useGroupsMemberControllerV1GetGroupsByUserId(member?.id as any, {
