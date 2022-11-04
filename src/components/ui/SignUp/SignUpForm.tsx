@@ -80,11 +80,12 @@ const SignUpForm: React.FC = () => {
           renderToast(
             'success',
             'Your account created successfully.You can now login in the Impakt app.',
+            'dark',
           );
           navigate('/download');
         },
         onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');
         },
       },
     );

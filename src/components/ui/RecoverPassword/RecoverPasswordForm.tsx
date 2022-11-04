@@ -27,10 +27,10 @@ const RecoverPasswordForm: React.FC = () => {
       { data: { email } },
       {
         onSuccess: () => {
-          renderToast('success', 'We have e-mailed your password reset link!');
+          renderToast('success', 'We have e-mailed your password reset link!', 'dark');
         },
         onError: (e) => {
-          renderToast('error', e.response?.data.message ?? 'Something went wrong');
+          renderToast('error', e.response?.data.message ?? 'Something went wrong', 'dark');
         },
       },
     );
