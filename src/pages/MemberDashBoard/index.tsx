@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { C } from 'components';
-import { GetGroupRequestResV2 } from '@impakt-dev/api-client';
 
 import {
   usePersistedAuthStore,
@@ -23,9 +22,12 @@ import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api
 import { useDiscourse } from '../../hooks/useDiscourse';
 import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
-import { GroupsRequestInstance } from '../../lib/impakt-dev-api-client/init';
-import { GetGroupMemberResWithGroupRes } from '../../lib/impakt-dev-api-client/react-query/types';
+import {
+  GetGroupMemberResWithGroupRes,
+  GetGroupRequestResV2,
+} from '../../lib/impakt-dev-api-client/react-query/types';
 import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { groupsRequestControllerV1GetGroupRequests } from '../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
@@ -172,7 +174,7 @@ const useFetchGroupRequests = () => {
   const fetchGroupRequests = async (myGroups: GetGroupMemberResWithGroupRes[]) => {
     if (myGroups?.length > 0) {
       const callMap = myGroups.map(async ({ groupId }) =>
-        GroupsRequestInstance.groupsRequestControllerV1GetGroupRequests(groupId),
+        groupsRequestControllerV1GetGroupRequests(groupId),
       );
 
       const getGroupRequests = await Promise.all(callMap);

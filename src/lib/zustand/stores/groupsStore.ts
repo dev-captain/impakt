@@ -1,11 +1,11 @@
 import { StateCreator } from 'zustand';
-import { GetGroupMemberResRoleEnum, GetGroupRequestResV2 } from '@impakt-dev/api-client';
 import {
   GetGroupMemberResWithGroupRes,
   ExploreGroupRes,
   GetGroupRes,
   GetGroupMemberResRole,
   GetMembersOfGroupRes,
+  GetGroupRequestResV2,
 } from '../../impakt-dev-api-client/react-query/types';
 
 export interface GroupsSlice {
