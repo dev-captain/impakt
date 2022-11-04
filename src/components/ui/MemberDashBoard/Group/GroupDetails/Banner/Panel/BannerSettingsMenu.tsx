@@ -36,11 +36,10 @@ const BannerSettingsMenu: React.FC = () => {
     );
   };
 
-  // if (isRoleLoading) return null;
-
-  const isRoleDefined = role && role !== 'None';
-
   if (!activeGroup) return null;
+  if (!role) return null;
+
+  const isRoleDefined = role !== 'None';
 
   return (
     <>

@@ -60,7 +60,8 @@ const GroupDetails: React.FC = () => {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
         retry: false,
-        enabled: fetchGroupDetailById.isSuccess,
+        staleTime: 0,
+        cacheTime: 0,
       },
     },
   );
@@ -72,7 +73,8 @@ const GroupDetails: React.FC = () => {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
         retry: false,
-        enabled: fetchGroupDetailById.isSuccess,
+        staleTime: 0,
+        cacheTime: 0,
       },
     },
   );
@@ -84,7 +86,8 @@ const GroupDetails: React.FC = () => {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
         retry: false,
-        enabled: fetchGroupDetailById.isSuccess,
+        staleTime: 0,
+        cacheTime: 0,
       },
     },
   );
@@ -98,7 +101,8 @@ const GroupDetails: React.FC = () => {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
         retry: false,
-        enabled: fetchGroupDetailById.isSuccess,
+        staleTime: 0,
+        cacheTime: 0,
       },
     },
   );
@@ -107,47 +111,92 @@ const GroupDetails: React.FC = () => {
 
   // const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
 
-  const getGroupDetail = async () => {
-    if (
-      fetchGroupDetailById.isSuccess &&
-      fetchAmIMemberOfGroup.isSuccess &&
-      fetchGroupRoleById.isSuccess &&
-      fetchMembersOfGroup.isSuccess &&
-      fetchPosts.isSuccess
-    ) {
-      if (isJoin && groupParam.eventId) {
-        // if join link just use the deeplink
-        const deepLink = deepLinkToApp(
-          fetchGroupDetailById.data.id,
-          parseInt(groupParam.eventId, 10),
-        );
-        window.location = deepLink as any;
+  const getActiveGroup = () => {
+    if (fetchGroupDetailById.isFetched) {
+      if (fetchGroupDetailById.isSuccess) {
+        if (isJoin && groupParam.eventId) {
+          // if join link just use the deeplink
+          const deepLink = deepLinkToApp(
+            fetchGroupDetailById.data.id,
+            parseInt(groupParam.eventId, 10),
+          );
+          window.location = deepLink as any;
+        }
+
+        setActiveGroup(fetchGroupDetailById.data);
       }
-
-      fetchAvailableChallengesForGroup(fetchMembersOfGroup.data);
-      const calendar = await calendarControllerGetCalendar(fetchGroupDetailById.data.calendarId);
-
-      console.log(fetchGroupDetailById.data);
-
-      setActiveGroup(fetchGroupDetailById.data);
-      setRole(fetchGroupRoleById.data.role);
-      setMembersOfGroup(fetchMembersOfGroup.data);
-      setCalendar(calendar);
-      setPosts(fetchPosts.data ?? []);
-      // Todo update calendar data on zustand
     }
   };
 
-  // Good path flow init
+  const getRole = () => {
+    if (fetchAmIMemberOfGroup.isFetched) {
+      if (fetchAmIMemberOfGroup.isSuccess && fetchAmIMemberOfGroup.data) {
+        if (fetchGroupRoleById.isFetched) {
+          if (fetchGroupRoleById.isSuccess) {
+            setRole(fetchGroupRoleById.data.role);
+          }
+        }
+      }
+    }
+  };
+
+  const getGroupCalendar = async () => {
+    if (fetchGroupDetailById.isFetched) {
+      if (fetchGroupDetailById.isSuccess) {
+        const calendar = await calendarControllerGetCalendar(fetchGroupDetailById.data.calendarId);
+        setCalendar(calendar);
+      }
+    }
+  };
+
+  const getGroupForum = async () => {
+    if (fetchPosts.isFetched) {
+      if (fetchPosts.isSuccess) {
+        setPosts(fetchPosts.data ?? []);
+      }
+    }
+  };
+
+  const getMembersOfGroup = () => {
+    if (fetchMembersOfGroup.isFetched) {
+      if (fetchMembersOfGroup.isSuccess) {
+        setMembersOfGroup(fetchMembersOfGroup.data);
+      }
+    }
+  };
+
+  const getAvailableChallenges = async () => {
+    if (fetchMembersOfGroup.isFetched) {
+      if (fetchMembersOfGroup.isSuccess) {
+        await fetchAvailableChallengesForGroup(fetchMembersOfGroup.data);
+      }
+    }
+  };
+
+  // Good paths flows init
   React.useEffect(() => {
-    getGroupDetail();
-  }, [
-    fetchGroupDetailById.isFetching,
-    fetchAmIMemberOfGroup.isSuccess,
-    fetchGroupRoleById.isSuccess,
-    fetchMembersOfGroup.isSuccess,
-    fetchPosts.isSuccess,
-  ]);
+    getActiveGroup();
+  }, [fetchGroupDetailById.isFetched]);
+
+  React.useEffect(() => {
+    getRole();
+  }, [fetchAmIMemberOfGroup.isFetched, fetchGroupRoleById.isFetched]);
+
+  React.useEffect(() => {
+    getGroupCalendar();
+  }, [fetchGroupDetailById.isFetched]);
+
+  React.useEffect(() => {
+    getGroupForum();
+  }, [fetchPosts.isFetched]);
+
+  React.useEffect(() => {
+    getMembersOfGroup();
+  }, [fetchMembersOfGroup.isFetched]);
+
+  React.useEffect(() => {
+    getAvailableChallenges();
+  }, [fetchMembersOfGroup.isFetched]);
 
   // Bad paths flow init
   React.useEffect(() => {
@@ -167,6 +216,12 @@ const GroupDetails: React.FC = () => {
       }
     }
   }, [fetchGroupDetailById.isError]);
+
+  React.useEffect(() => {
+    if (fetchGroupRoleById.isError) {
+      setRole('None');
+    }
+  }, [fetchGroupRoleById.isError]);
 
   // React.useEffect(() => {
   //   const showTip = localStorage.getItem('showTip');

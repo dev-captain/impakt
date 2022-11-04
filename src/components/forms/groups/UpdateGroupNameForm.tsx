@@ -60,7 +60,6 @@ const UpdateGroupNameForm: React.FC = () => {
           },
         },
       );
-      // TODO update active activeGroupon zustand
     }
   };
 

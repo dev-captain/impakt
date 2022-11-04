@@ -22,7 +22,7 @@ export interface GroupsSlice {
   addToMyGroups: (groups: GetGroupMemberResWithGroupRes) => void;
 
   role: GetGroupMemberResRole | null;
-  setRole: (role: GetGroupMemberResRole) => void;
+  setRole: (role: GetGroupMemberResRole | null) => void;
   setClear: () => void;
 }
 
