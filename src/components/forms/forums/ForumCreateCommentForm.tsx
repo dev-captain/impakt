@@ -63,11 +63,11 @@ const ForumCreateCommentForm = React.forwardRef<
             }
           }
 
-          renderToast('success', 'Comment added successfully.');
+          renderToast('success', 'Comment added successfully.', 'white');
           props.onClose();
         },
         onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
         },
       },
     );

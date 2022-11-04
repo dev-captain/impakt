@@ -87,10 +87,10 @@ const CreateEventForm: React.FC = () => {
         onSuccess: (event) => {
           const normalizedData1 = normalizeCalendarDataEvent(event);
           addEvent(normalizedData1);
-          renderToast('success', 'Event created successfully.');
+          renderToast('success', 'Event created successfully.', 'white');
         },
         onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
         },
       },
     );

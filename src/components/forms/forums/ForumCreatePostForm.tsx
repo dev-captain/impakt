@@ -38,9 +38,9 @@ const CreatePostForm: React.FC = ({ children }) => {
         referenceId: activeGroup.id,
       });
       addToPosts({ ...postData, Creator: { ...member } });
-      renderToast('success', 'Post created successfully.');
+      renderToast('success', 'Post created successfully.', 'white');
     } catch (e: any) {
-      renderToast('error', e.response?.data.message ?? 'Something went wrong');
+      renderToast('error', e.response?.data.message ?? 'Something went wrong', 'white');
     }
   };
 

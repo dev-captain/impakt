@@ -1,6 +1,6 @@
-import { createStandaloneToast } from '@chakra-ui/react';
+import { createStandaloneToast, ToastId } from '@chakra-ui/react';
 
-import theme from '../theme';
+import theme, { toastDarkLayout, toastLayout } from '../theme';
 
 const toast = createStandaloneToast({ theme });
 
@@ -67,14 +67,41 @@ export const convertMsToHM = (milliseconds: number) => {
   return { h: padTo2Digits(hours), m: padTo2Digits(minutes), s: padTo2Digits(seconds) };
 };
 
-export function renderToast(type: 'error' | 'success', description: string) {
-  return toast({
+let toastCounter = 0;
+let previousMode = '';
+let previousToastId: ToastId | undefined = '';
+
+export function renderToast(
+  type: 'error' | 'success',
+  description: string,
+  whiteOrDarkMode: 'white' | 'dark' | undefined = 'white',
+) {
+  if (toastCounter === 3) {
+    // display max 3 toast together
+    toastCounter = 0;
+    toast.closeAll();
+  }
+
+  if (whiteOrDarkMode === 'white' && previousMode === 'dark' && previousToastId) {
+    toast.close(previousToastId);
+  }
+
+  const toastWillBeDisplayed = toast({
     title: type === 'error' ? 'Error' : 'Success',
     description,
     isClosable: true,
     duration: 8000,
     status: type,
+    position: 'top-right',
+    variant: 'glass',
+    containerStyle: whiteOrDarkMode === 'white' ? toastLayout : toastDarkLayout,
   });
+
+  previousToastId = toastWillBeDisplayed;
+  previousMode = whiteOrDarkMode;
+  toastCounter += 1;
+
+  return toastWillBeDisplayed;
 }
 
 export default {};

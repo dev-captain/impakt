@@ -11,7 +11,7 @@ export const useLogout = () => {
     await signOut.mutateAsync().finally(() => {
       setMember(null);
       setClear();
-      renderToast('success', 'You have successfully logged out!');
+      renderToast('success', 'You have successfully logged out!', 'dark');
     });
   };
 

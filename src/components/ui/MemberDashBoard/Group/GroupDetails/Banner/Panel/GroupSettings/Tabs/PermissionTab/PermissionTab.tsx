@@ -34,7 +34,7 @@ const PermissionTab: React.FC = () => {
       },
       {
         onSuccess: (newStatus) => {
-          renderToast('success', 'Group Status Changed successfully.');
+          renderToast('success', 'Group permission changed successfully.');
           setActiveGroup({ ...activeGroup, private: newStatus.private });
           const shallowOfMyGroups = [...myGroups];
           const indexOfGroup = shallowOfMyGroups.findIndex(
