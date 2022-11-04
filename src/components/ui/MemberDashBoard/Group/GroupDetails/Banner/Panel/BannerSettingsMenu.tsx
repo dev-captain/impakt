@@ -114,6 +114,8 @@ const BannerSettingsMenu: React.FC = () => {
               color: '#fff',
             }}
             onClick={jointoGroup}
+            isDisabled={joinGroup.isLoading}
+            isLoading={joinGroup.isLoading}
             borderRadius="8px"
             fontWeight="600"
             border="1px solid #1C1C28"
