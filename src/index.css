@@ -12,6 +12,7 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #eef4f6 !important;
 }
 
 body::-webkit-scrollbar {
