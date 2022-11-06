@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Skeleton } from '@chakra-ui/react';
+import { Avatar, Text, AvatarGroup, Box, Skeleton } from '@chakra-ui/react';
 
 import { Common, I } from 'components';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
@@ -17,6 +17,14 @@ export const BannerHeaderRight: React.FC = () => {
       marginTop={{ md: '0', base: '20px' }}
     >
       {/* <Skeleton isLoaded={!isMembersLoading}> */}
+
+      <Box display="flex" mr="5px" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
+        <AvatarGroup size="sm" max={3} spacing="-0.50rem">
+          {members?.map(({ User }) => (
+            <Avatar name={User.firstName ?? User.username} />
+          ))}
+        </AvatarGroup>
+      </Box>
       <Common.ImpaktButton
         variant="transparent"
         backgroundColor="#E7ECFF"
@@ -28,7 +36,6 @@ export const BannerHeaderRight: React.FC = () => {
         _focus={{ boxShadow: 'none' }}
         color="#5C7FFF"
         fontWeight="700"
-        marginRight="16px"
         fontSize={{ base: '14px', md: '16px' }}
         leftIcon={<I.PeopleIcon width={{ md: '18px', base: '14px' }} />}
         cursor="auto"
@@ -36,16 +43,6 @@ export const BannerHeaderRight: React.FC = () => {
         {members?.length}
       </Common.ImpaktButton>
       {/* </Skeleton> */}
-      {/* <Box display="flex" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
-                <AvatarGroup size="sm" max={3} spacing="-0.50rem">
-                  {members.map(({ firstName, username }) => (
-                    <Avatar name={firstName ?? username} src={Images.group.ellipse} />
-                  ))}
-                </AvatarGroup>
-                <Text fontSize="18px" color="#5C7FFF" fontWeight="500" marginLeft="12px">
-                  friends
-                </Text>
-              </Box> */}
     </Box>
   );
 };

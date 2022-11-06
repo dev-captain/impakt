@@ -33,12 +33,6 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({
           {member && <GroupCardMemberCount count={member} />}
         </Box>
         <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="26px">
-          {/* <Box display="flex" position="relative">
-            <Image src={Images.group.ellipse} zIndex="10" />
-            <Image src={Images.group.ellipse} zIndex="9" position="absolute" left="27px" />
-            <Image src={Images.group.ellipse} zIndex="8" position="absolute" left="53px" />
-            <Image src={Images.group.ellipse} position="absolute" left="79px" />
-          </Box> */}
           {children}
 
           {isPrivateGroup && (

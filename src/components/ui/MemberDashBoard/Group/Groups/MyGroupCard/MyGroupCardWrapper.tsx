@@ -8,6 +8,7 @@ import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 const MyGroupCardHeader: React.FC = () => {
   const { myGroups } = usePersistedGroupStore();
+  console.log(myGroups);
   const navigate = useNavigate();
 
   return (

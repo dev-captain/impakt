@@ -54,7 +54,7 @@ const SignInForm: React.FC = () => {
           navigate(navigateTo);
         },
         onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');
         },
       },
     );

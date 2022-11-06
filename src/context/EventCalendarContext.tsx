@@ -190,15 +190,15 @@ export const EventCalendarContextProvider: React.FC<{
     }
     setSelectedDay(Day.today());
   };
+  const removeEvents = () => {
+    calendarRef.current.removeEvents();
+  };
 
   useEffect(() => {
-    if (runInitCalendarRef.current) {
-      initCalendar();
-    }
+    initCalendar();
 
-    return () => {
-      runInitCalendarRef.current = true;
-    };
+    // refresh once demounted
+    return () => removeEvents();
   }, [activeGroupCalendar]);
 
   return (

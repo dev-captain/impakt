@@ -45,7 +45,9 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
         onClose();
       }
     } catch (err: any) {
-      renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
+      if (err.response?.status !== 401) {
+        renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
+      }
     }
 
     // await dispatch(fetchMyGroups(member.id)).unwrap();

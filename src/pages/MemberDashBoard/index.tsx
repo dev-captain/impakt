@@ -155,11 +155,12 @@ const MemberDashboard: React.FC = () => {
   }, [discourse.news]);
 
   React.useEffect(() => {
-    if (fetchMyGroups.isFetchedAfterMount && fetchMyGroups.isSuccess) {
+    if (fetchMyGroups.isFetched && fetchMyGroups.isSuccess) {
       groupsStore.setMyGroups(fetchMyGroups.data);
-      fetchGroupRequests(fetchMyGroups.data);
+      const onlyAdminOnes = fetchMyGroups.data.filter(({ role }) => role === 'Creator');
+      fetchGroupRequests(onlyAdminOnes);
     }
-  }, [fetchExploreGroups.isFetchedAfterMount]);
+  }, [fetchMyGroups.isFetched]);
 
   React.useEffect(() => {
     if (fetchExploreGroups.isFetchedAfterMount && fetchExploreGroups.isSuccess) {
@@ -175,24 +176,19 @@ const useFetchGroupRequests = () => {
 
   const fetchGroupRequests = async (myGroups: GetGroupMemberResWithGroupRes[]) => {
     if (myGroups?.length > 0) {
-      const callMap = myGroups.map(async ({ groupId }) =>
-        groupsRequestControllerV1GetGroupRequests(groupId),
+      const callMap = myGroups.map(({ groupId }) =>
+        groupsRequestControllerV1GetGroupRequests(groupId, { status: 'Pending' }),
       );
 
       const getGroupRequests = await Promise.all(callMap);
+
       if (getGroupRequests.length > 0) {
-        const dataExist: GetGroupRequestResV2[] = [];
-        getGroupRequests.forEach((d) => {
-          if (d.length > 0) {
-            dataExist.push(d[0]);
-          }
-        });
+        const payload = getGroupRequests;
+        const payloadFlatted = payload.flatMap((d) => d);
 
-        const payload = dataExist;
+        setGroupRequests(payloadFlatted);
 
-        setGroupRequests(payload);
-
-        return payload;
+        return payloadFlatted;
       }
 
       return null;

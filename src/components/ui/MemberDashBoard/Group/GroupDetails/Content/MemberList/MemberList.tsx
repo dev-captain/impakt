@@ -4,12 +4,12 @@ import {
   Text,
   Image,
   Skeleton,
+  Avatar,
   // useClipboard,
   // useToast,
 } from '@chakra-ui/react';
 // import { I } from 'components';
 import * as React from 'react';
-import Images from 'assets/images';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
@@ -198,7 +198,7 @@ const MemberList: React.FC = () => {
                   marginTop="16px"
                 >
                   <Box display="flex" alignItems="center">
-                    <Image src={Images.group.ellipse} zIndex="0" />
+                    <Avatar name={User.firstName ?? User.username} width="32px" height="32px" />
                     <Text
                       color="#4E6070"
                       fontSize={{ lgx: '18px', md: '14px' }}

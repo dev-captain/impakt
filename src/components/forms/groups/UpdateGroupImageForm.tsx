@@ -14,12 +14,14 @@ import { useGroupsControllerV1PatchGroupCoverImage } from '../../../lib/impakt-d
 import { usePersistedGroupStore } from '../../../lib/zustand';
 import { renderToast } from '../../../utils';
 
-interface PropsI {}
-const UpdateGroupImageForm: React.FC<PropsI> = () => {
+const UpdateGroupImageForm: React.FC = () => {
   const updateGroupCoverImage = useGroupsControllerV1PatchGroupCoverImage();
   const groupParam = useParams();
   const { activeGroup, setActiveGroup, myGroups, setMyGroups } = usePersistedGroupStore();
-  const groupMemberCount = usePersistedGroupStore().membersOfGroup?.Members?.length;
+  const groupMembers = usePersistedGroupStore().membersOfGroup?.Members.filter(
+    (members) => members.role !== 'None',
+  );
+  const groupMemberCount = groupMembers?.length ?? 0;
 
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
@@ -156,29 +158,31 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
           </Box>
           <Box display="flex" justifyContent="space-between">
             <AvatarGroup size="md" max={4}>
-              <Avatar name="Ryan Florence" src={Images.group.ellipse} width="32px" height="32px" />
-              <Avatar name="Segun Adebayo" src={Images.group.ellipse} width="32px" height="32px" />
-              <Avatar name="Kent Dodds" src={Images.group.ellipse} width="32px" height="32px" />
-              <Avatar
-                name="Prosper Otemuyiwa"
-                src={Images.group.ellipse}
-                width="32px"
-                height="32px"
-              />
+              {groupMembers?.map((members) => (
+                <Avatar
+                  name={members.User.firstName ?? members.User.username}
+                  width="32px"
+                  height="32px"
+                />
+              ))}
             </AvatarGroup>
-            <Common.ImpaktButton
+            {/* <Common.ImpaktButton
+              cursor="pointer"
               variant="black"
-              colorScheme="#fff"
+              color="#29323B"
+              isLoading={updateGroupCoverImage.isLoading}
               w="99px"
               ml="16px"
               h="38px"
-              backgroundColor="#F5F8FA"
+              backgroundColor="#EEF4F6"
               borderRadius="8px"
               type="submit"
-              isLoading={updateGroupCoverImage.isLoading}
               fontSize={{ md: '16px' }}
-              fontWeight="700"
-            />
+              fontWeight="400"
+              leftIcon={<I.UploadIcon color="#29323B" width="12px" height="12px" />}
+            >
+              Upload
+            </Common.ImpaktButton> */}
           </Box>
         </Box>
       </Box>
