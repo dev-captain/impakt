@@ -206,6 +206,8 @@ const CreateEventForm: React.FC = () => {
           type="submit"
           fontSize={{ md: '16px' }}
           fontWeight="700"
+          isLoading={createEvent.isLoading}
+          isDisabled={createEvent.isLoading}
         >
           <I.SendIcon fontSize="10px" />
           <Text marginLeft="10px">Create</Text>

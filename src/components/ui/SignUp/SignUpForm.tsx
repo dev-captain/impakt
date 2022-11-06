@@ -238,6 +238,7 @@ const SignUpForm: React.FC = () => {
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
             isLoading={createUser.isLoading}
+            isDisabled={createUser.isLoading}
             type="submit"
             leftIcon={<I.AddMemberIcon />}
             size="lg"

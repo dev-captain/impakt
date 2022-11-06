@@ -196,6 +196,7 @@ const UpdateGroupImageForm: React.FC = () => {
             variant="black"
             color="#29323B"
             isLoading={updateGroupCoverImage.isLoading}
+            isDisabled={updateGroupCoverImage.isLoading}
             w="160px"
             h="42px"
             backgroundColor="#EEF4F6"

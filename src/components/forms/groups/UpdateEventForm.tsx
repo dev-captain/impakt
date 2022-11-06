@@ -225,6 +225,8 @@ const UpdateEventForm: React.FC = () => {
           </Box>
         </Box>
         <Common.ImpaktButton
+          isLoading={updateEventBe.isLoading}
+          isDisabled={updateEventBe.isLoading}
           variant="black"
           colorScheme="#fff"
           h={{ md: '48px', base: '40px' }}
