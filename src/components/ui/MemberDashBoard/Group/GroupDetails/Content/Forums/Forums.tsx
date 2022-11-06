@@ -1,17 +1,17 @@
 import { Box, Text, Button } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
-import { useAppSelector } from 'hooks';
 import { Day } from 'dayspan';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from 'assets/images';
 import UserForumsCard from './UserForumsCard';
 import CreatePostCard from './CreatePostCard';
+import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const Forums: React.FC = () => {
-  const role = useAppSelector((state) => state.groupsReducer.role);
-  const posts = useAppSelector((state) => state.postsReducer.posts);
+  const { role } = usePersistedGroupStore();
+  const { posts } = usePersistedForumStore();
   const isCreator = role === 'Creator';
 
   return (
@@ -33,16 +33,16 @@ const Forums: React.FC = () => {
             </Box>
           </Box>
           {isCreator && <CreatePostCard />}
-          {posts.map(({ id, creator, content, createdAt, comment }) => (
+          {posts.map(({ id, Creator, content, createdAt, Comment }) => (
             <UserForumsCard
               key={id}
               id={id}
-              name={creator?.firstName ?? creator?.username}
+              name={Creator?.firstName ?? Creator?.username}
               msg={content}
               title={content}
-              msgNo={comment.length}
+              msgNo={Comment.length}
               // view={view}
-              time={`${Day.now().hoursBetween(Day.fromString(createdAt.toISOString()))}h`}
+              time={`${Day.now().hoursBetween(Day.fromString(createdAt))}h`}
             />
           ))}
         </Box>

@@ -1,64 +1,86 @@
 import * as React from 'react';
-import { Menu, MenuButton, useToast, useDisclosure } from '@chakra-ui/react';
+import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
 // import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import { joinGroup } from '../../../../../../../lib/redux/slices/groups/actions/joinGroup';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
+import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { renderToast } from '../../../../../../../utils';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { exploreGroupToMyGroupsTransformation } from '../../../../../../../lib/impakt-dev-api-client/utils';
 
 const BannerSettingsMenu: React.FC = () => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const role = useAppSelector((state) => state.groupsReducer.role);
-  const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
-  const dispatch = useAppDispatch();
-  const toast = useToast();
+  const joinGroup = useGroupsMemberControllerV1JoinGroup();
+  const { member } = usePersistedAuthStore();
+  const {
+    activeGroup,
+    exploreGroups,
+    setExploreGroups,
+    addToMyGroups,
+    setMembersOfGroup,
+    membersOfGroup,
+    setRole,
+  } = usePersistedGroupStore();
+  const { role } = usePersistedGroupStore();
+  // const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isCreator = role === 'Creator';
 
   const jointoGroup = async () => {
     if (!activeGroup) return;
-    try {
-      await dispatch(joinGroup(activeGroup.id)).unwrap();
-      toast({
-        title: 'Success',
-        description: 'Joined successfully',
-        isClosable: true,
-        duration: 8000,
-        variant: 'glass',
-        status: 'success',
-        position: 'top-right',
-        containerStyle: {
-          background: 'rgba(255, 255, 255, 0.5)',
-          border: '1px solid #fff',
-          boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-          backdropFilter: 'blur(15px)',
-          color: '#000',
-          borderRadius: '16px',
-          position: 'absolute',
-          top: '90px',
-          width: '360px',
-        },
-      });
+    joinGroup.mutate(
+      { groupId: activeGroup.id },
+      {
+        onSuccess: () => {
+          renderToast('success', 'Joined successfully');
+          const shallowExploreGroups = [...exploreGroups];
+          const exploreItem = shallowExploreGroups.find((group) => group.id === activeGroup.id);
+          const distractGroupFromExploreList = shallowExploreGroups.filter(
+            (group) => group.id !== activeGroup.id,
+          );
+          setExploreGroups(distractGroupFromExploreList);
+          if (exploreItem) {
+            const myGroupObj = exploreGroupToMyGroupsTransformation(exploreItem, member?.id);
+            addToMyGroups({
+              ...myGroupObj,
+              Group: { ...myGroupObj.Group, memberCount: myGroupObj.Group.memberCount + 1 },
+            });
+          }
+          if (membersOfGroup && member) {
+            setMembersOfGroup({
+              ...membersOfGroup,
+              Members: [
+                ...membersOfGroup.Members,
+                {
+                  joinedAt: new Date().toISOString(),
+                  userId: member?.id,
+                  bannedAt: null,
+                  groupId: activeGroup.id,
+                  leftAt: null,
+                  role: 'Member',
+                  User: { ...member },
+                },
+              ],
+            });
+            setRole('Member');
+          }
 
-      navigate('/dashboard/groups');
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.response.data.message,
-        isClosable: true,
-        duration: 8000,
-        status: 'error',
-        position: 'top-right',
-      });
-    }
+          // await dispatch(fetchMyGroups(member.id));
+          // await dispatch(fetchGroups({ explore: true }));
+        },
+        onError: (err) => {
+          renderToast('success', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
 
-  if (isRoleLoading) return null;
+  if (!activeGroup) return null;
+  if (!role) return null;
 
-  const isRoleDefined = role && role !== 'None';
+  const isRoleDefined = role !== 'None';
 
   return (
     <>
@@ -92,6 +114,8 @@ const BannerSettingsMenu: React.FC = () => {
               color: '#fff',
             }}
             onClick={jointoGroup}
+            isDisabled={joinGroup.isLoading}
+            isLoading={joinGroup.isLoading}
             borderRadius="8px"
             fontWeight="600"
             border="1px solid #1C1C28"

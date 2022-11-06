@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, useDisclosure } from '@chakra-ui/react';
 import { Common, I } from 'components';
-import { useAppSelector } from 'hooks';
 import { DeleteIcon } from '@chakra-ui/icons';
 
 import ConfirmationModal from './ConfirmationModal';
+import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
 
 const GeneralSettings: React.FC = () => {
-  const role = useAppSelector((state) => state.groupsReducer.role);
+  const { role } = usePersistedGroupStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

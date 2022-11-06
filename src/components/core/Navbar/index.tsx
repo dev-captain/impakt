@@ -10,8 +10,6 @@ import {
   useMediaQuery,
   useColorMode,
   PositionProps,
-  useToast,
-  ScaleFade,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
@@ -19,17 +17,16 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
 
-import { toastDarkLayout } from 'theme';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import { useLogout } from '../../../hooks/useLogout';
 import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -39,8 +36,7 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
   const [notify, setNotify] = useState(false);
-  const dispatch = useAppDispatch();
-  const toast = useToast();
+  const logout = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -48,8 +44,9 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-  // const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
-  const notifies = useAppSelector((state) => state.groupsReducer.groupRequests)?.length;
+  const notifies = usePersistedGroupStore().groupRequests.filter(
+    (requestD) => requestD.status === 'Pending',
+  ).length;
 
   useEffect(() => {
     if (!isLessThan1280) {
@@ -207,20 +204,9 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
 
                   <Common.ImpaktButton
                     onClick={async () => {
-                      await dispatch(signOutMember()).unwrap();
-                      <ScaleFade initialScale={1}>
-                        {toast({
-                          title: 'Success',
-                          description: 'You have successfully logged out!',
-                          isClosable: true,
-                          duration: 8000,
-                          status: 'success',
-                          variant: 'glass',
-                          position: 'top-right',
-                          containerStyle: toastDarkLayout,
-                        })}
-                      </ScaleFade>;
-                      onClose();
+                      await logout().finally(() => {
+                        onClose();
+                      });
                     }}
                     leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}
                     variant="alert"

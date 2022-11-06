@@ -10,9 +10,9 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { I } from 'components';
-import { useAppSelector } from 'hooks';
 
 import NoitificationCard from './NotificationCard';
+import { usePersistedGroupStore } from '../../../../lib/zustand';
 
 interface NoitificationDrawerProps {
   open: boolean;
@@ -20,8 +20,11 @@ interface NoitificationDrawerProps {
 }
 
 const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }) => {
-  const requests = useAppSelector((state) => state.groupsReducer.groupRequests);
+  const requests = usePersistedGroupStore().groupRequests.filter(
+    (requestD) => requestD.status === 'Pending',
+  );
   // console.log(requests);
+  console.log(requests);
 
   return (
     <Drawer isOpen={open} placement="right" onClose={() => close()}>
@@ -100,14 +103,16 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
           }}
         >
           <Box>
-            {requests?.length ? (
-              requests?.map(({ id, requestorId, requesteeId, group, requestor }) => (
+            {requests.length ? (
+              requests.map(({ id, requestorId, requesteeId, Group, requestor }) => (
                 <NoitificationCard
                   key={id}
+                  id={id}
                   requestorId={requestorId}
                   groupId={requesteeId}
                   name={requestor.firstName ?? requestor.username}
-                  GroupName={group.groupName}
+                  requestor={requestor}
+                  GroupName={Group.groupName}
                 />
               ))
             ) : (

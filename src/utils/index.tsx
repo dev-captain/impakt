@@ -1,3 +1,19 @@
+import {
+  Alert,
+  AlertDescription,
+  AlertDialogCloseButton,
+  AlertIcon,
+  AlertTitle,
+  Button,
+  CloseButton,
+  createStandaloneToast,
+  ToastId,
+  VStack,
+} from '@chakra-ui/react';
+import theme, { toastDarkLayout, toastLayout } from '../theme';
+
+const toast = createStandaloneToast({ theme });
+
 export const horizontalScrollBy = (ref: any, size = 0) => {
   ref?.current?.scrollBy({
     top: 0,
@@ -60,5 +76,62 @@ export const convertMsToHM = (milliseconds: number) => {
 
   return { h: padTo2Digits(hours), m: padTo2Digits(minutes), s: padTo2Digits(seconds) };
 };
+
+let toastCounter = 0;
+let previousMode = '';
+let previousToastId: ToastId | undefined = '';
+
+export function renderToast(
+  type: 'error' | 'success',
+  description: string,
+  whiteOrDarkMode: 'white' | 'dark' | undefined = 'white',
+) {
+  if (whiteOrDarkMode === 'white' && previousMode === 'dark' && previousToastId) {
+    toast.close(previousToastId);
+  }
+
+  if (toastCounter === 3) {
+    // display max 3 toast together
+    toastCounter = 0;
+    toast.closeAll();
+  }
+
+  const toastWillBeDisplayed = toast({
+    title: type === 'error' ? 'Error' : 'Success',
+
+    description,
+    isClosable: true,
+    duration: 8000,
+    status: type,
+    position: 'top-right',
+    variant: 'glass',
+    // containerStyle: whiteOrDarkMode === 'white' ? toastLayout : toastDarkLayout,
+    render: ({ onClose }) => (
+      <Alert
+        style={whiteOrDarkMode === 'white' ? { ...toastLayout } : { ...toastDarkLayout }}
+        status={type}
+      >
+        <AlertIcon color={type === 'error' ? '#f84153' : '#4cbfa6'} />
+        <VStack gap="0" justifyContent="left" align="left">
+          <AlertTitle margin="0 !important"> {type === 'error' ? 'Error' : 'Success'} </AlertTitle>
+          <AlertDescription margin="0 !important">{description}</AlertDescription>
+        </VStack>
+        <CloseButton
+          alignSelf="flex-start"
+          position="absolute"
+          right={2}
+          top={1}
+          onClick={onClose}
+        />
+      </Alert>
+    ),
+  });
+
+  toastCounter += 1;
+  previousToastId = toastWillBeDisplayed;
+  previousMode = whiteOrDarkMode;
+
+  return toastWillBeDisplayed;
+}
 
 export default {};

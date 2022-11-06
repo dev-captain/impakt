@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { HStack } from '@chakra-ui/react';
-import { useAppSelector } from 'hooks';
 
 import ExploreGroupCardHeader from './Header/ExploreGroupCardHeader';
 import ExploreGroupCardWrapper from './ExploreGroupCardWrapper';
+import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 const ExploreGroup: React.FC = () => {
-  const exploreGroups = useAppSelector((state) => state.groupsReducer.exploreGroups);
+  const { exploreGroups } = usePersistedGroupStore();
+
   const [status, setStatus] = React.useState<'public' | 'private'>('public');
   if (exploreGroups.length === 0) return null;
 

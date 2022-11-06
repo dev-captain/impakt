@@ -1,8 +1,11 @@
-import { CalendarDtoV1, CalendarEventDtoV1Response } from '@impakt-dev/api-client';
 import { Day, EventInput } from 'dayspan';
+import {
+  CalendarDtoV1,
+  CalendarEventDtoV1Response,
+} from '../lib/impakt-dev-api-client/react-query/types';
 
 export const normalizeCalendarDataMap = (data: CalendarDtoV1) => {
-  const normalizedEvents = data.events.map((c) => {
+  const normalizedEvents = data.Events.map((c) => {
     return normalizeCalendarDataEvent(c);
   });
   const outPutData = { ...data, events: normalizedEvents };
@@ -11,11 +14,11 @@ export const normalizeCalendarDataMap = (data: CalendarDtoV1) => {
 };
 
 export const normalizeCalendarDataEvent = (data: CalendarEventDtoV1Response) => {
-  const convertStartDate = Day.fromString(data.schedule.start.toISOString());
-  const convertEndDate = Day.fromString(data.schedule.end.toISOString());
+  const convertStartDate = Day.fromString(data.schedule.start);
+  const convertEndDate = Day.fromString(data.schedule.end);
 
   // const convertExclude = data.schedule.exclude.map((value) => Day.fromString(value.toISOString()));
-  const convertCancel = data.schedule.cancel.map((value) => Day.fromString(value.toISOString()));
+  const convertCancel = data.schedule.cancel?.map((value) => Day.fromString(value));
 
   const normalizedCalendarDataEvent = {
     id: data.id,

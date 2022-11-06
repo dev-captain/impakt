@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { I } from 'components';
-import { useAppSelector } from 'hooks';
 import MyGroupCardWrapperHeaderStatisticTag from './MyGroupCardHeaderStatisticTag';
 import GroupCardWrapperHeader from '../../GroupCardHeader';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const MyGroupCardHeader: React.FC = () => {
-  const myGroups = useAppSelector((state) => state.groupsReducer.myGroups);
+  const { myGroups } = usePersistedGroupStore();
   const ownedGroup = myGroups.filter((group) => group.role === 'Creator');
 
   return (

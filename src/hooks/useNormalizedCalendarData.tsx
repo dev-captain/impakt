@@ -1,11 +1,11 @@
 import { CalendarDtoV1TypeEnum } from '@impakt-dev/api-client';
 import { Schedule, ScheduleInput } from 'dayspan';
 import React from 'react';
+import { usePersistedCalendarStore } from '../lib/zustand';
 import { normalizeCalendarDataMap } from '../utils/dayspan';
-import useAppSelector from './useAppSelector';
 
 const useNormalizedCalendarData = () => {
-  const activeGroupCalendar = useAppSelector((state) => state.calendarReducer.activeGroupCalendar);
+  const { calendar } = usePersistedCalendarStore();
   const [normalizedCalendarData, setNormalizedCalendarData] = React.useState<{
     events: {
       id?: any;
@@ -18,11 +18,11 @@ const useNormalizedCalendarData = () => {
   } | null>(null);
 
   React.useEffect(() => {
-    if (activeGroupCalendar) {
-      const data = normalizeCalendarDataMap(activeGroupCalendar);
+    if (calendar) {
+      const data = normalizeCalendarDataMap(calendar);
       setNormalizedCalendarData(data);
     }
-  }, [activeGroupCalendar]);
+  }, [calendar]);
 
   return normalizedCalendarData;
 };

@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl, useToast } from '@chakra-ui/react';
 
 import { Common } from 'components';
-import { toastLayout } from 'theme';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
-import { updateGroup } from '../../../lib/redux/slices/groups/actions/updateGroup';
+import { useGroupsControllerV1PatchGroup } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { renderToast } from '../../../utils';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 const UpdateGroupNameForm: React.FC = () => {
-  const group = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const dispatch = useAppDispatch();
-  const toast = useToast();
+  const updateGroup = useGroupsControllerV1PatchGroup();
+  const { activeGroup, setActiveGroup, myGroups, setMyGroups } = usePersistedGroupStore();
   const { handleSubmit, errors, setValue, getValues, isDirty } = useForm({
     resolver: yupResolver(createGroupYupScheme),
-    defaultValues: { groupName: group?.groupName },
+    defaultValues: { groupName: activeGroup?.groupName },
   });
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, {
@@ -38,19 +38,28 @@ const UpdateGroupNameForm: React.FC = () => {
   ];
   const handleUpdateGroupNameChanges = async (data: object) => {
     const { groupName } = data as { groupName: string };
-    if (!group?.id) return;
+    if (!activeGroup?.id) return;
     if (isDirty) {
-      await dispatch(updateGroup({ groupId: group.id, groupName })).unwrap();
-      toast({
-        title: 'Success',
-        description: 'Group name updated successfully.',
-        isClosable: true,
-        status: 'success',
-        duration: 8000,
-        variant: 'glass',
-        position: 'top-right',
-        containerStyle: toastLayout,
-      });
+      updateGroup.mutate(
+        { groupId: activeGroup.id, data: { groupName } },
+        {
+          onSuccess: (newActiveGroup) => {
+            renderToast('success', 'Group name updated successfully.');
+            setActiveGroup({ ...activeGroup, groupName: newActiveGroup.groupName });
+            const shallowOfMyGroups = [...myGroups];
+            const indexOfGroup = shallowOfMyGroups.findIndex(
+              (group) => group.groupId === activeGroup.id,
+            );
+            if (indexOfGroup !== -1) {
+              shallowOfMyGroups[indexOfGroup].Group.groupName = groupName;
+              setMyGroups(shallowOfMyGroups);
+            }
+          },
+          onError: (err) => {
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          },
+        },
+      );
     }
   };
 
@@ -69,6 +78,8 @@ const UpdateGroupNameForm: React.FC = () => {
     >
       <Common.InputItems inputItems={inputItems} />
       <Common.ImpaktButton
+        isLoading={updateGroup.isLoading}
+        disabled={updateGroup.isLoading}
         mt={{ md: 0, base: '10px' }}
         variant="black"
         colorScheme="#fff"

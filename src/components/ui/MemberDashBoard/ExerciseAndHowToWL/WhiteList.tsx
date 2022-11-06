@@ -5,16 +5,16 @@ import * as React from 'react';
 
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import { I, Common } from 'components';
-import useAppSelector from 'hooks/useAppSelector';
 import Images from '../../../../assets/images';
 import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
 import MemberDashboardCard from '../MemberDashBoardCard';
+import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const { onClose, isOpen, onOpen } = useDisclosure();
 
-  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
+  const { isWhitelistedCollection } = usePersistedAuthStore();
 
   return (
     <MemberDashboardCard
@@ -120,7 +120,7 @@ const WhiteList: React.FC = () => {
             fontSize={{ base: '16px', lg: '20px' }}
             lineHeight={{ base: '24px', lg: '32px' }}
           >
-            {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
+            {isWhitelistedCollection.isDiscordConnected ? 'Discord Connected' : 'Connect Discord'}
           </Common.ImpaktButton>
         </Box>
 

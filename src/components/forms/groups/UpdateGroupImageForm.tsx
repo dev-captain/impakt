@@ -4,28 +4,31 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Common, I } from 'components';
 
 import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { useParams } from 'react-router-dom';
 
 import Images from '../../../assets/images';
 import uploadImageScheme from '../../../lib/yup/schemas/uploadImageScheme';
 import { ALLOW_IMAGE_FILE } from '../../../lib/yup/fields';
-import { updateGroupCoverImage } from '../../../lib/redux/slices/groups/actions/updateGroupCoverImage';
+import { useGroupsControllerV1PatchGroupCoverImage } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { usePersistedGroupStore } from '../../../lib/zustand';
+import { renderToast } from '../../../utils';
 
-interface PropsI {}
-const UpdateGroupImageForm: React.FC<PropsI> = () => {
-  const dispatch = useAppDispatch();
+const UpdateGroupImageForm: React.FC = () => {
+  const updateGroupCoverImage = useGroupsControllerV1PatchGroupCoverImage();
   const groupParam = useParams();
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const groupMemberCount = useAppSelector(
-    (state) => state.groupsReducer.membersOfGroup?.members,
-  )?.length;
+  const { activeGroup, setActiveGroup, myGroups, setMyGroups } = usePersistedGroupStore();
+  const groupMembers = usePersistedGroupStore().membersOfGroup?.Members.filter(
+    (members) => members.role !== 'None',
+  );
+  const groupMemberCount = groupMembers?.length ?? 0;
+
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    if (activeGroup?.currentCoverImage) {
-      setBannerImage(activeGroup.currentCoverImage);
+    if (activeGroup?.CurrentCoverImage) {
+      setBannerImage(activeGroup.CurrentCoverImage);
 
       return;
     }
@@ -64,7 +67,28 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
 
     const formData = new FormData();
     formData.append('file', data.file);
-    await dispatch(updateGroupCoverImage({ body: formData, groupId: activeGroup.id })).unwrap();
+
+    updateGroupCoverImage.mutate(
+      { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
+      {
+        onSuccess: (newImage) => {
+          renderToast('success', 'Group cover image updated successfully.');
+          setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
+          const shallowOfMyGroups = [...myGroups];
+          const indexOfGroup = shallowOfMyGroups.findIndex(
+            (group) => group.groupId === activeGroup.id,
+          );
+          if (indexOfGroup !== -1) {
+            shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
+            setMyGroups(shallowOfMyGroups);
+          }
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
+    // TODO update zustand active group
   };
 
   const setBannerImage = (source: any) => {
@@ -134,28 +158,31 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
           </Box>
           <Box display="flex" justifyContent="space-between">
             <AvatarGroup size="md" max={4}>
-              <Avatar name="Ryan Florence" src={Images.group.ellipse} width="32px" height="32px" />
-              <Avatar name="Segun Adebayo" src={Images.group.ellipse} width="32px" height="32px" />
-              <Avatar name="Kent Dodds" src={Images.group.ellipse} width="32px" height="32px" />
-              <Avatar
-                name="Prosper Otemuyiwa"
-                src={Images.group.ellipse}
-                width="32px"
-                height="32px"
-              />
+              {groupMembers?.map((members) => (
+                <Avatar
+                  name={members.User.firstName ?? members.User.username}
+                  width="32px"
+                  height="32px"
+                />
+              ))}
             </AvatarGroup>
-            <Common.ImpaktButton
+            {/* <Common.ImpaktButton
+              cursor="pointer"
               variant="black"
-              colorScheme="#fff"
+              color="#29323B"
+              isLoading={updateGroupCoverImage.isLoading}
               w="99px"
               ml="16px"
               h="38px"
-              backgroundColor="#F5F8FA"
+              backgroundColor="#EEF4F6"
               borderRadius="8px"
               type="submit"
               fontSize={{ md: '16px' }}
-              fontWeight="700"
-            />
+              fontWeight="400"
+              leftIcon={<I.UploadIcon color="#29323B" width="12px" height="12px" />}
+            >
+              Upload
+            </Common.ImpaktButton> */}
           </Box>
         </Box>
       </Box>
@@ -168,6 +195,8 @@ const UpdateGroupImageForm: React.FC<PropsI> = () => {
             cursor="pointer"
             variant="black"
             color="#29323B"
+            isLoading={updateGroupCoverImage.isLoading}
+            isDisabled={updateGroupCoverImage.isLoading}
             w="160px"
             h="42px"
             backgroundColor="#EEF4F6"

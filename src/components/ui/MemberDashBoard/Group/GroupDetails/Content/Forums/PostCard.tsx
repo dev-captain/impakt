@@ -1,7 +1,6 @@
-import { Box, LayoutProps, Text, Image } from '@chakra-ui/react';
+import { Box, LayoutProps, Text, Image, Avatar } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
-import Images from '../../../../../../../assets/images';
 
 interface PostCardPropsI {
   id: number;
@@ -88,7 +87,7 @@ const PostCard: React.FC<PostCardPropsI> = ({
           alignItems={{ base: 'start', md: 'center' }}
           flexWrap={{ base: 'wrap', md: 'unset' }}
         >
-          <Image src={Images.group.ellipse} height="40px" width="40px" />
+          <Avatar name={name} width="36px" height="36px" />
           <Box marginLeft={{ base: '6px', md: '12px' }}>
             <Text
               color="#728BA3"

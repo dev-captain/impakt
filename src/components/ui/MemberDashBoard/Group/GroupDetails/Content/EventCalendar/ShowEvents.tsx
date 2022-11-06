@@ -4,12 +4,12 @@ import { AddIcon } from '@chakra-ui/icons';
 import { Day } from 'dayspan';
 import { Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const ShowEvents: React.FC = () => {
   const navigate = useNavigate();
-  const isAdmin = useAppSelector((state) => state.groupsReducer.role) === 'Creator';
+  const isAdmin = usePersistedGroupStore().role === 'Creator';
 
   const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
     useEventCalendarContext();

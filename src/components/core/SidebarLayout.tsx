@@ -19,9 +19,9 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   const [isClose, setIsClose] = useState(false);
 
   return (
-    <Box bgColor="#060609" minH="100vh" position="relative">
+    <Box bgColor="#EEF4F6" minH="100vh" position="relative">
       {isShowNavbar && (
-        <Box bgColor="#060609" as="nav" w="full" minH="80px">
+        <Box bgColor="#EEF4F6" as="nav" w="full" minH="80px">
           <Navbar isVersion2 position="fixed" />
         </Box>
       )}

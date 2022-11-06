@@ -1,54 +1,107 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'hooks';
 import { Box, VStack, Text } from '@chakra-ui/react';
 import { Day } from 'dayspan';
 import { DeleteIcon } from '@chakra-ui/icons';
 
-import { deletePost } from '../../../../../../../../lib/redux/slices/forum/post_actions/deletePost';
 import PostCard from '../PostCard';
 import ForumCreateCommentForm from '../../../../../../../forms/forums/ForumCreateCommentForm';
 import { Common } from '../../../../../../..';
-import { deleteComment } from '../../../../../../../../lib/redux/slices/forum/comment_actions/deleteComment';
+import {
+  usePersistedAuthStore,
+  usePersistedForumStore,
+  usePersistedGroupStore,
+} from '../../../../../../../../lib/zustand';
+import {
+  useCommentControllerV1DeleteOne,
+  usePostControllerV1DeleteOne,
+} from '../../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
+import { renderToast } from '../../../../../../../../utils';
 
 const ForumDetail: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const deletePost = usePostControllerV1DeleteOne();
+  const deleteComment = useCommentControllerV1DeleteOne();
+  const { member } = usePersistedAuthStore();
   const { postId } = useParams();
-  const postDetails = useAppSelector((state) => state.postsReducer.posts);
-  const activePostDetails = postDetails.find((post) => post.id === Number(postId));
-  const group = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const dispatch = useAppDispatch();
+  const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
+  const group = usePersistedGroupStore().activeGroup;
+
+  React.useEffect(() => {
+    const postDetail = posts.find((post) => post.id === Number(postId));
+    if (!postDetail) return;
+    setActivePost(postDetail);
+  }, []);
 
   const deletePostFromDb = async () => {
-    if (!group || !activePostDetails) return;
-
-    await dispatch(
-      deletePost({ referenceType: 'Group', referenceId: group.id, postId: activePostDetails.id }),
-    ).unwrap();
+    if (!group || !activePost) return;
+    deletePost.mutate(
+      {
+        referenceType: 'Group',
+        referenceId: group.id,
+        postId: activePost.id,
+      },
+      {
+        onSuccess: () => {
+          const updatedPostsList = posts.filter((post) => post.id !== activePost.id);
+          setActivePost(null);
+          setPosts(updatedPostsList);
+          renderToast('success', 'Post deleted successfully.');
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
 
   const deleteCommentFromDb = async (commentId: number) => {
-    if (!group || !activePostDetails) return;
-    await dispatch(deleteComment({ postId: activePostDetails.id, commentId })).unwrap();
+    if (!group || !activePost) return;
+
+    deleteComment.mutate(
+      {
+        postId: activePost.id,
+        commentId,
+      },
+      {
+        onSuccess: () => {
+          // TODO remove from related post comment array on zustand
+          const shallowOfPosts = [...posts];
+          const indexOfPost = shallowOfPosts.findIndex((post) => post.id === activePost.id);
+          shallowOfPosts[indexOfPost].Comment = shallowOfPosts[indexOfPost].Comment.filter(
+            (comment) => comment.id !== commentId,
+          );
+          setActivePost({
+            ...shallowOfPosts[indexOfPost],
+            Comment: shallowOfPosts[indexOfPost].Comment.filter(
+              (comment) => comment.id !== commentId,
+            ),
+          });
+          setPosts(shallowOfPosts);
+
+          renderToast('success', 'Comment deleted successfully.');
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
 
-  if (!activePostDetails) return null;
+  if (!activePost) return null;
 
   return (
     <VStack alignItems="flex-start" w="full">
       <PostCard
         w="100%"
-        id={activePostDetails.id}
-        name={activePostDetails.creator?.firstName ?? activePostDetails.creator?.username}
-        msg={activePostDetails.content}
-        title={activePostDetails.content}
-        msgNo={activePostDetails.comment.length}
+        id={activePost.id}
+        name={activePost.Creator?.firstName ?? activePost.Creator?.username}
+        msg={activePost.content}
+        title={activePost.content}
+        msgNo={activePost.Comment.length}
         // view={view}
-        time={`${Day.now().hoursBetween(
-          Day.fromString(activePostDetails.createdAt.toISOString()),
-        )}h`}
+        time={`${Day.now().hoursBetween(Day.fromString(activePost.createdAt))}h`}
       >
-        {member?.id === activePostDetails.creator?.id && (
+        {member?.id === activePost.Creator?.id && (
           <Common.ImpaktButton
             mt={{ md: 0, base: '10px' }}
             color="#B0C3D6"
@@ -63,21 +116,21 @@ const ForumDetail: React.FC = () => {
         )}
       </PostCard>
       <Box mt="20px !important" w="50%" alignSelf="flex-start">
-        <ForumCreateCommentForm postId={activePostDetails.id} onClose={() => null} />
+        <ForumCreateCommentForm postId={activePost.id} onClose={() => null} />
       </Box>
-      {activePostDetails.comment.length > 0 ? (
-        activePostDetails.comment.map(({ content, createdAt, creator, id }) => (
+      {activePost.Comment.length > 0 ? (
+        activePost.Comment.map(({ content, createdAt, Creator, id }) => (
           <PostCard
             w="50%"
             id={id}
-            name={creator?.firstName ?? creator?.username}
+            name={Creator?.firstName ?? Creator?.username}
             msg={content}
             title={content}
             msgNo={0}
             // view={view}
-            time={`${Day.now().hoursBetween(Day.fromString(createdAt.toISOString()))}h`}
+            time={`${Day.now().hoursBetween(Day.fromString(createdAt))}h`}
           >
-            {creator?.id === member?.id && (
+            {Creator?.id === member?.id && (
               <Common.ImpaktButton
                 mt={{ md: 0, base: '10px' }}
                 color="#B0C3D6"

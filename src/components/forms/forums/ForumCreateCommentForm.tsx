@@ -2,14 +2,16 @@ import { FormControl, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Common, I } from 'components';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { createComment } from '../../../lib/redux/slices/forum/comment_actions/createComment';
 import { InputGroupPropsI } from '../../common/InputGroup';
+import { usePersistedAuthStore, usePersistedForumStore } from '../../../lib/zustand';
+import { useCommentControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
+import { renderToast } from '../../../utils';
 
 const ForumCreateCommentForm = React.forwardRef<
   HTMLInputElement,
   { onClose: () => void; postId: number }
 >((props, ref) => {
+  const createComment = useCommentControllerV1CreateOne();
   const { handleSubmit, setValue } = useForm({
     defaultValues: { comment: '' },
   });
@@ -17,18 +19,58 @@ const ForumCreateCommentForm = React.forwardRef<
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
-  const dispatch = useAppDispatch();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
+  const { posts, setPosts, setActivePost } = usePersistedForumStore();
 
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
-    await dispatch(
-      createComment({
+
+    createComment.mutate(
+      {
         postId: props.postId,
-        createCommentDto: { content: data.comment },
-      }),
-    ).unwrap();
-    props.onClose();
+        data: {
+          content: data.comment,
+        },
+      },
+      {
+        onSuccess: (newComment) => {
+          const shallowOfPosts = [...posts];
+          const a = shallowOfPosts.findIndex((post) => post.id === props.postId);
+          if (a !== -1) {
+            shallowOfPosts[a] = {
+              ...shallowOfPosts[a],
+              Comment: [
+                ...shallowOfPosts[a].Comment,
+                {
+                  ...newComment,
+                  Creator: { ...member },
+                },
+              ],
+            };
+            setPosts(shallowOfPosts);
+            const activePost = posts.find((postsd) => postsd.id === props.postId);
+            if (activePost) {
+              setActivePost({
+                ...activePost,
+                Comment: [
+                  ...activePost.Comment,
+                  {
+                    ...newComment,
+                    Creator: { ...member },
+                  },
+                ],
+              });
+            }
+          }
+
+          renderToast('success', 'Comment added successfully.', 'white');
+          props.onClose();
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
+        },
+      },
+    );
   };
 
   const inputItems: InputGroupPropsI = {

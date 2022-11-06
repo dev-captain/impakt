@@ -1,14 +1,14 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import * as React from 'react';
-import { useAppSelector } from 'hooks';
 
 import { GroupSettingTab, GroupSettingsMemberTabs } from '../../../../../../../../../data';
 import EditGroupTab from './EditGroupTab/EditGroupTab';
 import GeneralSettings from './GeneralSettings/GeneralSettings';
 import PermissionTab from './PermissionTab/PermissionTab';
+import { usePersistedGroupStore } from '../../../../../../../../../lib/zustand';
 
 const GroupSettingsTabs: React.FC = () => {
-  const role = useAppSelector((state) => state.groupsReducer.role);
+  const { role } = usePersistedGroupStore();
 
   return (
     <Tabs mt="10px">

@@ -59,7 +59,7 @@ const SidebarLinkItem = ({
           _hover={{
             transition: '0.2s ease',
             background: '#20202E',
-            color: '#fff',
+            color: '#000',
             // transform: 'scale(1.15)',
           }}
         >
@@ -67,6 +67,7 @@ const SidebarLinkItem = ({
           <Text
             textStyle="regular3"
             pos="relative"
+            color="#000"
             marginLeft="14.5px"
             fontWeight={isActive ? '600' : 'normal'}
             _hover={{
@@ -98,7 +99,7 @@ const SidebarLinkItem = ({
             pos="relative"
             marginLeft="14.5px"
             fontWeight="600"
-            color={collaps ? '#fff' : ''}
+            color={collaps ? '#000' : ''}
             opacity={{ lg: collaps ? '0' : '1' }}
             transition="opacity .1s ease-in-out"
           >

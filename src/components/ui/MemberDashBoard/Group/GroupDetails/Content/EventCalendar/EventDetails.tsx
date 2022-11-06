@@ -4,14 +4,17 @@ import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { useAppSelector } from '../../../../../../../hooks';
 import { deepLinkToApp } from '../../../../../../../data';
+import {
+  usePersistedChallengeStore,
+  usePersistedGroupStore,
+} from '../../../../../../../lib/zustand';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
   // const navigate = useNavigate();
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const role = useAppSelector((state) => state.groupsReducer.role);
+  const { activeGroup } = usePersistedGroupStore();
+  const { role } = usePersistedGroupStore();
   const isAdmin = role === 'Creator';
   // const toast = useToast();
 
@@ -21,9 +24,9 @@ const EventDetails: React.FC = () => {
   const eventObj = getSelectedDayEvent();
   if (!eventObj) return null;
 
-  const challange = useAppSelector(
-    (state) => state.challengesReducer.availableGroupChallenges,
-  ).find(({ challenge }) => challenge.id === JSON.parse(eventObj.data).assocId);
+  const challange = usePersistedChallengeStore().availableGroupChallenges.find(
+    ({ challenge }) => challenge.id === JSON.parse(eventObj.data).assocId,
+  );
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
 

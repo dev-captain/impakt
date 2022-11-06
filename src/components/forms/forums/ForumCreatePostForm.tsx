@@ -1,14 +1,23 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
-import { Flex, FormControl, useToast } from '@chakra-ui/react';
+import { useForm } from 'hooks';
+import { Flex, FormControl } from '@chakra-ui/react';
 import { Common } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputGroupPropsI } from '../../common/InputGroup';
-import { createPost } from '../../../lib/redux/slices/forum/post_actions/createPost';
 import createPostYupScheme from '../../../lib/yup/schemas/createPostYupScheme';
+import {
+  usePersistedAuthStore,
+  usePersistedForumStore,
+  usePersistedGroupStore,
+} from '../../../lib/zustand';
+import { usePostControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
+import { renderToast } from '../../../utils';
 
 const CreatePostForm: React.FC = ({ children }) => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
+  const { addToPosts } = usePersistedForumStore();
+  const createPost = usePostControllerV1CreateOne();
+
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createPostYupScheme),
     defaultValues: { post: '' },
@@ -17,28 +26,22 @@ const CreatePostForm: React.FC = ({ children }) => {
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
   };
-  const dispatch = useAppDispatch();
-  const toast = useToast();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
 
   const handleOnCreate = async (data: object) => {
     const { post } = data as { post: string };
     if (!member || !activeGroup) return;
-
-    await dispatch(
-      createPost({
-        createPostDto: { content: post },
-        referenceId: activeGroup.id,
+    try {
+      const postData = await createPost.mutateAsync({
         referenceType: 'Group',
-      }),
-    ).unwrap();
-    toast({
-      title: 'Success',
-      description: 'Post created successfully.',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
+        data: { content: post },
+        referenceId: activeGroup.id,
+      });
+      addToPosts({ ...postData, Creator: { ...member } });
+      renderToast('success', 'Post created successfully.', 'white');
+    } catch (e: any) {
+      renderToast('error', e.response?.data.message ?? 'Something went wrong', 'white');
+    }
   };
 
   const inputItems: InputGroupPropsI[] = [

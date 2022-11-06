@@ -1,21 +1,13 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
-import {
-  ChallengeAttemptStatsRes,
-  GetChallengeLikesRes,
-  GetChallengeRes,
-} from '@impakt-dev/api-client';
 import { Day } from 'dayspan';
-import { useAppSelector } from '../../../../../../../../../hooks';
 import { convertMsToHM } from '../../../../../../../../../utils';
+import { usePersistedAuthStore } from '../../../../../../../../../lib/zustand';
+import { AvailableGroupChallengesTypeI } from '../../../../../../../../../lib/zustand/stores/challengeStore';
 
 interface ChallengesCardProps {
-  data: {
-    challenge: GetChallengeRes;
-    attempts: ChallengeAttemptStatsRes;
-    likes: GetChallengeLikesRes;
-  };
+  data: AvailableGroupChallengesTypeI;
   setAssocId: () => void;
   setAssocName: () => void;
   onClose: () => void;
@@ -29,15 +21,17 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
 }) => {
   const { challenge, likes, attempts } = data;
 
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const isValidDate = challenge.validFrom
-    ? Day.fromDate(challenge.validFrom)!.time < Day.now().time
+    ? Day.fromString(challenge.validFrom)!.time < Day.now().time
     : false;
   const getTimeDifference = () => {
     if (!isValidDate) return { h: 0, m: 0, s: 0 };
 
     const milliseconds =
-      Day.fromDate(challenge.validUntil)?.millisBetween(Day.fromDate(challenge.validFrom)!) ?? 0;
+      Day.fromString(challenge.validUntil ?? '')?.millisBetween(
+        Day.fromString(challenge.validFrom)!,
+      ) ?? 0;
     const { h, m, s } = convertMsToHM(milliseconds);
 
     return { h, m, s };
@@ -91,7 +85,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
               ml="10px"
               fontSize={{ base: '13px', md: '16px' }}
             >
-              {challenge.routine.estimatedTime}
+              {challenge.Routine.estimatedTime}
             </Text>
           </Box>
           {/* {play && (

@@ -22,7 +22,6 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const postParam = useParams();
   // const dispatch = useAppDispatch();
-  // const group = useAppSelector((state) => state.groupsReducer.activeGroup);
   const isStandalone = postParam.postId ? parseInt(postParam.postId, 10) === props.id : false;
   const navigate = useNavigate();
 
