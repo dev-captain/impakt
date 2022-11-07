@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { Day } from 'dayspan';
-import { convertMsToHM } from '../../../../../../../../../utils';
+import { convertMsToHM, truncateString } from '../../../../../../../../../utils';
 import { usePersistedAuthStore } from '../../../../../../../../../lib/zustand';
 import { AvailableGroupChallengesTypeI } from '../../../../../../../../../lib/zustand/stores/challengeStore';
 
@@ -51,7 +51,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
         lineHeight={{ base: '35px', md: 0 }}
       >
         <Text color="#29323B" fontSize={{ base: '18px', md: '24px' }} fontWeight="600">
-          {challenge.name}
+          {truncateString(`${challenge.name}`, 23)}
         </Text>
         <Box display="flex" gap="6px" flexWrap="wrap">
           <Box

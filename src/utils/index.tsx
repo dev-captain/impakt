@@ -132,4 +132,14 @@ export function renderToast(
   return toastWillBeDisplayed;
 }
 
+export const truncateString = (str: string, max: number) => {
+  if (str.length > max) {
+    const truncatedString = str.substring(0, max).concat('...');
+
+    return truncatedString;
+  }
+
+  return str;
+};
+
 export default {};

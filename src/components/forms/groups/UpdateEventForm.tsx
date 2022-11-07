@@ -7,7 +7,7 @@ import { Common, I } from 'components';
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import ChallengeModal from '../../ui/MemberDashBoard/Group/GroupDetails/Content/EventCalendar/SelectChallenge/ChallengeModal';
-import { padTo2Digits, renderToast } from '../../../utils';
+import { padTo2Digits, renderToast, truncateString } from '../../../utils';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 import { usePersistedChallengeStore, usePersistedGroupStore } from '../../../lib/zustand';
 import { useCalendarEventControllerUpdateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
@@ -32,7 +32,7 @@ const UpdateEventForm: React.FC = () => {
       eventTitle: JSON.parse(getSelectedDayEvent()!.event?.data).title ?? '',
       eventDescription: JSON.parse(getSelectedDayEvent()!.event?.data).description ?? '',
       assocId: JSON.parse(getSelectedDayEvent()!.event?.data).assocId ?? '',
-      assocName: challange?.challenge.name ?? '',
+      assocName: truncateString(challange?.challenge.name ?? '', 23) ?? '',
       eventStartTime: getSelectedDayEvent()?.event.schedule?.times[0].toString() ?? '',
       eventEndTime: getSelectedDayEvent()?.event.schedule?.times[1].toString() ?? '',
     },
@@ -216,7 +216,9 @@ const UpdateEventForm: React.FC = () => {
               cursor="pointer"
               onClick={() => onOpen()}
             >
-              {getValues('assocName').length > 0 ? getValues('assocName') : 'Select challenge'}
+              {getValues('assocName').length > 0
+                ? truncateString(getValues('assocName'), 23)
+                : 'Select challenge'}
             </Text>
           </Box>
 

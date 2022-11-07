@@ -12,7 +12,7 @@ import createEventYupScheme from '../../../lib/yup/schemas/createEventYupSchema'
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 import { useCalendarEventControllerCreateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
-import { renderToast } from '../../../utils';
+import { renderToast, truncateString } from '../../../utils';
 
 const CreateEventForm: React.FC = () => {
   const createEvent = useCalendarEventControllerCreateCalendarEvent();
@@ -189,7 +189,9 @@ const CreateEventForm: React.FC = () => {
               cursor="pointer"
               onClick={() => onOpen()}
             >
-              {getValues('assocName').length > 0 ? getValues('assocName') : 'Select challenge'}
+              {getValues('assocName').length > 0
+                ? truncateString(getValues('assocName'), 23)
+                : 'Select challenge'}
             </Text>
           </Box>
 

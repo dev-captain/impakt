@@ -9,6 +9,7 @@ import {
   usePersistedChallengeStore,
   usePersistedGroupStore,
 } from '../../../../../../../lib/zustand';
+import { truncateString } from '../../../../../../../utils';
 
 const EventDetails: React.FC = () => {
   // const [isGoing, setIsGoing] = React.useState(true);
@@ -131,7 +132,7 @@ const EventDetails: React.FC = () => {
             <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
           </Box>
           <Text color="#4E6070" fontSize="16px" fontWeight="500" maxW="258px">
-            {challange?.challenge.name ?? 'Challenge'}
+            {truncateString(`${challange?.challenge.name}`, 23)}
           </Text>
         </Box>
       </Box>
