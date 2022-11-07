@@ -2,8 +2,6 @@ import {
   Box,
   // Button,
   Text,
-  Image,
-  Skeleton,
   Avatar,
   // useClipboard,
   // useToast,

@@ -17,8 +17,7 @@ interface GroupSettingModalProps {
 const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
   const deleteGroup = useGroupsControllerV1Remove();
   const leaveGroup = useGroupsMemberControllerV1LeaveGroup();
-  const { activeGroup, myGroups, setMyGroups, exploreGroups, setExploreGroups } =
-    usePersistedGroupStore();
+  const { activeGroup, myGroups, setMyGroups } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
   const navigate = useNavigate();
   const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(

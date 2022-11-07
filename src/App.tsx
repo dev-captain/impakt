@@ -1,7 +1,5 @@
 import 'i18n';
-import { useEffect } from 'react';
-import { useColorMode } from '@chakra-ui/react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import {
   // Home,
   NotFound,
@@ -27,26 +25,6 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 
 const App = () => {
-  const { setColorMode } = useColorMode();
-  const location = useLocation();
-
-  const onRouteChanged = () => {
-    // force overflow unset if it's hidden on other then / page
-    if (location.pathname !== '/') {
-      if (document.body.style.overflow === 'hidden') {
-        document.body.style.overflow = 'unset';
-      }
-    }
-  };
-
-  useEffect(() => {
-    onRouteChanged();
-  }, [location]);
-
-  useEffect(() => {
-    setColorMode('light');
-  }, [setColorMode]);
-
   return (
     <Routes>
       <Route

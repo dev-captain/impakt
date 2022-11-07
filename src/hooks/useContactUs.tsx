@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { renderToast } from '../utils';
 
@@ -19,7 +18,6 @@ const useContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any | string>(null);
   const [isSuccessful, setIsSuccessful] = useState(false);
-  const toast = useToast();
 
   const sendData = async (data: ContactUs) => {
     setLoading(true);

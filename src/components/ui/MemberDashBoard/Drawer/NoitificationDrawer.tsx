@@ -23,8 +23,6 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
   const requests = usePersistedGroupStore().groupRequests.filter(
     (requestD) => requestD.status === 'Pending',
   );
-  // console.log(requests);
-  console.log(requests);
 
   return (
     <Drawer isOpen={open} placement="right" onClose={() => close()}>

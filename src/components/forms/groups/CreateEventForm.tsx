@@ -1,4 +1,4 @@
-import { FormControl, Box, Input, Text, useDisclosure, useToast } from '@chakra-ui/react';
+import { FormControl, Box, Input, Text, useDisclosure } from '@chakra-ui/react';
 import { Day, Time } from 'dayspan';
 import * as React from 'react';
 import { useForm } from 'hooks';

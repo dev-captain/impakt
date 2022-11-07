@@ -12,7 +12,6 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { I } from 'components';
 
-import { toastDarkLayout } from 'theme';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
 

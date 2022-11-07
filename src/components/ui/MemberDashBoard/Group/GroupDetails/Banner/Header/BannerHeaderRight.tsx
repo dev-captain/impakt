@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Text, AvatarGroup, Box, Skeleton } from '@chakra-ui/react';
+import { Avatar, AvatarGroup, Box } from '@chakra-ui/react';
 
 import { Common, I } from 'components';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';

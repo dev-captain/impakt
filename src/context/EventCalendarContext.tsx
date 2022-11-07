@@ -46,7 +46,6 @@ export const EventCalendarContextProvider: React.FC<{
   const navigate = useNavigate();
   const location = useLocation();
   const activeGroupCalendar = useNormalizedCalendarData();
-  const runInitCalendarRef = useRef(true);
   const calendarRef = useRef(Calendar.months<string, any>());
   const [calendarOverViewScreen, setCalendarOverViewScreen] = React.useState<OverViewScreenTypes[]>(
     ['first'],

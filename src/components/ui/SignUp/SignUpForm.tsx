@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from 'hooks';
 
-import { toastLayout } from 'theme';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
 import { useUserControllerCreate } from '../../../lib/impakt-dev-api-client/react-query/users/users';

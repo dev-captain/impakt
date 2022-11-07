@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import { Day } from 'dayspan';
 
 import {
   VStack,

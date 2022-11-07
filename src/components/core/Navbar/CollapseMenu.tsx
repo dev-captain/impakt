@@ -6,7 +6,6 @@ import Keys from 'i18n/types';
 import { Socials } from 'data';
 import { I } from 'components';
 
-import { toastDarkLayout } from 'theme';
 import NavbarLinkItem from './NavbarLinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../lib/zustand';

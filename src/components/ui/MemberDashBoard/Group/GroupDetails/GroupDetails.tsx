@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
+import { Box, Text, HStack } from '@chakra-ui/react';
 import { useLocation, useParams } from 'react-router-dom';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';

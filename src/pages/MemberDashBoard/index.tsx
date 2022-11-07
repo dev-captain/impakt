@@ -22,10 +22,7 @@ import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api
 import { useDiscourse } from '../../hooks/useDiscourse';
 import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
-import {
-  GetGroupMemberResWithGroupRes,
-  GetGroupRequestResV2,
-} from '../../lib/impakt-dev-api-client/react-query/types';
+import { GetGroupMemberResWithGroupRes } from '../../lib/impakt-dev-api-client/react-query/types';
 import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { groupsRequestControllerV1GetGroupRequests } from '../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 

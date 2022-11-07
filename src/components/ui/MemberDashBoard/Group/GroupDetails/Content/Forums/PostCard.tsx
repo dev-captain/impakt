@@ -1,4 +1,4 @@
-import { Box, LayoutProps, Text, Image, Avatar } from '@chakra-ui/react';
+import { Box, LayoutProps, Text, Avatar } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 
