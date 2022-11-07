@@ -53,14 +53,27 @@ const file = yup
     (value) => value === null || (value && ALLOW_IMAGE_FILE.includes(value.type)),
   );
 
-const eventTitle = yup.string().required('Event title is required field');
-const eventDescription = yup.string().required('Event description is required field');
+const eventTitle = yup
+  .string()
+  .required('Event title is required field')
+  .max(50, `You can't use more than 50 characters.`)
+  .required('Event description is required field');
+
+const eventDescription = yup
+  .string()
+  .max(50, `You can't use more than 50 characters.`)
+  .required('Event description is required field');
+
 const eventTime = yup.string().required('Event time is required field');
 const assocId = yup
   .number()
   .required('Challenge is required please select one...')
   .typeError('Challenge is required please select one...');
-const post = yup.string().required('Post content is required field...');
+
+const post = yup
+  .string()
+  .max(200, `You can't use more than 280 characters.`)
+  .required('Post content is required field...');
 
 export {
   email,
