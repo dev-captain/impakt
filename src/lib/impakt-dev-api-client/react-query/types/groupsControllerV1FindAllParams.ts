@@ -5,7 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type GroupsControllerV1FindGroupMembersParams = {
+export type GroupsControllerV1FindAllParams = {
   skip?: number | null;
   take?: number | null;
   deleted?: boolean | null;

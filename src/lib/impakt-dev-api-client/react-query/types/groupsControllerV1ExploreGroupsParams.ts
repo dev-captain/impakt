@@ -8,5 +8,6 @@
 export type GroupsControllerV1ExploreGroupsParams = {
   skip?: number | null;
   take?: number | null;
-  explore?: boolean;
+  deleted?: boolean | null;
+  includeRequests?: boolean | null;
 };

@@ -16,7 +16,6 @@ import type {
 import type {
   GetGroupRequestResV2,
   HttpExceptionSchema,
-  GroupsRequestControllerV1GetGroupRequestsParams,
   GetGroupRequestRes,
   PatchGroupRequestReq,
 } from '../types';
@@ -32,21 +31,18 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
   : never;
 
 export const groupsRequestControllerV1GetGroupRequests = (
-  groupId: number,
-  params?: GroupsRequestControllerV1GetGroupRequestsParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetGroupRequestResV2[]>(
-    { url: `/api/v1/groups/group-requests/${groupId}`, method: 'get', params, signal },
+    { url: `/api/v1/groups/group-requests`, method: 'get', signal },
     options,
   );
 };
 
-export const getGroupsRequestControllerV1GetGroupRequestsQueryKey = (
-  groupId: number,
-  params?: GroupsRequestControllerV1GetGroupRequestsParams,
-) => [`/api/v1/groups/group-requests/${groupId}`, ...(params ? [params] : [])];
+export const getGroupsRequestControllerV1GetGroupRequestsQueryKey = () => [
+  `/api/v1/groups/group-requests`,
+];
 
 export type GroupsRequestControllerV1GetGroupRequestsQueryResult = NonNullable<
   Awaited<ReturnType<typeof groupsRequestControllerV1GetGroupRequests>>
@@ -56,35 +52,27 @@ export type GroupsRequestControllerV1GetGroupRequestsQueryError = ErrorType<Http
 export const useGroupsRequestControllerV1GetGroupRequests = <
   TData = Awaited<ReturnType<typeof groupsRequestControllerV1GetGroupRequests>>,
   TError = ErrorType<HttpExceptionSchema>,
->(
-  groupId: number,
-  params?: GroupsRequestControllerV1GetGroupRequestsParams,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof groupsRequestControllerV1GetGroupRequests>>,
-      TError,
-      TData
-    >;
-    request?: SecondParameter<typeof customInstance>;
-  },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof groupsRequestControllerV1GetGroupRequests>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGroupsRequestControllerV1GetGroupRequestsQueryKey(groupId, params);
+  const queryKey = queryOptions?.queryKey ?? getGroupsRequestControllerV1GetGroupRequestsQueryKey();
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof groupsRequestControllerV1GetGroupRequests>>
-  > = ({ signal }) =>
-    groupsRequestControllerV1GetGroupRequests(groupId, params, requestOptions, signal);
+  > = ({ signal }) => groupsRequestControllerV1GetGroupRequests(requestOptions, signal);
 
   const query = useQuery<
     Awaited<ReturnType<typeof groupsRequestControllerV1GetGroupRequests>>,
     TError,
     TData
-  >(queryKey, queryFn, { enabled: !!groupId, ...queryOptions }) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
+  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 

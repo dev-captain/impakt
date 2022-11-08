@@ -17,6 +17,6 @@ export interface ExploreGroupRes {
   calendarId: number;
   private: boolean;
   deleted: boolean;
-  CurrentCoverImage: string;
-  Request: GetGroupRequestRes;
+  CurrentCoverImage?: string;
+  Request?: GetGroupRequestRes;
 }
