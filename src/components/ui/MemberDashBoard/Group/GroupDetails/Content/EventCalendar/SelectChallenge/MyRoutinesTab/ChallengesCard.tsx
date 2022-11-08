@@ -74,18 +74,14 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
           <Box
             display="flex"
             alignItems="center"
+            justifyContent="center"
             background="#EEF4F6"
             borderRadius="12px"
             p={{ base: '0 10px', md: '5px 12px' }}
           >
             <I.ClockIcon width="14px" height="14px" />
-            <Text
-              color="#29323B"
-              fontWeight="500"
-              ml="10px"
-              fontSize={{ base: '13px', md: '16px' }}
-            >
-              {challenge.Routine.estimatedTime}
+            <Text color="#29323B" fontWeight="500" ml="4px" fontSize={{ base: '13px', md: '16px' }}>
+              {Math.round(challenge.Routine.estimatedTime / 60)} min
             </Text>
           </Box>
           {/* {play && (
