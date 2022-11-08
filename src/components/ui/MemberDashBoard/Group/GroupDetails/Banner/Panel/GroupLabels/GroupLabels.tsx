@@ -2,8 +2,10 @@ import * as React from 'react';
 import { I } from 'components';
 import { IconButton } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
+import { usePersistedGroupStore } from '../../../../../../../../lib/zustand';
 
 const GroupLabels: React.FC = () => {
+  const { role } = usePersistedGroupStore();
   const isChallengeSelectedBefore = false;
   const isEditable = false;
   const groupStatisticLabelItems = [
@@ -25,7 +27,7 @@ const GroupLabels: React.FC = () => {
           icon={<I.AddBannerLabelItemIcon />}
         />
       ),
-      visible: true,
+      visible: role === 'Creator',
       labelTitle: 'Pinned Challenge',
       labelDescription: isChallengeSelectedBefore ? '' : 'Select Challenge',
       rightIcon: isEditable ? (
