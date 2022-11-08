@@ -54,7 +54,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           >
             <ExploreGroupItem
               gId={g.id}
-              gRequestStatus={g.Request?.status}
+              gRequestStatus={g.Request}
               gPrivate={isPrivate}
               key={`explore-group-item-${g.id}`}
             />

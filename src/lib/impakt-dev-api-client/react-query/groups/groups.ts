@@ -14,11 +14,12 @@ import type {
   QueryKey,
 } from '@tanstack/react-query';
 import type {
-  ExploreGroupRes,
-  HttpExceptionSchema,
-  GroupsControllerV1ExploreGroupsParams,
   GetGroupRes,
+  HttpExceptionSchema,
+  GroupsControllerV1FindAllParams,
   PostGroupsReq,
+  ExploreGroupRes,
+  GroupsControllerV1ExploreGroupsParams,
   PatchGroupsReq,
   GetUploadImageRes,
   GroupsControllerV1PatchGroupCoverImageBody,
@@ -36,53 +37,50 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
   ? P
   : never;
 
-export const groupsControllerV1ExploreGroups = (
-  params?: GroupsControllerV1ExploreGroupsParams,
+export const groupsControllerV1FindAll = (
+  params?: GroupsControllerV1FindAllParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
-  return customInstance<ExploreGroupRes[]>(
+  return customInstance<GetGroupRes[]>(
     { url: `/api/v1/groups`, method: 'get', params, signal },
     options,
   );
 };
 
-export const getGroupsControllerV1ExploreGroupsQueryKey = (
-  params?: GroupsControllerV1ExploreGroupsParams,
-) => [`/api/v1/groups`, ...(params ? [params] : [])];
+export const getGroupsControllerV1FindAllQueryKey = (params?: GroupsControllerV1FindAllParams) => [
+  `/api/v1/groups`,
+  ...(params ? [params] : []),
+];
 
-export type GroupsControllerV1ExploreGroupsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>
+export type GroupsControllerV1FindAllQueryResult = NonNullable<
+  Awaited<ReturnType<typeof groupsControllerV1FindAll>>
 >;
-export type GroupsControllerV1ExploreGroupsQueryError = ErrorType<HttpExceptionSchema>;
+export type GroupsControllerV1FindAllQueryError = ErrorType<HttpExceptionSchema>;
 
-export const useGroupsControllerV1ExploreGroups = <
-  TData = Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>,
+export const useGroupsControllerV1FindAll = <
+  TData = Awaited<ReturnType<typeof groupsControllerV1FindAll>>,
   TError = ErrorType<HttpExceptionSchema>,
 >(
-  params?: GroupsControllerV1ExploreGroupsParams,
+  params?: GroupsControllerV1FindAllParams,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof groupsControllerV1FindAll>>, TError, TData>;
     request?: SecondParameter<typeof customInstance>;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGroupsControllerV1ExploreGroupsQueryKey(params);
+  const queryKey = queryOptions?.queryKey ?? getGroupsControllerV1FindAllQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>> = ({
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof groupsControllerV1FindAll>>> = ({
     signal,
-  }) => groupsControllerV1ExploreGroups(params, requestOptions, signal);
+  }) => groupsControllerV1FindAll(params, requestOptions, signal);
 
-  const query = useQuery<
-    Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery<Awaited<ReturnType<typeof groupsControllerV1FindAll>>, TError, TData>(
+    queryKey,
+    queryFn,
+    queryOptions,
+  ) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 
@@ -140,6 +138,59 @@ export const useGroupsControllerV1Create = <
     TContext
   >(mutationFn, mutationOptions);
 };
+export const groupsControllerV1ExploreGroups = (
+  params?: GroupsControllerV1ExploreGroupsParams,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<ExploreGroupRes[]>(
+    { url: `/api/v1/groups/explore`, method: 'get', params, signal },
+    options,
+  );
+};
+
+export const getGroupsControllerV1ExploreGroupsQueryKey = (
+  params?: GroupsControllerV1ExploreGroupsParams,
+) => [`/api/v1/groups/explore`, ...(params ? [params] : [])];
+
+export type GroupsControllerV1ExploreGroupsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>
+>;
+export type GroupsControllerV1ExploreGroupsQueryError = ErrorType<HttpExceptionSchema>;
+
+export const useGroupsControllerV1ExploreGroups = <
+  TData = Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>,
+  TError = ErrorType<HttpExceptionSchema>,
+>(
+  params?: GroupsControllerV1ExploreGroupsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGroupsControllerV1ExploreGroupsQueryKey(params);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>> = ({
+    signal,
+  }) => groupsControllerV1ExploreGroups(params, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof groupsControllerV1ExploreGroups>>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
 export const groupsControllerV1PatchGroup = (
   groupId: number,
   patchGroupsReq: PatchGroupsReq,

@@ -22,9 +22,8 @@ import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api
 import { useDiscourse } from '../../hooks/useDiscourse';
 import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
-import { GetGroupMemberResWithGroupRes } from '../../lib/impakt-dev-api-client/react-query/types';
 import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-client/react-query/groups/groups';
-import { groupsRequestControllerV1GetGroupRequests } from '../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
+import { useGroupsRequestControllerV1GetGroupRequests } from '../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 
 // import { useRewardHistoryControllerV1GetRewardHistory } from '../../lib/impakt-dev-api-client/react-query/default/default';
 // import { VStack } from '@chakra-ui/react';
@@ -46,7 +45,6 @@ const MemberDashboard: React.FC = () => {
   const discourseStore = usePersistedDiscourseStore();
   const discourse = useDiscourse();
   // TODO next line is temp please move it to react query after its backend logic refactored.
-  const { fetchGroupRequests } = useFetchGroupRequests();
 
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
     query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
@@ -84,9 +82,13 @@ const MemberDashboard: React.FC = () => {
   });
 
   const fetchExploreGroups = useGroupsControllerV1ExploreGroups(
-    { explore: true },
+    { includeRequests: true },
     { query: getDefaultQueryOptions() },
   ); // TODO update zustand explore groups
+
+  const fetchGroupRequests = useGroupsRequestControllerV1GetGroupRequests({
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+  });
 
   React.useEffect(() => {
     if (fetchGodlBalanceScoreQuery.isSuccess) {
@@ -154,8 +156,6 @@ const MemberDashboard: React.FC = () => {
   React.useEffect(() => {
     if (fetchMyGroups.isFetched && fetchMyGroups.isSuccess) {
       groupsStore.setMyGroups(fetchMyGroups.data);
-      const onlyAdminOnes = fetchMyGroups.data.filter(({ role }) => role === 'Creator');
-      fetchGroupRequests(onlyAdminOnes);
     }
   }, [fetchMyGroups.isFetched]);
 
@@ -165,36 +165,13 @@ const MemberDashboard: React.FC = () => {
     }
   }, [fetchExploreGroups.isFetchedAfterMount]);
 
-  return <C.SidebarLayout isShowNavbar />;
-};
-
-const useFetchGroupRequests = () => {
-  const { setGroupRequests } = usePersistedGroupStore();
-
-  const fetchGroupRequests = async (myGroups: GetGroupMemberResWithGroupRes[]) => {
-    if (myGroups?.length > 0) {
-      const callMap = myGroups.map(({ groupId }) =>
-        groupsRequestControllerV1GetGroupRequests(groupId, { status: 'Pending' }),
-      );
-
-      const getGroupRequests = await Promise.all(callMap);
-
-      if (getGroupRequests.length > 0) {
-        const payload = getGroupRequests;
-        const payloadFlatted = payload.flatMap((d) => d);
-
-        setGroupRequests(payloadFlatted);
-
-        return payloadFlatted;
-      }
-
-      return null;
+  React.useEffect(() => {
+    if (fetchGroupRequests.isFetched && fetchGroupRequests.isSuccess) {
+      groupsStore.setGroupRequests(fetchGroupRequests.data);
     }
+  }, [fetchGroupRequests.isFetched]);
 
-    return null;
-  };
-
-  return { fetchGroupRequests };
+  return <C.SidebarLayout isShowNavbar />;
 };
 
 export default MemberDashboard;

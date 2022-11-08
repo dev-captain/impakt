@@ -16,5 +16,5 @@ export interface GetGroupRes {
   calendarId: number;
   private: boolean;
   deleted: boolean;
-  CurrentCoverImage: string;
+  CurrentCoverImage?: string;
 }

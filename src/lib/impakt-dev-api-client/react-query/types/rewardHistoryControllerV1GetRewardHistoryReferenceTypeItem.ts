@@ -17,4 +17,5 @@ export const RewardHistoryControllerV1GetRewardHistoryReferenceTypeItem = {
   TimelineBlockSession: 'TimelineBlockSession',
   GroupLevelUp: 'GroupLevelUp',
   GroupLevelDown: 'GroupLevelDown',
+  Team: 'Team',
 } as const;

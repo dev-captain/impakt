@@ -16,7 +16,7 @@ import { renderToast } from '../../../../../../utils';
 interface ExploreGroupItemPropsI {
   gId: number;
   gPrivate: boolean;
-  gRequestStatus: ExploreGroupRes['Request']['status'];
+  gRequestStatus: ExploreGroupRes['Request'];
 }
 
 const ExploreGroupItem: React.FC<ExploreGroupItemPropsI> = ({ gPrivate, gRequestStatus, gId }) => {
@@ -90,7 +90,7 @@ const ExploreGroupItem: React.FC<ExploreGroupItemPropsI> = ({ gPrivate, gRequest
           _hover={{ backgroundColor: '#000', color: '#fff' }}
           variant={
             gPrivate
-              ? gRequestStatus !== GetGroupRequestResStatus.Pending
+              ? gRequestStatus?.status !== GetGroupRequestResStatus.Pending
                 ? 'transparent'
                 : 'black'
               : 'transparent'
@@ -103,7 +103,7 @@ const ExploreGroupItem: React.FC<ExploreGroupItemPropsI> = ({ gPrivate, gRequest
           leftIcon={gPrivate ? undefined : <I.UnionIcon width="12px" />}
         >
           {gPrivate
-            ? gRequestStatus !== GetGroupRequestResStatus.Pending && !isClicked
+            ? gRequestStatus?.status !== GetGroupRequestResStatus.Pending && !isClicked
               ? 'Request to join'
               : 'Pending'
             : 'Join'}
