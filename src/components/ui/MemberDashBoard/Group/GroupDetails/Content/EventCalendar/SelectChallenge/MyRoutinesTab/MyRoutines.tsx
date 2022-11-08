@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Text, Link } from '@chakra-ui/react';
 import { UseFormSetValue } from 'react-hook-form';
+import { Link as ReactLink } from 'react-router-dom';
 
 import ChallengesCard from './ChallengesCard';
 import { usePersistedChallengeStore } from '../../../../../../../../../lib/zustand';
@@ -17,7 +18,6 @@ const MyRoutines: React.FC<{
   onClose: () => void;
 }> = ({ setValue, onClose }) => {
   const { availableGroupChallenges } = usePersistedChallengeStore();
-  if (!availableGroupChallenges.length) return null;
 
   return (
     <Box
@@ -39,15 +39,25 @@ const MyRoutines: React.FC<{
         },
       }}
     >
-      {availableGroupChallenges.map((t) => (
-        <ChallengesCard
-          key={t.challenge.id}
-          onClose={onClose}
-          setAssocId={() => setValue('assocId', t.challenge.id, { shouldValidate: true })}
-          setAssocName={() => setValue('assocName', t.challenge.name, { shouldValidate: true })}
-          data={t}
-        />
-      ))}
+      {availableGroupChallenges.length === 0 ? (
+        <Text cursor="pointer" color="gray.500">
+          You have to create your challenges{' '}
+          <Link as={ReactLink} to="/download">
+            <Text as="u">in game</Text>
+          </Link>
+          ...
+        </Text>
+      ) : (
+        availableGroupChallenges.map((t) => (
+          <ChallengesCard
+            key={t.challenge.id}
+            onClose={onClose}
+            setAssocId={() => setValue('assocId', t.challenge.id, { shouldValidate: true })}
+            setAssocName={() => setValue('assocName', t.challenge.name, { shouldValidate: true })}
+            data={t}
+          />
+        ))
+      )}
     </Box>
   );
 };
