@@ -40,12 +40,12 @@ const MyRoutines: React.FC<{
       }}
     >
       {availableGroupChallenges.length === 0 ? (
-        <Text cursor="pointer" color="gray.500">
+        <Text color="gray.500">
           Sorry, You have to create your challenges{' '}
           <Link as={ReactLink} to="/download">
             <Text as="u">in-game</Text>
-          </Link>
-          . The creation of the challenges will be available here soon...
+          </Link>{' '}
+          first. The creation of the challenges will be available here soon...
         </Text>
       ) : (
         availableGroupChallenges.map((t) => (
