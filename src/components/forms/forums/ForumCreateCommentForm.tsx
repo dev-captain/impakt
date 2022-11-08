@@ -1,19 +1,23 @@
 import { FormControl, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
 import { Common, I } from 'components';
+import { useForm } from 'hooks';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { InputGroupPropsI } from '../../common/InputGroup';
 import { usePersistedAuthStore, usePersistedForumStore } from '../../../lib/zustand';
 import { useCommentControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
 import { renderToast } from '../../../utils';
+import createCommentFormYupScheme from '../../../lib/yup/schemas/createCommentFormYupScheme';
 
 const ForumCreateCommentForm = React.forwardRef<
   HTMLInputElement,
   { onClose: () => void; postId: number }
 >((props, ref) => {
   const createComment = useCommentControllerV1CreateOne();
-  const { handleSubmit, setValue } = useForm({
+  const { handleSubmit, setValue, reset, getValues, errors } = useForm({
     defaultValues: { comment: '' },
+    resolver: yupResolver(createCommentFormYupScheme),
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -40,11 +44,11 @@ const ForumCreateCommentForm = React.forwardRef<
             shallowOfPosts[a] = {
               ...shallowOfPosts[a],
               Comment: [
-                ...shallowOfPosts[a].Comment,
                 {
                   ...newComment,
                   Creator: { ...member },
                 },
+                ...shallowOfPosts[a].Comment,
               ],
             };
             setPosts(shallowOfPosts);
@@ -53,17 +57,17 @@ const ForumCreateCommentForm = React.forwardRef<
               setActivePost({
                 ...activePost,
                 Comment: [
-                  ...activePost.Comment,
                   {
                     ...newComment,
                     Creator: { ...member },
                   },
+                  ...activePost.Comment,
                 ],
               });
             }
           }
-
           renderToast('success', 'Comment added successfully.', 'white');
+          reset({ comment: '' });
           props.onClose();
         },
         onError: (err) => {
@@ -80,6 +84,8 @@ const ForumCreateCommentForm = React.forwardRef<
     name: 'comment',
     label: 'Comment',
     whiteMode: true,
+    value: getValues('comment'),
+    errorMsg: errors?.comment?.message,
   };
 
   return (
@@ -106,6 +112,8 @@ const ForumCreateCommentForm = React.forwardRef<
         type="submit"
         fontSize={{ md: '16px' }}
         fontWeight="700"
+        isLoading={createComment.isLoading}
+        isDisabled={createComment.isLoading}
       >
         <I.SendIcon fontSize="10px" />
         <Text marginLeft="10px">Send</Text>

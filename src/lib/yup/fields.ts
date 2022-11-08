@@ -76,6 +76,11 @@ const post = yup
   .max(200, `You can't use more than 280 characters.`)
   .required('Post content is required field...');
 
+const comment = yup
+  .string()
+  .max(200, `You can't use more than 280 characters.`)
+  .required('Comment content is required field...');
+
 export {
   email,
   password,
@@ -92,4 +97,5 @@ export {
   eventTime,
   assocId,
   post,
+  comment,
 };

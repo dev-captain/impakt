@@ -152,7 +152,12 @@ const GroupDetails: React.FC = () => {
   const getGroupForum = async () => {
     if (fetchPosts.isFetched) {
       if (fetchPosts.isSuccess) {
-        setPosts(fetchPosts.data ?? []);
+        // TODO on the backend sort new ones to old ones for comment & posts
+        const reversedCommentPostsOrder = fetchPosts.data.map((postD) => {
+          return { ...postD, Comment: postD.Comment.reverse() };
+        });
+
+        setPosts(reversedCommentPostsOrder ?? []);
       }
     }
   };
