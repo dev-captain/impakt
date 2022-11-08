@@ -77,10 +77,7 @@ const CollapseSidebar = () => {
           borderColor="#2e2b2b"
           backdropFilter="blur(40px)"
         >
-          <MenuItem
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-          >
+          <MenuItem>
             <SidebarLinkItem
               isTransparent
               hide
@@ -91,10 +88,7 @@ const CollapseSidebar = () => {
               <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
             </SidebarLinkItem>
           </MenuItem>
-          <MenuItem
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-          >
+          <MenuItem>
             <SidebarLinkItem
               isTransparent
               hide

@@ -1,6 +1,7 @@
 import { Box, Image, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react';
 import Images from 'assets/images';
-import { I, Common } from 'components';
+import { Common } from 'components';
+import PersonalSocialMediaWrapper from '../../../common/PersonalSocialMediaWrapper';
 
 const { UserIcon } = Images.impaktIcons;
 
@@ -15,7 +16,7 @@ const IconsCard = ({
   name: string;
   title: string;
   subtitle?: string[];
-  socialMedia?: { platform: string; href: string }[];
+  socialMedia: any;
 }) => {
   return (
     <VStack
@@ -176,38 +177,7 @@ const IconsCard = ({
                 backfaceVisibility: 'visible',
               }}
             >
-              {socialMedia &&
-                socialMedia.map(({ platform, href }) => (
-                  <Box
-                    as="a"
-                    href={href}
-                    borderRadius="8px"
-                    display="flex"
-                    justifyContent="center"
-                    paddingY="5px"
-                    marginBottom="5px"
-                    cursor="pointer"
-                    alignItems="center"
-                    transition="0.5s"
-                    backdropFilter="blur(40px)"
-                    color="rgba(255, 255, 255, 0.75)"
-                    backgroundColor="rgba(255, 255, 255, 0.1)"
-                    _hover={{ backgroundColor: '#FFF', color: '#000' }}
-                    rowGap="8px"
-                    columnGap="8px"
-                  >
-                    <Box bgColor="transparent">
-                      {platform === 'Instagram' && <I.IGIcon width="20px" />}
-                      {platform === 'TikTok' && <I.TikTokIcon width="20px" />}
-                      {platform === 'Facebook' && <I.FBIcon width="20px" />}
-                      {platform === 'Website' && <I.WebIcon width="20px" />}
-                      {platform === 'Twitter' && <I.TwitterIcon width="20px" />}
-                    </Box>
-                    <Box>
-                      <Text textStyle="semiBold165">{platform}</Text>
-                    </Box>
-                  </Box>
-                ))}
+              <PersonalSocialMediaWrapper socialMedia={socialMedia} />
             </Box>
           </Common.FlipCardBox>
         </Box>

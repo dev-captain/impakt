@@ -1,7 +1,9 @@
 import { Box, HStack, VStack } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
-import { C } from 'components';
+import { useState } from 'react';
+import { C, I } from 'components';
 import Navbar from './Navbar';
 import CollapseSidebar from './Navbar/CollapseSidebar';
 
@@ -14,10 +16,12 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   isShowFooter = false,
   isShowNavbar = false,
 }) => {
+  const [isClose, setIsClose] = useState(false);
+
   return (
-    <Box bgColor="#060609" minH="100vh" position="relative">
+    <Box bgColor="#EEF4F6" minH="100vh" position="relative">
       {isShowNavbar && (
-        <Box bgColor="#060609" as="nav" w="full" minH="80px">
+        <Box bgColor="#EEF4F6" as="nav" w="full" minH="80px">
           <Navbar isVersion2 position="fixed" />
         </Box>
       )}
@@ -29,17 +33,17 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         zIndex="333"
         top="100px"
         color="white"
-        display={{ base: 'flex', lg: ' none' }}
+        display={{ base: 'initial', lg: ' none' }}
       >
-        <Box marginX="16px" w="100%">
+        <Box marginX="16px">
           <CollapseSidebar />
         </Box>
         {/* TODO  Sidebar */}
       </Box>
       <VStack
         as="main"
-        bgColor="#060609"
-        color="white"
+        bgColor="#EEF4F6"
+        color="#000"
         position="relative"
         justifyContent="flex-start"
         alignItems="flex-start"
@@ -56,16 +60,35 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           <VStack
             position="fixed"
             height="100%"
-            p="3em 2em"
+            p="3em 0"
             display={{ base: 'none', lg: 'flex' }}
-            w={{ base: 0, lg: '20vw' }}
-            minW={{ base: 0, lg: '260px' }}
-            bgColor="rgba(28, 28, 40, 0.65)"
+            w={{ base: 0, lg: isClose ? '80px' : '20vw' }}
+            minW={{ base: 0, lg: isClose ? '80px' : '260px' }}
+            transition="width .2s ease-in, min-width .2s linear"
+            bgColor="white"
             as="aside"
             justifyContent="flex-start"
             alignItems="flex-start"
           >
-            <C.Sidebar />
+            <Box
+              width="100%"
+              display="flex"
+              justifyContent={isClose ? 'center' : 'end'}
+              paddingRight={isClose ? '0' : '24px'}
+            >
+              {isClose === true ? (
+                <HamburgerIcon
+                  onClick={() => setIsClose(!isClose)}
+                  color="#4E6070"
+                  width="24px"
+                  height="32px"
+                  cursor="pointer"
+                />
+              ) : (
+                <I.CloseIcon onClick={() => setIsClose(!isClose)} cursor="pointer" />
+              )}
+            </Box>
+            <C.Sidebar collaps={isClose} />
             {/* TODO  Sidebar */}
           </VStack>
 
@@ -73,7 +96,11 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             w="full"
             id="content-container"
             m="0 !important"
-            marginLeft={{ base: '0', lg: '20vw !important' }}
+            marginLeft={{
+              base: '0',
+              lg: !isClose ? '20vw !important' : '5vw !important',
+            }}
+            transition="margin-left .2s ease-in"
             p={{ sm: '0 1em', lg: '3em 3em 3em 3em' }}
             marginTop={{ sm: '100px !important', lg: '0px !important' }}
           >
