@@ -3,16 +3,15 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import { I } from 'components';
+import { useAppSelector } from 'hooks';
 import InfoSection from 'components/common/InfoSection';
-
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 import ExerciseHistory from '../ExerciseHistory/ExerciseHistory';
 import Exercises from '../ExerciseHistory/Exercises';
-import { usePersistedBalanceScoreStore } from '../../../../lib/zustand';
 
 const RewardHistory: React.FC = () => {
   const { t } = useTranslation().i18n;
-  const { godlBalanceScore } = usePersistedBalanceScoreStore();
+  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
 
   return (
     <Box w="full" as="section" id="general-section">

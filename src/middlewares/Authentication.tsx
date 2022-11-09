@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { usePersistedAuthStore } from '../lib/zustand';
+import { useAppSelector } from 'hooks';
 
 const Authentication: React.FC = ({ children }) => {
-  const { member } = usePersistedAuthStore();
-
+  const member = useAppSelector((state) => state.memberAuth.member);
   const navigate = useNavigate();
   const location = useLocation();
 

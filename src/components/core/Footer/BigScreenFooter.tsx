@@ -1,20 +1,30 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { VStack, Text, SimpleGrid, GridItem, HStack, Box, Link } from '@chakra-ui/react';
+import { VStack, Text, SimpleGrid, GridItem, HStack, Image, Box, Link } from '@chakra-ui/react';
+import Images from 'assets/images';
+import { Socials } from 'data';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import { I } from 'components';
-import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
 
 type Props = {
   bgColor: string;
+  logo: string;
   textColor: string;
+  twitter: string;
+  discord: string;
+  youtube: string;
 };
 
-const BigScreenFooter = ({ bgColor, textColor }: Props) => {
+const BigScreenFooter = ({ bgColor, logo, textColor, twitter, youtube, discord }: Props) => {
   const { t } = useTranslation().i18n;
   const navigate = useNavigate();
+  const _hover = {
+    _hover: {
+      transition: '0.2s ease',
+      transform: 'scale(1.25)',
+    },
+  };
 
   return (
     <VStack
@@ -36,9 +46,7 @@ const BigScreenFooter = ({ bgColor, textColor }: Props) => {
                 h="full"
                 justify="center"
               >
-                <Box cursor="pointer" onClick={() => navigate('/')} mr="32px">
-                  <I.ImpaktIcon width="111px" height="32px" />
-                </Box>
+                <Image src={logo || Images.Common.Logo} onClick={() => navigate('/')} />
                 <VStack spacing="8px" align={{ base: 'center', md: 'flex-start' }}>
                   <HStack
                     display="flex"
@@ -74,7 +82,41 @@ const BigScreenFooter = ({ bgColor, textColor }: Props) => {
           </SimpleGrid>
         </GridItem>
         <GridItem colSpan={{ base: 5, md: 1 }} marginTop={{ base: 0, md: '60px' }}>
-          <NavBarSocialIcons />
+          <HStack justify={{ base: 'center', md: 'flex-end' }} spacing="32px" pl="64px">
+            <Box as="a" target="_blank" href={Socials.twitter}>
+              <Image
+                maxW="30px"
+                minW="30px"
+                h="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={twitter}
+                {..._hover}
+              />
+            </Box>
+            <Box as="a" target="_blank" href={Socials.discord}>
+              <Image
+                maxW="30px"
+                minW="30px"
+                h="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={discord}
+                {..._hover}
+              />
+            </Box>
+            <Box as="a" target="_blank" href={Socials.youtube}>
+              <Image
+                maxW="30px"
+                minW="30px"
+                h="30px"
+                opacity={0.6}
+                objectFit="contain"
+                src={youtube}
+                {..._hover}
+              />
+            </Box>
+          </HStack>
         </GridItem>
       </SimpleGrid>
     </VStack>

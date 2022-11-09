@@ -54,7 +54,6 @@ export default {
     help: 'Help',
     signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
-    notification: 'Notifications',
   },
   computerVision: {
     computerVision: 'COMPUTER VISION',
@@ -133,13 +132,9 @@ export default {
           '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.',
         subtitle1:
           'Previous 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
-
-        socialMedia: [
-          {
-            platform: 'Twitter',
-            href: 'https://twitter.com/demideuszin',
-          },
-        ],
+        twitterLink: 'https://twitter.com/demideuszin',
+        linkedInLink: '',
+        facebookLink: '',
       },
       {
         name: 'Valtec',
@@ -149,13 +144,9 @@ export default {
         subtitle: ' <span style="color:#FFF;">10+ years</span> of building technology companies.',
         subtitle1:
           'Previous roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
-        socialMedia: [
-          {
-            platform: 'Twitter',
-            href: 'https://twitter.com/shabamanation?s=21&t=WPEL7jC2IhTtV1U-9I-_Kw',
-          },
-          { platform: 'LinkedIn', href: 'https://www.linkedin.com/in/john-keh' },
-        ],
+        twitterLink: 'https://twitter.com/shabamanation?s=21&t=WPEL7jC2IhTtV1U-9I-_Kw',
+        linkedInLink: 'https://www.linkedin.com/in/john-keh',
+        facebookLink: '',
       },
       {
         name: 'Dahaka',
@@ -166,6 +157,9 @@ export default {
           ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.',
         subtitle1:
           'Managing a team of <span style="color:#FFF;">20+</span> engineers & product managers',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
       },
     ],
   },
@@ -235,17 +229,10 @@ export default {
     q4_1: 'Develop Computer Vision System',
     q1_1: 'Alpha Test App',
     q1_2: 'Daily/Weekly Routines',
-    q1_3: 'Community Outreach',
-    q1_4: 'Whitelist Opens',
-    q2_1: 'Beta Test App ',
-    q2_2: 'iOS Mobile App',
-    q2_3: 'Athlete Partnerships',
-    q2_4: 'Movement Controlled Avatar',
-    q3_1: 'IDO',
-    q3_2: 'Genesis NFT Mint',
-    q3_3: 'Minigames',
-    q3_4: 'Tournaments',
-    q3_5: 'Marketplace',
+    q1_3: 'Centralized Economy',
+    q2_1: 'Genesis NFT Mint',
+    q2_2: 'Decentralized Economy',
+    q3_1: 'Release SDK',
   },
   contactUs: {
     us: 'Us',
@@ -319,7 +306,7 @@ export default {
       headline: 'Referrals',
       subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#4E6070">1000 Koin</strong> and they receive <strong style="color:#4E6070">5000 Koin</strong>.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">1000 Koin</strong> and they receive <strong style="color:#FEC417">5000 Koin</strong>.',
       subDescription:
         'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
       discription_list1: 'WLs',
@@ -350,12 +337,6 @@ export default {
       koin: 'Koins',
     },
   },
-  NFTGeneral: {
-    title: 'NFT Designed in Partnership with an Oscar Winner.',
-    subTitle: 'A Dynamic NFT.',
-    howToWhiteList: 'How to Whitelist?',
-    cardInfo: 'Our AI technology recognizes your gestures & movements in real time',
-  },
   NFTGenesis: {
     Title: 'Impakt Genesis NFT',
     description:
@@ -380,46 +361,6 @@ export default {
         description: 'A dynamic NFT where high in-game score = high rarity',
       },
     ],
-  },
-  DynamicNFT: {
-    title: 'A Dynamic NFT?',
-    description:
-      'How will this work with Impakt Genesis? Simple, the highest rarities like Platinum, Diamond and Legend, can only be obtained by exercising daily! Hoping for a high rarity at reveal won&apos;t help. You&apos;ll have to sweat for it!',
-    cardInfo: 'More sweat, higher rarity!',
-    plans: [
-      {
-        title: 'GOLD',
-        image: Images.nft.gold,
-        imageThumb: Images.nft.goldThumb,
-        imageRect: Images.nft.goldRect,
-      },
-      {
-        title: 'Silver',
-        image: Images.nft.platinum,
-        imageThumb: Images.nft.platinuThumb,
-        imageRect: Images.nft.platinumRect,
-      },
-      {
-        title: 'Bronze',
-        image: Images.nft.bronze,
-        imageThumb: Images.nft.bronzethumb,
-        imageRect: Images.nft.bronzeRect,
-      },
-    ],
-  },
-  Message: {
-    MyChallengeMsg: {
-      description:
-        'You haven`t created any challenges yet. Download our desktop app and create your first challenge now',
-    },
-    PublicToolTip: {
-      description:
-        '<b>Public:</b><br /><br />Recommended for growing a following.<br />&nbsp;&nbsp;•Anyone can find your group<br />&nbsp;&nbsp;•Anyone can join(no approval needed)<br />&nbsp;&nbsp;•Anyone can view group content<br /><br /><b>Private:</b><br />Recommended for closed circles (e.g. friends, family)<br />&nbsp;•Only group members can view group content<br />&nbsp;&nbsp;•People can only join if you manually accept their join request',
-    },
-    PrivateToolTip: {
-      description:
-        'Only group members can view group content<br />People can only join if you manually accept their join request',
-    },
   },
   Evolving: {
     // builders: 'IMPAKT BUILDERS',

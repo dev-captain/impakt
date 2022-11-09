@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { usePascalCase } from 'hooks';
+import { usePascalCase, useAppSelector } from 'hooks';
 // import { useTranslation } from 'react-i18next';
 // import keys from 'i18n/types';
 
 import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import { usePersistedFitnessStore } from '../../../../lib/zustand';
 
 const Excercise: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const { convertToPascalCase } = usePascalCase();
-  const excerciseStatistics = usePersistedFitnessStore();
+  const excerciseStatistics = useAppSelector((state) => state.fitnessReducer.exerciseState);
   const [pascalCasedExerciseStates, setPascalCasedExerciseStates] = React.useState<
     ({
       repetitions: any;
@@ -19,8 +18,8 @@ const Excercise: React.FC = () => {
   >();
 
   React.useEffect(() => {
-    if (excerciseStatistics.exerciseState.length > 0) {
-      const pascalCasedExStatics = excerciseStatistics.exerciseState.map((stats: any) => {
+    if (excerciseStatistics && excerciseStatistics.length > 0) {
+      const pascalCasedExStatics = excerciseStatistics.map((stats: any) => {
         if (stats && stats.exercise) {
           const convertedLabel = convertToPascalCase(stats.exercise);
 
@@ -31,7 +30,7 @@ const Excercise: React.FC = () => {
       });
       setPascalCasedExerciseStates(pascalCasedExStatics);
     }
-  }, [excerciseStatistics.exerciseState]);
+  }, [excerciseStatistics]);
 
   return (
     <MemberDashboardCard
@@ -50,7 +49,9 @@ const Excercise: React.FC = () => {
         id="whitelist-challange-description-box-2"
         position="relative"
       >
-        <Text textStyle={{ base: 'bold4', lg: 'bold5' }}>Exercise Statistics</Text>
+        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
+          Exercise Statistics
+        </Text>
       </Box>
 
       <TableContainer borderRadius={10} w="100%" sx={{ marginTop: '0px !important' }}>
@@ -59,7 +60,7 @@ const Excercise: React.FC = () => {
             <Tr bgColor="#121216">
               <Th
                 textAlign="start"
-                color="#fff"
+                color="rgba(255, 255, 255, 0.4) "
                 borderBottom={0}
                 textTransform="capitalize"
                 whiteSpace="normal"
@@ -68,7 +69,7 @@ const Excercise: React.FC = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="#fff"
+                color="rgba(255, 255, 255, 0.4)"
                 borderBottom={0}
                 whiteSpace="normal"
                 textTransform="capitalize"

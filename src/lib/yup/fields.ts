@@ -25,77 +25,7 @@ const fourDigit = yup
 
 const walletAddress = yup
   .string()
-  .matches(/^0x[a-fA-F0-9]{40}$/g, 'It must be valid crypto address 0x... (ETH)')
+  .matches(/^0x[a-fA-F0-9]{40}$/g, 'It must be valid crypto address 0x...')
   .required('Wallet Address is required field');
 
-const topic = yup.string().required('Topic is required field');
-
-const message = yup.string().required('Message is required field');
-
-const groupName = yup
-  .string()
-  .required('Field is required')
-  .min(1, 'Group name must be at least 1 characters')
-  .max(30, 'Group name must be at max 30 characters');
-
-export const ALLOW_IMAGE_FILE: string[] = ['image/png', 'image/jpeg'];
-
-const file = yup
-  .mixed()
-  .required('File is required')
-  .test(
-    'fileSize',
-    'File too large',
-    (value) => value === null || (value && value.size <= 1 * 1024 * 1024),
-  )
-  .test(
-    'fileFormat',
-    'Unsupported file type',
-    (value) => value === null || (value && ALLOW_IMAGE_FILE.includes(value.type)),
-  );
-
-const eventTitle = yup
-  .string()
-  .required('Event title is required field')
-  .max(50, `You can't use more than 50 characters.`)
-  .required('Event description is required field');
-
-const eventDescription = yup
-  .string()
-  .max(50, `You can't use more than 50 characters.`)
-  .required('Event description is required field');
-
-const eventTime = yup.string().required('Event time is required field');
-const assocId = yup
-  .number()
-  .required('Challenge is required please select one...')
-  .typeError('Challenge is required please select one...');
-
-const post = yup
-  .string()
-  .max(200, `You can't use more than 280 characters.`)
-  .required('Post content is required field...');
-
-const comment = yup
-  .string()
-  .max(200, `You can't use more than 280 characters.`)
-  .required('Comment content is required field...');
-
-export {
-  email,
-  password,
-  memberName,
-  fourDigit,
-  passwordConfirmation,
-  walletAddress,
-  topic,
-  message,
-  groupName,
-  file,
-  eventTitle,
-  eventDescription,
-  eventTime,
-  assocId,
-  post,
-  comment,
-};
+export { email, password, memberName, fourDigit, passwordConfirmation, walletAddress };

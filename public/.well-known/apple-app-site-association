@@ -3,9 +3,9 @@
     "apps": [],
     "details": [
       {
-        "appID": "WJ6C73996T.com.impakt.fitness",
+        "appID": "WJ6C73996T.com.impakt.Minigames",
         "paths": [
-          "/dashboard/groups/group/*/event/*"
+          "/ios"
         ]
       }
     ]

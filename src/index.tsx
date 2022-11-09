@@ -5,28 +5,30 @@ import './index.css';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { persistor, store } from './lib/redux/store';
 import { PusherContextProvider } from './context/PusherContext';
-
-const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
-    <PusherContextProvider>
-      <HelmetProvider>
-        <BrowserRouter>
-          <ChakraProvider theme={theme}>
-            <ColorModeScript initialColorMode="light" />
-            <QueryClientProvider client={queryClient}>
-              <App />
-            </QueryClientProvider>
-          </ChakraProvider>
-        </BrowserRouter>
-      </HelmetProvider>
-    </PusherContextProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <PusherContextProvider>
+          <HelmetProvider>
+            <BrowserRouter>
+              <ChakraProvider theme={theme}>
+                <ColorModeScript initialColorMode="light" />
+                <App />
+              </ChakraProvider>
+            </BrowserRouter>
+          </HelmetProvider>
+        </PusherContextProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

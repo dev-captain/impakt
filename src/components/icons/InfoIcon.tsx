@@ -10,8 +10,8 @@ const InfoIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="currentColor"
-      fillOpacity="1"
+      fill="#fff"
+      fillOpacity="0.7"
       d="M11 7H9V5h2v2zm0 8H9V9h2v6zM10 0a10 10 0 100 20 10 10 0 000-20z"
     />
   </svg>

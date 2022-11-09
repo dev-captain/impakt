@@ -13,7 +13,7 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
 AOS.init();
 
 const ImpaktNFT = () => {
-  const bgImage = useColorModeValue(Images.backgrounds.nftBg, Images.backgrounds.light);
+  const bgImage = useColorModeValue(Images.impaktNFT.Header, Images.impaktNFT.light);
   const { t } = useTranslation(`default`).i18n;
 
   return (

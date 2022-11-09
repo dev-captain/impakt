@@ -10,19 +10,10 @@ import {
   FitnessStatsApi,
   ReferralsApi,
   CoinApi,
-  ChallengesApi,
-  CalendarApi,
-  LikesApi,
-  DefaultApi,
-  GroupsApi,
-  GroupsMemberApi,
-  GroupsRequestApi,
-  CalendarEventsDataModelApi,
-  PostsApi,
 } from '@impakt-dev/api-client';
 import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
-import theme, { toastDarkLayout } from '../../theme';
+import theme from '../../theme';
 
 const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
 
@@ -67,34 +58,22 @@ export const configuration = createConfiguration({
 
                   error.statusCode = errorRes.statusCode ?? 500;
                   error.message = errorRes.message ?? 'Something went wrong..';
-                  if (
-                    error.statusCode >= 400 &&
-                    error.statusCode !== 404 &&
-                    error.statusCode < 500
-                  ) {
+                  if (error.statusCode >= 400 && error.statusCode < 500) {
                     if (Array.isArray(error.message)) {
                       error.message.forEach((message) => {
                         toast({
-                          id: 'error-msg',
                           description: message,
                           status: 'error',
                           duration: 4000,
                           isClosable: true,
-                          position: 'top-right',
-                          variant: 'glass',
-                          containerStyle: toastDarkLayout,
                         });
                       });
                     } else {
                       toast({
-                        id: 'error-msg',
                         description: error.message,
                         status: 'error',
                         duration: 4000,
                         isClosable: true,
-                        position: 'top-right',
-                        variant: 'glass',
-                        containerStyle: toastDarkLayout,
                       });
                     }
                   }
@@ -116,15 +95,5 @@ export const authInstance = new AuthApi(configuration);
 export const godlInstance = new GodlApi(configuration);
 export const koinInstance = new CoinApi(configuration);
 export const UserInstance = new UsersApi(configuration);
-// UserInstance.userControllerGetUsers(undefined, undefined, undefined);
 export const FitnessInstance = new FitnessStatsApi(configuration);
 export const ReferralsInstance = new ReferralsApi(configuration);
-export const ChallengeInstance = new ChallengesApi(configuration);
-export const CalendarInstance = new CalendarApi(configuration);
-export const CalendarInstance2 = new CalendarEventsDataModelApi(configuration);
-export const LikeInstance = new LikesApi(configuration);
-export const AttemptInstance = new DefaultApi(configuration);
-export const GroupsInstance = new GroupsApi(configuration);
-export const GroupsMemberInstance = new GroupsMemberApi(configuration);
-export const GroupsRequestInstance = new GroupsRequestApi(configuration);
-export const PostsInstance = new PostsApi(configuration);

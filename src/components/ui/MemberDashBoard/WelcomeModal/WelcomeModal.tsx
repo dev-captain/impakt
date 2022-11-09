@@ -1,20 +1,17 @@
 import { Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
+import { useAppSelector } from 'hooks';
 
+import Whitelist from '../../../../assets/svgs/Vector.svg';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import {
-  usePersistedAuthStore,
-  usePersistedBalanceScoreStore,
-  usePersistedFitnessStore,
-} from '../../../../lib/zustand';
-import { I } from '../../..';
 
 const WelcomeModal: React.FC = () => {
-  const { member } = usePersistedAuthStore();
-  const { activeDays } = usePersistedFitnessStore();
-  const { godlBalanceScore, koinBalanceScore } = usePersistedBalanceScoreStore();
-  const { isWhitelistedCollection } = usePersistedAuthStore();
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const activeDays = useAppSelector((state) => state.fitnessReducer.activeDays);
+  const godlBalanceScore = useAppSelector((state) => state.godl.godlBalanceScore);
+  const koinBalanceScore = useAppSelector((state) => state.koin.koinBalanceScore);
+  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
   const memberName = member?.username;
   const memberInfo = memberName?.split('#');
 
@@ -27,22 +24,22 @@ const WelcomeModal: React.FC = () => {
     >
       <Box
         display="flex"
-        alignItems="center"
+        alignItems="baseline"
         mt="0 !important"
         letterSpacing="-0.04em !important"
         id="whitelist-challange-description-box-2"
       >
-        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#000">
+        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#FFFFFF">
           {memberInfo?.map((data, i) => (
-            <span key={data} style={{ color: `${i === 1 ? 'gray' : '#000'}` }}>
+            <span key={data} style={{ color: `${i === 1 ? 'gray' : 'white'}` }}>
               {i === 1 ? `#` : `Hi, `}
               {data}
             </span>
           ))}
         </Text>
-        {isWhitelistedCollection.isWhitelisted && (
+        {isWhitelisted && (
           <Box ms={3}>
-            <I.HeartIcon />
+            <img src={Whitelist} alt="Whitelist" />
           </Box>
         )}
       </Box>
@@ -50,7 +47,7 @@ const WelcomeModal: React.FC = () => {
         <Text color="#FEC417" textStyle="regular4">
           Nice to see you!
         </Text>
-        {isWhitelistedCollection.isWhitelisted && (
+        {isWhitelisted && (
           <Text mt={{ base: '0px', lg: '8px' }} textStyle="regular3">
             You are whitelisted. Congrats!
           </Text>
@@ -134,13 +131,19 @@ const WelcomeModal: React.FC = () => {
           borderRadius="20px"
           padding="12px 24px"
           h="auto"
-          bg="#F5F8FA"
+          bg="rgba(9, 9, 11, 0.4)"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
-            <Text Text color="#29323B" textAlign="center" textStyle="bold5">
+            <Text Text color="#FFFFFF" textAlign="center" textStyle="bold5">
               {activeDays}
             </Text>
-            <Text color="#728BA3" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
+            <Text
+              color="rgba(255, 255, 255, 0.4)"
+              textAlign="center"
+              mt="2px"
+              textStyle="regular3"
+              fontWeight={500}
+            >
               Active days
             </Text>
           </Box>

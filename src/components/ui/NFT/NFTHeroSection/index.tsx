@@ -12,130 +12,140 @@ import {
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { C, Common, I } from 'components';
+import { useNavigate } from 'react-router-dom';
 import { useParallax } from 'hooks';
 // import useModalStore from 'hooks/store/useModalStore';
 // import DownloadTitleItem from './DownloadTitleItem';
 // import Gradient from './Gradient';
 
 const NFTHeroSection = () => {
-  const [isLessThanMd] = useMediaQuery('(max-width:992px)');
+  const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.nft_bg, Images.nft.nft_bg);
   const { oscar } = Images.nft;
   const { t } = useTranslation(`default`).i18n;
   const cardRef = React.useRef<HTMLDivElement>(null);
-  const imageBoxRef = React.useRef<HTMLImageElement>(null);
+  const imageBoxRef = React.useRef<HTMLDivElement>(null);
   useParallax(cardRef, [imageBoxRef], { range: 25 });
+  const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
 
   return (
     <C.HeroLayout
       showNavbar
-      minH="100vh"
+      minH="70vh"
+      spacing={10}
       pos="relative"
       bgImage={bgImage}
-      justify="flex-start"
-      align="flex-start"
+      align="center"
+      justify="center"
     >
-      <VStack px={{ base: '1em', lg: '0' }} mt={{ base: '38px', lg: '76px' }} w="full">
-        <HStack
-          rowGap="24px"
-          flexDir={{ base: 'column-reverse', lg: 'row' }}
-          position="relative"
-          alignItems="flex-start"
-          maxW="1200px"
-          w="full"
-        >
-          <VStack
-            align={{ base: 'center', md: 'flex-start' }}
-            w={{ base: '100%', md: '60%' }}
-            paddingX={{ base: '0' }}
-            rowGap="24px"
-            // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
-          >
-            <Box
-              bgClip="text"
-              w={{ base: '81%', lg: '100%' }}
-              color="white"
-              marginBottom={{ base: '0px', md: '39px' }}
-              sx={{
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-              background="linear-gradient(302.56deg, rgba(140, 48, 155, 0.44) 3.86%, rgba(140, 48, 155, 0) 52.18%), linear-gradient(57.44deg, rgba(56, 4, 193, 0.55) -14.75%, rgba(56, 4, 193, 0) 32.81%), #FFFFFF"
-              letterSpacing="-2.5px"
-            >
-              <Text
-                fontSize={{ base: '32px', md: '50px', lg: '64px' }}
-                lineHeight="100%"
-                textAlign={{ base: 'center', md: 'left' }}
-                marginTop="0 !important"
-                paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
-                fontWeight="700 !important"
-                letterSpacing={{ base: '-0.5px', lg: '-2.5px' }}
-              >
-                NFT Designed in Partnership with an Oscar Winner.
-              </Text>
-              <Text
-                fontSize={{ base: '32px', md: '50px', lg: '64px' }}
-                lineHeight={{ base: '100%', md: '100%' }}
-                textStyle={{ base: 'black7', md: 'black8' }}
-                textAlign={{ base: 'center', md: 'left' }}
-                marginTop="20px"
-                paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
-                letterSpacing={{ base: '-0.5px', lg: '-2.5px' }}
-              >
-                A Dynamic NFT.
-              </Text>
-            </Box>
-            <Box mb={{ base: '0px', lg: '1em' }} />
-            {/* <Common.ImpaktButton
-                as="a"
-                height={{ base: '50px', md: '64px' }}
-                textStyle="regular201"
-                borderRadius="12px"
-                minW={{ base: '168px', lg: '224px' }}
-                maxW={{ base: '168px', lg: '224px' }}
-                href="/download"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate('/download');
-                }}
-                boxShadow="0px 0px 0px 6px rgba(240, 65, 83, 0.3)"
-              >
-                How to Whitelist?
-              </Common.ImpaktButton> */}
-            {/* </Box> */}
-            <Common.InfoCard
-              alignItems="center"
-              LeftLogo={
-                <Box position="relative" top="10px">
-                  <I.RichIcon2
-                    width={isLessThanMd ? '40px' : '80'}
-                    height={isLessThanMd ? '36px' : ''}
-                  />
-                </Box>
-              }
-            >
-              <VStack justifyContent="flex-start" alignItems="flex-start" color="white">
-                <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
-                  {t(Keys.computerVision.aiDescription)}
-                </Text>
-              </VStack>
-            </Common.InfoCard>
-          </VStack>
-          <Box
-            right="-150px"
-            position={{ base: 'unset', md: 'absolute' }}
-            top="-2vw"
-            ref={cardRef}
-            align="inherit"
+      <VStack w="full" pt={{ base: '20px', md: '40px' }}>
+        <VStack maxW="1232px" w="full" px="16px">
+          <HStack
+            flexDir={{ base: 'column', md: 'row' }}
+            columnGap="auto"
+            rowGap={{ base: '10px' }}
             alignItems="flex-start"
-            alignSelf={{ base: 'center', lg: 'unset' }}
-            marginBottom={{ base: '0', md: '15px' }}
-            paddingX="2.45em"
+            w="full"
           >
-            <Image ref={imageBoxRef} src={oscar} />
-          </Box>
-        </HStack>
+            <VStack
+              align={{ base: 'center', md: 'flex-start' }}
+              spacing="22px"
+              w="100%"
+              paddingX={{ base: '0' }}
+              marginTop="50px"
+              order={{ base: '2', md: '1' }}
+              // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
+            >
+              <Box
+                bgClip="text"
+                color="white"
+                marginBottom={{ base: '0px', md: '32px' }}
+                sx={{
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+                background="linear-gradient(279.09deg, rgba(195, 45, 255, 0.35) 16.95%, rgba(195, 45, 255, 0) 45.26%), linear-gradient(80.91deg, rgba(192, 72, 74, 0.35) 1.01%, rgba(192, 72, 74, 0) 18%), #FFFFFF"
+              >
+                <Text
+                  fontSize={{ base: '32px', md: '50px', lg: '64px' }}
+                  lineHeight={{ base: '100%', md: '100%' }}
+                  textStyle={{ base: 'black7', md: 'black8' }}
+                  textAlign={{ base: 'center', md: 'left' }}
+                  marginTop="0 !important"
+                  paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
+                >
+                  NFT Designed in Partnership with an Oscar Winner.
+                </Text>
+                <Text
+                  fontSize={{ base: '32px', md: '50px', lg: '64px' }}
+                  lineHeight={{ base: '100%', md: '100%' }}
+                  textStyle={{ base: 'black7', md: 'black8' }}
+                  textAlign={{ base: 'center', md: 'left' }}
+                  marginTop="20px"
+                  paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
+                >
+                  A Dynamic NFT.
+                </Text>
+              </Box>
+              <Box marginBottom={{ base: '24px !important', lg: '44px !important' }}>
+                <Box
+                  border="6px solid rgba(240, 65, 83, 0.3)"
+                  borderRadius={{ base: '14px', md: '24px' }}
+                >
+                  <Common.ImpaktButton
+                    as="a"
+                    height="64px"
+                    textStyle="regular201"
+                    href="/download"
+                    size={isLessThan1040 ? 'sm' : 'lg'}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/download');
+                    }}
+                  >
+                    How to Whitelist?
+                  </Common.ImpaktButton>
+                </Box>
+              </Box>
+              <Box
+                display={{ base: 'flex', md: 'block' }}
+                justifyContent={{ base: 'center', lg: 'flex-start' }}
+                alignItems={{ base: 'flex-start', lg: 'flex-start' }}
+                id="our-ai-card-box"
+                w="full"
+                marginTop="0px !important"
+              >
+                <Common.InfoCard LeftLogo={<I.RichIcon2 />}>
+                  <VStack alignItems="flex-start" color="white">
+                    <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
+                      {t(Keys.computerVision.aiDescription)}
+                    </Text>
+                  </VStack>
+                </Common.InfoCard>
+              </Box>
+            </VStack>
+            <VStack
+              ref={cardRef}
+              align={{ base: 'center' }}
+              spacing="22px"
+              w="100%"
+              paddingX={{ base: '0' }}
+              order={{ base: '1', md: '2' }}
+              // flexDirection={{ base: 'column-reverse', sm: 'column-reverse', md: 'row' }}
+            >
+              <Box
+                ref={imageBoxRef}
+                align="inherit"
+                alignItems="flex-start"
+                marginBottom={{ base: '0', md: '15px' }}
+              >
+                <Box>
+                  <Image src={oscar} />
+                </Box>
+              </Box>
+            </VStack>
+          </HStack>
+        </VStack>
       </VStack>
     </C.HeroLayout>
   );

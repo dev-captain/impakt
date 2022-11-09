@@ -9,7 +9,7 @@ const SignUp: React.FC = () => {
   const { t } = useTranslation().i18n;
 
   return (
-    <VStack rowGap={{ base: '1.5em', lg: '2em' }} w="full">
+    <VStack w="full">
       <VStack w="full">
         <Box
           sx={{
@@ -17,16 +17,15 @@ const SignUp: React.FC = () => {
             WebkitTextFillColor: 'transparent',
           }}
           background="linear-gradient(79.07deg, rgba(223, 0, 220, 0.3) 0%, rgba(223, 0, 220, 0) 58.09%), linear-gradient(280.93deg, rgba(255, 11, 34, 0.3) 0%, rgba(255, 11, 34, 0) 58.09%), #FFFFFF;"
+          minH="80px"
           id="hero-headline-box"
           bgClip="text"
           color="white"
         >
           <Text
             textAlign={{ base: 'center', lg: 'unset' }}
-            letterSpacing={{ base: '-0.5px', lg: '-2.5px' }}
-            fontSize={{ base: '32px', lg: '64px' }}
-            lineHeight={{ base: '32px', lg: '64px' }}
-            fontWeight="700"
+            letterSpacing="-2.5px"
+            textStyle="TitleBold64"
           >
             {t(keys.signUp.createAn)}
           </Text>

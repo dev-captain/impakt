@@ -1,4 +1,4 @@
-import { ThemeOverride, extendTheme, theme as base, UseToastOptions } from '@chakra-ui/react';
+import { ThemeOverride, extendTheme, theme as base } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import buttons from './buttons';
 import colors from './colors';
@@ -43,26 +43,5 @@ export const layoutPadding = {
   xl: '120px',
   '2xl': '240px',
 };
-
-export const toastLayout = {
-  background: 'rgba(255, 255, 255, 0.5)',
-  border: '1px solid #fff',
-  boxShadow: '0px 5px 40px -10px rgba(0, 0, 0, 0.25)',
-  backdropFilter: 'blur(15px)',
-  color: '#000',
-  fill: 'Background',
-  borderRadius: '16px',
-  width: '360px',
-} as UseToastOptions['containerStyle'];
-
-export const toastDarkLayout = {
-  background: 'rgba(255, 255, 255, 0.1)',
-  border: '1px solid rgba(255, 255, 255, 0.1)',
-  boxShadow: '0px 5px 40px -5px rgba(0, 0, 0, 0.25)',
-  backdropFilter: 'blur(40px)',
-  color: '#fff',
-  borderRadius: '16px',
-  width: '360px',
-} as UseToastOptions['containerStyle'];
 
 export default extendTheme(theme);

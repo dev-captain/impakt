@@ -1,16 +1,17 @@
-import { Box, FormControl, VStack } from '@chakra-ui/react';
+import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'hooks';
+import { useAppDispatch, useAppSelector, useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
+import { forgotPassword } from '../../../lib/redux/slices/member/actions/forgotPassword';
 import recoverPasswordFormYupScheme from '../../../lib/yup/schemas/recoverPasswordScheme';
-import { useAuthControllerRequestPasswordReset } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
-import { renderToast } from '../../../utils';
 
 const RecoverPasswordForm: React.FC = () => {
-  const resetPassword = useAuthControllerRequestPasswordReset();
+  const toast = useToast();
+  const dispatch = useAppDispatch();
+  const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
   const { handleSubmit, errors, getValues, setValue } = useForm({
     defaultValues: { email: '' },
     resolver: yupResolver(recoverPasswordFormYupScheme),
@@ -23,17 +24,14 @@ const RecoverPasswordForm: React.FC = () => {
   const handleRecoverPasswordFormSubmit = async (data: any) => {
     const { email } = data as { email: string };
 
-    resetPassword.mutate(
-      { data: { email } },
-      {
-        onSuccess: () => {
-          renderToast('success', 'We have e-mailed your password reset link!', 'dark');
-        },
-        onError: (e) => {
-          renderToast('error', e.response?.data.message ?? 'Something went wrong', 'dark');
-        },
-      },
-    );
+    await dispatch(forgotPassword({ email })).unwrap();
+    toast({
+      title: 'Success',
+      description: 'We have e-mailed your password reset link!',
+      isClosable: true,
+      duration: 8000,
+      status: 'success',
+    });
   };
 
   const inputItems: InputGroupPropsI[] = [
@@ -67,7 +65,7 @@ const RecoverPasswordForm: React.FC = () => {
         <Box w={{ base: 'full', lg: '313px' }}>
           <Common.ImpaktButton
             isDisabled={!getValues('email')}
-            isLoading={resetPassword.isLoading}
+            isLoading={isMemberAuthLoading}
             type="submit"
             leftIcon={<I.SendIcon />}
             size="lg"

@@ -1,7 +1,10 @@
-import { Box, Image, Text, VStack } from '@chakra-ui/react';
-import PersonalSocialMediaWrapper from '../../../common/PersonalSocialMediaWrapper';
+import { Box, Image, Text, VStack, Link } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import Images from 'assets/images';
 
 // import colors from 'theme/colors';
+
+const { Twitter, TwitterLight, Facebook, FacebookDark, LinkedIn, LinkedInDark } = Images.Common;
 
 const TeamCard = ({
   image,
@@ -9,16 +12,41 @@ const TeamCard = ({
   title,
   subtitle,
   subtitle1,
-  socialMedia,
+  twitterLink,
+  linkedInLink,
+  facebookLink,
 }: {
   image: string;
   name: string;
   title: string;
   subtitle: string;
   subtitle1: string;
-  socialMedia: any;
+  twitterLink: string;
+  linkedInLink: string;
+  facebookLink: string;
 }) => {
+  const [twitterImg, setTwitterImg] = useState(Twitter);
+  const [facebookImg, setFacebookImg] = useState(Facebook);
+  const [linkedinImg, setLinkedinImg] = useState(LinkedIn);
   // const bgColor = useColorModeValue('glass.800', 'glass.200');
+  const handleOnMouseOverTeamSocial = (
+    e: React.MouseEvent<HTMLDivElement>,
+    socialImage: any,
+    hoverType: string,
+  ) => {
+    if (hoverType === 'Twitter') setTwitterImg(socialImage);
+    if (hoverType === 'Facebook') setFacebookImg(socialImage);
+    if (hoverType === 'LinkedIn') setLinkedinImg(socialImage);
+  };
+  const handleOnMouseLeaveTeamSocial = (
+    e: React.MouseEvent<HTMLDivElement>,
+    socialImage: any,
+    hoverType: string,
+  ) => {
+    if (hoverType === 'Twitter') setTwitterImg(socialImage);
+    if (hoverType === 'Facebook') setFacebookImg(socialImage);
+    if (hoverType === 'LinkedIn') setLinkedinImg(socialImage);
+  };
 
   return (
     <VStack
@@ -154,7 +182,120 @@ const TeamCard = ({
                 backfaceVisibility: 'visible',
               }}
             >
-              <PersonalSocialMediaWrapper socialMedia={socialMedia} />
+              {twitterLink && (
+                <Box
+                  borderRadius="8px"
+                  display="flex"
+                  paddingY="5px"
+                  marginBottom="5px"
+                  justifyContent="center"
+                  backdropFilter="blur(40px)"
+                  backgroundColor="rgba(255, 255, 255, 0.1)"
+                  alignItems="center"
+                  transition="0.2s"
+                  cursor="pointer"
+                  onMouseMove={(e) => handleOnMouseOverTeamSocial(e, TwitterLight, 'Twitter')}
+                  onMouseLeave={(e) => handleOnMouseLeaveTeamSocial(e, Twitter, 'Twitter')}
+                  _hover={{ backgroundColor: '#FFF', color: '#000' }}
+                >
+                  <Link
+                    href={twitterLink}
+                    target="_blank"
+                    width="100%"
+                    height="100%"
+                    _focus={{ boxShadow: 'none' }}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    // pointerEvents="none"
+                    _hover={{ textDecoration: 'none' }}
+                    //
+                  >
+                    <Image
+                      maxW="24px"
+                      minW="19px"
+                      h="32px"
+                      opacity={0.6}
+                      objectFit="contain"
+                      src={twitterImg}
+                      me="8px"
+                    />
+                    <Text textStyle="semiBold17">Twitter</Text>
+                  </Link>
+                </Box>
+              )}
+              {facebookLink && (
+                <Link
+                  href={facebookLink}
+                  target="_blank"
+                  _focus={{ boxShadow: 'none' }}
+                  _hover={{ textDecoration: 'none' }}
+                >
+                  <Box
+                    borderRadius="8px"
+                    display="flex"
+                    justifyContent="center"
+                    paddingY="5px"
+                    marginBottom="5px"
+                    backdropFilter="blur(40px)"
+                    backgroundColor="rgba(255, 255, 255, 0.1)"
+                    alignItems="center"
+                    cursor="pointer"
+                    transition="0.2s"
+                    onMouseMove={(e) => handleOnMouseOverTeamSocial(e, FacebookDark, 'Facebook')}
+                    onMouseLeave={(e) => handleOnMouseLeaveTeamSocial(e, Facebook, 'Facebook')}
+                    _hover={{ backgroundColor: '#FFF', color: '#000' }}
+                  >
+                    <Image
+                      maxW="20px"
+                      minW="20px"
+                      h="32px"
+                      opacity={0.6}
+                      objectFit="contain"
+                      src={facebookImg}
+                      me="8px"
+                    />
+                    <Text textStyle="semiBold17">Facebook</Text>
+                  </Box>
+                </Link>
+              )}
+              {linkedInLink && (
+                <Link
+                  href={linkedInLink}
+                  target="_blank"
+                  _focus={{ boxShadow: 'none' }}
+                  _hover={{ textDecoration: 'none' }}
+                >
+                  <Box
+                    borderRadius="8px"
+                    display="flex"
+                    justifyContent="center"
+                    paddingY="5px"
+                    marginBottom="5px"
+                    cursor="pointer"
+                    alignItems="center"
+                    transition="0.2s"
+                    backdropFilter="blur(40px)"
+                    backgroundColor="rgba(255, 255, 255, 0.1)"
+                    onMouseMove={(e: any) =>
+                      handleOnMouseOverTeamSocial(e, LinkedInDark, 'LinkedIn')
+                    }
+                    onMouseLeave={(e: any) => handleOnMouseLeaveTeamSocial(e, LinkedIn, 'LinkedIn')}
+                    _hover={{ backgroundColor: '#FFF', color: '#000' }}
+                  >
+                    <Image
+                      maxW="20px"
+                      minW="20px"
+                      h="32px"
+                      opacity={0.6}
+                      objectFit="contain"
+                      src={linkedinImg}
+                      me="8px"
+                    />
+                    <Text textStyle="semiBold17">LinkedIn</Text>
+                  </Box>
+                </Link>
+              )}
             </Box>
           </Box>
         ) : (

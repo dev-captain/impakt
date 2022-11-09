@@ -1,28 +1,28 @@
 import { useColorModeValue, VStack, Spinner, useToast } from '@chakra-ui/react';
 import { S, C } from 'components';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from 'hooks';
 
-import { parseUrlQueryParamsToKeyValuePairs, renderToast } from '../../utils';
-import { usePersistedAuthStore } from '../../lib/zustand';
-import { useAuthControllerSignAccessToken } from '../../lib/impakt-dev-api-client/react-query/auth/auth';
+import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
+import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
 
 const SignIn = () => {
-  const requestAccessToken = useAuthControllerSignAccessToken();
-  const { member } = usePersistedAuthStore();
-
   const isThereNextParam = useLocation().search.includes('next');
   const navigateTo = isThereNextParam ? useLocation().search.split('=')[1] : '/dashboard';
-  const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
-
-  const [requestAccessTokenAttemp, setRequestAccessTokenAttemp] = useState(0);
 
   const navigate = useNavigate();
   const toast = useToast();
-
+  const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
+  const member = useAppSelector((state) => state.memberAuth.member);
+  const requestAccessTokenAttemp = useAppSelector(
+    (state) => state.memberAuth.requestAccessTokenAttemptCount,
+  );
+
+  const dispatch = useAppDispatch();
 
   const requestAccessTokenAsync = useCallback(async () => {
     toast({
@@ -32,16 +32,21 @@ const SignIn = () => {
     });
 
     try {
-      const request = await requestAccessToken.mutateAsync({
-        data: {
-          DiscoursePayload: queryString.sso,
-          DiscourseSig: queryString.sig,
-        },
-      });
-      setRequestAccessTokenAttemp((prev) => prev + 1);
+      const request = await dispatch(
+        requestAccessToken({
+          discoursePayload: queryString.sso,
+          discourseSig: queryString.sig,
+        }),
+      ).unwrap();
 
-      if (request.DiscourseRedirectUrl === undefined) {
-        renderToast('error', 'Something went wrong...');
+      if (request.discourseRedirectUrl === undefined) {
+        toast({
+          title: 'Error',
+          description: ' "Something went wrong...',
+          isClosable: false,
+          duration: 2000,
+          status: 'error',
+        });
 
         return undefined;
       }
@@ -54,7 +59,7 @@ const SignIn = () => {
         status: 'success',
       });
 
-      return request.DiscourseRedirectUrl;
+      return request.discourseRedirectUrl;
     } catch (error: any) {
       return null;
     }
@@ -79,7 +84,7 @@ const SignIn = () => {
         navigate(navigateTo);
       }
     }
-  }, [requestAccessTokenAttemp]);
+  }, [member, requestAccessTokenAttemp]);
 
   return (
     <C.HeroLayout

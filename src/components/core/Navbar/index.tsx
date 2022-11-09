@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -10,13 +10,16 @@ import {
   useMediaQuery,
   useColorMode,
   PositionProps,
+  useToast,
 } from '@chakra-ui/react';
+import Images from 'assets/images';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
+import { useAppDispatch } from 'hooks';
 
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -24,29 +27,27 @@ import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import { useLogout } from '../../../hooks/useLogout';
-import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
-import { usePersistedGroupStore } from '../../../lib/zustand';
+import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 
 interface NavbarProps {
   position?: PositionProps['position'];
   isVersion2?: boolean;
 }
 // const { dark, light } = Images;
+const { Discord, Twitter, TwitterLight, DiscordLight, Youtube, YoutubeLight, Tiktok } =
+  Images.Common;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
-  const [notify, setNotify] = useState(false);
-  const logout = useLogout();
+  const dispatch = useAppDispatch();
+  const toast = useToast();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
-  const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-  const notifies = usePersistedGroupStore().groupRequests.filter(
-    (requestD) => requestD.status === 'Pending',
-  ).length;
+  // const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
 
   useEffect(() => {
     if (!isLessThan1280) {
@@ -57,18 +58,22 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   useEffect(() => {
     if (path.path === 'dashboard') {
       setColorMode('light');
-      if (notifies) {
-        setNotify(true);
-      } else {
-        setNotify(false);
-      }
     }
-  }, [path.path, notifies]);
+  }, [path.path]);
 
   const isLight = colorMode === 'light';
+  const youtube = isLight ? Youtube : YoutubeLight;
+  const discord = isLight ? Discord : DiscordLight;
+  const twitter = isLight ? Twitter : TwitterLight;
   const textColor = isLight ? 'glass.100' : 'glass.700';
   // const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
-  const bgColor = isVersion2 ? '#fff' : 'rgba(28, 28, 40, 0.65)';
+  const bgColor = path.path !== '' ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  const _hover = {
+    _hover: {
+      transition: '0.2s ease',
+      transform: 'scale(1.25)',
+    },
+  };
 
   return (
     <Box
@@ -79,7 +84,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
       px={isVersion2 && !isLessThan1280 ? '0' : '16px'}
       display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
-      background={isVersion2 ? '#eef4f6' : 'transparent'}
     >
       {isOpen && !isVersion2 && <Gradient />}
       <Flex
@@ -113,36 +117,37 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <I.ImpaktIcon whiteMode={!isVersion2} variant="lg" w="128px" />
+            <I.ImpaktIcon variant="lg" whiteMode w="128px" />
           </Box>
           <HStack
             justify="flex-end"
             align="center"
             w="full"
-            ml="0 !important"
-            // spacing={[0, 0, 3, 5, 8, 12]}
+            spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
           >
-            <HStack w="full" align="space-between" id="yo" justify="space-between">
-              <Box display="flex" ml="0 !important" justifyContent="center" w="full">
-                <NavBarLink IsHeader />
-              </Box>
+            <HStack w="full" align="space-between" justify="space-between">
+              <NavBarLink IsHeader />
 
-              {!isVersion2 && (
-                <HStack
-                  justify={{ base: 'center', md: 'flex-end' }}
-                  spacing="8px"
-                  pl={{ base: isVersion2 ? '0px' : '64px' }}
-                >
-                  <NavBarSocialIcons />
+              <HStack
+                justify={{ base: 'center', md: 'flex-end' }}
+                spacing="8px"
+                pl={{ base: isVersion2 ? '0px' : '64px' }}
+              >
+                {!isVersion2 && <NavBarSocialIcons />}
+                {!isVersion2 && (
                   <Box position="relative" display="flex">
                     <DropDownProfileMenu />
                   </Box>
+                )}
 
+                {!isVersion2 && (
                   <Box>
                     <SignInLinkItem />
                   </Box>
+                )}
 
+                {!isVersion2 && (
                   <Common.ImpaktButton
                     as="a"
                     href="/download"
@@ -153,8 +158,8 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   >
                     {t(Keys.navbar.download)}
                   </Common.ImpaktButton>
-                </HStack>
-              )}
+                )}
+              </HStack>
 
               {isVersion2 && (
                 <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
@@ -166,29 +171,11 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                       e.preventDefault();
                     }}
                     leftIcon={<I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />}
-                    variant="white"
+                    variant="secondary"
                   >
                     {t(Keys.navbar.dashboard)}
                   </Common.ImpaktButton>
-                  <Common.ImpaktButton
-                    as="a"
-                    p="10px 16px 10px 12px"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onOpen();
-                    }}
-                    leftIcon={
-                      // <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
-                      notify ? (
-                        <I.NotifyIcon cursor="pointer" width="14.33px" height="14.33px" />
-                      ) : (
-                        <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
-                      )
-                    }
-                    variant="white"
-                  >
-                    {t(Keys.navbar.notification)}
-                  </Common.ImpaktButton>
+
                   <Common.ImpaktButton
                     href="/contact"
                     as="a"
@@ -197,16 +184,22 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                       navigate('/contact');
                     }}
                     leftIcon={<I.HelpIcon cursor="pointer" width="14.33px" height="12.33px" />}
-                    variant="white"
+                    variant="secondary"
                   >
                     {t(Keys.navbar.help)}
                   </Common.ImpaktButton>
 
                   <Common.ImpaktButton
                     onClick={async () => {
-                      await logout().finally(() => {
-                        onClose();
+                      await dispatch(signOutMember()).unwrap();
+                      toast({
+                        title: 'Success',
+                        description: 'You have successfully logged out!',
+                        isClosable: true,
+                        duration: 8000,
+                        status: 'success',
                       });
+                      onClose();
                     }}
                     leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}
                     variant="alert"
@@ -295,19 +288,23 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             isOpen={isOpen}
             onToggle={onToggle}
             isLessThan1280={isLessThan1280}
-            isVersion2={isVersion2}
           />
         </HStack>
       </Flex>
-      {isLessThan1280 && (
-        <CollapseMenu
-          isOpen={isOpen}
-          onClose={onClose}
-          textColor={textColor}
-          isLessThan1040={isLessThan1280}
-        />
-      )}
-      {!isLessThan1280 && <NotificationDrawer open={isOpen} close={() => onClose()} />}
+      <CollapseMenu
+        isOpen={isOpen}
+        onClose={onClose}
+        bg={bgColor}
+        textColor={textColor}
+        isLessThan1040={isLessThan1280}
+        twitter={twitter}
+        discord={discord}
+        hover={_hover}
+        youtube={youtube}
+        tiktok={Tiktok}
+        // isScrolling={isScrolling}
+        isScrolling
+      />
     </Box>
   );
 };
@@ -317,7 +314,6 @@ export default Navbar;
 const Gradient = () => {
   return (
     <Box
-      id="gradient"
       zIndex={10}
       bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
       opacity="0.4"

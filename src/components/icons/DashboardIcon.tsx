@@ -1,7 +1,7 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { SVGProps } from 'react';
 
-const DashboardIcon = (props: IconProps) => (
-  <Icon
+const DashboardIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
     xmlns="http://www.w3.org/2000/svg"
     width="14"
     height="12"
@@ -14,7 +14,7 @@ const DashboardIcon = (props: IconProps) => (
       fillOpacity="1"
       d="M5.667 11.333v-4h2.667v4h3.333V6h2L7 0 .333 6h2v5.333h3.334z"
     />
-  </Icon>
+  </svg>
 );
 
 export default DashboardIcon;

@@ -81,20 +81,10 @@ export default {
     fontSize: ' 18px',
     lineHeight: '30px',
   },
-  semibold18: {
-    fontWeight: '600',
-    fontSize: ' 18px',
-    lineHeight: '24px',
-  },
   regular20: {
     fontWeight: '400',
     fontSize: ' 20px',
     lineHeight: '32px',
-  },
-  semibold20: {
-    fontWeight: '600',
-    fontSize: ' 20px',
-    lineHeight: '100%',
   },
   bold3: {
     fontSize: '16px',

@@ -16,18 +16,15 @@ import { C, Common, I } from 'components';
 import GenesisCard from './GenesisCard';
 
 const NFTGenesis = () => {
-  const [isLessThanMd] = useMediaQuery('(max-width:992px)');
   const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.nft.nft_genesis_bg, Images.nft.nft_genesis_bg);
   const bgImageMobile = Images.nft.nft_genesis_mobile_bg;
   const [isLessThan1040] = useMediaQuery('(max-width: 1080px)');
   let Genesis = useState<object[]>();
   Genesis = t('NFTGenesis.Genesis', { returnObjects: true });
-
   return (
     <C.HeroLayout
       //   showNavbar
-      customTopPadding="80px"
       minH="70vh"
       spacing={10}
       pos="relative"
@@ -38,11 +35,9 @@ const NFTGenesis = () => {
       backgroungRepeat="no-repeat"
       backgroundBlendMode="lighten"
       bgColor="#121216"
-      removeBottomPadding={isLessThan1040}
-      customPadding="100px"
     >
-      <VStack px={{ base: '1em', lg: '0' }} w="full">
-        <VStack maxW="1200px" w="full">
+      <VStack w="full">
+        <VStack maxW="1232px" w="full" px="16px">
           <HStack
             flexDir={{ base: 'column', md: 'row' }}
             columnGap="auto"
@@ -52,7 +47,7 @@ const NFTGenesis = () => {
           >
             <VStack
               align={{ base: 'center', md: 'flex-end' }}
-              justifyContent="space-between"
+              spacing="22px"
               w="100%"
               flexDir={{ base: 'column', md: 'row' }}
               paddingX={{ base: '0' }}
@@ -61,7 +56,7 @@ const NFTGenesis = () => {
             >
               <Box
                 color="white"
-                width={{ base: '100%', md: '43%' }}
+                width={{ base: '100%', md: '50%' }}
                 marginBottom={{ base: '24px', md: '0px' }}
               >
                 <Box width={{ base: '100%', md: '468px' }}>
@@ -69,6 +64,7 @@ const NFTGenesis = () => {
                     fontSize={{ base: '32px', md: '35px', lg: '48px' }}
                     lineHeight={{ base: '100%', md: '100%' }}
                     textStyle={{ base: 'black7', md: 'black8' }}
+                    textAlign={{ base: 'center', md: 'left' }}
                     marginTop="0 !important"
                     letterSpacing="-1.5px"
                     paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
@@ -77,6 +73,7 @@ const NFTGenesis = () => {
                   </Text>
                   <Text
                     textStyle={{ base: 'semiBold5', md: 'regular18' }}
+                    textAlign={{ base: 'center', md: 'left' }}
                     marginTop="32px"
                     color="rgba(255, 255, 255, 0.85)"
                   >
@@ -88,20 +85,12 @@ const NFTGenesis = () => {
                 display={{ base: 'flex', md: 'block' }}
                 justifyContent={{ base: 'center', lg: 'flex-start' }}
                 alignItems={{ base: 'flex-start', lg: 'flex-start' }}
-                width={{ base: '100%', md: '48%' }}
+                width={{ base: '100%', md: '50%' }}
                 id="our-ai-card-box"
                 w="full"
                 marginTop="0px !important"
               >
-                <Common.InfoCard
-                  wFull
-                  LeftLogo={
-                    <I.RichIconK
-                      width={isLessThanMd ? '40' : ''}
-                      height={isLessThanMd ? '36' : ''}
-                    />
-                  }
-                >
+                <Common.InfoCard wFull LeftLogo={<I.RichIconK />}>
                   <VStack alignItems="flex-start" color="white">
                     <Text
                       textStyle={{ base: 'semiBold5', md: 'regular18' }}

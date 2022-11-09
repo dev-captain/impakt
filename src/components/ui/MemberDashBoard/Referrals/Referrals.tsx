@@ -16,7 +16,7 @@ const Referrals: React.FC = () => {
       <InfoSection
         tooltipLink="https://knowledgebase.impakt.com/referral-rewards?category=all-resources"
         tooltipText={t(keys.memberDashboard.referrals.description)}
-        tooltipIcon={<I.InfoIcon color="#B0C3D6" width="20px" height="20px" />}
+        tooltipIcon={<I.InfoIcon width="20px" height="20px" />}
       />
       <HStack
         columnGap="24px"

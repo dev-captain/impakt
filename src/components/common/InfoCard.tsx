@@ -1,5 +1,7 @@
-import { Box, Flex, HStack, Tooltip, forwardRef, BoxProps } from '@chakra-ui/react';
-import { I } from 'components';
+import { Box, Flex, HStack, Tooltip, Image } from '@chakra-ui/react';
+import * as React from 'react';
+
+import TooltopIcon from '../../assets/svgs/tooltipIcon.svg';
 
 interface InfoCardPropsI {
   LeftLogo?: any;
@@ -8,10 +10,16 @@ interface InfoCardPropsI {
   onToolTipClick?: () => void;
   wFull?: boolean;
 }
-const InfoCard = forwardRef<BoxProps & InfoCardPropsI, 'div'>((props, ref) => {
+const InfoCard: React.FC<InfoCardPropsI> = ({
+  LeftLogo,
+  children,
+  isShowTooltip,
+  onToolTipClick,
+  tooltipLabel,
+  wFull = false,
+}) => {
   return (
     <HStack
-      ref={ref}
       paddingX={{ base: '12px', lg: '19px' }}
       paddingY={{ base: '12px', lg: '16px' }}
       borderRadius="16px"
@@ -19,24 +27,23 @@ const InfoCard = forwardRef<BoxProps & InfoCardPropsI, 'div'>((props, ref) => {
       background="rgba(28, 28, 40, 0.65)"
       id="info-card"
       w="100%"
-      maxW={props.wFull ? 'full' : '500px'}
+      maxW={wFull ? 'full' : '500px'}
       justifyContent="space-between"
-      {...props}
     >
       <HStack columnGap="0.5em" id="left">
-        {props.LeftLogo && <Box>{props.LeftLogo}</Box>}
+        {LeftLogo && <Box>{LeftLogo}</Box>}
         <Box id="description" ml="0 !important">
-          {props.children}
+          {children}
         </Box>
       </HStack>
       <Flex id="right" ml="0px !important">
-        {props.isShowTooltip && (
+        {isShowTooltip && (
           <Box ml="10px" cursor="pointer" id="tooltip">
             <Tooltip
               p="20px 20px"
-              label={props.tooltipLabel}
-              onClick={props.onToolTipClick}
-              textStyle="semiBold16"
+              label={tooltipLabel}
+              onClick={onToolTipClick}
+              textStyle="semiBold16 "
               hasArrow
               mt="3"
               textAlign="center"
@@ -45,8 +52,8 @@ const InfoCard = forwardRef<BoxProps & InfoCardPropsI, 'div'>((props, ref) => {
               placement="top"
               closeOnClick={false}
             >
-              <Box color="rgba(255,255,255,0.1) !important">
-                <I.TooltipIcon width={{ base: '24px', lg: '32px' }} height="auto" />
+              <Box>
+                <Image src={TooltopIcon} alt="TooltopIcon" width={{ base: '24px', lg: '32px' }} />
               </Box>
             </Tooltip>
           </Box>
@@ -54,6 +61,6 @@ const InfoCard = forwardRef<BoxProps & InfoCardPropsI, 'div'>((props, ref) => {
       </Flex>
     </HStack>
   );
-});
+};
 
 export default InfoCard;

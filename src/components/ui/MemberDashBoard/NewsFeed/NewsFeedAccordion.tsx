@@ -11,22 +11,21 @@ import {
 import { I } from 'components';
 import * as React from 'react';
 import truncH from 'trunc-html';
-import { usePersistedDiscourseStore } from '../../../../lib/zustand';
 
-// import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '../../../../hooks';
 
 const NewsFeedAccordion: React.FC = () => {
   const [index, setIndex] = React.useState<number[]>([]);
-  const { news } = usePersistedDiscourseStore();
+  const newsFeeds = useAppSelector((state) => state.discourseReducer.news);
 
   return (
     <Accordion w="full" index={index} allowToggle>
       <VStack w="full">
-        {news?.map(({ title, description, id }: any, i: number) => (
+        {newsFeeds.map(({ title, description, id }: any, i: number) => (
           <AccordionItem
             w="full"
             key={`news-accordion-item-${id}`}
-            background="#F5F8FA"
+            background="#20202E"
             borderRadius="1em"
             border="0"
             py="1em"
