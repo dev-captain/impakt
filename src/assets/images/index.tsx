@@ -38,6 +38,7 @@ const Images = {
     LinkedInDark: require('./linkedindark.png'),
     Walletad: require('./walletad.png'),
     Goldaword: require('./goldaword.png'),
+    Vsport: require('./vsport.png'),
   },
   backgrounds: {
     advisorsSectionBg: require('./bgadvvisors.png'),
