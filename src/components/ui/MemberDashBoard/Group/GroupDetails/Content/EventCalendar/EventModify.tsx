@@ -1,8 +1,11 @@
 import React from 'react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useDisclosure } from '@chakra-ui/react';
+import { Forms, I } from 'components';
+
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
-import { Forms } from '../../../../../..';
+
+import ChallengeModal from '../../Modal/ChallengeModal';
 
 interface EventModifyPropsI {
   showGoBackButton?: boolean;
@@ -11,6 +14,9 @@ interface EventModifyPropsI {
 }
 
 const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, title, type }) => {
+  const [assocId, setAssocId] = React.useState<number>(NaN);
+  const [assocName, setAssocName] = React.useState<string>('');
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { goBackToOverViewScreen } = useEventCalendarContext();
 
   return (
@@ -31,8 +37,37 @@ const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, tit
           {title}
         </Text>
       </Box>
-      {type === 'create' && <Forms.CreateEventForm />}
-      {type === 'update' && <Forms.UpdateEventForm />}
+      {type === 'create' && (
+        <Forms.CreateEventForm
+          onOpen={onOpen}
+          clearAssoc={() => {
+            setAssocId(NaN);
+            setAssocName('');
+          }}
+          assocId={assocId}
+          assocName={assocName}
+        />
+      )}
+      {type === 'update' && (
+        <Forms.UpdateEventForm
+          onOpen={onOpen}
+          clearAssoc={() => {
+            setAssocId(NaN);
+            setAssocName('');
+          }}
+          assocId={assocId}
+          assocName={assocName}
+        />
+      )}
+      <ChallengeModal
+        setAssocId={setAssocId}
+        setAssocName={setAssocName}
+        key="2"
+        open={isOpen}
+        close={() => {
+          onClose();
+        }}
+      />
     </Box>
   );
 };

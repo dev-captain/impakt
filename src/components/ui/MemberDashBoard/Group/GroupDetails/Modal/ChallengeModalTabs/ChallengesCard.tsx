@@ -2,23 +2,15 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { Day } from 'dayspan';
-import { convertMsToHM, truncateString } from '../../../../../../../../../utils';
-import { usePersistedAuthStore } from '../../../../../../../../../lib/zustand';
-import { AvailableGroupChallengesTypeI } from '../../../../../../../../../lib/zustand/stores/challengeStore';
+import { convertMsToHM, truncateString } from '../../../../../../../utils';
+import { usePersistedAuthStore } from '../../../../../../../lib/zustand';
+import { AvailableGroupChallengesTypeI } from '../../../../../../../lib/zustand/stores/challengeStore';
 
 interface ChallengesCardProps {
   data: AvailableGroupChallengesTypeI;
-  setAssocId: () => void;
-  setAssocName: () => void;
-  onClose: () => void;
 }
 
-const ChallengesCard: React.FC<ChallengesCardProps> = ({
-  data,
-  setAssocName,
-  setAssocId,
-  onClose,
-}) => {
+const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, children }) => {
   const { challenge, likes, attempts } = data;
 
   const { member } = usePersistedAuthStore();
@@ -189,24 +181,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({
           >
             <Text>Preview</Text>
           </Common.ImpaktButton> */}
-          <Common.ImpaktButton
-            onClick={() => {
-              setAssocId();
-              setAssocName();
-              onClose();
-            }}
-            variant="black"
-            w="114px !important"
-            colorScheme="#fff"
-            h="38px"
-            backgroundColor="#29323B"
-            borderRadius="8px"
-            type="submit"
-            fontSize={{ base: '14px', md: '16px' }}
-            fontWeight="700"
-          >
-            <Text>Select</Text>
-          </Common.ImpaktButton>
+          {children}
         </Box>
       </Box>
     </Box>

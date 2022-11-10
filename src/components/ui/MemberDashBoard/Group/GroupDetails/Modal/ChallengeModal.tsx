@@ -6,37 +6,38 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
-  // useDisclosure,
   Input,
-  Tabs,
-  TabList,
   Tab,
-  TabPanels,
+  TabList,
   TabPanel,
+  TabPanels,
+  Tabs,
+  Link,
 } from '@chakra-ui/react';
-import { I } from 'components';
+import { Link as ReactLink } from 'react-router-dom';
+import { Common, I } from 'components';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import { ChallengeTab } from 'data';
-import { UseFormSetValue } from 'react-hook-form';
-import MyRoutines from './MyRoutinesTab/MyRoutines';
-// import ChallengeDetails from './ImpaktTab/ChallengeDetails';
+import { useTranslation } from 'react-i18next';
+
+import { ChallengeTab } from '../../../../../../data';
+import { usePersistedChallengeStore } from '../../../../../../lib/zustand';
+import ChallengesCard from './ChallengeModalTabs/ChallengesCard';
 
 interface ChallengeModalProps {
   open: boolean;
   close: () => void;
-  setValue: UseFormSetValue<{
-    eventTitle: string;
-    eventDescription: string;
-    eventStartTime: string;
-    eventEndTime: string;
-    assocName: string;
-    assocId: number;
-  }>;
+  setAssocId: (assocId: number) => void;
+  setAssocName: (assocName: string) => void;
 }
 
-const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }) => {
+const ChallengeModal: React.FC<ChallengeModalProps> = ({
+  open,
+  setAssocId,
+  setAssocName,
+  close,
+}) => {
+  const { availableGroupChallenges } = usePersistedChallengeStore();
   const { t } = useTranslation().i18n;
 
   return (
@@ -69,6 +70,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }
             <I.SearchIcon position="absolute" top="5px" left="48px" width="24px" color="#29323B" /> */}
           </Box>
           <ModalCloseButton
+            onClick={close}
             color="#728BA3"
             position="initial"
             fontSize="18px"
@@ -112,36 +114,59 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setValue }
             </TabList>
             <TabPanels>
               <TabPanel p="0" mt="24px">
-                <MyRoutines onClose={() => close()} setValue={setValue} />
-              </TabPanel>
-              <TabPanel p="0" mt="24px">
-                {/* <ChallengeDetails
-                  time="19 min"
-                  timmer={{ h: '08', m: '32', s: '44' }}
-                  name="Impakt"
-                  play="256"
-                  like="72"
-                /> */}
-                <Text>
-                  {t(keys.Message.MyChallengeMsg.description)}{' '}
-                  <span>
-                    <Text as="a" href="/download" color="#3c88d3">
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Download
+                <Box
+                  height="530px"
+                  overflow="auto"
+                  paddingRight="8px"
+                  css={{
+                    '&::-webkit-scrollbar': {
+                      width: '4px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                      width: '6px',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      visibility: 'initial',
+                      width: '10px',
+                      background: '#D3E2F0',
+                      borderRadius: '24px',
+                    },
+                  }}
+                >
+                  {availableGroupChallenges.length === 0 ? (
+                    <Text color="gray.500">
+                      Sorry, You have to create your challenges{' '}
+                      <Link as={ReactLink} to="/download">
+                        <Text as="u">in-game</Text>
+                      </Link>{' '}
+                      first. The creation of the challenges will be available here soon...
                     </Text>
-                  </span>
-                </Text>
-                {/* <Text as="a" href="/download" color="#3c88d3">
-                  Download
-                </Text> */}
-              </TabPanel>
-              <TabPanel>
-                <p>My Challenges</p>
-              </TabPanel>
-              <TabPanel>
-                <p>ICONs</p>
-              </TabPanel>
-              <TabPanel>
-                <p>Community</p>
+                  ) : (
+                    availableGroupChallenges.map((challengeI) => (
+                      <ChallengesCard key={challengeI.challenge.id} data={challengeI}>
+                        <Common.ImpaktButton
+                          onClick={() => {
+                            // setActiveGroupChallenge(challenge);
+                            setAssocName(challengeI.challenge.name);
+                            setAssocId(challengeI.challenge.id);
+                            close();
+                          }}
+                          variant="black"
+                          w="114px !important"
+                          colorScheme="#fff"
+                          h="38px"
+                          backgroundColor="#29323B"
+                          borderRadius="8px"
+                          type="submit"
+                          fontSize={{ base: '14px', md: '16px' }}
+                          fontWeight="700"
+                        >
+                          <Text>Select</Text>
+                        </Common.ImpaktButton>
+                      </ChallengesCard>
+                    ))
+                  )}
+                </Box>
               </TabPanel>
             </TabPanels>
           </Tabs>

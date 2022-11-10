@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import BannerLeftLabelItem from './GroupLabelItem';
+import GroupLabelItem from './GroupLabelItem';
 
 interface GroupLabelWrapperPropsI {
   items: {
@@ -17,7 +17,7 @@ const GroupLabelWrapper: React.FC<GroupLabelWrapperPropsI> = ({ items }) => {
     <>
       {items.map(({ leftIcon, rightIcon, visible, labelDescription, labelTitle }) =>
         visible ? (
-          <BannerLeftLabelItem
+          <GroupLabelItem
             key={labelTitle}
             leftIcon={leftIcon}
             rightIcon={rightIcon}
