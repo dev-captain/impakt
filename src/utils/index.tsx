@@ -80,7 +80,7 @@ let previousMode = '';
 let previousToastId: ToastId | undefined = '';
 
 export function renderToast(
-  type: 'error' | 'success',
+  type: 'error' | 'success' | 'warning',
   description: string,
   whiteOrDarkMode: 'white' | 'dark' | undefined = 'white',
 ) {
@@ -93,10 +93,18 @@ export function renderToast(
     toastCounter = 0;
     toast.closeAll();
   }
-
+  let toastTitle = '';
+  if (type === 'error') {
+    toastTitle = 'Error';
+  }
+  if (type === 'success') {
+    toastTitle = 'Success';
+  }
+  if (type === 'warning') {
+    toastTitle = 'Warning';
+  }
   const toastWillBeDisplayed = toast({
-    title: type === 'error' ? 'Error' : 'Success',
-
+    title: toastTitle,
     description,
     isClosable: true,
     duration: 8000,
@@ -111,7 +119,7 @@ export function renderToast(
       >
         <AlertIcon color={type === 'error' ? '#f84153' : '#4cbfa6'} />
         <VStack gap="0" justifyContent="left" align="left">
-          <AlertTitle margin="0 !important"> {type === 'error' ? 'Error' : 'Success'} </AlertTitle>
+          <AlertTitle margin="0 !important"> {toastTitle} </AlertTitle>
           <AlertDescription margin="0 !important">{description}</AlertDescription>
         </VStack>
         <CloseButton

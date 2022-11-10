@@ -42,7 +42,6 @@ export const ALLOW_IMAGE_FILE: string[] = ['image/png', 'image/jpeg'];
 
 const file = yup
   .mixed()
-  .required('File is required')
   .test(
     'fileSize',
     'File too large',

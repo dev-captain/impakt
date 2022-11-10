@@ -56,6 +56,8 @@ const UpdateGroupImageForm: React.FC = () => {
   };
 
   const openUploadImageFileInput = () => {
+    renderToast('warning', 'Image size should be less than 10MB.');
+
     if (uploadImageInputRef.current) {
       uploadImageInputRef.current.click();
     }
@@ -64,33 +66,60 @@ const UpdateGroupImageForm: React.FC = () => {
   const handleFormSubmit = async (data: any) => {
     if (!activeGroup) return;
     if (!groupParam.id) return;
-
     const formData = new FormData();
-    formData.append('file', data.file);
-
-    updateGroupCoverImage.mutate(
-      { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
-      {
-        onSuccess: (newImage) => {
-          renderToast('success', 'Group cover image updated successfully.');
-          setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
-          const shallowOfMyGroups = [...myGroups];
-          const indexOfGroup = shallowOfMyGroups.findIndex(
-            (group) => group.groupId === activeGroup.id,
+    if (data.file === null) {
+      fetch(Images.group.logo)
+        .then((res) => {
+          return res.blob();
+        })
+        .then((blob) => {
+          const file = new File([blob], 'logo.png', blob);
+          updateGroupCoverImage.mutate(
+            { data: { file: file as any }, groupId: activeGroup.id },
+            {
+              onSuccess: (newImage) => {
+                renderToast('success', 'Group cover image removed successfully.');
+                setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
+                const shallowOfMyGroups = [...myGroups];
+                const indexOfGroup = shallowOfMyGroups.findIndex(
+                  (group) => group.groupId === activeGroup.id,
+                );
+                if (indexOfGroup !== -1) {
+                  shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
+                  setMyGroups(shallowOfMyGroups);
+                }
+              },
+              onError: (err) => {
+                renderToast('error', err.response?.data.message ?? 'Something went wrong');
+              },
+            },
           );
-          if (indexOfGroup !== -1) {
-            shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
-            setMyGroups(shallowOfMyGroups);
-          }
+        });
+    } else {
+      formData.append('file', data.file);
+      updateGroupCoverImage.mutate(
+        { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
+        {
+          onSuccess: (newImage) => {
+            renderToast('success', 'Group cover image updated successfully.');
+            setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
+            const shallowOfMyGroups = [...myGroups];
+            const indexOfGroup = shallowOfMyGroups.findIndex(
+              (group) => group.groupId === activeGroup.id,
+            );
+            if (indexOfGroup !== -1) {
+              shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
+              setMyGroups(shallowOfMyGroups);
+            }
+          },
+          onError: (err) => {
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          },
         },
-        onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
-        },
-      },
-    );
+      );
+    }
     // TODO update zustand active group
   };
-
   const setBannerImage = (source: any) => {
     if (!uploadImageRef.current) return;
     uploadImageRef.current.src = source;
@@ -118,8 +147,6 @@ const UpdateGroupImageForm: React.FC = () => {
             minH="100px"
             maxH="300px"
             alt="Impakt group cover image"
-            onClick={openUploadImageFileInput}
-            cursor="pointer"
             width="100%"
             ref={uploadImageRef}
           />
@@ -201,8 +228,8 @@ const UpdateGroupImageForm: React.FC = () => {
             h="42px"
             backgroundColor="#EEF4F6"
             borderRadius="8px"
-            type="submit"
             fontSize={{ md: '16px' }}
+            onClick={openUploadImageFileInput}
             fontWeight="600"
             leftIcon={<I.UploadIcon color="#29323B" width="12px" height="12px" />}
           >
@@ -222,6 +249,23 @@ const UpdateGroupImageForm: React.FC = () => {
             onClick={resetUploadImage}
           >
             Remove
+          </Common.ImpaktButton>
+          <Common.ImpaktButton
+            mt="8px"
+            cursor="pointer"
+            variant="black"
+            color="#29323B"
+            isLoading={updateGroupCoverImage.isLoading}
+            isDisabled={updateGroupCoverImage.isLoading}
+            w="160px"
+            h="42px"
+            backgroundColor="#EEF4F6"
+            borderRadius="8px"
+            type="submit"
+            fontSize={{ md: '16px' }}
+            fontWeight="600"
+          >
+            Save
           </Common.ImpaktButton>
         </Box>
       </Box>
