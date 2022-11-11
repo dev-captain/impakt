@@ -18,7 +18,7 @@ import {
 import { Common, I } from 'components';
 import React from 'react';
 import { usePascalCase } from 'hooks';
-import { Day } from 'dayspan';
+import { Day, DaySpan } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 
 import { ChallengeTab, ChallengeTabs } from '../../../../../../data';
@@ -33,6 +33,7 @@ import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/Challeng
 import { convertMsToHM } from '../../../../../../utils';
 import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
+import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -53,6 +54,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   setAssocName,
   close,
 }) => {
+  const createChallenge = useChallengesControllerCreateOne();
   const [activeChallengeDurationDay, setActiveChallengeDurationDay] = React.useState(1);
   const [activeChallengeName, setActiveChallengeName] = React.useState('');
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
@@ -95,29 +97,54 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   const moveToFirstScreenAndDeleteHistory = () => {
     setActiveScreen(['select']);
   };
-  console.log(previewChallenge?.challenge);
 
   const getTimeDifference = () => {
     const isValidDate = previewChallenge?.challenge
       ? Day.fromString(previewChallenge?.challenge.validFrom)!.time < Day.now().time
       : false;
 
-    if (!isValidDate || !previewChallenge) return { h: 0, m: 0, s: 0 };
+    if (!isValidDate || !previewChallenge) return { d: 0, h: 0, m: 0, s: 0 };
 
-    const milliseconds =
-      Day.fromString(previewChallenge.challenge.validUntil ?? '')?.millisBetween(
-        Day.fromString(previewChallenge.challenge.validFrom)!,
-      ) ?? 0;
-    const { h, m, s } = convertMsToHM(milliseconds);
+    const d = Day.fromString(previewChallenge.challenge.validUntil ?? '').daysBetween(Day.now());
+    const h =
+      Day.fromString(previewChallenge.challenge.validUntil ?? '').hoursBetween(Day.now()) % 24;
+    const m =
+      Day.fromString(previewChallenge.challenge.validUntil ?? '').minutesBetween(Day.now()) % 60;
 
-    return { h, m, s };
+    return { d, h, m };
   };
 
   // TODO SOURCE WILL BE DIFFERENT
   const availableRoutines = availableGroupChallenges.map(({ challenge }) => challenge.Routine);
-  console.log(availableGroupChallenges);
-  console.log(availableRoutines);
-  console.log('hey', previewRouitine);
+  const handleSubmitCreateChallenge = () => {
+    if (!activeChallengeDurationDay) return;
+    if (activeChallengeName.length === 0) return;
+    if (!previewRouitine) return;
+    if (typeof activeChallengeDurationDay === 'string') return;
+
+    const validFrom = Day.now();
+    const validUntil = validFrom?.add('day', activeChallengeDurationDay);
+    console.log('input', validFrom, validUntil, activeChallengeDurationDay);
+    createChallenge.mutate(
+      {
+        data: {
+          name: activeChallengeName,
+          routineId: previewRouitine.id,
+          validFrom: validFrom.toISOString(),
+          validUntil: validUntil?.toISOString(),
+        },
+      },
+      {
+        onSuccess: (data) => {
+          console.log('Challenge created', data);
+          moveToFirstScreenAndDeleteHistory();
+        },
+        onError: (err) => {
+          console.log('error', err);
+        },
+      },
+    );
+  };
 
   return (
     <Modal isOpen={open} onClose={() => close()} isCentered>
@@ -496,7 +523,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                           value={value}
                           type="button"
                           onClick={(e) =>
-                            setActiveChallengeDurationDay(e.currentTarget.value as any)
+                            setActiveChallengeDurationDay(Number(e.currentTarget.value))
                           }
                         >
                           {value}
@@ -523,9 +550,9 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                 <ChallengeCardMetaLabel
                   creatorName={member?.firstName ?? member?.username ?? ''}
                   times={{
+                    d: getTimeDifference().d,
                     h: getTimeDifference().h,
                     m: getTimeDifference().m,
-                    s: getTimeDifference().s,
                   }}
                 />
               </Box>
@@ -620,7 +647,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                   h="64px"
                   borderRadius="16px"
                   onClick={() => {
-                    moveToFirstScreenAndDeleteHistory();
+                    handleSubmitCreateChallenge();
                   }}
                 >
                   <Text fontWeight="600">Create</Text>

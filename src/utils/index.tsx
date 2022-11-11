@@ -70,9 +70,13 @@ export const convertMsToHM = (milliseconds: number) => {
   // 👇️ comment (or remove) the line below
   // commenting next line gets you `24:00:00` instead of `00:00:00`
   // or `36:15:31` instead of `12:15:31`, etc.
-  // hours %= 24;
 
-  return { h: padTo2Digits(hours), m: padTo2Digits(minutes), s: padTo2Digits(seconds) };
+  return {
+    d: hours / 24,
+    h: padTo2Digits(hours % 24),
+    m: padTo2Digits(minutes),
+    s: padTo2Digits(seconds),
+  };
 };
 
 let toastCounter = 0;

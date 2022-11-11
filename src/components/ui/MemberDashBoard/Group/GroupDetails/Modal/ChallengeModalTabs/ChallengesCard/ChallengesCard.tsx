@@ -19,15 +19,14 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, children }) => {
     ? Day.fromString(challenge.validFrom)!.time < Day.now().time
     : false;
   const getTimeDifference = () => {
-    if (!isValidDate) return { h: 0, m: 0, s: 0 };
+    if (!isValidDate) return { h: 0, m: 0, s: 0, d: 0 };
 
-    const milliseconds =
-      Day.fromString(challenge.validUntil ?? '')?.millisBetween(
-        Day.fromString(challenge.validFrom)!,
-      ) ?? 0;
-    const { h, m, s } = convertMsToHM(milliseconds);
+    const d = Day.fromString(challenge.validUntil ?? '').daysBetween(Day.now());
+    console.log(challenge.validUntil, d);
+    const h = Day.fromString(challenge.validUntil ?? '').hoursBetween(Day.now()) % 24;
+    const m = Day.fromString(challenge.validUntil ?? '').minutesBetween(Day.now()) % 60;
 
-    return { h, m, s };
+    return { h, m, d };
   };
 
   return (
@@ -61,7 +60,11 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, children }) => {
         justifyContent="space-between"
       >
         <ChallengeCardMetaLabel
-          times={{ h: getTimeDifference().h, m: getTimeDifference().m, s: getTimeDifference().s }}
+          times={{
+            h: getTimeDifference().h,
+            m: getTimeDifference().m,
+            d: getTimeDifference().d,
+          }}
         />
         <Box
           display="flex"

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 
 interface ChallengeCardMetaLabelPropsI {
-  times: { h: string | number; m: string | number; s: string | number };
+  times: { d: number; h: string | number; m: string | number };
   creatorName?: string;
 }
 
@@ -17,21 +17,25 @@ const ChallengeCardMetaLabel: React.FC<ChallengeCardMetaLabelPropsI> = ({ times,
       alignItems="center"
     >
       <Text background="#EEF4F6" borderRadius="4px" p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}>
+        {times.d}
+      </Text>
+      <Text m="0 6px">:</Text>
+      <Text background="#EEF4F6" borderRadius="4px" p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}>
         {times.h}
       </Text>
       <Text m="0 6px">:</Text>
       <Text background="#EEF4F6" borderRadius="4px" p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}>
         {times.m}
       </Text>
-      <Text m="0 6px">:</Text>
-      <Text
+      {/* <Text m="0 6px">:</Text> */}
+      {/* <Text
         background="#EEF4F6"
         borderRadius="4px"
         p={{ base: '4px 6px', md: '6px 10px 5px 9px' }}
         mr="16px"
       >
-        {times.s}
-      </Text>
+        {times.s}Sec
+      </Text> */}
       {creatorName && (
         <Text color="#4E6070" fontWeight="500" fontSize="16px" lineHeight="18px">
           {`by ${creatorName}`}
