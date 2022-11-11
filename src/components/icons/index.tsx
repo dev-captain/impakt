@@ -94,3 +94,4 @@ export { default as SignInIcon } from './SignInIcon';
 export { default as CameraIcon } from './CameraIcon';
 export { default as SoundOffIcon } from './SoundOffIcon';
 export { default as SoundOnIcon } from './SoundOnIcon';
+export { default as ShareIcon } from './ShareIcon';
