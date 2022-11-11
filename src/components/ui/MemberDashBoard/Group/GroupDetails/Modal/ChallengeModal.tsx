@@ -29,7 +29,7 @@ import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTi
 import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
-import { convertMsToHM } from '../../../../../../utils';
+import { convertMsToHM, renderToast } from '../../../../../../utils';
 import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
@@ -79,7 +79,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   const [previewChallenge, setPreviewChallenge] = React.useState<GetChallengeRes | null>(null);
   const [previewRouitine, setRoutinePreview] = React.useState<GetRoutineRes | null>(null);
 
-  const { availableGroupChallenges } = usePersistedChallengeStore();
+  const { availableGroupChallenges, setAvailableGroupChallenges } = usePersistedChallengeStore();
   const currentScreen = activeScreen[activeScreen.length - 1];
 
   const moveToNextScreen = (newScreen: ChallengeModalScreens) => {
@@ -121,7 +121,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
 
     const validFrom = Day.now();
     const validUntil = validFrom?.add('day', activeChallengeDurationDay);
-    console.log('input', validFrom, validUntil, activeChallengeDurationDay);
     createChallenge.mutate(
       {
         data: {
@@ -133,11 +132,19 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
       },
       {
         onSuccess: (data) => {
-          console.log('Challenge created', data);
+          renderToast('success', 'Challenge is created successfully.', 'white');
+          setAvailableGroupChallenges([
+            {
+              ...data,
+              Routine: previewRouitine,
+            },
+            ...availableGroupChallenges,
+          ]);
           moveToFirstScreenAndDeleteHistory();
         },
         onError: (err) => {
-          console.log('error', err);
+          console.log(err);
+          renderToast('error', err.response?.data.message ?? 'Something went wrong...', 'white');
         },
       },
     );

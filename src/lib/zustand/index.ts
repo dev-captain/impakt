@@ -133,8 +133,8 @@ export const usePersistedChallengeStore = create<ChallengeStore>()(
     }),
     {
       name: 'challenge-storage',
-      serialize: (state) => btoa(JSON.stringify(state)),
-      deserialize: (str) => JSON.parse(atob(str)),
+      serialize: (state) => JSON.stringify(state),
+      deserialize: (str) => JSON.parse(str),
       getStorage: () => localStorage,
     },
   ),
