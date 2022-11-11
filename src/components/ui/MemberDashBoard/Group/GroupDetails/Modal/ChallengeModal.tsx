@@ -6,23 +6,33 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
-  Input,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
+  VStack,
+  HStack,
+  ModalFooter,
   Link,
+  useNumberInput,
+  Button,
+  Input,
+  FormLabel,
 } from '@chakra-ui/react';
-import { Link as ReactLink } from 'react-router-dom';
 import { Common, I } from 'components';
 import React from 'react';
-import keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
+import { usePascalCase } from 'hooks';
+import { Day } from 'dayspan';
+import { AddIcon } from '@chakra-ui/icons';
 
-import { ChallengeTab } from '../../../../../../data';
-import { usePersistedChallengeStore } from '../../../../../../lib/zustand';
-import ChallengesCard from './ChallengeModalTabs/ChallengesCard';
+import { ChallengeTab, ChallengeTabs } from '../../../../../../data';
+import { usePersistedAuthStore, usePersistedChallengeStore } from '../../../../../../lib/zustand';
+import ChallengesCard from './ChallengeModalTabs/ChallengesCard/ChallengesCard';
+import ChallengeModalHeader from './ChallengeModalTabs/ChallengeModalHeader';
+import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTitleText';
+import { AvailableGroupChallengesTypeI } from '../../../../../../lib/zustand/stores/challengeStore';
+import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
+import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
+import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
+import { convertMsToHM } from '../../../../../../utils';
+import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
+import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -30,6 +40,12 @@ interface ChallengeModalProps {
   setAssocId: (assocId: number) => void;
   setAssocName: (assocName: string) => void;
 }
+type ChallengeModalScreens =
+  | 'select'
+  | 'preview'
+  | 'create'
+  | 'create-preview'
+  | 'create-challenge-form';
 
 const ChallengeModal: React.FC<ChallengeModalProps> = ({
   open,
@@ -37,8 +53,71 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   setAssocName,
   close,
 }) => {
+  const [activeChallengeDurationDay, setActiveChallengeDurationDay] = React.useState(1);
+  const [activeChallengeName, setActiveChallengeName] = React.useState('');
+  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
+    step: 1,
+    defaultValue: 1,
+    value: activeChallengeDurationDay,
+    min: 1,
+    max: 30,
+    onChange: (_, valuesAsNumber) => {
+      setActiveChallengeDurationDay(valuesAsNumber);
+    },
+  });
+
+  const inc = getIncrementButtonProps();
+  const dec = getDecrementButtonProps();
+  const input = getInputProps({ style: { border: 0, textAlign: 'center', maxWidth: '155px' } });
+
+  const { member } = usePersistedAuthStore();
+  const { convertToPascalCase } = usePascalCase();
+  const [activeTab, setActiveTab] = React.useState<ChallengeTabs>('routine');
+  const [activeScreen, setActiveScreen] = React.useState<ChallengeModalScreens[]>(['select']);
+  const [previewChallenge, setPreviewChallenge] =
+    React.useState<AvailableGroupChallengesTypeI | null>(null);
+  const [previewRouitine, setRoutinePreview] = React.useState<GetRoutineRes | null>(null);
+
   const { availableGroupChallenges } = usePersistedChallengeStore();
-  const { t } = useTranslation().i18n;
+  const currentScreen = activeScreen[activeScreen.length - 1];
+
+  const moveToNextScreen = (newScreen: ChallengeModalScreens) => {
+    setActiveScreen((prev) => [...prev, newScreen]);
+  };
+
+  const moveBackToPreviousScreen = () => {
+    if (activeScreen.length > 1) {
+      const shallow = [...activeScreen];
+      shallow.pop();
+      setActiveScreen(shallow);
+    }
+  };
+  const moveToFirstScreenAndDeleteHistory = () => {
+    setActiveScreen(['select']);
+  };
+  console.log(previewChallenge?.challenge);
+
+  const getTimeDifference = () => {
+    const isValidDate = previewChallenge?.challenge
+      ? Day.fromString(previewChallenge?.challenge.validFrom)!.time < Day.now().time
+      : false;
+
+    if (!isValidDate || !previewChallenge) return { h: 0, m: 0, s: 0 };
+
+    const milliseconds =
+      Day.fromString(previewChallenge.challenge.validUntil ?? '')?.millisBetween(
+        Day.fromString(previewChallenge.challenge.validFrom)!,
+      ) ?? 0;
+    const { h, m, s } = convertMsToHM(milliseconds);
+
+    return { h, m, s };
+  };
+
+  // TODO SOURCE WILL BE DIFFERENT
+  const availableRoutines = availableGroupChallenges.map(({ challenge }) => challenge.Routine);
+  console.log(availableGroupChallenges);
+  console.log(availableRoutines);
+  console.log('hey', previewRouitine);
 
   return (
     <Modal isOpen={open} onClose={() => close()} isCentered>
@@ -50,25 +129,13 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
         borderRadius="32px"
         padding={{ base: '14px', md: '32px' }}
       >
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Text w="100%" fontSize={{ base: '20px', md: '32px' }} color="#29323B" fontWeight="700">
-            Select Challenge
-          </Text>
-          <Box position="relative" w="100%" display={{ base: 'none', md: 'block' }}>
-            {/* <Input
-              placeholder="Search"
-              background="#EEF4F6"
-              border="0"
-              _focus={{ border: '0' }}
-              borderRadius="12px"
-              // w="306px"
-              mr="24px"
-              ml="34px"
-              pl="48px"
-              w="86%"
-            />
-            <I.SearchIcon position="absolute" top="5px" left="48px" width="24px" color="#29323B" /> */}
-          </Box>
+        <ChallengeModalHeader
+          goBackOnClick={() => moveBackToPreviousScreen()}
+          showGoBackIcon={activeScreen.length > 1}
+          currentScreen={currentScreen}
+          previewHeaderText={previewChallenge?.challenge.name ?? ''}
+          createPreviewHeaderText={previewRouitine?.name ?? ''}
+        >
           <ModalCloseButton
             onClick={close}
             color="#728BA3"
@@ -76,8 +143,9 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             fontSize="18px"
             _focus={{ boxShadow: 'none' }}
           />
-        </Box>
-        <Box position="relative" w="100%" display={{ base: 'block', md: 'none' }}>
+        </ChallengeModalHeader>
+
+        {/* <Box position="relative" w="100%" display={{ base: 'block', md: 'none' }}>
           <Input
             mt="20px"
             placeholder="Search"
@@ -90,87 +158,479 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             w="100%"
           />
           <I.SearchIcon position="absolute" top="25px" left="18px" width="24px" color="#29323B" />
-        </Box>
+        </Box> */}
         <ModalBody p="0">
-          <Tabs mt="30px">
-            <TabList border="0" flexWrap="wrap">
-              {ChallengeTab.map((tab, index) => (
-                <Tab
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={`tab-${index}`}
-                  id={`tab-${index}`}
-                  _focus={{ boxShadow: 'none' }}
-                  _active={{ background: 'transparent', color: '#29323B' }}
-                  color="#728BA3"
-                  _selected={{ color: '#29323B', borderColor: '#29323B' }}
-                  fontWeight="500"
-                  p="8px 0"
-                  marginRight="24px"
-                  fontSize={{ base: '14px', md: '16px' }}
-                >
-                  {tab}
-                </Tab>
+          {/* MODAL BODY HEADER START HERE */}
+          {(currentScreen === 'select' || currentScreen === 'create') && (
+            <VStack alignItems="flex-start" mt="24px" mb="24px" rowGap="24px" padding="4px">
+              {currentScreen !== 'create' && (
+                <HStack w="full" justifyContent="flex-end">
+                  <Box minW="148px">
+                    <Common.ImpaktButton
+                      onClick={() => {
+                        moveToNextScreen('create');
+                      }}
+                      _hover={{ background: '' }}
+                      _selected={{ background: '' }}
+                      _focus={{ background: '' }}
+                      _active={{ background: '' }}
+                      background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                      leftIcon={<AddIcon fontSize="10px" />}
+                    >
+                      Create
+                    </Common.ImpaktButton>
+                  </Box>
+                </HStack>
+              )}
+              {currentScreen === 'create' && (
+                <HStack w="full" justifyContent="flex-start">
+                  <Text fontWeight="400" fontSize="18px" lineHeight="26px" color="#29323B">
+                    What would you like to challenge your members with?
+                  </Text>
+                </HStack>
+              )}
+              <HStack borderRadius="12px" minW="248px" w="25%" p="4px" bg="#EEF4F6">
+                {ChallengeTab.map((tab, index) => (
+                  <ChallengeModalTabTitleText
+                    onClick={() => {
+                      setActiveTab(tab);
+                    }}
+                    isSelected={activeTab === tab}
+                    title={tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  />
+                ))}
+              </HStack>
+            </VStack>
+          )}
+
+          {(currentScreen === 'preview' || currentScreen === 'create-preview') &&
+            activeTab === 'routine' &&
+            (previewChallenge || previewRouitine) && (
+              <HStack pl="0.5em" mt="24px" mb="24px" w="full" justifyContent="space-between">
+                <Box>
+                  <Text
+                    fontWeight="500"
+                    color="fitnessGrayMinus1"
+                    letterSpacing="-0.01em"
+                    fontSize="24px"
+                    lineHeight="100%"
+                  >
+                    {(currentScreen === 'preview' &&
+                      previewChallenge?.challenge.Routine.TimelineBlocks?.length) ??
+                      0}
+                    {(currentScreen === 'create-preview' &&
+                      previewRouitine?.TimelineBlocks?.length) ??
+                      0}{' '}
+                    Exercises
+                  </Text>
+                </Box>
+
+                <Box>
+                  <ChallengesCardScoreLabelsWrapper
+                    attemptScore={
+                      currentScreen === 'preview'
+                        ? previewChallenge?.attempts.successAttempts
+                        : undefined
+                    }
+                    estimationTimeScore={`${Math.ceil(
+                      currentScreen === 'preview'
+                        ? previewChallenge!.challenge.Routine.estimatedTime / 60
+                        : previewRouitine!.estimatedTime / 60,
+                    )} min`}
+                    likeScore={
+                      currentScreen === 'preview'
+                        ? previewChallenge?.likes.count ?? undefined
+                        : undefined
+                    }
+                  />
+                </Box>
+              </HStack>
+            )}
+          {/* MODAL BODY HEADER END HERE */}
+          {/* MODAL BODY CONTENT START HERE */}
+          <Box
+            height="530px"
+            overflow="auto"
+            paddingRight="8px"
+            css={{
+              '&::-webkit-scrollbar': {
+                width: '4px',
+              },
+              '&::-webkit-scrollbar-track': {
+                width: '6px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                visibility: 'initial',
+                width: '10px',
+                background: '#D3E2F0',
+                borderRadius: '24px',
+              },
+            }}
+          >
+            {currentScreen === 'select' &&
+              activeTab === 'routine' &&
+              availableGroupChallenges.map((challengeI) => (
+                <ChallengesCard key={challengeI.challenge.id} data={challengeI}>
+                  <Common.ImpaktButton
+                    onClick={() => {
+                      setPreviewChallenge(challengeI);
+                      moveToNextScreen('preview');
+                    }}
+                    variant="transparent"
+                    w="114px !important"
+                    backgroundColor="#EEF4F6"
+                    colorScheme="#fff"
+                    h="38px"
+                    borderRadius="8px"
+                    type="submit"
+                    fontSize={{ base: '14px', md: '16px' }}
+                    fontWeight="700"
+                  >
+                    <Text>Preview</Text>
+                  </Common.ImpaktButton>
+                  <Common.ImpaktButton
+                    onClick={() => {
+                      // setActiveGroupChallenge(challenge);
+                      setAssocName(challengeI.challenge.name);
+                      setAssocId(challengeI.challenge.id);
+                      close();
+                    }}
+                    variant="black"
+                    w="114px !important"
+                    colorScheme="#fff"
+                    h="38px"
+                    backgroundColor="#29323B"
+                    borderRadius="8px"
+                    type="submit"
+                    fontSize={{ base: '14px', md: '16px' }}
+                    fontWeight="700"
+                  >
+                    <Text>Select</Text>
+                  </Common.ImpaktButton>
+                </ChallengesCard>
               ))}
-            </TabList>
-            <TabPanels>
-              <TabPanel p="0" mt="24px">
-                <Box
-                  height="530px"
-                  overflow="auto"
-                  paddingRight="8px"
-                  css={{
-                    '&::-webkit-scrollbar': {
-                      width: '4px',
-                    },
-                    '&::-webkit-scrollbar-track': {
-                      width: '6px',
-                    },
-                    '&::-webkit-scrollbar-thumb': {
-                      visibility: 'initial',
-                      width: '10px',
-                      background: '#D3E2F0',
-                      borderRadius: '24px',
-                    },
+            {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
+              <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
+                <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
+                  {previewChallenge.challenge.Routine.TimelineBlocks?.map((exercise, index) => (
+                    <ChallengePreviewItemCard
+                      key={exercise.id}
+                      exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
+                      lengthOfExercise={exercise.Exercise?.averageTime ?? 0}
+                      exerciseType={
+                        exercise.Exercise?.supportedTypes[0] === 'Hold' ? 'time' : 'count'
+                      }
+                    />
+                  ))}
+                </VStack>
+              </VStack>
+            )}
+            {currentScreen === 'create' && activeTab === 'routine' && (
+              <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
+                <VStack w="full" id="exercise-card-item-s" justifyContent="flex-start">
+                  {availableRoutines.map((routine) => (
+                    <RoutineCard key={routine.id} routine={routine}>
+                      <Common.ImpaktButton
+                        onClick={() => {
+                          setRoutinePreview(routine);
+                          moveToNextScreen('create-preview');
+                        }}
+                        variant="transparent"
+                        w="114px !important"
+                        backgroundColor="#EEF4F6"
+                        colorScheme="#fff"
+                        h="38px"
+                        borderRadius="8px"
+                        type="submit"
+                        fontSize={{ base: '14px', md: '16px' }}
+                        fontWeight="700"
+                      >
+                        <Text>Preview</Text>
+                      </Common.ImpaktButton>
+                      <Common.ImpaktButton
+                        onClick={() => {
+                          setRoutinePreview(routine);
+                          moveToNextScreen('create-challenge-form');
+                        }}
+                        variant="black"
+                        w="114px !important"
+                        colorScheme="#fff"
+                        h="38px"
+                        backgroundColor="#29323B"
+                        borderRadius="8px"
+                        type="submit"
+                        fontSize={{ base: '14px', md: '16px' }}
+                        fontWeight="700"
+                      >
+                        <Text>Select</Text>
+                      </Common.ImpaktButton>
+                    </RoutineCard>
+                  ))}
+                </VStack>
+              </VStack>
+            )}
+            {currentScreen === 'create-preview' && activeTab === 'routine' && previewRouitine && (
+              <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
+                <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
+                  {previewRouitine.TimelineBlocks?.map((exercise, index) => (
+                    <ChallengePreviewItemCard
+                      key={exercise.id}
+                      exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
+                      lengthOfExercise={exercise.Exercise?.averageTime ?? 0}
+                      exerciseType={
+                        exercise.Exercise?.supportedTypes[0] === 'Hold' ? 'time' : 'count'
+                      }
+                    />
+                  ))}
+                </VStack>
+              </VStack>
+            )}
+
+            {currentScreen === 'create-challenge-form' &&
+              activeTab === 'routine' &&
+              previewRouitine && (
+                <VStack mt="36px" rowGap="24px" id="create-challenge-form-container">
+                  <Common.InputGroup
+                    onChange={(e) => {
+                      setActiveChallengeName(e.target.value);
+                    }}
+                    name="challengeName"
+                    label="Challenge Name"
+                    placeholder="Best Challenge"
+                    value={activeChallengeName}
+                    whiteMode
+                  />
+                  <VStack w="full" alignItems="flex-start">
+                    <FormLabel
+                      mb="0 !important"
+                      lineHeight="120%"
+                      color="rgba(78, 96, 112, 1)"
+                      textStyle="semiBold6"
+                    >
+                      Selected Routine:
+                    </FormLabel>
+                    <RoutineCard routine={previewRouitine}>
+                      <Common.ImpaktButton
+                        onClick={() => {
+                          moveToNextScreen('create-preview');
+                        }}
+                        variant="transparent"
+                        w="114px !important"
+                        backgroundColor="#EEF4F6"
+                        colorScheme="#fff"
+                        h="38px"
+                        borderRadius="8px"
+                        type="submit"
+                        fontSize={{ base: '14px', md: '16px' }}
+                        fontWeight="700"
+                      >
+                        <Text>Preview</Text>
+                      </Common.ImpaktButton>
+                      <Common.ImpaktButton
+                        onClick={() => {
+                          setRoutinePreview(null);
+                          moveToNextScreen('create');
+                        }}
+                        variant="black"
+                        w="114px !important"
+                        colorScheme="#fff"
+                        h="38px"
+                        backgroundColor="#29323B"
+                        borderRadius="8px"
+                        type="submit"
+                        fontSize={{ base: '14px', md: '16px' }}
+                        fontWeight="700"
+                      >
+                        <Text>Replace</Text>
+                      </Common.ImpaktButton>
+                    </RoutineCard>
+                  </VStack>
+                  <VStack
+                    w="full"
+                    alignItems="flex-start"
+                    justifyContent="flex-start"
+                    id="duration-container"
+                  >
+                    <FormLabel
+                      mb="0 !important"
+                      lineHeight="120%"
+                      color="rgba(78, 96, 112, 1)"
+                      textStyle="semiBold6"
+                    >
+                      Duration (days):
+                    </FormLabel>
+                    <HStack
+                      bgColor="#F5F8FA"
+                      padding="16px 10px"
+                      display="flex"
+                      border="1px solid #D3E2F0"
+                      borderRadius="12px"
+                      maxH="60px"
+                      justifyContent="space-between"
+                    >
+                      <Button background="rgba(242, 121, 97, 0.1)" padding="8px" {...dec}>
+                        <Text fontWeight="500" fontSize="20px" color="#CC4C33">
+                          -
+                        </Text>
+                      </Button>
+                      <Input _focus={{ border: 0 }} {...input} />
+                      <Button
+                        color="#CC4C33"
+                        background="rgba(242, 121, 97, 0.1)"
+                        padding="8px"
+                        {...inc}
+                      >
+                        <Text fontWeight="500" fontSize="20px" color="#CC4C33">
+                          +
+                        </Text>
+                      </Button>
+                    </HStack>
+                    <HStack>
+                      {[1, 3, 7, 14, 30].map((value) => (
+                        <Button
+                          _focus={{ border: 0 }}
+                          minW="48px"
+                          padding="8px"
+                          bgColor="#EEF4F6"
+                          borderRadius="8px"
+                          value={value}
+                          type="button"
+                          onClick={(e) =>
+                            setActiveChallengeDurationDay(e.currentTarget.value as any)
+                          }
+                        >
+                          {value}
+                        </Button>
+                      ))}
+                    </HStack>
+                  </VStack>
+                </VStack>
+              )}
+          </Box>
+          {/* MODAL BODY CONTENT END HERE */}
+        </ModalBody>
+
+        <ModalFooter
+          mb="0 !important"
+          px="0 !important"
+          pb="0 !important"
+          justifyContent="flex-start"
+        >
+          {/* MODAL FOOTER START HERE */}
+          {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
+            <HStack w="full" justifyContent="space-between">
+              <Box>
+                <ChallengeCardMetaLabel
+                  creatorName={member?.firstName ?? member?.username ?? ''}
+                  times={{
+                    h: getTimeDifference().h,
+                    m: getTimeDifference().m,
+                    s: getTimeDifference().s,
+                  }}
+                />
+              </Box>
+              <Box>
+                <Common.ImpaktButton
+                  onClick={() => {
+                    // setActiveGroupChallenge(challenge);
+                    setAssocName(previewChallenge.challenge.name);
+                    setAssocId(previewChallenge.challenge.id);
+                    close();
+                  }}
+                  variant="black"
+                  w="159px !important"
+                  colorScheme="#fff"
+                  h="64px"
+                  backgroundColor="#29323B"
+                  borderRadius="1em"
+                  type="submit"
+                  fontSize={{ base: '14px', md: '16px' }}
+                  fontWeight="700"
+                >
+                  <Text>Select</Text>
+                </Common.ImpaktButton>
+              </Box>
+            </HStack>
+          )}
+
+          {currentScreen === 'create' && activeTab === 'routine' && (
+            <HStack
+              padding="1em"
+              w="full"
+              justifyContent="space-between"
+              background="rgba(242, 121, 97, 0.1)"
+              borderRadius="16px"
+            >
+              <Box>
+                <Text fontWeight="400" fontSize="18px" lineHeight="26px" color="#CC4C33">
+                  Create your own routines in our app
+                </Text>
+              </Box>
+              <Box>
+                <Common.ImpaktButton
+                  _hover={{ background: '' }}
+                  _selected={{ background: '' }}
+                  _focus={{ background: '' }}
+                  _active={{ background: '' }}
+                  background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                >
+                  Open App
+                </Common.ImpaktButton>
+              </Box>
+            </HStack>
+          )}
+
+          {currentScreen === 'create-preview' && activeTab === 'routine' && previewRouitine && (
+            <HStack w="full" justifyContent="flex-end">
+              <Box>
+                <Common.ImpaktButton
+                  id="select-routine-button"
+                  onClick={() => {
+                    // setActiveGroupChallenge(challenge);
+                    // setAssocName(previewChallenge.challenge.name);
+                    // setAssocId(previewChallenge.challenge.id);
+                    moveToNextScreen('create-challenge-form');
+                  }}
+                  variant="black"
+                  w="159px !important"
+                  colorScheme="#fff"
+                  h="64px"
+                  backgroundColor="#29323B"
+                  borderRadius="1em"
+                  type="submit"
+                  fontSize={{ base: '14px', md: '16px' }}
+                  fontWeight="700"
+                >
+                  <Text>Select</Text>
+                </Common.ImpaktButton>
+              </Box>
+            </HStack>
+          )}
+
+          {currentScreen === 'create-challenge-form' && activeTab === 'routine' && previewRouitine && (
+            <HStack w="full" justifyContent="flex-end">
+              <Box>
+                <Common.ImpaktButton
+                  _hover={{ background: '' }}
+                  _selected={{ background: '' }}
+                  _focus={{ background: '' }}
+                  _active={{ background: '' }}
+                  background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                  padding="16px 48px"
+                  h="64px"
+                  borderRadius="16px"
+                  onClick={() => {
+                    moveToFirstScreenAndDeleteHistory();
                   }}
                 >
-                  {availableGroupChallenges.length === 0 ? (
-                    <Text color="gray.500">
-                      Sorry, You have to create your challenges{' '}
-                      <Link as={ReactLink} to="/download">
-                        <Text as="u">in-game</Text>
-                      </Link>{' '}
-                      first. The creation of the challenges will be available here soon...
-                    </Text>
-                  ) : (
-                    availableGroupChallenges.map((challengeI) => (
-                      <ChallengesCard key={challengeI.challenge.id} data={challengeI}>
-                        <Common.ImpaktButton
-                          onClick={() => {
-                            // setActiveGroupChallenge(challenge);
-                            setAssocName(challengeI.challenge.name);
-                            setAssocId(challengeI.challenge.id);
-                            close();
-                          }}
-                          variant="black"
-                          w="114px !important"
-                          colorScheme="#fff"
-                          h="38px"
-                          backgroundColor="#29323B"
-                          borderRadius="8px"
-                          type="submit"
-                          fontSize={{ base: '14px', md: '16px' }}
-                          fontWeight="700"
-                        >
-                          <Text>Select</Text>
-                        </Common.ImpaktButton>
-                      </ChallengesCard>
-                    ))
-                  )}
-                </Box>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </ModalBody>
+                  <Text fontWeight="600">Create</Text>
+                </Common.ImpaktButton>
+              </Box>
+            </HStack>
+          )}
+
+          {/* MODAL FOOTER END HERE */}
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
