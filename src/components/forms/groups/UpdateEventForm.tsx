@@ -30,7 +30,7 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   if (!getSelectedDayEvent()) return null;
 
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
-    (d) => d.challenge.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId,
+    (d) => d.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId,
   );
 
   const { handleSubmit, errors, setValue, getValues } = useForm({
@@ -38,7 +38,7 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
       eventTitle: JSON.parse(getSelectedDayEvent()!.event?.data).title ?? '',
       eventDescription: JSON.parse(getSelectedDayEvent()!.event?.data).description ?? '',
       assocId: JSON.parse(getSelectedDayEvent()!.event?.data).assocId ?? '',
-      assocName: truncateString(challange?.challenge.name ?? '', 23) ?? '',
+      assocName: truncateString(challange?.name ?? '', 23) ?? '',
       eventStartTime: getSelectedDayEvent()?.event.schedule?.times[0].toString() ?? '',
       eventEndTime: getSelectedDayEvent()?.event.schedule?.times[1].toString() ?? '',
     },

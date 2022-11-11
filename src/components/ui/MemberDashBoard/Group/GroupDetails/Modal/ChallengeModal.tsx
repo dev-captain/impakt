@@ -26,7 +26,6 @@ import { usePersistedAuthStore, usePersistedChallengeStore } from '../../../../.
 import ChallengesCard from './ChallengeModalTabs/ChallengesCard/ChallengesCard';
 import ChallengeModalHeader from './ChallengeModalTabs/ChallengeModalHeader';
 import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTitleText';
-import { AvailableGroupChallengesTypeI } from '../../../../../../lib/zustand/stores/challengeStore';
 import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
@@ -34,6 +33,7 @@ import { convertMsToHM } from '../../../../../../utils';
 import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
+import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -45,7 +45,7 @@ type ChallengeModalScreens =
   | 'select'
   | 'preview'
   | 'create'
-  | 'create-preview'
+  | 'preview-routine'
   | 'create-challenge-form';
 
 const ChallengeModal: React.FC<ChallengeModalProps> = ({
@@ -76,8 +76,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   const { convertToPascalCase } = usePascalCase();
   const [activeTab, setActiveTab] = React.useState<ChallengeTabs>('routine');
   const [activeScreen, setActiveScreen] = React.useState<ChallengeModalScreens[]>(['select']);
-  const [previewChallenge, setPreviewChallenge] =
-    React.useState<AvailableGroupChallengesTypeI | null>(null);
+  const [previewChallenge, setPreviewChallenge] = React.useState<GetChallengeRes | null>(null);
   const [previewRouitine, setRoutinePreview] = React.useState<GetRoutineRes | null>(null);
 
   const { availableGroupChallenges } = usePersistedChallengeStore();
@@ -99,23 +98,21 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   };
 
   const getTimeDifference = () => {
-    const isValidDate = previewChallenge?.challenge
-      ? Day.fromString(previewChallenge?.challenge.validFrom)!.time < Day.now().time
+    const isValidDate = previewChallenge
+      ? Day.fromString(previewChallenge.validFrom)!.time < Day.now().time
       : false;
 
     if (!isValidDate || !previewChallenge) return { d: 0, h: 0, m: 0, s: 0 };
 
-    const d = Day.fromString(previewChallenge.challenge.validUntil ?? '').daysBetween(Day.now());
-    const h =
-      Day.fromString(previewChallenge.challenge.validUntil ?? '').hoursBetween(Day.now()) % 24;
-    const m =
-      Day.fromString(previewChallenge.challenge.validUntil ?? '').minutesBetween(Day.now()) % 60;
+    const d = Day.fromString(previewChallenge.validUntil ?? '').daysBetween(Day.now());
+    const h = Day.fromString(previewChallenge.validUntil ?? '').hoursBetween(Day.now()) % 24;
+    const m = Day.fromString(previewChallenge.validUntil ?? '').minutesBetween(Day.now()) % 60;
 
     return { d, h, m };
   };
 
   // TODO SOURCE WILL BE DIFFERENT
-  const availableRoutines = availableGroupChallenges.map(({ challenge }) => challenge.Routine);
+  const availableRoutines = availableGroupChallenges.map((d) => d.Routine);
   const handleSubmitCreateChallenge = () => {
     if (!activeChallengeDurationDay) return;
     if (activeChallengeName.length === 0) return;
@@ -160,7 +157,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
           goBackOnClick={() => moveBackToPreviousScreen()}
           showGoBackIcon={activeScreen.length > 1}
           currentScreen={currentScreen}
-          previewHeaderText={previewChallenge?.challenge.name ?? ''}
+          previewHeaderText={previewChallenge?.name ?? ''}
           createPreviewHeaderText={previewRouitine?.name ?? ''}
         >
           <ModalCloseButton
@@ -230,7 +227,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             </VStack>
           )}
 
-          {(currentScreen === 'preview' || currentScreen === 'create-preview') &&
+          {(currentScreen === 'preview' || currentScreen === 'preview-routine') &&
             activeTab === 'routine' &&
             (previewChallenge || previewRouitine) && (
               <HStack pl="0.5em" mt="24px" mb="24px" w="full" justifyContent="space-between">
@@ -243,9 +240,9 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                     lineHeight="100%"
                   >
                     {(currentScreen === 'preview' &&
-                      previewChallenge?.challenge.Routine.TimelineBlocks?.length) ??
+                      previewChallenge?.Routine.TimelineBlocks?.length) ??
                       0}
-                    {(currentScreen === 'create-preview' &&
+                    {(currentScreen === 'preview-routine' &&
                       previewRouitine?.TimelineBlocks?.length) ??
                       0}{' '}
                     Exercises
@@ -254,20 +251,13 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
 
                 <Box>
                   <ChallengesCardScoreLabelsWrapper
-                    attemptScore={
-                      currentScreen === 'preview'
-                        ? previewChallenge?.attempts.successAttempts
-                        : undefined
-                    }
                     estimationTimeScore={`${Math.ceil(
                       currentScreen === 'preview'
-                        ? previewChallenge!.challenge.Routine.estimatedTime / 60
+                        ? previewChallenge!.Routine.estimatedTime / 60
                         : previewRouitine!.estimatedTime / 60,
                     )} min`}
                     likeScore={
-                      currentScreen === 'preview'
-                        ? previewChallenge?.likes.count ?? undefined
-                        : undefined
+                      currentScreen === 'preview' ? previewChallenge?.likes ?? undefined : undefined
                     }
                   />
                 </Box>
@@ -297,7 +287,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             {currentScreen === 'select' &&
               activeTab === 'routine' &&
               availableGroupChallenges.map((challengeI) => (
-                <ChallengesCard key={challengeI.challenge.id} data={challengeI}>
+                <ChallengesCard key={challengeI.id} challenge={challengeI}>
                   <Common.ImpaktButton
                     onClick={() => {
                       setPreviewChallenge(challengeI);
@@ -318,8 +308,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                   <Common.ImpaktButton
                     onClick={() => {
                       // setActiveGroupChallenge(challenge);
-                      setAssocName(challengeI.challenge.name);
-                      setAssocId(challengeI.challenge.id);
+                      setAssocName(challengeI.name);
+                      setAssocId(challengeI.id);
                       close();
                     }}
                     variant="black"
@@ -339,7 +329,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
-                  {previewChallenge.challenge.Routine.TimelineBlocks?.map((exercise, index) => (
+                  {previewChallenge.Routine.TimelineBlocks?.map((exercise, index) => (
                     <ChallengePreviewItemCard
                       key={exercise.id}
                       exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
@@ -360,7 +350,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                       <Common.ImpaktButton
                         onClick={() => {
                           setRoutinePreview(routine);
-                          moveToNextScreen('create-preview');
+                          moveToNextScreen('preview-routine');
                         }}
                         variant="transparent"
                         w="114px !important"
@@ -396,7 +386,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                 </VStack>
               </VStack>
             )}
-            {currentScreen === 'create-preview' && activeTab === 'routine' && previewRouitine && (
+            {currentScreen === 'preview-routine' && activeTab === 'routine' && previewRouitine && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
                   {previewRouitine.TimelineBlocks?.map((exercise, index) => (
@@ -439,7 +429,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                     <RoutineCard routine={previewRouitine}>
                       <Common.ImpaktButton
                         onClick={() => {
-                          moveToNextScreen('create-preview');
+                          moveToNextScreen('preview-routine');
                         }}
                         variant="transparent"
                         w="114px !important"
@@ -560,8 +550,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                 <Common.ImpaktButton
                   onClick={() => {
                     // setActiveGroupChallenge(challenge);
-                    setAssocName(previewChallenge.challenge.name);
-                    setAssocId(previewChallenge.challenge.id);
+                    setAssocName(previewChallenge.name);
+                    setAssocId(previewChallenge.id);
                     close();
                   }}
                   variant="black"
@@ -607,7 +597,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             </HStack>
           )}
 
-          {currentScreen === 'create-preview' && activeTab === 'routine' && previewRouitine && (
+          {currentScreen === 'preview-routine' && activeTab === 'routine' && previewRouitine && (
             <HStack w="full" justifyContent="flex-end">
               <Box>
                 <Common.ImpaktButton
@@ -638,6 +628,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             <HStack w="full" justifyContent="flex-end">
               <Box>
                 <Common.ImpaktButton
+                  isLoading={createChallenge.isLoading}
+                  isDisabled={createChallenge.isLoading}
                   _hover={{ background: '' }}
                   _selected={{ background: '' }}
                   _focus={{ background: '' }}

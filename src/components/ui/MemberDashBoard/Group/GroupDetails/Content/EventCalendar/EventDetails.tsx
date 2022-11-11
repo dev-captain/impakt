@@ -26,7 +26,7 @@ const EventDetails: React.FC = () => {
   if (!eventObj) return null;
 
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
-    ({ challenge }) => challenge.id === JSON.parse(eventObj.data).assocId,
+    (d) => d.id === JSON.parse(eventObj.data).assocId,
   );
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
@@ -132,7 +132,7 @@ const EventDetails: React.FC = () => {
             <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
           </Box>
           <Text color="#4E6070" fontSize="16px" fontWeight="500" maxW="258px">
-            {truncateString(`${challange?.challenge.name}`, 23)}
+            {truncateString(`${challange?.name}`, 23)}
           </Text>
         </Box>
       </Box>

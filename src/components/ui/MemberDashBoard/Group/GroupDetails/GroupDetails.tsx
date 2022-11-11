@@ -267,29 +267,16 @@ const GroupDetails: React.FC = () => {
 const useFetchAvailableChallenges = () => {
   const { setAvailableGroupChallenges } = usePersistedChallengeStore();
   const fetchAvailableChallengesForGroup = async (membersOfGroup: GetMembersOfGroupRes) => {
-    const admin = membersOfGroup.Members.filter(({ role }) => role === 'Creator')[0];
+    const admin = membersOfGroup.Members.find(({ role }) => role === 'Creator');
+    if (!admin) return;
 
-    const myChallengesRes = await challengesControllerGetMany({
-      validOnly: false,
+    const groupAdminChallenges = await challengesControllerGetMany({
+      validOnly: true,
       Routine: true,
       creatorId: admin.User.id,
     });
 
-    const challengesLikePromises = myChallengesRes.map(({ id }) =>
-      likeControllerGetChallengeLikes(id),
-    );
-
-    const attemptsOnPromises = myChallengesRes.map(async ({ id }) =>
-      challengeStatsControllerGetChallengeAttemptsForAllUsers(id),
-    );
-
-    const challengesLikes = await Promise.all([...challengesLikePromises]);
-    const attempts = await Promise.all([...attemptsOnPromises]);
-
-    const res = myChallengesRes.map((d, index) => {
-      return { challenge: { ...d }, attempts: attempts[index], likes: challengesLikes[index] };
-    });
-    setAvailableGroupChallenges(res);
+    setAvailableGroupChallenges(groupAdminChallenges);
   };
 
   return { fetchAvailableChallengesForGroup };

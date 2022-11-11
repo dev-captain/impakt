@@ -1,20 +1,9 @@
 import { StateCreator } from 'zustand';
-import {
-  ChallengeAttemptStatsRes,
-  GetChallengeLikesRes,
-  GetChallengeRes,
-} from '../../impakt-dev-api-client/react-query/types';
-
-export type AvailableGroupChallengesTypeI = {
-  challenge: GetChallengeRes;
-  attempts: ChallengeAttemptStatsRes;
-  likes: GetChallengeLikesRes;
-};
-export type AvailableGroupChallengesType = AvailableGroupChallengesTypeI[];
+import { GetChallengeRes } from '../../impakt-dev-api-client/react-query/types';
 
 export interface ChallengeStore {
-  availableGroupChallenges: AvailableGroupChallengesType;
-  setAvailableGroupChallenges: (availableGroupChallenges: AvailableGroupChallengesType) => void;
+  availableGroupChallenges: GetChallengeRes[];
+  setAvailableGroupChallenges: (availableGroupChallenges: GetChallengeRes[]) => void;
 }
 
 export const challengeStore: StateCreator<ChallengeStore> = (set) => ({

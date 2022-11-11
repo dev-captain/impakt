@@ -5,7 +5,7 @@ import ChallengeModalHeadlineText from './ChallengeModalHeadlineText';
 
 interface ChallengeModalHeaderPropsI {
   showGoBackIcon: boolean;
-  currentScreen: 'select' | 'create' | 'preview' | 'create-preview' | 'create-challenge-form';
+  currentScreen: 'select' | 'create' | 'preview' | 'preview-routine' | 'create-challenge-form';
   previewHeaderText: string;
   createPreviewHeaderText: string;
   goBackOnClick: () => void;
@@ -32,7 +32,7 @@ const ChallengeModalHeader: React.FC<ChallengeModalHeaderPropsI> = ({
         {currentScreen === 'preview' && (
           <ChallengeModalHeadlineText ml="24px" title={previewHeaderText} />
         )}
-        {currentScreen === 'create-preview' && (
+        {currentScreen === 'preview-routine' && (
           <ChallengeModalHeadlineText ml="24px" title={createPreviewHeaderText} />
         )}
 

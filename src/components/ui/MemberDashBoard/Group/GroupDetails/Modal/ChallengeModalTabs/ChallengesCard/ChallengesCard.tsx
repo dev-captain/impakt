@@ -1,20 +1,16 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { Common, I } from 'components';
 import { Day } from 'dayspan';
-import { convertMsToHM, truncateString } from '../../../../../../../../utils';
-import { usePersistedAuthStore } from '../../../../../../../../lib/zustand';
-import { AvailableGroupChallengesTypeI } from '../../../../../../../../lib/zustand/stores/challengeStore';
+import { truncateString } from '../../../../../../../../utils';
 import ChallengesCardScoreLabelsWrapper from './ChallengesCardScoreLabelsWrapper';
 import ChallengeCardMetaLabel from './ChallengeCardMetaLabel';
+import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 
 interface ChallengesCardProps {
-  data: AvailableGroupChallengesTypeI;
+  challenge: GetChallengeRes;
 }
 
-const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, children }) => {
-  const { challenge, likes, attempts } = data;
-
+const ChallengesCard: React.FC<ChallengesCardProps> = ({ challenge, children }) => {
   const isValidDate = challenge.validFrom
     ? Day.fromString(challenge.validFrom)!.time < Day.now().time
     : false;
@@ -47,9 +43,9 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data, children }) => {
         </Text>
 
         <ChallengesCardScoreLabelsWrapper
-          attemptScore={attempts.successAttempts}
+          attemptScore={challenge.Routine.TimelineBlocks?.length}
           estimationTimeScore={`${Math.ceil(challenge.Routine.estimatedTime / 60)} min`}
-          likeScore={likes?.count ?? undefined}
+          likeScore={challenge.likes ?? undefined}
         />
       </Box>
       <Box
