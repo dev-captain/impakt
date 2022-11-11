@@ -137,9 +137,12 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             {
               ...data,
               Routine: previewRouitine,
+              likes: 0,
             },
             ...availableGroupChallenges,
           ]);
+          setActiveChallengeDurationDay(1);
+          setActiveChallengeName('');
           moveToFirstScreenAndDeleteHistory();
         },
         onError: (err) => {
