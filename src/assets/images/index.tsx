@@ -116,6 +116,7 @@ const Images = {
     group: require('./group/group.jpg'),
     upload: require('./group/Upload.png'),
     logo: require('./group/logo.png'),
+    challengeBanner: require('./group/col.png'),
   },
   evolving: {
     evolving: require('./evolving.png'),

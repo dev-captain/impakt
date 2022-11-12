@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, HStack } from '@chakra-ui/react';
+import { Box, Text, HStack, StackProps } from '@chakra-ui/react';
 import { I } from 'components';
 import { convertMsToHM } from '../../../../../../../../utils';
 import { GetTimelineBlockResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockResType';
@@ -7,13 +7,14 @@ import { GetTimelineBlockResType } from '../../../../../../../../lib/impakt-dev-
 interface ChallengePreviewItemCardPropsI {
   exerciseName: string;
   exerciseType: GetTimelineBlockResType;
-  lengthOfExercise: number;
+  lengthOfExercise: { m: string; s: string };
 }
 
-const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI> = ({
+const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI & StackProps> = ({
   exerciseName,
   exerciseType,
   lengthOfExercise,
+  ...props
 }) => {
   return (
     <HStack
@@ -24,10 +25,11 @@ const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI> = ({
       justifyContent="space-between"
       alignItems="center"
       w="full"
+      {...props}
     >
       <Box id="length-of-exercise-box">
         <Text color="#728BA3" fontWeight="500" fontSize="18px" lineHeight="100%">
-          {`${convertMsToHM(lengthOfExercise).m}:${convertMsToHM(lengthOfExercise).s}`}
+          {`${lengthOfExercise.m}:${lengthOfExercise.s}`}
         </Text>
       </Box>
       <Box w="100%" id="exercise-title-box">

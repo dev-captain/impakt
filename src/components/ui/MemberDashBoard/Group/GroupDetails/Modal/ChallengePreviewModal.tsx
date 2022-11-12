@@ -1,0 +1,367 @@
+import {
+  Box,
+  Text,
+  HStack,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
+  VStack,
+  ModalCloseButton,
+  IconButton,
+  Button,
+  Image,
+} from '@chakra-ui/react';
+import React from 'react';
+import { Common, I } from '../../../../..';
+import Images from '../../../../../../assets/images';
+import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
+
+interface ChallengeModalProps {
+  open: boolean;
+  close: () => void;
+  challengePreview: {
+    title: string;
+    creator: string;
+    deepLinkToPlay: string;
+    timeLeft: { d: number; h: number; m: number };
+    likeCount: number;
+    myRank: string;
+    myBestScore: string;
+    exercices: [];
+    leaderboard: [];
+  };
+}
+const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
+  open,
+  close,
+  challengePreview,
+}) => {
+  return (
+    <Modal isOpen={open} onClose={() => close()} isCentered>
+      <ModalOverlay />
+      <ModalContent
+        backgroundColor="transparent"
+        w={{ base: '92%', md: '100%' }}
+        minW={{ base: '92%', md: '960px' }}
+        mt="140px"
+      >
+        <ModalBody p="0">
+          {/* MODAL BODY BANNER START HERE */}
+          <VStack
+            justifyContent="space-between"
+            id="challenge-modal-banner-container"
+            bg="#222430"
+            borderRadius="32px 32px 0 0"
+            p="24px"
+            w="full"
+            minH="240px"
+            position="relative"
+          >
+            <Box
+              top="0"
+              bottom="0 !important"
+              pos="absolute"
+              right={{ md: '25%!important' }}
+              display="flex"
+            >
+              <Image objectFit="cover" src={Images.group.challengeBanner} />
+            </Box>
+            <HStack justifyContent="space-between" w="full">
+              <Box>
+                <Button
+                  borderRadius="80px"
+                  p="8px 16px"
+                  bg="rgba(0, 2, 10, 0.4)"
+                  _hover={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                  _focus={{ bg: '' }}
+                  _active={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                  _selected={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                  autoFocus={false}
+                  leftIcon={<I.HeartIcon width="18px " height="18px " color="#fff" />}
+                >
+                  <Text fontWeight="500" fontSize="18px" lineHeight="100%" color="#fff">
+                    {challengePreview.likeCount}
+                  </Text>
+                </Button>
+              </Box>
+              <ModalCloseButton
+                _hover={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                _focus={{ bg: '' }}
+                _active={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                _selected={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                autoFocus={false}
+                background="rgba(0, 2, 10, 0.4)"
+                color="#fff"
+              />
+            </HStack>
+            <HStack flexWrap="wrap" rowGap="8px" justifyContent="space-between" w="full">
+              <HStack zIndex="999">
+                <Box
+                  p="8px 4px"
+                  textAlign="center"
+                  minW="48px"
+                  borderRadius="8px"
+                  bg="rgba(0, 0, 0, 0.25)"
+                >
+                  <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
+                    08
+                  </Text>
+                </Box>
+                <Box
+                  ml="2px !important"
+                  color="#FFFFFF"
+                  fontWeight="600"
+                  fontSize="32px"
+                  lineHeight="100%"
+                  as="span"
+                >
+                  :
+                </Box>
+                <Box
+                  minW="48px"
+                  ml="2px !important"
+                  textAlign="center"
+                  p="8px 4px"
+                  borderRadius="8px"
+                  bg="rgba(0, 0, 0, 0.25)"
+                >
+                  <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
+                    16
+                  </Text>
+                </Box>
+                <Box
+                  ml="2px !important"
+                  color="#FFFFFF"
+                  fontWeight="600"
+                  fontSize="32px"
+                  lineHeight="100%"
+                  as="span"
+                >
+                  :
+                </Box>
+                <Box
+                  textAlign="center"
+                  p="8px 4px"
+                  ml="2px !important"
+                  minW="48px"
+                  borderRadius="8px"
+                  bg="rgba(0, 0, 0, 0.25)"
+                >
+                  <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
+                    32
+                  </Text>
+                </Box>
+              </HStack>
+              <HStack ml="0 !important" columnGap="4px">
+                <HStack
+                  bg="rgba(0, 0, 0, 0.25)"
+                  columnGap="12px"
+                  padding="8px 16px 8px 8px"
+                  borderRadius="8px"
+                  backdropFilter="blur(20px)"
+                  id="challenge-preview-score-box"
+                  color="#fff"
+                >
+                  <Box id="">
+                    <I.RankIcon />
+                  </Box>
+                  <VStack alignItems="flex-start">
+                    <Text
+                      fontWeight="600"
+                      color="rgba(255, 255, 255, 0.75)"
+                      fontSize="12px"
+                      lineHeight="100%"
+                      letterSpacing="1px"
+                      id="score-label"
+                    >
+                      MY RANK
+                    </Text>
+                    <Text
+                      color="#FFCC66"
+                      fontWeight="500"
+                      fontSize="18px"
+                      lineHeight="100%"
+                      id="score-text"
+                    >
+                      #7
+                    </Text>
+                  </VStack>
+                </HStack>
+                <HStack
+                  bg="rgba(0, 0, 0, 0.25)"
+                  columnGap="12px"
+                  padding="8px 16px 8px 8px"
+                  borderRadius="8px"
+                  backdropFilter="blur(20px)"
+                  id="challenge-preview-score-box"
+                  color="#fff"
+                >
+                  <Box id="">
+                    <I.WinnerIcon />
+                  </Box>
+                  <VStack alignItems="flex-start">
+                    <Text
+                      fontWeight="600"
+                      color="#fff"
+                      fontSize="12px"
+                      lineHeight="100%"
+                      letterSpacing="1px"
+                      id="score-label"
+                    >
+                      MY BEST SCORE
+                    </Text>
+                    <Text
+                      color="#FFCC66"
+                      fontWeight="500"
+                      fontSize="18px"
+                      lineHeight="100%"
+                      id="score-text"
+                    >
+                      2,450
+                    </Text>
+                  </VStack>
+                </HStack>
+              </HStack>
+            </HStack>
+          </VStack>
+          {/* MODAL BODY BANNER END HERE */}
+          {/* MODAL BODY HEADER START HERE */}
+          <HStack
+            bg="#fff"
+            p="32px"
+            id="challenge-preview-header-box"
+            justifyContent="space-between"
+          >
+            <VStack rowGap="10px" alignItems="flex-start" id="challenge-preview-title-stack">
+              <HStack pos="relative" id="challenge-preivew-box-title">
+                <Text fontWeight="500" fontSize="32px" color="#29323B" lineHeight="100%">
+                  Daily Challenge
+                </Text>
+                <Text
+                  color="#CC4C33"
+                  fontWeight="500"
+                  fontSize="18px"
+                  lineHeight="100%"
+                  pos="relative"
+                  bottom="-8px"
+                >
+                  by Impakt
+                </Text>
+              </HStack>
+              <Box id="challenge-preview-box-details">
+                <Text fontWeight="500" fontSize="18px" lineHeight="100%" color="#728BA3">
+                  256 plays • 15 min
+                </Text>
+              </Box>
+            </VStack>
+            <HStack>
+              <Common.ImpaktButton
+                _hover={{ background: '' }}
+                _selected={{ background: '' }}
+                _focus={{ background: '' }}
+                _active={{ background: '' }}
+                leftIcon={<I.PlayChallengeIcon />}
+                background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                padding="12px 32px"
+                borderRadius="12px"
+              >
+                <Text fontWeight="600">Start</Text>
+              </Common.ImpaktButton>
+            </HStack>
+          </HStack>
+          {/* MODAL BODY HEADER END HERE */}
+          {/* MODAL BODY CONTENT START HERE */}
+          <HStack
+            bg="#fff"
+            id="challenge-preview-content-box"
+            alignItems="flex-start"
+            justifyContent="space-between"
+          >
+            <VStack
+              borderTop="1px solid #D3E2F0"
+              borderRight="1px solid #D3E2F0"
+              p="32px"
+              w="full"
+              alignItems="flex-start"
+              id="challenge-preview-content-left"
+            >
+              <VStack w="full" alignItems="flex-start" id="challenge-box">
+                <Box>
+                  <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
+                    0 Exercices
+                  </Text>
+                </Box>
+                <Box background="#F5F8FA" borderRadius="1em" w="full">
+                  <ChallengePreviewItemCard
+                    exerciseName="Rest"
+                    exerciseType="Rest"
+                    lengthOfExercise={{ m: '0', s: '10' }}
+                    borderBottom="1px solid #D3E2F0"
+                    borderRadius="0"
+                    background="transparent"
+                  />
+
+                  <ChallengePreviewItemCard
+                    exerciseName="Rest"
+                    exerciseType="Rest"
+                    lengthOfExercise={{ m: '0', s: '10' }}
+                    borderBottom="1px solid #D3E2F0"
+                    borderRadius="0"
+                    background="transparent"
+                  />
+
+                  <ChallengePreviewItemCard
+                    exerciseName="Rest"
+                    exerciseType="Rest"
+                    lengthOfExercise={{ m: '0', s: '10' }}
+                    borderBottom="1px solid #D3E2F0"
+                    borderRadius="0"
+                    background="transparent"
+                  />
+
+                  <ChallengePreviewItemCard
+                    exerciseName="Rest"
+                    exerciseType="Rest"
+                    lengthOfExercise={{ m: '0', s: '10' }}
+                    borderBottom="1px solid #D3E2F0"
+                    borderRadius="0"
+                    background="transparent"
+                  />
+
+                  <ChallengePreviewItemCard
+                    exerciseName="Rest"
+                    exerciseType="Rest"
+                    lengthOfExercise={{ m: '0', s: '10' }}
+                    borderRadius="0"
+                    background="transparent"
+                  />
+                </Box>
+              </VStack>
+            </VStack>
+
+            <VStack
+              ml="0 !important"
+              p="32px"
+              borderTop="1px solid #D3E2F0"
+              w="full"
+              alignItems="flex-start"
+              id="challenge-preview-content-left"
+            >
+              <VStack id="challenge-box">
+                <Box>
+                  <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
+                    Leaderboard
+                  </Text>
+                </Box>
+              </VStack>
+            </VStack>
+          </HStack>
+          {/* MODAL BODY CONTENT END HERE */}
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};
+
+export default ChallengePreviewModal;

@@ -98,3 +98,5 @@ export { default as AddBannerLabelItemIcon } from './AddBannerLabelItemIcon';
 export { default as TimeExerciseIcon } from './TimeExerciseIcon';
 export { default as RestExerciseIcon } from './RestExerciseIcon';
 export { default as HoldExerciseIcon } from './HoldExerciseIcon';
+export { default as WinnerIcon } from './WinnerIcon';
+export { default as RankIcon } from './RankIcon';

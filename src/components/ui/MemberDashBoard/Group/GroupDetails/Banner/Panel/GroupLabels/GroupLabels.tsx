@@ -4,12 +4,14 @@ import { IconButton, useDisclosure } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
 import { usePersistedGroupStore } from '../../../../../../../../lib/zustand';
 import ChallengeModal from '../../../Modal/ChallengeModal';
+import ChallengePreviewModal from '../../../Modal/ChallengePreviewModal';
 
 const GroupLabels: React.FC = () => {
   const [assocId, setAssocId] = React.useState<number>(NaN);
   const [assocName, setAssocName] = React.useState<string>('');
 
   const challengeModalDisclosure = useDisclosure();
+  const challengePreviewModalDisclosure = useDisclosure();
   const { role } = usePersistedGroupStore();
   const isCreator = role === 'Creator';
   const groupStatisticLabelItems = [
@@ -56,7 +58,9 @@ const GroupLabels: React.FC = () => {
             icon={<I.PenIcon />}
           />
         ) : null,
-      onClick: () => {},
+      onClick: () => {
+        challengePreviewModalDisclosure.onOpen();
+      },
     },
     // { Icon: () => <I.AppIcon />, labelTitle: 'top program', labelDescription: 'Home Abs' },
   ];
@@ -69,6 +73,21 @@ const GroupLabels: React.FC = () => {
         setAssocName={setAssocName}
         close={challengeModalDisclosure.onClose}
         open={challengeModalDisclosure.isOpen}
+      />
+      <ChallengePreviewModal
+        close={challengePreviewModalDisclosure.onClose}
+        open={challengePreviewModalDisclosure.isOpen}
+        challengePreview={{
+          title: 'Daily Challenge',
+          creator: 'by Impakt',
+          deepLinkToPlay: '',
+          exercices: [],
+          leaderboard: [],
+          likeCount: 82,
+          myBestScore: '2.450',
+          myRank: '7',
+          timeLeft: { d: 8, h: 16, m: 32 },
+        }}
       />
     </>
   );

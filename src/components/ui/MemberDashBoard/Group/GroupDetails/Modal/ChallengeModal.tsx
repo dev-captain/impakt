@@ -343,7 +343,10 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                     <ChallengePreviewItemCard
                       key={exercise.id}
                       exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
-                      lengthOfExercise={exercise.Exercise?.averageTime ?? 0}
+                      lengthOfExercise={{
+                        m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
+                        s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
+                      }}
                       exerciseType={exercise.type}
                     />
                   ))}
@@ -401,7 +404,10 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                     <ChallengePreviewItemCard
                       key={exercise.id}
                       exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
-                      lengthOfExercise={exercise.Exercise?.averageTime ?? 0}
+                      lengthOfExercise={{
+                        m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
+                        s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
+                      }}
                       exerciseType={exercise.type}
                     />
                   ))}
