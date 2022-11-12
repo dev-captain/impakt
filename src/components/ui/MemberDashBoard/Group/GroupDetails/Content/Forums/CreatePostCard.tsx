@@ -93,7 +93,14 @@ const CreatePostCard: React.FC = () => {
                 </VStack>
               </HStack>
               <HStack m="0 !important" justifyContent="flex-start" alignItems="flex-start">
-                <AddIcon mr="10px" mb="5px" boxSize="15px" border="5px" color="#728BA3" />
+                <AddIcon
+                  mr="10px"
+                  mb="5px"
+                  boxSize="15px"
+                  border="5px"
+                  color="#728BA3"
+                  cursor="pointer"
+                />
               </HStack>
             </HStack>
           </VStack>
