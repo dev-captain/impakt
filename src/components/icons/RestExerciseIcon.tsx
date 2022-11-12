@@ -1,6 +1,6 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 
-const CountExerciseIcon = (props: IconProps) => {
+const RestExerciseIcon = (props: IconProps) => {
   return (
     <Icon
       width="24px"
@@ -18,4 +18,4 @@ const CountExerciseIcon = (props: IconProps) => {
   );
 };
 
-export default CountExerciseIcon;
+export default RestExerciseIcon;

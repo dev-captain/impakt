@@ -25,6 +25,7 @@ import { GetMembersOfGroupRes } from '../../../../../lib/impakt-dev-api-client/r
 import { likeControllerGetChallengeLikes } from '../../../../../lib/impakt-dev-api-client/react-query/likes/likes';
 import { challengeStatsControllerGetChallengeAttemptsForAllUsers } from '../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { challengesControllerGetMany } from '../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
+import { routinesControllerGetRoutines } from '../../../../../lib/impakt-dev-api-client/react-query/routines/routines';
 
 const GroupDetails: React.FC = () => {
   const { setActiveGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
@@ -265,7 +266,7 @@ const GroupDetails: React.FC = () => {
 
 // TODO once the backend refactored for this feat it will moved to react query
 const useFetchAvailableChallenges = () => {
-  const { setAvailableGroupChallenges } = usePersistedChallengeStore();
+  const { setAvailableGroupChallenges, setAvailableGroupRoutines } = usePersistedChallengeStore();
   const fetchAvailableChallengesForGroup = async (membersOfGroup: GetMembersOfGroupRes) => {
     const admin = membersOfGroup.Members.find(({ role }) => role === 'Creator');
     if (!admin) return;
@@ -276,7 +277,15 @@ const useFetchAvailableChallenges = () => {
       creatorId: admin.User.id,
     });
 
+    const groupAdminRoutines = await routinesControllerGetRoutines({
+      creatorId: admin.User.id,
+      TimelineBlocks: true,
+    });
+    console.log('source of challenges', groupAdminChallenges);
+    console.log('source of routines', groupAdminRoutines);
+
     setAvailableGroupChallenges(groupAdminChallenges);
+    setAvailableGroupRoutines(groupAdminRoutines);
   };
 
   return { fetchAvailableChallengesForGroup };

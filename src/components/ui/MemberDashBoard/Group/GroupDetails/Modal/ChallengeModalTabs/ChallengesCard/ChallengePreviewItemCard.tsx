@@ -2,10 +2,11 @@ import React from 'react';
 import { Box, Text, HStack } from '@chakra-ui/react';
 import { I } from 'components';
 import { convertMsToHM } from '../../../../../../../../utils';
+import { GetTimelineBlockResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockResType';
 
 interface ChallengePreviewItemCardPropsI {
   exerciseName: string;
-  exerciseType: 'time' | 'count';
+  exerciseType: GetTimelineBlockResType;
   lengthOfExercise: number;
 }
 
@@ -35,8 +36,11 @@ const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI> = ({
         </Text>
       </Box>
       <Box id="type-of-exercise-box">
-        {exerciseType === 'count' && <I.CountExerciseIcon />}
-        {exerciseType === 'time' && <I.TimeExerciseIcon />}
+        {exerciseType === 'Blitz' && <I.TimeExerciseIcon />}
+        {exerciseType === 'Rest' && <I.RestExerciseIcon />}
+        {exerciseType === 'HIIT' && <I.TimeExerciseIcon />}
+        {exerciseType === 'HoldPose' && <I.HoldExerciseIcon />}
+        {exerciseType === 'Rhythm' && <I.TimeExerciseIcon />}
       </Box>
     </HStack>
   );

@@ -79,7 +79,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   const [previewChallenge, setPreviewChallenge] = React.useState<GetChallengeRes | null>(null);
   const [previewRouitine, setRoutinePreview] = React.useState<GetRoutineRes | null>(null);
 
-  const { availableGroupChallenges, setAvailableGroupChallenges } = usePersistedChallengeStore();
+  const { availableGroupChallenges, availableGroupRoutines, setAvailableGroupChallenges } =
+    usePersistedChallengeStore();
   const currentScreen = activeScreen[activeScreen.length - 1];
 
   const moveToNextScreen = (newScreen: ChallengeModalScreens) => {
@@ -112,7 +113,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   };
 
   // TODO SOURCE WILL BE DIFFERENT
-  const availableRoutines = availableGroupChallenges.map((d) => d.Routine);
   const handleSubmitCreateChallenge = () => {
     if (!activeChallengeDurationDay) return;
     if (activeChallengeName.length === 0) return;
@@ -133,6 +133,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
       {
         onSuccess: (data) => {
           renderToast('success', 'Challenge is created successfully.', 'white');
+          console.log(previewRouitine);
           setAvailableGroupChallenges([
             {
               ...data,
@@ -344,9 +345,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                       key={exercise.id}
                       exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
                       lengthOfExercise={exercise.Exercise?.averageTime ?? 0}
-                      exerciseType={
-                        exercise.Exercise?.supportedTypes[0] === 'Hold' ? 'time' : 'count'
-                      }
+                      exerciseType={exercise.type}
                     />
                   ))}
                 </VStack>
@@ -355,7 +354,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             {currentScreen === 'create' && activeTab === 'routine' && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="flex-start">
-                  {availableRoutines.map((routine) => (
+                  {availableGroupRoutines.map((routine) => (
                     <RoutineCard key={routine.id} routine={routine}>
                       <Common.ImpaktButton
                         onClick={() => {
@@ -399,14 +398,12 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             {currentScreen === 'preview-routine' && activeTab === 'routine' && previewRouitine && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
-                  {previewRouitine.TimelineBlocks?.map((exercise, index) => (
+                  {previewRouitine.TimelineBlocks?.map((exercise) => (
                     <ChallengePreviewItemCard
                       key={exercise.id}
                       exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
                       lengthOfExercise={exercise.Exercise?.averageTime ?? 0}
-                      exerciseType={
-                        exercise.Exercise?.supportedTypes[0] === 'Hold' ? 'time' : 'count'
-                      }
+                      exerciseType={exercise.type}
                     />
                   ))}
                 </VStack>
