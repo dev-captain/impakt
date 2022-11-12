@@ -25,7 +25,10 @@ const ForumCreateCommentForm = React.forwardRef<
   };
   const { member } = usePersistedAuthStore();
   const { posts, setPosts, setActivePost } = usePersistedForumStore();
-
+  console.log(posts);
+  const topic = posts.find((postsd) => postsd.id === props.postId);
+  console.log(topic);
+  const placeholdertext = `comment on ${topic ? topic.content : ''}`;
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
 
@@ -78,7 +81,7 @@ const ForumCreateCommentForm = React.forwardRef<
   };
 
   const inputItems: InputGroupPropsI = {
-    placeholder: 'My cool comment for post',
+    placeholder: placeholdertext,
     onChange,
     type: 'text',
     name: 'comment',
