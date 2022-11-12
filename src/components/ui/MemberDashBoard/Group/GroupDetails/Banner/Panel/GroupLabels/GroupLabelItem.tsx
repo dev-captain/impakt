@@ -6,6 +6,7 @@ interface GroupStatisticLabelPropsI {
   rightIcon: React.ReactElement<any, any>;
   labelTitle: string;
   labelDescription: string;
+  onClick: () => void;
 }
 
 const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
@@ -13,6 +14,7 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
   rightIcon,
   labelDescription,
   labelTitle,
+  onClick,
 }) => {
   return (
     <Box
@@ -21,6 +23,7 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
       w={{ base: 'full', md: 'auto' }}
       borderRadius="12px"
       p="8px 12px 8px 8px"
+      onClick={onClick}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         {leftIcon}

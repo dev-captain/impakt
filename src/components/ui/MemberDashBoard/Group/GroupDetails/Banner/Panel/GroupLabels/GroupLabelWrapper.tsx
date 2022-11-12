@@ -4,18 +4,19 @@ import GroupLabelItem from './GroupLabelItem';
 
 interface GroupLabelWrapperPropsI {
   items: {
-    leftIcon: React.ReactElement<any, any>;
+    leftIcon: any;
     visible: boolean;
     labelTitle: string;
     labelDescription: string;
-    rightIcon: React.ReactElement<any, any>;
+    rightIcon: any;
+    onClick: () => void;
   }[];
 }
 
 const GroupLabelWrapper: React.FC<GroupLabelWrapperPropsI> = ({ items }) => {
   return (
     <>
-      {items.map(({ leftIcon, rightIcon, visible, labelDescription, labelTitle }) =>
+      {items.map(({ onClick, leftIcon, rightIcon, visible, labelDescription, labelTitle }) =>
         visible ? (
           <GroupLabelItem
             key={labelTitle}
@@ -23,6 +24,7 @@ const GroupLabelWrapper: React.FC<GroupLabelWrapperPropsI> = ({ items }) => {
             rightIcon={rightIcon}
             labelDescription={labelDescription}
             labelTitle={labelTitle}
+            onClick={onClick}
           />
         ) : null,
       )}

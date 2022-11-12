@@ -112,7 +112,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
     return { d, h, m };
   };
 
-  // TODO SOURCE WILL BE DIFFERENT
   const handleSubmitCreateChallenge = () => {
     if (!activeChallengeDurationDay) return;
     if (activeChallengeName.length === 0) return;
