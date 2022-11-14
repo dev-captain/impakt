@@ -59,7 +59,13 @@ const ImpaktTeamFounders: React.FC = () => {
               boxShadow="0px 8px 15px -5px rgba(0, 0, 0, 0.8)"
             >
               <HStack w="full" align="center" justify="center">
-                <Card company={d.company} fname={d.fname} lname={d.lname} image={d.img} />
+                <Card
+                  company={d.company}
+                  title={d.job}
+                  fname={d.fname}
+                  lname={d.lname}
+                  image={d.img}
+                />
               </HStack>
             </GridItem>
           ))}

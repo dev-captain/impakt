@@ -32,7 +32,7 @@ const ImpaktTeamAdvisors: React.FC = () => {
         </Text>
         <HStack
           w="full"
-          maxW="1400px"
+          maxW="1100px"
           justifyContent={{ base: 'center', lg: 'center' }}
           flexWrap="wrap"
           rowGap={{ base: '0', lg: '50px' }}
@@ -47,7 +47,7 @@ const ImpaktTeamAdvisors: React.FC = () => {
               w="full"
               maxW="275px"
               maxH="560px"
-              p="24px 24px 24px"
+              p={d.fname !== 'Forrest' ? '24px 24px 24px' : '24px 15px 24px'}
               align="center"
               transitionDuration="150ms"
               justify="space-between"
