@@ -5,9 +5,9 @@ const MemberDashboardCard = forwardRef<BoxProps, 'div'>((props, ref) => {
     <Box
       id="member-dashboard-card"
       display="flex"
-      bgColor="rgba(28, 28, 40, 0.65)"
+      bgColor="rgba(255, 255, 255, 1)"
       p={{ base: '1.5em', lg: '2em' }}
-      borderRadius="2rem"
+      borderRadius="24px"
       alignItems="start"
       w="full"
       flexDir="column"

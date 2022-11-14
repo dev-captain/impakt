@@ -12,8 +12,8 @@ import {
 import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
+import Images from 'assets/images';
 import IconsCard from './IconsCard';
-import bgImage from '../../../../assets/images/impaktIconBg.png';
 
 const ImpaktIcons = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -33,7 +33,7 @@ const ImpaktIcons = () => {
       minH="70vh"
     >
       <Image
-        src={bgImage}
+        src={Images.backgrounds.impaktIcongBg}
         objectFit="cover"
         minW="100%"
         bottom="65px"

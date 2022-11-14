@@ -1,14 +1,15 @@
-import { Box, Flex, FormControl, useToast, VStack, Text, useMediaQuery } from '@chakra-ui/react';
+import { Box, Flex, FormControl, VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
-import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
 import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
+import { useUserControllerCreate } from '../../../lib/impakt-dev-api-client/react-query/users/users';
+import { renderToast } from '../../../utils';
 
 const SignUpForm: React.FC = () => {
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
@@ -16,9 +17,8 @@ const SignUpForm: React.FC = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
-  const toast = useToast();
-  const dispatch = useAppDispatch();
+  const createUser = useUserControllerCreate();
+
   React.useEffect(() => {
     if (!id) return;
     const isStringThatCanConvertToPositiveInt = Number.isInteger(Number(id)) && Number(id) > 0;
@@ -72,17 +72,22 @@ const SignUpForm: React.FC = () => {
       referrerId: activeReferrerId,
     };
 
-    await dispatch(signUpMember(payload)).unwrap();
-
-    toast({
-      title: 'Success',
-      description: 'Your account created successfully.You can now login in the Impakt app.',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
-
-    navigate('/download');
+    createUser.mutate(
+      { data: { ...payload } },
+      {
+        onSuccess: () => {
+          renderToast(
+            'success',
+            'Your account created successfully.You can now login in the Impakt app.',
+            'dark',
+          );
+          navigate('/download');
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');
+        },
+      },
+    );
   };
 
   const generateRandomFourDigitNumberString = () => {
@@ -231,7 +236,8 @@ const SignUpForm: React.FC = () => {
         </Flex>
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
-            isLoading={isMemberCreateLoading}
+            isLoading={createUser.isLoading}
+            isDisabled={createUser.isLoading}
             type="submit"
             leftIcon={<I.AddMemberIcon />}
             size="lg"

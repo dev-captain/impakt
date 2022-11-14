@@ -12,8 +12,8 @@ import {
 import { C } from 'components';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
+import Images from 'assets/images';
 import TeamCard from './TeamCard';
-import bgImage from '../../../../assets/images/teambg.png';
 
 const Founder = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -36,7 +36,7 @@ const Founder = () => {
       minH="70vh"
     >
       <Image
-        src={bgImage}
+        src={Images.backgrounds.teamBg}
         objectFit="cover"
         minW="100%"
         bottom="65px"
