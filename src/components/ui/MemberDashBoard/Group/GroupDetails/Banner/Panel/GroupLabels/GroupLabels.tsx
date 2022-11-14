@@ -26,14 +26,12 @@ const GroupLabels: React.FC = () => {
           <I.FireIcon />
         ) : (
           <IconButton
-            onClick={
-              isCreator
-                ? (e) => {
-                    e.stopPropagation();
-                    challengeModalDisclosure.onOpen();
-                  }
-                : () => null
-            }
+            onClick={(e) => {
+              if (isCreator) {
+                e.stopPropagation();
+                challengeModalDisclosure.onOpen();
+              }
+            }}
             fontSize="40px"
             width="40px"
             h="40px"
@@ -50,7 +48,12 @@ const GroupLabels: React.FC = () => {
       rightIcon:
         isCreator && assocName.length > 0 ? (
           <IconButton
-            onClick={challengeModalDisclosure.onOpen}
+            onClick={(e) => {
+              if (isCreator) {
+                e.stopPropagation();
+                challengeModalDisclosure.onOpen();
+              }
+            }}
             fontSize="40px"
             width="40px"
             h="40px"
@@ -59,7 +62,9 @@ const GroupLabels: React.FC = () => {
           />
         ) : null,
       onClick: () => {
-        challengePreviewModalDisclosure.onOpen();
+        if (assocName.length > 0) {
+          challengePreviewModalDisclosure.onOpen();
+        }
       },
     },
     // { Icon: () => <I.AppIcon />, labelTitle: 'top program', labelDescription: 'Home Abs' },
