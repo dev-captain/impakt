@@ -9,7 +9,6 @@ import {
   VStack,
   HStack,
   ModalFooter,
-  Link,
   useNumberInput,
   Button,
   Input,
@@ -18,7 +17,7 @@ import {
 import { Common, I } from 'components';
 import React from 'react';
 import { usePascalCase } from 'hooks';
-import { Day, DaySpan } from 'dayspan';
+import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 
 import { ChallengeTab, ChallengeTabs } from '../../../../../../data';
@@ -29,7 +28,7 @@ import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTi
 import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
-import { convertMsToHM, renderToast } from '../../../../../../utils';
+import { convertMsToHM, getTimeDifference, renderToast } from '../../../../../../utils';
 import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
@@ -38,8 +37,7 @@ import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/rea
 interface ChallengeModalProps {
   open: boolean;
   close: () => void;
-  setAssocId: (assocId: number) => void;
-  setAssocName: (assocName: string) => void;
+  setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
 }
 type ChallengeModalScreens =
   | 'select'
@@ -48,12 +46,7 @@ type ChallengeModalScreens =
   | 'preview-routine'
   | 'create-challenge-form';
 
-const ChallengeModal: React.FC<ChallengeModalProps> = ({
-  open,
-  setAssocId,
-  setAssocName,
-  close,
-}) => {
+const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveChallenge }) => {
   const createChallenge = useChallengesControllerCreateOne();
   const [activeChallengeDurationDay, setActiveChallengeDurationDay] = React.useState(1);
   const [activeChallengeName, setActiveChallengeName] = React.useState('');
@@ -96,20 +89,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
   };
   const moveToFirstScreenAndDeleteHistory = () => {
     setActiveScreen(['select']);
-  };
-
-  const getTimeDifference = () => {
-    const isValidDate = previewChallenge
-      ? Day.fromString(previewChallenge.validFrom)!.time < Day.now().time
-      : false;
-
-    if (!isValidDate || !previewChallenge) return { d: 0, h: 0, m: 0, s: 0 };
-
-    const d = Day.fromString(previewChallenge.validUntil ?? '').daysBetween(Day.now());
-    const h = Day.fromString(previewChallenge.validUntil ?? '').hoursBetween(Day.now()) % 24;
-    const m = Day.fromString(previewChallenge.validUntil ?? '').minutesBetween(Day.now()) % 60;
-
-    return { d, h, m };
   };
 
   const handleSubmitCreateChallenge = () => {
@@ -318,8 +297,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
                   <Common.ImpaktButton
                     onClick={() => {
                       // setActiveGroupChallenge(challenge);
-                      setAssocName(challengeI.name);
-                      setAssocId(challengeI.id);
+                      setActiveChallenge(challengeI);
                       close();
                     }}
                     variant="black"
@@ -551,19 +529,17 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
               <Box>
                 <ChallengeCardMetaLabel
                   creatorName={member?.firstName ?? member?.username ?? ''}
-                  times={{
-                    d: getTimeDifference().d,
-                    h: getTimeDifference().h,
-                    m: getTimeDifference().m,
-                  }}
+                  times={getTimeDifference(
+                    previewChallenge.validFrom,
+                    previewChallenge.validUntil ?? '',
+                  )}
                 />
               </Box>
               <Box>
                 <Common.ImpaktButton
                   onClick={() => {
                     // setActiveGroupChallenge(challenge);
-                    setAssocName(previewChallenge.name);
-                    setAssocId(previewChallenge.id);
+                    setActiveChallenge(previewChallenge);
                     close();
                   }}
                   variant="black"

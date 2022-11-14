@@ -8,13 +8,16 @@ import {
   ModalOverlay,
   VStack,
   ModalCloseButton,
-  IconButton,
   Button,
   Image,
 } from '@chakra-ui/react';
+import { Day } from 'dayspan';
 import React from 'react';
+import { usePascalCase } from 'hooks';
 import { Common, I } from '../../../../..';
 import Images from '../../../../../../assets/images';
+import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
+import { convertMsToHM, getTimeDifference } from '../../../../../../utils';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 
 interface ChallengeModalProps {
@@ -24,12 +27,15 @@ interface ChallengeModalProps {
     title: string;
     creator: string;
     deepLinkToPlay: string;
-    timeLeft: { d: number; h: number; m: number };
     likeCount: number;
     myRank: string;
     myBestScore: string;
-    exercices: [];
+    exercices: GetTimelineBlockRes[];
+    validFrom: string;
+    validUntil: string;
     leaderboard: [];
+    playedTimes: 256;
+    playedMins: 15;
   };
 }
 const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
@@ -37,8 +43,25 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
   close,
   challengePreview,
 }) => {
+  const {
+    creator,
+    exercices,
+    deepLinkToPlay,
+    leaderboard,
+    likeCount,
+    myBestScore,
+    myRank,
+    validFrom,
+    validUntil,
+    title,
+    playedTimes,
+    playedMins,
+  } = challengePreview;
+  const { d, h, m } = getTimeDifference(validFrom, validUntil);
+  const { convertToPascalCase } = usePascalCase();
+
   return (
-    <Modal isOpen={open} onClose={() => close()} isCentered>
+    <Modal scrollBehavior="inside" isOpen={open} onClose={() => close()} isCentered>
       <ModalOverlay />
       <ModalContent
         backgroundColor="transparent"
@@ -46,7 +69,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
         minW={{ base: '92%', md: '960px' }}
         mt="140px"
       >
-        <ModalBody p="0">
+        <ModalBody overflowY="auto" p="0">
           {/* MODAL BODY BANNER START HERE */}
           <VStack
             justifyContent="space-between"
@@ -81,7 +104,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   leftIcon={<I.HeartIcon width="18px " height="18px " color="#fff" />}
                 >
                   <Text fontWeight="500" fontSize="18px" lineHeight="100%" color="#fff">
-                    {challengePreview.likeCount}
+                    {likeCount}
                   </Text>
                 </Button>
               </Box>
@@ -105,7 +128,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    08
+                    {d}
                   </Text>
                 </Box>
                 <Box
@@ -127,7 +150,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    16
+                    {h}
                   </Text>
                 </Box>
                 <Box
@@ -149,7 +172,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    32
+                    {m}
                   </Text>
                 </Box>
               </HStack>
@@ -184,7 +207,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                       lineHeight="100%"
                       id="score-text"
                     >
-                      #7
+                      #
                     </Text>
                   </VStack>
                 </HStack>
@@ -218,7 +241,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                       lineHeight="100%"
                       id="score-text"
                     >
-                      2,450
+                      0
                     </Text>
                   </VStack>
                 </HStack>
@@ -236,7 +259,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
             <VStack rowGap="10px" alignItems="flex-start" id="challenge-preview-title-stack">
               <HStack pos="relative" id="challenge-preivew-box-title">
                 <Text fontWeight="500" fontSize="32px" color="#29323B" lineHeight="100%">
-                  Daily Challenge
+                  {title}
                 </Text>
                 <Text
                   color="#CC4C33"
@@ -246,12 +269,12 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   pos="relative"
                   bottom="-8px"
                 >
-                  by Impakt
+                  by {creator}
                 </Text>
               </HStack>
               <Box id="challenge-preview-box-details">
                 <Text fontWeight="500" fontSize="18px" lineHeight="100%" color="#728BA3">
-                  256 plays • 15 min
+                  {playedTimes} plays • {playedMins} min
                 </Text>
               </Box>
             </VStack>
@@ -265,6 +288,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
                 padding="12px 32px"
                 borderRadius="12px"
+                // onClick={()=>}
               >
                 <Text fontWeight="600">Start</Text>
               </Common.ImpaktButton>
@@ -289,53 +313,23 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
               <VStack rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
                 <Box>
                   <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
-                    0 Exercices
+                    {exercices.length} Exercices
                   </Text>
                 </Box>
                 <Box background="#F5F8FA" borderRadius="1em" w="full">
-                  <ChallengePreviewItemCard
-                    exerciseName="Rest"
-                    exerciseType="Rest"
-                    lengthOfExercise={{ m: '0', s: '10' }}
-                    borderBottom="1px solid #D3E2F0"
-                    borderRadius="0"
-                    background="transparent"
-                  />
-
-                  <ChallengePreviewItemCard
-                    exerciseName="Rest"
-                    exerciseType="Rest"
-                    lengthOfExercise={{ m: '0', s: '10' }}
-                    borderBottom="1px solid #D3E2F0"
-                    borderRadius="0"
-                    background="transparent"
-                  />
-
-                  <ChallengePreviewItemCard
-                    exerciseName="Rest"
-                    exerciseType="Rest"
-                    lengthOfExercise={{ m: '0', s: '10' }}
-                    borderBottom="1px solid #D3E2F0"
-                    borderRadius="0"
-                    background="transparent"
-                  />
-
-                  <ChallengePreviewItemCard
-                    exerciseName="Rest"
-                    exerciseType="Rest"
-                    lengthOfExercise={{ m: '0', s: '10' }}
-                    borderBottom="1px solid #D3E2F0"
-                    borderRadius="0"
-                    background="transparent"
-                  />
-
-                  <ChallengePreviewItemCard
-                    exerciseName="Rest"
-                    exerciseType="Rest"
-                    lengthOfExercise={{ m: '0', s: '10' }}
-                    borderRadius="0"
-                    background="transparent"
-                  />
+                  {exercices.map(({ Exercise, type }, index) => (
+                    <ChallengePreviewItemCard
+                      exerciseName={convertToPascalCase(Exercise?.name ?? '') ?? ''}
+                      exerciseType={type}
+                      lengthOfExercise={{
+                        m: convertMsToHM(Exercise?.averageTime ?? 0).m,
+                        s: convertMsToHM(Exercise?.averageTime ?? 0).s,
+                      }}
+                      borderBottom={index !== exercices.length - 1 ? '1px solid #D3E2F0' : '0'}
+                      borderRadius="0"
+                      background="transparent"
+                    />
+                  ))}
                 </Box>
               </VStack>
             </VStack>
@@ -354,7 +348,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                     Leaderboard
                   </Text>
                 </Box>
-                <VStack w="full">
+                {/* <VStack w="full">
                   <HStack
                     w="full"
                     bg="rgba(242, 121, 97, 0.1);"
@@ -438,7 +432,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                       </Box>
                     </HStack>
                   </HStack>
-                </VStack>
+                </VStack> */}
               </VStack>
             </VStack>
           </HStack>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { Day } from 'dayspan';
-import { truncateString } from '../../../../../../../../utils';
+import { getTimeDifference, truncateString } from '../../../../../../../../utils';
 import ChallengesCardScoreLabelsWrapper from './ChallengesCardScoreLabelsWrapper';
 import ChallengeCardMetaLabel from './ChallengeCardMetaLabel';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
@@ -11,20 +11,6 @@ interface ChallengesCardProps {
 }
 
 const ChallengesCard: React.FC<ChallengesCardProps> = ({ challenge, children }) => {
-  const isValidDate = challenge.validFrom
-    ? Day.fromString(challenge.validFrom)!.time < Day.now().time
-    : false;
-  const getTimeDifference = () => {
-    if (!isValidDate) return { h: 0, m: 0, s: 0, d: 0 };
-
-    const d = Day.fromString(challenge.validUntil ?? '').daysBetween(Day.now());
-    console.log(challenge.validUntil, d);
-    const h = Day.fromString(challenge.validUntil ?? '').hoursBetween(Day.now()) % 24;
-    const m = Day.fromString(challenge.validUntil ?? '').minutesBetween(Day.now()) % 60;
-
-    return { h, m, d };
-  };
-
   return (
     <Box
       padding={{ base: '12px', md: '24px' }}
@@ -56,11 +42,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ challenge, children }) 
         justifyContent="space-between"
       >
         <ChallengeCardMetaLabel
-          times={{
-            h: getTimeDifference().h,
-            m: getTimeDifference().m,
-            d: getTimeDifference().d,
-          }}
+          times={getTimeDifference(challenge.validFrom, challenge.validUntil ?? '')}
         />
         <Box
           display="flex"

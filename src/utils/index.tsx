@@ -8,6 +8,7 @@ import {
   ToastId,
   VStack,
 } from '@chakra-ui/react';
+import { Day } from 'dayspan';
 import theme, { toastDarkLayout, toastLayout } from '../theme';
 
 const toast = createStandaloneToast({ theme });
@@ -144,6 +145,20 @@ export const truncateString = (str: string, max: number) => {
   }
 
   return str;
+};
+export const getTimeDifference = (validFrom: string, validUntil: string) => {
+  if (validFrom.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
+  if (validUntil.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
+
+  const isValidDate = Day.fromString(validFrom).time < Day.now().time;
+
+  if (!isValidDate) return { d: '0', h: '0', m: '0', s: '0' };
+
+  const d = Day.fromString(validUntil).daysBetween(Day.now());
+  const h = Day.fromString(validUntil).hoursBetween(Day.now()) % 24;
+  const m = Day.fromString(validUntil).minutesBetween(Day.now()) % 60;
+
+  return { d: padTo2Digits(d), h: padTo2Digits(h), m: padTo2Digits(m) };
 };
 
 export default {};

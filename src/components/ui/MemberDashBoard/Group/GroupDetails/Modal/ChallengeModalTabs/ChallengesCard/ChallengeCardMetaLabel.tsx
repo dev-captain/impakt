@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 
 interface ChallengeCardMetaLabelPropsI {
-  times: { d: number; h: string | number; m: string | number };
+  times: { d: string; h: string; m: string };
   creatorName?: string;
 }
 

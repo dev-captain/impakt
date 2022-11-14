@@ -5,10 +5,10 @@ import GroupLabelWrapper from './GroupLabelWrapper';
 import { usePersistedGroupStore } from '../../../../../../../../lib/zustand';
 import ChallengeModal from '../../../Modal/ChallengeModal';
 import ChallengePreviewModal from '../../../Modal/ChallengePreviewModal';
+import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 
 const GroupLabels: React.FC = () => {
-  const [assocId, setAssocId] = React.useState<number>(NaN);
-  const [assocName, setAssocName] = React.useState<string>('');
+  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(null);
 
   const challengeModalDisclosure = useDisclosure();
   const challengePreviewModalDisclosure = useDisclosure();
@@ -22,7 +22,7 @@ const GroupLabels: React.FC = () => {
     // },
     {
       leftIcon:
-        assocName.length || !isCreator ? (
+        activeChallenge?.name.length || !isCreator ? (
           <I.FireIcon />
         ) : (
           <IconButton
@@ -44,9 +44,13 @@ const GroupLabels: React.FC = () => {
       labelTitle: 'Pinned Challenge',
       labelDescription:
         // eslint-disable-next-line no-nested-ternary
-        assocName.length > 0 ? assocName : isCreator ? 'Select Challenge' : 'No Challenge Selected',
+        activeChallenge?.name && activeChallenge.name.length > 0
+          ? activeChallenge?.name
+          : isCreator
+          ? 'Select Challenge'
+          : 'No Challenge Selected',
       rightIcon:
-        isCreator && assocName.length > 0 ? (
+        isCreator && activeChallenge?.name && activeChallenge.name.length > 0 ? (
           <IconButton
             onClick={(e) => {
               if (isCreator) {
@@ -62,8 +66,11 @@ const GroupLabels: React.FC = () => {
           />
         ) : null,
       onClick: () => {
-        if (assocName.length > 0) {
+        if (activeChallenge) {
           challengePreviewModalDisclosure.onOpen();
+        }
+        if (!activeChallenge && isCreator) {
+          challengeModalDisclosure.onOpen();
         }
       },
     },
@@ -74,8 +81,7 @@ const GroupLabels: React.FC = () => {
     <>
       <GroupLabelWrapper items={groupStatisticLabelItems} />
       <ChallengeModal
-        setAssocId={setAssocId}
-        setAssocName={setAssocName}
+        setActiveChallenge={setActiveChallenge}
         close={challengeModalDisclosure.onClose}
         open={challengeModalDisclosure.isOpen}
       />
@@ -83,15 +89,18 @@ const GroupLabels: React.FC = () => {
         close={challengePreviewModalDisclosure.onClose}
         open={challengePreviewModalDisclosure.isOpen}
         challengePreview={{
-          title: 'Daily Challenge',
-          creator: 'by Impakt',
+          title: activeChallenge?.name ?? 'Daily Challenge',
+          creator: activeChallenge?.Routine.Creator?.username ?? 'Impakt',
           deepLinkToPlay: '',
-          exercices: [],
+          exercices: activeChallenge?.Routine.TimelineBlocks ?? [],
           leaderboard: [],
-          likeCount: 82,
+          likeCount: activeChallenge?.likes ?? 0,
           myBestScore: '2.450',
           myRank: '7',
-          timeLeft: { d: 8, h: 16, m: 32 },
+          playedTimes: 256,
+          playedMins: 15,
+          validFrom: activeChallenge?.validFrom ?? '',
+          validUntil: activeChallenge?.validUntil ?? '',
         }}
       />
     </>

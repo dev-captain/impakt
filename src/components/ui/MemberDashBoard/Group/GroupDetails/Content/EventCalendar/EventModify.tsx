@@ -6,6 +6,7 @@ import { Forms, I } from 'components';
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
 
 import ChallengeModal from '../../Modal/ChallengeModal';
+import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 
 interface EventModifyPropsI {
   showGoBackButton?: boolean;
@@ -14,8 +15,7 @@ interface EventModifyPropsI {
 }
 
 const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, title, type }) => {
-  const [assocId, setAssocId] = React.useState<number>(NaN);
-  const [assocName, setAssocName] = React.useState<string>('');
+  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(null);
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { goBackToOverViewScreen } = useEventCalendarContext();
 
@@ -41,27 +41,24 @@ const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, tit
         <Forms.CreateEventForm
           onOpen={onOpen}
           clearAssoc={() => {
-            setAssocId(NaN);
-            setAssocName('');
+            setActiveChallenge(null);
           }}
-          assocId={assocId}
-          assocName={assocName}
+          assocId={activeChallenge?.id ?? 0}
+          assocName={activeChallenge?.name ?? ''}
         />
       )}
       {type === 'update' && (
         <Forms.UpdateEventForm
           onOpen={onOpen}
           clearAssoc={() => {
-            setAssocId(NaN);
-            setAssocName('');
+            setActiveChallenge(null);
           }}
-          assocId={assocId}
-          assocName={assocName}
+          assocId={activeChallenge?.id ?? 0}
+          assocName={activeChallenge?.name ?? ''}
         />
       )}
       <ChallengeModal
-        setAssocId={setAssocId}
-        setAssocName={setAssocName}
+        setActiveChallenge={setActiveChallenge}
         key="2"
         open={isOpen}
         close={() => {
