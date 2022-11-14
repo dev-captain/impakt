@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Box, Text, useToast, useClipboard } from '@chakra-ui/react';
+import { Box, Text, useClipboard } from '@chakra-ui/react';
 import { I } from 'components';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { renderToast } from '../../../../../../../utils';
 
 const CopyGroupInviteLinkForm: React.FC = () => {
   const group = usePersistedGroupStore().activeGroup;
-  const toast = useToast();
 
   /* eslint no-underscore-dangle: 0 */
   const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}`;
@@ -13,17 +13,12 @@ const CopyGroupInviteLinkForm: React.FC = () => {
 
   const copyClipBoardInviteLink = () => {
     onCopy();
-    toast({
-      title: 'Success',
-      description: 'Your link has been copied successfully.',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
+    renderToast('success', 'Your link has been copied successfully.', 'white');
   };
 
   return (
     <Box
+      w="full"
       ml="0px !important"
       display="flex"
       justifyContent="space-between"

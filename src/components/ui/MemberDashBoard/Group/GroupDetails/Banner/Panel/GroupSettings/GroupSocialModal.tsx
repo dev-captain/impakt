@@ -27,7 +27,6 @@ const GroupSocialModal: React.FC<GroupSettingModalProps> = ({ open, close }) => 
         w={{ base: '92%', md: '100%' }}
         minW={{ base: '92%', md: '750px' }}
         mt="140px"
-        h="449px"
         overflowY="auto"
         borderRadius="32px"
         padding={{ base: '14px', md: '32px' }}
