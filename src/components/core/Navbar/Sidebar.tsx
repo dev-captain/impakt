@@ -23,7 +23,7 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
         isActive={path.pathname === '/dashboard'}
         collaps={collaps}
       >
-        <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
+        <I.DashboardIcon cursor="pointer" width="32px" height="32px" />
       </SidebarLinkItem>
 
       <SidebarLinkItem
