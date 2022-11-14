@@ -198,7 +198,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   color="#fff"
                 >
                   <Box id="">
-                    <I.WinnerIcon />
+                    <I.WinnerIcon color="#FFCC66" />
                   </Box>
                   <VStack alignItems="flex-start">
                     <Text
@@ -286,7 +286,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
               alignItems="flex-start"
               id="challenge-preview-content-left"
             >
-              <VStack w="full" alignItems="flex-start" id="challenge-box">
+              <VStack rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
                 <Box>
                   <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
                     0 Exercices
@@ -346,14 +346,99 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
               borderTop="1px solid #D3E2F0"
               w="full"
               alignItems="flex-start"
-              id="challenge-preview-content-left"
+              id="challenge-preview-content-leaderboard"
             >
-              <VStack id="challenge-box">
+              <VStack rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
                 <Box>
                   <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
                     Leaderboard
                   </Text>
                 </Box>
+                <VStack w="full">
+                  <HStack
+                    w="full"
+                    bg="rgba(242, 121, 97, 0.1);"
+                    color="#CC4C33"
+                    p="1em"
+                    borderRadius="8px"
+                    id="leaderboard-item-container"
+                    justifyContent="space-between"
+                  >
+                    <HStack>
+                      <Box id="leaderboard-item-icon">
+                        <I.WinnerIcon color="#F27961" width="22.08px" height="21.6px" />
+                      </Box>
+                      <Box id="leaderboard-item-rank">
+                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                          1
+                        </Text>
+                      </Box>
+                      <Box ml="16px !important" id="leaderboard-item-username">
+                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                          RatSpeare
+                        </Text>
+                      </Box>
+                    </HStack>
+
+                    <HStack>
+                      <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                        6,500
+                      </Text>
+                    </HStack>
+                  </HStack>
+                  <HStack
+                    w="full"
+                    bg="#F5F8FA"
+                    p="1em"
+                    borderRadius="8px"
+                    id="leaderboard-item-container"
+                    justifyContent="space-between"
+                    color="#728BA3"
+                  >
+                    <HStack>
+                      <Box id="leaderboard-item-icon" minW="22.08px" />
+                      <Box id="leaderboard-item-rank">
+                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                          2
+                        </Text>
+                      </Box>
+                      <Box ml="16px !important" id="leaderboard-item-username">
+                        <Text color="#29323B" fontWeight="500" fontSize="18px" lineHeight="100%">
+                          DukeNuke
+                        </Text>
+                      </Box>
+                    </HStack>
+                    <HStack>
+                      <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                        6,400
+                      </Text>
+                    </HStack>
+                  </HStack>
+
+                  <HStack
+                    w="full"
+                    bg="#F5F8FA"
+                    p="1em"
+                    borderRadius="8px"
+                    id="leaderboard-item-container"
+                    justifyContent="space-between"
+                    color="#728BA3"
+                  >
+                    <HStack>
+                      <Box id="leaderboard-item-icon" minW="22.08px" />
+                      <Box id="leaderboard-item-rank">
+                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                          3
+                        </Text>
+                      </Box>
+                      <Box ml="16px !important" id="leaderboard-item-username">
+                        <Text color="#29323B" fontWeight="500" fontSize="18px" lineHeight="100%">
+                          Demideus
+                        </Text>
+                      </Box>
+                    </HStack>
+                  </HStack>
+                </VStack>
               </VStack>
             </VStack>
           </HStack>
