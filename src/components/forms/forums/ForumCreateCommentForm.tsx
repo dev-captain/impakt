@@ -26,7 +26,7 @@ const ForumCreateCommentForm = React.forwardRef<
   const { member } = usePersistedAuthStore();
   const { posts, setPosts, setActivePost } = usePersistedForumStore();
   const topic = posts.find((postsd) => postsd.id === props.postId);
-  const placeholdertext = `comment on ${topic ? topic.content : ''}`;
+  const placeholdertext = `Comment on ${topic ? topic.content : ''}`;
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
 
