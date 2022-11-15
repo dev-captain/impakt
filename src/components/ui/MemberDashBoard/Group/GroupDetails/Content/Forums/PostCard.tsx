@@ -87,14 +87,14 @@ const PostCard: React.FC<PostCardPropsI> = ({
           alignItems={{ base: 'start', md: 'center' }}
           flexWrap={{ base: 'wrap', md: 'unset' }}
         >
-          <Avatar name={name} width="36px" height="36px" />
+          <Avatar name={name?.replace(' ', '')} width="36px" height="36px" />
           <Box marginLeft={{ base: '6px', md: '12px' }}>
             <Text
               color="#728BA3"
               fontSize={{ lgx: '16px', sm: '14px', base: '12px' }}
               fontWeight="600"
             >
-              {name}
+              {name?.replace(' ', '')}
             </Text>
             <Text
               color="#4E6070"

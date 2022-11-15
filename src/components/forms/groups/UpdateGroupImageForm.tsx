@@ -160,7 +160,10 @@ const UpdateGroupImageForm: React.FC = () => {
             <AvatarGroup size="md" max={4}>
               {groupMembers?.map((members) => (
                 <Avatar
-                  name={members.User.firstName ?? members.User.username}
+                  name={
+                    members.User.firstName?.replace(' ', '') ??
+                    members.User.username?.replace(' ', '')
+                  }
                   width="32px"
                   height="32px"
                 />
