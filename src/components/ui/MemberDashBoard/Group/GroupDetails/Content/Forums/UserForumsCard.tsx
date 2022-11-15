@@ -1,23 +1,21 @@
 import * as React from 'react';
-import { useDisclosure, Button } from '@chakra-ui/react';
-import { I } from 'components';
+import { useDisclosure, Button, LayoutProps } from '@chakra-ui/react';
 // import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 
-// import { deletePost } from '../../../../../../../lib/redux/slices/forum/post_actions/deletePost';
-import CommentBox from './CommentBox';
 import ForumDetailModal from './ForumsDetail/ForumDetailModal';
 import PostCard from './PostCard';
-import { GetCommentRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getCommentRes';
 
 interface UserForumsPropsI {
   id: number;
-  name?: string;
-  msg: string;
-  title: string;
-  // view: string;
-  time: string;
-  comments: GetCommentRes[];
+  postTitle?: string;
+  postCreatorName?: string;
+  postCreatedAt?: string;
+  replyCount?: number;
+  messageCreatorName: string;
+  message: string;
+  messageCreatedAt: string;
+  w?: LayoutProps['w'];
 }
 
 const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
@@ -44,7 +42,7 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
     navigate(`post/${props.id}`);
   };
 
-  return !props.name ? null : (
+  return (
     <>
       <PostCard onClick={navigateToPost} {...props} />
       <ForumDetailModal

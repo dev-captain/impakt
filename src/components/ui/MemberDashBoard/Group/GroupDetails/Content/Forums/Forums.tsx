@@ -10,6 +10,7 @@ import UserForumsCard from './UserForumsCard';
 import CreatePostCard from './CreatePostCard';
 import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import CreatePostModal from './CreatePostModal';
+import { getCreatedBefore } from '../../../../../../../utils';
 
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -45,12 +46,13 @@ const Forums: React.FC = () => {
               <UserForumsCard
                 key={id}
                 id={id}
-                comments={Comment}
-                name={Creator?.firstName ?? Creator?.username}
-                msg={content}
-                title={content}
-                // view={view}
-                time={createdAt}
+                message={Comment[0]?.content}
+                messageCreatorName={Comment[0]?.Creator.username}
+                messageCreatedAt={getCreatedBefore(Comment[0]?.createdAt ?? '08-08-2000')}
+                replyCount={Comment.length}
+                postCreatedAt={getCreatedBefore(createdAt)}
+                postTitle={content}
+                postCreatorName={Creator?.username}
               />
             ))}
           </Box>

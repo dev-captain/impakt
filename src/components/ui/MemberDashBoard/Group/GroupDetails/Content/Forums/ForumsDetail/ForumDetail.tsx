@@ -16,7 +16,7 @@ import {
   useCommentControllerV1DeleteOne,
   usePostControllerV1DeleteOne,
 } from '../../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
-import { renderToast } from '../../../../../../../../utils';
+import { getCreatedBefore, renderToast } from '../../../../../../../../utils';
 
 const ForumDetail: React.FC = () => {
   const deletePost = usePostControllerV1DeleteOne();
@@ -24,6 +24,7 @@ const ForumDetail: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const { postId } = useParams();
   const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
+  console.log(activePost);
   const group = usePersistedGroupStore().activeGroup;
 
   React.useEffect(() => {
@@ -91,7 +92,8 @@ const ForumDetail: React.FC = () => {
 
   return (
     <VStack alignItems="flex-start" w="full">
-      <PostCard
+      <Text>Main text will be here</Text>
+      {/* <PostCard
         w="100%"
         id={activePost.id}
         name={activePost.Creator?.firstName ?? activePost.Creator?.username}
@@ -99,7 +101,7 @@ const ForumDetail: React.FC = () => {
         title={activePost.content}
         comments={activePost.Comment}
         // view={view}
-        time={`${Day.now().hoursBetween(Day.fromString(activePost.createdAt))}h`}
+        time={activePost.createdAt}
       >
         {member?.id === activePost.Creator?.id && (
           <Common.ImpaktButton
@@ -114,7 +116,7 @@ const ForumDetail: React.FC = () => {
             <DeleteIcon width="1em" height="1em" />
           </Common.ImpaktButton>
         )}
-      </PostCard>
+      </PostCard> */}
       <Box mt="20px !important" w="50%" alignSelf="flex-start">
         <ForumCreateCommentForm postId={activePost.id} onClose={() => null} />
       </Box>
@@ -123,12 +125,9 @@ const ForumDetail: React.FC = () => {
           <PostCard
             w="50%"
             id={id}
-            name={Creator?.firstName ?? Creator?.username}
-            msg={content}
-            title={content}
-            comments={[]}
-            // view={view}
-            time={`${Day.now().hoursBetween(Day.fromString(createdAt))}h`}
+            message={content}
+            messageCreatorName={Creator.username}
+            messageCreatedAt={getCreatedBefore(createdAt)}
           >
             {Creator?.id === member?.id && (
               <Common.ImpaktButton
