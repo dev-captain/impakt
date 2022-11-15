@@ -32,7 +32,7 @@ const UpdateGroupImageForm: React.FC = () => {
 
       return;
     }
-    setBannerImage(Images.group.logo);
+    setBannerImage(Images.group.cover);
   }, []);
 
   const { handleSubmit, reset, errors, setValue } = useForm({
@@ -43,83 +43,70 @@ const UpdateGroupImageForm: React.FC = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
-      setValue(e.target.name as any, file as any, { shouldValidate: true });
-      if (ALLOW_IMAGE_FILE.includes(file.type)) {
-        setBannerImage(URL.createObjectURL(file));
+      if (file) {
+        setValue(e.target.name as any, file as any, { shouldValidate: true, shouldDirty: true });
+        if (ALLOW_IMAGE_FILE.includes(file.type)) {
+          setBannerImage(URL.createObjectURL(file));
+        }
       }
     }
   };
 
   const resetUploadImage = () => {
     setBannerImage(Images.group.logo);
-    reset({ file: null });
+    fetch(Images.group.logo)
+      .then((res) => {
+        return res.blob();
+      })
+      .then((bl) => {
+        const file = new File([bl], 'logo.png', bl);
+        reset({ file } as any);
+      });
+    // const blob = new Blob([Images.group.logo]);
+    // console.log('file', blob);
   };
 
   const openUploadImageFileInput = () => {
-    renderToast('warning', 'Image size should be less than 10MB.');
+    renderToast('warning', 'Image size should be less than 1MB.');
 
     if (uploadImageInputRef.current) {
       uploadImageInputRef.current.click();
     }
   };
 
-  const handleFormSubmit = async (data: any) => {
+  const uploadImage = (data: { file: any }) => {
     if (!activeGroup) return;
     if (!groupParam.id) return;
     const formData = new FormData();
-    if (data.file === null) {
-      fetch(Images.group.logo)
-        .then((res) => {
-          return res.blob();
-        })
-        .then((blob) => {
-          const file = new File([blob], 'logo.png', blob);
-          updateGroupCoverImage.mutate(
-            { data: { file: file as any }, groupId: activeGroup.id },
-            {
-              onSuccess: (newImage) => {
-                renderToast('success', 'Group cover image removed successfully.');
-                setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
-                const shallowOfMyGroups = [...myGroups];
-                const indexOfGroup = shallowOfMyGroups.findIndex(
-                  (group) => group.groupId === activeGroup.id,
-                );
-                if (indexOfGroup !== -1) {
-                  shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
-                  setMyGroups(shallowOfMyGroups);
-                }
-              },
-              onError: (err) => {
-                renderToast('error', err.response?.data.message ?? 'Something went wrong');
-              },
-            },
+    formData.append('file', data.file);
+    updateGroupCoverImage.mutate(
+      { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
+      {
+        onSuccess: (newImage) => {
+          renderToast('success', 'Group cover image updated successfully.');
+          setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
+          const shallowOfMyGroups = [...myGroups];
+          const indexOfGroup = shallowOfMyGroups.findIndex(
+            (group) => group.groupId === activeGroup.id,
           );
-        });
-    } else {
-      formData.append('file', data.file);
-      updateGroupCoverImage.mutate(
-        { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
-        {
-          onSuccess: (newImage) => {
-            renderToast('success', 'Group cover image updated successfully.');
-            setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
-            const shallowOfMyGroups = [...myGroups];
-            const indexOfGroup = shallowOfMyGroups.findIndex(
-              (group) => group.groupId === activeGroup.id,
-            );
-            if (indexOfGroup !== -1) {
-              shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
-              setMyGroups(shallowOfMyGroups);
-            }
-          },
-          onError: (err) => {
-            renderToast('error', err.response?.data.message ?? 'Something went wrong');
-          },
+          if (indexOfGroup !== -1) {
+            shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
+            setMyGroups(shallowOfMyGroups);
+          }
+
+          reset({ file: null });
         },
-      );
-    }
-    // TODO update zustand active group
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
+
+  const handleFormSubmit = async (data: any) => {
+    uploadImage({ file: data.file });
+  };
+
   const setBannerImage = (source: any) => {
     if (!uploadImageRef.current) return;
     uploadImageRef.current.src = source;

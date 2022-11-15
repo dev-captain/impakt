@@ -117,7 +117,10 @@ export function renderToast(
         style={whiteOrDarkMode === 'white' ? { ...toastLayout } : { ...toastDarkLayout }}
         status={type}
       >
-        <AlertIcon color={type === 'error' ? '#f84153' : '#4cbfa6'} />
+        <AlertIcon
+          // eslint-disable-next-line no-nested-ternary
+          color={type === 'error' ? '#f84153' : type === 'success' ? '#4cbfa6' : 'yellow'}
+        />
         <VStack gap="0" justifyContent="left" align="left">
           <AlertTitle margin="0 !important"> {toastTitle} </AlertTitle>
           <AlertDescription margin="0 !important">{description}</AlertDescription>
