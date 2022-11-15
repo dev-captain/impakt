@@ -123,7 +123,7 @@ const EventDetails: React.FC = () => {
             href={deepLink}
           >
             <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
-              Click to join event
+              Join event
             </Text>
           </a>
         </Box>
