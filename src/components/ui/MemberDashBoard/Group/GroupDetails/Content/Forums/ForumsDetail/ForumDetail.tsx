@@ -97,7 +97,7 @@ const ForumDetail: React.FC = () => {
         name={activePost.Creator?.firstName ?? activePost.Creator?.username}
         msg={activePost.content}
         title={activePost.content}
-        msgNo={activePost.Comment.length}
+        comments={activePost.Comment}
         // view={view}
         time={`${Day.now().hoursBetween(Day.fromString(activePost.createdAt))}h`}
       >
@@ -126,7 +126,7 @@ const ForumDetail: React.FC = () => {
             name={Creator?.firstName ?? Creator?.username}
             msg={content}
             title={content}
-            msgNo={0}
+            comments={[]}
             // view={view}
             time={`${Day.now().hoursBetween(Day.fromString(createdAt))}h`}
           >

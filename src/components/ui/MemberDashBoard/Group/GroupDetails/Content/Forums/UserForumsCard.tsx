@@ -8,16 +8,18 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CommentBox from './CommentBox';
 import ForumDetailModal from './ForumsDetail/ForumDetailModal';
 import PostCard from './PostCard';
+import { GetCommentRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getCommentRes';
 
 interface UserForumsPropsI {
   id: number;
   name?: string;
   msg: string;
   title: string;
-  msgNo: number;
   // view: string;
   time: string;
+  comments: GetCommentRes[];
 }
+
 const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const postParam = useParams();
@@ -44,14 +46,14 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
 
   return !props.name ? null : (
     <>
-      <PostCard onClick={navigateToPost} {...props}>
-        <CommentBox postId={props.id}>
-          <Button background="transparent" _hover={{ backgroundColor: 'transparent' }} padding="0">
-            <I.CommentIcon color="#728BA3" width="25px" height="25px" />
-          </Button>
-        </CommentBox>
-      </PostCard>
-      <ForumDetailModal open={isOpen} close={onClose} />
+      <PostCard onClick={navigateToPost} {...props} />
+      <ForumDetailModal
+        open={isOpen}
+        close={() => {
+          onClose();
+          navigate(-1);
+        }}
+      />
     </>
   );
 };
