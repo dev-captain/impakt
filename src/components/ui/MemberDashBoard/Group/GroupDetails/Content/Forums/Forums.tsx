@@ -1,5 +1,5 @@
 import { Box, Text, Button } from '@chakra-ui/react';
-import { I } from 'components';
+// import { I } from 'components';
 import * as React from 'react';
 import { Day } from 'dayspan';
 
@@ -28,7 +28,7 @@ const Forums: React.FC = () => {
                 _hover={{ backgroundColor: 'transparent' }}
                 padding="0"
               >
-                <I.FullScreenIcon color="#B0C3D6" width="20px" />
+                {/* <I.FullScreenIcon color="#B0C3D6" width="20px" /> */}
               </Button>
             </Box>
           </Box>

@@ -18,6 +18,12 @@ const CreatePostCard: React.FC = () => {
     <>
       <Box
         border="1px solid #D3E2F0"
+        as="button"
+        w="full"
+        _hover={{
+          boxShadow:
+            'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;',
+        }}
         onClick={onOpen}
         padding={{ sm: '16px', base: '10px' }}
         borderRadius="12px"
@@ -93,7 +99,14 @@ const CreatePostCard: React.FC = () => {
                 </VStack>
               </HStack>
               <HStack m="0 !important" justifyContent="flex-start" alignItems="flex-start">
-                <AddIcon mr="10px" mb="5px" boxSize="15px" border="5px" color="#728BA3" />
+                <AddIcon
+                  mr="10px"
+                  mb="5px"
+                  boxSize="15px"
+                  border="5px"
+                  color="#728BA3"
+                  cursor="pointer"
+                />
               </HStack>
             </HStack>
           </VStack>
