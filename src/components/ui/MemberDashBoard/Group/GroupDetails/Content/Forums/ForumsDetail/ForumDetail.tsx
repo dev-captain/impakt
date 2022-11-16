@@ -121,6 +121,7 @@ const ForumDetail: React.FC = () => {
         copyOfActivePost.Comment.map(({ content, createdAt, Creator, id }) => (
           <PostCard
             w="100%"
+            p="16px 0"
             color="#4E6070"
             border="0"
             id={id}

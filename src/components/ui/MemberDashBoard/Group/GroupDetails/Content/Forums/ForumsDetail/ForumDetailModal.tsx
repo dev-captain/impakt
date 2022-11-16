@@ -76,9 +76,13 @@ const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
             </Box>
 
             <Box mt="0 !important" id="post-description-box">
-              <Text color="#4E6070" fontWeight="400" fontSize="14px" lineHeight="22px">
-                {firstPostComment?.content ?? 'The Post'}
-              </Text>
+              <Text
+                dangerouslySetInnerHTML={{ __html: firstPostComment?.content ?? 'The Post' }}
+                color="#4E6070"
+                fontWeight="400"
+                fontSize="14px"
+                lineHeight="22px"
+              />
             </Box>
           </VStack>
           <ModalCloseButton />

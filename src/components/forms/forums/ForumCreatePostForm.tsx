@@ -46,7 +46,7 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       const commentData = await createComment.mutateAsync({
         postId: postData.id,
         data: {
-          content: comment,
+          content: `<p>${comment.replace(/\r?\n/g, '<br/>')}</p>`,
         },
       });
 
