@@ -11,6 +11,7 @@ import {
 import React from 'react';
 // import { usePersistedGroupStore } from '../../../../../../../../lib/zustand';
 import GroupInviteLink from '../../GroupShare/GroupInviteLink';
+import InvitationByEmail from '../../GroupShare/InvitationByEmail';
 
 interface GroupSettingModalProps {
   open: boolean;
@@ -25,7 +26,7 @@ const GroupSocialModal: React.FC<GroupSettingModalProps> = ({ open, close }) => 
       <ModalOverlay />
       <ModalContent
         w={{ base: '92%', md: '100%' }}
-        minW={{ base: '92%', md: '750px' }}
+        minW={{ base: '92%', md: '480px' }}
         mt="140px"
         overflowY="auto"
         borderRadius="32px"
@@ -45,6 +46,9 @@ const GroupSocialModal: React.FC<GroupSettingModalProps> = ({ open, close }) => 
         <ModalBody p="0">
           <Tabs mt="15px">
             <GroupInviteLink />
+          </Tabs>
+          <Tabs mt="15px">
+            <InvitationByEmail />
           </Tabs>
         </ModalBody>
       </ModalContent>
