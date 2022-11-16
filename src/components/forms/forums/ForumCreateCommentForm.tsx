@@ -1,4 +1,4 @@
-import { Box, FormControl, Text, VStack } from '@chakra-ui/react';
+import { Box, Text, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { useForm } from 'hooks';
@@ -22,8 +22,8 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
   };
   const { member } = usePersistedAuthStore();
   const { posts, setPosts, setActivePost } = usePersistedForumStore();
-  const topic = posts.find((postsd) => postsd.id === props.postId);
-  const placeholdertext = `Comment on ${topic ? topic.content : ''}`;
+  // const topic = posts.find((postsd) => postsd.id === props.postId);
+  // const placeholdertext = `Comment on ${topic ? topic.content : ''}`;
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
     if (!props.postId) return;

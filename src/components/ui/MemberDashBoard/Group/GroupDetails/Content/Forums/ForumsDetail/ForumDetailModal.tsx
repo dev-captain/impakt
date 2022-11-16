@@ -12,11 +12,9 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Common, I } from '../../../../../../..';
-import { usePersistedAuthStore, usePersistedForumStore } from '../../../../../../../../lib/zustand';
+import { usePersistedForumStore } from '../../../../../../../../lib/zustand';
 import { getCreatedBefore } from '../../../../../../../../utils';
 import ForumCreateCommentForm from '../../../../../../../forms/forums/ForumCreateCommentForm';
-import GroupTextAreaInput from '../../../../GroupsTextAreaField';
 import ForumDetail from './ForumDetail';
 
 interface ForumDetailModalProps {

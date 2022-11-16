@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, VStack, Text, Drawer, Divider } from '@chakra-ui/react';
-import { Day } from 'dayspan';
+import { Box, VStack, Text, Divider } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 
 import PostCard from '../PostCard';
-import ForumCreateCommentForm from '../../../../../../../forms/forums/ForumCreateCommentForm';
 import { Common } from '../../../../../../..';
 import {
   usePersistedAuthStore,
@@ -14,12 +11,12 @@ import {
 } from '../../../../../../../../lib/zustand';
 import {
   useCommentControllerV1DeleteOne,
-  usePostControllerV1DeleteOne,
+  // usePostControllerV1DeleteOne,
 } from '../../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
 import { getCreatedBefore, renderToast } from '../../../../../../../../utils';
 
 const ForumDetail: React.FC = () => {
-  const deletePost = usePostControllerV1DeleteOne();
+  // const deletePost = usePostControllerV1DeleteOne();
   const deleteComment = useCommentControllerV1DeleteOne();
   const { member } = usePersistedAuthStore();
   const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
@@ -28,32 +25,30 @@ const ForumDetail: React.FC = () => {
   const sortedComments = activePost?.Comment.sort(
     (a, b) => new Date(a.createdAt).getDate() - new Date(b.createdAt).getDate(),
   );
-  console.log('detail', sortedComments);
   const distractFirstElementFromArray = sortedComments?.slice(0, sortedComments.length - 1);
-  console.log(distractFirstElementFromArray);
   const copyOfActivePost = { ...activePost, Comment: distractFirstElementFromArray };
 
-  const deletePostFromDb = async () => {
-    if (!group || !activePost) return;
-    deletePost.mutate(
-      {
-        referenceType: 'Group',
-        referenceId: group.id,
-        postId: activePost.id,
-      },
-      {
-        onSuccess: () => {
-          const updatedPostsList = posts.filter((post) => post.id !== activePost.id);
-          setActivePost(null);
-          setPosts(updatedPostsList);
-          renderToast('success', 'Post deleted successfully.');
-        },
-        onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
-        },
-      },
-    );
-  };
+  // const deletePostFromDb = async () => {
+  //   if (!group || !activePost) return;
+  //   deletePost.mutate(
+  //     {
+  //       referenceType: 'Group',
+  //       referenceId: group.id,
+  //       postId: activePost.id,
+  //     },
+  //     {
+  //       onSuccess: () => {
+  //         const updatedPostsList = posts.filter((post) => post.id !== activePost.id);
+  //         setActivePost(null);
+  //         setPosts(updatedPostsList);
+  //         renderToast('success', 'Post deleted successfully.');
+  //       },
+  //       onError: (err) => {
+  //         renderToast('error', err.response?.data.message ?? 'Something went wrong');
+  //       },
+  //     },
+  //   );
+  // };
 
   const deleteCommentFromDb = async (commentId: number) => {
     if (!group || !activePost) return;

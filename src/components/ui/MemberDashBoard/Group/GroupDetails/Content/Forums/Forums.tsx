@@ -40,7 +40,7 @@ const Forums: React.FC = () => {
               </Box>
             </Box>
             {/* //TODO IF ONLY THERE IS NO POST CHECK WILL ADD */}
-            {isCreator && <CreatePostCard onClick={onOpen} />}
+            {isCreator && posts.length === 0 && <CreatePostCard onClick={onOpen} />}
             {posts.length > 0 &&
               posts.map(
                 ({ id, Creator, content, createdAt, Comment }) =>
