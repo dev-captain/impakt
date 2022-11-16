@@ -73,12 +73,12 @@ const assocId = yup
 
 const post = yup
   .string()
-  .max(200, `You can't use more than 280 characters.`)
+  .max(60, `You can't use more than 60 characters.`)
   .required('Post content is required field...');
 
 const comment = yup
   .string()
-  .max(200, `You can't use more than 280 characters.`)
+  .max(280, `You can't use more than 280 characters.`)
   .required('Comment content is required field...');
 
 export {

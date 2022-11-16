@@ -1,7 +1,6 @@
 import { Box, Text, Button, useDisclosure } from '@chakra-ui/react';
 // import { I } from 'components';
 import * as React from 'react';
-import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
@@ -42,19 +41,23 @@ const Forums: React.FC = () => {
             </Box>
             {/* //TODO IF ONLY THERE IS NO POST CHECK WILL ADD */}
             {isCreator && <CreatePostCard onClick={onOpen} />}
-            {posts.map(({ id, Creator, content, createdAt, Comment }) => (
-              <UserForumsCard
-                key={id}
-                id={id}
-                message={Comment[0]?.content}
-                messageCreatorName={Comment[0]?.Creator.username}
-                messageCreatedAt={getCreatedBefore(Comment[0]?.createdAt ?? '08-08-2000')}
-                replyCount={Comment.length}
-                postCreatedAt={getCreatedBefore(createdAt)}
-                postTitle={content}
-                postCreatorName={Creator?.username}
-              />
-            ))}
+            {posts.length > 0 &&
+              posts.map(
+                ({ id, Creator, content, createdAt, Comment }) =>
+                  Comment.length && (
+                    <UserForumsCard
+                      key={id}
+                      id={id}
+                      message={Comment[0]?.content}
+                      messageCreatorName={Comment[0]?.Creator.username}
+                      messageCreatedAt={getCreatedBefore(Comment[0]?.createdAt ?? '08-08-2000')}
+                      replyCount={Comment.length}
+                      postCreatedAt={getCreatedBefore(createdAt)}
+                      postTitle={content}
+                      postCreatorName={Creator?.username}
+                    />
+                  ),
+              )}
           </Box>
         </MemberDashboardCard>
       </Box>
