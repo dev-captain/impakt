@@ -27,19 +27,20 @@ const Forums: React.FC = () => {
                 <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
                   Forums
                 </Text>
-                <Button
-                  background="transparent"
-                  variant="ghost"
-                  _selected={{ border: '0' }}
-                  _focus={{ border: 0 }}
-                  padding="0"
-                  onClick={onOpen}
-                >
-                  <AddIcon color="#29323B" width="15px" height="15px" fontWeight="bold" />
-                </Button>
+                {isCreator && (
+                  <Button
+                    background="transparent"
+                    variant="ghost"
+                    _selected={{ border: '0' }}
+                    _focus={{ border: 0 }}
+                    padding="0"
+                    onClick={onOpen}
+                  >
+                    <AddIcon color="#29323B" width="15px" height="15px" fontWeight="bold" />
+                  </Button>
+                )}
               </Box>
             </Box>
-            {/* //TODO IF ONLY THERE IS NO POST CHECK WILL ADD */}
             {isCreator && posts.length === 0 && <CreatePostCard onClick={onOpen} />}
             {posts.length > 0 &&
               posts.map(
