@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, VStack, Text } from '@chakra-ui/react';
-import { Day } from 'dayspan';
+import { Box, VStack, Text, Divider } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 
 import PostCard from '../PostCard';
-import ForumCreateCommentForm from '../../../../../../../forms/forums/ForumCreateCommentForm';
 import { Common } from '../../../../../../..';
 import {
   usePersistedAuthStore,
@@ -14,45 +11,44 @@ import {
 } from '../../../../../../../../lib/zustand';
 import {
   useCommentControllerV1DeleteOne,
-  usePostControllerV1DeleteOne,
+  // usePostControllerV1DeleteOne,
 } from '../../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
-import { renderToast } from '../../../../../../../../utils';
+import { getCreatedBefore, renderToast } from '../../../../../../../../utils';
 
 const ForumDetail: React.FC = () => {
-  const deletePost = usePostControllerV1DeleteOne();
+  // const deletePost = usePostControllerV1DeleteOne();
   const deleteComment = useCommentControllerV1DeleteOne();
   const { member } = usePersistedAuthStore();
-  const { postId } = useParams();
   const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
   const group = usePersistedGroupStore().activeGroup;
 
-  React.useEffect(() => {
-    const postDetail = posts.find((post) => post.id === Number(postId));
-    if (!postDetail) return;
-    setActivePost(postDetail);
-  }, []);
+  const sortedComments = activePost?.Comment.sort(
+    (a, b) => new Date(a.createdAt).getDate() - new Date(b.createdAt).getDate(),
+  );
+  const distractFirstElementFromArray = sortedComments?.slice(0, sortedComments.length - 1);
+  const copyOfActivePost = { ...activePost, Comment: distractFirstElementFromArray };
 
-  const deletePostFromDb = async () => {
-    if (!group || !activePost) return;
-    deletePost.mutate(
-      {
-        referenceType: 'Group',
-        referenceId: group.id,
-        postId: activePost.id,
-      },
-      {
-        onSuccess: () => {
-          const updatedPostsList = posts.filter((post) => post.id !== activePost.id);
-          setActivePost(null);
-          setPosts(updatedPostsList);
-          renderToast('success', 'Post deleted successfully.');
-        },
-        onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
-        },
-      },
-    );
-  };
+  // const deletePostFromDb = async () => {
+  //   if (!group || !activePost) return;
+  //   deletePost.mutate(
+  //     {
+  //       referenceType: 'Group',
+  //       referenceId: group.id,
+  //       postId: activePost.id,
+  //     },
+  //     {
+  //       onSuccess: () => {
+  //         const updatedPostsList = posts.filter((post) => post.id !== activePost.id);
+  //         setActivePost(null);
+  //         setPosts(updatedPostsList);
+  //         renderToast('success', 'Post deleted successfully.');
+  //       },
+  //       onError: (err) => {
+  //         renderToast('error', err.response?.data.message ?? 'Something went wrong');
+  //       },
+  //     },
+  //   );
+  // };
 
   const deleteCommentFromDb = async (commentId: number) => {
     if (!group || !activePost) return;
@@ -91,15 +87,21 @@ const ForumDetail: React.FC = () => {
 
   return (
     <VStack alignItems="flex-start" w="full">
-      <PostCard
+      <Box>
+        <Text fontWeight="400" color="#728BA3" fontSize="14px" lineHeight="100%">
+          {copyOfActivePost.Comment?.length ?? 0} Comments
+        </Text>
+      </Box>
+      <Divider orientation="horizontal" />
+      {/* <PostCard
         w="100%"
         id={activePost.id}
         name={activePost.Creator?.firstName ?? activePost.Creator?.username}
         msg={activePost.content}
         title={activePost.content}
-        msgNo={activePost.Comment.length}
+        comments={activePost.Comment}
         // view={view}
-        time={`${Day.now().hoursBetween(Day.fromString(activePost.createdAt))}h`}
+        time={activePost.createdAt}
       >
         {member?.id === activePost.Creator?.id && (
           <Common.ImpaktButton
@@ -114,21 +116,17 @@ const ForumDetail: React.FC = () => {
             <DeleteIcon width="1em" height="1em" />
           </Common.ImpaktButton>
         )}
-      </PostCard>
-      <Box mt="20px !important" w="50%" alignSelf="flex-start">
-        <ForumCreateCommentForm postId={activePost.id} onClose={() => null} />
-      </Box>
-      {activePost.Comment.length > 0 ? (
-        activePost.Comment.map(({ content, createdAt, Creator, id }) => (
+      </PostCard> */}
+      {copyOfActivePost && copyOfActivePost.Comment && copyOfActivePost.Comment.length > 0 ? (
+        copyOfActivePost.Comment.map(({ content, createdAt, Creator, id }) => (
           <PostCard
-            w="50%"
+            w="100%"
+            color="#4E6070"
+            border="0"
             id={id}
-            name={Creator?.firstName ?? Creator?.username}
-            msg={content}
-            title={content}
-            msgNo={0}
-            // view={view}
-            time={`${Day.now().hoursBetween(Day.fromString(createdAt))}h`}
+            message={content}
+            messageCreatorName={Creator.username}
+            messageCreatedAt={getCreatedBefore(createdAt)}
           >
             {Creator?.id === member?.id && (
               <Common.ImpaktButton
