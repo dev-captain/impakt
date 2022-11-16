@@ -32,7 +32,7 @@ const UpdateGroupImageForm: React.FC = () => {
 
       return;
     }
-    setBannerImage(Images.group.cover);
+    setBannerImage(Images.group.defaultThumbnail);
   }, []);
 
   const { handleSubmit, reset, errors, setValue } = useForm({
@@ -53,8 +53,8 @@ const UpdateGroupImageForm: React.FC = () => {
   };
 
   const resetUploadImage = () => {
-    setBannerImage(Images.group.logo);
-    fetch(Images.group.logo)
+    setBannerImage(Images.group.defaultThumbnail);
+    fetch(Images.group.defaultCoverImage)
       .then((res) => {
         return res.blob();
       })
