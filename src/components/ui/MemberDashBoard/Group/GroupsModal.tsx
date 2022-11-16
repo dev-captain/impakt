@@ -31,12 +31,13 @@ const GroupsModal: React.FC<GroupsModalPropsI> = ({
   size,
 }) => {
   return (
-    <Modal size={size} isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal size={size} scrollBehavior="inside" isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent
         w={{ base: '92%', md: '100%' }}
-        minW={{ base: '92%', md: '750px' }}
-        mt={size === 'full' ? '100px' : '140px'}
+        minW={{ base: '92%', md: '720px' }}
+        mt="100px"
+        mb="20px"
         h={size === 'full' ? '100px' : 'auto'}
         overflowY="auto"
         borderRadius={size === 'full' ? '0' : '32px'}
