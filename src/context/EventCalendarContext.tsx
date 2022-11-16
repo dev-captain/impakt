@@ -113,13 +113,11 @@ export const EventCalendarContextProvider: React.FC<{
 
   const moveToNextMonth = () => {
     calendarRef.current.next();
-    goToOverViewScreen('empty');
     reRenderCalendar();
   };
 
   const moveToPreviousMonth = () => {
     calendarRef.current.prev();
-    goToOverViewScreen('empty');
     reRenderCalendar();
   };
 
