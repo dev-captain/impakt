@@ -33,7 +33,7 @@ const CreatePostModal: React.FC<CreatePostModalPropsI> = ({ onClose, isOpen }) =
             fontWeight="500"
             fontSize="24px"
             lineHeight="100%"
-            letter-spacing="-0.5px"
+            letterSpacing="-0.5px"
             color="#29323B"
           >
             Create Topic
