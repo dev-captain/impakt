@@ -1,4 +1,4 @@
-import { Box, LayoutProps, Text, Avatar, HStack, VStack } from '@chakra-ui/react';
+import { Box, LayoutProps, Text, Avatar, HStack, VStack, BoxProps } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 
@@ -14,7 +14,7 @@ interface PostCardPropsI {
   onClick?: () => void;
   w?: LayoutProps['w'];
 }
-const PostCard: React.FC<PostCardPropsI> = ({
+const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
   postTitle,
   postCreatedAt,
   postCreatorName,
@@ -24,7 +24,7 @@ const PostCard: React.FC<PostCardPropsI> = ({
   id,
   messageCreatedAt,
   onClick,
-  w,
+  ...props
 }) => {
   return (
     <Box
@@ -39,9 +39,9 @@ const PostCard: React.FC<PostCardPropsI> = ({
       cursor={onClick ? 'pointer' : 'unset'}
       border="1px solid #D3E2F0"
       p="16px"
-      w={w}
       borderRadius="12px"
       marginTop="12px"
+      {...props}
     >
       {postCreatorName && (
         <Box

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, VStack, Text } from '@chakra-ui/react';
+import { Box, VStack, Text, Drawer, Divider } from '@chakra-ui/react';
 import { Day } from 'dayspan';
 import { DeleteIcon } from '@chakra-ui/icons';
 
@@ -22,16 +22,16 @@ const ForumDetail: React.FC = () => {
   const deletePost = usePostControllerV1DeleteOne();
   const deleteComment = useCommentControllerV1DeleteOne();
   const { member } = usePersistedAuthStore();
-  const { postId } = useParams();
   const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
-  console.log(activePost);
   const group = usePersistedGroupStore().activeGroup;
 
-  React.useEffect(() => {
-    const postDetail = posts.find((post) => post.id === Number(postId));
-    if (!postDetail) return;
-    setActivePost(postDetail);
-  }, []);
+  const sortedComments = activePost?.Comment.sort(
+    (a, b) => new Date(a.createdAt).getDate() - new Date(b.createdAt).getDate(),
+  );
+  console.log('detail', sortedComments);
+  const distractFirstElementFromArray = sortedComments?.slice(0, sortedComments.length - 1);
+  console.log(distractFirstElementFromArray);
+  const copyOfActivePost = { ...activePost, Comment: distractFirstElementFromArray };
 
   const deletePostFromDb = async () => {
     if (!group || !activePost) return;
@@ -92,7 +92,12 @@ const ForumDetail: React.FC = () => {
 
   return (
     <VStack alignItems="flex-start" w="full">
-      <Text>Main text will be here</Text>
+      <Box>
+        <Text fontWeight="400" color="#728BA3" fontSize="14px" lineHeight="100%">
+          {copyOfActivePost.Comment?.length ?? 0} Comments
+        </Text>
+      </Box>
+      <Divider orientation="horizontal" />
       {/* <PostCard
         w="100%"
         id={activePost.id}
@@ -117,13 +122,12 @@ const ForumDetail: React.FC = () => {
           </Common.ImpaktButton>
         )}
       </PostCard> */}
-      <Box mt="20px !important" w="50%" alignSelf="flex-start">
-        <ForumCreateCommentForm postId={activePost.id} onClose={() => null} />
-      </Box>
-      {activePost.Comment.length > 0 ? (
-        activePost.Comment.map(({ content, createdAt, Creator, id }) => (
+      {copyOfActivePost && copyOfActivePost.Comment && copyOfActivePost.Comment.length > 0 ? (
+        copyOfActivePost.Comment.map(({ content, createdAt, Creator, id }) => (
           <PostCard
-            w="50%"
+            w="100%"
+            color="#4E6070"
+            border="0"
             id={id}
             message={content}
             messageCreatorName={Creator.username}

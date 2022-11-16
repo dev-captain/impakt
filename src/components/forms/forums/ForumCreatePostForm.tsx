@@ -78,7 +78,7 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       <Box w="full">
         <GroupTextAreaInput
           onChange={onChange}
-          labelText="Description"
+          labelText="Brief summary of content"
           name="comment"
           errMessage={errors.comment?.message}
         />

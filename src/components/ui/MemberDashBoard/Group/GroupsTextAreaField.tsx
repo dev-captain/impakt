@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, FormLabel, Textarea } from '@chakra-ui/react';
+import { Box, Text, FormLabel, Textarea, TextareaProps } from '@chakra-ui/react';
 
 interface GroupTextAreaInputPropsI {
   name: string;
@@ -8,11 +8,12 @@ interface GroupTextAreaInputPropsI {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 
-const GroupTextAreaInput: React.FC<GroupTextAreaInputPropsI> = ({
+const GroupTextAreaInput: React.FC<GroupTextAreaInputPropsI & TextareaProps> = ({
   labelText,
   name,
   errMessage,
   onChange,
+  ...props
 }) => {
   return (
     <>
@@ -48,6 +49,7 @@ const GroupTextAreaInput: React.FC<GroupTextAreaInputPropsI> = ({
           bg: '#fff',
           border: errMessage ? '2px solid #BD0F21' : '1px solid #F27961',
         }}
+        {...props}
       />
 
       {errMessage && (
