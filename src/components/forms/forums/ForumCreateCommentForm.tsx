@@ -32,7 +32,7 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
       {
         postId: props.postId,
         data: {
-          content: data.comment,
+          content: `<p>${data.comment.replace(/\r?\n/g, '<br/>')}</p>`,
         },
       },
       {

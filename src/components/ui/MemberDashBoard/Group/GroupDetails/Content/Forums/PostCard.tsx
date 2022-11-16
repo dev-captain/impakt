@@ -100,9 +100,13 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
               </Text>
             </HStack>
             <HStack w="full" ml="2px !important" mt="8px !important">
-              <Text color="#4E6070" fontSize="14px" fontWeight="400" lineHeight="100%">
-                {message}
-              </Text>
+              <Text
+                dangerouslySetInnerHTML={{ __html: message }}
+                color="#4E6070"
+                fontSize="14px"
+                fontWeight="400"
+                lineHeight="100%"
+              />
             </HStack>
           </VStack>
         </HStack>
