@@ -9,7 +9,7 @@ const BannerImage: React.FC = () => {
 
   return (
     <Image
-      src={isCurrentImageExist ? currentCoverImageSource : Images.group.cover}
+      src={isCurrentImageExist ? currentCoverImageSource : Images.group.defaultCoverImage}
       loading="lazy"
       minH="100px"
       minWidth="100%"
