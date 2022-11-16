@@ -10,7 +10,7 @@ import groupInviteYupScheme from '../../../../../../../lib/yup/schemas/groupInvi
 
 const InvitationByEmail: React.FC = () => {
   // const group = usePersistedGroupStore().activeGroup;
-  const { handleSubmit, errors, setValue } = useForm({
+  const { errors, setValue } = useForm({
     resolver: yupResolver(groupInviteYupScheme),
   });
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -34,10 +34,17 @@ const InvitationByEmail: React.FC = () => {
       whiteMode: true,
     },
   ];
-  const handleUpdateGroupNameChanges = async () => {
+  const handleSendInvitationEmail = async (data: any) => {
+    alert({ ...data });
+    const values = Object.keys(data).map((key) => data[key]);
+    const address = values.join('');
+    alert(address);
     /**
      * TODO: We will use our own api point to send email with template
      */
+    const windowFeatures = 'left=200,top=200,width=450,height=450';
+    const mailto = `mailto:${data}`;
+    window.open(mailto, 'newWindows', windowFeatures);
   };
 
   return (
@@ -51,7 +58,7 @@ const InvitationByEmail: React.FC = () => {
       as="form"
       autoComplete="off"
       w="full"
-      onSubmit={handleSubmit(handleUpdateGroupNameChanges)}
+      // onSubmit={() => handleSubmit(handleSendInvitationEmail)}
     >
       <Common.InputItems inputItems={inputItems} />
       <Common.ImpaktButton
@@ -66,6 +73,7 @@ const InvitationByEmail: React.FC = () => {
         type="submit"
         fontSize={{ md: '16px' }}
         fontWeight="700"
+        onClick={handleSendInvitationEmail}
       >
         Send
       </Common.ImpaktButton>

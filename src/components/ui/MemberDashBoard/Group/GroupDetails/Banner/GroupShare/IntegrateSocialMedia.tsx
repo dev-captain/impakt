@@ -21,15 +21,18 @@ const IntegrateSocialMedia: React.FC = () => {
 
   const title = "Hi, I'd like you to join this amazing social fitness group on Impakt";
 
-  const handleClick = (data: any) => {
+  const handleClick = (type: string) => {
     if (typeof window !== 'undefined') {
-      // let url = 'https://www.';
+      let url = '';
+
       const windowFeatures = 'left=100,top=100,width=320,height=320';
-      if (data === 'discord') {
-        alert('1');
-        const url = `https://instagram://send?text={ inviteUrl }`;
-        window.open(url, 'newWindows', windowFeatures);
+      if (type === 'instagram') {
+        url = `https://instagram.com/send?text=${inviteUrl}`;
+      } else {
+        url = `https://discord.com/send?text=${inviteUrl}`;
       }
+
+      window.open(url, 'newWindows', windowFeatures);
     }
   };
 
@@ -37,8 +40,8 @@ const IntegrateSocialMedia: React.FC = () => {
     <Center>
       <Flex>
         <SocialIcon
-          onClick={handleClick('discord')}
-          url="https://discord.com"
+          onClick={() => handleClick('discord')}
+          network="discord"
           style={{ width: '60px', height: '60px', marginRight: '5px' }}
         />
         <TwitterShareButton url={inviteUrl} quote={title}>
@@ -51,7 +54,7 @@ const IntegrateSocialMedia: React.FC = () => {
           <TelegramIcon size="60" style={{ borderRadius: '50%', marginRight: '5px' }} />
         </TelegramShareButton>
         <SocialIcon
-          onClick={handleClick('instagram')}
+          onClick={() => handleClick('instagram')}
           url="https://instagram.com"
           style={{ width: '60px', height: '60px', marginRight: '5px' }}
         />
