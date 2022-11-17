@@ -11,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -32,6 +33,7 @@ import {
   usePostControllerV1PatchOne,
   usePostControllerV1DeleteOne,
 } from '../../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
+import ConformationModal from '../../../Banner/Panel/GroupSettings/Tabs/GeneralSettings/ConfirmationModal';
 
 interface ForumDetailModalProps {
   open: boolean;
@@ -39,6 +41,7 @@ interface ForumDetailModalProps {
 }
 
 const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
+  const confirmationModalDisclousere = useDisclosure();
   const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
   const { activeGroup } = usePersistedGroupStore();
   const updatePost = usePostControllerV1PatchOne();
@@ -65,8 +68,6 @@ const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
   const firstPostComment = creatorCommentSortedByCreatedDate
     ? creatorCommentSortedByCreatedDate[creatorCommentSortedByCreatedDate.length - 1]
     : undefined;
-
-  console.log('sort by date', creatorCommentSortedByCreatedDate);
 
   React.useEffect(() => {
     const postDetail = posts.find((post) => post.id === Number(postId));
@@ -167,176 +168,187 @@ const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
   };
 
   return (
-    <Modal onClose={close} scrollBehavior="inside" isOpen={open} isCentered>
-      <ModalOverlay />
-      <ModalContent
-        mt="100px"
-        mb="20px"
-        p="32px"
-        w={{ base: '92%', md: '100%' }}
-        minW={{ base: '92%', md: '720px' }}
-        borderRadius="24px"
-        boxShadow="0px 12px 30px -6px rgba(0, 6, 14, 0.12), 0px 24px 60px -12px rgba(0, 6, 14, 0.2)"
-      >
-        <ModalHeader p="0 !important">
-          <VStack
-            rowGap="1em"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            wordBreak="break-word"
-          >
-            <HStack>
-              <Text color="#91A8BD" fontWeight="400" fontSize="14px" lineHeight="100%">
-                {activePost?.Creator?.username} •{' '}
-                {getCreatedBefore(activePost?.createdAt ?? '08-08-2000')}
-              </Text>
-            </HStack>
-            <Box mt="0 !important" w="full" id="post-title-box">
-              {isEditMode && (
-                <GroupInputField
-                  maxH="46px"
-                  onChange={onChange}
-                  name="post"
-                  placeholder="Topic you want to update"
-                  errMsg={errors.post?.message}
-                  defaultValue={activePost?.content ?? 'The post'}
-                  fontWeight="500"
-                  fontSize="24px"
-                  lineHeight="100%"
-                  letterSpacing="-0.5px"
-                  color="#29323B"
-                  _placeholder={{ opacity: 1, color: '#91A8BD', fontSize: '15px' }}
-                />
-              )}
-
-              {!isEditMode && (
-                <Text
-                  fontWeight="500"
-                  fontSize="24px"
-                  lineHeight="100%"
-                  letterSpacing="-0.5px"
-                  color="#29323B"
-                >
-                  {activePost?.content ?? 'The Post'}
+    <>
+      <Modal onClose={close} scrollBehavior="inside" isOpen={open} isCentered>
+        <ModalOverlay />
+        <ModalContent
+          mt="100px"
+          mb="20px"
+          p="32px"
+          w={{ base: '92%', md: '100%' }}
+          minW={{ base: '92%', md: '720px' }}
+          borderRadius="24px"
+          boxShadow="0px 12px 30px -6px rgba(0, 6, 14, 0.12), 0px 24px 60px -12px rgba(0, 6, 14, 0.2)"
+        >
+          <ModalHeader p="0 !important">
+            <VStack
+              rowGap="1em"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              wordBreak="break-word"
+            >
+              <HStack>
+                <Text color="#91A8BD" fontWeight="400" fontSize="14px" lineHeight="100%">
+                  {activePost?.Creator?.username} •{' '}
+                  {getCreatedBefore(activePost?.createdAt ?? '08-08-2000')}
                 </Text>
-              )}
-            </Box>
+              </HStack>
+              <Box mt="0 !important" w="full" id="post-title-box">
+                {isEditMode && (
+                  <GroupInputField
+                    maxH="46px"
+                    onChange={onChange}
+                    name="post"
+                    placeholder="Topic you want to update"
+                    errMsg={errors.post?.message}
+                    defaultValue={activePost?.content ?? 'The post'}
+                    fontWeight="500"
+                    fontSize="24px"
+                    lineHeight="100%"
+                    letterSpacing="-0.5px"
+                    color="#29323B"
+                    _placeholder={{ opacity: 1, color: '#91A8BD', fontSize: '15px' }}
+                  />
+                )}
 
-            <Box w="full" mt="0 !important" id="post-description-box">
+                {!isEditMode && (
+                  <Text
+                    fontWeight="500"
+                    fontSize="24px"
+                    lineHeight="100%"
+                    letterSpacing="-0.5px"
+                    color="#29323B"
+                  >
+                    {activePost?.content ?? 'The Post'}
+                  </Text>
+                )}
+              </Box>
+
+              <Box w="full" mt="0 !important" id="post-description-box">
+                {!isEditMode && (
+                  <Text
+                    dangerouslySetInnerHTML={{ __html: firstPostComment?.content ?? 'The Post' }}
+                    color="#4E6070"
+                    fontWeight="400"
+                    fontSize="14px"
+                    lineHeight="22px"
+                  />
+                )}
+                {isEditMode && (
+                  <GroupTextAreaInput
+                    w="full"
+                    minHeight="54px"
+                    value={firstPostComment?.content}
+                    errMessage={errors.comment?.message}
+                    ref={textAreaRefUpdate}
+                    name="comment"
+                    onInput={onInput}
+                  />
+                )}
+              </Box>
+
               {!isEditMode && (
-                <Text
-                  dangerouslySetInnerHTML={{ __html: firstPostComment?.content ?? 'The Post' }}
-                  color="#4E6070"
-                  fontWeight="400"
-                  fontSize="14px"
-                  lineHeight="22px"
-                />
-              )}
-              {isEditMode && (
-                <GroupTextAreaInput
+                <HStack
+                  id="action-buttons-post"
                   w="full"
-                  minHeight="54px"
-                  value={firstPostComment?.content}
-                  errMessage={errors.comment?.message}
-                  ref={textAreaRefUpdate}
-                  name="comment"
-                  onInput={onInput}
-                />
+                  justifyContent="flex-end"
+                  mr="5px !important"
+                >
+                  <Button
+                    color="#29323B"
+                    bg="transparent"
+                    id="edit-post-button"
+                    leftIcon={<I.PenIcon width="16px" height="16px" />}
+                    _hover={{
+                      bg: '#F5F8FA',
+                      color: '#CC4C33',
+                    }}
+                    onClick={() => {
+                      setIsEditMode(true);
+                    }}
+                  >
+                    <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                      Edit
+                    </Text>
+                  </Button>
+                  <Button
+                    color="#BD0F21"
+                    bg="transparent"
+                    id="edit-post-button"
+                    leftIcon={<I.TrashIcon width="16px" height="16px" />}
+                    _hover={{
+                      bg: '#F04153',
+                      color: '#fff',
+                    }}
+                    onClick={confirmationModalDisclousere.onOpen}
+                  >
+                    <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                      Delete
+                    </Text>
+                  </Button>
+                  {/* <Button id="delete-post-button"></Button> */}
+                </HStack>
               )}
-            </Box>
 
-            {!isEditMode && (
-              <HStack
-                id="action-buttons-post"
-                w="full"
-                justifyContent="flex-end"
-                mr="5px !important"
-              >
-                <Button
-                  color="#29323B"
-                  bg="transparent"
-                  id="edit-post-button"
-                  leftIcon={<I.PenIcon width="16px" height="16px" />}
-                  _hover={{
-                    bg: '#F5F8FA',
-                    color: '#CC4C33',
-                  }}
-                  onClick={() => {
-                    setIsEditMode(true);
-                  }}
-                >
-                  <Text fontWeight="600" fontSize="16px" lineHeight="18px">
-                    Edit
-                  </Text>
-                </Button>
-                <Button
-                  color="#BD0F21"
-                  bg="transparent"
-                  id="edit-post-button"
-                  leftIcon={<I.TrashIcon width="16px" height="16px" />}
-                  _hover={{
-                    bg: '#F04153',
-                    color: '#fff',
-                  }}
-                  onClick={deletePostFromDb}
-                >
-                  <Text fontWeight="600" fontSize="16px" lineHeight="18px">
-                    Delete
-                  </Text>
-                </Button>
-                {/* <Button id="delete-post-button"></Button> */}
-              </HStack>
-            )}
-
-            {isEditMode && (
-              <HStack id="action-buttons-post" w="full" justifyContent="flex-end" pr="10px">
-                <Button
-                  width="126px"
-                  h="38px"
-                  color="#29323B"
-                  bg="transparent"
-                  id="cancel-post-button"
-                  leftIcon={<CloseIcon boxSize="8px" />}
-                  _hover={{
-                    bg: '#F5F8FA',
-                    color: '#CC4C33',
-                  }}
-                  onClick={() => setIsEditMode(false)}
-                >
-                  <Text fontWeight="600" fontSize="16px" lineHeight="18px">
-                    Cancel
-                  </Text>
-                </Button>
-                <Button
-                  width="110px"
-                  h="38px"
-                  color="#FFFFFF"
-                  bg="#29323B"
-                  id="save-post-button"
-                  isLoading={updatePost.isLoading || patchComment.isLoading}
-                  isDisabled={updatePost.isLoading || patchComment.isLoading}
-                  leftIcon={<CheckIcon boxSize="12px" />}
-                  _hover={{
-                    bg: '#F27961',
-                    color: '#FFFFFF',
-                  }}
-                  onClick={handleSubmit(handleOnCreate)}
-                >
-                  <Text fontWeight="600" fontSize="16px" lineHeight="18px">
-                    Save
-                  </Text>
-                </Button>
-              </HStack>
-            )}
-          </VStack>
-          <ModalCloseButton />
-        </ModalHeader>
-        <ModalBody mt="32px" p="0 !important">
-          <ForumCreateCommentForm postId={activePost?.id} />
-          <ForumDetail />
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+              {isEditMode && (
+                <HStack id="action-buttons-post" w="full" justifyContent="flex-end" pr="10px">
+                  <Button
+                    width="126px"
+                    h="38px"
+                    color="#29323B"
+                    bg="transparent"
+                    id="cancel-post-button"
+                    leftIcon={<CloseIcon boxSize="8px" />}
+                    _hover={{
+                      bg: '#F5F8FA',
+                      color: '#CC4C33',
+                    }}
+                    onClick={() => setIsEditMode(false)}
+                  >
+                    <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                      Cancel
+                    </Text>
+                  </Button>
+                  <Button
+                    width="110px"
+                    h="38px"
+                    color="#FFFFFF"
+                    bg="#29323B"
+                    id="save-post-button"
+                    isLoading={updatePost.isLoading || patchComment.isLoading}
+                    isDisabled={updatePost.isLoading || patchComment.isLoading}
+                    leftIcon={<CheckIcon boxSize="12px" />}
+                    _hover={{
+                      bg: '#F27961',
+                      color: '#FFFFFF',
+                    }}
+                    onClick={handleSubmit(handleOnCreate)}
+                  >
+                    <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                      Save
+                    </Text>
+                  </Button>
+                </HStack>
+              )}
+            </VStack>
+            <ModalCloseButton />
+          </ModalHeader>
+          <ModalBody mt="32px" p="0 !important">
+            <ForumCreateCommentForm postId={activePost?.id} />
+            <ForumDetail />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+      <ConformationModal
+        buttonIcon={<I.TrashIcon />}
+        buttonTitle="Delete"
+        close={confirmationModalDisclousere.onClose}
+        open={confirmationModalDisclousere.isOpen}
+        isLoading={deletePost.isLoading}
+        onClick={deletePostFromDb}
+        title="Are you sure you want to delete topic?"
+      />
+    </>
   );
 };
 
