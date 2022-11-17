@@ -1,6 +1,6 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
+import { I } from 'components';
 import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -11,15 +11,21 @@ import createCommentFormYupScheme from '../../../lib/yup/schemas/createCommentFo
 import GroupTextAreaInput from '../../ui/MemberDashBoard/Group/GroupsTextAreaField';
 
 const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
+  const refCommentArea = React.useRef<HTMLDivElement | null>(null);
   const createComment = useCommentControllerV1CreateOne();
-  const { handleSubmit, setValue, reset, getValues, errors } = useForm({
+  const { handleSubmit, setValue, errors, reset } = useForm({
     defaultValues: { comment: '' },
     resolver: yupResolver(createCommentFormYupScheme),
   });
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+  // const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  //   setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+  // };
+
+  const onInput = (e: any) => {
+    setValue('comment', e.currentTarget.innerHTML, { shouldValidate: true });
   };
+
   const { member } = usePersistedAuthStore();
   const { posts, setPosts, setActivePost } = usePersistedForumStore();
   // const topic = posts.find((postsd) => postsd.id === props.postId);
@@ -32,7 +38,7 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
       {
         postId: props.postId,
         data: {
-          content: `<p>${data.comment.replace(/\r?\n/g, '<br/>')}</p>`,
+          content: data.comment,
         },
       },
       {
@@ -66,6 +72,9 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
             }
           }
           renderToast('success', 'Comment added successfully.', 'white');
+          if (refCommentArea.current) {
+            refCommentArea.current.innerText = '';
+          }
           reset({ comment: '' });
         },
         onError: (err) => {
@@ -84,22 +93,33 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
     >
       <Box w="full">
         <GroupTextAreaInput
-          onChange={onChange}
+          ref={refCommentArea}
+          onInput={onInput}
           name="comment"
-          value={getValues('comment')}
           errMessage={errors.comment?.message}
+          minHeight="88px"
         />
       </Box>
       <Box display="flex" alignSelf="flex-end">
-        <Common.ImpaktButton
+        <Button
+          width="110px"
+          h="38px"
+          color="#FFFFFF"
+          bg="#29323B"
+          id="send-comment-button"
           isDisabled={createComment.isLoading}
           isLoading={createComment.isLoading}
           type="submit"
-          variant="black"
           leftIcon={<I.SendIcon />}
+          _hover={{
+            bg: '#F27961',
+            color: '#FFFFFF',
+          }}
         >
-          <Text>Send</Text>
-        </Common.ImpaktButton>
+          <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+            Send
+          </Text>
+        </Button>
       </Box>
     </VStack>
   );

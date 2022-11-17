@@ -30,8 +30,13 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   });
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+    setValue('post', e.target.value as any, { shouldValidate: true });
   };
+
+  const onInput = (e: any) => {
+    setValue('comment', e.currentTarget.innerHTML, { shouldValidate: true });
+  };
+
   const { member } = usePersistedAuthStore();
 
   const handleOnCreate = async (data: object) => {
@@ -46,7 +51,7 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       const commentData = await createComment.mutateAsync({
         postId: postData.id,
         data: {
-          content: `<p>${comment.replace(/\r?\n/g, '<br/>')}</p>`,
+          content: comment,
         },
       });
 
@@ -77,7 +82,8 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       </Box>
       <Box w="full">
         <GroupTextAreaInput
-          onChange={onChange}
+          minH="88px"
+          onInput={onInput}
           labelText="Brief summary of content"
           name="comment"
           errMessage={errors.comment?.message}

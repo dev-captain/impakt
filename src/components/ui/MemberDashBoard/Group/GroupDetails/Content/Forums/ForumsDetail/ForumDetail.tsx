@@ -1,26 +1,14 @@
 import * as React from 'react';
 import { Box, VStack, Text, Divider } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
 
 import PostCard from '../PostCard';
-import { Common } from '../../../../../../..';
-import {
-  usePersistedAuthStore,
-  usePersistedForumStore,
-  usePersistedGroupStore,
-} from '../../../../../../../../lib/zustand';
-import {
-  useCommentControllerV1DeleteOne,
-  // usePostControllerV1DeleteOne,
-} from '../../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
-import { getCreatedBefore, renderToast } from '../../../../../../../../utils';
+import { usePersistedForumStore } from '../../../../../../../../lib/zustand';
+import { getCreatedBefore } from '../../../../../../../../utils';
 
 const ForumDetail: React.FC = () => {
   // const deletePost = usePostControllerV1DeleteOne();
-  const deleteComment = useCommentControllerV1DeleteOne();
-  const { member } = usePersistedAuthStore();
-  const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
-  const group = usePersistedGroupStore().activeGroup;
+  // const { member } = usePersistedAuthStore();
+  const { activePost } = usePersistedForumStore();
 
   const sortedComments = activePost?.Comment.sort(
     (a, b) => new Date(a.createdAt).getDate() - new Date(b.createdAt).getDate(),
@@ -49,39 +37,6 @@ const ForumDetail: React.FC = () => {
   //     },
   //   );
   // };
-
-  const deleteCommentFromDb = async (commentId: number) => {
-    if (!group || !activePost) return;
-
-    deleteComment.mutate(
-      {
-        postId: activePost.id,
-        commentId,
-      },
-      {
-        onSuccess: () => {
-          // TODO remove from related post comment array on zustand
-          const shallowOfPosts = [...posts];
-          const indexOfPost = shallowOfPosts.findIndex((post) => post.id === activePost.id);
-          shallowOfPosts[indexOfPost].Comment = shallowOfPosts[indexOfPost].Comment.filter(
-            (comment) => comment.id !== commentId,
-          );
-          setActivePost({
-            ...shallowOfPosts[indexOfPost],
-            Comment: shallowOfPosts[indexOfPost].Comment.filter(
-              (comment) => comment.id !== commentId,
-            ),
-          });
-          setPosts(shallowOfPosts);
-
-          renderToast('success', 'Comment deleted successfully.');
-        },
-        onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
-        },
-      },
-    );
-  };
 
   if (!activePost) return null;
 
@@ -120,29 +75,19 @@ const ForumDetail: React.FC = () => {
       {copyOfActivePost && copyOfActivePost.Comment && copyOfActivePost.Comment.length > 0 ? (
         copyOfActivePost.Comment.map(({ content, createdAt, Creator, id }) => (
           <PostCard
+            messageCreatorId={Creator.id}
+            key={id}
             w="100%"
             p="16px 0"
             color="#4E6070"
             border="0"
+            postId={copyOfActivePost.id!}
             id={id}
             message={content}
             messageCreatorName={Creator.username}
             messageCreatedAt={getCreatedBefore(createdAt)}
-          >
-            {Creator?.id === member?.id && (
-              <Common.ImpaktButton
-                mt={{ md: 0, base: '10px' }}
-                color="#B0C3D6"
-                onClick={() => deleteCommentFromDb(id)}
-                bg="#fff"
-                borderRadius="8px"
-                type="submit"
-                fontWeight="600"
-              >
-                <DeleteIcon width="1em" height="1em" />
-              </Common.ImpaktButton>
-            )}
-          </PostCard>
+            isEditable
+          />
         ))
       ) : (
         <Text color="gray.500">No comment yet</Text>
