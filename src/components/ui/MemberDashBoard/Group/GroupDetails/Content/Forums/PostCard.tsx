@@ -255,6 +255,8 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
                   color: '#fff',
                 }}
                 onClick={deleteCommentFromDb}
+                isLoading={deleteComment.isLoading}
+                isDisabled={deleteComment.isLoading}
               >
                 <Text fontWeight="600" fontSize="16px" lineHeight="18px">
                   Delete
