@@ -1,9 +1,19 @@
-import { Box, LayoutProps, Text, Avatar, HStack, VStack, BoxProps } from '@chakra-ui/react';
+import { Box, LayoutProps, Text, Avatar, HStack, VStack, BoxProps, Button } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
+import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import GroupTextAreaInput from '../../../GroupsTextAreaField';
+import { useForm } from '../../../../../../../hooks';
+import {
+  useCommentControllerV1DeleteOne,
+  useCommentControllerV1PatchOne,
+} from '../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
+import { usePersistedForumStore } from '../../../../../../../lib/zustand';
+import { renderToast } from '../../../../../../../utils';
 
 interface PostCardPropsI {
   id: number;
+  postId?: number;
   postTitle?: string;
   postCreatorName?: string;
   postCreatedAt?: string;
@@ -13,6 +23,7 @@ interface PostCardPropsI {
   messageCreatedAt: string;
   onClick?: () => void;
   w?: LayoutProps['w'];
+  isEditable?: boolean;
 }
 const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
   postTitle,
@@ -24,8 +35,98 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
   id,
   messageCreatedAt,
   onClick,
+  isEditable,
+  postId,
   ...props
 }) => {
+  const commentInputRef = React.useRef<HTMLDivElement>(null);
+  const patchComment = useCommentControllerV1PatchOne();
+  const deleteComment = useCommentControllerV1DeleteOne();
+  const { posts, setPosts, setActivePost } = usePersistedForumStore();
+  const { setValue, getValues, errors } = useForm({
+    defaultValues: { 'comment-update': '' },
+  });
+
+  const onInput = (e: any) => {
+    setValue('comment-update', e.currentTarget.innerHTML, { shouldValidate: true });
+  };
+  const [isEditMode, setIsEditMode] = React.useState(false);
+
+  const handleOnCommentUpdate = async () => {
+    if (!commentInputRef.current) return null;
+
+    if (errors['comment-update']?.message) {
+      return null;
+    }
+    const value = getValues('comment-update');
+    if (!value) return null;
+
+    if (!isEditable || !postId) return null;
+    patchComment.mutate(
+      { commentId: id, data: { content: value }, postId },
+      {
+        onSuccess: () => {
+          const shallowOfPosts = [...posts];
+          const a = shallowOfPosts.findIndex((post) => post.id === postId);
+          const b = shallowOfPosts[a].Comment.findIndex((comment) => comment.id === id);
+          const shallowOfComments = shallowOfPosts[a].Comment;
+          shallowOfComments[b] = { ...shallowOfComments[b], content: value };
+          if (a !== -1) {
+            shallowOfPosts[a] = {
+              ...shallowOfPosts[a],
+              Comment: shallowOfComments,
+            };
+            setPosts(shallowOfPosts);
+            const activePost = posts.find((postsd) => postsd.id === postId);
+            if (activePost) {
+              setActivePost({
+                ...activePost,
+                Comment: shallowOfComments,
+              });
+            }
+            setIsEditMode(false);
+            if (commentInputRef.current) {
+              commentInputRef.current.innerHTML = value;
+            }
+          }
+        },
+      },
+    );
+
+    return null;
+  };
+
+  const deleteCommentFromDb = async () => {
+    if (!postId) return;
+
+    deleteComment.mutate(
+      {
+        postId,
+        commentId: id,
+      },
+      {
+        onSuccess: () => {
+          // TODO remove from related post comment array on zustand
+          const shallowOfPosts = [...posts];
+          const indexOfPost = shallowOfPosts.findIndex((post) => post.id === postId);
+          shallowOfPosts[indexOfPost].Comment = shallowOfPosts[indexOfPost].Comment.filter(
+            (comment) => comment.id !== id,
+          );
+          setActivePost({
+            ...shallowOfPosts[indexOfPost],
+            Comment: shallowOfPosts[indexOfPost].Comment.filter((comment) => comment.id !== id),
+          });
+          setPosts(shallowOfPosts);
+
+          renderToast('success', 'Comment deleted successfully.');
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
+  };
+
   return (
     <Box
       id={id.toString()}
@@ -83,32 +184,127 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
           </Box>
         )}
         <HStack
+          flexDir={isEditable && !isEditMode ? 'row' : 'column'}
+          rowGap="12px"
           wordBreak="break-word"
           w="full"
           mt="2px"
-          justifyContent="flex-start"
+          justifyContent="space-between"
           alignItems="flex-start"
         >
-          <Avatar name={messageCreatorName.replace(' ', '')} width="36px" height="36px" />
-          <VStack w="full" justifyContent="flex-end" alignItems="flex-start">
-            <HStack>
-              <Text color="#4E6070" fontWeight="500" fontSize="12px" lineHeight="100%">
-                {messageCreatorName} •{' '}
-                <Text as="span" fontWeight="400" color="#728BA3">
-                  {messageCreatedAt}
+          <HStack w="full">
+            <Avatar name={messageCreatorName.replace(' ', '')} width="36px" height="36px" />
+            <VStack w="full" justifyContent="flex-end" alignItems="flex-start">
+              <HStack>
+                <Text color="#4E6070" fontWeight="500" fontSize="12px" lineHeight="100%">
+                  {messageCreatorName} •{' '}
+                  <Text as="span" fontWeight="400" color="#728BA3">
+                    {messageCreatedAt}
+                  </Text>
                 </Text>
-              </Text>
+              </HStack>
+              {!isEditMode && (
+                <HStack w="full" ml="2px !important" mt="8px !important">
+                  <Text
+                    dangerouslySetInnerHTML={{ __html: message }}
+                    color="#4E6070"
+                    fontSize="14px"
+                    fontWeight="400"
+                    lineHeight="100%"
+                  />
+                </HStack>
+              )}
+              <HStack display={isEditMode ? '' : 'none'} w="full">
+                <GroupTextAreaInput
+                  ref={commentInputRef}
+                  w="full"
+                  minHeight="54px"
+                  value={message}
+                  name="comment-update"
+                  onInput={onInput}
+                />
+              </HStack>
+            </VStack>
+          </HStack>
+          {isEditable && !isEditMode && (
+            <HStack id="action-buttons-post" mr="5px !important">
+              <Button
+                color="#29323B"
+                bg="transparent"
+                id="edit-post-button"
+                leftIcon={<I.PenIcon width="16px" height="16px" />}
+                _hover={{
+                  bg: '#F5F8FA',
+                  color: '#CC4C33',
+                }}
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              >
+                <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                  Edit
+                </Text>
+              </Button>
+              <Button
+                color="#BD0F21"
+                bg="transparent"
+                id="edit-post-button"
+                leftIcon={<I.TrashIcon width="16px" height="16px" />}
+                _hover={{
+                  bg: '#F04153',
+                  color: '#fff',
+                }}
+                onClick={deleteCommentFromDb}
+              >
+                <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                  Delete
+                </Text>
+              </Button>
+              {/* <Button id="delete-post-button"></Button> */}
             </HStack>
-            <HStack w="full" ml="2px !important" mt="8px !important">
-              <Text
-                dangerouslySetInnerHTML={{ __html: message }}
-                color="#4E6070"
-                fontSize="14px"
-                fontWeight="400"
-                lineHeight="100%"
-              />
+          )}
+
+          {isEditable && isEditMode && (
+            <HStack id="action-buttons-post" w="full" justifyContent="flex-end" pr="10px">
+              <Button
+                width="126px"
+                h="38px"
+                color="#29323B"
+                bg="transparent"
+                id="cancel-post-button"
+                leftIcon={<CloseIcon boxSize="8px" />}
+                _hover={{
+                  bg: '#F5F8FA',
+                  color: '#CC4C33',
+                }}
+                onClick={() => setIsEditMode(false)}
+              >
+                <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                  Cancel
+                </Text>
+              </Button>
+              <Button
+                width="110px"
+                h="38px"
+                color="#FFFFFF"
+                bg="#29323B"
+                id="save-post-button"
+                isLoading={patchComment.isLoading}
+                isDisabled={patchComment.isLoading}
+                leftIcon={<CheckIcon boxSize="12px" />}
+                _hover={{
+                  bg: '#F27961',
+                  color: '#FFFFFF',
+                }}
+                onClick={handleOnCommentUpdate}
+              >
+                <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                  Save
+                </Text>
+              </Button>
+              {/* <Button id="delete-post-button"></Button> */}
             </HStack>
-          </VStack>
+          )}
         </HStack>
       </VStack>
     </Box>
