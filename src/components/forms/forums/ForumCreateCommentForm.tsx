@@ -13,7 +13,7 @@ import GroupTextAreaInput from '../../ui/MemberDashBoard/Group/GroupsTextAreaFie
 const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
   const refCommentArea = React.useRef<HTMLDivElement | null>(null);
   const createComment = useCommentControllerV1CreateOne();
-  const { handleSubmit, setValue, errors } = useForm({
+  const { handleSubmit, setValue, errors, reset } = useForm({
     defaultValues: { comment: '' },
     resolver: yupResolver(createCommentFormYupScheme),
   });
@@ -75,6 +75,7 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
           if (refCommentArea.current) {
             refCommentArea.current.innerText = '';
           }
+          reset({ comment: '' });
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');

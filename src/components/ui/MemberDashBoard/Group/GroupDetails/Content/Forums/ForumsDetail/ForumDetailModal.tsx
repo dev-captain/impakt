@@ -20,6 +20,7 @@ import { useParams } from 'react-router-dom';
 import { I } from '../../../../../../..';
 import { useForm } from '../../../../../../../../hooks';
 import {
+  usePersistedAuthStore,
   usePersistedForumStore,
   usePersistedGroupStore,
 } from '../../../../../../../../lib/zustand';
@@ -43,7 +44,9 @@ interface ForumDetailModalProps {
 const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
   const confirmationModalDisclousere = useDisclosure();
   const { activePost, posts, setActivePost, setPosts } = usePersistedForumStore();
-  const { activeGroup } = usePersistedGroupStore();
+  const { activeGroup, role } = usePersistedGroupStore();
+  const { member } = usePersistedAuthStore();
+  const isCreator = role === 'Creator';
   const updatePost = usePostControllerV1PatchOne();
   const deletePost = usePostControllerV1DeleteOne();
   const patchComment = useCommentControllerV1PatchOne();
@@ -68,6 +71,7 @@ const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
   const firstPostComment = creatorCommentSortedByCreatedDate
     ? creatorCommentSortedByCreatedDate[creatorCommentSortedByCreatedDate.length - 1]
     : undefined;
+  const isPostCreator = firstPostComment?.Creator.id === member?.id;
 
   React.useEffect(() => {
     const postDetail = posts.find((post) => post.id === Number(postId));
@@ -247,30 +251,32 @@ const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
                 )}
               </Box>
 
-              {!isEditMode && (
+              {!isEditMode && (isCreator || isPostCreator) && (
                 <HStack
                   id="action-buttons-post"
                   w="full"
                   justifyContent="flex-end"
                   mr="5px !important"
                 >
-                  <Button
-                    color="#29323B"
-                    bg="transparent"
-                    id="edit-post-button"
-                    leftIcon={<I.PenIcon width="16px" height="16px" />}
-                    _hover={{
-                      bg: '#F5F8FA',
-                      color: '#CC4C33',
-                    }}
-                    onClick={() => {
-                      setIsEditMode(true);
-                    }}
-                  >
-                    <Text fontWeight="600" fontSize="16px" lineHeight="18px">
-                      Edit
-                    </Text>
-                  </Button>
+                  {isPostCreator && (
+                    <Button
+                      color="#29323B"
+                      bg="transparent"
+                      id="edit-post-button"
+                      leftIcon={<I.PenIcon width="16px" height="16px" />}
+                      _hover={{
+                        bg: '#F5F8FA',
+                        color: '#CC4C33',
+                      }}
+                      onClick={() => {
+                        setIsEditMode(true);
+                      }}
+                    >
+                      <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                        Edit
+                      </Text>
+                    </Button>
+                  )}
                   <Button
                     color="#BD0F21"
                     bg="transparent"

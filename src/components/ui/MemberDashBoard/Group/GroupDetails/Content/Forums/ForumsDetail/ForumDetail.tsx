@@ -7,6 +7,7 @@ import { getCreatedBefore } from '../../../../../../../../utils';
 
 const ForumDetail: React.FC = () => {
   // const deletePost = usePostControllerV1DeleteOne();
+  // const { member } = usePersistedAuthStore();
   const { activePost } = usePersistedForumStore();
 
   const sortedComments = activePost?.Comment.sort(
@@ -74,6 +75,7 @@ const ForumDetail: React.FC = () => {
       {copyOfActivePost && copyOfActivePost.Comment && copyOfActivePost.Comment.length > 0 ? (
         copyOfActivePost.Comment.map(({ content, createdAt, Creator, id }) => (
           <PostCard
+            messageCreatorId={Creator.id}
             key={id}
             w="100%"
             p="16px 0"

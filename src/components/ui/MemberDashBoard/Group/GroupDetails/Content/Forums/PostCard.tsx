@@ -18,7 +18,11 @@ import {
   useCommentControllerV1DeleteOne,
   useCommentControllerV1PatchOne,
 } from '../../../../../../../lib/impakt-dev-api-client/react-query/posts/posts';
-import { usePersistedForumStore } from '../../../../../../../lib/zustand';
+import {
+  usePersistedAuthStore,
+  usePersistedForumStore,
+  usePersistedGroupStore,
+} from '../../../../../../../lib/zustand';
 import { renderToast } from '../../../../../../../utils';
 import ConformationModal from '../../Banner/Panel/GroupSettings/Tabs/GeneralSettings/ConfirmationModal';
 
@@ -29,6 +33,7 @@ interface PostCardPropsI {
   postCreatorName?: string;
   postCreatedAt?: string;
   replyCount?: number;
+  messageCreatorId?: number;
   messageCreatorName: string;
   message: string;
   messageCreatedAt: string;
@@ -41,6 +46,7 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
   postCreatedAt,
   postCreatorName,
   messageCreatorName,
+  messageCreatorId,
   replyCount,
   message,
   id,
@@ -50,6 +56,10 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
   postId,
   ...props
 }) => {
+  const { member } = usePersistedAuthStore();
+  const { role } = usePersistedGroupStore();
+  const isCreator = role === 'Creator';
+  const isCommentCreator = member?.id === messageCreatorId;
   const confirmationModalDisclousere = useDisclosure();
   const commentInputRef = React.useRef<HTMLDivElement>(null);
   const patchComment = useCommentControllerV1PatchOne();
@@ -239,25 +249,27 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
                 </HStack>
               </VStack>
             </HStack>
-            {isEditable && !isEditMode && (
+            {isEditable && !isEditMode && (isCreator || isCommentCreator) && (
               <HStack id="action-buttons-post" mr="5px !important">
-                <Button
-                  color="#29323B"
-                  bg="transparent"
-                  id="edit-post-button"
-                  leftIcon={<I.PenIcon width="16px" height="16px" />}
-                  _hover={{
-                    bg: '#F5F8FA',
-                    color: '#CC4C33',
-                  }}
-                  onClick={() => {
-                    setIsEditMode(true);
-                  }}
-                >
-                  <Text fontWeight="600" fontSize="16px" lineHeight="18px">
-                    Edit
-                  </Text>
-                </Button>
+                {isCommentCreator && (
+                  <Button
+                    color="#29323B"
+                    bg="transparent"
+                    id="edit-post-button"
+                    leftIcon={<I.PenIcon width="16px" height="16px" />}
+                    _hover={{
+                      bg: '#F5F8FA',
+                      color: '#CC4C33',
+                    }}
+                    onClick={() => {
+                      setIsEditMode(true);
+                    }}
+                  >
+                    <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+                      Edit
+                    </Text>
+                  </Button>
+                )}
                 <Button
                   color="#BD0F21"
                   bg="transparent"
