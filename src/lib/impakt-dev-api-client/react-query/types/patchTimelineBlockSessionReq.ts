@@ -12,12 +12,12 @@ export interface PatchTimelineBlockSessionReq {
   userTime: number;
   userCount: number;
   /** Only used with Rhythm challenges */
-  userScore: number;
+  userScore?: number | null;
   /** Highest streak value for danceOff */
-  danceOffHighestStreak: number;
+  danceOffHighestStreak?: number | null;
   status: PatchTimelineBlockSessionReqStatus;
   /** the groupId that the user joined from */
-  groupId: number | null;
+  groupId?: number | null;
   /** the eventId that the user joined from */
-  eventId: number | null;
+  eventId?: number | null;
 }

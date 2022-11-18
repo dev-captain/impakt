@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface IsWhitelistedRes {
-  isWhitelisted: boolean;
-  isWalletConnected: boolean;
+export interface CreateGuestV1Dto {
+  [key: string]: any;
 }
