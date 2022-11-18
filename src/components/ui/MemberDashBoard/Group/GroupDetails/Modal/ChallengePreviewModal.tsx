@@ -11,7 +11,6 @@ import {
   Button,
   Image,
 } from '@chakra-ui/react';
-import { Day } from 'dayspan';
 import React from 'react';
 import { usePascalCase } from 'hooks';
 import { Common, I } from '../../../../..';
@@ -19,6 +18,7 @@ import Images from '../../../../../../assets/images';
 import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
 import { convertMsToHM, getTimeDifference } from '../../../../../../utils';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
+import { GetUserScoreResV1 } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getUserScoreResV1';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -33,9 +33,9 @@ interface ChallengeModalProps {
     exercices: GetTimelineBlockRes[];
     validFrom: string;
     validUntil: string;
-    leaderboard: [];
-    playedTimes: 256;
-    playedMins: 15;
+    leaderboard: GetUserScoreResV1[];
+    playedTimes: number;
+    playedMins: string | number;
   };
 }
 const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
@@ -207,7 +207,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                       lineHeight="100%"
                       id="score-text"
                     >
-                      #
+                      #{myRank}
                     </Text>
                   </VStack>
                 </HStack>
@@ -241,7 +241,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                       lineHeight="100%"
                       id="score-text"
                     >
-                      0
+                      {myBestScore}
                     </Text>
                   </VStack>
                 </HStack>
@@ -348,91 +348,46 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                     Leaderboard
                   </Text>
                 </Box>
-                {/* <VStack w="full">
-                  <HStack
-                    w="full"
-                    bg="rgba(242, 121, 97, 0.1);"
-                    color="#CC4C33"
-                    p="1em"
-                    borderRadius="8px"
-                    id="leaderboard-item-container"
-                    justifyContent="space-between"
-                  >
-                    <HStack>
-                      <Box id="leaderboard-item-icon">
-                        <I.WinnerIcon color="#F27961" width="22.08px" height="21.6px" />
-                      </Box>
-                      <Box id="leaderboard-item-rank">
-                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
-                          1
-                        </Text>
-                      </Box>
-                      <Box ml="16px !important" id="leaderboard-item-username">
-                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
-                          RatSpeare
-                        </Text>
-                      </Box>
-                    </HStack>
+                <VStack w="full">
+                  {leaderboard.length === 0 && <Text color="gray.300">No record yet...</Text>}
+                  {leaderboard.map(({ userCount, username, userScore }) => (
+                    <HStack
+                      mt={userCount === 4 ? '16px !important' : '8px !important'}
+                      w="full"
+                      bg="rgba(242, 121, 97, 0.1);"
+                      color={userCount === 1 ? '#CC4C33' : '#728BA3'}
+                      p="1em"
+                      borderRadius="8px"
+                      id="leaderboard-item-container"
+                      justifyContent="space-between"
+                    >
+                      <HStack>
+                        {userCount === 1 && (
+                          <Box id="leaderboard-item-icon">
+                            <I.WinnerIcon color="#F27961" width="22.08px" height="21.6px" />
+                          </Box>
+                        )}
+                        {userCount !== 1 && <Box id="leaderboard-item-icon" minW="22.08px" />}
+                        <Box id="leaderboard-item-rank">
+                          <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                            {userCount}
+                          </Text>
+                        </Box>
+                        <Box ml="16px !important" id="leaderboard-item-username">
+                          <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                            {username}
+                          </Text>
+                        </Box>
+                      </HStack>
 
-                    <HStack>
-                      <Text fontWeight="500" fontSize="18px" lineHeight="100%">
-                        6,500
-                      </Text>
-                    </HStack>
-                  </HStack>
-                  <HStack
-                    w="full"
-                    bg="#F5F8FA"
-                    p="1em"
-                    borderRadius="8px"
-                    id="leaderboard-item-container"
-                    justifyContent="space-between"
-                    color="#728BA3"
-                  >
-                    <HStack>
-                      <Box id="leaderboard-item-icon" minW="22.08px" />
-                      <Box id="leaderboard-item-rank">
+                      <HStack>
                         <Text fontWeight="500" fontSize="18px" lineHeight="100%">
-                          2
+                          {userScore}
                         </Text>
-                      </Box>
-                      <Box ml="16px !important" id="leaderboard-item-username">
-                        <Text color="#29323B" fontWeight="500" fontSize="18px" lineHeight="100%">
-                          DukeNuke
-                        </Text>
-                      </Box>
+                      </HStack>
                     </HStack>
-                    <HStack>
-                      <Text fontWeight="500" fontSize="18px" lineHeight="100%">
-                        6,400
-                      </Text>
-                    </HStack>
-                  </HStack>
-
-                  <HStack
-                    w="full"
-                    bg="#F5F8FA"
-                    p="1em"
-                    borderRadius="8px"
-                    id="leaderboard-item-container"
-                    justifyContent="space-between"
-                    color="#728BA3"
-                  >
-                    <HStack>
-                      <Box id="leaderboard-item-icon" minW="22.08px" />
-                      <Box id="leaderboard-item-rank">
-                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
-                          3
-                        </Text>
-                      </Box>
-                      <Box ml="16px !important" id="leaderboard-item-username">
-                        <Text color="#29323B" fontWeight="500" fontSize="18px" lineHeight="100%">
-                          Demideus
-                        </Text>
-                      </Box>
-                    </HStack>
-                  </HStack>
-                </VStack> */}
+                  ))}
+                </VStack>
               </VStack>
             </VStack>
           </HStack>

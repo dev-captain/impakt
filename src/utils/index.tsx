@@ -59,7 +59,7 @@ export const padTo2Digits = (num: number) => {
   return num.toString().padStart(2, '0');
 };
 
-export const convertMsToHM = (milliseconds: number) => {
+export const convertMsToHM = (milliseconds: number, isNot2Digit?: boolean) => {
   let seconds = Math.floor(milliseconds / 1000);
   let minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
@@ -74,9 +74,9 @@ export const convertMsToHM = (milliseconds: number) => {
 
   return {
     d: hours / 24,
-    h: padTo2Digits(hours % 24),
-    m: padTo2Digits(minutes),
-    s: padTo2Digits(seconds),
+    h: isNot2Digit ? (hours % 24).toString() : padTo2Digits(hours % 24),
+    m: isNot2Digit ? minutes.toString() : padTo2Digits(minutes),
+    s: isNot2Digit ? seconds.toString() : padTo2Digits(seconds),
   };
 };
 

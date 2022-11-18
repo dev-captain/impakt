@@ -1,14 +1,59 @@
 import * as React from 'react';
 import { I } from 'components';
-import { IconButton, useDisclosure } from '@chakra-ui/react';
+import { IconButton, Skeleton, useDisclosure } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
-import { usePersistedGroupStore } from '../../../../../../../../lib/zustand';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../../lib/zustand';
 import ChallengeModal from '../../../Modal/ChallengeModal';
 import ChallengePreviewModal from '../../../Modal/ChallengePreviewModal';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
+import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
+import { useGroupsControllerV1GetGroupPinnedChallenges } from '../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
+import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
+import { convertMsToHM } from '../../../../../../../../utils';
 
 const GroupLabels: React.FC = () => {
-  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(null);
+  const { activeGroup } = usePersistedGroupStore();
+  const { member } = usePersistedAuthStore();
+  const groupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(activeGroup?.id ?? 0);
+  const createPinnedChallenge = useFavoriteControllerV1CreateOne();
+  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(
+    groupPinnedChallenge.data?.Challenge ?? null,
+  );
+  const challengeLeaderBoard = useChallengesLeaderboardControllerV1Usersleaderboard(
+    activeChallenge?.id ?? 0,
+    {
+      query: {
+        enabled: activeChallenge !== null,
+      },
+    },
+  );
+
+  const bestScoreOfUser = useChallengeStatsControllerGetUserBestScore(
+    activeChallenge?.id ?? 0,
+    member?.id ?? 0,
+    {
+      query: { enabled: activeChallenge !== null },
+    },
+  );
+
+  const memberRank = challengeLeaderBoard.data?.usersPassed.find(
+    ({ username }) => username === member?.username,
+  )?.userCount;
+
+  let playedTimes = 0;
+
+  challengeLeaderBoard.data?.usersPassed.forEach(({ userTime }) => {
+    playedTimes += userTime ?? 0;
+  });
+
+  console.log(bestScoreOfUser.data, memberRank);
+
+  React.useEffect(() => {
+    if (groupPinnedChallenge.data) {
+      setActiveChallenge(groupPinnedChallenge.data.Challenge);
+    }
+  }, [groupPinnedChallenge.isSuccess]);
 
   const challengeModalDisclosure = useDisclosure();
   const challengePreviewModalDisclosure = useDisclosure();
@@ -22,7 +67,7 @@ const GroupLabels: React.FC = () => {
     // },
     {
       leftIcon:
-        activeChallenge?.name.length || !isCreator ? (
+        activeChallenge?.name || !isCreator ? (
           <I.FireIcon />
         ) : (
           <IconButton
@@ -77,11 +122,24 @@ const GroupLabels: React.FC = () => {
     // { Icon: () => <I.AppIcon />, labelTitle: 'top program', labelDescription: 'Home Abs' },
   ];
 
+  const handlePinnedChallenge = (actChallenge: GetChallengeRes) => {
+    if (!activeGroup) return;
+
+    setActiveChallenge(actChallenge);
+    createPinnedChallenge.mutate({
+      data: { objectId: actChallenge.id, type: 'Challenge' },
+      referenceType: 'Group',
+      referenceId: activeGroup?.id,
+    });
+  };
+
   return (
     <>
-      <GroupLabelWrapper items={groupStatisticLabelItems} />
+      <Skeleton isLoaded={!groupPinnedChallenge.isLoading}>
+        <GroupLabelWrapper items={groupStatisticLabelItems} />
+      </Skeleton>
       <ChallengeModal
-        setActiveChallenge={setActiveChallenge}
+        setActiveChallenge={handlePinnedChallenge}
         close={challengeModalDisclosure.onClose}
         open={challengeModalDisclosure.isOpen}
       />
@@ -90,15 +148,18 @@ const GroupLabels: React.FC = () => {
         open={challengePreviewModalDisclosure.isOpen}
         challengePreview={{
           title: activeChallenge?.name ?? 'Daily Challenge',
-          creator: activeChallenge?.Routine.Creator?.username ?? 'Impakt',
+          creator: activeChallenge?.Routine?.Creator?.username ?? 'Impakt',
           deepLinkToPlay: '',
-          exercices: activeChallenge?.Routine.TimelineBlocks ?? [],
-          leaderboard: [],
+          exercices: activeChallenge?.Routine?.TimelineBlocks ?? [],
+          leaderboard: challengeLeaderBoard.data?.usersPassed ?? [],
           likeCount: activeChallenge?.likes ?? 0,
-          myBestScore: '2.450',
-          myRank: '7',
-          playedTimes: 256,
-          playedMins: 15,
+          myBestScore:
+            bestScoreOfUser.data && Object.keys(bestScoreOfUser.data).length > 0
+              ? bestScoreOfUser.data.userScore?.toString() ?? 'TBD'
+              : 'TBD',
+          myRank: memberRank?.toString() ?? 'TBD',
+          playedTimes: challengeLeaderBoard.data?.totalParticipants ?? 0,
+          playedMins: convertMsToHM(playedTimes, true).m,
           validFrom: activeChallenge?.validFrom ?? '',
           validUntil: activeChallenge?.validUntil ?? '',
         }}

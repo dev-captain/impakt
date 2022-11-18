@@ -12,5 +12,5 @@ export interface GetGroupPinnedChallengesRes {
   createdAt: string | null;
   updatedAt: string | null;
   /** Pinned challenge */
-  Challenge: GetChallengeRes[];
+  Challenge: GetChallengeRes;
 }
