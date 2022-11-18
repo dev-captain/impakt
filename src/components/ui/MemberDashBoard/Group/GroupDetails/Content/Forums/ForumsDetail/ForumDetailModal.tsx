@@ -173,7 +173,7 @@ const ForumDetailModal: React.FC<ForumDetailModalProps> = ({ open, close }) => {
 
   return (
     <>
-      <Modal onClose={close} scrollBehavior="inside" isOpen={open} isCentered>
+      <Modal onClose={close} autoFocus={false} scrollBehavior="inside" isOpen={open} isCentered>
         <ModalOverlay />
         <ModalContent
           mt="100px"

@@ -17,7 +17,7 @@ interface CreatePostModalPropsI {
 
 const CreatePostModal: React.FC<CreatePostModalPropsI> = ({ onClose, isOpen }) => {
   return (
-    <Modal onClose={onClose} scrollBehavior="inside" isOpen={isOpen} isCentered>
+    <Modal onClose={onClose} autoFocus={false} scrollBehavior="inside" isOpen={isOpen} isCentered>
       <ModalOverlay />
       <ModalContent
         mt="100px"
