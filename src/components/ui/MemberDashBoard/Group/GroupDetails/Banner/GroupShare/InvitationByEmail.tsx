@@ -11,7 +11,7 @@ import groupInviteYupScheme from '../../../../../../../lib/yup/schemas/groupInvi
 
 const InvitationByEmail: React.FC = () => {
   // const group = usePersistedGroupStore().activeGroup;
-  const { handleSubmit, errors, getValues, setValue } = useForm({
+  const { errors, getValues, setValue } = useForm({
     defaultValues: { email: '' },
     resolver: yupResolver(groupInviteYupScheme),
   });
