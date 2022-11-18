@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
 import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
+import RoleCard from './RoleCard';
 import { useGroupsControllerV1PatchGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../../../../../../../../utils';
 import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
@@ -112,6 +113,26 @@ const PermissionTab: React.FC = () => {
             Private
           </Button>
         </PermissionCard>
+
+        <RoleCard title="Moderators">
+          <Button
+            color={value === 'Public' ? '#29323B' : '#728BA3'}
+            bg={value === 'Public' ? '#EEF4F6' : '#fff'}
+            _hover={{
+              backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
+              color: value === 'Private' ? '#728BA3' : '#29323B',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            w="120px"
+            h="38px"
+            borderRadius="8px"
+            onClick={() => {
+              setValue('Public');
+            }}
+          >
+            Public
+          </Button>
+        </RoleCard>
       </Box>
       <Box mt="20px" textAlign="end">
         <Common.ImpaktButton
