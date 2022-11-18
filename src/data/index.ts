@@ -572,7 +572,10 @@ export const ChallengeList = [
 ];
 
 export type ChallengeTabs = 'routine' | 'game';
-export const ChallengeTab: ChallengeTabs[] = ['routine', 'game'];
+export const ChallengeTab: ChallengeTabs[] = [
+  'routine',
+  // 'game'
+];
 
 export const GroupSettingsMemberTabs = ['General'];
 

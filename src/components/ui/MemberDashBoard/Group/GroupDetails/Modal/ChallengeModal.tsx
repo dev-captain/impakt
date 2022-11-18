@@ -107,7 +107,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
       {
         onSuccess: (newChallenge) => {
           renderToast('success', 'Challenge is created successfully.', 'white');
-          console.log(previewRouitine);
           setAvailableGroupChallenges([
             {
               ...newChallenge,
@@ -116,7 +115,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             },
             ...availableGroupChallenges,
           ]);
-          challengeCreateForm.reset();
+          challengeCreateForm.reset({ assocDuration: 1, assocName: '' });
           moveToFirstScreenAndDeleteHistory();
         },
         onError: (err) => {
@@ -197,7 +196,13 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   </Text>
                 </HStack>
               )}
-              <HStack borderRadius="12px" minW="248px" w="25%" p="4px" bg="#EEF4F6">
+              <HStack
+                borderRadius="12px"
+                // minW="248px"
+                // w="25%"
+                p="4px"
+                bg="#EEF4F6"
+              >
                 {ChallengeTab.map((tab, index) => (
                   <ChallengeModalTabTitleText
                     onClick={() => {
