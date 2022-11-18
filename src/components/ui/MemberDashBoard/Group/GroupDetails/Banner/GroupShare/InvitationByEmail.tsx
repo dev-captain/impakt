@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl } from '@chakra-ui/react';
 
 import { Common } from 'components';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import { InputGroupPropsI } from '../../../../../../common/InputGroup';
 import groupInviteYupScheme from '../../../../../../../lib/yup/schemas/groupInviteYupScheme';
 // import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
@@ -20,7 +21,7 @@ const InvitationByEmail: React.FC = () => {
       shouldDirty: true,
     });
   };
-
+  const group = usePersistedGroupStore().activeGroup;
   /* eslint no-underscore-dangle: 0 */
   // const groupInviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}`;
   const inputItems: InputGroupPropsI[] = [
@@ -42,8 +43,13 @@ const InvitationByEmail: React.FC = () => {
      * TODO: We will use our own api point to send email with template
      */
     const windowFeatures = 'left=200,top=200,width=450,height=450';
-    const mailto = `mailto:${email}`;
-    window.open(mailto, 'newWindows', windowFeatures);
+    const subject = `Invitation to ${email}`;
+    const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}`;
+    const mailto = `mailto:${email}?subject=${subject}&body=<b>You have been inviated to Impakt<br> Please click the link below to join ${inviteUrl}</b>}`;
+    const win = window.open(mailto, 'newWindows', windowFeatures);
+    if (win) {
+      win.document.title = 'Invitation';
+    }
   };
 
   return (
