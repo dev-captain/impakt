@@ -46,7 +46,8 @@ const GroupDetails: React.FC = () => {
     query: {
       ...getDefaultQueryOptions(),
       refetchOnMount: true,
-      retry: false,
+      retry: true,
+      retryDelay: 5,
       staleTime: 0,
       cacheTime: 0,
     },
@@ -59,7 +60,7 @@ const GroupDetails: React.FC = () => {
       query: {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
-        retry: false,
+        retry: true,
         staleTime: 0,
         cacheTime: 0,
       },
@@ -72,7 +73,7 @@ const GroupDetails: React.FC = () => {
       query: {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
-        retry: false,
+        retry: true,
         staleTime: 0,
         cacheTime: 0,
       },
@@ -85,7 +86,7 @@ const GroupDetails: React.FC = () => {
       query: {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
-        retry: false,
+        retry: true,
         staleTime: 0,
         cacheTime: 0,
       },
@@ -100,7 +101,7 @@ const GroupDetails: React.FC = () => {
       query: {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
-        retry: false,
+        retry: true,
         staleTime: 0,
         cacheTime: 0,
       },

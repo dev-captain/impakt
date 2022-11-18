@@ -42,30 +42,38 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const handleOnCreate = async (data: object) => {
     const { post, comment } = data as { post: string; comment: string };
     if (!member || !activeGroup) return;
-    try {
-      const postData = await createPost.mutateAsync({
+    createPost.mutate(
+      {
         referenceType: 'Group',
         data: { content: post },
         referenceId: activeGroup.id,
-      });
-      const commentData = await createComment.mutateAsync({
-        postId: postData.id,
-        data: {
-          content: comment,
-        },
-      });
+      },
+      {
+        onSuccess: (newPost) => {
+          createComment.mutate(
+            {
+              postId: newPost.id,
+              data: {
+                content: comment,
+              },
+            },
+            {
+              onSuccess: (newComment) => {
+                addToPosts({
+                  ...newPost,
+                  Creator: { ...member },
+                  Comment: [{ ...newComment, Creator: { ...member } }],
+                });
 
-      addToPosts({
-        ...postData,
-        Creator: { ...member },
-        Comment: [{ ...commentData, Creator: { ...member } }],
-      });
-      renderToast('success', 'Post created successfully.', 'white');
-      reset({ comment: '', post: '' });
-      onClose();
-    } catch (e: any) {
-      renderToast('error', e.response?.data.message ?? 'Something went wrong', 'white');
-    }
+                renderToast('success', 'Post created successfully.', 'white');
+                reset({ comment: '', post: '' });
+                onClose();
+              },
+            },
+          );
+        },
+      },
+    );
   };
 
   return (
