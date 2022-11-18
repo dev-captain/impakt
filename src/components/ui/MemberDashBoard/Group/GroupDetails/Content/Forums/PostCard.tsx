@@ -342,7 +342,7 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
         close={confirmationModalDisclousere.onClose}
         open={confirmationModalDisclousere.isOpen}
         onClick={deleteCommentFromDb}
-        title="Are you sure you want'to delete comment?"
+        title="Are you sure you want to delete comment?"
         isLoading={deleteComment.isLoading}
       />
     </>
