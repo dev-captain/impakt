@@ -83,6 +83,10 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
       },
     );
   };
+  React.useEffect(() => {
+    if (!refCommentArea.current) return;
+    refCommentArea.current.focus();
+  }, []);
 
   return (
     <VStack

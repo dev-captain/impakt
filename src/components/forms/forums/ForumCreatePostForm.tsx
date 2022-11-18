@@ -72,6 +72,7 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     <VStack as="form" rowGap="8px" onSubmit={handleSubmit(handleOnCreate)} autoComplete="off">
       <Box w="full">
         <GroupInputField
+          autoFocus
           maxH="46px"
           onChange={onChange}
           labelText="Topic of discussion"
