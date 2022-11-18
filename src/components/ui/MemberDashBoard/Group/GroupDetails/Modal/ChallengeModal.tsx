@@ -9,16 +9,16 @@ import {
   VStack,
   HStack,
   ModalFooter,
-  useNumberInput,
   Button,
   Input,
   FormLabel,
 } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Common } from 'components';
 import React from 'react';
-import { usePascalCase } from 'hooks';
+import { useForm, usePascalCase } from 'hooks';
 import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ChallengeTab, ChallengeTabs } from '../../../../../../data';
 import { usePersistedAuthStore, usePersistedChallengeStore } from '../../../../../../lib/zustand';
@@ -33,6 +33,7 @@ import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
+import createChallengeYupScheme from '../../../../../../lib/yup/schemas/createChallengeYupScheme';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -48,22 +49,13 @@ type ChallengeModalScreens =
 
 const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveChallenge }) => {
   const createChallenge = useChallengesControllerCreateOne();
-  const [activeChallengeDurationDay, setActiveChallengeDurationDay] = React.useState(1);
-  const [activeChallengeName, setActiveChallengeName] = React.useState('');
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
-    step: 1,
-    defaultValue: 1,
-    value: activeChallengeDurationDay,
-    min: 1,
-    max: 30,
-    onChange: (_, valuesAsNumber) => {
-      setActiveChallengeDurationDay(valuesAsNumber);
+  const challengeCreateForm = useForm({
+    defaultValues: {
+      assocName: '',
+      assocDuration: 1,
     },
+    resolver: yupResolver(createChallengeYupScheme),
   });
-
-  const inc = getIncrementButtonProps();
-  const dec = getDecrementButtonProps();
-  const input = getInputProps({ style: { border: 0, textAlign: 'center', maxWidth: '155px' } });
 
   const { member } = usePersistedAuthStore();
   const { convertToPascalCase } = usePascalCase();
@@ -92,36 +84,37 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
   };
 
   const handleSubmitCreateChallenge = () => {
-    if (!activeChallengeDurationDay) return;
-    if (activeChallengeName.length === 0) return;
+    if (!challengeCreateForm.isValid && !challengeCreateForm.isDirty) return;
     if (!previewRouitine) return;
-    if (typeof activeChallengeDurationDay === 'string') return;
+    console.log(
+      challengeCreateForm.getValues('assocDuration'),
+      challengeCreateForm.getValues('assocName'),
+    );
 
     const validFrom = Day.now();
-    const validUntil = validFrom?.add('day', activeChallengeDurationDay);
+    const validUntil = validFrom?.add('day', challengeCreateForm.getValues('assocDuration'));
     createChallenge.mutate(
       {
         data: {
-          name: activeChallengeName,
+          name: challengeCreateForm.getValues('assocName'),
           routineId: previewRouitine.id,
           validFrom: validFrom.toISOString(),
           validUntil: validUntil?.toISOString(),
         },
       },
       {
-        onSuccess: (data) => {
+        onSuccess: (newChallenge) => {
           renderToast('success', 'Challenge is created successfully.', 'white');
           console.log(previewRouitine);
           setAvailableGroupChallenges([
             {
-              ...data,
+              ...newChallenge,
               Routine: previewRouitine,
               likes: 0,
             },
             ...availableGroupChallenges,
           ]);
-          setActiveChallengeDurationDay(1);
-          setActiveChallengeName('');
+          challengeCreateForm.reset();
           moveToFirstScreenAndDeleteHistory();
         },
         onError: (err) => {
@@ -133,7 +126,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
   };
 
   return (
-    <Modal isOpen={open} onClose={() => close()} isCentered>
+    <Modal isOpen={open} scrollBehavior="inside" onClose={() => close()} isCentered>
       <ModalOverlay />
       <ModalContent
         w={{ base: '92%', md: '100%' }}
@@ -172,7 +165,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
           />
           <I.SearchIcon position="absolute" top="25px" left="18px" width="24px" color="#29323B" />
         </Box> */}
-        <ModalBody p="0">
+        <ModalBody overflowX="hidden" p="0">
           {/* MODAL BODY HEADER START HERE */}
           {(currentScreen === 'select' || currentScreen === 'create') && (
             <VStack alignItems="flex-start" mt="24px" mb="24px" rowGap="24px" padding="4px">
@@ -256,7 +249,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
           {/* MODAL BODY CONTENT START HERE */}
           <Box
             height="530px"
-            overflow="auto"
+            overflowY="auto"
+            overflowX="hidden"
             paddingRight="8px"
             css={{
               '&::-webkit-scrollbar': {
@@ -399,12 +393,15 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                 <VStack mt="36px" rowGap="24px" id="create-challenge-form-container">
                   <Common.InputGroup
                     onChange={(e) => {
-                      setActiveChallengeName(e.target.value);
+                      challengeCreateForm.setValue('assocName', e.target.value, {
+                        shouldValidate: true,
+                      });
                     }}
-                    name="challengeName"
+                    errorMsg={challengeCreateForm.errors.assocName?.message}
+                    name="assocName"
                     label="Challenge Name"
                     placeholder="Best Challenge"
-                    value={activeChallengeName}
+                    value={challengeCreateForm.getValues('assocName')}
                     whiteMode
                   />
                   <VStack w="full" alignItems="flex-start">
@@ -475,17 +472,46 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                       maxH="60px"
                       justifyContent="space-between"
                     >
-                      <Button background="rgba(242, 121, 97, 0.1)" padding="8px" {...dec}>
+                      <Button
+                        background="rgba(242, 121, 97, 0.1)"
+                        padding="8px"
+                        disabled={challengeCreateForm.watch('assocDuration') <= 1}
+                        onClick={() => {
+                          console.log(challengeCreateForm.getValues('assocDuration'));
+                          if (challengeCreateForm.getValues('assocDuration') !== 1) {
+                            challengeCreateForm.setValue(
+                              'assocDuration',
+                              challengeCreateForm.getValues('assocDuration') - 1,
+                              { shouldValidate: true },
+                            );
+                          }
+                        }}
+                      >
                         <Text fontWeight="500" fontSize="20px" color="#CC4C33">
                           -
                         </Text>
                       </Button>
-                      <Input _focus={{ border: 0 }} {...input} />
+                      <Input
+                        id="assocDuration"
+                        name="assocDuration"
+                        value={challengeCreateForm.watch('assocDuration')}
+                        _focus={{ border: 0 }}
+                        style={{ border: 0, textAlign: 'center', maxWidth: '155px' }}
+                      />
                       <Button
                         color="#CC4C33"
                         background="rgba(242, 121, 97, 0.1)"
                         padding="8px"
-                        {...inc}
+                        disabled={challengeCreateForm.watch('assocDuration') >= 30}
+                        onClick={() => {
+                          if (challengeCreateForm.getValues('assocDuration') !== 30) {
+                            challengeCreateForm.setValue(
+                              'assocDuration',
+                              challengeCreateForm.getValues('assocDuration') + 1,
+                              { shouldValidate: true },
+                            );
+                          }
+                        }}
                       >
                         <Text fontWeight="500" fontSize="20px" color="#CC4C33">
                           +
@@ -502,9 +528,13 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                           borderRadius="8px"
                           value={value}
                           type="button"
-                          onClick={(e) =>
-                            setActiveChallengeDurationDay(Number(e.currentTarget.value))
-                          }
+                          onClick={(e) => {
+                            challengeCreateForm.setValue(
+                              'assocDuration',
+                              Number(e.currentTarget.value),
+                              { shouldValidate: true },
+                            );
+                          }}
                         >
                           {value}
                         </Button>
@@ -616,17 +646,20 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             <HStack w="full" justifyContent="flex-end">
               <Box>
                 <Common.ImpaktButton
+                  as="form"
                   isLoading={createChallenge.isLoading}
                   isDisabled={createChallenge.isLoading}
                   _hover={{ background: '' }}
                   _selected={{ background: '' }}
                   _focus={{ background: '' }}
                   _active={{ background: '' }}
+                  type="submit"
                   background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
                   padding="16px 48px"
                   h="64px"
                   borderRadius="16px"
                   onClick={() => {
+                    console.log('submitted');
                     handleSubmitCreateChallenge();
                   }}
                 >

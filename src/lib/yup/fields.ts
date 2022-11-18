@@ -71,6 +71,9 @@ const assocId = yup
   .required('Challenge is required please select one...')
   .typeError('Challenge is required please select one...');
 
+const assocName = yup.string().required('Challenge name is required');
+const assocDuration = yup.number().min(1).max(30);
+
 const post = yup
   .string()
   .max(200, `You can't use more than 280 characters.`)
@@ -98,4 +101,6 @@ export {
   assocId,
   post,
   comment,
+  assocName,
+  assocDuration,
 };
