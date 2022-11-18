@@ -10,8 +10,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import * as React from 'react';
+import * as yup from 'yup';
 import { I } from 'components';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import { yupResolver } from '@hookform/resolvers/yup';
 import GroupTextAreaInput from '../../../GroupsTextAreaField';
 import { useForm } from '../../../../../../../hooks';
 import {
@@ -67,6 +69,14 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
   const { posts, setPosts, setActivePost } = usePersistedForumStore();
   const { setValue, getValues, errors } = useForm({
     defaultValues: { 'comment-update': '' },
+    resolver: yupResolver(
+      yup.object().shape({
+        'comment-update': yup
+          .string()
+          .max(280, `You can't use more than 280 characters.`)
+          .required('Comment content is required field...'),
+      }),
+    ),
   });
 
   const onInput = (e: any) => {
@@ -239,6 +249,7 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
                 )}
                 <HStack display={isEditMode ? '' : 'none'} w="full">
                   <GroupTextAreaInput
+                    errMessage={errors['comment-update']?.message}
                     ref={commentInputRef}
                     w="full"
                     minHeight="54px"
