@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, HStack, Text } from '@chakra-ui/react';
 import { Day } from 'dayspan';
 import { getTimeDifference, truncateString } from '../../../../../../../../utils';
 import ChallengesCardScoreLabelsWrapper from './ChallengesCardScoreLabelsWrapper';
@@ -18,7 +18,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ challenge, children }) 
       borderRadius="24px"
       marginBottom="16px"
     >
-      <Box
+      <HStack
         display="flex"
         flexWrap="wrap"
         justifyContent="space-between"
@@ -33,7 +33,7 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ challenge, children }) 
           estimationTimeScore={`${Math.ceil(challenge.Routine.estimatedTime / 60)} min`}
           likeScore={challenge.likes ?? undefined}
         />
-      </Box>
+      </HStack>
       <Box
         mt={{ base: '14px', md: '20px' }}
         display="flex"
