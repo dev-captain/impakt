@@ -34,6 +34,7 @@ import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import createChallengeYupScheme from '../../../../../../lib/yup/schemas/createChallengeYupScheme';
+import { InputErrorMessage } from '../../../../../common';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -83,13 +84,14 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
     setActiveScreen(['select']);
   };
 
-  const handleSubmitCreateChallenge = () => {
-    if (!challengeCreateForm.isValid && !challengeCreateForm.isDirty) return;
+  const handleSubmitCreateChallenge = async () => {
+    if (!challengeCreateForm.isValid && !challengeCreateForm.isDirty) {
+      await challengeCreateForm.trigger('assocName');
+      await challengeCreateForm.trigger('assocDuration');
+
+      return;
+    }
     if (!previewRouitine) return;
-    console.log(
-      challengeCreateForm.getValues('assocDuration'),
-      challengeCreateForm.getValues('assocName'),
-    );
 
     const validFrom = Day.now();
     const validUntil = validFrom?.add('day', challengeCreateForm.getValues('assocDuration'));
@@ -518,6 +520,11 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                         </Text>
                       </Button>
                     </HStack>
+                    <Box>
+                      <InputErrorMessage
+                        errorMsg={challengeCreateForm.errors.assocDuration?.message}
+                      />
+                    </Box>
                     <HStack>
                       {[1, 3, 7, 14, 30].map((value) => (
                         <Button
