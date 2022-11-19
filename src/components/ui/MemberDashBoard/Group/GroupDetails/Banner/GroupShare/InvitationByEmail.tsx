@@ -11,7 +11,7 @@ import groupInviteYupScheme from '../../../../../../../lib/yup/schemas/groupInvi
 
 const InvitationByEmail: React.FC = () => {
   // const group = usePersistedGroupStore().activeGroup;
-  const { handleSubmit, errors, getValues, setValue } = useForm({
+  const { errors, getValues, setValue } = useForm({
     defaultValues: { email: '' },
     resolver: yupResolver(groupInviteYupScheme),
   });
@@ -37,20 +37,12 @@ const InvitationByEmail: React.FC = () => {
       whiteMode: true,
     },
   ];
-  const handleSendInvitationEmail = async (data: object) => {
-    const { email } = data as { email: string };
-    /**
-     * TODO: We will use our own api point to send email with template
-     */
-    const windowFeatures = 'left=200,top=200,width=450,height=450';
-    const subject = `Invitation to ${email}`;
-    const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}`;
-    const mailto = `mailto:${email}?subject=${subject}&body=<b>You have been inviated to Impakt<br> Please click the link below to join ${inviteUrl}</b>}`;
-    const win = window.open(mailto, 'newWindows', windowFeatures);
-    if (win) {
-      win.document.title = 'Invitation';
-    }
-  };
+
+  const subject = `Invitation to Impakt Group`;
+  const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}`;
+  const mailto = `mailto:${getValues(
+    'email',
+  )}?subject=${subject}&body= You have been invited to Impakt. Please click the link below to join ${inviteUrl}</b>}`;
 
   return (
     <FormControl
@@ -66,6 +58,9 @@ const InvitationByEmail: React.FC = () => {
     >
       <Common.InputItems inputItems={inputItems} />
       <Common.ImpaktButton
+        as="a"
+        isDisabled={!!errors.email?.message || getValues('email').length === 0}
+        href={mailto}
         mt={{ md: 0, base: '10px' }}
         variant="black"
         colorScheme="#fff"
@@ -76,7 +71,6 @@ const InvitationByEmail: React.FC = () => {
         borderRadius="8px"
         fontSize={{ md: '16px' }}
         fontWeight="700"
-        onClick={handleSubmit(handleSendInvitationEmail)}
       >
         Send
       </Common.ImpaktButton>
