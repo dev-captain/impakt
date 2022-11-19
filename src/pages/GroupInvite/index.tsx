@@ -72,7 +72,11 @@ const GroupInvite = () => {
   };
 
   useEffect(() => {
-    jointoGroup().then();
+    if (member) {
+      navigate(`/dashboard/groups/group/${groupId}`);
+    } else {
+      jointoGroup().then();
+    }
   });
 
   return (
