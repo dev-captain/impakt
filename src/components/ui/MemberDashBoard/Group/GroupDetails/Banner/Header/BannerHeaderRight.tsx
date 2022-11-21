@@ -21,7 +21,10 @@ export const BannerHeaderRight: React.FC = () => {
       <Box display="flex" mr="5px" alignItems="center" marginTop={{ md: '0', base: '20px' }}>
         <AvatarGroup size="sm" max={3} spacing="-0.50rem">
           {members?.map(({ User }) => (
-            <Avatar name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')} />
+            <Avatar
+              key={User.id}
+              name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+            />
           ))}
         </AvatarGroup>
       </Box>

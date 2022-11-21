@@ -5,7 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { GetChallengeLeaderboardResV1RoutineType } from './getChallengeLeaderboardResV1RoutineType';
-import type { GetUserScoreResV1 } from './getUserScoreResV1';
+import type { GetPlayerScoreResV1 } from './getPlayerScoreResV1';
 
 export interface GetChallengeLeaderboardResV1 {
   /** The total number of participants */
@@ -13,6 +13,6 @@ export interface GetChallengeLeaderboardResV1 {
   successParticipants: number;
   failedParticipants: number;
   routineType: GetChallengeLeaderboardResV1RoutineType;
-  /** unordered scores of users who passed the challenge */
-  usersPassed: GetUserScoreResV1[];
+  /** unordered scores of users and guests */
+  usersPassed: GetPlayerScoreResV1[];
 }

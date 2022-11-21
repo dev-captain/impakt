@@ -19,6 +19,7 @@ import type {
   ChallengesControllerGetManyParams,
   PostChallengeReq,
   PatchChallengeReq,
+  PutChallengeTag,
 } from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
@@ -275,6 +276,58 @@ export const useChallengesControllerRemoveOne = <
     Awaited<ReturnType<typeof challengesControllerRemoveOne>>,
     TError,
     { id: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const challengeTagV1ControllerSetChallengeTags = (
+  challengeId: number,
+  putChallengeTag: PutChallengeTag,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<void>(
+    {
+      url: `/api/v1/challenge/${challengeId}/tag`,
+      method: 'put',
+      headers: { 'Content-Type': 'application/json' },
+      data: putChallengeTag,
+    },
+    options,
+  );
+};
+
+export type ChallengeTagV1ControllerSetChallengeTagsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof challengeTagV1ControllerSetChallengeTags>>
+>;
+export type ChallengeTagV1ControllerSetChallengeTagsMutationBody = PutChallengeTag;
+export type ChallengeTagV1ControllerSetChallengeTagsMutationError = ErrorType<unknown>;
+
+export const useChallengeTagV1ControllerSetChallengeTags = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof challengeTagV1ControllerSetChallengeTags>>,
+    TError,
+    { challengeId: number; data: PutChallengeTag },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof challengeTagV1ControllerSetChallengeTags>>,
+    { challengeId: number; data: PutChallengeTag }
+  > = (props) => {
+    const { challengeId, data } = props ?? {};
+
+    return challengeTagV1ControllerSetChallengeTags(challengeId, data, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof challengeTagV1ControllerSetChallengeTags>>,
+    TError,
+    { challengeId: number; data: PutChallengeTag },
     TContext
   >(mutationFn, mutationOptions);
 };

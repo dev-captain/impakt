@@ -59,7 +59,7 @@ export const padTo2Digits = (num: number) => {
   return num.toString().padStart(2, '0');
 };
 
-export const convertMsToHM = (milliseconds: number) => {
+export const convertMsToHM = (milliseconds: number, isNot2Digit?: boolean) => {
   let seconds = Math.floor(milliseconds / 1000);
   let minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
@@ -71,9 +71,13 @@ export const convertMsToHM = (milliseconds: number) => {
   // 👇️ comment (or remove) the line below
   // commenting next line gets you `24:00:00` instead of `00:00:00`
   // or `36:15:31` instead of `12:15:31`, etc.
-  // hours %= 24;
 
-  return { h: padTo2Digits(hours), m: padTo2Digits(minutes), s: padTo2Digits(seconds) };
+  return {
+    d: hours / 24,
+    h: isNot2Digit ? (hours % 24).toString() : padTo2Digits(hours % 24),
+    m: isNot2Digit ? minutes.toString() : padTo2Digits(minutes),
+    s: isNot2Digit ? seconds.toString() : padTo2Digits(seconds),
+  };
 };
 
 let toastCounter = 0;
@@ -152,6 +156,20 @@ export const truncateString = (str: string, max: number) => {
   }
 
   return str;
+};
+export const getTimeDifference = (validFrom: string, validUntil: string) => {
+  if (validFrom.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
+  if (validUntil.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
+
+  const isValidDate = Day.fromString(validFrom).time < Day.now().time;
+
+  if (!isValidDate) return { d: '0', h: '0', m: '0', s: '0' };
+
+  const d = Day.fromString(validUntil).daysBetween(Day.now());
+  const h = Day.fromString(validUntil).hoursBetween(Day.now()) % 24;
+  const m = Day.fromString(validUntil).minutesBetween(Day.now()) % 60;
+
+  return { d: padTo2Digits(d), h: padTo2Digits(h), m: padTo2Digits(m) };
 };
 
 export default {};
