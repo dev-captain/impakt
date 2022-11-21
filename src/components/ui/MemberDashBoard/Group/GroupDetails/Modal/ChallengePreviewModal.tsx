@@ -10,7 +10,6 @@ import {
   ModalCloseButton,
   Button,
   Image,
-  Link,
 } from '@chakra-ui/react';
 import React from 'react';
 import { usePascalCase } from 'hooks';

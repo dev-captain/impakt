@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, HStack, Text } from '@chakra-ui/react';
-import { Day } from 'dayspan';
 import { getTimeDifference, truncateString } from '../../../../../../../../utils';
 import ChallengesCardScoreLabelsWrapper from './ChallengesCardScoreLabelsWrapper';
 import ChallengeCardMetaLabel from './ChallengeCardMetaLabel';

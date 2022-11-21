@@ -47,8 +47,6 @@ const GroupLabels: React.FC = () => {
     playedTimes += userTime ?? 0;
   });
 
-  console.log(bestScoreOfUser.data, memberRank);
-
   React.useEffect(() => {
     if (groupPinnedChallenge.data) {
       setActiveChallenge(groupPinnedChallenge.data.Challenge);

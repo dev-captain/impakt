@@ -19,8 +19,6 @@ const ChallengeModalHeader: React.FC<ChallengeModalHeaderPropsI> = ({
   createPreviewHeaderText,
   goBackOnClick,
 }) => {
-  console.log('Current screen', currentScreen);
-
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
       {showGoBackIcon && (

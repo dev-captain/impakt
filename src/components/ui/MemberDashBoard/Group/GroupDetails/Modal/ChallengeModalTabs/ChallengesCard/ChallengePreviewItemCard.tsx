@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Text, HStack, StackProps } from '@chakra-ui/react';
 import { I } from 'components';
-import { convertMsToHM } from '../../../../../../../../utils';
 import { GetTimelineBlockResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockResType';
 
 interface ChallengePreviewItemCardPropsI {

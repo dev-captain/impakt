@@ -119,7 +119,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
           moveToFirstScreenAndDeleteHistory();
         },
         onError: (err) => {
-          console.log(err);
           renderToast('error', err.response?.data.message ?? 'Something went wrong...', 'white');
         },
       },
@@ -205,6 +204,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
               >
                 {ChallengeTab.map((tab, index) => (
                   <ChallengeModalTabTitleText
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={index}
                     onClick={() => {
                       setActiveTab(tab);
                     }}
@@ -318,7 +319,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
-                  {previewChallenge.Routine.TimelineBlocks?.map((exercise, index) => (
+                  {previewChallenge.Routine.TimelineBlocks?.map((exercise) => (
                     <ChallengePreviewItemCard
                       key={exercise.id}
                       exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
@@ -484,7 +485,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                         padding="8px"
                         disabled={challengeCreateForm.watch('assocDuration') <= 1}
                         onClick={() => {
-                          console.log(challengeCreateForm.getValues('assocDuration'));
                           if (challengeCreateForm.getValues('assocDuration') !== 1) {
                             challengeCreateForm.setValue(
                               'assocDuration',
@@ -671,7 +671,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   h="64px"
                   borderRadius="16px"
                   onClick={() => {
-                    console.log('submitted');
                     handleSubmitCreateChallenge();
                   }}
                 >

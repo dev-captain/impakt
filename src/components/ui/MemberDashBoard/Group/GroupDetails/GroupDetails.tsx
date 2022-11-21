@@ -22,8 +22,6 @@ import {
 } from '../../../../../lib/zustand';
 import { calendarControllerGetCalendar } from '../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 import { GetMembersOfGroupRes } from '../../../../../lib/impakt-dev-api-client/react-query/types';
-import { likeControllerGetChallengeLikes } from '../../../../../lib/impakt-dev-api-client/react-query/likes/likes';
-import { challengeStatsControllerGetChallengeAttemptsForAllUsers } from '../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { challengesControllerGetMany } from '../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 import { routinesControllerGetRoutines } from '../../../../../lib/impakt-dev-api-client/react-query/routines/routines';
 
@@ -282,8 +280,6 @@ const useFetchAvailableChallenges = () => {
       creatorId: admin.User.id,
       TimelineBlocks: true,
     });
-    console.log('source of challenges', groupAdminChallenges);
-    console.log('source of routines', groupAdminRoutines);
 
     setAvailableGroupChallenges(groupAdminChallenges);
     setAvailableGroupRoutines(groupAdminRoutines);
