@@ -10,6 +10,7 @@ import {
   ModalCloseButton,
   Button,
   Image,
+  Link,
 } from '@chakra-ui/react';
 import React from 'react';
 import { usePascalCase } from 'hooks';
@@ -280,6 +281,8 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
             </VStack>
             <HStack>
               <Common.ImpaktButton
+                as="a"
+                href={deepLinkToPlay}
                 _hover={{ background: '' }}
                 _selected={{ background: '' }}
                 _focus={{ background: '' }}
