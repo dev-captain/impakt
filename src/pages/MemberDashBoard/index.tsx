@@ -78,7 +78,7 @@ const MemberDashboard: React.FC = () => {
   });
 
   const fetchMyGroups = useGroupsMemberControllerV1GetGroupsByUserId(member?.id as any, {
-    query: getDefaultQueryOptions(),
+    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
   });
 
   const fetchExploreGroups = useGroupsControllerV1ExploreGroups(

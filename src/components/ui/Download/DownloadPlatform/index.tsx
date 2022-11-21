@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, Box } from '@chakra-ui/react';
+import { VStack, HStack, useColorModeValue, Box, Image } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -50,6 +50,7 @@ const DownloadPlatform = () => {
                 >
                   <DownloadTitleItem title={t(keys.downloadPlateform.download)} />
                 </Box>
+                <Image src={Images.Common.Vsport} w={{ base: '120px', md: '300px', lg: '400px' }} />
               </VStack>
               <HStack
                 flexWrap={{ base: 'wrap', lg: 'nowrap' }}

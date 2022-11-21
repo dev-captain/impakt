@@ -32,7 +32,7 @@ const UpdateGroupImageForm: React.FC = () => {
 
       return;
     }
-    setBannerImage(Images.group.logo);
+    setBannerImage(Images.group.defaultThumbnail);
   }, []);
 
   const { handleSubmit, reset, errors, setValue } = useForm({
@@ -43,31 +43,42 @@ const UpdateGroupImageForm: React.FC = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
-      setValue(e.target.name as any, file as any, { shouldValidate: true });
-      if (ALLOW_IMAGE_FILE.includes(file.type)) {
-        setBannerImage(URL.createObjectURL(file));
+      if (file) {
+        setValue(e.target.name as any, file as any, { shouldValidate: true, shouldDirty: true });
+        if (ALLOW_IMAGE_FILE.includes(file.type)) {
+          setBannerImage(URL.createObjectURL(file));
+        }
       }
     }
   };
 
   const resetUploadImage = () => {
-    setBannerImage(Images.group.logo);
-    reset({ file: null });
+    setBannerImage(Images.group.defaultThumbnail);
+    fetch(Images.group.defaultCoverImage)
+      .then((res) => {
+        return res.blob();
+      })
+      .then((bl) => {
+        const file = new File([bl], 'logo.png', bl);
+        reset({ file } as any);
+      });
+    // const blob = new Blob([Images.group.logo]);
+    // console.log('file', blob);
   };
 
   const openUploadImageFileInput = () => {
+    renderToast('warning', 'Image size should be less than 1MB.');
+
     if (uploadImageInputRef.current) {
       uploadImageInputRef.current.click();
     }
   };
 
-  const handleFormSubmit = async (data: any) => {
+  const uploadImage = (data: { file: any }) => {
     if (!activeGroup) return;
     if (!groupParam.id) return;
-
     const formData = new FormData();
     formData.append('file', data.file);
-
     updateGroupCoverImage.mutate(
       { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
       {
@@ -82,13 +93,18 @@ const UpdateGroupImageForm: React.FC = () => {
             shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
             setMyGroups(shallowOfMyGroups);
           }
+
+          reset({ file: null });
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong');
         },
       },
     );
-    // TODO update zustand active group
+  };
+
+  const handleFormSubmit = async (data: any) => {
+    uploadImage({ file: data.file });
   };
 
   const setBannerImage = (source: any) => {
@@ -118,8 +134,6 @@ const UpdateGroupImageForm: React.FC = () => {
             minH="100px"
             maxH="300px"
             alt="Impakt group cover image"
-            onClick={openUploadImageFileInput}
-            cursor="pointer"
             width="100%"
             ref={uploadImageRef}
           />
@@ -160,7 +174,10 @@ const UpdateGroupImageForm: React.FC = () => {
             <AvatarGroup size="md" max={4}>
               {groupMembers?.map((members) => (
                 <Avatar
-                  name={members.User.firstName ?? members.User.username}
+                  name={
+                    members.User.firstName?.replace(' ', '') ??
+                    members.User.username?.replace(' ', '')
+                  }
                   width="32px"
                   height="32px"
                 />
@@ -201,8 +218,8 @@ const UpdateGroupImageForm: React.FC = () => {
             h="42px"
             backgroundColor="#EEF4F6"
             borderRadius="8px"
-            type="submit"
             fontSize={{ md: '16px' }}
+            onClick={openUploadImageFileInput}
             fontWeight="600"
             leftIcon={<I.UploadIcon color="#29323B" width="12px" height="12px" />}
           >
@@ -222,6 +239,23 @@ const UpdateGroupImageForm: React.FC = () => {
             onClick={resetUploadImage}
           >
             Remove
+          </Common.ImpaktButton>
+          <Common.ImpaktButton
+            mt="8px"
+            cursor="pointer"
+            variant="black"
+            color="#29323B"
+            isLoading={updateGroupCoverImage.isLoading}
+            isDisabled={updateGroupCoverImage.isLoading}
+            w="160px"
+            h="42px"
+            backgroundColor="#EEF4F6"
+            borderRadius="8px"
+            type="submit"
+            fontSize={{ md: '16px' }}
+            fontWeight="600"
+          >
+            Save
           </Common.ImpaktButton>
         </Box>
       </Box>

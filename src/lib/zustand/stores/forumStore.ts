@@ -15,7 +15,7 @@ export const forumStore: StateCreator<ForumSlice> = (set, get) => ({
     set({ posts });
   },
   addToPosts: (post) => {
-    set({ posts: [...get().posts, post] });
+    set({ posts: [post, ...get().posts] });
   },
   activePost: null,
   setActivePost: (activePost) => {

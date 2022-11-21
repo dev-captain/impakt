@@ -46,7 +46,12 @@ const EventDetails: React.FC = () => {
             }}
             marginRight="5px"
           />
-          <Box display="flex" justifyContent="space-between" alignContent="center">
+          <Box
+            display="flex"
+            wordBreak="break-word"
+            justifyContent="space-between"
+            alignContent="center"
+          >
             <Text color="#29323B" fontWeight="600" fontSize="20px" marginRight="50px">
               {JSON.parse(eventObj.data).title}
             </Text>
@@ -123,7 +128,7 @@ const EventDetails: React.FC = () => {
             href={deepLink}
           >
             <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
-              Click to join event
+              Join event
             </Text>
           </a>
         </Box>

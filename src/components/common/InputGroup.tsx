@@ -135,20 +135,28 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
               id={name}
               color={whiteMode ? 'rgba(41, 50, 59, 1)' : '#fff'}
               h="100%"
-              border="none"
-              _focus={{ border: whiteMode ? '' : '2px solid rgba(240, 65, 83, 1)' }}
+              border={errorMsg ? '1px solid #BD0F21 !important' : 'none'}
+              _focus={{
+                // eslint-disable-next-line no-nested-ternary
+                border: errorMsg
+                  ? '1px solid #BD0F21'
+                  : whiteMode
+                  ? ''
+                  : '2px solid rgba(240, 65, 83, 1)',
+              }}
               minH="60px"
               defaultValue={defaultValue}
               maxLength={maxLength}
               type={type}
               value={value}
               pl={leftIcon ? '80px' : '2em'}
+              isInvalid={!!errorMsg}
+              errorBorderColor="transparent"
               // minWidth={{ base: '100%', md: '503px' }}
               w="full"
               ref={ref}
               placeholder={placeholder}
               textStyle="regular201"
-              isInvalid={!!errorMsg}
               borderRadius="12px"
               onChange={onChange}
               _autofill={{
