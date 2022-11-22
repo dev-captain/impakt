@@ -10,7 +10,7 @@ import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/im
 import { useGroupsControllerV1GetGroupPinnedChallenges } from '../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
-import { convertMsToHM } from '../../../../../../../../utils';
+import { convertMsToHM, normalizeExerciseNames } from '../../../../../../../../utils';
 
 const GroupLabels: React.FC = () => {
   const [playedTimes, setPlayedTimes] = React.useState(0);
@@ -155,7 +155,7 @@ const GroupLabels: React.FC = () => {
           title: activeChallenge?.name ?? 'Daily Challenge',
           creator: activeChallenge?.Routine?.Creator?.username ?? 'Impakt',
           deepLinkToPlay: `https://fitness.impakt.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
-          exercices: activeChallenge?.Routine?.TimelineBlocks ?? [],
+          exercices: normalizeExerciseNames(activeChallenge?.Routine?.TimelineBlocks ?? []),
           leaderboard: challengeLeaderBoard.data?.usersPassed ?? [],
           likeCount: activeChallenge?.likes ?? 0,
           myBestScore:
