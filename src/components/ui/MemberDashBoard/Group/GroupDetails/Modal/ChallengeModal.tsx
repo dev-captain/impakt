@@ -20,11 +20,14 @@ import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { ChallengeTab, ChallengeTabs } from '../../../../../../data';
+import {
+  // ChallengeTab,
+  ChallengeTabs,
+} from '../../../../../../data';
 import { usePersistedAuthStore, usePersistedChallengeStore } from '../../../../../../lib/zustand';
 import ChallengesCard from './ChallengeModalTabs/ChallengesCard/ChallengesCard';
 import ChallengeModalHeader from './ChallengeModalTabs/ChallengeModalHeader';
-import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTitleText';
+// import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTitleText';
 import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
@@ -60,7 +63,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
 
   const { member } = usePersistedAuthStore();
   const { convertToPascalCase } = usePascalCase();
-  const [activeTab, setActiveTab] = React.useState<ChallengeTabs>('routine');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+  const [activeTab, _] = React.useState<ChallengeTabs>('routine');
   const [activeScreen, setActiveScreen] = React.useState<ChallengeModalScreens[]>(['select']);
   const [previewChallenge, setPreviewChallenge] = React.useState<GetChallengeRes | null>(null);
   const [previewRouitine, setRoutinePreview] = React.useState<GetRoutineRes | null>(null);
@@ -195,7 +199,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   </Text>
                 </HStack>
               )}
-              <HStack
+              {/* <HStack
                 borderRadius="12px"
                 // minW="248px"
                 // w="25%"
@@ -213,7 +217,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                     title={tab.charAt(0).toUpperCase() + tab.slice(1)}
                   />
                 ))}
-              </HStack>
+              </HStack> */}
             </VStack>
           )}
 
