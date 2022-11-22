@@ -286,14 +286,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             }}
           >
             {currentScreen === 'select' &&
-            activeTab === 'routine' &&
-            availableGroupChallenges.length === 0 ? (
-              <NoItemCard
-                noItemTitle="You don't have any active challenges. Create one to pin it."
-                noItemButtonTitle="Create"
-                noItemButtonOnClick={() => moveToNextScreen('create')}
-              />
-            ) : (
+              activeTab === 'routine' &&
+              availableGroupChallenges.length !== 0 &&
               availableGroupChallenges.map((challengeI) => (
                 <ChallengesCard key={challengeI.id} challenge={challengeI}>
                   <Common.ImpaktButton
@@ -332,8 +326,18 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                     <Text>Select</Text>
                   </Common.ImpaktButton>
                 </ChallengesCard>
-              ))
-            )}
+              ))}
+
+            {currentScreen === 'select' &&
+              activeTab === 'routine' &&
+              availableGroupChallenges.length === 0 && (
+                <NoItemCard
+                  noItemTitle="You don't have any active challenges. Create one to pin it."
+                  noItemButtonTitle="Create"
+                  noItemButtonOnClick={() => moveToNextScreen('create')}
+                />
+              )}
+
             {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
