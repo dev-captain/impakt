@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { Common } from 'components';
 import React from 'react';
-import { useForm, usePascalCase } from 'hooks';
+import { useForm } from 'hooks';
 import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -35,7 +35,12 @@ import ChallengeModalHeader from './ChallengeModalTabs/ChallengeModalHeader';
 import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
-import { convertMsToHM, getTimeDifference, renderToast } from '../../../../../../utils';
+import {
+  convertMsToHM,
+  getTimeDifference,
+  normalizeExerciseNames,
+  renderToast,
+} from '../../../../../../utils';
 import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
@@ -68,7 +73,6 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
   });
 
   // const { member } = usePersistedAuthStore();
-  const { convertToPascalCase } = usePascalCase();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [activeTab, _] = React.useState<ChallengeTabs>('routine');
   const [activeScreen, setActiveScreen] = React.useState<ChallengeModalScreens[]>(['select']);
@@ -341,17 +345,19 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
-                  {previewChallenge.Routine.TimelineBlocks?.map((exercise) => (
-                    <ChallengePreviewItemCard
-                      key={exercise.id}
-                      exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
-                      lengthOfExercise={{
-                        m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
-                        s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
-                      }}
-                      exerciseType={exercise.type}
-                    />
-                  ))}
+                  {normalizeExerciseNames(previewChallenge.Routine.TimelineBlocks ?? []).map(
+                    (exercise) => (
+                      <ChallengePreviewItemCard
+                        key={exercise.id}
+                        exerciseName={exercise.Exercise?.name ?? ''}
+                        lengthOfExercise={{
+                          m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
+                          s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
+                        }}
+                        exerciseType={exercise.type}
+                      />
+                    ),
+                  )}
                 </VStack>
               </VStack>
             )}
@@ -419,10 +425,10 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             {currentScreen === 'preview-routine' && activeTab === 'routine' && previewRouitine && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
-                  {previewRouitine.TimelineBlocks?.map((exercise) => (
+                  {normalizeExerciseNames(previewRouitine.TimelineBlocks ?? []).map((exercise) => (
                     <ChallengePreviewItemCard
                       key={exercise.id}
-                      exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
+                      exerciseName={exercise.Exercise?.name ?? ''}
                       lengthOfExercise={{
                         m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
                         s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,

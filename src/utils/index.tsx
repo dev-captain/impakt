@@ -9,6 +9,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { Day } from 'dayspan';
+import { GetTimelineBlockRes } from '../lib/impakt-dev-api-client/react-query/types';
 import theme, { toastDarkLayout, toastLayout } from '../theme';
 
 const toast = createStandaloneToast({ theme });
@@ -196,4 +197,38 @@ export const getCreatedBefore = (createdAt: string) => {
   }
 
   return `${Day.now().yearsBetween(Day.fromString(createdAt))} years ago`;
+};
+
+export const convertToPascalCase = (label: string) => {
+  const convertedLabel = label.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
+
+  return convertedLabel;
+};
+
+const exerciseNameCorrection = (exerciseName: string) => {
+  if (exerciseName === 'Squat') return 'Squats';
+  if (exerciseName === 'Side Lunge') return 'Side Lunges';
+  if (exerciseName === 'High Knee') return 'High Knees';
+  if (exerciseName === 'No Action') return 'Rest';
+  if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
+
+  return exerciseName;
+};
+
+export const normalizeExerciseNames = (routines: GetTimelineBlockRes[]) => {
+  const pascalCasedRoutines = routines.map((r1) => {
+    return {
+      ...r1,
+      Exercise: { ...r1.Exercise, name: convertToPascalCase(r1.Exercise?.name ?? '') },
+    };
+  });
+
+  const pascalCaseWithNormalizedExerciseName = pascalCasedRoutines.map((pR) => {
+    return {
+      ...pR,
+      Exercise: { ...pR.Exercise, name: exerciseNameCorrection(pR.Exercise.name ?? '') },
+    };
+  }) as GetTimelineBlockRes[];
+
+  return pascalCaseWithNormalizedExerciseName;
 };
