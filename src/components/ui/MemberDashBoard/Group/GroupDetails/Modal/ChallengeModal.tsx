@@ -357,7 +357,12 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             )}
             {currentScreen === 'create' && activeTab === 'routine' && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
-                <VStack w="full" id="exercise-card-item-s" justifyContent="flex-start">
+                <VStack
+                  w="full"
+                  spacing="16px"
+                  id="exercise-card-item-s"
+                  justifyContent="flex-start"
+                >
                   {availableGroupRoutines.length === 0 ? (
                     <NoItemCard
                       noItemButtonOnClick={() => navigate('/download')}

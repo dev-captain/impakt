@@ -15,7 +15,6 @@ const RoutineCard: React.FC<RoutineCardProps> = ({ routine, children }) => {
       padding={{ base: '12px', md: '24px' }}
       border="2px solid #EEF4F6"
       borderRadius="24px"
-      marginBottom="16px"
     >
       <Box
         display="flex"
