@@ -19,6 +19,7 @@ import { useForm, usePascalCase } from 'hooks';
 import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
 import {
   // ChallengeTab,
@@ -41,6 +42,7 @@ import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-d
 import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import createChallengeYupScheme from '../../../../../../lib/yup/schemas/createChallengeYupScheme';
 import { InputErrorMessage } from '../../../../../common';
+import NoItemCard from './ChallengeModalTabs/NoChallengeCard/NoItemCard';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -55,6 +57,7 @@ type ChallengeModalScreens =
   | 'create-challenge-form';
 
 const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveChallenge }) => {
+  const navigate = useNavigate();
   const createChallenge = useChallengesControllerCreateOne();
   const challengeCreateForm = useForm({
     defaultValues: {
@@ -176,7 +179,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
           {/* MODAL BODY HEADER START HERE */}
           {(currentScreen === 'select' || currentScreen === 'create') && (
             <VStack alignItems="flex-start" mt="24px" mb="24px" rowGap="24px" padding="4px">
-              {currentScreen !== 'create' && (
+              {currentScreen !== 'create' && availableGroupChallenges.length > 0 && (
                 <HStack w="full" justifyContent="flex-end">
                   <Box minW="148px">
                     <Common.ImpaktButton
@@ -283,7 +286,14 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             }}
           >
             {currentScreen === 'select' &&
-              activeTab === 'routine' &&
+            activeTab === 'routine' &&
+            availableGroupChallenges.length === 0 ? (
+              <NoItemCard
+                noItemTitle="You don't have any active challenges. Create one to pin it."
+                noItemButtonTitle="Create"
+                noItemButtonOnClick={() => moveToNextScreen('create')}
+              />
+            ) : (
               availableGroupChallenges.map((challengeI) => (
                 <ChallengesCard key={challengeI.id} challenge={challengeI}>
                   <Common.ImpaktButton
@@ -322,7 +332,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                     <Text>Select</Text>
                   </Common.ImpaktButton>
                 </ChallengesCard>
-              ))}
+              ))
+            )}
             {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
@@ -343,44 +354,56 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             {currentScreen === 'create' && activeTab === 'routine' && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="flex-start">
-                  {availableGroupRoutines.map((routine) => (
-                    <RoutineCard key={routine.id} routine={routine}>
-                      <Common.ImpaktButton
-                        onClick={() => {
-                          setRoutinePreview(routine);
-                          moveToNextScreen('preview-routine');
-                        }}
-                        variant="transparent"
-                        w="114px !important"
-                        backgroundColor="#EEF4F6"
-                        colorScheme="#fff"
-                        h="38px"
-                        borderRadius="8px"
-                        type="submit"
-                        fontSize={{ base: '14px', md: '16px' }}
-                        fontWeight="700"
-                      >
-                        <Text>Preview</Text>
-                      </Common.ImpaktButton>
-                      <Common.ImpaktButton
-                        onClick={() => {
-                          setRoutinePreview(routine);
-                          moveToNextScreen('create-challenge-form');
-                        }}
-                        variant="black"
-                        w="114px !important"
-                        colorScheme="#fff"
-                        h="38px"
-                        backgroundColor="#29323B"
-                        borderRadius="8px"
-                        type="submit"
-                        fontSize={{ base: '14px', md: '16px' }}
-                        fontWeight="700"
-                      >
-                        <Text>Select</Text>
-                      </Common.ImpaktButton>
-                    </RoutineCard>
-                  ))}
+                  {availableGroupRoutines.length === 0 ? (
+                    <NoItemCard
+                      noItemButtonOnClick={() => navigate('/download')}
+                      noItemButtonTitle="Download"
+                      noItemTitle="You don't have any routines yet."
+                    >
+                      <Box mt="0 !important">
+                        <Text>Download our app to create your first one.</Text>
+                      </Box>
+                    </NoItemCard>
+                  ) : (
+                    availableGroupRoutines.map((routine) => (
+                      <RoutineCard key={routine.id} routine={routine}>
+                        <Common.ImpaktButton
+                          onClick={() => {
+                            setRoutinePreview(routine);
+                            moveToNextScreen('preview-routine');
+                          }}
+                          variant="transparent"
+                          w="114px !important"
+                          backgroundColor="#EEF4F6"
+                          colorScheme="#fff"
+                          h="38px"
+                          borderRadius="8px"
+                          type="submit"
+                          fontSize={{ base: '14px', md: '16px' }}
+                          fontWeight="700"
+                        >
+                          <Text>Preview</Text>
+                        </Common.ImpaktButton>
+                        <Common.ImpaktButton
+                          onClick={() => {
+                            setRoutinePreview(routine);
+                            moveToNextScreen('create-challenge-form');
+                          }}
+                          variant="black"
+                          w="114px !important"
+                          colorScheme="#fff"
+                          h="38px"
+                          backgroundColor="#29323B"
+                          borderRadius="8px"
+                          type="submit"
+                          fontSize={{ base: '14px', md: '16px' }}
+                          fontWeight="700"
+                        >
+                          <Text>Select</Text>
+                        </Common.ImpaktButton>
+                      </RoutineCard>
+                    ))
+                  )}
                 </VStack>
               </VStack>
             )}
