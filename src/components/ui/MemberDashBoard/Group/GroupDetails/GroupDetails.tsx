@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Text, HStack } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import { useLocation, useParams } from 'react-router-dom';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
+import BannerPrivate from './BannerPrivate/Banner';
 import { deepLinkToApp } from '../../../../../data';
 import {
   useGroupsControllerV1FindGroupMembers,
@@ -242,9 +243,11 @@ const GroupDetails: React.FC = () => {
 
   if (isNotFound.length > 0)
     return (
-      <Text fontWeight="hairline" fontSize="2xl">
-        {isNotFound}
-      </Text>
+      <Box w="full" as="section" id="general-section">
+        <HStack w="100%" display="block">
+          <BannerPrivate />
+        </HStack>
+      </Box>
     );
 
   if (fetchGroupDetailById.isLoading || fetchGroupDetailById.isRefetching) return null;

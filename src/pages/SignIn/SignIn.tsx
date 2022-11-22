@@ -13,9 +13,8 @@ const SignIn = () => {
   const { member } = usePersistedAuthStore();
 
   const isThereNextParam = useLocation().search.includes('next');
-  const navigateTo = isThereNextParam ? useLocation().search.split('=')[1] : '/dashboard';
+  const navigateTo = isThereNextParam ? useLocation().search.split('next=')[1] : '/dashboard';
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
-
   const [requestAccessTokenAttemp, setRequestAccessTokenAttemp] = useState(0);
 
   const navigate = useNavigate();
@@ -42,7 +41,6 @@ const SignIn = () => {
 
       if (request.DiscourseRedirectUrl === undefined) {
         renderToast('error', 'Something went wrong...');
-
         return undefined;
       }
 
@@ -53,7 +51,6 @@ const SignIn = () => {
         duration: 2000,
         status: 'success',
       });
-
       return request.DiscourseRedirectUrl;
     } catch (error: any) {
       return null;

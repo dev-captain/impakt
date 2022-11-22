@@ -16,7 +16,7 @@ import { usePersistedAuthStore } from '../../../lib/zustand';
 const SignInForm: React.FC = () => {
   const navigate = useNavigate();
   const isThereNextParam = useLocation().search.includes('next');
-  const navigateTo = isThereNextParam ? useLocation().search.split('=')[1] : '/dashboard';
+  const navigateTo = isThereNextParam ? useLocation().search.split('next=')[1] : '/dashboard';
   const signIn = useAuthControllerLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
