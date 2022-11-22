@@ -24,7 +24,10 @@ import {
   // ChallengeTab,
   ChallengeTabs,
 } from '../../../../../../data';
-import { usePersistedAuthStore, usePersistedChallengeStore } from '../../../../../../lib/zustand';
+import {
+  // usePersistedAuthStore,
+  usePersistedChallengeStore,
+} from '../../../../../../lib/zustand';
 import ChallengesCard from './ChallengeModalTabs/ChallengesCard/ChallengesCard';
 import ChallengeModalHeader from './ChallengeModalTabs/ChallengeModalHeader';
 // import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTitleText';
@@ -61,7 +64,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
     resolver: yupResolver(createChallengeYupScheme),
   });
 
-  const { member } = usePersistedAuthStore();
+  // const { member } = usePersistedAuthStore();
   const { convertToPascalCase } = usePascalCase();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [activeTab, _] = React.useState<ChallengeTabs>('routine');
@@ -574,7 +577,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             <HStack w="full" justifyContent="space-between">
               <Box>
                 <ChallengeCardMetaLabel
-                  creatorName={member?.firstName ?? member?.username ?? ''}
+                  // creatorName={member?.firstName ?? member?.username ?? ''}
                   times={getTimeDifference(
                     previewChallenge.validFrom,
                     previewChallenge.validUntil ?? '',

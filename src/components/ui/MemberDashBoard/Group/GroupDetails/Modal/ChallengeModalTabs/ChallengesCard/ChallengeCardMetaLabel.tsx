@@ -3,10 +3,13 @@ import { Box, Text } from '@chakra-ui/react';
 
 interface ChallengeCardMetaLabelPropsI {
   times: { d: string; h: string; m: string };
-  creatorName?: string;
+  // creatorName?: string;
 }
 
-const ChallengeCardMetaLabel: React.FC<ChallengeCardMetaLabelPropsI> = ({ times, creatorName }) => {
+const ChallengeCardMetaLabel: React.FC<ChallengeCardMetaLabelPropsI> = ({
+  times,
+  // creatorName
+}) => {
   return (
     <Box
       color="#29323B"
@@ -36,11 +39,11 @@ const ChallengeCardMetaLabel: React.FC<ChallengeCardMetaLabelPropsI> = ({ times,
       >
         {times.s}Sec
       </Text> */}
-      {creatorName && (
+      {/* {creatorName && (
         <Text color="#4E6070" fontWeight="500" fontSize="16px" lineHeight="18px">
           {`by ${creatorName}`}
         </Text>
-      )}
+      )} */}
     </Box>
   );
 };

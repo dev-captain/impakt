@@ -112,6 +112,7 @@ const GroupLabels: React.FC = () => {
         if (activeChallenge) {
           challengePreviewModalDisclosure.onOpen();
         }
+
         if (!activeChallenge && isCreator) {
           challengeModalDisclosure.onOpen();
         }
