@@ -26,12 +26,13 @@ const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI & StackP
       w="full"
       {...props}
     >
-      <Box id="length-of-exercise-box">
-        <Text color="#728BA3" fontWeight="500" fontSize="18px" lineHeight="100%">
-          {`${lengthOfExercise.m}:${lengthOfExercise.s}`}
-        </Text>
-      </Box>
-      <Box w="100%" id="exercise-title-box">
+      <Box display="flex" w="100%" id="exercise-title-box">
+        <Box w="52px">
+          <Text color="#728BA3" fontWeight="500" fontSize="18px" lineHeight="100%">
+            {`${lengthOfExercise.m}:${lengthOfExercise.s}`}
+          </Text>
+        </Box>
+        <Box w="12px" />
         <Text fontWeight="500" color="#29323B" fontSize="18px" lineHeight="100%">
           {exerciseName}
         </Text>

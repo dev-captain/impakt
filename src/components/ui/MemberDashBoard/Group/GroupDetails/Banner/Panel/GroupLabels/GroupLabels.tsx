@@ -10,9 +10,10 @@ import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/im
 import { useGroupsControllerV1GetGroupPinnedChallenges } from '../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
-import { convertMsToHM } from '../../../../../../../../utils';
+import { convertMsToHM, normalizeExerciseNames } from '../../../../../../../../utils';
 
 const GroupLabels: React.FC = () => {
+  const [playedTimes, setPlayedTimes] = React.useState(0);
   const { activeGroup } = usePersistedGroupStore();
   const { member } = usePersistedAuthStore();
   const groupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(activeGroup?.id ?? 0);
@@ -41,11 +42,16 @@ const GroupLabels: React.FC = () => {
     ({ username }) => username === member?.username,
   )?.userCount;
 
-  let playedTimes = 0;
+  React.useEffect(() => {
+    if (challengeLeaderBoard.data) {
+      let count = 0;
+      challengeLeaderBoard.data?.usersPassed.forEach(({ userTime }) => {
+        count += userTime ?? 0;
+      });
 
-  challengeLeaderBoard.data?.usersPassed.forEach(({ userTime }) => {
-    playedTimes += userTime ?? 0;
-  });
+      setPlayedTimes(count);
+    }
+  }, [challengeLeaderBoard]);
 
   React.useEffect(() => {
     if (groupPinnedChallenge.data) {
@@ -112,6 +118,7 @@ const GroupLabels: React.FC = () => {
         if (activeChallenge) {
           challengePreviewModalDisclosure.onOpen();
         }
+
         if (!activeChallenge && isCreator) {
           challengeModalDisclosure.onOpen();
         }
@@ -148,14 +155,14 @@ const GroupLabels: React.FC = () => {
           title: activeChallenge?.name ?? 'Daily Challenge',
           creator: activeChallenge?.Routine?.Creator?.username ?? 'Impakt',
           deepLinkToPlay: `https://fitness.impakt.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
-          exercices: activeChallenge?.Routine?.TimelineBlocks ?? [],
+          exercices: normalizeExerciseNames(activeChallenge?.Routine?.TimelineBlocks ?? []),
           leaderboard: challengeLeaderBoard.data?.usersPassed ?? [],
           likeCount: activeChallenge?.likes ?? 0,
           myBestScore:
             bestScoreOfUser.data && Object.keys(bestScoreOfUser.data).length > 0
-              ? bestScoreOfUser.data.userScore?.toString() ?? 'TBD'
-              : 'TBD',
-          myRank: memberRank?.toString() ?? 'TBD',
+              ? bestScoreOfUser.data.userScore?.toString() ?? '-'
+              : '-',
+          myRank: memberRank !== undefined ? `#${memberRank}` : '-',
           playedTimes: challengeLeaderBoard.data?.totalParticipants ?? 0,
           playedMins: convertMsToHM(playedTimes, true).m,
           validFrom: activeChallenge?.validFrom ?? '',

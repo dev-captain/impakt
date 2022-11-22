@@ -15,26 +15,39 @@ import {
 } from '@chakra-ui/react';
 import { Common } from 'components';
 import React from 'react';
-import { useForm, usePascalCase } from 'hooks';
+import { useForm } from 'hooks';
 import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
-import { ChallengeTab, ChallengeTabs } from '../../../../../../data';
-import { usePersistedAuthStore, usePersistedChallengeStore } from '../../../../../../lib/zustand';
+import {
+  // ChallengeTab,
+  ChallengeTabs,
+} from '../../../../../../data';
+import {
+  // usePersistedAuthStore,
+  usePersistedChallengeStore,
+} from '../../../../../../lib/zustand';
 import ChallengesCard from './ChallengeModalTabs/ChallengesCard/ChallengesCard';
 import ChallengeModalHeader from './ChallengeModalTabs/ChallengeModalHeader';
-import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTitleText';
+// import ChallengeModalTabTitleText from './ChallengeModalTabs/ChallengeModalTabTitleText';
 import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
-import { convertMsToHM, getTimeDifference, renderToast } from '../../../../../../utils';
+import {
+  convertMsToHM,
+  getTimeDifference,
+  normalizeExerciseNames,
+  renderToast,
+} from '../../../../../../utils';
 import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import createChallengeYupScheme from '../../../../../../lib/yup/schemas/createChallengeYupScheme';
 import { InputErrorMessage } from '../../../../../common';
+import NoItemCard from './ChallengeModalTabs/NoChallengeCard/NoItemCard';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -49,6 +62,7 @@ type ChallengeModalScreens =
   | 'create-challenge-form';
 
 const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveChallenge }) => {
+  const navigate = useNavigate();
   const createChallenge = useChallengesControllerCreateOne();
   const challengeCreateForm = useForm({
     defaultValues: {
@@ -58,9 +72,9 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
     resolver: yupResolver(createChallengeYupScheme),
   });
 
-  const { member } = usePersistedAuthStore();
-  const { convertToPascalCase } = usePascalCase();
-  const [activeTab, setActiveTab] = React.useState<ChallengeTabs>('routine');
+  // const { member } = usePersistedAuthStore();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+  const [activeTab, _] = React.useState<ChallengeTabs>('routine');
   const [activeScreen, setActiveScreen] = React.useState<ChallengeModalScreens[]>(['select']);
   const [previewChallenge, setPreviewChallenge] = React.useState<GetChallengeRes | null>(null);
   const [previewRouitine, setRoutinePreview] = React.useState<GetRoutineRes | null>(null);
@@ -169,7 +183,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
           {/* MODAL BODY HEADER START HERE */}
           {(currentScreen === 'select' || currentScreen === 'create') && (
             <VStack alignItems="flex-start" mt="24px" mb="24px" rowGap="24px" padding="4px">
-              {currentScreen !== 'create' && (
+              {currentScreen !== 'create' && availableGroupChallenges.length > 0 && (
                 <HStack w="full" justifyContent="flex-end">
                   <Box minW="148px">
                     <Common.ImpaktButton
@@ -195,7 +209,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   </Text>
                 </HStack>
               )}
-              <HStack
+              {/* <HStack
                 borderRadius="12px"
                 // minW="248px"
                 // w="25%"
@@ -213,7 +227,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                     title={tab.charAt(0).toUpperCase() + tab.slice(1)}
                   />
                 ))}
-              </HStack>
+              </HStack> */}
             </VStack>
           )}
 
@@ -277,6 +291,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
           >
             {currentScreen === 'select' &&
               activeTab === 'routine' &&
+              availableGroupChallenges.length !== 0 &&
               availableGroupChallenges.map((challengeI) => (
                 <ChallengesCard key={challengeI.id} challenge={challengeI}>
                   <Common.ImpaktButton
@@ -316,74 +331,104 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   </Common.ImpaktButton>
                 </ChallengesCard>
               ))}
+
+            {currentScreen === 'select' &&
+              activeTab === 'routine' &&
+              availableGroupChallenges.length === 0 && (
+                <NoItemCard
+                  noItemTitle="You don't have any active challenges. Create one to pin it."
+                  noItemButtonTitle="Create"
+                  noItemButtonOnClick={() => moveToNextScreen('create')}
+                />
+              )}
+
             {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
-                  {previewChallenge.Routine.TimelineBlocks?.map((exercise) => (
-                    <ChallengePreviewItemCard
-                      key={exercise.id}
-                      exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
-                      lengthOfExercise={{
-                        m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
-                        s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
-                      }}
-                      exerciseType={exercise.type}
-                    />
-                  ))}
+                  {normalizeExerciseNames(previewChallenge.Routine.TimelineBlocks ?? []).map(
+                    (exercise) => (
+                      <ChallengePreviewItemCard
+                        key={exercise.id}
+                        exerciseName={exercise.Exercise?.name ?? ''}
+                        lengthOfExercise={{
+                          m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
+                          s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
+                        }}
+                        exerciseType={exercise.type}
+                      />
+                    ),
+                  )}
                 </VStack>
               </VStack>
             )}
             {currentScreen === 'create' && activeTab === 'routine' && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
-                <VStack w="full" id="exercise-card-item-s" justifyContent="flex-start">
-                  {availableGroupRoutines.map((routine) => (
-                    <RoutineCard key={routine.id} routine={routine}>
-                      <Common.ImpaktButton
-                        onClick={() => {
-                          setRoutinePreview(routine);
-                          moveToNextScreen('preview-routine');
-                        }}
-                        variant="transparent"
-                        w="114px !important"
-                        backgroundColor="#EEF4F6"
-                        colorScheme="#fff"
-                        h="38px"
-                        borderRadius="8px"
-                        type="submit"
-                        fontSize={{ base: '14px', md: '16px' }}
-                        fontWeight="700"
-                      >
-                        <Text>Preview</Text>
-                      </Common.ImpaktButton>
-                      <Common.ImpaktButton
-                        onClick={() => {
-                          setRoutinePreview(routine);
-                          moveToNextScreen('create-challenge-form');
-                        }}
-                        variant="black"
-                        w="114px !important"
-                        colorScheme="#fff"
-                        h="38px"
-                        backgroundColor="#29323B"
-                        borderRadius="8px"
-                        type="submit"
-                        fontSize={{ base: '14px', md: '16px' }}
-                        fontWeight="700"
-                      >
-                        <Text>Select</Text>
-                      </Common.ImpaktButton>
-                    </RoutineCard>
-                  ))}
+                <VStack
+                  w="full"
+                  spacing="16px"
+                  id="exercise-card-item-s"
+                  justifyContent="flex-start"
+                >
+                  {availableGroupRoutines.length === 0 ? (
+                    <NoItemCard
+                      noItemButtonOnClick={() => navigate('/download')}
+                      noItemButtonTitle="Download"
+                      noItemTitle="You don't have any routines yet."
+                    >
+                      <Box mt="0 !important">
+                        <Text>Download our app to create your first one.</Text>
+                      </Box>
+                    </NoItemCard>
+                  ) : (
+                    availableGroupRoutines.map((routine) => (
+                      <RoutineCard key={routine.id} routine={routine}>
+                        <Common.ImpaktButton
+                          onClick={() => {
+                            setRoutinePreview(routine);
+                            moveToNextScreen('preview-routine');
+                          }}
+                          variant="transparent"
+                          w="114px !important"
+                          backgroundColor="#EEF4F6"
+                          colorScheme="#fff"
+                          h="38px"
+                          borderRadius="8px"
+                          type="submit"
+                          fontSize={{ base: '14px', md: '16px' }}
+                          fontWeight="700"
+                        >
+                          <Text>Preview</Text>
+                        </Common.ImpaktButton>
+                        <Common.ImpaktButton
+                          onClick={() => {
+                            setRoutinePreview(routine);
+                            moveToNextScreen('create-challenge-form');
+                          }}
+                          variant="black"
+                          w="114px !important"
+                          colorScheme="#fff"
+                          h="38px"
+                          backgroundColor="#29323B"
+                          borderRadius="8px"
+                          type="submit"
+                          fontSize={{ base: '14px', md: '16px' }}
+                          fontWeight="700"
+                        >
+                          <Text>Select</Text>
+                        </Common.ImpaktButton>
+                      </RoutineCard>
+                    ))
+                  )}
                 </VStack>
               </VStack>
             )}
             {currentScreen === 'preview-routine' && activeTab === 'routine' && previewRouitine && (
               <VStack rowGap="24px" pl="0.5em" justifyContent="flex-start" alignItems="flex-start">
                 <VStack w="full" id="exercise-card-item-s" justifyContent="space-between">
-                  {previewRouitine.TimelineBlocks?.map((exercise) => (
+                  {normalizeExerciseNames(previewRouitine.TimelineBlocks ?? []).map((exercise) => (
                     <ChallengePreviewItemCard
                       key={exercise.id}
-                      exerciseName={convertToPascalCase(exercise.Exercise?.name ?? '') ?? ''}
+                      exerciseName={exercise.Exercise?.name ?? ''}
                       lengthOfExercise={{
                         m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
                         s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
@@ -570,7 +615,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             <HStack w="full" justifyContent="space-between">
               <Box>
                 <ChallengeCardMetaLabel
-                  creatorName={member?.firstName ?? member?.username ?? ''}
+                  // creatorName={member?.firstName ?? member?.username ?? ''}
                   times={getTimeDifference(
                     previewChallenge.validFrom,
                     previewChallenge.validUntil ?? '',

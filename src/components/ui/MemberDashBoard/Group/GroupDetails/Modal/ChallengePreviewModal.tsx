@@ -207,7 +207,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                       lineHeight="100%"
                       id="score-text"
                     >
-                      #{myRank}
+                      {myRank}
                     </Text>
                   </VStack>
                 </HStack>
@@ -257,7 +257,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
             justifyContent="space-between"
           >
             <VStack rowGap="10px" alignItems="flex-start" id="challenge-preview-title-stack">
-              <HStack pos="relative" id="challenge-preivew-box-title">
+              <HStack align="baseline" pos="relative" id="challenge-preivew-box-title">
                 <Text fontWeight="500" fontSize="32px" color="#29323B" lineHeight="100%">
                   {title}
                 </Text>
@@ -267,7 +267,6 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   fontSize="18px"
                   lineHeight="100%"
                   pos="relative"
-                  bottom="-8px"
                 >
                   by {creator}
                 </Text>
