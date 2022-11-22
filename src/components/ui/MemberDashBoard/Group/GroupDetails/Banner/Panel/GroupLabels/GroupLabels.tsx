@@ -154,7 +154,7 @@ const GroupLabels: React.FC = () => {
         challengePreview={{
           title: activeChallenge?.name ?? 'Daily Challenge',
           creator: activeChallenge?.Routine?.Creator?.username ?? 'Impakt',
-          deepLinkToPlay: `https://fitness.impakt.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
+          deepLinkToPlay: `https://fitness.impakt-dev.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
           exercices: normalizeExerciseNames(activeChallenge?.Routine?.TimelineBlocks ?? []),
           leaderboard: challengeLeaderBoard.data?.usersPassed ?? [],
           likeCount: activeChallenge?.likes ?? 0,
