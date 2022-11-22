@@ -13,6 +13,7 @@ import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../.
 import { convertMsToHM } from '../../../../../../../../utils';
 
 const GroupLabels: React.FC = () => {
+  const [playedTimes, setPlayedTimes] = React.useState(0);
   const { activeGroup } = usePersistedGroupStore();
   const { member } = usePersistedAuthStore();
   const groupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(activeGroup?.id ?? 0);
@@ -41,11 +42,16 @@ const GroupLabels: React.FC = () => {
     ({ username }) => username === member?.username,
   )?.userCount;
 
-  let playedTimes = 0;
+  React.useEffect(() => {
+    if (challengeLeaderBoard.data) {
+      let count = 0;
+      challengeLeaderBoard.data?.usersPassed.forEach(({ userTime }) => {
+        count += userTime ?? 0;
+      });
 
-  challengeLeaderBoard.data?.usersPassed.forEach(({ userTime }) => {
-    playedTimes += userTime ?? 0;
-  });
+      setPlayedTimes(count);
+    }
+  }, [challengeLeaderBoard]);
 
   React.useEffect(() => {
     if (groupPinnedChallenge.data) {
