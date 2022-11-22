@@ -154,9 +154,9 @@ const GroupLabels: React.FC = () => {
           likeCount: activeChallenge?.likes ?? 0,
           myBestScore:
             bestScoreOfUser.data && Object.keys(bestScoreOfUser.data).length > 0
-              ? bestScoreOfUser.data.userScore?.toString() ?? 'TBD'
-              : 'TBD',
-          myRank: memberRank?.toString() ?? 'TBD',
+              ? bestScoreOfUser.data.userScore?.toString() ?? '-'
+              : '-',
+          myRank: memberRank !== undefined ? `#${memberRank}` : '-',
           playedTimes: challengeLeaderBoard.data?.totalParticipants ?? 0,
           playedMins: convertMsToHM(playedTimes, true).m,
           validFrom: activeChallenge?.validFrom ?? '',

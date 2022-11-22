@@ -207,7 +207,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                       lineHeight="100%"
                       id="score-text"
                     >
-                      #{myRank}
+                      {myRank}
                     </Text>
                   </VStack>
                 </HStack>
