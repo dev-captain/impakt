@@ -351,10 +351,11 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   {leaderboard.length === 0 && <Text color="gray.300">No record yet...</Text>}
                   {leaderboard.map(({ username, userScore }, index) => (
                     <HStack
-                      mt={index === 2 ? '16px !important' : '8px !important'}
+                      // eslint-disable-next-line no-nested-ternary
+                      mt={index === 0 ? '0' : index === 3 ? '16px !important' : '8px !important'}
                       w="full"
-                      bg="rgba(242, 121, 97, 0.1);"
-                      color={index === 1 ? '#CC4C33' : '#728BA3'}
+                      bg={index === 0 ? 'rgba(242, 121, 97, 0.1);' : '#F5F8FA'}
+                      color={index === 0 ? '#CC4C33' : '#728BA3'}
                       p="1em"
                       borderRadius="8px"
                       id="leaderboard-item-container"
@@ -368,19 +369,34 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                         )}
                         {index !== 0 && <Box id="leaderboard-item-icon" minW="22.08px" />}
                         <Box id="leaderboard-item-rank">
-                          <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                          <Text
+                            color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#728BA3'}
+                            fontWeight="500"
+                            fontSize="18px"
+                            lineHeight="100%"
+                          >
                             {index + 1}
                           </Text>
                         </Box>
                         <Box ml="16px !important" id="leaderboard-item-username">
-                          <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                          <Text
+                            color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#29323B'}
+                            fontWeight="500"
+                            fontSize="18px"
+                            lineHeight="100%"
+                          >
                             {username}
                           </Text>
                         </Box>
                       </HStack>
 
                       <HStack>
-                        <Text fontWeight="500" fontSize="18px" lineHeight="100%">
+                        <Text
+                          color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#728BA3'}
+                          fontWeight="500"
+                          fontSize="18px"
+                          lineHeight="100%"
+                        >
                           {userScore}
                         </Text>
                       </HStack>
