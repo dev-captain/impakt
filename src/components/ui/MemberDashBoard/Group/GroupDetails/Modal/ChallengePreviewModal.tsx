@@ -16,7 +16,7 @@ import { usePascalCase } from 'hooks';
 import { Common, I } from '../../../../..';
 import Images from '../../../../../../assets/images';
 import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
-import { convertMsToHM, getTimeDifference } from '../../../../../../utils';
+import { getTimeDifference } from '../../../../../../utils';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import { GetUserScoreResV1 } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getUserScoreResV1';
 
@@ -314,18 +314,16 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
               <VStack rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
                 <Box>
                   <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
-                    {exercices.length} Exercices
+                    {exercices.length} Exercises
                   </Text>
                 </Box>
                 <Box background="#F5F8FA" borderRadius="1em" w="full">
-                  {exercices.map(({ Exercise, type }, index) => (
+                  {exercices.map(({ Exercise, type, TimelineBlockAttributes }, index) => (
                     <ChallengePreviewItemCard
                       exerciseName={convertToPascalCase(Exercise?.name ?? '') ?? ''}
                       exerciseType={type}
-                      lengthOfExercise={{
-                        m: convertMsToHM(Exercise?.averageTime ?? 0).m,
-                        s: convertMsToHM(Exercise?.averageTime ?? 0).s,
-                      }}
+                      timeLineBlockType={TimelineBlockAttributes[0]?.type}
+                      timeLineBlockValue={TimelineBlockAttributes[0]?.value}
                       borderBottom={index !== exercices.length - 1 ? '1px solid #D3E2F0' : '0'}
                       borderRadius="0"
                       background="transparent"
@@ -351,27 +349,27 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 </Box>
                 <VStack w="full">
                   {leaderboard.length === 0 && <Text color="gray.300">No record yet...</Text>}
-                  {leaderboard.map(({ userCount, username, userScore }) => (
+                  {leaderboard.map(({ username, userScore }, index) => (
                     <HStack
-                      mt={userCount === 4 ? '16px !important' : '8px !important'}
+                      mt={index === 2 ? '16px !important' : '8px !important'}
                       w="full"
                       bg="rgba(242, 121, 97, 0.1);"
-                      color={userCount === 1 ? '#CC4C33' : '#728BA3'}
+                      color={index === 1 ? '#CC4C33' : '#728BA3'}
                       p="1em"
                       borderRadius="8px"
                       id="leaderboard-item-container"
                       justifyContent="space-between"
                     >
                       <HStack>
-                        {userCount === 1 && (
+                        {index === 0 && (
                           <Box id="leaderboard-item-icon">
                             <I.WinnerIcon color="#F27961" width="22.08px" height="21.6px" />
                           </Box>
                         )}
-                        {userCount !== 1 && <Box id="leaderboard-item-icon" minW="22.08px" />}
+                        {index !== 0 && <Box id="leaderboard-item-icon" minW="22.08px" />}
                         <Box id="leaderboard-item-rank">
                           <Text fontWeight="500" fontSize="18px" lineHeight="100%">
-                            {userCount}
+                            {index + 1}
                           </Text>
                         </Box>
                         <Box ml="16px !important" id="leaderboard-item-username">

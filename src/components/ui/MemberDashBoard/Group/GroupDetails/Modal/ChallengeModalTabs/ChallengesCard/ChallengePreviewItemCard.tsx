@@ -2,19 +2,31 @@ import React from 'react';
 import { Box, Text, HStack, StackProps } from '@chakra-ui/react';
 import { I } from 'components';
 import { GetTimelineBlockResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockResType';
+import { GetTimelineBlockAttributeResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types';
+import { padTo2Digits } from '../../../../../../../../utils';
 
 interface ChallengePreviewItemCardPropsI {
   exerciseName: string;
   exerciseType: GetTimelineBlockResType;
-  lengthOfExercise: { m: string; s: string };
+  timeLineBlockType: GetTimelineBlockAttributeResType;
+  timeLineBlockValue: number;
 }
 
 const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI & StackProps> = ({
   exerciseName,
   exerciseType,
-  lengthOfExercise,
+  timeLineBlockType,
+  timeLineBlockValue,
   ...props
 }) => {
+  const value =
+    // eslint-disable-next-line no-nested-ternary
+    timeLineBlockType === 'CountConstraint' || timeLineBlockType === 'CountGoal'
+      ? timeLineBlockValue
+      : timeLineBlockType === 'TimeConstraint' || timeLineBlockType === 'TimeGoal'
+      ? `${padTo2Digits(Math.floor(timeLineBlockValue / 60))}:${timeLineBlockValue}`
+      : 0;
+
   return (
     <HStack
       background="#F5F8FA"
@@ -29,7 +41,7 @@ const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI & StackP
       <Box display="flex" w="100%" id="exercise-title-box">
         <Box w="52px">
           <Text color="#728BA3" fontWeight="500" fontSize="18px" lineHeight="100%">
-            {`${lengthOfExercise.m}:${lengthOfExercise.s}`}
+            {value}
           </Text>
         </Box>
         <Box w="12px" />
@@ -38,7 +50,7 @@ const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI & StackP
         </Text>
       </Box>
       <Box id="type-of-exercise-box">
-        {exerciseType === 'Blitz' && <I.TimeExerciseIcon />}
+        {exerciseType === 'Blitz' && <I.SpeedExerciseIcon />}
         {exerciseType === 'Rest' && <I.RestExerciseIcon />}
         {exerciseType === 'HIIT' && <I.TimeExerciseIcon />}
         {exerciseType === 'HoldPose' && <I.HoldExerciseIcon />}
