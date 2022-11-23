@@ -35,12 +35,7 @@ import ChallengeModalHeader from './ChallengeModalTabs/ChallengeModalHeader';
 import ChallengesCardScoreLabelsWrapper from './ChallengeModalTabs/ChallengesCard/ChallengesCardScoreLabelsWrapper';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import ChallengeCardMetaLabel from './ChallengeModalTabs/ChallengesCard/ChallengeCardMetaLabel';
-import {
-  convertMsToHM,
-  getTimeDifference,
-  normalizeExerciseNames,
-  renderToast,
-} from '../../../../../../utils';
+import { getTimeDifference, normalizeExerciseNames, renderToast } from '../../../../../../utils';
 import RoutineCard from './ChallengeModalTabs/RoutineCard/RoutineCard';
 import { GetRoutineRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { useChallengesControllerCreateOne } from '../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
@@ -350,10 +345,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                       <ChallengePreviewItemCard
                         key={exercise.id}
                         exerciseName={exercise.Exercise?.name ?? ''}
-                        lengthOfExercise={{
-                          m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
-                          s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
-                        }}
+                        timeLineBlockType={exercise.TimelineBlockAttributes[0].type}
+                        timeLineBlockValue={exercise.TimelineBlockAttributes[0].value}
                         exerciseType={exercise.type}
                       />
                     ),
@@ -429,10 +422,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                     <ChallengePreviewItemCard
                       key={exercise.id}
                       exerciseName={exercise.Exercise?.name ?? ''}
-                      lengthOfExercise={{
-                        m: convertMsToHM(exercise.Exercise?.averageTime ?? 0).m,
-                        s: convertMsToHM(exercise.Exercise?.averageTime ?? 0).s,
-                      }}
+                      timeLineBlockType={exercise.TimelineBlockAttributes[0].type}
+                      timeLineBlockValue={exercise.TimelineBlockAttributes[0].value}
                       exerciseType={exercise.type}
                     />
                   ))}

@@ -16,7 +16,7 @@ import { usePascalCase } from 'hooks';
 import { Common, I } from '../../../../..';
 import Images from '../../../../../../assets/images';
 import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
-import { convertMsToHM, getTimeDifference } from '../../../../../../utils';
+import { getTimeDifference } from '../../../../../../utils';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import { GetUserScoreResV1 } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getUserScoreResV1';
 
@@ -318,14 +318,12 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   </Text>
                 </Box>
                 <Box background="#F5F8FA" borderRadius="1em" w="full">
-                  {exercices.map(({ Exercise, type }, index) => (
+                  {exercices.map(({ Exercise, type, TimelineBlockAttributes }, index) => (
                     <ChallengePreviewItemCard
                       exerciseName={convertToPascalCase(Exercise?.name ?? '') ?? ''}
                       exerciseType={type}
-                      lengthOfExercise={{
-                        m: convertMsToHM(Exercise?.averageTime ?? 0).m,
-                        s: convertMsToHM(Exercise?.averageTime ?? 0).s,
-                      }}
+                      timeLineBlockType={TimelineBlockAttributes[0]?.type}
+                      timeLineBlockValue={TimelineBlockAttributes[0]?.value}
                       borderBottom={index !== exercices.length - 1 ? '1px solid #D3E2F0' : '0'}
                       borderRadius="0"
                       background="transparent"
