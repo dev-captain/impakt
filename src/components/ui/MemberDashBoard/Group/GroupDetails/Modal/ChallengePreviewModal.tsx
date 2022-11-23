@@ -351,10 +351,10 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   {leaderboard.length === 0 && <Text color="gray.300">No record yet...</Text>}
                   {leaderboard.map(({ username, userScore }, index) => (
                     <HStack
-                      mt={index === 2 ? '16px !important' : '8px !important'}
+                      mt={index === 3 ? '16px !important' : '8px !important'}
                       w="full"
                       bg="rgba(242, 121, 97, 0.1);"
-                      color={index === 1 ? '#CC4C33' : '#728BA3'}
+                      color={index === 0 ? '#CC4C33' : '#728BA3'}
                       p="1em"
                       borderRadius="8px"
                       id="leaderboard-item-container"
