@@ -114,25 +114,7 @@ const PermissionTab: React.FC = () => {
           </Button>
         </PermissionCard>
 
-        <RoleCard title="Moderators">
-          <Button
-            color={value === 'Public' ? '#29323B' : '#728BA3'}
-            bg={value === 'Public' ? '#EEF4F6' : '#fff'}
-            _hover={{
-              backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
-              color: value === 'Private' ? '#728BA3' : '#29323B',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="8px"
-            onClick={() => {
-              setValue('Public');
-            }}
-          >
-            Public
-          </Button>
-        </RoleCard>
+        <RoleCard title="Moderators" />
       </Box>
       <Box mt="20px" textAlign="end">
         <Common.ImpaktButton

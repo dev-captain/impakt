@@ -39,7 +39,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title, children }) => {
         </Text>
       </Box>
       <Box display="flex" justifyContent="space-between" alignItem="center">
-        <Text color="#29323B" fontSize={{ md: '12px', base: '12px' }} fontWeight="300">
+        <Text color="#29323B" fontSize={{ md: '14px', base: '14px' }} fontWeight="300">
           Assign group members to be moderators. They will be able to do everything you can, except
           deleting your group and assigning other moderators.
         </Text>
