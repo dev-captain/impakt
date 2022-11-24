@@ -17,11 +17,11 @@ const GroupInvite = () => {
   const [searchParams] = useSearchParams();
   const groupId: any = searchParams.get('group_id');
   const isPrivate = searchParams.get('private') === 'true';
-
+  const referralId = searchParams.get('referralId');
   const jointoGroup = async () => {
     // eslint-disable-next-line no-unused-expressions
     if (!member) {
-      navigate(`/signin?next=${location.pathname + location.search}`);
+      navigate(`/register/${referralId}?next=${location.pathname + location.search}`);
     }
     if (member) {
       if (isPrivate) {
@@ -77,7 +77,9 @@ const GroupInvite = () => {
 
   useEffect(() => {
     jointoGroup().then(() => {
-      navigate(`/dashboard/groups/group/${groupId}`);
+      if (member) {
+        navigate(`/dashboard/groups/group/${groupId}`);
+      }
     });
   }, []);
 
