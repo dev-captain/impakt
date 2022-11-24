@@ -3,7 +3,7 @@ import { Box, Text, HStack, StackProps } from '@chakra-ui/react';
 import { I } from 'components';
 import { GetTimelineBlockResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockResType';
 import { GetTimelineBlockAttributeResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types';
-import { convertMsToHM } from '../../../../../../../../utils';
+import { convertSSToMMSS, padTo2Digits } from '../../../../../../../../utils';
 
 interface ChallengePreviewItemCardPropsI {
   exerciseName: string;
@@ -24,7 +24,9 @@ const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI & StackP
     timeLineBlockType === 'CountConstraint' || timeLineBlockType === 'CountGoal'
       ? timeLineBlockValue
       : timeLineBlockType === 'TimeConstraint' || timeLineBlockType === 'TimeGoal'
-      ? `${convertMsToHM(timeLineBlockValue).m}:${convertMsToHM(timeLineBlockValue).s}`
+      ? `${padTo2Digits(Math.floor(convertSSToMMSS(timeLineBlockValue).m))}:${padTo2Digits(
+          Math.round(convertSSToMMSS(timeLineBlockValue).s),
+        )}`
       : 0;
 
   return (

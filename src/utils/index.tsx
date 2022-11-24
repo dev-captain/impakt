@@ -81,6 +81,16 @@ export const convertMsToHM = (milliseconds: number, isNot2Digit?: boolean) => {
   };
 };
 
+export const convertSSToMMSS = (seconds: number) => {
+  const minutes = seconds / 60;
+  const restSeconds = seconds % 60;
+
+  return {
+    m: minutes,
+    s: restSeconds,
+  };
+};
+
 let toastCounter = 0;
 let previousMode = '';
 let previousToastId: ToastId | undefined = '';
