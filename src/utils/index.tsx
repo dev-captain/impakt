@@ -176,27 +176,30 @@ export const getTimeDifference = (validFrom: string, validUntil: string) => {
 export default {};
 
 export const getCreatedBefore = (createdAt: string) => {
-  if (Day.now().yearsBetween(Day.fromString(createdAt)) === 0) {
-    if (Day.now().weeksBetween(Day.fromString(createdAt)) === 0) {
-      if (Day.now().daysBetween(Day.fromString(createdAt)) === 0) {
-        if (Day.now().hoursBetween(Day.fromString(createdAt)) === 0) {
-          if (Day.now().minutesBetween(Day.fromString(createdAt)) === 0) {
+  const stringToDateDay = Day.fromDate(new Date(createdAt));
+  if (!stringToDateDay) return '';
+
+  if (Day.now().yearsBetween(stringToDateDay) === 0) {
+    if (Day.now().weeksBetween(stringToDateDay) === 0) {
+      if (Day.now().daysBetween(stringToDateDay) === 0) {
+        if (Day.now().hoursBetween(stringToDateDay) === 0) {
+          if (Day.now().minutesBetween(stringToDateDay) === 0) {
             return 'just now';
           }
 
-          return `${Day.now().minutesBetween(Day.fromString(createdAt))} min ago`;
+          return `${Day.now().minutesBetween(stringToDateDay)} min ago`;
         }
 
-        return `${Day.now().hoursBetween(Day.fromString(createdAt))} hours ago`;
+        return `${Day.now().hoursBetween(stringToDateDay)} hours ago`;
       }
 
-      return `${Day.now().daysBetween(Day.fromString(createdAt))} days ago`;
+      return `${Day.now().daysBetween(stringToDateDay)} days ago`;
     }
 
-    return `${Day.now().weeksBetween(Day.fromString(createdAt))} weeks ago`;
+    return `${Day.now().weeksBetween(stringToDateDay)} weeks ago`;
   }
 
-  return `${Day.now().yearsBetween(Day.fromString(createdAt))} years ago`;
+  return `${Day.now().yearsBetween(stringToDateDay)} years ago`;
 };
 
 export const convertToPascalCase = (label: string) => {
