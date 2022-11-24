@@ -289,3 +289,51 @@ export const useGroupsMemberControllerV1LeaveGroup = <
     TContext
   >(mutationFn, mutationOptions);
 };
+
+export const groupsMemberControllerV1AddModerator = (
+  groupId: number,
+  userId: number,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<boolean>(
+    { url: `/api/v1/groups/${groupId}/addModerator/${userId}`, method: 'post' },
+    options,
+  );
+};
+
+export type GroupsMemberControllerV1AddModeratorMutationResult = NonNullable<
+  Awaited<ReturnType<typeof useGroupsMemberControllerV1AddModerator>>
+>;
+
+export type GroupsMemberControllerV1AddModeratorError = ErrorType<HttpExceptionSchema>;
+
+export const useGroupsMemberControllerV1AddModerator = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AddModerator>>,
+    TError,
+    { groupId: number; userId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AddModerator>>,
+    { groupId: number; userId: number }
+  > = (props) => {
+    const { groupId, userId } = props ?? {};
+
+    return groupsMemberControllerV1AddModerator(groupId, userId, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AddModerator>>,
+    TError,
+    { groupId: number; userId: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
