@@ -252,16 +252,26 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
           {/* MODAL BODY HEADER START HERE */}
           <HStack
             bg="#fff"
-            p="32px"
+            p={{ base: '1em', md: '2em' }}
             id="challenge-preview-header-box"
             justifyContent="space-between"
+            flexWrap="wrap"
+            rowGap="1em"
           >
             <VStack rowGap="10px" alignItems="flex-start" id="challenge-preview-title-stack">
-              <HStack align="baseline" pos="relative" id="challenge-preivew-box-title">
+              <HStack
+                flexWrap="wrap"
+                align={{ base: 'flex-start', md: 'baseline' }}
+                pos="relative"
+                rowGap="0.5em"
+                columnGap="0.5em"
+                id="challenge-preivew-box-title"
+              >
                 <Text fontWeight="500" fontSize="32px" color="#29323B" lineHeight="100%">
                   {title}
                 </Text>
                 <Text
+                  ml="0 !important"
                   color="#CC4C33"
                   fontWeight="500"
                   fontSize="18px"
@@ -277,7 +287,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 </Text>
               </Box>
             </VStack>
-            <HStack>
+            <HStack ml="0 !important">
               <Common.ImpaktButton
                 as="a"
                 href={deepLinkToPlay}
@@ -302,6 +312,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
             id="challenge-preview-content-box"
             alignItems="flex-start"
             justifyContent="space-between"
+            flexWrap={{ base: 'wrap', md: 'nowrap' }}
           >
             <VStack
               borderTop="1px solid #D3E2F0"
