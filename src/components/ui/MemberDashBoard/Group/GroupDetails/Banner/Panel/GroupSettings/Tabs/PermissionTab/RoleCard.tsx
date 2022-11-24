@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
-import { Box, Text, Avatar, Button } from '@chakra-ui/react';
+import { Box, Text, Avatar, Button, useDisclosure } from '@chakra-ui/react';
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 // import { Common } from 'components';
 import { useForm } from 'hooks';
 import { Common, I } from 'components';
+import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputGroupPropsI } from '../../../../../../../../../common/InputGroup';
 import createGroupYupScheme from '../../../../../../../../../../lib/yup/schemas/createGroupYupScheme';
 import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
+import {
+  useGroupsMemberControllerV1AddModerator,
+  useGroupsMemberControllerV1RemoveModerator,
+} from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { renderToast } from '../../../../../../../../../../utils';
+import ConfirmationModal from './ConfirmationModal';
 
 interface ChallengesCardProps {
   title: string;
@@ -18,8 +25,16 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     resolver: yupResolver(createGroupYupScheme),
     defaultValues: { username: '' },
   });
-  const members = usePersistedGroupStore().membersOfGroup?.Members ?? [];
+
+  const assignAsModerator = useGroupsMemberControllerV1AddModerator();
+  const removeFromModerator = useGroupsMemberControllerV1RemoveModerator();
+  const { activeGroup, setMyGroups, myGroups, membersOfGroup } = usePersistedGroupStore();
+  const [members, setMembers] = useState(membersOfGroup?.Members ?? []);
   const [searchedMembers, setSearchedMembers] = useState<Array<any>>([]);
+  const [userIndex, setUserIndex] = useState(-1);
+  const groupParam = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const checkString = (username, filterVal) => {
     console.log(username);
     console.log(filterVal);
@@ -41,9 +56,72 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     );
     setSearchedMembers(result);
   };
-  const addModeratorRole = (e) => {
-    console.log(e);
+
+  const handleOnAssignModerator = async (userId) => {
+    if (!activeGroup?.id) return;
+    assignAsModerator.mutate(
+      {
+        groupId: Number(groupParam?.id),
+        userId: Number(userId),
+      },
+      {
+        onSuccess: () => {
+          renderToast('success', 'Assigned as a Moderator successfully.');
+          const shallowOfMyGroups = [...myGroups];
+          const indexOfGroup = shallowOfMyGroups.findIndex(
+            (group) => group.groupId === activeGroup.id,
+          );
+          if (indexOfGroup !== -1) {
+            setMyGroups(shallowOfMyGroups);
+          }
+          setMembers(
+            members.map((member) => ({
+              ...member,
+              role: member.User.id === userId ? 'Moderator' : member.role,
+            })),
+          );
+        },
+        onError: (err) => {
+          console.log(err);
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
   };
+
+  const handleOnRemoveModerator = async (userId) => {
+    onClose();
+    if (!activeGroup?.id) return;
+    removeFromModerator.mutate(
+      {
+        groupId: Number(groupParam?.id),
+        userId: Number(userId),
+      },
+      {
+        onSuccess: () => {
+          renderToast('success', 'Removed Moderator role successfully.');
+          const shallowOfMyGroups = [...myGroups];
+          const indexOfGroup = shallowOfMyGroups.findIndex(
+            (group) => group.groupId === activeGroup.id,
+          );
+          if (indexOfGroup !== -1) {
+            setMyGroups(shallowOfMyGroups);
+          }
+          setMembers(
+            members.map((member) => ({
+              ...member,
+              role: member.User.id === userId ? 'Member' : member.role,
+            })),
+          );
+        },
+        onError: (err) => {
+          console.log(err);
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
+  };
+
   const inputItems: InputGroupPropsI[] = [
     {
       placeholder: 'Username',
@@ -80,7 +158,8 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
           {searchedMembers.map(
             ({ role, User }) =>
               role !== 'None' &&
-              role !== 'Moderator' && (
+              role !== 'Moderator' &&
+              role !== 'Creater' && (
                 <Box
                   key={`${User.id}-box`}
                   display="flex"
@@ -108,7 +187,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                     </Text>
                   </Box>
                   <Box marginLeft="1em" display="flex" alignItems="center">
-                    <Button onClick={addModeratorRole}>
+                    <Button onClick={() => handleOnAssignModerator(User.id)}>
                       <AddIcon color="#4E6070" width="14px" height="14px" />
                     </Button>
                     {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
@@ -150,7 +229,13 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                     </Text>
                   </Box>
                   <Box marginLeft="1em" display="flex" alignItems="center">
-                    <Button>
+                    <Button
+                      onClick={() => {
+                        setUserIndex(User.id);
+                        onOpen();
+                      }}
+                    >
+                      {/* <Button onClick={() => handleOnRemoveModerator(User.id)}> */}
                       <CloseIcon color="#ff3333" width="12px" height="12px" />
                     </Button>
                     {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
@@ -160,6 +245,11 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
           )}
         </Box>
       </Box>
+      <ConfirmationModal
+        open={isOpen}
+        close={() => onClose()}
+        handleConfirm={() => handleOnRemoveModerator(userIndex)}
+      />
     </Box>
   );
 };
