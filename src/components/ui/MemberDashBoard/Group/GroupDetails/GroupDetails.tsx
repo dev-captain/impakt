@@ -279,6 +279,7 @@ const useFetchAvailableChallenges = () => {
     const groupAdminRoutines = await routinesControllerGetRoutines({
       creatorId: admin.User.id,
       TimelineBlocks: true,
+      Creator: true,
     });
 
     setAvailableGroupChallenges(groupAdminChallenges);
