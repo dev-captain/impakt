@@ -24,7 +24,9 @@ const ChallengePreviewItemCard: React.FC<ChallengePreviewItemCardPropsI & StackP
     timeLineBlockType === 'CountConstraint' || timeLineBlockType === 'CountGoal'
       ? timeLineBlockValue
       : timeLineBlockType === 'TimeConstraint' || timeLineBlockType === 'TimeGoal'
-      ? `${padTo2Digits(Math.floor(timeLineBlockValue / 60))}:${padTo2Digits(timeLineBlockValue)}`
+      ? `${padTo2Digits(Math.floor(timeLineBlockValue / 60))}:${padTo2Digits(
+          Math.ceil(timeLineBlockValue),
+        )}`
       : 0;
 
   return (
