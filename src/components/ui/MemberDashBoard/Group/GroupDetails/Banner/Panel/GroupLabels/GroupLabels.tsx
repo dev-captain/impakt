@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { isMobile } from 'react-device-detect';
 import { I } from 'components';
 import { IconButton, Skeleton, useDisclosure } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
@@ -146,7 +147,9 @@ const GroupLabels: React.FC = () => {
             activeChallenge?.Routine?.Creator?.username ??
             activeChallenge?.Creator?.username ??
             'Impakt',
-          deepLinkToPlay: `https://fitness.impakt-dev.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
+          deepLinkToPlay: isMobile
+            ? `impakt://challenge?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`
+            : `https://fitness.impakt-dev.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
           exercices: normalizeExerciseNames(activeChallenge?.Routine?.TimelineBlocks ?? []),
           leaderboard:
             challengeLeaderBoard.data?.usersPassed.sort((a, b) => b.userScore - a.userScore) ?? [],
