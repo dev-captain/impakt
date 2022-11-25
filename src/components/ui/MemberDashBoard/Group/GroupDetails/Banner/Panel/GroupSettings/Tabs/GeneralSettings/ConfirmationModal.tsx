@@ -1,123 +1,87 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
-import { useNavigate } from 'react-router-dom';
-import { Common, I } from 'components';
-import GroupsModal from '../../../../../../GroupsModal';
-import { useGroupsControllerV1Remove } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
-import { renderToast } from '../../../../../../../../../../utils';
-import { useGroupsMemberControllerV1LeaveGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
-import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
+import {
+  Box,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  VStack,
+  Text,
+  Button,
+} from '@chakra-ui/react';
 
 interface GroupSettingModalProps {
   open: boolean;
   close: () => void;
+  title: string;
+  buttonTitle: any;
+  buttonIcon: any;
+  onClick: () => void;
+  isLoading?: boolean;
 }
 
-const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
-  const deleteGroup = useGroupsControllerV1Remove();
-  const leaveGroup = useGroupsMemberControllerV1LeaveGroup();
-  const { activeGroup, myGroups, setMyGroups } = usePersistedGroupStore();
-  const { role } = usePersistedGroupStore();
-  const navigate = useNavigate();
-  const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
-    (m) => m.role !== 'None',
-  );
-
-  const handleGroupDelete = async () => {
-    if (activeGroup?.id) {
-      deleteGroup.mutate(
-        { groupId: activeGroup.id },
-        {
-          onSuccess: () => {
-            renderToast('success', `Group is deleted successfully`);
-            const distractFromMyGroup = myGroups.filter(
-              (myGroup) => myGroup.groupId !== activeGroup.id,
-            );
-            setMyGroups(distractFromMyGroup);
-            // TODO update explore group on zustand
-            navigate('/dashboard/groups');
-          },
-          onError: (err) => {
-            renderToast('error', err.response?.data.message ?? 'Something went wrong');
-          },
-        },
-      );
-    }
-  };
-
-  const handleLeaveGroup = async () => {
-    if (activeGroup) {
-      leaveGroup.mutate(
-        { groupId: activeGroup.id },
-        {
-          onSuccess: () => {
-            renderToast('success', `Left from Group successfully`);
-            const distractFromMyGroup = myGroups.filter(
-              (myGroup) => myGroup.groupId !== activeGroup.id,
-            );
-            setMyGroups(distractFromMyGroup);
-            navigate('/dashboard/groups');
-          },
-          onError: (err) => {
-            renderToast('error', err.response?.data.message ?? 'Something went wrong');
-          },
-        },
-      );
-    }
-  };
-
+const ConformationModal: React.FC<GroupSettingModalProps> = ({
+  open,
+  close,
+  title,
+  onClick,
+  buttonTitle,
+  buttonIcon,
+  isLoading,
+  children,
+}) => {
   return (
-    <GroupsModal
-      modalTitle={{
-        text:
-          role !== 'Creator'
-            ? 'Are you sure you want to leave?'
-            : 'Are you sure you want to delete group?',
-      }}
-      isOpen={open}
-      onClose={close}
-      showCloseButton
-    >
-      <Box display="flex" justifyContent="center" alignItems="center" mt="24px">
-        <Box>
-          {role === 'Creator' && (
-            <Box display="flex" alignItems="center" justifyContent="center" marginBottom="24px">
-              <I.PeopleIcon color="#F84153" />
-              <Text color="#F84153" fontSize="24px" fontWeight="700" marginLeft="12px">
-                {members?.length}
+    <Modal isOpen={open} isCentered onClose={close}>
+      <ModalOverlay />
+      <ModalContent
+        mt="100px"
+        mb="20px"
+        p="32px"
+        w={{ base: '92%', md: '100%' }}
+        minW={{ base: '92%', md: '560px' }}
+        borderRadius="24px"
+        boxShadow="0px 12px 30px -6px rgba(0, 6, 14, 0.12), 0px 24px 60px -12px rgba(0, 6, 14, 0.2)"
+      >
+        <ModalHeader>
+          <ModalCloseButton />
+        </ModalHeader>
+        <ModalBody padding="0 !important">
+          <VStack rowGap="16px">
+            <Box textAlign="center" id="confirmation-modal-title-box">
+              <Text color="#29323B" fontWeight="500" fontSize="24px" lineHeight="32px">
+                {title}
               </Text>
             </Box>
-          )}
-          <Common.ImpaktButton
-            mt={{ md: 0, base: '10px' }}
-            display="flex"
-            justifyContent="center"
-            margin="auto"
-            colorScheme="#fff"
-            w={{ md: '156px', base: '100%' }}
-            ml={{ md: '16px', base: '0' }}
-            _hover={{ bg: '#C41F30' }}
-            _active={{ bg: '#910917', color: '#fff' }}
-            h="60px"
-            borderRadius="8px"
-            type="submit"
-            isDisabled={role === 'Creator' ? deleteGroup.isLoading : leaveGroup.isLoading}
-            isLoading={role === 'Creator' ? deleteGroup.isLoading : leaveGroup.isLoading}
-            fontSize={{ md: '20px' }}
-            onClick={role === 'Creator' ? handleGroupDelete : handleLeaveGroup}
-            fontWeight="700"
-          >
-            {role === 'Creator' ? (
-              <DeleteIcon width="24px" height="24px" marginRight="20px" />
-            ) : (
-              <I.LeaveIcon width="24px" height="24px" marginRight="20px" />
-            )}
-            {role === 'Creator' ? 'Delete' : 'Leave'}
-          </Common.ImpaktButton>
-        </Box>
-      </Box>
-    </GroupsModal>
+            <Box display="flex" justifyContent="center" alignItems="center" mt="24px">
+              <Box>
+                {children}
+                <Button
+                  display="flex"
+                  justifyContent="center"
+                  width="161px"
+                  h="60px"
+                  borderRadius="8px"
+                  type="submit"
+                  isDisabled={isLoading}
+                  isLoading={isLoading}
+                  onClick={onClick}
+                  color="#FFFFFF"
+                  bg="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                  leftIcon={buttonIcon}
+                  _hover={{ bg: '#F04153' }}
+                >
+                  <Text fontWeight="600" fontSize="20px" lineHeight="32px">
+                    {buttonTitle}
+                  </Text>
+                </Button>
+              </Box>
+            </Box>
+          </VStack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 

@@ -42,17 +42,11 @@ export const ALLOW_IMAGE_FILE: string[] = ['image/png', 'image/jpeg'];
 
 const file = yup
   .mixed()
-  .required('File is required')
-  .test(
-    'fileSize',
-    'File too large',
-    (value) => value === null || (value && value.size <= 1 * 1024 * 1024),
-  )
-  .test(
-    'fileFormat',
-    'Unsupported file type',
-    (value) => value === null || (value && ALLOW_IMAGE_FILE.includes(value.type)),
-  );
+  .required('File is a required field to upload cover image...')
+  .test('fileFormat', 'Unsupported file type', (value) => {
+    return value && ALLOW_IMAGE_FILE.includes(value.type);
+  })
+  .test('fileSize', 'File too large', (value) => value && value.size <= 1 * 1024 * 1024);
 
 const eventTitle = yup
   .string()
@@ -71,14 +65,17 @@ const assocId = yup
   .required('Challenge is required please select one...')
   .typeError('Challenge is required please select one...');
 
+const assocName = yup.string().required('Challenge name is required');
+const assocDuration = yup.number().min(1).max(30);
+
 const post = yup
   .string()
-  .max(200, `You can't use more than 280 characters.`)
+  .max(60, `You can't use more than 60 characters.`)
   .required('Post content is required field...');
 
 const comment = yup
   .string()
-  .max(200, `You can't use more than 280 characters.`)
+  .max(280, `You can't use more than 280 characters.`)
   .required('Comment content is required field...');
 
 export {
@@ -98,4 +95,6 @@ export {
   assocId,
   post,
   comment,
+  assocName,
+  assocDuration,
 };

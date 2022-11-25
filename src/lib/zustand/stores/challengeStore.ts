@@ -1,25 +1,20 @@
 import { StateCreator } from 'zustand';
-import {
-  ChallengeAttemptStatsRes,
-  GetChallengeLikesRes,
-  GetChallengeRes,
-} from '../../impakt-dev-api-client/react-query/types';
-
-export type AvailableGroupChallengesTypeI = {
-  challenge: GetChallengeRes;
-  attempts: ChallengeAttemptStatsRes;
-  likes: GetChallengeLikesRes;
-};
-export type AvailableGroupChallengesType = AvailableGroupChallengesTypeI[];
+import { GetChallengeRes, GetRoutineRes } from '../../impakt-dev-api-client/react-query/types';
 
 export interface ChallengeStore {
-  availableGroupChallenges: AvailableGroupChallengesType;
-  setAvailableGroupChallenges: (availableGroupChallenges: AvailableGroupChallengesType) => void;
+  availableGroupChallenges: GetChallengeRes[];
+  availableGroupRoutines: GetRoutineRes[];
+  setAvailableGroupChallenges: (availableGroupChallenges: GetChallengeRes[]) => void;
+  setAvailableGroupRoutines: (availableGroupRoutines: GetRoutineRes[]) => void;
 }
 
 export const challengeStore: StateCreator<ChallengeStore> = (set) => ({
   availableGroupChallenges: [],
+  availableGroupRoutines: [],
   setAvailableGroupChallenges: (availableGroupChallenges) => {
     set({ availableGroupChallenges });
+  },
+  setAvailableGroupRoutines: (availableGroupRoutines) => {
+    set({ availableGroupRoutines });
   },
 });

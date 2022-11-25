@@ -15,6 +15,7 @@ const EventCalendar: React.FC = () => {
       transform="translateY(20px)"
       borderRadius="10px"
       marginTop="10px"
+      boxShadow="0px 10px 10px -5px rgba(0, 6, 14, 0.08), 0px 20px 25px -5px rgba(0, 6, 14, 0.14);"
     >
       <CalendarDays />
       <Box

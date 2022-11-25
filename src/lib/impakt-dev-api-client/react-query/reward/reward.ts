@@ -4,8 +4,15 @@
  * Impakt API
  * OpenAPI spec version: 1.0.0
  */
-import { useMutation } from '@tanstack/react-query';
-import type { UseMutationOptions, MutationFunction } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import type {
+  UseQueryOptions,
+  UseMutationOptions,
+  QueryFunction,
+  MutationFunction,
+  UseQueryResult,
+  QueryKey,
+} from '@tanstack/react-query';
 import type { CreateTeamRewardDTO } from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
@@ -17,6 +24,50 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
 ) => any
   ? P
   : never;
+
+export const rewardTeamV1ControllerGetTeamReward = (
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<void>({ url: `/api/vv1/reward-team`, method: 'get', signal }, options);
+};
+
+export const getRewardTeamV1ControllerGetTeamRewardQueryKey = () => [`/api/vv1/reward-team`];
+
+export type RewardTeamV1ControllerGetTeamRewardQueryResult = NonNullable<
+  Awaited<ReturnType<typeof rewardTeamV1ControllerGetTeamReward>>
+>;
+export type RewardTeamV1ControllerGetTeamRewardQueryError = ErrorType<unknown>;
+
+export const useRewardTeamV1ControllerGetTeamReward = <
+  TData = Awaited<ReturnType<typeof rewardTeamV1ControllerGetTeamReward>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof rewardTeamV1ControllerGetTeamReward>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getRewardTeamV1ControllerGetTeamRewardQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof rewardTeamV1ControllerGetTeamReward>>> = ({
+    signal,
+  }) => rewardTeamV1ControllerGetTeamReward(requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof rewardTeamV1ControllerGetTeamReward>>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
 
 export const rewardTeamV1ControllerCreateTeamReward = (
   createTeamRewardDTO: CreateTeamRewardDTO,

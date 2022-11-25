@@ -136,8 +136,9 @@ const IconsCard = ({
             >
               {subtitle && subtitle.length > 0 ? (
                 <UnorderedList px="10px" type="dot">
-                  {subtitle.map((titleItem: string) => (
-                    <ListItem color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
+                  {subtitle.map((titleItem: string, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <ListItem key={index} color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
                       {titleItem}
                     </ListItem>
                   ))}

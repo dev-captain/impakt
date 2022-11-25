@@ -113,10 +113,12 @@ const Images = {
   group: {
     img: require('./group/img.png'),
     ellipse: require('./group/Ellipse.png'),
-    cover: require('./group/cover.png'),
+    defaultThumbnail: require('./group/group-thumbnail-default.jpg'),
+    defaultCoverImage: require('./group/group-thumbnail-original.jpg'),
     group: require('./group/group.jpg'),
     upload: require('./group/Upload.png'),
     logo: require('./group/logo.png'),
+    challengeBanner: require('./group/col.png'),
   },
   evolving: {
     evolving: require('./evolving.png'),

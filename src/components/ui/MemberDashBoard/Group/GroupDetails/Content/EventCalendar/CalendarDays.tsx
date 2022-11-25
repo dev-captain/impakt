@@ -14,6 +14,7 @@ const CalendarDays: React.FC = () => {
     moveToPreviousMonth,
     getStartDayOfCurrentMonth,
     setSelectedDay,
+    goToOverViewScreen,
   } = useEventCalendarContext();
 
   return (
@@ -39,7 +40,10 @@ const CalendarDays: React.FC = () => {
             boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
             borderRadius=" 8px"
             cursor=" pointer"
-            onClick={moveToPreviousMonth}
+            onClick={() => {
+              moveToPreviousMonth();
+              goToOverViewScreen('empty');
+            }}
           />
           <Box>{[getCurrentMonthLabel(), getCurrentYear()].join(' ')}</Box>
           <ChevronRightIcon
@@ -49,7 +53,10 @@ const CalendarDays: React.FC = () => {
             boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
             borderRadius=" 8px"
             cursor=" pointer"
-            onClick={moveToNextMonth}
+            onClick={() => {
+              moveToNextMonth();
+              goToOverViewScreen('empty');
+            }}
           />
         </Box>
         <DayNames />
@@ -76,7 +83,19 @@ const CalendarDays: React.FC = () => {
               dayNumber={day.dayOfMonth}
               eventsCounts={day.events.length}
               dote={day.events.length <= 3 ? '.'.repeat(day.events.length) : '...'}
-              selectDay={() => setSelectedDay(day)} // selectedDay
+              selectDay={
+                !day.currentMonth
+                  ? () => {
+                      if (day.month > getDaysOfCurrentMonth()[15].month) {
+                        moveToNextMonth();
+                      }
+                      if (day.month < getDaysOfCurrentMonth()[15].month) {
+                        moveToPreviousMonth();
+                      }
+                      setSelectedDay(day);
+                    }
+                  : () => setSelectedDay(day)
+              } // selectedDay
             />
           ))}
         </>

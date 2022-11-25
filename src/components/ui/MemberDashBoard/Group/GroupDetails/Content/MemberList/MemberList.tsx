@@ -196,14 +196,18 @@ const MemberList: React.FC = () => {
                   marginTop="16px"
                 >
                   <Box display="flex" alignItems="center">
-                    <Avatar name={User.firstName ?? User.username} width="32px" height="32px" />
+                    <Avatar
+                      name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                      width="32px"
+                      height="32px"
+                    />
                     <Text
                       color="#4E6070"
                       fontSize={{ lgx: '18px', md: '14px' }}
                       fontWeight="500"
                       marginLeft="16px"
                     >
-                      {User.firstName ?? User.username}
+                      {User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
                     </Text>
                   </Box>
 

@@ -13,11 +13,9 @@ const useForm = <TFieldValues extends FieldValues = FieldValues, TContext = any>
   props?: UseFormProps<TFieldValues, TContext>,
 ): Omit<
   UseFormReturn<TFieldValues, TContext>,
-  | 'watch'
   | 'getFieldState'
   | 'setError'
   | 'clearErrors'
-  | 'trigger'
   | 'formState'
   | 'resetField'
   | 'unregister'
@@ -27,11 +25,13 @@ const useForm = <TFieldValues extends FieldValues = FieldValues, TContext = any>
 > & {
   errors: DeepMap<DeepPartial<TFieldValues>, FieldError>;
   isDirty: boolean;
+  isValid: boolean;
 } => {
   const formReturn = useReactHookForm(props);
 
   const {
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, isValid },
+    trigger,
     register,
     setValue,
     ...rest
@@ -42,7 +42,7 @@ const useForm = <TFieldValues extends FieldValues = FieldValues, TContext = any>
     Object.keys(props.defaultValues).forEach((field) => register(field as any));
   }, []);
 
-  return { ...rest, errors, isDirty, setValue };
+  return { ...rest, errors, isDirty, isValid, setValue, trigger };
 };
 
 export default useForm;
