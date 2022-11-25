@@ -652,6 +652,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
               </Box>
               <Box>
                 <Common.ImpaktButton
+                  as="a"
+                  href="impakt://"
                   _hover={{ background: '' }}
                   _selected={{ background: '' }}
                   _focus={{ background: '' }}
