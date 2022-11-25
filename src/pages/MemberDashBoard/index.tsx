@@ -161,7 +161,17 @@ const MemberDashboard: React.FC = () => {
 
   React.useEffect(() => {
     if (fetchExploreGroups.isFetchedAfterMount && fetchExploreGroups.isSuccess) {
-      groupsStore.setExploreGroups(fetchExploreGroups.data);
+      const sortByAlphabetExploreGroups = fetchExploreGroups.data.sort((a, b) => {
+        if (a.groupName.toUpperCase() < b.groupName.toUpperCase()) {
+          return -1;
+        }
+        if (a.groupName.toUpperCase() > b.groupName.toUpperCase()) {
+          return 1;
+        }
+
+        return 0;
+      });
+      groupsStore.setExploreGroups(sortByAlphabetExploreGroups);
     }
   }, [fetchExploreGroups.isFetchedAfterMount]);
 
