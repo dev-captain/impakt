@@ -274,6 +274,7 @@ const useFetchAvailableChallenges = () => {
       validOnly: true,
       Routine: true,
       creatorId: admin.User.id,
+      Creator: true,
     });
 
     const groupAdminRoutines = await routinesControllerGetRoutines({

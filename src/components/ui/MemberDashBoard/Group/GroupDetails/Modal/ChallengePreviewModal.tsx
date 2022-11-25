@@ -329,8 +329,9 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   </Text>
                 </Box>
                 <Box background="#F5F8FA" borderRadius="1em" w="full">
-                  {exercices.map(({ Exercise, type, TimelineBlockAttributes }, index) => (
+                  {exercices.map(({ id, Exercise, type, TimelineBlockAttributes }, index) => (
                     <ChallengePreviewItemCard
+                      key={id}
                       exerciseName={convertToPascalCase(Exercise?.name ?? '') ?? ''}
                       exerciseType={type}
                       timeLineBlockType={TimelineBlockAttributes[0]?.type}
@@ -360,8 +361,9 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 </Box>
                 <VStack w="full">
                   {leaderboard.length === 0 && <Text color="gray.300">No record yet...</Text>}
-                  {leaderboard.map(({ username, userScore }, index) => (
+                  {leaderboard.map(({ id, username, userScore }, index) => (
                     <HStack
+                      key={id}
                       // eslint-disable-next-line no-nested-ternary
                       mt={index === 0 ? '0' : index === 3 ? '16px !important' : '8px !important'}
                       w="full"

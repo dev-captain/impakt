@@ -12,7 +12,12 @@ const FitnestJourneyCardWrapper: React.FC = () => {
       mt="40px"
     >
       {journeyData.map((data) => (
-        <FitnessJourneyCard img={data.img} title={data.title} description={data.description} />
+        <FitnessJourneyCard
+          key={`item-${data.title}`}
+          img={data.img}
+          title={data.title}
+          description={data.description}
+        />
       ))}
     </Box>
   );

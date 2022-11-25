@@ -570,6 +570,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                       {[1, 3, 7, 14, 30].map((value) => (
                         <Button
                           _focus={{ border: 0 }}
+                          key={`button-${value}`}
                           minW="48px"
                           padding="8px"
                           bgColor="#EEF4F6"

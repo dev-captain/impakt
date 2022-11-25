@@ -7,6 +7,7 @@
 import type { TagRes } from './tagRes';
 import type { GetRoutineRes } from './getRoutineRes';
 import type { GetRoutineToChallengeRes } from './getRoutineToChallengeRes';
+import type { GetUserRes } from './getUserRes';
 
 export interface GetChallengeRes {
   id: number;
@@ -31,4 +32,6 @@ export interface GetChallengeRes {
    * @deprecated
    */
   RoutinesToChallenges: GetRoutineToChallengeRes[];
+  /** available only with Get methods */
+  Creator?: GetUserRes;
 }

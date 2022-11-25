@@ -33,7 +33,7 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
   : never;
 
 export const challengesControllerGetMany = (
-  params?: ChallengesControllerGetManyParams,
+  params: ChallengesControllerGetManyParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
@@ -44,7 +44,7 @@ export const challengesControllerGetMany = (
 };
 
 export const getChallengesControllerGetManyQueryKey = (
-  params?: ChallengesControllerGetManyParams,
+  params: ChallengesControllerGetManyParams,
 ) => [`/api/v1/fitness/challenges`, ...(params ? [params] : [])];
 
 export type ChallengesControllerGetManyQueryResult = NonNullable<
@@ -56,7 +56,7 @@ export const useChallengesControllerGetMany = <
   TData = Awaited<ReturnType<typeof challengesControllerGetMany>>,
   TError = ErrorType<HttpExceptionSchema>,
 >(
-  params?: ChallengesControllerGetManyParams,
+  params: ChallengesControllerGetManyParams,
   options?: {
     query?: UseQueryOptions<Awaited<ReturnType<typeof challengesControllerGetMany>>, TError, TData>;
     request?: SecondParameter<typeof customInstance>;
