@@ -150,7 +150,7 @@ const GroupLabels: React.FC = () => {
           // eslint-disable-next-line no-nested-ternary
           deepLinkToPlay: isMobile
             ? `impakt://challenge?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`
-            : process.env.NODE_ENV === 'production'
+            : process.env.REACT_APP_NODE_ENV === 'production'
             ? `https://fitness.impakt.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`
             : `https://fitness.impakt-dev.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
           exercices: normalizeExerciseNames(activeChallenge?.Routine?.TimelineBlocks ?? []),
