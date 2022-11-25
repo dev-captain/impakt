@@ -104,20 +104,6 @@ const CollapseSidebar = () => {
               <I.DashboardIcon cursor="pointer" width="26px" height="23px" color="#000" />
             </SidebarLinkItem>
           </MenuItem>
-          <MenuItem
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-          >
-            <SidebarLinkItem
-              hide
-              href="referrals"
-              title="Referrals"
-              isActive={path.pathname === '/dashboard/referrals'}
-              collaps
-            >
-              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#000" />
-            </SidebarLinkItem>
-          </MenuItem>
 
           <MenuItem
             _active={{ backgroundColor: 'transparent' }}
@@ -131,6 +117,21 @@ const CollapseSidebar = () => {
               collaps
             >
               <I.PeopleIcon cursor="pointer" width="32px" height="32px" color="#000" />
+            </SidebarLinkItem>
+          </MenuItem>
+
+          <MenuItem
+            _active={{ backgroundColor: 'transparent' }}
+            _focus={{ backgroundColor: 'transparent' }}
+          >
+            <SidebarLinkItem
+              hide
+              href="referrals"
+              title="Referrals"
+              isActive={path.pathname === '/dashboard/referrals'}
+              collaps
+            >
+              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#000" />
             </SidebarLinkItem>
           </MenuItem>
           {/* <MenuItem
