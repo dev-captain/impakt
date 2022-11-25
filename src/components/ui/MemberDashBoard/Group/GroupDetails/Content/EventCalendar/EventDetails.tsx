@@ -16,7 +16,7 @@ const EventDetails: React.FC = () => {
   // const navigate = useNavigate();
   const { activeGroup } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
-  const isAdmin = role === 'Creator';
+  const isAdmin = role === 'Creator' || role === 'Moderator';
   // const toast = useToast();
 
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =

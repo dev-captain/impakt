@@ -290,79 +290,32 @@ export const useGroupsMemberControllerV1LeaveGroup = <
   >(mutationFn, mutationOptions);
 };
 
-export const groupsMemberControllerV1AddModerator = (
+export const groupsMemberControllerV1AssignRole = (
   groupId: number,
   userId: number,
+  role: string,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<boolean>(
-    { url: `/api/v1/groups/${groupId}/add-moderator/${userId}`, method: 'post' },
+    { url: `/api/v1/groups/${groupId}/assign-role/${userId}?role=${role}`, method: 'patch' },
     options,
   );
 };
 
-export type GroupsMemberControllerV1AddModeratorMutationResult = NonNullable<
-  Awaited<ReturnType<typeof useGroupsMemberControllerV1AddModerator>>
->;
-
-export type GroupsMemberControllerV1AddModeratorError = ErrorType<HttpExceptionSchema>;
-
-export const useGroupsMemberControllerV1AddModerator = <
-  TError = ErrorType<HttpExceptionSchema>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof groupsMemberControllerV1AddModerator>>,
-    TError,
-    { groupId: number; userId: number },
-    TContext
-  >;
-  request?: SecondParameter<typeof customInstance>;
-}) => {
-  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof groupsMemberControllerV1AddModerator>>,
-    { groupId: number; userId: number }
-  > = (props) => {
-    const { groupId, userId } = props ?? {};
-
-    return groupsMemberControllerV1AddModerator(groupId, userId, requestOptions);
-  };
-
-  return useMutation<
-    Awaited<ReturnType<typeof groupsMemberControllerV1AddModerator>>,
-    TError,
-    { groupId: number; userId: number },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-
-export const groupsMemberControllerV1RemoveModerator = (
-  groupId: number,
-  userId: number,
-  options?: SecondParameter<typeof customInstance>,
-) => {
-  return customInstance<boolean>(
-    { url: `/api/v1/groups/${groupId}/remove-moderator/${userId}`, method: 'post' },
-    options,
-  );
-};
-
-export type GroupsMemberControllerV1RemoveModeratorMutationResult = NonNullable<
-  Awaited<ReturnType<typeof useGroupsMemberControllerV1RemoveModerator>>
+export type GroupsMemberControllerV1AssignRoleMutationResult = NonNullable<
+  Awaited<ReturnType<typeof useGroupsMemberControllerV1AssignRole>>
 >;
 
 export type GroupsMemberControllerV1RemoveModeratorError = ErrorType<HttpExceptionSchema>;
 
-export const useGroupsMemberControllerV1RemoveModerator = <
+export const useGroupsMemberControllerV1AssignRole = <
   TError = ErrorType<HttpExceptionSchema>,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof groupsMemberControllerV1RemoveModerator>>,
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignRole>>,
     TError,
-    { groupId: number; userId: number },
+    { groupId: number; userId: number; role: string },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -370,18 +323,18 @@ export const useGroupsMemberControllerV1RemoveModerator = <
   const { mutation: mutationOptions, request: requestOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof groupsMemberControllerV1RemoveModerator>>,
-    { groupId: number; userId: number }
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignRole>>,
+    { groupId: number; userId: number; role: string }
   > = (props) => {
-    const { groupId, userId } = props ?? {};
+    const { groupId, userId, role } = props ?? {};
 
-    return groupsMemberControllerV1RemoveModerator(groupId, userId, requestOptions);
+    return groupsMemberControllerV1AssignRole(groupId, userId, role, requestOptions);
   };
 
   return useMutation<
-    Awaited<ReturnType<typeof groupsMemberControllerV1RemoveModerator>>,
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignRole>>,
     TError,
-    { groupId: number; userId: number },
+    { groupId: number; userId: number; role: string },
     TContext
   >(mutationFn, mutationOptions);
 };

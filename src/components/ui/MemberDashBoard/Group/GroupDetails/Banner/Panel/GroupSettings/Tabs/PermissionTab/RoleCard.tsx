@@ -9,10 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputGroupPropsI } from '../../../../../../../../../common/InputGroup';
 import createGroupYupScheme from '../../../../../../../../../../lib/yup/schemas/createGroupYupScheme';
 import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
-import {
-  useGroupsMemberControllerV1AddModerator,
-  useGroupsMemberControllerV1RemoveModerator,
-} from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { useGroupsMemberControllerV1AssignRole } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../../../../../utils';
 import ConfirmationModal from './ConfirmationModal';
 
@@ -26,8 +23,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     defaultValues: { username: '' },
   });
 
-  const assignAsModerator = useGroupsMemberControllerV1AddModerator();
-  const removeFromModerator = useGroupsMemberControllerV1RemoveModerator();
+  const assignRole = useGroupsMemberControllerV1AssignRole();
   const { activeGroup, setMyGroups, myGroups, membersOfGroup } = usePersistedGroupStore();
   const [members, setMembers] = useState(membersOfGroup?.Members ?? []);
   const [searchedMembers, setSearchedMembers] = useState<Array<any>>([]);
@@ -59,10 +55,11 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
 
   const handleOnAssignModerator = async (userId) => {
     if (!activeGroup?.id) return;
-    assignAsModerator.mutate(
+    assignRole.mutate(
       {
         groupId: Number(groupParam?.id),
         userId: Number(userId),
+        role: 'Moderator',
       },
       {
         onSuccess: () => {
@@ -92,10 +89,11 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   const handleOnRemoveModerator = async (userId) => {
     onClose();
     if (!activeGroup?.id) return;
-    removeFromModerator.mutate(
+    assignRole.mutate(
       {
         groupId: Number(groupParam?.id),
         userId: Number(userId),
+        role: 'Member',
       },
       {
         onSuccess: () => {
