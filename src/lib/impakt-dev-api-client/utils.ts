@@ -11,6 +11,7 @@ export const getDefaultQueryOptions = <T>() => {
 
   query.refetchOnWindowFocus = false;
   query.refetchOnMount = true;
+  query.retry = 2;
 
   return query;
 };

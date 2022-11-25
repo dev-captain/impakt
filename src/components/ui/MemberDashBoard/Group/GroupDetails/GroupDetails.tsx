@@ -45,8 +45,7 @@ const GroupDetails: React.FC = () => {
     query: {
       ...getDefaultQueryOptions(),
       refetchOnMount: true,
-      retry: true,
-      retryDelay: 5,
+      retry: 0,
       staleTime: 0,
       cacheTime: 0,
     },
@@ -59,9 +58,9 @@ const GroupDetails: React.FC = () => {
       query: {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
-        retry: true,
         staleTime: 0,
         cacheTime: 0,
+        enabled: fetchGroupDetailById.isSuccess,
       },
     },
   );
@@ -72,9 +71,9 @@ const GroupDetails: React.FC = () => {
       query: {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
-        retry: true,
         staleTime: 0,
         cacheTime: 0,
+        enabled: fetchGroupDetailById.isSuccess,
       },
     },
   );
@@ -84,10 +83,7 @@ const GroupDetails: React.FC = () => {
     {
       query: {
         ...getDefaultQueryOptions(),
-        refetchOnMount: true,
-        retry: true,
-        staleTime: 0,
-        cacheTime: 0,
+        enabled: fetchGroupDetailById.isSuccess,
       },
     },
   );
@@ -100,9 +96,9 @@ const GroupDetails: React.FC = () => {
       query: {
         ...getDefaultQueryOptions(),
         refetchOnMount: true,
-        retry: true,
         staleTime: 0,
         cacheTime: 0,
+        enabled: fetchGroupDetailById.isSuccess,
       },
     },
   );
@@ -112,6 +108,16 @@ const GroupDetails: React.FC = () => {
   // const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
 
   const getActiveGroup = () => {
+    if (fetchGroupDetailById.isError) {
+      if (fetchGroupDetailById.error.response?.status === 404) {
+        setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
+      } else {
+        setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
+      }
+
+      return;
+    }
+
     if (fetchGroupDetailById.isFetched) {
       if (fetchGroupDetailById.isSuccess) {
         if (isJoin && groupParam.eventId) {
@@ -130,7 +136,7 @@ const GroupDetails: React.FC = () => {
 
   const getRole = () => {
     if (fetchAmIMemberOfGroup.isFetched) {
-      if (fetchAmIMemberOfGroup.isSuccess && fetchAmIMemberOfGroup.data) {
+      if (fetchAmIMemberOfGroup.isSuccess) {
         if (fetchGroupRoleById.isFetched) {
           if (fetchGroupRoleById.isSuccess) {
             setRole(fetchGroupRoleById.data.role);
@@ -212,21 +218,13 @@ const GroupDetails: React.FC = () => {
     return () => setActiveGroup(null);
   }, []);
 
-  React.useEffect(() => {
-    if (fetchGroupDetailById.isError) {
-      if (fetchGroupDetailById.error.response?.status === 404) {
-        setIsNotFound('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
-      } else {
-        setIsNotFound('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
-      }
-    }
-  }, [fetchGroupDetailById.isError]);
+  React.useEffect(() => {}, [fetchGroupDetailById.isError]);
 
   React.useEffect(() => {
-    if (fetchGroupRoleById.isError) {
+    if (fetchGroupRoleById.isError || fetchAmIMemberOfGroup.isError) {
       setRole('None');
     }
-  }, [fetchGroupRoleById.isError]);
+  }, [fetchGroupRoleById.isError, fetchAmIMemberOfGroup.isError]);
 
   // React.useEffect(() => {
   //   const showTip = localStorage.getItem('showTip');
@@ -247,7 +245,7 @@ const GroupDetails: React.FC = () => {
       </Text>
     );
 
-  if (fetchGroupDetailById.isLoading || fetchGroupDetailById.isRefetching) return null;
+  if (fetchGroupDetailById.isLoading) return null;
 
   return (
     <Box w="full" as="section" id="general-section">
