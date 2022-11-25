@@ -290,6 +290,10 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
             <HStack ml="0 !important">
               <Common.ImpaktButton
                 as="a"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location = deepLinkToPlay as any;
+                }}
                 href={deepLinkToPlay}
                 _hover={{ background: '' }}
                 _selected={{ background: '' }}
