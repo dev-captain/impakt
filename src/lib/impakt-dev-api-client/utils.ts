@@ -10,8 +10,8 @@ export const getDefaultQueryOptions = <T>() => {
   const query: UseQueryOptions<T, ErrorType<HttpExceptionSchema>, T, QueryKey> = {};
 
   query.refetchOnWindowFocus = false;
-  query.refetchOnMount = true;
-  query.retry = 2;
+  query.refetchOnMount = false;
+  query.retry = 0;
 
   return query;
 };

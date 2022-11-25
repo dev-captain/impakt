@@ -94,6 +94,7 @@ export const usePersistedGroupStore = create<GroupsSlice>()(
       serialize: (state) => JSON.stringify(state),
       deserialize: (str) => JSON.parse(str),
       getStorage: () => localStorage,
+      partialize: (state) => ({ ...state, activeGroup: null }),
     },
   ),
 );
