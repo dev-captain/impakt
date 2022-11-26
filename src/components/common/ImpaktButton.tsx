@@ -1,10 +1,18 @@
 import { As, Button, ButtonProps, forwardRef } from '@chakra-ui/react';
 import * as React from 'react';
 
+type ImpaktButtonVariantType =
+  | 'primary'
+  | 'secondary'
+  | 'alert'
+  | 'white'
+  | 'black'
+  | 'transparent';
+
 interface ImpaktButtonProps {
   size?: 'sm' | 'lg';
   as?: As<any>;
-  variant?: 'primary' | 'secondary' | 'alert';
+  variant?: ImpaktButtonVariantType;
   leftIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   href?: string;
@@ -24,6 +32,7 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
       color={textColor}
       _hover={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
       transition="all .2s linear"
+      cursor="pointer"
       px="20px"
       fontWeight="500"
       bg={bgColor}
@@ -41,7 +50,7 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
   );
 });
 
-const getBgColor = (variant?: 'primary' | 'alert' | 'secondary') => {
+const getBgColor = (variant?: ImpaktButtonVariantType) => {
   if (variant === 'primary') {
     return 'accentRed2';
   }
@@ -52,10 +61,22 @@ const getBgColor = (variant?: 'primary' | 'alert' | 'secondary') => {
     return 'rgba(240, 65, 83, 0.12)';
   }
 
+  if (variant === 'white') {
+    return 'rgba(255,255,255,1)';
+  }
+
+  if (variant === 'black') {
+    return '#1C1C28';
+  }
+
+  if (variant === 'transparent') {
+    return 'transparent';
+  }
+
   return 'accentRed2';
 };
 
-const getTextColor = (variant?: 'primary' | 'alert' | 'secondary') => {
+const getTextColor = (variant?: ImpaktButtonVariantType) => {
   if (variant === 'primary') {
     return 'rgba(255, 255, 255, 1)';
   }
@@ -64,6 +85,18 @@ const getTextColor = (variant?: 'primary' | 'alert' | 'secondary') => {
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 1)';
+  }
+
+  if (variant === 'white') {
+    return 'fitnessGray';
+  }
+
+  if (variant === 'black') {
+    return '#fff';
+  }
+
+  if (variant === 'transparent') {
+    return '#000';
   }
 
   return 'rgba(255, 255, 255, 1)';

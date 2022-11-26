@@ -1,6 +1,5 @@
 export { default as Blog } from './Blog';
 export { default as Home } from './Home';
-export { default as KnowledgeBase } from './KnowledgeBase';
 export { default as NotFound } from './NotFound';
 export { default as Event } from './Event';
 export { default as Contact } from './Contact';
@@ -14,4 +13,5 @@ export { default as SignUp } from './SignUp/SignUp';
 export { default as SignIn } from './SignIn/SignIn';
 export { default as MemberDashboard } from './MemberDashBoard';
 export { default as NFT } from './NFT';
+export { default as Whitelist } from './Whitelist';
 export { default as Landing } from './Landing';

@@ -1,11 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'i18n';
-import { useEffect } from 'react';
-import { useColorMode } from '@chakra-ui/react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import {
   // Home,
-  KnowledgeBase,
   NotFound,
   Event,
   Contact,
@@ -17,35 +13,18 @@ import {
   SignUp,
   SignIn,
   MemberDashboard,
-  // NFT,
+  NFT,
   TermsOfUse,
+  Whitelist,
   Landing,
 } from 'pages';
 import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
+import ErrorBoundary from './components/common/ErrorBoundary';
+// import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 
 const App = () => {
-  const { setColorMode } = useColorMode();
-  const location = useLocation();
-
-  const onRouteChanged = () => {
-    // force overflow unset if it's hidden on other then / page
-    if (location.pathname !== '/') {
-      if (document.body.style.overflow === 'hidden') {
-        document.body.style.overflow = 'unset';
-      }
-    }
-  };
-
-  useEffect(() => {
-    onRouteChanged();
-  }, [location]);
-
-  useEffect(() => {
-    setColorMode('light');
-  }, [setColorMode]);
-
   return (
     <Routes>
       <Route
@@ -56,9 +35,6 @@ const App = () => {
           </Common.ScrollToTop>
         }
       />
-      <Route path="/knowledge-base" element={<KnowledgeBase />}>
-        <Route path=":article" element={<KnowledgeBase />} />
-      </Route>
 
       <Route path="/events" element={<Event />}>
         <Route path=":slug" element={<Event />} />
@@ -78,21 +54,42 @@ const App = () => {
 
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
-      {/* <Route path="/nft" element={<NFT />} /> */}
-      <Route path="/terms-of-use" element={<TermsOfUse />} />
+      <Route path="/nft" element={<NFT />} />
+      <Route path="/whitelist" element={<Whitelist />} />
+      <Route
+        path="/terms-of-use"
+        element={
+          <Common.ScrollToTop>
+            <TermsOfUse />
+          </Common.ScrollToTop>
+        }
+      />
 
       <Route
         path="dashboard"
         element={
           <Authentication>
-            <MemberDashboard />
+            <ErrorBoundary>
+              <MemberDashboard />
+            </ErrorBoundary>
           </Authentication>
         }
       >
         <Route path="" element={<S.General />} />
         <Route path="referrals" element={<S.Referrals />} />
-        {/* <Route path="reward-history" element={<S.RewardHistory />} /> */}
-        {/* <Route path="statistics" element={<S.Statistics />} /> */}
+        <Route path="groups">
+          <Route path="" element={<S.Group />} />
+          {/* <Route path="create-group" element={<S.CreateGroup isStandalone />} /> */}
+          <Route path="group">
+            <Route path=":id" element={<S.GroupDetail />}>
+              <Route path="event/:eventId" />
+              <Route path="post/:postId" />
+              <Route path="event/:eventId/join" />
+            </Route>
+          </Route>
+        </Route>
+        <Route path="reward-history" element={<S.RewardHistory />} />
+        <Route path="statistics" element={<S.Statistics />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

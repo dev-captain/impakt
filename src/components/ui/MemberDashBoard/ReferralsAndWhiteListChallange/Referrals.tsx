@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 
 import { VStack, Box, Text } from '@chakra-ui/react';
-import { useAppSelector } from 'hooks';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
+import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 const Referrals: React.FC = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
   const { t } = useTranslation().i18n;
 
   return (

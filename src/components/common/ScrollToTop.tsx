@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const ScrollToTop: React.FC = ({ children }) => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
   // eslint-disable-next-line react/jsx-no-useless-fragment

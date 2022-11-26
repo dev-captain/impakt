@@ -14,7 +14,7 @@ export default {
     squats: 'SQUATS',
     body: 'Fitness is for all.',
     body1:
-      'The Impakt App your phone or your webcam. That`s all you need to enter the Impakt world. No expensive equipment, no payments required. Our body motion tracking technology takes care of everything.',
+      "The Impakt App, your phone, or your webcam. That's all you need to enter the Impakt world. No expensive equipment, no payment required. Our body motion tracking technology takes care of everything.",
     evolving: 'I am always evolving.',
     evolvingMsg:
       'Faster, stronger, healthier. All these benefits will be reflected by our avatars. Obtainable from challenges or acquirable via Koin, our avatar cosmetics reflect our fitness journey.',
@@ -26,7 +26,7 @@ export default {
       'Fitness experts, health specialists, and pro athletes. They are our Impakt ICONs and we are honored to have them on board our journey!',
     impaktTeamTitle: 'The Impakt team',
     impaktTeamDescription:
-      'We`re proud to have each and every member on board. A perfect mix of cultures, experiences and abilities.',
+      "We' re proud  to have each and every member on board. A perfect mix of cultures, experiences and abilities.",
     privacyTitle: 'Privacy.',
     privacyTitle1: 'I choose how',
     privacyTitle2: 'the world sees me.',
@@ -54,6 +54,7 @@ export default {
     help: 'Help',
     signIn: 'Sign In',
     termsOfUse: 'Terms of Use',
+    notification: 'Notifications',
   },
   computerVision: {
     computerVision: 'COMPUTER VISION',
@@ -132,9 +133,13 @@ export default {
           '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.',
         subtitle1:
           'Previous 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
-        twitterLink: 'https://twitter.com/demideuszin',
-        linkedInLink: '',
-        facebookLink: '',
+
+        socialMedia: [
+          {
+            platform: 'Twitter',
+            href: 'https://twitter.com/demideuszin',
+          },
+        ],
       },
       {
         name: 'Valtec',
@@ -144,9 +149,13 @@ export default {
         subtitle: ' <span style="color:#FFF;">10+ years</span> of building technology companies.',
         subtitle1:
           'Previous roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
-        twitterLink: 'https://twitter.com/shabamanation?s=21&t=WPEL7jC2IhTtV1U-9I-_Kw',
-        linkedInLink: 'https://www.linkedin.com/in/john-keh',
-        facebookLink: '',
+        socialMedia: [
+          {
+            platform: 'Twitter',
+            href: 'https://twitter.com/shabamanation?s=21&t=WPEL7jC2IhTtV1U-9I-_Kw',
+          },
+          { platform: 'LinkedIn', href: 'https://www.linkedin.com/in/john-keh' },
+        ],
       },
       {
         name: 'Dahaka',
@@ -157,9 +166,6 @@ export default {
           ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.',
         subtitle1:
           'Managing a team of <span style="color:#FFF;">20+</span> engineers & product managers',
-        twitterLink: '',
-        linkedInLink: '',
-        facebookLink: '',
       },
     ],
   },
@@ -229,10 +235,17 @@ export default {
     q4_1: 'Develop Computer Vision System',
     q1_1: 'Alpha Test App',
     q1_2: 'Daily/Weekly Routines',
-    q1_3: 'Centralized Economy',
-    q2_1: 'Genesis NFT Mint',
-    q2_2: 'Decentralized Economy',
-    q3_1: 'Release SDK',
+    q1_3: 'Community Outreach',
+    q1_4: 'Whitelist Opens',
+    q2_1: 'Beta Test App ',
+    q2_2: 'iOS Mobile App',
+    q2_3: 'Athlete Partnerships',
+    q2_4: 'Movement Controlled Avatar',
+    q3_1: 'IDO',
+    q3_2: 'Genesis NFT Mint',
+    q3_3: 'Minigames',
+    q3_4: 'Tournaments',
+    q3_5: 'Marketplace',
   },
   contactUs: {
     us: 'Us',
@@ -306,7 +319,7 @@ export default {
       headline: 'Referrals',
       subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">1000 Koin</strong> and they receive <strong style="color:#FEC417">5000 Koin</strong>.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#4E6070">1000 Koin</strong> and they receive <strong style="color:#4E6070">5000 Koin</strong>.',
       subDescription:
         'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
       discription_list1: 'WLs',
@@ -337,6 +350,12 @@ export default {
       koin: 'Koins',
     },
   },
+  NFTGeneral: {
+    title: 'NFT Designed in Partnership with an Oscar Winner.',
+    subTitle: 'A Dynamic NFT.',
+    howToWhiteList: 'How to Whitelist?',
+    cardInfo: 'Our AI technology recognizes your gestures & movements in real time',
+  },
   NFTGenesis: {
     Title: 'Impakt Genesis NFT',
     description:
@@ -362,6 +381,46 @@ export default {
       },
     ],
   },
+  DynamicNFT: {
+    title: 'A Dynamic NFT?',
+    description:
+      'How will this work with Impakt Genesis? Simple, the highest rarities like Platinum, Diamond and Legend, can only be obtained by exercising daily! Hoping for a high rarity at reveal won&apos;t help. You&apos;ll have to sweat for it!',
+    cardInfo: 'More sweat, higher rarity!',
+    plans: [
+      {
+        title: 'GOLD',
+        image: Images.nft.gold,
+        imageThumb: Images.nft.goldThumb,
+        imageRect: Images.nft.goldRect,
+      },
+      {
+        title: 'Silver',
+        image: Images.nft.platinum,
+        imageThumb: Images.nft.platinuThumb,
+        imageRect: Images.nft.platinumRect,
+      },
+      {
+        title: 'Bronze',
+        image: Images.nft.bronze,
+        imageThumb: Images.nft.bronzethumb,
+        imageRect: Images.nft.bronzeRect,
+      },
+    ],
+  },
+  Message: {
+    MyChallengeMsg: {
+      description:
+        'You haven`t created any challenges yet. Download our desktop app and create your first challenge now',
+    },
+    PublicToolTip: {
+      description:
+        '<b>Public:</b><br /><br />Recommended for growing a following.<br />&nbsp;&nbsp;•Anyone can find your group<br />&nbsp;&nbsp;•Anyone can join(no approval needed)<br />&nbsp;&nbsp;•Anyone can view group content<br /><br /><b>Private:</b><br />Recommended for closed circles (e.g. friends, family)<br />&nbsp;•Only group members can view group content<br />&nbsp;&nbsp;•People can only join if you manually accept their join request',
+    },
+    PrivateToolTip: {
+      description:
+        'Only group members can view group content<br />People can only join if you manually accept their join request',
+    },
+  },
   Evolving: {
     // builders: 'IMPAKT BUILDERS',
     Title: 'I am always evolving.',
@@ -382,7 +441,7 @@ export default {
         linkedInLink: '',
         facebookLink: '',
         followers: '1M+ Followers',
-        data: ['UFC Middleweight contender'],
+        data: ['UFC Fighter and Winner of UFC Ultimate Fighter 17'],
       },
       {
         name: 'Matt Fox',
@@ -397,7 +456,7 @@ export default {
         linkedInLink: 'https://www.linkedin.com/in/john-keh',
         facebookLink: '',
         followers: '500k+ Followers',
-        data: ['Fitness Influencer of the Year Nominee (2020)'],
+        data: ['Fitness Influencer of the Year (2020 Nominee)'],
       },
       {
         name: 'Uyen Ha',
@@ -410,64 +469,115 @@ export default {
         linkedInLink: '',
         facebookLink: '',
         followers: '100k+ Followers',
-        data: ['Former Australian National  Team wrestler'],
+        data: ['Australian National Wrestler and Pro MMA Fighter'],
+      },
+      {
+        name: 'Levi Webb',
+        title: 'CTO',
+        image: Images.kelvinImg.photoLevi,
+        alt: '',
+        subtitle: 'ONE Championship fighter',
+        subtitle1: 'Former Australian National  Team wrestler',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '100k+ Followers',
+        data: ["Men's Physique Competitor and Health Chef"],
+      },
+      {
+        name: 'Aaron Burke',
+        title: 'CTO',
+        image: Images.kelvinImg.photoAaron2,
+        alt: '',
+        subtitle: 'ONE Championship fighter',
+        subtitle1: 'Former Australian National  Team wrestler',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '100k+ Followers',
+        data: ['NPC Bodybuilder and Lifestyle Coach'],
       },
     ],
   },
   leadershipData: {
     data: [
       {
-        title: 'Winston',
-        company: 'Zin',
-        fname: 'Demideus',
-        semititle: 'Leadership',
-        // lname: 'Lin',
-        post: 'Founder/CEO',
-        // img: Images.team.demideus,
+        company: 'Impakt',
+        job: 'CEO',
+        fname: 'Winston',
+        lname: 'Zin',
+        img: Images.home.wiston,
       },
       {
-        title: 'Hakim',
-        company: 'Bawa',
-        fname: 'Dahaka',
-        // lname: 'Lin',
-        post: 'Founder/CTO',
-        // img: Images.team.dahaka,
+        company: 'Impakt',
+        job: 'CTO',
+        fname: 'Hakim',
+        lname: 'Bawa',
+        img: Images.home.hakim,
       },
-      // {
-      //   title: 'Hakim',
-      //   company: 'Bawa',
-      //   fname: 'Dahaka',
-      //   post: 'Founder/CTO',
-      //   img: Images.team.dahaka,
-      // },
     ],
   },
   advisorData: {
     data: [
       {
         company: 'Twitch',
-        job: 'Founder /',
+        job: 'Founder of',
         fname: 'Kevin',
         lname: 'Lin',
-        semititle: 'Advisors & Investor',
-        post: 'Impakt Advisor',
-        // img: Images.advisor.kevin,
+        img: Images.advisor.kevin,
       },
       {
         company: 'Netscape',
-        job: 'CTO /',
+        job: 'CTO of',
         fname: 'Tim',
         lname: 'Howes',
-        post: 'Impakt Advisor',
-        // img: Images.advisor.tim,
+        img: Images.advisor.tim,
       },
       {
         company: 'Guitar Hero',
-        job: 'Founder /',
+        job: 'Founder of',
         fname: 'Kai',
         lname: 'Huang',
-        post: 'Impakt Advisor',
-        // img: Images.advisor.kai,
+        img: Images.advisor.kai,
+      },
+      {
+        company: 'UFC',
+        job: 'VP of Athlete Development',
+        fname: 'Forrest',
+        lname: 'Griffin',
+        img: Images.kelvinImg.photoGriffin,
+      },
+      {
+        company: '6 Oscar Nominations',
+        job: 'Oscar Winner in VFX',
+        fname: 'Chris',
+        lname: 'Armsden',
+        img: Images.advisor.chris,
+      },
+    ],
+  },
+  officalPartners: {
+    data: [
+      {
+        company: 'WCFN',
+        job: 'Founder of',
+        fname: 'John',
+        lname: 'Graham',
+        img: Images.partners.john,
+      },
+      // {
+      //   company: 'Nike',
+      //   job: 'Former Athlete',
+      //   fname: 'John',
+      //   lname: 'Graham',
+      //   img: Images.advisor.kai,
+      // },
+      {
+        company: 'Chains.com',
+        job: 'Director APAC of',
+        fname: 'Jeremy',
+        lname: 'Chou',
+        img: Images.partners.jeremy,
       },
     ],
   },

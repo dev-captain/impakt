@@ -1,11 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { ImpaktFooter } from '../ui';
 
 import Footer from './Footer/FooterV1';
-import NewNavbar from './NewNavbar';
+// import NewNavbar from './NewNavbar';
 import Navbar from './Navbar';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -14,6 +14,7 @@ export const HeroLayout: React.FC<{
   bgColor?: string;
   spacing?: number;
   showNavbar?: boolean;
+  showNavbar2?: boolean;
   addSpacer?: boolean;
   pos?: string;
   minH?: string;
@@ -22,9 +23,11 @@ export const HeroLayout: React.FC<{
   backgroundBlendMode?: string;
   showFooter?: boolean;
   showFooterV2?: boolean;
+  customTopPadding?: string | any;
   customPadding?: string | any;
   removeBottomPadding?: boolean;
   bgPosition?: string;
+  background?: string;
   removeTopPadding?: boolean;
   children: React.ReactNode;
   align?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
@@ -43,19 +46,22 @@ export const HeroLayout: React.FC<{
   showNavbar = false,
   addSpacer = false,
   showFooterV2 = false,
+  showNavbar2 = false,
   backgroundSize = 'cover',
   backgroungRepeat,
   backgroundBlendMode,
+  customTopPadding,
   removeTopPadding = false,
   pos,
   bgPosition,
+  background,
 }) => {
   const backgroundColor = useColorModeValue('glass.900', 'glass.200');
-  const location = useLocation();
 
   return (
     <>
-      {showNavbar ? location.pathname === '/' ? <NewNavbar /> : <Navbar /> : ''}
+      {showNavbar && <Navbar />}
+      {showNavbar2 && <Navbar />}
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
         overflowY="visible"
@@ -70,13 +76,14 @@ export const HeroLayout: React.FC<{
           minW="full"
           align={align}
           justify={justify}
+          background={background}
           backgroundSize={backgroundSize}
           backgroundImage={bgImage}
           backgroundColor={bgColor || backgroundColor}
           backgroundPosition={{ base: bgPosition ?? 'top', md: bgPosition ?? 'bottom' }}
           backgroundRepeat={backgroungRepeat}
           backgroundBlendMode={backgroundBlendMode}
-          paddingTop={removeTopPadding ? 0 : '100px'}
+          paddingTop={customTopPadding || { base: removeTopPadding ? '0 !important' : '100px' }}
           paddingBottom={
             customPadding || {
               base: removeBottomPadding ? 0 : '60px',

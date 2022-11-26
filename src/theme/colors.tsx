@@ -12,6 +12,11 @@ export default {
   accentRed2: 'linear-gradient(180deg, #F04153 0%, #F91F35 100%)',
   accentGreen: '#40DC1A',
   accentBlackGradient: 'linear-gradient(150.95deg, #363639 15.07%, #222226 82.14%)',
+  fitnessGray: '#4E6070',
+  fitnessGray2: '#91A8BD',
+  fitnessGray4: '#D3E2F0',
+  fitnessGrayMinus1: '#29323B',
+  fitnessSky: 'rgba(92, 127, 255, 1)',
   bg: {
     dark: '#282A2E',
     light: '#F3F3FB',

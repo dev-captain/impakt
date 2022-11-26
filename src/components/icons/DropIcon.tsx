@@ -9,7 +9,7 @@ const DropIcon = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M4.5 9L12 16.5L19.5 9H4.5Z" fill="white" fillOpacity="0.5" />
+    <path d="M4.5 9L12 16.5L19.5 9H4.5Z" fill="currentColor" fillOpacity="1" />
   </svg>
 );
 

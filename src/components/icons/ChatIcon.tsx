@@ -1,7 +1,7 @@
-import { SVGProps } from 'react';
+import { Icon, IconProps } from '@chakra-ui/react';
 
-const ChatIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
+const ChatIcon = (props: IconProps) => (
+  <Icon
     xmlns="http://www.w3.org/2000/svg"
     width="28"
     height="24"
@@ -14,7 +14,7 @@ const ChatIcon = (props: SVGProps<SVGSVGElement>) => (
       fillOpacity="1"
       d="M12.736 15.252h-4.52a.484.484 0 00-.485.484v7.02c0 .267.217.483.484.483h4.521a.484.484 0 00.484-.484v-7.019a.484.484 0 00-.484-.484zM19.785.761h-4.52a.484.484 0 00-.485.484v21.51c0 .267.217.484.484.484h4.52a.484.484 0 00.485-.484V1.245a.484.484 0 00-.484-.484zm7.084 6.535h-4.52a.484.484 0 00-.484.484v14.975c0 .267.216.484.484.484h4.52a.484.484 0 00.484-.484V7.78a.484.484 0 00-.484-.484zm-21.218 0h-4.52a.484.484 0 00-.485.484v14.975c0 .267.217.484.485.484h4.52a.484.484 0 00.484-.484V7.78a.484.484 0 00-.484-.484z"
     />
-  </svg>
+  </Icon>
 );
 
 export default ChatIcon;

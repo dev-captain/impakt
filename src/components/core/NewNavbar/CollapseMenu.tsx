@@ -1,45 +1,26 @@
-import { VStack, Collapse, useToast, HStack, Box, Image } from '@chakra-ui/react';
+import { VStack, Collapse, HStack, Box, Link, Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { Socials } from 'data';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { I } from 'components';
 
-import { Common, I } from 'components';
 import NavbarLinkItem from './NavbarLinkItem';
-import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
 import SignInLinkItem from './SignInLinkItem';
+import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useLogout } from '../../../hooks/useLogout';
 
 type Props = {
-  bg: string;
   isOpen: boolean;
   textColor: string;
   onClose: () => void;
   isLessThan1040: boolean;
-  twitter: string;
-  tiktok: string;
-  discord: string;
-  hover: object;
-  youtube: string;
-
-  isScrolling: boolean;
 };
 
-const CollapseMenu = ({
-  isOpen,
-  onClose,
-  textColor,
-  isLessThan1040,
-  twitter,
-  discord,
-  hover,
-  youtube,
-  tiktok,
-}: Props) => {
-  const dispatch = useAppDispatch();
-  const toast = useToast();
-  const member = useAppSelector((state) => state.memberAuth.member);
+const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => {
+  const logout = useLogout();
+  const { member } = usePersistedAuthStore();
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;
@@ -62,7 +43,7 @@ const CollapseMenu = ({
           hide
           href="/"
           onClose={onClose}
-          isActive={path.path === 'Fitness'}
+          isActive={path.path === ''}
           title={t(Keys.navbar.impaktFitness)}
         />
         <NavbarLinkItem
@@ -101,6 +82,15 @@ const CollapseMenu = ({
         {member && (
           <NavbarLinkItem
             isSmall
+            href=""
+            onClose={onClose}
+            title={t(Keys.navbar.notification)}
+            isActive={path.path === '/notification'}
+          />
+        )}
+        {member && (
+          <NavbarLinkItem
+            isSmall
             href="/contact"
             onClose={onClose}
             title={t(Keys.navbar.help)}
@@ -113,15 +103,9 @@ const CollapseMenu = ({
             isSmall
             href="#"
             onClose={async () => {
-              await dispatch(signOutMember()).unwrap();
-              toast({
-                title: 'Success',
-                description: 'You have successfully logged out!',
-                isClosable: true,
-                duration: 8000,
-                status: 'success',
+              await logout().finally(() => {
+                onClose();
               });
-              onClose();
             }}
             title={t(Keys.navbar.signOut)}
             isActive={path.path === '#'}
@@ -151,49 +135,53 @@ const CollapseMenu = ({
             justify={{ base: 'center', md: 'flex-end' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
-            <Box me="24px !important" as="a" target="_blank" href={Socials.twitter}>
-              <Image
-                maxW="35"
-                w="35px"
-                h="35px"
-                opacity={0.6}
-                objectFit="contain"
-                src={twitter}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.twitter}
+            >
+              <I.TwitterIcon />
             </Box>
-            <Box me="24px !important" as="a" target="_blank" href={Socials.discord}>
-              <Image
-                maxW="32"
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={discord}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.discord}
+            >
+              <I.DiscordIcon />
             </Box>
-            <Box me="24px !important" as="a" target="_blank" href={Socials.tiktok}>
-              <Image
-                maxW="21px"
-                minW="24px"
-                h="24px"
-                opacity={0.6}
-                objectFit="contain"
-                src={tiktok}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.tiktok}
+            >
+              <I.TikTokIcon />
             </Box>
-            <Box as="a" target="_blank" href={Socials.youtube}>
-              <Image
-                maxW="32"
-                w="32px"
-                h="32px"
-                opacity={0.6}
-                objectFit="contain"
-                src={youtube}
-                {...hover}
-              />
+            <Box
+              color="rgba(255,255,255,0.5)"
+              _hover={{
+                color: 'rgba(255,255,255,1)',
+                transition: '.2s linear',
+              }}
+              as="a"
+              target="_blank"
+              href={Socials.youtube}
+            >
+              <I.YoutubeSocialIcon />
             </Box>
             {/* {path.path !== 'dashboard' && (
               <Box
@@ -213,20 +201,15 @@ const CollapseMenu = ({
           </HStack>
         </HStack>
         <HStack w="full" align="space-between" flexDirection="column" justify="space-between">
-          <Box>
-            <Common.ImpaktButton color="#F04153" bg="#FDE8EA" gap="8px" padding="10px 14px">
-              <I.DownloadIcon width="16px" />
-              Developer? SDK Here!
-            </Common.ImpaktButton>
-          </Box>
-          <Box marginLeft="0 !important" marginTop="10px !important">
-            <Common.ImpaktButton color="#F04153" bg="#FDE8EA" gap="14px" padding="10px 14px">
-              <I.DownloadIcon width="16px" />
-              Get The App
-            </Common.ImpaktButton>
-          </Box>
-          <Box marginLeft="0 !important" marginTop="10px !important">
+          <Box w="full" ml="0 !important">
             <SignInLinkItem />
+          </Box>
+          <Box w="full" display="flex" mt="2" ml="0 !important">
+            <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
+              <Button marginTop="8px" width="100%" colorScheme="red">
+                {t(Keys.navbar.download)}
+              </Button>
+            </Link>
           </Box>
         </HStack>
       </VStack>

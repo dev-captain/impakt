@@ -73,7 +73,7 @@ const SidebarLink = ({ IsHeader }: Props) => {
       {!IsHeader && (
         <NavbarLinkItem
           type="LINK"
-          href="https://knowledgebase.impakt.com/terms-of-use?category=Terms-of-Use"
+          href="/terms-of-use"
           onClose={onClose}
           passiveColor={passiveColor}
           title={t(Keys.navbar.termsOfUse)}
