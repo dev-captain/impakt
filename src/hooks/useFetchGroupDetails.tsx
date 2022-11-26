@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { deepLinkToApp } from '../data';
 import { useCalendarControllerGetCalendar } from '../lib/impakt-dev-api-client/react-query/calendar/calendar';
@@ -22,10 +22,7 @@ import {
 } from '../lib/zustand';
 
 export const useFetchGroupDetails = () => {
-  // local states
-  const [isGroupDetailsLoading, setIsGroupDetailsLoading] = React.useState(false);
-  const [isError, setIsError] = React.useState('');
-
+  // console.log('render');
   // global states
   const { setActiveGroup, activeGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
   const { setCalendar } = usePersistedCalendarStore();
@@ -40,6 +37,11 @@ export const useFetchGroupDetails = () => {
     useLocation().pathname.includes('join');
   const newGroup = parseInt(groupParam.id ?? '-asd', 10) !== activeGroup?.id;
 
+  // local states
+  const [isGroupDetailsLoading, setIsGroupDetailsLoading] = React.useState(newGroup);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+  const [isError, setIsError] = React.useState('');
+
   // fetching group relateds
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
   const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
@@ -49,7 +51,6 @@ export const useFetchGroupDetails = () => {
       enabled: newGroup,
       // initialData: activeGroup ?? undefined,
       onSuccess: async (data) => {
-        setIsGroupDetailsLoading(true);
         if (isJoin && groupParam.eventId) {
           // if join link just use the deeplink
           const deepLink = deepLinkToApp(data.id, parseInt(groupParam.eventId, 10));
@@ -63,16 +64,14 @@ export const useFetchGroupDetails = () => {
         await fetchPosts.refetch();
         await fetchGroupCalendar.refetch();
         setActiveGroup(data);
+        setIsGroupDetailsLoading(false);
       },
       onError: (err) => {
-        setIsGroupDetailsLoading(true);
         if (err.response?.status === 404 || err.response?.status === 400) {
           setIsError('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
         } else {
           setIsError('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
         }
-      },
-      onSettled: () => {
         setIsGroupDetailsLoading(false);
       },
     },
@@ -158,12 +157,9 @@ export const useFetchGroupDetails = () => {
     },
   );
 
-  // restart states if group refreshed on init
-  useEffect(() => {
+  React.useEffect(() => {
     if (newGroup) {
       setActiveGroup(null);
-      setIsGroupDetailsLoading(true);
-      setIsError('');
     }
   }, []);
 
