@@ -38,10 +38,14 @@ const GroupLabels: React.FC = () => {
       query: { enabled: activeChallenge !== null },
     },
   );
-
-  const memberRank = challengeLeaderBoard.data?.usersPassed.find(
+  const sortLeaderboardByScore = challengeLeaderBoard.data?.usersPassed.sort(
+    (a, b) => b.userScore - a.userScore,
+  );
+  const memberRankIndex = sortLeaderboardByScore?.findIndex(
     ({ username }) => username === member?.username,
-  )?.userCount;
+  );
+  // eslint-disable-next-line no-nested-ternary, no-constant-condition
+  const memberRank = memberRankIndex;
 
   React.useEffect(() => {
     if (groupPinnedChallenge.data) {
@@ -154,14 +158,13 @@ const GroupLabels: React.FC = () => {
             ? `https://fitness.impakt.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`
             : `https://fitness.impakt-dev.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
           exercices: normalizeExerciseNames(activeChallenge?.Routine?.TimelineBlocks ?? []),
-          leaderboard:
-            challengeLeaderBoard.data?.usersPassed.sort((a, b) => b.userScore - a.userScore) ?? [],
+          leaderboard: sortLeaderboardByScore ?? [],
           likeCount: activeChallenge?.likes ?? 0,
           myBestScore:
             bestScoreOfUser.data && Object.keys(bestScoreOfUser.data).length > 0
               ? bestScoreOfUser.data.userScore?.toString() ?? '-'
               : '-',
-          myRank: memberRank !== undefined ? `#${memberRank}` : '-',
+          myRank: memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-',
           playedTimes: challengeLeaderBoard.data?.usersPassed.length ?? 0,
           playedMins: activeChallenge?.Routine.estimatedTime
             ? Math.ceil(activeChallenge.Routine.estimatedTime / 60)
