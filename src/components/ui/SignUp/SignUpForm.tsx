@@ -10,6 +10,7 @@ import { InputGroupPropsI } from '../../common/InputGroup';
 import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
 import { useUserControllerCreate } from '../../../lib/impakt-dev-api-client/react-query/users/users';
 import { renderToast } from '../../../utils';
+import { PostUserReq } from '../../../lib/impakt-dev-api-client/react-query/types/postUserReq';
 
 const SignUpForm: React.FC = () => {
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
