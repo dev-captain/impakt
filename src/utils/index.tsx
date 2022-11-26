@@ -243,5 +243,9 @@ export const normalizeExerciseNames = (routines: GetTimelineBlockRes[]) => {
     };
   }) as GetTimelineBlockRes[];
 
-  return pascalCaseWithNormalizedExerciseName;
+  const sortByExerciseOrderNumber = pascalCaseWithNormalizedExerciseName.sort(
+    (a, b) => a.order - b.order,
+  );
+
+  return sortByExerciseOrderNumber;
 };
