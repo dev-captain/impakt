@@ -1,0 +1,198 @@
+import React, { useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { deepLinkToApp } from '../data';
+import { useCalendarControllerGetCalendar } from '../lib/impakt-dev-api-client/react-query/calendar/calendar';
+import { challengesControllerGetMany } from '../lib/impakt-dev-api-client/react-query/challenges/challenges';
+import {
+  useGroupsMemberControllerV1AmIMemberOfGroup,
+  useGroupsMemberControllerV1AmIRoleOnGroup,
+} from '../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { GetMembersOfGroupRes } from '../lib/impakt-dev-api-client/react-query/types';
+import {
+  useGroupsControllerV1FindOne,
+  useGroupsControllerV1FindGroupMembers,
+} from '../lib/impakt-dev-api-client/react-query/groups/groups';
+import { usePostControllerV1GetMany } from '../lib/impakt-dev-api-client/react-query/posts/posts';
+import { routinesControllerGetRoutines } from '../lib/impakt-dev-api-client/react-query/routines/routines';
+import {
+  usePersistedCalendarStore,
+  usePersistedChallengeStore,
+  usePersistedForumStore,
+  usePersistedGroupStore,
+} from '../lib/zustand';
+
+export const useFetchGroupDetails = () => {
+  // local states
+  const [isGroupDetailsLoading, setIsGroupDetailsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState('');
+
+  // global states
+  const { setActiveGroup, activeGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
+  const { setCalendar } = usePersistedCalendarStore();
+  const { setPosts } = usePersistedForumStore();
+
+  // params checks
+  const groupParam = useParams();
+  const isJoin =
+    groupParam.id &&
+    groupParam.eventId &&
+    groupParam.eventId !== 'join' &&
+    useLocation().pathname.includes('join');
+  const newGroup = parseInt(groupParam.id ?? '-asd', 10) !== activeGroup?.id;
+
+  // fetching group relateds
+  const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
+  const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
+    query: {
+      retry: 0,
+      refetchOnMount: true,
+      enabled: newGroup,
+      // initialData: activeGroup ?? undefined,
+      onSuccess: async (data) => {
+        setIsGroupDetailsLoading(true);
+        if (isJoin && groupParam.eventId) {
+          // if join link just use the deeplink
+          const deepLink = deepLinkToApp(data.id, parseInt(groupParam.eventId, 10));
+          window.location = deepLink as any;
+
+          return;
+        }
+        await fetchMembersOfGroup.refetch();
+        await fetchAmIMemberOfGroup.refetch();
+        await fetchGroupRoleById.refetch();
+        await fetchPosts.refetch();
+        await fetchGroupCalendar.refetch();
+        setActiveGroup(data);
+      },
+      onError: (err) => {
+        setIsGroupDetailsLoading(true);
+        if (err.response?.status === 404 || err.response?.status === 400) {
+          setIsError('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
+        } else {
+          setIsError('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
+        }
+      },
+      onSettled: () => {
+        setIsGroupDetailsLoading(false);
+      },
+    },
+  });
+
+  const fetchMembersOfGroup = useGroupsControllerV1FindGroupMembers(
+    parseInt(groupParam?.id ?? '0', 10),
+    {},
+    {
+      query: {
+        enabled: false,
+        refetchOnMount: false,
+        retry: 0,
+        onSuccess: async (membersOfGroup) => {
+          setMembersOfGroup(membersOfGroup);
+
+          await fetchAvailableChallengesForGroup(membersOfGroup);
+        },
+      },
+    },
+  );
+
+  const fetchAmIMemberOfGroup = useGroupsMemberControllerV1AmIMemberOfGroup(
+    parseInt(groupParam?.id ?? '0', 10),
+    {
+      query: {
+        enabled: false,
+        refetchOnMount: false,
+        retry: 0,
+      },
+    },
+  );
+
+  const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup(
+    parseInt(groupParam?.id ?? '0', 10),
+    {
+      query: {
+        enabled: false,
+        refetchOnMount: false,
+        retry: 0,
+        onError: () => {
+          setRole('None');
+        },
+        onSuccess: (roleData) => {
+          setRole(roleData.role);
+        },
+      },
+    },
+  );
+
+  const fetchPosts = usePostControllerV1GetMany(
+    'Group',
+    parseInt(groupParam?.id ?? '0', 10),
+    {},
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (posts) => {
+          // TODO on the backend sort new ones to old ones for comment & posts
+          const reversedCommentPostsOrder = posts.map((postD) => {
+            return { ...postD, Comment: postD.Comment.reverse() };
+          });
+
+          setPosts(reversedCommentPostsOrder ?? []);
+        },
+      },
+    },
+  );
+
+  const fetchGroupCalendar = useCalendarControllerGetCalendar(
+    fetchGroupDetailById.data?.calendarId ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (calendarData) => {
+          setCalendar(calendarData);
+        },
+      },
+    },
+  );
+
+  // restart states if group refreshed on init
+  useEffect(() => {
+    if (newGroup) {
+      setActiveGroup(null);
+      setIsGroupDetailsLoading(true);
+      setIsError('');
+    }
+  }, []);
+
+  return { group: activeGroup, isGroupDetailsLoading, isError };
+};
+
+// TODO once the backend refactored for this feat it will moved to react query
+const useFetchAvailableChallenges = () => {
+  const { setAvailableGroupChallenges, setAvailableGroupRoutines } = usePersistedChallengeStore();
+  const fetchAvailableChallengesForGroup = async (membersOfGroup: GetMembersOfGroupRes) => {
+    const admin = membersOfGroup.Members.find(({ role }) => role === 'Creator');
+    if (!admin) return;
+
+    const groupAdminChallenges = await challengesControllerGetMany({
+      validOnly: true,
+      Routine: true,
+      creatorId: admin.User.id,
+      Creator: true,
+    });
+
+    const groupAdminRoutines = await routinesControllerGetRoutines({
+      creatorId: admin.User.id,
+      TimelineBlocks: true,
+      Creator: true,
+    });
+
+    setAvailableGroupChallenges(groupAdminChallenges);
+    setAvailableGroupRoutines(groupAdminRoutines);
+  };
+
+  return { fetchAvailableChallengesForGroup };
+};
