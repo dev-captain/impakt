@@ -82,7 +82,7 @@ const MemberDashboard: React.FC = () => {
   });
 
   const fetchExploreGroups = useGroupsControllerV1ExploreGroups(
-    { includeRequests: true },
+    { includeRequests: true, deleted: false },
     { query: getDefaultQueryOptions() },
   ); // TODO update zustand explore groups
 
