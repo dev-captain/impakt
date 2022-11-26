@@ -15,7 +15,7 @@ const GeneralSettings: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const deleteGroup = useGroupsControllerV1Remove();
   const leaveGroup = useGroupsMemberControllerV1LeaveGroup();
-  const { activeGroup, myGroups, setMyGroups } = usePersistedGroupStore();
+  const { activeGroup, myGroups, setMyGroups, setRole } = usePersistedGroupStore();
   const navigate = useNavigate();
   const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
     (m) => m.role !== 'None',
@@ -53,6 +53,7 @@ const GeneralSettings: React.FC = () => {
             const distractFromMyGroup = myGroups.filter(
               (myGroup) => myGroup.groupId !== activeGroup.id,
             );
+            setRole('None');
             setMyGroups(distractFromMyGroup);
             navigate('/dashboard/groups');
           },

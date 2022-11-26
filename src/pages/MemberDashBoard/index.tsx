@@ -47,11 +47,11 @@ const MemberDashboard: React.FC = () => {
   // TODO next line is temp please move it to react query after its backend logic refactored.
 
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
 
   const fetchKoinBalanceScoreQuery = useCoinAccountControllerV1GetAccount({
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
 
   // const fetchIsUserWhitelistedQuery = useUserControllerIsWhitelisted();
@@ -61,24 +61,24 @@ const MemberDashboard: React.FC = () => {
   const fetchReferrals = useReferralControllerGetReferrees(
     { count: true },
     {
-      query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+      query: getDefaultQueryOptions(),
     },
   );
   const fetchReferralsChallenges = useReferralControllerGetReferreeHowManyChallengesDone({
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
   const fetchReferralsRewardGodl = useReferralControllerGetReferralRewardsForGodl({
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
   const fetchReferralsRewardKoin = useReferralControllerGetReferralRewardsForCoin({
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
   const fetchActiveDays = useFitnessStatsControllerGetDaysActive(member?.id as any, {
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
 
   const fetchMyGroups = useGroupsMemberControllerV1GetGroupsByUserId(member?.id as any, {
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
 
   const fetchExploreGroups = useGroupsControllerV1ExploreGroups(
@@ -87,7 +87,7 @@ const MemberDashboard: React.FC = () => {
   ); // TODO update zustand explore groups
 
   const fetchGroupRequests = useGroupsRequestControllerV1GetGroupRequests({
-    query: { ...getDefaultQueryOptions(), refetchOnMount: true, cacheTime: 0, staleTime: 0 },
+    query: getDefaultQueryOptions(),
   });
 
   React.useEffect(() => {
