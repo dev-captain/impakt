@@ -16,7 +16,11 @@ import { normalizeExerciseNames } from '../../../../../../../../utils';
 const GroupLabels: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
   const { member } = usePersistedAuthStore();
-  const groupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(activeGroup?.id ?? 0);
+  const groupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(activeGroup?.id ?? 0, {
+    query: {
+      enabled: activeGroup !== null,
+    },
+  });
 
   const createPinnedChallenge = useFavoriteControllerV1CreateOne();
   const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(
