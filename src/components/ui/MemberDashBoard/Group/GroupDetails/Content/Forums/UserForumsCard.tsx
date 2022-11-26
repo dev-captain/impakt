@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import ForumDetailModal from './ForumsDetail/ForumDetailModal';
 import PostCard from './PostCard';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 interface UserForumsPropsI {
   id: number;
@@ -19,6 +20,7 @@ interface UserForumsPropsI {
 }
 
 const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
+  const group = usePersistedGroupStore();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const postParam = useParams();
   // const dispatch = useAppDispatch();
@@ -49,7 +51,7 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
         open={isOpen}
         close={() => {
           onClose();
-          navigate(-1);
+          navigate(`/dashboard/groups/group/${group.activeGroup?.id}`);
         }}
       />
     </>
