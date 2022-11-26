@@ -16,7 +16,7 @@ const EventsOverview: React.FC = () => {
         backgroundColor="#fff"
         borderRadius="24px"
         w="100%"
-        minH={screen === 'empty' ? '0' : '384px'}
+        minH={screen === 'empty' ? '0' : 'auto'}
         p="5px"
         display="flex"
         flexDirection="column"
