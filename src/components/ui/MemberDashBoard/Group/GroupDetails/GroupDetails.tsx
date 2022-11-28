@@ -1,62 +1,46 @@
 import React from 'react';
-import { Box, Text, CircularProgress, HStack } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { useParams } from 'react-router-dom';
-import GroupWelcome from '../../GroupWelcome';
-import { useAppDispatch, useAppSelector } from '../../../../../hooks';
-import { fetchGroupDetailById } from '../../../../../lib/redux/slices/groups/actions/fetchGroupDetailById';
+import { Box, Text, HStack, CircularProgress } from '@chakra-ui/react';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
+import { useFetchGroupDetails } from '../../../../../hooks/useFetchGroupDetails';
+// import { getDefaultQueryOptions } from '../../../../../lib/impakt-dev-api-client/utils';
 
 const GroupDetails: React.FC = () => {
-  const [show, setShow] = React.useState<null | string>(null);
-  const [isNotFound, setIsNotFound] = React.useState(false);
-  const groupParam = useParams();
-  const dispatch = useAppDispatch();
-  const isLoading = useAppSelector((state) => state.groupsReducer.isLoading);
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { group, isError, isGroupDetailsLoading } = useFetchGroupDetails();
+  // const [show, setShow] = React.useState<null | string>(null);
+  // React.useEffect(() => {
+  //   const showTip = localStorage.getItem('showTip');
+  //   if (showTip) {
+  //     setShow(showTip);
+  //   }
+  // }, []);
 
-  const getGroupDetail = async () => {
-    try {
-      if (groupParam?.id) {
-        await dispatch(fetchGroupDetailById(groupParam.id)).unwrap();
-      }
-    } catch (e) {
-      setIsNotFound(true);
-    }
-  };
+  // const hide = () => {
+  //   localStorage.setItem('showTip', 'false');
+  //   setShow('false');
+  // };
 
-  React.useEffect(() => {
-    getGroupDetail();
-  }, []);
-
-  React.useEffect(() => {
-    const showTip = localStorage.getItem('showTip');
-    if (showTip) {
-      setShow(showTip);
-    }
-  }, []);
-
-  const hide = () => {
-    localStorage.setItem('showTip', 'false');
-    setShow('false');
-  };
-
-  if (isLoading) return <CircularProgress isIndeterminate />;
-  if (isNotFound) return <Text>404 Group not found</Text>;
+  if (isError.length > 0)
+    return (
+      <Text fontWeight="hairline" fontSize="2xl">
+        {isError}
+      </Text>
+    );
+  if (isGroupDetailsLoading) return <CircularProgress isIndeterminate />;
+  if (!group) return null;
 
   return (
     <Box w="full" as="section" id="general-section">
-      {(!localStorage.getItem('showTip') || !show) && activeGroup?.ownerId === member?.id ? (
+      {/* {(!localStorage.getItem('showTip') || !show) && activeGroup?.role === GroupRole.Creator ? (
         <GroupWelcome hideGroupWelcome={hide} />
-      ) : (
-        <HStack w="100%" display="block">
-          <Banner img={Images.group.cover} />
-          <Content />
-        </HStack>
-      )}
+      ) : ( */}
+      <HStack w="100%" display="block">
+        <Banner />
+        <Content />
+      </HStack>
+      {/* )} */}
     </Box>
   );
 };
+
 export default GroupDetails;

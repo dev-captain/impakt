@@ -1,11 +1,17 @@
-import React, { createContext, useContext, useRef } from 'react';
-import { Calendar, CalendarDay, CalendarEvent, Day, EventInput, DayInput } from 'dayspan';
+import React, { createContext, useContext, useEffect, useRef } from 'react';
+import { Calendar, CalendarDay, CalendarEvent, Day, EventInput } from 'dayspan';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import useNormalizedCalendarData from '../hooks/useNormalizedCalendarData';
 
 interface EventCalendarContext {
   addEvents: (events: EventInput<string, any>[]) => void;
+  addEvent: (event: EventInput<string, any>) => void;
+  updateEvent: (event: EventInput<string, any>) => void;
+  removeEvent: (event: EventInput<string, any>) => void;
   setSelectedDay: (day: Day) => Calendar<string, any>;
   getSelectedDay: () => Day;
   getSelectedDayEvents: () => CalendarEvent<string, any>[];
+  setActiveEventId: React.Dispatch<React.SetStateAction<number | undefined>>;
   moveToNextMonth: () => void;
   moveToPreviousMonth: () => void;
   getCurrentMonthLabel: () => string;
@@ -15,14 +21,12 @@ interface EventCalendarContext {
   getCurrentOverviewScreen: () => OverViewScreenTypes;
   goToOverViewScreen: (screenName: OverViewScreenTypes) => void;
   goBackToOverViewScreen: () => void;
-  setSelectedEventsOfDay: (dayInput: DayInput) => void;
-  setSelectedEventOfDay: (event: CalendarEvent<string, any>) => void;
   getSelectedDayEvent: () => CalendarEvent<string, any> | undefined;
 }
 
 // eslint-disable-next-line no-redeclare
 const EventCalendarContext = createContext<EventCalendarContext | null>(null);
-type OverViewScreenTypes = 'empty' | 'first' | 'create' | 'event' | 'remove';
+type OverViewScreenTypes = 'empty' | 'first' | 'create' | 'event' | 'remove' | 'update';
 
 export function useEventCalendarContext() {
   const context = useContext(EventCalendarContext);
@@ -38,16 +42,17 @@ export function useEventCalendarContext() {
 export const EventCalendarContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
+  const eventQuery = useParams()?.eventId;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activeGroupCalendar = useNormalizedCalendarData();
   const calendarRef = useRef(Calendar.months<string, any>());
   const [calendarOverViewScreen, setCalendarOverViewScreen] = React.useState<OverViewScreenTypes[]>(
     ['first'],
   );
-  const [selectedEvents, setSelectedEvents] = React.useState<CalendarEvent<string, any>[]>([]);
-
-  const [selectedEvent, setSelectedEvent] = React.useState<CalendarEvent<string, any>>();
-
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const [_, setReRenderCalendarCount] = React.useState<number>(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+  const [reRerender, setReRenderCalendarCount] = React.useState<number>(0);
+  const [activeEventId, setActiveEventId] = React.useState<number>();
 
   const reRenderCalendar = () => {
     setReRenderCalendarCount((prev) => prev + 1);
@@ -58,32 +63,50 @@ export const EventCalendarContextProvider: React.FC<{
     reRenderCalendar();
   };
 
+  const updateEvent = (event: EventInput<string, any>) => {
+    if (!getSelectedDayEvent()) return;
+
+    calendarRef.current.removeEvent(getSelectedDayEvent()?.event);
+    calendarRef.current.addEvent(event);
+    goToOverViewScreen('first');
+    reRenderCalendar();
+  };
+
+  const addEvent = (event: EventInput<string, any>) => {
+    calendarRef.current.addEvent(event);
+    goToOverViewScreen('first');
+    reRenderCalendar();
+  };
+
+  const removeEvent = (event: EventInput<string, any>) => {
+    calendarRef.current.removeEvent(event);
+    goToOverViewScreen('first');
+    removeEventQueryFromLocation();
+    reRenderCalendar();
+  };
+
   const getSelectedDay = () => {
     return calendarRef.current.selection?.start;
   };
 
   const getSelectedDayEvent = () => {
-    return selectedEvent;
+    return calendarRef.current
+      .getDay(getSelectedDay())
+      ?.events.find((event) => event.event.id === activeEventId);
   };
 
   const getSelectedDayEvents = () => {
-    return selectedEvents;
-  };
-
-  const setSelectedEventsOfDay = (dayInput: DayInput) => {
-    setSelectedEvents(calendarRef.current.getDay(dayInput).events);
-  };
-
-  const setSelectedEventOfDay = (event: CalendarEvent<string, any>) => {
-    setSelectedEvent(event);
+    return calendarRef.current.getDay(getSelectedDay())?.events.sort((a, b) => {
+      return a.time.start.time - b.time.start.time;
+    });
   };
 
   const setSelectedDay = (day: Day) => {
     const selectedDay = calendarRef.current.select(day);
-    setSelectedEventsOfDay(day);
     if (getCurrentOverviewScreen() !== 'first') {
       goToOverViewScreen('first');
     }
+    reRenderCalendar();
 
     return selectedDay;
   };
@@ -129,19 +152,65 @@ export const EventCalendarContextProvider: React.FC<{
       calendarOverViewScreen.pop();
       setCalendarOverViewScreen([...calendarOverViewScreen]);
     }
+    // side effect
+    removeEventQueryFromLocation();
   };
+
+  const removeEventQueryFromLocation = () => {
+    if (
+      eventQuery &&
+      (calendarOverViewScreen[calendarOverViewScreen.length - 1] === 'first' ||
+        calendarOverViewScreen[calendarOverViewScreen.length - 1] === 'remove')
+    ) {
+      navigate(location.pathname.substring(0, location.pathname.indexOf('/event')));
+    }
+  };
+
+  const initCalendar = () => {
+    if (activeGroupCalendar) {
+      addEvents(activeGroupCalendar.events);
+    }
+    // const dummyEvents = getDummyEvents();
+    // addEvents(dummyEvents);
+    if (eventQuery) {
+      const findTheEventQuery = activeGroupCalendar?.events.find(
+        ({ id }) => id === parseInt(eventQuery, 10),
+      );
+
+      if (findTheEventQuery && findTheEventQuery.visible && findTheEventQuery.schedule.start) {
+        setSelectedDay(Day.fromString(findTheEventQuery.schedule.start.toString()));
+        goToOverViewScreen('event');
+        setActiveEventId(findTheEventQuery.id);
+
+        return;
+      }
+    }
+    setSelectedDay(Day.today());
+  };
+  const removeEvents = () => {
+    calendarRef.current.removeEvents();
+  };
+
+  useEffect(() => {
+    initCalendar();
+
+    // refresh once demounted
+    return () => removeEvents();
+  }, [activeGroupCalendar]);
 
   return (
     <EventCalendarContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         addEvents,
+        updateEvent,
+        addEvent,
         setSelectedDay,
+        setActiveEventId,
+        removeEvent,
         getSelectedDay,
         getSelectedDayEvent,
         getSelectedDayEvents,
-        setSelectedEventOfDay,
-        setSelectedEventsOfDay,
         moveToNextMonth,
         moveToPreviousMonth,
         getCurrentMonthLabel,

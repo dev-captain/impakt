@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { VStack, Text, HStack, Box } from '@chakra-ui/react';
+import { VStack, Text, HStack, Box, Link } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -40,20 +40,11 @@ const SmallScreenFooter = ({ bgColor, textColor }: { bgColor: string; textColor:
           <Text fontSize="12px" lineHeight="16px" opacity="0.6">
             {t(keys.footer.allRightReserved)}
           </Text>
-          <Box onClick={() => navigate('/terms-of-use')}>
-            <Box
-              as="a"
-              href="/terms-of-use"
-              onClick={(e: any) => {
-                e.preventDefault();
-                navigate('/terms-of-use');
-              }}
-            >
-              <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
-                {t(keys.footer.termOfUse)}
-              </Text>
-            </Box>
-          </Box>
+          <Link href="/terms-of-use">
+            <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
+              {t(keys.footer.termOfUse)}
+            </Text>
+          </Link>
         </VStack>
       </VStack>
     </VStack>

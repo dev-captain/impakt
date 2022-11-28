@@ -5,16 +5,16 @@ import * as React from 'react';
 
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import { I, Common } from 'components';
-import useAppSelector from 'hooks/useAppSelector';
 import Images from '../../../../assets/images';
 import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
 import MemberDashboardCard from '../MemberDashBoardCard';
+import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const { onClose, isOpen, onOpen } = useDisclosure();
 
-  const isWhitelisted = useAppSelector((state) => state.whitelistReducer.isWhitelisted);
+  // const { isWhitelistedCollection } = usePersistedAuthStore();
 
   return (
     <MemberDashboardCard
@@ -105,9 +105,8 @@ const WhiteList: React.FC = () => {
       </Box>
       <Box w="100%" id="whitelist-challange-description-box-2" sx={{ marginTop: '0px !important' }}>
         <Box>
-          <Common.ImpaktButton
+          {/* <Common.ImpaktButton
             as="a"
-            href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
             leftIcon={
               <Box marginRight="8px">
                 <I.DiscordIcon />
@@ -121,8 +120,8 @@ const WhiteList: React.FC = () => {
             fontSize={{ base: '16px', lg: '20px' }}
             lineHeight={{ base: '24px', lg: '32px' }}
           >
-            {isWhitelisted ? 'Discord Connected' : 'Connect Discord'}
-          </Common.ImpaktButton>
+            {isWhitelistedCollection.isDiscordConnected ? 'Discord Connected' : 'Connect Discord'}
+          </Common.ImpaktButton> */}
         </Box>
 
         <Box mt="12px">

@@ -1,20 +1,17 @@
-import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
+import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
-import { useState } from 'react';
 import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import contactUsYupScheme from '../../../lib/yup/schemas/contactUsYupScheme';
-
-const url = 'https://contact-api-email.herokuapp.com/common/contact';
+import useContactUs from '../../../hooks/useContactUs';
 
 const ContactUsForm: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
+  const { sendData, loading } = useContactUs();
 
-  const { handleSubmit, errors, setValue } = useForm({
+  const { handleSubmit, reset, getValues, errors, setValue } = useForm({
     defaultValues: { memberName: '', email: '', topic: '', message: '' },
     resolver: yupResolver(contactUsYupScheme),
   });
@@ -32,35 +29,15 @@ const ContactUsForm: React.FC = () => {
       topic: string;
     };
 
-    setIsLoading(true);
-    try {
-      const msg = {
-        subject: topic,
-        text: `Name: ${memberName} - Email: ${email} \n ${message}`,
-      };
-      await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(msg),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      setIsLoading(false);
-      toast({
-        description: 'You sent a message successfully.',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
-    } catch (err) {
-      setIsLoading(false);
-      toast({
-        description: 'Something went wrong. Please check information and try again.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-    }
+    await sendData({
+      email,
+      name: memberName,
+      message,
+      subject: topic,
+      isSubscribed: false,
+    }).finally(() => {
+      reset({ email: '', memberName: '', message: '', topic: '' });
+    });
   };
 
   const inputItems: InputGroupPropsI[] = [
@@ -72,6 +49,7 @@ const ContactUsForm: React.FC = () => {
       name: 'memberName',
       label: 'Your name',
       errorMsg: errors?.memberName?.message,
+      value: getValues('memberName'),
       autoFocus: true,
     },
     {
@@ -82,6 +60,7 @@ const ContactUsForm: React.FC = () => {
       name: 'email',
       label: 'Email',
       errorMsg: errors?.email?.message,
+      value: getValues('email'),
     },
     {
       placeholder: 'Your Topic',
@@ -91,6 +70,7 @@ const ContactUsForm: React.FC = () => {
       name: 'topic',
       label: 'Topic',
       errorMsg: errors?.topic?.message,
+      value: getValues('topic'),
     },
   ];
 
@@ -111,6 +91,7 @@ const ContactUsForm: React.FC = () => {
       <Box w="full">
         <Common.ImpaktTextareaField
           name="message"
+          value={getValues('message')}
           labelText="Message"
           errMsg={errors.message?.message}
           onChange={onChange}
@@ -120,7 +101,7 @@ const ContactUsForm: React.FC = () => {
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
-            isLoading={isLoading}
+            isLoading={loading}
             type="submit"
             leftIcon={<I.SendIcon width="24" height="24" />}
             size="lg"

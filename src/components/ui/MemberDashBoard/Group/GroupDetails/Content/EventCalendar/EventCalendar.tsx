@@ -1,44 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import { Box, HStack } from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import React from 'react';
+import { Box } from '@chakra-ui/react';
 
-import { Day } from 'dayspan';
-
-import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { getDummyEvents } from 'data';
-import DayNames from './DayNames';
 import EventsOverview from './EventsOverview';
-import DayComponent from './Day';
+import CalendarDays from './CalendarDays';
+// import { getDummyEvents } from '../../../../../../../data';
 
 const EventCalendar: React.FC = () => {
-  const runInitCalendarRef = useRef(true);
-  const {
-    addEvents,
-    getCurrentMonthLabel,
-    getCurrentYear,
-    getDaysOfCurrentMonth,
-    moveToNextMonth,
-    moveToPreviousMonth,
-    getStartDayOfCurrentMonth,
-    setSelectedDay,
-  } = useEventCalendarContext();
-
-  const initCalendar = () => {
-    const dummyEvents = getDummyEvents();
-    addEvents(dummyEvents);
-    setSelectedDay(Day.today());
-  };
-
-  useEffect(() => {
-    if (runInitCalendarRef.current) {
-      initCalendar();
-    }
-
-    return () => {
-      runInitCalendarRef.current = true;
-    };
-  }, []);
-
   return (
     <Box
       height="100%"
@@ -48,68 +15,9 @@ const EventCalendar: React.FC = () => {
       transform="translateY(20px)"
       borderRadius="10px"
       marginTop="10px"
+      boxShadow="0px 10px 10px -5px rgba(0, 6, 14, 0.08), 0px 20px 25px -5px rgba(0, 6, 14, 0.14);"
     >
-      <Box width="100%" height="30%" color="white" display="flex" flexWrap="wrap">
-        <Box
-          padding="15px 20px"
-          height="70%"
-          width="100%"
-          whiteSpace="nowrap"
-          fontSize="1.2em"
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          backgroundColor="white"
-          color="#616161"
-          borderRadius="10px 10px 0 0"
-        >
-          <ChevronLeftIcon
-            fontSize="30px"
-            padding="3px"
-            backgroundColor=" #ffffff"
-            boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
-            borderRadius=" 8px"
-            cursor=" pointer"
-            onClick={moveToPreviousMonth}
-          />
-          <Box>{[getCurrentMonthLabel(), getCurrentYear()].join(' ')}</Box>
-          <ChevronRightIcon
-            fontSize="30px"
-            padding="3px"
-            backgroundColor=" #ffffff"
-            boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
-            borderRadius=" 8px"
-            cursor=" pointer"
-            onClick={moveToNextMonth}
-          />
-        </Box>
-        <DayNames />
-      </Box>
-      <HStack
-        width=" 100%;"
-        height=" 70%;"
-        flexWrap="wrap"
-        display="flex"
-        justifyContent="center"
-        alignItems="flex-start"
-        background=" #ffffff"
-        padding={{ base: '0 12px', md: '16px 15px 10px 12px' }}
-      >
-        {/* {renderWeeks()} */}
-        <>
-          {getDaysOfCurrentMonth().map((day) => (
-            <DayComponent
-              isCurrentMonth={day.sameMonth(getStartDayOfCurrentMonth())}
-              isToday={day.currentDay}
-              isDaySelected={day.selectedDay}
-              dayNumber={day.dayOfMonth}
-              eventsCounts={day.events.length}
-              dote={day.events.length <= 3 ? '.'.repeat(day.events.length) : '...'}
-              selectDay={() => setSelectedDay(day)}
-            />
-          ))}
-        </>
-      </HStack>
+      <CalendarDays />
       <Box
         backgroundColor=" #ffffff"
         width=" 100%"

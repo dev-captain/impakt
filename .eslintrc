@@ -16,6 +16,7 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "react/destructuring-assignment": "off",
+    "react/jsx-key": "error",
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
@@ -38,11 +39,13 @@
       }
     ],
     "no-use-before-define": "off",
+    "no-redeclare": "off",
     "import/extensions": ["error", "never"],
     "react/prop-types": 0,
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "react/function-component-definition": 0,
+    "import/prefer-default-export": 0,
     "react/jsx-props-no-spreading": 0,
     "react/require-default-props": 0,
     "@typescript-eslint/no-use-before-define": 0,
@@ -50,6 +53,7 @@
     "react-hooks/exhaustive-deps": 0,
     "@typescript-eslint/no-unused-vars": ["error"],
     "no-unused-vars": "error",
+    "no-console": "error",
     "no-param-reassign": [
       "error",
       {

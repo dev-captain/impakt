@@ -2,20 +2,16 @@ import * as React from 'react';
 import { Box } from '@chakra-ui/react';
 
 import BannerImage from './BannerImage';
-import BannerHeaderLeft from './BannerHeaderLeft';
-import BannerHeaderRight from './BannerHeaderRight';
-// import BannerPanelLeft from './BannerPanelLeft';
-import BannerPanelRight from './BannerPanelRight';
+import BannerHeaderLeft from './Header/BannerHeaderLeft';
+import BannerHeaderRight from './Header/BannerHeaderRight';
+import BannerPanelLeft from './Panel/BannerPanelLeft';
+import BannerPanelRight from './Panel/BannerPanelRight';
 
-interface BannerProps {
-  img: any;
-}
-
-const Banner: React.FC<BannerProps> = ({ img }) => {
+const Banner: React.FC = () => {
   return (
     <Box>
       <Box backgroundColor="#fff" borderRadius="24px" w="full" p={{ base: '16px', md: '32px' }}>
-        <BannerImage src={img} />
+        <BannerImage />
         <Box>
           <Box
             marginTop="32px"
@@ -28,8 +24,12 @@ const Banner: React.FC<BannerProps> = ({ img }) => {
             <BannerHeaderLeft />
             <BannerHeaderRight />
           </Box>
-          <Box display={{ md: 'flex', base: 'block' }} justifyContent="end" alignItems="flex-end">
-            {/* <BannerPanelLeft /> */}
+          <Box
+            display={{ md: 'flex', base: 'block' }}
+            justifyContent="space-between"
+            alignItems="flex-end"
+          >
+            <BannerPanelLeft />
             <BannerPanelRight />
           </Box>
         </Box>

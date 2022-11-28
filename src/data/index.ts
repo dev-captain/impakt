@@ -1,5 +1,5 @@
 import Images from 'assets/images';
-import { Day, EventInput, Month } from 'dayspan';
+import { Day, EventInput } from 'dayspan';
 
 export const RoadMapData: {
   date: string;
@@ -71,6 +71,7 @@ export const Videos = {
   impaktGames: 'assets/videos/tutorial-video.mp4',
   heroVideo: 'assets/videos/herovideo.mov',
   stars: 'assets/videos/stars.mov',
+  newVideo: 'assets/videos/Trailer.mp4',
   backgroundBeachVideo: 'assets/videos/backgroundbeach.mp4',
 };
 
@@ -80,7 +81,7 @@ export const Socials = {
   twitter: 'https://twitter.com/impaktlife',
   discord: 'https://discord.gg/eVQJ8XRa9S',
   tiktok: 'http://tiktok.com/@impaktlife',
-  instagram: 'https://www.instagram.com/impakt.life/',
+  insta: 'https://www.instagram.com/impakt.life/',
 };
 
 export const Categories = [
@@ -470,68 +471,72 @@ export const getDummyEvents = () => {
     id: 1,
     data: event1Data,
     schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 11),
-      times: [Day.build(2022, Month.SEPTEMBER, 11, 8)],
-      duration: 1,
-      durationUnit: 'hours',
+      on: Day.fromString('2022-10-01T20:00:00.000Z'),
+      duration: 0,
+      exclude: ['2022-10-01T20:30:00.000Z'],
+      times: [
+        Day.fromString('2022-10-01T20:00:00.000Z'),
+        Day.fromString('2022-10-01T20:59:00.000Z'),
+      ],
     },
   };
 
-  const event2: EventInput<string, any> = {
-    id: 2,
-    data: event2Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 11),
-      times: [Day.build(2022, Month.SEPTEMBER, 11, 15)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event2: EventInput<string, any> = {
+  //   id: 2,
+  //   data: event2Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 11),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 11, 15)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
-  const event3 = {
-    id: 3,
-    data: event3Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 1),
-      times: [Day.build(2022, Month.SEPTEMBER, 1, 13)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event3 = {
+  //   id: 3,
+  //   data: event3Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 1),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 1, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
-  const event4 = {
-    id: 4,
-    data: event4Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 2),
-      times: [Day.build(2022, Month.SEPTEMBER, 2, 13)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event4 = {
+  //   id: 4,
+  //   data: event4Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 2),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 2, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
-  const event5 = {
-    id: 4,
-    data: event5Data,
-    schedule: {
-      on: Day.build(2022, Month.SEPTEMBER, 7),
-      times: [Day.build(2022, Month.SEPTEMBER, 7, 13)],
-      duration: 1,
-      durationUnit: 'hours',
-    },
-  };
+  // const event5 = {
+  //   id: 4,
+  //   data: event5Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 7),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 7, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
 
   allEvents.push(event1);
-  allEvents.push(event2);
-  allEvents.push(event3);
-  allEvents.push(event4);
-  allEvents.push(event5);
+  // allEvents.push(event2);
+  // allEvents.push(event3);
+  // allEvents.push(event4);
+  // allEvents.push(event5);
 
   return allEvents;
 };
 
 export const ChallengeList = [
   {
+    id: 1,
     title: 'Daily Challenge',
     challenge: '8',
     time: '5 min',
@@ -541,12 +546,14 @@ export const ChallengeList = [
     name: 'Impakt',
   },
   {
+    id: 2,
     title: 'Good Morning',
     challenge: '22',
     time: '18 min',
     name: 'Demideus',
   },
   {
+    id: 3,
     title: 'Power v3',
     challenge: '16',
     time: '12 min',
@@ -555,6 +562,7 @@ export const ChallengeList = [
     name: 'Demideus',
   },
   {
+    id: 5,
     title: 'Power v3',
     challenge: '16',
     time: '19 min',
@@ -563,17 +571,18 @@ export const ChallengeList = [
   },
 ];
 
-export const ChallengeTab = [
-  'My Routines',
-  // 'My Challenges',
-  // 'Impakt',
-  // 'ICONs',
-  // 'Community'
+export type ChallengeTabs = 'routine' | 'game';
+export const ChallengeTab: ChallengeTabs[] = [
+  'routine',
+  // 'game'
 ];
+
+export const GroupSettingsMemberTabs = ['General'];
 
 export const GroupSettingTab = [
   'Edit group',
   'Permissions',
+  'General',
   // 'Requests',
   // 'Members list'
 ];
@@ -635,5 +644,53 @@ export const DummyChatData = [
     name: 'KittenSpy',
     time: 'Today at 9:20 AM',
     msg: 'wanna start a challenge?',
+  },
+];
+
+export const deepLinkToApp = (groupId?: number, eventId?: number) =>
+  `impakt://join-event?groupId=${groupId}&eventId=${eventId}`;
+
+export const journeyData = [
+  {
+    img: Images.Journey.Journey,
+    title: 'We need variety',
+    description: 'Choose from 40+ exercises. More added constantly.',
+  },
+  {
+    img: Images.Journey.Journey1,
+    title: 'Starting at the base',
+    description: 'Routines customized to our starting fitness level.',
+  },
+  {
+    img: Images.Journey.Journey2,
+    title: 'Challenging ourselves & others',
+    description: 'Complete Impakt challenges and compete with others.',
+  },
+];
+
+export const AthletesData = [
+  {
+    name: 'Kelvin Gastelum',
+    title: 'CEO',
+    image: Images.team.demideus,
+    alt: '',
+    subtitle:
+      '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.\nPrevious 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
+  },
+  {
+    name: 'Matt Fox',
+    title: 'President',
+    image: Images.team.valtec,
+    alt: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> of building technology companies.\nPrevious roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
+  },
+  {
+    name: 'Uyen Ha',
+    title: 'CTO',
+    image: Images.team.dahaka,
+    alt: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.\nManaging a team of <span style="color:#FFF;">20+</span> engineers & product managers',
   },
 ];

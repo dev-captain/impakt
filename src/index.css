@@ -12,6 +12,7 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #eef4f6 !important;
 }
 
 body::-webkit-scrollbar {
@@ -106,6 +107,24 @@ code {
   border-radius: 10px;
   visibility: visible !important;
   transition: all 0.5s;
+}
+.slick-list {
+  margin: 0 -20px;
+}
+.slick-slide > div {
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+@media screen and (min-width: 1280px) {
+  .slick-slide > div {
+    padding: 0 20px;
+  }
+}
+#chakra-toast-manager-top-right {
+  top: 90px !important;
+  margin-right: 0.5rem;
 }
 
 /* NFT Slider */

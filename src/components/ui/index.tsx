@@ -10,3 +10,4 @@ export * from './TermsofUse';
 export * from './NFT';
 export * from './ContactUs';
 export * from './Whitelist';
+export * as Landing from './Landing';

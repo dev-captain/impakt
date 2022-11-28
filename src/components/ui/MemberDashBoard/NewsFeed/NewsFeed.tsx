@@ -25,15 +25,15 @@ const NewsFeed: React.FC = () => {
           </Box>
         </HStack>
       </Box>
-      <Box color="#fff" w="full" id="news-feed-accordion-box">
+      <Box color="#4E6070" w="full" id="news-feed-accordion-box">
         <NewsFeedAccordion />
       </Box>
 
-      <Box color="#fff" w="full" id="news-feed-check-our-discourse-box">
+      <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
         <Common.ImpaktButton
           size="lg"
           variant="white"
-          bgColor="#2E2E36"
+          bgColor="#F5F8FA"
           leftIcon={
             <Box marginRight="8px">
               <I.DiscourseIcon />
@@ -41,7 +41,7 @@ const NewsFeed: React.FC = () => {
           }
           fontSize={{ base: '12px', md: '16px', lg: '20px' }}
           lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
-          color="#fff"
+          color="#4E6070"
           justifyContent={{ md: 'center', lg: 'flex-start' }}
           as="a"
           href="https://discuss.impakt.com/tag/news"

@@ -12,6 +12,29 @@ export default {
     workout: 'Work out! Get fit! Get paid!',
     excercise: 'EXERCISE',
     squats: 'SQUATS',
+    body: 'Fitness is for all.',
+    body1:
+      "The Impakt App, your phone, or your webcam. That's all you need to enter the Impakt world. No expensive equipment, no payment required. Our body motion tracking technology takes care of everything.",
+    evolving: 'I am always evolving.',
+    evolvingMsg:
+      'Faster, stronger, healthier. All these benefits will be reflected by our avatars. Obtainable from challenges or acquirable via Koin, our avatar cosmetics reflect our fitness journey.',
+    fitnessJourneyTitle: 'My fitness journey.',
+    fitnessJourneyDescription:
+      'Remember counting the seconds on the treadmill? Remember the pure boredom? Not in Impakt! Fitness must be fun, challenging, and entertaining.Through gamification and constant updates, Impakt keeps us engaged and motivated. Our fitness journey is never over, and neither is Impakt. We are constantly evolving. Together.',
+    athletesTitle: 'Elite athletes are already on board.',
+    athletesDescription:
+      'Fitness experts, health specialists, and pro athletes. They are our Impakt ICONs and we are honored to have them on board our journey!',
+    impaktTeamTitle: 'The Impakt team',
+    impaktTeamDescription:
+      "We' re proud  to have each and every member on board. A perfect mix of cultures, experiences and abilities.",
+    privacyTitle: 'Privacy.',
+    privacyTitle1: 'I choose how',
+    privacyTitle2: 'the world sees me.',
+    privacyDescription:
+      'Camera on or camera off? It`s always our choice. We can show our real selves or go with our own digital identity.',
+    humanTitle: 'The human need of connecting with others.',
+    humanDescription:
+      'We connect through shared experiences and goals! And what better goal than being fit & healthy to bring us together?',
   },
   downloadPlateform: {
     download: 'Download our App',
@@ -296,7 +319,7 @@ export default {
       headline: 'Referrals',
       subHeadline: 'Refer friends and together earn $6 USD in Crypto',
       description:
-        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#FEC417">$1 USD in Crypto</strong> and they receive <strong style="color:#FEC417">$5 USD in Crypto</strong>.',
+        'For each member who joins through your referral link and completes at least 5 daily, weekly or targeted challenges with Impakt, you receive <strong style="color:#4E6070">1000 Koin</strong> and they receive <strong style="color:#4E6070">5000 Koin</strong>.',
       subDescription:
         'Your crypto value will be given as GODL, which you will be able to spend in our marketplace when it launches🔥',
       discription_list1: 'WLs',
@@ -306,7 +329,7 @@ export default {
       descriptionFooter:
         'Have your friends join us on the Impakt Rocket and let’s moon it together!',
       discription_list5:
-        'GODL is our in-game currency! You`ll use it on our marketplace for Whitelist spots, NFT discounts, Token exchange and many more!',
+        'Koin is the virtual currency within the world of Impakt. You`ll use it to customize your character by purchasing skins, items, pets, and much more.',
     },
     yourReferralLink: `Your referral link:`,
     whitelist: {
@@ -324,6 +347,7 @@ export default {
       date: 'Date',
       reason: 'Reason',
       godl: 'GODL',
+      koin: 'Koins',
     },
   },
   NFTGeneral: {
@@ -380,6 +404,220 @@ export default {
         image: Images.nft.bronze,
         imageThumb: Images.nft.bronzethumb,
         imageRect: Images.nft.bronzeRect,
+      },
+    ],
+  },
+  Message: {
+    MyChallengeMsg: {
+      description:
+        'You haven`t created any challenges yet. Download our desktop app and create your first challenge now',
+    },
+    PublicToolTip: {
+      description:
+        '<b>Public:</b><br /><br />Recommended for growing a following.<br />&nbsp;&nbsp;•Anyone can find your group<br />&nbsp;&nbsp;•Anyone can join(no approval needed)<br />&nbsp;&nbsp;•Anyone can view group content<br /><br /><b>Private:</b><br />Recommended for closed circles (e.g. friends, family)<br />&nbsp;•Only group members can view group content<br />&nbsp;&nbsp;•People can only join if you manually accept their join request',
+    },
+    PrivateToolTip: {
+      description:
+        'Only group members can view group content<br />People can only join if you manually accept their join request',
+    },
+  },
+  Evolving: {
+    // builders: 'IMPAKT BUILDERS',
+    Title: 'I am always evolving.',
+  },
+  athletes: {
+    builders: 'IMPAKT BUILDERS',
+    Title: 'The Founders',
+    team: [
+      {
+        name: 'Kelvin Gastelum',
+        title: 'CEO',
+        image: Images.kelvinImg.kelvinImg,
+        alt: '',
+        subtitle: 'UFC Middleweight contender',
+        subtitle1: '2019 Fight of the Year award',
+        subtitle2: 'The Ultimate Fighter 17 winner',
+        twitterLink: 'https://twitter.com/demideuszin',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '1M+ Followers',
+        data: ['UFC Fighter and Winner of UFC Ultimate Fighter 17'],
+      },
+      {
+        name: 'Matt Fox',
+        title: 'President',
+        image: Images.kelvinImg.photoMatt,
+        alt: '',
+        subtitle: 'Home fitness expert',
+        subtitle1: 'No gym in 6 years',
+        subtitle2: 'Cancer surviror',
+        subtitle3: 'Nominated fitness influencer of 2020',
+        twitterLink: 'https://twitter.com/shabamanation?s=21&t=WPEL7jC2IhTtV1U-9I-_Kw',
+        linkedInLink: 'https://www.linkedin.com/in/john-keh',
+        facebookLink: '',
+        followers: '500k+ Followers',
+        data: ['Fitness Influencer of the Year (2020 Nominee)'],
+      },
+      {
+        name: 'Uyen Ha',
+        title: 'CTO',
+        image: Images.kelvinImg.photoUyen,
+        alt: '',
+        subtitle: 'ONE Championship fighter',
+        subtitle1: 'Former Australian National  Team wrestler',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '100k+ Followers',
+        data: ['Australian National Wrestler and Pro MMA Fighter'],
+      },
+      {
+        name: 'Levi Webb',
+        title: 'CTO',
+        image: Images.kelvinImg.photoLevi,
+        alt: '',
+        subtitle: 'ONE Championship fighter',
+        subtitle1: 'Former Australian National  Team wrestler',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '100k+ Followers',
+        data: ["Men's Physique Competitor and Health Chef"],
+      },
+      {
+        name: 'Aaron Burke',
+        title: 'CTO',
+        image: Images.kelvinImg.photoAaron2,
+        alt: '',
+        subtitle: 'ONE Championship fighter',
+        subtitle1: 'Former Australian National  Team wrestler',
+        twitterLink: '',
+        linkedInLink: '',
+        facebookLink: '',
+        followers: '100k+ Followers',
+        data: ['NPC Bodybuilder and Lifestyle Coach'],
+      },
+    ],
+  },
+  leadershipData: {
+    data: [
+      {
+        company: 'Impakt',
+        job: 'CEO',
+        fname: 'Winston',
+        lname: 'Zin',
+        img: Images.home.wiston,
+      },
+      {
+        company: 'Impakt',
+        job: 'CTO',
+        fname: 'Hakim',
+        lname: 'Bawa',
+        img: Images.home.hakim,
+      },
+    ],
+  },
+  advisorData: {
+    data: [
+      {
+        company: 'Twitch',
+        job: 'Founder of',
+        fname: 'Kevin',
+        lname: 'Lin',
+        img: Images.advisor.kevin,
+      },
+      {
+        company: 'Netscape',
+        job: 'CTO of',
+        fname: 'Tim',
+        lname: 'Howes',
+        img: Images.advisor.tim,
+      },
+      {
+        company: 'Guitar Hero',
+        job: 'Founder of',
+        fname: 'Kai',
+        lname: 'Huang',
+        img: Images.advisor.kai,
+      },
+      {
+        company: 'UFC',
+        job: 'VP of Athlete Development',
+        fname: 'Forrest',
+        lname: 'Griffin',
+        img: Images.kelvinImg.photoGriffin,
+      },
+      {
+        company: '6 Oscar Nominations',
+        job: 'Oscar Winner in VFX',
+        fname: 'Chris',
+        lname: 'Armsden',
+        img: Images.advisor.chris,
+      },
+    ],
+  },
+  officalPartners: {
+    data: [
+      {
+        company: 'WCFN',
+        job: 'Founder of',
+        fname: 'John',
+        lname: 'Graham',
+        img: Images.partners.john,
+      },
+      // {
+      //   company: 'Nike',
+      //   job: 'Former Athlete',
+      //   fname: 'John',
+      //   lname: 'Graham',
+      //   img: Images.advisor.kai,
+      // },
+      {
+        company: 'Chains.com',
+        job: 'Director APAC of',
+        fname: 'Jeremy',
+        lname: 'Chou',
+        img: Images.partners.jeremy,
+      },
+    ],
+  },
+  teamData: {
+    data: [
+      {
+        title: 'John',
+        name: 'Duke Nuke',
+        post: 'Sales/Partnerships & Strategy',
+        img: Images.team.duke,
+      },
+      {
+        title: 'Ursina',
+        name: 'RatSpeare',
+        post: 'Product Management & Strategy',
+        img: Images.team.ratSpeare,
+      },
+      {
+        title: 'Roman',
+        name: 'JSolo',
+        post: 'Product Design & Strategy',
+        img: Images.team.JSolo,
+      },
+      {
+        title: 'Guney',
+        name: 'Requiem Aeternam',
+        post: 'Unity Engineering & Strategy',
+        img: Images.team.requiem,
+      },
+      {
+        title: 'Andrei',
+        name: 'Berila',
+        post: 'Marketing/Sales & Strategy',
+        img: Images.team.berila,
+      },
+      {
+        title: 'Chris',
+        name: 'CatRoutines',
+        post: 'TechSupport/Community & Strategy',
+        img: Images.team.catRoutines,
       },
     ],
   },

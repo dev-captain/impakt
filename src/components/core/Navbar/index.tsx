@@ -10,7 +10,6 @@ import {
   useMediaQuery,
   useColorMode,
   PositionProps,
-  useToast,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
@@ -18,7 +17,6 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
-import { useAppDispatch, useAppSelector } from 'hooks';
 
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
@@ -26,8 +24,9 @@ import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './NavBarSocialIcons';
-import { signOutMember } from '../../../lib/redux/slices/member/actions/signOutMember';
+import { useLogout } from '../../../hooks/useLogout';
 import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -36,9 +35,8 @@ interface NavbarProps {
 // const { dark, light } = Images;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
-  const [notify] = useState(false);
-  const dispatch = useAppDispatch();
-  const toast = useToast();
+  const [notify, setNotify] = useState(false);
+  const logout = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
@@ -46,7 +44,9 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-  const isScrolling = useAppSelector((state) => state.stateReducer.heroVideo.isScrolling);
+  const notifies = usePersistedGroupStore().groupRequests.filter(
+    (requestD) => requestD.status === 'Pending',
+  ).length;
 
   useEffect(() => {
     if (!isLessThan1280) {
@@ -57,12 +57,18 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   useEffect(() => {
     if (path.path === 'dashboard') {
       setColorMode('light');
+      if (notifies) {
+        setNotify(true);
+      } else {
+        setNotify(false);
+      }
     }
-  }, [path.path]);
+  }, [path.path, notifies]);
 
   const isLight = colorMode === 'light';
   const textColor = isLight ? 'glass.100' : 'glass.700';
-  const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  // const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
+  const bgColor = isVersion2 ? '#fff' : 'rgba(28, 28, 40, 0.65)';
 
   return (
     <Box
@@ -73,7 +79,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
       px={isVersion2 && !isLessThan1280 ? '0' : '16px'}
       display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
-      background={isVersion2 ? '#eef4f6' : bgColor}
+      background={isVersion2 ? '#eef4f6' : 'transparent'}
     >
       {isOpen && !isVersion2 && <Gradient />}
       <Flex
@@ -91,8 +97,12 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         height={isVersion2 && !isLessThan1280 ? '80px' : '70px'}
         marginTop={isVersion2 && !isLessThan1280 ? '0' : '10px'}
         transition="background-color 0.5s linear"
-        bgColor={isVersion2 ? 'white' : bgColor}
-        backdropFilter={isScrolling || path.path !== '' ? 'blur(40px)' : 'blur(0px)'}
+        bgColor={bgColor}
+        backdropFilter={
+          // isScrolling
+          // ||
+          path.path !== '' ? 'blur(40px)' : 'blur(0px)'
+        }
         borderBottom={isVersion2 && !isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
       >
         <HStack w="full" justify="space-between">
@@ -103,7 +113,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             minWidth={{ base: isVersion2 ? 'auto' : 'auto' }}
           >
             {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
-            <I.ImpaktIcon isblack={`${isVersion2}`} cursor="pointer" width="111px" height="32px" />
+            <I.ImpaktIcon whiteMode={!isVersion2} variant="lg" w="128px" />
           </Box>
           <HStack
             justify="flex-end"
@@ -194,15 +204,9 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
 
                   <Common.ImpaktButton
                     onClick={async () => {
-                      await dispatch(signOutMember()).unwrap();
-                      toast({
-                        title: 'Success',
-                        description: 'You have successfully logged out!',
-                        isClosable: true,
-                        duration: 8000,
-                        status: 'success',
+                      await logout().finally(() => {
+                        onClose();
                       });
-                      onClose();
                     }}
                     leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}
                     variant="alert"
@@ -313,6 +317,7 @@ export default Navbar;
 const Gradient = () => {
   return (
     <Box
+      id="gradient"
       zIndex={10}
       bg="radial-gradient(50% 50% at 50% 50%, #B8326C 0%, rgba(184, 50, 108, 0) 100%)"
       opacity="0.4"

@@ -3,13 +3,13 @@ import * as React from 'react';
 import { I } from 'components';
 import Images from 'assets/images';
 import { ChevronRightIcon, CloseIcon } from '@chakra-ui/icons';
-import { useAppSelector } from '../../../hooks';
+import { usePersistedGroupStore } from '../../../lib/zustand';
 
 interface BannerProps {
   hideGroupWelcome: () => void;
 }
 const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
-  const activeGroup = useAppSelector((state) => state.groupsReducer.activeGroup);
+  const { activeGroup } = usePersistedGroupStore();
 
   return (
     <Box>
@@ -27,7 +27,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
               fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
               color="29323B"
             >
-              {activeGroup?.friendlyName}
+              {activeGroup?.groupName}
             </Text>
             <Box
               display={{ base: 'block', md: 'flex' }}

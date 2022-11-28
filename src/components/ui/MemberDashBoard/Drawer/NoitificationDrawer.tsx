@@ -9,9 +9,10 @@ import {
   DrawerOverlay,
   Text,
 } from '@chakra-ui/react';
-import { Common, I } from 'components';
-import { CloseIcon } from '@chakra-ui/icons';
+import { I } from 'components';
+
 import NoitificationCard from './NotificationCard';
+import { usePersistedGroupStore } from '../../../../lib/zustand';
 
 interface NoitificationDrawerProps {
   open: boolean;
@@ -19,6 +20,10 @@ interface NoitificationDrawerProps {
 }
 
 const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }) => {
+  const requests = usePersistedGroupStore().groupRequests.filter(
+    (requestD) => requestD.status === 'Pending',
+  );
+
   return (
     <Drawer isOpen={open} placement="right" onClose={() => close()}>
       <DrawerOverlay />
@@ -38,7 +43,7 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
           </Box>
           <DrawerCloseButton position="initial" />
         </Box>
-        <Box
+        {/* <Box
           display={{ md: 'flex', base: 'block' }}
           justifyContent="space-between"
           width="100%"
@@ -75,7 +80,7 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
             <CloseIcon color="#29323B" width="10px" height="10px" mr="11px" />
             Decline All
           </Common.ImpaktButton>
-        </Box>
+        </Box> */}
         <DrawerBody
           pr="6px"
           mr="12px"
@@ -96,10 +101,21 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
           }}
         >
           <Box>
-            <NoitificationCard name="Dahaka" GroupName="Bodyweight Training" />
-            <NoitificationCard name="Alp047" GroupName="Power Training" />
-            <NoitificationCard name="Dahaka" GroupName="Good Morning" />
-            <NoitificationCard name="Alp047" GroupName="Bodyweight Training" />
+            {requests.length ? (
+              requests.map(({ id, requestorId, requesteeId, Group, requestor }) => (
+                <NoitificationCard
+                  key={id}
+                  id={id}
+                  requestorId={requestorId}
+                  groupId={requesteeId}
+                  name={requestor.firstName ?? requestor.username}
+                  requestor={requestor}
+                  GroupName={Group.groupName}
+                />
+              ))
+            ) : (
+              <Text color="gray.300">No notifications</Text>
+            )}
           </Box>
         </DrawerBody>
       </DrawerContent>

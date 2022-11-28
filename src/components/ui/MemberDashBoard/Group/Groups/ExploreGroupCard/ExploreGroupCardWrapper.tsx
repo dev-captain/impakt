@@ -1,75 +1,68 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-nested-ternary */
+import { Box } from '@chakra-ui/react';
 import * as React from 'react';
-import { Box, Button, HStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
-import GroupCardWrapperHeader from '../GroupCardWrapperHeader';
-import ExplorePrivateSection from './ExplorePrivateSection';
-import ExplorePublicSection from './ExplorePublicSection';
+import Images from '../../../../../../assets/images';
+import GroupsCard from '../GroupsCard';
 
-const ExploreGroupCardWrapper: React.FC = () => {
-  const [status, setStatus] = React.useState<String>('public');
+import ExploreGroupItem from './ExploreGroupItem';
+import { usePersistedGroupStore } from '../../../../../../lib/zustand';
+
+interface ExploreGroupCardWrapperPropsI {
+  status: 'private' | 'public';
+}
+const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
+  const isPrivate = status === 'private';
+  const navigate = useNavigate();
+
+  const { exploreGroups } = usePersistedGroupStore();
+
+  const exploreGroup = exploreGroups.filter(
+    // eslint-disable-next-line no-underscore-dangle
+    (d) => d.private === isPrivate,
+  );
 
   return (
-    <HStack
-      columnGap={{ md: '24px' }}
-      rowGap="24px"
-      justifyContent="flex-start"
-      alignItems="flex-start"
-      w="full"
-      margin="30px 0"
-      flexWrap={{ sm: 'wrap' }}
-      display={{ sm: 'flex' }}
-    >
-      {/* here is the components */}
-      <Box
-        w="full"
-        as="section"
-        id="explore-group-section"
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Box>
-          <GroupCardWrapperHeader title="Explore Groups" />
-        </Box>
-        <Box margin="20px 0">
-          <Button
-            color={status === 'public' ? '#fff' : '#000'}
-            bg={status === 'public' ? '#29323B' : '#fff'}
-            _hover={{
-              backgroundColor: status === 'private' ? '#fff' : '#29323B',
-              color: status === 'private' ? '#000' : '#fff',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="8px 0 0 8px"
-            onClick={() => {
-              setStatus('public');
-            }}
+    <>
+      {exploreGroup.map((g) => (
+        <Box
+          key={g.id}
+          cursor={g.private ? 'unset' : 'pointer'}
+          marginStart="0 !important"
+          w={{
+            base: '100%',
+            sm: '100%',
+            md: '31%',
+            lgx: '23%',
+          }}
+          onClick={(e: React.MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!g.private) {
+              navigate(`/dashboard/groups/group/${g.id}`);
+            }
+          }}
+          position="relative"
+        >
+          <GroupsCard
+            img={g.CurrentCoverImage ? g.CurrentCoverImage : Images.group.defaultThumbnail}
+            member={g.memberCount}
+            name={g.groupName}
+            isPrivateGroup={g.private}
           >
-            Public
-          </Button>
-          <Button
-            bg={status === 'private' ? '#29323B' : '#fff'}
-            color={status === 'private' ? '#fff' : '#000'}
-            _hover={{
-              backgroundColor: status === 'public' ? '#fff' : '#29323B',
-              color: status === 'public' ? '#000' : '#fff',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="0 8px 8px 0"
-            onClick={() => {
-              setStatus('private');
-            }}
-          >
-            Private
-          </Button>
+            <ExploreGroupItem
+              gId={g.id}
+              gRequestStatus={g.Request}
+              gPrivate={isPrivate}
+              key={`explore-group-item-${g.id}`}
+            />
+          </GroupsCard>
         </Box>
-      </Box>
-      {status === 'private' ? <ExplorePrivateSection /> : <ExplorePublicSection />}
-    </HStack>
+      ))}
+    </>
   );
 };
+
 export default ExploreGroupCardWrapper;
