@@ -2,8 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 export const useNextParamRouter = () => {
   const navigate = useNavigate();
-  const isThereNextParam = useLocation().search.includes('next');
-  const nextParamLink = useLocation().search.split('=')[1];
+  const isThereNextParam = useLocation().search.substring(1, 5).includes('next');
+  const nextParamLink = useLocation().search.substring(6);
   const navigateToNextParam = () => {
     if (isThereNextParam) {
       if (isForOtherImpaktProduct(nextParamLink)) {
