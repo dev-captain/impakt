@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Text, Avatar, Button, useDisclosure } from '@chakra-ui/react';
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
-// import { Common } from 'components';
 import { useForm } from 'hooks';
 import { Common, I } from 'components';
 import { useParams } from 'react-router-dom';
@@ -159,7 +158,6 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                         <AddIcon color="#4E6070" width="14px" height="14px" />
                       </Button>
                     )}
-                    {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
                   </Box>
                 </Box>
               ),
@@ -205,11 +203,9 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                           onOpen();
                         }}
                       >
-                        {/* <Button onClick={() => handleOnRemoveModerator(User.id)}> */}
                         <CloseIcon color="#ff3333" width="12px" height="12px" />
                       </Button>
                     )}
-                    {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
                   </Box>
                 </Box>
               ),
