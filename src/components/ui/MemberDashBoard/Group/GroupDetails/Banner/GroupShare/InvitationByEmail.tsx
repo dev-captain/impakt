@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl } from '@chakra-ui/react';
 
 import { Common } from 'components';
-import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { usePersistedGroupStore, usePersistedAuthStore } from '../../../../../../../lib/zustand';
 import { InputGroupPropsI } from '../../../../../../common/InputGroup';
 import groupInviteYupScheme from '../../../../../../../lib/yup/schemas/groupInviteYupScheme';
 // import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
@@ -37,9 +37,9 @@ const InvitationByEmail: React.FC = () => {
       whiteMode: true,
     },
   ];
-
+  const { member } = usePersistedAuthStore();
   const subject = `Invitation to Impakt Group`;
-  const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}`;
+  const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}&referralId=${member?.id}`;
   const mailto = `mailto:${getValues(
     'email',
   )}?subject=${subject}&body= You have been invited to Impakt. Please click the link below to join ${inviteUrl}</b>}`;
