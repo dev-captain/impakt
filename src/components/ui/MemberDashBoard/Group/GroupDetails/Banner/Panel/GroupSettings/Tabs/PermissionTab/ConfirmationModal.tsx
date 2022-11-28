@@ -14,7 +14,7 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close, hand
   return (
     <GroupsModal
       modalTitle={{
-        text: 'Are you want remove this user from moderation team?',
+        text: 'Are you sure you want remove this user from moderation team?',
       }}
       isOpen={open}
       onClose={close}
