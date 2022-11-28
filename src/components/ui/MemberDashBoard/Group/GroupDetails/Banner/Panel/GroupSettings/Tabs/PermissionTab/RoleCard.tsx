@@ -23,6 +23,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     defaultValues: { username: '' },
   });
 
+  const memberRole = usePersistedGroupStore();
   const assignRole = useGroupsMemberControllerV1AssignRole();
   const { activeGroup, setMyGroups, myGroups, membersOfGroup } = usePersistedGroupStore();
   const [members, setMembers] = useState(membersOfGroup?.Members ?? []);
@@ -30,7 +31,6 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   const [userIndex, setUserIndex] = useState(-1);
   const groupParam = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const checkString = (username, filterVal) => {
     let res = 0;
     let lastSearch = -1;
@@ -46,6 +46,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     if (res === filterVal.length) return true;
     return false;
   };
+
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
     const filterVal = e.target.value.toLowerCase();
@@ -86,7 +87,6 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       },
     );
   };
-
   const inputItems: InputGroupPropsI[] = [
     {
       placeholder: 'Username',
@@ -110,10 +110,12 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
         </Text>
       </Box>
       <Box display="flex" justifyContent="space-between" alignItem="center">
-        <Text color="#29323B" fontSize={{ md: '14px', base: '14px' }} fontWeight="300">
-          Assign group members to be moderators. They will be able to do everything you can, except
-          deleting your group and assigning other moderators.
-        </Text>
+        {memberRole.role === 'Creator' && (
+          <Text color="#29323B" fontSize={{ md: '14px', base: '14px' }} fontWeight="300">
+            Assign group members to be moderators. They will be able to do everything you can,
+            except deleting your group and assigning other moderators.
+          </Text>
+        )}
       </Box>
       <Box display="flex" width="100%" mt="12px">
         <Common.InputItems inputItems={inputItems} />
@@ -152,9 +154,11 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                     </Text>
                   </Box>
                   <Box marginLeft="1em" display="flex" alignItems="center">
-                    <Button onClick={() => handleOnAssignModerator(User.id, 'Moderator')}>
-                      <AddIcon color="#4E6070" width="14px" height="14px" />
-                    </Button>
+                    {memberRole.role === 'Creator' && (
+                      <Button onClick={() => handleOnAssignModerator(User.id, 'Moderator')}>
+                        <AddIcon color="#4E6070" width="14px" height="14px" />
+                      </Button>
+                    )}
                     {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
                   </Box>
                 </Box>
@@ -194,15 +198,17 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                     </Text>
                   </Box>
                   <Box marginLeft="1em" display="flex" alignItems="center">
-                    <Button
-                      onClick={() => {
-                        setUserIndex(User.id);
-                        onOpen();
-                      }}
-                    >
-                      {/* <Button onClick={() => handleOnRemoveModerator(User.id)}> */}
-                      <CloseIcon color="#ff3333" width="12px" height="12px" />
-                    </Button>
+                    {memberRole.role === 'Creator' && (
+                      <Button
+                        onClick={() => {
+                          setUserIndex(User.id);
+                          onOpen();
+                        }}
+                      >
+                        {/* <Button onClick={() => handleOnRemoveModerator(User.id)}> */}
+                        <CloseIcon color="#ff3333" width="12px" height="12px" />
+                      </Button>
+                    )}
                     {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
                   </Box>
                 </Box>
