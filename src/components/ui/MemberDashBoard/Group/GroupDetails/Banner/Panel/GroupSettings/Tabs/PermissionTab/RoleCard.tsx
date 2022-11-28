@@ -124,7 +124,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
             ({ role, User }) =>
               role !== 'None' &&
               role !== 'Moderator' &&
-              role !== 'Creater' && (
+              role !== 'Creator' && (
                 <Box
                   key={`${User.id}-box`}
                   display="flex"
