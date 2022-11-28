@@ -32,12 +32,15 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const checkString = (username, filterVal) => {
-    console.log(username);
-    console.log(filterVal);
     let res = 0;
+    let lastSearch = -1;
     for (let i = 0; i < filterVal.length; i += 1) {
-      if (username.includes(filterVal[i])) {
-        res += 1;
+      for (let j = lastSearch + 1; j < username.length; j += 1) {
+        if (username[j] === filterVal[i]) {
+          res += 1;
+          lastSearch = j;
+          break;
+        }
       }
     }
     if (res === filterVal.length) return true;
@@ -45,21 +48,20 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   };
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
-    const filterVal = e.target.value.split('').sort().join('').toLowerCase();
-    console.log(members[0].User.username.split('').sort().join('').toLowerCase());
+    const filterVal = e.target.value.toLowerCase();
     const result = members.filter((member) =>
-      checkString(member.User.username.split('').sort().join('').toLowerCase(), filterVal),
+      checkString(member.User.username.toLowerCase(), filterVal),
     );
     setSearchedMembers(result);
   };
 
-  const handleOnAssignModerator = async (userId) => {
+  const handleOnAssignModerator = async (userId, Role) => {
     if (!activeGroup?.id) return;
     assignRole.mutate(
       {
         groupId: Number(groupParam?.id),
         userId: Number(userId),
-        role: 'Moderator',
+        role: Role,
       },
       {
         onSuccess: () => {
@@ -74,46 +76,11 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
           setMembers(
             members.map((member) => ({
               ...member,
-              role: member.User.id === userId ? 'Moderator' : member.role,
+              role: member.User.id === userId ? Role : member.role,
             })),
           );
         },
         onError: (err) => {
-          console.log(err);
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
-        },
-      },
-    );
-  };
-
-  const handleOnRemoveModerator = async (userId) => {
-    onClose();
-    if (!activeGroup?.id) return;
-    assignRole.mutate(
-      {
-        groupId: Number(groupParam?.id),
-        userId: Number(userId),
-        role: 'Member',
-      },
-      {
-        onSuccess: () => {
-          renderToast('success', 'Removed Moderator role successfully.');
-          const shallowOfMyGroups = [...myGroups];
-          const indexOfGroup = shallowOfMyGroups.findIndex(
-            (group) => group.groupId === activeGroup.id,
-          );
-          if (indexOfGroup !== -1) {
-            setMyGroups(shallowOfMyGroups);
-          }
-          setMembers(
-            members.map((member) => ({
-              ...member,
-              role: member.User.id === userId ? 'Member' : member.role,
-            })),
-          );
-        },
-        onError: (err) => {
-          console.log(err);
           renderToast('error', err.response?.data.message ?? 'Something went wrong');
         },
       },
@@ -185,7 +152,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                     </Text>
                   </Box>
                   <Box marginLeft="1em" display="flex" alignItems="center">
-                    <Button onClick={() => handleOnAssignModerator(User.id)}>
+                    <Button onClick={() => handleOnAssignModerator(User.id, 'Moderator')}>
                       <AddIcon color="#4E6070" width="14px" height="14px" />
                     </Button>
                     {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
@@ -246,7 +213,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       <ConfirmationModal
         open={isOpen}
         close={() => onClose()}
-        handleConfirm={() => handleOnRemoveModerator(userIndex)}
+        handleConfirm={() => handleOnAssignModerator(userIndex, 'Member')}
       />
     </Box>
   );
