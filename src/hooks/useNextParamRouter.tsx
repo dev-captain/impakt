@@ -23,6 +23,6 @@ export const useNextParamRouter = () => {
 
 const isForOtherImpaktProduct = (hostname: string) => {
   return (
-    /impakt\.com$/.test(hostname.substring(1)) || /impakt-dev\.com$/.test(hostname.substring(1))
+    /impakt\.com */.test(hostname.substring(1)) || /impakt-dev\.com */.test(hostname.substring(1))
   );
 };
