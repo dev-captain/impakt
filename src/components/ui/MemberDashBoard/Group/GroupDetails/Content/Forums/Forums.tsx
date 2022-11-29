@@ -14,17 +14,6 @@ import { getCreatedBefore } from '../../../../../../../utils';
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { posts } = usePersistedForumStore();
-  // const creatorCommentSortedByCreatedDate = activePost?.Comment.sort(
-  //   (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  // );
-  const resortedPosts = posts.map((post) => {
-    return {
-      ...post,
-      Comment: post.Comment.sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      ),
-    };
-  });
 
   return (
     <>
@@ -48,9 +37,9 @@ const Forums: React.FC = () => {
                 </Button>
               </Box>
             </Box>
-            {resortedPosts.length === 0 && <CreatePostCard onClick={onOpen} />}
-            {resortedPosts.length > 0 &&
-              resortedPosts.map(
+            {posts.length === 0 && <CreatePostCard onClick={onOpen} />}
+            {posts.length > 0 &&
+              posts.map(
                 ({ id, Creator, content, createdAt, Comment }) =>
                   Comment.length && (
                     <UserForumsCard

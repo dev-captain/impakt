@@ -141,12 +141,7 @@ export const useFetchGroupDetails = () => {
         retry: 0,
         refetchOnMount: false,
         onSuccess: (posts) => {
-          // TODO on the backend sort new ones to old ones for comment & posts
-          const reversedCommentPostsOrder = posts.map((postD) => {
-            return { ...postD, Comment: postD.Comment.reverse() };
-          });
-
-          setPosts(reversedCommentPostsOrder ?? []);
+          setPosts(posts ?? []);
         },
       },
     },
