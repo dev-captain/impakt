@@ -17,11 +17,11 @@ interface ChallengesCardProps {
 }
 
 const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
+  const [inputValue, setInput] = useState('');
   const { errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
     defaultValues: { username: '' },
   });
-
   const memberRole = usePersistedGroupStore();
   const assignRole = useGroupsMemberControllerV1AssignRole();
   const { activeGroup, setMyGroups, myGroups, membersOfGroup } = usePersistedGroupStore();
@@ -47,6 +47,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   };
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setInput(e.target.value);
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
     const filterVal = e.target.value.toLowerCase();
     const result = members.filter((member) =>
@@ -97,7 +98,18 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       autoFocus: true,
       whiteMode: true,
       width: '50%',
-      rightIcon: <I.CloseIcon color="#29323B" width="20px" height="20px" />,
+      value: inputValue,
+      rightIcon: (
+        <I.CloseIcon
+          color="#29323B"
+          width="20px"
+          height="20px"
+          style={{ borderRadius: '50px', backgroundColor: '#91A8BD', fill: '#ffffff' }}
+          onClick={() => {
+            setInput('');
+          }}
+        />
+      ),
     },
   ];
 
