@@ -10,10 +10,7 @@ const ForumDetail: React.FC = () => {
   // const { member } = usePersistedAuthStore();
   const { activePost } = usePersistedForumStore();
 
-  const sortedComments = activePost?.Comment.sort(
-    (a, b) => new Date(a.createdAt).getDate() - new Date(b.createdAt).getDate(),
-  );
-  const distractFirstElementFromArray = sortedComments?.slice(0, sortedComments.length - 1);
+  const distractFirstElementFromArray = activePost?.Comment.slice(0, activePost.Comment.length - 1);
   const copyOfActivePost = { ...activePost, Comment: distractFirstElementFromArray };
 
   // const deletePostFromDb = async () => {
