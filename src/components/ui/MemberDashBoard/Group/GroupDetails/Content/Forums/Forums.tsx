@@ -15,7 +15,7 @@ import { getCreatedBefore } from '../../../../../../../utils';
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { posts } = usePersistedForumStore();
-  const { activeGroup } = usePersistedGroupStore();
+  const { activeGroup, role } = usePersistedGroupStore();
   // const creatorCommentSortedByCreatedDate = activePost?.Comment.sort(
   //   (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   // );
@@ -35,6 +35,8 @@ const Forums: React.FC = () => {
       </MemberDashboardCard>
     );
 
+  const isRoleDefined = role && role !== 'None';
+
   return (
     <>
       <Box marginStart="0 !important" width={{ base: '100%', md: '40%', lgx: '50%' }}>
@@ -45,16 +47,18 @@ const Forums: React.FC = () => {
                 <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
                   Forums
                 </Text>
-                <Button
-                  background="transparent"
-                  variant="ghost"
-                  _selected={{ border: '0' }}
-                  _focus={{ border: 0 }}
-                  padding="0"
-                  onClick={onOpen}
-                >
-                  <AddIcon color="#29323B" width="15px" height="15px" fontWeight="bold" />
-                </Button>
+                {isRoleDefined ? (
+                  <Button
+                    background="transparent"
+                    variant="ghost"
+                    _selected={{ border: '0' }}
+                    _focus={{ border: 0 }}
+                    padding="0"
+                    onClick={onOpen}
+                  >
+                    <AddIcon color="#29323B" width="15px" height="15px" fontWeight="bold" />
+                  </Button>
+                ) : null}
               </Box>
             </Box>
             {resortedPosts.length === 0 && <CreatePostCard onClick={onOpen} />}
