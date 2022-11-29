@@ -78,7 +78,12 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
           reset({ comment: '' });
         },
         onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
+          if (err.response?.data.message.includes('resource')) {
+            renderToast('error', 'You have to be member of the group to post comment...');
+
+            return;
+          }
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
         },
       },
     );
