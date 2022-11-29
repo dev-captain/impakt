@@ -132,9 +132,11 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
           </Text>
         )}
       </Box>
-      <Box display="flex" width="100%" mt="12px">
-        <Common.InputItems inputItems={inputItems} />
-      </Box>
+      {memberRole.role === 'Creator' && (
+        <Box display="flex" width="100%" mt="12px">
+          <Common.InputItems inputItems={inputItems} />
+        </Box>
+      )}
       <Box display="flex" width="100%" mt="12px">
         <Box w="full">
           {searchedMembers.map(

@@ -17,7 +17,7 @@ const PermissionTab: React.FC = () => {
 
   const { t } = useTranslation().i18n;
   const groupParam = useParams();
-  const { activeGroup, setActiveGroup, setMyGroups, myGroups } = usePersistedGroupStore();
+  const { activeGroup, setActiveGroup, setMyGroups, myGroups, role } = usePersistedGroupStore();
   React.useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
     if (activeGroup?.private) {
@@ -117,30 +117,32 @@ const PermissionTab: React.FC = () => {
 
         <RoleCard title="Moderators" />
       </Box>
-      <Box mt="20px" textAlign="end">
-        <Common.ImpaktButton
-          variant="black"
-          color="#fff"
-          w="147px"
-          h="60px"
-          backgroundColor="#29323B"
-          borderRadius="8px"
-          type="submit"
-          fontSize={{ md: '16px' }}
-          fontWeight="500"
-          isLoading={updateGroup.isLoading}
-          isDisabled={updateGroup.isLoading}
-          onClick={() => handleOnUpdate()}
-        >
-          <Text
-            ml={{ md: '11px', base: '6px' }}
-            fontSize={{ md: '20px', base: '16px' }}
-            fontWeight="600"
+      {role === 'Creator' && (
+        <Box mt="20px" textAlign="end">
+          <Common.ImpaktButton
+            variant="black"
+            color="#fff"
+            w="147px"
+            h="60px"
+            backgroundColor="#29323B"
+            borderRadius="8px"
+            type="submit"
+            fontSize={{ md: '16px' }}
+            fontWeight="500"
+            isLoading={updateGroup.isLoading}
+            isDisabled={updateGroup.isLoading}
+            onClick={() => handleOnUpdate()}
           >
-            Save
-          </Text>
-        </Common.ImpaktButton>
-      </Box>
+            <Text
+              ml={{ md: '11px', base: '6px' }}
+              fontSize={{ md: '20px', base: '16px' }}
+              fontWeight="600"
+            >
+              Save
+            </Text>
+          </Common.ImpaktButton>
+        </Box>
+      )}
     </Box>
   );
 };
