@@ -27,7 +27,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   const { activeGroup, setMyGroups, myGroups, membersOfGroup } = usePersistedGroupStore();
   const [members, setMembers] = useState(membersOfGroup?.Members ?? []);
   const [searchedMembers, setSearchedMembers] = useState<Array<any>>([]);
-  const [userIndex, setUserIndex] = useState(-1);
+  const [userIndex, setUserIndex] = useState({ id: -1, name: '' });
   const groupParam = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const checkString = (username, filterVal) => {
@@ -43,6 +43,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       }
     }
     if (res === filterVal.length) return true;
+
     return false;
   };
 
@@ -56,7 +57,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     setSearchedMembers(result);
   };
 
-  const handleOnAssignModerator = async (userId, Role) => {
+  const handleOnAssignModerator = async (userId: number, Role) => {
     if (!activeGroup?.id) return;
     assignRole.mutate(
       {
@@ -66,7 +67,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       },
       {
         onSuccess: () => {
-          renderToast('success', 'Assigned as a Moderator successfully.');
+          renderToast('success', `Assigned as a ${Role} successfully.`);
           const shallowOfMyGroups = [...myGroups];
           const indexOfGroup = shallowOfMyGroups.findIndex(
             (group) => group.groupId === activeGroup.id,
@@ -82,7 +83,11 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
           );
         },
         onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          if (err.response?.data.message === 'Member role is Moderator already...') {
+            renderToast('error', `${userIndex.name} is already a moderator`);
+          } else {
+            renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          }
         },
       },
     );
@@ -211,7 +216,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                     {memberRole.role === 'Creator' && (
                       <Button
                         onClick={() => {
-                          setUserIndex(User.id);
+                          setUserIndex({ id: User.id, name: User.username });
                           onOpen();
                         }}
                       >
@@ -227,7 +232,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       <ConfirmationModal
         open={isOpen}
         close={() => onClose()}
-        handleConfirm={() => handleOnAssignModerator(userIndex, 'Member')}
+        handleConfirm={() => handleOnAssignModerator(userIndex.id, 'Member')}
       />
     </Box>
   );
