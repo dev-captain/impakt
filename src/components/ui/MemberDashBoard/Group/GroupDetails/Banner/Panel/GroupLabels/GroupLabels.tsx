@@ -27,15 +27,16 @@ const GroupLabels: React.FC = () => {
     bestScoreOfUser,
   } = usePersistedChallengeStore();
   const { member } = usePersistedAuthStore();
-
+  const createPinnedChallenge = useFavoriteControllerV1CreateOne();
   const fetchPinnedChallengeUserBestScore = useChallengeStatsControllerGetUserBestScore(
-    groupPinnedChallenge?.Challenge.id ?? 0,
+    groupPinnedChallenge?.Challenge?.id ?? 0,
     member?.id ?? 0,
     {
       query: {
         enabled: false,
         retry: 0,
         refetchOnMount: false,
+        refetchOnWindowFocus: false,
         onSuccess: (bestScore) => {
           setBestScoreOfUser(bestScore);
         },
@@ -50,6 +51,7 @@ const GroupLabels: React.FC = () => {
         enabled: false,
         retry: 0,
         refetchOnMount: false,
+        refetchOnWindowFocus: false,
         onSuccess: (leaderboard) => {
           setChallengeLeaderBoard(leaderboard);
         },
@@ -57,7 +59,6 @@ const GroupLabels: React.FC = () => {
     },
   );
 
-  const createPinnedChallenge = useFavoriteControllerV1CreateOne();
   const sortLeaderboardByScore = challengeLeaderBoard?.usersPassed.sort(
     (a, b) => b.userScore - a.userScore,
   );
@@ -117,6 +118,8 @@ const GroupLabels: React.FC = () => {
                 challengeModalDisclosure.onOpen();
               }
             }}
+            isLoading={createPinnedChallenge.isLoading}
+            isDisabled={createPinnedChallenge.isLoading}
             fontSize="40px"
             width="40px"
             h="40px"
@@ -138,9 +141,16 @@ const GroupLabels: React.FC = () => {
   ];
 
   const handlePinnedChallenge = (actChallenge: GetChallengeRes) => {
-    if (!activeGroup || !groupPinnedChallenge) return;
+    if (!activeGroup) return;
+    if (actChallenge.id === groupPinnedChallenge?.Challenge?.id) return;
 
-    setGroupPinnedChallenge({ ...groupPinnedChallenge, Challenge: actChallenge });
+    setGroupPinnedChallenge({
+      id: 0,
+      groupName: activeGroup.groupName,
+      createdAt: actChallenge.createdAt,
+      updatedAt: actChallenge.updatedAt,
+      Challenge: actChallenge,
+    });
 
     createPinnedChallenge.mutate(
       {
