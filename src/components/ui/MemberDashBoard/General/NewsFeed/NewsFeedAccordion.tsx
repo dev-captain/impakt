@@ -11,7 +11,7 @@ import {
 import { I } from 'components';
 import * as React from 'react';
 import truncH from 'trunc-html';
-import { usePersistedDiscourseStore } from '../../../../lib/zustand';
+import { usePersistedDiscourseStore } from '../../../../../lib/zustand';
 
 // import { useAppSelector } from '../../../../hooks';
 

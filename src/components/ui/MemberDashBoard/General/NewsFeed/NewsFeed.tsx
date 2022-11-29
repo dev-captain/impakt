@@ -1,53 +1,52 @@
+import React from 'react';
 import { Box, HStack, Text } from '@chakra-ui/react';
-import * as React from 'react';
 import { Common, I } from 'components';
 
-import MemberDashboardCard from '../MemberDashBoardCard';
+import MemberDashboardCard from '../../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
 
 const NewsFeed: React.FC = () => {
   return (
     <MemberDashboardCard
-      color="rgba(255,255,255,0.5)"
-      _hover={{ color: 'rgba(255,255,255,1)' }}
-      transition="color .2s"
+      justifyContent="space-between"
+      _hover={{ color: 'darkOrange' }}
+      transition="color .5s"
       rowGap="1.5em"
+      color="fg-1"
     >
-      <Box id="news-feed-headline-box">
-        <HStack columnGap="1.125em">
-          <Box color="#000" id="news-feed-headline-text-box">
-            <Text textStyle="bold5" lineHeight="100%">
-              News Feed
-            </Text>
-          </Box>
-          <Box id="news-feed-headline-text-icon-box">
-            <I.NewsIcon />
-          </Box>
-        </HStack>
-      </Box>
+      <HStack w="full" justifyContent="space-between">
+        <Box color="fg-1" id="news-feed-headline-text-box">
+          <Text textStyle="bold5" letterSpacing="-0.5px" lineHeight="100%">
+            News Feed
+          </Text>
+        </Box>
+        <Box id="news-feed-headline-text-icon-box">
+          <I.NewsIcon />
+        </Box>
+      </HStack>
+
       <Box color="#4E6070" w="full" id="news-feed-accordion-box">
         <NewsFeedAccordion />
       </Box>
 
-      <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
+      <Box display="flex" w="full" id="news-feed-check-our-discourse-box">
         <Common.ImpaktButton
+          display="flex"
+          wordBreak="break-word"
           size="lg"
-          variant="white"
-          bgColor="#F5F8FA"
-          leftIcon={
-            <Box marginRight="8px">
-              <I.DiscourseIcon />
-            </Box>
-          }
-          fontSize={{ base: '12px', md: '16px', lg: '20px' }}
-          lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
-          color="#4E6070"
+          variant="white-50"
+          leftIcon={<I.DiscourseIcon style={{ marginRight: '5px' }} />}
+          fontSize="20px"
+          lineHeight="100%"
           justifyContent={{ md: 'center', lg: 'flex-start' }}
           as="a"
           href="https://discuss.impakt.com/tag/news"
           target="_blank"
+          height="auto"
+          width="full"
+          whiteSpace="break-spaces"
         >
-          Check our Discourse for more updates
+          <Text wordBreak="break-word">Check our Discourse for more updates</Text>
         </Common.ImpaktButton>
       </Box>
       {/* <Box id="news-feed-headline-box">Headline</Box> */}

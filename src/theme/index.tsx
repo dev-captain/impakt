@@ -7,7 +7,8 @@ import shadows from './shadows';
 import textStyles from './textStyles';
 
 const breakpoints = createBreakpoints({
-  sm: '0',
+  base: '0',
+  sm: '500px',
   md: '992px',
   lg: '1281px',
   lgx: '1560px',

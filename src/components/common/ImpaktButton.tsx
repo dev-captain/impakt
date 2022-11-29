@@ -6,6 +6,7 @@ type ImpaktButtonVariantType =
   | 'secondary'
   | 'alert'
   | 'white'
+  | 'white-50'
   | 'black'
   | 'transparent';
 
@@ -23,6 +24,8 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
   const bgColor = getBgColor(props.variant);
   const size = props.size ?? 'sm';
   const textColor = getTextColor(props.variant);
+  const hoverBg = getHoverBg(props.variant);
+  const hoverTextColor = getHoverTextColor(props.variant);
 
   return (
     <Button
@@ -30,7 +33,7 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
       type={props.type}
       w="full"
       color={textColor}
-      _hover={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
+      _hover={{ bg: hoverBg, textDecoration: 'none', color: hoverTextColor }}
       transition="all .2s linear"
       cursor="pointer"
       px="20px"
@@ -65,6 +68,10 @@ const getBgColor = (variant?: ImpaktButtonVariantType) => {
     return 'rgba(255,255,255,1)';
   }
 
+  if (variant === 'white-50') {
+    return 'a5';
+  }
+
   if (variant === 'black') {
     return '#1C1C28';
   }
@@ -89,6 +96,70 @@ const getTextColor = (variant?: ImpaktButtonVariantType) => {
 
   if (variant === 'white') {
     return 'fitnessGray';
+  }
+
+  if (variant === 'white-50') {
+    return 'fg-1';
+  }
+
+  if (variant === 'black') {
+    return '#fff';
+  }
+
+  if (variant === 'transparent') {
+    return '#000';
+  }
+
+  return 'rgba(255, 255, 255, 1)';
+};
+
+const getHoverBg = (variant?: ImpaktButtonVariantType) => {
+  if (variant === 'primary') {
+    return 'rgba(255, 255, 255, 1)';
+  }
+  if (variant === 'secondary') {
+    return 'rgba(255, 255, 255, 0.75)';
+  }
+  if (variant === 'alert') {
+    return 'rgba(240, 65, 83, 1)';
+  }
+
+  if (variant === 'white') {
+    return '#F5F8FA';
+  }
+
+  if (variant === 'white-50') {
+    return 'darkOrange';
+  }
+
+  if (variant === 'black') {
+    return '#fff';
+  }
+
+  if (variant === 'transparent') {
+    return '#000';
+  }
+
+  return 'rgba(255, 255, 255, 1)';
+};
+
+const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
+  if (variant === 'primary') {
+    return 'rgba(255, 255, 255, 1)';
+  }
+  if (variant === 'secondary') {
+    return 'rgba(255, 255, 255, 0.75)';
+  }
+  if (variant === 'alert') {
+    return 'rgba(240, 65, 83, 1)';
+  }
+
+  if (variant === 'white') {
+    return '#F27961';
+  }
+
+  if (variant === 'white-50') {
+    return '#FFFFFF';
   }
 
   if (variant === 'black') {
