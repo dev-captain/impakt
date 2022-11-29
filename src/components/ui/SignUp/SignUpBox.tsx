@@ -8,10 +8,11 @@ import SignUpForm from './SignUpForm';
 const SignUpBox: React.FC = () => {
   const isThereNextParam = useLocation().search.includes('next');
   let navigateTo = '/signin';
-  console.log(useLocation().search);
+
   if (isThereNextParam) {
     navigateTo = `/signin?next=${useLocation().search.split('next=')[1]}`;
   }
+
   return (
     <Common.Card m="0 !important" maxW="576px" h="100%" w="full">
       <SignUpForm />
