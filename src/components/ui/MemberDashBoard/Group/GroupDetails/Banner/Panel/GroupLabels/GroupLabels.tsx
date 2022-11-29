@@ -13,12 +13,49 @@ import ChallengePreviewModal from '../../../Modal/ChallengePreviewModal';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
 import { normalizeExerciseNames } from '../../../../../../../../utils';
+import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
+import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 
 const GroupLabels: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
-  const { groupPinnedChallenge, setGroupPinnedChallenge, challengeLeaderBoard, bestScoreOfUser } =
-    usePersistedChallengeStore();
+  const {
+    groupPinnedChallenge,
+    setBestScoreOfUser,
+    setChallengeLeaderBoard,
+    setGroupPinnedChallenge,
+    challengeLeaderBoard,
+    bestScoreOfUser,
+  } = usePersistedChallengeStore();
   const { member } = usePersistedAuthStore();
+
+  const fetchPinnedChallengeUserBestScore = useChallengeStatsControllerGetUserBestScore(
+    groupPinnedChallenge?.Challenge.id ?? 0,
+    member?.id ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (bestScore) => {
+          setBestScoreOfUser(bestScore);
+        },
+      },
+    },
+  );
+
+  const fetchPinnedChallengeLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
+    groupPinnedChallenge?.Challenge?.id ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (leaderboard) => {
+          setChallengeLeaderBoard(leaderboard);
+        },
+      },
+    },
+  );
 
   const createPinnedChallenge = useFavoriteControllerV1CreateOne();
   const sortLeaderboardByScore = challengeLeaderBoard?.usersPassed.sort(
@@ -104,11 +141,20 @@ const GroupLabels: React.FC = () => {
     if (!activeGroup || !groupPinnedChallenge) return;
 
     setGroupPinnedChallenge({ ...groupPinnedChallenge, Challenge: actChallenge });
-    createPinnedChallenge.mutate({
-      data: { objectId: actChallenge.id, type: 'Challenge' },
-      referenceType: 'Group',
-      referenceId: activeGroup?.id,
-    });
+
+    createPinnedChallenge.mutate(
+      {
+        data: { objectId: actChallenge.id, type: 'Challenge' },
+        referenceType: 'Group',
+        referenceId: activeGroup?.id,
+      },
+      {
+        onSuccess: async () => {
+          await fetchPinnedChallengeLeaderboard.refetch();
+          await fetchPinnedChallengeUserBestScore.refetch();
+        },
+      },
+    );
   };
 
   return (
