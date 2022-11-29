@@ -2,18 +2,20 @@ import { Box, Text, Button, useDisclosure } from '@chakra-ui/react';
 // import { I } from 'components';
 import * as React from 'react';
 import { AddIcon } from '@chakra-ui/icons';
+import { I } from 'components';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from 'assets/images';
 import UserForumsCard from './UserForumsCard';
 import CreatePostCard from './CreatePostCard';
-import { usePersistedForumStore } from '../../../../../../../lib/zustand';
+import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import CreatePostModal from './CreatePostModal';
 import { getCreatedBefore } from '../../../../../../../utils';
 
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { posts } = usePersistedForumStore();
+  const { activeGroup } = usePersistedGroupStore();
   // const creatorCommentSortedByCreatedDate = activePost?.Comment.sort(
   //   (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   // );
@@ -25,6 +27,13 @@ const Forums: React.FC = () => {
       ),
     };
   });
+
+  if (activeGroup?.isPreview && activeGroup.private)
+    return (
+      <MemberDashboardCard justifyContent="center" alignItems="center" marginTop="26px">
+        <I.LockIcon />
+      </MemberDashboardCard>
+    );
 
   return (
     <>

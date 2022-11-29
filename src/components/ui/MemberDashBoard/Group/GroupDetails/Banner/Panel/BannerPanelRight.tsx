@@ -3,8 +3,7 @@ import { Box } from '@chakra-ui/react';
 
 import BannerSettingsMenu from './BannerSettingsMenu';
 
-interface PropsI {}
-const BannerPanelRight: React.FC<PropsI> = () => {
+const BannerPanelRight: React.FC = () => {
   return (
     <Box marginTop={{ md: '0', base: '20px' }} display="flex">
       <BannerSettingsMenu />

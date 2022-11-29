@@ -8,13 +8,31 @@ import {
 } from '@chakra-ui/react';
 // import { I } from 'components';
 import * as React from 'react';
+import { I } from 'components';
+
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const MemberList: React.FC = () => {
+  const { activeGroup } = usePersistedGroupStore();
   // const toast = useToast();
   // const isMemberLoading = useAppSelector((state) => state.groupsReducer.isMembersLoading);
   const members = usePersistedGroupStore().membersOfGroup;
+
+  if (activeGroup?.isPreview && activeGroup.private)
+    return (
+      <MemberDashboardCard
+        justifyContent="center"
+        alignItems="center"
+        width={{ base: '100%', md: '312px' }}
+        minW={{ base: '100%', md: '312px' }}
+        minH={{ base: '100%', md: '312px' }}
+        height={{ base: '100%', md: '312px' }}
+        marginTop="26px"
+      >
+        <I.LockIcon />
+      </MemberDashboardCard>
+    );
 
   return (
     <Box marginStart="0 !important" width={{ base: '100%', md: '30%', lgx: '25%' }}>

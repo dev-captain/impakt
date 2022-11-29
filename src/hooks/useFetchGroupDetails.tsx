@@ -51,7 +51,8 @@ export const useFetchGroupDetails = () => {
 
   // fetching group relateds
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
-  const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
+
+  useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
     query: {
       retry: 0,
       refetchOnMount: true,
@@ -65,13 +66,21 @@ export const useFetchGroupDetails = () => {
 
           return;
         }
-        await fetchMembersOfGroup.refetch();
-        await fetchAmIMemberOfGroup.refetch();
-        await fetchGroupRoleById.refetch();
-        await fetchPosts.refetch();
-        await fetchGroupCalendar.refetch();
-        await fetchGroupPinnedChallenge.refetch();
 
+        if (!data.isPreview || !data.private) {
+          await fetchMembersOfGroup.refetch();
+          const isMemberOfGroup = await fetchAmIMemberOfGroup.refetch();
+          if (isMemberOfGroup.data) {
+            await fetchGroupRoleById.refetch();
+          } else {
+            setRole('None');
+          }
+          await fetchPosts.refetch();
+          await fetchGroupCalendar.refetch();
+          await fetchGroupPinnedChallenge.refetch();
+        } else {
+          setRole('None');
+        }
         setActiveGroup(data);
         setIsGroupDetailsLoading(false);
       },
@@ -121,9 +130,6 @@ export const useFetchGroupDetails = () => {
         enabled: false,
         refetchOnMount: false,
         retry: 0,
-        onError: () => {
-          setRole('None');
-        },
         onSuccess: (roleData) => {
           setRole(roleData.role);
         },
@@ -152,19 +158,16 @@ export const useFetchGroupDetails = () => {
     },
   );
 
-  const fetchGroupCalendar = useCalendarControllerGetCalendar(
-    fetchGroupDetailById.data?.calendarId ?? 0,
-    {
-      query: {
-        enabled: false,
-        retry: 0,
-        refetchOnMount: false,
-        onSuccess: (calendarData) => {
-          setCalendar(calendarData);
-        },
+  const fetchGroupCalendar = useCalendarControllerGetCalendar(parseInt(groupParam?.id ?? '0', 10), {
+    query: {
+      enabled: false,
+      retry: 0,
+      refetchOnMount: false,
+      onSuccess: (calendarData) => {
+        setCalendar(calendarData);
       },
     },
-  );
+  });
 
   const fetchGroupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(
     parseInt(groupParam?.id ?? '0', 10),
