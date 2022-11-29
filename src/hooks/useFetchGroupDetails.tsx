@@ -11,21 +11,28 @@ import { GetMembersOfGroupRes } from '../lib/impakt-dev-api-client/react-query/t
 import {
   useGroupsControllerV1FindOne,
   useGroupsControllerV1FindGroupMembers,
+  useGroupsControllerV1GetGroupPinnedChallenges,
 } from '../lib/impakt-dev-api-client/react-query/groups/groups';
 import { usePostControllerV1GetMany } from '../lib/impakt-dev-api-client/react-query/posts/posts';
 import { routinesControllerGetRoutines } from '../lib/impakt-dev-api-client/react-query/routines/routines';
 import {
+  usePersistedAuthStore,
   usePersistedCalendarStore,
   usePersistedChallengeStore,
   usePersistedForumStore,
   usePersistedGroupStore,
 } from '../lib/zustand';
+import { useChallengeStatsControllerGetUserBestScore } from '../lib/impakt-dev-api-client/react-query/default/default';
+import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 
 export const useFetchGroupDetails = () => {
   // console.log('render');
   // global states
+  const { member } = usePersistedAuthStore();
   const { setActiveGroup, activeGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
   const { setCalendar } = usePersistedCalendarStore();
+  const { setGroupPinnedChallenge, setBestScoreOfUser, setChallengeLeaderBoard } =
+    usePersistedChallengeStore();
   const { setPosts } = usePersistedForumStore();
 
   // params checks
@@ -63,6 +70,8 @@ export const useFetchGroupDetails = () => {
         await fetchGroupRoleById.refetch();
         await fetchPosts.refetch();
         await fetchGroupCalendar.refetch();
+        await fetchGroupPinnedChallenge.refetch();
+
         setActiveGroup(data);
         setIsGroupDetailsLoading(false);
       },
@@ -152,6 +161,52 @@ export const useFetchGroupDetails = () => {
         refetchOnMount: false,
         onSuccess: (calendarData) => {
           setCalendar(calendarData);
+        },
+      },
+    },
+  );
+
+  const fetchGroupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(
+    parseInt(groupParam?.id ?? '0', 10),
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: async (pinnedChallenge) => {
+          setGroupPinnedChallenge(pinnedChallenge);
+          if (pinnedChallenge.Challenge) {
+            await fetchPinnedChallengeLeaderboard.refetch();
+            await fetchPinnedChallengeUserBestScore.refetch();
+          }
+        },
+      },
+    },
+  );
+  const fetchPinnedChallengeUserBestScore = useChallengeStatsControllerGetUserBestScore(
+    fetchGroupPinnedChallenge.data?.Challenge?.id ?? 0,
+    member?.id ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (bestScore) => {
+          setBestScoreOfUser(bestScore);
+        },
+      },
+    },
+  );
+
+  const fetchPinnedChallengeLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
+    fetchGroupPinnedChallenge.data?.Challenge?.id ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (leaderboard) => {
+          setChallengeLeaderBoard(leaderboard);
         },
       },
     },
