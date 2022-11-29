@@ -66,7 +66,13 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       },
       {
         onSuccess: () => {
-          renderToast('success', `Assigned as a ${Role} successfully.`);
+          if (Role === 'Moderator') {
+            renderToast('success', `Successfully assigned ${userIndex.name} as a moderator`);
+          } else if (Role === 'Member') {
+            renderToast('success', `Successfully removed ${userIndex.name} as a moderator`);
+          } else {
+            renderToast('success', `Assigned as a ${Role} successfully.`);
+          }
           const shallowOfMyGroups = [...myGroups];
           const indexOfGroup = shallowOfMyGroups.findIndex(
             (group) => group.groupId === activeGroup.id,
@@ -174,6 +180,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                     {memberRole.role === 'Creator' && (
                       <Button
                         onClick={() => {
+                          setUserIndex({ id: User.id, name: User.username });
                           handleOnAssignModerator(User.id, 'Moderator');
                           searchedMembers.splice(index, 1);
                         }}
