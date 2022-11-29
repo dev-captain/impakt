@@ -15,7 +15,6 @@ import ConfirmationModal from './ConfirmationModal';
 interface ChallengesCardProps {
   title: string;
 }
-
 const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   const [inputValue, setInput] = useState('');
   const { errors, setValue } = useForm({
@@ -139,7 +138,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       <Box display="flex" width="100%" mt="12px">
         <Box w="full">
           {searchedMembers.map(
-            ({ role, User }) =>
+            ({ role, User }, index) =>
               role !== 'None' &&
               role !== 'Moderator' &&
               role !== 'Creator' && (
@@ -171,7 +170,12 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                   </Box>
                   <Box marginLeft="1em" display="flex" alignItems="center">
                     {memberRole.role === 'Creator' && (
-                      <Button onClick={() => handleOnAssignModerator(User.id, 'Moderator')}>
+                      <Button
+                        onClick={() => {
+                          handleOnAssignModerator(User.id, 'Moderator');
+                          searchedMembers.splice(index, 1);
+                        }}
+                      >
                         <AddIcon color="#4E6070" width="14px" height="14px" />
                       </Button>
                     )}
