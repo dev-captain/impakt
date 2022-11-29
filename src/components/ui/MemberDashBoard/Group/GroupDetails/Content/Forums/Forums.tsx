@@ -10,7 +10,7 @@ import UserForumsCard from './UserForumsCard';
 import CreatePostCard from './CreatePostCard';
 import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import CreatePostModal from './CreatePostModal';
-import { getCreatedBefore } from '../../../../../../../utils';
+import { getCreatedBefore, renderToast } from '../../../../../../../utils';
 
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -47,18 +47,25 @@ const Forums: React.FC = () => {
                 <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
                   Forums
                 </Text>
-                {isRoleDefined ? (
-                  <Button
-                    background="transparent"
-                    variant="ghost"
-                    _selected={{ border: '0' }}
-                    _focus={{ border: 0 }}
-                    padding="0"
-                    onClick={onOpen}
-                  >
-                    <AddIcon color="#29323B" width="15px" height="15px" fontWeight="bold" />
-                  </Button>
-                ) : null}
+                <Button
+                  background="transparent"
+                  variant="ghost"
+                  _selected={{ border: '0' }}
+                  _focus={{ border: 0 }}
+                  padding="0"
+                  onClick={
+                    isRoleDefined
+                      ? onOpen
+                      : () => {
+                          renderToast(
+                            'warning',
+                            'You have to be a member of the group to create a topic',
+                          );
+                        }
+                  }
+                >
+                  <AddIcon color="#29323B" width="15px" height="15px" fontWeight="bold" />
+                </Button>
               </Box>
             </Box>
             {resortedPosts.length === 0 && <CreatePostCard onClick={onOpen} />}
