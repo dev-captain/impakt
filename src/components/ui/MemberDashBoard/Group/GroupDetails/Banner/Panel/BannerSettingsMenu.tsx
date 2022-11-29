@@ -96,7 +96,6 @@ const BannerSettingsMenu: React.FC = () => {
           }
         },
         onError: (err) => {
-          console.log('bruh');
           renderToast('error', err.response?.data.message ?? 'Something went wrong');
         },
       },
@@ -105,7 +104,6 @@ const BannerSettingsMenu: React.FC = () => {
 
   if (!activeGroup) return null;
 
-  console.log(role);
   const isRoleNotDefined = !role || role === 'None';
 
   return (
@@ -141,7 +139,7 @@ const BannerSettingsMenu: React.FC = () => {
               color: '#fff',
             }}
             onClick={
-              activeGroup?.isPreview && activeGroup.private
+              activeGroup.private
                 ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
                   ? () => null
                   : handleSendRequestToJoin
@@ -155,7 +153,7 @@ const BannerSettingsMenu: React.FC = () => {
             justifyContent="space-around"
             fontSize="16px"
             leftIcon={
-              activeGroup?.isPreview && activeGroup.private ? (
+              activeGroup.private ? (
                 exploreGroups.find((group) => group.id === activeGroup.id)?.Request ? undefined : (
                   <I.UnionIcon />
                 )
@@ -164,7 +162,7 @@ const BannerSettingsMenu: React.FC = () => {
               )
             }
           >
-            {activeGroup?.isPreview && activeGroup.private
+            {activeGroup.private
               ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
                 ? 'Pending'
                 : 'Request to join'
