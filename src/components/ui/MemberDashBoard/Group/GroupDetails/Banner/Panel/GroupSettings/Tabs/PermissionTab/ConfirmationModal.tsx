@@ -36,7 +36,10 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close, hand
             borderRadius="8px"
             type="submit"
             fontSize={{ md: '16px' }}
-            onClick={handleConfirm}
+            onClick={() => {
+              handleConfirm();
+              close();
+            }}
             fontWeight="700"
           >
             <DeleteIcon width="24px" height="24px" marginRight="20px" />
