@@ -9,7 +9,7 @@ const CopyGroupInviteLinkForm: React.FC = () => {
 
   /* eslint no-underscore-dangle: 0 */
   const { member } = usePersistedAuthStore();
-  const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}&referralId=${member?.id}`;
+  const inviteUrl = `${window.location.origin}/invite?g=${group?.id}&p=${group?.private}&r=${member?.id}`;
   const { hasCopied, onCopy } = useClipboard(inviteUrl, { timeout: 3000 });
 
   const copyClipBoardInviteLink = () => {

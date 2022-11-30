@@ -23,7 +23,7 @@ const InvitationByEmail: React.FC = () => {
   };
   const group = usePersistedGroupStore().activeGroup;
   /* eslint no-underscore-dangle: 0 */
-  // const groupInviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}`;
+  // const groupInviteUrl = `${window.location.origin}/invite?g=${group?.id}&p=${group?.private}`;
   const inputItems: InputGroupPropsI[] = [
     {
       placeholder: 'hello@mail.com',
@@ -39,7 +39,7 @@ const InvitationByEmail: React.FC = () => {
   ];
   const { member } = usePersistedAuthStore();
   const subject = `Invitation to Impakt Group`;
-  const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}&referralId=${member?.id}`;
+  const inviteUrl = `${window.location.origin}/invite?g=${group?.id}&p=${group?.private}&r=${member?.id}`;
   const mailto = `mailto:${getValues(
     'email',
   )}?subject=${subject}&body= You have been invited to Impakt. Please click the link below to join ${inviteUrl}</b>}`;

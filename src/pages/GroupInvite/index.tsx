@@ -15,9 +15,9 @@ const GroupInvite = () => {
   const location = useLocation();
   const { member } = usePersistedAuthStore();
   const [searchParams] = useSearchParams();
-  const groupId: any = searchParams.get('group_id');
-  const isPrivate = searchParams.get('private') === 'true';
-  const referralId = searchParams.get('referralId');
+  const groupId: any = searchParams.get('g');
+  const isPrivate = searchParams.get('p') === 'true';
+  const referralId = searchParams.get('r');
   const jointoGroup = async () => {
     // eslint-disable-next-line no-unused-expressions
     if (!member) {

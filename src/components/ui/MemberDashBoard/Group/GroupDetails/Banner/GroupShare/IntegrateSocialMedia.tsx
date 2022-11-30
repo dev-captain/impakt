@@ -18,7 +18,7 @@ const IntegrateSocialMedia: React.FC = () => {
   const group = usePersistedGroupStore().activeGroup;
   /* eslint no-underscore-dangle: 0 */
   const { member } = usePersistedAuthStore();
-  const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}&referralId=${member?.id})`;
+  const inviteUrl = `${window.location.origin}/invite?g=${group?.id}&p=${group?.private}&r=${member?.id})`;
 
   const title = "Hi, I'd like you to join this amazing social fitness group on Impakt";
 

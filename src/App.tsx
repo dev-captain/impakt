@@ -48,7 +48,7 @@ const App = () => {
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
 
-      <Route path="/invite-link" element={<GroupInvite />} />
+      <Route path="/invite" element={<GroupInvite />} />
 
       <Route path="/register" element={<SignUp />}>
         <Route path=":id" element={<SignUp />} />
