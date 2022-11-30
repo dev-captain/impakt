@@ -29,7 +29,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
       {exploreGroup.map((g) => (
         <Box
           key={g.id}
-          cursor={g.private ? 'unset' : 'pointer'}
+          cursor="pointer"
           marginStart="0 !important"
           w={{
             base: '100%',
@@ -40,9 +40,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            if (!g.private) {
-              navigate(`/d/g/${g.id}`);
-            }
+            navigate(`/d/g/${g.id}`);
           }}
           position="relative"
         >

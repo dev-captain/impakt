@@ -1,11 +1,31 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
+import { I } from 'components';
 
 import EventsOverview from './EventsOverview';
 import CalendarDays from './CalendarDays';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import { getDummyEvents } from '../../../../../../../data';
 
 const EventCalendar: React.FC = () => {
+  const { activeGroup } = usePersistedGroupStore();
+
+  if (activeGroup?.isPreview && activeGroup.private)
+    return (
+      <MemberDashboardCard
+        justifyContent="center"
+        alignItems="center"
+        width={{ base: '100%', md: '312px' }}
+        minW={{ base: '100%', md: '312px' }}
+        minH={{ base: '100%', md: '312px' }}
+        height={{ base: '100%', md: '312px' }}
+        marginTop="26px"
+      >
+        <I.LockIcon />
+      </MemberDashboardCard>
+    );
+
   return (
     <Box
       height="100%"

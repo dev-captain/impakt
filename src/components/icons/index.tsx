@@ -103,3 +103,4 @@ export { default as HoldExerciseIcon } from './HoldExerciseIcon';
 export { default as WinnerIcon } from './WinnerIcon';
 export { default as RankIcon } from './RankIcon';
 export { default as SpeedExerciseIcon } from './SpeedExerciseIcon';
+export { default as LockIcon } from './LockIcon';

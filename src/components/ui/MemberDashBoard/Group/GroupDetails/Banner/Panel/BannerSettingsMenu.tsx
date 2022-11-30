@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import * as React from 'react';
 import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
 // import { useNavigate } from 'react-router-dom';
@@ -8,9 +9,11 @@ import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../../lib/i
 import { renderToast } from '../../../../../../../utils';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import { exploreGroupToMyGroupsTransformation } from '../../../../../../../lib/impakt-dev-api-client/utils';
+import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 
 const BannerSettingsMenu: React.FC = () => {
   const joinGroup = useGroupsMemberControllerV1JoinGroup();
+  const sendGroupRequestToJoin = useGroupsRequestControllerV1SendRequestToJoinGroup();
   const { member } = usePersistedAuthStore();
   const {
     activeGroup,
@@ -75,15 +78,38 @@ const BannerSettingsMenu: React.FC = () => {
     );
   };
 
+  const handleSendRequestToJoin = () => {
+    if (!activeGroup) return;
+
+    sendGroupRequestToJoin.mutate(
+      { groupId: activeGroup?.id },
+      {
+        onSuccess: (d) => {
+          renderToast('success', 'Request sent successfully');
+          const shallowExploreGroups = [...exploreGroups];
+          const indexOfExploreGroup = shallowExploreGroups.findIndex(
+            (group) => group.id === activeGroup.id,
+          );
+          if (indexOfExploreGroup !== -1) {
+            shallowExploreGroups[indexOfExploreGroup].Request = d;
+            setExploreGroups(shallowExploreGroups);
+          }
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
+      },
+    );
+  };
+
   if (!activeGroup) return null;
-  if (!role) return null;
 
   const isRoleNotDefined = !role || role === 'None';
 
   return (
     <>
       <Menu>
-        {!isRoleNotDefined ? (
+        {!isRoleNotDefined && (
           <Common.ImpaktButton
             variant="transparent"
             as={MenuButton}
@@ -104,14 +130,21 @@ const BannerSettingsMenu: React.FC = () => {
             {isCreator ? 'Settings' : null}
             {!isCreator && <I.SettingIcon width="16px" />}
           </Common.ImpaktButton>
-        ) : (
+        )}
+        {isRoleNotDefined && (
           <Common.ImpaktButton
             variant="black"
             hover={{
               backgroundColor: '#fff',
               color: '#fff',
             }}
-            onClick={jointoGroup}
+            onClick={
+              activeGroup.private
+                ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
+                  ? () => null
+                  : handleSendRequestToJoin
+                : jointoGroup
+            }
             isDisabled={joinGroup.isLoading}
             isLoading={joinGroup.isLoading}
             borderRadius="8px"
@@ -119,9 +152,21 @@ const BannerSettingsMenu: React.FC = () => {
             border="1px solid #1C1C28"
             justifyContent="space-around"
             fontSize="16px"
-            leftIcon={<I.UnionIcon width="12px" />}
+            leftIcon={
+              activeGroup.private ? (
+                exploreGroups.find((group) => group.id === activeGroup.id)?.Request ? undefined : (
+                  <I.UnionIcon />
+                )
+              ) : (
+                <I.UnionIcon />
+              )
+            }
           >
-            Join
+            {activeGroup.private
+              ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
+                ? 'Pending'
+                : 'Request to join'
+              : 'Join'}
           </Common.ImpaktButton>
         )}
       </Menu>
