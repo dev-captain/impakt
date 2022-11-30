@@ -32,7 +32,7 @@ const ErrorBoundary: React.FC<any> = ({ children }) => {
           });
         }
       }
-      navigate('/dashboard');
+      navigate('/d');
     }
   }, []);
 

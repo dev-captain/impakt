@@ -35,7 +35,7 @@ const ExploreGroupItem: React.FC<ExploreGroupItemPropsI> = ({ gPrivate, gRequest
         {
           onSuccess: (d) => {
             renderToast('success', 'Request sent successfully');
-            navigate('/dashboard/groups');
+            navigate('/d/g');
             const shallowExploreGroups = [...exploreGroups];
             const indexOfExploreGroup = shallowExploreGroups.findIndex((group) => group.id === gId);
             if (indexOfExploreGroup !== -1) {
