@@ -38,11 +38,11 @@ const GroupInvite = () => {
                 shallowExploreGroups[indexOfExploreGroup].Request = d;
                 setExploreGroups(shallowExploreGroups);
               }
-              navigate('/dashboard/groups');
+              navigate('/d/g');
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
-              navigate('/dashboard/groups');
+              navigate('/d/g');
             },
           },
         );
@@ -66,11 +66,11 @@ const GroupInvite = () => {
                 });
               }
 
-              navigate(`/dashboard/groups/group/${groupId}`);
+              navigate(`/d/g/${groupId}`);
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
-              navigate(`/dashboard/groups/group/${groupId}`);
+              navigate(`/d/g/${groupId}`);
             },
           },
         );
