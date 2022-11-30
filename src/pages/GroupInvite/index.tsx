@@ -1,4 +1,3 @@
-import { Container, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { useGroupsMemberControllerV1JoinGroup } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
@@ -9,6 +8,7 @@ import { renderToast } from '../../utils';
 
 const GroupInvite = () => {
   const { exploreGroups, setExploreGroups, addToMyGroups } = usePersistedGroupStore();
+
   const sendGroupRequestToJoin = useGroupsRequestControllerV1SendRequestToJoinGroup();
   const joinGroup = useGroupsMemberControllerV1JoinGroup();
   const navigate = useNavigate();
@@ -64,10 +64,12 @@ const GroupInvite = () => {
                   Group: { ...myGroupObj.Group, memberCount: myGroupObj.Group.memberCount + 1 },
                 });
               }
-              navigate('/dashboard/groups');
+
+              navigate(`/dashboard/groups/group/${groupId}`);
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
+              navigate(`/dashboard/groups/group/${groupId}`);
             },
           },
         );
@@ -76,26 +78,10 @@ const GroupInvite = () => {
   };
 
   useEffect(() => {
-    jointoGroup().then(() => {
-      if (member) {
-        navigate(`/dashboard/groups/group/${groupId}`);
-      }
-    });
+    jointoGroup();
   }, []);
 
-  return (
-    <Container>
-      {!member ? (
-        <Text fontSize="50px" color="tomato">
-          Unauthorized
-        </Text>
-      ) : (
-        <Text fontSize="50px" color="tomato">
-          Already a member
-        </Text>
-      )}
-    </Container>
-  );
+  return null;
 };
 
 export default GroupInvite;
