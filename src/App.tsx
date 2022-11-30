@@ -23,6 +23,7 @@ import { Common, S } from 'components';
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
+import GroupInvite from './pages/GroupInvite/index';
 
 const App = () => {
   return (
@@ -46,6 +47,8 @@ const App = () => {
       <Route path="/download" element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
+
+      <Route path="/invite" element={<GroupInvite />} />
 
       <Route path="/register" element={<SignUp />}>
         <Route path=":id" element={<SignUp />} />
