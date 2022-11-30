@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as React from 'react';
-import { SocialIcon } from 'react-social-icons';
+// import { SocialIcon } from 'react-social-icons';
 import {
   TwitterShareButton,
   TwitterIcon,
@@ -22,29 +22,29 @@ const IntegrateSocialMedia: React.FC = () => {
 
   const title = "Hi, I'd like you to join this amazing social fitness group on Impakt";
 
-  const handleClick = (type: string) => {
-    if (typeof window !== 'undefined') {
-      let url = '';
+  // const handleClick = (type: string) => {
+  //   if (typeof window !== 'undefined') {
+  //     let url = '';
 
-      const windowFeatures = 'left=100,top=100,width=320,height=320';
-      if (type === 'instagram') {
-        url = `https://instagram.com/?url=${inviteUrl}`;
-      } else {
-        url = 'https://discord.gg/eVQJ8XRa9S';
-      }
+  //     const windowFeatures = 'left=100,top=100,width=320,height=320';
+  //     if (type === 'instagram') {
+  //       url = `https://instagram.com/?url=${inviteUrl}`;
+  //     } else {
+  //       url = 'https://discord.gg/eVQJ8XRa9S';
+  //     }
 
-      window.open(url, 'newWindows', windowFeatures);
-    }
-  };
+  //     window.open(url, 'newWindows', windowFeatures);
+  //   }
+  // };
 
   return (
     <Center>
       <Flex>
-        <SocialIcon
+        {/* <SocialIcon
           onClick={() => handleClick('discord')}
           network="discord"
           style={{ width: '60px', height: '60px', marginRight: '5px' }}
-        />
+        /> */}
         <TwitterShareButton url={inviteUrl} quote={title}>
           <TwitterIcon size="60" style={{ borderRadius: '50%', marginRight: '5px' }} />
         </TwitterShareButton>
@@ -54,11 +54,11 @@ const IntegrateSocialMedia: React.FC = () => {
         <TelegramShareButton url={inviteUrl} title={title}>
           <TelegramIcon size="60" style={{ borderRadius: '50%', marginRight: '5px' }} />
         </TelegramShareButton>
-        <SocialIcon
+        {/* <SocialIcon
           onClick={() => handleClick('instagram')}
           network="instagram"
           style={{ width: '60px', height: '60px', marginRight: '5px' }}
-        />
+        /> */}
         <WhatsappShareButton url={inviteUrl} title={title}>
           <WhatsappIcon size="60" style={{ borderRadius: '50%', marginRight: '5px' }} />
         </WhatsappShareButton>
