@@ -33,7 +33,7 @@ const GeneralSettings: React.FC = () => {
             );
             setMyGroups(distractFromMyGroup);
             // TODO update explore group on zustand
-            navigate('/dashboard/groups');
+            navigate('/d/g');
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');
@@ -55,7 +55,7 @@ const GeneralSettings: React.FC = () => {
             );
             setRole('None');
             setMyGroups(distractFromMyGroup);
-            navigate('/dashboard/groups');
+            navigate('/d/g');
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');
