@@ -17,7 +17,7 @@ import { usePersistedGroupStore, usePersistedAuthStore } from '../../../../../..
 const IntegrateSocialMedia: React.FC = () => {
   const group = usePersistedGroupStore().activeGroup;
   /* eslint no-underscore-dangle: 0 */
-  const { member } = usePersistedAuthStore().member;
+  const { member } = usePersistedAuthStore();
   const inviteUrl = `${window.location.origin}/invite-link?group_id=${group?.id}&private=${group?.private}&referralId=${member?.id})`;
 
   const title = "Hi, I'd like you to join this amazing social fitness group on Impakt";
@@ -28,9 +28,9 @@ const IntegrateSocialMedia: React.FC = () => {
 
       const windowFeatures = 'left=100,top=100,width=320,height=320';
       if (type === 'instagram') {
-        url = `https://instagram.com/send?text=${inviteUrl}`;
+        url = `https://instagram.com/?url=${inviteUrl}`;
       } else {
-        url = `https://discord.com/send?text=${inviteUrl}`;
+        url = 'https://discord.gg/eVQJ8XRa9S';
       }
 
       window.open(url, 'newWindows', windowFeatures);
@@ -56,7 +56,7 @@ const IntegrateSocialMedia: React.FC = () => {
         </TelegramShareButton>
         <SocialIcon
           onClick={() => handleClick('instagram')}
-          url="https://instagram.com"
+          network="instagram"
           style={{ width: '60px', height: '60px', marginRight: '5px' }}
         />
         <WhatsappShareButton url={inviteUrl} title={title}>
