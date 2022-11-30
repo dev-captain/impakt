@@ -42,6 +42,7 @@ const GroupInvite = () => {
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
+              navigate('/dashboard/groups');
             },
           },
         );
