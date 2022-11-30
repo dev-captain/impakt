@@ -40,7 +40,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            navigate(`/dashboard/groups/group/${g.id}`);
+            navigate(`/d/g/${g.id}`);
           }}
           position="relative"
         >
