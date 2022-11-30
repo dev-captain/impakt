@@ -4,8 +4,9 @@ import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { C, I } from 'components';
-import Navbar from './Navbar';
-import CollapseSidebar from './Navbar/CollapseSidebar';
+import SidebarCollapseMenu from './SidebarCollapseMenu';
+import SidebarNavigationMenu from './SidebarNavigationMenu';
+import SidebarMenu from './SidebarMenu';
 
 interface SidebarLayoutProps {
   isShowFooter?: boolean;
@@ -19,12 +20,8 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   const [isClose, setIsClose] = useState(false);
 
   return (
-    <Box bgColor="#EEF4F6" minH="100vh" position="relative">
-      {isShowNavbar && (
-        <Box bgColor="#EEF4F6" as="nav" w="full" minH="80px">
-          <Navbar isVersion2 position="fixed" />
-        </Box>
-      )}
+    <Box bgColor="a5" minH="100vh" position="relative">
+      {isShowNavbar && <SidebarNavigationMenu position="fixed" />}
 
       <Box
         w="full"
@@ -36,13 +33,12 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         display={{ base: 'initial', lg: ' none' }}
       >
         <Box marginX="16px">
-          <CollapseSidebar />
+          <SidebarCollapseMenu />
         </Box>
         {/* TODO  Sidebar */}
       </Box>
       <VStack
         as="main"
-        bgColor="#EEF4F6"
         color="#000"
         position="relative"
         justifyContent="flex-start"
@@ -60,36 +56,22 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           <VStack
             position="fixed"
             height="100%"
-            p="3em 0"
+            p="10em 0"
             display={{ base: 'none', lg: 'flex' }}
-            w={{ base: 0, lg: isClose ? '80px' : '20vw' }}
+            w={{ base: 0, lg: isClose ? '80px' : '16.25vw' }}
             minW={{ base: 0, lg: isClose ? '80px' : '260px' }}
-            transition="width .2s ease-in, min-width .2s linear"
-            bgColor="white"
+            transition="width .4s ease-in, min-width .4s linear"
             as="aside"
             justifyContent="flex-start"
             alignItems="flex-start"
+            onMouseOver={() => {
+              setIsClose(false);
+            }}
+            onMouseLeave={() => {
+              setIsClose(true);
+            }}
           >
-            <Box
-              width="100%"
-              display="flex"
-              justifyContent={isClose ? 'center' : 'end'}
-              paddingRight={isClose ? '0' : '24px'}
-            >
-              {isClose === true ? (
-                <HamburgerIcon
-                  onClick={() => setIsClose(!isClose)}
-                  color="#4E6070"
-                  width="24px"
-                  height="32px"
-                  cursor="pointer"
-                />
-              ) : (
-                <I.CloseIcon onClick={() => setIsClose(!isClose)} cursor="pointer" />
-              )}
-            </Box>
-            <C.Sidebar collaps={isClose} />
-            {/* TODO  Sidebar */}
+            <SidebarMenu isHide={isClose} />
           </VStack>
 
           <VStack
@@ -100,8 +82,8 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
               base: '0',
               lg: !isClose ? '20vw !important' : '5vw !important',
             }}
-            transition="margin-left .2s ease-in"
-            p={{ sm: '0 1em', lg: '3em 3em 3em 3em' }}
+            transition="margin-left .4s ease-in"
+            p={{ sm: '0 1em', lg: '7em 3em 3em 3em' }}
             marginTop={{ sm: '100px !important', lg: '0px !important' }}
           >
             <Outlet />

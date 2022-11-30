@@ -22,3 +22,4 @@ export { default as ImpaktAccordion } from './ImpaktAccordion';
 export { default as FlipCardBox } from './FlipCardBox';
 export { default as LeaderboardTable } from './LeaderboardTable';
 export { default as InputErrorMessage } from './InputErrorMessage';
+export { default as LinkItem } from './LinkItem';

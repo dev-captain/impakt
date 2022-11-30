@@ -1,4 +1,10 @@
-import { ThemeOverride, extendTheme, theme as base, UseToastOptions } from '@chakra-ui/react';
+import {
+  ThemeOverride,
+  extendTheme,
+  theme as base,
+  UseToastOptions,
+  ThemeConfig,
+} from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import buttons from './buttons';
 import colors from './colors';
@@ -15,10 +21,14 @@ const breakpoints = createBreakpoints({
   xl: '1920px',
 });
 
-const theme: ThemeOverride = {
-  initialColorMode: 'dark',
-  breakpoints,
+const colorPalette: ThemeConfig = {
+  initialColorMode: 'light',
   useSystemColorMode: false,
+};
+
+const theme: ThemeOverride = {
+  ...colorPalette,
+  breakpoints,
   colors,
   shadows,
   textStyles,

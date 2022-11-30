@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 // import Email from 'components/icons/Email';
 // import useNewsletter from 'hooks/useNewsletter';
-import NavBarLink from '../Navbar/NavBarLink';
+// import NavBarLink from '../Navbar/NavBarLink';
 import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
 
 const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
@@ -187,7 +187,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
               </SimpleGrid>
             </HStack>
             <HStack w="full" padding={{ base: '0px 16px', md: '0px', lg: wFull ? '0 48px' : '0' }}>
-              <NavBarLink IsHeader={false} />
+              {/* <NavBarLink IsHeader={false} /> */}
             </HStack>
 
             <HStack

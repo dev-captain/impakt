@@ -8,8 +8,8 @@ import { I } from 'components';
 
 import NavbarLinkItem from './NavbarLinkItem';
 import SignInLinkItem from './SignInLinkItem';
-import { usePersistedAuthStore } from '../../../lib/zustand';
-import { useLogout } from '../../../hooks/useLogout';
+import { usePersistedAuthStore } from '../../../../lib/zustand';
+import { useLogout } from '../../../../hooks/useLogout';
 
 type Props = {
   isOpen: boolean;

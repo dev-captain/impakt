@@ -5,8 +5,8 @@ import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import NavBarLink from '../NewNavbar/NavBarLink';
-import NavBarSocialIcons from '../NewNavbar/NavBarSocialIcons';
+import NavBarLink from '../../ui/Landing/LandingPageNavbar/NavBarLink';
+import NavBarSocialIcons from '../../ui/Landing/LandingPageNavbar/NavBarSocialIcons';
 
 const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
   const navigate = useNavigate();

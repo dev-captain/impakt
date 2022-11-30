@@ -125,7 +125,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           >
             <HStack w="full" align="space-between" id="yo" justify="space-between">
               <Box display="flex" ml="0 !important" justifyContent="center" w="full">
-                <NavBarLink IsHeader />
+                <NavBarLink />
               </Box>
 
               {!isVersion2 && (
@@ -152,66 +152,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     }}
                   >
                     {t(Keys.navbar.download)}
-                  </Common.ImpaktButton>
-                </HStack>
-              )}
-
-              {isVersion2 && (
-                <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
-                  <Common.ImpaktButton
-                    href="/dashboard"
-                    as="a"
-                    p="10px 16px 10px 12px"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
-                    leftIcon={<I.DashboardIcon cursor="pointer" width="14.33px" height="12.33px" />}
-                    variant="white"
-                  >
-                    {t(Keys.navbar.dashboard)}
-                  </Common.ImpaktButton>
-                  <Common.ImpaktButton
-                    as="a"
-                    p="10px 16px 10px 12px"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onOpen();
-                    }}
-                    leftIcon={
-                      // <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
-                      notify ? (
-                        <I.NotifyIcon cursor="pointer" width="14.33px" height="14.33px" />
-                      ) : (
-                        <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
-                      )
-                    }
-                    variant="white"
-                  >
-                    {t(Keys.navbar.notification)}
-                  </Common.ImpaktButton>
-                  <Common.ImpaktButton
-                    href="/contact"
-                    as="a"
-                    onClick={(e: any) => {
-                      e.preventDefault();
-                      navigate('/contact');
-                    }}
-                    leftIcon={<I.HelpIcon cursor="pointer" width="14.33px" height="12.33px" />}
-                    variant="white"
-                  >
-                    {t(Keys.navbar.help)}
-                  </Common.ImpaktButton>
-
-                  <Common.ImpaktButton
-                    onClick={async () => {
-                      await logout().finally(() => {
-                        onClose();
-                      });
-                    }}
-                    leftIcon={<I.LogOutIcon cursor="pointer" width="13px" height="13px" />}
-                    variant="alert"
-                  >
-                    {t(Keys.navbar.signOut)}
                   </Common.ImpaktButton>
                 </HStack>
               )}
@@ -295,7 +235,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             isOpen={isOpen}
             onToggle={onToggle}
             isLessThan1280={isLessThan1280}
-            isVersion2={isVersion2}
           />
         </HStack>
       </Flex>

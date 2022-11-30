@@ -6,7 +6,7 @@ import Keys from 'i18n/types';
 import { Socials } from 'data';
 import { I } from 'components';
 
-import NavbarLinkItem from './NavbarLinkItem';
+import NavbarLinkItem from '../../common/LinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
@@ -19,7 +19,7 @@ type Props = {
 };
 
 const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => {
-  const logout = useLogout();
+  // const logout = useLogout();
   const { member } = usePersistedAuthStore();
   const location = useLocation();
   const path = parsePathname(location.pathname);
@@ -38,61 +38,39 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         padding="16px"
         mt="4px"
       >
+        <NavbarLinkItem href="/" isActive={path.path === ''} title={t(Keys.navbar.impaktFitness)} />
         <NavbarLinkItem
-          isSmall
-          hide
-          href="/"
-          onClose={onClose}
-          isActive={path.path === ''}
-          title={t(Keys.navbar.impaktFitness)}
-        />
-        <NavbarLinkItem
-          isSmall
-          hide
-          type="LINK"
-          onClose={onClose}
           title={t(Keys.navbar.knowledgeBase)}
           href="https://knowledgebase.impakt.com"
           isActive={path.path === 'knowledge-base'}
         />
         <NavbarLinkItem
-          hide
-          isSmall
           href="/events"
-          onClose={onClose}
           title={t(Keys.navbar.events)}
           isActive={path.path === 'events'}
         />
         <NavbarLinkItem
-          isSmall
           href="/contact"
-          onClose={onClose}
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
         />
         {member && (
           <NavbarLinkItem
-            isSmall
             href="/dashboard"
-            onClose={onClose}
             title={t(Keys.navbar.dashboard)}
             isActive={path.path === 'dashboard'}
           />
         )}
         {member && (
           <NavbarLinkItem
-            isSmall
             href=""
-            onClose={onClose}
             title={t(Keys.navbar.notification)}
             isActive={path.path === '/notification'}
           />
         )}
         {member && (
           <NavbarLinkItem
-            isSmall
             href="/contact"
-            onClose={onClose}
             title={t(Keys.navbar.help)}
             isActive={path.path === '/contact'}
           />
@@ -100,13 +78,12 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
 
         {member && (
           <NavbarLinkItem
-            isSmall
             href="#"
-            onClose={async () => {
-              await logout().finally(() => {
-                onClose();
-              });
-            }}
+            // onClose={async () => {
+            //   await logout().finally(() => {
+            //     onClose();
+            //   });
+            // }}
             title={t(Keys.navbar.signOut)}
             isActive={path.path === '#'}
           />

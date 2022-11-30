@@ -24,7 +24,7 @@ const General: React.FC = () => {
           {/* <WhiteList /> */}
         </GeneralModalBox>
 
-        <GeneralModalBox>
+        <GeneralModalBox ml="0 !important">
           <NewsFeed />
           {/* <Topics /> */}
         </GeneralModalBox>

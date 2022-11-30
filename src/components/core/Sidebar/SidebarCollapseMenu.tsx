@@ -1,9 +1,9 @@
 import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import { I } from 'components';
 import { useLocation } from 'react-router-dom';
-import SidebarLinkItem from './SidebarLinkItem';
+import SidebarMenuItem from './SidebarMenuItem';
 
-const CollapseSidebar = () => {
+const SidebarCollapseMenu = () => {
   const path = useLocation();
 
   return (
@@ -27,6 +27,7 @@ const CollapseSidebar = () => {
           {path.pathname === '/dashboard' && (
             <Box display="flex" alignItems="flex-end">
               <I.DashboardIcon
+                isActive={false}
                 cursor="pointer"
                 width="26px"
                 height="23px"
@@ -94,45 +95,37 @@ const CollapseSidebar = () => {
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
-            <SidebarLinkItem
-              hide
-              href=""
-              title="General"
-              isActive={path.pathname === '/dashboard'}
-              collaps
-            >
+            <SidebarMenuItem hide href="" title="General" isActive={path.pathname === '/dashboard'}>
               <I.DashboardIcon cursor="pointer" width="26px" height="23px" color="#000" />
-            </SidebarLinkItem>
+            </SidebarMenuItem>
           </MenuItem>
 
           <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
-            <SidebarLinkItem
+            <SidebarMenuItem
               hide
               href="groups"
               title="Groups"
               isActive={path.pathname === '/dashboard/groups'}
-              collaps
             >
               <I.PeopleIcon cursor="pointer" width="32px" height="32px" color="#000" />
-            </SidebarLinkItem>
+            </SidebarMenuItem>
           </MenuItem>
 
           <MenuItem
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
-            <SidebarLinkItem
+            <SidebarMenuItem
               hide
               href="referrals"
               title="Referrals"
               isActive={path.pathname === '/dashboard/referrals'}
-              collaps
             >
               <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#000" />
-            </SidebarLinkItem>
+            </SidebarMenuItem>
           </MenuItem>
           {/* <MenuItem
             _active={{ backgroundColor: 'transparent' }}
@@ -167,4 +160,4 @@ const CollapseSidebar = () => {
     </Box>
   );
 };
-export default CollapseSidebar;
+export default SidebarCollapseMenu;
