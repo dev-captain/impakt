@@ -20,8 +20,8 @@ const BannerSettingsMenu: React.FC = () => {
     setMembersOfGroup,
     membersOfGroup,
     setRole,
+    role,
   } = usePersistedGroupStore();
-  const { role } = usePersistedGroupStore();
   // const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isCreator = role === 'Creator';
@@ -78,12 +78,12 @@ const BannerSettingsMenu: React.FC = () => {
   if (!activeGroup) return null;
   if (!role) return null;
 
-  const isRoleDefined = role !== 'None';
+  const isRoleNotDefined = !role || role === 'None';
 
   return (
     <>
       <Menu>
-        {isRoleDefined ? (
+        {!isRoleNotDefined ? (
           <Common.ImpaktButton
             variant="transparent"
             as={MenuButton}

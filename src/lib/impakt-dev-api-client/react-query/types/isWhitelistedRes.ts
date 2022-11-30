@@ -7,7 +7,5 @@
 
 export interface IsWhitelistedRes {
   isWhitelisted: boolean;
-  isDiscordConnected: boolean;
-  isTwitterConnected: boolean;
   isWalletConnected: boolean;
 }

@@ -52,6 +52,7 @@ const App = () => {
 
       <Route path="/register" element={<SignUp />}>
         <Route path=":id" element={<SignUp />} />
+        <Route path="bonus" element={<SignUp />} />
       </Route>
 
       <Route path="/signin" element={<SignIn />} />

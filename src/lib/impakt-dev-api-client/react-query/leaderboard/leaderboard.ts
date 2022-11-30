@@ -4,14 +4,22 @@
  * Impakt API
  * OpenAPI spec version: 1.0.0
  */
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import type {
   UseQueryOptions,
+  UseMutationOptions,
   QueryFunction,
+  MutationFunction,
   UseQueryResult,
   QueryKey,
 } from '@tanstack/react-query';
-import type { GetChallengeLeaderboardResV1, HttpExceptionSchema } from '../types';
+import type {
+  GetChallengeLeaderboardResV1,
+  HttpExceptionSchema,
+  LeaderboardDtoV1,
+  LeaderboardControllerV1GetLeaderboardParams,
+  LeaderboardCreateDtoV1,
+} from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
 
@@ -141,4 +149,235 @@ export const useChallengesLeaderboardControllerV1CommunitiesLeaderboard = <
   query.queryKey = queryKey;
 
   return query;
+};
+
+export const leaderboardControllerV1GetLeaderboard = (
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  params?: LeaderboardControllerV1GetLeaderboardParams,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<LeaderboardDtoV1>(
+    { url: `/api/v1/leaderboards/${reference}/${referenceId}`, method: 'get', params, signal },
+    options,
+  );
+};
+
+export const getLeaderboardControllerV1GetLeaderboardQueryKey = (
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  params?: LeaderboardControllerV1GetLeaderboardParams,
+) => [`/api/v1/leaderboards/${reference}/${referenceId}`, ...(params ? [params] : [])];
+
+export type LeaderboardControllerV1GetLeaderboardQueryResult = NonNullable<
+  Awaited<ReturnType<typeof leaderboardControllerV1GetLeaderboard>>
+>;
+export type LeaderboardControllerV1GetLeaderboardQueryError = ErrorType<unknown>;
+
+export const useLeaderboardControllerV1GetLeaderboard = <
+  TData = Awaited<ReturnType<typeof leaderboardControllerV1GetLeaderboard>>,
+  TError = ErrorType<unknown>,
+>(
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  params?: LeaderboardControllerV1GetLeaderboardParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof leaderboardControllerV1GetLeaderboard>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getLeaderboardControllerV1GetLeaderboardQueryKey(reference, referenceId, params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof leaderboardControllerV1GetLeaderboard>>
+  > = ({ signal }) =>
+    leaderboardControllerV1GetLeaderboard(reference, referenceId, params, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof leaderboardControllerV1GetLeaderboard>>,
+    TError,
+    TData
+  >(queryKey, queryFn, {
+    enabled: !!(reference && referenceId),
+    ...queryOptions,
+  }) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
+export const leaderboardControllerV1CreateEntry = (
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  leaderboardCreateDtoV1: LeaderboardCreateDtoV1,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<LeaderboardDtoV1>(
+    {
+      url: `/api/v1/leaderboards/${reference}/${referenceId}`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: leaderboardCreateDtoV1,
+    },
+    options,
+  );
+};
+
+export type LeaderboardControllerV1CreateEntryMutationResult = NonNullable<
+  Awaited<ReturnType<typeof leaderboardControllerV1CreateEntry>>
+>;
+export type LeaderboardControllerV1CreateEntryMutationBody = LeaderboardCreateDtoV1;
+export type LeaderboardControllerV1CreateEntryMutationError = ErrorType<unknown>;
+
+export const useLeaderboardControllerV1CreateEntry = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof leaderboardControllerV1CreateEntry>>,
+    TError,
+    { reference: 'Challenge' | 'MiniGame'; referenceId: number; data: LeaderboardCreateDtoV1 },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof leaderboardControllerV1CreateEntry>>,
+    { reference: 'Challenge' | 'MiniGame'; referenceId: number; data: LeaderboardCreateDtoV1 }
+  > = (props) => {
+    const { reference, referenceId, data } = props ?? {};
+
+    return leaderboardControllerV1CreateEntry(reference, referenceId, data, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof leaderboardControllerV1CreateEntry>>,
+    TError,
+    { reference: 'Challenge' | 'MiniGame'; referenceId: number; data: LeaderboardCreateDtoV1 },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const leaderboardControllerV1GetEntry = (
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  id: number,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<LeaderboardDtoV1>(
+    { url: `/api/v1/leaderboards/${reference}/${referenceId}/${id}`, method: 'get', signal },
+    options,
+  );
+};
+
+export const getLeaderboardControllerV1GetEntryQueryKey = (
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  id: number,
+) => [`/api/v1/leaderboards/${reference}/${referenceId}/${id}`];
+
+export type LeaderboardControllerV1GetEntryQueryResult = NonNullable<
+  Awaited<ReturnType<typeof leaderboardControllerV1GetEntry>>
+>;
+export type LeaderboardControllerV1GetEntryQueryError = ErrorType<unknown>;
+
+export const useLeaderboardControllerV1GetEntry = <
+  TData = Awaited<ReturnType<typeof leaderboardControllerV1GetEntry>>,
+  TError = ErrorType<unknown>,
+>(
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  id: number,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof leaderboardControllerV1GetEntry>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getLeaderboardControllerV1GetEntryQueryKey(reference, referenceId, id);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof leaderboardControllerV1GetEntry>>> = ({
+    signal,
+  }) => leaderboardControllerV1GetEntry(reference, referenceId, id, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof leaderboardControllerV1GetEntry>>,
+    TError,
+    TData
+  >(queryKey, queryFn, {
+    enabled: !!(reference && referenceId && id),
+    ...queryOptions,
+  }) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
+export const leaderboardControllerV1DeleteEntry = (
+  reference: 'Challenge' | 'MiniGame',
+  referenceId: number,
+  id: number,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<void>(
+    { url: `/api/v1/leaderboards/${reference}/${referenceId}/${id}`, method: 'delete' },
+    options,
+  );
+};
+
+export type LeaderboardControllerV1DeleteEntryMutationResult = NonNullable<
+  Awaited<ReturnType<typeof leaderboardControllerV1DeleteEntry>>
+>;
+
+export type LeaderboardControllerV1DeleteEntryMutationError = ErrorType<unknown>;
+
+export const useLeaderboardControllerV1DeleteEntry = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof leaderboardControllerV1DeleteEntry>>,
+    TError,
+    { reference: 'Challenge' | 'MiniGame'; referenceId: number; id: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof leaderboardControllerV1DeleteEntry>>,
+    { reference: 'Challenge' | 'MiniGame'; referenceId: number; id: number }
+  > = (props) => {
+    const { reference, referenceId, id } = props ?? {};
+
+    return leaderboardControllerV1DeleteEntry(reference, referenceId, id, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof leaderboardControllerV1DeleteEntry>>,
+    TError,
+    { reference: 'Challenge' | 'MiniGame'; referenceId: number; id: number },
+    TContext
+  >(mutationFn, mutationOptions);
 };

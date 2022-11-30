@@ -1,8 +1,12 @@
 import React from 'react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useDisclosure } from '@chakra-ui/react';
+import { Forms } from 'components';
+
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
-import { Forms } from '../../../../../..';
+
+import ChallengeModal from '../../Modal/ChallengeModal';
+import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 
 interface EventModifyPropsI {
   showGoBackButton?: boolean;
@@ -11,6 +15,8 @@ interface EventModifyPropsI {
 }
 
 const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, title, type }) => {
+  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(null);
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { goBackToOverViewScreen } = useEventCalendarContext();
 
   return (
@@ -31,8 +37,34 @@ const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, tit
           {title}
         </Text>
       </Box>
-      {type === 'create' && <Forms.CreateEventForm />}
-      {type === 'update' && <Forms.UpdateEventForm />}
+      {type === 'create' && (
+        <Forms.CreateEventForm
+          onOpen={onOpen}
+          clearAssoc={() => {
+            setActiveChallenge(null);
+          }}
+          assocId={activeChallenge?.id ?? 0}
+          assocName={activeChallenge?.name ?? ''}
+        />
+      )}
+      {type === 'update' && (
+        <Forms.UpdateEventForm
+          onOpen={onOpen}
+          clearAssoc={() => {
+            setActiveChallenge(null);
+          }}
+          assocId={activeChallenge?.id ?? 0}
+          assocName={activeChallenge?.name ?? ''}
+        />
+      )}
+      <ChallengeModal
+        setActiveChallenge={setActiveChallenge}
+        key="2"
+        open={isOpen}
+        close={() => {
+          onClose();
+        }}
+      />
     </Box>
   );
 };

@@ -18,4 +18,6 @@ export type ChallengesControllerGetManyParams = {
   notCreatorId?: number | null;
   publishableStatus?: ChallengesControllerGetManyPublishableStatus;
   orderBy?: string | null;
+  qualitySort?: boolean;
+  Creator?: boolean;
 };

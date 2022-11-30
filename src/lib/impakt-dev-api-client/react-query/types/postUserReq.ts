@@ -18,4 +18,6 @@ export interface PostUserReq {
   referrerId?: number | null;
   /** Pass multiple ids to be joined by the user */
   communities?: number[] | null;
+  /** minigameBonus flag when true, we reward 5000 KOIN otherwise we reward nothing */
+  minigameBonus?: boolean | null;
 }

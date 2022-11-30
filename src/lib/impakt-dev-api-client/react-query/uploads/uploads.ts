@@ -17,6 +17,8 @@ import type {
   HttpExceptionSchema,
   UploadControllerUploadFileBody,
   UploadControllerUploadFileParams,
+  UploadControllerUploadCvBody,
+  UploadControllerUploadCvParams,
 } from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
@@ -137,6 +139,62 @@ export const useUploadControllerUploadFile = <
     Awaited<ReturnType<typeof uploadControllerUploadFile>>,
     TError,
     { data: UploadControllerUploadFileBody; params: UploadControllerUploadFileParams },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const uploadControllerUploadCv = (
+  uploadControllerUploadCvBody: UploadControllerUploadCvBody,
+  params: UploadControllerUploadCvParams,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  const formData = new FormData();
+  formData.append('file', uploadControllerUploadCvBody.file);
+
+  return customInstance<boolean>(
+    {
+      url: `/api/v1/uploads/uploads/landmarks`,
+      method: 'post',
+      headers: { 'Content-Type': 'multipart/form-data' },
+      data: formData,
+      params,
+    },
+    options,
+  );
+};
+
+export type UploadControllerUploadCvMutationResult = NonNullable<
+  Awaited<ReturnType<typeof uploadControllerUploadCv>>
+>;
+export type UploadControllerUploadCvMutationBody = UploadControllerUploadCvBody;
+export type UploadControllerUploadCvMutationError = ErrorType<HttpExceptionSchema>;
+
+export const useUploadControllerUploadCv = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof uploadControllerUploadCv>>,
+    TError,
+    { data: UploadControllerUploadCvBody; params: UploadControllerUploadCvParams },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof uploadControllerUploadCv>>,
+    { data: UploadControllerUploadCvBody; params: UploadControllerUploadCvParams }
+  > = (props) => {
+    const { data, params } = props ?? {};
+
+    return uploadControllerUploadCv(data, params, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof uploadControllerUploadCv>>,
+    TError,
+    { data: UploadControllerUploadCvBody; params: UploadControllerUploadCvParams },
     TContext
   >(mutationFn, mutationOptions);
 };

@@ -1,33 +1,38 @@
-import { FormControl, Text } from '@chakra-ui/react';
+import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
+import { I } from 'components';
 import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { InputGroupPropsI } from '../../common/InputGroup';
 import { usePersistedAuthStore, usePersistedForumStore } from '../../../lib/zustand';
 import { useCommentControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
 import { renderToast } from '../../../utils';
 import createCommentFormYupScheme from '../../../lib/yup/schemas/createCommentFormYupScheme';
+import GroupTextAreaInput from '../../ui/MemberDashBoard/Group/GroupsTextAreaField';
 
-const ForumCreateCommentForm = React.forwardRef<
-  HTMLInputElement,
-  { onClose: () => void; postId: number }
->((props, ref) => {
+const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
+  const refCommentArea = React.useRef<HTMLDivElement | null>(null);
   const createComment = useCommentControllerV1CreateOne();
-  const { handleSubmit, setValue, reset, getValues, errors } = useForm({
+  const { handleSubmit, setValue, errors, reset } = useForm({
     defaultValues: { comment: '' },
     resolver: yupResolver(createCommentFormYupScheme),
   });
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+  // const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  //   setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
+  // };
+
+  const onInput = (e: any) => {
+    setValue('comment', e.currentTarget.innerHTML, { shouldValidate: true });
   };
+
   const { member } = usePersistedAuthStore();
   const { posts, setPosts, setActivePost } = usePersistedForumStore();
-
+  // const topic = posts.find((postsd) => postsd.id === props.postId);
+  // const placeholdertext = `Comment on ${topic ? topic.content : ''}`;
   const handleOnCommentCreate = async (data: { comment: string }) => {
     if (!member) return;
+    if (!props.postId) return;
 
     createComment.mutate(
       {
@@ -67,8 +72,10 @@ const ForumCreateCommentForm = React.forwardRef<
             }
           }
           renderToast('success', 'Comment added successfully.', 'white');
+          if (refCommentArea.current) {
+            refCommentArea.current.innerText = '';
+          }
           reset({ comment: '' });
-          props.onClose();
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
@@ -76,53 +83,50 @@ const ForumCreateCommentForm = React.forwardRef<
       },
     );
   };
-
-  const inputItems: InputGroupPropsI = {
-    placeholder: 'My cool comment for post',
-    onChange,
-    type: 'text',
-    name: 'comment',
-    label: 'Comment',
-    whiteMode: true,
-    value: getValues('comment'),
-    errorMsg: errors?.comment?.message,
-  };
+  React.useEffect(() => {
+    if (!refCommentArea.current) return;
+    refCommentArea.current.focus();
+  }, []);
 
   return (
-    <FormControl
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      flexDir="column"
-      m="0 !important"
-      rowGap="24px"
+    <VStack
       as="form"
+      rowGap="8px"
       onSubmit={handleSubmit(handleOnCommentCreate)}
       autoComplete="off"
-      w="full"
     >
-      <Common.InputGroup {...inputItems} ref={ref} />
-
-      <Common.ImpaktButton
-        variant="black"
-        colorScheme="#fff"
-        h={{ md: '48px', base: '40px' }}
-        backgroundColor="#29323B"
-        borderRadius="8px"
-        type="submit"
-        fontSize={{ md: '16px' }}
-        fontWeight="700"
-        isLoading={createComment.isLoading}
-        isDisabled={createComment.isLoading}
-      >
-        <I.SendIcon fontSize="10px" />
-        <Text marginLeft="10px">Send</Text>
-      </Common.ImpaktButton>
-      {/* <Flex justifyContent="space-between" w="full">
-        {children}
-      </Flex> */}
-    </FormControl>
+      <Box w="full">
+        <GroupTextAreaInput
+          ref={refCommentArea}
+          onInput={onInput}
+          name="comment"
+          errMessage={errors.comment?.message}
+          minHeight="88px"
+        />
+      </Box>
+      <Box display="flex" alignSelf="flex-end">
+        <Button
+          width="110px"
+          h="38px"
+          color="#FFFFFF"
+          bg="#29323B"
+          id="send-comment-button"
+          isDisabled={createComment.isLoading}
+          isLoading={createComment.isLoading}
+          type="submit"
+          leftIcon={<I.SendIcon />}
+          _hover={{
+            bg: '#F27961',
+            color: '#FFFFFF',
+          }}
+        >
+          <Text fontWeight="600" fontSize="16px" lineHeight="18px">
+            Send
+          </Text>
+        </Button>
+      </Box>
+    </VStack>
   );
-});
+};
 
 export default ForumCreateCommentForm;

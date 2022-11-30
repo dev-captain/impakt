@@ -25,6 +25,7 @@ import type {
   GroupsControllerV1PatchGroupCoverImageBody,
   GetMembersOfGroupRes,
   GroupsControllerV1FindGroupMembersParams,
+  GetGroupPinnedChallengesRes,
 } from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
@@ -442,6 +443,62 @@ export const useGroupsControllerV1FindGroupMembers = <
 
   const query = useQuery<
     Awaited<ReturnType<typeof groupsControllerV1FindGroupMembers>>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!groupId, ...queryOptions }) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
+export const groupsControllerV1GetGroupPinnedChallenges = (
+  groupId: number,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<GetGroupPinnedChallengesRes>(
+    { url: `/api/v1/groups/${groupId}/pinned-challenge`, method: 'get', signal },
+    options,
+  );
+};
+
+export const getGroupsControllerV1GetGroupPinnedChallengesQueryKey = (groupId: number) => [
+  `/api/v1/groups/${groupId}/pinned-challenge`,
+];
+
+export type GroupsControllerV1GetGroupPinnedChallengesQueryResult = NonNullable<
+  Awaited<ReturnType<typeof groupsControllerV1GetGroupPinnedChallenges>>
+>;
+export type GroupsControllerV1GetGroupPinnedChallengesQueryError = ErrorType<HttpExceptionSchema>;
+
+export const useGroupsControllerV1GetGroupPinnedChallenges = <
+  TData = Awaited<ReturnType<typeof groupsControllerV1GetGroupPinnedChallenges>>,
+  TError = ErrorType<HttpExceptionSchema>,
+>(
+  groupId: number,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof groupsControllerV1GetGroupPinnedChallenges>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGroupsControllerV1GetGroupPinnedChallengesQueryKey(groupId);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof groupsControllerV1GetGroupPinnedChallenges>>
+  > = ({ signal }) => groupsControllerV1GetGroupPinnedChallenges(groupId, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof groupsControllerV1GetGroupPinnedChallenges>>,
     TError,
     TData
   >(queryKey, queryFn, { enabled: !!groupId, ...queryOptions }) as UseQueryResult<TData, TError> & {

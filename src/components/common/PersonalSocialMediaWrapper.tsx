@@ -18,6 +18,7 @@ const PersonalSocialMediaWrapper: React.FC<PersonalSocialMediaWrapperPropsI> = (
     <>
       {socialMedia.map(({ platform, href }) => (
         <Box
+          key={`${platform}-item`}
           as="a"
           href={href}
           borderRadius="8px"

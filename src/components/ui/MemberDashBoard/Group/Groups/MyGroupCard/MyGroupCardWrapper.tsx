@@ -31,7 +31,11 @@ const MyGroupCardHeader: React.FC = () => {
           <Box position="relative">
             <GroupsCard
               member={m.Group?.memberCount ?? 0}
-              img={m.Group?.currentCoverImageId ? m.Group?.CurrentCoverImage : Images.group.logo}
+              img={
+                m.Group?.currentCoverImageId
+                  ? m.Group?.CurrentCoverImage
+                  : Images.group.defaultThumbnail
+              }
               name={m.Group?.groupName}
               // eslint-disable-next-line no-underscore-dangle
               isPrivateGroup={m.Group?.private}

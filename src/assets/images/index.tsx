@@ -18,6 +18,7 @@ const Images = {
     Peter404: require('./peter404.png'),
     Window: require('./home/hero/window.png'),
     Goldaword: require('./goldaword.png'),
+    Vsport: require('./vsport.png'),
   },
   backgrounds: {
     advisorsSectionBg: require('./backgrounds/bgadvvisors.png'),
@@ -112,10 +113,12 @@ const Images = {
   group: {
     img: require('./group/img.png'),
     ellipse: require('./group/Ellipse.png'),
-    cover: require('./group/cover.png'),
+    defaultThumbnail: require('./group/group-thumbnail-default.jpg'),
+    defaultCoverImage: require('./group/group-thumbnail-original.jpg'),
     group: require('./group/group.jpg'),
     upload: require('./group/Upload.png'),
     logo: require('./group/logo.png'),
+    challengeBanner: require('./group/col.png'),
   },
   evolving: {
     evolving: require('./evolving.png'),
@@ -132,6 +135,7 @@ const Images = {
     photoAaron: require('./Photo_Aaron.png'),
     photoAaron2: require('./Photo_Aaron2.png'),
     photoLevi: require('./Photo_Levi.png'),
+    photoGriffin: require('./Photo_Griffin.png'),
   },
   Privacy: {
     PrivacyImg1: require('./PrivacyImg1.png'),

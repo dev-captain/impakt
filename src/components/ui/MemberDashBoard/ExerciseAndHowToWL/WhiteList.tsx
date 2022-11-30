@@ -14,7 +14,7 @@ const WhiteList: React.FC = () => {
   // const { t } = useTranslation().i18n;
   const { onClose, isOpen, onOpen } = useDisclosure();
 
-  const { isWhitelistedCollection } = usePersistedAuthStore();
+  // const { isWhitelistedCollection } = usePersistedAuthStore();
 
   return (
     <MemberDashboardCard
@@ -105,7 +105,7 @@ const WhiteList: React.FC = () => {
       </Box>
       <Box w="100%" id="whitelist-challange-description-box-2" sx={{ marginTop: '0px !important' }}>
         <Box>
-          <Common.ImpaktButton
+          {/* <Common.ImpaktButton
             as="a"
             leftIcon={
               <Box marginRight="8px">
@@ -121,7 +121,7 @@ const WhiteList: React.FC = () => {
             lineHeight={{ base: '24px', lg: '32px' }}
           >
             {isWhitelistedCollection.isDiscordConnected ? 'Discord Connected' : 'Connect Discord'}
-          </Common.ImpaktButton>
+          </Common.ImpaktButton> */}
         </Box>
 
         <Box mt="12px">

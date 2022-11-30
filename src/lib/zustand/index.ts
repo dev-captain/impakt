@@ -94,6 +94,7 @@ export const usePersistedGroupStore = create<GroupsSlice>()(
       serialize: (state) => JSON.stringify(state),
       deserialize: (str) => JSON.parse(str),
       getStorage: () => localStorage,
+      partialize: (state) => ({ ...state, activeGroup: null }),
     },
   ),
 );
@@ -133,8 +134,8 @@ export const usePersistedChallengeStore = create<ChallengeStore>()(
     }),
     {
       name: 'challenge-storage',
-      serialize: (state) => btoa(JSON.stringify(state)),
-      deserialize: (str) => JSON.parse(atob(str)),
+      serialize: (state) => JSON.stringify(state),
+      deserialize: (str) => JSON.parse(str),
       getStorage: () => localStorage,
     },
   ),

@@ -35,7 +35,7 @@ const RoadMapSmallView = () => {
             pt="85px"
           >
             {RoadmapInfo.map((item) => (
-              <RoadmapItem type="vertical" data={item} />
+              <RoadmapItem key={`item-${item.title}`} type="vertical" data={item} />
             ))}
           </VStack>
         </HStack>
