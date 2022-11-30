@@ -1,11 +1,16 @@
 import React from 'react';
 import { Common } from 'components';
 import { Text, Flex, Link } from '@chakra-ui/react';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link as ReactRouterLink, useLocation } from 'react-router-dom';
 
 import SignUpForm from './SignUpForm';
 
 const SignUpBox: React.FC = () => {
+  const isThereNextParam = useLocation().search.includes('next');
+  const navigateTo = isThereNextParam
+    ? `/signin?next=${useLocation().search.split('next=')[1]}`
+    : '/signin';
+
   return (
     <Common.Card m="0 !important" maxW="576px" h="100%" w="full">
       <SignUpForm />
@@ -14,7 +19,7 @@ const SignUpBox: React.FC = () => {
           Already have an account?
           <Link
             as={ReactRouterLink}
-            to="/signin"
+            to={navigateTo}
             textDecor="none !important"
             mx="5px"
             cursor="pointer"

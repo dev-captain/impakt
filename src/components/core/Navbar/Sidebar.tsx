@@ -20,7 +20,7 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
         href=""
         onClose={onClose}
         title="General"
-        isActive={path.pathname === '/dashboard'}
+        isActive={path.pathname === '/d'}
         collaps={collaps}
       >
         <I.DashboardIcon cursor="pointer" width="32px" height="32px" />
@@ -28,9 +28,9 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
 
       <SidebarLinkItem
         hide
-        href="groups"
+        href="g"
         title="Groups"
-        isActive={path.pathname === '/dashboard/groups'}
+        isActive={path.pathname === '/d/g'}
         collaps={collaps}
       >
         <I.PeopleIcon cursor="pointer" width="32px" height="32px" />
@@ -38,10 +38,10 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
 
       <SidebarLinkItem
         hide
-        href="referrals"
+        href="r"
         onClose={onClose}
         title="Referrals"
-        isActive={path.pathname === '/dashboard/referrals'}
+        isActive={path.pathname === '/d/r'}
         collaps={collaps}
       >
         <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
@@ -52,7 +52,7 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
         href="reward-history"
         onClose={onClose}
         title="Reward history"
-        isActive={path.pathname === '/dashboard/reward-history'}
+        isActive={path.pathname === '/d/reward-history'}
         collaps={collaps}
       >
         <I.RewardIcon cursor="pointer" width="27px" height="27px" />
@@ -63,7 +63,7 @@ const Sidebar: React.FC<SidebarPropsI> = ({ collaps }) => {
         href="statistics"
         onClose={onClose}
         title="Statistics"
-        isActive={path.pathname === '/dashboard/statistics'}
+        isActive={path.pathname === '/d/statistics'}
         collaps={collaps}
       >
         <I.ChatIcon cursor="pointer" width="27px" height="23px" />

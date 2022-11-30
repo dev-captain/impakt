@@ -27,7 +27,7 @@ const GroupDetailMiddleWare: React.FC = ({ children }) => {
   React.useEffect(() => {
     getAmIMemberOfGroup().then((res) => {
       if (!res) {
-        navigate('/dashboard/groups');
+        navigate('/d/g');
       }
     });
   }, []);
