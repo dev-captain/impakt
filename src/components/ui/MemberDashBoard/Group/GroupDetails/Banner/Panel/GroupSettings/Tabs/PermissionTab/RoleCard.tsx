@@ -56,7 +56,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     setSearchedMembers(result);
   };
 
-  const handleOnAssignModerator = async (userId: number, Role) => {
+  const handleOnAssignModerator = async (userId: number, userName: string, Role) => {
     if (!activeGroup?.id) return;
     assignRole.mutate(
       {
@@ -67,9 +67,9 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       {
         onSuccess: () => {
           if (Role === 'Moderator') {
-            renderToast('success', `Successfully assigned ${userIndex.name} as a moderator`);
+            renderToast('success', `Successfully assigned ${userName} as a moderator`);
           } else if (Role === 'Member') {
-            renderToast('success', `Successfully removed ${userIndex.name} as a moderator`);
+            renderToast('success', `Successfully removed ${userName} as a moderator`);
           } else {
             renderToast('success', `Assigned as a ${Role} successfully.`);
           }
@@ -117,6 +117,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
           style={{ borderRadius: '50px', backgroundColor: '#91A8BD', fill: '#ffffff' }}
           onClick={() => {
             setInput('');
+            setSearchedMembers([]);
           }}
         />
       ),
@@ -181,7 +182,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
                       <Button
                         onClick={() => {
                           setUserIndex({ id: User.id, name: User.username });
-                          handleOnAssignModerator(User.id, 'Moderator');
+                          handleOnAssignModerator(User.id, User.username, 'Moderator');
                           searchedMembers.splice(index, 1);
                         }}
                       >
@@ -245,7 +246,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       <ConfirmationModal
         open={isOpen}
         close={() => onClose()}
-        handleConfirm={() => handleOnAssignModerator(userIndex.id, 'Member')}
+        handleConfirm={() => handleOnAssignModerator(userIndex.id, userIndex.name, 'Member')}
       />
     </Box>
   );
