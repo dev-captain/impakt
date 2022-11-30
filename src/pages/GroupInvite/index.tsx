@@ -38,11 +38,11 @@ const GroupInvite = () => {
                 shallowExploreGroups[indexOfExploreGroup].Request = d;
                 setExploreGroups(shallowExploreGroups);
               }
-              navigate('/d/g');
+              navigate(`/d/g/${groupId}`);
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
-              navigate('/d/g');
+              navigate(`/d/g/${groupId}`);
             },
           },
         );
