@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
         href=""
         onClose={onClose}
         title="General"
-        isActive={path.pathname === '/dashboard'}
+        isActive={path.pathname === '/d'}
       >
         <I.DashboardIcon cursor="pointer" width="26px" height="23px" />
       </SidebarLinkItem>
@@ -26,7 +26,7 @@ const Sidebar: React.FC = () => {
         href="referrals"
         onClose={onClose}
         title="Referrals"
-        isActive={path.pathname === '/dashboard/referrals'}
+        isActive={path.pathname === '/d/r'}
       >
         <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
       </SidebarLinkItem>
@@ -36,7 +36,7 @@ const Sidebar: React.FC = () => {
         href="reward-history"
         onClose={onClose}
         title="Reward history"
-        isActive={path.pathname === '/dashboard/reward-history'}
+        isActive={path.pathname === '/d/reward-history'}
       >
         <I.RewardIcon cursor="pointer" width="27px" height="27px" />
       </SidebarLinkItem> */}
@@ -46,7 +46,7 @@ const Sidebar: React.FC = () => {
         href="statistics"
         onClose={onClose}
         title="Statistics"
-        isActive={path.pathname === '/dashboard/statistics'}
+        isActive={path.pathname === '/d/statistics'}
       >
         <I.ChatIcon cursor="pointer" width="27px" height="23px" />
       </SidebarLinkItem> */}

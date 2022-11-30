@@ -159,7 +159,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
               {isVersion2 && (
                 <HStack justifyContent="center" h={{ base: '40px', md: '100px' }}>
                   <Common.ImpaktButton
-                    href="/dashboard"
+                    href="/d"
                     as="a"
                     p="10px 16px 10px 12px"
                     onClick={(e) => {

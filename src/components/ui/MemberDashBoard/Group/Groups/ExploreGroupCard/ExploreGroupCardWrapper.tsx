@@ -41,7 +41,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
             e.preventDefault();
             e.stopPropagation();
             if (!g.private) {
-              navigate(`/dashboard/groups/group/${g.id}`);
+              navigate(`/d/g/${g.id}`);
             }
           }}
           position="relative"
