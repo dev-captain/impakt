@@ -43,10 +43,9 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
   const { t } = useTranslation(`default`).i18n;
   const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
-  // const notifies = usePersistedGroupStore().groupRequests.filter(
-  //   (requestD) => requestD.status === 'Pending',
-  // ).length;
-  const notifies = 2;
+  const notifies = usePersistedGroupStore().groupRequests.filter(
+    (requestD) => requestD.status === 'Pending',
+  ).length;
 
   const textColor = 'glass.100';
 
@@ -100,11 +99,13 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
 
               <HStack columnGap="2em" justifyContent="center" h={{ base: '40px', md: '100px' }}>
                 {notifies > 0 ? (
-                  <Box onClick={onOpen}>
+                  <Box onClick={isOpen ? onClose : onOpen}>
                     <I.NotificationIcon color="fg1" cursor="pointer" />
                   </Box>
                 ) : (
-                  <I.NotifyIcon color="fg1" cursor="pointer" />
+                  <Box onClick={isOpen ? onClose : onOpen}>
+                    <I.NotifyIcon color="fg1" cursor="pointer" />
+                  </Box>
                 )}
 
                 <SideBarNavigationDropDownMenu />

@@ -27,7 +27,7 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
   return (
     <Drawer isOpen={open} placement="right" onClose={() => close()}>
       <DrawerOverlay />
-      <DrawerContent bg="a5" top="80px !important" maxWidth={{ md: '384px', base: '300px' }}>
+      <DrawerContent bg="a5" top="112px !important" maxWidth={{ md: '384px', base: '300px' }}>
         <Box
           display="flex"
           alignItems="center"
@@ -36,7 +36,11 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
           borderBottom="1px solid #EBF4F7"
         >
           <Box display="flex" alignItems="center">
-            <I.NotificationIcon color="#728BA3" />
+            {requests.length > 0 ? (
+              <I.NotificationIcon color="fg1" cursor="pointer" />
+            ) : (
+              <I.NotifyIcon color="fg1" cursor="pointer" />
+            )}
             <DrawerHeader p="0" color="#4E6070" ml="16px">
               Notifications
             </DrawerHeader>

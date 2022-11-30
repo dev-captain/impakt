@@ -3,7 +3,7 @@ import Keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
 import { HStack } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import { LinkItem } from '../../common';
+import { Common } from 'components';
 
 const SidebarNavigationLinks = () => {
   // TODO Sidebar links UI
@@ -21,7 +21,7 @@ const SidebarNavigationLinks = () => {
       justifyContent={{ base: 'center', md: 'start' }}
       display="flex"
     >
-      <LinkItem
+      <Common.LinkItem
         titleTextColor={activeColor || textColor}
         href="/"
         isNavigate
@@ -30,14 +30,14 @@ const SidebarNavigationLinks = () => {
         color={activeColor || textColor}
         passiveColor={passiveColor}
       />
-      <LinkItem
+      <Common.LinkItem
         titleTextColor={activeColor || textColor}
         passiveColor={passiveColor}
         title={t(Keys.navbar.knowledgeBase)}
         href="https://knowledgebase.impakt.com"
         isActive={path.path === 'knowledge-base'}
       />
-      <LinkItem
+      <Common.LinkItem
         titleTextColor={activeColor || textColor}
         href="/contact"
         isNavigate
