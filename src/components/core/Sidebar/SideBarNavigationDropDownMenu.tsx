@@ -21,7 +21,7 @@ const SideBarNavigationDropDownMenu: React.FC = () => {
     <Menu autoSelect={false} offset={[45, 10]}>
       {({ isOpen }) => (
         <HStack
-          _hover={{ bg: 'white', boxShadow: 'lightSm' }}
+          _hover={{ bg: 'white', boxShadow: !isOpen ? 'lightSm' : '' }}
           boxShadow={isOpen ? 'lightM' : ''}
           bg={isOpen ? 'white' : ''}
           borderRadius="12px"
