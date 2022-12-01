@@ -25,10 +25,10 @@ const Sidebar: React.FC<{ isHide: boolean }> = ({ isHide }) => {
       <SidebarMenuItem
         onClick={() => {
           setActiveIndex(1);
-          navigate('groups');
+          navigate('/d/g');
         }}
         hide={isHide}
-        href="groups"
+        href="/d/g"
         title="Groups"
         isActive={activeIndex === 1}
       >
@@ -38,10 +38,10 @@ const Sidebar: React.FC<{ isHide: boolean }> = ({ isHide }) => {
       <SidebarMenuItem
         onClick={() => {
           setActiveIndex(2);
-          navigate('referrals');
+          navigate('/d/r');
         }}
         hide={isHide}
-        href="referrals"
+        href="/d/r"
         title="Referrals"
         isActive={activeIndex === 2}
       >
