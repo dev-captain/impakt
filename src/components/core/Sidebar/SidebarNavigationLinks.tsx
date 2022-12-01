@@ -15,12 +15,7 @@ const SidebarNavigationLinks = () => {
   const passiveColor = 'fg';
 
   return (
-    <HStack
-      spacing={[3, 3, 3, 5, 8, 12]}
-      flexWrap={{ base: 'wrap', md: 'nowrap' }}
-      justifyContent={{ base: 'center', md: 'start' }}
-      display="flex"
-    >
+    <>
       <Common.LinkItem
         titleTextColor={activeColor || textColor}
         href="/"
@@ -45,7 +40,7 @@ const SidebarNavigationLinks = () => {
         title={t(Keys.navbar.contactUs)}
         isActive={path.path === 'contact'}
       />
-    </HStack>
+    </>
   );
 };
 

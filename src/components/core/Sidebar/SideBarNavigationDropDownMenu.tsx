@@ -13,12 +13,18 @@ import { I } from 'components';
 import { useLogout } from 'hooks';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 
-const SideBarNavigationDropDownMenu: React.FC = () => {
+interface SideBarNavigationDropDownMenuPropsI {
+  offset?: [x: number, y: number];
+}
+
+const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuPropsI> = ({
+  offset,
+}) => {
   const { member } = usePersistedAuthStore();
   const logout = useLogout();
 
   return (
-    <Menu autoSelect={false} offset={[45, 10]}>
+    <Menu autoSelect={false} offset={offset ?? [45, 10]}>
       {({ isOpen }) => (
         <HStack
           _hover={{ bg: 'white', boxShadow: !isOpen ? 'lightSm' : '' }}
@@ -29,8 +35,12 @@ const SideBarNavigationDropDownMenu: React.FC = () => {
         >
           <MenuButton>
             <HStack spacing="12px">
-              <Avatar w="40px" h="40px" name="Demideus" />
-              <Text textStyle="semiBold6" color="fg-1">
+              <Avatar
+                w={{ base: '30px', md: '40px' }}
+                h={{ base: '30px', md: '40px' }}
+                name="Demideus"
+              />
+              <Text textStyle={{ base: 'semiBold5', md: 'semiBold6' }} color="fg-1">
                 {member?.firstName ?? member?.username}
               </Text>
               <I.DropIcon

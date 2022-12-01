@@ -1,47 +1,22 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
-import { FC, useState } from 'react';
-import {
-  Box,
-  Flex,
-  // Image,
-  HStack,
-  useDisclosure,
-  useMediaQuery,
-  PositionProps,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button,
-  Avatar,
-  Text,
-} from '@chakra-ui/react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { parsePathname } from 'utils';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { FC } from 'react';
+import { Box, Text, Flex, HStack, useDisclosure, PositionProps, VStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
-import { I, Common } from 'components';
+import { Common, I } from 'components';
 
-import { useLogout } from '../../../hooks/useLogout';
 import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 import { usePersistedGroupStore } from '../../../lib/zustand';
 import SidebarNavigationLinks from './SidebarNavigationLinks';
 import SideBarNavigationDropDownMenu from './SideBarNavigationDropDownMenu';
 
-interface NavbarProps {
+interface SidebarNavigationMenuProps {
   position?: PositionProps['position'];
 }
-// const { dark, light } = Images;
 
-const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
+const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({ position = 'fixed' }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(`default`).i18n;
-  const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
-  const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
+  const collapseMenuDisclousere = useDisclosure();
+  const notificationDisclosure = useDisclosure();
   const notifies = usePersistedGroupStore().groupRequests.filter(
     (requestD) => requestD.status === 'Pending',
   ).length;
@@ -55,32 +30,25 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
       top="0"
       zIndex="99999999999"
       w="full"
-      display={isLessThan1280 ? 'auto' : 'flex'}
+      display="flex"
       justifyContent="center"
-      px={!isLessThan1280 ? '3em' : '16px'}
+      px={{ base: '1em', lg: '3em' }}
       bgColor="a5"
       h={{ base: 'auto', lg: '112px' }}
       id="navbar-box"
     >
       <Flex
         w="full"
-        maxWidth={{ base: '1232px', md: 'full' }}
-        maxW={!isLessThan1280 ? 'full' : '1232px'}
         flexDir="row"
         alignSelf="center"
         overflow="visible"
         color={textColor}
         position="relative"
         alignItems="center"
-        borderRadius={!isLessThan1280 ? '0' : '16px'}
-        height={!isLessThan1280 ? '80px' : '70px'}
-        marginTop={!isLessThan1280 ? '0' : '10px'}
-        transition="background-color 0.5s linear"
-        borderBottom={!isLessThan1280 ? '1px solid rgba(255,255,255,0.1)' : '0'}
+        minH="80px"
       >
         <HStack w="full" justify="space-between">
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px">
-            {/* <Image minW="55px" h="32px" src={colorMode === 'light' ? Logo : LogoLight} /> */}
             <I.ImpaktIcon variant="lg" w="128px" />
           </Box>
           <HStack
@@ -88,21 +56,39 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
             align="center"
             w="full"
             ml="0 !important"
-            // spacing={[0, 0, 3, 5, 8, 12]}
             display={{ base: 'none', md: 'flex' }}
           >
             <HStack w="full" align="space-between" id="yo" justify="space-between">
               <Box display="flex" ml="0 !important" justifyContent="center" w="full">
-                <SidebarNavigationLinks />
+                <HStack
+                  spacing={[3, 3, 3, 5, 8, 12]}
+                  flexWrap={{ base: 'wrap', md: 'nowrap' }}
+                  justifyContent={{ base: 'center', md: 'start' }}
+                  display="flex"
+                >
+                  <SidebarNavigationLinks />
+                </HStack>
               </Box>
 
               <HStack columnGap="2em" justifyContent="center" h={{ base: '40px', md: '100px' }}>
                 {notifies > 0 ? (
-                  <Box onClick={isOpen ? onClose : onOpen}>
+                  <Box
+                    onClick={
+                      notificationDisclosure.isOpen
+                        ? notificationDisclosure.onClose
+                        : notificationDisclosure.onOpen
+                    }
+                  >
                     <I.NotificationIcon color="fg1" cursor="pointer" />
                   </Box>
                 ) : (
-                  <Box onClick={isOpen ? onClose : onOpen}>
+                  <Box
+                    onClick={
+                      notificationDisclosure.isOpen
+                        ? notificationDisclosure.onClose
+                        : notificationDisclosure.onOpen
+                    }
+                  >
                     <I.NotifyIcon color="fg1" cursor="pointer" />
                   </Box>
                 )}
@@ -111,23 +97,25 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
               </HStack>
             </HStack>
           </HStack>
-
-          {/* <CollapseMenuController
-            isOpen={isOpen}
-            onToggle={onToggle}
-            isLessThan1280={isLessThan1280}
-          /> */}
         </HStack>
       </Flex>
-      {/* {isLessThan1280 && (
-        <CollapseMenu
-          isOpen={isOpen}
-          onClose={onClose}
-          textColor={textColor}
-          isLessThan1040={isLessThan1280}
-        />
-      )} */}
-      <NotificationDrawer open={isOpen} close={() => onClose()} />
+      <Common.CollapseMenu>
+        <VStack
+          display={{ base: 'flex', md: 'none' }}
+          borderRadius="12px"
+          boxShadow="light"
+          mx="1em"
+          bgColor="white"
+          p="1em"
+        >
+          <SidebarNavigationLinks />
+          <SideBarNavigationDropDownMenu offset={[-15, 10]} />
+        </VStack>
+      </Common.CollapseMenu>
+      <NotificationDrawer
+        open={notificationDisclosure.isOpen}
+        close={notificationDisclosure.onClose}
+      />
     </Box>
   );
 };

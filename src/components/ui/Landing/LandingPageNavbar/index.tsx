@@ -19,7 +19,6 @@ import Keys from 'i18n/types';
 import { I, Common } from 'components';
 
 import CollapseMenu from './CollapseMenu';
-import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
@@ -129,10 +128,11 @@ const LandingPageNavbar: FC = () => {
             </HStack>
           </HStack>
 
-          <CollapseMenuController
+          <Common.CollapseMenuIconButton
+            display={{ md: 'none' }}
+            aria-label="Toggle Navigation"
             isOpen={isOpen}
-            onToggle={onToggle}
-            isLessThan1280={isLessThan1280}
+            onClick={onToggle}
           />
         </HStack>
       </Flex>

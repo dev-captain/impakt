@@ -16,7 +16,7 @@ const SidebarCollapseMenu = () => {
           as={Button}
           rightIcon={<I.DropIcon color="glass.1000" />}
           backgroundColor="#fff"
-          boxShadow="lightM"
+          boxShadow="light"
           color="fg-1"
           borderRadius="16px"
           textAlign="left"
@@ -24,7 +24,7 @@ const SidebarCollapseMenu = () => {
           w="100%"
           _active={{ backgroundColor: '#fff' }}
           _hover={{ backgroundColor: '#fff' }}
-          _focus={{ boxShadow: 'none' }}
+          _focus={{ boxShadow: 'light' }}
         >
           {path.pathname === '/d' && (
             <Box onClick={() => setActiveIndex(0)} display="flex" alignItems="center">
@@ -55,7 +55,7 @@ const SidebarCollapseMenu = () => {
             </Box>
           )}
         </MenuButton>
-        <MenuList borderRadius="16px" w="100%" minW="100%" boxShadow="lightM">
+        <MenuList borderRadius="16px" w="100%" minW="100%" boxShadow="light">
           <MenuItem
             onClick={() => {
               setActiveIndex(0);
