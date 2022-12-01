@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { Common, I } from 'components';
 import { useNavigate } from 'react-router-dom';
 import Images from '../../../../../../assets/images';
@@ -21,12 +21,7 @@ const MyGroupCardHeader: React.FC = () => {
             e.preventDefault();
             navigate(`/d/g/${m.groupId}`);
           }}
-          w={{
-            base: '100%',
-            sm: '100%',
-            md: '31%',
-            lgx: '23%',
-          }}
+          w="282px"
         >
           <Box position="relative">
             <GroupsCard
@@ -41,17 +36,11 @@ const MyGroupCardHeader: React.FC = () => {
               isPrivateGroup={m.Group?.private}
             >
               <Common.ImpaktButton
-                variant="transparent"
-                _hover={{ backgroundColor: '#000', color: '#fff' }}
-                border="1px solid #1C1C28"
+                variant="white-50"
                 borderRadius="8px"
-                width={{ md: '112px', sm: '100px', base: '100px' }}
                 justifyContent="space-around"
-                fontSize={{ lgx: '16px', base: '14px' }}
-                _focus={{ boxShadow: 'none' }}
-                leftIcon={<I.CheckIcon />}
               >
-                Joined
+                <Text textStyle="semiBold3">View</Text>
               </Common.ImpaktButton>
             </GroupsCard>
           </Box>

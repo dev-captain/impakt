@@ -17,14 +17,12 @@ const ExploreGroup: React.FC = () => {
 
   return (
     <HStack
-      columnGap={{ md: '24px' }}
-      rowGap="24px"
-      justifyContent="flex-start"
-      alignItems="flex-start"
+      columnGap="24px !important"
+      rowGap="24px !important"
       w="full"
-      margin="30px 0"
+      spacing="0"
       flexWrap={{ sm: 'wrap' }}
-      display={{ sm: 'flex' }}
+      flexDir={{ base: 'column', md: 'row' }}
     >
       <ExploreGroupCardHeader status={status} handleChangeStatus={handleChangeStatus} />
       <ExploreGroupCardWrapper status={status} />

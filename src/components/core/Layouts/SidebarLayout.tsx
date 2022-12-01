@@ -43,8 +43,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         w="full"
         position="fixed"
         h="90px"
-        zIndex="333"
-        top={{ base: '90px', md: '112px' }}
+        top="90px"
         color="white"
         display={{ base: 'initial', lg: ' none' }}
       >
@@ -99,7 +98,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             m="0 !important"
             marginLeft={{
               base: '0',
-              lg: !isClose ? '20vw !important' : '5vw !important',
+              lg: isClose ? '13.958vw !important' : '16.458vw !important',
             }}
             transition="margin-left .4s ease-in"
             p={{ base: '0 1em', lg: '7em 3em 3em 3em' }}

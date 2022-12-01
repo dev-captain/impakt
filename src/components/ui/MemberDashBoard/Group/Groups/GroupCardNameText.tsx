@@ -6,7 +6,7 @@ interface GroupCardNameTitleTextPropsI {
 }
 const GroupCardNameTitleText: React.FC<GroupCardNameTitleTextPropsI> = ({ groupName }) => {
   return (
-    <Text as="h1" textStyle="TitleBold64" fontSize={{ lgx: '20px', base: '16px' }} color="#1C1C28">
+    <Text textStyle="semiBold6" color="fg-1">
       {groupName}
     </Text>
   );

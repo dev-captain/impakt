@@ -1,13 +1,11 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-nested-ternary */
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Common } from 'components';
 
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
 
-import ExploreGroupItem from './ExploreGroupItem';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 interface ExploreGroupCardWrapperPropsI {
@@ -31,12 +29,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           key={g.id}
           cursor="pointer"
           marginStart="0 !important"
-          w={{
-            base: '100%',
-            sm: '100%',
-            md: '31%',
-            lgx: '23%',
-          }}
+          w="282px"
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
@@ -50,12 +43,13 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
             name={g.groupName}
             isPrivateGroup={g.private}
           >
-            <ExploreGroupItem
-              gId={g.id}
-              gRequestStatus={g.Request}
-              gPrivate={isPrivate}
-              key={`explore-group-item-${g.id}`}
-            />
+            <Common.ImpaktButton
+              variant="white-50"
+              borderRadius="8px"
+              justifyContent="space-around"
+            >
+              <Text textStyle="semiBold3">View</Text>
+            </Common.ImpaktButton>
           </GroupsCard>
         </Box>
       ))}

@@ -138,7 +138,7 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'white-50') {
-    return 'darkOrange';
+    return 'linear-gradient(90deg, #F04153 0%, #F27961 100%);';
   }
 
   if (variant === 'black') {
@@ -172,7 +172,7 @@ const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'white-50') {
-    return '#FFFFFF';
+    return '#fff';
   }
 
   if (variant === 'black') {

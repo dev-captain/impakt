@@ -12,7 +12,7 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   handleChangeStatus,
 }) => {
   return (
-    <GroupCardWrapperHeader justify="space-between" title="Explore Groups">
+    <GroupCardWrapperHeader justify="space-between" title="Explore">
       <Box m="20px 0 !important">
         <ExploreGroupCardPrivatePublicToggleButton
           status={status}

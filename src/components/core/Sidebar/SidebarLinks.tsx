@@ -42,6 +42,7 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
           cursor="pointer"
           width="32px"
           height="32px"
+          color={!path.pathname.includes(routes.groups) ? 'fg2' : ''}
         />
       </SidebarMenuItem>
 

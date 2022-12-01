@@ -10,7 +10,7 @@ const SidebarCollapseMenu = () => {
   const navigate = useNavigate();
 
   return (
-    <Box width="full">
+    <Box zIndex="9999 !important" width="full">
       <Menu isLazy matchWidth strategy="fixed">
         <MenuButton
           as={Button}
