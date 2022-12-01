@@ -38,7 +38,6 @@ interface NavbarProps {
 // const { dark, light } = Images;
 
 const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
-  const logout = useLogout();
   const navigate = useNavigate();
   const { t } = useTranslation(`default`).i18n;
   const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
