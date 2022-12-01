@@ -19,7 +19,13 @@ const Sidebar: React.FC<{ isHide: boolean }> = ({ isHide }) => {
         title="General"
         isActive={activeIndex === 0}
       >
-        <I.DashboardIcon isActive={activeIndex === 0} cursor="pointer" width="32px" height="32px" />
+        <I.DashboardIcon
+          key="1"
+          isActive={activeIndex === 0}
+          cursor="pointer"
+          width="32px"
+          height="32px"
+        />
       </SidebarMenuItem>
 
       <SidebarMenuItem

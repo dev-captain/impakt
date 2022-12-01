@@ -23,20 +23,6 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
     <Box bgColor="a5" minH="100vh" position="relative">
       {isShowNavbar && <SidebarNavigationMenu position="fixed" />}
 
-      <Box
-        w="full"
-        position="fixed"
-        h="90px"
-        zIndex="333"
-        top="100px"
-        color="white"
-        display={{ base: 'initial', lg: ' none' }}
-      >
-        <Box marginX="16px">
-          <SidebarCollapseMenu />
-        </Box>
-        {/* TODO  Sidebar */}
-      </Box>
       <VStack
         as="main"
         color="#000"
@@ -83,14 +69,28 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
               lg: !isClose ? '20vw !important' : '5vw !important',
             }}
             transition="margin-left .4s ease-in"
-            p={{ sm: '0 1em', lg: '7em 3em 3em 3em' }}
-            marginTop={{ sm: '100px !important', lg: '0px !important' }}
+            p={{ base: '0 1em', lg: '7em 3em 3em 3em' }}
+            marginTop={{ base: '170px !important', lg: '0px !important' }}
           >
             <Outlet />
           </VStack>
         </HStack>
       </VStack>
 
+      <Box
+        w="full"
+        position="fixed"
+        h="90px"
+        zIndex="333"
+        top="90px"
+        color="white"
+        display={{ base: 'initial', lg: ' none' }}
+      >
+        <Box marginX="16px">
+          <SidebarCollapseMenu />
+        </Box>
+        {/* TODO  Sidebar */}
+      </Box>
       {isShowFooter && <C.FooterV2 wFull />}
     </Box>
   );

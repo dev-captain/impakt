@@ -27,7 +27,11 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
   return (
     <Drawer isOpen={open} placement="right" onClose={() => close()}>
       <DrawerOverlay />
-      <DrawerContent bg="a5" top="112px !important" maxWidth={{ md: '384px', base: '300px' }}>
+      <DrawerContent
+        bg="a5"
+        top={{ md: '80px !important', lg: '112px !important' }}
+        maxWidth={{ md: '384px', base: '300px' }}
+      >
         <Box
           display="flex"
           alignItems="center"

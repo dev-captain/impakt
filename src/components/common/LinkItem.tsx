@@ -24,6 +24,7 @@ const LinkItem: React.FC<LinkItemProps & TextProps> = ({
   isNavigate,
   titleTextColor,
   titleTextStyle,
+  isDisabled,
   ...props
 }) => {
   const navigate = useNavigate();
@@ -35,14 +36,16 @@ const LinkItem: React.FC<LinkItemProps & TextProps> = ({
         transition: '0.2s ease',
         opacity: 1,
       }}
-      as={href ? 'a' : 'div'}
+      as="a"
       onClick={(e) => {
-        e.preventDefault();
-        if (isNavigate && href) {
-          return navigate(href);
+        if (isNavigate) {
+          e.preventDefault();
+          if (!isDisabled) {
+            if (href) {
+              navigate(href);
+            }
+          }
         }
-
-        return null;
       }}
       {...props}
     >

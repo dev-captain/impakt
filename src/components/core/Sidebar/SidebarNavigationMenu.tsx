@@ -59,7 +59,7 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
       justifyContent="center"
       px={!isLessThan1280 ? '3em' : '16px'}
       bgColor="a5"
-      h="112px"
+      h={{ base: 'auto', lg: '112px' }}
       id="navbar-box"
     >
       <Flex
@@ -89,7 +89,7 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
             w="full"
             ml="0 !important"
             // spacing={[0, 0, 3, 5, 8, 12]}
-            display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
+            display={{ base: 'none', md: 'flex' }}
           >
             <HStack w="full" align="space-between" id="yo" justify="space-between">
               <Box display="flex" ml="0 !important" justifyContent="center" w="full">
@@ -127,7 +127,7 @@ const SidebarNavigationMenu: FC<NavbarProps> = ({ position = 'fixed' }) => {
           isLessThan1040={isLessThan1280}
         />
       )} */}
-      {!isLessThan1280 && <NotificationDrawer open={isOpen} close={() => onClose()} />}
+      <NotificationDrawer open={isOpen} close={() => onClose()} />
     </Box>
   );
 };
