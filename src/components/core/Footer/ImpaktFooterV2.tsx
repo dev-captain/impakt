@@ -38,8 +38,8 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
           justify={{ base: 'center', lg: wFull ? 'flex-start' : 'space-between' }}
         >
-          <HStack display="flex">
-            <I.ImpaktIcon variant="lg" w="111px" whiteMode={!isWhiteMode} />
+          <HStack columnGap="2em" display="flex">
+            <I.ImpaktIcon variant="lg" minW="111px" w="111px" whiteMode={!isWhiteMode} />
             <Box onClick={() => navigate('/download')}>
               <Common.ImpaktButton variant={isWhiteMode ? 'orange' : 'primary'}>
                 Download

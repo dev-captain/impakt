@@ -107,6 +107,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             transition="margin-left .4s ease-in"
             p={{ base: '0 1em', lg: '7em 3em 3em 3em' }}
             marginTop={{ base: '170px !important', lg: '0px !important' }}
+            marginBottom="80px !important" // For footer
           >
             <Outlet />
           </VStack>
