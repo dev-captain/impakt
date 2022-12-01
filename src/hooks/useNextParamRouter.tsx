@@ -14,7 +14,7 @@ export const useNextParamRouter = () => {
 
       navigate(nextParamLink);
     } else {
-      navigate('/dashboard');
+      navigate('/d');
     }
   };
 

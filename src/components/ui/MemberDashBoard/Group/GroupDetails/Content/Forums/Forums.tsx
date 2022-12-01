@@ -2,29 +2,29 @@ import { Box, Text, Button, useDisclosure } from '@chakra-ui/react';
 // import { I } from 'components';
 import * as React from 'react';
 import { AddIcon } from '@chakra-ui/icons';
+import { I } from 'components';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from 'assets/images';
 import UserForumsCard from './UserForumsCard';
 import CreatePostCard from './CreatePostCard';
-import { usePersistedForumStore } from '../../../../../../../lib/zustand';
+import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import CreatePostModal from './CreatePostModal';
-import { getCreatedBefore } from '../../../../../../../utils';
+import { getCreatedBefore, renderToast } from '../../../../../../../utils';
 
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { posts } = usePersistedForumStore();
-  // const creatorCommentSortedByCreatedDate = activePost?.Comment.sort(
-  //   (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  // );
-  const resortedPosts = posts.map((post) => {
-    return {
-      ...post,
-      Comment: post.Comment.sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      ),
-    };
-  });
+  const { activeGroup, role } = usePersistedGroupStore();
+
+  if (activeGroup?.isPreview && activeGroup.private)
+    return (
+      <MemberDashboardCard justifyContent="center" alignItems="center" marginTop="26px">
+        <I.LockIcon />
+      </MemberDashboardCard>
+    );
+
+  const isRoleDefined = role && role !== 'None';
 
   return (
     <>
@@ -42,15 +42,24 @@ const Forums: React.FC = () => {
                   _selected={{ border: '0' }}
                   _focus={{ border: 0 }}
                   padding="0"
-                  onClick={onOpen}
+                  onClick={
+                    isRoleDefined
+                      ? onOpen
+                      : () => {
+                          renderToast(
+                            'warning',
+                            'You have to be a member of the group to create a topic',
+                          );
+                        }
+                  }
                 >
                   <AddIcon color="#29323B" width="15px" height="15px" fontWeight="bold" />
                 </Button>
               </Box>
             </Box>
-            {resortedPosts.length === 0 && <CreatePostCard onClick={onOpen} />}
-            {resortedPosts.length > 0 &&
-              resortedPosts.map(
+            {posts.length === 0 && <CreatePostCard onClick={onOpen} />}
+            {posts.length > 0 &&
+              posts.map(
                 ({ id, Creator, content, createdAt, Comment }) =>
                   Comment.length && (
                     <UserForumsCard

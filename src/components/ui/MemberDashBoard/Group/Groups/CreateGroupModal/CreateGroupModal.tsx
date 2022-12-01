@@ -18,7 +18,7 @@ const CreateGroupModal: React.FC<CreateGroupModalPropsI> = ({ isStandalone, onCl
     ? () => {
         if (props.onClose) {
           props.onClose();
-          navigate('/dashboard/groups');
+          navigate('/d/g');
         }
       }
     : props.onClose;

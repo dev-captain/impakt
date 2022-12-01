@@ -11,21 +11,28 @@ import { GetMembersOfGroupRes } from '../lib/impakt-dev-api-client/react-query/t
 import {
   useGroupsControllerV1FindOne,
   useGroupsControllerV1FindGroupMembers,
+  useGroupsControllerV1GetGroupPinnedChallenges,
 } from '../lib/impakt-dev-api-client/react-query/groups/groups';
 import { usePostControllerV1GetMany } from '../lib/impakt-dev-api-client/react-query/posts/posts';
 import { routinesControllerGetRoutines } from '../lib/impakt-dev-api-client/react-query/routines/routines';
 import {
+  usePersistedAuthStore,
   usePersistedCalendarStore,
   usePersistedChallengeStore,
   usePersistedForumStore,
   usePersistedGroupStore,
 } from '../lib/zustand';
+import { useChallengeStatsControllerGetUserBestScore } from '../lib/impakt-dev-api-client/react-query/default/default';
+import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 
 export const useFetchGroupDetails = () => {
   // console.log('render');
   // global states
+  const { member } = usePersistedAuthStore();
   const { setActiveGroup, activeGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
   const { setCalendar } = usePersistedCalendarStore();
+  const { setGroupPinnedChallenge, setBestScoreOfUser, setChallengeLeaderBoard } =
+    usePersistedChallengeStore();
   const { setPosts } = usePersistedForumStore();
 
   // params checks
@@ -44,7 +51,8 @@ export const useFetchGroupDetails = () => {
 
   // fetching group relateds
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
-  const fetchGroupDetailById = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
+
+  useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
     query: {
       retry: 0,
       refetchOnMount: true,
@@ -58,11 +66,21 @@ export const useFetchGroupDetails = () => {
 
           return;
         }
-        await fetchMembersOfGroup.refetch();
-        await fetchAmIMemberOfGroup.refetch();
-        await fetchGroupRoleById.refetch();
-        await fetchPosts.refetch();
-        await fetchGroupCalendar.refetch();
+
+        if (!data.isPreview || !data.private) {
+          await fetchMembersOfGroup.refetch();
+          const isMemberOfGroup = await fetchAmIMemberOfGroup.refetch();
+          if (isMemberOfGroup.data) {
+            await fetchGroupRoleById.refetch();
+          } else {
+            setRole('None');
+          }
+          await fetchPosts.refetch();
+          await fetchGroupCalendar.refetch();
+          await fetchGroupPinnedChallenge.refetch();
+        } else {
+          setRole('None');
+        }
         setActiveGroup(data);
         setIsGroupDetailsLoading(false);
       },
@@ -112,9 +130,6 @@ export const useFetchGroupDetails = () => {
         enabled: false,
         refetchOnMount: false,
         retry: 0,
-        onError: () => {
-          setRole('None');
-        },
         onSuccess: (roleData) => {
           setRole(roleData.role);
         },
@@ -132,26 +147,64 @@ export const useFetchGroupDetails = () => {
         retry: 0,
         refetchOnMount: false,
         onSuccess: (posts) => {
-          // TODO on the backend sort new ones to old ones for comment & posts
-          const reversedCommentPostsOrder = posts.map((postD) => {
-            return { ...postD, Comment: postD.Comment.reverse() };
-          });
-
-          setPosts(reversedCommentPostsOrder ?? []);
+          setPosts(posts ?? []);
         },
       },
     },
   );
 
-  const fetchGroupCalendar = useCalendarControllerGetCalendar(
-    fetchGroupDetailById.data?.calendarId ?? 0,
+  const fetchGroupCalendar = useCalendarControllerGetCalendar(parseInt(groupParam?.id ?? '0', 10), {
+    query: {
+      enabled: false,
+      retry: 0,
+      refetchOnMount: false,
+      onSuccess: (calendarData) => {
+        setCalendar(calendarData);
+      },
+    },
+  });
+
+  const fetchGroupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(
+    parseInt(groupParam?.id ?? '0', 10),
     {
       query: {
         enabled: false,
         retry: 0,
         refetchOnMount: false,
-        onSuccess: (calendarData) => {
-          setCalendar(calendarData);
+        onSuccess: async (pinnedChallenge) => {
+          setGroupPinnedChallenge(pinnedChallenge);
+          if (pinnedChallenge.Challenge) {
+            await fetchPinnedChallengeLeaderboard.refetch();
+            await fetchPinnedChallengeUserBestScore.refetch();
+          }
+        },
+      },
+    },
+  );
+  const fetchPinnedChallengeUserBestScore = useChallengeStatsControllerGetUserBestScore(
+    fetchGroupPinnedChallenge.data?.Challenge?.id ?? 0,
+    member?.id ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (bestScore) => {
+          setBestScoreOfUser(bestScore);
+        },
+      },
+    },
+  );
+
+  const fetchPinnedChallengeLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
+    fetchGroupPinnedChallenge.data?.Challenge?.id ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (leaderboard) => {
+          setChallengeLeaderBoard(leaderboard);
         },
       },
     },

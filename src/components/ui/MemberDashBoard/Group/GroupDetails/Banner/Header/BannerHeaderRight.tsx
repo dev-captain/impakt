@@ -9,6 +9,9 @@ export const BannerHeaderRight: React.FC = () => {
   const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
     ({ role }: any) => role !== 'None',
   );
+  const { activeGroup } = usePersistedGroupStore();
+
+  if (activeGroup?.isPreview && activeGroup.private) return null;
 
   return (
     <Box

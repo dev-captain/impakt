@@ -17,4 +17,5 @@ export interface GetGroupRes {
   private: boolean;
   deleted: boolean;
   CurrentCoverImage?: string;
+  isPreview?: boolean;
 }

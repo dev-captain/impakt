@@ -24,57 +24,57 @@ const CollapseSidebar = () => {
           _hover={{ backgroundColor: '#fff' }}
           _focus={{ boxShadow: 'none' }}
         >
-          {path.pathname === '/dashboard' && (
+          {path.pathname === '/d' && (
             <Box display="flex" alignItems="flex-end">
               <I.DashboardIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname === '/dashboard' ? '1' : '0.5'}
+                opacity={path.pathname === '/d' ? '1' : '0.5'}
               />
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
-          {path.pathname.includes('/dashboard/groups') && (
+          {path.pathname.includes('/d/g') && (
             <Box display="flex" alignItems="flex-end">
               <I.PeopleIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname.includes('/dashboard/groups') ? '1' : '0.5'}
+                opacity={path.pathname.includes('/d/g') ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Groups</Text>
             </Box>
           )}
-          {path.pathname === '/dashboard/referrals' && (
+          {path.pathname === '/d/r' && (
             <Box display="flex" alignItems="flex-end">
               <I.ReferralsIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname === '/dashboard/referrals' ? '1' : '0.5'}
+                opacity={path.pathname === '/d/r' ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Referrals</Text>
             </Box>
           )}
-          {/* {path.pathname === '/dashboard/reward-history' && (
+          {/* {path.pathname === '/d/reward-history' && (
             <Box display="flex" alignItems="flex-end">
               <I.RewardIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname === '/dashboard/reward-history' ? '1' : '0.5'}
+                opacity={path.pathname === '/d/reward-history' ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Reward history</Text>
             </Box>
           )} */}
-          {path.pathname === '/dashboard/statistics' && (
+          {path.pathname === '/d/statistics' && (
             <Box display="flex" alignItems="flex-end">
               <I.ChatIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname === '/dashboard/statistics' ? '1' : '0.5'}
+                opacity={path.pathname === '/d/statistics' ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Statistics</Text>
             </Box>
@@ -94,13 +94,7 @@ const CollapseSidebar = () => {
             _active={{ backgroundColor: 'transparent' }}
             _focus={{ backgroundColor: 'transparent' }}
           >
-            <SidebarLinkItem
-              hide
-              href=""
-              title="General"
-              isActive={path.pathname === '/dashboard'}
-              collaps
-            >
+            <SidebarLinkItem hide href="" title="General" isActive={path.pathname === '/d'} collaps>
               <I.DashboardIcon cursor="pointer" width="26px" height="23px" color="#000" />
             </SidebarLinkItem>
           </MenuItem>
@@ -111,9 +105,9 @@ const CollapseSidebar = () => {
           >
             <SidebarLinkItem
               hide
-              href="groups"
+              href="g"
               title="Groups"
-              isActive={path.pathname === '/dashboard/groups'}
+              isActive={path.pathname === '/d/g'}
               collaps
             >
               <I.PeopleIcon cursor="pointer" width="32px" height="32px" color="#000" />
@@ -126,9 +120,9 @@ const CollapseSidebar = () => {
           >
             <SidebarLinkItem
               hide
-              href="referrals"
+              href="r"
               title="Referrals"
-              isActive={path.pathname === '/dashboard/referrals'}
+              isActive={path.pathname === '/d/r'}
               collaps
             >
               <I.ReferralsIcon cursor="pointer" width="32px" height="32px" color="#000" />
@@ -143,7 +137,7 @@ const CollapseSidebar = () => {
               hide
               href="reward-history"
               title="Reward history"
-              isActive={path.pathname === '/dashboard/reward-history'}
+              isActive={path.pathname === '/d/reward-history'}
             >
               <I.RewardIcon cursor="pointer" width="27px" height="27px" />
             </SidebarLinkItem>
@@ -157,7 +151,7 @@ const CollapseSidebar = () => {
               hide
               href="statistics"
               title="Statistics"
-              isActive={path.pathname === '/dashboard/statistics'}
+              isActive={path.pathname === '/d/statistics'}
             >
               <I.ChatIcon cursor="pointer" width="27px" height="23px" />
             </SidebarLinkItem>
