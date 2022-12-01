@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { C, Common, I } from 'components';
 import SidebarCollapseMenu from './SidebarCollapseMenu';
 import SidebarNavigationMenu from './SidebarNavigationMenu';
-import SidebarMenu from './SidebarMenu';
+import SidebarMenu from './SidebarLinks';
 import SidebarNavigationLinks from './SidebarNavigationLinks';
 import SideBarNavigationDropDownMenu from './SideBarNavigationDropDownMenu';
 import NoitificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
@@ -114,7 +114,9 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         </HStack>
       </VStack>
 
+      {/* FOOTER START HERE */}
       {isShowFooter && <C.FooterV2 wFull />}
+      {/* FOOTER END HERE  */}
     </Box>
   );
 };

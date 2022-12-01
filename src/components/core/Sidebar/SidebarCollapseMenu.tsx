@@ -2,7 +2,7 @@ import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra
 import { I } from 'components';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SidebarMenuItem from './SidebarMenuItem';
+import SidebarLinks from './SidebarLinks';
 
 const SidebarCollapseMenu = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -56,90 +56,7 @@ const SidebarCollapseMenu = () => {
           )}
         </MenuButton>
         <MenuList borderRadius="16px" w="100%" minW="100%" boxShadow="light">
-          <MenuItem
-            onClick={() => {
-              setActiveIndex(0);
-              navigate('/d');
-            }}
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-          >
-            <SidebarMenuItem
-              // onClick={() => {
-              //   setActiveIndex(0);
-              //   navigate('');
-              // }}
-              // hide={isHide}
-              isActive={activeIndex === 0}
-              href=""
-              title="General"
-            >
-              <I.DashboardIcon />
-            </SidebarMenuItem>
-          </MenuItem>
-
-          <MenuItem
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-          >
-            <SidebarMenuItem
-              onClick={() => {
-                setActiveIndex(1);
-                navigate('/d/g');
-              }}
-              isActive={activeIndex === 1}
-              href="/d/g"
-              title="Groups"
-            >
-              <I.PeopleIcon cursor="pointer" width="32px" height="32px" />
-            </SidebarMenuItem>
-          </MenuItem>
-
-          <MenuItem
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-            onClick={() => setActiveIndex(2)}
-          >
-            <SidebarMenuItem
-              onClick={() => {
-                setActiveIndex(2);
-                navigate('/d/r');
-              }}
-              isActive={activeIndex === 2}
-              href="/d/r"
-              title="Referrals"
-            >
-              <I.ReferralsIcon cursor="pointer" width="32px" height="32px" />
-            </SidebarMenuItem>
-          </MenuItem>
-          {/* <MenuItem
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-          >
-            <SidebarLinkItem
-              isTransparent
-              hide
-              href="reward-history"
-              title="Reward history"
-              isActive={path.pathname === '/d/reward-history'}
-            >
-              <I.RewardIcon cursor="pointer" width="27px" height="27px" />
-            </SidebarLinkItem>
-          </MenuItem> */}
-          {/* <MenuItem
-            _active={{ backgroundColor: 'transparent' }}
-            _focus={{ backgroundColor: 'transparent' }}
-          >
-            <SidebarLinkItem
-              isTransparent
-              hide
-              href="statistics"
-              title="Statistics"
-              isActive={path.pathname === '/d/statistics'}
-            >
-              <I.ChatIcon cursor="pointer" width="27px" height="23px" />
-            </SidebarLinkItem>
-          </MenuItem> */}
+          <SidebarLinks isHide={false} />
         </MenuList>
       </Menu>
     </Box>

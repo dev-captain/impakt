@@ -1,27 +1,27 @@
 import * as React from 'react';
 import { I } from 'components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SidebarMenuItem from './SidebarMenuItem';
+import { routes } from '../../../data';
 
-const Sidebar: React.FC<{ isHide: boolean }> = ({ isHide }) => {
+const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
+  const path = useLocation();
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = React.useState(0);
 
   return (
     <>
       <SidebarMenuItem
         onClick={() => {
-          setActiveIndex(0);
-          navigate('');
+          navigate(routes.dashboard);
         }}
         hide={isHide}
         href=""
         title="General"
-        isActive={activeIndex === 0}
+        isActive={path.pathname === routes.dashboard}
       >
         <I.DashboardIcon
           key="1"
-          isActive={activeIndex === 0}
+          isActive={path.pathname === routes.dashboard}
           cursor="pointer"
           width="32px"
           height="32px"
@@ -30,28 +30,36 @@ const Sidebar: React.FC<{ isHide: boolean }> = ({ isHide }) => {
 
       <SidebarMenuItem
         onClick={() => {
-          setActiveIndex(1);
-          navigate('/d/g');
+          navigate(routes.groups);
         }}
         hide={isHide}
         href="/d/g"
         title="Groups"
-        isActive={activeIndex === 1}
+        isActive={path.pathname.includes(routes.groups)}
       >
-        <I.PeopleIcon isActive={activeIndex === 1} cursor="pointer" width="32px" height="32px" />
+        <I.PeopleIcon
+          isActive={path.pathname.includes(routes.groups)}
+          cursor="pointer"
+          width="32px"
+          height="32px"
+        />
       </SidebarMenuItem>
 
       <SidebarMenuItem
         onClick={() => {
-          setActiveIndex(2);
-          navigate('/d/r');
+          navigate(routes.referrals);
         }}
         hide={isHide}
         href="/d/r"
         title="Referrals"
-        isActive={activeIndex === 2}
+        isActive={path.pathname === routes.referrals}
       >
-        <I.ReferralsIcon isActive={activeIndex === 2} cursor="pointer" width="32px" height="32px" />
+        <I.ReferralsIcon
+          isActive={path.pathname === routes.referrals}
+          cursor="pointer"
+          width="32px"
+          height="32px"
+        />
       </SidebarMenuItem>
 
       {/* <SidebarMenuItem
@@ -78,4 +86,4 @@ const Sidebar: React.FC<{ isHide: boolean }> = ({ isHide }) => {
     </>
   );
 };
-export default Sidebar;
+export default SidebarLinks;
