@@ -1,12 +1,15 @@
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, HStack, useDisclosure, VStack } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import { C, I } from 'components';
+import { C, Common, I } from 'components';
 import SidebarCollapseMenu from './SidebarCollapseMenu';
 import SidebarNavigationMenu from './SidebarNavigationMenu';
 import SidebarMenu from './SidebarMenu';
+import SidebarNavigationLinks from './SidebarNavigationLinks';
+import SideBarNavigationDropDownMenu from './SideBarNavigationDropDownMenu';
+import NoitificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 
 interface SidebarLayoutProps {
   isShowFooter?: boolean;
@@ -18,11 +21,27 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   isShowNavbar = false,
 }) => {
   const [isClose, setIsClose] = useState(false);
+  const notificationDisclosure = useDisclosure();
 
   return (
     <Box bgColor="a5" minH="100vh" position="relative">
-      {isShowNavbar && <SidebarNavigationMenu position="fixed" />}
+      {/* Main Navigation */}
+      {isShowNavbar && (
+        <SidebarNavigationMenu
+          notificationDrawerClose={notificationDisclosure.onClose}
+          notificationDrawerOpen={notificationDisclosure.onOpen}
+          notificationDrawerIsOpen={notificationDisclosure.isOpen}
+          position="fixed"
+        />
+      )}
 
+      {/* Notification Drawer */}
+      <NoitificationDrawer
+        open={notificationDisclosure.isOpen}
+        close={notificationDisclosure.onClose}
+      />
+
+      {/* Sub navigation mobile */}
       <Box
         w="full"
         position="fixed"
@@ -35,9 +54,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         <Box marginX="16px">
           <SidebarCollapseMenu />
         </Box>
-        {/* TODO  Sidebar */}
       </Box>
-
       <VStack
         as="main"
         color="#000"
@@ -54,6 +71,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           minH={{ sm: 'calc(50vh)', lg: 'calc(100vh - 80px)' }}
           id="hstack"
         >
+          {/* Left Aside Desktop  */}
           <VStack
             position="fixed"
             height="100%"
@@ -75,6 +93,9 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             <SidebarMenu isHide={isClose} />
           </VStack>
 
+          {/* Left Aside Desktop  END */}
+
+          {/* BODY START HERE */}
           <VStack
             w="full"
             id="content-container"
@@ -89,6 +110,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           >
             <Outlet />
           </VStack>
+          {/*  BODY END HERE */}
         </HStack>
       </VStack>
 

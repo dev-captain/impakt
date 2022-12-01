@@ -11,12 +11,18 @@ import SideBarNavigationDropDownMenu from './SideBarNavigationDropDownMenu';
 
 interface SidebarNavigationMenuProps {
   position?: PositionProps['position'];
+  notificationDrawerIsOpen: boolean;
+  notificationDrawerOpen: () => void;
+  notificationDrawerClose: () => void;
 }
 
-const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({ position = 'fixed' }) => {
+const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({
+  position = 'fixed',
+  notificationDrawerIsOpen,
+  notificationDrawerClose,
+  notificationDrawerOpen,
+}) => {
   const navigate = useNavigate();
-  const collapseMenuDisclousere = useDisclosure();
-  const notificationDisclosure = useDisclosure();
   const notifies = usePersistedGroupStore().groupRequests.filter(
     (requestD) => requestD.status === 'Pending',
   ).length;
@@ -74,9 +80,7 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({ position = 'fix
                 {notifies > 0 ? (
                   <Box
                     onClick={
-                      notificationDisclosure.isOpen
-                        ? notificationDisclosure.onClose
-                        : notificationDisclosure.onOpen
+                      notificationDrawerIsOpen ? notificationDrawerClose : notificationDrawerOpen
                     }
                   >
                     <I.NotificationIcon color="fg1" cursor="pointer" />
@@ -84,9 +88,7 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({ position = 'fix
                 ) : (
                   <Box
                     onClick={
-                      notificationDisclosure.isOpen
-                        ? notificationDisclosure.onClose
-                        : notificationDisclosure.onOpen
+                      notificationDrawerIsOpen ? notificationDrawerClose : notificationDrawerOpen
                     }
                   >
                     <I.NotifyIcon color="fg1" cursor="pointer" />
@@ -112,10 +114,6 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({ position = 'fix
           <SideBarNavigationDropDownMenu offset={[-15, 10]} />
         </VStack>
       </Common.CollapseMenu>
-      <NotificationDrawer
-        open={notificationDisclosure.isOpen}
-        close={notificationDisclosure.onClose}
-      />
     </Box>
   );
 };
