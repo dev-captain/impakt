@@ -51,7 +51,7 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
         open={isOpen}
         close={() => {
           onClose();
-          navigate(`/dashboard/groups/group/${group.activeGroup?.id}`);
+          navigate(`/d/g/${group.activeGroup?.id}`);
         }}
       />
     </>

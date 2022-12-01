@@ -19,7 +19,7 @@ const MyGroupCardHeader: React.FC = () => {
           as="a"
           onClick={(e: any) => {
             e.preventDefault();
-            navigate(`/dashboard/groups/group/${m.groupId}`);
+            navigate(`/d/g/${m.groupId}`);
           }}
           w={{
             base: '100%',

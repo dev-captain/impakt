@@ -23,6 +23,7 @@ import { Common, S } from 'components';
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
+import GroupInvite from './pages/GroupInvite/index';
 
 const App = () => {
   return (
@@ -47,6 +48,8 @@ const App = () => {
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
 
+      <Route path="/invite" element={<GroupInvite />} />
+
       <Route path="/register" element={<SignUp />}>
         <Route path=":id" element={<SignUp />} />
         <Route path="bonus" element={<SignUp />} />
@@ -66,7 +69,7 @@ const App = () => {
       />
 
       <Route
-        path="dashboard"
+        path="d"
         element={
           <Authentication>
             <ErrorBoundary>
@@ -76,16 +79,14 @@ const App = () => {
         }
       >
         <Route path="" element={<S.General />} />
-        <Route path="referrals" element={<S.Referrals />} />
-        <Route path="groups">
+        <Route path="r" element={<S.Referrals />} />
+        <Route path="g">
           <Route path="" element={<S.Group />} />
           {/* <Route path="create-group" element={<S.CreateGroup isStandalone />} /> */}
-          <Route path="group">
-            <Route path=":id" element={<S.GroupDetail />}>
-              <Route path="event/:eventId" />
-              <Route path="post/:postId" />
-              <Route path="event/:eventId/join" />
-            </Route>
+          <Route path=":id" element={<S.GroupDetail />}>
+            <Route path="event/:eventId" />
+            <Route path="post/:postId" />
+            <Route path="event/:eventId/join" />
           </Route>
         </Route>
         <Route path="reward-history" element={<S.RewardHistory />} />

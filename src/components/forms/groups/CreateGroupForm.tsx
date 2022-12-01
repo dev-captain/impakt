@@ -40,7 +40,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
         Group: { ...groupData, memberCount: 1 },
       });
       renderToast('success', 'Group created successfully.');
-      navigate('/dashboard/groups');
+      navigate('/d/g');
       if (onClose) {
         onClose();
       }

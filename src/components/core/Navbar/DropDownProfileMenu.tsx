@@ -38,7 +38,7 @@ const DropDownProfileMenu: React.FC = () => {
         borderRadius="8px"
       >
         <MenuItem
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate('/d')}
           isFocusable={false}
           h="100%"
           borderRadius="8px 8px 0px 0px"
