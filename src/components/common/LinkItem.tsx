@@ -50,7 +50,11 @@ const LinkItem: React.FC<LinkItemProps & TextProps> = ({
       {...props}
     >
       {children}
-      <Text textStyle={titleTextStyle ?? 'regular3'} textColor={titleTextColor ?? '#000'}>
+      <Text
+        textStyle={titleTextStyle ?? 'regular3'}
+        _hover={{ color: passiveColor }}
+        textColor={titleTextColor ?? '#000'}
+      >
         {title}
       </Text>
     </Box>

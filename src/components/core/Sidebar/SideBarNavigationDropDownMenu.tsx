@@ -38,7 +38,7 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
               <Avatar
                 w={{ base: '30px', md: '40px' }}
                 h={{ base: '30px', md: '40px' }}
-                name="Demideus"
+                name={member?.firstName ?? member?.username}
               />
               <Text textStyle={{ base: 'semiBold5', md: 'semiBold6' }} color="fg-1">
                 {member?.firstName ?? member?.username}

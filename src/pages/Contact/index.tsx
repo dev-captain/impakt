@@ -1,5 +1,5 @@
-import { Container } from '@chakra-ui/react';
-import { S } from 'components';
+import { Box, Container } from '@chakra-ui/react';
+import { C, S } from 'components';
 import DiscordSupport from '../../components/ui/ContactUs/DiscordSupport';
 
 const ContactPage = () => {

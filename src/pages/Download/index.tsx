@@ -1,4 +1,5 @@
 import { Container } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/react';
 import { C, S } from 'components';
 
 const DownloadSCreen = () => {
@@ -7,14 +8,9 @@ const DownloadSCreen = () => {
       {/* <Common.VideoModal /> */}
       <C.Seo />
 
-      <div id="download-platform">
+      <Box id="download-platform">
         <S.DownloadPlatfrom />
-      </div>
-
-      {/* <div id="subscription-form">
-        <S.SubscriptionForm />
-      </div> */}
-      <C.ImpaktFooterV2 wFull isWhiteMode={false} />
+      </Box>
     </Container>
   );
 };

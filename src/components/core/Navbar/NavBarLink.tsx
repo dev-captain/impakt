@@ -9,18 +9,17 @@ import {
   HStack,
   // useMediaQuery
 } from '@chakra-ui/react';
-// import { useLocation } from 'react-router-dom';
-// import NavbarLinkItem from './NavbarLinkItem';
+import Keys from 'i18n/types';
+import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Common } from 'components';
 
 const NavbarLink = () => {
-  // const location = useLocation();
-  // const path = parsePathname(location.pathname);
+  const path = useLocation();
+  const { t } = useTranslation().i18n;
 
-  // const textColor = location.pathname.includes('dashboard') ? 'fitnessGray' : 'glass.100';
-  // const activeColor = location.pathname.includes('dashboard') ? 'fitnessGray' : 'glass.100';
-  // const passiveColor = location.pathname.includes('dashboard')
-  //   ? 'fitnessGray'
-  //   : 'rgba(255,255,255)';
+  const textColor = 'rgba(255,255,255,0.5)';
+  const passiveColor = 'white';
 
   return (
     <HStack
@@ -29,44 +28,43 @@ const NavbarLink = () => {
       justifyContent={{ base: 'center', md: 'start' }}
       display="flex"
     >
-      {/* <NavbarLinkItem
+      <Common.LinkItem
         href="/"
         title={t(Keys.navbar.impaktFitness)}
-        isActive={path.path === ''}
-        color={activeColor || textColor}
+        isActive={path.pathname === ''}
         passiveColor={passiveColor}
+        titleTextColor={textColor}
+        isNavigate
       />
-      <NavbarLinkItem
-        type="LINK"
-        onClose={onClose}
-        passiveColor={passiveColor}
+      <Common.LinkItem
         title={t(Keys.navbar.knowledgeBase)}
         href="https://knowledgebase.impakt.com"
-        isActive={path.path === 'knowledge-base'}
+        isActive={path.pathname === 'knowledge-base'}
+        passiveColor={passiveColor}
+        titleTextColor={textColor}
       />
-      <NavbarLinkItem
+      {/* <Common.LinkItem
         href="/events"
-        onClose={onClose}
         passiveColor={passiveColor}
         title={t(Keys.navbar.events)}
-        isActive={path.path === 'events'}
-      />
-      <NavbarLinkItem
+        isActive={path.pathname === 'events'}
+      /> */}
+      <Common.LinkItem
         href="/contact"
-        onClose={onClose}
-        passiveColor={passiveColor}
         title={t(Keys.navbar.contactUs)}
-        isActive={path.path === 'contact'}
+        isActive={path.pathname === 'contact'}
+        passiveColor={passiveColor}
+        titleTextColor={textColor}
+        isNavigate
       />
-      {!IsHeader && (
-        <NavbarLinkItem
-          href="/terms-of-use"
-          onClose={onClose}
-          passiveColor={passiveColor}
-          title={t(Keys.navbar.termsOfUse)}
-          isActive={path.path === 'terms-of-use'}
-        />
-      )} */}
+      {/* (
+      <Common.LinkItem
+        href="/terms-of-use"
+        passiveColor={passiveColor}
+        title={t(Keys.navbar.termsOfUse)}
+        isActive={path.pathname === 'terms-of-use'}
+      />
+      ) */}
     </HStack>
   );
 };

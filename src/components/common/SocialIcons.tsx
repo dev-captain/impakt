@@ -13,7 +13,7 @@ const SocialIcons: React.FC<BoxProps> = ({ ...props }) => {
         target="_blank"
         href={Socials.discord}
         transition="color .2s , transform 0.2s ease"
-        color="#000"
+        color="rgba(255,255,255,0.5)"
         {...props}
       >
         <I.DiscordIcon width="35px" height="35px" />

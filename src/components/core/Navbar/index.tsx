@@ -1,6 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import {
   Box,
   Flex,
@@ -23,10 +21,6 @@ import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
-import NavBarSocialIcons from '../../common/SocialIcons';
-import { useLogout } from '../../../hooks/useLogout';
-import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
-import { usePersistedGroupStore } from '../../../lib/zustand';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -35,35 +29,13 @@ interface NavbarProps {
 // const { dark, light } = Images;
 
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
-  const [notify, setNotify] = useState(false);
-  const logout = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
-  const { onOpen, isOpen, onToggle, onClose } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
-  const { colorMode, setColorMode } = useColorMode();
-  const notifies = usePersistedGroupStore().groupRequests.filter(
-    (requestD) => requestD.status === 'Pending',
-  ).length;
-
-  useEffect(() => {
-    if (!isLessThan1280) {
-      onClose();
-    }
-  }, [isLessThan1280, onClose]);
-
-  useEffect(() => {
-    if (path.path === 'dashboard') {
-      setColorMode('light');
-      if (notifies) {
-        setNotify(true);
-      } else {
-        setNotify(false);
-      }
-    }
-  }, [path.path, notifies]);
+  const { colorMode } = useColorMode();
 
   const isLight = colorMode === 'light';
   const textColor = isLight ? 'glass.100' : 'glass.700';
@@ -89,7 +61,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         flexDir="row"
         alignSelf="center"
         overflow="visible"
-        color={textColor}
+        // color={textColor}
         position="relative"
         alignItems="center"
         px={isVersion2 && !isLessThan1280 ? '3em' : '16px'}
@@ -125,7 +97,14 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           >
             <HStack w="full" align="space-between" id="yo" justify="space-between">
               <Box display="flex" ml="0 !important" justifyContent="center" w="full">
-                <NavBarLink />
+                <HStack
+                  spacing={[3, 3, 3, 5, 6, 12]}
+                  flexWrap={{ base: 'wrap', md: 'nowrap' }}
+                  justifyContent={{ base: 'center', md: 'start' }}
+                  display="flex"
+                >
+                  <NavBarLink />
+                </HStack>
               </Box>
 
               {!isVersion2 && (
@@ -134,7 +113,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   spacing="8px"
                   pl={{ base: isVersion2 ? '0px' : '64px' }}
                 >
-                  <NavBarSocialIcons />
+                  <Common.SocialIcons />
                   <Box position="relative" display="flex">
                     <DropDownProfileMenu />
                   </Box>
@@ -145,6 +124,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
 
                   <Common.ImpaktButton
                     as="a"
+                    variant="primary"
                     href="/download"
                     onClick={(e) => {
                       e.preventDefault();
@@ -157,80 +137,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
               )}
             </HStack>
           </HStack>
-          {/* <HStack
-            align="center"
-            spacing="44px"
-            justify="flex-end"
-            flex={{ base: 1, md: 'auto' }}
-            display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
-          >
-            <HStack
-              pl={{ base: 0, md: '64px' }}
-              spacing={{ base: '6px', md: '32px' }}
-              justify={{ base: 'center', md: 'flex-end' }}
-              display={['none', 'none', 'none', isLessThan1040 ? 'none' : 'flex', 'flex']}
-            >
-              <Box as="a" target="_blank" href={Socials.twitter}>
-                <Image
-                  maxW="35"
-                  w="35px"
-                  h="35px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src={twitter}
-                  {..._hover}
-                />
-              </Box>
-              <Box as="a" target="_blank" href={Socials.discord}>
-                <Image
-                  maxW="32"
-                  w="32px"
-                  h="32px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src={discord}
-                  {..._hover}
-                />
-              </Box>
-              <Box me="24px !important" as="a" target="_blank" href={Socials.tiktok}>
-                <Image
-                  maxW="21px"
-                  minW="24px"
-                  h="24px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src={Tiktok}
-                  {..._hover}
-                />
-              </Box>
-              <Box as="a" target="_blank" href={Socials.youtube}>
-                <Image
-                  maxW="32"
-                  w="32px"
-                  h="32px"
-                  opacity={0.6}
-                  objectFit="contain"
-                  src={youtube}
-                  {..._hover}
-                />
-              </Box>
-              {path.path !== 'dashboard' && (
-                <Box
-                  as="button"
-                  onClick={() => setColorMode(colorMode === 'dark' ? 'light' : 'dark')}
-                >
-                  <Image
-                    w="26px"
-                    h="26px"
-                    minW="26px"
-                    objectFit="contain"
-                    src={colorMode === 'dark' ? dark : light}
-                    {..._hover}
-                  />
-                </Box>
-              )}
-            </HStack>
-          </HStack> */}
           <CollapseMenuController
             isOpen={isOpen}
             onToggle={onToggle}
@@ -246,7 +152,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
           isLessThan1040={isLessThan1280}
         />
       )}
-      {!isLessThan1280 && <NotificationDrawer open={isOpen} close={() => onClose()} />}
     </Box>
   );
 };

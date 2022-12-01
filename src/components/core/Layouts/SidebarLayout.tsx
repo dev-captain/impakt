@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Box, HStack, useDisclosure, VStack } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 import { C, I } from 'components';
-import SidebarCollapseMenu from './SidebarCollapseMenu';
-import SidebarNavigationMenu from './SidebarNavigationMenu';
-import SidebarMenu from './SidebarLinks';
-import SidebarNavigationLinks from './SidebarNavigationLinks';
+import SidebarCollapseMenu from '../Sidebar/SidebarCollapseMenu';
+import SidebarNavigationMenu from '../Sidebar/SidebarNavigationMenu';
+import SidebarMenu from '../Sidebar/SidebarLinks';
+import SidebarNavigationLinks from '../Sidebar/SidebarNavigationLinks';
 import NoitificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 
 interface SidebarLayoutProps {

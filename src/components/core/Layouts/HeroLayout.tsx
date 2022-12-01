@@ -4,9 +4,8 @@ import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
 // import { useLocation } from 'react-router-dom';
 import { C } from 'components';
 
-import Footer from './Footer/FooterV1';
-// import NewNavbar from './NewNavbar';
-import Navbar from './Navbar';
+import Footer from '../Footer/FooterV1';
+import Navbar from '../Navbar';
 
 // eslint-disable-next-line import/prefer-default-export
 export const HeroLayout: React.FC<{
@@ -14,7 +13,6 @@ export const HeroLayout: React.FC<{
   bgColor?: string;
   spacing?: number;
   showNavbar?: boolean;
-  showNavbar2?: boolean;
   addSpacer?: boolean;
   pos?: string;
   minH?: string;
@@ -46,7 +44,6 @@ export const HeroLayout: React.FC<{
   showNavbar = false,
   addSpacer = false,
   showFooterV2 = false,
-  showNavbar2 = false,
   backgroundSize = 'cover',
   backgroungRepeat,
   backgroundBlendMode,
@@ -61,7 +58,6 @@ export const HeroLayout: React.FC<{
   return (
     <>
       {showNavbar && <Navbar />}
-      {showNavbar2 && <Navbar />}
       <Box
         minH={{ base: 'auto', md: minH || 'auto', xl: minH || '100vh' }}
         overflowY="visible"
