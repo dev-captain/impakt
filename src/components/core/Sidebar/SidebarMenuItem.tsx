@@ -23,8 +23,16 @@ const SidebarMenuItem = ({ title, href, isActive, hide = false, onClick, childre
       alignItems="center"
       columnGap="1.5em"
       justifyContent="flex-start"
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        if (onClick) {
+          onClick();
+        }
+      }}
       transition="width 5s linear"
+      as="a"
+      href={href}
+      title={title}
     >
       {children}
       {!hide && (

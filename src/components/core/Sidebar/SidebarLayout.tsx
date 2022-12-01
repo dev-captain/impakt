@@ -1,14 +1,11 @@
+import React, { useState } from 'react';
 import { Box, HStack, useDisclosure, VStack } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
-import * as React from 'react';
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
-import { C, Common, I } from 'components';
+import { C, I } from 'components';
 import SidebarCollapseMenu from './SidebarCollapseMenu';
 import SidebarNavigationMenu from './SidebarNavigationMenu';
 import SidebarMenu from './SidebarLinks';
 import SidebarNavigationLinks from './SidebarNavigationLinks';
-import SideBarNavigationDropDownMenu from './SideBarNavigationDropDownMenu';
 import NoitificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 
 interface SidebarLayoutProps {
