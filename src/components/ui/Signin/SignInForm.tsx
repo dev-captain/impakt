@@ -48,7 +48,7 @@ const SignInForm: React.FC = () => {
       {
         onSuccess: (member) => {
           setMember(member);
-          renderToast('success', 'Welcome');
+          renderToast('success', `Welcome ${member.firstName ?? member.username}`);
           navigateTo();
         },
         onError: (err) => {

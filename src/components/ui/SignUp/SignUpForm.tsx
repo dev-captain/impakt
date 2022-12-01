@@ -101,7 +101,7 @@ const SignUpForm: React.FC = () => {
               {
                 onSuccess: (member) => {
                   setMember(member);
-                  renderToast('success', 'Welcome');
+                  renderToast('success', `Welcome ${member.firstName ?? member.username}`);
                   navigate(navigateTo);
                 },
                 onError: (err) => {

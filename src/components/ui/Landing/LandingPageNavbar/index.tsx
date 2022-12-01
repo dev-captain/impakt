@@ -18,11 +18,11 @@ import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
 
-import CollapseMenu from './CollapseMenu';
-import DropDownProfileMenu from './DropDownProfileMenu';
+import CollapseMenu from './LandingPageCollapseMenu';
+import DropDownProfileMenu from './LandingPageDropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
-import NavBarSocialIcons from './NavBarSocialIcons';
+import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import { useLogout } from '../../../../hooks/useLogout';
 
 // const { dark, light } = Images;

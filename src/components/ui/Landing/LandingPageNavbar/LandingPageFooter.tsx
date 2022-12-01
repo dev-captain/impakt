@@ -5,8 +5,8 @@ import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import NavBarLink from '../../ui/Landing/LandingPageNavbar/NavBarLink';
-import NavBarSocialIcons from '../../ui/Landing/LandingPageNavbar/NavBarSocialIcons';
+import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
+import LandingPageNavbarLinks from './LandingPageNavbarLinks';
 
 const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
   const navigate = useNavigate();
@@ -200,7 +200,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
               </SimpleGrid>
             </HStack>
             <HStack w="full" padding={{ base: '0px', lg: wFull ? '0 48px' : '0' }}>
-              <NavBarLink IsHeader={false} />
+              <LandingPageNavbarLinks IsHeader={false} />
             </HStack>
             <HStack
               justifyContent={{ base: 'center', md: 'center' }}

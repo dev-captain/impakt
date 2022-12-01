@@ -66,7 +66,7 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
                   alignItems="center"
                   justifyContent="flex-start"
                 >
-                  <I.SignOutIcon />
+                  <I.SignOutIcon color="darkRed" />
                   <Text ml="0 !important" textStyle="semiBold6" color="darkRed">
                     Sign out
                   </Text>

@@ -34,7 +34,7 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({
       position={position}
       as="nav"
       top="0"
-      zIndex="99999999999"
+      zIndex="999"
       w="full"
       display="flex"
       justifyContent="center"
@@ -76,7 +76,12 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({
                 </HStack>
               </Box>
 
-              <HStack columnGap="2em" justifyContent="center" h={{ base: '40px', md: '100px' }}>
+              <HStack
+                columnGap="2em"
+                spacing="0px !important"
+                justifyContent="center"
+                h={{ base: '40px', md: '100px' }}
+              >
                 {notifies > 0 ? (
                   <Box
                     onClick={

@@ -6,7 +6,7 @@ import Keys from 'i18n/types';
 import { Socials } from 'data';
 import { I } from 'components';
 
-import NavbarLinkItem from './NavbarLinkItem';
+import NavbarLinkItem from './LandingPageNavbarLinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../../lib/zustand';
 import { useLogout } from '../../../../hooks/useLogout';
