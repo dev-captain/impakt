@@ -24,6 +24,7 @@ const SidebarNavigationLinks = () => {
         isActive={path.path === ''}
         color={activeColor || textColor}
         passiveColor={passiveColor}
+        textStyle="semiBold6"
       />
       <Common.LinkItem
         titleTextColor={activeColor || textColor}
@@ -31,6 +32,7 @@ const SidebarNavigationLinks = () => {
         title={t(Keys.navbar.knowledgeBase)}
         href="https://knowledgebase.impakt.com"
         isActive={path.path === 'knowledge-base'}
+        textStyle="semiBold6"
       />
       <Common.LinkItem
         titleTextColor={activeColor || textColor}
@@ -39,6 +41,7 @@ const SidebarNavigationLinks = () => {
         passiveColor={passiveColor}
         title={t(Keys.navbar.contactUs)}
         isActive={path.path === 'contact'}
+        textStyle="semiBold6"
       />
     </>
   );

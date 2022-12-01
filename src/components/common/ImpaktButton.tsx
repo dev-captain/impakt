@@ -8,7 +8,8 @@ type ImpaktButtonVariantType =
   | 'white'
   | 'white-50'
   | 'black'
-  | 'transparent';
+  | 'transparent'
+  | 'orange';
 
 interface ImpaktButtonProps {
   size?: 'sm' | 'lg';
@@ -80,6 +81,10 @@ const getBgColor = (variant?: ImpaktButtonVariantType) => {
     return 'transparent';
   }
 
+  if (variant === 'orange') {
+    return 'linear-gradient(90deg, #F04153 0%, #F27961 100%);';
+  }
+
   return 'accentRed2';
 };
 
@@ -108,6 +113,10 @@ const getTextColor = (variant?: ImpaktButtonVariantType) => {
 
   if (variant === 'transparent') {
     return '#000';
+  }
+
+  if (variant === 'orange') {
+    return '#fff';
   }
 
   return 'rgba(255, 255, 255, 1)';
@@ -140,12 +149,16 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
     return '#000';
   }
 
+  if (variant === 'orange') {
+    return 'a4';
+  }
+
   return 'rgba(255, 255, 255, 1)';
 };
 
 const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
   if (variant === 'primary') {
-    return 'rgba(255, 255, 255, 1)';
+    return '#000';
   }
   if (variant === 'secondary') {
     return 'rgba(255, 255, 255, 0.75)';
@@ -168,6 +181,10 @@ const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
 
   if (variant === 'transparent') {
     return '#000';
+  }
+
+  if (variant === 'orange') {
+    return 'fg-1';
   }
 
   return 'rgba(255, 255, 255, 1)';

@@ -181,7 +181,7 @@ const MemberDashboard: React.FC = () => {
     }
   }, [fetchGroupRequests.isFetched]);
 
-  return <C.SidebarLayout isShowNavbar />;
+  return <C.SidebarLayout isShowNavbar isShowFooter />;
 };
 
 export default MemberDashboard;

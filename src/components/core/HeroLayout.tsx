@@ -2,7 +2,7 @@
 import React from 'react';
 import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
 // import { useLocation } from 'react-router-dom';
-import { ImpaktFooter } from '../ui';
+import { C } from 'components';
 
 import Footer from './Footer/FooterV1';
 // import NewNavbar from './NewNavbar';
@@ -97,7 +97,7 @@ export const HeroLayout: React.FC<{
         </VStack>
       </Box>
       {showFooter && <Footer />}
-      {showFooterV2 && <ImpaktFooter />}
+      {showFooterV2 && <C.ImpaktFooterV2 wFull isWhiteMode={false} />}
     </>
   );
 };

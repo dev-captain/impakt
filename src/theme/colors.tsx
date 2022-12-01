@@ -24,7 +24,9 @@ export default {
   fitnessSky: 'rgba(92, 127, 255, 1)',
   darkOrange: '#CC4C33',
   softOrange: 'rgba(242, 121, 97, 0.1)',
+  normalOrange: 'rgba(242, 121, 97, 1)',
   darkRed: '#BD0F21',
+  'dark-2': '#09090B',
   bg: {
     dark: '#282A2E',
     light: '#F3F3FB',

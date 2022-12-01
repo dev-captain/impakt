@@ -23,7 +23,7 @@ import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
-import NavBarSocialIcons from './NavBarSocialIcons';
+import NavBarSocialIcons from '../../common/SocialIcons';
 import { useLogout } from '../../../hooks/useLogout';
 import NotificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
 import { usePersistedGroupStore } from '../../../lib/zustand';

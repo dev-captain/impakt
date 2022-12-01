@@ -14,7 +14,7 @@ const DownloadSCreen = () => {
       {/* <div id="subscription-form">
         <S.SubscriptionForm />
       </div> */}
-      <S.ImpaktFooter />
+      <C.ImpaktFooterV2 wFull isWhiteMode={false} />
     </Container>
   );
 };

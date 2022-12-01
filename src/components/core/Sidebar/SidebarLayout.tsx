@@ -115,7 +115,11 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
       </VStack>
 
       {/* FOOTER START HERE */}
-      {isShowFooter && <C.FooterV2 wFull />}
+      {isShowFooter && (
+        <C.ImpaktFooterV2 isWhiteMode wFull>
+          <SidebarNavigationLinks />
+        </C.ImpaktFooterV2>
+      )}
       {/* FOOTER END HERE  */}
     </Box>
   );
