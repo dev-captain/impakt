@@ -52,7 +52,7 @@ export const useFetchGroupDetails = () => {
   // fetching group relateds
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
 
-  useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
+  const fetchGroupDetail = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
     query: {
       retry: 0,
       refetchOnMount: true,
@@ -153,16 +153,22 @@ export const useFetchGroupDetails = () => {
     },
   );
 
-  const fetchGroupCalendar = useCalendarControllerGetCalendar(parseInt(groupParam?.id ?? '0', 10), {
-    query: {
-      enabled: false,
-      retry: 0,
-      refetchOnMount: false,
-      onSuccess: (calendarData) => {
-        setCalendar(calendarData);
+  const fetchGroupCalendar = useCalendarControllerGetCalendar(
+    fetchGroupDetail.data?.calendarId ?? 0,
+    {
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        onSuccess: (calendarData) => {
+          setCalendar(calendarData);
+        },
+        onError: () => {
+          setCalendar(null);
+        },
       },
     },
-  });
+  );
 
   const fetchGroupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(
     parseInt(groupParam?.id ?? '0', 10),
