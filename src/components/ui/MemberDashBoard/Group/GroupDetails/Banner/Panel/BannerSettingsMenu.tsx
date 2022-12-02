@@ -143,7 +143,6 @@ const BannerSettingsMenu: React.FC = () => {
             isLoading={joinGroup.isLoading}
             borderRadius="8px"
             fontWeight="600"
-            border="1px solid #1C1C28"
             justifyContent="space-around"
             fontSize="16px"
             leftIcon={
