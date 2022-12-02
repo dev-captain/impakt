@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { isMobile } from 'react-device-detect';
-import { I } from 'components';
+import { Common, I } from 'components';
 import { IconButton, useDisclosure } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
 import {
@@ -111,7 +111,8 @@ const GroupLabels: React.FC = () => {
         isCreator &&
         groupPinnedChallenge?.Challenge?.name &&
         groupPinnedChallenge?.Challenge?.name.length > 0 ? (
-          <IconButton
+          <Common.ImpaktButton
+            variant="white-50"
             onClick={(e) => {
               if (isCreator) {
                 e.stopPropagation();
@@ -123,9 +124,11 @@ const GroupLabels: React.FC = () => {
             fontSize="40px"
             width="40px"
             h="40px"
+            padding="8px"
             aria-label="update-top-challenge"
-            icon={<I.PenIcon />}
-          />
+          >
+            <I.PenIcon />
+          </Common.ImpaktButton>
         ) : null,
       onClick: () => {
         if (groupPinnedChallenge) {

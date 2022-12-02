@@ -29,20 +29,25 @@ const EventCalendar: React.FC = () => {
   return (
     <Box
       height="100%"
-      width={{ base: '100%', md: '428px' }}
+      width="312px"
       display="flex"
       flexWrap="wrap"
       transform="translateY(20px)"
-      borderRadius="10px"
+      borderRadius="24px"
       marginTop="10px"
       boxShadow="0px 10px 10px -5px rgba(0, 6, 14, 0.08), 0px 20px 25px -5px rgba(0, 6, 14, 0.14);"
+      p="1em"
+      bg="white"
     >
       <CalendarDays />
       <Box
+        m="0 !important"
+        pb="4px !important"
+        pt="24px"
         backgroundColor=" #ffffff"
         width=" 100%"
-        padding=" 20px 20px"
-        borderRadius="0 0 10px 10px"
+        borderRadius="0 0 24px 24px"
+        borderTop="1px solid #DFEDF2"
       >
         <EventsOverview />
       </Box>

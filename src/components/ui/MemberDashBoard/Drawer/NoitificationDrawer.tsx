@@ -43,7 +43,7 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
         >
           <Box display="flex" alignItems="center">
             {requests.length > 0 ? (
-              <I.NotificationIcon color="fg1" cursor="pointer" />
+              <I.NotificationIcon isActive color="fg1" cursor="pointer" />
             ) : (
               <I.NotifyIcon color="fg1" cursor="pointer" />
             )}

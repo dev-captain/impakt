@@ -88,7 +88,7 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({
                       notificationDrawerIsOpen ? notificationDrawerClose : notificationDrawerOpen
                     }
                   >
-                    <I.NotificationIcon color="fg1" cursor="pointer" />
+                    <I.NotificationIcon isActive color="fg1" cursor="pointer" />
                   </Box>
                 ) : (
                   <Box

@@ -21,7 +21,6 @@ const EventsOverview: React.FC = () => {
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
-        mt="20px"
       >
         {screen === 'empty' && null}
         {screen === 'first' && <ShowEvents />}

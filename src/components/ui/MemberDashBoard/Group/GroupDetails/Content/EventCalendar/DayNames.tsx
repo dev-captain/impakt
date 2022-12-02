@@ -8,7 +8,7 @@ const DayNames: React.FC = () => {
       height="30%"
       backgroundColor="white"
       color="rgb(170, 170, 170)"
-      padding="16px 15px 10px 12px"
+      padding="16px 0"
       display="flex"
       justifyContent={{ base: 'space-between', md: 'center' }}
       alignItems="center"

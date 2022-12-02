@@ -9,7 +9,8 @@ type ImpaktButtonVariantType =
   | 'white-50'
   | 'black'
   | 'transparent'
-  | 'orange';
+  | 'orange'
+  | 'delete';
 
 interface ImpaktButtonProps {
   size?: 'sm' | 'lg';
@@ -74,7 +75,7 @@ const getBgColor = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'black') {
-    return '#1C1C28';
+    return 'fg-1';
   }
 
   if (variant === 'transparent') {
@@ -83,6 +84,10 @@ const getBgColor = (variant?: ImpaktButtonVariantType) => {
 
   if (variant === 'orange') {
     return 'linear-gradient(90deg, #F04153 0%, #F27961 100%);';
+  }
+
+  if (variant === 'delete') {
+    return 'softOrange';
   }
 
   return 'accentRed2';
@@ -119,6 +124,10 @@ const getTextColor = (variant?: ImpaktButtonVariantType) => {
     return '#fff';
   }
 
+  if (variant === 'delete') {
+    return 'impaktRed';
+  }
+
   return 'rgba(255, 255, 255, 1)';
 };
 
@@ -142,7 +151,7 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'black') {
-    return '#fff';
+    return '#F27961';
   }
 
   if (variant === 'transparent') {
@@ -151,6 +160,10 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
 
   if (variant === 'orange') {
     return 'a4';
+  }
+
+  if (variant === 'delete') {
+    return 'impaktRed';
   }
 
   return 'rgba(255, 255, 255, 1)';
@@ -185,6 +198,10 @@ const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
 
   if (variant === 'orange') {
     return 'fg-1';
+  }
+
+  if (variant === 'delete') {
+    return 'white';
   }
 
   return 'rgba(255, 255, 255, 1)';
