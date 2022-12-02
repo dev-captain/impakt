@@ -17,7 +17,7 @@ const BannerShareButton: React.FC = () => {
       <Menu>
         {isRoleDefined && (
           <Common.ImpaktButton
-            variant="transparent"
+            variant="white-50"
             as={MenuButton}
             borderRadius="8px"
             justifyConten="center"

@@ -88,14 +88,10 @@ const GeneralSettings: React.FC = () => {
       >
         <Common.ImpaktButton
           mt={{ md: 0, base: '10px' }}
-          variant="primary"
-          color="#F84153"
+          variant="delete"
           w={{ md: '222px', base: '100%' }}
           ml={{ md: '16px', base: '0' }}
           h="60px"
-          bg="#FEE1E3"
-          _hover={{ bg: '#C41F30', color: '#fff' }}
-          _active={{ bg: '#910917', color: '#fff' }}
           borderRadius="8px"
           type="submit"
           fontSize={{ md: '20px' }}

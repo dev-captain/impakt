@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, HStack } from '@chakra-ui/react';
+import { HStack } from '@chakra-ui/react';
 
 import BannerSettingsMenu from './BannerSettingsMenu';
 import BannerShareButton from '../BannerShareButton';
