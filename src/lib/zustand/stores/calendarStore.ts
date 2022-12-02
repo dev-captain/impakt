@@ -3,7 +3,7 @@ import { CalendarDtoV1 } from '../../impakt-dev-api-client/react-query/types';
 
 export interface CalendarStore {
   calendar: CalendarDtoV1 | null;
-  setCalendar: (calendar: CalendarDtoV1) => void;
+  setCalendar: (calendar: CalendarDtoV1 | null) => void;
 }
 
 export const calendarStore: StateCreator<CalendarStore> = (set) => ({

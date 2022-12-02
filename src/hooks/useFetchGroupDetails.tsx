@@ -161,6 +161,9 @@ export const useFetchGroupDetails = () => {
       onSuccess: (calendarData) => {
         setCalendar(calendarData);
       },
+      onError: () => {
+        setCalendar(null);
+      },
     },
   });
 
