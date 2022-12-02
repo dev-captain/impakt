@@ -106,7 +106,7 @@ const GroupLabels: React.FC = () => {
           ? groupPinnedChallenge?.Challenge?.name
           : isCreator
           ? 'Select Challenge'
-          : 'No Challenge Selected',
+          : 'Challenge not selected',
       rightIcon:
         isCreator &&
         groupPinnedChallenge?.Challenge?.name &&

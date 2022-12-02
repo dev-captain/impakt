@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 
 import BannerSettingsMenu from './BannerSettingsMenu';
 import BannerShareButton from '../BannerShareButton';
 
 const BannerPanelRight: React.FC = () => {
   return (
-    <Box marginTop={{ md: '0', base: '20px' }} display="flex" gap="8px">
+    <HStack marginTop={{ md: '0', base: '20px' }} display="flex" spacing="1em">
       <BannerShareButton />
       <BannerSettingsMenu />
       {/* <Button
@@ -18,7 +18,7 @@ const BannerPanelRight: React.FC = () => {
               >
                 <I.SearchIcon color="#4E6070" width="22px" />
               </Button> */}
-    </Box>
+    </HStack>
   );
 };
 export default BannerPanelRight;

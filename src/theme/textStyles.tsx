@@ -51,6 +51,11 @@ export default {
     fontWeight: '700',
     lineHeight: '100%',
   },
+  semiBold32: {
+    fontSize: '32px',
+    fontWeight: '500',
+    lineHeight: '100%',
+  },
   normal5: {
     fontSize: '32px',
     fontWeight: '600',

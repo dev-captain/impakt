@@ -30,16 +30,16 @@ const GroupDetails: React.FC = () => {
   if (!group) return null;
 
   return (
-    <Box w="full" as="section" id="general-section">
+    <HStack w="full" as="section" id="group-detail-section">
       {/* {(!localStorage.getItem('showTip') || !show) && activeGroup?.role === GroupRole.Creator ? (
         <GroupWelcome hideGroupWelcome={hide} />
       ) : ( */}
-      <HStack w="100%" display="block">
+      <Box maxW="1200px" w="100%">
         <Banner />
         <Content />
-      </HStack>
+      </Box>
       {/* )} */}
-    </Box>
+    </HStack>
   );
 };
 

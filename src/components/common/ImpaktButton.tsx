@@ -40,7 +40,7 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
       px="20px"
       fontWeight="500"
       bg={bgColor}
-      _focus={{ bg: '#FFFFFF', textDecoration: 'none', color: '#000' }}
+      _focus={{ boxShadow: 'none' }}
       minW={size === 'lg' ? '202px' : 'unset'}
       minH={size === 'lg' ? '64px' : 'unset'}
       py={size === 'sm' ? '10px' : '16px'}
@@ -78,7 +78,7 @@ const getBgColor = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'transparent') {
-    return 'transparent';
+    return 'a4';
   }
 
   if (variant === 'orange') {
@@ -112,7 +112,7 @@ const getTextColor = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'transparent') {
-    return '#000';
+    return 'fg';
   }
 
   if (variant === 'orange') {
@@ -146,7 +146,7 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'transparent') {
-    return '#000';
+    return 'a4';
   }
 
   if (variant === 'orange') {

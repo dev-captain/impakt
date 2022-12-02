@@ -18,10 +18,11 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
 }) => {
   return (
     <Box
+      bg="white"
       ml="0 !important"
       border="1px solid #D3E2F0"
       w={{ base: 'full', md: 'auto' }}
-      borderRadius="12px"
+      borderRadius="8px"
       p="8px 12px 8px 8px"
       onClick={onClick}
       cursor="pointer"
@@ -32,21 +33,14 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
           <Text
             textTransform="uppercase"
             letterSpacing="1px"
-            color="fitnessGray2"
+            color="fg2"
             fontSize="12px"
             lineHeight="100%"
             fontWeight="600"
           >
             {labelTitle}
           </Text>
-          <Text
-            color="fitnessGrayMinus1"
-            mt="8px"
-            textTransform="capitalize"
-            fontSize={{ base: '14px', md: '16px' }}
-            lineHeight="100%"
-            fontWeight="500"
-          >
+          <Text color="fg-1" mt="8px" textTransform="capitalize" textStyle="semiBold5">
             {labelDescription}
           </Text>
         </Box>
