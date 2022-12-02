@@ -81,10 +81,10 @@ const ReferralsBox: React.FC = () => {
           w="100%"
           h="auto"
           borderRadius="20px"
-          bg="rgba(254, 196, 23, 0.15)"
+          bg="softOrange"
           padding={{ base: '12px 0px', sm: '12px 10px', md: '12px 20px', lg: '12px 24px' }}
         >
-          <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
+          <Box color="darkOrange" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textStyle="bold5" textAlign="center">
               {koinRewardedByReferrals || '0'}
             </Text>
