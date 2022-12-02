@@ -1,14 +1,4 @@
-import {
-  memo,
-  // ,
-  // useEffect
-} from 'react';
-// import { parsePathname } from 'utils';
-// import Keys from 'i18n/types';
-import {
-  HStack,
-  // useMediaQuery
-} from '@chakra-ui/react';
+import { memo } from 'react';
 import Keys from 'i18n/types';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -22,12 +12,7 @@ const NavbarLink = () => {
   const passiveColor = 'white';
 
   return (
-    <HStack
-      spacing={[3, 3, 3, 5, 6, 12]}
-      flexWrap={{ base: 'wrap', md: 'nowrap' }}
-      justifyContent={{ base: 'center', md: 'start' }}
-      display="flex"
-    >
+    <>
       <Common.LinkItem
         href="/"
         title={t(Keys.navbar.impaktFitness)}
@@ -65,7 +50,7 @@ const NavbarLink = () => {
         isActive={path.pathname === 'terms-of-use'}
       />
       ) */}
-    </HStack>
+    </>
   );
 };
 

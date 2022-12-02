@@ -10,82 +10,58 @@ import NavbarLinkItem from '../../common/LinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
+import NavBarLink from './NavBarLink';
 
 type Props = {
   isOpen: boolean;
-  textColor: string;
   onClose: () => void;
   isLessThan1040: boolean;
 };
 
-const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => {
-  // const logout = useLogout();
+const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
+  const logout = useLogout();
   const { member } = usePersistedAuthStore();
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;
 
+  const textColor = 'rgba(255,255,255,0.5)';
+  const passiveColor = 'white';
+
   return (
     <Collapse in={isOpen} animateOpacity>
       <VStack
-        spacing={0}
         paddingBottom={8}
         bg="#1C1C28"
         marginTop="0px"
         borderRadius="12px"
         zIndex={900}
-        color={textColor}
         padding="16px"
         mt="4px"
       >
-        <NavbarLinkItem href="/" isActive={path.path === ''} title={t(Keys.navbar.impaktFitness)} />
-        <NavbarLinkItem
-          title={t(Keys.navbar.knowledgeBase)}
-          href="https://knowledgebase.impakt.com"
-          isActive={path.path === 'knowledge-base'}
-        />
-        <NavbarLinkItem
-          href="/events"
-          title={t(Keys.navbar.events)}
-          isActive={path.path === 'events'}
-        />
-        <NavbarLinkItem
-          href="/contact"
-          title={t(Keys.navbar.contactUs)}
-          isActive={path.path === 'contact'}
-        />
+        <NavBarLink />
         {member && (
           <NavbarLinkItem
             href="/d"
+            titleTextColor={textColor}
+            passiveColor={passiveColor}
             title={t(Keys.navbar.dashboard)}
-            isActive={path.path === 'dashboard'}
-          />
-        )}
-        {member && (
-          <NavbarLinkItem
-            href=""
-            title={t(Keys.navbar.notification)}
-            isActive={path.path === '/notification'}
-          />
-        )}
-        {member && (
-          <NavbarLinkItem
-            href="/contact"
-            title={t(Keys.navbar.help)}
-            isActive={path.path === '/contact'}
+            isActive={path.path === '/d'}
           />
         )}
 
         {member && (
           <NavbarLinkItem
             href="#"
-            // onClose={async () => {
-            //   await logout().finally(() => {
-            //     onClose();
-            //   });
-            // }}
+            onClick={async () => {
+              await logout().finally(() => {
+                onClose();
+              });
+            }}
             title={t(Keys.navbar.signOut)}
             isActive={path.path === '#'}
+            titleTextColor={textColor}
+            passiveColor={passiveColor}
           />
         )}
 

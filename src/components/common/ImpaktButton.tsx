@@ -127,7 +127,7 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
     return 'rgba(255, 255, 255, 1)';
   }
   if (variant === 'secondary') {
-    return 'rgba(255, 255, 255, 0.75)';
+    return 'rgba(0, 0, 0, 0.3)';
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 1)';

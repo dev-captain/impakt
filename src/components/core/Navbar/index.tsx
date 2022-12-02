@@ -94,14 +94,16 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
             ml="0 !important"
             // spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
+            zIndex="99"
           >
-            <HStack w="full" align="space-between" id="yo" justify="space-between">
+            <HStack w="full" align="space-between" id="yo" justify="space-between" zIndex="99">
               <Box display="flex" ml="0 !important" justifyContent="center" w="full">
                 <HStack
                   spacing={[3, 3, 3, 5, 6, 12]}
                   flexWrap={{ base: 'wrap', md: 'nowrap' }}
                   justifyContent={{ base: 'center', md: 'start' }}
                   display="flex"
+                  zIndex="99"
                 >
                   <NavBarLink />
                 </HStack>
@@ -145,12 +147,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
         </HStack>
       </Flex>
       {isLessThan1280 && (
-        <CollapseMenu
-          isOpen={isOpen}
-          onClose={onClose}
-          textColor={textColor}
-          isLessThan1040={isLessThan1280}
-        />
+        <CollapseMenu isOpen={isOpen} onClose={onClose} isLessThan1040={isLessThan1280} />
       )}
     </Box>
   );
@@ -168,7 +165,7 @@ const Gradient = () => {
       pos="absolute"
       w="930px"
       h="472px"
-      left="-637px"
+      left="-699px"
       top="-314px"
     />
   );
