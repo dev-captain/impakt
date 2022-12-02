@@ -15,9 +15,9 @@ const ShowEvents: React.FC = () => {
     useEventCalendarContext();
   const selectedDay = getSelectedDay();
   const selectedDayEvents = getSelectedDayEvents();
-  const isToday = Day.now().compare(selectedDay, 'day') === 0;
 
   if (!selectedDay) return null;
+  const isToday = Day.now().compare(selectedDay ?? new Date(), 'day') === 0;
 
   return (
     <>

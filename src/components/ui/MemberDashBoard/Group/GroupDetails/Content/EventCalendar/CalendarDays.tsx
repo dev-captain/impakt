@@ -61,20 +61,24 @@ const CalendarDays: React.FC = () => {
             }}
           />
         </Box>
-        <DayNames />
       </Box>
 
       <HStack
-        width=" 100%;"
+        width={{ base: '312px', md: '100%' }}
         height=" 70%;"
         flexWrap="wrap"
         display="flex"
+        alignSelf="center"
         justifyContent="center"
-        alignItems="flex-start"
+        alignItems="start"
         background=" #ffffff"
         padding={{ base: '0 12px', md: '8px 0' }}
       >
         {/* {renderWeeks()} */}
+
+        <Box display="flex" w="full">
+          <DayNames />
+        </Box>
         <>
           {getDaysOfCurrentMonth().map((day) => (
             <DayComponent

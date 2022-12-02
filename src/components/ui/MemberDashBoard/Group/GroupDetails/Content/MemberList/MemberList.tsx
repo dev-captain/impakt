@@ -12,6 +12,7 @@ import { I } from 'components';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { truncateString } from '../../../../../../../utils';
 
 const MemberList: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
@@ -35,23 +36,23 @@ const MemberList: React.FC = () => {
     );
 
   return (
-    <Box marginStart="0 !important" width={{ base: '100%', md: '30%', lgx: '25%' }}>
-      {/* <Skeleton isLoaded={!isMemberLoading}> */}
-      <MemberDashboardCard
-        p={{ base: '16px', md: '24px' }}
-        marginTop={{ base: 0, md: '26px' }}
-        marginLeft="auto"
-        marginBottom="20px"
-      >
-        <Box w="full">
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Box display="flex" alignItems="center">
-              <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
-                Members
-              </Text>
-              {/* <I.SettingIcon color="#B0C3D6" width="20px" /> */}
-            </Box>
-            {/* <Button
+    <MemberDashboardCard
+      p={{ base: '16px', md: '24px' }}
+      marginTop={{ base: 0, md: '26px' }}
+      marginLeft="auto"
+      marginBottom="20px"
+      minW="312px"
+      width={{ base: '100%', md: '30%', lgx: '25%' }}
+    >
+      <Box w="full">
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box display="flex" alignItems="center">
+            <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
+              Members
+            </Text>
+            {/* <I.SettingIcon color="#B0C3D6" width="20px" /> */}
+          </Box>
+          {/* <Button
               onClick={onCopyHandle}
               backgroundColor="#1C1C28"
               fontWeight="700"
@@ -68,8 +69,8 @@ const MemberList: React.FC = () => {
             >
               <I.UnionIcon />
             </Button> */}
-          </Box>
-          {/* <Text
+        </Box>
+        {/* <Text
             textTransform="uppercase"
             color="#728BA3"
             fontSize="16px"
@@ -168,7 +169,7 @@ const MemberList: React.FC = () => {
               <I.PlayChallengeIcon />
             </Box>
           </Box> */}
-          {/* <Box backgroundColor="#E2EDF7" w="full" height="1px" margin="20px 0" />
+        {/* <Box backgroundColor="#E2EDF7" w="full" height="1px" margin="20px 0" />
           <Box display="flex" marginTop="24px" justifyContent="space-between" alignItems="center">
             <Text
               textTransform="uppercase"
@@ -204,44 +205,50 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-          {members?.Members.map(
-            ({ role, User }) =>
-              role !== 'None' && (
+        {members?.Members.map(
+          ({ role, User }) =>
+            role !== 'None' && (
+              <Box
+                key={`${User.id}-box`}
+                display="flex"
+                justifyContent="space-between"
+                marginTop="16px"
+              >
                 <Box
-                  key={`${User.id}-box`}
                   display="flex"
-                  justifyContent="space-between"
-                  marginTop="16px"
+                  w="full"
+                  wordBreak="break-all"
+                  textOverflow="ellipsis"
+                  alignItems="center"
+                  overflow="hidden"
                 >
-                  <Box display="flex" alignItems="center">
-                    <Avatar
-                      name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
-                      width="32px"
-                      height="32px"
-                    />
-                    <Text
-                      color="#4E6070"
-                      fontSize={{ lgx: '18px', md: '14px' }}
-                      fontWeight="500"
-                      marginLeft="16px"
-                    >
-                      {User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
-                    </Text>
-                  </Box>
-
-                  <Box marginLeft="1em" display="flex" alignItems="center">
-                    <Text color="#4E6070" fontSize={{ lgx: '18px', md: '14px' }} fontWeight="500">
-                      {role}
-                    </Text>
-                    {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
-                  </Box>
+                  <Avatar
+                    name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                    width="32px"
+                    height="32px"
+                  />
+                  <Text
+                    color="#4E6070"
+                    fontSize={{ lgx: '18px', md: '14px' }}
+                    fontWeight="500"
+                    marginLeft="16px"
+                  >
+                    {User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                  </Text>
                 </Box>
-              ),
-          )}
-        </Box>
-      </MemberDashboardCard>
-      {/* </Skeleton> */}
-    </Box>
+                <Box w="10px" h="10px" />
+
+                <Box display="flex" alignItems="center">
+                  <Text color="#4E6070" fontSize={{ lgx: '18px', md: '14px' }} fontWeight="500">
+                    {role}
+                  </Text>
+                  {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
+                </Box>
+              </Box>
+            ),
+        )}
+      </Box>
+    </MemberDashboardCard>
   );
 };
 export default MemberList;
