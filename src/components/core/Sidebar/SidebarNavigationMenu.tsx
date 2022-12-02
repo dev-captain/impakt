@@ -40,6 +40,7 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({
       px={{ base: '1em', lg: '3em' }}
       bgColor="a5"
       h={{ base: 'auto', lg: '112px' }}
+      maxH="90px"
       id="navbar-box"
     >
       <Flex

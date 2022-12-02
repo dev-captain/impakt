@@ -45,6 +45,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         h="90px"
         top="90px"
         color="white"
+        zIndex="1"
         display={{ base: 'initial', lg: ' none' }}
       >
         <Box marginX="16px">
