@@ -78,13 +78,13 @@ const PermissionTab: React.FC = () => {
           helperText={t(keys.Message.PublicToolTip.description)}
         >
           <Button
-            color={value === 'Public' ? '#29323B' : '#728BA3'}
-            bg={value === 'Public' ? '#EEF4F6' : '#fff'}
+            color={value === 'Public' ? '#FFFFFF' : '#728BA3'}
+            bg={value === 'Public' ? '#29323B' : '#fff'}
             _hover={{
-              backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
-              color: value === 'Private' ? '#728BA3' : '#29323B',
+              backgroundColor: value === 'Private' ? 'transparent' : '#29323B',
+              color: value === 'Private' ? '#CC4C33' : 'none',
             }}
-            _focus={{ boxShadow: 'none' }}
+            _focus={{ boxShadow: 'none', color: '#FFFFFF', backgroundColor: '#29323B' }}
             w="120px"
             h="38px"
             borderRadius="8px"
@@ -95,13 +95,13 @@ const PermissionTab: React.FC = () => {
             Public
           </Button>
           <Button
-            bg={value === 'Private' ? '#EEF4F6' : '#fff'}
-            color={value === 'Private' ? '#29323B' : '#728BA3'}
+            color={value === 'Private' ? '#FFFFFF' : '#728BA3'}
+            bg={value === 'Private' ? '#29323B' : '#fff'}
             _hover={{
-              backgroundColor: value === 'Public' ? 'transparent' : '#EEF4F6',
-              color: value === 'Public' ? '#728BA3' : '#29323B',
+              backgroundColor: value === 'Public' ? 'transparent' : '#29323B',
+              color: value === 'Public' ? '#CC4C33' : 'none',
             }}
-            _focus={{ boxShadow: 'none' }}
+            _focus={{ boxShadow: 'none', color: '#FFFFFF', backgroundColor: '#29323B' }}
             w="120px"
             h="38px"
             borderRadius="8px"
