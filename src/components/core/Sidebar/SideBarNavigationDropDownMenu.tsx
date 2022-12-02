@@ -24,16 +24,16 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
   const logout = useLogout();
 
   return (
-    <Menu autoSelect={false} offset={offset ?? [45, 10]}>
+    <Menu autoSelect={false} offset={offset ?? [0, 10]}>
       {({ isOpen }) => (
-        <HStack
-          _hover={{ bg: 'white', boxShadow: !isOpen ? 'lightSm' : '' }}
-          boxShadow={isOpen ? 'lightM' : ''}
-          bg={isOpen ? 'white' : ''}
-          borderRadius="12px"
-          p="12px"
-        >
-          <MenuButton>
+        <>
+          <MenuButton
+            _hover={{ bg: 'white', boxShadow: !isOpen ? 'lightSm' : '' }}
+            boxShadow={isOpen ? 'lightM' : ''}
+            bg={isOpen ? 'white' : ''}
+            borderRadius="12px"
+            p="12px"
+          >
             <HStack spacing="12px">
               <Avatar
                 w={{ base: '30px', md: '40px' }}
@@ -74,7 +74,7 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
               </MenuItem>
             </VStack>
           </MenuList>
-        </HStack>
+        </>
       )}
     </Menu>
   );
