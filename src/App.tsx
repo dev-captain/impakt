@@ -19,6 +19,9 @@ import {
   Landing,
 } from 'pages';
 import { Common, S } from 'components';
+import { useEffect } from 'react';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
@@ -26,6 +29,11 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import GroupInvite from './pages/GroupInvite/index';
 
 const App = () => {
+  useEffect(() => {
+    LogRocket.init('qmt5ka/impakt');
+    setupLogRocketReact(LogRocket);
+  }, []);
+
   return (
     <Routes>
       <Route
