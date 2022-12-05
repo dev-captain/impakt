@@ -116,7 +116,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
               Is your group public or private?
             </Text>
             <Text
-              color="#CC4C33"
+              color={!info ? '#CC4C33' : '#728BA3'}
               display="block"
               style={{ cursor: 'pointer' }}
               onClick={toggleInfo}
