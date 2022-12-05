@@ -14,8 +14,8 @@ import { useCalendarEventControllerCreateCalendarEvent } from '../../../lib/impa
 import { renderToast, truncateString } from '../../../utils';
 
 interface CreateEventFormPropsI {
-  assocId: number;
-  assocName: string;
+  assocId?: number;
+  assocName?: string;
   clearAssoc: () => void;
   onOpen: () => void;
 }
@@ -38,7 +38,7 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
     },
     resolver: yupResolver(createEventYupScheme),
   });
-  console.log(errors, getValues('eventStartTime'), getValues('eventEndTime'));
+
   React.useEffect(() => {
     if (props.assocId) setValue('assocId', props.assocId);
     if (props.assocName) setValue('assocName', props.assocName);
@@ -232,8 +232,8 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
             cursor="pointer"
             onClick={() => props.onOpen()}
           >
-            {getValues('assocName').length > 0
-              ? truncateString(getValues('assocName'), 23)
+            {getValues('assocName') && getValues('assocName')!.length > 0
+              ? truncateString(getValues('assocName')!, 23)
               : 'Select challenge'}{' '}
           </Text>
         </Box>

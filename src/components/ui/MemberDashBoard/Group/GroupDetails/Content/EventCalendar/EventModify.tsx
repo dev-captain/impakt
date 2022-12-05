@@ -43,8 +43,8 @@ const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, tit
           clearAssoc={() => {
             setActiveChallenge(null);
           }}
-          assocId={activeChallenge?.id ?? 0}
-          assocName={activeChallenge?.name ?? ''}
+          assocId={activeChallenge?.id}
+          assocName={activeChallenge?.name}
         />
       )}
       {type === 'update' && (
@@ -53,8 +53,8 @@ const EventModify: React.FC<EventModifyPropsI> = ({ showGoBackButton = true, tit
           clearAssoc={() => {
             setActiveChallenge(null);
           }}
-          assocId={activeChallenge?.id ?? 0}
-          assocName={activeChallenge?.name ?? ''}
+          assocId={activeChallenge?.id!}
+          assocName={activeChallenge?.name!}
         />
       )}
       <ChallengeModal
