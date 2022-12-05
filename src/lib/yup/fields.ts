@@ -60,6 +60,7 @@ const eventDescription = yup
   .required('Event description is required field');
 
 const eventTime = yup.string().required('Event time is required field');
+const eventEndTime = yup.number().required('Duration time is required field');
 const assocId = yup
   .number()
   .required('Challenge is required please select one...')
@@ -97,4 +98,5 @@ export {
   comment,
   assocName,
   assocDuration,
+  eventEndTime,
 };
