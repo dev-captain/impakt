@@ -12,11 +12,11 @@ const SignIn = () => {
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const navigateTo = useNextParamRouter();
+  const navigate = useNextParamRouter('/d');
 
   useEffect(() => {
     if (member) {
-      navigateTo();
+      navigate();
     }
   }, []);
 
