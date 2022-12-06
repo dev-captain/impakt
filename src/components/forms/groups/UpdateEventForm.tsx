@@ -1,4 +1,4 @@
-import { FormControl, Box, Input, Text } from '@chakra-ui/react';
+import { FormControl, Box, Input, Text, HStack, Select, VStack } from '@chakra-ui/react';
 import { Day, Time } from 'dayspan';
 import * as React from 'react';
 import { useForm } from 'hooks';
@@ -6,15 +6,14 @@ import { Common, I } from 'components';
 
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
-import { padTo2Digits, renderToast, truncateString } from '../../../utils';
+import { renderToast, truncateString } from '../../../utils';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 import { usePersistedChallengeStore, usePersistedGroupStore } from '../../../lib/zustand';
 import { useCalendarEventControllerUpdateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
-import { assocId } from '../../../lib/yup/fields';
 
 interface UpdateEventFormPropsI {
-  assocId: number;
-  assocName: string;
+  challengeId: number;
+  challengeName: string;
   clearAssoc: () => void;
   onOpen: () => void;
 }
@@ -25,22 +24,32 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   const { getSelectedDay, getSelectedDayEvent, updateEvent } = useEventCalendarContext();
   const date = getSelectedDay();
 
+  const defaultEventStartDate = Day.fromDate(getSelectedDayEvent()?.day.date ?? new Date())
+    ?.add('hour', getSelectedDayEvent()?.event.schedule.times[0].hour)
+    ?.add('minute', getSelectedDayEvent()?.event.schedule.times[0].minute);
+
+  const defaultEndDate = Day.fromDate(getSelectedDayEvent()?.day.date ?? new Date())
+    ?.add('hour', getSelectedDayEvent()?.event.schedule.times[1].hour)
+    ?.add('minute', getSelectedDayEvent()?.event.schedule.times[1].minute);
+
+  const defaultDuration = defaultEndDate?.minutesBetween(defaultEventStartDate ?? Day.now());
+
   const { activeGroup } = usePersistedGroupStore();
 
   if (!getSelectedDayEvent()) return null;
 
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
-    (d) => d.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId,
+    (d) => d.id === JSON.parse(getSelectedDayEvent()!.event?.data).challengeId,
   );
 
   const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {
       eventTitle: JSON.parse(getSelectedDayEvent()!.event?.data).title ?? '',
       eventDescription: JSON.parse(getSelectedDayEvent()!.event?.data).description ?? '',
-      assocId: JSON.parse(getSelectedDayEvent()!.event?.data).assocId ?? '',
-      assocName: truncateString(challange?.name ?? '', 23) ?? '',
+      challengeId: JSON.parse(getSelectedDayEvent()!.event?.data).challengeId ?? '',
+      challengeName: truncateString(challange?.name ?? '', 23) ?? '',
       eventStartTime: getSelectedDayEvent()?.event.schedule?.times[0].toString() ?? '',
-      eventEndTime: getSelectedDayEvent()?.event.schedule?.times[1].toString() ?? '',
+      eventEndTime: defaultDuration,
     },
   });
 
@@ -51,12 +60,12 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   }, []);
 
   React.useEffect(() => {
-    if ((props.assocId, props.assocName)) {
-      setValue('assocId', assocId, {
+    if ((props.challengeId, props.challengeName)) {
+      setValue('challengeId', props.challengeId, {
         shouldValidate: true,
         shouldDirty: true,
       });
-      setValue('assocName', props.assocName, {
+      setValue('challengeName', props.challengeName, {
         shouldValidate: true,
         shouldDirty: true,
       });
@@ -73,46 +82,36 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   const handleUpdate = async (data: Object) => {
     if (!activeGroup) return;
 
-    const { eventTitle, eventDescription, eventStartTime, eventEndTime } = data as {
+    const { eventTitle, challengeId, eventDescription, eventStartTime, eventEndTime } = data as {
       eventTitle: string;
       eventDescription: string;
-      assocId: number;
       eventStartTime: string;
-      eventEndTime: string;
+      eventEndTime: number;
+      challengeId: number;
     };
-    const parsedStartTime = Time.fromString(eventStartTime);
-    const parsedEndTime = Time.fromString(eventEndTime);
-    const isStartTimeLessThanEndTime =
-      parsedStartTime.toMilliseconds() < parsedEndTime.toMilliseconds();
 
-    const schedule = {
-      start: isStartTimeLessThanEndTime
-        ? new Date(
-            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
-          ).toISOString()
-        : new Date(
-            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
-          ).toISOString(),
-      end: isStartTimeLessThanEndTime
-        ? new Date(
-            new Date(date.date).setHours(parsedEndTime.hour, parsedEndTime.minute),
-          ).toISOString()
-        : new Date(
-            new Date(date.date).setHours(parsedStartTime.hour, parsedStartTime.minute),
-          ).toISOString(),
-    };
+    const timeFromString = Time.fromString(eventStartTime);
+    const eventStartOn = new Date(
+      new Date(date.date).setHours(timeFromString.hour, timeFromString.minute),
+    );
+
+    const addDate = Day.fromDate(eventStartOn)
+      ?.add('minute', eventEndTime < 0 ? 0 : eventEndTime)
+      .toDate();
+
+    const eventEndOn = new Date(addDate!);
 
     updateEventBe.mutate(
       {
         eventId: getSelectedDayEvent()?.event.id,
         data: {
-          assocId: props.assocId,
+          challengeId,
           description: eventDescription,
           title: eventTitle,
           reschedule: {
-            endDateTime: schedule.end,
-            startDateTime: schedule.start,
-            on: schedule.start,
+            endDateTime: eventEndOn.toISOString(),
+            startDateTime: eventStartOn.toISOString(),
+            on: eventStartOn.toISOString(),
           },
         },
       },
@@ -151,24 +150,6 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
     },
   ];
 
-  const defaultEventStartTime = getSelectedDayEvent()
-    ? [
-        padTo2Digits(getSelectedDayEvent()!.event.schedule?.times[0].hour as any),
-        padTo2Digits(getSelectedDayEvent()!.event.schedule?.times[0].minute as any),
-      ]
-        .join(':')
-        .toString()
-    : '';
-
-  const defaultEventEndDate = getSelectedDayEvent()
-    ? [
-        padTo2Digits(getSelectedDayEvent()!.event.schedule?.times[1].hour as any),
-        padTo2Digits(getSelectedDayEvent()!.event.schedule?.times[1].minute as any),
-      ]
-        .join(':')
-        .toString()
-    : '';
-
   return (
     <FormControl
       display="flex"
@@ -191,41 +172,53 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
         </Text>
       </Box>
       <Box display="flex" flexDir="column">
-        <Box w="60%" alignItems="center" display="flex">
+        <Box w="100%" alignItems="center" display="flex">
           <Box w="34px">
             <I.ClockIcon width="20px" height="20px" color="#728BA3" />
           </Box>
-          <Input
-            name="eventStartTime"
-            onChange={onChange}
-            defaultValue={defaultEventStartTime}
-            pr="0"
-            border="0"
-            _focus={{ border: 0 }}
-            size="md"
-            sx={{
-              '&::-webkit-calendar-picker-indicator': { background: 'none', display: 'none' },
-            }}
-            type="time"
-          />
-          -
-          <Input
-            name="eventEndTime"
-            defaultValue={defaultEventEndDate}
-            onChange={onChange}
-            border="0"
-            _focus={{ border: 0 }}
-            size="md"
-            sx={{
-              '&::-webkit-calendar-picker-indicator': { background: 'none', display: 'none' },
-            }}
-            type="time"
-          />
+          <HStack w="full">
+            <VStack align="flex-start">
+              <Text ml="5px" fontWeight="500" fontSize="14px" lineHeight="100%" color="#4E6070">
+                Time:
+              </Text>
+              <Select
+                isInvalid={!!errors.eventStartTime?.message}
+                name="eventStartTime"
+                border="1px solid #B0C3D6;"
+                borderRadius="12px"
+                bg="#FFFFFF"
+                w="150px !important"
+                placeholder={defaultEventStartDate?.format('h:mm a')}
+                onChange={(value) => setValue('eventStartTime', value.currentTarget.value)}
+              >
+                {timeOptions.map((timeOpt, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <option key={`${timeOpt.time}${index}`} value={timeOpt.time}>
+                    {timeOpt.time} {timeOpt.format}
+                  </option>
+                ))}
+              </Select>
+            </VStack>
+            <VStack align="flex-start">
+              <Text fontWeight="500" fontSize="14px" lineHeight="100%" color="#4E6070">
+                Duration (min):
+              </Text>
+              <Input
+                defaultValue={getValues('eventEndTime')}
+                isInvalid={!!errors.eventStartTime?.message}
+                name="eventEndTime"
+                min="0"
+                max="9999"
+                onChange={(value) => setValue('eventEndTime', Number(value.currentTarget.value))}
+                type="number"
+              />
+            </VStack>
+          </HStack>
         </Box>
         <Box>
-          <Common.InputErrorMessage
-            errorMsg={errors?.eventStartTime?.message || errors?.eventEndTime?.message}
-          />
+          {/* <Common.InputErrorMessage
+            errorMsg={errors?.eventStartTime?.message || errors?.eventEndTime}
+          /> */}
         </Box>
       </Box>
       <Box display="flex" flexDir="column" alignItems="flex-start" mb="12px" w="100%">
@@ -240,14 +233,14 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
             cursor="pointer"
             onClick={() => props.onOpen()}
           >
-            {getValues('assocName').length > 0
-              ? truncateString(getValues('assocName'), 23)
+            {getValues('challengeName').length > 0
+              ? truncateString(getValues('challengeName'), 23)
               : 'Select challenge'}
           </Text>
         </Box>
 
         <Box>
-          <Common.InputErrorMessage errorMsg={errors?.assocId?.message} />
+          <Common.InputErrorMessage errorMsg={errors?.challengeId?.message} />
         </Box>
       </Box>
       <Common.ImpaktButton
@@ -268,4 +261,103 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
     </FormControl>
   );
 };
+
+const timeOptions: { time: string; format: 'am' | 'pm' }[] = [
+  { time: '1:00', format: 'am' },
+  { time: '1:15', format: 'am' },
+  { time: '1:30', format: 'am' },
+  { time: '1:45', format: 'am' },
+  { time: '2:00', format: 'am' },
+  { time: '2:15', format: 'am' },
+  { time: '2:30', format: 'am' },
+  { time: '2:45', format: 'am' },
+  { time: '3:00', format: 'am' },
+  { time: '3:15', format: 'am' },
+  { time: '3:30', format: 'am' },
+  { time: '3:45', format: 'am' },
+  { time: '4:00', format: 'am' },
+  { time: '4:15', format: 'am' },
+  { time: '4:30', format: 'am' },
+  { time: '4:45', format: 'am' },
+  { time: '5:00', format: 'am' },
+  { time: '5:15', format: 'am' },
+  { time: '5:30', format: 'am' },
+  { time: '5:45', format: 'am' },
+  { time: '6:00', format: 'am' },
+  { time: '6:15', format: 'am' },
+  { time: '6:30', format: 'am' },
+  { time: '6:45', format: 'am' },
+  { time: '7:00', format: 'am' },
+  { time: '7:15', format: 'am' },
+  { time: '7:30', format: 'am' },
+  { time: '7:45', format: 'am' },
+  { time: '8:00', format: 'am' },
+  { time: '8:15', format: 'am' },
+  { time: '8:30', format: 'am' },
+  { time: '8:45', format: 'am' },
+  { time: '9:00', format: 'am' },
+  { time: '9:15', format: 'am' },
+  { time: '9:30', format: 'am' },
+  { time: '9:45', format: 'am' },
+  { time: '10:00', format: 'am' },
+  { time: '10:15', format: 'am' },
+  { time: '10:30', format: 'am' },
+  { time: '10:45', format: 'am' },
+  { time: '11:00', format: 'am' },
+  { time: '11:15', format: 'am' },
+  { time: '11:30', format: 'am' },
+  { time: '11:45', format: 'am' },
+  { time: '12:00', format: 'pm' },
+  { time: '12:15', format: 'am' },
+  { time: '12:30', format: 'am' },
+  { time: '12:45', format: 'am' },
+  { time: '1:00', format: 'pm' },
+  { time: '1:15', format: 'pm' },
+  { time: '1:30', format: 'pm' },
+  { time: '1:45', format: 'pm' },
+  { time: '2:00', format: 'pm' },
+  { time: '2:15', format: 'pm' },
+  { time: '2:30', format: 'pm' },
+  { time: '2:45', format: 'pm' },
+  { time: '3:00', format: 'pm' },
+  { time: '3:15', format: 'pm' },
+  { time: '3:30', format: 'pm' },
+  { time: '3:45', format: 'pm' },
+  { time: '4:00', format: 'pm' },
+  { time: '4:15', format: 'pm' },
+  { time: '4:30', format: 'pm' },
+  { time: '4:45', format: 'pm' },
+  { time: '5:00', format: 'pm' },
+  { time: '5:15', format: 'pm' },
+  { time: '5:30', format: 'pm' },
+  { time: '5:45', format: 'pm' },
+  { time: '6:00', format: 'pm' },
+  { time: '6:15', format: 'pm' },
+  { time: '6:30', format: 'pm' },
+  { time: '6:45', format: 'pm' },
+  { time: '7:00', format: 'pm' },
+  { time: '7:15', format: 'pm' },
+  { time: '7:30', format: 'pm' },
+  { time: '7:45', format: 'pm' },
+  { time: '8:00', format: 'pm' },
+  { time: '8:15', format: 'pm' },
+  { time: '8:30', format: 'pm' },
+  { time: '8:45', format: 'pm' },
+  { time: '9:00', format: 'pm' },
+  { time: '9:15', format: 'pm' },
+  { time: '9:30', format: 'pm' },
+  { time: '9:45', format: 'pm' },
+  { time: '10:00', format: 'pm' },
+  { time: '10:15', format: 'pm' },
+  { time: '10:30', format: 'pm' },
+  { time: '10:45', format: 'pm' },
+  { time: '11:00', format: 'pm' },
+  { time: '11:15', format: 'pm' },
+  { time: '11:30', format: 'pm' },
+  { time: '11:45', format: 'pm' },
+  { time: '12:00', format: 'am' },
+  { time: '12:15', format: 'am' },
+  { time: '12:30', format: 'am' },
+  { time: '12:45', format: 'am' },
+];
 export default UpdateEventForm;
