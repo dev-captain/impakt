@@ -188,14 +188,13 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
                 borderRadius="12px"
                 bg="#FFFFFF"
                 w="150px !important"
-                placeholder={defaultEventStartDate?.format('h:mma')}
+                placeholder={defaultEventStartDate?.format('h:mm a')}
                 onChange={(value) => setValue('eventStartTime', value.currentTarget.value)}
               >
                 {timeOptions.map((timeOpt, index) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <option key={`${timeOpt.time}${index}`} value={timeOpt.time}>
-                    {timeOpt.time}
-                    {timeOpt.format}
+                    {timeOpt.time} {timeOpt.format}
                   </option>
                 ))}
               </Select>

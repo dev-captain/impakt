@@ -193,8 +193,7 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
                 {timeOptions.map((timeOpt, index) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <option key={`${timeOpt.time}${index}`} value={timeOpt.time}>
-                    {timeOpt.time}
-                    {timeOpt.format}
+                    {timeOpt.time} {timeOpt.format}
                   </option>
                 ))}
               </Select>
