@@ -13,14 +13,15 @@ import { renderToast } from '../../../utils';
 import { PostUserReq } from '../../../lib/impakt-dev-api-client/react-query/types/postUserReq';
 import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
 import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
 
 const SignUpForm: React.FC = () => {
   const isThereNextParam =
-    useLocation().search.includes('next') && useLocation().search.includes('invite');
+    useLocation().search.includes('next') || useLocation().search.includes('invite');
 
-  const navigateTo = isThereNextParam
-    ? `/signin?next=${useLocation().search.split('next=')[1]}`
-    : '/signin';
+  const navigateToNextParam = useNextParamRouter('/download');
+  const navigate = useNavigate();
+
   const { setMember } = usePersistedAuthStore();
 
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
@@ -28,7 +29,6 @@ const SignUpForm: React.FC = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const createUser = useUserControllerCreate();
   const signIn = useAuthControllerLogin();
 
@@ -88,21 +88,19 @@ const SignUpForm: React.FC = () => {
     createUser.mutate(
       { data: { ...payload } },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           renderToast(
             'success',
             'Your account created successfully.You can now login in the Impakt app.',
             'dark',
           );
-
           if (isThereNextParam) {
-            signIn.mutate(
+            await signIn.mutateAsync(
               { data: { emailOrUsername: email, password } },
               {
                 onSuccess: (member) => {
                   setMember(member);
                   renderToast('success', 'Welcome');
-                  navigate(navigateTo);
                 },
                 onError: (err) => {
                   renderToast(
@@ -113,9 +111,8 @@ const SignUpForm: React.FC = () => {
                 },
               },
             );
-          } else {
-            navigate('/download');
           }
+          navigateToNextParam();
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');

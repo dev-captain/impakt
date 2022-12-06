@@ -1,20 +1,17 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const useNextParamRouter = () => {
+export const useNextParamRouter = (fallBackLink?: string) => {
   const navigate = useNavigate();
-  const isThereNextParam = useLocation().search.substring(1, 5).includes('next');
-  const nextParamLink = useLocation().search.substring(6);
+  const isThereNextParam = useLocation().search.includes('next=');
+  const navigateToLink = isThereNextParam ? useLocation().search.split('next=')[1] : fallBackLink;
+
   const navigateToNextParam = () => {
-    if (isThereNextParam) {
-      if (isForOtherImpaktProduct(nextParamLink)) {
-        window.location.replace(nextParamLink.substring(1));
-
-        return;
+    if (navigateToLink) {
+      if (isForOtherImpaktProduct(navigateToLink)) {
+        window.location.replace(navigateToLink.substring(1));
+      } else {
+        navigate(navigateToLink);
       }
-
-      navigate(nextParamLink);
-    } else {
-      navigate('/d');
     }
   };
 
