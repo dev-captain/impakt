@@ -10,11 +10,10 @@ import { renderToast, truncateString } from '../../../utils';
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 import { usePersistedChallengeStore, usePersistedGroupStore } from '../../../lib/zustand';
 import { useCalendarEventControllerUpdateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
-import { assocId } from '../../../lib/yup/fields';
 
 interface UpdateEventFormPropsI {
-  assocId: number;
-  assocName: string;
+  challengeId: number;
+  challengeName: string;
   clearAssoc: () => void;
   onOpen: () => void;
 }
@@ -40,15 +39,15 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   if (!getSelectedDayEvent()) return null;
 
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
-    (d) => d.id === JSON.parse(getSelectedDayEvent()!.event?.data).assocId,
+    (d) => d.id === JSON.parse(getSelectedDayEvent()!.event?.data).challengeId,
   );
 
   const { handleSubmit, errors, setValue, getValues } = useForm({
     defaultValues: {
       eventTitle: JSON.parse(getSelectedDayEvent()!.event?.data).title ?? '',
       eventDescription: JSON.parse(getSelectedDayEvent()!.event?.data).description ?? '',
-      assocId: JSON.parse(getSelectedDayEvent()!.event?.data).assocId ?? '',
-      assocName: truncateString(challange?.name ?? '', 23) ?? '',
+      challengeId: JSON.parse(getSelectedDayEvent()!.event?.data).challengeId ?? '',
+      challengeName: truncateString(challange?.name ?? '', 23) ?? '',
       eventStartTime: getSelectedDayEvent()?.event.schedule?.times[0].toString() ?? '',
       eventEndTime: defaultDuration,
     },
@@ -61,12 +60,12 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   }, []);
 
   React.useEffect(() => {
-    if ((props.assocId, props.assocName)) {
-      setValue('assocId', assocId, {
+    if ((props.challengeId, props.challengeName)) {
+      setValue('challengeId', props.challengeId, {
         shouldValidate: true,
         shouldDirty: true,
       });
-      setValue('assocName', props.assocName, {
+      setValue('challengeName', props.challengeName, {
         shouldValidate: true,
         shouldDirty: true,
       });
@@ -83,12 +82,12 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   const handleUpdate = async (data: Object) => {
     if (!activeGroup) return;
 
-    const { eventTitle, eventDescription, eventStartTime, eventEndTime } = data as {
+    const { eventTitle, challengeId, eventDescription, eventStartTime, eventEndTime } = data as {
       eventTitle: string;
       eventDescription: string;
-      assocId: number;
       eventStartTime: string;
       eventEndTime: number;
+      challengeId: number;
     };
 
     const timeFromString = Time.fromString(eventStartTime);
@@ -106,7 +105,7 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
       {
         eventId: getSelectedDayEvent()?.event.id,
         data: {
-          assocId: props.assocId,
+          challengeId,
           description: eventDescription,
           title: eventTitle,
           reschedule: {
@@ -235,14 +234,14 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
             cursor="pointer"
             onClick={() => props.onOpen()}
           >
-            {getValues('assocName').length > 0
-              ? truncateString(getValues('assocName'), 23)
+            {getValues('challengeName').length > 0
+              ? truncateString(getValues('challengeName'), 23)
               : 'Select challenge'}
           </Text>
         </Box>
 
         <Box>
-          <Common.InputErrorMessage errorMsg={errors?.assocId?.message} />
+          <Common.InputErrorMessage errorMsg={errors?.challengeId?.message} />
         </Box>
       </Box>
       <Common.ImpaktButton

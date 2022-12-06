@@ -14,8 +14,8 @@ import { useCalendarEventControllerCreateCalendarEvent } from '../../../lib/impa
 import { renderToast, truncateString } from '../../../utils';
 
 interface CreateEventFormPropsI {
-  assocId?: number;
-  assocName?: string;
+  challengeId?: number;
+  challengeName?: string;
   clearAssoc: () => void;
   onOpen: () => void;
 }
@@ -33,15 +33,15 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
       eventDescription: '',
       eventStartTime: '',
       eventEndTime: 0,
-      assocId: props.assocId,
-      assocName: props.assocName,
+      challengeId: props.challengeId,
+      challengeName: props.challengeName,
     },
     resolver: yupResolver(createEventYupScheme),
   });
 
   React.useEffect(() => {
-    if (props.assocId) setValue('assocId', props.assocId);
-    if (props.assocName) setValue('assocName', props.assocName);
+    if (props.challengeId) setValue('challengeId', props.challengeId);
+    if (props.challengeName) setValue('challengeName', props.challengeName);
 
     return () => {
       props.clearAssoc();
@@ -57,19 +57,19 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
   const handleAdd = async (data: Object) => {
     if (!activeGroup) return;
 
-    const { eventTitle, eventDescription, eventStartTime, eventEndTime, assocId } = data as {
+    const { eventTitle, eventDescription, eventStartTime, eventEndTime, challengeId } = data as {
       eventTitle: string;
       eventDescription: string;
       eventStartTime: string;
       eventEndTime: number;
-      assocId: number;
+      challengeId: number;
     };
 
     const eventData = {
       title: eventTitle,
       description: eventDescription,
       creatorId: member!.id,
-      assocId,
+      challengeId,
     };
     const timeFromString = Time.fromString(eventStartTime);
     const eventStartOn = new Date(
@@ -84,7 +84,7 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
       {
         calendarId: activeGroup.calendarId,
         data: {
-          data: eventData,
+          data: { ...eventData, challengeId, groupId: activeGroup.id },
           schedule: { start: eventStartOn.toISOString(), end: eventEndOn.toISOString() },
         },
       },
@@ -232,14 +232,14 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
             cursor="pointer"
             onClick={() => props.onOpen()}
           >
-            {getValues('assocName') && getValues('assocName')!.length > 0
-              ? truncateString(getValues('assocName')!, 23)
+            {getValues('challengeName') && getValues('challengeName')!.length > 0
+              ? truncateString(getValues('challengeName')!, 23)
               : 'Select challenge'}{' '}
           </Text>
         </Box>
 
         <Box>
-          <Common.InputErrorMessage errorMsg={errors?.assocId?.message} />
+          <Common.InputErrorMessage errorMsg={errors?.challengeId?.message} />
         </Box>
       </Box>
       <Common.ImpaktButton

@@ -61,12 +61,12 @@ const eventDescription = yup
 
 const eventTime = yup.string().required('Event time is required field');
 const eventEndTime = yup.number().required('Duration time is required field');
-const assocId = yup
+const challengeId = yup
   .number()
   .required('Challenge is required please select one...')
   .typeError('Challenge is required please select one...');
 
-const assocName = yup.string().required('Challenge name is required');
+const challengeName = yup.string().required('Challenge name is required');
 const assocDuration = yup.number().min(1).max(30);
 
 const post = yup
@@ -93,10 +93,10 @@ export {
   eventTitle,
   eventDescription,
   eventTime,
-  assocId,
+  challengeId,
   post,
   comment,
-  assocName,
+  challengeName,
   assocDuration,
   eventEndTime,
 };

@@ -26,7 +26,7 @@ const EventDetails: React.FC = () => {
   if (!eventObj) return null;
 
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
-    (d) => d.id === JSON.parse(eventObj.data).assocId,
+    (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);

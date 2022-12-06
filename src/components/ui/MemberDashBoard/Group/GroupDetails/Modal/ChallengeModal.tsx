@@ -61,7 +61,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
   const createChallenge = useChallengesControllerCreateOne();
   const challengeCreateForm = useForm({
     defaultValues: {
-      assocName: '',
+      challengeName: '',
       assocDuration: 1,
     },
     resolver: yupResolver(createChallengeYupScheme),
@@ -95,7 +95,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
 
   const handleSubmitCreateChallenge = async () => {
     if (!challengeCreateForm.isValid && !challengeCreateForm.isDirty) {
-      await challengeCreateForm.trigger('assocName');
+      await challengeCreateForm.trigger('challengeName');
       await challengeCreateForm.trigger('assocDuration');
 
       return;
@@ -107,7 +107,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
     createChallenge.mutate(
       {
         data: {
-          name: challengeCreateForm.getValues('assocName'),
+          name: challengeCreateForm.getValues('challengeName'),
           routineId: previewRouitine.id,
           validFrom: validFrom.toISOString(),
           validUntil: validUntil?.toISOString(),
@@ -124,7 +124,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
             },
             ...availableGroupChallenges,
           ]);
-          challengeCreateForm.reset({ assocDuration: 1, assocName: '' });
+          challengeCreateForm.reset({ assocDuration: 1, challengeName: '' });
           moveToFirstScreenAndDeleteHistory();
         },
         onError: (err) => {
@@ -437,15 +437,15 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                 <VStack mt="36px" rowGap="24px" id="create-challenge-form-container">
                   <Common.InputGroup
                     onChange={(e) => {
-                      challengeCreateForm.setValue('assocName', e.target.value, {
+                      challengeCreateForm.setValue('challengeName', e.target.value, {
                         shouldValidate: true,
                       });
                     }}
-                    errorMsg={challengeCreateForm.errors.assocName?.message}
-                    name="assocName"
+                    errorMsg={challengeCreateForm.errors.challengeName?.message}
+                    name="challengeName"
                     label="Challenge Name"
                     placeholder="Best Challenge"
-                    value={challengeCreateForm.getValues('assocName')}
+                    value={challengeCreateForm.getValues('challengeName')}
                     whiteMode
                   />
                   <VStack w="full" alignItems="flex-start">
@@ -673,8 +673,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   id="select-routine-button"
                   onClick={() => {
                     // setActiveGroupChallenge(challenge);
-                    // setAssocName(previewChallenge.challenge.name);
-                    // setAssocId(previewChallenge.challenge.id);
+                    // setchallengeName(previewChallenge.challenge.name);
+                    // setchallengeId(previewChallenge.challenge.id);
                     moveToNextScreen('create-challenge-form');
                   }}
                   variant="black"
