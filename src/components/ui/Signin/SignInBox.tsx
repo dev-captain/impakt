@@ -2,11 +2,13 @@ import * as React from 'react';
 import { Common } from 'components';
 import { Text, Flex, Link } from '@chakra-ui/react';
 
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link as ReactRouterLink, useLocation } from 'react-router-dom';
 
 import SignInForm from './SignInForm';
 
 const SignInBox: React.FC = () => {
+  const navigateTo = `/register${useLocation().search}`;
+
   return (
     <Common.Card
       maxW="576px"
@@ -20,7 +22,7 @@ const SignInBox: React.FC = () => {
           First time?
           <Link
             as={ReactRouterLink}
-            to="/register"
+            to={navigateTo}
             textDecor="none !important"
             mx="5px"
             cursor="pointer"

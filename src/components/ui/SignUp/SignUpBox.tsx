@@ -6,10 +6,7 @@ import { Link as ReactRouterLink, useLocation } from 'react-router-dom';
 import SignUpForm from './SignUpForm';
 
 const SignUpBox: React.FC = () => {
-  const isThereNextParam = useLocation().search.includes('next');
-  const navigateTo = isThereNextParam
-    ? `/signin?next=${useLocation().search.split('next=')[1]}`
-    : '/signin';
+  const navigateTo = `/signin${useLocation().search}`;
 
   return (
     <Common.Card m="0 !important" maxW="576px" h="100%" w="full">
