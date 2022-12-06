@@ -13,7 +13,7 @@ const GroupSettingsTabs: React.FC = () => {
   return (
     <Tabs mt="10px">
       <TabList border="0" flexWrap="wrap">
-        {role === 'Creator'
+        {role === 'Creator' || role === 'Moderator'
           ? GroupSettingTab.map((tab, index) => (
               <Tab
                 // eslint-disable-next-line react/no-array-index-key
@@ -48,13 +48,13 @@ const GroupSettingsTabs: React.FC = () => {
             ))}
       </TabList>
       <TabPanels>
-        {role === 'Creator' && (
+        {(role === 'Creator' || role === 'Moderator') && (
           <TabPanel p="0" mt="24px">
             <EditGroupTab />
           </TabPanel>
         )}
 
-        {role === 'Creator' && (
+        {(role === 'Creator' || role === 'Moderator') && (
           <TabPanel p="0" mt="24px">
             <PermissionTab />
           </TabPanel>

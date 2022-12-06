@@ -62,8 +62,6 @@ const UpdateGroupImageForm: React.FC = () => {
         const file = new File([bl], 'logo.png', bl);
         reset({ file } as any);
       });
-    // const blob = new Blob([Images.group.logo]);
-    // console.log('file', blob);
   };
 
   const openUploadImageFileInput = () => {

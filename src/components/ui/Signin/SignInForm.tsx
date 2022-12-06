@@ -14,7 +14,8 @@ import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
 
 const SignInForm: React.FC = () => {
-  const navigateTo = useNextParamRouter();
+  const navigate = useNextParamRouter('/d');
+
   const signIn = useAuthControllerLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
@@ -43,13 +44,13 @@ const SignInForm: React.FC = () => {
       signInPayload.discoursePayload = queryString.sso;
       signInPayload.discourseSig = queryString.sig;
     }
-    signIn.mutate(
+    await signIn.mutateAsync(
       { data: { ...signInPayload } },
       {
         onSuccess: (member) => {
           setMember(member);
           renderToast('success', 'Welcome');
-          navigateTo();
+          navigate();
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');

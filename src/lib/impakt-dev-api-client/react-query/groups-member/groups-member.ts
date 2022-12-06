@@ -289,3 +289,52 @@ export const useGroupsMemberControllerV1LeaveGroup = <
     TContext
   >(mutationFn, mutationOptions);
 };
+
+export const groupsMemberControllerV1AssignRole = (
+  groupId: number,
+  userId: number,
+  role: string,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<boolean>(
+    { url: `/api/v1/groups/${groupId}/assign-role/${userId}?role=${role}`, method: 'patch' },
+    options,
+  );
+};
+
+export type GroupsMemberControllerV1AssignRoleMutationResult = NonNullable<
+  Awaited<ReturnType<typeof useGroupsMemberControllerV1AssignRole>>
+>;
+
+export type GroupsMemberControllerV1RemoveModeratorError = ErrorType<HttpExceptionSchema>;
+
+export const useGroupsMemberControllerV1AssignRole = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignRole>>,
+    TError,
+    { groupId: number; userId: number; role: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignRole>>,
+    { groupId: number; userId: number; role: string }
+  > = (props) => {
+    const { groupId, userId, role } = props ?? {};
+
+    return groupsMemberControllerV1AssignRole(groupId, userId, role, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignRole>>,
+    TError,
+    { groupId: number; userId: number; role: string },
+    TContext
+  >(mutationFn, mutationOptions);
+};
