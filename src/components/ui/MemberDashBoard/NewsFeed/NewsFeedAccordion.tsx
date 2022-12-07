@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { I } from 'components';
 import * as React from 'react';
-import truncH from 'trunc-html';
+// import truncH from 'trunc-html';
 import { usePersistedDiscourseStore } from '../../../../lib/zustand';
 
 // import { useAppSelector } from '../../../../hooks';
@@ -62,14 +62,14 @@ const NewsFeedAccordion: React.FC = () => {
                     overflow="hidden"
                     sx={{ a: { color: 'gold', marginLeft: '3px' } }}
                     dangerouslySetInnerHTML={{
-                      __html: `${truncH(description, 200).html}`,
+                      __html: `${description}`,
                     }}
                   />
-                  <Box as="a" href={`https://discuss.impakt.com/t/${id}`}>
+                  {/* <Box as="a" href={`https://discuss.impakt.com/t/${id}`}>
                     <Text fontWeight="700" color="impaktRed">
                       Click here to read more
                     </Text>
-                  </Box>
+                  </Box> */}
                 </AccordionPanel>
               </Box>
             )}

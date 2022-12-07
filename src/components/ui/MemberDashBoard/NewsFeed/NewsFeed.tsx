@@ -1,6 +1,9 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
+import {
+  //  Common,
+  I,
+} from 'components';
 
 import MemberDashboardCard from '../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
@@ -29,7 +32,7 @@ const NewsFeed: React.FC = () => {
         <NewsFeedAccordion />
       </Box>
 
-      <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
+      {/* <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
         <Common.ImpaktButton
           size="lg"
           variant="white"
@@ -49,7 +52,7 @@ const NewsFeed: React.FC = () => {
         >
           Check our Discourse for more updates
         </Common.ImpaktButton>
-      </Box>
+      </Box> */}
       {/* <Box id="news-feed-headline-box">Headline</Box> */}
       {/* <Box>2</Box> */}
     </MemberDashboardCard>
