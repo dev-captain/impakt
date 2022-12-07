@@ -17,11 +17,9 @@ const NavbarLink = ({ IsHeader }: Props) => {
   const path = parsePathname(location.pathname);
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
 
-  const textColor = location.pathname.includes('dashboard') ? 'fitnessGray' : 'glass.100';
-  const activeColor = location.pathname.includes('dashboard') ? 'fitnessGray' : 'glass.100';
-  const passiveColor = location.pathname.includes('dashboard')
-    ? 'fitnessGray'
-    : 'rgba(255,255,255)';
+  const textColor = location.pathname.includes('d') ? 'fitnessGray' : 'glass.100';
+  const activeColor = location.pathname.includes('d') ? 'fitnessGray' : 'glass.100';
+  const passiveColor = location.pathname.includes('d') ? 'fitnessGray' : 'rgba(255,255,255)';
 
   useEffect(() => {
     if (!isLessThan1040) {
