@@ -177,7 +177,7 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
           /> */}
           <HStack w="full">
             <VStack align="flex-start">
-              <Text ml="5px" fontWeight="500" fontSize="14px" lineHeight="100%" color="#4E6070">
+              <Text ml="5px" fontWeight="500" fontSize="10px" lineHeight="100%" color="#4E6070">
                 Time:
               </Text>
               <Select
@@ -199,7 +199,7 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
               </Select>
             </VStack>
             <VStack align="flex-start">
-              <Text fontWeight="500" fontSize="14px" lineHeight="100%" color="#4E6070">
+              <Text fontWeight="500" fontSize="10px" lineHeight="100%" color="#4E6070">
                 Duration (min):
               </Text>
               <Input
