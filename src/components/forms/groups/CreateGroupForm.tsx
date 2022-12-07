@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'hooks';
 import keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
-import { Flex, FormControl, Box, Button, Text, Tooltip } from '@chakra-ui/react';
+import { Flex, FormControl, Box, Button, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
@@ -20,7 +20,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
   const [info, setInfo] = useState(false);
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
-    defaultValues: { groupName: '' },
+    defaultValues: { groupName: value },
   });
   const { t } = useTranslation().i18n;
   const helperText = t(keys.Message.PublicToolTip.description);
