@@ -26,7 +26,7 @@ const GroupDetails: React.FC = () => {
         {isError}
       </Text>
     );
-  if (isGroupDetailsLoading) return <CircularProgress isIndeterminate />;
+  if (isGroupDetailsLoading) return <CircularProgress color="darkOrange" isIndeterminate />;
   if (!group) return null;
 
   return (
