@@ -9,10 +9,10 @@ import GroupsCard from '../GroupsCard';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 interface ExploreGroupCardWrapperPropsI {
-  status: 'private' | 'public';
+  status: 'Private' | 'Public';
 }
 const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
-  const isPrivate = status === 'private';
+  const isPrivate = status === 'Private';
   const navigate = useNavigate();
 
   const { exploreGroups } = usePersistedGroupStore();

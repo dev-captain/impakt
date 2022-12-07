@@ -4,20 +4,17 @@ import GroupCardWrapperHeader from '../../GroupCardHeader';
 import ExploreGroupCardPrivatePublicToggleButton from './ExploreGroupCardPrivatePublicToggleButton';
 
 interface ExploreGroupCardWrapperHeaderPropsI {
-  status: 'public' | 'private';
-  handleChangeStatus: (status: ExploreGroupCardWrapperHeaderPropsI['status']) => void;
+  status: 'Public' | 'Private';
+  setStatus: (status: 'Public' | 'Private') => void;
 }
 const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   status,
-  handleChangeStatus,
+  setStatus,
 }) => {
   return (
     <GroupCardWrapperHeader justify="space-between" title="Explore">
       <Box m="20px 0 !important">
-        <ExploreGroupCardPrivatePublicToggleButton
-          status={status}
-          handleChangeStatus={handleChangeStatus}
-        />
+        <ExploreGroupCardPrivatePublicToggleButton status={status} setStatus={setStatus} />
       </Box>
     </GroupCardWrapperHeader>
   );
