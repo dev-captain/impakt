@@ -128,11 +128,11 @@ const GroupLabels: React.FC = () => {
           />
         ) : null,
       onClick: () => {
-        if (groupPinnedChallenge) {
+        if (groupPinnedChallenge?.Challenge) {
           challengePreviewModalDisclosure.onOpen();
         }
 
-        if (!groupPinnedChallenge && isCreator) {
+        if (!groupPinnedChallenge?.Challenge && isCreator) {
           challengeModalDisclosure.onOpen();
         }
       },
