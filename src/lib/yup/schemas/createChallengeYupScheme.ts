@@ -1,8 +1,8 @@
 import * as yup from 'yup';
-import { assocName, assocDuration } from '../fields';
+import { challengeName, assocDuration } from '../fields';
 
 const createChallengeYupScheme = yup.object().shape({
-  assocName,
+  challengeName,
   assocDuration,
 });
 

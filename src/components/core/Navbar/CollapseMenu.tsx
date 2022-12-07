@@ -41,6 +41,23 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         <NavbarLinkItem
           isSmall
           hide
+          href="/d/g"
+          onClose={onClose}
+          isActive={path.path === '/d/g'}
+          title="Groups"
+        />
+        {member && (
+          <NavbarLinkItem
+            isSmall
+            href="/d"
+            onClose={onClose}
+            title={t(Keys.navbar.dashboard)}
+            isActive={path.path === 'dashboard'}
+          />
+        )}
+        <NavbarLinkItem
+          isSmall
+          hide
           href="/"
           onClose={onClose}
           isActive={path.path === ''}
@@ -70,16 +87,8 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
         />
-        {member && (
-          <NavbarLinkItem
-            isSmall
-            href="/d"
-            onClose={onClose}
-            title={t(Keys.navbar.dashboard)}
-            isActive={path.path === 'dashboard'}
-          />
-        )}
-        {member && (
+
+        {/* {member && (
           <NavbarLinkItem
             isSmall
             href=""
@@ -96,7 +105,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             title={t(Keys.navbar.help)}
             isActive={path.path === '/contact'}
           />
-        )}
+        )} */}
 
         {member && (
           <NavbarLinkItem
