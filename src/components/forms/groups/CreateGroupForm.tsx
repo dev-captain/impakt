@@ -20,7 +20,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
   const [info, setInfo] = useState(false);
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
-    defaultValues: { groupName: value },
+    defaultValues: { groupName: '' },
   });
   const { t } = useTranslation().i18n;
   const helperText = t(keys.Message.PublicToolTip.description);
@@ -33,9 +33,10 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
 
   const handleOnCreate = async (data: object) => {
     const { groupName } = data as { groupName: string };
+    const privateValue = value;
     if (!member) return;
     try {
-      const groupData = await createGroup.mutateAsync({ data: { groupName } });
+      const groupData = await createGroup.mutateAsync({ data: { groupName, privateValue } });
       addToMyGroups({
         groupId: groupData.id,
         userId: member.id,
