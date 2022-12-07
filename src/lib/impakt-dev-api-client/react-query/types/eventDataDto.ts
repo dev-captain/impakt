@@ -11,5 +11,7 @@ export interface EventDataDto {
   /** The description of the event */
   description: string;
   creatorId: number;
-  assocId: number;
+  assocId?: number;
+  challengeId?: number;
+  groupId?: number;
 }

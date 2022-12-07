@@ -9,13 +9,12 @@ import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 const ShowEvents: React.FC = () => {
   const navigate = useNavigate();
-  const isAdmin = usePersistedGroupStore().role === 'Creator';
-
+  const isAdmin =
+    usePersistedGroupStore().role === 'Creator' || usePersistedGroupStore().role === 'Moderator';
   const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
     useEventCalendarContext();
   const selectedDay = getSelectedDay();
   const selectedDayEvents = getSelectedDayEvents();
-
   if (!selectedDay) return null;
   const isToday = Day.now().compare(selectedDay ?? new Date(), 'day') === 0;
 

@@ -16,7 +16,7 @@ const EventDetails: React.FC = () => {
   // const navigate = useNavigate();
   const { activeGroup } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
-  const isAdmin = role === 'Creator';
+  const isAdmin = role === 'Creator' || role === 'Moderator';
   // const toast = useToast();
 
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
@@ -26,7 +26,7 @@ const EventDetails: React.FC = () => {
   if (!eventObj) return null;
 
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
-    (d) => d.id === JSON.parse(eventObj.data).assocId,
+    (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);

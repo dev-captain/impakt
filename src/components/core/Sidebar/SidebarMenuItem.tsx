@@ -39,7 +39,7 @@ const SidebarMenuItem = ({ title, href, isActive, hide = false, onClick, childre
         <Common.LinkItem
           margin="0 !important"
           titleTextStyle="semiBold6"
-          titleTextColor={isActive ? 'darkOrange' : 'fg-1'}
+          titlePassiveColor={isActive ? 'darkOrange' : 'fg-1'}
           title={title}
           isDisabled
         />

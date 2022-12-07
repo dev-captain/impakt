@@ -39,16 +39,19 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
         padding="16px"
         mt="4px"
       >
-        <NavBarLink />
-        {member && (
-          <NavbarLinkItem
-            href="/d"
-            titleTextColor={textColor}
-            passiveColor={passiveColor}
-            title={t(Keys.navbar.dashboard)}
-            isActive={path.path === '/d'}
-          />
-        )}
+        <NavbarLinkItem href="/d/g" isNavigate title="Groups" />
+        {member && <NavbarLinkItem href="/d" isNavigate title={t(Keys.navbar.dashboard)} />}
+        <NavbarLinkItem href="/" isNavigate title={t(Keys.navbar.impaktFitness)} />
+        <NavbarLinkItem
+          title={t(Keys.navbar.knowledgeBase)}
+          href="https://knowledgebase.impakt.com"
+        />
+        <NavbarLinkItem href="/events" isNavigate title={t(Keys.navbar.events)} />
+        <NavbarLinkItem
+          isNavigate
+          title={t(Keys.navbar.contactUs)}
+          isActive={path.path === 'contact'}
+        />
 
         {member && (
           <NavbarLinkItem
@@ -59,19 +62,8 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
               });
             }}
             title={t(Keys.navbar.signOut)}
-            isActive={path.path === '#'}
-            titleTextColor={textColor}
-            passiveColor={passiveColor}
           />
         )}
-
-        {/* {!member && (
-          <NavbarLinkItem
-            href="/signin"
-            title={t(Keys.navbar.signIn)}
-            isActive={path.path === 'signin'}
-          />
-        )} */}
 
         <HStack
           align="center"

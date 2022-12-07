@@ -17,16 +17,16 @@ const NavbarLink = () => {
         href="/"
         title={t(Keys.navbar.impaktFitness)}
         isActive={path.pathname === ''}
-        passiveColor={passiveColor}
-        titleTextColor={textColor}
+        titleActiveColor={passiveColor}
+        titlePassiveColor={textColor}
         isNavigate
       />
       <Common.LinkItem
         title={t(Keys.navbar.knowledgeBase)}
         href="https://knowledgebase.impakt.com"
         isActive={path.pathname === 'knowledge-base'}
-        passiveColor={passiveColor}
-        titleTextColor={textColor}
+        titleActiveColor={passiveColor}
+        titlePassiveColor={textColor}
       />
       {/* <Common.LinkItem
         href="/events"
@@ -38,8 +38,8 @@ const NavbarLink = () => {
         href="/contact"
         title={t(Keys.navbar.contactUs)}
         isActive={path.pathname === 'contact'}
-        passiveColor={passiveColor}
-        titleTextColor={textColor}
+        titleActiveColor={passiveColor}
+        titlePassiveColor={textColor}
         isNavigate
       />
       {/* (

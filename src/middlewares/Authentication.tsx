@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import LogRocket from 'logrocket';
 import { usePersistedAuthStore } from '../lib/zustand';
 
 const Authentication: React.FC = ({ children }) => {
@@ -11,6 +12,12 @@ const Authentication: React.FC = ({ children }) => {
   React.useEffect(() => {
     if (!member) {
       navigate(`/signin?next=${location.pathname}`);
+    } else {
+      LogRocket.identify(member.id.toString(), {
+        email: member.email ?? '',
+        name: member.username,
+        emailVerified: member.emailVerified,
+      });
     }
   }, [member]);
 

@@ -19,13 +19,32 @@ import {
   Landing,
 } from 'pages';
 import { Common, S } from 'components';
+import { useEffect } from 'react';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
+import { BrowserTracing } from '@sentry/tracing';
+import * as Sentry from '@sentry/react';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 import GroupInvite from './pages/GroupInvite/index';
 
+Sentry.init({
+  dsn: 'https://482e35ccc1c3471b86af0c359112f6ad@o522080.ingest.sentry.io/4504274587549696',
+  integrations: [new BrowserTracing()],
+
+  // We recommend adjusting this value in production, or using tracesSampler
+  // for finer control
+  tracesSampleRate: 1.0,
+});
+
 const App = () => {
+  useEffect(() => {
+    LogRocket.init('qmt5ka/impakt');
+    setupLogRocketReact(LogRocket);
+  }, []);
+
   return (
     <Routes>
       <Route
