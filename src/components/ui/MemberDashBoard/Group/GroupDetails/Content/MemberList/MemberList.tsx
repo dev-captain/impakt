@@ -190,6 +190,10 @@ const MemberList: React.FC = () => {
             ({ role, User }) =>
               role !== 'None' && (
                 <HStack
+                  as="a"
+                  href=""
+                  onClick={(e) => e.preventDefault()}
+                  title={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
                   key={`${User.id}-box`}
                   w="full"
                   alignItems="center"
