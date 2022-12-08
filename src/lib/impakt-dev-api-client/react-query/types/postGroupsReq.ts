@@ -7,5 +7,5 @@
 
 export interface PostGroupsReq {
   groupName: string;
-  value:boolean;
+  _private:boolean;
 }

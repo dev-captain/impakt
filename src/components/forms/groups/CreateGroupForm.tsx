@@ -35,7 +35,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
     const { groupName } = data as { groupName: string };
     if (!member) return;
     try {
-      const groupData = await createGroup.mutateAsync({ data: { groupName, value } });
+      const groupData = await createGroup.mutateAsync({ data: { groupName, _private: value } });
       addToMyGroups({
         groupId: groupData.id,
         userId: member.id,
