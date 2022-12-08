@@ -40,7 +40,7 @@ const NewsFeedAccordion: React.FC = () => {
       id: 7,
       bg: '#1877F2',
       icon: <I.FacebookBigIcon />,
-      href: 'https://www.facebook.com/impakt.life',
+      href: 'https://www.facebook.com/ImpaktFitnessGamified/',
     },
     {
       id: 8,
