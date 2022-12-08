@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Box, VStack, Text, HStack } from '@chakra-ui/react';
+import { Box, VStack, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import { useNavigate } from 'react-router-dom';
+import NewsFeedItem from './NewsFeedItem';
 // import truncH from 'trunc-html';
 // import { usePersistedDiscourseStore } from '../../../../lib/zustand';
 
@@ -53,10 +54,11 @@ const NewsFeedAccordion: React.FC = () => {
   return (
     <VStack spacing="12px" w="full">
       {getStartedLinkItems?.map(({ title, href, order }) => (
-        <HStack
-          as="a"
+        <NewsFeedItem
+          title={title}
           href={href}
-          target="_blank"
+          order={order}
+          key={`item-id-${order}`}
           onClick={(e) => {
             if (!href) return;
             if (!href.includes('https') || !href.includes('http')) {
@@ -64,44 +66,7 @@ const NewsFeedAccordion: React.FC = () => {
               navigate(href);
             }
           }}
-          w="full"
-          key={`get-started-item-${order}`}
-          background="#F5F8FA"
-          borderRadius="1em"
-          border="0"
-          position="relative"
-          p="1em"
-          columnGap="12px"
-          justifyContent="space-between"
-        >
-          <Box>
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              id="order-box-dot"
-              w="24px"
-              h="24px"
-              background="#4E6070"
-              borderRadius="50%"
-            >
-              <Text color="#F5F8FA" lineHeight="100%">
-                {order}
-              </Text>
-            </Box>
-          </Box>
-          <Box w="full" id="news-">
-            <Text color="#29323B" fontWeight="400" fontSize="18px" lineHeight="26px">
-              {title}
-            </Text>
-          </Box>
-
-          {href && (
-            <Box transform="rotate(270deg)">
-              <I.DropIcon />
-            </Box>
-          )}
-        </HStack>
+        />
       ))}
       {/* // ocial medias */}
       <HStack
