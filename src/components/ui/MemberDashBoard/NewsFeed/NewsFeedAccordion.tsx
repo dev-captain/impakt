@@ -89,7 +89,7 @@ const NewsFeedAccordion: React.FC = () => {
             alignItems="center"
             opacity="1"
             transition="all .2s linear"
-            _hover={{ opacity: '0.8' }}
+            _hover={{ opacity: '0.6' }}
             as="a"
             href={href}
             borderRadius="12px"

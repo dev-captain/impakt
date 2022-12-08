@@ -13,16 +13,16 @@ const NewsFeedItem: React.FC<StackProps & { title: string; href?: string; order:
   return (
     <HStack
       as="a"
-      onMouseEnter={() => setIsOver(true)}
-      onMouseLeave={() => setIsOver(false)}
+      onMouseEnter={() => href && setIsOver(true)}
+      onMouseLeave={() => href && setIsOver(false)}
       href={href}
       target="_blank"
       w="full"
       background="#F5F8FA"
       color="#29323B"
       _hover={{
-        background: 'rgba(242, 121, 97, 1)',
-        color: 'white',
+        background: href && 'rgba(242, 121, 97, 1)',
+        color: href && 'white',
       }}
       borderRadius="1em"
       border="0"
