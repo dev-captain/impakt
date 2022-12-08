@@ -21,7 +21,7 @@ const UpdateGroupImageForm: React.FC = () => {
   const groupMembers = usePersistedGroupStore().membersOfGroup?.Members.filter(
     (members) => members.role !== 'None',
   );
-  const groupMemberCount = groupMembers?.length ?? 0;
+  // const groupMemberCount = groupMembers?.length ?? 0;
 
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
@@ -157,7 +157,7 @@ const UpdateGroupImageForm: React.FC = () => {
             <Text color="#29323B" fontSize={{ md: '20px', base: '14px' }} fontWeight="600">
               {activeGroup?.groupName}
             </Text>
-            <Box
+            {/* <Box
               color="#4E6070"
               fontWeight="600"
               fontSize="16px"
@@ -166,7 +166,7 @@ const UpdateGroupImageForm: React.FC = () => {
             >
               <I.PeopleIcon width="16px" height="16px" mr="6px" />
               {groupMemberCount}
-            </Box>
+            </Box> */}
           </Box>
           <Box display="flex" justifyContent="space-between">
             <AvatarGroup size="md" max={4}>
