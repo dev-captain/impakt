@@ -93,10 +93,8 @@ const PermissionTab: React.FC = () => {
         <Box mt="20px" textAlign="end">
           <Common.ImpaktButton
             variant="black"
-            color="#fff"
             w="147px"
             h="60px"
-            backgroundColor="#29323B"
             borderRadius="8px"
             type="submit"
             fontSize={{ md: '16px' }}

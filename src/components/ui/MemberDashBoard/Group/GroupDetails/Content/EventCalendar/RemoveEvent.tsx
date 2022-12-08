@@ -93,7 +93,6 @@ const RemoveEvent: React.FC = () => {
         </Common.ImpaktButton>
         <Common.ImpaktButton
           variant="white-50"
-          bg="white"
           h={{ md: '48px', base: '40px' }}
           borderRadius="8px"
           type="submit"

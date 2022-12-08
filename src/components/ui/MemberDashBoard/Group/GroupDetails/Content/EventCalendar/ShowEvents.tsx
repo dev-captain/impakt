@@ -83,9 +83,7 @@ const ShowEvents: React.FC = () => {
         <Common.ImpaktButton
           mt="10px"
           variant="black"
-          colorScheme="#fff"
           h={{ md: '48px', base: '40px' }}
-          backgroundColor="#29323B"
           borderRadius="8px"
           type="submit"
           fontSize={{ md: '16px' }}

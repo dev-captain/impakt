@@ -247,9 +247,7 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
         isLoading={updateEventBe.isLoading}
         isDisabled={updateEventBe.isLoading}
         variant="black"
-        colorScheme="#fff"
         h={{ md: '48px', base: '40px' }}
-        backgroundColor="#29323B"
         borderRadius="8px"
         type="submit"
         fontSize={{ md: '16px' }}

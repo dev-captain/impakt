@@ -87,7 +87,6 @@ const ExploreGroupItem: React.FC<ExploreGroupItemPropsI> = ({ gPrivate, gRequest
           fontSize="16px"
           isDisabled={sendGroupRequestToJoin.isLoading || joinGroup.isLoading}
           isLoading={sendGroupRequestToJoin.isLoading || joinGroup.isLoading}
-          _hover={{ backgroundColor: '#000', color: '#fff' }}
           variant={
             gPrivate
               ? gRequestStatus?.status !== GetGroupRequestResStatus.Pending

@@ -114,6 +114,7 @@ const SignInForm: React.FC = () => {
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
+            variant="primary"
             isLoading={signIn.isLoading}
             type="submit"
             leftIcon={<I.EnterIcon width="24" height="24" />}

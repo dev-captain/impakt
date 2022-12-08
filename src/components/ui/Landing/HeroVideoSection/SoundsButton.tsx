@@ -12,15 +12,13 @@ const SoundsButton: FC<SoundsButtonPropsI> = ({ onClick, isOn }) => {
       bottom="0"
       left="50%"
       transform="translate(-50%, -50%)"
-      variant="secondary"
+      variant="transparent"
       border="0"
       w="auto"
       display="flex"
       marginTop="25px"
       backgroundColor="transparent"
-      _hover={{ backgroundColor: 'transparent' }}
-      _focus={{ backgroundColor: 'transparent' }}
-      _active={{ backgroundColor: 'transparent' }}
+      _hover={{ backgroundColor: 'transparent', color: '#fff' }}
       onClick={onClick}
     >
       {isOn ? (

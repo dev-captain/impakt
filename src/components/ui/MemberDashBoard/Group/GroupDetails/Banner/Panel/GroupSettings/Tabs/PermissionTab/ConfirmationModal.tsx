@@ -27,15 +27,13 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({ open, close, hand
             display="flex"
             justifyContent="center"
             margin="auto"
-            colorScheme="#fff"
             w={{ md: '156px', base: '100%' }}
             ml={{ md: '16px', base: '0' }}
-            _hover={{ bg: '#C41F30' }}
-            _active={{ bg: '#910917', color: '#fff' }}
             h="60px"
             borderRadius="8px"
             type="submit"
             fontSize={{ md: '16px' }}
+            variant="delete"
             onClick={() => {
               handleConfirm();
               close();

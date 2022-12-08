@@ -183,12 +183,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                           </Common.ImpaktButton>
                         </Box>
                         <Box onClick={() => navigate('/register')}>
-                          <Common.ImpaktButton
-                            color="#fff"
-                            bg="#6B6B73"
-                            gap="8px"
-                            padding="10px 14px"
-                          >
+                          <Common.ImpaktButton variant="black" gap="8px" padding="10px 14px">
                             {/* {t(Keys.footer.downloadApp)} */}
                             <I.NotifyIcon width="16px" />I Want Updates
                           </Common.ImpaktButton>

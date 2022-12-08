@@ -267,6 +267,7 @@ const SignUpForm: React.FC = () => {
         </Flex>
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
+            variant="primary"
             isLoading={createUser.isLoading}
             isDisabled={createUser.isLoading}
             type="submit"

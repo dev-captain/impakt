@@ -29,7 +29,7 @@ const NoitificationDrawer: React.FC<NoitificationDrawerProps> = ({ open, close }
       {/* <DrawerOverlay /> */}
       <DrawerContent
         bg="a5"
-        top={{ md: '80px !important', lg: '112px !important' }}
+        top={{ md: '80px !important', lg: '90px !important' }}
         maxWidth={{ md: '384px', base: '300px' }}
         display={{ base: 'none', md: 'flex' }}
         boxShadow="lightM"

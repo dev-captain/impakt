@@ -7,9 +7,11 @@ type ImpaktButtonVariantType =
   | 'alert'
   | 'white'
   | 'white-50'
+  | 'black-orange'
   | 'black'
   | 'transparent'
   | 'orange'
+  | 'orange-black'
   | 'delete';
 
 interface ImpaktButtonProps {
@@ -36,12 +38,12 @@ const ImpaktButton = forwardRef<ButtonProps & ImpaktButtonProps, 'button'>((prop
       w="full"
       color={textColor}
       _hover={{ bg: hoverBg, textDecoration: 'none', color: hoverTextColor }}
+      _focus={{ bg: hoverBg, textDecoration: 'none', color: hoverTextColor, boxShadow: 'none' }}
       transition="all .2s linear"
       cursor="pointer"
       px="20px"
       fontWeight="500"
       bg={bgColor}
-      _focus={{ boxShadow: 'none' }}
       minW={size === 'lg' ? '202px' : 'unset'}
       minH={size === 'lg' ? '64px' : 'unset'}
       py={size === 'sm' ? '10px' : '16px'}
@@ -60,7 +62,7 @@ const getBgColor = (variant?: ImpaktButtonVariantType) => {
     return 'accentRed2';
   }
   if (variant === 'secondary') {
-    return 'rgba(255, 255, 255, 0.1)';
+    return '#000';
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 0.12)';
@@ -74,16 +76,24 @@ const getBgColor = (variant?: ImpaktButtonVariantType) => {
     return 'a5';
   }
 
+  if (variant === 'black-orange') {
+    return 'fg-1';
+  }
+
   if (variant === 'black') {
     return 'fg-1';
   }
 
   if (variant === 'transparent') {
-    return 'a4';
+    return 'transparent';
   }
 
   if (variant === 'orange') {
-    return 'linear-gradient(90deg, #F04153 0%, #F27961 100%);';
+    return 'orangeGradient';
+  }
+
+  if (variant === 'orange-black') {
+    return 'orangeGradient';
   }
 
   if (variant === 'delete') {
@@ -98,7 +108,7 @@ const getTextColor = (variant?: ImpaktButtonVariantType) => {
     return 'rgba(255, 255, 255, 1)';
   }
   if (variant === 'secondary') {
-    return 'rgba(255, 255, 255, 0.75)';
+    return '#fff';
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 1)';
@@ -112,15 +122,23 @@ const getTextColor = (variant?: ImpaktButtonVariantType) => {
     return 'fg-1';
   }
 
+  if (variant === 'black-orange') {
+    return '#fff';
+  }
+
   if (variant === 'black') {
     return '#fff';
   }
 
   if (variant === 'transparent') {
-    return 'fg';
+    return '#fff';
   }
 
   if (variant === 'orange') {
+    return '#fff';
+  }
+
+  if (variant === 'orange-black') {
     return '#fff';
   }
 
@@ -136,7 +154,7 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
     return 'rgba(255, 255, 255, 1)';
   }
   if (variant === 'secondary') {
-    return 'rgba(0, 0, 0, 0.3)';
+    return '#fff';
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 1)';
@@ -147,7 +165,11 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'white-50') {
-    return 'linear-gradient(90deg, #F04153 0%, #F27961 100%);';
+    return 'orangeGradient';
+  }
+
+  if (variant === 'black-orange') {
+    return 'orangeGradient';
   }
 
   if (variant === 'black') {
@@ -155,18 +177,22 @@ const getHoverBg = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'transparent') {
-    return 'a4';
+    return 'white';
   }
 
   if (variant === 'orange') {
     return 'a4';
   }
 
+  if (variant === 'orange-black') {
+    return 'fg-1';
+  }
+
   if (variant === 'delete') {
     return 'impaktRed';
   }
 
-  return 'rgba(255, 255, 255, 1)';
+  return 'fg-1';
 };
 
 const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
@@ -174,7 +200,7 @@ const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
     return '#000';
   }
   if (variant === 'secondary') {
-    return 'rgba(255, 255, 255, 0.75)';
+    return '#000';
   }
   if (variant === 'alert') {
     return 'rgba(240, 65, 83, 1)';
@@ -185,6 +211,10 @@ const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
   }
 
   if (variant === 'white-50') {
+    return '#fff';
+  }
+
+  if (variant === 'black-orange') {
     return '#fff';
   }
 
@@ -198,6 +228,10 @@ const getHoverTextColor = (variant?: ImpaktButtonVariantType) => {
 
   if (variant === 'orange') {
     return 'fg-1';
+  }
+
+  if (variant === 'orange-black') {
+    return '#fff';
   }
 
   if (variant === 'delete') {
