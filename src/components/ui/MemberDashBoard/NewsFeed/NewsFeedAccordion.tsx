@@ -25,12 +25,12 @@ const NewsFeedAccordion: React.FC = () => {
       icon: <I.YoutubeBigIcon />,
       href: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw/featured',
     },
-    {
-      id: 4,
-      bg: '#5662F6',
-      icon: <I.DiscordBigIcon />,
-      href: 'https://discord.gg/impaktlife',
-    },
+    // {
+    //   id: 4,
+    //   bg: '#5662F6',
+    //   icon: <I.DiscordBigIcon />,
+    //   href: 'https://discord.gg/impaktlife',
+    // },
     {
       id: 5,
       bg: '#36B9FF',
@@ -104,7 +104,7 @@ const NewsFeedAccordion: React.FC = () => {
 };
 
 const getStartedLinkItems = [
-  { title: 'Explore Groups', href: '/d/g', order: 1 },
+  { title: 'Join Our Community', href: '/d/g/12', order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
   { title: 'Download Fitness App', href: '/download', order: 3 },
   { title: 'Follow us', href: undefined, order: 4 },
