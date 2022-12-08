@@ -1,9 +1,9 @@
 import { Box, HStack, Image, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import Images from '../../../../../assets/images';
 
 import MemberDashboardCard from '../../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
-import Images from '../../../../assets/images';
 
 const NewsFeed: React.FC = () => {
   return (

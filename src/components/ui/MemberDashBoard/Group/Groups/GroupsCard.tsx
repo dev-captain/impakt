@@ -46,9 +46,9 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({
           </Box>
         )}
         <GroupsThumbnailImage src={img} />
-        <Box bottom="1em" left="1em" position="absolute">
+        {/* <Box bottom="1em" left="1em" position="absolute">
           {member && <GroupCardMemberCount count={member} />}
-        </Box>
+        </Box> */}
       </Box>
       <VStack
         w="100%"
