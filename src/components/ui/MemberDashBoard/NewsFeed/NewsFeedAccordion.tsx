@@ -25,12 +25,12 @@ const NewsFeedAccordion: React.FC = () => {
       icon: <I.YoutubeBigIcon />,
       href: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw/featured',
     },
-    {
-      id: 4,
-      bg: '#5662F6',
-      icon: <I.DiscordBigIcon />,
-      href: 'https://discord.gg/impaktlife',
-    },
+    // {
+    //   id: 4,
+    //   bg: '#5662F6',
+    //   icon: <I.DiscordBigIcon />,
+    //   href: 'https://discord.gg/impaktlife',
+    // },
     {
       id: 5,
       bg: '#36B9FF',
