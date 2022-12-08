@@ -1,19 +1,19 @@
-import { SVGProps } from 'react';
+import { Icon, IconProps } from '@chakra-ui/react';
 
-const NotificationIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="22"
-    height="27"
+const NotificationIcon = (props: IconProps) => (
+  <Icon
+    width="32px"
+    height="32px"
+    viewBox="0 0 32 32"
     fill="none"
-    viewBox="0 0 22 27"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
+      d="M15.9987 29.333C17.4654 29.333 18.6654 28.133 18.6654 26.6663H13.332C13.332 27.3736 13.613 28.0519 14.1131 28.552C14.6132 29.0521 15.2915 29.333 15.9987 29.333ZM23.9987 21.333V14.6663C23.9987 10.573 21.812 7.14634 17.9987 6.23967V5.33301C17.9987 4.22634 17.1054 3.33301 15.9987 3.33301C14.892 3.33301 13.9987 4.22634 13.9987 5.33301V6.23967C10.172 7.14634 7.9987 10.5597 7.9987 14.6663V21.333L5.33203 23.9997V25.333H26.6654V23.9997L23.9987 21.333Z"
       fill="currentColor"
-      d="M11 26.333c1.466 0 2.666-1.2 2.666-2.666H8.333A2.667 2.667 0 0011 26.333zm8-8v-6.666c0-4.094-2.187-7.52-6-8.427v-.907c0-1.106-.894-2-2-2-1.107 0-2 .894-2 2v.907c-3.827.907-6 4.32-6 8.427v6.666L.333 21v1.333h21.333V21L19 18.333z"
     />
-  </svg>
+  </Icon>
 );
 
 export default NotificationIcon;
