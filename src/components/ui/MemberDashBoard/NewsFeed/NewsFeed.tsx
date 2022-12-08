@@ -1,9 +1,9 @@
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack, Image, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
 
 import MemberDashboardCard from '../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
+import Images from '../../../../assets/images';
 
 const NewsFeed: React.FC = () => {
   return (
@@ -17,11 +17,11 @@ const NewsFeed: React.FC = () => {
         <HStack columnGap="1.125em">
           <Box color="#000" id="news-feed-headline-text-box">
             <Text textStyle="bold5" lineHeight="100%">
-              News Feed
+              Get Started
             </Text>
           </Box>
           <Box id="news-feed-headline-text-icon-box">
-            <I.NewsIcon />
+            <Image w="32px" h="32px" src={Images.Common.emojiImpakt} />
           </Box>
         </HStack>
       </Box>
@@ -29,7 +29,7 @@ const NewsFeed: React.FC = () => {
         <NewsFeedAccordion />
       </Box>
 
-      <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
+      {/* <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
         <Common.ImpaktButton
           size="lg"
           variant="white"
@@ -49,7 +49,7 @@ const NewsFeed: React.FC = () => {
         >
           Check our Discourse for more updates
         </Common.ImpaktButton>
-      </Box>
+      </Box> */}
       {/* <Box id="news-feed-headline-box">Headline</Box> */}
       {/* <Box>2</Box> */}
     </MemberDashboardCard>
