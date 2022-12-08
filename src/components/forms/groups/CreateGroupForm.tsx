@@ -16,7 +16,7 @@ import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zust
 const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onClose }) => {
   const createGroup = useGroupsControllerV1Create();
   const { addToMyGroups } = usePersistedGroupStore();
-  const [value, settingValue] = useState('Public');
+  const [value, settingValue] = useState(false);
   const [info, setInfo] = useState(false);
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
@@ -33,10 +33,9 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
 
   const handleOnCreate = async (data: object) => {
     const { groupName } = data as { groupName: string };
-    const privateValue = value;
     if (!member) return;
     try {
-      const groupData = await createGroup.mutateAsync({ data: { groupName, privateValue } });
+      const groupData = await createGroup.mutateAsync({ data: { groupName, value } });
       addToMyGroups({
         groupId: groupData.id,
         userId: member.id,
@@ -127,35 +126,35 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
           </Box>
           <Box display="flex" width="100%" mt="12px">
             <Button
-              color={value === 'Public' ? '#29323B' : '#728BA3'}
-              bg={value === 'Public' ? '#EEF4F6' : '#fff'}
+              color={value === false ? '#29323B' : '#728BA3'}
+              bg={value === false ? '#EEF4F6' : '#fff'}
               _hover={{
-                backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
-                color: value === 'Private' ? '#728BA3' : '#29323B',
+                backgroundColor: value === true ? 'transparent' : '#EEF4F6',
+                color: value === true ? '#728BA3' : '#29323B',
               }}
               _focus={{ boxShadow: 'none' }}
               w="120px"
               h="38px"
               borderRadius="8px"
               onClick={() => {
-                settingValue('Public');
+                settingValue(false);
               }}
             >
               Public
             </Button>
             <Button
-              bg={value === 'Private' ? '#EEF4F6' : '#fff'}
-              color={value === 'Private' ? '#29323B' : '#728BA3'}
+              bg={value === true ? '#EEF4F6' : '#fff'}
+              color={value === true ? '#29323B' : '#728BA3'}
               _hover={{
-                backgroundColor: value === 'Public' ? 'transparent' : '#EEF4F6',
-                color: value === 'Public' ? '#728BA3' : '#29323B',
+                backgroundColor: value === false ? 'transparent' : '#EEF4F6',
+                color: value === false ? '#728BA3' : '#29323B',
               }}
               _focus={{ boxShadow: 'none' }}
               w="120px"
               h="38px"
               borderRadius="8px"
               onClick={() => {
-                settingValue('Private');
+                settingValue(true);
               }}
             >
               Private
