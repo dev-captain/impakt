@@ -20,7 +20,7 @@ const SignInButton: React.FC = () => {
       bg="rgba(28, 28, 40, 0.65)"
       gap="8px"
     >
-      <I.SignInIcon color="#fff" width="15px" />
+      <I.SignInIcon width="15px" />
       Sign In
     </Common.ImpaktButton>
   ) : null;

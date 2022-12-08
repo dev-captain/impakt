@@ -25,7 +25,7 @@ const MyGroupCardHeader: React.FC = () => {
         >
           <Box position="relative">
             <GroupsCard
-              member={m.Group?.memberCount ?? 0}
+              // member={m.Group?.memberCount ?? 0}
               img={
                 m.Group?.currentCoverImageId
                   ? m.Group?.CurrentCoverImage

@@ -4,17 +4,17 @@ import { LockIcon } from '@chakra-ui/icons';
 
 import MemberDashboardCard from '../../MemberDashBoardCard';
 import GroupsThumbnailImage from './GroupsThumbnailImage';
-import GroupCardMemberCount from './GroupCardMemberCount';
+// import GroupCardMemberCount from './GroupCardMemberCount';
 import GroupCardNameTitleText from './GroupCardNameText';
 
 interface GroupsCardPropsI {
-  member?: number;
+  // member?: number;
   img: any;
   name: string;
   isPrivateGroup: boolean;
 }
 const GroupsCard: React.FC<GroupsCardPropsI> = ({
-  member,
+  // member,
   img,
   name,
   children,

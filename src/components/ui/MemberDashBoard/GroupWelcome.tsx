@@ -34,7 +34,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
               alignItems="center"
               marginTop={{ md: '0', base: '20px' }}
             >
-              <Box display="flex" alignItems="center" mr="50px">
+              {/* <Box display="flex" alignItems="center" mr="50px">
                 <I.PeopleIcon color="#5C7FFF" />
                 <Text
                   as="h1"
@@ -56,7 +56,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
                 >
                   People joined
                 </Text>
-              </Box>
+              </Box> */}
               {/* <Box display="flex" alignItems="center" mt={{ base: '20px', md: '0' }}>
                 <I.RewardIcon color="#000" />
                 <Text

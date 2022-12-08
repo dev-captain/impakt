@@ -39,7 +39,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
         >
           <GroupsCard
             img={g.CurrentCoverImage ? g.CurrentCoverImage : Images.group.defaultThumbnail}
-            member={g.memberCount}
+            // member={g.memberCount}
             name={g.groupName}
             isPrivateGroup={g.private}
           >
