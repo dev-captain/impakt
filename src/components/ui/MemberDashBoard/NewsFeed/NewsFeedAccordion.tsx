@@ -138,7 +138,7 @@ const NewsFeedAccordion: React.FC = () => {
 const getStartedLinkItems = [
   { title: 'Explore Groups', href: '/d/g', order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
-  { title: 'Download Fitness App', href: 'https://impakt.com/download', order: 3 },
+  { title: 'Download Fitness App', href: '/download', order: 3 },
   { title: 'Follow us', href: undefined, order: 4 },
 ];
 
