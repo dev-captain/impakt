@@ -46,7 +46,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const { colorMode, setColorMode } = useColorMode();
   const notifies = usePersistedGroupStore().groupRequests.filter(
     (requestD) => requestD.status === 'Pending',
-  ).length;
+  );
 
   useEffect(() => {
     if (!isLessThan1280) {
@@ -55,9 +55,9 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   }, [isLessThan1280, onClose]);
 
   useEffect(() => {
-    if (path.path === 'dashboard') {
+    if (path.path === 'd') {
       setColorMode('light');
-      if (notifies) {
+      if (notifies.length > 0) {
         setNotify(true);
       } else {
         setNotify(false);
@@ -180,9 +180,9 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                     leftIcon={
                       // <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
                       notify ? (
-                        <I.NotifyIcon cursor="pointer" width="14.33px" height="14.33px" />
+                        <I.NotifyIcon color="fitnessGray" cursor="pointer" width="15px" />
                       ) : (
-                        <I.NotificationIcon cursor="pointer" width="14.33px" height="12.33px" />
+                        <I.NotificationIcon color="fitnessGray" cursor="pointer" width="15px" />
                       )
                     }
                     variant="white"

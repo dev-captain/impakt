@@ -249,3 +249,16 @@ export const normalizeExerciseNames = (routines: GetTimelineBlockRes[]) => {
 
   return sortByExerciseOrderNumber;
 };
+
+export const parseDaytime = (time: any) => {
+  // eslint-disable-next-line prefer-const
+  let [hours, minutes] = time
+    .substr(0, time.length - 2)
+    .split(':')
+    .map(Number);
+  if (time.includes('pm') && hours !== 12) {
+    hours += 12;
+  }
+
+  return 1000 * 60 * (hours * 60 + minutes);
+};
