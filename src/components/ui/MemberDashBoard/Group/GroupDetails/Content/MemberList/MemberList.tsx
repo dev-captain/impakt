@@ -14,12 +14,27 @@ import { I } from 'components';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { GetMembersOfGroupResGroupRole } from '../../../../../../../lib/impakt-dev-api-client/react-query/types';
+
+const rolesOrders: GetMembersOfGroupResGroupRole[] = [
+  'Creator',
+  'Owner',
+  'Admin',
+  'Moderator',
+  'Member',
+  'None',
+];
 
 const MemberList: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
   // const toast = useToast();
   // const isMemberLoading = useAppSelector((state) => state.groupsReducer.isMembersLoading);
   const members = usePersistedGroupStore().membersOfGroup;
+  const sortByRole = members?.Members.sort(
+    (a, b) =>
+      rolesOrders.indexOf(a.role) - rolesOrders.indexOf(b.role) ||
+      a.User.username.localeCompare(b.User.username),
+  );
 
   if (activeGroup?.isPreview && activeGroup.private)
     return (
@@ -186,7 +201,7 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-          {members?.Members.map(
+          {sortByRole?.map(
             ({ role, User }) =>
               role !== 'None' && (
                 <HStack
