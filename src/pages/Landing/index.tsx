@@ -15,7 +15,7 @@ const LandingPage = () => {
       <S.Landing.Athletes />
       <S.Landing.ImpaktTeam />
       <S.Landing.BecomePart />
-      <C.FooterV3 />
+      <S.Landing.LandingPageFooter />
     </Container>
   );
 };

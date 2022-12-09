@@ -28,7 +28,7 @@ const Whitelist = () => {
       {/* <section>
         <S.NFTCongrats />
       </section> */}
-      <C.FooterV2 />
+      <C.ImpaktFooterV2 wFull isWhiteMode={false} />
     </Container>
   );
 };

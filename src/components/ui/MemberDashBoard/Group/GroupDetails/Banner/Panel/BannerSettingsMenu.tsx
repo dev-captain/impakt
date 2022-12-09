@@ -111,24 +111,18 @@ const BannerSettingsMenu: React.FC = () => {
       <Menu>
         {!isRoleNotDefined && (
           <Common.ImpaktButton
-            variant="transparent"
+            variant="white-50"
             as={MenuButton}
-            backgroundColor="#F4F7F9"
             borderRadius="8px"
-            __css={{ span: { display: 'flex', justifyContent: 'center', alignItems: 'center' } }}
+            justifyConten="center"
             alignItems="center"
-            height="40px"
-            color="#4E6070"
-            px="1em"
-            py="12px"
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={isCreator ? <I.SettingIcon width="16px" /> : undefined}
+            p="12px"
+            h="56px"
             onClick={() => {
               onOpen();
             }}
           >
-            {isCreator ? 'Settings' : null}
-            {!isCreator && <I.SettingIcon width="16px" />}
+            <I.SettingIcon />
           </Common.ImpaktButton>
         )}
         {isRoleNotDefined && (
@@ -149,7 +143,6 @@ const BannerSettingsMenu: React.FC = () => {
             isLoading={joinGroup.isLoading}
             borderRadius="8px"
             fontWeight="600"
-            border="1px solid #1C1C28"
             justifyContent="space-around"
             fontSize="16px"
             leftIcon={

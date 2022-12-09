@@ -11,6 +11,7 @@ import CreatePostCard from './CreatePostCard';
 import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import CreatePostModal from './CreatePostModal';
 import { getCreatedBefore, renderToast } from '../../../../../../../utils';
+import AccessDeniedBox from '../AccessDeniedBox';
 
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -19,17 +20,23 @@ const Forums: React.FC = () => {
 
   if (activeGroup?.isPreview && activeGroup.private)
     return (
-      <MemberDashboardCard justifyContent="center" alignItems="center" marginTop="26px">
-        <I.LockIcon />
-      </MemberDashboardCard>
+      <AccessDeniedBox
+        height={{ base: '100%', md: '312px' }}
+        width={{ base: '100%', md: 'full' }}
+        justifyContent="center"
+      />
     );
 
   const isRoleDefined = role && role !== 'None';
 
   return (
     <>
-      <Box marginStart="0 !important" width={{ base: '100%', md: '40%', lgx: '50%' }}>
-        <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto" marginTop="26px">
+      <Box
+        marginStart="0 !important"
+        width={{ base: '100%', md: '40%', lgx: '50%' }}
+        display="flex"
+      >
+        <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto">
           <Box w="full">
             <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
               <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">

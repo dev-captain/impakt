@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, HStack, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
 import DayComponent from './Day';
@@ -21,7 +21,7 @@ const CalendarDays: React.FC = () => {
     <>
       <Box width="100%" height="30%" color="white" display="flex" flexWrap="wrap">
         <Box
-          padding="15px 20px"
+          padding="15px 0"
           height="70%"
           width="100%"
           whiteSpace="nowrap"
@@ -37,7 +37,6 @@ const CalendarDays: React.FC = () => {
             fontSize="30px"
             padding="3px"
             backgroundColor=" #ffffff"
-            boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
             borderRadius=" 8px"
             cursor=" pointer"
             onClick={() => {
@@ -45,12 +44,15 @@ const CalendarDays: React.FC = () => {
               goToOverViewScreen('empty');
             }}
           />
-          <Box>{[getCurrentMonthLabel(), getCurrentYear()].join(' ')}</Box>
+          <Box>
+            <Text color="fg-1" textStyle="semiBold6">
+              {[getCurrentMonthLabel(), getCurrentYear()].join(' ')}
+            </Text>
+          </Box>
           <ChevronRightIcon
             fontSize="30px"
             padding="3px"
             backgroundColor=" #ffffff"
-            boxShadow=" 0px 0px 12px -3px rgb(0 ,0 ,0 ,35%)"
             borderRadius=" 8px"
             cursor=" pointer"
             onClick={() => {
@@ -59,20 +61,24 @@ const CalendarDays: React.FC = () => {
             }}
           />
         </Box>
-        <DayNames />
       </Box>
 
       <HStack
-        width=" 100%;"
+        width={{ base: '312px', md: '100%' }}
         height=" 70%;"
         flexWrap="wrap"
         display="flex"
+        alignSelf="center"
         justifyContent="center"
-        alignItems="flex-start"
+        alignItems="start"
         background=" #ffffff"
-        padding={{ base: '0 12px', md: '16px 15px 10px 12px' }}
+        padding={{ base: '0 12px', md: '8px 0' }}
       >
         {/* {renderWeeks()} */}
+
+        <Box display="flex" w="full">
+          <DayNames />
+        </Box>
         <>
           {getDaysOfCurrentMonth().map((day) => (
             <DayComponent

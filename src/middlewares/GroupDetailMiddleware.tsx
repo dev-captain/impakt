@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_SERVER_BASE_URL } from '../lib/axios/api';
+import routes from '../data/routes';
 
 const GroupDetailMiddleWare: React.FC = ({ children }) => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const GroupDetailMiddleWare: React.FC = ({ children }) => {
   React.useEffect(() => {
     getAmIMemberOfGroup().then((res) => {
       if (!res) {
-        navigate('/d/g');
+        navigate(routes.groups);
       }
     });
   }, []);

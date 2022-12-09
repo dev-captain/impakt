@@ -79,40 +79,12 @@ const PermissionTab: React.FC = () => {
           title="Is your group public or private?"
           helperText={t(keys.Message.PublicToolTip.description)}
         >
-          <Button
-            color={value === 'Public' ? '#29323B' : '#728BA3'}
-            bg={value === 'Public' ? '#EEF4F6' : '#fff'}
-            _hover={{
-              backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
-              color: value === 'Private' ? '#728BA3' : '#29323B',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="8px"
-            onClick={() => {
-              setValue('Public');
-            }}
-          >
-            Public
-          </Button>
-          <Button
-            bg={value === 'Private' ? '#EEF4F6' : '#fff'}
-            color={value === 'Private' ? '#29323B' : '#728BA3'}
-            _hover={{
-              backgroundColor: value === 'Public' ? 'transparent' : '#EEF4F6',
-              color: value === 'Public' ? '#728BA3' : '#29323B',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="8px"
-            onClick={() => {
-              setValue('Private');
-            }}
-          >
-            Private
-          </Button>
+          <Common.Toggle
+            leftTitle="Public"
+            rightTitle="Private"
+            onToggle={value === 'Public' ? () => setValue('Private') : () => setValue('Public')}
+            on={value === 'Public'}
+          />
         </PermissionCard>
 
         <RoleCard title="Moderators" />
@@ -121,10 +93,8 @@ const PermissionTab: React.FC = () => {
         <Box mt="20px" textAlign="end">
           <Common.ImpaktButton
             variant="black"
-            color="#fff"
             w="147px"
             h="60px"
-            backgroundColor="#29323B"
             borderRadius="8px"
             type="submit"
             fontSize={{ md: '16px' }}

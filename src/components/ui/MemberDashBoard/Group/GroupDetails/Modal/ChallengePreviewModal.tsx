@@ -300,7 +300,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 _focus={{ background: '' }}
                 _active={{ background: '' }}
                 leftIcon={<I.PlayChallengeIcon />}
-                background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                variant="orange-black"
                 padding="12px 32px"
                 borderRadius="12px"
                 // onClick={()=>}

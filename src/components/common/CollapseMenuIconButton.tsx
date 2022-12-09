@@ -1,22 +1,22 @@
-import { IconButton } from '@chakra-ui/react';
+import React from 'react';
+import { IconButton, IconButtonProps } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
-type Props = {
+type CollapseMenuIconButtonProps = {
   isOpen: boolean;
-  onToggle: () => void;
-  isLessThan1280: boolean;
 };
 
-const CollapseMenuController = ({ isLessThan1280, onToggle, isOpen }: Props) => {
+const CollapseMenuIconButton: React.FC<CollapseMenuIconButtonProps & IconButtonProps> = ({
+  isOpen,
+  ...props
+}) => {
   return (
     <IconButton
       zIndex={100}
       variant="ghost"
-      onClick={onToggle}
-      aria-label="Toggle Navigation"
       backdropFilter="blur(40px)"
       background={isOpen ? '#fff' : 'rgba(255, 255, 255, 0.1)'}
-      display={['flex', 'flex', 'flex', isLessThan1280 ? 'flex' : 'none', 'none']}
+      display="flex"
       _hover={{
         backgroundColor: isOpen ? '#FFF' : 'rgba(255, 255, 255, 0.1)',
       }}
@@ -30,8 +30,9 @@ const CollapseMenuController = ({ isLessThan1280, onToggle, isOpen }: Props) => 
           <HamburgerIcon w={5} h={5} color="#000" boxSize="22px" />
         )
       }
+      {...props}
     />
   );
 };
 
-export default CollapseMenuController;
+export default CollapseMenuIconButton;

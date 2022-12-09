@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMediaQuery, VStack } from '@chakra-ui/react';
 import { C } from 'components';
-import NewNavbar from '../../../core/NewNavbar';
+import LandingPageNavbar from '../LandingPageNavbar';
 
 const MyBodyLayout: React.FC = ({ children }) => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
@@ -17,7 +17,7 @@ const MyBodyLayout: React.FC = ({ children }) => {
       justify="flex-start"
       removeTopPadding
     >
-      <NewNavbar />
+      <LandingPageNavbar />
       <VStack w="full">
         <VStack paddingX={{ base: '1em', lg: '0' }} maxW="100%" w="full">
           <VStack

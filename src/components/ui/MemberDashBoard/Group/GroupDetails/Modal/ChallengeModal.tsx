@@ -43,6 +43,7 @@ import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/rea
 import createChallengeYupScheme from '../../../../../../lib/yup/schemas/createChallengeYupScheme';
 import { InputErrorMessage } from '../../../../../common';
 import NoItemCard from './ChallengeModalTabs/NoChallengeCard/NoItemCard';
+import routes from '../../../../../../data/routes';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -185,11 +186,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                       onClick={() => {
                         moveToNextScreen('create');
                       }}
-                      _hover={{ background: '' }}
-                      _selected={{ background: '' }}
-                      _focus={{ background: '' }}
-                      _active={{ background: '' }}
-                      background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                      variant="orange-black"
                       leftIcon={<AddIcon fontSize="10px" />}
                     >
                       Create
@@ -294,10 +291,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                       setPreviewChallenge(challengeI);
                       moveToNextScreen('preview');
                     }}
-                    variant="transparent"
+                    variant="white-50"
                     w="114px !important"
-                    backgroundColor="#EEF4F6"
-                    colorScheme="#fff"
                     h="38px"
                     borderRadius="8px"
                     type="submit"
@@ -314,9 +309,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                     }}
                     variant="black"
                     w="114px !important"
-                    colorScheme="#fff"
                     h="38px"
-                    backgroundColor="#29323B"
                     borderRadius="8px"
                     type="submit"
                     fontSize={{ base: '14px', md: '16px' }}
@@ -364,7 +357,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                 >
                   {availableGroupRoutines.length === 0 ? (
                     <NoItemCard
-                      noItemButtonOnClick={() => navigate('/download')}
+                      noItemButtonOnClick={() => navigate(routes.download)}
                       noItemButtonTitle="Download"
                       noItemTitle="You don't have any routines yet."
                     >
@@ -380,10 +373,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                             setRoutinePreview(routine);
                             moveToNextScreen('preview-routine');
                           }}
-                          variant="transparent"
+                          variant="white-50"
                           w="114px !important"
-                          backgroundColor="#EEF4F6"
-                          colorScheme="#fff"
                           h="38px"
                           borderRadius="8px"
                           type="submit"
@@ -399,9 +390,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                           }}
                           variant="black"
                           w="114px !important"
-                          colorScheme="#fff"
                           h="38px"
-                          backgroundColor="#29323B"
                           borderRadius="8px"
                           type="submit"
                           fontSize={{ base: '14px', md: '16px' }}
@@ -462,10 +451,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                         onClick={() => {
                           moveToNextScreen('preview-routine');
                         }}
-                        variant="transparent"
+                        variant="white-50"
                         w="114px !important"
-                        backgroundColor="#EEF4F6"
-                        colorScheme="#fff"
                         h="38px"
                         borderRadius="8px"
                         type="submit"
@@ -481,9 +468,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                         }}
                         variant="black"
                         w="114px !important"
-                        colorScheme="#fff"
                         h="38px"
-                        backgroundColor="#29323B"
                         borderRadius="8px"
                         type="submit"
                         fontSize={{ base: '14px', md: '16px' }}
@@ -623,9 +608,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   }}
                   variant="black"
                   w="159px !important"
-                  colorScheme="#fff"
                   h="64px"
-                  backgroundColor="#29323B"
                   borderRadius="1em"
                   type="submit"
                   fontSize={{ base: '14px', md: '16px' }}
@@ -654,11 +637,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                 <Common.ImpaktButton
                   as="a"
                   href="impakt://"
-                  _hover={{ background: '' }}
-                  _selected={{ background: '' }}
-                  _focus={{ background: '' }}
-                  _active={{ background: '' }}
                   background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                  variant="orange-black"
                 >
                   Open App
                 </Common.ImpaktButton>
@@ -679,9 +659,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   }}
                   variant="black"
                   w="159px !important"
-                  colorScheme="#fff"
                   h="64px"
-                  backgroundColor="#29323B"
                   borderRadius="1em"
                   type="submit"
                   fontSize={{ base: '14px', md: '16px' }}
@@ -700,12 +678,8 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                   as="form"
                   isLoading={createChallenge.isLoading}
                   isDisabled={createChallenge.isLoading}
-                  _hover={{ background: '' }}
-                  _selected={{ background: '' }}
-                  _focus={{ background: '' }}
-                  _active={{ background: '' }}
+                  variant="black"
                   type="submit"
-                  background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
                   padding="16px 48px"
                   h="64px"
                   borderRadius="16px"

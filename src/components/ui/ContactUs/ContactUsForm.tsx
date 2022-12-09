@@ -101,6 +101,7 @@ const ContactUsForm: React.FC = () => {
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
+            variant="primary"
             isLoading={loading}
             type="submit"
             leftIcon={<I.SendIcon width="24" height="24" />}

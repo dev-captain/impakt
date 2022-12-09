@@ -3,16 +3,7 @@ import React from 'react';
 
 const DayNames: React.FC = () => {
   return (
-    <Box
-      width="100%"
-      height="30%"
-      backgroundColor="white"
-      color="rgb(170, 170, 170)"
-      padding="16px 15px 10px 12px"
-      display="flex"
-      justifyContent={{ base: 'space-between', md: 'center' }}
-      alignItems="center"
-    >
+    <>
       <Text
         display="flex"
         justifyContent="center"
@@ -83,7 +74,7 @@ const DayNames: React.FC = () => {
       >
         Sa
       </Text>
-    </Box>
+    </>
   );
 };
 

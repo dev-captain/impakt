@@ -17,7 +17,7 @@ const GroupCardWrapperHeader: React.FC<GroupCardWrapperHeaderPropsI> = ({
       display="flex"
       w="full"
       gap={{ lgx: '48px', base: '44px' }}
-      justifyContent={{ base: 'flex-end', md: justify }}
+      justifyContent={{ base: 'flex-end', lg: justify }}
       // borderBottom="2px solid #E0E0E0"
     >
       <MemberDashboardSectionHeadlineText title={title} />
