@@ -11,7 +11,7 @@ type Props = {
   onClose?: () => void;
   target?: React.HTMLAttributeAnchorTarget;
   children: React.ReactNode;
-  isTransparent?: boolean;
+  collaps: boolean;
 };
 
 const SidebarLinkItem = ({
@@ -23,7 +23,7 @@ const SidebarLinkItem = ({
   target,
   type,
   children,
-  isTransparent = false,
+  collaps,
 }: Props) => {
   const navigate = useNavigate();
   // TODO Sidebar link item UI
@@ -31,21 +31,21 @@ const SidebarLinkItem = ({
   return (
     <Box
       justifyContent="center"
-      // h={{ base: '48px', md: '56px' }}
+      h="48px"
       onClick={onClose}
       cursor="pointer"
       width="100%"
-      backgroundColor={isActive && !isTransparent ? '#20202E' : 'none'}
-      borderRadius="16px"
+      backgroundColor="transparent"
       alignItems="start"
       // padding="16px 18px"
-      color={isActive ? 'rgba(255 ,255 ,255 ,1)' : 'rgba(255 ,255 ,255 ,0.5)'}
+      color={isActive ? 'fitnessSky' : 'rgba(78, 96, 112, 0.5)'}
+      borderLeft={isActive ? '4px solid #5C7FFF' : '4px solid transparent'}
       padding="0"
       _hover={{
-        background: !isTransparent ? '#20202E' : 'none',
-        color: 'rgba(255 , 255 ,255 ,1)',
-        transition: 'all 0.5s ease',
+        color: 'fitnessSky',
+        transition: 'all 0.1s ease',
         fontWeight: '600',
+        borderLeft: '4px solid #5C7FFF',
       }}
     >
       {type === 'LINK' && (
@@ -59,7 +59,7 @@ const SidebarLinkItem = ({
           _hover={{
             transition: '0.2s ease',
             background: '#20202E',
-            color: '#fff',
+            color: '#000',
             // transform: 'scale(1.15)',
           }}
         >
@@ -67,6 +67,7 @@ const SidebarLinkItem = ({
           <Text
             textStyle="regular3"
             pos="relative"
+            color="#000"
             marginLeft="14.5px"
             fontWeight={isActive ? '600' : 'normal'}
             _hover={{
@@ -84,7 +85,7 @@ const SidebarLinkItem = ({
           target={target}
           display="flex"
           alignItems="center"
-          padding="16px 18px"
+          padding={collaps === true ? '16px 24px' : '16px 48px'}
           h={{ base: '48px', md: '56px' }}
           onClick={() => {
             navigate(href);
@@ -93,7 +94,15 @@ const SidebarLinkItem = ({
           color="inherit"
         >
           {children}
-          <Text textStyle="regular3" pos="relative" marginLeft="14.5px" fontWeight="600">
+          <Text
+            textStyle="regular3"
+            pos="relative"
+            marginLeft="14.5px"
+            fontWeight="600"
+            color={collaps ? '#000' : ''}
+            opacity={{ lg: collaps ? '0' : '1' }}
+            transition="opacity .1s ease-in-out"
+          >
             {title}
           </Text>
         </Box>

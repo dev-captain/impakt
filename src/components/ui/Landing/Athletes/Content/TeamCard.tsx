@@ -52,8 +52,9 @@ const TeamCard = ({ image, name, data }: { image: string; name: string; data: an
             transitionProperty="transform, opacity"
             mt="2px"
           >
-            {data.map((d: any) => (
-              <Box display="flex" height="36px">
+            {data.map((d: any, index: any) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Box key={index} display="flex" height="36px">
                 <Text
                   textStyle="semiBold5"
                   margin="0 !important"

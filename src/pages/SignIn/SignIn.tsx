@@ -1,90 +1,24 @@
-import { useColorModeValue, VStack, Spinner, useToast } from '@chakra-ui/react';
+import { useColorModeValue, VStack, Spinner } from '@chakra-ui/react';
 import { S, C } from 'components';
-import { useEffect, useCallback } from 'react';
 import Images from 'assets/images';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from 'hooks';
+import { useEffect } from 'react';
 
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
-import { requestAccessToken } from '../../lib/redux/slices/member/actions/requestAccessToken';
+import { usePersistedAuthStore } from '../../lib/zustand';
+import { useNextParamRouter } from '../../hooks/useNextParamRouter';
 
 const SignIn = () => {
-  const isThereNextParam = useLocation().search.includes('next');
-  const navigateTo = isThereNextParam ? useLocation().search.split('=')[1] : '/dashboard';
-
-  const navigate = useNavigate();
-  const toast = useToast();
+  const { member } = usePersistedAuthStore();
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const member = useAppSelector((state) => state.memberAuth.member);
-  const requestAccessTokenAttemp = useAppSelector(
-    (state) => state.memberAuth.requestAccessTokenAttemptCount,
-  );
-
-  const dispatch = useAppDispatch();
-
-  const requestAccessTokenAsync = useCallback(async () => {
-    toast({
-      title: 'Logging in to forums',
-      duration: 2000,
-      status: 'info',
-    });
-
-    try {
-      const request = await dispatch(
-        requestAccessToken({
-          discoursePayload: queryString.sso,
-          discourseSig: queryString.sig,
-        }),
-      ).unwrap();
-
-      if (request.discourseRedirectUrl === undefined) {
-        toast({
-          title: 'Error',
-          description: ' "Something went wrong...',
-          isClosable: false,
-          duration: 2000,
-          status: 'error',
-        });
-
-        return undefined;
-      }
-
-      toast({
-        title: 'Success',
-        description: ' "Redirecting to forums..',
-        isClosable: false,
-        duration: 2000,
-        status: 'success',
-      });
-
-      return request.discourseRedirectUrl;
-    } catch (error: any) {
-      return null;
-    }
-  }, []);
+  const navigate = useNextParamRouter('/d');
 
   useEffect(() => {
     if (member) {
-      if (queryString.DiscourseConnect) {
-        if (requestAccessTokenAttemp === 0) {
-          const request = requestAccessTokenAsync();
-          request.then((res) => {
-            if (res) {
-              window.location.href = res;
-            }
-          });
-
-          return;
-        }
-      }
-
-      if (requestAccessTokenAttemp === 0) {
-        navigate(navigateTo);
-      }
+      navigate();
     }
-  }, [member, requestAccessTokenAttemp]);
+  }, []);
 
   return (
     <C.HeroLayout

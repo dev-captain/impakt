@@ -1,0 +1,34 @@
+import * as React from 'react';
+import { HStack } from '@chakra-ui/react';
+
+import ExploreGroupCardHeader from './Header/ExploreGroupCardHeader';
+import ExploreGroupCardWrapper from './ExploreGroupCardWrapper';
+import { usePersistedGroupStore } from '../../../../../../lib/zustand';
+
+const ExploreGroup: React.FC = () => {
+  const { exploreGroups } = usePersistedGroupStore();
+
+  const [status, setStatus] = React.useState<'public' | 'private'>('public');
+  if (exploreGroups.length === 0) return null;
+
+  const handleChangeStatus = (activeStatus: typeof status) => {
+    setStatus(activeStatus);
+  };
+
+  return (
+    <HStack
+      columnGap={{ md: '24px' }}
+      rowGap="24px"
+      justifyContent="flex-start"
+      alignItems="flex-start"
+      w="full"
+      margin="30px 0"
+      flexWrap={{ sm: 'wrap' }}
+      display={{ sm: 'flex' }}
+    >
+      <ExploreGroupCardHeader status={status} handleChangeStatus={handleChangeStatus} />
+      <ExploreGroupCardWrapper status={status} />
+    </HStack>
+  );
+};
+export default ExploreGroup;

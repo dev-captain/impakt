@@ -1,10 +1,9 @@
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack, Image, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { I } from 'components';
 
 import MemberDashboardCard from '../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
-import { ImpaktButton } from '../../../common';
+import Images from '../../../../assets/images';
 
 const NewsFeed: React.FC = () => {
   return (
@@ -16,29 +15,25 @@ const NewsFeed: React.FC = () => {
     >
       <Box id="news-feed-headline-box">
         <HStack columnGap="1.125em">
-          <Box color="#fff" id="news-feed-headline-text-box">
+          <Box color="#000" id="news-feed-headline-text-box">
             <Text textStyle="bold5" lineHeight="100%">
-              News Feed
+              Get Started
             </Text>
           </Box>
           <Box id="news-feed-headline-text-icon-box">
-            <I.NewsIcon />
+            <Image w="32px" h="32px" src={Images.Common.emojiImpakt} />
           </Box>
         </HStack>
       </Box>
-      <Box
-        _hover={{ color: 'rgba(255,255,255,1)' }}
-        color="rgba(255,255,255,0.75)"
-        w="full"
-        id="news-feed-accordion-box"
-      >
+      <Box color="#4E6070" w="full" id="news-feed-accordion-box">
         <NewsFeedAccordion />
       </Box>
 
-      <Box color="#fff" w="full" id="news-feed-check-our-discourse-box">
-        <ImpaktButton
+      {/* <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
+        <Common.ImpaktButton
           size="lg"
-          variant="secondary"
+          variant="white"
+          bgColor="#F5F8FA"
           leftIcon={
             <Box marginRight="8px">
               <I.DiscourseIcon />
@@ -46,14 +41,15 @@ const NewsFeed: React.FC = () => {
           }
           fontSize={{ base: '12px', md: '16px', lg: '20px' }}
           lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
+          color="#4E6070"
           justifyContent={{ md: 'center', lg: 'flex-start' }}
           as="a"
           href="https://discuss.impakt.com/tag/news"
           target="_blank"
         >
           Check our Discourse for more updates
-        </ImpaktButton>
-      </Box>
+        </Common.ImpaktButton>
+      </Box> */}
       {/* <Box id="news-feed-headline-box">Headline</Box> */}
       {/* <Box>2</Box> */}
     </MemberDashboardCard>

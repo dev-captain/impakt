@@ -1,19 +1,13 @@
-import { useColorModeValue, VStack } from '@chakra-ui/react';
-import { useEffect } from 'react';
-import DiscordSupport from './component/DiscordSupport';
-import SendMessage from './component/SendMessage';
+import { Container } from '@chakra-ui/react';
+import { S } from 'components';
+import DiscordSupport from '../../components/ui/ContactUs/DiscordSupport';
 
 const ContactPage = () => {
-  const bgColor = useColorModeValue('glass.800', 'glass.300');
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  }, []);
-
   return (
-    <VStack spacing={0} bgColor={bgColor}>
-      <SendMessage />
+    <Container spacing={0} backgroundColor="" p={0} minW="full" m={0} bgColor="">
+      <S.ContactUs />
       <DiscordSupport />
-    </VStack>
+    </Container>
   );
 };
 
