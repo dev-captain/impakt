@@ -27,7 +27,7 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
       onClick={onClick}
       cursor="pointer"
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box display="flex" justifyContent="flex-start" alignItems="center">
         {leftIcon}
         <Box marginLeft="12px">
           <Text
