@@ -9,6 +9,7 @@ import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustan
 import { renderToast } from '../../../../../../../../../../utils';
 import { useGroupsMemberControllerV1LeaveGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { useGroupsControllerV1Remove } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import routes from '../../../../../../../../../../data/routes';
 
 const GeneralSettings: React.FC = () => {
   const { role } = usePersistedGroupStore();
@@ -33,7 +34,7 @@ const GeneralSettings: React.FC = () => {
             );
             setMyGroups(distractFromMyGroup);
             // TODO update explore group on zustand
-            navigate('/d/g');
+            navigate(routes.groups);
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');
@@ -55,7 +56,7 @@ const GeneralSettings: React.FC = () => {
             );
             setRole('None');
             setMyGroups(distractFromMyGroup);
-            navigate('/d/g');
+            navigate(routes.groups);
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');

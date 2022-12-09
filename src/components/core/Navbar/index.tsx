@@ -21,6 +21,7 @@ import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 import NavBarLink from './NavBarLink';
+import routes from '../../../data/routes';
 
 interface NavbarProps {
   position?: PositionProps['position'];
@@ -127,10 +128,10 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   <Common.ImpaktButton
                     as="a"
                     variant="primary"
-                    href="/download"
+                    href={routes.download}
                     onClick={(e) => {
                       e.preventDefault();
-                      navigate('/download');
+                      navigate(routes.download);
                     }}
                   >
                     {t(Keys.navbar.download)}

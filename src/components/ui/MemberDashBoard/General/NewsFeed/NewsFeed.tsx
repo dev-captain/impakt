@@ -1,6 +1,6 @@
-import React from 'react';
-import { Box, HStack, Text } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Box, HStack, Image, Text } from '@chakra-ui/react';
+import * as React from 'react';
+import Images from '../../../../../assets/images';
 
 import MemberDashboardCard from '../../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
@@ -14,22 +14,23 @@ const NewsFeed: React.FC = () => {
       rowGap="1.5em"
       color="fg-1"
     >
-      <HStack w="full" justifyContent="space-between">
-        <Box color="fg-1" id="news-feed-headline-text-box">
-          <Text textStyle="bold5" letterSpacing="-0.5px" lineHeight="100%">
-            News Feed
-          </Text>
-        </Box>
-        <Box id="news-feed-headline-text-icon-box">
-          <I.NewsIcon />
-        </Box>
-      </HStack>
-
+      <Box id="news-feed-headline-box">
+        <HStack columnGap="1.125em">
+          <Box color="#000" id="news-feed-headline-text-box">
+            <Text textStyle="bold5" lineHeight="100%">
+              Get Started
+            </Text>
+          </Box>
+          <Box id="news-feed-headline-text-icon-box">
+            <Image w="32px" h="32px" src={Images.Common.emojiImpakt} />
+          </Box>
+        </HStack>
+      </Box>
       <Box color="#4E6070" w="full" id="news-feed-accordion-box">
         <NewsFeedAccordion />
       </Box>
 
-      <Box display="flex" w="full" id="news-feed-check-our-discourse-box">
+      {/* <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
         <Common.ImpaktButton
           display="flex"
           wordBreak="break-word"
@@ -48,7 +49,7 @@ const NewsFeed: React.FC = () => {
         >
           <Text wordBreak="break-word">Check our Discourse for more updates</Text>
         </Common.ImpaktButton>
-      </Box>
+      </Box> */}
       {/* <Box id="news-feed-headline-box">Headline</Box> */}
       {/* <Box>2</Box> */}
     </MemberDashboardCard>

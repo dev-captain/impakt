@@ -15,6 +15,7 @@ const Images = {
       md: require('./logo/Logo-64x64.png'),
       lg: require('./logo/Logo-128x128.png'),
     },
+    emojiImpakt: require('./logo/impakt-emoji.png'),
     Peter404: require('./peter404.png'),
     Window: require('./home/hero/window.png'),
     Goldaword: require('./goldaword.png'),

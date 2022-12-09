@@ -434,9 +434,7 @@ const ChallengesCard: React.FC<ChallengesDetailsProps> = ({ time, play, like, ti
           <Common.ImpaktButton
             variant="black"
             w={{ base: '130px', md: '160px' }}
-            colorScheme="#fff"
             h={{ base: '44px', md: '64px' }}
-            backgroundColor="#29323B"
             borderRadius="16px"
             type="submit"
             fontSize={{ base: '14px', md: '16px' }}

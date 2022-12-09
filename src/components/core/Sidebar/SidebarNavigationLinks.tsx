@@ -11,34 +11,34 @@ const SidebarNavigationLinks = () => {
   const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
   const textColor = 'fg';
-  const activeColor = 'fg';
   const passiveColor = 'fg';
+  const activeColor = 'fg';
 
   return (
     <>
       <Common.LinkItem
-        titleTextColor={activeColor || textColor}
+        titlePassiveColor={passiveColor || textColor}
         href="/"
         isNavigate
         title={t(Keys.navbar.impaktFitness)}
         isActive={path.path === ''}
         color={activeColor || textColor}
-        passiveColor={passiveColor}
+        titleActiveColor={activeColor}
         textStyle="semiBold6"
       />
       <Common.LinkItem
-        titleTextColor={activeColor || textColor}
-        passiveColor={passiveColor}
+        titleActiveColor={activeColor}
+        titlePassiveColor={passiveColor}
         title={t(Keys.navbar.knowledgeBase)}
         href="https://knowledgebase.impakt.com"
         isActive={path.path === 'knowledge-base'}
         textStyle="semiBold6"
       />
       <Common.LinkItem
-        titleTextColor={activeColor || textColor}
+        titleActiveColor={activeColor}
+        titlePassiveColor={passiveColor}
         href="/contact"
         isNavigate
-        passiveColor={passiveColor}
         title={t(Keys.navbar.contactUs)}
         isActive={path.path === 'contact'}
         textStyle="semiBold6"

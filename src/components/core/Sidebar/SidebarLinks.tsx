@@ -2,7 +2,7 @@ import * as React from 'react';
 import { I } from 'components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SidebarMenuItem from './SidebarMenuItem';
-import { routes } from '../../../data';
+import routes from '../../../data/routes';
 
 const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
   const path = useLocation();
@@ -33,7 +33,7 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
           navigate(routes.groups);
         }}
         hide={isHide}
-        href="/d/g"
+        href={routes.groups}
         title="Groups"
         isActive={path.pathname.includes(routes.groups)}
       >
@@ -51,7 +51,7 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
           navigate(routes.referrals);
         }}
         hide={isHide}
-        href="/d/r"
+        href={routes.referrals}
         title="Referrals"
         isActive={path.pathname === routes.referrals}
       >

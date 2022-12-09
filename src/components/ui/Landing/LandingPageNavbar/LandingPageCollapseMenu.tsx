@@ -10,6 +10,7 @@ import NavbarLinkItem from './LandingPageNavbarLinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../../lib/zustand';
 import { useLogout } from '../../../../hooks/useLogout';
+import routes from '../../../../data/routes';
 
 type Props = {
   isOpen: boolean;
@@ -38,6 +39,24 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         padding="16px"
         mt="4px"
       >
+        <NavbarLinkItem
+          isSmall
+          hide
+          type="LINK"
+          onClose={onClose}
+          title="Groups"
+          href={routes.groups}
+          isActive={path.path === routes.groups}
+        />
+        {member && (
+          <NavbarLinkItem
+            isSmall
+            href={routes.dashboard}
+            onClose={onClose}
+            title={t(Keys.navbar.dashboard)}
+            isActive={path.path === 'dashboard'}
+          />
+        )}
         <NavbarLinkItem
           isSmall
           hide
@@ -70,16 +89,8 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
         />
-        {member && (
-          <NavbarLinkItem
-            isSmall
-            href="/d"
-            onClose={onClose}
-            title={t(Keys.navbar.dashboard)}
-            isActive={path.path === 'dashboard'}
-          />
-        )}
-        {member && (
+
+        {/* {member && (
           <NavbarLinkItem
             isSmall
             href=""
@@ -87,8 +98,8 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             title={t(Keys.navbar.notification)}
             isActive={path.path === '/notification'}
           />
-        )}
-        {member && (
+        )} */}
+        {/* {member && (
           <NavbarLinkItem
             isSmall
             href="/contact"
@@ -96,7 +107,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             title={t(Keys.navbar.help)}
             isActive={path.path === '/contact'}
           />
-        )}
+        )} */}
 
         {member && (
           <NavbarLinkItem
@@ -205,7 +216,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             <SignInLinkItem />
           </Box>
           <Box w="full" display="flex" mt="2" ml="0 !important">
-            <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
+            <Link w="full" href={routes.download} _hover={{ textDecoration: 'none' }}>
               <Button marginTop="8px" width="100%" colorScheme="red">
                 {t(Keys.navbar.download)}
               </Button>

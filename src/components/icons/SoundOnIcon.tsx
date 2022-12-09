@@ -10,7 +10,7 @@ const SoundOnIcon = (props: IconProps) => (
     {...props}
   >
     <path
-      stroke="#fff"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="3.29"

@@ -11,6 +11,7 @@ import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
 import NavBarLink from './NavBarLink';
+import routes from '../../../data/routes';
 
 type Props = {
   isOpen: boolean;
@@ -39,16 +40,21 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
         padding="16px"
         mt="4px"
       >
-        <NavBarLink />
+        <NavbarLinkItem href={routes.groups} isNavigate title="Groups" />
         {member && (
-          <NavbarLinkItem
-            href="/d"
-            titleTextColor={textColor}
-            passiveColor={passiveColor}
-            title={t(Keys.navbar.dashboard)}
-            isActive={path.path === '/d'}
-          />
+          <NavbarLinkItem href={routes.dashboard} isNavigate title={t(Keys.navbar.dashboard)} />
         )}
+        <NavbarLinkItem href="/" isNavigate title={t(Keys.navbar.impaktFitness)} />
+        <NavbarLinkItem
+          title={t(Keys.navbar.knowledgeBase)}
+          href="https://knowledgebase.impakt.com"
+        />
+        <NavbarLinkItem href="/events" isNavigate title={t(Keys.navbar.events)} />
+        <NavbarLinkItem
+          isNavigate
+          title={t(Keys.navbar.contactUs)}
+          isActive={path.path === 'contact'}
+        />
 
         {member && (
           <NavbarLinkItem
@@ -59,19 +65,8 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
               });
             }}
             title={t(Keys.navbar.signOut)}
-            isActive={path.path === '#'}
-            titleTextColor={textColor}
-            passiveColor={passiveColor}
           />
         )}
-
-        {/* {!member && (
-          <NavbarLinkItem
-            href="/signin"
-            title={t(Keys.navbar.signIn)}
-            isActive={path.path === 'signin'}
-          />
-        )} */}
 
         <HStack
           align="center"
@@ -158,7 +153,7 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
             <SignInLinkItem />
           </Box>
           <Box w="full" display="flex" mt="2" ml="0 !important">
-            <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
+            <Link w="full" href={routes.download} _hover={{ textDecoration: 'none' }}>
               <Button marginTop="8px" width="100%" colorScheme="red">
                 {t(Keys.navbar.download)}
               </Button>

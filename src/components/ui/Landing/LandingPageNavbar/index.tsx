@@ -24,6 +24,7 @@ import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import { useLogout } from '../../../../hooks/useLogout';
+import routes from '../../../../data/routes';
 
 // const { dark, light } = Images;
 
@@ -106,7 +107,7 @@ const LandingPageNavbar: FC = () => {
                   marginLeft="0 !important"
                   flexWrap={{ base: 'wrap', lg: 'nowrap' }}
                 >
-                  <Box onClick={() => navigate('/download')}>
+                  <Box onClick={() => navigate(routes.download)}>
                     <Common.ImpaktButton
                       color="#F04153"
                       bg="#FDE8EA"

@@ -7,12 +7,13 @@ import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
 
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
+import routes from '../../../../../../data/routes';
 
 interface ExploreGroupCardWrapperPropsI {
-  status: 'private' | 'public';
+  status: 'Private' | 'Public';
 }
 const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
-  const isPrivate = status === 'private';
+  const isPrivate = status === 'Private';
   const navigate = useNavigate();
 
   const { exploreGroups } = usePersistedGroupStore();
@@ -33,13 +34,13 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            navigate(`/d/g/${g.id}`);
+            navigate(routes.groupDetail(g.id));
           }}
           position="relative"
         >
           <GroupsCard
             img={g.CurrentCoverImage ? g.CurrentCoverImage : Images.group.defaultThumbnail}
-            member={g.memberCount}
+            // member={g.memberCount}
             name={g.groupName}
             isPrivateGroup={g.private}
           >

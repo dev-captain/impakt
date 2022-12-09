@@ -12,6 +12,7 @@ import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme'
 import { useGroupsControllerV1Create } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../utils';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
+import routes from '../../../data/routes';
 
 const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onClose }) => {
   const createGroup = useGroupsControllerV1Create();
@@ -46,7 +47,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
         Group: { ...groupData, memberCount: 1 },
       });
       renderToast('success', 'Group created successfully.');
-      navigate('/d/g');
+      navigate(routes.groups);
       if (onClose) {
         onClose();
       }
@@ -175,14 +176,9 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
       </Box>
       <Flex justifyContent="space-between" w="full">
         <Common.ImpaktButton
-          variant="transparent"
-          _hover={{ backgroundColor: '#000', color: '#fff' }}
-          _active={{ backgroundColor: 'transparent' }}
-          _focus={{ boxShadow: 'none' }}
-          border="2px solid #29323B"
+          variant="delete"
           borderRadius="16px"
-          color="#29323B"
-          w={{ md: '152px', base: '120px' }}
+          w={{ md: '135px', base: '130px' }}
           h={{ md: '64px', base: '54px' }}
           fontSize={{ md: '18px' }}
           fontWeight="700"
@@ -197,10 +193,8 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
           isLoading={createGroup.isLoading}
           disabled={createGroup.isSuccess}
           variant="black"
-          colorScheme="#fff"
           w={{ md: '135px', base: '130px' }}
           h={{ md: '64px', base: '54px' }}
-          backgroundColor="#29323B"
           borderRadius="16px"
           type="submit"
           fontSize={{ md: '18px' }}

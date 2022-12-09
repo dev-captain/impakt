@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, AvatarGroup, Box } from '@chakra-ui/react';
 
-import { Common, I } from 'components';
+// import { Common, I } from 'components';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 export const BannerHeaderRight: React.FC = () => {
@@ -31,7 +31,7 @@ export const BannerHeaderRight: React.FC = () => {
           ))}
         </AvatarGroup>
       </Box>
-      <Common.ImpaktButton
+      {/* <Common.ImpaktButton
         variant="transparent"
         backgroundColor="#E7ECFF"
         borderRadius="8px"
@@ -47,7 +47,7 @@ export const BannerHeaderRight: React.FC = () => {
         cursor="auto"
       >
         {members?.length}
-      </Common.ImpaktButton>
+      </Common.ImpaktButton> */}
       {/* </Skeleton> */}
     </Box>
   );

@@ -60,14 +60,17 @@ const InvitationByEmail: React.FC = () => {
       <Common.ImpaktButton
         as="a"
         isDisabled={!!errors.email?.message || getValues('email').length === 0}
+        onClick={(e) => {
+          if (!!errors.email?.message || getValues('email').length === 0) {
+            e.preventDefault();
+          }
+        }}
         href={mailto}
         mt={{ md: 0, base: '10px' }}
         variant="black"
-        colorScheme="#fff"
         w={{ md: '147px', base: '100%' }}
         ml={{ md: '16px', base: '0' }}
         h="60px"
-        backgroundColor="#29323B"
         borderRadius="8px"
         fontSize={{ md: '16px' }}
         fontWeight="700"

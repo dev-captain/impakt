@@ -12,9 +12,11 @@ import signInFormYupScheme from '../../../lib/yup/schemas/signInYupScheme';
 import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
+import routes from '../../../data/routes';
 
 const SignInForm: React.FC = () => {
-  const navigateTo = useNextParamRouter();
+  const navigate = useNextParamRouter(routes.dashboard);
+
   const signIn = useAuthControllerLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
@@ -43,13 +45,13 @@ const SignInForm: React.FC = () => {
       signInPayload.discoursePayload = queryString.sso;
       signInPayload.discourseSig = queryString.sig;
     }
-    signIn.mutate(
+    await signIn.mutateAsync(
       { data: { ...signInPayload } },
       {
         onSuccess: (member) => {
           setMember(member);
           renderToast('success', `Welcome ${member.firstName ?? member.username}`);
-          navigateTo();
+          navigate();
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');
@@ -113,6 +115,7 @@ const SignInForm: React.FC = () => {
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
+            variant="primary"
             isLoading={signIn.isLoading}
             type="submit"
             leftIcon={<I.EnterIcon width="24" height="24" />}

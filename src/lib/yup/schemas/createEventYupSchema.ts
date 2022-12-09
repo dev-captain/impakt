@@ -1,12 +1,12 @@
 import * as yup from 'yup';
-import { eventDescription, assocId, eventTime, eventTitle } from '../fields';
+import { eventDescription, challengeId, eventTime, eventTitle, eventEndTime } from '../fields';
 
 const createEventYupScheme = yup.object().shape({
   eventTitle,
   eventDescription,
   eventStartTime: eventTime,
-  eventEndTime: eventTime,
-  assocId,
+  eventEndTime,
+  challengeId,
 });
 
 export default createEventYupScheme;

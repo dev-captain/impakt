@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Text, useMediaQuery, VStack } from '@chakra-ui/react';
 import { C, Common } from 'components';
+import routes from '../../../../data/routes';
 
 const NFTCongrats: React.FC = () => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
@@ -43,7 +44,7 @@ const NFTCongrats: React.FC = () => {
                 height="64px"
                 textStyle="regular201"
                 minW={{ base: '225px', lg: '228px' }}
-                href="/download"
+                href={routes.download}
                 borderRadius="12px"
                 boxShadow="0px 0px 0px 6px rgba(240, 65, 83, 0.3)"
               >

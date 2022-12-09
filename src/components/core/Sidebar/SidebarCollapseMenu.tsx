@@ -2,6 +2,7 @@ import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra
 import { I } from 'components';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import routes from '../../../data/routes';
 import SidebarLinks from './SidebarLinks';
 
 const SidebarCollapseMenu = () => {
@@ -26,30 +27,30 @@ const SidebarCollapseMenu = () => {
           _hover={{ backgroundColor: '#fff' }}
           _focus={{ boxShadow: 'light' }}
         >
-          {path.pathname === '/d' && (
+          {path.pathname === routes.dashboard && (
             <Box onClick={() => setActiveIndex(0)} display="flex" alignItems="center">
               <I.DashboardIcon key="2" />
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
-          {path.pathname.includes('/d/g') && (
+          {path.pathname.includes(routes.groups) && (
             <Box onClick={() => setActiveIndex(1)} display="flex" alignItems="center">
               <I.PeopleIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname.includes('/d/g') ? '1' : '0.5'}
+                opacity={path.pathname.includes(routes.groups) ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Groups</Text>
             </Box>
           )}
-          {path.pathname === '/d/r' && (
+          {path.pathname === routes.referrals && (
             <Box onClick={() => setActiveIndex(2)} display="flex" alignItems="center">
               <I.ReferralsIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname === '/d/r' ? '1' : '0.5'}
+                opacity={path.pathname === routes.referrals ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Referrals</Text>
             </Box>

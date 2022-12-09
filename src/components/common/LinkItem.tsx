@@ -6,9 +6,9 @@ type LinkItemProps = {
   href?: string;
   title: string;
   titleTextStyle?: string;
-  titleTextColor?: string;
+  titlePassiveColor?: string;
   color?: string;
-  passiveColor?: string;
+  titleActiveColor?: string;
   isActive?: boolean;
   isNavigate?: boolean;
   isDisabled?: boolean;
@@ -19,10 +19,10 @@ const LinkItem: React.FC<LinkItemProps & TextProps> = ({
   href,
   isActive,
   color,
-  passiveColor,
+  titleActiveColor = 'white',
   children,
   isNavigate,
-  titleTextColor,
+  titlePassiveColor = 'rgba(255,255,255,0.5)',
   titleTextStyle,
   isDisabled,
   ...props
@@ -52,8 +52,9 @@ const LinkItem: React.FC<LinkItemProps & TextProps> = ({
       {children}
       <Text
         textStyle={titleTextStyle ?? 'regular3'}
-        _hover={{ color: passiveColor }}
-        textColor={titleTextColor ?? '#000'}
+        _hover={{ color: titleActiveColor }}
+        transition="color .2s linear"
+        textColor={titlePassiveColor ?? '#000'}
       >
         {title}
       </Text>
