@@ -10,6 +10,7 @@ import NavbarLinkItem from './LandingPageNavbarLinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../../lib/zustand';
 import { useLogout } from '../../../../hooks/useLogout';
+import routes from '../../../../data/routes';
 
 type Props = {
   isOpen: boolean;
@@ -50,7 +51,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         {member && (
           <NavbarLinkItem
             isSmall
-            href="/d"
+            href={routes.dashboard}
             onClose={onClose}
             title={t(Keys.navbar.dashboard)}
             isActive={path.path === 'dashboard'}

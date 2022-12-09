@@ -29,6 +29,7 @@ import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 import GroupInvite from './pages/GroupInvite/index';
+import routes from './data/routes';
 
 Sentry.init({
   dsn: 'https://482e35ccc1c3471b86af0c359112f6ad@o522080.ingest.sentry.io/4504274587549696',
@@ -88,7 +89,7 @@ const App = () => {
       />
 
       <Route
-        path="d"
+        path={routes.dashboard}
         element={
           <Authentication>
             <ErrorBoundary>

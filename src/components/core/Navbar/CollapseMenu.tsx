@@ -11,6 +11,7 @@ import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
 import NavBarLink from './NavBarLink';
+import routes from '../../../data/routes';
 
 type Props = {
   isOpen: boolean;
@@ -40,7 +41,9 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
         mt="4px"
       >
         <NavbarLinkItem href="/d/g" isNavigate title="Groups" />
-        {member && <NavbarLinkItem href="/d" isNavigate title={t(Keys.navbar.dashboard)} />}
+        {member && (
+          <NavbarLinkItem href={routes.dashboard} isNavigate title={t(Keys.navbar.dashboard)} />
+        )}
         <NavbarLinkItem href="/" isNavigate title={t(Keys.navbar.impaktFitness)} />
         <NavbarLinkItem
           title={t(Keys.navbar.knowledgeBase)}
