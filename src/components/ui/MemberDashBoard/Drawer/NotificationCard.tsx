@@ -26,6 +26,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
 }) => {
   const { member } = usePersistedAuthStore();
   const {
+    activeGroup,
     groupRequests,
     myGroups,
     membersOfGroup,
@@ -60,21 +61,23 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
                 setMyGroups(shallowOfMyGroups);
               }
               if (membersOfGroup && member) {
-                setMembersOfGroup({
-                  ...membersOfGroup,
-                  Members: [
-                    ...membersOfGroup.Members,
-                    {
-                      joinedAt: new Date().toISOString(),
-                      userId: requestor?.id,
-                      bannedAt: null,
-                      groupId,
-                      leftAt: null,
-                      role: 'Member',
-                      User: { ...requestor },
-                    },
-                  ],
-                });
+                if (groupId === activeGroup?.id) {
+                  setMembersOfGroup({
+                    ...membersOfGroup,
+                    Members: [
+                      ...membersOfGroup.Members,
+                      {
+                        joinedAt: new Date().toISOString(),
+                        userId: requestor?.id,
+                        bannedAt: null,
+                        groupId,
+                        leftAt: null,
+                        role: 'Member',
+                        User: { ...requestor },
+                      },
+                    ],
+                  });
+                }
               }
             }
           }
