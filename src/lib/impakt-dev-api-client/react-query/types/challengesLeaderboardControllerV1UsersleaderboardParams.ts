@@ -5,7 +5,4 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface CreateGuestV1Dto {
-  /** Guest name */
-  screenName: string;
-}
+export type ChallengesLeaderboardControllerV1UsersleaderboardParams = { eventId?: number | null };

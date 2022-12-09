@@ -5,7 +5,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface CreateGuestV1Dto {
+export interface GuestV1Dto {
+  /** Guest Id */
+  id: number;
   /** Guest name */
   screenName: string;
 }

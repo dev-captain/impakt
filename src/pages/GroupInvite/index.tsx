@@ -62,7 +62,10 @@ const GroupInvite = () => {
                 const myGroupObj = exploreGroupToMyGroupsTransformation(exploreItem, member?.id);
                 addToMyGroups({
                   ...myGroupObj,
-                  Group: { ...myGroupObj.Group, memberCount: myGroupObj.Group.memberCount + 1 },
+                  Group: {
+                    ...myGroupObj.Group,
+                    memberCount: myGroupObj.Group.memberCount ?? 0 + 1,
+                  },
                 });
               }
 

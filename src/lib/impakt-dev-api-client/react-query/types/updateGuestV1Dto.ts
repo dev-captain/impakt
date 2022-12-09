@@ -6,5 +6,6 @@
  */
 
 export interface UpdateGuestV1Dto {
-  [key: string]: any;
+  /** Guest name */
+  screenName: string;
 }

@@ -29,13 +29,13 @@ export const calendarControllerGetCalendar = (
   signal?: AbortSignal,
 ) => {
   return customInstance<CalendarDtoV1>(
-    { url: `/api/v1/calendar/calendar/${calendarId}`, method: 'get', signal },
+    { url: `/api/v1/calendar/${calendarId}`, method: 'get', signal },
     options,
   );
 };
 
 export const getCalendarControllerGetCalendarQueryKey = (calendarId: number) => [
-  `/api/v1/calendar/calendar/${calendarId}`,
+  `/api/v1/calendar/${calendarId}`,
 ];
 
 export type CalendarControllerGetCalendarQueryResult = NonNullable<
