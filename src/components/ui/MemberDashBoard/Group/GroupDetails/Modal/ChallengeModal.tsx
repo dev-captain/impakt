@@ -43,6 +43,7 @@ import { GetChallengeRes } from '../../../../../../lib/impakt-dev-api-client/rea
 import createChallengeYupScheme from '../../../../../../lib/yup/schemas/createChallengeYupScheme';
 import { InputErrorMessage } from '../../../../../common';
 import NoItemCard from './ChallengeModalTabs/NoChallengeCard/NoItemCard';
+import routes from '../../../../../../data/routes';
 
 interface ChallengeModalProps {
   open: boolean;
@@ -356,7 +357,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveC
                 >
                   {availableGroupRoutines.length === 0 ? (
                     <NoItemCard
-                      noItemButtonOnClick={() => navigate('/download')}
+                      noItemButtonOnClick={() => navigate(routes.download)}
                       noItemButtonTitle="Download"
                       noItemTitle="You don't have any routines yet."
                     >

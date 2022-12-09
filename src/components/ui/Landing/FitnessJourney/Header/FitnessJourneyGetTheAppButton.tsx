@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Common, I } from 'components';
 import { useNavigate } from 'react-router-dom';
+import routes from '../../../../../data/routes';
 
 const FitnessJourneyGetTheAppButton: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const FitnessJourneyGetTheAppButton: React.FC = () => {
       width="100%"
       margin={{ base: 'auto', md: 'initial' }}
       mt={{ base: '30px', md: '0' }}
-      onClick={() => navigate('/download')}
+      onClick={() => navigate(routes.download)}
     >
       <I.DownloadIcon />
       Get The App

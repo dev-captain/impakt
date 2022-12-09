@@ -1,6 +1,7 @@
 import { Link } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import routes from '../../data/routes';
 
 const breathKeyFrame = keyframes`
   0%{
@@ -31,7 +32,7 @@ const YoutubeIcon: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => 
 
   return (
     <Link
-      href="/download"
+      href={routes.download}
       onMouseOver={() => {
         setIsMouseOver(true);
       }}

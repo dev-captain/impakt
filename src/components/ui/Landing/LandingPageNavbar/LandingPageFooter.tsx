@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import LandingPageNavbarLinks from './LandingPageNavbarLinks';
+import routes from '../../../../data/routes';
 
 const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
   const navigate = useNavigate();
@@ -170,7 +171,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                             Developer? SDK Here!
                           </Common.ImpaktButton>
                         </Box> */}
-                        <Box onClick={() => navigate('/download')}>
+                        <Box onClick={() => navigate(routes.download)}>
                           <Common.ImpaktButton
                             color="#F04153"
                             bg="#FDE8EA"

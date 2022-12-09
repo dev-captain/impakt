@@ -14,12 +14,13 @@ import { PostUserReq } from '../../../lib/impakt-dev-api-client/react-query/type
 import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
+import routes from '../../../data/routes';
 
 const SignUpForm: React.FC = () => {
   const isThereNextParam =
     useLocation().search.includes('next') || useLocation().search.includes('invite');
 
-  const navigateToNextParam = useNextParamRouter('/download');
+  const navigateToNextParam = useNextParamRouter(routes.download);
   const navigate = useNavigate();
 
   const { setMember } = usePersistedAuthStore();

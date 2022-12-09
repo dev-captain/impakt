@@ -5,6 +5,7 @@ import { I, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
+import routes from '../../../data/routes';
 
 interface ImpaktFooterV2PropsI {
   wFull: boolean;
@@ -40,7 +41,7 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
         >
           <HStack columnGap="2em" display="flex">
             <I.ImpaktIcon variant="lg" minW="111px" w="111px" whiteMode={!isWhiteMode} />
-            <Box onClick={() => navigate('/download')}>
+            <Box onClick={() => navigate(routes.download)}>
               <Common.ImpaktButton variant={isWhiteMode ? 'orange' : 'primary'}>
                 Download
               </Common.ImpaktButton>

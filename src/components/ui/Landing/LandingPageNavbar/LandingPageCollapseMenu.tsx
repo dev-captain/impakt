@@ -216,7 +216,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             <SignInLinkItem />
           </Box>
           <Box w="full" display="flex" mt="2" ml="0 !important">
-            <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
+            <Link w="full" href={routes.download} _hover={{ textDecoration: 'none' }}>
               <Button marginTop="8px" width="100%" colorScheme="red">
                 {t(Keys.navbar.download)}
               </Button>
