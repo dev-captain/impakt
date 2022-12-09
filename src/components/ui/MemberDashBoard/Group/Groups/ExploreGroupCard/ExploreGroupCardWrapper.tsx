@@ -7,6 +7,7 @@ import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
 
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
+import routes from '../../../../../../data/routes';
 
 interface ExploreGroupCardWrapperPropsI {
   status: 'Private' | 'Public';
@@ -33,7 +34,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            navigate(`/d/g/${g.id}`);
+            navigate(routes.groupDetail(g.id));
           }}
           position="relative"
         >

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { I } from 'components';
 import { useNavigate } from 'react-router-dom';
 import NewsFeedItem from './NewsFeedItem';
+import routes from '../../../../../data/routes';
 // import truncH from 'trunc-html';
 // import { usePersistedDiscourseStore } from '../../../../lib/zustand';
 
@@ -104,7 +105,7 @@ const NewsFeedAccordion: React.FC = () => {
 };
 
 const getStartedLinkItems = [
-  { title: 'Join Our Community', href: '/d/g/12', order: 1 },
+  { title: 'Join Our Community', href: routes.groupDetail(12), order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
   { title: 'Download Fitness App', href: '/download', order: 3 },
   { title: 'Follow us', href: undefined, order: 4 },

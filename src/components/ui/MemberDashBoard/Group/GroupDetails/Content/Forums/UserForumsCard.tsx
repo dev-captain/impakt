@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ForumDetailModal from './ForumsDetail/ForumDetailModal';
 import PostCard from './PostCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import routes from '../../../../../../../data/routes';
 
 interface UserForumsPropsI {
   id: number;
@@ -51,7 +52,7 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
         open={isOpen}
         close={() => {
           onClose();
-          navigate(`/d/g/${group.activeGroup?.id}`);
+          navigate(routes.groupDetail(group.activeGroup?.id));
         }}
       />
     </>

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
+import routes from '../../../../../../data/routes';
 
 const MyGroupCardHeader: React.FC = () => {
   const { myGroups } = usePersistedGroupStore();
@@ -19,7 +20,7 @@ const MyGroupCardHeader: React.FC = () => {
           as="a"
           onClick={(e: any) => {
             e.preventDefault();
-            navigate(`/d/g/${m.groupId}`);
+            navigate(routes.groupDetail(m.groupId));
           }}
           w="282px"
         >
