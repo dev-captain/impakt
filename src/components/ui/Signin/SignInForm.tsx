@@ -12,9 +12,10 @@ import signInFormYupScheme from '../../../lib/yup/schemas/signInYupScheme';
 import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
+import routes from '../../../data/routes';
 
 const SignInForm: React.FC = () => {
-  const navigate = useNextParamRouter('/d');
+  const navigate = useNextParamRouter(routes.dashboard);
 
   const signIn = useAuthControllerLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);

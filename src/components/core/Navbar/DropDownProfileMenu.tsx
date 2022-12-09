@@ -14,6 +14,7 @@ import { I } from 'components';
 
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
+import routes from '../../../data/routes';
 
 const DropDownProfileMenu: React.FC = () => {
   const logout = useLogout();
@@ -38,7 +39,7 @@ const DropDownProfileMenu: React.FC = () => {
         borderRadius="8px"
       >
         <MenuItem
-          onClick={() => navigate('/d')}
+          onClick={() => navigate(routes.dashboard)}
           isFocusable={false}
           h="100%"
           borderRadius="8px 8px 0px 0px"

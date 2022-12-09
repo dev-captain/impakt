@@ -661,10 +661,3 @@ export const AthletesData = [
       ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.\nManaging a team of <span style="color:#FFF;">20+</span> engineers & product managers',
   },
 ];
-
-export const routes = {
-  home: '/',
-  dashboard: '/d',
-  groups: '/d/g',
-  referrals: '/d/r',
-};

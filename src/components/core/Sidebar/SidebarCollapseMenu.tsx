@@ -2,6 +2,7 @@ import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra
 import { I } from 'components';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import routes from '../../../data/routes';
 import SidebarLinks from './SidebarLinks';
 
 const SidebarCollapseMenu = () => {
@@ -26,7 +27,7 @@ const SidebarCollapseMenu = () => {
           _hover={{ backgroundColor: '#fff' }}
           _focus={{ boxShadow: 'light' }}
         >
-          {path.pathname === '/d' && (
+          {path.pathname === routes.dashboard && (
             <Box onClick={() => setActiveIndex(0)} display="flex" alignItems="center">
               <I.DashboardIcon key="2" />
               <Text marginLeft="10px">General</Text>

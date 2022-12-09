@@ -2,7 +2,7 @@ import * as React from 'react';
 import { I } from 'components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SidebarMenuItem from './SidebarMenuItem';
-import { routes } from '../../../data';
+import routes from '../../../data/routes';
 
 const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
   const path = useLocation();
