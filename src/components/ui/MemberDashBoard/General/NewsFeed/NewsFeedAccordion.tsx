@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Box, VStack, Text, HStack } from '@chakra-ui/react';
+import { Box, VStack, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import { useNavigate } from 'react-router-dom';
+import NewsFeedItem from './NewsFeedItem';
 // import truncH from 'trunc-html';
 // import { usePersistedDiscourseStore } from '../../../../lib/zustand';
 
@@ -24,12 +25,12 @@ const NewsFeedAccordion: React.FC = () => {
       icon: <I.YoutubeBigIcon />,
       href: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw/featured',
     },
-    {
-      id: 4,
-      bg: '#5662F6',
-      icon: <I.DiscordBigIcon />,
-      href: 'https://discord.gg/impaktlife',
-    },
+    // {
+    //   id: 4,
+    //   bg: '#5662F6',
+    //   icon: <I.DiscordBigIcon />,
+    //   href: 'https://discord.gg/impaktlife',
+    // },
     {
       id: 5,
       bg: '#36B9FF',
@@ -40,7 +41,7 @@ const NewsFeedAccordion: React.FC = () => {
       id: 7,
       bg: '#1877F2',
       icon: <I.FacebookBigIcon />,
-      href: 'https://www.facebook.com/impakt.life',
+      href: 'https://www.facebook.com/ImpaktFitnessGamified/',
     },
     {
       id: 8,
@@ -53,10 +54,11 @@ const NewsFeedAccordion: React.FC = () => {
   return (
     <VStack spacing="12px" w="full">
       {getStartedLinkItems?.map(({ title, href, order }) => (
-        <HStack
-          as="a"
+        <NewsFeedItem
+          title={title}
           href={href}
-          target="_blank"
+          order={order}
+          key={`item-id-${order}`}
           onClick={(e) => {
             if (!href) return;
             if (!href.includes('https') || !href.includes('http')) {
@@ -64,44 +66,7 @@ const NewsFeedAccordion: React.FC = () => {
               navigate(href);
             }
           }}
-          w="full"
-          key={`get-started-item-${order}`}
-          background="#F5F8FA"
-          borderRadius="1em"
-          border="0"
-          position="relative"
-          p="1em"
-          columnGap="12px"
-          justifyContent="space-between"
-        >
-          <Box>
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              id="order-box-dot"
-              w="24px"
-              h="24px"
-              background="#4E6070"
-              borderRadius="50%"
-            >
-              <Text color="#F5F8FA" lineHeight="100%">
-                {order}
-              </Text>
-            </Box>
-          </Box>
-          <Box w="full" id="news-">
-            <Text color="#29323B" fontWeight="400" fontSize="18px" lineHeight="26px">
-              {title}
-            </Text>
-          </Box>
-
-          {href && (
-            <Box transform="rotate(270deg)">
-              <I.DropIcon />
-            </Box>
-          )}
-        </HStack>
+        />
       ))}
       {/* // ocial medias */}
       <HStack
@@ -122,6 +87,9 @@ const NewsFeedAccordion: React.FC = () => {
             h={{ base: '48px', md: '60px' }}
             justifyContent="center"
             alignItems="center"
+            opacity="1"
+            transition="all .2s linear"
+            _hover={{ opacity: '0.6' }}
             as="a"
             href={href}
             borderRadius="12px"
@@ -136,7 +104,7 @@ const NewsFeedAccordion: React.FC = () => {
 };
 
 const getStartedLinkItems = [
-  { title: 'Explore Groups', href: '/d/g', order: 1 },
+  { title: 'Join Our Community', href: '/d/g/12', order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
   { title: 'Download Fitness App', href: '/download', order: 3 },
   { title: 'Follow us', href: undefined, order: 4 },

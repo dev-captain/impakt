@@ -1,5 +1,14 @@
 import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, Box, Image } from '@chakra-ui/react';
+import {
+  Text,
+  VStack,
+  HStack,
+  useColorModeValue,
+  Box,
+  Image,
+  Tooltip,
+  Divider,
+} from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
@@ -54,11 +63,12 @@ const DownloadPlatform = () => {
                 <Image src={Images.Common.Vsport} w={{ base: '120px', md: '300px', lg: '400px' }} />
               </VStack>
               <HStack
-                flexWrap={{ base: 'wrap', lg: 'nowrap' }}
+                flexWrap={{ base: 'wrap-reverse', lg: 'nowrap' }}
                 background="rgba(28, 28, 40, 0.65)"
                 display="flex"
                 spacing={2}
                 columnGap={3}
+                rowGap={3}
                 padding="16px"
                 borderRadius="24px"
                 order={{ base: '3', md: '2' }}
@@ -97,6 +107,13 @@ const DownloadPlatform = () => {
                     link="https://dyqq95qvqgziv.cloudfront.net/Impakt_Setup.pkg"
                     pe="auto"
                   />
+                </Box>
+                <Box display="flex" w={{ base: 'full', md: 'auto' }} justifyContent="flex-end">
+                  <Tooltip placement="auto" borderRadius="1em" label={<DownloadSpecBox />}>
+                    <Box cursor="pointer" id="tooltip" position="relative">
+                      <I.TooltipIcon width="24px" />
+                    </Box>
+                  </Tooltip>
                 </Box>
               </HStack>
               <HStack
@@ -145,7 +162,6 @@ const DownloadPlatform = () => {
                 </Box>
               </HStack>
             </VStack>
-
             {/* <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
               <VStack pos="absolute" zIndex={2}>
                 <I.Play />
@@ -169,4 +185,33 @@ const DownloadPlatform = () => {
   );
 };
 
+const DownloadSpecBox = () => {
+  return (
+    <VStack w="full" p="2em">
+      <Text fontWeight="700">Min Specs</Text>
+      <ul>
+        <li>
+          Requires a 64-bit processor and operating system OS: Windows 10 or later / macOS Catalina
+          10.15 or later
+        </li>
+        <li>Processor: Intel Core i5 2.5 GHz or equivalent</li>
+        <li>Memory: 8 GB RAM</li>
+        <li>Graphics: UHD Graphics 630 </li>
+        <li>Storage: 4 GB available space</li>
+      </ul>
+      <Divider />
+      <Text fontWeight="700">Recommended Specs </Text>
+      <ul>
+        <li>
+          Requires a 64-bit processor and operating system OS: Windows 10 or later / macOS Catalina
+          10.15 or later
+        </li>
+        <li>Processor: Intel Core i7 2.8GHz or equivalent</li>
+        <li>Memory: 16 GB RAM</li>
+        <li>Graphics: NVidia GTX 960 or AMD equivalent </li>
+        <li>Storage: 4 GB available space</li>
+      </ul>
+    </VStack>
+  );
+};
 export default memo(DownloadPlatform);

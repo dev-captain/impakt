@@ -1,5 +1,5 @@
 import { FormControl, Box, Text, Select, VStack, HStack, Input } from '@chakra-ui/react';
-import { Day, Time } from 'dayspan';
+import { Day } from 'dayspan';
 import * as React from 'react';
 import { useForm } from 'hooks';
 import { Common, I } from 'components';
@@ -11,7 +11,7 @@ import createEventYupScheme from '../../../lib/yup/schemas/createEventYupSchema'
 import { normalizeCalendarDataEvent } from '../../../utils/dayspan';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 import { useCalendarEventControllerCreateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
-import { renderToast, truncateString } from '../../../utils';
+import { parseDaytime, renderToast, truncateString } from '../../../utils';
 
 interface CreateEventFormPropsI {
   challengeId?: number;
@@ -71,10 +71,8 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
       creatorId: member!.id,
       challengeId,
     };
-    const timeFromString = Time.fromString(eventStartTime);
-    const eventStartOn = new Date(
-      new Date(date.date).setHours(timeFromString.hour, timeFromString.minute),
-    );
+
+    const eventStartOn = new Date(new Date(date.date).getTime() + parseDaytime(eventStartTime));
     const addDate = Day.fromDate(eventStartOn)
       ?.add('minute', eventEndTime < 0 ? 0 : eventEndTime)
       .toDate();
@@ -191,8 +189,11 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
                 onChange={(value) => setValue('eventStartTime', value.currentTarget.value)}
               >
                 {timeOptions.map((timeOpt, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <option key={`${timeOpt.time}${index}`} value={timeOpt.time}>
+                  <option
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`${timeOpt.time}${index}`}
+                    value={`${timeOpt.time}${timeOpt.format}`}
+                  >
                     {timeOpt.time} {timeOpt.format}
                   </option>
                 ))}

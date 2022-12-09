@@ -1,15 +1,40 @@
-import { Box, Text, Avatar } from '@chakra-ui/react';
+import {
+  Box,
+  // Button,
+  Text,
+  Avatar,
+  HStack,
+  VStack,
+  // useClipboard,
+  // useToast,
+} from '@chakra-ui/react';
+// import { I } from 'components';
 import * as React from 'react';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import AccessDeniedBox from '../AccessDeniedBox';
+import { GetMembersOfGroupResGroupRole } from '../../../../../../../lib/impakt-dev-api-client/react-query/types';
+
+const rolesOrders: GetMembersOfGroupResGroupRole[] = [
+  'Creator',
+  'Owner',
+  'Admin',
+  'Moderator',
+  'Member',
+  'None',
+];
 
 const MemberList: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
   // const toast = useToast();
   // const isMemberLoading = useAppSelector((state) => state.groupsReducer.isMembersLoading);
   const members = usePersistedGroupStore().membersOfGroup;
+  const sortByRole = members?.Members.sort(
+    (a, b) =>
+      rolesOrders.indexOf(a.role) - rolesOrders.indexOf(b.role) ||
+      a.User.username.localeCompare(b.User.username),
+  );
 
   if (activeGroup?.isPreview && activeGroup.private) return <AccessDeniedBox />;
 
@@ -183,22 +208,28 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-        {members?.Members.map(
+        {sortByRole?.map(
           ({ role, User }) =>
             role !== 'None' && (
-              <Box
+              <HStack
+                as="a"
+                href=""
+                onClick={(e) => e.preventDefault()}
+                title={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
                 key={`${User.id}-box`}
-                display="flex"
-                justifyContent="space-between"
-                marginTop="16px"
+                w="full"
+                alignItems="center"
+                marginTop="16px !important"
               >
-                <Box
-                  display="flex"
+                <HStack
                   w="full"
-                  wordBreak="break-all"
-                  textOverflow="ellipsis"
-                  alignItems="center"
-                  overflow="hidden"
+                  maxW="60%"
+                  spacing="1em"
+                  sx={{
+                    _before: { wordBreak: 'keep-all' },
+                    _after: { wordBreak: 'keep-all' },
+                    wordBreak: 'keep-all',
+                  }}
                 >
                   <Avatar
                     name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
@@ -208,21 +239,58 @@ const MemberList: React.FC = () => {
                   <Text
                     color="#4E6070"
                     fontSize={{ lgx: '18px', md: '14px' }}
+                    lineHeight="100%"
                     fontWeight="500"
                     marginLeft="16px"
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
                   >
                     {User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
                   </Text>
-                </Box>
-                <Box w="10px" h="10px" />
-
-                <Box display="flex" alignItems="center">
-                  <Text color="#4E6070" fontSize={{ lgx: '18px', md: '14px' }} fontWeight="500">
+                </HStack>
+                <HStack justifyContent="flex-end" w="full">
+                  <Text
+                    color="#4E6070"
+                    fontSize={{ lgx: '18px', md: '14px' }}
+                    lineHeight="100%"
+                    fontWeight="500"
+                  >
                     {role}
                   </Text>
-                  {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
-                </Box>
-              </Box>
+                </HStack>
+                {/* <HStack flex="2" display="flex" alignItems="center">
+                    <Avatar
+                      name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                      width="32px"
+                      height="32px"
+                    />
+                    <Text
+                      color="#4E6070"
+                      fontSize={{ lgx: '18px', md: '14px' }}
+                      lineHeight="100%"
+                      fontWeight="500"
+                      marginLeft="16px"
+                      whiteSpace="nowrap"
+                      sx={{
+                        _before: { wordBreak: 'keep-all' },
+                        _after: { wordBreak: 'keep-all' },
+                        wordBreak: 'keep-all',
+                      }}
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
+                      {User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                      fjasjfajlskaklsafsajfaskjlfkjl
+                    </Text>
+                  </HStack>
+
+                  <HStack flex="2" marginLeft="1em" display="flex" alignItems="center">
+                    <Text color="#4E6070" fontSize={{ lgx: '18px', md: '14px' }} fontWeight="500">
+                      {role}
+                    </Text>
+                    {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
+              </HStack>
             ),
         )}
       </Box>
