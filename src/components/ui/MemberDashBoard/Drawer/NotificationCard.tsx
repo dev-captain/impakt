@@ -57,7 +57,8 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
               );
 
               if (indexOfGroup !== -1) {
-                shallowOfMyGroups[indexOfGroup].Group.memberCount += 1;
+                shallowOfMyGroups[indexOfGroup].Group.memberCount =
+                  shallowOfMyGroups[indexOfGroup].Group.memberCount ?? 0 + 1;
                 setMyGroups(shallowOfMyGroups);
               }
               if (membersOfGroup && member) {

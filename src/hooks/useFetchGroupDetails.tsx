@@ -204,6 +204,7 @@ export const useFetchGroupDetails = () => {
 
   const fetchPinnedChallengeLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
     fetchGroupPinnedChallenge.data?.Challenge?.id ?? 0,
+    {},
     {
       query: {
         enabled: false,

@@ -8,4 +8,5 @@
 export interface PostRoutineSessionReq {
   routineId: number;
   challengeId?: number | null;
+  eventId?: number | null;
 }
