@@ -122,7 +122,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
               style={{ cursor: 'pointer' }}
               onClick={toggleInfo}
             >
-              learn more
+              Learn more
             </Text>
           </Box>
           <Box display="flex" width="100%" mt="12px">
