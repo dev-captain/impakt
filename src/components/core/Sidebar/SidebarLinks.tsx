@@ -51,7 +51,7 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
           navigate(routes.referrals);
         }}
         hide={isHide}
-        href="/d/r"
+        href={routes.referrals}
         title="Referrals"
         isActive={path.pathname === routes.referrals}
       >

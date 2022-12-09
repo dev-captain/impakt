@@ -44,13 +44,13 @@ const SidebarCollapseMenu = () => {
               <Text marginLeft="10px">Groups</Text>
             </Box>
           )}
-          {path.pathname === '/d/r' && (
+          {path.pathname === routes.referrals && (
             <Box onClick={() => setActiveIndex(2)} display="flex" alignItems="center">
               <I.ReferralsIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname === '/d/r' ? '1' : '0.5'}
+                opacity={path.pathname === routes.referrals ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Referrals</Text>
             </Box>
