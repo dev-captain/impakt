@@ -208,7 +208,7 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-        <Box style={{ maxHeight: '480px', overflowY: 'scroll' }}>
+        <Box maxHeight="428px" overflowY="scroll">
           {sortByRole?.map(
             ({ role, User }) =>
               role !== 'None' && (

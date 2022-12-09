@@ -64,7 +64,7 @@ const Forums: React.FC = () => {
                 </Button>
               </Box>
             </Box>
-            <Box style={{ overflowY: 'scroll', maxHeight: '480px' }}>
+            <Box style={{ overflowY: 'scroll', maxHeight: '428px' }}>
               {posts.length === 0 && <CreatePostCard onClick={onOpen} />}
               {posts.length > 0 &&
                 posts.map(
