@@ -64,24 +64,26 @@ const Forums: React.FC = () => {
                 </Button>
               </Box>
             </Box>
-            {posts.length === 0 && <CreatePostCard onClick={onOpen} />}
-            {posts.length > 0 &&
-              posts.map(
-                ({ id, Creator, content, createdAt, Comment }) =>
-                  Comment.length && (
-                    <UserForumsCard
-                      key={id}
-                      id={id}
-                      message={Comment[0]?.content}
-                      messageCreatorName={Comment[0]?.Creator.username}
-                      messageCreatedAt={getCreatedBefore(Comment[0]?.createdAt ?? '08-08-2000')}
-                      replyCount={Comment.length - 1}
-                      postCreatedAt={getCreatedBefore(createdAt)}
-                      postTitle={content}
-                      postCreatorName={Creator?.username}
-                    />
-                  ),
-              )}
+            <Box style={{ overflowY: 'scroll', maxHeight: '480px' }}>
+              {posts.length === 0 && <CreatePostCard onClick={onOpen} />}
+              {posts.length > 0 &&
+                posts.map(
+                  ({ id, Creator, content, createdAt, Comment }) =>
+                    Comment.length && (
+                      <UserForumsCard
+                        key={id}
+                        id={id}
+                        message={Comment[0]?.content}
+                        messageCreatorName={Comment[0]?.Creator.username}
+                        messageCreatedAt={getCreatedBefore(Comment[0]?.createdAt ?? '08-08-2000')}
+                        replyCount={Comment.length - 1}
+                        postCreatedAt={getCreatedBefore(createdAt)}
+                        postTitle={content}
+                        postCreatorName={Creator?.username}
+                      />
+                    ),
+                )}
+            </Box>
           </Box>
         </MemberDashboardCard>
       </Box>
