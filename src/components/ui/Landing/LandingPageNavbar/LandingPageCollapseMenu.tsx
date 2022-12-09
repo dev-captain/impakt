@@ -45,8 +45,8 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           type="LINK"
           onClose={onClose}
           title="Groups"
-          href="/d/g"
-          isActive={path.path === '/d/g'}
+          href={routes.groups}
+          isActive={path.path === routes.groups}
         />
         {member && (
           <NavbarLinkItem

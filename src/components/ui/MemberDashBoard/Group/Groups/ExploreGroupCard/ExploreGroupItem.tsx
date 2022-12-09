@@ -3,6 +3,7 @@ import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from '../../../../..';
+import routes from '../../../../../../data/routes';
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 import {
@@ -35,7 +36,7 @@ const ExploreGroupItem: React.FC<ExploreGroupItemPropsI> = ({ gPrivate, gRequest
         {
           onSuccess: (d) => {
             renderToast('success', 'Request sent successfully');
-            navigate('/d/g');
+            navigate(routes.groups);
             const shallowExploreGroups = [...exploreGroups];
             const indexOfExploreGroup = shallowExploreGroups.findIndex((group) => group.id === gId);
             if (indexOfExploreGroup !== -1) {

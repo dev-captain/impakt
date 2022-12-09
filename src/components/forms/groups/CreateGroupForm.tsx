@@ -9,6 +9,7 @@ import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme'
 import { useGroupsControllerV1Create } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { renderToast } from '../../../utils';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
+import routes from '../../../data/routes';
 
 const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onClose }) => {
   const createGroup = useGroupsControllerV1Create();
@@ -40,7 +41,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
         Group: { ...groupData, memberCount: 1 },
       });
       renderToast('success', 'Group created successfully.');
-      navigate('/d/g');
+      navigate(routes.groups);
       if (onClose) {
         onClose();
       }

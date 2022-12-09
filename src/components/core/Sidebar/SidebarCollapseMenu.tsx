@@ -33,13 +33,13 @@ const SidebarCollapseMenu = () => {
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
-          {path.pathname.includes('/d/g') && (
+          {path.pathname.includes(routes.groups) && (
             <Box onClick={() => setActiveIndex(1)} display="flex" alignItems="center">
               <I.PeopleIcon
                 cursor="pointer"
                 width="26px"
                 height="23px"
-                opacity={path.pathname.includes('/d/g') ? '1' : '0.5'}
+                opacity={path.pathname.includes(routes.groups) ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Groups</Text>
             </Box>

@@ -40,7 +40,7 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
         padding="16px"
         mt="4px"
       >
-        <NavbarLinkItem href="/d/g" isNavigate title="Groups" />
+        <NavbarLinkItem href={routes.groups} isNavigate title="Groups" />
         {member && (
           <NavbarLinkItem href={routes.dashboard} isNavigate title={t(Keys.navbar.dashboard)} />
         )}

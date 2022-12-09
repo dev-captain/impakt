@@ -33,7 +33,7 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
           navigate(routes.groups);
         }}
         hide={isHide}
-        href="/d/g"
+        href={routes.groups}
         title="Groups"
         isActive={path.pathname.includes(routes.groups)}
       >
