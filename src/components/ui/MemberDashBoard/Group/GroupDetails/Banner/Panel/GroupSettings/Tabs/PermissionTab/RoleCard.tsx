@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputGroupPropsI } from '../../../../../../../../../common/InputGroup';
 import createGroupYupScheme from '../../../../../../../../../../lib/yup/schemas/createGroupYupScheme';
 import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
-import { useGroupsMemberControllerV1AssignRole } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { useGroupsMemberControllerV1AssignGroupRole } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../../../../../utils';
 import ConfirmationModal from './ConfirmationModal';
 
@@ -22,7 +22,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
     defaultValues: { username: '' },
   });
   const memberRole = usePersistedGroupStore();
-  const assignRole = useGroupsMemberControllerV1AssignRole();
+  const assignRole = useGroupsMemberControllerV1AssignGroupRole();
   const { activeGroup, setMyGroups, myGroups, membersOfGroup } = usePersistedGroupStore();
   const [members, setMembers] = useState(membersOfGroup?.Members ?? []);
   const [searchedMembers, setSearchedMembers] = useState<Array<any>>([]);
@@ -62,7 +62,7 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
       {
         groupId: Number(groupParam?.id),
         userId: Number(userId),
-        role: Role,
+        params: { role: Role },
       },
       {
         onSuccess: () => {

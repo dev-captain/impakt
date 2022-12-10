@@ -55,7 +55,7 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
   };
 
   const handleAdd = async (data: Object) => {
-    if (!activeGroup) return;
+    if (!activeGroup || !activeGroup.calendarId) return;
 
     const { eventTitle, eventDescription, eventStartTime, eventEndTime, challengeId } = data as {
       eventTitle: string;

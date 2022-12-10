@@ -23,4 +23,5 @@ export interface GetUserRes {
   Communities: GetCommunityRes[] | null;
   DiscourseRedirectUrl: string | null;
   emailVerified: boolean;
+  calendarId: number;
 }

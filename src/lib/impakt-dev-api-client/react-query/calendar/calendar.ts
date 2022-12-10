@@ -41,13 +41,13 @@ export const calendarControllerGetCalendar = (
   signal?: AbortSignal,
 ) => {
   return customInstance<CalendarDtoV1>(
-    { url: `/api/v1/calendar/calendar/${calendarId}`, method: 'get', signal },
+    { url: `/api/v1/calendar/${calendarId}`, method: 'get', signal },
     options,
   );
 };
 
 export const getCalendarControllerGetCalendarQueryKey = (calendarId: number) => [
-  `/api/v1/calendar/calendar/${calendarId}`,
+  `/api/v1/calendar/${calendarId}`,
 ];
 
 export type CalendarControllerGetCalendarQueryResult = NonNullable<
@@ -94,13 +94,13 @@ export const calendarControllerGetCalendarListView = (
   signal?: AbortSignal,
 ) => {
   return customInstance<CalendarDtoV1>(
-    { url: `/api/v1/calendar/calendar/${calendarId}/list`, method: 'get', signal },
+    { url: `/api/v1/calendar/${calendarId}/list`, method: 'get', signal },
     options,
   );
 };
 
 export const getCalendarControllerGetCalendarListViewQueryKey = (calendarId: number) => [
-  `/api/v1/calendar/calendar/${calendarId}/list`,
+  `/api/v1/calendar/${calendarId}/list`,
 ];
 
 export type CalendarControllerGetCalendarListViewQueryResult = NonNullable<
