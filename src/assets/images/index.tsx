@@ -51,10 +51,12 @@ const Images = {
     chris: require('./advisor/chris3.png'),
     tim: require('./advisor/tim.png'),
     kai: require('./advisor/kai.png'),
+    jonathanHakim: require('./advisor/jonathanHakim.jpg'),
   },
   partners: {
     john: require('./partners/john.jpg'),
     jeremy: require('./partners/jeremy.png'),
+    hashamUllah: require('./partners/hashamUllah.jpg'),
   },
   team: {
     // cap: require('./team/cap.png'),
@@ -137,6 +139,7 @@ const Images = {
     photoAaron2: require('./Photo_Aaron2.png'),
     photoLevi: require('./Photo_Levi.png'),
     photoGriffin: require('./Photo_Griffin.png'),
+    photoLizCarmouche: require('./Photo_Liz_Carmouche.jpg'),
   },
   Privacy: {
     PrivacyImg1: require('./PrivacyImg1.png'),
