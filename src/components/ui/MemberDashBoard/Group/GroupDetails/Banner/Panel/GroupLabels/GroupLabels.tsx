@@ -192,8 +192,8 @@ const GroupLabels: React.FC = () => {
           deepLinkToPlay: isMobile
             ? `impakt://challenge?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`
             : process.env.REACT_APP_NODE_ENV === 'production'
-            ? `https://fitness.impakt.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`
-            : `https://fitness.impakt-dev.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`,
+            ? `https://fitness.impakt.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`
+            : `https://fitness.impakt-dev.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`,
           exercices: normalizeExerciseNames(
             groupPinnedChallenge?.Challenge?.Routine?.TimelineBlocks ?? [],
           ),
