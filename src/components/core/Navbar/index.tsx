@@ -6,7 +6,6 @@ import {
   HStack,
   useDisclosure,
   useMediaQuery,
-  useColorMode,
   PositionProps,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -36,10 +35,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
   const path = parsePathname(location.pathname);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
-  const { colorMode } = useColorMode();
 
-  const isLight = colorMode === 'light';
-  const textColor = isLight ? 'glass.100' : 'glass.700';
   // const bgColor = path.path !== '' || isScrolling ? 'rgba(28, 28, 40, 0.65)' : 'transparent';
   const bgColor = isVersion2 ? '#fff' : 'rgba(28, 28, 40, 0.65)';
 

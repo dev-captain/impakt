@@ -27,7 +27,6 @@ const BannerSettingsMenu: React.FC = () => {
   } = usePersistedGroupStore();
   // const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const isCreator = role === 'Creator';
 
   const jointoGroup = async () => {
     if (!activeGroup) return;
@@ -46,7 +45,7 @@ const BannerSettingsMenu: React.FC = () => {
             const myGroupObj = exploreGroupToMyGroupsTransformation(exploreItem, member?.id);
             addToMyGroups({
               ...myGroupObj,
-              Group: { ...myGroupObj.Group, memberCount: myGroupObj.Group.memberCount + 1 },
+              Group: { ...myGroupObj.Group, memberCount: myGroupObj.Group.memberCount ?? 0 + 1 },
             });
           }
           if (membersOfGroup && member) {

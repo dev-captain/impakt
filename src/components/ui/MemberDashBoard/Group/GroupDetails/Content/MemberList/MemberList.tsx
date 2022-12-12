@@ -4,7 +4,6 @@ import {
   Text,
   Avatar,
   HStack,
-  VStack,
   // useClipboard,
   // useToast,
 } from '@chakra-ui/react';

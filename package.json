@@ -10,7 +10,7 @@
     "@emotion/styled": "^11.10.5",
     "@faker-js/faker": "^7.6.0",
     "@hookform/resolvers": "^2.8.8",
-    "@impakt-dev/api-client": "^0.47.0-1536",
+    "@impakt-dev/api-client": "^0.50.2-1617",
     "@reduxjs/toolkit": "^1.8.2",
     "@rematch/core": "^2.2.0",
     "@sentry/react": "^7.23.0",

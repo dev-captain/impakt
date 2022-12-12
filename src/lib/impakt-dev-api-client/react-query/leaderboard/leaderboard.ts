@@ -16,6 +16,7 @@ import type {
 import type {
   GetChallengeLeaderboardResV1,
   HttpExceptionSchema,
+  ChallengesLeaderboardControllerV1UsersleaderboardParams,
   LeaderboardDtoV1,
   LeaderboardControllerV1GetLeaderboardParams,
   LeaderboardCreateDtoV1,
@@ -33,18 +34,20 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
 
 export const challengesLeaderboardControllerV1Usersleaderboard = (
   challengeId: number,
+  params?: ChallengesLeaderboardControllerV1UsersleaderboardParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetChallengeLeaderboardResV1>(
-    { url: `/api/v1/leaderboards/${challengeId}/users`, method: 'get', signal },
+    { url: `/api/v1/leaderboards/${challengeId}/users`, method: 'get', params, signal },
     options,
   );
 };
 
 export const getChallengesLeaderboardControllerV1UsersleaderboardQueryKey = (
   challengeId: number,
-) => [`/api/v1/leaderboards/${challengeId}/users`];
+  params?: ChallengesLeaderboardControllerV1UsersleaderboardParams,
+) => [`/api/v1/leaderboards/${challengeId}/users`, ...(params ? [params] : [])];
 
 export type ChallengesLeaderboardControllerV1UsersleaderboardQueryResult = NonNullable<
   Awaited<ReturnType<typeof challengesLeaderboardControllerV1Usersleaderboard>>
@@ -57,6 +60,7 @@ export const useChallengesLeaderboardControllerV1Usersleaderboard = <
   TError = ErrorType<HttpExceptionSchema>,
 >(
   challengeId: number,
+  params?: ChallengesLeaderboardControllerV1UsersleaderboardParams,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof challengesLeaderboardControllerV1Usersleaderboard>>,
@@ -70,12 +74,12 @@ export const useChallengesLeaderboardControllerV1Usersleaderboard = <
 
   const queryKey =
     queryOptions?.queryKey ??
-    getChallengesLeaderboardControllerV1UsersleaderboardQueryKey(challengeId);
+    getChallengesLeaderboardControllerV1UsersleaderboardQueryKey(challengeId, params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof challengesLeaderboardControllerV1Usersleaderboard>>
   > = ({ signal }) =>
-    challengesLeaderboardControllerV1Usersleaderboard(challengeId, requestOptions, signal);
+    challengesLeaderboardControllerV1Usersleaderboard(challengeId, params, requestOptions, signal);
 
   const query = useQuery<
     Awaited<ReturnType<typeof challengesLeaderboardControllerV1Usersleaderboard>>,

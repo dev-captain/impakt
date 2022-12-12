@@ -17,8 +17,6 @@ type LinkItemProps = {
 const LinkItem: React.FC<LinkItemProps & TextProps> = ({
   title,
   href,
-  isActive,
-  color,
   titleActiveColor = 'white',
   children,
   isNavigate,

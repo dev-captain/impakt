@@ -84,10 +84,8 @@ const CalendarDays: React.FC = () => {
             <DayComponent
               key={day.dayIdentifier}
               isCurrentMonth={day.sameMonth(getStartDayOfCurrentMonth())}
-              isToday={day.currentDay}
               isDaySelected={day.selectedDay}
               dayNumber={day.dayOfMonth}
-              eventsCounts={day.events.length}
               dote={day.events.length <= 3 ? '.'.repeat(day.events.length) : '...'}
               selectDay={
                 !day.currentMonth

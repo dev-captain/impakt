@@ -1,7 +1,6 @@
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
-import { HStack } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { Common } from 'components';
 

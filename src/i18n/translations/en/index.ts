@@ -412,13 +412,9 @@ export default {
       description:
         'You haven`t created any challenges yet. Download our desktop app and create your first challenge now',
     },
-    PublicToolTip: {
-      description:
-        '<b>Public:</b><br /><br />Recommended for growing a following.<br />&nbsp;&nbsp;•Anyone can find your group<br />&nbsp;&nbsp;•Anyone can join(no approval needed)<br />&nbsp;&nbsp;•Anyone can view group content<br /><br /><b>Private:</b><br />Recommended for closed circles (e.g. friends, family)<br />&nbsp;•Only group members can view group content<br />&nbsp;&nbsp;•People can only join if you manually accept their join request',
-    },
     PrivateToolTip: {
       description:
-        'Only group members can view group content<br />People can only join if you manually accept their join request',
+        'Only group members can view group content <br /> People can only join if you manually accept their join request',
     },
   },
   Evolving: {

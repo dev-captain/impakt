@@ -46,6 +46,7 @@ const GroupLabels: React.FC = () => {
 
   const fetchPinnedChallengeLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
     groupPinnedChallenge?.Challenge?.id ?? 0,
+    {},
     {
       query: {
         enabled: false,

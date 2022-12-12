@@ -10,7 +10,6 @@ import NavbarLinkItem from '../../common/LinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
-import NavBarLink from './NavBarLink';
 import routes from '../../../data/routes';
 
 type Props = {
@@ -25,9 +24,6 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
   const location = useLocation();
   const path = parsePathname(location.pathname);
   const { t } = useTranslation().i18n;
-
-  const textColor = 'rgba(255,255,255,0.5)';
-  const passiveColor = 'white';
 
   return (
     <Collapse in={isOpen} animateOpacity>

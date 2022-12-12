@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { useForm } from 'hooks';
-import { Flex, FormControl } from '@chakra-ui/react';
+import { Flex, FormControl, Box, Button, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Common, I } from 'components';
@@ -10,11 +11,13 @@ import { useGroupsControllerV1Create } from '../../../lib/impakt-dev-api-client/
 import { renderToast } from '../../../utils';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 import routes from '../../../data/routes';
+import PublicPrivateGroupHelperText from '../../ui/MemberDashBoard/Group/PublicPrivateGroupHelperText';
 
 const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onClose }) => {
   const createGroup = useGroupsControllerV1Create();
   const { addToMyGroups } = usePersistedGroupStore();
-
+  const [value, settingValue] = useState(false);
+  const [info, setInfo] = useState(false);
   const { handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(createGroupYupScheme),
     defaultValues: { groupName: '' },
@@ -30,7 +33,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
     const { groupName } = data as { groupName: string };
     if (!member) return;
     try {
-      const groupData = await createGroup.mutateAsync({ data: { groupName } });
+      const groupData = await createGroup.mutateAsync({ data: { groupName, _private: value } });
       addToMyGroups({
         groupId: groupData.id,
         userId: member.id,
@@ -66,6 +69,11 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
       whiteMode: true,
     },
   ];
+  const toggleInfo = () => {
+    if (!info) {
+      setInfo(true);
+    } else setInfo(false);
+  };
 
   return (
     <FormControl
@@ -81,7 +89,79 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
       w="full"
     >
       <Common.InputItems inputItems={inputItems} />
-      <Flex justifyContent="space-between" alignItems="center" w="full">
+      <Box
+        overflow="auto"
+        width="full"
+        paddingRight="8px"
+        css={{
+          '&::-webkit-scrollbar': {
+            width: '4px',
+          },
+          '&::-webkit-scrollbar-track': {
+            width: '6px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            visibility: 'initial',
+            width: '10px',
+            background: '#D3E2F0',
+            borderRadius: '24px',
+          },
+        }}
+      >
+        <Box border="2px solid #EEF4F6" p="16px" borderRadius="16px" mb="16px">
+          <Box display="flex" justifyContent="space-between" alignItem="center">
+            <Text color="#29323B" fontSize={{ md: '18px', base: '12px' }} fontWeight="500">
+              Is your group public or private?
+            </Text>
+            <Text
+              color={!info ? '#CC4C33' : '#728BA3'}
+              display="block"
+              style={{ cursor: 'pointer' }}
+              onClick={toggleInfo}
+            >
+              Learn more
+            </Text>
+          </Box>
+          <Box display="flex" width="100%" mt="12px">
+            <Button
+              color={value === false ? '#29323B' : '#728BA3'}
+              bg={value === false ? '#EEF4F6' : '#fff'}
+              _hover={{
+                backgroundColor: value === true ? 'transparent' : '#EEF4F6',
+                color: value === true ? '#728BA3' : '#29323B',
+              }}
+              _focus={{ boxShadow: 'none' }}
+              w="120px"
+              h="38px"
+              borderRadius="8px"
+              onClick={() => {
+                settingValue(false);
+              }}
+            >
+              Public
+            </Button>
+            <Button
+              bg={value === true ? '#EEF4F6' : '#fff'}
+              color={value === true ? '#29323B' : '#728BA3'}
+              _hover={{
+                backgroundColor: value === false ? 'transparent' : '#EEF4F6',
+                color: value === false ? '#728BA3' : '#29323B',
+              }}
+              _focus={{ boxShadow: 'none' }}
+              w="120px"
+              h="38px"
+              borderRadius="8px"
+              onClick={() => {
+                settingValue(true);
+              }}
+            >
+              Private
+            </Button>
+          </Box>
+          {info && <PublicPrivateGroupHelperText p="1em" />}
+        </Box>
+      </Box>
+      <Flex justifyContent="space-between" w="full">
         <Common.ImpaktButton
           variant="delete"
           borderRadius="16px"

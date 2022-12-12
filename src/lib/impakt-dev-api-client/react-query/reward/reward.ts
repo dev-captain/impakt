@@ -29,10 +29,10 @@ export const rewardTeamV1ControllerGetTeamReward = (
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
-  return customInstance<void>({ url: `/api/vv1/reward-team`, method: 'get', signal }, options);
+  return customInstance<void>({ url: `/api/v1/reward-team`, method: 'get', signal }, options);
 };
 
-export const getRewardTeamV1ControllerGetTeamRewardQueryKey = () => [`/api/vv1/reward-team`];
+export const getRewardTeamV1ControllerGetTeamRewardQueryKey = () => [`/api/v1/reward-team`];
 
 export type RewardTeamV1ControllerGetTeamRewardQueryResult = NonNullable<
   Awaited<ReturnType<typeof rewardTeamV1ControllerGetTeamReward>>
@@ -75,7 +75,7 @@ export const rewardTeamV1ControllerCreateTeamReward = (
 ) => {
   return customInstance<void>(
     {
-      url: `/api/vv1/reward-team`,
+      url: `/api/v1/reward-team`,
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       data: createTeamRewardDTO,
