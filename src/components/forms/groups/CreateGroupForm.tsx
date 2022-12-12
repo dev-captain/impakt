@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useForm } from 'hooks';
-import keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
 import { Flex, FormControl, Box, Button, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +11,7 @@ import { useGroupsControllerV1Create } from '../../../lib/impakt-dev-api-client/
 import { renderToast } from '../../../utils';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 import routes from '../../../data/routes';
+import PublicPrivateGroupHelperText from '../../ui/MemberDashBoard/Group/PublicPrivateGroupHelperText';
 
 const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onClose }) => {
   const createGroup = useGroupsControllerV1Create();
@@ -23,8 +22,6 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
     resolver: yupResolver(createGroupYupScheme),
     defaultValues: { groupName: '' },
   });
-  const { t } = useTranslation().i18n;
-  const helperText = t(keys.Message.PublicToolTip.description);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
@@ -161,17 +158,7 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
               Private
             </Button>
           </Box>
-          {info && (
-            <Text
-              color="#4E6070"
-              bg="#EEF4F6"
-              padding="15px"
-              style={{ display: 'block', marginTop: '20px', borderRadius: '10px' }}
-              dangerouslySetInnerHTML={{
-                __html: helperText,
-              }}
-            />
-          )}
+          {info && <PublicPrivateGroupHelperText p="1em" />}
         </Box>
       </Box>
       <Flex justifyContent="space-between" w="full">

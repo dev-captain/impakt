@@ -51,9 +51,9 @@
     "@typescript-eslint/no-use-before-define": 0,
     "newline-before-return": 1,
     "react-hooks/exhaustive-deps": 0,
-    "@typescript-eslint/no-unused-vars": ["off"],
-    "no-unused-vars": "off",
-    "no-console": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-unused-vars": "error",
+    "no-console": "error",
     "no-param-reassign": [
       "error",
       {
