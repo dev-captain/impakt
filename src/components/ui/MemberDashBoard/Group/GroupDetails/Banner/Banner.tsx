@@ -7,8 +7,11 @@ import BannerHeaderLeft from './Header/BannerHeaderLeft';
 import BannerPanelLeft from './Panel/BannerPanelLeft';
 import BannerPanelRight from './Panel/BannerPanelRight';
 import MemberDashboardCard from '../../../MemberDashBoardCard';
+import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
 const Banner: React.FC = () => {
+  const memberRole = usePersistedGroupStore();
+
   return (
     <MemberDashboardCard borderRadius="24px" padding="0 !important" w="full">
       <BannerImage />
@@ -30,7 +33,7 @@ const Banner: React.FC = () => {
           flexDir={{ base: 'column', md: 'row' }}
           justifyContent="space-between"
         >
-          <BannerPanelLeft />
+          {memberRole.role !== 'None' && memberRole.role !== 'Member' && <BannerPanelLeft />}
           <BannerPanelRight />
         </HStack>
       </Box>
