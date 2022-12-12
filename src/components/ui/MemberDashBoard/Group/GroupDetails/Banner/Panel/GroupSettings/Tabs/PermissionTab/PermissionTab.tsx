@@ -1,9 +1,7 @@
 import React from 'react';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
-import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
 import RoleCard from './RoleCard';
 import { useGroupsControllerV1PatchGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
@@ -15,7 +13,6 @@ const PermissionTab: React.FC = () => {
   const updateGroup = useGroupsControllerV1PatchGroup();
   const [value, setValue] = React.useState('Public');
 
-  const { t } = useTranslation().i18n;
   const groupParam = useParams();
   const { activeGroup, setActiveGroup, setMyGroups, myGroups, role } = usePersistedGroupStore();
   React.useEffect(() => {
@@ -75,10 +72,7 @@ const PermissionTab: React.FC = () => {
           },
         }}
       >
-        <PermissionCard
-          title="Is your group public or private?"
-          helperText={t(keys.Message.PublicToolTip.description)}
-        >
+        <PermissionCard title="Is your group public or private?">
           <Button
             color={value === 'Public' ? '#29323B' : '#728BA3'}
             bg={value === 'Public' ? '#EEF4F6' : '#fff'}
