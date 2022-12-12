@@ -1,5 +1,6 @@
-import { Box, Image, useDisclosure } from '@chakra-ui/react';
+import { Box, Image, Text, useDisclosure } from '@chakra-ui/react';
 import { Common, I } from 'components';
+import { LockIcon } from '@chakra-ui/icons';
 import * as React from 'react';
 import Images from '../../../../../../assets/images';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
@@ -13,6 +14,7 @@ const BannerImage: React.FC = () => {
   const isCurrentImageExist = usePersistedGroupStore().activeGroup?.currentCoverImageId;
   const currentCoverImageSource = usePersistedGroupStore().activeGroup?.CurrentCoverImage;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { activeGroup } = usePersistedGroupStore();
 
   return (
     <Box w="full" position="relative">
@@ -43,6 +45,24 @@ const BannerImage: React.FC = () => {
       >
         <I.PenIcon />
       </Common.ImpaktButton>
+      {activeGroup?.isPreview && activeGroup.private && (
+        <Box
+          bg="rgba(18, 18, 22, 0.4)"
+          w="128px"
+          borderRadius="40px"
+          h="32px"
+          position="absolute"
+          bottom="24px"
+          left="32px"
+          padding="12px"
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <LockIcon color="white" />
+          <Text color="white">PRIVATE</Text>
+        </Box>
+      )}
       <BannerImageChangeModal open={isOpen} close={onClose} />
     </Box>
   );
