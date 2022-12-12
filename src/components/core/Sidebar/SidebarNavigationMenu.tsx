@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Text, Flex, HStack, useDisclosure, PositionProps, VStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, PositionProps, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from 'components';

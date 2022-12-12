@@ -1,5 +1,5 @@
-import { Box, HStack } from '@chakra-ui/react';
-import * as React from 'react';
+import React from 'react';
+import { HStack } from '@chakra-ui/react';
 import { EventCalendarContextProvider } from 'context/EventCalendarContext';
 import Forums from './Forums/Forums';
 import MemberList from './MemberList/MemberList';

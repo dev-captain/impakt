@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';

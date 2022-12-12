@@ -27,7 +27,6 @@ const BannerSettingsMenu: React.FC = () => {
   } = usePersistedGroupStore();
   // const isRoleLoading = useAppSelector((state) => state.groupsReducer.isRoleLoading);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const isCreator = role === 'Creator';
 
   const jointoGroup = async () => {
     if (!activeGroup) return;

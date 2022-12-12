@@ -1,14 +1,11 @@
-import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
+import { Box, Button, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react';
 import { I } from 'components';
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import routes from '../../../data/routes';
 import SidebarLinks from './SidebarLinks';
 
 const SidebarCollapseMenu = () => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
   const path = useLocation();
-  const navigate = useNavigate();
 
   return (
     <Box zIndex="9999 !important" width="full">
@@ -28,13 +25,13 @@ const SidebarCollapseMenu = () => {
           _focus={{ boxShadow: 'light' }}
         >
           {path.pathname === routes.dashboard && (
-            <Box onClick={() => setActiveIndex(0)} display="flex" alignItems="center">
+            <Box display="flex" alignItems="center">
               <I.DashboardIcon key="2" />
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
           {path.pathname.includes(routes.groups) && (
-            <Box onClick={() => setActiveIndex(1)} display="flex" alignItems="center">
+            <Box display="flex" alignItems="center">
               <I.PeopleIcon
                 cursor="pointer"
                 width="26px"
@@ -45,7 +42,7 @@ const SidebarCollapseMenu = () => {
             </Box>
           )}
           {path.pathname === routes.referrals && (
-            <Box onClick={() => setActiveIndex(2)} display="flex" alignItems="center">
+            <Box display="flex" alignItems="center">
               <I.ReferralsIcon
                 cursor="pointer"
                 width="26px"

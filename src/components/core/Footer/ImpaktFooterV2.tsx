@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { memo } from 'react';
+import React from 'react';
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
 import { I, Common } from 'components';
 import { useNavigate } from 'react-router-dom';

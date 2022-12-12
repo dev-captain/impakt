@@ -13,8 +13,6 @@ import {
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parsePathname } from 'utils';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
 
@@ -23,13 +21,11 @@ import DropDownProfileMenu from './LandingPageDropDownProfileMenu';
 import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
 import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
-import { useLogout } from '../../../../hooks/useLogout';
 import routes from '../../../../data/routes';
 
 // const { dark, light } = Images;
 
 const LandingPageNavbar: FC = () => {
-  const logout = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
   const path = parsePathname(location.pathname);

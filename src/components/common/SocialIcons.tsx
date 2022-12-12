@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, BoxProps, HStack } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 import { Socials } from 'data';
 import { I } from 'components';
 

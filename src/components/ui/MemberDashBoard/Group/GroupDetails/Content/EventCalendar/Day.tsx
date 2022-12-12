@@ -2,20 +2,16 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 
 interface DayProps {
-  isToday: boolean;
   isCurrentMonth: boolean;
   isDaySelected: boolean;
   dayNumber: number;
-  eventsCounts: number;
   selectDay: () => void;
   dote: string;
 }
 
 const DayComponent: React.FC<DayProps> = ({
-  isToday,
   isCurrentMonth,
   dayNumber,
-  eventsCounts,
   isDaySelected,
   selectDay,
   dote,

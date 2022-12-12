@@ -2,7 +2,6 @@ import { Box, Text, Button, useDisclosure } from '@chakra-ui/react';
 // import { I } from 'components';
 import * as React from 'react';
 import { AddIcon } from '@chakra-ui/icons';
-import { I } from 'components';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from 'assets/images';

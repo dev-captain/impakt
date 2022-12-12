@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import React from 'react';
 
 const DayNames: React.FC = () => {

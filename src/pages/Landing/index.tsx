@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/react';
-import { S, C } from 'components';
+import { S } from 'components';
 
 const LandingPage = () => {
   // const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
