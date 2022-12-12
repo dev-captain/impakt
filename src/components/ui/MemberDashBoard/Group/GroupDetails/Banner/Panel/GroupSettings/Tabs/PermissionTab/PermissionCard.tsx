@@ -17,6 +17,7 @@ const PermissionCard: React.FC<ChallengesCardProps> = ({ title, children }) => {
 
         <Tooltip
           bg="#FFFFFF"
+          cursor="pointer"
           borderRadius="16px"
           width="900px"
           boxShadow="0px 4px 6px -2px rgba(0, 0, 0, 0.12)"
