@@ -53,7 +53,7 @@ const PermissionCard: React.FC<ChallengesCardProps> = ({ title, children }) => {
               </Box>
               <Divider />
               <Box>
-                <Text>Private</Text>
+                <Text fontWeight="600">Private</Text>
               </Box>
               <Box>
                 <Text fontWeight="400">Recommended for closed circles (e.g. friends, family)</Text>
