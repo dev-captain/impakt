@@ -1,8 +1,10 @@
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Image, useDisclosure } from '@chakra-ui/react';
+import { Common, I } from 'components';
 import * as React from 'react';
 import Images from '../../../../../../assets/images';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 // import GroupCardMemberCount from '../../Groups/GroupCardMemberCount';
+import BannerImageChangeModal from './BannerImageChangeModal';
 
 const BannerImage: React.FC = () => {
   // const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
@@ -10,6 +12,7 @@ const BannerImage: React.FC = () => {
   // );
   const isCurrentImageExist = usePersistedGroupStore().activeGroup?.currentCoverImageId;
   const currentCoverImageSource = usePersistedGroupStore().activeGroup?.CurrentCoverImage;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box w="full" position="relative">
@@ -27,7 +30,20 @@ const BannerImage: React.FC = () => {
         borderRadius="24px 24px 0 0"
         maxH="240px"
         objectFit="cover"
+        // position="absolute"
       />
+      <Common.ImpaktButton
+        variant="black"
+        w="48px"
+        h="48px"
+        style={{ position: 'absolute', top: '16px', right: '16px' }}
+        onClick={() => {
+          onOpen();
+        }}
+      >
+        <I.PenIcon />
+      </Common.ImpaktButton>
+      <BannerImageChangeModal open={isOpen} close={onClose} />
     </Box>
   );
 };
