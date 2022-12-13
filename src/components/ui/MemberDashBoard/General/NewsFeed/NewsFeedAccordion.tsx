@@ -108,7 +108,7 @@ const getStartedLinkItems = [
   { title: 'Join Our Community', href: routes.groupDetail(12), order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
   {
-    title: 'Try Fitness 2.0 on Web',
+    title: 'Try Fitness 2.0 Challenge',
     href: 'https://fitness.impakt.com/?challengeId=1708',
     order: 3,
   },
