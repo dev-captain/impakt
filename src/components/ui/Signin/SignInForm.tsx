@@ -12,9 +12,10 @@ import signInFormYupScheme from '../../../lib/yup/schemas/signInYupScheme';
 import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
+import routes from '../../../data/routes';
 
 const SignInForm: React.FC = () => {
-  const navigate = useNextParamRouter('/d');
+  const navigate = useNextParamRouter(routes.dashboard);
 
   const signIn = useAuthControllerLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -49,7 +50,7 @@ const SignInForm: React.FC = () => {
       {
         onSuccess: (member) => {
           setMember(member);
-          renderToast('success', 'Welcome');
+          renderToast('success', `Welcome ${member.firstName ?? member.username}`);
           navigate();
         },
         onError: (err) => {
@@ -114,6 +115,7 @@ const SignInForm: React.FC = () => {
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
+            variant="primary"
             isLoading={signIn.isLoading}
             type="submit"
             leftIcon={<I.EnterIcon width="24" height="24" />}

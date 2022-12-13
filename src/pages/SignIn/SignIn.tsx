@@ -6,13 +6,14 @@ import { useEffect } from 'react';
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 import { usePersistedAuthStore } from '../../lib/zustand';
 import { useNextParamRouter } from '../../hooks/useNextParamRouter';
+import routes from '../../data/routes';
 
 const SignIn = () => {
   const { member } = usePersistedAuthStore();
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const navigate = useNextParamRouter('/d');
+  const navigate = useNextParamRouter(routes.dashboard);
 
   useEffect(() => {
     if (member) {

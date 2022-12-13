@@ -4,6 +4,7 @@ import * as React from 'react';
 import { I } from 'components';
 import { useNavigate } from 'react-router-dom';
 import NewsFeedItem from './NewsFeedItem';
+import routes from '../../../../../data/routes';
 // import truncH from 'trunc-html';
 // import { usePersistedDiscourseStore } from '../../../../lib/zustand';
 
@@ -35,7 +36,7 @@ const NewsFeedAccordion: React.FC = () => {
       id: 5,
       bg: '#36B9FF',
       icon: <I.TwitterBigIcon />,
-      href: 'https://twitter.com/impaktlife',
+      href: 'https://twitter.com/impakt_life',
     },
     {
       id: 7,
@@ -104,15 +105,15 @@ const NewsFeedAccordion: React.FC = () => {
 };
 
 const getStartedLinkItems = [
-  { title: 'Join Our Community', href: '/d/g/12', order: 1 },
+  { title: 'Join Our Community', href: routes.groupDetail(12), order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
-  {
-    title: 'Try Fitness 2.0 on Web',
-    href: 'https://fitness.impakt.com/?challengeId=1708',
-    order: 3,
-  },
-  { title: 'Download Fitness 2.0 App', href: '/download', order: 4 },
-  { title: 'Follow us', href: undefined, order: 5 },
+  // {
+  //   title: 'Try Fitness 2.0 on Web',
+  //   href: 'https://fitness.impakt.com/?challengeId=1708',
+  //   order: 3,
+  // },
+  { title: 'Download Fitness 2.0 App', href: '/download', order: 3 },
+  { title: 'Follow us', href: undefined, order: 4 },
 ];
 
 export default NewsFeedAccordion;

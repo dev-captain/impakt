@@ -17,23 +17,18 @@ const BannerShareButton: React.FC = () => {
       <Menu>
         {isRoleDefined && (
           <Common.ImpaktButton
-            variant="transparent"
+            variant="white-50"
             as={MenuButton}
-            backgroundColor="#F4F7F9"
             borderRadius="8px"
-            __css={{ span: { display: 'flex', justifyContent: 'center', alignItems: 'center' } }}
+            justifyConten="center"
             alignItems="center"
-            height="40px"
-            color="#4E6070"
-            px="1em"
-            py="12px"
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<I.ShareIcon width="16px" />}
+            p="12px"
+            h="56px"
             onClick={() => {
               onOpen();
             }}
           >
-            Share
+            <I.ShareIcon width="32px" />
           </Common.ImpaktButton>
         )}
       </Menu>

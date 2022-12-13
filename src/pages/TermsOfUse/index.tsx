@@ -14,7 +14,7 @@ const TermsOfUse = () => {
       {/* <div id="subscription-form">
         <S.SubscriptionForm />
       </div> */}
-      <S.ImpaktFooter />
+      <C.ImpaktFooterV2 isWhiteMode={false} wFull />
     </Container>
   );
 };

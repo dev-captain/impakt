@@ -208,33 +208,28 @@ const UpdateGroupImageForm: React.FC = () => {
         </Text>
         <Box display="flex" flexDirection="column">
           <Common.ImpaktButton
-            cursor="pointer"
             variant="black"
-            color="#29323B"
             isLoading={updateGroupCoverImage.isLoading}
             isDisabled={updateGroupCoverImage.isLoading}
             w="160px"
             h="42px"
-            backgroundColor="#EEF4F6"
             borderRadius="8px"
             fontSize={{ md: '16px' }}
             onClick={openUploadImageFileInput}
             fontWeight="600"
-            leftIcon={<I.UploadIcon color="#29323B" width="12px" height="12px" />}
+            leftIcon={<I.UploadIcon width="12px" height="12px" />}
           >
             Upload
           </Common.ImpaktButton>
           <Common.ImpaktButton
             mt="8px"
             variant="black"
-            color="#29323B"
             w="160px"
             h="42px"
-            backgroundColor="#EEF4F6"
             borderRadius="8px"
             fontSize={{ md: '16px' }}
             fontWeight="600"
-            leftIcon={<CloseIcon color="#29323B" width="10px" height="10px" />}
+            leftIcon={<CloseIcon width="10px" height="10px" />}
             onClick={resetUploadImage}
           >
             Remove
@@ -243,12 +238,10 @@ const UpdateGroupImageForm: React.FC = () => {
             mt="8px"
             cursor="pointer"
             variant="black"
-            color="#29323B"
             isLoading={updateGroupCoverImage.isLoading}
             isDisabled={updateGroupCoverImage.isLoading}
             w="160px"
             h="42px"
-            backgroundColor="#EEF4F6"
             borderRadius="8px"
             type="submit"
             fontSize={{ md: '16px' }}

@@ -23,14 +23,7 @@ const NoItemCard: React.FC<NoItemCardPropsI> = ({
         {children}
       </VStack>
       <Box>
-        <Common.ImpaktButton
-          onClick={noItemButtonOnClick}
-          _hover={{ background: '' }}
-          _selected={{ background: '' }}
-          _focus={{ background: '' }}
-          _active={{ background: '' }}
-          background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
-        >
+        <Common.ImpaktButton onClick={noItemButtonOnClick} variant="orange-black">
           {noItemButtonTitle}
         </Common.ImpaktButton>
       </Box>

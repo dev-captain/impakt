@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import routes from '../../data/routes';
 import { useGroupsMemberControllerV1JoinGroup } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
 import { exploreGroupToMyGroupsTransformation } from '../../lib/impakt-dev-api-client/utils';
@@ -38,11 +39,11 @@ const GroupInvite = () => {
                 shallowExploreGroups[indexOfExploreGroup].Request = d;
                 setExploreGroups(shallowExploreGroups);
               }
-              navigate(`/d/g/${groupId}`);
+              navigate(routes.groupDetail(groupId));
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
-              navigate(`/d/g/${groupId}`);
+              navigate(routes.groupDetail(groupId));
             },
           },
         );
@@ -69,11 +70,11 @@ const GroupInvite = () => {
                 });
               }
 
-              navigate(`/d/g/${groupId}`);
+              navigate(routes.groupDetail(groupId));
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
-              navigate(`/d/g/${groupId}`);
+              navigate(routes.groupDetail(groupId));
             },
           },
         );

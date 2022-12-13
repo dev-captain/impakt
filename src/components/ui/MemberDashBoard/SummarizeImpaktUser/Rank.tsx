@@ -60,7 +60,7 @@ const MemberDashBoardSummarizeRank: React.FC<MemberDashBoardSummarizeRankPropsI>
               <Text mt="5px" fontWeight={400} textStyle="semibold3">
                 <i>
                   You are not ranked yet.{' '}
-                  <Link fontWeight={700} textStyle="semibold3" href="/download">
+                  <Link fontWeight={700} textStyle="semibold3" href={routes.download}>
                     Download our app now
                   </Link>{' '}
                   and do a daily, weekly or targeted challenge to get ranked.

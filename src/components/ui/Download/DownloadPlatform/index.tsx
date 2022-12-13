@@ -30,7 +30,8 @@ const DownloadPlatform = () => {
   return (
     <C.HeroLayout
       showNavbar
-      minH="70vh"
+      showFooterV2
+      minH="80vh"
       spacing={10}
       pos="relative"
       bgImage={bgImage}
@@ -141,7 +142,7 @@ const DownloadPlatform = () => {
                   isHorizontal
                   iconName="Android"
                   title="Download for Android"
-                  link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
+                  link="https://play.google.com/store/apps/details?id=com.impakt.fitness"
                   pe="auto"
                 />
                 <Box

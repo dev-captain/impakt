@@ -94,10 +94,10 @@ const NFTHeroSection = () => {
                 borderRadius="12px"
                 minW={{ base: '168px', lg: '224px' }}
                 maxW={{ base: '168px', lg: '224px' }}
-                href="/download"
+                href={routes.download}
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate('/download');
+                  navigate(routes.download);
                 }}
                 boxShadow="0px 0px 0px 6px rgba(240, 65, 83, 0.3)"
               >

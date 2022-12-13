@@ -2,31 +2,30 @@ import { memo, useEffect } from 'react';
 import { parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
-import { HStack, useColorMode, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import { HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import NavbarLinkItem from './NavbarLinkItem';
+import NavbarLinkItem from './LandingPageNavbarLinkItem';
 
 type Props = {
   IsHeader: boolean;
 };
 
-const SidebarLink = ({ IsHeader }: Props) => {
-  // TODO Sidebar links UI
-  const { colorMode, setColorMode } = useColorMode();
+const NavbarLink = ({ IsHeader }: Props) => {
+  // const { colorMode } = useColorMode();
   const location = useLocation();
-  const isLight = colorMode === 'light';
+  // const isLight = colorMode === 'light';
   const { t } = useTranslation(`default`).i18n;
   const { onClose } = useDisclosure();
   const path = parsePathname(location.pathname);
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
-  const textColor = isLight ? 'glass.100' : 'glass.700';
-  const activeColor = isLight ? 'glass.100' : 'glass.900';
-  const passiveColor = isLight ? 'rgba(255,255,255)' : 'glass.700';
-  useEffect(() => {
-    if (path.path === 'dashboard') {
-      setColorMode('light');
-    }
-  }, [path.path]);
+  // const textColor = isLight ? 'glass.100' : 'glass.700';
+  // const activeColor = isLight ? 'glass.100' : 'glass.900';
+  const passiveColor = location.pathname.includes('dashboard') ? 'fitnessGray' : '#545454';
+  // useEffect(() => {
+  //   if (path.path === 'dashboard') {
+  //     setColorMode('light');
+  //   }
+  // }, [path.path]);
 
   useEffect(() => {
     if (!isLessThan1040) {
@@ -36,33 +35,26 @@ const SidebarLink = ({ IsHeader }: Props) => {
 
   return (
     <HStack
-      spacing={[3, 3, 3, 5, 8, 12]}
+      // spacing={[3, 3, 3, 5, 6, 12]}
       flexWrap={{ base: 'wrap', md: 'nowrap' }}
       justifyContent={{ base: 'center', md: 'start' }}
       display="flex"
+      gap="20px"
     >
-      <NavbarLinkItem
+      {/* <NavbarLinkItem
         href="/"
         title={t(Keys.navbar.impaktFitness)}
-        isActive={path.path === ''}
+        isActive={path.path === '/'}
         color={activeColor || textColor}
         passiveColor={passiveColor}
-      />
-      <NavbarLinkItem
-        type="LINK"
-        onClose={onClose}
-        passiveColor={passiveColor}
-        title={t(Keys.navbar.knowledgeBase)}
-        href="https://knowledgebase.impakt.com"
-        isActive={path.path === 'knowledge-base'}
-      />
-      <NavbarLinkItem
+      /> */}
+      {/* <NavbarLinkItem
         href="/events"
         onClose={onClose}
         passiveColor={passiveColor}
         title={t(Keys.navbar.events)}
         isActive={path.path === 'events'}
-      />
+      /> */}
       <NavbarLinkItem
         href="/contact"
         onClose={onClose}
@@ -72,11 +64,11 @@ const SidebarLink = ({ IsHeader }: Props) => {
       />
       {!IsHeader && (
         <NavbarLinkItem
-          type="LINK"
           href="/terms-of-use"
           onClose={onClose}
           passiveColor={passiveColor}
           title={t(Keys.navbar.termsOfUse)}
+          isActive={path.path === 'terms-of-use'}
         />
       )}
       {/* <Button variant="ghost" onClick={() => changeLanguage('en')}>
@@ -89,4 +81,4 @@ const SidebarLink = ({ IsHeader }: Props) => {
   );
 };
 
-export default memo(SidebarLink);
+export default memo(NavbarLink);

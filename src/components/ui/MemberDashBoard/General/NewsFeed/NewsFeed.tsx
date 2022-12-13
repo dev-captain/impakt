@@ -1,17 +1,18 @@
 import { Box, HStack, Image, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import Images from '../../../../../assets/images';
 
-import MemberDashboardCard from '../MemberDashBoardCard';
+import MemberDashboardCard from '../../MemberDashBoardCard';
 import NewsFeedAccordion from './NewsFeedAccordion';
-import Images from '../../../../assets/images';
 
 const NewsFeed: React.FC = () => {
   return (
     <MemberDashboardCard
-      color="rgba(255,255,255,0.5)"
-      _hover={{ color: 'rgba(255,255,255,1)' }}
-      transition="color .2s"
+      justifyContent="space-between"
+      _hover={{ color: 'darkOrange' }}
+      transition="color .5s"
       rowGap="1.5em"
+      color="fg-1"
     >
       <Box id="news-feed-headline-box">
         <HStack columnGap="1.125em">
@@ -31,23 +32,22 @@ const NewsFeed: React.FC = () => {
 
       {/* <Box color="#4E6070" w="full" id="news-feed-check-our-discourse-box">
         <Common.ImpaktButton
+          display="flex"
+          wordBreak="break-word"
           size="lg"
-          variant="white"
-          bgColor="#F5F8FA"
-          leftIcon={
-            <Box marginRight="8px">
-              <I.DiscourseIcon />
-            </Box>
-          }
-          fontSize={{ base: '12px', md: '16px', lg: '20px' }}
-          lineHeight={{ base: '16px', md: '24px', lg: '32px' }}
-          color="#4E6070"
+          variant="white-50"
+          leftIcon={<I.DiscourseIcon style={{ marginRight: '5px' }} />}
+          fontSize="20px"
+          lineHeight="100%"
           justifyContent={{ md: 'center', lg: 'flex-start' }}
           as="a"
           href="https://discuss.impakt.com/tag/news"
           target="_blank"
+          height="auto"
+          width="full"
+          whiteSpace="break-spaces"
         >
-          Check our Discourse for more updates
+          <Text wordBreak="break-word">Check our Discourse for more updates</Text>
         </Common.ImpaktButton>
       </Box> */}
       {/* <Box id="news-feed-headline-box">Headline</Box> */}
