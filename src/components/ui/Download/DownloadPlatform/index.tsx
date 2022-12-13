@@ -141,7 +141,7 @@ const DownloadPlatform = () => {
                   isHorizontal
                   iconName="Android"
                   title="Download for Android"
-                  link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
+                  link="https://play.google.com/store/apps/details?id=com.impakt.fitness"
                   pe="auto"
                 />
                 <Box
