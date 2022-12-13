@@ -299,9 +299,16 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   if (isAndroid) {
                     window.location =
                       `intent://scan/#Intent;scheme=${deepLinkToPlay};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
-                  } else {
-                    window.location = deepLinkToPlay as any;
+
+                    setTimeout(() => {
+                      window.location =
+                        'https://play.google.com/store/apps/details?id=com.impakt.fitness' as any;
+                    }, 1500);
+
+                    return;
                   }
+
+                  window.location = deepLinkToPlay as any;
 
                   setTimeout(() => {
                     navigate('/download');

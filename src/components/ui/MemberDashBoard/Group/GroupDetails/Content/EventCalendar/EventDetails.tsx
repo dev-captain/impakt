@@ -4,6 +4,9 @@ import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { isAndroid } from 'react-device-detect';
+import { useNavigate } from 'react-router-dom';
+
 import { deepLinkToApp } from '../../../../../../../data';
 import {
   usePersistedChallengeStore,
@@ -12,6 +15,7 @@ import {
 import { truncateString } from '../../../../../../../utils';
 
 const EventDetails: React.FC = () => {
+  const navigate = useNavigate();
   // const [isGoing, setIsGoing] = React.useState(true);
   // const navigate = useNavigate();
   const { activeGroup } = usePersistedGroupStore();
@@ -122,8 +126,23 @@ const EventDetails: React.FC = () => {
           <a
             onClick={(e) => {
               e.preventDefault();
+              if (isAndroid) {
+                window.location =
+                  `intent://scan/#Intent;scheme=${deepLink};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
+
+                setTimeout(() => {
+                  window.location =
+                    'https://play.google.com/store/apps/details?id=com.impakt.fitness' as any;
+                }, 1500);
+
+                return;
+              }
 
               window.location = deepLink as any;
+
+              setTimeout(() => {
+                navigate('/download');
+              }, 1000);
             }}
             href={deepLink}
           >
