@@ -107,13 +107,13 @@ const NewsFeedAccordion: React.FC = () => {
 const getStartedLinkItems = [
   { title: 'Join Our Community', href: routes.groupDetail(12), order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
-  {
-    title: 'Try Fitness 2.0 Challenge',
-    href: 'https://fitness.impakt.com/?challengeId=1708',
-    order: 3,
-  },
-  { title: 'Download Fitness 2.0 App', href: '/download', order: 4 },
-  { title: 'Follow us', href: undefined, order: 5 },
+  // {
+  //   title: 'Try Fitness 2.0 Challenge',
+  //   href: 'https://fitness.impakt.com/?challengeId=1708',
+  //   order: 3,
+  // },
+  { title: 'Download Fitness 2.0 App', href: '/download', order: 3 },
+  { title: 'Follow us', href: undefined, order: 4 },
 ];
 
 export default NewsFeedAccordion;
