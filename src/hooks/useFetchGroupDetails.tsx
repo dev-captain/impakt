@@ -228,10 +228,13 @@ export const useFetchGroupDetails = () => {
 
 // TODO once the backend refactored for this feat it will moved to react query
 const useFetchAvailableChallenges = () => {
+  const { member } = usePersistedAuthStore();
   const { setAvailableGroupChallenges, setAvailableGroupRoutines } = usePersistedChallengeStore();
   const fetchAvailableChallengesForGroup = async (membersOfGroup: GetMembersOfGroupRes) => {
     const admin = membersOfGroup.Members.find(({ role }) => role === 'Creator');
-    const moderator = membersOfGroup.Members.find(({ role }) => role === 'Moderator');
+    const moderator = membersOfGroup.Members.find(
+      ({ role, User }) => role === 'Moderator' && User.id === member?.id,
+    );
     if (!admin) return;
 
     const groupAdminChallenges = await challengesControllerGetMany({
