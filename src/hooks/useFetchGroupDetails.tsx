@@ -228,9 +228,13 @@ export const useFetchGroupDetails = () => {
 
 // TODO once the backend refactored for this feat it will moved to react query
 const useFetchAvailableChallenges = () => {
+  const { member } = usePersistedAuthStore();
   const { setAvailableGroupChallenges, setAvailableGroupRoutines } = usePersistedChallengeStore();
   const fetchAvailableChallengesForGroup = async (membersOfGroup: GetMembersOfGroupRes) => {
     const admin = membersOfGroup.Members.find(({ role }) => role === 'Creator');
+    const moderator = membersOfGroup.Members.find(
+      ({ role, User }) => role === 'Moderator' && User.id === member?.id,
+    );
     if (!admin) return;
 
     const groupAdminChallenges = await challengesControllerGetMany({
@@ -246,6 +250,24 @@ const useFetchAvailableChallenges = () => {
       Creator: true,
     });
 
+    if (moderator) {
+      const groupModeratorChallenges = await challengesControllerGetMany({
+        validOnly: true,
+        Routine: true,
+        creatorId: moderator?.User.id,
+        Creator: true,
+      });
+
+      const groupModeratorChallengesRoutines = await routinesControllerGetRoutines({
+        creatorId: moderator?.User.id,
+        TimelineBlocks: true,
+        Creator: true,
+      });
+      setAvailableGroupChallenges([...groupAdminChallenges, ...groupModeratorChallenges]);
+      setAvailableGroupRoutines([...groupAdminRoutines, ...groupModeratorChallengesRoutines]);
+
+      return;
+    }
     setAvailableGroupChallenges(groupAdminChallenges);
     setAvailableGroupRoutines(groupAdminRoutines);
   };
