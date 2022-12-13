@@ -1,13 +1,17 @@
 import { memo } from 'react';
 import {
-  Text,
   VStack,
   HStack,
   useColorModeValue,
   Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
   Image,
-  Tooltip,
-  Divider,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
@@ -107,13 +111,13 @@ const DownloadPlatform = () => {
                     pe="auto"
                   />
                 </Box>
-                <Box display="flex" w={{ base: 'full', md: 'auto' }} justifyContent="flex-end">
+                {/* <Box display="flex" w={{ base: 'full', md: 'auto' }} justifyContent="flex-end">
                   <Tooltip placement="auto" borderRadius="1em" label={<DownloadSpecBox />}>
                     <Box cursor="pointer" id="tooltip" position="relative">
                       <I.TooltipIcon width="24px" />
                     </Box>
                   </Tooltip>
-                </Box>
+                </Box> */}
               </HStack>
               <HStack
                 flexWrap={{ base: 'wrap', lg: 'nowrap' }}
@@ -178,6 +182,7 @@ const DownloadPlatform = () => {
               <Gradient />
             </VStack> */}
           </HStack>
+          <DownloadSpecBox />
         </VStack>
       </VStack>
     </C.HeroLayout>
@@ -187,29 +192,131 @@ const DownloadPlatform = () => {
 const DownloadSpecBox = () => {
   return (
     <VStack w="full" p="2em">
-      <Text fontWeight="700">Min Specs</Text>
-      <ul>
-        <li>
-          Requires a 64-bit processor and operating system OS: Windows 10 or later / macOS Catalina
-          10.15 or later
-        </li>
-        <li>Processor: Intel Core i5 2.5 GHz or equivalent</li>
-        <li>Memory: 8 GB RAM</li>
-        <li>Graphics: UHD Graphics 630 </li>
-        <li>Storage: 4 GB available space</li>
-      </ul>
-      <Divider />
-      <Text fontWeight="700">Recommended Specs </Text>
-      <ul>
-        <li>
-          Requires a 64-bit processor and operating system OS: Windows 10 or later / macOS Catalina
-          10.15 or later
-        </li>
-        <li>Processor: Intel Core i7 2.8GHz or equivalent</li>
-        <li>Memory: 16 GB RAM</li>
-        <li>Graphics: NVidia GTX 960 or AMD equivalent </li>
-        <li>Storage: 4 GB available space</li>
-      </ul>
+      <Box
+        bgClip="text"
+        color="white"
+        sx={{
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}
+        background="linear-gradient(0deg, rgba(212, 35, 89, 0.35) 14.58%, rgba(212, 35, 89, 0) 45.1%), #FFFFFF"
+      >
+        <DownloadTitleItem title="Specs" />
+      </Box>
+      <Box
+        w="full"
+        display={{ base: 'block', md: 'flex' }}
+        justifyContent="center"
+        style={{ marginTop: '24px' }}
+      >
+        <TableContainer
+          borderRadius={10}
+          borderTopEndRadius={{ md: '0' }}
+          borderBottomEndRadius={{ md: '0' }}
+          w={{ base: 'full', md: 'auto' }}
+          sx={{ marginTop: '0px !important' }}
+        >
+          <Table variant="striped" colorScheme="whiteAlpha" whiteSpace="pre-wrap">
+            <Thead>
+              <Tr bgColor="#0E0E11">
+                <Th
+                  textAlign="start"
+                  color="#fff"
+                  borderBottom={0}
+                  textTransform="capitalize"
+                  whiteSpace="normal"
+                />
+                <Th
+                  textAlign="start"
+                  color="#fff"
+                  borderBottom={0}
+                  textTransform="capitalize"
+                  whiteSpace="normal"
+                >
+                  Recommended:
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td />
+                <Td>Requires a 64-bit processor and operating system</Td>
+              </Tr>
+              <Tr>
+                <Td>OS</Td>
+                <Td>Windows 10 or later / macOS Catalina 10.15 or later</Td>
+              </Tr>
+              <Tr>
+                <Td>CPU</Td>
+                <Td>Intel Core i7 2.8GHz or equivalent</Td>
+              </Tr>
+              <Tr>
+                <Td>RAM</Td>
+                <Td>16 GB</Td>
+              </Tr>
+              <Tr>
+                <Td>GPU</Td>
+                <Td>NVidia GTX 960 or AMD equivalent</Td>
+              </Tr>
+              <Tr>
+                <Td>Storage</Td>
+                <Td>4 GB available space</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <TableContainer
+          borderRadius={10}
+          borderTopStartRadius={{ md: '0' }}
+          borderBottomStartRadius={{ md: '0' }}
+          w={{ base: 'full', md: 'auto' }}
+          // sx={{ marginTop: '0px !important' }}
+          marginTop={{ base: '24px', md: '0' }}
+        >
+          <Table variant="striped" colorScheme="whiteAlpha" whiteSpace="pre-wrap">
+            <Thead>
+              <Tr bgColor="#0E0E11">
+                <Th display={{ md: 'none' }}> </Th>
+                <Th
+                  textAlign="start"
+                  color="#fff"
+                  borderBottom={0}
+                  textTransform="capitalize"
+                  whiteSpace="normal"
+                >
+                  Minimal:
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td display={{ md: 'none' }} />
+                <Td>Requires a 64-bit processor and operating system</Td>
+              </Tr>
+              <Tr>
+                <Td display={{ md: 'none' }}>OS</Td>
+                <Td>Windows 10 or later / macOS Catalina 10.15 or later</Td>
+              </Tr>
+              <Tr>
+                <Td display={{ md: 'none' }}>CPU</Td>
+                <Td>Intel Core i5 2.5 GHz or equivalent</Td>
+              </Tr>
+              <Tr>
+                <Td display={{ md: 'none' }}>RAM</Td>
+                <Td>8 GB</Td>
+              </Tr>
+              <Tr>
+                <Td display={{ md: 'none' }}>GPU</Td>
+                <Td>Graphics: UHD Graphics 630</Td>
+              </Tr>
+              <Tr>
+                <Td display={{ md: 'none' }}>Storage</Td>
+                <Td>4 GB available space</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
     </VStack>
   );
 };
