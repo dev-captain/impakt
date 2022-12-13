@@ -72,7 +72,7 @@ const GroupLabels: React.FC = () => {
   const challengeModalDisclosure = useDisclosure();
   const challengePreviewModalDisclosure = useDisclosure();
   const { role } = usePersistedGroupStore();
-  const isCreator = role === 'Creator';
+  const isCreator = role === 'Creator' || role === 'Moderator';
   const groupStatisticLabelItems = [
     // {
     //   Icon: () => <I.CalenderIcon color="#5C7FFF" />,
