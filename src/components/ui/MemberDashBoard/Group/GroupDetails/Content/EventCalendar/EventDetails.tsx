@@ -146,7 +146,7 @@ const EventDetails: React.FC = () => {
             }}
             href={deepLink}
           >
-            <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
+            <Text color="nextOrange" fontSize="16px" fontWeight="500">
               Join event
             </Text>
           </a>
@@ -161,7 +161,7 @@ const EventDetails: React.FC = () => {
         </Box>
       </Box>
 
-      <Box display="flex" gap="8px">
+      <Box display="flex" gap="8px" w="full" justifyContent="flex-end" mt="1em">
         {/* <Common.ImpaktButton
           variant="black"
           color={isGoing ? '#fff' : '#29323B'}
@@ -180,31 +180,29 @@ const EventDetails: React.FC = () => {
         {isAdmin && (
           <>
             <Common.ImpaktButton
-              variant="black"
+              variant="white-50"
               onClick={() => goToOverViewScreen('update')}
               w="48px"
               h={{ md: '48px', base: '40px' }}
-              backgroundColor="#EEF4F6"
               borderRadius="8px"
               type="submit"
-              color="#29323B"
               fontSize={{ md: '16px' }}
               fontWeight="700"
+              padding="8px"
             >
               <I.PenIcon width="18px" />
             </Common.ImpaktButton>
             <Common.ImpaktButton
-              variant="black"
+              variant="delete"
               w="48px"
               h={{ md: '48px', base: '40px' }}
-              backgroundColor="#FEE1E3"
               borderRadius="8px"
               type="submit"
               fontSize={{ md: '16px' }}
               fontWeight="700"
               onClick={() => goToOverViewScreen('remove')}
             >
-              <DeleteIcon width="18px" color="#F84153" />
+              <DeleteIcon width="18px" />
             </Common.ImpaktButton>
           </>
         )}

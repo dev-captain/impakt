@@ -17,7 +17,6 @@ const DiscordSupport = () => {
       align="flex-start"
       justify="flex-start"
       pos="relative"
-      showFooterV2
     >
       <Box
         m="0 !important"

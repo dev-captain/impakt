@@ -414,7 +414,7 @@ export default {
     },
     PrivateToolTip: {
       description:
-        'Only group members can view group content<br />People can only join if you manually accept their join request',
+        'Only group members can view group content <br /> People can only join if you manually accept their join request',
     },
   },
   Evolving: {

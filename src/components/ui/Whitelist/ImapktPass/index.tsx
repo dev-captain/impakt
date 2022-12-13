@@ -3,6 +3,7 @@ import { VStack, Box, Text, useColorModeValue, HStack } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useNavigate } from 'react-router-dom';
 import { Socials } from '../../../../data';
+import routes from '../../../../data/routes';
 
 const ImpaktPass = () => {
   const navigate = useNavigate();
@@ -148,10 +149,10 @@ const ImpaktPass = () => {
               <Box mt={{ base: '1em', lg: '0' }}>
                 <Common.ImpaktButton
                   as="a"
-                  href="/download"
+                  href={routes.download}
                   onClick={(e) => {
                     e.preventDefault();
-                    navigate('/download');
+                    navigate(routes.download);
                   }}
                   leftIcon={
                     <Box marginRight="8px">

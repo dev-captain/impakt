@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Forms } from 'components';
 import { useNavigate } from 'react-router-dom';
 import GroupsModal from '../../GroupsModal';
+import routes from '../../../../../../data/routes';
 
 interface CreateGroupModalPropsI {
   isStandalone: boolean;
@@ -18,7 +19,7 @@ const CreateGroupModal: React.FC<CreateGroupModalPropsI> = ({ isStandalone, onCl
     ? () => {
         if (props.onClose) {
           props.onClose();
-          navigate('/d/g');
+          navigate(routes.groups);
         }
       }
     : props.onClose;

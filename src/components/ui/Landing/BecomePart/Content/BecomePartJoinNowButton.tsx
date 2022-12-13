@@ -7,13 +7,11 @@ const BecomePartJoinNowButton: React.FC = () => {
 
   return (
     <Common.ImpaktButton
-      color="#ffffff"
-      bg="#000000"
+      variant="black"
       height="50px"
       w={{ md: '300px', base: '170px' }}
       gap="8px"
       padding="10px 14px"
-      _hover={{ bg: '#000', color: '#fff' }}
       onClick={() => navigate('/register')}
     >
       Join Now

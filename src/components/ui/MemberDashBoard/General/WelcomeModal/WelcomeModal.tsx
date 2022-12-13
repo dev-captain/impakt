@@ -2,29 +2,24 @@ import { Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
 
-import MemberDashboardCard from '../MemberDashBoardCard';
+import MemberDashboardCard from '../../MemberDashBoardCard';
 import {
   usePersistedAuthStore,
   usePersistedBalanceScoreStore,
   usePersistedFitnessStore,
-} from '../../../../lib/zustand';
-import { I } from '../../..';
+} from '../../../../../lib/zustand';
+import { I } from '../../../..';
 
 const WelcomeModal: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const { activeDays } = usePersistedFitnessStore();
   const { godlBalanceScore, koinBalanceScore } = usePersistedBalanceScoreStore();
   const { isWhitelistedCollection } = usePersistedAuthStore();
-  const memberName = member?.username;
-  const memberInfo = memberName?.split('#');
+  const memberName = member?.username.substring(0, member?.username.indexOf('#'));
+  const memberNumber = member?.username?.substring(member?.username.indexOf('#'));
 
   return (
-    <MemberDashboardCard
-      w="100%"
-      flexDir="column"
-      alignItems="start"
-      rowGap={{ base: '18px', lg: '32px' }}
-    >
+    <MemberDashboardCard flexDir="column" alignItems="start" rowGap={{ base: '18px', lg: '32px' }}>
       <Box
         display="flex"
         alignItems="center"
@@ -32,13 +27,16 @@ const WelcomeModal: React.FC = () => {
         letterSpacing="-0.04em !important"
         id="whitelist-challange-description-box-2"
       >
-        <Text textStyle={{ base: 'bold4', lg: 'bold5' }} color="#000">
-          {memberInfo?.map((data, i) => (
-            <span key={data} style={{ color: `${i === 1 ? 'gray' : '#000'}` }}>
-              {i === 1 ? `#` : `Hi, `}
-              {data}
-            </span>
-          ))}
+        <Text
+          textStyle={{ base: 'bold4', md: 'bold5' }}
+          lineHeight="100%"
+          letterSpacing="-0.5px"
+          color="fg-1"
+        >
+          Hi, <Box as="span">{memberName}</Box>
+          <Box as="span" color="fg3">
+            {memberNumber}
+          </Box>
         </Text>
         {isWhitelistedCollection.isWhitelisted && (
           <Box ms={3}>
@@ -47,7 +45,7 @@ const WelcomeModal: React.FC = () => {
         )}
       </Box>
       <Box id="whitelist-challange-description-box-2 " sx={{ marginTop: '0px !important' }}>
-        <Text color="#FEC417" textStyle="regular4">
+        <Text color="fg-1" textStyle="regular4" lineHeight="100%">
           Nice to see you!
         </Text>
         {isWhitelistedCollection.isWhitelisted && (
@@ -66,9 +64,9 @@ const WelcomeModal: React.FC = () => {
           borderRadius="20px"
           padding="12px 24px"
           h="auto"
-          bg="rgba(254, 196, 23, 0.15)"
+          bg="softOrange"
         >
-          <Box color="#FEC417" mt="0 !important" id="whitelist-challange-description-box-2">
+          <Box color="darkOrange" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textAlign="center" textStyle="bold5">
               {koinBalanceScore ?? 0}
             </Text>
@@ -137,10 +135,10 @@ const WelcomeModal: React.FC = () => {
           bg="#F5F8FA"
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
-            <Text Text color="#29323B" textAlign="center" textStyle="bold5">
+            <Text Text color="fg-1" textAlign="center" textStyle="bold5">
               {activeDays}
             </Text>
-            <Text color="#728BA3" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
+            <Text color="fg1" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Active days
             </Text>
           </Box>

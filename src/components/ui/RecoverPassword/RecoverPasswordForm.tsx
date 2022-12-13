@@ -66,6 +66,7 @@ const RecoverPasswordForm: React.FC = () => {
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '313px' }}>
           <Common.ImpaktButton
+            variant="primary"
             isDisabled={!getValues('email')}
             isLoading={resetPassword.isLoading}
             type="submit"

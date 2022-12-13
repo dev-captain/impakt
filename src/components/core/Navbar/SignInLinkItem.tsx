@@ -11,6 +11,7 @@ const SignInButton: React.FC = () => {
     <Common.ImpaktButton
       as="a"
       variant="secondary"
+      bgColor="rgba(28, 28, 40, 1)"
       href="/signin"
       onClick={(e) => {
         e.preventDefault();

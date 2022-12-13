@@ -30,7 +30,8 @@ const DownloadPlatform = () => {
   return (
     <C.HeroLayout
       showNavbar
-      minH="70vh"
+      showFooterV2
+      minH="80vh"
       spacing={10}
       pos="relative"
       bgImage={bgImage}
