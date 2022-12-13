@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { usePascalCase } from 'hooks';
-import { isAndroid, isIOS, isMobile } from 'react-device-detect';
+import { isAndroid } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from '../../../../..';
@@ -296,24 +296,16 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 as="a"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (isMobile) {
-                    if (isAndroid) {
-                      window.location =
-                        `intent://scan/#Intent;scheme=${deepLinkToPlay};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
-
-                      return;
-                    }
-                    if (isIOS) {
-                      window.location = deepLinkToPlay as any;
-
-                      setTimeout(() => {
-                        navigate('/download');
-                      }, 1000);
-
-                      return;
-                    }
+                  if (isAndroid) {
+                    window.location =
+                      `intent://scan/#Intent;scheme=${deepLinkToPlay};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
+                  } else {
+                    window.location = deepLinkToPlay as any;
                   }
-                  window.location = deepLinkToPlay as any;
+
+                  setTimeout(() => {
+                    navigate('/download');
+                  }, 1000);
                 }}
                 href={deepLinkToPlay}
                 _hover={{ background: '' }}
