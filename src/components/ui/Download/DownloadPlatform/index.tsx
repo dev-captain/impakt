@@ -138,31 +138,31 @@ const DownloadPlatform = () => {
                 >
                   <I.MobileIcon opacity="1" />
                 </Box>
-
-                <Common.DownloadButton
-                  width={{ base: '100%', md: '319px' }}
-                  bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
-                  isHorizontal
-                  iconName="Android"
-                  title="Download for Android"
-                  link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
-                  pe="auto"
-                />
                 <Box
-                  width={{ base: '100%', md: '282px' }}
+                  width={{ base: '100%', md: '315px' }}
                   marginTop={{ base: '12px !important', md: '0px !important' }}
                   marginStart="0px !important"
                 >
                   <Common.DownloadButton
-                    width={{ base: '100%', md: '282px' }}
-                    bg="rgba(255, 255, 255, 0.1)"
+                    width={{ base: '100%', md: '315px' }}
+                    bg=""
                     isHorizontal
-                    iconName="Ios"
-                    title="iOS coming soon"
+                    iconName=""
+                    title="Launching soon for mobile"
                     link=""
                     pe="none"
                   />
                 </Box>
+
+                <Common.DownloadButton
+                  width={{ base: '100%', md: '282px' }}
+                  bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
+                  isHorizontal
+                  iconName=""
+                  title="Join the waitlist"
+                  link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
+                  pe="auto"
+                />
               </HStack>
             </VStack>
             {/* <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
