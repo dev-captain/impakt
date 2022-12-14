@@ -160,7 +160,6 @@ const DownloadPlatform = () => {
                   isHorizontal
                   iconName=""
                   title="Join the waitlist"
-                  link="https://play.google.com/store/apps/details?id=com.impakt.Minigames"
                   pe="auto"
                 />
               </HStack>
