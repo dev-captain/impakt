@@ -12,7 +12,7 @@ import {
   Td,
   TableContainer,
   Image,
-  // useDisclosure,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
@@ -20,11 +20,11 @@ import keys from 'i18n/types';
 import { I, C, Common } from 'components';
 // import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
-// import WaitlistModal from './WaitlistModal';
+import WaitlistModal from './WaitlistModal';
 // import Gradient from './Gradient';
 
 const DownloadPlatform = () => {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
   const bgImage = useColorModeValue(
@@ -83,7 +83,7 @@ const DownloadPlatform = () => {
                 <Box
                   width="60px"
                   height="60px"
-                  display={{ base: 'none', md: 'flex' }}
+                  d={{ base: 'none', md: 'flex' }}
                   justifyContent="center"
                   alignItems="center"
                 >
@@ -124,6 +124,7 @@ const DownloadPlatform = () => {
                 </Box> */}
               </HStack>
               <HStack
+                flexWrap={{ base: 'wrap', lg: 'nowrap' }}
                 background="rgba(28, 28, 40, 0.65)"
                 display="flex"
                 spacing={2}
@@ -133,17 +134,21 @@ const DownloadPlatform = () => {
                 order={{ base: '2', md: '3' }}
               >
                 <Box
-                  display="flex"
                   width="60px"
                   height="60px"
+                  d={{ base: 'none', md: 'flex' }}
                   justifyContent="center "
                   alignItems="center"
                 >
                   <I.MobileIcon opacity="1" />
                 </Box>
-                <Box width={{ base: '100%', md: '315px' }} marginStart="0px !important">
+                <Box
+                  width={{ base: '100%', md: '315px' }}
+                  marginTop={{ base: '12px !important', md: '0px !important' }}
+                  marginStart="0px !important"
+                >
                   <Common.DownloadButton
-                    width={{ base: '100%', md: '282px' }}
+                    width={{ base: '100%', md: '315px' }}
                     bg=""
                     isHorizontal
                     iconName=""
@@ -153,7 +158,7 @@ const DownloadPlatform = () => {
                   />
                 </Box>
 
-                {/* <Common.DownloadButton
+                <Common.DownloadButton
                   width={{ base: '100%', md: '282px' }}
                   bg="linear-gradient(143.78deg, #DC143C 18.94%, #B22222 78.86%)"
                   isHorizontal
@@ -163,8 +168,7 @@ const DownloadPlatform = () => {
                   onClick={() => {
                     onOpen();
                   }}
-                /> */}
-                <Box mt="0 !important" minW={{ base: '0%', md: '282px' }} />
+                />
               </HStack>
             </VStack>
             {/* <VStack pos="relative" align="center" justify="center" onClick={show} cursor="pointer">
@@ -187,7 +191,7 @@ const DownloadPlatform = () => {
           <DownloadSpecBox />
         </VStack>
       </VStack>
-      {/* <WaitlistModal isOpen={isOpen} onClose={onClose} isCloseButton /> */}
+      <WaitlistModal isOpen={isOpen} onClose={onClose} isCloseButton />
     </C.HeroLayout>
   );
 };
