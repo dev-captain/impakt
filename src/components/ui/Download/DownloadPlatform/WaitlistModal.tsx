@@ -7,52 +7,52 @@ import {
   ModalCloseButton,
   ModalBody,
   Box,
-  Stack,
   Text,
+  Image,
+  VStack,
 } from '@chakra-ui/react';
+import WaitlistForm from './WaitlistForm';
+import Images from '../../../../assets/images';
 
 export type WaitlistModalProps = {
   isOpen: boolean;
   isCloseButton?: boolean;
   onClose: () => void;
-  overlay: boolean;
 };
 
 const WaitlistModal: React.FC<WaitlistModalProps> = (props) => {
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose}>
-      <ModalOverlay bg={props.overlay ? 'modalOverlayBg' : undefined} />
+    <Modal isCentered scrollBehavior="inside" isOpen={props.isOpen} onClose={props.onClose}>
+      <ModalOverlay />
       <ModalContent
-        rounded="3xl"
+        w={{ base: '92%', md: '100%' }}
+        borderRadius="3xl"
         boxShadow="0px 12px 30px -6px rgba(0, 6, 14, 0.12), 0px 24px 60px -12px rgba(0, 6, 14, 0.2);"
       >
         <ModalHeader>
           {props.isCloseButton && <ModalCloseButton onClick={props.onClose} />}
         </ModalHeader>
-        <ModalBody>
-          <Box
-            maxW="360px"
-            maxH="290px"
+        <ModalBody p="2em">
+          <VStack
             w="full"
             h="full"
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
+            rowGap="1em"
           >
-            <Stack align="center">
-              <Text fontSize="2xl" fontWeight="medium" color="#29323B" isTruncated>
-                Launching soon on
+            <Text fontSize="2xl" fontWeight="medium" color="#29323B" isTruncated>
+              Launching soon on
+            </Text>
+            <Box mt="2" display="flex" flexDirection="column" alignItems="center">
+              <Image src={Images.Common.VsportDark} w="168px" h="48px" />
+              <Text fontSize="18px" fontWeight="medium" color="#29323B">
+                for mobile
               </Text>
-              <Box mt="2" display="flex" flexDirection="column" alignItems="center">
-                <Image src={Vsport} w="168px" h="48px" />
-                <Text fontSize="18px" fontWeight="medium" color="#29323B">
-                  for mobile
-                </Text>
-              </Box>
-            </Stack>
+            </Box>
             <WaitlistForm />
-          </Box>
+          </VStack>
         </ModalBody>
       </ModalContent>
     </Modal>

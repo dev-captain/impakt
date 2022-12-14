@@ -12,6 +12,7 @@ import {
   Td,
   TableContainer,
   Image,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
@@ -19,9 +20,11 @@ import keys from 'i18n/types';
 import { I, C, Common } from 'components';
 // import useModalStore from 'hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
+import WaitlistModal from './WaitlistModal';
 // import Gradient from './Gradient';
 
 const DownloadPlatform = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
   const bgImage = useColorModeValue(
@@ -162,6 +165,9 @@ const DownloadPlatform = () => {
                   iconName=""
                   title="Join the waitlist"
                   pe="auto"
+                  onClick={() => {
+                    onOpen();
+                  }}
                 />
               </HStack>
             </VStack>
@@ -185,6 +191,7 @@ const DownloadPlatform = () => {
           <DownloadSpecBox />
         </VStack>
       </VStack>
+      <WaitlistModal isOpen={isOpen} onClose={onClose} isCloseButton />
     </C.HeroLayout>
   );
 };

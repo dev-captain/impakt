@@ -20,6 +20,7 @@ const Images = {
     Window: require('./home/hero/window.png'),
     Goldaword: require('./goldaword.png'),
     Vsport: require('./vsport-2.png'),
+    VsportDark: require('./vsport.png'),
   },
   backgrounds: {
     advisorsSectionBg: require('./backgrounds/bgadvvisors.png'),
