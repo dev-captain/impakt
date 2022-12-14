@@ -5,7 +5,7 @@ import BecomePartJoinNowButton from './Content/BecomePartJoinNowButton';
 
 const BecomePart: React.FC = () => {
   return (
-    <Box bgColor="#F0F7FF" textAlign="center" padding={{ md: '126px 16px', base: '70px 16px' }}>
+    <Box bgColor="#F5F8FA" textAlign="center" padding={{ md: '126px 16px', base: '70px 16px' }}>
       <BecomePartHeadlineText />
       <BecomePartJoinNowButton />
     </Box>
