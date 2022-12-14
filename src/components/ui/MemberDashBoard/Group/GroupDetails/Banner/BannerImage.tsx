@@ -45,7 +45,7 @@ const BannerImage: React.FC = () => {
       >
         <I.PenIcon />
       </Common.ImpaktButton>
-      {activeGroup?.isPreview && activeGroup.private && (
+      {activeGroup?.private && (
         <Box
           bg="rgba(18, 18, 22, 0.4)"
           w="128px"

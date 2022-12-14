@@ -580,7 +580,7 @@ export const ChallengeTab: ChallengeTabs[] = [
 export const GroupSettingsMemberTabs = ['General'];
 
 export const GroupSettingTab = [
-  'Edit group',
+  // 'Edit group',
   'Permissions',
   'General',
   // 'Requests',
