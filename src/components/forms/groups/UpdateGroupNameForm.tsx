@@ -82,11 +82,9 @@ const UpdateGroupNameForm: React.FC = () => {
         disabled={updateGroup.isLoading}
         mt={{ md: 0, base: '10px' }}
         variant="black"
-        colorScheme="#fff"
         w={{ md: '147px', base: '100%' }}
         ml={{ md: '16px', base: '0' }}
         h="60px"
-        backgroundColor="#29323B"
         borderRadius="8px"
         type="submit"
         fontSize={{ md: '16px' }}

@@ -13,6 +13,7 @@ const BannerPanelLeft: React.FC = () => {
       rowGap="12px"
       columnGap="12px"
       flexDir={{ base: 'column', md: 'row' }}
+      flexWrap="wrap"
     >
       {activeGroup?.isPreview && activeGroup.private ? (
         <Text color="#29323B" fontWeight="400" fontSize="18px" lineHeight="26px">

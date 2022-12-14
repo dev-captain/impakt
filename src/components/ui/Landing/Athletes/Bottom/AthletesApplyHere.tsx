@@ -18,13 +18,11 @@ const AthletesApplyHere: React.FC = () => {
         Got what it takes to be an ICON?
       </Text>
       <Common.ImpaktButton
-        color="#ffffff"
-        bg="#000000"
+        variant="black"
         height="50px"
         w={{ md: '300px', base: '170px' }}
         gap="8px"
         padding="10px 14px"
-        _hover={{ bg: '#000', color: '#fff' }}
         // disabled
         onClick={() => navigate('/contact')}
       >

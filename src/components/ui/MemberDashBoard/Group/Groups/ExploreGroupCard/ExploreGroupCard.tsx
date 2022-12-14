@@ -8,25 +8,19 @@ import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 const ExploreGroup: React.FC = () => {
   const { exploreGroups } = usePersistedGroupStore();
 
-  const [status, setStatus] = React.useState<'public' | 'private'>('public');
+  const [status, setStatus] = React.useState<'Public' | 'Private'>('Public');
   if (exploreGroups.length === 0) return null;
-
-  const handleChangeStatus = (activeStatus: typeof status) => {
-    setStatus(activeStatus);
-  };
 
   return (
     <HStack
-      columnGap={{ md: '24px' }}
-      rowGap="24px"
-      justifyContent="flex-start"
-      alignItems="flex-start"
+      columnGap="24px !important"
+      rowGap="24px !important"
       w="full"
-      margin="30px 0"
+      spacing="0"
       flexWrap={{ sm: 'wrap' }}
-      display={{ sm: 'flex' }}
+      flexDir={{ base: 'column', md: 'row' }}
     >
-      <ExploreGroupCardHeader status={status} handleChangeStatus={handleChangeStatus} />
+      <ExploreGroupCardHeader status={status} setStatus={setStatus} />
       <ExploreGroupCardWrapper status={status} />
     </HStack>
   );

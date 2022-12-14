@@ -5,8 +5,9 @@ import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
-import NavBarLink from '../NewNavbar/NavBarLink';
-import NavBarSocialIcons from '../NewNavbar/NavBarSocialIcons';
+import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
+import LandingPageNavbarLinks from './LandingPageNavbarLinks';
+import routes from '../../../../data/routes';
 
 const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
   const navigate = useNavigate();
@@ -170,7 +171,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                             Developer? SDK Here!
                           </Common.ImpaktButton>
                         </Box> */}
-                        <Box onClick={() => navigate('/download')}>
+                        <Box onClick={() => navigate(routes.download)}>
                           <Common.ImpaktButton
                             color="#F04153"
                             bg="#FDE8EA"
@@ -183,12 +184,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                           </Common.ImpaktButton>
                         </Box>
                         <Box onClick={() => navigate('/register')}>
-                          <Common.ImpaktButton
-                            color="#fff"
-                            bg="#6B6B73"
-                            gap="8px"
-                            padding="10px 14px"
-                          >
+                          <Common.ImpaktButton variant="black" gap="8px" padding="10px 14px">
                             {/* {t(Keys.footer.downloadApp)} */}
                             <I.NotifyIcon width="16px" />I Want Updates
                           </Common.ImpaktButton>
@@ -200,7 +196,7 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
               </SimpleGrid>
             </HStack>
             <HStack w="full" padding={{ base: '0px', lg: wFull ? '0 48px' : '0' }}>
-              <NavBarLink IsHeader={false} />
+              <LandingPageNavbarLinks IsHeader={false} />
             </HStack>
             <HStack
               justifyContent={{ base: 'center', md: 'center' }}

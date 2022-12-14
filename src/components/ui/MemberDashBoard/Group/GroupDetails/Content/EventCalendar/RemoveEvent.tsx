@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { DeleteIcon, ChevronLeftIcon } from '@chakra-ui/icons';
+import { DeleteIcon, ChevronLeftIcon, CloseIcon } from '@chakra-ui/icons';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { Common } from 'components';
 import { Time } from 'dayspan';
@@ -28,7 +28,7 @@ const RemoveEvent: React.FC = () => {
   return (
     <>
       <Box>
-        <Box display="flex" justifyContent="left" alignItems="center" mb="16px">
+        <Box display="flex" mb="16px">
           <ChevronLeftIcon
             fontSize="30px"
             padding="3px"
@@ -38,7 +38,7 @@ const RemoveEvent: React.FC = () => {
             onClick={() => goBackToOverViewScreen()}
             marginRight="5px"
           />
-          <Box textAlign="center" marginLeft={{ base: '50px', md: '35px' }}>
+          <Box>
             <Text color="#29323B" fontWeight="600" fontSize="20px">
               Are you sure?
             </Text>
@@ -79,35 +79,28 @@ const RemoveEvent: React.FC = () => {
       </Box>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Common.ImpaktButton
-          variant="black"
-          colorScheme="#fff"
+          variant="delete"
           h={{ md: '48px', base: '40px' }}
-          backgroundColor="#F84153"
           borderRadius="8px"
           type="submit"
           fontSize={{ md: '16px' }}
           fontWeight="700"
           marginRight="5px"
-          _hover={{ backgroundColor: '#F84153' }}
           onClick={removeHandle}
         >
-          <DeleteIcon width="18px" color="#fff" marginRight="5px" />
+          <DeleteIcon width="18px" marginRight="5px" />
           Yes, delete
         </Common.ImpaktButton>
         <Common.ImpaktButton
-          variant="black"
+          variant="white-50"
           h={{ md: '48px', base: '40px' }}
-          backgroundColor="#EEF4F6"
           borderRadius="8px"
           type="submit"
           fontSize={{ md: '16px' }}
           fontWeight="700"
-          color="#29323B"
           onClick={goBackToOverViewScreen}
-          _hover={{ backgroundColor: '#EEF4F6' }}
         >
-          <DeleteIcon width="18px" color="#29323B" marginRight="5px" />
-          No
+          <CloseIcon />
         </Common.ImpaktButton>
       </Box>
     </>

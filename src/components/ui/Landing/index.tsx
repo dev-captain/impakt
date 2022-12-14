@@ -7,3 +7,4 @@ export { default as Privacy } from 'components/ui/Landing/Privacy';
 export { default as Evolving } from 'components/ui/Landing/Evolving';
 export { default as FitnessJourney } from 'components/ui/Landing/FitnessJourney';
 export { default as BecomePart } from 'components/ui/Landing/BecomePart';
+export { default as LandingPageFooter } from 'components/ui/Landing/LandingPageNavbar/LandingPageFooter';

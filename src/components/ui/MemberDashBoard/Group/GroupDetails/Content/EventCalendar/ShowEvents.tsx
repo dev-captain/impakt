@@ -16,19 +16,26 @@ const ShowEvents: React.FC = () => {
   const selectedDay = getSelectedDay();
   const selectedDayEvents = getSelectedDayEvents();
   if (!selectedDay) return null;
+  const isToday = Day.now().compare(selectedDay ?? new Date(), 'day') === 0;
+
   return (
     <>
       <Box>
-        <Box display="flex" mb="16px">
-          <Text color="#29323B" fontWeight="600" fontSize="20px">
+        <Box w="full" justifyContent="space-between" display="flex" mb="16px">
+          <Text color="fg-1" fontStyle="semiBold6">
             {Day.build(selectedDay.year, selectedDay.month, selectedDay.dayOfMonth).format(
               'dddd, MMMM D',
             )}
           </Text>
+          {isToday && (
+            <Text color="#F27961" fontStyle="semiBold6">
+              Today{' '}
+            </Text>
+          )}
         </Box>
         {selectedDayEvents?.length === 0 ? (
-          <Box background="#EEF4F6" p="16px" color="#728BA3" borderRadius="8px" mb="3px">
-            <Text fontSize="14px" fontWeight="600" opacity="0.5">
+          <Box background="a5" p="16px" maxH="46px" color="#728BA3" borderRadius="8px" mb="3px">
+            <Text textStyle="semiBold12" color="fg2">
               No upcoming events
             </Text>
           </Box>
@@ -41,23 +48,26 @@ const ShowEvents: React.FC = () => {
                 new Time(Number(Day.now().format('HH'))) && <TimeIndicator />} */}
                   <Box
                     key={eventObj.id}
-                    background="#E7ECFF"
-                    p="8px"
-                    color="#4364D9"
+                    background="softOrange"
+                    p="1em"
+                    color="darkOrange"
+                    cursor="pointer"
+                    _hover={{ background: '#F27961', color: 'white' }}
                     borderRadius="8px"
-                    mb="3px"
+                    mb="0.5em"
                     onClick={() => {
                       goToOverViewScreen('event');
                       setActiveEventId(eventObj.event.id);
                       navigate(`event/${eventObj.event.id}`);
                     }}
                   >
-                    <Text fontSize="14px" fontWeight="600">
-                      {JSON.parse(eventObj.event.data).title}
-                    </Text>
-                    <Text fontSize="12px" fontWeight="500">
+                    <Text textStyle="normal14">
                       {eventObj.event.schedule?.times[0].format('h:mma ')}-{' '}
                       {eventObj.event.schedule?.times[1].format('h:mma ')}
+                    </Text>
+
+                    <Text mt="8px" textStyle="semiBold12">
+                      {JSON.parse(eventObj.event.data).title}
                     </Text>
                   </Box>
                 </Box>
@@ -73,9 +83,7 @@ const ShowEvents: React.FC = () => {
         <Common.ImpaktButton
           mt="10px"
           variant="black"
-          colorScheme="#fff"
           h={{ md: '48px', base: '40px' }}
-          backgroundColor="#29323B"
           borderRadius="8px"
           type="submit"
           fontSize={{ md: '16px' }}

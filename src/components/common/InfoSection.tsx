@@ -22,7 +22,7 @@ const InfoSection: React.FC<InfoSectionPropsI> = ({ tooltipIcon, tooltipText, to
       mt={{ sm: '24px', lg: '0' }}
     >
       <VStack
-        maxW={{ base: 'auto', lg: '708px' }}
+        maxW={{ base: 'auto', lg: '588px' }}
         w={{ base: '100%', lg: '50%' }}
         justifyContent="flex-start"
         alignItems="flex-start"
@@ -69,6 +69,7 @@ const InfoSection: React.FC<InfoSectionPropsI> = ({ tooltipIcon, tooltipText, to
             </Tooltip>
             <Text
               textStyle="semiBold5"
+              lineHeight="24px"
               margin="0px 10px"
               color="#4E6070"
               dangerouslySetInnerHTML={{
