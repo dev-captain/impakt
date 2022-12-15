@@ -19,6 +19,7 @@ const queryClient = new QueryClient();
 
 const initSentry = () => {
   if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
+    console.log('sentry initialized');
     Sentry.init({
       dsn: 'https://482e35ccc1c3471b86af0c359112f6ad@o522080.ingest.sentry.io/4504274587549696',
       integrations: [new BrowserTracing()],
@@ -31,6 +32,7 @@ const initSentry = () => {
 
 const initLogRocket = () => {
   if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
+    console.log('logrocket initialized');
     LogRocket.init('qmt5ka/impakt');
     setupLogRocketReact(LogRocket);
   }
