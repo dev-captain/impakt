@@ -2,8 +2,6 @@ import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import textStyles from 'theme';
-import colors from 'theme/colors';
 import GroupSocialModal from '../../Banner/Panel/GroupSettings/GroupSocialModal';
 
 const GroupShare: React.FC = () => {
@@ -34,11 +32,11 @@ const GroupShare: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <I.PeopleIcon color={colors.impaktRed} w={{ base: '20px', md: '32px' }} />
+            <I.PeopleIcon color="impaktRed" w={{ base: '20px', md: '32px' }} />
           </Box>
           <Text
-            color={colors['fg-1']}
-            fontSize={{ base: textStyles.regular2, md: textStyles.regular201 }}
+            color="fg-1"
+            textStyle={{ base: 'regular2', md: 'regular201' }}
             maxW={{ base: '240px' }}
             marginLeft={{ base: '16px' }}
           >
@@ -46,7 +44,7 @@ const GroupShare: React.FC = () => {
           </Text>
         </Box>
         <ChevronRightIcon
-          color={colors.fg1}
+          color="fg1"
           w={{ base: '20px', md: '30px' }}
           h={{ base: '20px', md: '30px' }}
         />

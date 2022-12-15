@@ -2,8 +2,6 @@ import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import * as React from 'react';
 import { I } from 'components';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import colors from 'theme/colors';
-import textStyles from 'theme';
 import BannerImageChangeModal from './BannerImageChangeModal';
 
 const ChangeBannerImage: React.FC = () => {
@@ -34,12 +32,12 @@ const ChangeBannerImage: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <I.FrameIcon color={colors.nextOrange} w={{ base: '20px', md: '32px' }} />
+            <I.FrameIcon color="nextOrange" w={{ base: '20px', md: '32px' }} />
           </Box>
           <Box />
           <Text
-            color={colors['fg-1']}
-            fontSize={{ base: textStyles.regular2, md: textStyles.regular201 }}
+            color="fg-1"
+            textStyle={{ base: 'regular2', md: 'regular201' }}
             maxW={{ base: '240px' }}
             marginLeft={{ base: '16px' }}
           >
@@ -47,7 +45,7 @@ const ChangeBannerImage: React.FC = () => {
           </Text>
         </Box>
         <ChevronRightIcon
-          color={colors.fg1}
+          color="fg1"
           w={{ base: '20px', md: '30px' }}
           h={{ base: '20px', md: '30px' }}
         />

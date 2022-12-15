@@ -24,8 +24,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
         <Text
           w="100%"
           color="#1C1C28"
-          fontSize={{ base: '20px', md: '28px' }}
-          fontWeight="700"
+          textStyle={{ base: 'bold20', md: 'bold4' }}
           mb={{ base: '10px', md: '16px' }}
           display="flex"
           alignItems="center"
@@ -45,7 +44,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
         </Text>
         <Text
           maxW="624px"
-          fontSize={{ base: '14px', md: '20px' }}
+          textStyle={{ base: 'regular14', md: 'regular20' }}
           color="rgba(28, 28, 40, 0.7)"
           textAlign="start"
           mb="32px"
