@@ -9,14 +9,14 @@ import MyGroupCardHeader from './MyGroupCard/Header/MyGroupCardHeader';
 const Groups: React.FC = () => {
   return (
     <Box minH="100vh" overflow="hidden" w="full" as="section" id="general-section">
-      <VStack alignItems="flex-start" rowGap="1em" justifyContent="flex-start" w="full">
+      <VStack alignItems="flex-start" spacing="0" rowGap="5em" justifyContent="flex-start" w="full">
         {/* Your groups  section */}
-        <Box w="full" as="section" id="your-groups-section">
+        <Box maxW="1200px" w="full" as="section" id="your-groups-section">
           <MyGroupCardHeader />
           <MyGroupCard />
         </Box>
         {/* Explore Group section */}
-        <Box w="full" as="section" id="explore-group-section">
+        <Box mb="50px !important" maxW="1200px" w="full" as="section" id="explore-group-section">
           <ExploreGroupCard />
         </Box>
       </VStack>

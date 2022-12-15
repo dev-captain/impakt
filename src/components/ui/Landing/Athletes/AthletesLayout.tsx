@@ -7,7 +7,7 @@ const AthletesLayout: React.FC = ({ children }) => {
 
   return (
     <C.HeroLayout
-      bgColor="#F0F7FF"
+      bgColor="#F5F8FA"
       pos="relative"
       customPadding={{
         base: '16px',

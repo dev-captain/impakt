@@ -12,5 +12,7 @@ export interface CalendarEventDataDtoV1Response {
   creatorId: number;
   parentEventId: number | null;
   assocId: number | null;
+  groupId?: number | null;
   createdAt: string;
+  challengeId?: number | null;
 }

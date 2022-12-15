@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import React from 'react';
+import { Box } from '@chakra-ui/react';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 // import Topics from '../Topics/Topics';
-import WelcomeModal from '../WelcomeModal/WelcomeModal';
-import NewsFeed from '../NewsFeed/NewsFeed';
+import WelcomeModal from './WelcomeModal/WelcomeModal';
+import NewsFeed from './NewsFeed/NewsFeed';
+import GeneralModalBox from './GeneralModalBox';
+import GeneralBody from './GeneralBody';
 // import WhiteList from '../ExerciseAndHowToWL/WhiteList';
 
 const General: React.FC = () => {
@@ -16,31 +18,18 @@ const General: React.FC = () => {
       id="general-section"
     >
       <MemberDashboardSectionHeadlineText title="General" />
-      <HStack
-        columnGap="24px"
-        rowGap="24px"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        w="full"
-        flexWrap={{ base: 'wrap', lg: 'nowrap' }}
-      >
-        <VStack
-          w="full"
-          mt={{ sm: '24px', lg: '0' }}
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          rowGap="24px"
-        >
+      <GeneralBody>
+        <GeneralModalBox>
           <WelcomeModal />
           {/* <WhiteList /> */}
-        </VStack>
+        </GeneralModalBox>
 
-        <VStack w="full" marginLeft="0 !important" rowGap="24px">
+        <GeneralModalBox ml="0 !important">
           <NewsFeed />
           {/* <Topics /> */}
-        </VStack>
+        </GeneralModalBox>
         {/* <VStack></VStack> */}
-      </HStack>
+      </GeneralBody>
       {/* <WelcomeModal /> */}
       {/* <WhiteList /> */}
       {/* TODO News Feed  */}

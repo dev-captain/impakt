@@ -1,20 +1,19 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-nested-ternary */
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Common } from 'components';
 
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
 
-import ExploreGroupItem from './ExploreGroupItem';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
+import routes from '../../../../../../data/routes';
 
 interface ExploreGroupCardWrapperPropsI {
-  status: 'private' | 'public';
+  status: 'Private' | 'Public';
 }
 const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
-  const isPrivate = status === 'private';
+  const isPrivate = status === 'Private';
   const navigate = useNavigate();
 
   const { exploreGroups } = usePersistedGroupStore();
@@ -29,35 +28,29 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ stat
       {exploreGroup.map((g) => (
         <Box
           key={g.id}
-          cursor={g.private ? 'unset' : 'pointer'}
+          cursor="pointer"
           marginStart="0 !important"
-          w={{
-            base: '100%',
-            sm: '100%',
-            md: '31%',
-            lgx: '23%',
-          }}
+          w="282px"
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            if (!g.private) {
-              navigate(`/dashboard/groups/group/${g.id}`);
-            }
+            navigate(routes.groupDetail(g.id));
           }}
           position="relative"
         >
           <GroupsCard
             img={g.CurrentCoverImage ? g.CurrentCoverImage : Images.group.defaultThumbnail}
-            member={g.memberCount}
+            // member={g.memberCount}
             name={g.groupName}
             isPrivateGroup={g.private}
           >
-            <ExploreGroupItem
-              gId={g.id}
-              gRequestStatus={g.Request}
-              gPrivate={isPrivate}
-              key={`explore-group-item-${g.id}`}
-            />
+            <Common.ImpaktButton
+              variant="white-50"
+              borderRadius="8px"
+              justifyContent="space-around"
+            >
+              <Text textStyle="semiBold3">View</Text>
+            </Common.ImpaktButton>
           </GroupsCard>
         </Box>
       ))}

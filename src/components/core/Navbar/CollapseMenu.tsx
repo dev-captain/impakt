@@ -6,19 +6,19 @@ import Keys from 'i18n/types';
 import { Socials } from 'data';
 import { I } from 'components';
 
-import NavbarLinkItem from './NavbarLinkItem';
+import NavbarLinkItem from '../../common/LinkItem';
 import SignInLinkItem from './SignInLinkItem';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
+import routes from '../../../data/routes';
 
 type Props = {
   isOpen: boolean;
-  textColor: string;
   onClose: () => void;
   isLessThan1040: boolean;
 };
 
-const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => {
+const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
   const logout = useLogout();
   const { member } = usePersistedAuthStore();
   const location = useLocation();
@@ -28,97 +28,41 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
   return (
     <Collapse in={isOpen} animateOpacity>
       <VStack
-        spacing={0}
         paddingBottom={8}
         bg="#1C1C28"
         marginTop="0px"
         borderRadius="12px"
         zIndex={900}
-        color={textColor}
         padding="16px"
         mt="4px"
       >
+        <NavbarLinkItem href={routes.groups} isNavigate title="Groups" />
+        {member && (
+          <NavbarLinkItem href={routes.dashboard} isNavigate title={t(Keys.navbar.dashboard)} />
+        )}
+        <NavbarLinkItem href="/" isNavigate title={t(Keys.navbar.impaktFitness)} />
         <NavbarLinkItem
-          isSmall
-          hide
-          href="/"
-          onClose={onClose}
-          isActive={path.path === ''}
-          title={t(Keys.navbar.impaktFitness)}
-        />
-        <NavbarLinkItem
-          isSmall
-          hide
-          type="LINK"
-          onClose={onClose}
           title={t(Keys.navbar.knowledgeBase)}
           href="https://knowledgebase.impakt.com"
-          isActive={path.path === 'knowledge-base'}
         />
+        <NavbarLinkItem href="/events" isNavigate title={t(Keys.navbar.events)} />
         <NavbarLinkItem
-          hide
-          isSmall
-          href="/events"
-          onClose={onClose}
-          title={t(Keys.navbar.events)}
-          isActive={path.path === 'events'}
-        />
-        <NavbarLinkItem
-          isSmall
-          href="/contact"
-          onClose={onClose}
+          isNavigate
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
         />
-        {member && (
-          <NavbarLinkItem
-            isSmall
-            href="/dashboard"
-            onClose={onClose}
-            title={t(Keys.navbar.dashboard)}
-            isActive={path.path === 'dashboard'}
-          />
-        )}
-        {member && (
-          <NavbarLinkItem
-            isSmall
-            href=""
-            onClose={onClose}
-            title={t(Keys.navbar.notification)}
-            isActive={path.path === '/notification'}
-          />
-        )}
-        {member && (
-          <NavbarLinkItem
-            isSmall
-            href="/contact"
-            onClose={onClose}
-            title={t(Keys.navbar.help)}
-            isActive={path.path === '/contact'}
-          />
-        )}
 
         {member && (
           <NavbarLinkItem
-            isSmall
             href="#"
-            onClose={async () => {
+            onClick={async () => {
               await logout().finally(() => {
                 onClose();
               });
             }}
             title={t(Keys.navbar.signOut)}
-            isActive={path.path === '#'}
           />
         )}
-
-        {/* {!member && (
-          <NavbarLinkItem
-            href="/signin"
-            title={t(Keys.navbar.signIn)}
-            isActive={path.path === 'signin'}
-          />
-        )} */}
 
         <HStack
           align="center"
@@ -205,7 +149,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             <SignInLinkItem />
           </Box>
           <Box w="full" display="flex" mt="2" ml="0 !important">
-            <Link w="full" href="/download" _hover={{ textDecoration: 'none' }}>
+            <Link w="full" href={routes.download} _hover={{ textDecoration: 'none' }}>
               <Button marginTop="8px" width="100%" colorScheme="red">
                 {t(Keys.navbar.download)}
               </Button>

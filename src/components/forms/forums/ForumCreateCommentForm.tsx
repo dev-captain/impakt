@@ -4,7 +4,11 @@ import { I } from 'components';
 import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { usePersistedAuthStore, usePersistedForumStore } from '../../../lib/zustand';
+import {
+  usePersistedAuthStore,
+  usePersistedForumStore,
+  usePersistedGroupStore,
+} from '../../../lib/zustand';
 import { useCommentControllerV1CreateOne } from '../../../lib/impakt-dev-api-client/react-query/posts/posts';
 import { renderToast } from '../../../utils';
 import createCommentFormYupScheme from '../../../lib/yup/schemas/createCommentFormYupScheme';
@@ -12,6 +16,7 @@ import GroupTextAreaInput from '../../ui/MemberDashBoard/Group/GroupsTextAreaFie
 
 const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
   const refCommentArea = React.useRef<HTMLDivElement | null>(null);
+  const { role } = usePersistedGroupStore();
   const createComment = useCommentControllerV1CreateOne();
   const { handleSubmit, setValue, errors, reset } = useForm({
     defaultValues: { comment: '' },
@@ -78,7 +83,12 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
           reset({ comment: '' });
         },
         onError: (err) => {
-          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'white');
+          if (err.response?.data.message.includes('resource')) {
+            renderToast('error', 'You have to be member of the group to post comment...');
+
+            return;
+          }
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
         },
       },
     );
@@ -87,6 +97,10 @@ const ForumCreateCommentForm: React.FC<{ postId?: number }> = (props) => {
     if (!refCommentArea.current) return;
     refCommentArea.current.focus();
   }, []);
+
+  const isRoleDefined = role && role !== 'None';
+
+  if (!isRoleDefined) return null;
 
   return (
     <VStack

@@ -1,48 +1,66 @@
 import * as React from 'react';
 import { isMobile } from 'react-device-detect';
-import { I } from 'components';
-import { IconButton, Skeleton, useDisclosure } from '@chakra-ui/react';
+import { Common, I } from 'components';
+import { IconButton, useDisclosure } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
-import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../../lib/zustand';
+import {
+  usePersistedAuthStore,
+  usePersistedChallengeStore,
+  usePersistedGroupStore,
+} from '../../../../../../../../lib/zustand';
 import ChallengeModal from '../../../Modal/ChallengeModal';
 import ChallengePreviewModal from '../../../Modal/ChallengePreviewModal';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
-import { useGroupsControllerV1GetGroupPinnedChallenges } from '../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
-import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
-import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { normalizeExerciseNames } from '../../../../../../../../utils';
+import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
+import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 
 const GroupLabels: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
+  const {
+    groupPinnedChallenge,
+    setBestScoreOfUser,
+    setChallengeLeaderBoard,
+    setGroupPinnedChallenge,
+    challengeLeaderBoard,
+    bestScoreOfUser,
+  } = usePersistedChallengeStore();
   const { member } = usePersistedAuthStore();
-  const groupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(activeGroup?.id ?? 0, {
-    query: {
-      enabled: activeGroup !== null,
-    },
-  });
-
   const createPinnedChallenge = useFavoriteControllerV1CreateOne();
-  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(
-    groupPinnedChallenge.data?.Challenge ?? null,
-  );
-  const challengeLeaderBoard = useChallengesLeaderboardControllerV1Usersleaderboard(
-    activeChallenge?.id ?? 0,
+  const fetchPinnedChallengeUserBestScore = useChallengeStatsControllerGetUserBestScore(
+    groupPinnedChallenge?.Challenge?.id ?? 0,
+    member?.id ?? 0,
     {
       query: {
-        enabled: activeChallenge !== null,
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        onSuccess: (bestScore) => {
+          setBestScoreOfUser(bestScore);
+        },
       },
     },
   );
 
-  const bestScoreOfUser = useChallengeStatsControllerGetUserBestScore(
-    activeChallenge?.id ?? 0,
-    member?.id ?? 0,
+  const fetchPinnedChallengeLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
+    groupPinnedChallenge?.Challenge?.id ?? 0,
+    {},
     {
-      query: { enabled: activeChallenge !== null },
+      query: {
+        enabled: false,
+        retry: 0,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        onSuccess: (leaderboard) => {
+          setChallengeLeaderBoard(leaderboard);
+        },
+      },
     },
   );
-  const sortLeaderboardByScore = challengeLeaderBoard.data?.usersPassed.sort(
+
+  const sortLeaderboardByScore = challengeLeaderBoard?.usersPassed.sort(
     (a, b) => b.userScore - a.userScore,
   );
   const memberRankIndex = sortLeaderboardByScore?.findIndex(
@@ -51,16 +69,10 @@ const GroupLabels: React.FC = () => {
   // eslint-disable-next-line no-nested-ternary, no-constant-condition
   const memberRank = memberRankIndex;
 
-  React.useEffect(() => {
-    if (groupPinnedChallenge.data) {
-      setActiveChallenge(groupPinnedChallenge.data.Challenge);
-    }
-  }, [groupPinnedChallenge.isSuccess]);
-
   const challengeModalDisclosure = useDisclosure();
   const challengePreviewModalDisclosure = useDisclosure();
   const { role } = usePersistedGroupStore();
-  const isCreator = role === 'Creator';
+  const isCreator = role === 'Creator' || role === 'Moderator';
   const groupStatisticLabelItems = [
     // {
     //   Icon: () => <I.CalenderIcon color="#5C7FFF" />,
@@ -69,7 +81,7 @@ const GroupLabels: React.FC = () => {
     // },
     {
       leftIcon:
-        activeChallenge?.name || !isCreator ? (
+        groupPinnedChallenge?.Challenge?.name || !isCreator ? (
           <I.FireIcon />
         ) : (
           <IconButton
@@ -91,33 +103,40 @@ const GroupLabels: React.FC = () => {
       labelTitle: 'Pinned Challenge',
       labelDescription:
         // eslint-disable-next-line no-nested-ternary
-        activeChallenge?.name && activeChallenge.name.length > 0
-          ? activeChallenge?.name
+        groupPinnedChallenge?.Challenge?.name && groupPinnedChallenge?.Challenge?.name.length > 0
+          ? groupPinnedChallenge?.Challenge?.name
           : isCreator
           ? 'Select Challenge'
-          : 'No Challenge Selected',
+          : 'Challenge not selected',
       rightIcon:
-        isCreator && activeChallenge?.name && activeChallenge.name.length > 0 ? (
-          <IconButton
+        isCreator &&
+        groupPinnedChallenge?.Challenge?.name &&
+        groupPinnedChallenge?.Challenge?.name.length > 0 ? (
+          <Common.ImpaktButton
+            variant="white-50"
             onClick={(e) => {
               if (isCreator) {
                 e.stopPropagation();
                 challengeModalDisclosure.onOpen();
               }
             }}
+            isLoading={createPinnedChallenge.isLoading}
+            isDisabled={createPinnedChallenge.isLoading}
             fontSize="40px"
             width="40px"
             h="40px"
+            padding="8px"
             aria-label="update-top-challenge"
-            icon={<I.PenIcon />}
-          />
+          >
+            <I.PenIcon />
+          </Common.ImpaktButton>
         ) : null,
       onClick: () => {
-        if (activeChallenge) {
+        if (groupPinnedChallenge?.Challenge) {
           challengePreviewModalDisclosure.onOpen();
         }
 
-        if (!activeChallenge && isCreator) {
+        if (!groupPinnedChallenge?.Challenge && isCreator) {
           challengeModalDisclosure.onOpen();
         }
       },
@@ -127,20 +146,34 @@ const GroupLabels: React.FC = () => {
 
   const handlePinnedChallenge = (actChallenge: GetChallengeRes) => {
     if (!activeGroup) return;
+    if (actChallenge.id === groupPinnedChallenge?.Challenge?.id) return;
 
-    setActiveChallenge(actChallenge);
-    createPinnedChallenge.mutate({
-      data: { objectId: actChallenge.id, type: 'Challenge' },
-      referenceType: 'Group',
-      referenceId: activeGroup?.id,
+    setGroupPinnedChallenge({
+      id: 0,
+      groupName: activeGroup.groupName,
+      createdAt: actChallenge.createdAt,
+      updatedAt: actChallenge.updatedAt,
+      Challenge: actChallenge,
     });
+
+    createPinnedChallenge.mutate(
+      {
+        data: { objectId: actChallenge.id, type: 'Challenge' },
+        referenceType: 'Group',
+        referenceId: activeGroup?.id,
+      },
+      {
+        onSuccess: async () => {
+          await fetchPinnedChallengeLeaderboard.refetch();
+          await fetchPinnedChallengeUserBestScore.refetch();
+        },
+      },
+    );
   };
 
   return (
     <>
-      <Skeleton isLoaded={!groupPinnedChallenge.isLoading}>
-        <GroupLabelWrapper items={groupStatisticLabelItems} />
-      </Skeleton>
+      <GroupLabelWrapper items={groupStatisticLabelItems} />
       <ChallengeModal
         setActiveChallenge={handlePinnedChallenge}
         close={challengeModalDisclosure.onClose}
@@ -150,31 +183,34 @@ const GroupLabels: React.FC = () => {
         close={challengePreviewModalDisclosure.onClose}
         open={challengePreviewModalDisclosure.isOpen}
         challengePreview={{
-          title: activeChallenge?.name ?? 'Daily Challenge',
+          title: groupPinnedChallenge?.Challenge?.name ?? 'Daily Challenge',
           creator:
-            activeChallenge?.Routine?.Creator?.username ??
-            activeChallenge?.Creator?.username ??
+            groupPinnedChallenge?.Challenge?.Routine?.Creator?.username ??
+            groupPinnedChallenge?.Challenge?.Creator?.username ??
             'Impakt',
           // eslint-disable-next-line no-nested-ternary
           deepLinkToPlay: isMobile
-            ? `impakt://challenge?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`
+            ? `impakt://challenge?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`
             : process.env.REACT_APP_NODE_ENV === 'production'
-            ? `https://fitness.impakt.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`
-            : `https://fitness.impakt-dev.com/?challengeId=${activeChallenge?.id}&groupId=${activeGroup?.id}`,
-          exercices: normalizeExerciseNames(activeChallenge?.Routine?.TimelineBlocks ?? []),
+            ? `https://fitness.impakt.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`
+            : `https://fitness.impakt-dev.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`,
+          exercices: normalizeExerciseNames(
+            groupPinnedChallenge?.Challenge?.Routine?.TimelineBlocks ?? [],
+          ),
           leaderboard: sortLeaderboardByScore ?? [],
-          likeCount: activeChallenge?.likes ?? 0,
+          likeCount: groupPinnedChallenge?.Challenge?.likes ?? 0,
           myBestScore:
-            bestScoreOfUser.data && Object.keys(bestScoreOfUser.data).length > 0
-              ? bestScoreOfUser.data.userScore?.toString() ?? '-'
+            bestScoreOfUser && Object.keys(bestScoreOfUser).length > 0
+              ? bestScoreOfUser.userScore?.toString() ?? '-'
               : '-',
           myRank: memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-',
-          playedTimes: challengeLeaderBoard.data?.usersPassed.length ?? 0,
-          playedMins: activeChallenge?.Routine.estimatedTime
-            ? Math.ceil(activeChallenge.Routine.estimatedTime / 60)
+          playedTimes: challengeLeaderBoard?.usersPassed.length ?? 0,
+          playedMins: groupPinnedChallenge?.Challenge?.Routine.estimatedTime
+            ? // eslint-disable-next-line no-unsafe-optional-chaining
+              Math.ceil(groupPinnedChallenge?.Challenge?.Routine.estimatedTime! / 60)
             : 0,
-          validFrom: activeChallenge?.validFrom ?? '',
-          validUntil: activeChallenge?.validUntil ?? '',
+          validFrom: groupPinnedChallenge?.Challenge?.validFrom ?? '',
+          validUntil: groupPinnedChallenge?.Challenge?.validUntil ?? '',
         }}
       />
     </>

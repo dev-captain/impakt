@@ -9,6 +9,7 @@ import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustan
 import { renderToast } from '../../../../../../../../../../utils';
 import { useGroupsMemberControllerV1LeaveGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { useGroupsControllerV1Remove } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import routes from '../../../../../../../../../../data/routes';
 
 const GeneralSettings: React.FC = () => {
   const { role } = usePersistedGroupStore();
@@ -33,7 +34,7 @@ const GeneralSettings: React.FC = () => {
             );
             setMyGroups(distractFromMyGroup);
             // TODO update explore group on zustand
-            navigate('/dashboard/groups');
+            navigate(routes.groups);
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');
@@ -55,7 +56,7 @@ const GeneralSettings: React.FC = () => {
             );
             setRole('None');
             setMyGroups(distractFromMyGroup);
-            navigate('/dashboard/groups');
+            navigate(routes.groups);
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');
@@ -88,14 +89,10 @@ const GeneralSettings: React.FC = () => {
       >
         <Common.ImpaktButton
           mt={{ md: 0, base: '10px' }}
-          variant="primary"
-          color="#F84153"
+          variant="delete"
           w={{ md: '222px', base: '100%' }}
           ml={{ md: '16px', base: '0' }}
           h="60px"
-          bg="#FEE1E3"
-          _hover={{ bg: '#C41F30', color: '#fff' }}
-          _active={{ bg: '#910917', color: '#fff' }}
           borderRadius="8px"
           type="submit"
           fontSize={{ md: '20px' }}

@@ -17,6 +17,7 @@ import type {
   GetGroupMemberResWithGroupRes,
   HttpExceptionSchema,
   GetGroupMemberRes,
+  GroupsMemberControllerV1AssignGroupRoleParams,
 } from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
@@ -286,6 +287,54 @@ export const useGroupsMemberControllerV1LeaveGroup = <
     Awaited<ReturnType<typeof groupsMemberControllerV1LeaveGroup>>,
     TError,
     { groupId: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const groupsMemberControllerV1AssignGroupRole = (
+  groupId: number,
+  userId: number,
+  params: GroupsMemberControllerV1AssignGroupRoleParams,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<boolean>(
+    { url: `/api/v1/groups/${groupId}/assign-role/${userId}`, method: 'patch', params },
+    options,
+  );
+};
+
+export type GroupsMemberControllerV1AssignGroupRoleMutationResult = NonNullable<
+  Awaited<ReturnType<typeof groupsMemberControllerV1AssignGroupRole>>
+>;
+
+export type GroupsMemberControllerV1AssignGroupRoleMutationError = ErrorType<HttpExceptionSchema>;
+
+export const useGroupsMemberControllerV1AssignGroupRole = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignGroupRole>>,
+    TError,
+    { groupId: number; userId: number; params: GroupsMemberControllerV1AssignGroupRoleParams },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignGroupRole>>,
+    { groupId: number; userId: number; params: GroupsMemberControllerV1AssignGroupRoleParams }
+  > = (props) => {
+    const { groupId, userId, params } = props ?? {};
+
+    return groupsMemberControllerV1AssignGroupRole(groupId, userId, params, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof groupsMemberControllerV1AssignGroupRole>>,
+    TError,
+    { groupId: number; userId: number; params: GroupsMemberControllerV1AssignGroupRoleParams },
     TContext
   >(mutationFn, mutationOptions);
 };

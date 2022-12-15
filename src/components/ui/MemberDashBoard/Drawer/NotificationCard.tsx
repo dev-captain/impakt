@@ -26,6 +26,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
 }) => {
   const { member } = usePersistedAuthStore();
   const {
+    activeGroup,
     groupRequests,
     myGroups,
     membersOfGroup,
@@ -56,25 +57,28 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
               );
 
               if (indexOfGroup !== -1) {
-                shallowOfMyGroups[indexOfGroup].Group.memberCount += 1;
+                shallowOfMyGroups[indexOfGroup].Group.memberCount =
+                  shallowOfMyGroups[indexOfGroup].Group.memberCount ?? 0 + 1;
                 setMyGroups(shallowOfMyGroups);
               }
               if (membersOfGroup && member) {
-                setMembersOfGroup({
-                  ...membersOfGroup,
-                  Members: [
-                    ...membersOfGroup.Members,
-                    {
-                      joinedAt: new Date().toISOString(),
-                      userId: requestor?.id,
-                      bannedAt: null,
-                      groupId,
-                      leftAt: null,
-                      role: 'Member',
-                      User: { ...requestor },
-                    },
-                  ],
-                });
+                if (groupId === activeGroup?.id) {
+                  setMembersOfGroup({
+                    ...membersOfGroup,
+                    Members: [
+                      ...membersOfGroup.Members,
+                      {
+                        joinedAt: new Date().toISOString(),
+                        userId: requestor?.id,
+                        bannedAt: null,
+                        groupId,
+                        leftAt: null,
+                        role: 'Member',
+                        User: { ...requestor },
+                      },
+                    ],
+                  });
+                }
               }
             }
           }
@@ -103,11 +107,9 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
       </Box>
       <Box mt="16px" display="flex" justifyContent="space-between" width="100%">
         <Common.ImpaktButton
-          variant="black"
-          color="#29323B"
+          variant="white-50"
           w="47%"
           h="42px"
-          backgroundColor="#EEF4F6"
           borderRadius="8px"
           type="submit"
           fontWeight="600"
@@ -121,11 +123,9 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
           </Text>
         </Common.ImpaktButton>
         <Common.ImpaktButton
-          variant="black"
-          color="#29323B"
+          variant="delete"
           w="47%"
           h="42px"
-          backgroundColor="transparent"
           borderRadius="8px"
           fontSize={{ md: '16px', base: '14px' }}
           isDisabled={answerToGroupRequest.isLoading}
@@ -134,7 +134,7 @@ const NoitificationCard: React.FC<NoitificationCardProps> = ({
           fontWeight="600"
           onClick={() => acceptOrDeclineRequestToJoin('Declined')}
         >
-          <CloseIcon color="#29323B" width="10px" height="10px" mr="11px" />
+          <CloseIcon width="10px" height="10px" mr="11px" />
           Decline
         </Common.ImpaktButton>
       </Box>

@@ -2,7 +2,7 @@ import { Box, Flex, FormControl, VStack, Text, useMediaQuery } from '@chakra-ui/
 import * as React from 'react';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from 'hooks';
 
@@ -11,15 +11,27 @@ import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
 import { useUserControllerCreate } from '../../../lib/impakt-dev-api-client/react-query/users/users';
 import { renderToast } from '../../../utils';
 import { PostUserReq } from '../../../lib/impakt-dev-api-client/react-query/types/postUserReq';
+import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
+import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
+import routes from '../../../data/routes';
 
 const SignUpForm: React.FC = () => {
+  const isThereNextParam =
+    useLocation().search.includes('next') || useLocation().search.includes('invite');
+
+  const navigateToNextParam = useNextParamRouter(routes.download);
+  const navigate = useNavigate();
+
+  const { setMember } = usePersistedAuthStore();
+
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const [isShowPassword, setIsShowPassword] = useState(false);
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const createUser = useUserControllerCreate();
+  const signIn = useAuthControllerLogin();
 
   React.useEffect(() => {
     if (!id) return;
@@ -74,17 +86,34 @@ const SignUpForm: React.FC = () => {
       referrerId: activeReferrerId,
       minigameBonus: searchParams.get('minigamebonus') === 'true' ? true : false ?? false,
     } as PostUserReq;
-
     createUser.mutate(
       { data: { ...payload } },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           renderToast(
             'success',
             'Your account created successfully.You can now login in the Impakt app.',
             'dark',
           );
-          navigate('/download');
+          if (isThereNextParam) {
+            await signIn.mutateAsync(
+              { data: { emailOrUsername: email, password } },
+              {
+                onSuccess: (member) => {
+                  setMember(member);
+                  renderToast('success', 'Welcome');
+                },
+                onError: (err) => {
+                  renderToast(
+                    'error',
+                    err.response?.data.message ?? 'Something went wrong',
+                    'dark',
+                  );
+                },
+              },
+            );
+          }
+          navigateToNextParam();
         },
         onError: (err) => {
           renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');
@@ -239,6 +268,7 @@ const SignUpForm: React.FC = () => {
         </Flex>
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
+            variant="primary"
             isLoading={createUser.isLoading}
             isDisabled={createUser.isLoading}
             type="submit"

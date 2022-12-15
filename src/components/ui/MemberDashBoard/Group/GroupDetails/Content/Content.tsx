@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/react';
-import * as React from 'react';
+import React from 'react';
+import { Box, HStack } from '@chakra-ui/react';
 import { EventCalendarContextProvider } from 'context/EventCalendarContext';
 import Forums from './Forums/Forums';
 import MemberList from './MemberList/MemberList';
@@ -9,12 +9,17 @@ import GroupChat from './GroupChat/GroupChat';
 
 const Content: React.FC = () => {
   return (
-    <Box
+    <HStack
       marginStart="0 !important"
       display="flex"
       w="full"
-      gap="20px"
+      columnGap="24px"
+      rowGap="24px"
+      spacing="0"
       flexDirection={{ base: 'column', md: 'unset' }}
+      justifyContent="flex-start"
+      alignItems="flex-start"
+      mt="24px"
     >
       {/* <EventCalendar /> */}
       <EventCalendarContextProvider>
@@ -25,7 +30,7 @@ const Content: React.FC = () => {
         <Forums />
       </Box>
       <MemberList />
-    </Box>
+    </HStack>
   );
 };
 export default Content;

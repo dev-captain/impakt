@@ -13,6 +13,9 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { usePascalCase } from 'hooks';
+import { isAndroid } from 'react-device-detect';
+import { useNavigate } from 'react-router-dom';
+
 import { Common, I } from '../../../../..';
 import Images from '../../../../../../assets/images';
 import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
@@ -57,6 +60,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
     playedTimes,
     playedMins,
   } = challengePreview;
+  const navigate = useNavigate();
   const { d, h, m } = getTimeDifference(validFrom, validUntil);
   const { convertToPascalCase } = usePascalCase();
 
@@ -292,7 +296,23 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 as="a"
                 onClick={(e) => {
                   e.preventDefault();
+                  if (isAndroid) {
+                    window.location =
+                      `intent://scan/#Intent;scheme=${deepLinkToPlay};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
+
+                    setTimeout(() => {
+                      window.location =
+                        'https://play.google.com/store/apps/details?id=com.impakt.fitness' as any;
+                    }, 1500);
+
+                    return;
+                  }
+
                   window.location = deepLinkToPlay as any;
+
+                  setTimeout(() => {
+                    navigate('/download');
+                  }, 1000);
                 }}
                 href={deepLinkToPlay}
                 _hover={{ background: '' }}
@@ -300,7 +320,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 _focus={{ background: '' }}
                 _active={{ background: '' }}
                 leftIcon={<I.PlayChallengeIcon />}
-                background="linear-gradient(90deg, #F04153 0%, #F27961 100%);"
+                variant="orange-black"
                 padding="12px 32px"
                 borderRadius="12px"
                 // onClick={()=>}

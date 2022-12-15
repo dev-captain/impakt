@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
-import keys from 'i18n/types';
 import PermissionCard from './PermissionCard';
+import RoleCard from './RoleCard';
 import { useGroupsControllerV1PatchGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+
 import { renderToast } from '../../../../../../../../../../utils';
 import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
 
@@ -13,9 +13,8 @@ const PermissionTab: React.FC = () => {
   const updateGroup = useGroupsControllerV1PatchGroup();
   const [value, setValue] = React.useState('Public');
 
-  const { t } = useTranslation().i18n;
   const groupParam = useParams();
-  const { activeGroup, setActiveGroup, setMyGroups, myGroups } = usePersistedGroupStore();
+  const { activeGroup, setActiveGroup, setMyGroups, myGroups, role } = usePersistedGroupStore();
   React.useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
     if (activeGroup?.private) {
@@ -73,70 +72,41 @@ const PermissionTab: React.FC = () => {
           },
         }}
       >
-        <PermissionCard
-          title="Is your group public or private?"
-          helperText={t(keys.Message.PublicToolTip.description)}
-        >
-          <Button
-            color={value === 'Public' ? '#29323B' : '#728BA3'}
-            bg={value === 'Public' ? '#EEF4F6' : '#fff'}
-            _hover={{
-              backgroundColor: value === 'Private' ? 'transparent' : '#EEF4F6',
-              color: value === 'Private' ? '#728BA3' : '#29323B',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="8px"
-            onClick={() => {
-              setValue('Public');
-            }}
-          >
-            Public
-          </Button>
-          <Button
-            bg={value === 'Private' ? '#EEF4F6' : '#fff'}
-            color={value === 'Private' ? '#29323B' : '#728BA3'}
-            _hover={{
-              backgroundColor: value === 'Public' ? 'transparent' : '#EEF4F6',
-              color: value === 'Public' ? '#728BA3' : '#29323B',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            w="120px"
-            h="38px"
-            borderRadius="8px"
-            onClick={() => {
-              setValue('Private');
-            }}
-          >
-            Private
-          </Button>
+        <PermissionCard title="Is your group public or private?">
+          <Common.Toggle
+            leftTitle="Public"
+            rightTitle="Private"
+            onToggle={value === 'Public' ? () => setValue('Private') : () => setValue('Public')}
+            on={value === 'Public'}
+          />
         </PermissionCard>
+
+        <RoleCard title="Moderators" />
       </Box>
-      <Box mt="20px" textAlign="end">
-        <Common.ImpaktButton
-          variant="black"
-          color="#fff"
-          w="147px"
-          h="60px"
-          backgroundColor="#29323B"
-          borderRadius="8px"
-          type="submit"
-          fontSize={{ md: '16px' }}
-          fontWeight="500"
-          isLoading={updateGroup.isLoading}
-          isDisabled={updateGroup.isLoading}
-          onClick={() => handleOnUpdate()}
-        >
-          <Text
-            ml={{ md: '11px', base: '6px' }}
-            fontSize={{ md: '20px', base: '16px' }}
-            fontWeight="600"
+      {role === 'Creator' && (
+        <Box mt="20px" textAlign="end">
+          <Common.ImpaktButton
+            variant="black"
+            w="147px"
+            h="60px"
+            borderRadius="8px"
+            type="submit"
+            fontSize={{ md: '16px' }}
+            fontWeight="500"
+            isLoading={updateGroup.isLoading}
+            isDisabled={updateGroup.isLoading}
+            onClick={() => handleOnUpdate()}
           >
-            Save
-          </Text>
-        </Common.ImpaktButton>
-      </Box>
+            <Text
+              ml={{ md: '11px', base: '6px' }}
+              fontSize={{ md: '20px', base: '16px' }}
+              fontWeight="600"
+            >
+              Save
+            </Text>
+          </Common.ImpaktButton>
+        </Box>
+      )}
     </Box>
   );
 };

@@ -7,13 +7,21 @@ interface MemberCountPropsI {
 }
 const GroupCardMemberCount: React.FC<MemberCountPropsI> = ({ count }) => {
   return (
-    <Box display="flex" alignItems="center">
-      <I.PeopleIcon width={{ lgx: '32px', base: '26px' }} />
+    <Box
+      display="flex"
+      bg="rgba(0, 2, 10, 0.4);"
+      justifyContent="center"
+      alignItems="center"
+      backdropFilter="blur(20px)"
+      p="4px 10px"
+      borderRadius="40px"
+    >
+      <I.PeopleIcon color="white" width="20px !important" height="20px !important" />
       <Text
         as="h1"
-        textStyle="TitleBold64"
+        textStyle="semiBold12"
         fontSize={{ lgx: '20px', base: '16px' }}
-        color="#1C1C28"
+        color="white"
         marginLeft="6px"
       >
         {count}

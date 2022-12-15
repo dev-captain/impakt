@@ -4,6 +4,9 @@ import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { isAndroid } from 'react-device-detect';
+import { useNavigate } from 'react-router-dom';
+
 import { deepLinkToApp } from '../../../../../../../data';
 import {
   usePersistedChallengeStore,
@@ -12,11 +15,12 @@ import {
 import { truncateString } from '../../../../../../../utils';
 
 const EventDetails: React.FC = () => {
+  const navigate = useNavigate();
   // const [isGoing, setIsGoing] = React.useState(true);
   // const navigate = useNavigate();
   const { activeGroup } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
-  const isAdmin = role === 'Creator';
+  const isAdmin = role === 'Creator' || role === 'Moderator';
   // const toast = useToast();
 
   const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
@@ -26,7 +30,7 @@ const EventDetails: React.FC = () => {
   if (!eventObj) return null;
 
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
-    (d) => d.id === JSON.parse(eventObj.data).assocId,
+    (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
@@ -122,12 +126,27 @@ const EventDetails: React.FC = () => {
           <a
             onClick={(e) => {
               e.preventDefault();
+              if (isAndroid) {
+                window.location =
+                  `intent://scan/#Intent;scheme=${deepLink};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
+
+                setTimeout(() => {
+                  window.location =
+                    'https://play.google.com/store/apps/details?id=com.impakt.fitness' as any;
+                }, 1500);
+
+                return;
+              }
 
               window.location = deepLink as any;
+
+              setTimeout(() => {
+                navigate('/download');
+              }, 1000);
             }}
             href={deepLink}
           >
-            <Text color="#5C7FFF" fontSize="16px" fontWeight="500">
+            <Text color="nextOrange" fontSize="16px" fontWeight="500">
               Join event
             </Text>
           </a>
@@ -142,7 +161,7 @@ const EventDetails: React.FC = () => {
         </Box>
       </Box>
 
-      <Box display="flex" gap="8px">
+      <Box display="flex" gap="8px" w="full" justifyContent="flex-end" mt="1em">
         {/* <Common.ImpaktButton
           variant="black"
           color={isGoing ? '#fff' : '#29323B'}
@@ -161,31 +180,29 @@ const EventDetails: React.FC = () => {
         {isAdmin && (
           <>
             <Common.ImpaktButton
-              variant="black"
+              variant="white-50"
               onClick={() => goToOverViewScreen('update')}
               w="48px"
               h={{ md: '48px', base: '40px' }}
-              backgroundColor="#EEF4F6"
               borderRadius="8px"
               type="submit"
-              color="#29323B"
               fontSize={{ md: '16px' }}
               fontWeight="700"
+              padding="8px"
             >
               <I.PenIcon width="18px" />
             </Common.ImpaktButton>
             <Common.ImpaktButton
-              variant="black"
+              variant="delete"
               w="48px"
               h={{ md: '48px', base: '40px' }}
-              backgroundColor="#FEE1E3"
               borderRadius="8px"
               type="submit"
               fontSize={{ md: '16px' }}
               fontWeight="700"
               onClick={() => goToOverViewScreen('remove')}
             >
-              <DeleteIcon width="18px" color="#F84153" />
+              <DeleteIcon width="18px" />
             </Common.ImpaktButton>
           </>
         )}

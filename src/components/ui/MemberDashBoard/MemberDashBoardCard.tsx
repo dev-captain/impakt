@@ -1,12 +1,12 @@
-import { Box, BoxProps, forwardRef } from '@chakra-ui/react';
+import { forwardRef, StackProps, VStack } from '@chakra-ui/react';
 
-const MemberDashboardCard = forwardRef<BoxProps, 'div'>((props, ref) => {
+const MemberDashboardCard = forwardRef<StackProps, 'div'>((props, ref) => {
   return (
-    <Box
+    <VStack
       id="member-dashboard-card"
       display="flex"
       bgColor="rgba(255, 255, 255, 1)"
-      boxShadow="0px 10px 10px -5px rgba(0, 6, 14, 0.08), 0px 20px 25px -5px rgba(0, 6, 14, 0.14);"
+      boxShadow="light"
       p={{ base: '1.5em', lg: '2em' }}
       borderRadius="24px"
       alignItems="start"

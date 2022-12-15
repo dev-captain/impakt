@@ -5,7 +5,7 @@ import { C } from 'components';
 import {
   usePersistedAuthStore,
   usePersistedBalanceScoreStore,
-  usePersistedDiscourseStore,
+  // usePersistedDiscourseStore,
   usePersistedFitnessStore,
   usePersistedGroupStore,
   usePersistedReferralsStore,
@@ -19,7 +19,7 @@ import {
   useReferralControllerGetReferrees,
 } from '../../lib/impakt-dev-api-client/react-query/referrals/referrals';
 import { useFitnessStatsControllerGetDaysActive } from '../../lib/impakt-dev-api-client/react-query/fitness-stats/fitness-stats';
-import { useDiscourse } from '../../hooks/useDiscourse';
+// import { useDiscourse } from '../../hooks/useDiscourse';
 import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 import { useGroupsMemberControllerV1GetGroupsByUserId } from '../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-client/react-query/groups/groups';
@@ -42,8 +42,8 @@ const MemberDashboard: React.FC = () => {
   const referralsStore = usePersistedReferralsStore();
   const groupsStore = usePersistedGroupStore();
   const fitnessStore = usePersistedFitnessStore();
-  const discourseStore = usePersistedDiscourseStore();
-  const discourse = useDiscourse();
+  // const discourseStore = usePersistedDiscourseStore();
+  // const discourse = useDiscourse();
   // TODO next line is temp please move it to react query after its backend logic refactored.
 
   const fetchGodlBalanceScoreQuery = useGodlAccountControllerGetAccount({
@@ -147,11 +147,11 @@ const MemberDashboard: React.FC = () => {
     }
   }, [fetchReferralsRewardKoin.isSuccess]);
 
-  React.useEffect(() => {
-    if (discourse.isDiscourseFetched) {
-      discourseStore.setNews(discourse.news);
-    }
-  }, [discourse.news]);
+  // React.useEffect(() => {
+  //   if (discourse.isDiscourseFetched) {
+  //     discourseStore.setNews(discourse.news);
+  //   }
+  // }, [discourse.news]);
 
   React.useEffect(() => {
     if (fetchMyGroups.isFetched && fetchMyGroups.isSuccess) {
@@ -181,7 +181,7 @@ const MemberDashboard: React.FC = () => {
     }
   }, [fetchGroupRequests.isFetched]);
 
-  return <C.SidebarLayout isShowNavbar />;
+  return <C.SidebarLayout isShowNavbar isShowFooter />;
 };
 
 export default MemberDashboard;

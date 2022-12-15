@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
 import { I } from 'components';
-import NavBarSocialIcons from '../Navbar/NavBarSocialIcons';
+import NavBarSocialIcons from '../../common/SocialIcons';
 
 type Props = {
   bgColor: string;

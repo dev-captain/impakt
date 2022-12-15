@@ -10,11 +10,12 @@ export interface GetGroupRes {
   groupName: string;
   createdAt: string | null;
   updatedAt: string;
-  conversationId: number;
-  currentCoverImageId: number;
-  memberCount: number;
-  calendarId: number;
+  conversationId: number | null;
+  currentCoverImageId: number | null;
+  memberCount: number | null;
+  calendarId: number | null;
   private: boolean;
   deleted: boolean;
   CurrentCoverImage?: string;
+  isPreview?: boolean;
 }

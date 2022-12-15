@@ -21,7 +21,7 @@ const UpdateGroupImageForm: React.FC = () => {
   const groupMembers = usePersistedGroupStore().membersOfGroup?.Members.filter(
     (members) => members.role !== 'None',
   );
-  const groupMemberCount = groupMembers?.length ?? 0;
+  // const groupMemberCount = groupMembers?.length ?? 0;
 
   const uploadImageInputRef = React.useRef<HTMLInputElement | null>(null);
   const uploadImageRef = React.useRef<HTMLImageElement | null>(null);
@@ -62,8 +62,6 @@ const UpdateGroupImageForm: React.FC = () => {
         const file = new File([bl], 'logo.png', bl);
         reset({ file } as any);
       });
-    // const blob = new Blob([Images.group.logo]);
-    // console.log('file', blob);
   };
 
   const openUploadImageFileInput = () => {
@@ -159,7 +157,7 @@ const UpdateGroupImageForm: React.FC = () => {
             <Text color="#29323B" fontSize={{ md: '20px', base: '14px' }} fontWeight="600">
               {activeGroup?.groupName}
             </Text>
-            <Box
+            {/* <Box
               color="#4E6070"
               fontWeight="600"
               fontSize="16px"
@@ -168,7 +166,7 @@ const UpdateGroupImageForm: React.FC = () => {
             >
               <I.PeopleIcon width="16px" height="16px" mr="6px" />
               {groupMemberCount}
-            </Box>
+            </Box> */}
           </Box>
           <Box display="flex" justifyContent="space-between">
             <AvatarGroup size="md" max={4}>
@@ -210,33 +208,28 @@ const UpdateGroupImageForm: React.FC = () => {
         </Text>
         <Box display="flex" flexDirection="column">
           <Common.ImpaktButton
-            cursor="pointer"
             variant="black"
-            color="#29323B"
             isLoading={updateGroupCoverImage.isLoading}
             isDisabled={updateGroupCoverImage.isLoading}
             w="160px"
             h="42px"
-            backgroundColor="#EEF4F6"
             borderRadius="8px"
             fontSize={{ md: '16px' }}
             onClick={openUploadImageFileInput}
             fontWeight="600"
-            leftIcon={<I.UploadIcon color="#29323B" width="12px" height="12px" />}
+            leftIcon={<I.UploadIcon width="12px" height="12px" />}
           >
             Upload
           </Common.ImpaktButton>
           <Common.ImpaktButton
             mt="8px"
             variant="black"
-            color="#29323B"
             w="160px"
             h="42px"
-            backgroundColor="#EEF4F6"
             borderRadius="8px"
             fontSize={{ md: '16px' }}
             fontWeight="600"
-            leftIcon={<CloseIcon color="#29323B" width="10px" height="10px" />}
+            leftIcon={<CloseIcon width="10px" height="10px" />}
             onClick={resetUploadImage}
           >
             Remove
@@ -245,12 +238,10 @@ const UpdateGroupImageForm: React.FC = () => {
             mt="8px"
             cursor="pointer"
             variant="black"
-            color="#29323B"
             isLoading={updateGroupCoverImage.isLoading}
             isDisabled={updateGroupCoverImage.isLoading}
             w="160px"
             h="42px"
-            backgroundColor="#EEF4F6"
             borderRadius="8px"
             type="submit"
             fontSize={{ md: '16px' }}

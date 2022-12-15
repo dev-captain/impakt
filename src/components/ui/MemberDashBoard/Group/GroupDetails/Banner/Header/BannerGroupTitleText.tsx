@@ -8,9 +8,10 @@ const BannerGroupTitleText: React.FC = () => {
 
   return (
     <Text
-      textStyle="TitleBold64"
+      textStyle="semiBold32"
       fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
       color="29323B"
+      letterSpacing="-0.01em"
     >
       {activeGroup?.groupName}
     </Text>

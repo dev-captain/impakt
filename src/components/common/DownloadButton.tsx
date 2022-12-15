@@ -11,20 +11,23 @@ const DownloadButton = ({
   width,
   bg,
   pe,
+  onClick,
 }: {
-  link: string;
+  link?: string;
   width: object;
   title: string;
   isHorizontal?: boolean;
   bg: string;
   pe: any;
   iconName: 'Apple' | 'Windows' | 'Android' | 'Ios' | '';
+  onClick?: () => void;
 }) => {
   const Wrapper = isHorizontal ? HStack : VStack;
 
   return (
     <Button
       as="a"
+      cursor="pointer"
       h="full"
       width={width}
       py={'16px'}
@@ -38,6 +41,7 @@ const DownloadButton = ({
       className="buttonHover"
       marginStart="0px !important"
       pointerEvents={pe}
+      onClick={onClick}
     >
       <Wrapper>
         {iconName === 'Apple' && <I.Apple opacity="1" />}

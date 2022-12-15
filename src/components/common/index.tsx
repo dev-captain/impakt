@@ -22,3 +22,8 @@ export { default as ImpaktAccordion } from './ImpaktAccordion';
 export { default as FlipCardBox } from './FlipCardBox';
 export { default as LeaderboardTable } from './LeaderboardTable';
 export { default as InputErrorMessage } from './InputErrorMessage';
+export { default as LinkItem } from './LinkItem';
+export { default as CollapseMenuIconButton } from './CollapseMenuIconButton';
+export { default as CollapseMenu } from './CollapseMenu';
+export { default as SocialIcons } from './SocialIcons';
+export { default as Toggle } from './Toggle';

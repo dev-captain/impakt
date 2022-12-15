@@ -4,8 +4,9 @@
  * Impakt API
  * OpenAPI spec version: 1.0.0
  */
+import type { ExerciseRepetitionRes } from './exerciseRepetitionRes';
 
 export interface ExerciseStatsRes {
   /** Exercises repititions by the user */
-  exerciseStats: string[];
+  exerciseStats: ExerciseRepetitionRes[];
 }

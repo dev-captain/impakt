@@ -72,6 +72,14 @@ const CreatePostForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             },
           );
         },
+        onError: (err) => {
+          if (err.response?.data.message.includes('resource')) {
+            renderToast('error', 'You have to be member of the group to create post...');
+
+            return;
+          }
+          renderToast('error', err.response?.data.message ?? 'Something went wrong');
+        },
       },
     );
   };

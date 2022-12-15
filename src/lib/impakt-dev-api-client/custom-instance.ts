@@ -1,5 +1,6 @@
 // custom-instance.ts
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { sendExceptionToSentry } from '../../utils/sentry';
 import { usePersistedAuthStore } from '../zustand';
 
 export const customInstance = <T>(
@@ -35,12 +36,18 @@ export const AXIOS_INSTANCE = Axios.create({
 const createAxiosResponseInterceptor = () => {
   const interceptor = AXIOS_INSTANCE.interceptors.response.use(
     (response) => response,
-    (error) => {
+    (error: any) => {
       // Reject promise if usual error
-      if (error.response.status !== 401) {
+      if (error.response?.status !== 401) {
         return Promise.reject(error);
       }
 
+      if (
+        process.env.REACT_APP_VERCEL_ENV === 'production' ||
+        process.env.REACT_APP_VERCEL_ENV === 'preview'
+      ) {
+        sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
+      }
       /*
        * When response code is 401, try to refresh the token.
        * Eject the interceptor so it doesn't loop in case
@@ -52,7 +59,7 @@ const createAxiosResponseInterceptor = () => {
 
       return AXIOS_INSTANCE.post('/api/v1/iam/auth/refresh')
         .then(() => {
-          return AXIOS_INSTANCE(error.response.config);
+          return AXIOS_INSTANCE(error.response?.config);
         })
         .catch(() => {
           authStorePersisted.persist.clearStorage();
