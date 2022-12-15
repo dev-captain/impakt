@@ -30,11 +30,7 @@ const Forums: React.FC = () => {
 
   return (
     <>
-      <Box
-        marginStart="0 !important"
-        width={{ base: '100%', md: '40%', lgx: '50%' }}
-        display="flex"
-      >
+      <Box marginStart="0 !important" width={{ base: '100%' }} display="flex">
         <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto">
           <Box w="full">
             <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
