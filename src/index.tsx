@@ -18,6 +18,7 @@ import { PusherContextProvider } from './context/PusherContext';
 const queryClient = new QueryClient();
 
 const initSentry = () => {
+  console.log(process.env.VERCEL_ENV, 'sentry initialized');
   if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
     console.log('sentry initialized');
     Sentry.init({
