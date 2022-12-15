@@ -6,12 +6,44 @@ import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
+import { BrowserTracing } from '@sentry/tracing';
+import * as Sentry from '@sentry/react';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { PusherContextProvider } from './context/PusherContext';
 
 const queryClient = new QueryClient();
+
+const initSentry = () => {
+  if (
+    process.env.REACT_APP_VERCEL_ENV === 'production' ||
+    process.env.REACT_APP_VERCEL_ENV === 'preview'
+  ) {
+    Sentry.init({
+      dsn: 'https://482e35ccc1c3471b86af0c359112f6ad@o522080.ingest.sentry.io/4504274587549696',
+      integrations: [new BrowserTracing()],
+      // We recommend adjusting this value in production, or using tracesSampler
+      // for finer control
+      tracesSampleRate: 1.0,
+    });
+  }
+};
+
+const initLogRocket = () => {
+  if (
+    process.env.REACT_APP_VERCEL_ENV === 'production' ||
+    process.env.REACT_APP_VERCEL_ENV === 'preview'
+  ) {
+    LogRocket.init('qmt5ka/impakt');
+    setupLogRocketReact(LogRocket);
+  }
+};
+
+initSentry();
+initLogRocket();
 
 ReactDOM.render(
   <React.StrictMode>
