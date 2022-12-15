@@ -6,7 +6,9 @@ import PromoBarDayItem from './PromoBarDayItem';
 interface PropsI {}
 export const PromoBarCounter: React.FC<PropsI> = () => {
   const { d, h, m, s } = compareDateWithNow(
-    new Date(process.env.REACT_APP_PROMO_DATE ?? '1990').toString(),
+    new Date(process.env.REACT_APP_PROMO_DATE ?? '1990').toLocaleString('en-US', {
+      timeZone: 'America/Los_Angeles',
+    }),
   );
   const [count, setCount] = React.useState(0);
   React.useEffect(() => {
