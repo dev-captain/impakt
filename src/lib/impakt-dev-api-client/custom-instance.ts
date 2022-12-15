@@ -42,7 +42,10 @@ const createAxiosResponseInterceptor = () => {
         return Promise.reject(error);
       }
 
-      if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
+      if (
+        process.env.REACT_APP_VERCEL_ENV === 'production' ||
+        process.env.REACT_APP_VERCEL_ENV === 'preview'
+      ) {
         sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
       }
       /*

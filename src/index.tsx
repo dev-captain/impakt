@@ -18,8 +18,10 @@ import { PusherContextProvider } from './context/PusherContext';
 const queryClient = new QueryClient();
 
 const initSentry = () => {
-  console.log(process.env.VERCEL_ENV, 'sentry initialized');
-  if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
+  if (
+    process.env.REACT_APP_VERCEL_ENV === 'production' ||
+    process.env.REACT_APP_VERCEL_ENV === 'preview'
+  ) {
     console.log('sentry initialized');
     Sentry.init({
       dsn: 'https://482e35ccc1c3471b86af0c359112f6ad@o522080.ingest.sentry.io/4504274587549696',
@@ -32,8 +34,10 @@ const initSentry = () => {
 };
 
 const initLogRocket = () => {
-  if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
-    console.log('logrocket initialized');
+  if (
+    process.env.REACT_APP_VERCEL_ENV === 'production' ||
+    process.env.REACT_APP_VERCEL_ENV === 'preview'
+  ) {
     LogRocket.init('qmt5ka/impakt');
     setupLogRocketReact(LogRocket);
   }
