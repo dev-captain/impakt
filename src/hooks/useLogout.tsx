@@ -6,7 +6,10 @@ import {
 } from '../lib/zustand';
 import { renderToast } from '../utils';
 
-export const useLogout = () => {
+type UseLogoutType = {
+  silent?: boolean;
+};
+export const useLogout = (props?: UseLogoutType) => {
   const signOut = useAuthControllerLogout();
   const { setMember } = usePersistedAuthStore();
   const { setClear } = usePersistedGroupStore();
@@ -18,7 +21,9 @@ export const useLogout = () => {
       setClear();
       setClearGodl();
       setClearKoin();
-      renderToast('success', 'You have successfully logged out!', 'dark');
+      if (!props?.silent) {
+        renderToast('success', 'You have successfully logged out!', 'dark');
+      }
     });
   };
 

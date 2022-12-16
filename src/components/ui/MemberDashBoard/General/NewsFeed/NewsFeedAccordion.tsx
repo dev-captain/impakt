@@ -36,7 +36,7 @@ const NewsFeedAccordion: React.FC = () => {
       id: 5,
       bg: '#36B9FF',
       icon: <I.TwitterBigIcon />,
-      href: 'https://twitter.com/impaktlife',
+      href: 'https://twitter.com/impakt_life',
     },
     {
       id: 7,
@@ -108,7 +108,7 @@ const getStartedLinkItems = [
   { title: 'Join Our Community', href: routes.groupDetail(12), order: 1 },
   { title: 'Try vSports Minigames', href: 'https://vsports.me/', order: 2 },
   // {
-  //   title: 'Try Fitness 2.0 Challenge',
+  //   title: 'Try Fitness 2.0 on Web',
   //   href: 'https://fitness.impakt.com/?challengeId=1708',
   //   order: 3,
   // },
