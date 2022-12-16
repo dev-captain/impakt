@@ -20,7 +20,7 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
   const isNone = role === 'None';
   return (
     <Box
-      bg="white"
+      bg={labelDescription === 'Pin a challenge' ? 'orangeGradient' : 'white'}
       ml="0 !important"
       border="1px solid #D3E2F0"
       w={{ base: 'full', md: 'auto' }}
@@ -37,7 +37,10 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
               PINNED CHALLENGE
             </Text>
           )}
-          <Text color="fg-1" textStyle="semiBold5">
+          <Text
+            color={labelDescription === 'Pin a challenge' ? 'white' : 'fg-1'}
+            textStyle="semiBold5"
+          >
             {labelDescription}
           </Text>
         </Box>

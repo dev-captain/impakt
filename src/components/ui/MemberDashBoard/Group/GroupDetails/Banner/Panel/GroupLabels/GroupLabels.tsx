@@ -97,7 +97,7 @@ const GroupLabels: React.FC = () => {
             h="40px"
             aria-label="create-top-challenge"
             variant="ghost"
-            icon={<I.AddBannerLabelItemIcon />}
+            icon={<I.AddBannerLabelItemIcon bg="rgba(255, 255, 255, 0.1)" />}
           />
         ),
       visible: true,

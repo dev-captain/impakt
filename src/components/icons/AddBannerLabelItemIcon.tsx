@@ -26,8 +26,7 @@ const AddBannerLabelItemIcon = (props: IconProps) => (
         y2="20"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#F04153" />
-        <stop offset="1" stopColor="#F27961" />
+        <stop stopColor="white" />
       </linearGradient>
     </defs>
   </Icon>
