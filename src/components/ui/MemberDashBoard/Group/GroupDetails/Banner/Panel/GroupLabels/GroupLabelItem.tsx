@@ -29,17 +29,17 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
       onClick={onClick}
       cursor="pointer"
     >
-      <Box display="flex" justifyContent="flex-start" alignItems="center">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         {leftIcon}
         <Box marginLeft="12px">
           {(isMember || isNone) && (
-            <Text color="fg-1" textStyle="regular14" mb="8px">
+            <Text color="fg2" textStyle="bold1" mb="8px">
               PINNED CHALLENGE
             </Text>
           )}
           <Text
             color={labelDescription === 'Pin a challenge' ? 'white' : 'fg-1'}
-            textStyle="semiBold5"
+            textStyle="semiBold17"
           >
             {labelDescription}
           </Text>
