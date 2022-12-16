@@ -24,6 +24,7 @@ import {
 } from '../lib/zustand';
 import { useChallengeStatsControllerGetUserBestScore } from '../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
+import { getDefaultQueryOptions } from '../lib/impakt-dev-api-client/utils';
 
 export const useFetchGroupDetails = () => {
   // console.log('render');
@@ -42,10 +43,10 @@ export const useFetchGroupDetails = () => {
     groupParam.eventId &&
     groupParam.eventId !== 'join' &&
     useLocation().pathname.includes('join');
-  const newGroup = parseInt(groupParam.id ?? '-asd', 10) !== activeGroup?.id;
+  const isNewGroup = parseInt(groupParam.id ?? '-asd', 10) !== activeGroup?.id;
 
   // local states
-  const [isGroupDetailsLoading, setIsGroupDetailsLoading] = React.useState(newGroup);
+  const [isGroupDetailsLoading, setIsGroupDetailsLoading] = React.useState(isNewGroup);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [isError, setIsError] = React.useState('');
 
@@ -54,10 +55,10 @@ export const useFetchGroupDetails = () => {
 
   const fetchGroupDetail = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
     query: {
-      retry: 0,
-      refetchOnMount: true,
-      enabled: newGroup,
-      // initialData: activeGroup ?? undefined,
+      ...getDefaultQueryOptions(),
+      refetchOnWindowFocus: true,
+      staleTime: isNewGroup ? 0 : 120000,
+      refetchInterval: 300000,
       onSuccess: async (data) => {
         if (isJoin && groupParam.eventId) {
           // if join link just use the deeplink
@@ -218,7 +219,7 @@ export const useFetchGroupDetails = () => {
   );
 
   React.useEffect(() => {
-    if (newGroup) {
+    if (isNewGroup) {
       setActiveGroup(null);
     }
   }, []);
