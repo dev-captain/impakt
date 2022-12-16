@@ -96,17 +96,17 @@ const GroupLabels: React.FC = () => {
             h="40px"
             aria-label="create-top-challenge"
             variant="ghost"
-            icon={<I.AddBannerLabelItemIcon />}
+            icon={<I.AddBannerLabelItemIcon bg="rgba(255, 255, 255, 0.1);" />}
           />
         ),
       visible: true,
-      labelTitle: 'Pinned Challenge',
+      // labelTitle: 'Pinned Challenge',
       labelDescription:
         // eslint-disable-next-line no-nested-ternary
         groupPinnedChallenge?.Challenge?.name && groupPinnedChallenge?.Challenge?.name.length > 0
           ? groupPinnedChallenge?.Challenge?.name
           : isCreator
-          ? 'Select Challenge'
+          ? 'Pin a challenge'
           : 'Challenge not selected',
       rightIcon:
         isCreator &&
