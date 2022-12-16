@@ -63,17 +63,16 @@ export const PromoBarCounter: React.FC<PropsI> = () => {
         p={{ base: '10px 20px', md: '18px 32px' }}
       >
         <Text textStyle="semibold20">
-          {d === '00' && h === '00' && m === '00' && s === '00' ? 'Invest Now' : 'Join Now'}
+          {d === '00' && h === '00' && m === '00' && s === '00' ? 'Invest Now' : 'Join'}
         </Text>
       </Common.ImpaktButton>
       {d === '00' && h === '00' && m === '00' && s === '00' ? null : (
         <WaitlistModal
-          headlineText="Become part of the Impakt family"
+          headlineText=""
           isOpen={isOpen}
           onClose={onClose}
           isCloseButton
-          buttonText="Join Now"
-          subHeadlineText=""
+          subHeadlineText="Launching soon. Want to become an early investor?"
         />
       )}
     </>

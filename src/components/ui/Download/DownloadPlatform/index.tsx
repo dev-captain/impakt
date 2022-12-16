@@ -196,7 +196,6 @@ const DownloadPlatform = () => {
         isOpen={isOpen}
         onClose={onClose}
         isCloseButton
-        buttonText="Join the waitlist"
         subHeadlineText="for mobile"
       />
     </C.HeroLayout>
