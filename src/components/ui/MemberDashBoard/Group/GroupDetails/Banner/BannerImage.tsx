@@ -15,7 +15,7 @@ const BannerImage: React.FC = () => {
   const currentCoverImageSource = usePersistedGroupStore().activeGroup?.CurrentCoverImage;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { activeGroup } = usePersistedGroupStore();
-
+  const { role } = usePersistedGroupStore();
   return (
     <Box w="full" position="relative">
       {/* TODO PEN ICON TO CHANGE BANNER WILL ADD HERE */}
@@ -34,17 +34,19 @@ const BannerImage: React.FC = () => {
         objectFit="cover"
         // position="absolute"
       />
-      <Common.ImpaktButton
-        variant="black"
-        w="48px"
-        h="48px"
-        style={{ position: 'absolute', top: '16px', right: '16px' }}
-        onClick={() => {
-          onOpen();
-        }}
-      >
-        <I.PenIcon />
-      </Common.ImpaktButton>
+      {role === 'Creator' && (
+        <Common.ImpaktButton
+          variant="black"
+          w="48px"
+          h="48px"
+          style={{ position: 'absolute', top: '16px', right: '16px' }}
+          onClick={() => {
+            onOpen();
+          }}
+        >
+          <I.PenIcon />
+        </Common.ImpaktButton>
+      )}
       {activeGroup?.private && (
         <Box
           bg="rgba(18, 18, 22, 0.4)"

@@ -5,9 +5,8 @@ import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import ChangeGroupTitleModal from './ChangeGroupTitleModal';
 
 const BannerGroupTitleText: React.FC = () => {
-  // const { activeGroup } = usePersistedGroupStore();
+  const { activeGroup } = usePersistedGroupStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { membersOfGroup } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
   return (
     <Text
@@ -18,7 +17,7 @@ const BannerGroupTitleText: React.FC = () => {
       display="flex"
       alignItems="center"
     >
-      Group by {membersOfGroup?.Members[0].User.username}
+      {activeGroup?.groupName}
       {role === 'Creator' && (
         <I.PenIcon
           color="#91A8BD"

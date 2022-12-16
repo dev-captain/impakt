@@ -126,7 +126,8 @@ const BannerSettingsMenu: React.FC = () => {
         )}
         {isRoleNotDefined && (
           <Common.ImpaktButton
-            variant="black"
+            // variant="black"
+            bg="orangeGradient"
             hover={{
               backgroundColor: '#fff',
               color: '#fff',
