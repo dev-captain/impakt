@@ -28,23 +28,26 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
       p="8px 12px 8px 8px"
       onClick={onClick}
       cursor="pointer"
+      position="relative"
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        {leftIcon}
-        <Box marginLeft="12px">
-          {(isMember || isNone) && (
-            <Text color="fg2" textStyle="bold1" mb="8px">
-              PINNED CHALLENGE
+      <Box display="flex" justifyContent="space-between" alignItems="center" position="relative">
+        <Box display="flex" justifyContent="flex-start" alignItems="center">
+          {leftIcon}
+          <Box marginLeft="12px">
+            {(isMember || isNone) && (
+              <Text color="fg2" textStyle="bold1" mb="8px">
+                PINNED CHALLENGE
+              </Text>
+            )}
+            <Text
+              color={labelDescription === 'Pin a challenge' ? 'white' : 'fg-1'}
+              textStyle="semiBold17"
+            >
+              {labelDescription}
             </Text>
-          )}
-          <Text
-            color={labelDescription === 'Pin a challenge' ? 'white' : 'fg-1'}
-            textStyle="semiBold17"
-          >
-            {labelDescription}
-          </Text>
+          </Box>
         </Box>
-        {rightIcon && <Box ml="12px">{rightIcon}</Box>}
+        {rightIcon && <Box ml="20px">{rightIcon}</Box>}
       </Box>
     </Box>
   );
