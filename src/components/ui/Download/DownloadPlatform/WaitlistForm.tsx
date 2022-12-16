@@ -26,7 +26,9 @@ const sendMailAsContact = async (email: string) => {
   return response.data;
 };
 
-const WaitlistForm: React.FC = () => {
+const WaitlistForm: React.FC<{ setIsSubmitted: (value: boolean) => void }> = ({
+  setIsSubmitted,
+}) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { handleSubmit, getValues, setValue, errors, reset } = useForm({
     defaultValues: { email: '' },
@@ -39,6 +41,7 @@ const WaitlistForm: React.FC = () => {
     await sendMailAsContact(email).then(() => {
       reset({ email: '' });
       renderToast('success', 'Email added to waitlist successfully.', 'dark');
+      setIsSubmitted(true);
     });
     setIsLoading(false);
   };
@@ -49,19 +52,21 @@ const WaitlistForm: React.FC = () => {
 
   return (
     <VStack as="form" rowGap="12px" onSubmit={handleSubmit(handleOnSubmitWaitlistForm)} w="full">
-      <Common.InputGroup
-        label="Email"
-        whiteMode
-        value={getValues('email')}
-        errorMsg={errors.email?.message}
-        placeholder="hello@mail.com"
-        name="email"
-        onChange={onChange}
-      />
-      <Box h="50px" w="75%">
+      <Box w="full">
+        <Common.InputGroup
+          label="Enter your email to join the waitlist"
+          whiteMode
+          value={getValues('email')}
+          errorMsg={errors.email?.message}
+          placeholder="hello@mail.com"
+          name="email"
+          onChange={onChange}
+        />
+      </Box>
+      <Box h="48px" w="full">
         <Common.ImpaktButton
           h="full"
-          variant="black"
+          variant="orange-black"
           isLoading={isLoading}
           isDisabled={isLoading}
           type="submit"

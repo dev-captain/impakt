@@ -8,3 +8,4 @@ export { default as Evolving } from 'components/ui/Landing/Evolving';
 export { default as FitnessJourney } from 'components/ui/Landing/FitnessJourney';
 export { default as BecomePart } from 'components/ui/Landing/BecomePart';
 export { default as LandingPageFooter } from 'components/ui/Landing/LandingPageNavbar/LandingPageFooter';
+export { default as PromoBar } from 'components/ui/Landing/PromoBar/PromoBar';
