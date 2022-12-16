@@ -1,5 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { usePersistedGroupStore } from 'lib/zustand';
 
 interface GroupStatisticLabelPropsI {
   leftIcon: React.ReactElement<any, any>;
@@ -14,6 +15,9 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
   labelDescription,
   onClick,
 }) => {
+  const { role } = usePersistedGroupStore();
+  const isMember = role === 'Member';
+  const isNone = role === 'None';
   return (
     <Box
       bg="orangeGradient"
@@ -28,6 +32,11 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
       <Box display="flex" justifyContent="flex-start" alignItems="center">
         {leftIcon}
         <Box marginLeft="12px">
+          {(isMember || isNone) && (
+            <Text color="white" textStyle="regular14" mb="8px">
+              PINNED CHALLENGE
+            </Text>
+          )}
           <Text color="white" textStyle="semiBold5">
             {labelDescription}
           </Text>
