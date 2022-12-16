@@ -23,7 +23,8 @@ const FireIcon = (props: IconProps) => (
         y2="31.9993"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="white" />
+        <stop stopColor="#F04153" />
+        <stop offset="1" stopColor="#F27961" />
       </linearGradient>
     </defs>
   </Icon>

@@ -20,7 +20,7 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
   const isNone = role === 'None';
   return (
     <Box
-      bg="orangeGradient"
+      bg="white"
       ml="0 !important"
       border="1px solid #D3E2F0"
       w={{ base: 'full', md: 'auto' }}
@@ -33,11 +33,11 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
         {leftIcon}
         <Box marginLeft="12px">
           {(isMember || isNone) && (
-            <Text color="white" textStyle="regular14" mb="8px">
+            <Text color="fg-1" textStyle="regular14" mb="8px">
               PINNED CHALLENGE
             </Text>
           )}
-          <Text color="white" textStyle="semiBold5">
+          <Text color="fg-1" textStyle="semiBold5">
             {labelDescription}
           </Text>
         </Box>
