@@ -33,10 +33,7 @@ const initSentry = () => {
 };
 
 const initLogRocket = () => {
-  if (
-    process.env.REACT_APP_VERCEL_ENV === 'production' ||
-    process.env.REACT_APP_VERCEL_ENV === 'preview'
-  ) {
+  if (process.env.REACT_APP_VERCEL_ENV === 'production') {
     LogRocket.init('qmt5ka/impakt');
     setupLogRocketReact(LogRocket);
   }
