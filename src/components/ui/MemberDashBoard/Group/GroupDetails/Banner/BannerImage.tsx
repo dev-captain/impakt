@@ -16,6 +16,8 @@ const BannerImage: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { activeGroup } = usePersistedGroupStore();
   const { role } = usePersistedGroupStore();
+  const isCreator = role === 'Creator';
+  const isModerator = role === 'Moderator';
   return (
     <Box w="full" position="relative">
       {/* TODO PEN ICON TO CHANGE BANNER WILL ADD HERE */}
@@ -34,7 +36,7 @@ const BannerImage: React.FC = () => {
         objectFit="cover"
         // position="absolute"
       />
-      {role === 'Creator' && (
+      {isCreator && (
         <Common.ImpaktButton
           variant="black"
           w="48px"
@@ -47,7 +49,7 @@ const BannerImage: React.FC = () => {
           <I.PenIcon />
         </Common.ImpaktButton>
       )}
-      {activeGroup?.private && (
+      {activeGroup?.private && (isCreator || isModerator) && (
         <Box
           bg="rgba(18, 18, 22, 0.4)"
           w="128px"
