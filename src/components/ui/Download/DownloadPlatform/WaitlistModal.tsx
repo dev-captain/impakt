@@ -18,6 +18,9 @@ export type WaitlistModalProps = {
   isOpen: boolean;
   isCloseButton?: boolean;
   onClose: () => void;
+  headlineText: string;
+  subHeadlineText: string;
+  buttonText: string;
 };
 
 const WaitlistModal: React.FC<WaitlistModalProps> = (props) => {
@@ -41,17 +44,23 @@ const WaitlistModal: React.FC<WaitlistModalProps> = (props) => {
             alignItems="center"
             justifyContent="center"
             rowGap="1em"
+            wordBreak="break-word"
           >
-            <Text fontSize="2xl" fontWeight="medium" color="#29323B" isTruncated>
-              Launching soon on
+            <Text
+              fontSize={{ base: 'xl', md: '2xl' }}
+              fontWeight="medium"
+              color="#29323B"
+              isTruncated
+            >
+              {props.headlineText}
             </Text>
             <Box mt="2" display="flex" flexDirection="column" alignItems="center">
               <Image src={Images.Common.VsportDark} w="168px" h="48px" />
               <Text fontSize="18px" fontWeight="medium" color="#29323B">
-                for mobile
+                {props.subHeadlineText}
               </Text>
             </Box>
-            <WaitlistForm />
+            <WaitlistForm buttonText={props.buttonText} />
           </VStack>
         </ModalBody>
       </ModalContent>

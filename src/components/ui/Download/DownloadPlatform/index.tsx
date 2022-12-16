@@ -191,7 +191,14 @@ const DownloadPlatform = () => {
           <DownloadSpecBox />
         </VStack>
       </VStack>
-      <WaitlistModal isOpen={isOpen} onClose={onClose} isCloseButton />
+      <WaitlistModal
+        headlineText="Launching soon on"
+        isOpen={isOpen}
+        onClose={onClose}
+        isCloseButton
+        buttonText="Join the waitlist"
+        subHeadlineText="for mobile"
+      />
     </C.HeroLayout>
   );
 };

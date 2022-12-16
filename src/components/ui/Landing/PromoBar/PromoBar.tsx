@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, Text } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { I } from 'components';
 import { PromoBarCounter } from './PromoBarCounter';
 
 const PromoBar: React.FC = () => {
@@ -41,17 +41,6 @@ const PromoBar: React.FC = () => {
               spacing={{ base: '0', md: '24px' }}
             >
               <PromoBarCounter />
-              <Common.ImpaktButton
-                ml={{ base: '0', md: '24px' }}
-                target="_blank"
-                as="a"
-                variant="white"
-                h="full"
-                href="https://wefunder.com/vsports"
-                p={{ base: '10px 20px', md: '18px 32px' }}
-              >
-                <Text textStyle="semibold20">Invest Now</Text>
-              </Common.ImpaktButton>
             </HStack>
           </HStack>
         </HStack>

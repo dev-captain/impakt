@@ -26,7 +26,7 @@ const sendMailAsContact = async (email: string) => {
   return response.data;
 };
 
-const WaitlistForm: React.FC = () => {
+const WaitlistForm: React.FC<{ buttonText: string }> = ({ buttonText }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { handleSubmit, getValues, setValue, errors, reset } = useForm({
     defaultValues: { email: '' },
@@ -66,7 +66,7 @@ const WaitlistForm: React.FC = () => {
           isDisabled={isLoading}
           type="submit"
         >
-          <Text>Join the waitlist</Text>
+          <Text>{buttonText} </Text>
         </Common.ImpaktButton>
       </Box>
     </VStack>
