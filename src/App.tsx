@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'i18n';
-import { useEffect } from 'react';
-import { useColorMode } from '@chakra-ui/react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import {
-  Home,
-  KnowledgeBase,
+  // Home,
   NotFound,
   Event,
   Contact,
   Onboarding,
-  LeaderBoard,
   DownloadSCreen,
   ChangePassword,
   RecoveryPassword,
@@ -18,48 +13,30 @@ import {
   SignUp,
   SignIn,
   MemberDashboard,
-  // NFT,
+  NFT,
   TermsOfUse,
+  Whitelist,
+  Landing,
 } from 'pages';
 import { Common, S } from 'components';
 
 import Authentication from './middlewares/Authentication';
+import ErrorBoundary from './components/common/ErrorBoundary';
+// import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
+import GroupInvite from './pages/GroupInvite/index';
+import routes from './data/routes';
 
 const App = () => {
-  const { setColorMode } = useColorMode();
-  const location = useLocation();
-
-  const onRouteChanged = () => {
-    // force overflow unset if it's hidden on other then / page
-    if (location.pathname !== '/') {
-      if (document.body.style.overflow === 'hidden') {
-        document.body.style.overflow = 'unset';
-      }
-    }
-  };
-
-  useEffect(() => {
-    onRouteChanged();
-  }, [location]);
-
-  useEffect(() => {
-    setColorMode('light');
-  }, [setColorMode]);
-
   return (
     <Routes>
       <Route
         path="/"
         element={
           <Common.ScrollToTop>
-            <Home />
+            <Landing />
           </Common.ScrollToTop>
         }
       />
-
-      <Route path="/knowledge-base" element={<KnowledgeBase />}>
-        <Route path=":article" element={<KnowledgeBase />} />
-      </Route>
 
       <Route path="/events" element={<Event />}>
         <Route path=":slug" element={<Event />} />
@@ -68,32 +45,53 @@ const App = () => {
       <Route path="/onboarding" element={<Onboarding />} />
 
       <Route path="/contact" element={<Contact />} />
-      <Route path="/leader-board" element={<LeaderBoard />} />
-      <Route path="/download" element={<DownloadSCreen />} />
+      <Route path={routes.download} element={<DownloadSCreen />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/recover-password" element={<RecoveryPassword />} />
 
+      <Route path="/invite" element={<GroupInvite />} />
+
       <Route path="/register" element={<SignUp />}>
         <Route path=":id" element={<SignUp />} />
+        <Route path="bonus" element={<SignUp />} />
       </Route>
 
       <Route path="/signin" element={<SignIn />} />
       <Route path="/verify" element={<Verify />} />
-      {/* <Route path="/nft" element={<NFT />} /> */}
-      <Route path="/terms-of-use" element={<TermsOfUse />} />
+      <Route path="/nft" element={<NFT />} />
+      <Route path="/whitelist" element={<Whitelist />} />
+      <Route
+        path="/terms-of-use"
+        element={
+          <Common.ScrollToTop>
+            <TermsOfUse />
+          </Common.ScrollToTop>
+        }
+      />
 
       <Route
-        path="dashboard"
+        path={routes.dashboard}
         element={
           <Authentication>
-            <MemberDashboard />
+            <ErrorBoundary>
+              <MemberDashboard />
+            </ErrorBoundary>
           </Authentication>
         }
       >
         <Route path="" element={<S.General />} />
-        <Route path="referrals" element={<S.Referrals />} />
-        {/* <Route path="reward-history" element={<S.RewardHistory />} /> */}
-        {/* <Route path="statistics" element={<S.Statistics />} /> */}
+        <Route path="r" element={<S.Referrals />} />
+        <Route path="g">
+          <Route path="" element={<S.Group />} />
+          {/* <Route path="create-group" element={<S.CreateGroup isStandalone />} /> */}
+          <Route path=":id" element={<S.GroupDetail />}>
+            <Route path="event/:eventId" />
+            <Route path="post/:postId" />
+            <Route path="event/:eventId/join" />
+          </Route>
+        </Route>
+        <Route path="reward-history" element={<S.RewardHistory />} />
+        <Route path="statistics" element={<S.Statistics />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

@@ -27,7 +27,7 @@ const CollapseMenuController = ({ isLessThan1280, onToggle, isOpen }: Props) => 
         isOpen ? (
           <CloseIcon w={3} h={3} color="#1C1C28" boxSize="15px" />
         ) : (
-          <HamburgerIcon w={5} h={5} color="#FFF" boxSize="22px" />
+          <HamburgerIcon w={5} h={5} color="#fff" boxSize="22px" />
         )
       }
     />

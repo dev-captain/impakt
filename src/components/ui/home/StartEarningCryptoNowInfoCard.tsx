@@ -4,6 +4,7 @@ import { VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Keys from 'i18n/types';
 import { useNavigate } from 'react-router-dom';
+import routes from '../../../data/routes';
 
 const StartEarningCryptoNowInfoCard: FC = () => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
@@ -19,10 +20,10 @@ const StartEarningCryptoNowInfoCard: FC = () => {
       <VStack
         cursor="pointer"
         as="a"
-        href="/download"
+        href={routes.download}
         onClick={(e) => {
           e.preventDefault();
-          navigate('/download');
+          navigate(routes.download);
         }}
         alignItems="flex-start"
         color="white"

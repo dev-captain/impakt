@@ -1,4 +1,5 @@
 import Images from 'assets/images';
+import { Day, EventInput } from 'dayspan';
 
 export const RoadMapData: {
   date: string;
@@ -70,6 +71,8 @@ export const Videos = {
   impaktGames: 'assets/videos/tutorial-video.mp4',
   heroVideo: 'assets/videos/herovideo.mov',
   stars: 'assets/videos/stars.mov',
+  newVideo: 'assets/videos/Trailer.mp4',
+  backgroundBeachVideo: 'assets/videos/backgroundbeach.mp4',
 };
 
 export const Socials = {
@@ -78,6 +81,7 @@ export const Socials = {
   twitter: 'https://twitter.com/impaktlife',
   discord: 'https://discord.gg/eVQJ8XRa9S',
   tiktok: 'http://tiktok.com/@impaktlife',
+  insta: 'https://www.instagram.com/impakt.life/',
 };
 
 export const Categories = [
@@ -253,9 +257,9 @@ export const RoadmapInfo = [
         isDone: true,
       },
     ],
-    height: '124px',
+    height: '0px',
     isCompleted: true,
-    lineHeight: '124px',
+    lineHeight: '88px',
     pinLineHeight: '60px',
   },
   {
@@ -267,14 +271,18 @@ export const RoadmapInfo = [
       },
       {
         title: 'q1_2',
-        isDone: false,
+        isDone: true,
       },
       {
         title: 'q1_3',
-        isDone: false,
+        isDone: true,
+      },
+      {
+        title: 'q1_4',
+        isDone: true,
       },
     ],
-    height: '184px',
+    height: '150px',
     lineHeight: '124px',
     isCompleted: true,
     pinLineHeight: '100px',
@@ -284,15 +292,24 @@ export const RoadmapInfo = [
     items: [
       {
         title: 'q2_1',
-        isDone: false,
+        isDone: true,
       },
       {
         title: 'q2_2',
-        isDone: false,
+        isDone: true,
+      },
+      {
+        title: 'q2_3',
+        isDone: true,
+      },
+
+      {
+        title: 'q2_4',
+        isDone: true,
       },
     ],
-    height: '241px',
-    isCompleted: false,
+    height: '220px',
+    isCompleted: true,
     lineHeight: '184px',
     pinLineHeight: '130px',
   },
@@ -301,6 +318,25 @@ export const RoadmapInfo = [
     items: [
       {
         title: 'q3_1',
+        isDone: false,
+      },
+
+      {
+        title: 'q3_2',
+        isDone: false,
+      },
+
+      {
+        title: 'q3_3',
+        isDone: false,
+      },
+
+      {
+        title: 'q3_4',
+        isDone: false,
+      },
+      {
+        title: 'q3_5',
         isDone: false,
       },
     ],
@@ -386,4 +422,242 @@ export const CommunityData = [
   'Telos',
   'Moonriver',
   'Cronos',
+];
+
+export const event1Data = JSON.stringify({
+  title: 'Good morning',
+  description: 'This is description',
+  link: 'impakt.com/e/ehF47bc11',
+  memberCount: 29,
+  chellanges: 'Hero cardio',
+});
+
+export const event2Data = JSON.stringify({
+  title: 'Power Training',
+  description: 'This is description 2',
+  link: 'impakt.com/e/ehF47bc9',
+  memberCount: 29,
+  chellanges: 'Hero cardio',
+});
+
+export const event3Data = JSON.stringify({
+  title: 'Event 3 - Cinema',
+  description: 'This is description 3',
+  link: 'impakt.com/e/ehF47bc4',
+  memberCount: 15,
+  chellanges: 'Hero cardio',
+});
+
+export const event4Data = JSON.stringify({
+  title: 'Event 4 - Theater',
+  description: 'This is description 4',
+  link: 'impakt.com/e/ehF47bca',
+  memberCount: 99,
+  chellanges: 'Hero cardio',
+});
+
+export const event5Data = JSON.stringify({
+  title: 'Event 5 - Theater',
+  description: 'This is description 5',
+  link: 'impakt.com/e/ehF47bca',
+  memberCount: 15,
+  chellanges: 'Hero cardio',
+});
+
+export const getDummyEvents = () => {
+  const allEvents: EventInput<string, any>[] = [];
+
+  const event1: EventInput<string, any> = {
+    id: 1,
+    data: event1Data,
+    schedule: {
+      on: Day.fromString('2022-10-01T20:00:00.000Z'),
+      duration: 0,
+      exclude: ['2022-10-01T20:30:00.000Z'],
+      times: [
+        Day.fromString('2022-10-01T20:00:00.000Z'),
+        Day.fromString('2022-10-01T20:59:00.000Z'),
+      ],
+    },
+  };
+
+  // const event2: EventInput<string, any> = {
+  //   id: 2,
+  //   data: event2Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 11),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 11, 15)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
+
+  // const event3 = {
+  //   id: 3,
+  //   data: event3Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 1),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 1, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
+
+  // const event4 = {
+  //   id: 4,
+  //   data: event4Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 2),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 2, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
+
+  // const event5 = {
+  //   id: 4,
+  //   data: event5Data,
+  //   schedule: {
+  //     on: Day.build(2022, Month.SEPTEMBER, 7),
+  //     times: [Day.build(2022, Month.SEPTEMBER, 7, 13)],
+  //     duration: 1,
+  //     durationUnit: 'hours',
+  //   },
+  // };
+
+  allEvents.push(event1);
+  // allEvents.push(event2);
+  // allEvents.push(event3);
+  // allEvents.push(event4);
+  // allEvents.push(event5);
+
+  return allEvents;
+};
+
+export const ChallengeList = [
+  {
+    id: 1,
+    title: 'Daily Challenge',
+    challenge: '8',
+    time: '5 min',
+    play: '256',
+    like: '72',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Impakt',
+  },
+  {
+    id: 2,
+    title: 'Good Morning',
+    challenge: '22',
+    time: '18 min',
+    name: 'Demideus',
+  },
+  {
+    id: 3,
+    title: 'Power v3',
+    challenge: '16',
+    time: '12 min',
+    play: '8',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Demideus',
+  },
+  {
+    id: 5,
+    title: 'Power v3',
+    challenge: '16',
+    time: '19 min',
+    timmer: { h: '08', m: '32', s: '44' },
+    name: 'Demideus',
+  },
+];
+
+export type ChallengeTabs = 'routine' | 'game';
+export const ChallengeTab: ChallengeTabs[] = [
+  'routine',
+  // 'game'
+];
+
+export const GroupSettingsMemberTabs = ['General'];
+
+export const GroupSettingTab = [
+  'Edit group',
+  'Permissions',
+  'General',
+  // 'Requests',
+  // 'Members list'
+];
+
+export const GroupDetails = [
+  {
+    name: 'Morning',
+    private: 'true',
+  },
+  {
+    name: 'Private',
+    private: 'true',
+  },
+  {
+    name: 'Public',
+    private: 'false',
+  },
+  {
+    name: 'news',
+    private: 'true',
+  },
+  {
+    name: 'sport',
+    private: 'false',
+  },
+  {
+    name: 'std.10',
+    private: 'false',
+  },
+];
+
+export const deepLinkToApp = (groupId?: number, eventId?: number) =>
+  `impakt://join-event?groupId=${groupId}&eventId=${eventId}`;
+
+export const journeyData = [
+  {
+    img: Images.Journey.Journey,
+    title: 'We need variety',
+    description: 'Choose from 40+ exercises. More added constantly.',
+  },
+  {
+    img: Images.Journey.Journey1,
+    title: 'Starting at the base',
+    description: 'Routines customized to our starting fitness level.',
+  },
+  {
+    img: Images.Journey.Journey2,
+    title: 'Challenging ourselves & others',
+    description: 'Complete Impakt challenges and compete with others.',
+  },
+];
+
+export const AthletesData = [
+  {
+    name: 'Kelvin Gastelum',
+    title: 'CEO',
+    image: Images.team.demideus,
+    alt: '',
+    subtitle:
+      '3rd time CEO with <span style="color:#FFF;">15+ years</span> of experience in building businesses.\nPrevious 2 CEO/Founder roles in companies generating <span style="color:#FFF;">$40M+</span> yearly turnover.',
+  },
+  {
+    name: 'Matt Fox',
+    title: 'President',
+    image: Images.team.valtec,
+    alt: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> of building technology companies.\nPrevious roles at Uber Eats (Business Intel Lead), Block (Square), and Y-Combinator.',
+  },
+  {
+    name: 'Uyen Ha',
+    title: 'CTO',
+    image: Images.team.dahaka,
+    alt: '',
+    subtitle:
+      ' <span style="color:#FFF;">10+ years</span> building technology companies and experienced in building Computer Vision, Unity Apps, and Web Apps.\nManaging a team of <span style="color:#FFF;">20+</span> engineers & product managers',
+  },
 ];

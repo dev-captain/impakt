@@ -1,90 +1,56 @@
-import { memo, useEffect } from 'react';
-import { parsePathname } from 'utils';
+import { memo } from 'react';
 import Keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
-import { HStack, useColorMode, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import NavbarLinkItem from './NavbarLinkItem';
+import { useTranslation } from 'react-i18next';
+import { Common } from 'components';
 
-type Props = {
-  IsHeader: boolean;
-};
+const NavbarLink = () => {
+  const path = useLocation();
+  const { t } = useTranslation().i18n;
 
-const NavbarLink = ({ IsHeader }: Props) => {
-  const { colorMode, setColorMode } = useColorMode();
-  const location = useLocation();
-  const isLight = colorMode === 'light';
-  const { t } = useTranslation(`default`).i18n;
-  const { onClose } = useDisclosure();
-  const path = parsePathname(location.pathname);
-  const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
-  const textColor = isLight ? 'glass.100' : 'glass.700';
-  const activeColor = isLight ? 'glass.100' : 'glass.900';
-  const passiveColor = isLight ? 'rgba(255,255,255)' : 'glass.700';
-  useEffect(() => {
-    if (path.path === 'dashboard') {
-      setColorMode('light');
-    }
-  }, [path.path]);
-
-  useEffect(() => {
-    if (!isLessThan1040) {
-      onClose();
-    }
-  }, [isLessThan1040, onClose]);
+  const textColor = 'rgba(255,255,255,0.5)';
+  const passiveColor = 'white';
 
   return (
-    <HStack
-      spacing={[3, 3, 3, 5, 6, 12]}
-      flexWrap={{ base: 'wrap', md: 'nowrap' }}
-      justifyContent={{ base: 'center', md: 'start' }}
-      display="flex"
-    >
-      <NavbarLinkItem
+    <>
+      <Common.LinkItem
         href="/"
         title={t(Keys.navbar.impaktFitness)}
-        isActive={path.path === ''}
-        color={activeColor || textColor}
-        passiveColor={passiveColor}
+        isActive={path.pathname === ''}
+        titleActiveColor={passiveColor}
+        titlePassiveColor={textColor}
+        isNavigate
       />
-      <NavbarLinkItem
-        type="LINK"
-        onClose={onClose}
-        passiveColor={passiveColor}
+      <Common.LinkItem
         title={t(Keys.navbar.knowledgeBase)}
         href="https://knowledgebase.impakt.com"
-        isActive={path.path === 'knowledge-base'}
+        isActive={path.pathname === 'knowledge-base'}
+        titleActiveColor={passiveColor}
+        titlePassiveColor={textColor}
       />
-      <NavbarLinkItem
+      {/* <Common.LinkItem
         href="/events"
-        onClose={onClose}
         passiveColor={passiveColor}
         title={t(Keys.navbar.events)}
-        isActive={path.path === 'events'}
-      />
-      <NavbarLinkItem
+        isActive={path.pathname === 'events'}
+      /> */}
+      <Common.LinkItem
         href="/contact"
-        onClose={onClose}
-        passiveColor={passiveColor}
         title={t(Keys.navbar.contactUs)}
-        isActive={path.path === 'contact'}
+        isActive={path.pathname === 'contact'}
+        titleActiveColor={passiveColor}
+        titlePassiveColor={textColor}
+        isNavigate
       />
-      {!IsHeader && (
-        <NavbarLinkItem
-          href="/terms-of-use"
-          onClose={onClose}
-          passiveColor={passiveColor}
-          title={t(Keys.navbar.termsOfUse)}
-          isActive={path.path === 'terms-of-use'}
-        />
-      )}
-      {/* <Button variant="ghost" onClick={() => changeLanguage('en')}>
-                  <Text>En</Text>
-                </Button>
-                <Button variant="ghost" onClick={() => changeLanguage('zh')}>
-                  <Text>Zh</Text>
-                </Button> */}
-    </HStack>
+      {/* (
+      <Common.LinkItem
+        href="/terms-of-use"
+        passiveColor={passiveColor}
+        title={t(Keys.navbar.termsOfUse)}
+        isActive={path.pathname === 'terms-of-use'}
+      />
+      ) */}
+    </>
   );
 };
 

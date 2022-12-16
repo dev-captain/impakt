@@ -2,42 +2,38 @@ import * as React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import keys from 'i18n/types';
-import moment from 'moment';
 
 import {
   VStack,
-  Box,
+  // Box,
   Text,
   Table,
   Thead,
   Tbody,
   Tr,
   Th,
-  Td,
+  // Td,
   TableContainer,
 } from '@chakra-ui/react';
-import { useAppSelector, usePascalCase } from 'hooks';
+// import {  usePascalCase } from 'hooks';
 
 const ExercisesList: React.FC = () => {
   const { t } = useTranslation().i18n;
 
-  const { convertToPascalCase } = usePascalCase();
-  const rewardHistoryStatistics = useAppSelector(
-    (state) => state.rewardHistoryReducer.rewardHistoryState,
-  );
-  const [pascalCasedRewardHistoryStatistics, setPascalCasedRewardHistoryStatistics] =
-    React.useState<typeof rewardHistoryStatistics>([]);
+  // const { convertToPascalCase } = usePascalCase();
+  // const [pascalCasedRewardHistoryStatistics, setPascalCasedRewardHistoryStatistics] =
+  //   React.useState<typeof rewardHistoryStatistics>([]);
 
-  React.useEffect(() => {
-    if (rewardHistoryStatistics && rewardHistoryStatistics.length > 0) {
-      const pascalCasedExStatics = rewardHistoryStatistics.map((stats) => {
-        const convertedPurpose = convertToPascalCase(stats.purpose);
+  // React.useEffect(() => {
+  //   if (rewardHistoryStatistics && rewardHistoryStatistics.length > 0) {
+  //     const pascalCasedExStatics = rewardHistoryStatistics.map((stats) => {
+  //       const convertedPurpose = convertToPascalCase(stats.purpose);
 
-        return { ...stats, purpose: convertedPurpose };
-      });
-      setPascalCasedRewardHistoryStatistics(pascalCasedExStatics);
-    }
-  }, [rewardHistoryStatistics]);
+  //       return { ...stats, purpose: convertedPurpose };
+  //     });
+  //     setPascalCasedRewardHistoryStatistics(pascalCasedExStatics);
+  //   }
+  // }, [rewardHistoryStatistics]);
 
   return (
     <VStack
@@ -54,7 +50,7 @@ const ExercisesList: React.FC = () => {
             <Tr bgColor="#121216">
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4) "
+                color="#fff"
                 borderBottom={0}
                 whiteSpace="normal"
                 textTransform="capitalize"
@@ -69,7 +65,7 @@ const ExercisesList: React.FC = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4)"
+                color="#fff"
                 borderBottom={0}
                 paddingX={{ base: '15px', md: '20px' }}
                 textTransform="capitalize"
@@ -84,7 +80,7 @@ const ExercisesList: React.FC = () => {
               </Th>
               <Th
                 textAlign="start"
-                color="rgba(255, 255, 255, 0.4)"
+                color="#fff"
                 borderBottom={0}
                 paddingX={{ base: '15px', md: '24px' }}
                 textTransform="capitalize"
@@ -144,7 +140,7 @@ const ExercisesList: React.FC = () => {
             </Tr> */}
             {/* {excerciseStatistics.length > 0 && */}
             {/* excerciseStatistics.map((exercise: any) => ( */}
-            {pascalCasedRewardHistoryStatistics.length > 0 &&
+            {/* {pascalCasedRewardHistoryStatistics.length > 0 &&
               pascalCasedRewardHistoryStatistics.map(
                 ({ purpose, timestamp, value }) =>
                   value !== 0 && (
@@ -162,7 +158,11 @@ const ExercisesList: React.FC = () => {
                         textStyle={{ md: 'semiBold6', base: 'semiBold12' }}
                         color="rgba(255, 255, 255, 0.4)"
                       >
-                        {moment(timestamp).format('DD.MM.YYYY')}
+                        {Day.build(
+                          timestamp.getFullYear(),
+                          timestamp.getMonth(),
+                          timestamp.getDate(),
+                        ).format('DD.MM.YYYY')}
                       </Td>
                       <Td
                         borderBottom={0}
@@ -175,7 +175,7 @@ const ExercisesList: React.FC = () => {
                       >
                         {purpose}
                         {/* {exercise.purpose} */}
-                      </Td>
+            {/* </Td>
                       <Td
                         borderBottom={0}
                         paddingY="10px"
@@ -191,14 +191,13 @@ const ExercisesList: React.FC = () => {
                             textStyle={{ md: 'semiBold24', base: 'normal14' }}
                             color="#FEC417"
                           >
-                            +{value}
-                            {/* {exercise.godl} */}
-                          </Text>
+                            +{value} */}
+            {/* {exercise.godl} */}
+            {/* </Text>
                         </Box>
                       </Td>
-                    </Tr>
-                  ),
-              )}
+                    </Tr> */}
+            {/* ), */}
             {/* ))} */}
           </Tbody>
         </Table>

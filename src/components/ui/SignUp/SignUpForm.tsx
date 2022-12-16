@@ -1,24 +1,38 @@
-import { Box, Flex, FormControl, useToast, VStack, Text, useMediaQuery } from '@chakra-ui/react';
+import { Box, Flex, FormControl, VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
-import { signUpMember } from '../../../lib/redux/slices/member/actions/signUpMember';
 import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';
+import { useUserControllerCreate } from '../../../lib/impakt-dev-api-client/react-query/users/users';
+import { renderToast } from '../../../utils';
+import { PostUserReq } from '../../../lib/impakt-dev-api-client/react-query/types/postUserReq';
+import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
+import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
+import routes from '../../../data/routes';
 
 const SignUpForm: React.FC = () => {
+  const isThereNextParam =
+    useLocation().search.includes('next') || useLocation().search.includes('invite');
+
+  const navigateToNextParam = useNextParamRouter(routes.download);
+  const navigate = useNavigate();
+
+  const { setMember } = usePersistedAuthStore();
+
   const [activeReferrerId, setActiveReferrerId] = useState<number>();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const [isShowPassword, setIsShowPassword] = useState(false);
   const { id } = useParams();
-  const navigate = useNavigate();
-  const isMemberCreateLoading = useAppSelector((state) => state.memberAuth.isLoading);
-  const toast = useToast();
-  const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
+  const createUser = useUserControllerCreate();
+  const signIn = useAuthControllerLogin();
+
   React.useEffect(() => {
     if (!id) return;
     const isStringThatCanConvertToPositiveInt = Number.isInteger(Number(id)) && Number(id) > 0;
@@ -70,19 +84,42 @@ const SignUpForm: React.FC = () => {
       password,
       email,
       referrerId: activeReferrerId,
-    };
-
-    await dispatch(signUpMember(payload)).unwrap();
-
-    toast({
-      title: 'Success',
-      description: 'Your account created successfully.You can now login in the Impakt app.',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
-
-    navigate('/download');
+      minigameBonus: searchParams.get('minigamebonus') === 'true' ? true : false ?? false,
+    } as PostUserReq;
+    createUser.mutate(
+      { data: { ...payload } },
+      {
+        onSuccess: async () => {
+          renderToast(
+            'success',
+            'Your account created successfully.You can now login in the Impakt app.',
+            'dark',
+          );
+          if (isThereNextParam) {
+            await signIn.mutateAsync(
+              { data: { emailOrUsername: email, password } },
+              {
+                onSuccess: (member) => {
+                  setMember(member);
+                  renderToast('success', 'Welcome');
+                },
+                onError: (err) => {
+                  renderToast(
+                    'error',
+                    err.response?.data.message ?? 'Something went wrong',
+                    'dark',
+                  );
+                },
+              },
+            );
+          }
+          navigateToNextParam();
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');
+        },
+      },
+    );
   };
 
   const generateRandomFourDigitNumberString = () => {
@@ -231,7 +268,9 @@ const SignUpForm: React.FC = () => {
         </Flex>
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
-            isLoading={isMemberCreateLoading}
+            variant="primary"
+            isLoading={createUser.isLoading}
+            isDisabled={createUser.isLoading}
             type="submit"
             leftIcon={<I.AddMemberIcon />}
             size="lg"

@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Common } from 'components';
-
-import { useAppSelector } from 'hooks';
+import { usePersistedAuthStore } from '../../../lib/zustand';
 
 const SignInButton: React.FC = () => {
   const navigate = useNavigate();
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
 
   return !member ? (
     <Common.ImpaktButton
       as="a"
       variant="secondary"
+      bgColor="rgba(28, 28, 40, 1)"
       href="/signin"
       onClick={(e) => {
         e.preventDefault();

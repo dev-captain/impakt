@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useToast } from '@chakra-ui/react';
+import axios from 'axios';
+import { renderToast } from '../utils';
 
 interface ContactUs {
   email: string;
@@ -9,49 +10,43 @@ interface ContactUs {
   isSubscribed?: boolean;
 }
 
-const url = 'https://contact-api-email.herokuapp.com/common/contact';
+const freshDeskAwsApiGateWayAxiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_TICKET_API_GATEWAY_BASE_URI,
+});
 
 const useContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any | string>(null);
   const [isSuccessful, setIsSuccessful] = useState(false);
-  const toast = useToast();
 
-  const sendData = async (data: ContactUs, resetFields: () => void) => {
+  const sendData = async (data: ContactUs) => {
     setLoading(true);
     setError(null);
     setIsSuccessful(false);
     try {
-      const msg = {
+      const payload = JSON.stringify({
+        name: data.name,
+        description: data.message,
         subject: data.subject,
-        text: `Name: ${data.name} - Email: ${data.email} \n ${data.message}`,
-      };
-      await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(msg),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        priority: 1,
+        status: 2,
+        group_id: 'General',
+        type: 'Question',
+        tags: ['discord'],
+        email_config_id: 72000081040,
+        email: data.email,
       });
-      resetFields();
+
+      await freshDeskAwsApiGateWayAxiosInstance.post('/tickets/', payload);
+
       setIsSuccessful(true);
       setLoading(false);
-      toast({
-        description: 'You sent a message successfully.',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
+      renderToast('success', 'You sent a message successfully.', 'dark');
     } catch (err) {
       setError(err);
       setIsSuccessful(false);
       setLoading(false);
-      toast({
-        description: 'Something went wrong. Please check information and try again.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
+      renderToast('error', 'Something went wrong. Please check information and try again.', 'dark');
     }
   };
 

@@ -2,18 +2,23 @@ import { useColorModeValue, VStack } from '@chakra-ui/react';
 import { C, S } from 'components';
 import React from 'react';
 import Images from 'assets/images';
-import { useNavigate } from 'react-router-dom';
+import { useLogout } from 'hooks';
 
-import { useAppSelector } from 'hooks';
+import { usePersistedAuthStore } from '../../lib/zustand';
 
 const SignUp = () => {
-  const member = useAppSelector((state) => state.memberAuth.member);
-  const navigate = useNavigate();
+  const logout = useLogout({ silent: true });
+  const handleLogout = async () => {
+    await logout();
+  };
+  const { member } = usePersistedAuthStore();
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   React.useEffect(() => {
-    if (member) navigate('/signin');
+    if (member) {
+      handleLogout();
+    }
   }, []);
 
   return (

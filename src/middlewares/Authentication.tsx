@@ -1,16 +1,23 @@
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector } from 'hooks';
+import LogRocket from 'logrocket';
+import { usePersistedAuthStore } from '../lib/zustand';
 
 const Authentication: React.FC = ({ children }) => {
-  const member = useAppSelector((state) => state.memberAuth.member);
+  const { member } = usePersistedAuthStore();
+
   const navigate = useNavigate();
   const location = useLocation();
 
   React.useEffect(() => {
     if (!member) {
-      console.log(location.pathname);
       navigate(`/signin?next=${location.pathname}`);
+    } else {
+      LogRocket.identify(member.id.toString(), {
+        email: member.email ?? '',
+        name: member.username,
+        emailVerified: member.emailVerified,
+      });
     }
   }, [member]);
 

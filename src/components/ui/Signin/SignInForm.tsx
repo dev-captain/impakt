@@ -1,22 +1,28 @@
-import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
+import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { Common, I } from 'components';
 import { LoginReq } from '@impakt-dev/api-client';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector, useForm } from 'hooks';
+import { useForm } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { signInMember } from '../../../lib/redux/slices/member/actions/signInMember';
-import { parseUrlQueryParamsToKeyValuePairs } from '../../../utils';
+import { parseUrlQueryParamsToKeyValuePairs, renderToast } from '../../../utils';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import signInFormYupScheme from '../../../lib/yup/schemas/signInYupScheme';
+import { useAuthControllerLogin } from '../../../lib/impakt-dev-api-client/react-query/auth/auth';
+import { usePersistedAuthStore } from '../../../lib/zustand';
+import { useNextParamRouter } from '../../../hooks/useNextParamRouter';
+import routes from '../../../data/routes';
 
 const SignInForm: React.FC = () => {
+  const navigate = useNextParamRouter(routes.dashboard);
+
+  const signIn = useAuthControllerLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);
-  const toast = useToast();
   const queryString = parseUrlQueryParamsToKeyValuePairs(window.location.search);
-  const dispatch = useAppDispatch();
-  const isMemberAuthLoading = useAppSelector((state) => state.memberAuth.isLoading);
+  const { setMember } = usePersistedAuthStore();
+
+  // const navigate = useNavigate();
 
   const { handleSubmit, errors, setValue } = useForm({
     defaultValues: { email: '', password: '' },
@@ -39,16 +45,19 @@ const SignInForm: React.FC = () => {
       signInPayload.discoursePayload = queryString.sso;
       signInPayload.discourseSig = queryString.sig;
     }
-
-    await dispatch(signInMember(signInPayload)).unwrap();
-
-    toast({
-      title: 'Success',
-      description: 'Welcome !',
-      isClosable: true,
-      duration: 8000,
-      status: 'success',
-    });
+    await signIn.mutateAsync(
+      { data: { ...signInPayload } },
+      {
+        onSuccess: (member) => {
+          setMember(member);
+          renderToast('success', `Welcome ${member.firstName ?? member.username}`);
+          navigate();
+        },
+        onError: (err) => {
+          renderToast('error', err.response?.data.message ?? 'Something went wrong', 'dark');
+        },
+      },
+    );
   };
 
   const inputItems: InputGroupPropsI[] = [
@@ -106,7 +115,8 @@ const SignInForm: React.FC = () => {
       <VStack m="0 !important" w="full">
         <Box w={{ base: 'full', lg: '240px' }}>
           <Common.ImpaktButton
-            isLoading={isMemberAuthLoading}
+            variant="primary"
+            isLoading={signIn.isLoading}
             type="submit"
             leftIcon={<I.EnterIcon width="24" height="24" />}
             size="lg"

@@ -23,7 +23,11 @@ const signUp = 'signUp';
 const signIn = 'signIn';
 const memberDashboard = 'memberDashboard';
 const NFTGenesis = 'NFTGenesis';
+const NFTGeneral = 'NFTGeneral';
+const DynamicNFT = 'DynamicNFT';
 const termsOfUse = 'termsOfUse';
+const Message = 'Message';
+const evolving = 'evolving';
 
 const TranslationKeys = {
   common: {
@@ -37,6 +41,22 @@ const TranslationKeys = {
     workout: `${impaktGamesHero}.workout`,
     excercise: `${impaktGamesHero}.excercise`,
     squats: `${impaktGamesHero}.squats`,
+    body: `${impaktGamesHero}.body`,
+    body1: `${impaktGamesHero}.body1`,
+    evolving: `${impaktGamesHero}.evolving`,
+    evolvingMsg: `${impaktGamesHero}.evolvingMsg`,
+    fitnessJourneyTitle: `${impaktGamesHero}.fitnessJourneyTitle`,
+    fitnessJourneyDescription: `${impaktGamesHero}.fitnessJourneyDescription`,
+    athletesTitle: `${impaktGamesHero}.athletesTitle`,
+    athletesDescription: `${impaktGamesHero}.athletesDescription`,
+    impaktTeamTitle: `${impaktGamesHero}.impaktTeamTitle`,
+    impaktTeamDescription: `${impaktGamesHero}.impaktTeamDescription`,
+    privacyTitle: `${impaktGamesHero}.privacyTitle`,
+    privacyTitle1: `${impaktGamesHero}.privacyTitle1`,
+    privacyTitle2: `${impaktGamesHero}.privacyTitle2`,
+    privacyDescription: `${impaktGamesHero}.privacyDescription`,
+    humanTitle: `${impaktGamesHero}.humanTitle`,
+    humanDescription: `${impaktGamesHero}.humanDescription`,
   },
   downloadPlateform: {
     download: `${downloadPlateform}.download`,
@@ -56,6 +76,7 @@ const TranslationKeys = {
     help: `${navbar}.help`,
     signIn: `${navbar}.signIn`,
     termsOfUse: `${navbar}.termsOfUse`,
+    notification: `${navbar}.notification`,
   },
   computerVision: {
     computerVision: `${computerVision}.computerVision`,
@@ -229,10 +250,35 @@ const TranslationKeys = {
       koin: `${memberDashboard}.exerciseList.koin`,
     },
   },
+  NFTGeneral: {
+    title: `${NFTGeneral}.title`,
+    subTitle: `${NFTGeneral}.subTitle`,
+    howToWhiteList: `${NFTGeneral}.howToWhiteList`,
+    cardInfo: `${NFTGeneral}.cardInfo`,
+  },
   NFTGenesis: {
     Title: `${NFTGenesis}.Title`,
     description: `${NFTGenesis}.description`,
     infoDescription: `${NFTGenesis}.infoDescription`,
+  },
+  DynamicNFT: {
+    title: `${DynamicNFT}.title`,
+    description: `${DynamicNFT}.description`,
+    cardInfo: `${DynamicNFT}.cardInfo`,
+  },
+  Message: {
+    MyChallengeMsg: {
+      description: `${Message}.MyChallengeMsg.description`,
+    },
+    PublicToolTip: {
+      description: `${Message}.PublicToolTip.description`,
+    },
+    PrivateToolTip: {
+      description: `${Message}.PrivateToolTip.description`,
+    },
+  },
+  evolving: {
+    Title: `${evolving}.Title`,
   },
 };
 
