@@ -7,7 +7,7 @@ const FitnessJourneyLayout: React.FC = ({ children }) => {
 
   return (
     <C.HeroLayout
-      bgColor="#F0F7FF"
+      bgColor="#EEF4F6"
       pos="relative"
       customPadding={{
         base: '16px',
