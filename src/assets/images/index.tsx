@@ -32,7 +32,6 @@ const Images = {
     downloadAppBg: require('./backgrounds/downloadapp_bg.png'),
     teamofuseBg: require('./backgrounds/teamofusebg.png'),
     teamBg: require('./backgrounds/teambg.png'),
-    whitelistBg: require('./backgrounds/Whitelistbg.png'),
     nftBg2: require('./backgrounds/nft_bg2.png'),
     nftBg: require('./backgrounds/nftbg.png'),
     impaktIcongBg: require('./backgrounds/impaktIconBg.png'),
