@@ -20,6 +20,7 @@ export type WaitlistModalProps = {
   onClose: () => void;
   headlineText?: string;
   subHeadlineText?: string;
+  type: 'mobile' | 'invest';
 };
 
 const WaitlistModal: React.FC<WaitlistModalProps> = (props) => {
@@ -98,7 +99,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = (props) => {
                 </VStack>
               )}
 
-              <WaitlistForm setIsSubmitted={setIsSubmitted} />
+              <WaitlistForm type={props.type} setIsSubmitted={setIsSubmitted} />
             </VStack>
           )}
           {isSubmitted && <SubmittedCard />}

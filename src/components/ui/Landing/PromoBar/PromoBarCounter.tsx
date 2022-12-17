@@ -73,6 +73,7 @@ export const PromoBarCounter: React.FC<PropsI> = () => {
           onClose={onClose}
           isCloseButton
           subHeadlineText="Launching soon. Want to become an early investor?"
+          type="invest"
         />
       )}
     </>
