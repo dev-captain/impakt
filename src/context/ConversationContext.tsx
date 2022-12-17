@@ -3,10 +3,16 @@ import * as SocketIOClient from 'socket.io-client';
 
 const API_SERVER_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
 
+interface Message {
+  id: number;
+  createdAt: string;
+  userId: number;
+  text: string;
+}
+
 interface ConversationContext {
-  conversationId: number | null;
   setConversationId: React.Dispatch<React.SetStateAction<number | null>>;
-  messages: any[];
+  messages: Message[];
   sendMessage: (data: string) => void;
 }
 
@@ -23,9 +29,11 @@ export function useConversationContext() {
   return context;
 }
 
-export const GroupChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ConversationContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [conversationId, setConversationId] = React.useState<number | null>(null);
-  const [messages, setMessages] = React.useState<any[]>([]);
+  const [messages, setMessages] = React.useState<Message[]>([]);
   const socketRef = React.useRef<SocketIOClient.Socket>();
 
   /**
@@ -34,6 +42,8 @@ export const GroupChatContextProvider: React.FC<{ children: React.ReactNode }> =
    */
   React.useEffect(() => {
     socketRef.current = SocketIOClient.io(API_SERVER_URL);
+
+    // TODO: pre-load previous messages
 
     return () => {
       socketRef.current?.disconnect();
@@ -49,10 +59,14 @@ export const GroupChatContextProvider: React.FC<{ children: React.ReactNode }> =
     if (conversationId) {
       socketRef.current?.emit('join', conversationId);
 
-      socketRef.current?.on('message', (data: any) => {
+      socketRef.current?.on('message', (data: Message) => {
         setMessages((prev) => [...prev, data]);
       });
     }
+
+    return () => {
+      socketRef.current?.emit('leave', conversationId);
+    };
   }, [conversationId]);
 
   /**
@@ -66,7 +80,6 @@ export const GroupChatContextProvider: React.FC<{ children: React.ReactNode }> =
     <ConversationContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        conversationId,
         setConversationId,
         messages,
         sendMessage,
