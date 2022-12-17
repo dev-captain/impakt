@@ -11,7 +11,7 @@ interface GroupSettingModalProps {
 const ChangeGroupTitleModal: React.FC<GroupSettingModalProps> = ({ open, close }) => {
   return (
     <GroupsModal
-      modalTitle={{ text: 'Change Group Title' }}
+      modalTitle={{ text: 'Change Group Name' }}
       isOpen={open}
       onClose={close}
       showCloseButton
