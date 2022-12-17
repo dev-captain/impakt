@@ -66,6 +66,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.5.4",
     "styled-components": "^5.3.5",
     "trunc-html": "^1.1.2",
     "web-vitals": "^2.1.0",
