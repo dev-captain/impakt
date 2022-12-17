@@ -9,12 +9,24 @@ import { Common } from '../../..';
 import { renderToast } from '../../../../utils';
 
 // TODO move to client library
-const sendMailAsContact = async (email: string) => {
+const sendMailAsContact = async (email: string, type: 'mobile' | 'invest') => {
+  const getIds = () => {
+    if (type === 'mobile') {
+      return [process.env.REACT_APP_MOBILE_WAITLIST_ID];
+    }
+
+    if (type === 'invest') {
+      return [process.env.REACT_APP_INVEST_WAITLIST_ID];
+    }
+
+    return [];
+  };
+
   const response = await axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/api/v1/mail/mailing-list/add-contact`,
     {
       email,
-      mailingListIds: [process.env.REACT_APP_MOBILE_WAITLIST_ID],
+      mailingListIds: getIds(),
     },
     {
       headers: {
@@ -26,9 +38,10 @@ const sendMailAsContact = async (email: string) => {
   return response.data;
 };
 
-const WaitlistForm: React.FC<{ setIsSubmitted: (value: boolean) => void }> = ({
-  setIsSubmitted,
-}) => {
+const WaitlistForm: React.FC<{
+  setIsSubmitted: (value: boolean) => void;
+  type: 'mobile' | 'invest';
+}> = ({ setIsSubmitted, type }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { handleSubmit, getValues, setValue, errors, reset } = useForm({
     defaultValues: { email: '' },
@@ -38,7 +51,7 @@ const WaitlistForm: React.FC<{ setIsSubmitted: (value: boolean) => void }> = ({
     setIsLoading(true);
     const { email }: { email: string } = data;
     if (!email) return;
-    await sendMailAsContact(email).then(() => {
+    await sendMailAsContact(email, type).then(() => {
       reset({ email: '' });
       renderToast('success', 'Email added to waitlist successfully.', 'dark');
       setIsSubmitted(true);

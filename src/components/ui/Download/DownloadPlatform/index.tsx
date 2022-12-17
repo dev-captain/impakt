@@ -197,6 +197,7 @@ const DownloadPlatform = () => {
         onClose={onClose}
         isCloseButton
         subHeadlineText="for mobile"
+        type="mobile"
       />
     </C.HeroLayout>
   );
