@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, HStack } from '@chakra-ui/react';
 import { EventCalendarContextProvider } from 'context/EventCalendarContext';
+import { ConversationContextProvider } from 'context/ConversationContext';
 import Forums from './Forums/Forums';
 import MemberList from './MemberList/MemberList';
 import EventCalendar from './EventCalendar/EventCalendar';
@@ -26,7 +27,9 @@ const Content: React.FC = () => {
         <EventCalendar />
       </EventCalendarContextProvider>
       <Box width="100%">
-        <GroupChat />
+        <ConversationContextProvider>
+          <GroupChat />
+        </ConversationContextProvider>
         <Forums />
       </Box>
       <MemberList />
