@@ -16,6 +16,7 @@ const LandingPage = () => {
       <S.Landing.ImpaktTeam />
       <S.Landing.BecomePart />
       <S.Landing.LandingPageFooter />
+      <S.Landing.PromoBar />
     </Container>
   );
 };

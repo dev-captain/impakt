@@ -176,11 +176,26 @@ export const getTimeDifference = (validFrom: string, validUntil: string) => {
 
   if (!isValidDate) return { d: '0', h: '0', m: '0', s: '0' };
 
-  const d = Day.fromString(validUntil).daysBetween(Day.now());
-  const h = Day.fromString(validUntil).hoursBetween(Day.now()) % 24;
-  const m = Day.fromString(validUntil).minutesBetween(Day.now()) % 60;
+  return compareDateWithNow(validUntil);
+};
 
-  return { d: padTo2Digits(d), h: padTo2Digits(h), m: padTo2Digits(m) };
+export const compareDateWithNow = (date: string) => {
+  const dateObj = new Date(date);
+
+  if (Number.isNaN(dateObj.getTime())) {
+    return { d: '00', h: '00', m: '00', s: '00' };
+  }
+
+  if (dateObj.getTime() < Day.now().time) {
+    return { d: '00', h: '00', m: '00', s: '00' };
+  }
+
+  const d = Day.fromString(date).daysBetween(Day.now());
+  const h = Day.fromString(date).hoursBetween(Day.now()) % 24;
+  const m = Day.fromString(date).minutesBetween(Day.now()) % 60;
+  const s = Day.fromString(date).secondsBetween(Day.now()) % 60;
+
+  return { d: padTo2Digits(d), h: padTo2Digits(h), m: padTo2Digits(m), s: padTo2Digits(s) };
 };
 
 export default {};
