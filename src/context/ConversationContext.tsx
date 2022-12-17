@@ -41,8 +41,13 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
    * Disconnect from the socket server
    */
   React.useEffect(() => {
-    socketRef.current = SocketIOClient.io(API_SERVER_URL);
+    socketRef.current = SocketIOClient.io(API_SERVER_URL, { withCredentials: true });
 
+    socketRef.current.on('new-message', (data: string) => {
+      setMessages((prev) => [...prev, JSON.parse(data) as Message]);
+
+      return true;
+    });
     // TODO: pre-load previous messages
 
     return () => {
@@ -57,23 +62,15 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
    */
   React.useEffect(() => {
     if (conversationId) {
-      socketRef.current?.emit('join', conversationId);
-
-      socketRef.current?.on('message', (data: Message) => {
-        setMessages((prev) => [...prev, data]);
-      });
+      socketRef.current?.emit('join-conversation', conversationId);
     }
-
-    return () => {
-      socketRef.current?.emit('leave', conversationId);
-    };
   }, [conversationId]);
 
   /**
    * Send a message to the server
    */
   async function sendMessage(data: string) {
-    socketRef.current?.emit('message', { conversationId, data });
+    socketRef.current?.emit('new-message', { conversationId, data });
   }
 
   return (

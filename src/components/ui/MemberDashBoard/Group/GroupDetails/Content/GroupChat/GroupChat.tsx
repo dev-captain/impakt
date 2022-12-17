@@ -22,9 +22,8 @@ const GroupChat: React.FC = () => {
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) =>
     setInputValue(event.target.value);
 
-  const handleMessageSend: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    ev.preventDefault();
-    if (inputValue) {
+  const handleMessageSend: React.MouseEventHandler<HTMLDivElement> = () => {
+    if (inputValue && inputValue.length > 0) {
       sendMessage(inputValue);
       setInputValue('');
     }
