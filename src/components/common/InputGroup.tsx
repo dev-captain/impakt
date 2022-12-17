@@ -2,11 +2,11 @@ import {
   InputLeftElement,
   Input,
   InputGroup as ChakraInputGroup,
-  FormLabel,
   Box,
   InputRightElement,
   ResponsiveValue,
   Link,
+  FormLabel,
 } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 
@@ -35,6 +35,7 @@ export interface InputGroupPropsI {
   autoFocus?: boolean | undefined;
   defaultValue?: string | number | readonly string[] | undefined;
   whiteMode?: boolean;
+  isSmallLabel?: boolean;
 }
 
 const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
@@ -57,6 +58,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
       autoFocus,
       defaultValue,
       whiteMode,
+      isSmallLabel,
     },
     ref,
   ) => {
@@ -77,10 +79,11 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
               display="flex"
               w="full"
               color={whiteMode ? 'rgba(78, 96, 112, 1)' : 'rgba(255, 255, 255, 0.85)'}
-              textStyle="semiBold6"
               lineHeight="120%"
+              fontSize={isSmallLabel ? '14px' : '16px'}
+              fontWeight={isSmallLabel ? '400' : '600'}
             >
-              <Box>
+              <Box as="p" textStyle="inherit">
                 {label}
                 {label.length > 1 && ':'}
               </Box>
