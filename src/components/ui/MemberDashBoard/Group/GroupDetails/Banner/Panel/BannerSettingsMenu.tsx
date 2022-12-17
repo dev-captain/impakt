@@ -113,7 +113,7 @@ const BannerSettingsMenu: React.FC = () => {
             variant="white-50"
             as={MenuButton}
             borderRadius="8px"
-            justifyConten="center"
+            justifyContent="center"
             alignItems="center"
             p="12px"
             h="56px"
@@ -126,7 +126,8 @@ const BannerSettingsMenu: React.FC = () => {
         )}
         {isRoleNotDefined && (
           <Common.ImpaktButton
-            variant="black"
+            // variant="black"
+            bg="orangeGradient"
             hover={{
               backgroundColor: '#fff',
               color: '#fff',
@@ -142,7 +143,7 @@ const BannerSettingsMenu: React.FC = () => {
             isLoading={joinGroup.isLoading}
             borderRadius="8px"
             fontWeight="600"
-            justifyContent="space-around"
+            justifyContent="center"
             fontSize="16px"
             leftIcon={
               activeGroup.private ? (
