@@ -72,7 +72,8 @@ const GroupLabels: React.FC = () => {
   const challengeModalDisclosure = useDisclosure();
   const challengePreviewModalDisclosure = useDisclosure();
   const { role } = usePersistedGroupStore();
-  const isCreator = role === 'Creator' || role === 'Moderator';
+  const isCreator = role === 'Creator';
+  const isModerator = role === 'Moderator';
   const groupStatisticLabelItems = [
     // {
     //   Icon: () => <I.CalenderIcon color="#5C7FFF" />,
@@ -81,12 +82,12 @@ const GroupLabels: React.FC = () => {
     // },
     {
       leftIcon:
-        groupPinnedChallenge?.Challenge?.name || !isCreator ? (
-          <I.FireIcon />
+        groupPinnedChallenge?.Challenge?.name || (!isModerator && !isCreator) ? (
+          <I.FireIcon bg="rgba(255, 255, 255, 0.1)" />
         ) : (
           <IconButton
             onClick={(e) => {
-              if (isCreator) {
+              if (isCreator || isModerator) {
                 e.stopPropagation();
                 challengeModalDisclosure.onOpen();
               }
@@ -96,7 +97,7 @@ const GroupLabels: React.FC = () => {
             h="40px"
             aria-label="create-top-challenge"
             variant="ghost"
-            icon={<I.AddBannerLabelItemIcon />}
+            icon={<I.AddBannerLabelItemIcon bg="rgba(255, 255, 255, 0.1)" />}
           />
         ),
       visible: true,
@@ -105,17 +106,17 @@ const GroupLabels: React.FC = () => {
         // eslint-disable-next-line no-nested-ternary
         groupPinnedChallenge?.Challenge?.name && groupPinnedChallenge?.Challenge?.name.length > 0
           ? groupPinnedChallenge?.Challenge?.name
-          : isCreator
-          ? 'Select Challenge'
+          : isCreator || isModerator
+          ? 'Pin a challenge'
           : 'Challenge not selected',
       rightIcon:
-        isCreator &&
+        (isCreator || isModerator) &&
         groupPinnedChallenge?.Challenge?.name &&
         groupPinnedChallenge?.Challenge?.name.length > 0 ? (
           <Common.ImpaktButton
             variant="white-50"
             onClick={(e) => {
-              if (isCreator) {
+              if (isCreator || isModerator) {
                 e.stopPropagation();
                 challengeModalDisclosure.onOpen();
               }
@@ -136,7 +137,7 @@ const GroupLabels: React.FC = () => {
           challengePreviewModalDisclosure.onOpen();
         }
 
-        if (!groupPinnedChallenge?.Challenge && isCreator) {
+        if (!groupPinnedChallenge?.Challenge && (isCreator || isModerator)) {
           challengeModalDisclosure.onOpen();
         }
       },

@@ -12,7 +12,7 @@ const Banner: React.FC = () => {
   return (
     <MemberDashboardCard borderRadius="24px" padding="0 !important" w="full">
       <BannerImage />
-      <Box p="32px" w="full">
+      <Box p={{ base: '16px', md: '32px' }} w="full">
         <Box
           display={{ md: 'flex', base: 'block' }}
           justifyContent="space-between"
@@ -24,10 +24,10 @@ const Banner: React.FC = () => {
           {/* <BannerHeaderRight /> */}
         </Box>
         <HStack
-          flexWrap="wrap"
           spacing="0"
           rowGap="1em"
-          alignItems="stretch"
+          alignItems={{ base: 'flex-start', md: 'stretch' }}
+          flexDir={{ base: 'column', md: 'row' }}
           justifyContent="space-between"
         >
           <BannerPanelLeft />

@@ -7,6 +7,7 @@ const AddBannerLabelItemIcon = (props: IconProps) => (
     viewBox="0 0 40 40"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    color="white"
     {...props}
   >
     <rect width="40" height="40" rx="4" fill="#F04153" fillOpacity="0.1" />
@@ -25,8 +26,7 @@ const AddBannerLabelItemIcon = (props: IconProps) => (
         y2="20"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#F04153" />
-        <stop offset="1" stopColor="#F27961" />
+        <stop stopColor="white" />
       </linearGradient>
     </defs>
   </Icon>
