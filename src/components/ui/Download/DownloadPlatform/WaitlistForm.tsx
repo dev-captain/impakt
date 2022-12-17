@@ -74,6 +74,7 @@ const WaitlistForm: React.FC<{
           placeholder="hello@mail.com"
           name="email"
           onChange={onChange}
+          isSmallLabel
         />
       </Box>
       <Box h="48px" w="full">
