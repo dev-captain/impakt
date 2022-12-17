@@ -18,6 +18,7 @@ const BannerImage: React.FC = () => {
   const { role } = usePersistedGroupStore();
   const isCreator = role === 'Creator';
   const isModerator = role === 'Moderator';
+
   return (
     <Box w="full" position="relative">
       {/* TODO PEN ICON TO CHANGE BANNER WILL ADD HERE */}
@@ -36,7 +37,7 @@ const BannerImage: React.FC = () => {
         objectFit="cover"
         // position="absolute"
       />
-      {isCreator && (
+      {(isCreator || isModerator) && (
         <Common.ImpaktButton
           variant="black"
           w="48px"
@@ -49,7 +50,8 @@ const BannerImage: React.FC = () => {
           <I.PenIcon />
         </Common.ImpaktButton>
       )}
-      {activeGroup?.private && (isCreator || isModerator) && (
+      {((activeGroup?.private && (isCreator || isModerator)) ||
+        (activeGroup?.isPreview && activeGroup.private)) && (
         <Box
           bg="rgba(18, 18, 22, 0.4)"
           w="128px"
@@ -67,7 +69,7 @@ const BannerImage: React.FC = () => {
           <Text color="white">PRIVATE</Text>
         </Box>
       )}
-      <BannerImageChangeModal open={isOpen} close={onClose} />
+      {(isCreator || isModerator) && <BannerImageChangeModal open={isOpen} close={onClose} />}
     </Box>
   );
 };
