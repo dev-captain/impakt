@@ -18,6 +18,7 @@ const GroupLabelItem: React.FC<GroupStatisticLabelPropsI> = ({
   const { role } = usePersistedGroupStore();
   const isMember = role === 'Member';
   const isNone = role === 'None';
+
   return (
     <Box
       bg={labelDescription === 'Pin a challenge' ? 'orangeGradient' : 'white'}

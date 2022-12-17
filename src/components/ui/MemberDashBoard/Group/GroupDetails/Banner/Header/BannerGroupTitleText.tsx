@@ -8,6 +8,7 @@ const BannerGroupTitleText: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { role } = usePersistedGroupStore();
+
   return (
     <Text
       textStyle="semiBold32"
@@ -18,7 +19,7 @@ const BannerGroupTitleText: React.FC = () => {
       alignItems="center"
     >
       {activeGroup?.groupName}
-      {role === 'Creator' && (
+      {(role === 'Creator' || role === 'Moderator') && (
         <I.PenIcon
           color="#91A8BD"
           marginLeft="20px"
@@ -28,7 +29,9 @@ const BannerGroupTitleText: React.FC = () => {
           }}
         />
       )}
-      <ChangeGroupTitleModal open={isOpen} close={onClose} />
+      {(role === 'Creator' || role === 'Moderator') && (
+        <ChangeGroupTitleModal open={isOpen} close={onClose} />
+      )}
     </Text>
   );
 };
