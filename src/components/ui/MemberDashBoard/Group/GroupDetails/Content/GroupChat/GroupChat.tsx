@@ -8,13 +8,37 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import { I } from 'components';
+import { usePersistedGroupStore } from 'lib/zustand';
 import * as React from 'react';
-import { DummyChatData } from 'data';
+import { useConversationContext } from 'context/ConversationContext';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
-// import Images from 'assets/images';
 import GroupChatCard from './GroupChatCard';
 
 const GroupChat: React.FC = () => {
+  const { activeGroup } = usePersistedGroupStore();
+  const { messages, sendMessage, setConversationId } = useConversationContext();
+  const [inputValue, setInputValue] = React.useState<string | undefined>();
+
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) =>
+    setInputValue(event.target.value);
+
+  const handleMessageSend: React.MouseEventHandler<HTMLDivElement> = (ev) => {
+    ev.preventDefault();
+    if (inputValue) {
+      sendMessage(inputValue);
+      setInputValue('');
+    }
+  };
+
+  /**
+   * Set the conversation id when the component mounts
+   */
+  React.useEffect(() => {
+    if (activeGroup?.conversationId) {
+      setConversationId(activeGroup?.conversationId);
+    }
+  }, [activeGroup?.conversationId]);
+
   return (
     <Box marginStart="0 !important" width={{ base: '100%', md: '100%', lgx: '100%' }}>
       <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto" marginTop="26px">
@@ -51,8 +75,13 @@ const GroupChat: React.FC = () => {
               },
             }}
           >
-            {DummyChatData.map(({ name, msg, time }) => (
-              <GroupChatCard key={name} name={name} msg={msg} time={time} />
+            {messages.map((msg) => (
+              <GroupChatCard
+                key={msg.id}
+                name={String(msg.userId)}
+                msg={msg.text}
+                time={msg.createdAt}
+              />
             ))}
           </Box>
           <Box marginTop="16px">
@@ -75,11 +104,14 @@ const GroupChat: React.FC = () => {
                 height="50px"
                 _focus={{ outline: '0' }}
                 padding="16px 35px"
+                value={inputValue}
+                onChange={handleInputChange}
               />
               <InputRightElement
                 height="50px"
                 // eslint-disable-next-line react/no-children-prop
                 children={<I.SendIcon color="#5C7FFF" width="25px" height="25px" />}
+                onClick={handleMessageSend}
               />
             </InputGroup>
           </Box>
