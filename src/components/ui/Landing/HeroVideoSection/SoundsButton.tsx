@@ -18,7 +18,8 @@ const SoundsButton: FC<SoundsButtonPropsI> = ({ onClick, isOn }) => {
       display="flex"
       marginTop="25px"
       backgroundColor="transparent"
-      _hover={{ backgroundColor: 'transparent', color: '#fff' }}
+      _hover={{}}
+      _focus={{}}
       onClick={onClick}
     >
       {isOn ? (
