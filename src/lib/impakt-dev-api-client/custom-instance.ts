@@ -38,16 +38,17 @@ const createAxiosResponseInterceptor = () => {
     (response) => response,
     (error: any) => {
       // Reject promise if usual error
-      if (error.response?.status !== 401) {
-        return Promise.reject(error);
-      }
-
       if (
         process.env.REACT_APP_VERCEL_ENV === 'production' ||
         process.env.REACT_APP_VERCEL_ENV === 'preview'
       ) {
         sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
       }
+
+      if (error.response?.status !== 401) {
+        return Promise.reject(error);
+      }
+
       /*
        * When response code is 401, try to refresh the token.
        * Eject the interceptor so it doesn't loop in case
