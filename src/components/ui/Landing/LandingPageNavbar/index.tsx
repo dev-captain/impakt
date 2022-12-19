@@ -126,7 +126,7 @@ const LandingPageNavbar: FC = () => {
           </HStack>
 
           <Common.CollapseMenuIconButton
-            display={{ md: 'none' }}
+            display={[isLessThan1280 ? 'flex' : 'none']}
             aria-label="Toggle Navigation"
             isOpen={isOpen}
             onClick={onToggle}
