@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons';
 import { Day, Time } from 'dayspan';
 import { I, Common } from 'components';
@@ -9,12 +9,21 @@ import { useNavigate } from 'react-router-dom';
 
 import { deepLinkToApp } from '../../../../../../../data';
 import {
+  usePersistedAuthStore,
   usePersistedChallengeStore,
   usePersistedGroupStore,
 } from '../../../../../../../lib/zustand';
 import { truncateString } from '../../../../../../../utils';
+import ActionPreviewModal from '../../Modal/ActionPreviewModal';
 
 const EventDetails: React.FC = () => {
+  const { member } = usePersistedAuthStore();
+  const { onOpen, isOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    onOpen();
+  }, []);
+
   const navigate = useNavigate();
   // const [isGoing, setIsGoing] = React.useState(true);
   // const navigate = useNavigate();
@@ -83,11 +92,7 @@ const EventDetails: React.FC = () => {
             <I.DateIcon width="20px" height="20px" />
           </Box>
           <Text color="#4E6070" fontSize="16px" fontWeight="500">
-            {Day.build(
-              eventObj.schedule.end.date.getFullYear(),
-              eventObj.schedule.end.date.getMonth(),
-              eventObj.schedule.end.date.getDate(),
-            ).format('dddd, MMMM D')}
+            {Day.fromDate(eventObj.schedule.end.date)?.format('dddd, MMMM D')}
           </Text>
         </Box>
         <Box display="flex" alignItems="center" mb="12px">
@@ -207,6 +212,20 @@ const EventDetails: React.FC = () => {
           </>
         )}
       </Box>
+      <ActionPreviewModal
+        actionPreview={{
+          exercices: [],
+          leaderboard: [],
+          playedMins: 5,
+          subtitle: truncateString(`${challange?.name}`, 23),
+          validUntil: eventObj.time.end.toISOString(),
+          title: JSON.parse(eventObj.data).title ?? '',
+          mode: 'join',
+          isEdit: JSON.parse(eventObj.data).creatorId === member?.id,
+        }}
+        open={isOpen}
+        close={onClose}
+      />
     </>
   );
 };

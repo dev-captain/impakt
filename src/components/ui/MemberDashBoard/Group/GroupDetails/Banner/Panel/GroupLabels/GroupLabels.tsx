@@ -9,12 +9,12 @@ import {
   usePersistedGroupStore,
 } from '../../../../../../../../lib/zustand';
 import ChallengeModal from '../../../Modal/ChallengeModal';
-import ChallengePreviewModal from '../../../Modal/ChallengePreviewModal';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
 import { normalizeExerciseNames } from '../../../../../../../../utils';
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
+import ActionPreviewModal from '../../../Modal/ActionPreviewModal';
 
 const GroupLabels: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
@@ -179,11 +179,12 @@ const GroupLabels: React.FC = () => {
         close={challengeModalDisclosure.onClose}
         open={challengeModalDisclosure.isOpen}
       />
-      <ChallengePreviewModal
+      <ActionPreviewModal
         close={challengePreviewModalDisclosure.onClose}
         open={challengePreviewModalDisclosure.isOpen}
-        challengePreview={{
+        actionPreview={{
           title: groupPinnedChallenge?.Challenge?.name ?? 'Daily Challenge',
+          subtitle: `${challengeLeaderBoard?.usersPassed.length ?? 0} plays`,
           creator:
             groupPinnedChallenge?.Challenge?.Routine?.Creator?.username ??
             groupPinnedChallenge?.Challenge?.Creator?.username ??
@@ -204,12 +205,10 @@ const GroupLabels: React.FC = () => {
               ? bestScoreOfUser.userScore?.toString() ?? '-'
               : '-',
           myRank: memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-',
-          playedTimes: challengeLeaderBoard?.usersPassed.length ?? 0,
           playedMins: groupPinnedChallenge?.Challenge?.Routine.estimatedTime
             ? // eslint-disable-next-line no-unsafe-optional-chaining
               Math.ceil(groupPinnedChallenge?.Challenge?.Routine.estimatedTime! / 60)
             : 0,
-          validFrom: groupPinnedChallenge?.Challenge?.validFrom ?? '',
           validUntil: groupPinnedChallenge?.Challenge?.validUntil ?? '',
         }}
       />
