@@ -457,7 +457,7 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                     bg="softOrange"
                   >
                     <Box color="nextOrange">
-                      <I.TooltipIcon />
+                      <I.TooltipIcon width="20px" height="20px" />
                     </Box>
                     <Box>
                       <Text color="darkOrange" textStyle="regular18" lineHeight="26px">
