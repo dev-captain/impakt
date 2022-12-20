@@ -9,12 +9,13 @@ import {
   usePersistedGroupStore,
 } from '../../../../../../../../lib/zustand';
 import ChallengeModal from '../../../Modal/ChallengeModal';
-import ChallengePreviewModal from '../../../Modal/ChallengePreviewModal';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
 import { normalizeExerciseNames } from '../../../../../../../../utils';
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
+
+const ActionPreviewModal = React.lazy(() => import('../../../Modal/ActionPreviewModal'));
 
 const GroupLabels: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
@@ -172,6 +173,8 @@ const GroupLabels: React.FC = () => {
     );
   };
 
+  const myRank = memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-';
+
   return (
     <>
       <GroupLabelWrapper items={groupStatisticLabelItems} />
@@ -180,40 +183,46 @@ const GroupLabels: React.FC = () => {
         close={challengeModalDisclosure.onClose}
         open={challengeModalDisclosure.isOpen}
       />
-      <ChallengePreviewModal
-        close={challengePreviewModalDisclosure.onClose}
-        open={challengePreviewModalDisclosure.isOpen}
-        challengePreview={{
-          title: groupPinnedChallenge?.Challenge?.name ?? 'Daily Challenge',
-          creator:
-            groupPinnedChallenge?.Challenge?.Routine?.Creator?.username ??
-            groupPinnedChallenge?.Challenge?.Creator?.username ??
-            'Impakt',
-          // eslint-disable-next-line no-nested-ternary
-          deepLinkToPlay: isMobile
-            ? `impakt://challenge?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`
-            : process.env.REACT_APP_NODE_ENV === 'production'
-            ? `https://fitness.impakt.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`
-            : `https://fitness.impakt-dev.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`,
-          exercices: normalizeExerciseNames(
-            groupPinnedChallenge?.Challenge?.Routine?.TimelineBlocks ?? [],
-          ),
-          leaderboard: sortLeaderboardByScore ?? [],
-          likeCount: groupPinnedChallenge?.Challenge?.likes ?? 0,
-          myBestScore:
-            bestScoreOfUser && Object.keys(bestScoreOfUser).length > 0
-              ? bestScoreOfUser.userScore?.toString() ?? '-'
-              : '-',
-          myRank: memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-',
-          playedTimes: challengeLeaderBoard?.usersPassed.length ?? 0,
-          playedMins: groupPinnedChallenge?.Challenge?.Routine.estimatedTime
-            ? // eslint-disable-next-line no-unsafe-optional-chaining
-              Math.ceil(groupPinnedChallenge?.Challenge?.Routine.estimatedTime! / 60)
-            : 0,
-          validFrom: groupPinnedChallenge?.Challenge?.validFrom ?? '',
-          validUntil: groupPinnedChallenge?.Challenge?.validUntil ?? '',
-        }}
-      />
+      {challengePreviewModalDisclosure.isOpen && (
+        <React.Suspense fallback={<div>Yükleniyor...</div>}>
+          <ActionPreviewModal
+            key="pinned-challenge-modal"
+            close={challengePreviewModalDisclosure.onClose}
+            open={challengePreviewModalDisclosure.isOpen}
+            actionPreview={{
+              title: groupPinnedChallenge?.Challenge?.name ?? 'Daily Challenge',
+              subtitle: `${challengeLeaderBoard?.usersPassed.length ?? 0} plays`,
+              creator:
+                groupPinnedChallenge?.Challenge?.Routine?.Creator?.username ??
+                groupPinnedChallenge?.Challenge?.Creator?.username ??
+                'Impakt',
+              // eslint-disable-next-line no-nested-ternary
+              deepLinkToPlay: isMobile
+                ? `impakt://challenge?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`
+                : process.env.REACT_APP_NODE_ENV === 'production'
+                ? `https://fitness.impakt.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`
+                : `https://fitness.impakt-dev.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`,
+              exercices: normalizeExerciseNames(
+                groupPinnedChallenge?.Challenge?.Routine?.TimelineBlocks ?? [],
+              ),
+              leaderboard: sortLeaderboardByScore ?? [],
+              likeCount: groupPinnedChallenge?.Challenge?.likes ?? 0,
+              myBestScore:
+                bestScoreOfUser && Object.keys(bestScoreOfUser).length > 0
+                  ? bestScoreOfUser.userScore?.toString() ?? '-'
+                  : '-',
+              myRank,
+              playedMins: groupPinnedChallenge?.Challenge?.Routine.estimatedTime
+                ? // eslint-disable-next-line no-unsafe-optional-chaining
+                  Math.ceil(groupPinnedChallenge?.Challenge?.Routine.estimatedTime! / 60)
+                : 0,
+              mode: 'start',
+              validUntil: groupPinnedChallenge?.Challenge?.validUntil ?? '',
+              isPlayedByMember: myRank !== '-',
+            }}
+          />
+        </React.Suspense>
+      )}
     </>
   );
 };

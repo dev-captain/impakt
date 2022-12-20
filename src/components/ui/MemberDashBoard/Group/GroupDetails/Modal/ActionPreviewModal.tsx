@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import {
   Box,
   Text,
@@ -19,33 +20,34 @@ import { useNavigate } from 'react-router-dom';
 import { Common, I } from '../../../../..';
 import Images from '../../../../../../assets/images';
 import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
-import { getTimeDifference } from '../../../../../../utils';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import { GetUserScoreResV1 } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getUserScoreResV1';
 
-interface ChallengeModalProps {
+interface ActionPreviewModalProps {
   open: boolean;
   close: () => void;
-  challengePreview: {
+  actionPreview: {
     title: string;
-    creator: string;
-    deepLinkToPlay: string;
-    likeCount: number;
-    myRank: string;
-    myBestScore: string;
+    creator?: string;
+    deepLinkToPlay?: string;
+    likeCount?: number;
+    myRank?: string;
+    myBestScore?: string;
     exercices: GetTimelineBlockRes[];
-    validFrom: string;
-    validUntil: string;
     leaderboard: GetUserScoreResV1[];
-    playedTimes: number;
+    subtitle: string;
     playedMins: string | number;
+    mode?: 'join' | 'start';
+    validUntil: string;
+    isPlayedByMember?: boolean;
+    isEdit?: boolean;
+    editButtonClick?: () => void;
+    bannerImg?: string;
+    modalStatus?: 'starting' | 'finished' | 'pending';
   };
 }
-const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
-  open,
-  close,
-  challengePreview,
-}) => {
+
+const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, actionPreview }) => {
   const {
     creator,
     exercices,
@@ -54,15 +56,34 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
     likeCount,
     myBestScore,
     myRank,
-    validFrom,
-    validUntil,
     title,
-    playedTimes,
+    subtitle,
     playedMins,
-  } = challengePreview;
+    mode,
+    isEdit,
+    editButtonClick,
+    validUntil,
+    bannerImg,
+    isPlayedByMember,
+    modalStatus,
+  } = actionPreview;
+
+  const [status, setStatus] = React.useState<'starting' | 'finished' | 'pending'>(
+    modalStatus ?? 'pending',
+  );
+
   const navigate = useNavigate();
-  const { d, h, m } = getTimeDifference(validFrom, validUntil);
   const { convertToPascalCase } = usePascalCase();
+  const link = () => {
+    if (mode === 'start' && deepLinkToPlay) {
+      return deepLinkToPlay;
+    }
+    if (mode === 'join' && status === 'starting' && deepLinkToPlay) {
+      return deepLinkToPlay;
+    }
+
+    return undefined;
+  };
 
   return (
     <Modal scrollBehavior="inside" isOpen={open} onClose={() => close()} isCentered>
@@ -92,26 +113,36 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
               right={{ md: '25%!important' }}
               display="flex"
             >
-              <Image objectFit="cover" src={Images.group.challengeBanner} />
+              <Image objectFit="cover" src={bannerImg ?? Images.group.challengeBanner} />
+              {isPlayedByMember && (
+                <Box position="absolute" left="25%" bottom="-40%">
+                  <I.LaurelIcon />
+                </Box>
+              )}
             </Box>
-            <HStack justifyContent="space-between" w="full">
-              <Box>
-                <Button
-                  borderRadius="80px"
-                  p="8px 16px"
-                  bg="rgba(0, 2, 10, 0.4)"
-                  _hover={{ bg: 'rgba(0, 2, 10, 0.8)' }}
-                  _focus={{ bg: '' }}
-                  _active={{ bg: 'rgba(0, 2, 10, 0.8)' }}
-                  _selected={{ bg: 'rgba(0, 2, 10, 0.8)' }}
-                  autoFocus={false}
-                  leftIcon={<I.HeartIcon width="18px " height="18px " color="#fff" />}
-                >
-                  <Text fontWeight="500" fontSize="18px" lineHeight="100%" color="#fff">
-                    {likeCount}
-                  </Text>
-                </Button>
-              </Box>
+            <HStack
+              justifyContent={likeCount !== undefined ? 'space-between' : 'flex-end'}
+              w="full"
+            >
+              {likeCount !== undefined && (
+                <Box>
+                  <Button
+                    borderRadius="80px"
+                    p="8px 16px"
+                    bg="rgba(0, 2, 10, 0.4)"
+                    _hover={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                    _focus={{ bg: '' }}
+                    _active={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                    _selected={{ bg: 'rgba(0, 2, 10, 0.8)' }}
+                    autoFocus={false}
+                    leftIcon={<I.HeartIcon width="18px " height="18px " color="#fff" />}
+                  >
+                    <Text fontWeight="500" fontSize="18px" lineHeight="100%" color="#fff">
+                      {likeCount}
+                    </Text>
+                  </Button>
+                </Box>
+              )}
               <ModalCloseButton
                 _hover={{ bg: 'rgba(0, 2, 10, 0.8)' }}
                 _focus={{ bg: '' }}
@@ -124,7 +155,13 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
             </HStack>
             <HStack flexWrap="wrap" rowGap="8px" justifyContent="space-between" w="full">
               <HStack zIndex="999">
-                <Box
+                <Common.CountDownTimer
+                  finishCb={() => setStatus('finished')}
+                  last15MinutesCb={() => setStatus('starting')}
+                  isWhite
+                  validUntil={validUntil}
+                />
+                {/* <Box
                   p="8px 4px"
                   textAlign="center"
                   minW="48px"
@@ -132,7 +169,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    {d}
+                    {timer.d}
                   </Text>
                 </Box>
                 <Box
@@ -154,7 +191,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    {h}
+                    {timer.h}
                   </Text>
                 </Box>
                 <Box
@@ -176,79 +213,83 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    {m}
+                    {timer.m}
                   </Text>
-                </Box>
+                </Box> */}
               </HStack>
               <HStack ml="0 !important" columnGap="4px">
-                <HStack
-                  bg="rgba(0, 0, 0, 0.25)"
-                  columnGap="12px"
-                  padding="8px 16px 8px 8px"
-                  borderRadius="8px"
-                  backdropFilter="blur(20px)"
-                  id="challenge-preview-score-box"
-                  color="#fff"
-                >
-                  <Box id="">
-                    <I.RankIcon />
-                  </Box>
-                  <VStack alignItems="flex-start">
-                    <Text
-                      fontWeight="600"
-                      color="rgba(255, 255, 255, 0.75)"
-                      fontSize="12px"
-                      lineHeight="100%"
-                      letterSpacing="1px"
-                      id="score-label"
-                    >
-                      MY RANK
-                    </Text>
-                    <Text
-                      color="#FFCC66"
-                      fontWeight="500"
-                      fontSize="18px"
-                      lineHeight="100%"
-                      id="score-text"
-                    >
-                      {myRank}
-                    </Text>
-                  </VStack>
-                </HStack>
-                <HStack
-                  bg="rgba(0, 0, 0, 0.25)"
-                  columnGap="12px"
-                  padding="8px 16px 8px 8px"
-                  borderRadius="8px"
-                  backdropFilter="blur(20px)"
-                  id="challenge-preview-score-box"
-                  color="#fff"
-                >
-                  <Box id="">
-                    <I.WinnerIcon color="#FFCC66" />
-                  </Box>
-                  <VStack alignItems="flex-start">
-                    <Text
-                      fontWeight="600"
-                      color="#fff"
-                      fontSize="12px"
-                      lineHeight="100%"
-                      letterSpacing="1px"
-                      id="score-label"
-                    >
-                      MY BEST SCORE
-                    </Text>
-                    <Text
-                      color="#FFCC66"
-                      fontWeight="500"
-                      fontSize="18px"
-                      lineHeight="100%"
-                      id="score-text"
-                    >
-                      {myBestScore}
-                    </Text>
-                  </VStack>
-                </HStack>
+                {myRank && (
+                  <HStack
+                    bg="rgba(0, 0, 0, 0.25)"
+                    columnGap="12px"
+                    padding="8px 16px 8px 8px"
+                    borderRadius="8px"
+                    backdropFilter="blur(20px)"
+                    id="challenge-preview-score-box"
+                    color="#fff"
+                  >
+                    <Box id="">
+                      <I.RankIcon />
+                    </Box>
+                    <VStack alignItems="flex-start">
+                      <Text
+                        fontWeight="600"
+                        color="rgba(255, 255, 255, 0.75)"
+                        fontSize="12px"
+                        lineHeight="100%"
+                        letterSpacing="1px"
+                        id="score-label"
+                      >
+                        MY RANK
+                      </Text>
+                      <Text
+                        color="#FFCC66"
+                        fontWeight="500"
+                        fontSize="18px"
+                        lineHeight="100%"
+                        id="score-text"
+                      >
+                        {myRank}
+                      </Text>
+                    </VStack>
+                  </HStack>
+                )}
+                {myBestScore && (
+                  <HStack
+                    bg="rgba(0, 0, 0, 0.25)"
+                    columnGap="12px"
+                    padding="8px 16px 8px 8px"
+                    borderRadius="8px"
+                    backdropFilter="blur(20px)"
+                    id="challenge-preview-score-box"
+                    color="#fff"
+                  >
+                    <Box id="">
+                      <I.WinnerIcon color="#FFCC66" />
+                    </Box>
+                    <VStack alignItems="flex-start">
+                      <Text
+                        fontWeight="600"
+                        color="#fff"
+                        fontSize="12px"
+                        lineHeight="100%"
+                        letterSpacing="1px"
+                        id="score-label"
+                      >
+                        MY BEST SCORE
+                      </Text>
+                      <Text
+                        color="#FFCC66"
+                        fontWeight="500"
+                        fontSize="18px"
+                        lineHeight="100%"
+                        id="score-text"
+                      >
+                        {myBestScore}
+                      </Text>
+                    </VStack>
+                  </HStack>
+                )}
               </HStack>
             </HStack>
           </VStack>
@@ -274,20 +315,22 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 <Text fontWeight="500" fontSize="32px" color="#29323B" lineHeight="100%">
                   {title}
                 </Text>
-                <Text
-                  ml="0 !important"
-                  color="#CC4C33"
-                  fontWeight="500"
-                  fontSize="18px"
-                  lineHeight="100%"
-                  pos="relative"
-                >
-                  by {creator}
-                </Text>
+                {creator && (
+                  <Text
+                    ml="0 !important"
+                    color="#CC4C33"
+                    fontWeight="500"
+                    fontSize="18px"
+                    lineHeight="100%"
+                    pos="relative"
+                  >
+                    by {creator}
+                  </Text>
+                )}
               </HStack>
               <Box id="challenge-preview-box-details">
                 <Text fontWeight="500" fontSize="18px" lineHeight="100%" color="#728BA3">
-                  {playedTimes} plays • {playedMins} min
+                  {subtitle} • {playedMins} min
                 </Text>
               </Box>
             </VStack>
@@ -296,9 +339,11 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                 as="a"
                 onClick={(e) => {
                   e.preventDefault();
+                  if (!link()) return;
+
                   if (isAndroid) {
                     window.location =
-                      `intent://scan/#Intent;scheme=${deepLinkToPlay};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
+                      `intent://scan/#Intent;scheme=${link()};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
 
                     setTimeout(() => {
                       window.location =
@@ -308,25 +353,50 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
                     return;
                   }
 
-                  window.location = deepLinkToPlay as any;
+                  window.location = link() as any;
 
                   setTimeout(() => {
                     navigate('/download');
                   }, 1000);
                 }}
-                href={deepLinkToPlay}
+                href={link()}
                 _hover={{ background: '' }}
                 _selected={{ background: '' }}
                 _focus={{ background: '' }}
                 _active={{ background: '' }}
-                leftIcon={<I.PlayChallengeIcon />}
-                variant="orange-black"
+                leftIcon={
+                  status !== 'finished' || mode === 'start' ? <I.PlayChallengeIcon /> : undefined
+                }
+                disabled={(status === 'finished' || status === 'pending') && mode === 'join'}
+                variant={
+                  mode === 'start'
+                    ? 'orange-black'
+                    : status === 'finished' || status === 'pending'
+                    ? 'white-50'
+                    : 'orange-black'
+                }
                 padding="12px 32px"
                 borderRadius="12px"
                 // onClick={()=>}
               >
-                <Text fontWeight="600">Start</Text>
+                <Text fontWeight="600">
+                  {mode === 'start' ? 'Start' : status === 'finished' ? 'Event passed' : 'Join'}
+                </Text>
               </Common.ImpaktButton>
+
+              {isEdit && status !== 'finished' && (
+                <Common.ImpaktButton
+                  onClick={editButtonClick}
+                  variant="white-50"
+                  fontSize="40px"
+                  width="40px"
+                  h="40px"
+                  padding="8px"
+                  aria-label="update-top-challenge"
+                >
+                  <I.PenIcon />
+                </Common.ImpaktButton>
+              )}
             </HStack>
           </HStack>
           {/* MODAL BODY HEADER END HERE */}
@@ -336,7 +406,7 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
             id="challenge-preview-content-box"
             alignItems="flex-start"
             justifyContent="space-between"
-            flexWrap={{ base: 'wrap', md: 'nowrap' }}
+            flexWrap={{ base: 'wrap-reverse', md: 'nowrap' }}
           >
             <VStack
               borderTop="1px solid #D3E2F0"
@@ -371,13 +441,33 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
 
             <VStack
               ml="0 !important"
-              p="32px"
               borderTop="1px solid #D3E2F0"
               w="full"
               alignItems="flex-start"
               id="challenge-preview-content-leaderboard"
             >
-              <VStack rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
+              {status === 'pending' && mode === 'join' && (
+                <VStack p="32px" w="full" borderBottom="1px solid #D3E2F0">
+                  <HStack
+                    columnGap="1em"
+                    spacing="0"
+                    borderRadius="1em"
+                    p="1em"
+                    w="full"
+                    bg="softOrange"
+                  >
+                    <Box color="nextOrange">
+                      <I.TooltipIcon width="20px" height="20px" />
+                    </Box>
+                    <Box>
+                      <Text color="darkOrange" textStyle="regular18" lineHeight="26px">
+                        Lobby will open 15 minutes before the event starts
+                      </Text>
+                    </Box>
+                  </HStack>
+                </VStack>
+              )}
+              <VStack p="32px" rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
                 <Box>
                   <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
                     Leaderboard
@@ -450,4 +540,4 @@ const ChallengePreviewModal: React.FC<ChallengeModalProps> = ({
   );
 };
 
-export default ChallengePreviewModal;
+export default ActionPreviewModal;
