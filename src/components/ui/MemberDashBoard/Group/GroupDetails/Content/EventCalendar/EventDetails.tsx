@@ -13,7 +13,7 @@ import {
   usePersistedChallengeStore,
   usePersistedGroupStore,
 } from '../../../../../../../lib/zustand';
-import { truncateString } from '../../../../../../../utils';
+import { compareDateWithNow, truncateString } from '../../../../../../../utils';
 import ActionPreviewModal from '../../Modal/ActionPreviewModal';
 
 const EventDetails: React.FC = () => {
@@ -44,6 +44,21 @@ const EventDetails: React.FC = () => {
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
 
+  const dmmydate = new Date('12/20/2022 09:48 am').toISOString();
+  const { d, h, m, s } = compareDateWithNow(dmmydate);
+
+  const getStatus = () => {
+    if (d === '00' && h === '00' && m === '00' && s === '00') {
+      return 'finished';
+    }
+
+    if (d === '00' && h === '00' && Number(m) < 15) {
+      return 'starting';
+    }
+
+    return 'pending';
+  };
+
   return (
     <>
       <Box>
@@ -68,7 +83,7 @@ const EventDetails: React.FC = () => {
             <Text color="#29323B" fontWeight="600" fontSize="20px" marginRight="50px">
               {JSON.parse(eventObj.data).title}
             </Text>
-            {new Time(Number(eventObj.schedule.times.map((h) => h.hour))).matchesHour(
+            {new Time(Number(eventObj.schedule.times.map((sch) => sch.hour))).matchesHour(
               new Time(Number(Day.now().format('HH'))),
             ) && (
               <Box background="#5C7FFF" borderRadius="16px" textAlign="center" p="2px 14px">
@@ -213,15 +228,22 @@ const EventDetails: React.FC = () => {
         )}
       </Box>
       <ActionPreviewModal
+        key="event-preview-modal"
         actionPreview={{
           exercices: [],
           leaderboard: [],
           playedMins: 5,
           subtitle: truncateString(`${challange?.name}`, 23),
-          validUntil: eventObj.time.end.toISOString(),
+          validUntil: dmmydate,
           title: JSON.parse(eventObj.data).title ?? '',
           mode: 'join',
           isEdit: JSON.parse(eventObj.data).creatorId === member?.id,
+          deepLinkToPlay: deepLink,
+          modalStatus: getStatus(),
+          editButtonClick: () => {
+            goToOverViewScreen('update');
+            onClose();
+          },
         }}
         open={isOpen}
         close={onClose}

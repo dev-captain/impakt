@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import {
   Box,
   Text,
@@ -19,9 +20,9 @@ import { useNavigate } from 'react-router-dom';
 import { Common, I } from '../../../../..';
 import Images from '../../../../../../assets/images';
 import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
-import { compareDateWithNow } from '../../../../../../utils';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import { GetUserScoreResV1 } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getUserScoreResV1';
+import { compareDateWithNow } from '../../../../../../utils';
 
 interface ActionPreviewModalProps {
   open: boolean;
@@ -34,12 +35,16 @@ interface ActionPreviewModalProps {
     myRank?: string;
     myBestScore?: string;
     exercices: GetTimelineBlockRes[];
-    validUntil: string;
     leaderboard: GetUserScoreResV1[];
     subtitle: string;
     playedMins: string | number;
-    isEdit?: boolean;
     mode?: 'join' | 'start';
+    validUntil: string;
+    isPlayedByMember?: boolean;
+    isEdit?: boolean;
+    editButtonClick?: () => void;
+    bannerImg?: string;
+    modalStatus?: 'starting' | 'finished' | 'pending';
   };
 }
 
@@ -52,16 +57,37 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
     likeCount,
     myBestScore,
     myRank,
-    validUntil,
     title,
     subtitle,
     playedMins,
     mode,
+    isEdit,
+    editButtonClick,
+    validUntil,
+    bannerImg,
+    isPlayedByMember,
+    modalStatus,
   } = actionPreview;
+  const timer = compareDateWithNow(validUntil);
+
+  console.log(timer);
+
+  const [status, setStatus] = React.useState<'starting' | 'finished' | 'pending'>(
+    modalStatus ?? 'pending',
+  );
+
   const navigate = useNavigate();
-  const { d, h, m } = compareDateWithNow(validUntil);
   const { convertToPascalCase } = usePascalCase();
-  const isFinished = d === '00' && h === '00' && m === '00';
+  const link = () => {
+    if (mode === 'start' && deepLinkToPlay) {
+      return deepLinkToPlay;
+    }
+    if (mode === 'join' && status === 'starting' && deepLinkToPlay) {
+      return deepLinkToPlay;
+    }
+
+    return undefined;
+  };
 
   return (
     <Modal scrollBehavior="inside" isOpen={open} onClose={() => close()} isCentered>
@@ -91,7 +117,12 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
               right={{ md: '25%!important' }}
               display="flex"
             >
-              <Image objectFit="cover" src={Images.group.challengeBanner} />
+              <Image objectFit="cover" src={bannerImg ?? Images.group.challengeBanner} />
+              {isPlayedByMember && (
+                <Box position="absolute" left="25%" bottom="-40%">
+                  <I.LaurelIcon />
+                </Box>
+              )}
             </Box>
             <HStack
               justifyContent={likeCount !== undefined ? 'space-between' : 'flex-end'}
@@ -128,7 +159,13 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
             </HStack>
             <HStack flexWrap="wrap" rowGap="8px" justifyContent="space-between" w="full">
               <HStack zIndex="999">
-                <Box
+                <Common.CountDownTimer
+                  finishCb={() => setStatus('finished')}
+                  last15MinutesCb={() => setStatus('starting')}
+                  isWhite
+                  validUntil={validUntil}
+                />
+                {/* <Box
                   p="8px 4px"
                   textAlign="center"
                   minW="48px"
@@ -136,7 +173,7 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    {d}
+                    {timer.d}
                   </Text>
                 </Box>
                 <Box
@@ -158,7 +195,7 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    {h}
+                    {timer.h}
                   </Text>
                 </Box>
                 <Box
@@ -180,9 +217,9 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                   bg="rgba(0, 0, 0, 0.25)"
                 >
                   <Text color="#FFFFFF" fontWeight="600" fontSize="32px" lineHeight="100%">
-                    {m}
+                    {timer.m}
                   </Text>
-                </Box>
+                </Box> */}
               </HStack>
               <HStack ml="0 !important" columnGap="4px">
                 {myRank && (
@@ -306,11 +343,11 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                 as="a"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (!deepLinkToPlay) return;
+                  if (!link()) return;
 
                   if (isAndroid) {
                     window.location =
-                      `intent://scan/#Intent;scheme=${deepLinkToPlay};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
+                      `intent://scan/#Intent;scheme=${link()};S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.impakt.fitness;end` as any;
 
                     setTimeout(() => {
                       window.location =
@@ -320,26 +357,50 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                     return;
                   }
 
-                  window.location = deepLinkToPlay as any;
+                  window.location = link() as any;
 
                   setTimeout(() => {
                     navigate('/download');
                   }, 1000);
                 }}
-                href={deepLinkToPlay}
+                href={link()}
                 _hover={{ background: '' }}
                 _selected={{ background: '' }}
                 _focus={{ background: '' }}
                 _active={{ background: '' }}
-                leftIcon={<I.PlayChallengeIcon />}
-                disabled={!deepLinkToPlay || isFinished}
-                variant={deepLinkToPlay ? 'orange-black' : 'white-50'}
+                leftIcon={
+                  status !== 'finished' || mode === 'start' ? <I.PlayChallengeIcon /> : undefined
+                }
+                disabled={(status === 'finished' || status === 'pending') && mode === 'join'}
+                variant={
+                  mode === 'start'
+                    ? 'orange-black'
+                    : status === 'finished' || status === 'pending'
+                    ? 'white-50'
+                    : 'orange-black'
+                }
                 padding="12px 32px"
                 borderRadius="12px"
                 // onClick={()=>}
               >
-                <Text fontWeight="600">{mode === 'join' ? 'Join' : 'Start'} </Text>
+                <Text fontWeight="600">
+                  {mode === 'start' ? 'Start' : status === 'finished' ? 'Event passed' : 'Join'}
+                </Text>
               </Common.ImpaktButton>
+
+              {isEdit && status !== 'finished' && (
+                <Common.ImpaktButton
+                  onClick={editButtonClick}
+                  variant="white-50"
+                  fontSize="40px"
+                  width="40px"
+                  h="40px"
+                  padding="8px"
+                  aria-label="update-top-challenge"
+                >
+                  <I.PenIcon />
+                </Common.ImpaktButton>
+              )}
             </HStack>
           </HStack>
           {/* MODAL BODY HEADER END HERE */}
