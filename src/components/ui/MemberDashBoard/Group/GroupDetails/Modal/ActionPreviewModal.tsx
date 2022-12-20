@@ -406,7 +406,7 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
             id="challenge-preview-content-box"
             alignItems="flex-start"
             justifyContent="space-between"
-            flexWrap={{ base: 'wrap', md: 'nowrap' }}
+            flexWrap={{ base: 'wrap-reverse', md: 'nowrap' }}
           >
             <VStack
               borderTop="1px solid #D3E2F0"
@@ -441,13 +441,33 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
 
             <VStack
               ml="0 !important"
-              p="32px"
               borderTop="1px solid #D3E2F0"
               w="full"
               alignItems="flex-start"
               id="challenge-preview-content-leaderboard"
             >
-              <VStack rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
+              {status === 'pending' && mode === 'join' && (
+                <VStack p="32px" w="full" borderBottom="1px solid #D3E2F0">
+                  <HStack
+                    columnGap="1em"
+                    spacing="0"
+                    borderRadius="1em"
+                    p="1em"
+                    w="full"
+                    bg="softOrange"
+                  >
+                    <Box color="nextOrange">
+                      <I.TooltipIcon />
+                    </Box>
+                    <Box>
+                      <Text color="darkOrange" textStyle="regular18" lineHeight="26px">
+                        Lobby will open 15 minutes before the event starts
+                      </Text>
+                    </Box>
+                  </HStack>
+                </VStack>
+              )}
+              <VStack p="32px" rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
                 <Box>
                   <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
                     Leaderboard
