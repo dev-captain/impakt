@@ -39,8 +39,7 @@ const EventDetails: React.FC = () => {
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
 
-  const dmmydate = new Date('12/20/2022 09:48 am').toISOString();
-  const { d, h, m, s } = compareDateWithNow(dmmydate);
+  const { d, h, m, s } = compareDateWithNow(eventObj.time.end.toISOString());
 
   const getStatus = () => {
     if (d === '00' && h === '00' && m === '00' && s === '00') {
@@ -101,7 +100,7 @@ const EventDetails: React.FC = () => {
         leaderboard: sortLeaderboardByScore ?? [],
         playedMins: 5,
         subtitle: truncateString(`${challange?.name}`, 23),
-        validUntil: dmmydate,
+        validUntil: eventObj.time.end.toISOString(),
         title: JSON.parse(eventObj.data).title ?? '',
         mode: 'join',
         isEdit: JSON.parse(eventObj.data).creatorId === member?.id,
