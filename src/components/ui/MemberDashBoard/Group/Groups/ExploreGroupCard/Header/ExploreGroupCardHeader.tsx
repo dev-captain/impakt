@@ -56,7 +56,7 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   return (
     <GroupCardWrapperHeader title="Explore">
       <Box display="flex" justifyContent="flex-end" alignItems="center">
-        <Box display="flex">
+        <Box display="flex" mr="20px">
           <Common.InputItems inputItems={inputItems} />
         </Box>
         <Box m="20px 0 !important">

@@ -19,7 +19,6 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
 }) => {
   const isPrivate = status === 'Private';
   const navigate = useNavigate();
-  console.log(searchGroup);
   const { exploreGroups } = usePersistedGroupStore();
   const checkString = (groupname, filterVal) => {
     let res = 0;
