@@ -22,7 +22,6 @@ import Images from '../../../../../../assets/images';
 import { GetTimelineBlockRes } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockRes';
 import ChallengePreviewItemCard from './ChallengeModalTabs/ChallengesCard/ChallengePreviewItemCard';
 import { GetUserScoreResV1 } from '../../../../../../lib/impakt-dev-api-client/react-query/types/getUserScoreResV1';
-import { compareDateWithNow } from '../../../../../../utils';
 
 interface ActionPreviewModalProps {
   open: boolean;
@@ -68,9 +67,6 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
     isPlayedByMember,
     modalStatus,
   } = actionPreview;
-  const timer = compareDateWithNow(validUntil);
-
-  console.log(timer);
 
   const [status, setStatus] = React.useState<'starting' | 'finished' | 'pending'>(
     modalStatus ?? 'pending',

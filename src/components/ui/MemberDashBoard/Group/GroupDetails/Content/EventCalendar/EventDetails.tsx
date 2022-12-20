@@ -36,7 +36,6 @@ const EventDetails: React.FC = () => {
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
     (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
-  console.log(JSON.parse(eventObj.data));
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
 
@@ -54,8 +53,6 @@ const EventDetails: React.FC = () => {
 
     return 'pending';
   };
-
-  console.log(challange?.id, JSON.parse(eventObj.data).assocId);
 
   const fetchLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
     challange?.id ?? 0,
