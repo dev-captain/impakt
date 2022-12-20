@@ -247,6 +247,12 @@ export default {
     fontSize: '48px',
     lineHeight: '100%',
   },
+  TitleBold48_2: {
+    fontWeight: '500',
+    fontFamily: `Poppins ,${theme.fonts?.heading}`,
+    fontSize: '48px',
+    lineHeight: '56px',
+  },
   TitleBold64: {
     fontWeight: '700',
     fontFamily: `Poppins ,${theme.fonts?.heading}`,
