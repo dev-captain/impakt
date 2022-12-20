@@ -98,7 +98,10 @@ const EventDetails: React.FC = () => {
       actionPreview={{
         exercices: normalizeExerciseNames(challange?.Routine?.TimelineBlocks ?? []),
         leaderboard: sortLeaderboardByScore ?? [],
-        playedMins: 5,
+        playedMins: challange?.Routine.estimatedTime
+          ? // eslint-disable-next-line no-unsafe-optional-chaining
+            Math.ceil(challange?.Routine.estimatedTime! / 60)
+          : 0,
         subtitle: truncateString(`${challange?.name}`, 23),
         validUntil: eventObj.time.end.toISOString(),
         title: JSON.parse(eventObj.data).title ?? '',
