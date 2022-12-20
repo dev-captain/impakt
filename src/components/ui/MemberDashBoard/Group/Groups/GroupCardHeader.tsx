@@ -10,7 +10,7 @@ interface GroupCardWrapperHeaderPropsI {
 const GroupCardWrapperHeader: React.FC<GroupCardWrapperHeaderPropsI> = ({
   title,
   children,
-  justify = 'flex-start',
+  justify = 'space-between',
 }) => {
   return (
     <Box
@@ -18,6 +18,7 @@ const GroupCardWrapperHeader: React.FC<GroupCardWrapperHeaderPropsI> = ({
       w="full"
       gap={{ lgx: '48px', base: '44px' }}
       justifyContent={{ base: 'flex-end', lg: justify }}
+      alignItems="center"
       // borderBottom="2px solid #E0E0E0"
     >
       <MemberDashboardSectionHeadlineText title={title} />

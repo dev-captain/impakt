@@ -11,16 +11,35 @@ import routes from '../../../../../../data/routes';
 
 interface ExploreGroupCardWrapperPropsI {
   status: 'Private' | 'Public';
+  searchGroup: string;
 }
-const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
+const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
+  status,
+  searchGroup,
+}) => {
   const isPrivate = status === 'Private';
   const navigate = useNavigate();
-
+  console.log(searchGroup);
   const { exploreGroups } = usePersistedGroupStore();
+  const checkString = (groupname, filterVal) => {
+    let res = 0;
+    let lastSearch = -1;
+    for (let i = 0; i < filterVal.length; i += 1) {
+      for (let j = lastSearch + 1; j < groupname.length; j += 1) {
+        if (groupname[j] === filterVal[i]) {
+          res += 1;
+          lastSearch = j;
+          break;
+        }
+      }
+    }
+    if (res === filterVal.length) return true;
 
+    return false;
+  };
   const exploreGroup = exploreGroups.filter(
     // eslint-disable-next-line no-underscore-dangle
-    (d) => d.private === isPrivate,
+    (d) => d.private === isPrivate && checkString(d.groupName, searchGroup),
   );
 
   return (
