@@ -172,6 +172,8 @@ const GroupLabels: React.FC = () => {
     );
   };
 
+  const myRank = memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-';
+
   return (
     <>
       <GroupLabelWrapper items={groupStatisticLabelItems} />
@@ -208,13 +210,14 @@ const GroupLabels: React.FC = () => {
                 bestScoreOfUser && Object.keys(bestScoreOfUser).length > 0
                   ? bestScoreOfUser.userScore?.toString() ?? '-'
                   : '-',
-              myRank: memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-',
+              myRank,
               playedMins: groupPinnedChallenge?.Challenge?.Routine.estimatedTime
                 ? // eslint-disable-next-line no-unsafe-optional-chaining
                   Math.ceil(groupPinnedChallenge?.Challenge?.Routine.estimatedTime! / 60)
                 : 0,
               mode: 'start',
               validUntil: groupPinnedChallenge?.Challenge?.validUntil ?? '',
+              isPlayedByMember: myRank !== '-',
             }}
           />
         </React.Suspense>
