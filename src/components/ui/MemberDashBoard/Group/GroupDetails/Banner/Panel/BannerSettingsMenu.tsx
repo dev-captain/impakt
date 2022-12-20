@@ -90,7 +90,7 @@ const BannerSettingsMenu: React.FC = () => {
             (group) => group.id === activeGroup.id,
           );
           if (indexOfExploreGroup !== -1) {
-            shallowExploreGroups[indexOfExploreGroup].Request = d;
+            shallowExploreGroups[indexOfExploreGroup].Request = { ...d, status: 'Pending' };
             setExploreGroups(shallowExploreGroups);
           }
         },
@@ -104,6 +104,7 @@ const BannerSettingsMenu: React.FC = () => {
   if (!activeGroup) return null;
 
   const isRoleNotDefined = !role || role === 'None';
+  const request = exploreGroups.find((group) => group.id === activeGroup.id)?.Request;
 
   return (
     <>
@@ -134,7 +135,7 @@ const BannerSettingsMenu: React.FC = () => {
             }}
             onClick={
               activeGroup.private
-                ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
+                ? request?.status === 'Pending'
                   ? () => null
                   : handleSendRequestToJoin
                 : jointoGroup
@@ -147,7 +148,7 @@ const BannerSettingsMenu: React.FC = () => {
             fontSize="16px"
             leftIcon={
               activeGroup.private ? (
-                exploreGroups.find((group) => group.id === activeGroup.id)?.Request ? undefined : (
+                request?.status === 'Pending' ? undefined : (
                   <I.UnionIcon />
                 )
               ) : (
@@ -156,7 +157,7 @@ const BannerSettingsMenu: React.FC = () => {
             }
           >
             {activeGroup.private
-              ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
+              ? request?.status === 'Pending'
                 ? 'Pending'
                 : 'Request to join'
               : 'Join'}

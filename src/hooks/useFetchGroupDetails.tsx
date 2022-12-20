@@ -25,6 +25,7 @@ import {
 import { useChallengeStatsControllerGetUserBestScore } from '../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 import { getDefaultQueryOptions } from '../lib/impakt-dev-api-client/utils';
+import { GroupsSlice } from '../lib/zustand/stores/groupsStore';
 
 export const useFetchGroupDetails = () => {
   // console.log('render');
@@ -68,21 +69,42 @@ export const useFetchGroupDetails = () => {
           return;
         }
 
-        if (!data.isPreview || !data.private) {
+        const isMemberOfGroup = await fetchAmIMemberOfGroup.refetch();
+
+        let memberRole: GroupsSlice['role'] = 'None';
+
+        if (isMemberOfGroup.data) {
+          const roleRes = await fetchGroupRoleById.refetch();
+
+          memberRole = roleRes.data!.role;
+        }
+
+        // if group public
+        if (!data.private) {
           await fetchMembersOfGroup.refetch();
-          const isMemberOfGroup = await fetchAmIMemberOfGroup.refetch();
-          if (isMemberOfGroup.data) {
-            await fetchGroupRoleById.refetch();
-          } else {
-            setRole('None');
-          }
           await fetchPosts.refetch();
           await fetchGroupCalendar.refetch();
           await fetchGroupPinnedChallenge.refetch();
-        } else {
-          setRole('None');
+          setActiveGroup(data);
         }
-        setActiveGroup(data);
+
+        // if group private
+        if (data.private) {
+          // check if preview
+          if (!data.isPreview) {
+            if (memberRole !== 'None') {
+              // edge check if user not try to re-join group
+              await fetchMembersOfGroup.refetch();
+              await fetchPosts.refetch();
+              await fetchGroupCalendar.refetch();
+              await fetchGroupPinnedChallenge.refetch();
+            }
+          }
+          setActiveGroup({ ...data, isPreview: memberRole === 'None' });
+        }
+
+        setRole(memberRole);
+
         setIsGroupDetailsLoading(false);
       },
       onError: (err) => {

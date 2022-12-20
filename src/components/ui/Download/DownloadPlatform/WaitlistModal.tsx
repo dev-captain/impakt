@@ -78,17 +78,18 @@ const WaitlistModal: React.FC<WaitlistModalProps> = (props) => {
                   {props.headlineText}
                 </Text>
               )}
-              {props.subHeadlineText && (
-                <VStack
-                  spacing="0"
-                  rowGap="1em"
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  textAlign="center"
-                >
-                  <I.VSportByImpaktIcon width="166px" height="64px" />
-                  {/* <Image src={Images.Common.VsportDark} w="168px" h="48px" /> */}
+
+              <VStack
+                spacing="0"
+                rowGap="1em"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                textAlign="center"
+              >
+                <I.VSportByImpaktIcon width="166px" height="64px" />
+                {/* <Image src={Images.Common.VsportDark} w="168px" h="48px" /> */}
+                {props.subHeadlineText && (
                   <Text
                     textStyle="regular201"
                     lineHeight={{ base: '26px', md: '28px' }}
@@ -96,8 +97,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = (props) => {
                   >
                     {props.subHeadlineText}
                   </Text>
-                </VStack>
-              )}
+                )}
+              </VStack>
 
               <WaitlistForm type={props.type} setIsSubmitted={setIsSubmitted} />
             </VStack>
