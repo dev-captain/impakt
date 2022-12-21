@@ -16,6 +16,7 @@ import {
 import ActionPreviewModal from '../../Modal/ActionPreviewModal';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
+import { useChallengesControllerGetOne } from '../../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 
 const EventDetails: React.FC = () => {
   const { member } = usePersistedAuthStore();
@@ -32,8 +33,22 @@ const EventDetails: React.FC = () => {
 
   const eventObj = getSelectedDayEvent();
   if (!eventObj) return null;
+  const findTheChallenge = usePersistedChallengeStore().availableGroupChallenges.find(
+    (d) => d.id === JSON.parse(eventObj.data).challengeId,
+  );
 
-  const challange = usePersistedChallengeStore().availableGroupChallenges.find(
+  const fallbackChallengeFetch = useChallengesControllerGetOne(
+    JSON.parse(eventObj.data).challengeId,
+    {
+      query: {
+        enabled: findTheChallenge === undefined && JSON.parse(eventObj.data).challengeId !== null,
+      },
+    },
+  );
+
+  const challange = findTheChallenge ?? fallbackChallengeFetch.data;
+
+  usePersistedChallengeStore().availableGroupChallenges.find(
     (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
 
@@ -58,6 +73,7 @@ const EventDetails: React.FC = () => {
     { eventId: JSON.parse(eventObj.data).assocId },
     {
       query: {
+        enabled: !!challange,
         retry: 0,
         refetchOnMount: true,
         refetchOnWindowFocus: false,
@@ -70,7 +86,7 @@ const EventDetails: React.FC = () => {
     member?.id ?? 0,
     {
       query: {
-        enabled: false,
+        enabled: !!challange,
         retry: 0,
         refetchOnMount: true,
         refetchOnWindowFocus: false,
@@ -102,7 +118,7 @@ const EventDetails: React.FC = () => {
           ? // eslint-disable-next-line no-unsafe-optional-chaining
             Math.ceil(challange?.Routine.estimatedTime! / 60)
           : 0,
-        subtitle: truncateString(`${challange?.name}`, 23),
+        subtitle: truncateString(`${challange?.name ?? '???'}`, 23),
         validUntil: eventObj.time.end.toISOString(),
         title: JSON.parse(eventObj.data).title ?? '',
         mode: 'join',
