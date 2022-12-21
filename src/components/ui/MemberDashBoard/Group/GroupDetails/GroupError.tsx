@@ -11,29 +11,29 @@ const GroupError: React.FC<{ isError: string }> = (props) => {
 
   return (
     <Box textAlign="center">
-      <Box display="flex" maxW="670px" maxH="440px" position="relative" alignItems="center">
+      <Box display="flex" position="relative" alignItems="center">
         <Text
           bgGradient="linear-gradient(90deg, #F04153 0%, #F27961 100%)"
           bgClip="text"
           textStyle="ErrorText"
           position="absolute"
-          left={{ base: '12vw', sm: '6vw', md: '0' }}
+          left={{ base: '6vw', md: '0' }}
         >
           4
         </Text>
-        <Image src={Images.group.error} />
+        <Image src={Images.group.error} w="auto" h="auto" />
         <Text
           bgGradient="linear-gradient(90deg, #F04153 0%, #F27961 100%)"
           bgClip="text"
           textStyle="ErrorText"
           position="absolute"
-          right={{ base: '12vw', sm: '6vw', md: '0' }}
+          right={{ base: '6vw', md: '10' }}
         >
           4
         </Text>
       </Box>
       <Text
-        textStyle={{ base: 'regular6', md: 'TitleBold48_2' }}
+        textStyle={{ base: 'regular4', sm: 'regular6', md: 'TitleBold48_2' }}
         mt="20px"
         maxW="640px"
         textAlign="center"
