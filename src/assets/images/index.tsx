@@ -120,7 +120,7 @@ const Images = {
     upload: require('./group/Upload.png'),
     logo: require('./group/logo.png'),
     challengeBanner: require('./group/col.png'),
-    error: require('./group/404.png'),
+    error: require('./group/error.png'),
   },
   evolving: {
     evolving: require('./evolving.png'),

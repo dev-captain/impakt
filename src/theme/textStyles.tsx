@@ -259,6 +259,12 @@ export default {
     fontSize: { base: '48px', lg: '64px' },
     lineHeight: '100%',
   },
+  ErrorText: {
+    fontWeight: '500',
+    // fontFamily: `Poppins ,${theme.fonts?.heading}`,
+    fontSize: { base: '25vw', md: '300px' },
+    lineHeight: '360px',
+  },
   accentGradient: {
     bgClip: 'text',
     bgGradient: 'linear(to-r, rgba(220, 20, 60, 1), rgba(178, 34, 34, 1))',
