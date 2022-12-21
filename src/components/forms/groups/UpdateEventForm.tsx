@@ -48,7 +48,7 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
       eventDescription: JSON.parse(getSelectedDayEvent()!.event?.data).description ?? '',
       challengeId: JSON.parse(getSelectedDayEvent()!.event?.data).challengeId ?? '',
       challengeName: truncateString(challange?.name ?? '', 23) ?? '',
-      eventStartTime: getSelectedDayEvent()?.event.schedule?.times[0].toString() ?? '',
+      eventStartTime: defaultEventStartDate?.format('h:mm a') ?? '',
       eventEndTime: defaultDuration,
     },
   });
