@@ -25,7 +25,7 @@ const EditGroupTab: React.FC = () => {
       }}
     >
       <Forms.UpdateGroupNameForm />
-      <Forms.UpdateGroupImageForm />
+      {/* <Forms.UpdateGroupImageForm /> */}
     </Box>
   );
 };

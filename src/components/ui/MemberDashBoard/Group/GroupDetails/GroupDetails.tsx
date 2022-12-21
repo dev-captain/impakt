@@ -7,19 +7,6 @@ import { useFetchGroupDetails } from '../../../../../hooks/useFetchGroupDetails'
 
 const GroupDetails: React.FC = () => {
   const { group, isError, isGroupDetailsLoading } = useFetchGroupDetails();
-  // const [show, setShow] = React.useState<null | string>(null);
-  // React.useEffect(() => {
-  //   const showTip = localStorage.getItem('showTip');
-  //   if (showTip) {
-  //     setShow(showTip);
-  //   }
-  // }, []);
-
-  // const hide = () => {
-  //   localStorage.setItem('showTip', 'false');
-  //   setShow('false');
-  // };
-
   if (isError.length > 0)
     return (
       <Text fontWeight="hairline" fontSize="2xl">
@@ -31,14 +18,10 @@ const GroupDetails: React.FC = () => {
 
   return (
     <HStack w="full" as="section" id="group-detail-section">
-      {/* {(!localStorage.getItem('showTip') || !show) && activeGroup?.role === GroupRole.Creator ? (
-        <GroupWelcome hideGroupWelcome={hide} />
-      ) : ( */}
       <Box maxW="1200px" w="100%">
         <Banner />
         <Content />
       </Box>
-      {/* )} */}
     </HStack>
   );
 };

@@ -5,7 +5,7 @@ const PeopleIcon: React.FC<IconProps & { isActive?: boolean }> = (props) => {
   if (props.isActive)
     return (
       <Icon
-        width="32px"
+        // width="32px"
         height="32px"
         viewBox="0 0 32 32"
         fill="none"
@@ -68,7 +68,7 @@ const PeopleIcon: React.FC<IconProps & { isActive?: boolean }> = (props) => {
 
   return (
     <Icon
-      width="32px"
+      // width="32px"
       height="32px"
       viewBox="0 0 32 32"
       fill="none"

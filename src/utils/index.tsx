@@ -169,12 +169,12 @@ export const truncateString = (str: string, max: number) => {
   return str;
 };
 export const getTimeDifference = (validFrom: string, validUntil: string) => {
-  if (validFrom.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
-  if (validUntil.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
+  if (validFrom.length === 0) return { d: '00', h: '00', m: '00', s: '00' };
+  if (validUntil.length === 0) return { d: '00', h: '00', m: '00', s: '00' };
 
   const isValidDate = Day.fromString(validFrom).time < Day.now().time;
 
-  if (!isValidDate) return { d: '0', h: '0', m: '0', s: '0' };
+  if (!isValidDate) return { d: '00', h: '00', m: '00', s: '00' };
 
   return compareDateWithNow(validUntil);
 };
