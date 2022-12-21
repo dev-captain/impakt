@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { Text, Box, Image } from '@chakra-ui/react';
+import myVideos from '../../../../../assets/videos/funMotion.mp4';
 
 interface FitnessJourneyCardProps {
-  img: string;
+  video: string;
   title: string;
   description: string;
 }
 
-const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ img, title, description }) => {
+const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, description }) => {
   return (
     <Box
       width={{ md: 'auto', base: '100%' }}
@@ -18,14 +19,27 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ img, title, des
       mt={{ md: '0', base: '20px' }}
       boxShadow="0px 8px 15px -4px rgba(0, 0, 0, 0.8)"
       backdropFilter="blur(40px)"
+      p="1em"
     >
-      <Image
-        src={img}
+      <Box
         objectFit="cover"
-        zIndex="0"
-        padding={{ base: '12px', md: '28px' }}
-        pb="21px"
-      />
+        as="video"
+        // ref={videoRef}
+        top="0"
+        maxH="343px"
+        left="0"
+        w="100%"
+        height="100%"
+        borderRadius="20px"
+        filter="contrast(120%) brightness(120%)"
+        autoPlay
+        loop
+        muted
+        playsInline
+        src={video}
+      >
+        <source src={video} type="video/mp4" />
+      </Box>
       <Box padding={{ lgx: '16px', base: '12px' }}>
         <Box>
           <Text

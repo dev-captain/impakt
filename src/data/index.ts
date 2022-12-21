@@ -1,5 +1,8 @@
 import Images from 'assets/images';
 import { Day, EventInput } from 'dayspan';
+import FunMotionVideo from '../assets/videos/funMotion.mp4';
+import LazyFitnessVideo from '../assets/videos/lazyFitness.mp4';
+import SocialFitnessVideo from '../assets/videos/socialFitness.mp4';
 
 export const RoadMapData: {
   date: string;
@@ -73,6 +76,9 @@ export const Videos = {
   stars: 'assets/videos/stars.mov',
   newVideo: 'assets/videos/Trailer.mp4',
   backgroundBeachVideo: 'assets/videos/backgroundbeach.mp4',
+  funMotion: 'assets/videos/funMotion.mp4',
+  lazyFitness: 'assets/videos/lazyFitness.mp4',
+  socialFitness: 'assets/videos/ocialFitness.mp4',
 };
 
 export const Socials = {
@@ -620,18 +626,18 @@ export const deepLinkToApp = (groupId?: number, eventId?: number) =>
 
 export const journeyData = [
   {
-    img: Images.Journey.Journey,
+    video: FunMotionVideo,
     title: 'Fun Motion Controlled Games',
     description: 'Flex your reflexes! Play in your web browser now',
   },
   {
-    img: Images.Journey.Journey1,
+    video: SocialFitnessVideo,
     title: 'Social Fitness with Friends',
     description:
       'We bring the studio to your home,. Hang out with old friends and make new ones, too!',
   },
   {
-    img: Images.Journey.Journey2,
+    video: LazyFitnessVideo,
     title: 'Not Too Busy for Lazy Fitness',
     description: 'Grab your phone, smack it to your face and start your magical transformation',
   },

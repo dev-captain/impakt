@@ -14,7 +14,7 @@ const FitnestJourneyCardWrapper: React.FC = () => {
       {journeyData.map((data) => (
         <FitnessJourneyCard
           key={`item-${data.title}`}
-          img={data.img}
+          video={data.video}
           title={data.title}
           description={data.description}
         />
