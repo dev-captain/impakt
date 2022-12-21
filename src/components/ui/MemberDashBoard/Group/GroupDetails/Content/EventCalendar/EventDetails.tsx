@@ -73,6 +73,7 @@ const EventDetails: React.FC = () => {
     { eventId: JSON.parse(eventObj.data).assocId },
     {
       query: {
+        enabled: !!challange,
         retry: 0,
         refetchOnMount: true,
         refetchOnWindowFocus: false,
@@ -85,7 +86,7 @@ const EventDetails: React.FC = () => {
     member?.id ?? 0,
     {
       query: {
-        enabled: false,
+        enabled: !!challange,
         retry: 0,
         refetchOnMount: true,
         refetchOnWindowFocus: false,
