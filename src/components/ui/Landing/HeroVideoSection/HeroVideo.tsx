@@ -7,15 +7,11 @@ import HeroVideoText from './HeroVideoText';
 import HeroVideoEnterButton from './HeroVideoEnterButton';
 
 const HeroVideo: React.FC = () => {
+  const [isVideoEnded, setIsVideoEnded] = React.useState(false);
   const videoBoxRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
   const [sound, setSound] = useState(true);
   const [opacityText, setOpacityText] = useState(1);
-
-  const play = () => {
-    setOpacityText(0);
-    videoRef?.current?.play();
-  };
 
   const handleMute = () => {
     setSound(!sound);
@@ -25,6 +21,8 @@ const HeroVideo: React.FC = () => {
 
   const endVideo = () => {
     if (!videoBoxRef.current) return;
+    setOpacityText(0);
+    setIsVideoEnded(true);
     videoBoxRef.current.style.maxHeight = '0';
   };
 
@@ -67,10 +65,10 @@ const HeroVideo: React.FC = () => {
         {opacityText === 1 && (
           <>
             <HeroVideoText />
-            <HeroVideoEnterButton onClick={play} />
+            {/* <HeroVideoEnterButton onClick={play} /> */}
           </>
         )}
-        <SoundsButton onClick={handleMute} isOn={sound} />
+        {!isVideoEnded && <SoundsButton onClick={handleMute} isOn={!sound} />}
       </Box>
     </Box>
   );
