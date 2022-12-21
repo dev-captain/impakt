@@ -36,9 +36,17 @@ const EventDetails: React.FC = () => {
   const findTheChallenge = usePersistedChallengeStore().availableGroupChallenges.find(
     (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
+
   const fallbackChallengeFetch = useChallengesControllerGetOne(
     JSON.parse(eventObj.data).challengeId,
-    { query: { enabled: findTheChallenge === undefined && JSON.parse(eventObj.data).challengeId } },
+    {
+      query: {
+        enabled:
+          findTheChallenge === undefined &&
+          (JSON.parse(eventObj.data).challengeId !== undefined ||
+            JSON.parse(eventObj.data).challengeId !== null),
+      },
+    },
   );
 
   const challange = findTheChallenge ?? fallbackChallengeFetch.data;
