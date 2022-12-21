@@ -38,7 +38,7 @@ const EventDetails: React.FC = () => {
   );
   const fallbackChallengeFetch = useChallengesControllerGetOne(
     JSON.parse(eventObj.data).challengeId,
-    { query: { enabled: findTheChallenge === undefined } },
+    { query: { enabled: findTheChallenge === undefined && JSON.parse(eventObj.data).challengeId } },
   );
 
   const challange = findTheChallenge ?? fallbackChallengeFetch.data;
