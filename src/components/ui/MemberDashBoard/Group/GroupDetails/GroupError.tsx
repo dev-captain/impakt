@@ -10,7 +10,13 @@ const GroupError: React.FC<{ isError: string }> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <Box textAlign="center">
+    <Box
+      display="flex"
+      flexDir="column"
+      position={{ base: 'relative', lg: 'fixed' }}
+      h="2000px"
+      mb="50px"
+    >
       <Box display="flex" position="relative" alignItems="center">
         <Text
           bgGradient="linear-gradient(90deg, #F04153 0%, #F27961 100%)"
@@ -40,7 +46,7 @@ const GroupError: React.FC<{ isError: string }> = (props) => {
       >
         {props.isError}
       </Text>
-      <Text textStyle={{ base: 'regular20', md: 'regular4' }} mt="48px" mb="24px">
+      <Text textStyle={{ base: 'regular20', md: 'regular4' }} margin="auto" mt="48px" mb="24px">
         You are welcome to look around though:
       </Text>
       <Box display="flex" justifyContent="center">

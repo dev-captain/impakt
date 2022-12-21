@@ -7,6 +7,8 @@ import GroupError from './GroupError';
 
 const GroupDetails: React.FC = () => {
   const { group, isError, isGroupDetailsLoading } = useFetchGroupDetails();
+  console.log(isError);
+
   if (isError.length > 0) return <GroupError isError={isError} />;
   if (isGroupDetailsLoading) return <CircularProgress color="darkOrange" isIndeterminate />;
   if (!group) return null;
