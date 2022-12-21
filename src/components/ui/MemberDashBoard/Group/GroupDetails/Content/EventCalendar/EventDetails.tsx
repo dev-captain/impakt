@@ -37,16 +37,17 @@ const EventDetails: React.FC = () => {
     (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
 
-  console.log('input check log', JSON.parse(eventObj.data).challengeId);
+  console.log(
+    'input check log',
+    JSON.parse(eventObj.data).challengeId,
+    findTheChallenge === undefined && JSON.parse(eventObj.data).challengeId !== null,
+  );
 
   const fallbackChallengeFetch = useChallengesControllerGetOne(
     JSON.parse(eventObj.data).challengeId,
     {
       query: {
-        enabled:
-          findTheChallenge === undefined &&
-          (JSON.parse(eventObj.data).challengeId !== undefined ||
-            JSON.parse(eventObj.data).challengeId !== null),
+        enabled: findTheChallenge === undefined && JSON.parse(eventObj.data).challengeId !== null,
       },
     },
   );
