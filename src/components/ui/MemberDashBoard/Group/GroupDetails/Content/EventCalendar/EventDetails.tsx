@@ -70,7 +70,7 @@ const EventDetails: React.FC = () => {
 
   const fetchLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
     challange?.id ?? 0,
-    { eventId: JSON.parse(eventObj.data).assocId },
+    {},
     {
       query: {
         enabled: !!challange,
