@@ -118,7 +118,7 @@ const EventDetails: React.FC = () => {
           ? // eslint-disable-next-line no-unsafe-optional-chaining
             Math.ceil(challange?.Routine.estimatedTime! / 60)
           : 0,
-        subtitle: truncateString(`${challange?.name}`, 23),
+        subtitle: truncateString(`${challange?.name ?? '???'}`, 23),
         validUntil: eventObj.time.end.toISOString(),
         title: JSON.parse(eventObj.data).title ?? '',
         mode: 'join',
