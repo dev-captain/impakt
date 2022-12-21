@@ -27,12 +27,6 @@ const HeroVideo: React.FC = () => {
     if (!videoBoxRef.current) return;
     videoBoxRef.current.style.maxHeight = '0';
   };
-  useEffect(() => {
-    if (videoRef.current) {
-      // pollyfill fix for ios require auto play true with playsInline but we don't want to play auto : hacky solution
-      videoRef.current.pause();
-    }
-  }, []);
 
   return (
     <Box
@@ -56,6 +50,7 @@ const HeroVideo: React.FC = () => {
         autoPlay
         onEnded={() => endVideo()}
         playsInline
+        muted
       >
         <Box as="source" src={Videos.newVideo} type="video/mp4" />
       </Box>
