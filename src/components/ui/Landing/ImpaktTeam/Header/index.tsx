@@ -38,15 +38,15 @@ const ImpaktTeamHeader: React.FC = () => {
               <LandingLine dir="h" />
               <Text
                 color="#1C1C28"
-                fontSize="18px"
+                fontSize="26px"
                 lineHeight="inherit"
-                fontWeight="500"
+                fontWeight="700"
                 textStyle="TitleBold48"
                 maxWidth="519px"
                 margin="auto"
-                mb="37px"
+                mb="15px"
               >
-                {t(keys.impaktGamesHero.impaktTeamDescription)}
+                The Industry experts defining vSports.
               </Text>
             </Box>
           </VStack>

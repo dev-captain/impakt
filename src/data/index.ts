@@ -621,18 +621,19 @@ export const deepLinkToApp = (groupId?: number, eventId?: number) =>
 export const journeyData = [
   {
     img: Images.Journey.Journey,
-    title: 'We need variety',
-    description: 'Choose from 40+ exercises. More added constantly.',
+    title: 'Fun Motion Controlled Games',
+    description: 'Flex your reflexes! Play in your web browser now',
   },
   {
     img: Images.Journey.Journey1,
-    title: 'Starting at the base',
-    description: 'Routines customized to our starting fitness level.',
+    title: 'Social Fitness with Friends',
+    description:
+      'We bring the studio to your home,. Hang out with old friends and make new ones, too!',
   },
   {
     img: Images.Journey.Journey2,
-    title: 'Challenging ourselves & others',
-    description: 'Complete Impakt challenges and compete with others.',
+    title: 'Not Too Busy for Lazy Fitness',
+    description: 'Grab your phone, smack it to your face and start your magical transformation',
   },
 ];
 

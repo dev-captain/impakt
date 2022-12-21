@@ -18,7 +18,9 @@ const FitnessJourneyDescriptionText: React.FC = () => {
       maxWidth={{ lg: '632px', md: '482px', base: '730px' }}
       textAlign={{ base: 'center', md: 'start' }}
     >
-      {t(keys.impaktGamesHero.fitnessJourneyDescription)}
+      It&apos;s your body and your goals. Do fitness as you want. Whether you want to get fit while
+      playing games, or hang out with friends doing yoga in a virtual studio. Maybe you just want to
+      chat on the phone while you magically get fit. At Impakt, it&apos;s your choice.
     </Text>
   );
 };

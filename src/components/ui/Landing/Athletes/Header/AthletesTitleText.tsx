@@ -17,7 +17,7 @@ const AthletesTitleText: React.FC<PropsI> = () => {
       lineHeight="100%"
       maxWidth="600px"
     >
-      {t(keys.impaktGamesHero.athletesTitle)}
+      Impakt ICONs
     </Text>
   );
 };

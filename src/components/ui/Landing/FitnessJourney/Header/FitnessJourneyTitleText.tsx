@@ -18,7 +18,7 @@ const FitnessJourneyTitleText: React.FC = () => {
       margin="auto"
       textAlign={{ base: 'center', md: 'start' }}
     >
-      {t(keys.impaktGamesHero.fitnessJourneyTitle)}
+      Own your Journey
     </Text>
   );
 };

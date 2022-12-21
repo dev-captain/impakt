@@ -17,7 +17,7 @@ const AthletesDescriptionText: React.FC = () => {
       margin="auto"
       mb={{ lg: '97px', base: '40px' }}
     >
-      {t(keys.impaktGamesHero.athletesDescription)}
+      The best athletes are making an Impakt.
     </Text>
   );
 };

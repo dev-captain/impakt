@@ -24,6 +24,9 @@ const MyBodyHeader: React.FC = () => {
             w="fit-content"
             gap="8px"
             padding="10px 14px"
+            as="a"
+            href="https://vsports.impakt.com"
+            title="vSports Fitness World"
           >
             Experience vSports now in your browser
           </Common.ImpaktButton>
