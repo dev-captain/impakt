@@ -36,9 +36,14 @@ const EventDetails: React.FC = () => {
   const findTheChallenge = usePersistedChallengeStore().availableGroupChallenges.find(
     (d) => d.id === JSON.parse(eventObj.data).challengeId,
   );
+
   const fallbackChallengeFetch = useChallengesControllerGetOne(
     JSON.parse(eventObj.data).challengeId,
-    { query: { enabled: findTheChallenge === undefined } },
+    {
+      query: {
+        enabled: findTheChallenge === undefined && JSON.parse(eventObj.data).challengeId !== null,
+      },
+    },
   );
 
   const challange = findTheChallenge ?? fallbackChallengeFetch.data;
@@ -68,6 +73,7 @@ const EventDetails: React.FC = () => {
     { eventId: JSON.parse(eventObj.data).assocId },
     {
       query: {
+        enabled: !!challange,
         retry: 0,
         refetchOnMount: true,
         refetchOnWindowFocus: false,
@@ -80,7 +86,7 @@ const EventDetails: React.FC = () => {
     member?.id ?? 0,
     {
       query: {
-        enabled: false,
+        enabled: !!challange,
         retry: 0,
         refetchOnMount: true,
         refetchOnWindowFocus: false,
@@ -112,7 +118,7 @@ const EventDetails: React.FC = () => {
           ? // eslint-disable-next-line no-unsafe-optional-chaining
             Math.ceil(challange?.Routine.estimatedTime! / 60)
           : 0,
-        subtitle: truncateString(`${challange?.name}`, 23),
+        subtitle: truncateString(`${challange?.name ?? '???'}`, 23),
         validUntil: eventObj.time.end.toISOString(),
         title: JSON.parse(eventObj.data).title ?? '',
         mode: 'join',
