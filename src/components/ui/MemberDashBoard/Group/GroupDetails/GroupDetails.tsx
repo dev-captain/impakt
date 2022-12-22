@@ -1,18 +1,14 @@
 import React from 'react';
-import { Box, Text, HStack, CircularProgress } from '@chakra-ui/react';
+import { Box, HStack, CircularProgress } from '@chakra-ui/react';
 import Content from './Content/Content';
 import Banner from './Banner/Banner';
 import { useFetchGroupDetails } from '../../../../../hooks/useFetchGroupDetails';
-// import { getDefaultQueryOptions } from '../../../../../lib/impakt-dev-api-client/utils';
+import GroupError from './GroupError';
 
 const GroupDetails: React.FC = () => {
   const { group, isError, isGroupDetailsLoading } = useFetchGroupDetails();
-  if (isError.length > 0)
-    return (
-      <Text fontWeight="hairline" fontSize="2xl">
-        {isError}
-      </Text>
-    );
+  
+  if (isError.length > 0) return <GroupError isError={isError} />;
   if (isGroupDetailsLoading) return <CircularProgress color="darkOrange" isIndeterminate />;
   if (!group) return null;
 
