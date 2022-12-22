@@ -618,25 +618,6 @@ export const GroupDetails = [
 export const deepLinkToApp = (groupId?: number, eventId?: number) =>
   `impakt://join-event?groupId=${groupId}&eventId=${eventId}`;
 
-export const journeyData = [
-  {
-    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Fun+Motion+Controlled+Games.mp4',
-    title: 'Fun Motion Controlled Games',
-    description: 'Flex your reflexes! Play in your web browser now',
-  },
-  {
-    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Social+Fitness+With+Friends.mp4',
-    title: 'Social Fitness with Friends',
-    description:
-      'We bring the studio to your home,. Hang out with old friends and make new ones, too!',
-  },
-  {
-    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Not+Too+Busy+For+Lazy+Fitness.mp4',
-    title: 'Not Too Busy for Lazy Fitness',
-    description: 'Grab your phone, smack it to your face and start your magical transformation',
-  },
-];
-
 export const AthletesData = [
   {
     name: 'Kelvin Gastelum',
