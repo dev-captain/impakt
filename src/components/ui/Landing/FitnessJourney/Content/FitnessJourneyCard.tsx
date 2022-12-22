@@ -30,7 +30,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
         top="0"
         left="0"
         w="100%"
-        height="300px"
+        height="30vh"
         borderRadius="20px"
         autoPlay
         loop
