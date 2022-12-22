@@ -2,8 +2,6 @@ import { Box } from '@chakra-ui/react';
 import { memo } from 'react';
 import styled from 'styled-components';
 
-import { Videos } from '../../../../../data';
-
 const Source = styled.source``;
 
 const MyBodyVideo = () => {
@@ -50,13 +48,15 @@ const MyBodyVideo = () => {
       maxWidth="1000px"
       height="100%"
       borderRadius="20px"
-      filter="contrast(120%) brightness(120%)"
       autoPlay
       loop
       muted
       playsInline
     >
-      <Source src={Videos.heroVideo} type="video/mp4" />
+      <Source
+        src="https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Vsport+Website+video+v1.3.mp4"
+        type="video/mp4"
+      />
     </Box>
     // </Box>
   );
