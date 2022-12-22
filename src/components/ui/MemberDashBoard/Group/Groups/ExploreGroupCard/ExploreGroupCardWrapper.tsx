@@ -23,7 +23,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
   const { checkString } = useSearchString();
   const exploreGroup = exploreGroups.filter(
     // eslint-disable-next-line no-underscore-dangle
-    (d) => d.private === isPrivate && checkString(d.groupName, searchGroup),
+    (d) => d.private === isPrivate && checkString(d.groupName.toLowerCase(), searchGroup),
   );
 
   return (

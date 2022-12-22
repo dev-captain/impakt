@@ -19,7 +19,7 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   const [inputValue, setInput] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setInput(e.target.value);
-    const filterVal = e.target.value;
+    const filterVal = e.target.value.toLowerCase();
     setSearchGroup(filterVal);
   };
   const inputItems: InputGroupPropsI[] = [
@@ -29,7 +29,7 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
       type: 'text',
       name: 'Groupname',
       leftIcon: <I.SearchIcon color="#29323B" width="20px" height="20px" />,
-      autoFocus: true,
+      autoFocus: false,
       whiteMode: true,
       width: '100%',
       value: inputValue,
