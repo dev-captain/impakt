@@ -17,8 +17,9 @@ const SubmittedCard: React.FC = () => {
         <I.SubmittedIcon />
       </Box>
       <Box>
-        <Text textStyle="regular201" color="fg-1">
-          Thank you!
+        <Text textStyle="regular201" color="fg-1" textAlign="center" lineHeight="150%">
+          Welcome onboard! <br />
+          As an early subscriber, you&apos;ll be first in line to know when we launch
         </Text>
       </Box>
     </VStack>
