@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Text, Box, Image } from '@chakra-ui/react';
-import myVideos from '../../../../../assets/videos/funMotion.mp4';
+import { Text, Box } from '@chakra-ui/react';
 
 interface FitnessJourneyCardProps {
   video: string;
