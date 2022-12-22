@@ -21,8 +21,8 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, d
       p="1em"
     >
       <Box
-        objectFit="cover"
         as="video"
+        objectFit="fill"
         // ref={videoRef}
         top="0"
         left="0"
