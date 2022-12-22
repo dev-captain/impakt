@@ -85,6 +85,8 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
     return undefined;
   };
 
+  console.log('status', status);
+
   return (
     <Modal scrollBehavior="inside" isOpen={open} onClose={() => close()} isCentered>
       <ModalOverlay />
@@ -442,7 +444,10 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
             <VStack
               ml="0 !important"
               borderTop="1px solid #D3E2F0"
-              w="full"
+              display={
+                (mode === 'join' && status === 'pending') || mode === 'start' ? 'flex' : 'hidden'
+              }
+              w={(mode === 'join' && status === 'pending') || mode === 'start' ? 'full' : '0'}
               alignItems="flex-start"
               id="challenge-preview-content-leaderboard"
             >
@@ -467,70 +472,72 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                   </HStack>
                 </VStack>
               )}
-              <VStack p="32px" rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
-                <Box>
-                  <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
-                    Leaderboard
-                  </Text>
-                </Box>
-                <VStack w="full">
-                  {leaderboard.length === 0 && <Text color="gray.300">No record yet...</Text>}
-                  {leaderboard.map(({ id, username, userScore }, index) => (
-                    <HStack
-                      key={id}
-                      // eslint-disable-next-line no-nested-ternary
-                      mt={index === 0 ? '0' : index === 3 ? '16px !important' : '8px !important'}
-                      w="full"
-                      bg={index === 0 ? 'rgba(242, 121, 97, 0.1);' : '#F5F8FA'}
-                      color={index === 0 ? '#CC4C33' : '#728BA3'}
-                      p="1em"
-                      borderRadius="8px"
-                      id="leaderboard-item-container"
-                      justifyContent="space-between"
-                    >
-                      <HStack>
-                        {index === 0 && (
-                          <Box id="leaderboard-item-icon">
-                            <I.WinnerIcon color="#F27961" width="22.08px" height="21.6px" />
+              {mode === 'start' && (
+                <VStack p="32px" rowGap="24px" w="full" alignItems="flex-start" id="challenge-box">
+                  <Box>
+                    <Text fontStyle="normal" fontWeight="500" fontSize="24px" lineHeight="100%">
+                      Leaderboard
+                    </Text>
+                  </Box>
+                  <VStack w="full">
+                    {leaderboard.length === 0 && <Text color="gray.300">No record yet...</Text>}
+                    {leaderboard.map(({ id, username, userScore }, index) => (
+                      <HStack
+                        key={id}
+                        // eslint-disable-next-line no-nested-ternary
+                        mt={index === 0 ? '0' : index === 3 ? '16px !important' : '8px !important'}
+                        w="full"
+                        bg={index === 0 ? 'rgba(242, 121, 97, 0.1);' : '#F5F8FA'}
+                        color={index === 0 ? '#CC4C33' : '#728BA3'}
+                        p="1em"
+                        borderRadius="8px"
+                        id="leaderboard-item-container"
+                        justifyContent="space-between"
+                      >
+                        <HStack>
+                          {index === 0 && (
+                            <Box id="leaderboard-item-icon">
+                              <I.WinnerIcon color="#F27961" width="22.08px" height="21.6px" />
+                            </Box>
+                          )}
+                          {index !== 0 && <Box id="leaderboard-item-icon" minW="22.08px" />}
+                          <Box id="leaderboard-item-rank">
+                            <Text
+                              color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#728BA3'}
+                              fontWeight="500"
+                              fontSize="18px"
+                              lineHeight="100%"
+                            >
+                              {index + 1}
+                            </Text>
                           </Box>
-                        )}
-                        {index !== 0 && <Box id="leaderboard-item-icon" minW="22.08px" />}
-                        <Box id="leaderboard-item-rank">
+                          <Box ml="16px !important" id="leaderboard-item-username">
+                            <Text
+                              color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#29323B'}
+                              fontWeight="500"
+                              fontSize="18px"
+                              lineHeight="100%"
+                            >
+                              {username}
+                            </Text>
+                          </Box>
+                        </HStack>
+
+                        <HStack>
                           <Text
                             color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#728BA3'}
                             fontWeight="500"
                             fontSize="18px"
                             lineHeight="100%"
                           >
-                            {index + 1}
+                            {userScore}
                           </Text>
-                        </Box>
-                        <Box ml="16px !important" id="leaderboard-item-username">
-                          <Text
-                            color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#29323B'}
-                            fontWeight="500"
-                            fontSize="18px"
-                            lineHeight="100%"
-                          >
-                            {username}
-                          </Text>
-                        </Box>
+                        </HStack>
                       </HStack>
-
-                      <HStack>
-                        <Text
-                          color={index === 0 ? 'rgba(204, 76, 51, 1)' : '#728BA3'}
-                          fontWeight="500"
-                          fontSize="18px"
-                          lineHeight="100%"
-                        >
-                          {userScore}
-                        </Text>
-                      </HStack>
-                    </HStack>
-                  ))}
+                    ))}
+                  </VStack>
                 </VStack>
-              </VStack>
+              )}
             </VStack>
           </HStack>
           {/* MODAL BODY CONTENT END HERE */}
