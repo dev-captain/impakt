@@ -1,8 +1,5 @@
 import Images from 'assets/images';
 import { Day, EventInput } from 'dayspan';
-import FunMotionVideo from '../assets/videos/funMotion.mp4';
-import LazyFitnessVideo from '../assets/videos/lazyFitness.mp4';
-import SocialFitnessVideo from '../assets/videos/socialFitness.mp4';
 
 export const RoadMapData: {
   date: string;
@@ -76,9 +73,6 @@ export const Videos = {
   stars: 'assets/videos/stars.mov',
   newVideo: 'assets/videos/Trailer.mp4',
   backgroundBeachVideo: 'assets/videos/backgroundbeach.mp4',
-  funMotion: 'assets/videos/funMotion.mp4',
-  lazyFitness: 'assets/videos/lazyFitness.mp4',
-  socialFitness: 'assets/videos/ocialFitness.mp4',
 };
 
 export const Socials = {
@@ -626,18 +620,18 @@ export const deepLinkToApp = (groupId?: number, eventId?: number) =>
 
 export const journeyData = [
   {
-    video: FunMotionVideo,
+    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Fun+Motion+Controlled+Games.mp4',
     title: 'Fun Motion Controlled Games',
     description: 'Flex your reflexes! Play in your web browser now',
   },
   {
-    video: SocialFitnessVideo,
+    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Social+Fitness+With+Friends.mp4',
     title: 'Social Fitness with Friends',
     description:
       'We bring the studio to your home,. Hang out with old friends and make new ones, too!',
   },
   {
-    video: LazyFitnessVideo,
+    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Not+Too+Busy+For+Lazy+Fitness.mp4',
     title: 'Not Too Busy for Lazy Fitness',
     description: 'Grab your phone, smack it to your face and start your magical transformation',
   },
