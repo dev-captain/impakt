@@ -85,8 +85,6 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
     return undefined;
   };
 
-  console.log('status', status);
-
   return (
     <Modal scrollBehavior="inside" isOpen={open} onClose={() => close()} isCentered>
       <ModalOverlay />

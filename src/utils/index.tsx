@@ -239,6 +239,11 @@ const exerciseNameCorrection = (exerciseName: string) => {
   if (exerciseName === 'High Knee') return 'High Knees';
   if (exerciseName === 'No Action') return 'Rest';
   if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
+  if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
+  if (exerciseName === 'Cross Punch') return 'Cross Punches';
+  if (exerciseName === 'Standing Kick') return 'Standing Kicks';
+  if (exerciseName === 'Standing Crunch Knee') return 'Standing Knee Crunches';
+  if (exerciseName === 'Standing Crunch Leg') return 'Standing Leg Crunches';
 
   return exerciseName;
 };
