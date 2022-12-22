@@ -14,42 +14,25 @@ const NavbarLink = () => {
   return (
     <>
       <Common.LinkItem
-        href="/"
-        title={t(Keys.navbar.impaktFitness)}
+        href="http://community.impakt.com/"
+        title="Social Fitness"
         isActive={path.pathname === ''}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
-        isNavigate
       />
       <Common.LinkItem
-        title={t(Keys.navbar.knowledgeBase)}
-        href="https://knowledgebase.impakt.com"
-        isActive={path.pathname === 'knowledge-base'}
+        title="vSports"
+        href="http://vsports.me/"
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
       />
-      {/* <Common.LinkItem
-        href="/events"
-        passiveColor={passiveColor}
-        title={t(Keys.navbar.events)}
-        isActive={path.pathname === 'events'}
-      /> */}
       <Common.LinkItem
-        href="/contact"
+        href="http://impakt.com/contact"
         title={t(Keys.navbar.contactUs)}
         isActive={path.pathname === 'contact'}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
-        isNavigate
       />
-      {/* (
-      <Common.LinkItem
-        href="/terms-of-use"
-        passiveColor={passiveColor}
-        title={t(Keys.navbar.termsOfUse)}
-        isActive={path.pathname === 'terms-of-use'}
-      />
-      ) */}
     </>
   );
 };
