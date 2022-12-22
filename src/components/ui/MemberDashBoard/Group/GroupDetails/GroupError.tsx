@@ -47,10 +47,12 @@ const GroupError: React.FC<{ isError: string }> = (props) => {
         mt="20px"
         maxW="640px"
         textAlign="center"
+        color="fg-1"
       >
         {props.isError}
       </Text>
       <Text
+        color="fg"
         textStyle={{ base: 'regular20', md: 'regular4' }}
         textAlign="center"
         mt={{ base: '30px', sm: '48px' }}
