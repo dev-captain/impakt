@@ -207,58 +207,59 @@ const MemberList: React.FC = () => {
               <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" />
             </Box>
           </Box> */}
-        {sortByRole?.map(
-          ({ role, User }) =>
-            role !== 'None' && (
-              <HStack
-                as="a"
-                href=""
-                onClick={(e) => e.preventDefault()}
-                title={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
-                key={`${User.id}-box`}
-                w="full"
-                alignItems="center"
-                marginTop="16px !important"
-              >
+        <Box maxHeight="428px" overflowY="scroll">
+          {sortByRole?.map(
+            ({ role, User }) =>
+              role !== 'None' && (
                 <HStack
+                  as="a"
+                  href=""
+                  onClick={(e) => e.preventDefault()}
+                  title={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                  key={`${User.id}-box`}
                   w="full"
-                  maxW="60%"
-                  spacing="1em"
-                  sx={{
-                    _before: { wordBreak: 'keep-all' },
-                    _after: { wordBreak: 'keep-all' },
-                    wordBreak: 'keep-all',
-                  }}
+                  alignItems="center"
+                  marginTop="16px !important"
                 >
-                  <Avatar
-                    name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
-                    width="32px"
-                    height="32px"
-                  />
-                  <Text
-                    color="#4E6070"
-                    fontSize={{ lgx: '18px', md: '14px' }}
-                    lineHeight="100%"
-                    fontWeight="500"
-                    marginLeft="16px"
-                    whiteSpace="nowrap"
-                    overflow="hidden"
-                    textOverflow="ellipsis"
+                  <HStack
+                    w="full"
+                    maxW="60%"
+                    spacing="1em"
+                    sx={{
+                      _before: { wordBreak: 'keep-all' },
+                      _after: { wordBreak: 'keep-all' },
+                      wordBreak: 'keep-all',
+                    }}
                   >
-                    {User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
-                  </Text>
-                </HStack>
-                <HStack justifyContent="flex-end" w="full">
-                  <Text
-                    color="#4E6070"
-                    fontSize={{ lgx: '18px', md: '14px' }}
-                    lineHeight="100%"
-                    fontWeight="500"
-                  >
-                    {role}
-                  </Text>
-                </HStack>
-                {/* <HStack flex="2" display="flex" alignItems="center">
+                    <Avatar
+                      name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                      width="32px"
+                      height="32px"
+                    />
+                    <Text
+                      color="#4E6070"
+                      fontSize={{ lgx: '18px', md: '14px' }}
+                      lineHeight="100%"
+                      fontWeight="500"
+                      marginLeft="16px"
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
+                      {User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
+                    </Text>
+                  </HStack>
+                  <HStack justifyContent="flex-end" w="full">
+                    <Text
+                      color="#4E6070"
+                      fontSize={{ lgx: '18px', md: '14px' }}
+                      lineHeight="100%"
+                      fontWeight="500"
+                    >
+                      {role}
+                    </Text>
+                  </HStack>
+                  {/* <HStack flex="2" display="flex" alignItems="center">
                     <Avatar
                       name={User.firstName?.replace(' ', '') ?? User.username?.replace(' ', '')}
                       width="32px"
@@ -289,9 +290,10 @@ const MemberList: React.FC = () => {
                       {role}
                     </Text>
                     {/* <Box backgroundColor="#53E0C2" width="8px" height="8px" borderRadius="50%" /> */}
-              </HStack>
-            ),
-        )}
+                </HStack>
+              ),
+          )}
+        </Box>
       </Box>
     </MemberDashboardCard>
   );

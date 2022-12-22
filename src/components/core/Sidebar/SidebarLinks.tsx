@@ -25,6 +25,7 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
           cursor="pointer"
           width="32px"
           height="32px"
+          fill="#91A8BD"
         />
       </SidebarMenuItem>
 
