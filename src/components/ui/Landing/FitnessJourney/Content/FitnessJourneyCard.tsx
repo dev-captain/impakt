@@ -25,10 +25,9 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, d
         as="video"
         // ref={videoRef}
         top="0"
-        maxH="343px"
         left="0"
         w="100%"
-        height="100%"
+        height="300px"
         borderRadius="20px"
         filter="contrast(120%) brightness(120%)"
         autoPlay
