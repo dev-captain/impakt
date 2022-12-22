@@ -14,7 +14,7 @@ const MyBodyHeader: React.FC = () => {
       marginTop={{ md: '100px !important', base: '50px !important' }}
     >
       <Box textAlign="center">
-        <Box mb="50px !important">
+        <Box mb="100px !important">
           <Box
             as="a"
             title="vSports Fitness World"
