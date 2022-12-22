@@ -64,24 +64,15 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           href="http://community.impakt.com"
           onClose={onClose}
           isActive={path.path === ''}
-          title={t(Keys.navbar.impaktFitness)}
+          title="Social Fitness"
         />
         <NavbarLinkItem
           isSmall
           hide
           type="LINK"
           onClose={onClose}
-          title={t(Keys.navbar.knowledgeBase)}
-          href="https://knowledgebase.impakt.com"
-          isActive={path.path === 'knowledge-base'}
-        />
-        <NavbarLinkItem
-          hide
-          isSmall
-          href="/events"
-          onClose={onClose}
-          title={t(Keys.navbar.events)}
-          isActive={path.path === 'events'}
+          title="vSports"
+          href="http://vsports.me/"
         />
         <NavbarLinkItem
           isSmall

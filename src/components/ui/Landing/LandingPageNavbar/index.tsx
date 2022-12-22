@@ -32,7 +32,6 @@ const LandingPageNavbar: FC = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-
   useEffect(() => {
     if (!isLessThan1280) {
       onClose();
@@ -80,22 +79,50 @@ const LandingPageNavbar: FC = () => {
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px" minWidth="auto">
             <I.ImpaktIcon variant="lg" />
           </Box>
+          <Box
+            display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
+            ml="0 !important"
+            w="300px"
+            justifyContent="space-between"
+          >
+            <Common.LinkItem
+              href="http://community.impakt.com/"
+              title="Social Fitness"
+              titleActiveColor="fg"
+              textStyle="semiBold6"
+              titlePassiveColor="fg"
+            />
+            <Common.LinkItem
+              href="http://vsports.me/"
+              title="vSports"
+              titleActiveColor="fg"
+              textStyle="semiBold6"
+              titlePassiveColor="fg"
+            />
+            <Common.LinkItem
+              href="http://impakt.com/contact"
+              title="Contact Us"
+              titleActiveColor="fg"
+              textStyle="semiBold6"
+              titlePassiveColor="fg"
+            />
+          </Box>
           <HStack
             justify="flex-end"
             align="center"
-            w="full"
+            w="auto"
             spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
           >
-            <HStack w="full" display="flex" justifyContent="space-between" alignItems="center">
-              <Box display="flex" ml="0 !important" justifyContent="center" w="full">
+            <HStack w="auto" display="flex" justifyContent="flex-end" alignItems="center">
+              <Box display="flex" ml="0 !important" justifyContent="center" w="auto">
                 {/* <NavBarLink IsHeader /> */}
                 <NavBarSocialIcons />
               </Box>
               <HStack
                 justify={{ base: 'center', md: 'flex-end' }}
                 spacing="8px"
-                pl={{ base: '64px' }}
+                pl={{ base: '16px' }}
               >
                 <Box
                   display="flex"
