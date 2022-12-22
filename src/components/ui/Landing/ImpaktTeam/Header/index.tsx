@@ -46,7 +46,7 @@ const ImpaktTeamHeader: React.FC = () => {
                 margin="auto"
                 mb="15px"
               >
-                The Industry experts defining vSports.
+                The industry experts defining vSports.
               </Text>
             </Box>
           </VStack>
