@@ -159,9 +159,9 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
               }}
               as="a"
               target="_blank"
-              href={Socials.discord}
+              href={Socials.insta}
             >
-              <I.DiscordIcon />
+              <I.InstagramBigIcon />
             </Box>
             <Box
               color="rgba(255,255,255,0.5)"
