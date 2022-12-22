@@ -183,12 +183,12 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
                             Get The App
                           </Common.ImpaktButton>
                         </Box>
-                        <Box onClick={() => navigate('/register')}>
-                          <Common.ImpaktButton variant="black" gap="8px" padding="10px 14px">
-                            {/* {t(Keys.footer.downloadApp)} */}
-                            <I.NotifyIcon width="16px" />I Want Updates
-                          </Common.ImpaktButton>
-                        </Box>
+                        {/* <Box onClick={() => navigate('/register')}> */}
+                        {/* <Common.ImpaktButton variant="black" gap="8px" padding="10px 14px"> */}
+                        {/* {t(Keys.footer.downloadApp)} */}
+                        {/* <I.NotifyIcon width="16px" />I Want Updates */}
+                        {/* </Common.ImpaktButton> */}
+                        {/* </Box> */}
                       </Box>
                     </HStack>
                   </HStack>
