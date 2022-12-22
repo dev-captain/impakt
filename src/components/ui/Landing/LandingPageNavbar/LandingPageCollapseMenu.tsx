@@ -60,7 +60,8 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         <NavbarLinkItem
           isSmall
           hide
-          href="/"
+          type="LINK"
+          href="http://community.impakt.com"
           onClose={onClose}
           isActive={path.path === ''}
           title={t(Keys.navbar.impaktFitness)}
@@ -84,7 +85,8 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         />
         <NavbarLinkItem
           isSmall
-          href="/contact"
+          type="LINK"
+          href="http://impakt.com/contact"
           onClose={onClose}
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
