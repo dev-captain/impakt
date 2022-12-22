@@ -9,6 +9,9 @@ interface FitnessJourneyCardProps {
 const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, children }) => {
   return (
     <Box
+      as="a"
+      href="https://vsports.me/"
+      title="vSports Fitness World"
       w="full"
       display="flex"
       backgroundColor="#fff"
