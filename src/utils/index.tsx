@@ -169,12 +169,12 @@ export const truncateString = (str: string, max: number) => {
   return str;
 };
 export const getTimeDifference = (validFrom: string, validUntil: string) => {
-  if (validFrom.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
-  if (validUntil.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
+  if (validFrom.length === 0) return { d: '00', h: '00', m: '00', s: '00' };
+  if (validUntil.length === 0) return { d: '00', h: '00', m: '00', s: '00' };
 
   const isValidDate = Day.fromString(validFrom).time < Day.now().time;
 
-  if (!isValidDate) return { d: '0', h: '0', m: '0', s: '0' };
+  if (!isValidDate) return { d: '00', h: '00', m: '00', s: '00' };
 
   return compareDateWithNow(validUntil);
 };
@@ -239,6 +239,11 @@ const exerciseNameCorrection = (exerciseName: string) => {
   if (exerciseName === 'High Knee') return 'High Knees';
   if (exerciseName === 'No Action') return 'Rest';
   if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
+  if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
+  if (exerciseName === 'Cross Punch') return 'Cross Punches';
+  if (exerciseName === 'Standing Kick') return 'Standing Kicks';
+  if (exerciseName === 'Standing Crunch Knee') return 'Standing Knee Crunches';
+  if (exerciseName === 'Standing Crunch Leg') return 'Standing Leg Crunches';
 
   return exerciseName;
 };

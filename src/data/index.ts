@@ -76,12 +76,13 @@ export const Videos = {
 };
 
 export const Socials = {
-  facebook: '',
+  facebook: 'https://www.facebook.com/impakt.vsports',
   youtube: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw',
-  twitter: 'https://twitter.com/impaktlife',
+  twitter: 'https://twitter.com/impakt_vsports',
   discord: 'https://discord.gg/eVQJ8XRa9S',
-  tiktok: 'http://tiktok.com/@impaktlife',
-  insta: 'https://www.instagram.com/impakt.life/',
+  tiktok: 'http://www.tiktok.com/@impakt.vsports',
+  insta: 'https://www.instagram.com/impakt.vsports/',
+  linkedin: 'https://www.linkedin.com/company/impaktlife/',
 };
 
 export const Categories = [
@@ -580,7 +581,7 @@ export const ChallengeTab: ChallengeTabs[] = [
 export const GroupSettingsMemberTabs = ['General'];
 
 export const GroupSettingTab = [
-  'Edit group',
+  // 'Edit group',
   'Permissions',
   'General',
   // 'Requests',

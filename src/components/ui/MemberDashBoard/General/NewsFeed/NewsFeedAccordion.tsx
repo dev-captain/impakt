@@ -5,6 +5,7 @@ import { I } from 'components';
 import { useNavigate } from 'react-router-dom';
 import NewsFeedItem from './NewsFeedItem';
 import routes from '../../../../../data/routes';
+import { Socials } from '../../../../../data';
 // import truncH from 'trunc-html';
 // import { usePersistedDiscourseStore } from '../../../../lib/zustand';
 
@@ -13,18 +14,18 @@ import routes from '../../../../../data/routes';
 const NewsFeedAccordion: React.FC = () => {
   const navigate = useNavigate();
   const socialMedias = [
-    { id: 1, bg: '#29323B', icon: <I.TiktokBigIcon />, href: 'https://www.tiktok.com/@impaktlife' },
+    { id: 1, bg: '#29323B', icon: <I.TiktokBigIcon />, href: Socials.tiktok },
     {
       id: 2,
       bg: 'linear-gradient(45deg, #EE0016 0.33%, #D20067 50.65%, #C0009F 100.33%);',
       icon: <I.InstagramBigIcon />,
-      href: 'https://www.instagram.com/impakt.life/',
+      href: Socials.insta,
     },
     {
       id: 3,
       bg: '#F04153',
       icon: <I.YoutubeBigIcon />,
-      href: 'https://www.youtube.com/channel/UCxQBnTaxPdlmxMEfPwOuBPw/featured',
+      href: Socials.youtube,
     },
     // {
     //   id: 4,
@@ -36,19 +37,19 @@ const NewsFeedAccordion: React.FC = () => {
       id: 5,
       bg: '#36B9FF',
       icon: <I.TwitterBigIcon />,
-      href: 'https://twitter.com/impakt_life',
+      href: Socials.twitter,
     },
     {
       id: 7,
       bg: '#1877F2',
       icon: <I.FacebookBigIcon />,
-      href: 'https://www.facebook.com/ImpaktFitnessGamified/',
+      href: Socials.facebook,
     },
     {
       id: 8,
       bg: '#0A66C2',
       icon: <I.LinkedInBigIcon />,
-      href: 'https://www.linkedin.com/company/impaktlife/',
+      href: Socials.linkedin,
     },
   ];
 
