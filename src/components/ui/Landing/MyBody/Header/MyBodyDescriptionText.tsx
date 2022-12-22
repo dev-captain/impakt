@@ -1,18 +1,15 @@
 import * as React from 'react';
 import { Text } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
 
 const MyBodyDescriptionText: React.FC = () => {
-  const { t } = useTranslation(`default`).i18n;
-
   return (
     <>
       <Text color="#1C1C28" fontWeight="500">
-        {t(Keys.impaktGamesHero.body)}
+        Have fun, break a sweat, break the ice, meet new people and get in the best shape of your
+        life. Right now.
       </Text>
-      <Text color="#1C1C28" fontWeight="500" maxWidth="618px">
-        {t(Keys.impaktGamesHero.body1)}
+      <Text color="#1C1C28" mt="1.5em" fontWeight="700">
+        The best fun you ever had.
       </Text>
     </>
   );
