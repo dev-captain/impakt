@@ -30,7 +30,7 @@ const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          Welcome to your new Group
+          Welcome to your new group
           <CloseIcon
             w={3}
             h={3}
