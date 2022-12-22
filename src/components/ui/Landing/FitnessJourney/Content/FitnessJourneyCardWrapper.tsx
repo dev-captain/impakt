@@ -36,7 +36,7 @@ const journeyData = [
     ),
   },
   {
-    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Social+Fitness+With+Friends.mp4',
+    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Social+Fitness+with+Friends.mp4',
     title: 'Social Fitness with Friends',
     description: (
       <Text color="#1C1C28" maxWidth="280px">
@@ -45,7 +45,8 @@ const journeyData = [
     ),
   },
   {
-    video: 'https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Not+Too+Busy+For+Lazy+Fitness.mp4',
+    video:
+      'https://impakt-static-files.s3.amazonaws.com/landing-page/Not+too+busy+for+lazy+fitness.mp4',
     title: 'Not Too Busy for Lazy Fitness',
     description: (
       <Text color="#1C1C28" maxWidth="280px">
