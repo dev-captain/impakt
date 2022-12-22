@@ -1,11 +1,19 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { Box } from '@chakra-ui/react';
 import * as React from 'react';
+import { OverViewScreenTypes } from '../../../../../../../context/EventCalendarContext';
 import ChallengeModalHeadlineText from './ChallengeModalHeadlineText';
 
 interface ChallengeModalHeaderPropsI {
   showGoBackIcon: boolean;
-  currentScreen: 'select' | 'create' | 'preview' | 'preview-routine' | 'create-challenge-form';
+  currentScreen:
+    | 'select'
+    | 'create'
+    | 'preview'
+    | 'preview-routine'
+    | 'create-challenge-form'
+    | 'create-event-form'
+    | OverViewScreenTypes;
   previewHeaderText: string;
   createPreviewHeaderText: string;
   goBackOnClick: () => void;
