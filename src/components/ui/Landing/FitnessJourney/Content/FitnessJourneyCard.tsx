@@ -10,6 +10,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
   return (
     <Box
       as="a"
+      target="_blank"
       href="https://vsports.me/"
       title="vSports Fitness World"
       w="full"
