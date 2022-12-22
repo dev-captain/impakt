@@ -82,7 +82,7 @@ export const Socials = {
   discord: 'https://discord.gg/eVQJ8XRa9S',
   tiktok: 'http://www.tiktok.com/@impakt.vsports',
   insta: 'https://www.instagram.com/impakt.vsports/',
-  linkedin: 'https://www.linkedin.com/company/impaktlife/',
+  linkedin: 'https://linkedin.com/company/impakt-vsports',
 };
 
 export const Categories = [
