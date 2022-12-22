@@ -20,7 +20,7 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   const [inputValue, setInput] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setInput(e.target.value);
-    const filterVal = e.target.value.toLowerCase();
+    const filterVal = e.target.value;
     setSearchGroup(filterVal);
     // setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
     // const result = members.filter((member) =>
@@ -30,7 +30,7 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   };
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Groupname',
+      placeholder: 'Search',
       onChange,
       type: 'text',
       name: 'Groupname',
