@@ -10,4 +10,5 @@ export { default as useForm } from 'hooks/useForm';
 export { default as usePascalCase } from 'hooks/usePascalCase';
 export { default as useNormalizeError } from 'hooks/useNormalizeError';
 export { default as useDebounce } from 'hooks/useDebounce';
+export { default as useSearchString } from 'hooks/useSearchString';
 export { useLogout } from 'hooks/useLogout';

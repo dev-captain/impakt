@@ -2,7 +2,7 @@ import { Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Common } from 'components';
-
+import { useSearchString } from 'hooks';
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
 
@@ -20,22 +20,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
   const isPrivate = status === 'Private';
   const navigate = useNavigate();
   const { exploreGroups } = usePersistedGroupStore();
-  const checkString = (groupname, filterVal) => {
-    let res = 0;
-    let lastSearch = -1;
-    for (let i = 0; i < filterVal.length; i += 1) {
-      for (let j = lastSearch + 1; j < groupname.length; j += 1) {
-        if (groupname[j] === filterVal[i]) {
-          res += 1;
-          lastSearch = j;
-          break;
-        }
-      }
-    }
-    if (res === filterVal.length) return true;
-
-    return false;
-  };
+  const { checkString } = useSearchString();
   const exploreGroup = exploreGroups.filter(
     // eslint-disable-next-line no-underscore-dangle
     (d) => d.private === isPrivate && checkString(d.groupName, searchGroup),

@@ -9,7 +9,6 @@ import ExploreGroupCardPrivatePublicToggleButton from './ExploreGroupCardPrivate
 interface ExploreGroupCardWrapperHeaderPropsI {
   status: 'Public' | 'Private';
   setStatus: (status: 'Public' | 'Private') => void;
-  // searchGroup: string;
   setSearchGroup: (string) => void;
 }
 const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
@@ -22,11 +21,6 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
     setInput(e.target.value);
     const filterVal = e.target.value;
     setSearchGroup(filterVal);
-    // setValue(e.target.name as any, e.target.value as any, { shouldValidate: true });
-    // const result = members.filter((member) =>
-    //   checkString(member.User.username.toLowerCase(), filterVal),
-    // );
-    // setSearchedMembers(result);
   };
   const inputItems: InputGroupPropsI[] = [
     {
@@ -34,23 +28,11 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
       onChange,
       type: 'text',
       name: 'Groupname',
-      // errorMsg: errors?.username?.message,
       leftIcon: <I.SearchIcon color="#29323B" width="20px" height="20px" />,
       autoFocus: true,
       whiteMode: true,
       width: '100%',
       value: inputValue,
-      // rightIcon: (
-      //   <I.CloseIcon
-      //     color="#29323B"
-      //     width="20px"
-      //     height="20px"
-      //     style={{ borderRadius: '50px', backgroundColor: '#91A8BD', fill: '#ffffff' }}
-      //     onClick={() => {
-      //       setInput('');
-      //     }}
-      //   />
-      // ),
     },
   ];
   return (
