@@ -86,7 +86,8 @@ const LandingPageNavbar: FC = () => {
             justifyContent="space-between"
           >
             <Common.LinkItem
-              href="http://community.impakt.com/"
+              isNavigate
+              href="d/g/12"
               title="Social Fitness"
               titleActiveColor="fg"
               textStyle="semiBold6"
@@ -100,7 +101,8 @@ const LandingPageNavbar: FC = () => {
               titlePassiveColor="fg"
             />
             <Common.LinkItem
-              href="http://impakt.com/contact"
+              href={routes.contact}
+              isNavigate
               title="Contact Us"
               titleActiveColor="fg"
               textStyle="semiBold6"
