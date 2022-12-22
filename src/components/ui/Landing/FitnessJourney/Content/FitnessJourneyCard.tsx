@@ -4,10 +4,9 @@ import { Text, Box } from '@chakra-ui/react';
 interface FitnessJourneyCardProps {
   video: string;
   title: string;
-  description: string;
 }
 
-const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, description }) => {
+const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, children }) => {
   return (
     <Box
       w="full"
@@ -49,9 +48,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, d
           >
             {title}
           </Text>
-          <Text color="#1C1C28" maxWidth="280px">
-            {description}
-          </Text>
+          {children}
         </Box>
       </Box>
     </Box>
