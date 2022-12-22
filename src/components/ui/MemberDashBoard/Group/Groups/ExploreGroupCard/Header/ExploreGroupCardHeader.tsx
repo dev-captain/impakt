@@ -37,8 +37,15 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   ];
   return (
     <GroupCardWrapperHeader title="Explore">
-      <Box display="flex" justifyContent="flex-end" alignItems="center">
-        <Box display="flex" mr="20px">
+      <Box
+        display="flex"
+        flexDir={{ base: 'column-reverse', sm: 'row' }}
+        justifyContent="flex-end"
+        alignItems="center"
+        w={{ base: '100%' }}
+        // alignItems={{ base: 'flex-end', sm: 'center' }}
+      >
+        <Box display="flex" mr={{ base: '0', sm: '20px' }} w={{ base: '282px', sm: 'auto' }}>
           <Common.InputItems inputItems={inputItems} />
         </Box>
         <Box m="20px 0 !important">
