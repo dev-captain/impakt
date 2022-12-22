@@ -1,11 +1,7 @@
 import * as React from 'react';
 import { Text } from '@chakra-ui/react';
-import keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
 
 const AthletesDescriptionText: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
   return (
     <Text
       color="#1C1C28"

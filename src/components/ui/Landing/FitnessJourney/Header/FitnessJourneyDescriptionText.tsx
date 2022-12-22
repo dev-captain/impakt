@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { Text } from '@chakra-ui/react';
-import keys from 'i18n/types';
-
-import { useTranslation } from 'react-i18next';
 
 const FitnessJourneyDescriptionText: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
   return (
     <Text
       margin="auto"

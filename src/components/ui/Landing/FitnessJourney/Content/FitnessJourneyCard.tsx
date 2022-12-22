@@ -10,7 +10,7 @@ interface FitnessJourneyCardProps {
 const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, description }) => {
   return (
     <Box
-      width={{ md: 'auto', base: '100%' }}
+      w="full"
       display="flex"
       backgroundColor="#fff"
       borderRadius="14px"
