@@ -65,7 +65,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           alignItems="flex-start"
           mt="0 !important"
           w="full"
-          minH={{ sm: 'calc(50vh)', lg: '100vh' }}
+          minH={{ sm: 'calc(50vh)', lg: 'calc(100vh - 80px)' }}
           id="hstack"
         >
           {/* Left Aside Desktop  */}

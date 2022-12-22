@@ -13,8 +13,8 @@ const GroupError: React.FC<{ isError: string }> = (props) => {
     <Box
       display="flex"
       flexDir="column"
-      position={{ base: 'relative', lg: 'fixed' }}
-      h="2000px"
+      alignItems="center"
+      transform={{ lg: 'translateX(-5vw)' }}
       mb="50px"
     >
       <Box display="flex" position="relative" alignItems="center">
@@ -23,17 +23,21 @@ const GroupError: React.FC<{ isError: string }> = (props) => {
           bgClip="text"
           textStyle="ErrorText"
           position="absolute"
-          left={{ base: '6vw', md: '0' }}
+          left={{ base: '45px', sm: '30px', md: '0' }}
         >
           4
         </Text>
-        <Image src={Images.group.error} w="auto" h="auto" />
+        <Image
+          src={Images.group.error}
+          w={{ base: '350px', sm: '400px', md: '440px' }}
+          h={{ base: '200px', sm: '250px', md: '290px' }}
+        />
         <Text
           bgGradient="linear-gradient(90deg, #F04153 0%, #F27961 100%)"
           bgClip="text"
           textStyle="ErrorText"
           position="absolute"
-          right={{ base: '6vw', md: '10' }}
+          right={{ base: '45px', sm: '30px', md: '0' }}
         >
           4
         </Text>
@@ -46,7 +50,12 @@ const GroupError: React.FC<{ isError: string }> = (props) => {
       >
         {props.isError}
       </Text>
-      <Text textStyle={{ base: 'regular20', md: 'regular4' }} margin="auto" mt="48px" mb="24px">
+      <Text
+        textStyle={{ base: 'regular20', md: 'regular4' }}
+        textAlign="center"
+        mt={{ base: '30px', sm: '48px' }}
+        mb={{ base: '20px', sm: '24px' }}
+      >
         You are welcome to look around though:
       </Text>
       <Box display="flex" justifyContent="center">

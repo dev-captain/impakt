@@ -262,7 +262,7 @@ export default {
   ErrorText: {
     fontWeight: '500',
     // fontFamily: `Poppins ,${theme.fonts?.heading}`,
-    fontSize: { base: '35vw', sm: '200px', md: '300px' },
+    fontSize: { base: '100px', sm: '150px', md: '200px' },
     lineHeight: '360px',
   },
   accentGradient: {
