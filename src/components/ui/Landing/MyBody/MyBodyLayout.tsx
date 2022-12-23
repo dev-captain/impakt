@@ -16,6 +16,7 @@ const MyBodyLayout: React.FC = ({ children }) => {
       align="flex-start"
       justify="flex-start"
       removeTopPadding
+      minH="auto"
     >
       <LandingPageNavbar />
       <VStack w="full">

@@ -1,17 +1,35 @@
 import * as React from 'react';
 import { Text, Box } from '@chakra-ui/react';
+import { isMobile } from 'react-device-detect';
 
 interface FitnessJourneyCardProps {
   video: string;
   title: string;
+  description: string;
+  link: string;
 }
 
-const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, children }) => {
+const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
+  video,
+  title,
+  link,
+  description,
+}) => {
+  const videoRef = React.useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
+  const handleVideoStart = () => {
+    videoRef.current?.play();
+  };
+  const handleVideoStop = () => {
+    videoRef.current?.pause();
+  };
+
   return (
     <Box
+      onMouseOver={isMobile ? () => null : handleVideoStart}
+      onMouseLeave={isMobile ? () => null : handleVideoStop}
       as="a"
       target="_blank"
-      href="https://vsports.me/"
+      href={link}
       title="vSports Fitness World"
       w="full"
       display="flex"
@@ -26,16 +44,17 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
       <Box
         as="video"
         objectFit="fill"
-        // ref={videoRef}
+        ref={videoRef}
         top="0"
         left="0"
         w="100%"
-        height="30vh"
+        height={{ base: '200px', md: '15.625vw' }}
         borderRadius="20px"
-        autoPlay
+        autoPlay={isMobile}
         loop
         muted
         playsInline
+        boxShadow="dark"
         src={video}
       >
         <source src={video} type="video/mp4" />
@@ -51,7 +70,9 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
           >
             {title}
           </Text>
-          {children}
+          <Text color="#1C1C28" maxWidth="300">
+            {description}
+          </Text>
         </Box>
       </Box>
     </Box>

@@ -63,7 +63,13 @@ const HeroVideo: React.FC = () => {
         {!isVideoEnded && (
           <>
             <HeroVideoText />
-            <SoundsButton onClick={handleMute} isOn={!sound} />
+            <SoundsButton
+              variant="transparent"
+              _focus={{}}
+              _hover={{}}
+              onClick={handleMute}
+              isOn={!sound}
+            />
           </>
         )}
       </Box>
