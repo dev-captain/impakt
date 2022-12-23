@@ -1,12 +1,12 @@
 import { Box } from '@chakra-ui/react';
-import { memo, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import SoundsButton from '../../HeroVideoSection/SoundsButton';
 
 const Source = styled.source``;
 
 const MyBodyVideo = () => {
-  const [volume, setVolume] = useState<string>('1');
+  const [volume, setVolume] = useState<string>('0.5');
   const videoRef = useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
   const [showButton, setShowButton] = useState(false);
   const [sound, setSound] = useState(true);
@@ -14,12 +14,19 @@ const MyBodyVideo = () => {
     setSound(!sound);
     if (!videoRef.current) return;
     videoRef.current.muted = !videoRef.current.muted;
+    setVolume(() => (!sound ? '0' : String(videoRef.current!.volume)));
   };
   const onVolumeChanges = (currentVolume: string) => {
     if (!videoRef.current) return;
     videoRef.current.volume = Number(currentVolume);
     setVolume(currentVolume);
   };
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = Number(volume);
+    }
+  }, []);
 
   return (
     <Box
