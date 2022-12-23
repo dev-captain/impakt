@@ -62,12 +62,13 @@ const MyBodyVideo = () => {
           w="full"
           transform="translate(-50%,-50%)"
         >
-          <SoundsButton onClick={() => null} isOn={!sound} />
+          <SoundsButton variant="black-orange" onClick={() => null} isOn={!sound} />
         </Box>
       )}
 
       {showButton && (
         <Box
+          onClick={(e) => e.stopPropagation()}
           id="hero-video-content-box"
           zIndex="20"
           position="absolute"
@@ -77,18 +78,28 @@ const MyBodyVideo = () => {
           w="full"
           transform="translate(-50%,-50%)"
         >
-          <input
-            value={volume}
-            onClick={(e) => e.stopPropagation()}
-            onChange={(e) => {
-              e.stopPropagation();
-              onVolumeChanges(e.currentTarget.value);
-            }}
-            min="0"
-            max="1"
-            type="range"
-            step="0.01"
-          />
+          <Box
+            bg="fg-1"
+            p={{ base: '0.3em', md: '1em' }}
+            borderRadius={{ base: '0.8em', md: '1em' }}
+            w="min-content"
+            display="flex"
+            _hover={{ bg: 'orangeGradient' }}
+            transition="all .4s linear"
+          >
+            <input
+              value={volume}
+              onClick={(e) => e.stopPropagation()}
+              onChange={(e) => {
+                e.stopPropagation();
+                onVolumeChanges(e.currentTarget.value);
+              }}
+              min="0"
+              max="1"
+              type="range"
+              step="0.01"
+            />
+          </Box>
         </Box>
       )}
     </Box>
