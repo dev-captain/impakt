@@ -18,9 +18,10 @@ import { I, Common } from 'components';
 
 import CollapseMenu from './LandingPageCollapseMenu';
 import DropDownProfileMenu from './LandingPageDropDownProfileMenu';
+import DropDownSocialMediaMenu from './LandingPageDropDownSocialMediaMenu';
 import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
-import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
+// import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import routes from '../../../../data/routes';
 
 // const { dark, light } = Images;
@@ -82,8 +83,9 @@ const LandingPageNavbar: FC = () => {
           <Box
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
             ml="0 !important"
-            w="300px"
+            w="500px"
             justifyContent="space-between"
+            alignItems="center"
           >
             <Common.LinkItem
               href="http://community.impakt.com/"
@@ -106,6 +108,9 @@ const LandingPageNavbar: FC = () => {
               textStyle="semiBold6"
               titlePassiveColor="fg"
             />
+            <Box position="relative" display="flex">
+              <DropDownSocialMediaMenu />
+            </Box>
           </Box>
           <HStack
             justify="flex-end"
@@ -115,10 +120,9 @@ const LandingPageNavbar: FC = () => {
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
           >
             <HStack w="auto" display="flex" justifyContent="flex-end" alignItems="center">
-              <Box display="flex" ml="0 !important" justifyContent="center" w="auto">
-                {/* <NavBarLink IsHeader /> */}
+              {/* <Box display="flex" ml="0 !important" justifyContent="center" w="auto">
                 <NavBarSocialIcons />
-              </Box>
+              </Box> */}
               <HStack
                 justify={{ base: 'center', md: 'flex-end' }}
                 spacing="8px"
