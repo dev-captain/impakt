@@ -6,6 +6,7 @@ import SoundsButton from '../../HeroVideoSection/SoundsButton';
 const Source = styled.source``;
 
 const MyBodyVideo = () => {
+  const [volume, setVolume] = useState<string>('1');
   const videoRef = useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
   const [showButton, setShowButton] = useState(false);
   const [sound, setSound] = useState(true);
@@ -14,38 +15,13 @@ const MyBodyVideo = () => {
     if (!videoRef.current) return;
     videoRef.current.muted = !videoRef.current.muted;
   };
-  // const [showPlayButton, setShowPlayButton] = React.useState(false);
-  // const [isVideoPaused, setIsVideoPaused] = React.useState(false);
-  // const videoRef = useRef<null | (HTMLDivElement & HTMLVideoElement)>(null);
-  // const stopStartToggle = () => {
-  //   if (!videoRef.current) return;
-  //   if (videoRef.current.paused) {
-  //     videoRef.current.play();
-  //     setIsVideoPaused(false);
-  //   } else {
-  //     videoRef.current.pause();
-  //     setIsVideoPaused(true);
-  //   }
-  // };
+  const onVolumeChanges = (currentVolume: string) => {
+    if (!videoRef.current) return;
+    videoRef.current.volume = Number(currentVolume);
+    setVolume(currentVolume);
+  };
 
   return (
-    // <Box
-    //   position="relative"
-    //   // onClick={stopStartToggle}
-    //   // onMouseLeave={() => setShowPlayButton(false)}
-    //   // onMouseOver={() => setShowPlayButton(true)}
-    // >
-    //   <Box
-    //     zIndex={99999}
-    //     // opacity={showPlayButton ? '1' : '0'}
-    //     top="50%"
-    //     left="50%"
-    //     transform="translate(-50%,-50%)"
-    //     transition="all .2s linear"
-    //     position="absolute"
-    //   >
-    //     {isVideoPaused ? <I.WhitePlay /> : <I.StopIcon />}
-    //   </Box>
     <Box
       position="relative"
       onClick={handleMute}
@@ -87,6 +63,32 @@ const MyBodyVideo = () => {
           transform="translate(-50%,-50%)"
         >
           <SoundsButton onClick={() => null} isOn={!sound} />
+        </Box>
+      )}
+
+      {showButton && (
+        <Box
+          id="hero-video-content-box"
+          zIndex="20"
+          position="absolute"
+          bottom="0"
+          left="50%"
+          px="1em"
+          w="full"
+          transform="translate(-50%,-50%)"
+        >
+          <input
+            value={volume}
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => {
+              e.stopPropagation();
+              onVolumeChanges(e.currentTarget.value);
+            }}
+            min="0"
+            max="1"
+            type="range"
+            step="0.01"
+          />
         </Box>
       )}
     </Box>
