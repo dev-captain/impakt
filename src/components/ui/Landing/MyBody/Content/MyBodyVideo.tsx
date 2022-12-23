@@ -46,7 +46,7 @@ const MyBodyVideo = () => {
         boxShadow="dark"
       >
         <Source
-          src="https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Vsport+Website+video+v1.3.mp4"
+          src="https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Vsport+Website+Video.mp4"
           type="video/mp4"
         />
       </Box>
@@ -54,7 +54,7 @@ const MyBodyVideo = () => {
       {showButton && (
         <Box
           id="hero-video-content-box"
-          zIndex="20"
+          zIndex="0"
           position="absolute"
           top={{ base: '36%', md: '50%' }}
           left="50%"
@@ -70,7 +70,7 @@ const MyBodyVideo = () => {
         <Box
           onClick={(e) => e.stopPropagation()}
           id="hero-video-content-box"
-          zIndex="20"
+          zIndex="0"
           position="absolute"
           bottom="0"
           left="50%"
