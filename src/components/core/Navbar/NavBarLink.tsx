@@ -15,7 +15,7 @@ const NavbarLink = () => {
 
   return (
     <>
-      <Common.LinkItem
+      <Common.NavBarLinkItem
         href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
         title="Social Fitness"
         isActive={path.pathname === ''}
@@ -23,13 +23,13 @@ const NavbarLink = () => {
         titlePassiveColor={textColor}
         isNavigate={isProduction}
       />
-      <Common.LinkItem
+      <Common.NavBarLinkItem
         title="vSports"
         href="http://vsports.me/"
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
       />
-      <Common.LinkItem
+      <Common.NavBarLinkItem
         href={routes.contact}
         title={t(Keys.navbar.contactUs)}
         isActive={path.pathname === 'contact'}

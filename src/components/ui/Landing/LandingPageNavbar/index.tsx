@@ -83,35 +83,35 @@ const LandingPageNavbar: FC = () => {
           <Box
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
             ml="0 !important"
-            w="500px"
+            w="700px"
             justifyContent="space-between"
             alignItems="center"
           >
-            <Common.LinkItem
+            <Common.NavBarLinkItem
               href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
               title="Social Fitness"
-              titleActiveColor="fg"
-              textStyle="semiBold6"
+              titleActiveColor="white"
               titlePassiveColor="fg"
+              textStyle="semiBold6"
               isNavigate={isProduction}
             />
-            <Common.LinkItem
+            <Common.NavBarLinkItem
               href="http://vsports.me/"
               title="vSports"
-              titleActiveColor="fg"
+              titleActiveColor="white"
               textStyle="semiBold6"
               titlePassiveColor="fg"
             />
-            <Common.LinkItem
+            <Common.NavBarLinkItem
               href={routes.contact}
               isNavigate
               title="Contact Us"
-              titleActiveColor="fg"
+              titleActiveColor="white"
               textStyle="semiBold6"
               titlePassiveColor="fg"
             />
-            <Box position="relative" display="flex">
-              <DropDownSocialMediaMenu />
+            <Box>
+              <DropDownSocialMediaMenu iconColor="rgba(28, 28, 40, 0.65)" bgColor="white" />
             </Box>
           </Box>
           <HStack
@@ -122,9 +122,6 @@ const LandingPageNavbar: FC = () => {
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
           >
             <HStack w="auto" display="flex" justifyContent="flex-end" alignItems="center">
-              {/* <Box display="flex" ml="0 !important" justifyContent="center" w="auto">
-                <NavBarSocialIcons />
-              </Box> */}
               <HStack
                 justify={{ base: 'center', md: 'flex-end' }}
                 spacing="8px"
