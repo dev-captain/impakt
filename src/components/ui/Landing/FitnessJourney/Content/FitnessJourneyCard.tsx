@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text, Box } from '@chakra-ui/react';
+import { isMobile } from 'react-device-detect';
 
 interface FitnessJourneyCardProps {
   video: string;
@@ -7,8 +8,26 @@ interface FitnessJourneyCardProps {
 }
 
 const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, children }) => {
+  const videoRef = React.useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
+  const handleVideoStart = () => {
+    videoRef.current?.play();
+  };
+  const handleVideoStop = () => {
+    videoRef.current?.pause();
+  };
+
+  // useEffect(() => {
+  //   first
+
+  //   return () => {
+  //     second
+  //   }
+  // }, [third])
+
   return (
     <Box
+      onMouseOver={isMobile ? () => null : handleVideoStart}
+      onMouseLeave={isMobile ? () => null : handleVideoStop}
       as="a"
       target="_blank"
       href="https://vsports.me/"
@@ -26,13 +45,13 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
       <Box
         as="video"
         objectFit="fill"
-        // ref={videoRef}
+        ref={videoRef}
         top="0"
         left="0"
         w="100%"
         height="30vh"
         borderRadius="20px"
-        autoPlay
+        autoPlay={isMobile}
         loop
         muted
         playsInline
