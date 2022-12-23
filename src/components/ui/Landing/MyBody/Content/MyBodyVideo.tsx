@@ -67,6 +67,7 @@ const MyBodyVideo = () => {
         loop
         muted
         playsInline
+        boxShadow="dark"
       >
         <Source
           src="https://d3mgxbfgxk1n2v.cloudfront.net/landing-page/Vsport+Website+video+v1.3.mp4"

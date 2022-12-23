@@ -55,6 +55,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
         loop
         muted
         playsInline
+        boxShadow="dark"
         src={video}
       >
         <source src={video} type="video/mp4" />
