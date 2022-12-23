@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuButton, MenuItem, useDisclosure, Box, MenuList } from '@chakra-ui/react';
+import { Menu, MenuButton, MenuItem, useDisclosure, MenuList, HStack, Box } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 // import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import { I } from 'components';
@@ -36,60 +36,58 @@ const DropDownSocialMediaMenu: React.FC<SocialIconProps> = ({ titleColor, bgColo
         <MenuItem
           isFocusable={false}
           borderRadius="8px"
-          flexDir="column"
-          justifyContent="space-between"
-          w="100%"
-          h="200px"
-          alignItems="center"
           _hover={{ bg: bgColor }}
+          justifyContent="center"
         >
-          <Box
-            me="16px !important"
-            _hover={{ transform: 'scale(1.25)' }}
-            as="a"
-            target="_blank"
-            href={Socials.insta}
-            color={iconColor}
-            transition="color .2s , transform 0.2s ease"
-          >
-            <I.IGIcon width="30px" height="30px" />
-          </Box>
+          <HStack display="flex" justifyContent="space-between" w="100%">
+            <Box
+              m="0px 8px !important"
+              _hover={{ color: { iconColor }, transform: 'scale(1.25)' }}
+              as="a"
+              target="_blank"
+              href={Socials.insta}
+              color={iconColor}
+              transition="color .2s , transform 0.2s ease"
+            >
+              <I.IGIcon width="20px" height="20px" />
+            </Box>
 
-          <Box
-            me="16px !important"
-            _hover={{ transform: 'scale(1.25)' }}
-            as="a"
-            target="_blank"
-            href={Socials.twitter}
-            color={iconColor}
-            transition="color .2s , transform 0.2s ease"
-          >
-            <I.TwitterIcon width="30px" height="30px" />
-          </Box>
+            <Box
+              m="0px 8px !important"
+              _hover={{ color: { iconColor }, transform: 'scale(1.25)' }}
+              as="a"
+              target="_blank"
+              href={Socials.twitter}
+              color={iconColor}
+              transition="color .2s , transform 0.2s ease"
+            >
+              <I.TwitterIcon width="20px" height="20px" />
+            </Box>
 
-          <Box
-            me="16px !important"
-            _hover={{ transform: 'scale(1.25)' }}
-            as="a"
-            target="_blank"
-            href={Socials.tiktok}
-            color={iconColor}
-            transition="color .2s , transform 0.2s ease"
-          >
-            <I.TikTokIcon width="30px" height="30px" />
-          </Box>
+            <Box
+              m="0px 8px !important"
+              _hover={{ color: { iconColor }, transform: 'scale(1.25)' }}
+              as="a"
+              target="_blank"
+              href={Socials.tiktok}
+              color={iconColor}
+              transition="color .2s , transform 0.2s ease"
+            >
+              <I.TikTokIcon width="20px" height="20px" />
+            </Box>
 
-          <Box
-            me="16px !important"
-            _hover={{ transform: 'scale(1.25)' }}
-            as="a"
-            target="_blank"
-            href={Socials.youtube}
-            color={iconColor}
-            transition="color .2s , transform 0.2s ease"
-          >
-            <I.YoutubeSocialIcon width="30px" height="30px" />
-          </Box>
+            <Box
+              m="0px 8px !important"
+              _hover={{ color: { iconColor }, transform: 'scale(1.25)' }}
+              as="a"
+              target="_blank"
+              href={Socials.youtube}
+              color={iconColor}
+              transition="color .2s , transform 0.2s ease"
+            >
+              <I.YoutubeSocialIcon width="20px" height="20px" />
+            </Box>
+          </HStack>
         </MenuItem>
       </MenuList>
     </Menu>
