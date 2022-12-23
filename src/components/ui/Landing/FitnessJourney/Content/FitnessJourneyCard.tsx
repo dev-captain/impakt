@@ -5,9 +5,16 @@ import { isMobile } from 'react-device-detect';
 interface FitnessJourneyCardProps {
   video: string;
   title: string;
+  description: string;
+  link: string;
 }
 
-const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, children }) => {
+const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
+  video,
+  title,
+  link,
+  description,
+}) => {
   const videoRef = React.useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
   const handleVideoStart = () => {
     videoRef.current?.play();
@@ -16,21 +23,13 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
     videoRef.current?.pause();
   };
 
-  // useEffect(() => {
-  //   first
-
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
-
   return (
     <Box
       onMouseOver={isMobile ? () => null : handleVideoStart}
       onMouseLeave={isMobile ? () => null : handleVideoStop}
       as="a"
       target="_blank"
-      href="https://vsports.me/"
+      href={link}
       title="vSports Fitness World"
       w="full"
       display="flex"
@@ -71,7 +70,9 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ video, title, c
           >
             {title}
           </Text>
-          {children}
+          <Text color="#1C1C28" maxWidth="300">
+            {description}
+          </Text>
         </Box>
       </Box>
     </Box>
