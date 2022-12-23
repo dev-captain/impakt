@@ -3,6 +3,8 @@ import Keys from 'i18n/types';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Common } from 'components';
+import { isProduction } from '../../../utils';
+import routes from '../../../data/routes';
 
 const NavbarLink = () => {
   const path = useLocation();
@@ -14,11 +16,12 @@ const NavbarLink = () => {
   return (
     <>
       <Common.LinkItem
-        href="http://community.impakt.com/"
+        href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
         title="Social Fitness"
         isActive={path.pathname === ''}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
+        isNavigate={isProduction}
       />
       <Common.LinkItem
         title="vSports"
@@ -27,11 +30,12 @@ const NavbarLink = () => {
         titlePassiveColor={textColor}
       />
       <Common.LinkItem
-        href="http://impakt.com/contact"
+        href={routes.contact}
         title={t(Keys.navbar.contactUs)}
         isActive={path.pathname === 'contact'}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
+        isNavigate
       />
     </>
   );
