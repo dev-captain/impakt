@@ -15,7 +15,7 @@ const FitnessJourneyLayout: React.FC = ({ children }) => {
         xl: '127px',
         '2xl': '0px',
       }}
-      minH="70vh"
+      minH="auto"
     >
       <VStack spacing="0px" px="16px" maxW="100%" w="full" color={textColor}>
         <VStack width="100%" p={{ lgx: '0 145px', lg: '0 50px' }}>

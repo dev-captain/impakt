@@ -48,7 +48,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
         top="0"
         left="0"
         w="100%"
-        height="30vh"
+        height={{ base: '200px', md: '15.625vw' }}
         borderRadius="20px"
         autoPlay={isMobile}
         loop
