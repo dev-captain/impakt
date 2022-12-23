@@ -234,18 +234,43 @@ export const convertToPascalCase = (label: string) => {
 };
 
 const exerciseNameCorrection = (exerciseName: string) => {
-  if (exerciseName === 'Squat') return 'Squats';
-  if (exerciseName === 'Side Lunge') return 'Side Lunges';
-  if (exerciseName === 'High Knee') return 'High Knees';
-  if (exerciseName === 'No Action') return 'Rest';
-  if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
-  if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
-  if (exerciseName === 'Cross Punch') return 'Cross Punches';
-  if (exerciseName === 'Standing Kick') return 'Standing Kicks';
-  if (exerciseName === 'Standing Crunch Knee') return 'Standing Knee Crunches';
-  if (exerciseName === 'Standing Crunch Leg') return 'Standing Leg Crunches';
+  const exercises = {
+    'No Action': 'Rest',
+    'Push Up': 'Push Ups',
+    'KneePush Up': 'Knee Push Ups',
+    'Sit Up': 'Sit Ups',
+    Squat: 'Squats',
+    'Squat Hold': 'Squat Hold',
+    'Elbow Plank': 'Elbow Plank',
+    'Elbow PlankHold': 'Elbow Plank Hold',
+    'Leg Raise': 'Leg Raises',
+    'Glute Bridge': 'Glute Bridges',
+    'Jumping Jack': 'Jumping Jacks',
+    'High Knee': 'High Knees',
+    Stretch: 'Stretch',
+    'Stretch Hold': 'Stretch Hold',
+    'Forward Lunge': 'Forward Lunges',
+    Burpee: 'Burpees',
+    'Side Lunge': 'Side Lunges',
+    'Glute Bridge Hold': 'Glute Bridge Holds',
+    'Walk Out': 'Walk Outs',
+    'Feet Tap Left': 'Left Foot Taps',
+    'Feet Tap Right': 'Right Foot Taps',
+    'Cross Feet Tap Front': 'Cross Foot Taps',
+    'Cross Feet Tap Back': 'Back Cross Foot Taps',
+    'Cross Punch': 'Cross Punches',
+    'Standing CrunchKnee': 'Standing Knee Crunches',
+    'Standing CrunchLeg': 'Standing Leg Crunches',
+    'Standing Kick': 'Standing Kicks',
+    'Bicycle Crunch': 'Bicycle Crunches',
+    'Kick Back': 'Kickbacks',
+    'Mountain Climber': 'Mountain Climbers',
+    Windmill: 'Windmills',
+    'Plank UpDown': 'Up Down Planks',
+  };
+  const convertedExerciseName = exercises[exerciseName] ?? exerciseName;
 
-  return exerciseName;
+  return convertedExerciseName;
 };
 
 export const normalizeExerciseNames = (routines: GetTimelineBlockRes[]) => {
