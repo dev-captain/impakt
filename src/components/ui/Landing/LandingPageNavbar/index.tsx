@@ -12,7 +12,7 @@ import {
   // PositionProps,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { parsePathname } from 'utils';
+import { isProduction, parsePathname } from 'utils';
 
 import { I, Common } from 'components';
 
@@ -86,12 +86,12 @@ const LandingPageNavbar: FC = () => {
             justifyContent="space-between"
           >
             <Common.LinkItem
-              isNavigate
-              href="d/g/12"
+              href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
               title="Social Fitness"
               titleActiveColor="fg"
               textStyle="semiBold6"
               titlePassiveColor="fg"
+              isNavigate={isProduction}
             />
             <Common.LinkItem
               href="http://vsports.me/"
