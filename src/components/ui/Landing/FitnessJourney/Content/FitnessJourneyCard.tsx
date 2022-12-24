@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Text, Box } from '@chakra-ui/react';
-import { isMobile } from 'react-device-detect';
 
 interface FitnessJourneyCardProps {
   video: string;
@@ -15,18 +14,8 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
   link,
   description,
 }) => {
-  const videoRef = React.useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
-  const handleVideoStart = () => {
-    videoRef.current?.play();
-  };
-  const handleVideoStop = () => {
-    videoRef.current?.pause();
-  };
-
   return (
     <Box
-      onMouseOver={isMobile ? () => null : handleVideoStart}
-      onMouseLeave={isMobile ? () => null : handleVideoStop}
       as="a"
       target="_blank"
       href={link}
@@ -44,13 +33,13 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
       <Box
         as="video"
         objectFit="fill"
-        ref={videoRef}
+        // ref={videoRef}
         top="0"
         left="0"
         w="100%"
         height={{ base: '200px', md: '15.625vw' }}
         borderRadius="20px"
-        autoPlay={isMobile}
+        autoPlay
         loop
         muted
         playsInline
