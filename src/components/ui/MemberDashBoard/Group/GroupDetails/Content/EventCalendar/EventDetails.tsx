@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { I } from 'components';
 
 import { deepLinkToApp } from '../../../../../../../data';
 import {
@@ -18,12 +19,16 @@ import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../.
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesControllerGetOne } from '../../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types';
+import ConformationModal from '../../Banner/Panel/GroupSettings/Tabs/GeneralSettings/ConfirmationModal';
+import { useCalendarEventControllerDeleteCalendarEvent } from '../../../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 
 const EventDetails: React.FC<{
   setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
 }> = ({ setActiveChallenge }) => {
+  const deleteEvent = useCalendarEventControllerDeleteCalendarEvent();
   const { member } = usePersistedAuthStore();
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const deleteConfirmationModal = useDisclosure();
 
   useEffect(() => {
     onOpen();
@@ -31,7 +36,8 @@ const EventDetails: React.FC<{
 
   const { activeGroup } = usePersistedGroupStore();
 
-  const { getSelectedDayEvent, goToOverViewScreen } = useEventCalendarContext();
+  const { getSelectedDayEvent, removeEvent, goToOverViewScreen, goBackToOverViewScreen } =
+    useEventCalendarContext();
 
   const eventObj = getSelectedDayEvent();
   if (!eventObj) return null;
@@ -106,40 +112,67 @@ const EventDetails: React.FC<{
 
   const myRank = memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-';
 
-  return (
-    <ActionPreviewModal
-      key="event-preview-modal"
-      actionPreview={{
-        exercices: normalizeExerciseNames(challange?.Routine?.TimelineBlocks ?? []),
-        leaderboard: sortLeaderboardByScore ?? [],
-        playedMins: challange?.Routine.estimatedTime
-          ? // eslint-disable-next-line no-unsafe-optional-chaining
-            Math.ceil(challange?.Routine.estimatedTime! / 60)
-          : 0,
-        subtitle: truncateString(`${challange?.name ?? '???'}`, 23),
-        validUntil: eventObj.time.end.toISOString(),
-        title: JSON.parse(eventObj.data).title ?? '',
-        mode: 'join',
-        isEdit: JSON.parse(eventObj.data).creatorId === member?.id,
-        deepLinkToPlay: deepLink,
-        modalStatus: getStatus(),
-        myRank,
-        editButtonClick: () => {
-          if (challange) {
-            setActiveChallenge(challange);
-          }
-          goToOverViewScreen('update');
-          onClose();
+  const removeHandle = async () => {
+    if (!eventObj) return;
+    deleteEvent.mutate(
+      { eventId: eventObj.event.id },
+      {
+        onSuccess: () => {
+          removeEvent(eventObj.event);
         },
-        myBestScore,
-        isPlayedByMember: myRank !== '-',
-      }}
-      open={isOpen}
-      close={() => {
-        onClose();
-        goToOverViewScreen('first');
-      }}
-    />
+      },
+    );
+    // locally delete event
+  };
+
+  return (
+    <>
+      <ActionPreviewModal
+        key="event-preview-modal"
+        actionPreview={{
+          exercices: normalizeExerciseNames(challange?.Routine?.TimelineBlocks ?? []),
+          leaderboard: sortLeaderboardByScore ?? [],
+          playedMins: challange?.Routine.estimatedTime
+            ? // eslint-disable-next-line no-unsafe-optional-chaining
+              Math.ceil(challange?.Routine.estimatedTime! / 60)
+            : 0,
+          subtitle: truncateString(`${challange?.name ?? '???'}`, 23),
+          validUntil: eventObj.time.end.toISOString(),
+          title: JSON.parse(eventObj.data).title ?? '',
+          mode: 'join',
+          isEdit: JSON.parse(eventObj.data).creatorId === member?.id,
+          deepLinkToPlay: deepLink,
+          modalStatus: getStatus(),
+          myRank,
+          editButtonClick: () => {
+            if (challange) {
+              setActiveChallenge(challange);
+            }
+            goToOverViewScreen('update');
+            onClose();
+          },
+          deleteButtonClick: () => {
+            deleteConfirmationModal.onOpen();
+          },
+          myBestScore,
+          isPlayedByMember: myRank !== '-',
+        }}
+        open={isOpen}
+        close={() => {
+          console.log('run bro');
+          goBackToOverViewScreen();
+          onClose();
+        }}
+      />
+      <ConformationModal
+        buttonIcon={<I.TrashIcon />}
+        buttonTitle="Remove Event"
+        title="Are you sure? Event will be deleted"
+        close={deleteConfirmationModal.onClose}
+        open={deleteConfirmationModal.isOpen}
+        onClick={removeHandle}
+      />
+    </>
   );
 };
 export default EventDetails;

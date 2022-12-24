@@ -149,21 +149,14 @@ export const EventCalendarContextProvider: React.FC<{
 
   const goBackToOverViewScreen = () => {
     if (calendarOverViewScreen.length > 1) {
-      calendarOverViewScreen.pop();
-      setCalendarOverViewScreen([...calendarOverViewScreen]);
+      setCalendarOverViewScreen(['first']);
     }
     // side effect
     removeEventQueryFromLocation();
   };
 
   const removeEventQueryFromLocation = () => {
-    if (
-      eventQuery &&
-      (calendarOverViewScreen[calendarOverViewScreen.length - 1] === 'first' ||
-        calendarOverViewScreen[calendarOverViewScreen.length - 1] === 'remove')
-    ) {
-      navigate(location.pathname.substring(0, location.pathname.indexOf('/event')));
-    }
+    navigate(location.pathname.substring(0, location.pathname.indexOf('/event')));
   };
 
   const initCalendar = () => {
