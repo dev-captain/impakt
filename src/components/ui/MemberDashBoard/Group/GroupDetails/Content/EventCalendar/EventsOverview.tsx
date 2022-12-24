@@ -1,14 +1,19 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { Box, useDisclosure } from '@chakra-ui/react';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import ShowEvents from './ShowEvents';
 import RemoveEvent from './RemoveEvent';
-import EventModal from '../../Modal/EventModal';
+import ChallengeModal from '../../Modal/ChallengeModal/ChallengeModal';
+import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
+import ActionPreviewModal from '../../Modal/ActionPreviewModal';
+import EventDetails from './EventDetails';
 // import EventModify from './EventModify';
 
 const EventsOverview: React.FC = () => {
-  const { onClose, isOpen } = useDisclosure({ isOpen: true });
-  const { getCurrentOverviewScreen } = useEventCalendarContext();
+  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(null);
+  const { getCurrentOverviewScreen, goToOverViewScreen } = useEventCalendarContext();
   const screen = getCurrentOverviewScreen();
 
   return (
@@ -25,11 +30,25 @@ const EventsOverview: React.FC = () => {
       >
         {screen === 'empty' && null}
         {screen === 'first' && <ShowEvents />}
-        {/* {screen === 'create' && <EventModify title="Create event" type="create" />} */}
-        {/* {screen === 'update' && <EventModify title="Update event" type="update" />} */}
-        {screen === 'event' && (
-          <EventModal setActiveChallenge={() => null} open={isOpen} close={() => onClose} />
+        {screen === 'create' && (
+          <ChallengeModal
+            setActiveChallenge={setActiveChallenge}
+            initScreen="create-event"
+            close={() => goToOverViewScreen('first')}
+            open
+          />
         )}
+
+        {screen === 'update' && (
+          <ChallengeModal
+            setActiveChallenge={setActiveChallenge}
+            initScreen="update-challenge-event-form"
+            close={() => goToOverViewScreen('event')}
+            open
+          />
+        )}
+        {/* {screen === 'update' && <EventModify title="Update event" type="update" />} */}
+        {screen === 'event' && <EventDetails />}
         {screen === 'remove' && <RemoveEvent />}
       </Box>
     </Box>

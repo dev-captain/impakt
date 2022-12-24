@@ -28,8 +28,7 @@ const EventDetails: React.FC = () => {
 
   const { activeGroup } = usePersistedGroupStore();
 
-  const { getSelectedDayEvent, goBackToOverViewScreen, goToOverViewScreen } =
-    useEventCalendarContext();
+  const { getSelectedDayEvent, goToOverViewScreen } = useEventCalendarContext();
 
   const eventObj = getSelectedDayEvent();
   if (!eventObj) return null;
@@ -136,7 +135,7 @@ const EventDetails: React.FC = () => {
       open={isOpen}
       close={() => {
         onClose();
-        goBackToOverViewScreen();
+        goToOverViewScreen('first');
       }}
     />
   );

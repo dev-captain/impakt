@@ -56,6 +56,10 @@ export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
       {currentScreen === 'create-challenge-form' && activeTab === 'routine' && previewRoutine && (
         <ChallengeCreateFormFooter />
       )}
+
+      {currentScreen === 'create-challenge-event-form' &&
+        activeTab === 'routine' &&
+        previewRoutine && <ChallengeCreateFormFooter />}
     </>
   );
 };

@@ -26,16 +26,7 @@ interface EventCalendarContext {
 
 // eslint-disable-next-line no-redeclare
 const EventCalendarContext = createContext<EventCalendarContext | null>(null);
-export type OverViewScreenTypes =
-  | 'empty'
-  | 'first'
-  | 'create'
-  | 'event'
-  | 'remove'
-  | 'update'
-  | 'preview'
-  | 'preview-routine'
-  | 'select';
+export type OverViewScreenTypes = 'empty' | 'first' | 'create' | 'event' | 'remove' | 'update';
 
 export function useEventCalendarContext() {
   const context = useContext(EventCalendarContext);

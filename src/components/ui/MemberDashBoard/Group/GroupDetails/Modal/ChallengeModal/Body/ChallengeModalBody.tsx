@@ -88,8 +88,8 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
         <ChallengePreviewRoutineBody previewRoutine={previewRoutine.TimelineBlocks ?? []} />
       )}
 
-      {/* // CREATE CHALLENGE BODY  */}
-      {currentScreen === 'create' && activeTab === 'routine' && (
+      {/* // CREATE CHALLENGE & EVENT CHALLENGE BODY  */}
+      {(currentScreen === 'create' || currentScreen === 'create-event') && activeTab === 'routine' && (
         <ChallengeCreateBody
           routines={availableGroupRoutines}
           previewOnClick={(routine) => {
@@ -98,7 +98,12 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
           }}
           selectOnClick={(routine) => {
             setRoutinePreview(routine);
-            moveToNextScreen('create-challenge-form');
+            if (currentScreen === 'create') {
+              moveToNextScreen('create-challenge-form');
+            }
+            if (currentScreen === 'create-event') {
+              moveToNextScreen('create-challenge-event-form');
+            }
           }}
         />
       )}
@@ -107,6 +112,21 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
       {currentScreen === 'create-challenge-form' && activeTab === 'routine' && (
         <ChallengeCreateFormBody
           formCb={moveWithoutHistory}
+          previewOnClick={() => {
+            moveToNextScreen('preview-routine');
+          }}
+          replaceOnClick={() => {
+            setRoutinePreview(null);
+            moveToNextScreen('create');
+          }}
+          previewRoutine={previewRoutine}
+        />
+      )}
+
+      {/* // CREATE EVENT CHALLENGE BODY  */}
+      {currentScreen === 'create-challenge-event-form' && activeTab === 'routine' && (
+        <ChallengeCreateFormBody
+          formCb={onClose}
           previewOnClick={() => {
             moveToNextScreen('preview-routine');
           }}

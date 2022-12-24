@@ -24,22 +24,34 @@ import { ChallengeModalBody } from './Body/ChallengeModalBody';
 import { ChallengeModalHeaders } from './Headers/ChallengeModalHeaders';
 import { ChallengeModalFooters } from './Footers/ChallengeModalFooters';
 
-interface ChallengeModalProps {
-  open: boolean;
-  close: () => void;
-  setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
-}
 export type ChallengeModalScreens =
   | 'select'
   | 'preview'
   | 'create'
+  | 'create-event'
   | 'preview-routine'
-  | 'create-challenge-form';
+  | 'create-challenge-form'
+  | 'create-challenge-event-form'
+  | 'update-challenge-event-form';
 
-const ChallengeModal: React.FC<ChallengeModalProps> = ({ open, close, setActiveChallenge }) => {
+interface ChallengeModalProps {
+  open: boolean;
+  close: () => void;
+  setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
+  initScreen?: ChallengeModalScreens;
+}
+
+const ChallengeModal: React.FC<ChallengeModalProps> = ({
+  open,
+  close,
+  setActiveChallenge,
+  initScreen,
+}) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [activeTab, _] = React.useState<ChallengeTabs>('routine');
-  const [activeScreen, setActiveScreen] = React.useState<ChallengeModalScreens[]>(['select']);
+  const [activeScreen, setActiveScreen] = React.useState<ChallengeModalScreens[]>([
+    initScreen ?? 'select',
+  ]);
   const [previewChallenge, setPreviewChallenge] = React.useState<GetChallengeRes | null>(null);
   const [previewRouitine, setRoutinePreview] = React.useState<GetRoutineRes | null>(null);
 

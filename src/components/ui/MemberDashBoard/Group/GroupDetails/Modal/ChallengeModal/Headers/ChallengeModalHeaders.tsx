@@ -34,7 +34,11 @@ export const ChallengeModalHeaders: React.FC<ChallengeModalHeadersPropsI> = ({
           }}
         />
       )}
-      {currentScreen === 'create' && <ChallengeCreateHeader />}
+
+      {(currentScreen === 'create' || currentScreen === 'create-event') && (
+        <ChallengeCreateHeader />
+      )}
+
       {currentScreen === 'preview' && activeTab === 'routine' && (
         <ChallengePreviewHeader
           estTime={previewChallenge?.Routine.estimatedTime ?? 60}
