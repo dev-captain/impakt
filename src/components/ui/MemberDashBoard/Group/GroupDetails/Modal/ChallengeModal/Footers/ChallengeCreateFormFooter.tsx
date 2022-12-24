@@ -1,15 +1,22 @@
 import React from 'react';
 import { HStack, Box, Text } from '@chakra-ui/react';
 import { Common } from 'components';
+import { createEventFormName } from '../../../../../../../forms/groups/CreateEventForm';
+import { createChallengeFormName } from '../../../../../../../forms/groups/CreateChallengeForm';
 
-interface ChallengeCreateFormFooterPropsI {}
+interface ChallengeCreateFormFooterPropsI {
+  formName: typeof createEventFormName | typeof createChallengeFormName;
+}
 
-export const ChallengeCreateFormFooter: React.FC<ChallengeCreateFormFooterPropsI> = () => {
+export const ChallengeCreateFormFooter: React.FC<ChallengeCreateFormFooterPropsI> = ({
+  formName,
+}) => {
   return (
     <HStack w="full" justifyContent="flex-end">
       <Box>
         <Common.ImpaktButton
-          form="create-challenge-form"
+          form={formName}
+          // "create-challenge-form"
           variant="black"
           type="submit"
           padding="16px 48px"

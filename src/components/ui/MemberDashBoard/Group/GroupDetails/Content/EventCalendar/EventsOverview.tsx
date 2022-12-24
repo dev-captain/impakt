@@ -32,8 +32,8 @@ const EventsOverview: React.FC = () => {
         {screen === 'first' && <ShowEvents />}
         {screen === 'create' && (
           <ChallengeModal
+            initScreen="select-challenge-event"
             setActiveChallenge={setActiveChallenge}
-            initScreen="create-event"
             close={() => goToOverViewScreen('first')}
             open
           />
@@ -48,7 +48,7 @@ const EventsOverview: React.FC = () => {
           />
         )}
         {/* {screen === 'update' && <EventModify title="Update event" type="update" />} */}
-        {screen === 'event' && <EventDetails />}
+        {screen === 'event' && <EventDetails setActiveChallenge={setActiveChallenge} />}
         {screen === 'remove' && <RemoveEvent />}
       </Box>
     </Box>

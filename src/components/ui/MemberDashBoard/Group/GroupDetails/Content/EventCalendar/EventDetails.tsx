@@ -17,8 +17,11 @@ import ActionPreviewModal from '../../Modal/ActionPreviewModal';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesControllerGetOne } from '../../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
+import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types';
 
-const EventDetails: React.FC = () => {
+const EventDetails: React.FC<{
+  setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
+}> = ({ setActiveChallenge }) => {
   const { member } = usePersistedAuthStore();
   const { onOpen, isOpen, onClose } = useDisclosure();
 
@@ -46,10 +49,6 @@ const EventDetails: React.FC = () => {
   );
 
   const challange = findTheChallenge ?? fallbackChallengeFetch.data;
-
-  usePersistedChallengeStore().availableGroupChallenges.find(
-    (d) => d.id === JSON.parse(eventObj.data).challengeId,
-  );
 
   const deepLink = deepLinkToApp(activeGroup?.id, eventObj.event.id);
 
@@ -126,6 +125,9 @@ const EventDetails: React.FC = () => {
         modalStatus: getStatus(),
         myRank,
         editButtonClick: () => {
+          if (challange) {
+            setActiveChallenge(challange);
+          }
           goToOverViewScreen('update');
           onClose();
         },

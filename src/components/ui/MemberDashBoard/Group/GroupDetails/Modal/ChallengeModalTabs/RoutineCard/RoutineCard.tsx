@@ -3,47 +3,51 @@ import { Box, Text } from '@chakra-ui/react';
 import { truncateString } from '../../../../../../../../utils';
 import { GetRoutineRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types';
 import ChallengesCardScoreLabelsWrapper from '../ChallengesCard/ChallengesCardScoreLabelsWrapper';
+import { Common } from '../../../../../../..';
 
 interface RoutineCardProps {
   routine: GetRoutineRes;
+  showLabel?: boolean;
 }
 
-const RoutineCard: React.FC<RoutineCardProps> = ({ routine, children }) => {
+const RoutineCard: React.FC<RoutineCardProps> = ({ routine, children, showLabel = false }) => {
   return (
-    <Box
-      w="100%"
-      padding={{ base: '12px', md: '24px' }}
-      border="2px solid #EEF4F6"
-      borderRadius="24px"
-    >
+    <Box w="full">
+      {showLabel && <Common.InputLabel label="Selected Routine" whiteMode isSmallLabel />}
       <Box
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="space-between"
-        lineHeight={{ base: '35px', md: 0 }}
+        w="100%"
+        padding={{ base: '12px', md: '24px' }}
+        border="2px solid #EEF4F6"
+        borderRadius="24px"
       >
-        <Text color="#29323B" fontSize={{ base: '18px', md: '24px' }} fontWeight="600">
-          {truncateString(`${routine.name}`, 23)}
-        </Text>
-      </Box>
-      <Box
-        mt={{ base: '14px', md: '25px' }}
-        display="flex"
-        flexWrap="wrap"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <ChallengesCardScoreLabelsWrapper
-          estimationTimeScore={`${Math.ceil(routine.estimatedTime / 60)} min`}
-        />
         <Box
           display="flex"
           flexWrap="wrap"
-          alignItems="center"
-          gap="12px"
-          mt={{ base: '10px', md: 0 }}
+          justifyContent="space-between"
+          lineHeight={{ base: '35px', md: 0 }}
         >
-          {/* <Common.ImpaktButton
+          <Text color="#29323B" fontSize={{ base: '18px', md: '24px' }} fontWeight="600">
+            {truncateString(`${routine.name}`, 23)}
+          </Text>
+        </Box>
+        <Box
+          mt={{ base: '14px', md: '25px' }}
+          display="flex"
+          flexWrap="wrap"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <ChallengesCardScoreLabelsWrapper
+            estimationTimeScore={`${Math.ceil(routine.estimatedTime / 60)} min`}
+          />
+          <Box
+            display="flex"
+            flexWrap="wrap"
+            alignItems="center"
+            gap="12px"
+            mt={{ base: '10px', md: 0 }}
+          >
+            {/* <Common.ImpaktButton
             variant="black"
             color="#29323B"
             h="38px"
@@ -56,7 +60,8 @@ const RoutineCard: React.FC<RoutineCardProps> = ({ routine, children }) => {
           >
             <Text>Preview</Text>
           </Common.ImpaktButton> */}
-          {children}
+            {children}
+          </Box>
         </Box>
       </Box>
     </Box>

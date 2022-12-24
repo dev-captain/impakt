@@ -6,6 +6,7 @@ import { GetRoutineRes } from '../../../../../../../../lib/impakt-dev-api-client
 import { usePersistedChallengeStore } from '../../../../../../../../lib/zustand';
 import { ChallengeModalScreens } from '../ChallengeModal';
 import { ChallengeCreateBody } from './ChallengeCreateBody';
+import { ChallengeCreateEventFormBody } from './ChallengeCreateEventFormBody';
 import { ChallengeCreateFormBody } from './ChallengeCreateFormBody';
 import ChallengePreviewRoutineBody from './ChallengePreviewRoutineBody';
 import { ChallengeSelectBody } from './ChallengeSelectBody';
@@ -59,28 +60,46 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
       }}
     >
       {/* // SELECT BODY  */}
-      {currentScreen === 'select' && activeTab === 'routine' && (
-        <ChallengeSelectBody
-          challenges={availableGroupChallenges}
-          noItemCardCreateOnClick={() => moveToNextScreen('create')}
-          selectOnClick={(challengeI) => {
-            // setActiveGroupChallenge(challenge);
-            setActiveChallenge(challengeI);
-            onClose();
-          }}
-          previewOnClick={(challengeI) => {
-            setPreviewChallenge(challengeI);
-            moveToNextScreen('preview');
-          }}
-        />
-      )}
+      {(currentScreen === 'select' || currentScreen === 'select-challenge-event') &&
+        activeTab === 'routine' && (
+          <ChallengeSelectBody
+            challenges={availableGroupChallenges}
+            noItemCardCreateOnClick={() => moveToNextScreen('create')}
+            selectOnClick={(challengeI) => {
+              // setActiveGroupChallenge(challenge);
+              setActiveChallenge(challengeI);
+
+              if (currentScreen === 'select') {
+                onClose();
+
+                return;
+              }
+              if (currentScreen === 'select-challenge-event') {
+                setPreviewChallenge(challengeI);
+                moveToNextScreen('create-challenge-event-form');
+              }
+            }}
+            previewOnClick={(challengeI) => {
+              setPreviewChallenge(challengeI);
+              if (currentScreen === 'select') {
+                moveToNextScreen('preview');
+              }
+
+              if (currentScreen === 'select-challenge-event') {
+                moveToNextScreen('preview-challenge-event');
+              }
+            }}
+          />
+        )}
 
       {/* // PREVIEW BODY  */}
-      {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
-        <ChallengePreviewRoutineBody
-          previewRoutine={previewChallenge.Routine.TimelineBlocks ?? []}
-        />
-      )}
+      {(currentScreen === 'preview' || currentScreen === 'preview-challenge-event') &&
+        activeTab === 'routine' &&
+        previewChallenge && (
+          <ChallengePreviewRoutineBody
+            previewRoutine={previewChallenge.Routine.TimelineBlocks ?? []}
+          />
+        )}
 
       {/* // PREVIEW ROUTINE BODY  */}
 
@@ -89,24 +108,25 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
       )}
 
       {/* // CREATE CHALLENGE & EVENT CHALLENGE BODY  */}
-      {(currentScreen === 'create' || currentScreen === 'create-event') && activeTab === 'routine' && (
-        <ChallengeCreateBody
-          routines={availableGroupRoutines}
-          previewOnClick={(routine) => {
-            setRoutinePreview(routine);
-            moveToNextScreen('preview-routine');
-          }}
-          selectOnClick={(routine) => {
-            setRoutinePreview(routine);
-            if (currentScreen === 'create') {
-              moveToNextScreen('create-challenge-form');
-            }
-            if (currentScreen === 'create-event') {
-              moveToNextScreen('create-challenge-event-form');
-            }
-          }}
-        />
-      )}
+      {(currentScreen === 'create' || currentScreen === 'create-challenge-event') &&
+        activeTab === 'routine' && (
+          <ChallengeCreateBody
+            routines={availableGroupRoutines}
+            previewOnClick={(routine) => {
+              setRoutinePreview(routine);
+              moveToNextScreen('preview-routine');
+            }}
+            selectOnClick={(routine) => {
+              setRoutinePreview(routine);
+              if (currentScreen === 'create') {
+                moveToNextScreen('create-challenge-form');
+              }
+              if (currentScreen === 'create-challenge-event') {
+                moveToNextScreen('create-challenge-event-form');
+              }
+            }}
+          />
+        )}
 
       {/* // CREATE CHALLENGE FORM BODY  */}
       {currentScreen === 'create-challenge-form' && activeTab === 'routine' && (
@@ -125,16 +145,15 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
 
       {/* // CREATE EVENT CHALLENGE BODY  */}
       {currentScreen === 'create-challenge-event-form' && activeTab === 'routine' && (
-        <ChallengeCreateFormBody
-          formCb={onClose}
+        <ChallengeCreateEventFormBody
           previewOnClick={() => {
-            moveToNextScreen('preview-routine');
+            moveToNextScreen('preview-challenge-event');
           }}
           replaceOnClick={() => {
             setRoutinePreview(null);
-            moveToNextScreen('create');
+            moveToNextScreen('select-challenge-event');
           }}
-          previewRoutine={previewRoutine}
+          previewChallenge={previewChallenge}
         />
       )}
     </Box>

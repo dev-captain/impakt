@@ -28,9 +28,11 @@ export type ChallengeModalScreens =
   | 'select'
   | 'preview'
   | 'create'
-  | 'create-event'
   | 'preview-routine'
   | 'create-challenge-form'
+  | 'select-challenge-event'
+  | 'preview-challenge-event'
+  | 'create-challenge-event'
   | 'create-challenge-event-form'
   | 'update-challenge-event-form';
 
@@ -151,6 +153,7 @@ const ChallengeModal: React.FC<ChallengeModalProps> = ({
             moveToNextScreen={moveToNextScreen}
             onClose={close}
             setActiveChallenge={setActiveChallenge}
+            setPreviewChallenge={setPreviewChallenge}
             previewRoutine={previewRouitine}
             previewChallenge={previewChallenge}
             activeTab={activeTab}

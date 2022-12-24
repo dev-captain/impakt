@@ -27,9 +27,14 @@ const ChallengeModalHeader: React.FC<ChallengeModalHeaderPropsI> = ({
       )}
       <Box w="full" wordBreak="keep-all" minW="355px">
         {currentScreen === 'select' && <ChallengeModalHeadlineText title="Select Challenge" />}
+        {currentScreen === 'select-challenge-event' && (
+          <ChallengeModalHeadlineText title="Create Event" />
+        )}
         {currentScreen === 'create' && <ChallengeModalHeadlineText title="Create Challenge" />}
-        {currentScreen === 'create-event' && <ChallengeModalHeadlineText title="Create Event" />}
-        {currentScreen === 'preview' && (
+        {currentScreen === 'create-challenge-event' && (
+          <ChallengeModalHeadlineText title="Create Event" />
+        )}
+        {(currentScreen === 'preview' || currentScreen === 'preview-challenge-event') && (
           <ChallengeModalHeadlineText ml="24px" title={previewHeaderText} />
         )}
         {currentScreen === 'preview-routine' && (

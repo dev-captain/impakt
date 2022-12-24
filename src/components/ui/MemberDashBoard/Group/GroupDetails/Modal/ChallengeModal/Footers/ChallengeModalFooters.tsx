@@ -16,6 +16,7 @@ interface ChallengeModalFootersPropsI {
   onClose: () => void;
   moveToNextScreen: (newScreen: ChallengeModalScreens) => void;
   setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
+  setPreviewChallenge: (previewChallenge: GetChallengeRes) => void;
 }
 export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
   activeTab,
@@ -25,20 +26,30 @@ export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
   previewChallenge,
   previewRoutine,
   setActiveChallenge,
+  setPreviewChallenge,
 }) => {
   return (
     <>
-      {currentScreen === 'preview' && activeTab === 'routine' && previewChallenge && (
-        <ChallengePreviewFooter
-          selectOnClick={() => {
-            // setActiveGroupChallenge(challenge);
-            setActiveChallenge(previewChallenge);
-            onClose();
-          }}
-          validFrom={previewChallenge.validFrom}
-          validUntil={previewChallenge.validUntil ?? ''}
-        />
-      )}
+      {(currentScreen === 'preview' || currentScreen === 'preview-challenge-event') &&
+        activeTab === 'routine' &&
+        previewChallenge && (
+          <ChallengePreviewFooter
+            selectOnClick={() => {
+              // setActiveGroupChallenge(challenge);
+              setActiveChallenge(previewChallenge);
+
+              if (currentScreen === 'preview') {
+                onClose();
+              }
+              if (currentScreen === 'preview-challenge-event') {
+                setPreviewChallenge(previewChallenge);
+                moveToNextScreen('create-challenge-event-form');
+              }
+            }}
+            validFrom={previewChallenge.validFrom}
+            validUntil={previewChallenge.validUntil ?? ''}
+          />
+        )}
 
       {currentScreen === 'create' && activeTab === 'routine' && <ChallengeCreateFooter />}
 
@@ -54,12 +65,12 @@ export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
       )}
 
       {currentScreen === 'create-challenge-form' && activeTab === 'routine' && previewRoutine && (
-        <ChallengeCreateFormFooter />
+        <ChallengeCreateFormFooter formName="create-challenge-form" />
       )}
 
       {currentScreen === 'create-challenge-event-form' &&
         activeTab === 'routine' &&
-        previewRoutine && <ChallengeCreateFormFooter />}
+        previewChallenge && <ChallengeCreateFormFooter formName="create-challenge-event-form" />}
     </>
   );
 };

@@ -15,6 +15,7 @@ interface CreateChallengeFormPropsI {
   previewRoutine: GetRoutineRes | null;
   cb?: () => void;
 }
+export const createChallengeFormName = 'create-challenge-form';
 
 export const CreateChallengeForm: React.FC<CreateChallengeFormPropsI> = ({
   children,
@@ -81,7 +82,7 @@ export const CreateChallengeForm: React.FC<CreateChallengeFormPropsI> = ({
       onSubmit={challengeCreateForm.handleSubmit(handleSubmitCreateChallenge)}
       mt="36px"
       rowGap="24px"
-      id="create-challenge-form"
+      id={createChallengeFormName}
     >
       <Common.InputGroup
         onChange={(e) => {
