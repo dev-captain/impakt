@@ -400,7 +400,7 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                   <I.PenIcon />
                 </Common.ImpaktButton>
               )}
-              {mode === 'join' && (
+              {isEdit && mode === 'join' && (
                 <Common.ImpaktButton
                   variant="delete"
                   width="40px"
