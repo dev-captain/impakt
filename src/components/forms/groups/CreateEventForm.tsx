@@ -1,4 +1,4 @@
-import { FormControl, Box, Text, Select, VStack, HStack, Input } from '@chakra-ui/react';
+import { Box, Text, Select, VStack, HStack, Input } from '@chakra-ui/react';
 import { Day } from 'dayspan';
 import * as React from 'react';
 import { useForm } from 'hooks';

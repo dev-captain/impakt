@@ -10,6 +10,7 @@ import { ChallengeCreateEventFormBody } from './ChallengeCreateEventFormBody';
 import { ChallengeCreateFormBody } from './ChallengeCreateFormBody';
 import ChallengePreviewRoutineBody from './ChallengePreviewRoutineBody';
 import { ChallengeSelectBody } from './ChallengeSelectBody';
+import { ChallengeUpdateEventFormBody } from './ChallengeUpdateEventFormBody';
 
 interface ChallengeModalBodyPropsI {
   activeTab: ChallengeTabs;
@@ -18,7 +19,7 @@ interface ChallengeModalBodyPropsI {
   moveWithoutHistory: () => void;
   setPreviewChallenge: (challenge: GetChallengeRes | null) => void;
   setRoutinePreview: (routine: GetRoutineRes | null) => void;
-  setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
+  setActiveChallenge?: (activeChallenge: GetChallengeRes) => void;
   onClose: () => void;
   previewRoutine: GetRoutineRes | null;
   previewChallenge: GetChallengeRes | null;
@@ -60,23 +61,34 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
       }}
     >
       {/* // SELECT BODY  */}
-      {(currentScreen === 'select' || currentScreen === 'select-challenge-event') &&
+      {(currentScreen === 'select' ||
+        currentScreen === 'select-challenge-event' ||
+        currentScreen === 'update-challenge-replace-event-form') &&
         activeTab === 'routine' && (
           <ChallengeSelectBody
+            formName={currentScreen === 'select' ? 'select-pinned-challenge-form' : undefined}
             challenges={availableGroupChallenges}
             noItemCardCreateOnClick={() => moveToNextScreen('create')}
             selectOnClick={(challengeI) => {
               // setActiveGroupChallenge(challenge);
-              setActiveChallenge(challengeI);
+              if (setActiveChallenge) {
+                setActiveChallenge(challengeI);
+              }
+              setPreviewChallenge(challengeI);
 
               if (currentScreen === 'select') {
                 onClose();
 
                 return;
               }
+
               if (currentScreen === 'select-challenge-event') {
-                setPreviewChallenge(challengeI);
                 moveToNextScreen('create-challenge-event-form');
+              }
+
+              if (currentScreen === 'update-challenge-replace-event-form') {
+                setPreviewChallenge(challengeI);
+                moveToNextScreen('update-challenge-event-form');
               }
             }}
             previewOnClick={(challengeI) => {
@@ -88,12 +100,18 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
               if (currentScreen === 'select-challenge-event') {
                 moveToNextScreen('preview-challenge-event');
               }
+
+              if (currentScreen === 'update-challenge-replace-event-form') {
+                moveToNextScreen('preview-challenge-replace-event-form');
+              }
             }}
           />
         )}
 
       {/* // PREVIEW BODY  */}
-      {(currentScreen === 'preview' || currentScreen === 'preview-challenge-event') &&
+      {(currentScreen === 'preview' ||
+        currentScreen === 'preview-challenge-event' ||
+        currentScreen === 'preview-challenge-replace-event-form') &&
         activeTab === 'routine' &&
         previewChallenge && (
           <ChallengePreviewRoutineBody
@@ -152,6 +170,21 @@ export const ChallengeModalBody: React.FC<ChallengeModalBodyPropsI> = ({
           replaceOnClick={() => {
             setRoutinePreview(null);
             moveToNextScreen('select-challenge-event');
+          }}
+          previewChallenge={previewChallenge}
+        />
+      )}
+
+      {/* // UPDATE EVENT CHALLENGE BODY  */}
+      {currentScreen === 'update-challenge-event-form' && activeTab === 'routine' && (
+        <ChallengeUpdateEventFormBody
+          formCb={onClose}
+          previewOnClick={() => {
+            moveToNextScreen('preview-challenge-replace-event-form');
+          }}
+          replaceOnClick={() => {
+            setRoutinePreview(null);
+            moveToNextScreen('update-challenge-replace-event-form');
           }}
           previewChallenge={previewChallenge}
         />

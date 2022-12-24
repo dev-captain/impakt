@@ -34,13 +34,16 @@ export const ChallengeModalHeaders: React.FC<ChallengeModalHeadersPropsI> = ({
           }}
         />
       )}
-      {currentScreen === 'select-challenge-event' && <ChallengeCreateHeader />}
+      {(currentScreen === 'select-challenge-event' ||
+        currentScreen === 'update-challenge-replace-event-form') && <ChallengeCreateHeader />}
 
       {(currentScreen === 'create' || currentScreen === 'create-challenge-event') && (
         <ChallengeCreateHeader />
       )}
 
-      {(currentScreen === 'preview' || currentScreen === 'preview-challenge-event') &&
+      {(currentScreen === 'preview' ||
+        currentScreen === 'preview-challenge-event' ||
+        currentScreen === 'preview-challenge-replace-event-form') &&
         activeTab === 'routine' && (
           <ChallengePreviewHeader
             estTime={previewChallenge?.Routine.estimatedTime ?? 60}

@@ -1,18 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import ShowEvents from './ShowEvents';
 import RemoveEvent from './RemoveEvent';
 import ChallengeModal from '../../Modal/ChallengeModal/ChallengeModal';
 import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
-import ActionPreviewModal from '../../Modal/ActionPreviewModal';
 import EventDetails from './EventDetails';
 // import EventModify from './EventModify';
 
 const EventsOverview: React.FC = () => {
-  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes | null>(null);
+  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes>();
   const { getCurrentOverviewScreen, goToOverViewScreen } = useEventCalendarContext();
   const screen = getCurrentOverviewScreen();
 
@@ -33,7 +32,6 @@ const EventsOverview: React.FC = () => {
         {screen === 'create' && (
           <ChallengeModal
             initScreen="select-challenge-event"
-            setActiveChallenge={setActiveChallenge}
             close={() => goToOverViewScreen('first')}
             open
           />
@@ -41,7 +39,7 @@ const EventsOverview: React.FC = () => {
 
         {screen === 'update' && (
           <ChallengeModal
-            setActiveChallenge={setActiveChallenge}
+            activeChallenge={activeChallenge}
             initScreen="update-challenge-event-form"
             close={() => goToOverViewScreen('event')}
             open

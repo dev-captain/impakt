@@ -8,12 +8,14 @@ interface ChallengePreviewFooterPropsI {
   validFrom: string;
   validUntil: string;
   selectOnClick: () => void;
+  formName?: string;
 }
 
 export const ChallengePreviewFooter: React.FC<ChallengePreviewFooterPropsI> = ({
   validFrom,
   validUntil,
   selectOnClick,
+  formName,
 }) => {
   return (
     <HStack w="full" justifyContent="space-between">
@@ -25,6 +27,8 @@ export const ChallengePreviewFooter: React.FC<ChallengePreviewFooterPropsI> = ({
       </Box>
       <Box>
         <Common.ImpaktButton
+          form={formName}
+          // "select-pinned-challenge-form"
           onClick={selectOnClick}
           variant="black"
           w="159px !important"

@@ -34,9 +34,12 @@ const ChallengeModalHeader: React.FC<ChallengeModalHeaderPropsI> = ({
         {currentScreen === 'create-challenge-event' && (
           <ChallengeModalHeadlineText title="Create Event" />
         )}
-        {(currentScreen === 'preview' || currentScreen === 'preview-challenge-event') && (
+        {(currentScreen === 'preview' ||
+          currentScreen === 'preview-challenge-event' ||
+          currentScreen === 'preview-challenge-replace-event-form') && (
           <ChallengeModalHeadlineText ml="24px" title={previewHeaderText} />
         )}
+
         {currentScreen === 'preview-routine' && (
           <ChallengeModalHeadlineText ml="24px" title={createPreviewHeaderText} />
         )}
@@ -50,6 +53,10 @@ const ChallengeModalHeader: React.FC<ChallengeModalHeaderPropsI> = ({
         )}
 
         {currentScreen === 'update-challenge-event-form' && (
+          <ChallengeModalHeadlineText ml="24px" title="Edit Event" />
+        )}
+
+        {currentScreen === 'update-challenge-replace-event-form' && (
           <ChallengeModalHeadlineText ml="24px" title="Edit Event" />
         )}
       </Box>

@@ -12,11 +12,12 @@ import { usePersistedChallengeStore, usePersistedGroupStore } from '../../../lib
 import { useCalendarEventControllerUpdateCalendarEvent } from '../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 
 interface UpdateEventFormPropsI {
+  formCb: () => void;
   challengeId: number;
   challengeName: string;
-  clearAssoc: () => void;
-  onOpen: () => void;
 }
+
+export const updateEventFormName = 'update-challenge-event-form';
 
 const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
   const updateEventBe = useCalendarEventControllerUpdateCalendarEvent();
@@ -52,12 +53,6 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
       eventEndTime: defaultDuration,
     },
   });
-
-  React.useEffect(() => {
-    return () => {
-      props.clearAssoc();
-    };
-  }, []);
 
   React.useEffect(() => {
     if ((props.challengeId, props.challengeName)) {
@@ -116,6 +111,7 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
         onSuccess: (updatedEventData) => {
           const normalizedData1 = normalizeCalendarDataEvent(updatedEventData);
           updateEvent(normalizedData1);
+          props.formCb();
           renderToast('success', 'Event updated successfully.');
         },
       },
@@ -124,66 +120,66 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Add title',
+      placeholder: 'Event  title',
       onChange,
       type: 'text',
       name: 'eventTitle',
       errorMsg: errors?.eventTitle?.message,
       autoFocus: false,
       whiteMode: true,
-      leftIcon: <I.TextIcon width="20px" height="20px" />,
       defaultValue: JSON.parse(getSelectedDayEvent()!.event.data).title,
-    },
-    {
-      placeholder: 'Add description',
-      onChange,
-      type: 'text',
-      name: 'eventDescription',
-      errorMsg: errors?.eventDescription?.message,
-      autoFocus: false,
-      whiteMode: true,
-      defaultValue: JSON.parse(getSelectedDayEvent()!.event.data).description,
-      leftIcon: <I.MenuIcon width="20px" height="20px" />,
     },
   ];
 
   return (
-    <FormControl
-      display="flex"
-      justifyContent="center"
-      flexDir="column"
-      m="0 !important"
-      rowGap="24px"
+    <VStack
+      id={updateEventFormName}
       as="form"
       onSubmit={handleSubmit(handleUpdate)}
       autoComplete="off"
-      w="full"
+      mt="36px"
+      rowGap="24px"
     >
       <Common.InputItems inputItems={inputItems} />
-      <Box display="flex" alignItems="center">
-        <Box w="34px">
-          <I.DateIcon color="#728BA3" width="16px" height="16px" />
-        </Box>
-        <Text color="#4E6070" fontSize="16px" fontWeight="500">
-          {Day.build(date.year, date.month, date.dayOfMonth).format('dddd, MMMM D')}
-        </Text>
-      </Box>
-      <Box display="flex" flexDir="column">
-        <Box w="100%" alignItems="center" display="flex">
-          <Box w="34px">
-            <I.ClockIcon width="20px" height="20px" color="#728BA3" />
+      {props.children}
+      <HStack justifyContent="space-between" gap="24px" w="full">
+        <VStack spacing="0" w="full">
+          <Box w="full">
+            <Common.InputLabel label="Date" isSmallLabel whiteMode />
           </Box>
-          <HStack w="full">
-            <VStack align="flex-start">
-              <Text ml="5px" fontWeight="500" fontSize="10px" lineHeight="100%" color="#4E6070">
-                Time:
-              </Text>
+          <HStack
+            minH="60px"
+            p="1em"
+            background="a5"
+            border="1px solid #D3E2F0"
+            borderRadius="12px"
+            gap="1em"
+            spacing="0"
+            w="full"
+            display="flex"
+            alignItems="center"
+          >
+            <Box w="24px">
+              <I.DateIcon color="#728BA3" width="24px" height="24px" />
+            </Box>
+            <Text color="#4E6070" fontSize="16px" fontWeight="500">
+              {Day.build(date.year, date.month, date.dayOfMonth).format('dddd, MMMM D')}
+            </Text>
+          </HStack>
+        </VStack>
+        <HStack w="full" alignItems="center" justifyContent="flex-end" display="flex">
+          <HStack w="full" justifyContent="flex-end">
+            <VStack spacing="0" align="flex-start">
+              <Box w="full">
+                <Common.InputLabel label="Time" isSmallLabel whiteMode />
+              </Box>
               <Select
+                minH="60px"
                 isInvalid={!!errors.eventStartTime?.message}
                 name="eventStartTime"
                 border="1px solid #B0C3D6;"
                 borderRadius="12px"
-                bg="#FFFFFF"
+                bg="a5"
                 w="150px !important"
                 placeholder={defaultEventStartDate?.format('h:mm a')}
                 onChange={(value) => setValue('eventStartTime', value.currentTarget.value)}
@@ -199,11 +195,13 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
                 ))}
               </Select>
             </VStack>
-            <VStack align="flex-start">
-              <Text fontWeight="500" fontSize="10px" lineHeight="100%" color="#4E6070">
-                Duration (min):
-              </Text>
+            <VStack spacing="0" w="full" align="flex-start">
+              <Box w="full">
+                <Common.InputLabel label="Duration (min)" isSmallLabel whiteMode />
+              </Box>
               <Input
+                minH="60px"
+                bg="a5"
                 defaultValue={getValues('eventEndTime')}
                 isInvalid={!!errors.eventStartTime?.message}
                 name="eventEndTime"
@@ -214,49 +212,22 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
               />
             </VStack>
           </HStack>
-        </Box>
-        <Box>
-          {/* <Common.InputErrorMessage
-            errorMsg={errors?.eventStartTime?.message || errors?.eventEndTime}
-          /> */}
-        </Box>
-      </Box>
-      <Box display="flex" flexDir="column" alignItems="flex-start" mb="12px" w="100%">
-        <Box display="flex">
-          <Box w="34px">
-            <I.ChallengeIcon width="20px" height="20px" color="#728BA3" />
-          </Box>
-          <Text
-            color="#4E6070"
-            fontSize="16px"
-            fontWeight="500"
-            cursor="pointer"
-            onClick={() => props.onOpen()}
-          >
-            {getValues('challengeName').length > 0
-              ? truncateString(getValues('challengeName'), 23)
-              : 'Select challenge'}
-          </Text>
-        </Box>
-
-        <Box>
-          <Common.InputErrorMessage errorMsg={errors?.challengeId?.message} />
-        </Box>
-      </Box>
-      <Common.ImpaktButton
-        isLoading={updateEventBe.isLoading}
-        isDisabled={updateEventBe.isLoading}
+        </HStack>
+      </HStack>
+      {/* <Common.ImpaktButton
         variant="black"
         h={{ md: '48px', base: '40px' }}
         borderRadius="8px"
         type="submit"
         fontSize={{ md: '16px' }}
         fontWeight="700"
+        isLoading={createEvent.isLoading}
+        isDisabled={createEvent.isLoading}
       >
-        <I.PenIcon width="18px" />
-        <Text marginLeft="10px">Update Event</Text>
-      </Common.ImpaktButton>
-    </FormControl>
+        <I.SendIcon fontSize="10px" />
+        <Text marginLeft="10px">Create</Text>
+      </Common.ImpaktButton> */}
+    </VStack>
   );
 };
 

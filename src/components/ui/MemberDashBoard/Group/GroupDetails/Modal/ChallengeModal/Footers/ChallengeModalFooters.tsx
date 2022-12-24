@@ -7,6 +7,7 @@ import { ChallengeCreateFooter } from './ChallengeCreateFooter';
 import { ChallengeCreateFormFooter } from './ChallengeCreateFormFooter';
 import { ChallengePreviewFooter } from './ChallengePreviewFooter';
 import { ChallengePreviewRoutineFooter } from './ChallengePreviewRoutineFooter';
+import { ChallengeUpdateFormFooter } from './ChallengeUpdateFormFooter';
 
 interface ChallengeModalFootersPropsI {
   currentScreen: ChallengeModalScreens;
@@ -15,9 +16,10 @@ interface ChallengeModalFootersPropsI {
   previewRoutine: GetRoutineRes | null;
   onClose: () => void;
   moveToNextScreen: (newScreen: ChallengeModalScreens) => void;
-  setActiveChallenge: (activeChallenge: GetChallengeRes) => void;
+  setActiveChallenge?: (activeChallenge: GetChallengeRes) => void;
   setPreviewChallenge: (previewChallenge: GetChallengeRes) => void;
 }
+
 export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
   activeTab,
   currentScreen,
@@ -30,13 +32,17 @@ export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
 }) => {
   return (
     <>
-      {(currentScreen === 'preview' || currentScreen === 'preview-challenge-event') &&
+      {(currentScreen === 'preview' ||
+        currentScreen === 'preview-challenge-event' ||
+        currentScreen === 'preview-challenge-replace-event-form') &&
         activeTab === 'routine' &&
         previewChallenge && (
           <ChallengePreviewFooter
             selectOnClick={() => {
               // setActiveGroupChallenge(challenge);
-              setActiveChallenge(previewChallenge);
+              if (setActiveChallenge) {
+                setActiveChallenge(previewChallenge);
+              }
 
               if (currentScreen === 'preview') {
                 onClose();
@@ -44,6 +50,11 @@ export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
               if (currentScreen === 'preview-challenge-event') {
                 setPreviewChallenge(previewChallenge);
                 moveToNextScreen('create-challenge-event-form');
+              }
+
+              if (currentScreen === 'preview-challenge-replace-event-form') {
+                setPreviewChallenge(previewChallenge);
+                moveToNextScreen('update-challenge-event-form');
               }
             }}
             validFrom={previewChallenge.validFrom}
@@ -71,6 +82,10 @@ export const ChallengeModalFooters: React.FC<ChallengeModalFootersPropsI> = ({
       {currentScreen === 'create-challenge-event-form' &&
         activeTab === 'routine' &&
         previewChallenge && <ChallengeCreateFormFooter formName="create-challenge-event-form" />}
+
+      {currentScreen === 'update-challenge-event-form' &&
+        activeTab === 'routine' &&
+        previewChallenge && <ChallengeUpdateFormFooter formName="update-challenge-event-form" />}
     </>
   );
 };

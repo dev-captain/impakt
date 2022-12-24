@@ -10,6 +10,7 @@ interface PropsI {
   previewOnClick: (preview: GetChallengeRes) => void;
   selectOnClick: (challengeI: GetChallengeRes) => void;
   noItemCardCreateOnClick: () => void;
+  formName?: string;
 }
 
 export const ChallengeSelectBody: React.FC<PropsI> = ({
@@ -17,6 +18,7 @@ export const ChallengeSelectBody: React.FC<PropsI> = ({
   previewOnClick,
   selectOnClick,
   noItemCardCreateOnClick,
+  formName,
 }) => {
   if (challenges.length === 0) {
     return (
@@ -53,6 +55,7 @@ export const ChallengeSelectBody: React.FC<PropsI> = ({
             type="submit"
             fontSize={{ base: '14px', md: '16px' }}
             fontWeight="700"
+            form={formName}
           >
             <Text>Select</Text>
           </Common.ImpaktButton>
