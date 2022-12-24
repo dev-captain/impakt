@@ -159,7 +159,6 @@ const EventDetails: React.FC<{
         }}
         open={isOpen}
         close={() => {
-          console.log('run bro');
           goBackToOverViewScreen();
           onClose();
         }}

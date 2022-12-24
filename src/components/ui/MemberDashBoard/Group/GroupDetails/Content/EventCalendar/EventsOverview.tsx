@@ -4,7 +4,6 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import ShowEvents from './ShowEvents';
-import RemoveEvent from './RemoveEvent';
 import ChallengeModal from '../../Modal/ChallengeModal/ChallengeModal';
 import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import EventDetails from './EventDetails';
@@ -47,7 +46,6 @@ const EventsOverview: React.FC = () => {
         )}
         {/* {screen === 'update' && <EventModify title="Update event" type="update" />} */}
         {screen === 'event' && <EventDetails setActiveChallenge={setActiveChallenge} />}
-        {screen === 'remove' && <RemoveEvent />}
       </Box>
     </Box>
   );
