@@ -134,7 +134,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           marginTop="20px !important"
         >
           <HStack
-            pl={{ base: 0, md: '64px' }}
+            pl={{ base: 0, md: '0' }}
             spacing={{ base: '6px', md: '32px' }}
             justify={{ base: 'center', md: 'flex-end' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
