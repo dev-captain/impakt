@@ -1,8 +1,9 @@
-import { parsePathname } from 'utils';
+import { isProduction, parsePathname } from 'utils';
 import Keys from 'i18n/types';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { Common } from 'components';
+import routes from '../../../data/routes';
 
 const SidebarNavigationLinks = () => {
   // TODO Sidebar links UI
@@ -17,30 +18,30 @@ const SidebarNavigationLinks = () => {
     <>
       <Common.LinkItem
         titlePassiveColor={passiveColor || textColor}
-        href="/"
-        isNavigate
-        title={t(Keys.navbar.impaktFitness)}
+        href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
+        title="Social Fitness"
         isActive={path.path === ''}
         color={activeColor || textColor}
         titleActiveColor={activeColor}
         textStyle="semiBold6"
+        isNavigate={isProduction}
       />
       <Common.LinkItem
         titleActiveColor={activeColor}
         titlePassiveColor={passiveColor}
-        title={t(Keys.navbar.knowledgeBase)}
-        href="https://knowledgebase.impakt.com"
+        title="vSports"
+        href="http://vsports.me/"
         isActive={path.path === 'knowledge-base'}
         textStyle="semiBold6"
       />
       <Common.LinkItem
         titleActiveColor={activeColor}
         titlePassiveColor={passiveColor}
-        href="/contact"
-        isNavigate
+        href={routes.contact}
         title={t(Keys.navbar.contactUs)}
         isActive={path.path === 'contact'}
         textStyle="semiBold6"
+        isNavigate
       />
     </>
   );

@@ -307,3 +307,6 @@ export const parseDaytime = (time: any) => {
 
   return 1000 * 60 * (hours * 60 + minutes);
 };
+
+export const isProduction = process.env.REACT_APP_VERCEL_ENV === 'production';
+export const isPreview = process.env.REACT_APP_VERCEL_ENV === 'preview';
