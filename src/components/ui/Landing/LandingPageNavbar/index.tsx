@@ -12,15 +12,16 @@ import {
   // PositionProps,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { parsePathname } from 'utils';
+import { isProduction, parsePathname } from 'utils';
 
 import { I, Common } from 'components';
 
 import CollapseMenu from './LandingPageCollapseMenu';
 import DropDownProfileMenu from './LandingPageDropDownProfileMenu';
+import DropDownSocialMediaMenu from './LandingPageDropDownSocialMediaMenu';
 import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
-import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
+// import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import routes from '../../../../data/routes';
 
 // const { dark, light } = Images;
@@ -32,7 +33,6 @@ const LandingPageNavbar: FC = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const { colorMode, setColorMode } = useColorMode();
-
   useEffect(() => {
     if (!isLessThan1280) {
       onClose();
@@ -80,22 +80,52 @@ const LandingPageNavbar: FC = () => {
           <Box onClick={() => navigate('/')} zIndex={100} pr="40px" minWidth="auto">
             <I.ImpaktIcon variant="lg" />
           </Box>
+          <Box
+            display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
+            ml="0 !important"
+            w="700px"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Common.NavBarLinkItem
+              href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
+              title="Social Fitness"
+              titleActiveColor="white"
+              titlePassiveColor="fg"
+              textStyle="semiBold6"
+              isNavigate={isProduction}
+            />
+            <Common.NavBarLinkItem
+              href="http://vsports.me/"
+              title="vSports"
+              titleActiveColor="white"
+              textStyle="semiBold6"
+              titlePassiveColor="fg"
+            />
+            <Common.NavBarLinkItem
+              href={routes.contact}
+              isNavigate
+              title="Contact Us"
+              titleActiveColor="white"
+              textStyle="semiBold6"
+              titlePassiveColor="fg"
+            />
+            <Box>
+              <DropDownSocialMediaMenu iconColor="rgba(28, 28, 40, 0.65)" bgColor="white" />
+            </Box>
+          </Box>
           <HStack
             justify="flex-end"
             align="center"
-            w="full"
+            w="auto"
             spacing={[0, 0, 3, 5, 8, 12]}
             display={['none', 'none', 'none', isLessThan1280 ? 'none' : 'flex', 'flex']}
           >
-            <HStack w="full" display="flex" justifyContent="space-between" alignItems="center">
-              <Box display="flex" ml="0 !important" justifyContent="center" w="full">
-                {/* <NavBarLink IsHeader /> */}
-                <NavBarSocialIcons />
-              </Box>
+            <HStack w="auto" display="flex" justifyContent="flex-end" alignItems="center">
               <HStack
                 justify={{ base: 'center', md: 'flex-end' }}
                 spacing="8px"
-                pl={{ base: '64px' }}
+                pl={{ base: '16px' }}
               >
                 <Box
                   display="flex"
