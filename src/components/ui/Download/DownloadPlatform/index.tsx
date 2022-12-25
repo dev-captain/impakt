@@ -13,6 +13,7 @@ import {
   TableContainer,
   Image,
   useDisclosure,
+  Text,
 } from '@chakra-ui/react';
 import Images from 'assets/images';
 import { useTranslation } from 'react-i18next';
@@ -247,7 +248,7 @@ const DownloadSpecBox = () => {
                   textTransform="capitalize"
                   whiteSpace="normal"
                 >
-                  Recommended:
+                  <Text textStyle="regular3">Recommended:</Text>
                 </Th>
               </Tr>
             </Thead>
@@ -298,7 +299,7 @@ const DownloadSpecBox = () => {
                   textTransform="capitalize"
                   whiteSpace="normal"
                 >
-                  Minimal:
+                  <Text textStyle="regular3">Minimal:</Text>
                 </Th>
               </Tr>
             </Thead>

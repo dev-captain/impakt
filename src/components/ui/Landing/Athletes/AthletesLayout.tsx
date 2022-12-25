@@ -15,7 +15,7 @@ const AthletesLayout: React.FC = ({ children }) => {
         xl: '100px',
         '2xl': '0px',
       }}
-      // minH="70vh"
+      minH="auto"
     >
       <VStack spacing="0px" px="16px" maxW="100%" w="full" color={textColor}>
         <VStack width="100%">

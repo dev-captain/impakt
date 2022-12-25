@@ -18,7 +18,7 @@ const NewsFeedAccordion: React.FC = () => {
     {
       id: 2,
       bg: 'linear-gradient(45deg, #EE0016 0.33%, #D20067 50.65%, #C0009F 100.33%);',
-      icon: <I.InstagramBigIcon />,
+      icon: <I.InstagramBigIcon color="white" />,
       href: Socials.insta,
     },
     {

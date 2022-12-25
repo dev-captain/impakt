@@ -15,6 +15,7 @@ import Keys from 'i18n/types';
 
 import { I, Common } from 'components';
 
+import DropDownSocialMediaMenu from 'components/ui/Landing/LandingPageNavbar/LandingPageDropDownSocialMediaMenu';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -103,6 +104,13 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   zIndex="99"
                 >
                   <NavBarLink />
+                  <Box textColor="red">
+                    <DropDownSocialMediaMenu
+                      titleColor="rgba(255,255,255,0.5)"
+                      bgColor="rgba(28, 28, 40)"
+                      iconColor="white"
+                    />
+                  </Box>
                 </HStack>
               </Box>
 
@@ -112,7 +120,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   spacing="8px"
                   pl={{ base: isVersion2 ? '0px' : '64px' }}
                 >
-                  <Common.SocialIcons />
                   <Box position="relative" display="flex">
                     <DropDownProfileMenu />
                   </Box>

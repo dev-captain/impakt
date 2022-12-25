@@ -60,31 +60,24 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
         <NavbarLinkItem
           isSmall
           hide
-          href="/"
+          type="LINK"
+          href="http://community.impakt.com"
           onClose={onClose}
           isActive={path.path === ''}
-          title={t(Keys.navbar.impaktFitness)}
+          title="Social Fitness"
         />
         <NavbarLinkItem
           isSmall
           hide
           type="LINK"
           onClose={onClose}
-          title={t(Keys.navbar.knowledgeBase)}
-          href="https://knowledgebase.impakt.com"
-          isActive={path.path === 'knowledge-base'}
-        />
-        <NavbarLinkItem
-          hide
-          isSmall
-          href="/events"
-          onClose={onClose}
-          title={t(Keys.navbar.events)}
-          isActive={path.path === 'events'}
+          title="vSports"
+          href="http://vsports.me/"
         />
         <NavbarLinkItem
           isSmall
-          href="/contact"
+          type="LINK"
+          href="http://impakt.com/contact"
           onClose={onClose}
           title={t(Keys.navbar.contactUs)}
           isActive={path.path === 'contact'}
@@ -141,7 +134,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           marginTop="20px !important"
         >
           <HStack
-            pl={{ base: 0, md: '64px' }}
+            pl={{ base: 0, md: '0' }}
             spacing={{ base: '6px', md: '32px' }}
             justify={{ base: 'center', md: 'flex-end' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
@@ -166,9 +159,9 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
               }}
               as="a"
               target="_blank"
-              href={Socials.discord}
+              href={Socials.insta}
             >
-              <I.DiscordIcon />
+              <I.InstagramBigIcon />
             </Box>
             <Box
               color="rgba(255,255,255,0.5)"

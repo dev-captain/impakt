@@ -56,7 +56,8 @@ const NavbarLink = ({ IsHeader }: Props) => {
         isActive={path.path === 'events'}
       /> */}
       <NavbarLinkItem
-        href="/contact"
+        href="http://impakt.com/contact"
+        type="LINK"
         onClose={onClose}
         passiveColor={passiveColor}
         title={t(Keys.navbar.contactUs)}

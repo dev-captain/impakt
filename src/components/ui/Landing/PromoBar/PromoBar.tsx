@@ -30,8 +30,8 @@ const PromoBar: React.FC = () => {
             rowGap="1em"
           >
             <Box>
-              <Text textStyle={{ base: 'semiBold3', md: 'semiBold24' }} color="white">
-                Become part of the Impakt family
+              <Text textStyle={{ base: 'semiBold3', md: 'semiBold20' }} color="white">
+                Be an Impakt First Investor. Join our family.
               </Text>
             </Box>
             <HStack
