@@ -1,11 +1,9 @@
 import { VStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import * as React from 'react';
-import keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
+import keys from '@/i18n/types';
 import LandingLine from '../../LandingLine';
 
 const ImpaktTeamHeader: React.FC = () => {
-  const { t } = useTranslation().i18n;
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   return (
@@ -33,7 +31,7 @@ const ImpaktTeamHeader: React.FC = () => {
                 fontWeight="700"
                 lineHeight="inherit"
               >
-                {t(keys.impaktGamesHero.impaktTeamTitle)}
+                {keys.impaktGamesHero.impaktTeamTitle}
               </Text>
               <LandingLine dir="h" />
               <Text

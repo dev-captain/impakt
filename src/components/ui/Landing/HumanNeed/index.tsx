@@ -1,12 +1,10 @@
 import { Text, VStack, useColorModeValue, Box } from '@chakra-ui/react';
-import { C, Common } from 'components';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import Images from 'assets/images';
+import { C, Common } from '@/components';
+import keys from '@/i18n/types';
+import Images from '@/assets/images';
 
 const HumanNeed = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const { t } = useTranslation().i18n;
 
   return (
     <>
@@ -50,7 +48,7 @@ const HumanNeed = () => {
                     lineHeight="100%"
                     maxWidth="742px"
                   >
-                    {t(keys.impaktGamesHero.humanTitle)}
+                    {keys.impaktGamesHero.humanTitle}
                   </Text>
                   <Box
                     height="1px"
@@ -67,7 +65,7 @@ const HumanNeed = () => {
                     maxWidth="643px"
                     margin="auto"
                   >
-                    {t(keys.impaktGamesHero.humanDescription)}
+                    {keys.impaktGamesHero.humanDescription}
                   </Text>
                 </Box>
               </VStack>

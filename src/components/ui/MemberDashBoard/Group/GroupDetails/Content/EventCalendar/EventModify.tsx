@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
-import { Forms } from 'components';
+import { Forms } from '@/components';
 
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
 

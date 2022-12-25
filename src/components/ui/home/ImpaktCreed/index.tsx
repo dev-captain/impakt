@@ -1,15 +1,12 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { memo } from 'react';
 import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
-import { C, I, Common } from 'components';
+import Keys from '@/i18n/types';
+import { C, I, Common } from '@/components';
 
 import Images from '../../../../assets/images';
 
 const ImpaktCreed = () => {
-  const { t } = useTranslation(`default`).i18n;
-
   return (
     <C.HeroLayout
       // showNavbar
@@ -39,7 +36,7 @@ const ImpaktCreed = () => {
                 >
                   <Box mt="0 !important" mb="24px">
                     <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
-                      {t(Keys.impaktCreed.creed)}
+                      {Keys.impaktCreed.creed}
                     </Text>
                   </Box>
                   <Box mt="0 !important" mb="24px !important">
@@ -48,7 +45,7 @@ const ImpaktCreed = () => {
                       letterSpacing="-2.5px"
                       textStyle={{ base: 'TitleBold48', sm: 'TitleBold64', md: 'TitleBold64' }}
                     >
-                      {t(Keys.impaktCreed.creedLabel)}
+                      {Keys.impaktCreed.creedLabel}
                     </Text>
                   </Box>
                   <Box
@@ -62,7 +59,7 @@ const ImpaktCreed = () => {
                       fontSize="20px"
                       textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
                       dangerouslySetInnerHTML={{
-                        __html: t(Keys.impaktCreed.description),
+                        __html: Keys.impaktCreed.description,
                       }}
                     />
                     <Text
@@ -71,7 +68,7 @@ const ImpaktCreed = () => {
                       fontSize="20px"
                       textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
                       dangerouslySetInnerHTML={{
-                        __html: t(Keys.impaktCreed.description2),
+                        __html: Keys.impaktCreed.description2,
                       }}
                     />
                   </Box>
@@ -82,7 +79,7 @@ const ImpaktCreed = () => {
                           textStyle={{ base: 'semiBold5', sm: 'regular20', md: 'regular20' }}
                           color="rgba(255, 255, 255, 0.75);"
                           dangerouslySetInnerHTML={{
-                            __html: t(Keys.impaktCreed.description1),
+                            __html: Keys.impaktCreed.description1,
                           }}
                         />
                       </VStack>

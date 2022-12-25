@@ -7,10 +7,10 @@ import {
   useMediaQuery,
   VStack,
 } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { C } from 'components';
 import { useNavigate } from 'react-router-dom';
-import { layoutPadding } from 'theme';
+import Images from '@/assets/images';
+import { C } from '@/components';
+import { layoutPadding } from '@/theme';
 import NotFoundCard from './component/NotFoundCard';
 
 const NotFound = () => {

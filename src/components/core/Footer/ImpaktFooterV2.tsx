@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
-import { I, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
+import Keys from '@/i18n/types';
+import { I, Common } from '@/components';
 import routes from '../../../data/routes';
 
 interface ImpaktFooterV2PropsI {
@@ -18,7 +17,6 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
   children,
 }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(`default`).i18n;
   const bgColor = isWhiteMode ? 'a5' : 'dark-2';
 
   return (
@@ -86,10 +84,10 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
           flexDir="row"
         >
           <Text color={isWhiteMode ? 'fg1' : 'rgba(255, 255, 255, 0.4)'} textStyle="regular3">
-            {t(Keys.footer.madeBy)}
+            {Keys.footer.madeBy}
           </Text>
           <Text color={isWhiteMode ? 'fg1' : 'rgba(255, 255, 255, 0.4)'} textStyle="regular3">
-            {t(Keys.footer.allRightReserved)}
+            {Keys.footer.allRightReserved}
           </Text>
         </HStack>
       </VStack>

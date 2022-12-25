@@ -1,8 +1,7 @@
 import { Box, HStack, Text, useColorModeValue, useMediaQuery, VStack } from '@chakra-ui/react';
-import { C } from 'components';
-import { RoadmapInfo } from 'data';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
+import { C } from '@/components';
+import { RoadmapInfo } from '@/data';
+import Keys from '@/i18n/types';
 import Progress from './Progress';
 import RoadMapBackground from './RoadmapBackground';
 import RoadmapItem from './RoadmapItem';
@@ -10,7 +9,6 @@ import RoadMapSmallView from './RoadmapSmallView';
 import Images from '../../../../assets/images';
 
 const RoadMap = () => {
-  const { t } = useTranslation().i18n;
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
@@ -59,7 +57,7 @@ const RoadMap = () => {
                   fontWeight="700"
                   fontStyle="TitleBold64"
                 >
-                  {t(Keys.ourRoadmap.roadmap)}
+                  {Keys.ourRoadmap.roadmap}
                 </Text>
               </Box>
             </HStack>

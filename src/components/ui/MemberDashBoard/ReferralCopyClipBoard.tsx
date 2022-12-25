@@ -1,15 +1,13 @@
 import { Box, useToast, Text, useClipboard } from '@chakra-ui/react';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+import keys from '@/i18n/types';
 
-import { I } from 'components';
+import { I } from '@/components';
 
 const ReferralCopyClipboard: React.FC<{
   userId?: number;
   isBadge?: boolean;
 }> = ({ userId, isBadge }) => {
-  const { t } = useTranslation().i18n;
   const toast = useToast();
   const referralLink = `${window.location.origin}/register/${userId}`;
   const { hasCopied, onCopy } = useClipboard(referralLink, { timeout: 3000 });
@@ -30,7 +28,7 @@ const ReferralCopyClipboard: React.FC<{
       <Box>
         {!isBadge && (
           <Text color="#4E6070" textStyle="regular3">
-            {t(keys.memberDashboard.yourReferralLink)}
+            {keys.memberDashboard.yourReferralLink}
           </Text>
         )}
       </Box>

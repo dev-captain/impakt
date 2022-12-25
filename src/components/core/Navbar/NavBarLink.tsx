@@ -1,14 +1,12 @@
 import { memo } from 'react';
-import Keys from 'i18n/types';
 import { useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { isProduction } from '../../../utils';
 import routes from '../../../data/routes';
+import Keys from '@/i18n/types';
 
 const NavbarLink = () => {
   const path = useLocation();
-  const { t } = useTranslation().i18n;
 
   const textColor = 'rgba(255,255,255,0.5)';
   const passiveColor = 'white';
@@ -31,7 +29,7 @@ const NavbarLink = () => {
       />
       <Common.NavBarLinkItem
         href={routes.contact}
-        title={t(Keys.navbar.contactUs)}
+        title={Keys.navbar.contactUs}
         isActive={path.pathname === 'contact'}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}

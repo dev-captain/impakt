@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { memo } from 'react';
-import { VStack, HStack, useColorModeValue, Box, Text, Image } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import { I, C, Common } from 'components';
-import Keys from 'i18n/types';
-import Images from 'assets/images';
 import AOS from 'aos';
+import { VStack, HStack, useColorModeValue, Box, Text, Image } from '@chakra-ui/react';
+import { I, C, Common } from '@/components';
+import Keys from '@/i18n/types';
+import Images from '@/assets/images';
 
 import '../../../../theme/styles.css';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
@@ -14,7 +13,6 @@ AOS.init();
 
 const ImpaktNFT = () => {
   const bgImage = useColorModeValue(Images.backgrounds.nftBg, Images.backgrounds.light);
-  const { t } = useTranslation(`default`).i18n;
 
   return (
     <C.HeroLayout
@@ -53,7 +51,7 @@ const ImpaktNFT = () => {
             >
               <Box display="flex" w="full" justifyContent="flex-start" mt="0 !important">
                 <Text color="gold" textTransform="uppercase" textStyle="reguler2">
-                  {t(Keys.impaktNFT.impaktDesign)}
+                  {Keys.impaktNFT.impaktDesign}
                 </Text>
               </Box>
               <Box mt="0 !important">
@@ -62,9 +60,9 @@ const ImpaktNFT = () => {
                   letterSpacing="-1.5px"
                   textStyle={{ base: 'bold5', md: 'TitleBold48' }}
                 >
-                  {t(Keys.impaktNFT.impaktlabel)}
+                  {Keys.impaktNFT.impaktlabel}
                   <Text display="inline-block" letterSpacing="-1.5px" className="gradient-text">
-                    {t(Keys.impaktNFT.impaktChris)}
+                    {Keys.impaktNFT.impaktChris}
                   </Text>
                 </Text>
               </Box>
@@ -73,7 +71,7 @@ const ImpaktNFT = () => {
                   color="rgba(255, 255, 255, 0.85);"
                   textStyle={{ base: 'semiBold5', md: 'regular18' }}
                 >
-                  {t(Keys.impaktNFT.description)}
+                  {Keys.impaktNFT.description}
                 </Text>
               </Box>
               <Box mt="0 !important" w="full" id="hero-info-card-box">
@@ -83,7 +81,7 @@ const ImpaktNFT = () => {
                       textStyle={{ base: 'semiBold5', md: 'regular18' }}
                       color="rgba(255, 255, 255, 0.75);"
                     >
-                      {t(Keys.impaktNFT.description1)}
+                      {Keys.impaktNFT.description1}
                     </Text>
                   </VStack>
                 </Common.InfoCard>
@@ -93,9 +91,9 @@ const ImpaktNFT = () => {
                   color="rgba(255, 255, 255, 0.85);"
                   textStyle={{ base: 'semiBold5', md: 'regular18' }}
                 >
-                  {t(Keys.impaktNFT.careerdescription)}
+                  {Keys.impaktNFT.careerdescription}
                   <Text color="gold" as="a" target="_blank" href="#">
-                    {t(Keys.impaktNFT.careerdescription1)}
+                    {Keys.impaktNFT.careerdescription1}
                   </Text>
                 </Text>
               </Box>

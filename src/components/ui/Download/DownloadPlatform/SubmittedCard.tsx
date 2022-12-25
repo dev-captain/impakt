@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, VStack, Text } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 
 const SubmittedCard: React.FC = () => {
   return (

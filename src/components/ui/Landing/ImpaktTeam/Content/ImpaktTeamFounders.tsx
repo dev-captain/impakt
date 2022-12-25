@@ -1,12 +1,10 @@
 import { Text, Box, GridItem, HStack, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
 import Card from '../Card';
+import Keys from '@/i18n/translations/en';
 
 const ImpaktTeamFounders: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
-  const leadership = t('leadershipData.data', { returnObjects: true }) as object[];
+  const leadership = [Keys.leadershipData.data];
 
   return (
     <VStack

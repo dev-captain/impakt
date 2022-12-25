@@ -13,9 +13,9 @@ import {
   Input,
   FormLabel,
 } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import React from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { Day } from 'dayspan';
 import { AddIcon } from '@chakra-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';

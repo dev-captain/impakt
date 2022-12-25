@@ -8,13 +8,12 @@ import {
   useMediaQuery,
   useColorModeValue,
 } from '@chakra-ui/react';
-import Images from 'assets/images';
-import useModalStore from 'hooks/store/useModalStore';
-import { useTranslation } from 'react-i18next';
-import { layoutPadding } from 'theme';
-import colors from 'theme/colors';
-import keys from 'i18n/types';
-import { C } from 'components';
+import Images from '@/assets/images';
+import { layoutPadding } from '@/theme';
+import useModalStore from '@/hooks/store/useModalStore';
+import colors from '@/theme/colors';
+import keys from '@/i18n/types';
+import { C } from '@/components';
 
 import MotionCard from './MotionCard';
 
@@ -29,7 +28,6 @@ const MotionCaptureHero = () => {
   const cardBg = useColorModeValue('glass.800', 'glass.100');
   const textColor = useColorModeValue(colors.glass[100], colors.glass[700]);
   const modal = useModalStore((state) => state);
-  const { t } = useTranslation(`default`).i18n;
 
   return (
     <C.HeroLayout
@@ -77,11 +75,11 @@ const MotionCaptureHero = () => {
                 fontSize={{ base: '40px', md: '56px' }}
                 lineHeight={{ base: '40px', md: '60px' }}
               >
-                <Text fontWeight="300">{t(keys.computerVision.computerVision)}</Text>
-                <Text fontWeight="700">{t(keys.computerVision.technology)}</Text>
+                <Text fontWeight="300">{keys.computerVision.computerVision}</Text>
+                <Text fontWeight="700">{keys.computerVision.technology}</Text>
               </VStack>
               <Text maxW="440px" fontSize="20px" opacity="0.62" fontWeight="400" lineHeight="32px">
-                {t(keys.computerVision.description)}
+                {keys.computerVision.description}
               </Text>
             </VStack>
             <HStack
@@ -107,7 +105,7 @@ const MotionCaptureHero = () => {
                     isVrGlass
                     bgColor={cardBg}
                     iconColor={textColor}
-                    title={t(keys.computerVision.hardwareCard)}
+                    title={keys.computerVision.hardwareCard}
                   />
                 </GridItem>
                 <GridItem
@@ -119,7 +117,7 @@ const MotionCaptureHero = () => {
                   <MotionCard
                     bgColor={cardBg}
                     iconColor={textColor}
-                    title={t(keys.computerVision.cameraCard)}
+                    title={keys.computerVision.cameraCard}
                   />
                 </GridItem>
               </SimpleGrid>

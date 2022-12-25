@@ -1,14 +1,13 @@
 import { VStack, Box, Text, HStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import { Common, I } from 'components';
 import { useSearchParams } from 'react-router-dom';
+
+import { Common, I } from '@/components';
+import keys from '@/i18n/translations/en';
 
 import SignUpBox from './SignUpBox';
 
 const SignUp: React.FC = () => {
-  const { t } = useTranslation().i18n;
   const [searchParams] = useSearchParams();
   const isMiniGameBonusBoxExist =
     searchParams.get('minigamebonus') === 'true' ? true : false ?? false;
@@ -33,7 +32,7 @@ const SignUp: React.FC = () => {
             lineHeight={{ base: '32px', lg: '64px' }}
             fontWeight="700"
           >
-            {t(keys.signUp.createAn)}
+            {keys.signUp.createAn}
           </Text>
         </Box>
       </VStack>

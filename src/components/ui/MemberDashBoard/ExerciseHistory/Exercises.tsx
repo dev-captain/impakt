@@ -1,8 +1,5 @@
 import * as React from 'react';
 
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-
 import {
   VStack,
   Box,
@@ -15,10 +12,9 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
+import keys from '@/i18n/types';
 
 const Exercises: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
   return (
     <VStack
       w="100%"
@@ -44,7 +40,7 @@ const Exercises: React.FC = () => {
                 paddingBottom="0px"
                 height="48px"
               >
-                {t(keys.memberDashboard.exerciseList.date)}
+                {keys.memberDashboard.exerciseList.date}
               </Th>
               <Th
                 textAlign="start"
@@ -58,7 +54,7 @@ const Exercises: React.FC = () => {
                 paddingBottom="0px"
                 height="48px"
               >
-                {t(keys.memberDashboard.exerciseList.reason)}
+                {keys.memberDashboard.exerciseList.reason}
               </Th>
               <Th
                 textAlign="start"
@@ -71,7 +67,7 @@ const Exercises: React.FC = () => {
                 height="48px"
                 width={{ base: '88px', md: '112px' }}
               >
-                {t(keys.memberDashboard.exerciseList.godl)}
+                {keys.memberDashboard.exerciseList.godl}
               </Th>
             </Tr>
           </Thead>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Common } from 'components';
+import { Common } from '@/components';
 
 interface ExploreGroupCardPrivatePublicToggleButtonPropsI {
   status: 'Public' | 'Private';

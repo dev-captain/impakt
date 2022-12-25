@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, BoxProps } from '@chakra-ui/react';
-import { Socials } from 'data';
-import { I } from 'components';
+import { Socials } from '@/data';
+import { I } from '@/components';
 
 const SocialIcons: React.FC<BoxProps> = ({ ...props }) => {
   return (

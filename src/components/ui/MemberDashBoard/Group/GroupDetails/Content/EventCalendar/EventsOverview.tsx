@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { useEventCalendarContext } from '@/context/EventCalendarContext';
 import ShowEvents from './ShowEvents';
 import EventDetails from './EventDetails';
 import RemoveEvent from './RemoveEvent';

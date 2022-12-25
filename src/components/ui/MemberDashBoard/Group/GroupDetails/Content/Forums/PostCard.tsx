@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import * as yup from 'yup';
-import { I } from 'components';
+import { I } from '@/components';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import GroupTextAreaInput from '../../../GroupsTextAreaField';

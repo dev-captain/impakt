@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { VStack, Box, Text, GridItem, HStack } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
 import Card from '../Card';
+import Keys from '@/i18n/translations/en';
 
 const ImpaktTeamOfficalPartnership: React.FC = () => {
-  const { t } = useTranslation().i18n;
-  const officalPartners = t('officalPartners.data', { returnObjects: true }) as object[];
+  const officalPartners = [Keys.officalPartners.data];
 
   return (
     <VStack

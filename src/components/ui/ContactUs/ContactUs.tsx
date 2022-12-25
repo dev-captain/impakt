@@ -1,14 +1,12 @@
 import { VStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+import keys from '@/i18n/types';
 
-import { C } from 'components';
+import { C } from '@/components';
 import ContactUsBox from './ContactUsBox';
 import Images from '../../../assets/images';
 
 const ContactUs: React.FC = () => {
-  const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
@@ -50,7 +48,7 @@ const ContactUs: React.FC = () => {
                 fontSize={{ base: '32px', md: '48px' }}
                 lineHeight={{ base: '32px', md: '48px' }}
               >
-                {t(keys.contact.getInTouch)} {t(keys.contact.withUs)}
+                {keys.contact.getInTouch} {keys.contact.withUs}
               </Text>
             </Box>
           </VStack>

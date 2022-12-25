@@ -1,8 +1,8 @@
 import { FormControl, Box, Input, Text, HStack, Select, VStack } from '@chakra-ui/react';
 import { Day } from 'dayspan';
 import * as React from 'react';
-import { useForm } from 'hooks';
-import { Common, I } from 'components';
+import { useForm } from '@/hooks';
+import { Common, I } from '@/components';
 
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';

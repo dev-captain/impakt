@@ -1,8 +1,5 @@
 import * as React from 'react';
 
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-
 import {
   VStack,
   // Box,
@@ -15,11 +12,10 @@ import {
   // Td,
   TableContainer,
 } from '@chakra-ui/react';
-// import {  usePascalCase } from 'hooks';
+import keys from '@/i18n/types';
+// import {  usePascalCase } from '@/hooks';
 
 const ExercisesList: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
   // const { convertToPascalCase } = usePascalCase();
   // const [pascalCasedRewardHistoryStatistics, setPascalCasedRewardHistoryStatistics] =
   //   React.useState<typeof rewardHistoryStatistics>([]);
@@ -60,7 +56,7 @@ const ExercisesList: React.FC = () => {
                 height="58px"
               >
                 <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
-                  {t(keys.memberDashboard.exerciseList.date)}
+                  {keys.memberDashboard.exerciseList.date}
                 </Text>
               </Th>
               <Th
@@ -75,7 +71,7 @@ const ExercisesList: React.FC = () => {
                 height="58px"
               >
                 <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
-                  {t(keys.memberDashboard.exerciseList.reason)}
+                  {keys.memberDashboard.exerciseList.reason}
                 </Text>
               </Th>
               <Th
@@ -90,7 +86,7 @@ const ExercisesList: React.FC = () => {
                 width={{ base: '88px', sm: '118px', md: '150px' }}
               >
                 <Text textStyle={{ md: 'semiBold20', base: 'normal14' }}>
-                  {t(keys.memberDashboard.exerciseList.koin)}
+                  {keys.memberDashboard.exerciseList.koin}
                 </Text>
               </Th>
             </Tr>

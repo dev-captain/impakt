@@ -1,5 +1,5 @@
 import React from 'react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { Text, Flex, Link } from '@chakra-ui/react';
 import { Link as ReactRouterLink, useLocation } from 'react-router-dom';
 

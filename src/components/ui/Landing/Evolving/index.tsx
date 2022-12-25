@@ -9,14 +9,12 @@ import {
   Box,
   Image,
 } from '@chakra-ui/react';
-import { C } from 'components';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import Images from 'assets/images';
+import { C } from '@/components';
+import keys from '@/i18n/types';
+import Images from '@/assets/images';
 
 const Evolving = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const { t } = useTranslation().i18n;
 
   return (
     <C.HeroLayout
@@ -61,7 +59,7 @@ const Evolving = () => {
                   fontWeight="700"
                   lineHeight="inherit"
                 >
-                  {t(keys.impaktGamesHero.evolving)}
+                  {keys.impaktGamesHero.evolving}
                 </Text>
                 <Box height="1px" background="#000" width="152px" margin="24px auto" />
                 <Text
@@ -73,7 +71,7 @@ const Evolving = () => {
                   maxWidth="670px"
                   margin="auto"
                 >
-                  {t(keys.impaktGamesHero.evolvingMsg)}
+                  {keys.impaktGamesHero.evolvingMsg}
                 </Text>
                 {/* <Common.ImpaktButton
                   color="#ffffff"

@@ -1,6 +1,6 @@
 import { useDisclosure, Text, Box } from '@chakra-ui/react';
 import * as React from 'react';
-import { Forms } from 'components';
+import { Forms } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import GroupsModal from '../../GroupsModal';
 import routes from '../../../../../../data/routes';

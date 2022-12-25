@@ -1,5 +1,5 @@
 import React from 'react';
-import { Forms } from 'components';
+import { Forms } from '@/components';
 import GroupsModal from '../../GroupsModal';
 // import GroupSettingsTabs from './Tabs/GroupSettingsTabs';
 

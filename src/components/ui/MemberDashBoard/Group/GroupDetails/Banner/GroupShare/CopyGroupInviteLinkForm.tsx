@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Text, useClipboard } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import { usePersistedGroupStore, usePersistedAuthStore } from '../../../../../../../lib/zustand';
 import { renderToast } from '../../../../../../../utils';
 

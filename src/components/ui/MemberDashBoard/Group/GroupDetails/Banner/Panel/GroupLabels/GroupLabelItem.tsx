@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { usePersistedGroupStore } from 'lib/zustand';
+import { usePersistedGroupStore } from '@/lib/zustand';
 
 interface GroupStatisticLabelPropsI {
   leftIcon: React.ReactElement<any, any>;

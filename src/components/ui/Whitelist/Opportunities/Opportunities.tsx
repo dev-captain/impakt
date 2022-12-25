@@ -1,10 +1,9 @@
 import { memo } from 'react';
-// import { useTranslation } from 'react-i18next';
-// import Keys from 'i18n/types';
-import Images from 'assets/images';
-
+// import Keys from '@/i18n/types';
 import { VStack, HStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
-import { S, C, I } from 'components';
+import Images from '@/assets/images';
+
+import { S, C, I } from '@/components';
 import OpportunitiesCard from './OpportunitiesCard';
 
 const Opportunities = () => {
@@ -13,7 +12,6 @@ const Opportunities = () => {
     Images.whitelist.opportunitiesBg,
   );
   // const navigate = useNavigate();
-  //   const { t } = useTranslation(`default`).i18n;
   //   const [isLessThan1040] = useMediaQuery('(max-width: 991px)');
 
   return (
@@ -88,7 +86,7 @@ const Opportunities = () => {
                   <OpportunitiesCard
                     icon={<I.GleamIcon />}
                     iconText="Whitelist via Gleam"
-                    href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
+                    href={`${import.meta.env.VITE_API_BASE_URL}/api/v1/iam/auth/discord/login`}
                     mBottom="16px"
                   >
                     <Text
@@ -107,7 +105,7 @@ const Opportunities = () => {
                   <OpportunitiesCard
                     icon={<I.TwitterIcon />}
                     iconText="Whitelist via Twitter"
-                    href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
+                    href={`${import.meta.env.VITE_API_BASE_URL}/api/v1/iam/auth/discord/login`}
                     mBottom="16px"
                   >
                     <Text
@@ -125,7 +123,7 @@ const Opportunities = () => {
                   <OpportunitiesCard
                     icon={<I.DiscordIcon />}
                     iconText="Whitelist via Discord"
-                    href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/discord/login`}
+                    href={`${import.meta.env.VITE_API_BASE_URL}/api/v1/iam/auth/discord/login`}
                     mBottom="16px"
                   >
                     <Text

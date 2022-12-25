@@ -1,6 +1,6 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { useDisclosure, Text } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import CreateGroupModal from '../CreateGroupModal/CreateGroupModal';
 
 const CreateGroupButton = () => {

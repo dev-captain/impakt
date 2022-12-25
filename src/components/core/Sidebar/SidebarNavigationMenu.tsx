@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Box, Flex, HStack, PositionProps, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 
 import { usePersistedGroupStore } from '../../../lib/zustand';
 import SidebarNavigationLinks from './SidebarNavigationLinks';

@@ -1,15 +1,14 @@
 import { GridItem, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import Slider, { Settings } from 'react-slick';
-import { useTranslation } from 'react-i18next';
 import TeamCard from './TeamCard';
+import Keys from '@/i18n/translations/en';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const AthletesSlider: React.FC = () => {
-  const { t } = useTranslation().i18n;
-  const Team = t('athletes.team', { returnObjects: true }) as object[];
+  const Team = [Keys.athletes];
 
   return (
     <Slider {...settings}>

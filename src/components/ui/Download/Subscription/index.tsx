@@ -1,13 +1,11 @@
 import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
-import { C, Common } from 'components';
 import React, { useState } from 'react';
-import { validateEmail } from 'utils';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+import { C, Common } from '@/components';
+import { validateEmail } from '@/utils';
+import keys from '@/i18n/types';
 import Gradients from './Gradient';
 
 const SubscriptionForm = () => {
-  const { t } = useTranslation().i18n;
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
   const isSmallView = useBreakpointValue({
@@ -86,7 +84,7 @@ const SubscriptionForm = () => {
               fontSize="14px"
               onChange={onChange}
               textStyle="regular2"
-              placeholder={t(keys.contact.yourEmail)}
+              placeholder={keys.contact.yourEmail}
               _placeholder={{ color: textColor, fontSize: '14px' }}
             />
 

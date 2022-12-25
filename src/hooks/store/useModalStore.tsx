@@ -1,5 +1,5 @@
 import create, { SetState } from 'zustand';
-// import { Videos } from 'data';
+// import { Videos } from '@/data';
 
 type ModalStore = {
   modal: {

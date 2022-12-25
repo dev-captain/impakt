@@ -1,14 +1,11 @@
 import * as React from 'react';
-import { usePascalCase } from 'hooks';
-// import { useTranslation } from 'react-i18next';
-// import keys from 'i18n/types';
-
 import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react';
+import { usePascalCase } from '@/hooks';
+
 import MemberDashboardCard from '../MemberDashBoardCard';
 import { usePersistedFitnessStore } from '../../../../lib/zustand';
 
 const Excercise: React.FC = () => {
-  // const { t } = useTranslation().i18n;
   const { convertToPascalCase } = usePascalCase();
   const excerciseStatistics = usePersistedFitnessStore();
   const [pascalCasedExerciseStates, setPascalCasedExerciseStates] = React.useState<

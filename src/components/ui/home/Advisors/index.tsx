@@ -7,18 +7,14 @@ import {
   useColorModeValue,
   Box,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import { C } from 'components';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+import { C } from '@/components';
+import keys from '@/i18n/types';
 import InvestorCard from '../Founders/InvestorCard';
 import Images from '../../../../assets/images';
 
 const Advisor = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const { t } = useTranslation().i18n;
-  let Advisors = useState<object[]>();
-  Advisors = t('impaktAdvisor.Advisors', { returnObjects: true });
+  const Advisors = [keys.impaktAdvisor];
 
   return (
     <C.HeroLayout
@@ -55,7 +51,7 @@ const Advisor = () => {
               mt={{ base: 0, md: 0, xl: '64px' }}
             >
               <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
-                {t(keys.impaktAdvisor.adviser)}
+                {keys.impaktAdvisor.adviser}
               </Text>
             </VStack>
             <VStack
@@ -71,7 +67,7 @@ const Advisor = () => {
                   textStyle={{ base: 'bold5', md: 'TitleBold48' }}
                   letterSpacing={{ base: '-0.5px', md: 'auto' }}
                 >
-                  {t(keys.impaktAdvisor.Title)}
+                  {keys.impaktAdvisor.Title}
                 </Text>
               </Box>
             </VStack>

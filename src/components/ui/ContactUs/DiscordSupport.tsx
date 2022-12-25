@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import { Box, Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import { C } from 'components';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+import { C } from '@/components';
+import keys from '@/i18n/types';
 import { Videos } from '../../../data';
 
 const DiscordSupport = () => {
-  const { t } = useTranslation().i18n;
   const mode = useColorModeValue('dark', 'light');
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
@@ -70,7 +68,7 @@ const DiscordSupport = () => {
             fontSize={{ base: '32px', md: '48px' }}
             lineHeight={{ base: '32px', md: '48px' }}
           >
-            {t(keys.contact.joinOur)} <b>{t(keys.contact.discordSupport)}</b>
+            {keys.contact.joinOur} <b>{keys.contact.discordSupport}</b>
           </Text>
         </Box>
 

@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-vars */
 import { VStack, Text, SimpleGrid, GridItem, HStack, Box, Link } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import { I } from 'components';
+import keys from '@/i18n/types';
+import { I } from '@/components';
 import NavBarSocialIcons from '../../common/SocialIcons';
 
 type Props = {
@@ -13,7 +12,6 @@ type Props = {
 };
 
 const BigScreenFooter = ({ bgColor, textColor }: Props) => {
-  const { t } = useTranslation().i18n;
   const navigate = useNavigate();
 
   return (
@@ -48,16 +46,16 @@ const BigScreenFooter = ({ bgColor, textColor }: Props) => {
                     fontWeight="500"
                   >
                     <Text fontWeight="400" opacity="0.6">
-                      {t(keys.footer.madeBy)}
+                      {keys.footer.madeBy}
                     </Text>
                     <Text marginLeft="4px">impakt.com</Text>
                   </HStack>
                   <Text fontSize="12px" lineHeight="16px" opacity="0.6">
-                    {t(keys.footer.allRightReserved)}
+                    {keys.footer.allRightReserved}
                   </Text>
                   <Link href="/terms-of-use">
                     <Text fontSize="13px" lineHeight="16px" opacity="0.6" fontWeight="500">
-                      {t(keys.footer.termOfUse)}
+                      {keys.footer.termOfUse}
                     </Text>
                   </Link>
                 </VStack>

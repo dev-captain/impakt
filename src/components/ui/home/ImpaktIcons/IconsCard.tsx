@@ -1,6 +1,6 @@
 import { Box, Image, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { Common } from 'components';
+import Images from '@/assets/images';
+import { Common } from '@/components';
 import PersonalSocialMediaWrapper from '../../../common/PersonalSocialMediaWrapper';
 
 const { UserIcon } = Images.impaktIcons;

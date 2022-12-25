@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { C } from 'components';
+import { C } from '@/components';
 import { Box, useColorModeValue, VStack } from '@chakra-ui/react';
 
 const FitnessJourneyLayout: React.FC = ({ children }) => {

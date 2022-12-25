@@ -1,14 +1,12 @@
-import { isProduction, parsePathname } from 'utils';
-import Keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { Common } from 'components';
+import { isProduction, parsePathname } from '@/utils';
+import Keys from '@/i18n/types';
+import { Common } from '@/components';
 import routes from '../../../data/routes';
 
 const SidebarNavigationLinks = () => {
   // TODO Sidebar links UI
   const location = useLocation();
-  const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
   const textColor = 'fg';
   const passiveColor = 'fg';
@@ -38,7 +36,7 @@ const SidebarNavigationLinks = () => {
         titleActiveColor={activeColor}
         titlePassiveColor={passiveColor}
         href={routes.contact}
-        title={t(Keys.navbar.contactUs)}
+        title={Keys.navbar.contactUs}
         isActive={path.path === 'contact'}
         textStyle="semiBold6"
         isNavigate

@@ -1,10 +1,9 @@
 import { VStack, Collapse, HStack, Box, Link, Button } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { parsePathname } from 'utils';
-import Keys from 'i18n/types';
-import { Socials } from 'data';
-import { I } from 'components';
+import { parsePathname } from '@/utils';
+import Keys from '@/i18n/types';
+import { Socials } from '@/data';
+import { I } from '@/components';
 
 import NavbarLinkItem from './LandingPageNavbarLinkItem';
 import SignInLinkItem from './SignInLinkItem';
@@ -24,7 +23,6 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
   const { member } = usePersistedAuthStore();
   const location = useLocation();
   const path = parsePathname(location.pathname);
-  const { t } = useTranslation().i18n;
 
   return (
     <Collapse in={isOpen} animateOpacity>
@@ -53,7 +51,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
             isSmall
             href={routes.dashboard}
             onClose={onClose}
-            title={t(Keys.navbar.dashboard)}
+            title={Keys.navbar.dashboard}
             isActive={path.path === 'dashboard'}
           />
         )}
@@ -79,7 +77,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           type="LINK"
           href="http://impakt.com/contact"
           onClose={onClose}
-          title={t(Keys.navbar.contactUs)}
+          title={Keys.navbar.contactUs}
           isActive={path.path === 'contact'}
         />
 
@@ -111,7 +109,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
                 onClose();
               });
             }}
-            title={t(Keys.navbar.signOut)}
+            title={Keys.navbar.signOut}
             isActive={path.path === '#'}
           />
         )}
@@ -211,7 +209,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           <Box w="full" display="flex" mt="2" ml="0 !important">
             <Link w="full" href={routes.download} _hover={{ textDecoration: 'none' }}>
               <Button marginTop="8px" width="100%" colorScheme="red">
-                {t(Keys.navbar.download)}
+                {Keys.navbar.download}
               </Button>
             </Link>
           </Box>

@@ -1,13 +1,10 @@
 import { VStack, Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+import keys from '@/i18n/types';
 
 import SignInBox from './ChangePasswordBox';
 
 const ChangePassword: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
   return (
     <VStack w="full">
       <VStack w="full">
@@ -29,7 +26,7 @@ const ChangePassword: React.FC = () => {
             textStyle="TitleBold64"
             lineHeight="100%"
           >
-            {t(keys.password.newPassword)}
+            {keys.password.newPassword}
           </Text>
         </Box>
       </VStack>
