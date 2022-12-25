@@ -26,7 +26,7 @@ const Forums: React.FC = () => {
       />
     );
 
-  const isRoleDefined = role && role !== 'None';
+  const isRoleDefined = role && role !== 'None' && role !== 'Guest';
 
   return (
     <>

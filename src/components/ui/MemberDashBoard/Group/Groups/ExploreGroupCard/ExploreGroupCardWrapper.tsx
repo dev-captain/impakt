@@ -12,10 +12,12 @@ import routes from '../../../../../../data/routes';
 interface ExploreGroupCardWrapperPropsI {
   status: 'Private' | 'Public';
   searchGroup: string;
+  isGuest: boolean;
 }
 const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
   status,
   searchGroup,
+  isGuest,
 }) => {
   const isPrivate = status === 'Private';
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            navigate(routes.groupDetail(g.id));
+            navigate(isGuest ? routes.groupDetailGuest(g.id) : routes.groupDetail(g.id));
           }}
           position="relative"
         >

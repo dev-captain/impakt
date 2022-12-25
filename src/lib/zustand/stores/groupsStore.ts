@@ -21,8 +21,8 @@ export interface GroupsSlice {
   setExploreGroups: (exploreGroups: ExploreGroupRes[]) => void;
   addToMyGroups: (groups: GetGroupMemberResWithGroupRes) => void;
 
-  role: GetGroupMemberResRole | null;
-  setRole: (role: GetGroupMemberResRole | null) => void;
+  role: GetGroupMemberResRole | 'Guest' | null;
+  setRole: (role: GetGroupMemberResRole | 'Guest' | null) => void;
   setClear: () => void;
 }
 

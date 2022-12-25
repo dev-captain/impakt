@@ -2,13 +2,14 @@ import * as React from 'react';
 import { Box, Text, SkeletonCircle, HStack, Skeleton, VStack } from '@chakra-ui/react';
 import { I } from 'components';
 
-import { usePersistedAuthStore } from '../../../../../../../lib/zustand';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 interface CreatePostCardPropsI {
   onClick: () => void;
 }
 const CreatePostCard: React.FC<CreatePostCardPropsI> = ({ onClick }) => {
   const { member } = usePersistedAuthStore();
+  const { role } = usePersistedGroupStore();
 
   return (
     <Box
@@ -18,7 +19,7 @@ const CreatePostCard: React.FC<CreatePostCardPropsI> = ({ onClick }) => {
       _hover={{
         boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;',
       }}
-      onClick={onClick}
+      onClick={role !== 'Guest' ? onClick : () => null}
       p="16px"
       borderRadius="12px"
       marginTop="12px"

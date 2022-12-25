@@ -5,8 +5,12 @@ import Banner from './Banner/Banner';
 import { useFetchGroupDetails } from '../../../../../hooks/useFetchGroupDetails';
 import GroupError from './GroupError';
 
-const GroupDetails: React.FC = () => {
-  const { group, isError, isGroupDetailsLoading } = useFetchGroupDetails();
+interface GroupDetailsPropsI {
+  isAnonymously?: boolean;
+}
+
+const GroupDetails: React.FC<GroupDetailsPropsI> = ({ isAnonymously = false }) => {
+  const { group, isError, isGroupDetailsLoading } = useFetchGroupDetails(isAnonymously);
 
   if (isError.length > 0) return <GroupError isError={isError} />;
   if (isGroupDetailsLoading) return <CircularProgress color="darkOrange" isIndeterminate />;

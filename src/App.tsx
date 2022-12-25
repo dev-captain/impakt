@@ -25,6 +25,7 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 // import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
 import GroupInvite from './pages/GroupInvite/index';
 import routes from './data/routes';
+import ExploreGroup, { GuestExplore, MainExplore } from './pages/Explore';
 
 const App = () => {
   return (
@@ -50,6 +51,17 @@ const App = () => {
       <Route path="/recover-password" element={<RecoveryPassword />} />
 
       <Route path="/invite" element={<GroupInvite />} />
+      <Route path="/explore" element={<ExploreGroup />}>
+        <Route path="" element={<MainExplore />} />
+        <Route
+          path=":id"
+          element={
+            <GuestExplore>
+              <S.GroupDetail isAnonymously />
+            </GuestExplore>
+          }
+        />
+      </Route>
 
       <Route path="/register" element={<SignUp />}>
         <Route path=":id" element={<SignUp />} />

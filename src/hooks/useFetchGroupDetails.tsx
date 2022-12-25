@@ -27,7 +27,7 @@ import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../lib/imp
 import { getDefaultQueryOptions } from '../lib/impakt-dev-api-client/utils';
 import { GroupsSlice } from '../lib/zustand/stores/groupsStore';
 
-export const useFetchGroupDetails = () => {
+export const useFetchGroupDetails = (isAnonymously: boolean = false) => {
   // console.log('render');
   // global states
   const { member } = usePersistedAuthStore();
@@ -69,9 +69,11 @@ export const useFetchGroupDetails = () => {
           return;
         }
 
-        const isMemberOfGroup = await fetchAmIMemberOfGroup.refetch();
-
         let memberRole: GroupsSlice['role'] = 'None';
+
+        const isMemberOfGroup = !isAnonymously
+          ? await fetchAmIMemberOfGroup.refetch()
+          : { data: false };
 
         if (isMemberOfGroup.data) {
           const roleRes = await fetchGroupRoleById.refetch();
@@ -103,7 +105,7 @@ export const useFetchGroupDetails = () => {
           setActiveGroup({ ...data, isPreview: memberRole === 'None' });
         }
 
-        setRole(memberRole);
+        setRole(isAnonymously ? 'Guest' : memberRole);
 
         setIsGroupDetailsLoading(false);
       },

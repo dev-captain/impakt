@@ -75,6 +75,8 @@ const GroupLabels: React.FC = () => {
   const { role } = usePersistedGroupStore();
   const isCreator = role === 'Creator';
   const isModerator = role === 'Moderator';
+  const isGuest = role === 'Guest';
+
   const groupStatisticLabelItems = [
     // {
     //   Icon: () => <I.CalenderIcon color="#5C7FFF" />,
@@ -183,7 +185,7 @@ const GroupLabels: React.FC = () => {
         close={challengeModalDisclosure.onClose}
         open={challengeModalDisclosure.isOpen}
       />
-      {challengePreviewModalDisclosure.isOpen && (
+      {challengePreviewModalDisclosure.isOpen && !isGuest && (
         <React.Suspense fallback={<div>Yükleniyor...</div>}>
           <ActionPreviewModal
             key="pinned-challenge-modal"

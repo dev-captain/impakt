@@ -6,11 +6,15 @@ import { Common } from 'components';
 import { useEventCalendarContext } from 'context/EventCalendarContext';
 import { useNavigate } from 'react-router-dom';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import routes from '../../../../../../../data/routes';
 
 const ShowEvents: React.FC = () => {
   const navigate = useNavigate();
+  const { activeGroup } = usePersistedGroupStore();
   const isAdmin =
     usePersistedGroupStore().role === 'Creator' || usePersistedGroupStore().role === 'Moderator';
+  const isGuest = usePersistedGroupStore().role === 'Guest';
+
   const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
     useEventCalendarContext();
   const selectedDay = getSelectedDay();
@@ -58,7 +62,13 @@ const ShowEvents: React.FC = () => {
                     onClick={() => {
                       goToOverViewScreen('event');
                       setActiveEventId(eventObj.event.id);
-                      navigate(`event/${eventObj.event.id}`);
+                      navigate(
+                        isGuest
+                          ? `${routes.groupDetail(activeGroup?.id ?? 12)}/event/${
+                              eventObj.event.id
+                            }`
+                          : `event/${eventObj.event.id}`,
+                      );
                     }}
                   >
                     <Text textStyle="normal14">
