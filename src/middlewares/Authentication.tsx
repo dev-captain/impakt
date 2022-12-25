@@ -11,7 +11,7 @@ const Authentication: React.FC = ({ children }) => {
 
   React.useEffect(() => {
     if (!member) {
-      navigate(`/signin?next=${location.pathname}`);
+      navigate(`/signin?next=${location.pathname}`, { state: { wasGuest: true } });
     } else {
       LogRocket.identify(member.id.toString(), {
         email: member.email ?? '',

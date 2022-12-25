@@ -62,7 +62,7 @@ export const MainExplore = () => {
 
 export const GuestExplore: React.FC = ({ children }) => {
   const guestClickListener = () => {
-    renderToast('warning', 'To see details you must be signed in first', 'white');
+    renderToast('warning', 'To see details you must be signed in first', 'white', 1000);
   };
 
   useEffect(() => {

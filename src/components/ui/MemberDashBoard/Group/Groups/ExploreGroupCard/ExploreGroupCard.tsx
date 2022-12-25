@@ -26,6 +26,7 @@ const ExploreGroup: React.FC<ExploreGroupProps> = ({ isGuest = false }) => {
       flexDir={{ base: 'column', md: 'row' }}
     >
       <ExploreGroupCardHeader
+        showToggle={!isGuest}
         status={status}
         setStatus={setStatus}
         setSearchGroup={setSearchGroup}

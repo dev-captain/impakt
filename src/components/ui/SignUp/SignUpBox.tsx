@@ -17,6 +17,7 @@ const SignUpBox: React.FC = () => {
           <Link
             as={ReactRouterLink}
             to={navigateTo}
+            state={useLocation().state}
             textDecor="none !important"
             mx="5px"
             cursor="pointer"

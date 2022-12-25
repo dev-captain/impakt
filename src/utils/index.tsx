@@ -98,7 +98,9 @@ let previousToastId: ToastId | undefined = '';
 export function renderToast(
   type: 'error' | 'success' | 'warning',
   description: string,
+  // eslint-disable-next-line default-param-last
   whiteOrDarkMode: 'white' | 'dark' | undefined = 'white',
+  duration?: number,
 ) {
   if (whiteOrDarkMode === 'white' && previousMode === 'dark' && previousToastId) {
     toast.close(previousToastId);
@@ -123,7 +125,7 @@ export function renderToast(
     title: toastTitle,
     description,
     isClosable: true,
-    duration: 8000,
+    duration: duration ?? 8000,
     status: type,
     position: 'top-right',
     variant: 'glass',

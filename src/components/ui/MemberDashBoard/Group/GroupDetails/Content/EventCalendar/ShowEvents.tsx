@@ -68,6 +68,7 @@ const ShowEvents: React.FC = () => {
                               eventObj.event.id
                             }`
                           : `event/${eventObj.event.id}`,
+                        { state: { wasGuest: isGuest } },
                       );
                     }}
                   >

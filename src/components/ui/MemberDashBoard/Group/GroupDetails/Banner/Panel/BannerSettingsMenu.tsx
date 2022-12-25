@@ -139,7 +139,7 @@ const BannerSettingsMenu: React.FC = () => {
             }}
             onClick={
               isGuest
-                ? () => navigate(routes.groupDetail(activeGroup.id))
+                ? () => navigate(`${routes.invite}?g=${activeGroup.id}&p=false`)
                 : activeGroup.private
                 ? request?.status === 'Pending'
                   ? () => null
