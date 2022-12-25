@@ -61,7 +61,7 @@ const CollapseMenu = ({ isOpen, onClose, textColor, isLessThan1040 }: Props) => 
           isSmall
           hide
           type="LINK"
-          href="http://community.impakt.com"
+          href={routes.explore}
           onClose={onClose}
           isActive={path.path === ''}
           title="Social Fitness"

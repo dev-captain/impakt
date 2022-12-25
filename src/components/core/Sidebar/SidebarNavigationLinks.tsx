@@ -18,7 +18,7 @@ const SidebarNavigationLinks = () => {
     <>
       <Common.LinkItem
         titlePassiveColor={passiveColor || textColor}
-        href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
+        href={routes.explore}
         title="Social Fitness"
         isActive={path.path === ''}
         color={activeColor || textColor}

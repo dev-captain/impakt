@@ -88,7 +88,7 @@ const LandingPageNavbar: FC = () => {
             alignItems="center"
           >
             <Common.NavBarLinkItem
-              href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
+              href={routes.explore}
               title="Social Fitness"
               titleActiveColor="white"
               titlePassiveColor="fg"

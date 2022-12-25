@@ -165,8 +165,9 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
         id={id.toString()}
         onClick={(e) => {
           e.preventDefault();
-          e.stopPropagation();
-          if (onClick) {
+          // e.stopPropagation();
+
+          if (onClick && role !== 'Guest') {
             onClick();
           }
         }}

@@ -39,7 +39,7 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   ];
 
   return (
-    <GroupCardWrapperHeader title="Explore">
+    <GroupCardWrapperHeader title={showToggle ? 'Explore' : 'Explore Groups'}>
       <Box
         display="flex"
         flexDir={{ base: 'column-reverse', sm: 'row' }}
