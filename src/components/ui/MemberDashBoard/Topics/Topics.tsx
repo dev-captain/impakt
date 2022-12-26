@@ -1,6 +1,6 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 
 import MemberDashboardCard from '../MemberDashBoardCard';
 import TopicsAccordion from './TopicsAccordion';

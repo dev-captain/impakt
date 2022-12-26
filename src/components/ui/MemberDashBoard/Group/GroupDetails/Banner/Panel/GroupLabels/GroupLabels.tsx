@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { isMobile } from 'react-device-detect';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { IconButton, useDisclosure } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
 import {
@@ -199,7 +199,7 @@ const GroupLabels: React.FC = () => {
               // eslint-disable-next-line no-nested-ternary
               deepLinkToPlay: isMobile
                 ? `impakt://challenge?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`
-                : process.env.REACT_APP_NODE_ENV === 'production'
+                : import.meta.env.VITE_NODE_ENV === 'production'
                 ? `https://fitness.impakt.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`
                 : `https://fitness.impakt-dev.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`,
               exercices: normalizeExerciseNames(

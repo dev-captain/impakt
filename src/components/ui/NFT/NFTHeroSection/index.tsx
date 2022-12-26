@@ -1,6 +1,4 @@
 import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
 import {
   VStack,
   HStack,
@@ -10,10 +8,11 @@ import {
   Image,
   useMediaQuery,
 } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { C, Common, I } from 'components';
-import { useParallax } from 'hooks';
-// import useModalStore from 'hooks/store/useModalStore';
+import Keys from '@/i18n/translations/en';
+import Images from '@/assets/images';
+import { C, Common, I } from '@/components';
+import { useParallax } from '@/hooks';
+// import useModalStore from '@/hooks/store/useModalStore';
 // import DownloadTitleItem from './DownloadTitleItem';
 // import Gradient from './Gradient';
 
@@ -21,7 +20,6 @@ const NFTHeroSection = () => {
   const [isLessThanMd] = useMediaQuery('(max-width:992px)');
   const bgImage = useColorModeValue(Images.nft.nft_bg, Images.nft.nft_bg);
   const { oscar } = Images.nft;
-  const { t } = useTranslation(`default`).i18n;
   const cardRef = React.useRef<HTMLDivElement>(null);
   const imageBoxRef = React.useRef<HTMLImageElement>(null);
   useParallax(cardRef, [imageBoxRef], { range: 25 });
@@ -117,7 +115,7 @@ const NFTHeroSection = () => {
             >
               <VStack justifyContent="flex-start" alignItems="flex-start" color="white">
                 <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
-                  {t(Keys.computerVision.aiDescription)}
+                  {Keys.computerVision.aiDescription}
                 </Text>
               </VStack>
             </Common.InfoCard>

@@ -9,7 +9,7 @@ import {
   VStack,
   IconButton,
 } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 
 import WaitlistForm from './WaitlistForm';
 import SubmittedCard from './SubmittedCard';

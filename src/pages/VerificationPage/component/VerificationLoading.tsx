@@ -1,14 +1,12 @@
 import React from 'react';
 import { useColorModeValue, VStack, Text, Spinner, useBreakpointValue } from '@chakra-ui/react';
-import keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
-import Images from 'assets/images';
+import keys from '@/i18n/translations/en';
+import Images from '@/assets/images';
 
-import { C } from 'components';
+import { C } from '@/components';
 import Gradients from './Gradient';
 
 const VerificationLoading: React.FC = () => {
-  const { t } = useTranslation().i18n;
   const isSmallView = useBreakpointValue({
     base: true,
     sm: true,
@@ -49,7 +47,7 @@ const VerificationLoading: React.FC = () => {
             lineHeight={{ base: '40px', md: '60px' }}
             marginRight={{ base: '5px', md: '10px' }}
           >
-            {t(keys.verification.verification)}
+            {keys.verification.verification}
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
@@ -57,7 +55,7 @@ const VerificationLoading: React.FC = () => {
             lineHeight={{ base: '40px', md: '60px' }}
             marginTop="0 !important"
           >
-            {t(keys.verification.loading)}
+            {keys.verification.loading}
           </Text>
         </VStack>
         <VStack

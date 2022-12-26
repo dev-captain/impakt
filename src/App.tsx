@@ -1,4 +1,3 @@
-import 'i18n';
 import { Routes, Route } from 'react-router-dom';
 import {
   // Home,
@@ -17,8 +16,8 @@ import {
   TermsOfUse,
   Whitelist,
   Landing,
-} from 'pages';
-import { Common, S } from 'components';
+} from '@/pages';
+import { Common, S } from '@/components';
 
 import Authentication from './middlewares/Authentication';
 import ErrorBoundary from './components/common/ErrorBoundary';

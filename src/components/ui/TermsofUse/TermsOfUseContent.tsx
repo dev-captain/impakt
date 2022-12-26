@@ -9,16 +9,14 @@ import {
   UnorderedList,
   ListItem,
 } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import { C } from 'components';
-// import useModalStore from 'hooks/store/useModalStore';
+import Images from '@/assets/images';
+import { C } from '@/components';
+// import useModalStore from '@/hooks/store/useModalStore';
 import TermsOfUseTitle from './TermsOfUseTitle';
+import keys from '@/i18n/translations/en';
 // import Gradient from './Gradient';
 
 const TermsofUseContent = () => {
-  const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
   const bgImage = useColorModeValue(Images.backgrounds.teamofuseBg, Images.backgrounds.teamofuseBg);
   // const show = useModalStore((state) => state.setDownloadPage);
@@ -62,7 +60,7 @@ const TermsofUseContent = () => {
                     57.44deg
                     , rgb(56 4 193 / 46%) -14.75%, rgba(56, 4, 193, 0) 32.81%),#FFFFFF"
                 >
-                  <TermsOfUseTitle title={t(keys.termsOfUse.title)} />
+                  <TermsOfUseTitle title={keys.termsOfUse.title} />
                 </Box>
               </VStack>
               <HStack

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { CloseIcon } from '@chakra-ui/icons';
 import { PatchGroupRequestReqStatusEnum } from '@impakt-dev/api-client';
 import { useGroupsRequestControllerV1AnswerRequestToJoinGroup } from '../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';

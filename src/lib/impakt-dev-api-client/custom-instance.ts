@@ -25,7 +25,7 @@ export const customInstance = <T>(
   return promise;
 };
 
-const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
+const API_SERVER_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 const authStorePersisted = usePersistedAuthStore;
 
 export const AXIOS_INSTANCE = Axios.create({
@@ -39,8 +39,8 @@ const createAxiosResponseInterceptor = () => {
     (error: any) => {
       // Reject promise if usual error
       if (
-        process.env.REACT_APP_VERCEL_ENV === 'production' ||
-        process.env.REACT_APP_VERCEL_ENV === 'preview'
+        import.meta.env.VITE_VERCEL_ENV === 'production' ||
+        import.meta.env.VITE_VERCEL_ENV === 'preview'
       ) {
         sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
       }

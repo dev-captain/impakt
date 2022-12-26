@@ -1,9 +1,8 @@
 import { Box, HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
+import Keys from '@/i18n/translations/en';
 
-import Images from 'assets/images';
-import { C } from 'components';
+import Images from '@/assets/images';
+import { C } from '@/components';
 
 import MirrorAndStarsVideo from '../MirrorAndStarsVideo';
 import NftCard from './NftCard';
@@ -11,7 +10,6 @@ import StartEarningCryptoNowInfoCard from '../StartEarningCryptoNowInfoCard';
 
 const EarnCrypto = () => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBgRotated, Images.backgrounds.light);
-  const { t } = useTranslation(`default`).i18n;
 
   return (
     <C.HeroLayout
@@ -72,7 +70,7 @@ const EarnCrypto = () => {
               >
                 <Box id="move-to-earn-box">
                   <Text textStyle="semiBold3" letterSpacing="2px" color="#F04153" lineHeight="100%">
-                    {t(Keys.burnAndEarn.burnAnd)}
+                    {Keys.burnAndEarn.burnAnd}
                   </Text>
                 </Box>
 
@@ -82,7 +80,7 @@ const EarnCrypto = () => {
                     textStyle={{ base: 'TitleBold48', md: 'TitleBold64' }}
                     color="#fff"
                   >
-                    {t(Keys.burnAndEarn.earn)}
+                    {Keys.burnAndEarn.earn}
                   </Text>
                 </Box>
 

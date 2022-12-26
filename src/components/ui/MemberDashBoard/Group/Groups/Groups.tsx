@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, VStack } from '@chakra-ui/react';
-// import { useAppSelector } from 'hooks';
+// import { useAppSelector } from '@/hooks';
 
 import ExploreGroupCard from './ExploreGroupCard/ExploreGroupCard';
 import MyGroupCard from './MyGroupCard/MyGroupCard';

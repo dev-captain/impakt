@@ -1,8 +1,8 @@
 import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import recoverPasswordFormYupScheme from '../../../lib/yup/schemas/recoverPasswordScheme';

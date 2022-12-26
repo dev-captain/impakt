@@ -9,17 +9,14 @@ import {
   Box,
   Image,
 } from '@chakra-ui/react';
-import { C } from 'components';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import Images from 'assets/images';
+import { C } from '@/components';
+import keys from '@/i18n/translations/en';
+import Images from '@/assets/images';
 import IconsCard from './IconsCard';
 
 const ImpaktIcons = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const { t } = useTranslation().i18n;
-  let Icons = useState<object[]>();
-  Icons = t('impaktIcons.icons', { returnObjects: true });
+  const Icons = [keys.impaktIcons];
 
   return (
     <C.HeroLayout
@@ -63,7 +60,7 @@ const ImpaktIcons = () => {
               mt={{ base: 0, md: 0, xl: '64px' }}
             >
               <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
-                {t(keys.impaktIcons.influential)}
+                {keys.impaktIcons.influential}
               </Text>
             </VStack>
             <VStack
@@ -74,7 +71,7 @@ const ImpaktIcons = () => {
               mt={{ base: 0, md: 0, xl: '24px' }}
             >
               <Box maxW={{ base: '100%', lg: '800px' }}>
-                <Text textStyle="TitleBold48">{t(keys.impaktIcons.Title)}</Text>
+                <Text textStyle="TitleBold48">{keys.impaktIcons.Title}</Text>
               </Box>
             </VStack>
             <VStack
@@ -89,7 +86,7 @@ const ImpaktIcons = () => {
                   textStyle={{ base: 'regular16', md: 'regular18' }}
                   color="rgba(255, 255, 255, 0.75);"
                 >
-                  {t(keys.impaktIcons.description)}
+                  {keys.impaktIcons.description}
                 </Text>
               </Box>
             </VStack>

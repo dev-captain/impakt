@@ -9,8 +9,8 @@ import {
   MenuButton,
   VStack,
 } from '@chakra-ui/react';
-import { I } from 'components';
-import { useLogout } from 'hooks';
+import { I } from '@/components';
+import { useLogout } from '@/hooks';
 import { usePersistedAuthStore } from '../../../lib/zustand';
 
 interface SideBarNavigationDropDownMenuPropsI {

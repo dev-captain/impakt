@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
-import { Common } from 'components';
+import { Common } from '@/components';
 import GroupsModal from '../../../../../../GroupsModal';
 
 interface GroupSettingModalProps {

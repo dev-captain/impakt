@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Image } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 
 interface MemberDashBoardUserImagePropsI {
   imageSrc?: string;

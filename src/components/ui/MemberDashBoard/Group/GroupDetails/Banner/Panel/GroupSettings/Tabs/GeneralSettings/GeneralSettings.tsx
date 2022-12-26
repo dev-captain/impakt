@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, useDisclosure, Text } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 

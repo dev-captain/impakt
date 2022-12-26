@@ -1,7 +1,7 @@
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { I } from 'components';
-import { useForm } from 'hooks';
+import { I } from '@/components';
+import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { useNavigate } from 'react-router-dom';
 
 const BecomePartJoinNowButton: React.FC = () => {

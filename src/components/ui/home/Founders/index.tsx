@@ -9,17 +9,14 @@ import {
   Box,
   Image,
 } from '@chakra-ui/react';
-import { C } from 'components';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import Images from 'assets/images';
+import { C } from '@/components';
+import keys from '@/i18n/translations/en';
+import Images from '@/assets/images';
 import TeamCard from './TeamCard';
 
 const Founder = () => {
   const textColor = useColorModeValue('glass.100', 'glass.700');
-  const { t } = useTranslation().i18n;
-  let Team = useState<object[]>();
-  Team = t('Founder.team', { returnObjects: true });
+  const Team = [keys.Founder];
 
   return (
     <C.HeroLayout
@@ -65,7 +62,7 @@ const Founder = () => {
               mt={{ base: 0, md: 0, xl: '64px' }}
             >
               <Text color="#F04153" textTransform="uppercase" textStyle="semiBold17">
-                {t(keys.Founder.builders)}
+                {keys.Founder.builders}
               </Text>
             </VStack>
             <VStack
@@ -77,7 +74,7 @@ const Founder = () => {
               mb="72px !important"
             >
               <Box maxW={{ base: '100%', lg: '800px' }}>
-                <Text textStyle="TitleBold48">{t(keys.Founder.Title)}</Text>
+                <Text textStyle="TitleBold48">{keys.Founder.Title}</Text>
               </Box>
             </VStack>
             <SimpleGrid

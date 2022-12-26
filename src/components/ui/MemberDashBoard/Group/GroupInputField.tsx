@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormLabel, Input, InputProps } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 
 interface GroupInputFieldPropsI {
   labelText?: string;

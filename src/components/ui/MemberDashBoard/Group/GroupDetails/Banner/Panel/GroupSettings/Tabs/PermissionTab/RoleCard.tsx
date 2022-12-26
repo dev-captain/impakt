@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Text, Avatar, Button, useDisclosure } from '@chakra-ui/react';
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
-import { useForm } from 'hooks';
-import { Common, I } from 'components';
+import { useForm } from '@/hooks';
+import { Common, I } from '@/components';
 import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputGroupPropsI } from '../../../../../../../../../common/InputGroup';
