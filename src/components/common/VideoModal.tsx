@@ -65,9 +65,6 @@ function VideoModal() {
                     height: '100%',
                     width: '100%',
                   }}
-                  // @ts-ignore
-                  // eslint-disable-next-line react/jsx-no-duplicate-props
-                  allow="autoplay"
                 />
               </VStack>
             )}
