@@ -8,7 +8,7 @@ import {
   DrawerHeader,
   Text,
 } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 
 import NoitificationCard from './NotificationCard';
 import { usePersistedGroupStore } from '../../../../lib/zustand';

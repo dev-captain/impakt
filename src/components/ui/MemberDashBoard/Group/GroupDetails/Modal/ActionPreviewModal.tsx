@@ -13,9 +13,10 @@ import {
   Image,
 } from '@chakra-ui/react';
 import React from 'react';
-import { usePascalCase } from 'hooks';
+import { usePascalCase } from '@/hooks';
 import { isAndroid } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 import { Common, I } from '../../../../..';
 import Images from '../../../../../../assets/images';
@@ -42,6 +43,7 @@ interface ActionPreviewModalProps {
     isPlayedByMember?: boolean;
     isEdit?: boolean;
     editButtonClick?: () => void;
+    deleteButtonClick?: () => void;
     bannerImg?: string;
     modalStatus?: 'starting' | 'finished' | 'pending';
   };
@@ -62,6 +64,7 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
     mode,
     isEdit,
     editButtonClick,
+    deleteButtonClick,
     validUntil,
     bannerImg,
     isPlayedByMember,
@@ -395,6 +398,22 @@ const ActionPreviewModal: React.FC<ActionPreviewModalProps> = ({ open, close, ac
                   aria-label="update-top-challenge"
                 >
                   <I.PenIcon />
+                </Common.ImpaktButton>
+              )}
+              {isEdit && mode === 'join' && (
+                <Common.ImpaktButton
+                  variant="delete"
+                  width="40px"
+                  h="40px"
+                  padding="12px"
+                  borderRadius="8px"
+                  type="submit"
+                  fontSize={{ md: '16px' }}
+                  fontWeight="700"
+                  marginRight="5px"
+                  onClick={deleteButtonClick}
+                >
+                  <DeleteIcon width="18px" />
                 </Common.ImpaktButton>
               )}
             </HStack>

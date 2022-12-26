@@ -1,5 +1,5 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { FC } from 'react';
 
 interface HeroVideoEnterButtonPropsI {

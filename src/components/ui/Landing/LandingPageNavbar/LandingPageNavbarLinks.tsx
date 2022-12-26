@@ -1,9 +1,8 @@
 import { memo, useEffect } from 'react';
-import { parsePathname } from 'utils';
-import Keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
 import { HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
+import { parsePathname } from '@/utils';
+import Keys from '@/i18n/translations/en';
 import NavbarLinkItem from './LandingPageNavbarLinkItem';
 
 type Props = {
@@ -14,7 +13,6 @@ const NavbarLink = ({ IsHeader }: Props) => {
   // const { colorMode } = useColorMode();
   const location = useLocation();
   // const isLight = colorMode === 'light';
-  const { t } = useTranslation(`default`).i18n;
   const { onClose } = useDisclosure();
   const path = parsePathname(location.pathname);
   const [isLessThan1040] = useMediaQuery('(max-width: 1040px)');
@@ -60,7 +58,7 @@ const NavbarLink = ({ IsHeader }: Props) => {
         type="LINK"
         onClose={onClose}
         passiveColor={passiveColor}
-        title={t(Keys.navbar.contactUs)}
+        title={Keys.navbar.contactUs}
         isActive={path.path === 'contact'}
       />
       {!IsHeader && (
@@ -68,7 +66,7 @@ const NavbarLink = ({ IsHeader }: Props) => {
           href="/terms-of-use"
           onClose={onClose}
           passiveColor={passiveColor}
-          title={t(Keys.navbar.termsOfUse)}
+          title={Keys.navbar.termsOfUse}
           isActive={path.path === 'terms-of-use'}
         />
       )}

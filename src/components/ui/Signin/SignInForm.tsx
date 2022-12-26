@@ -1,9 +1,9 @@
 import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { LoginReq } from '@impakt-dev/api-client';
 import { useState } from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { parseUrlQueryParamsToKeyValuePairs, renderToast } from '../../../utils';

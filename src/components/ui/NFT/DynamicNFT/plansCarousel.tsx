@@ -1,14 +1,13 @@
 import { memo, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 // import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { Text } from '@chakra-ui/react';
+import keys from '@/i18n/translations/en';
 
 const PlansCarousel = () => {
-  const { t } = useTranslation(`default`).i18n;
   const [images, setImages] = useState<any[]>();
-  let NFTPlans = useState<object[]>();
-  NFTPlans = t('DynamicNFT.plans', { returnObjects: true });
+  const NFTPlans = [keys.DynamicNFT.plans];
+
   useEffect(() => {
     if (!images) setImages(NFTPlans);
   }, [NFTPlans]);

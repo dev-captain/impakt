@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { horizontalScrollBy } from 'utils';
+import { horizontalScrollBy } from '@/utils';
 import useWindowSize from './useWindowSize';
 
 const useHorizontalScroll = () => {

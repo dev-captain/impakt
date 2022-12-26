@@ -4,7 +4,7 @@ import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../../utils';

@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/react';
-import { C, S } from 'components';
+import { C, S } from '@/components';
 
 const Whitelist = () => {
   return (

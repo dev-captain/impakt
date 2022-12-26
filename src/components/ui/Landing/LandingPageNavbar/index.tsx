@@ -12,9 +12,9 @@ import {
   // PositionProps,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { isProduction, parsePathname } from 'utils';
+import { isProduction, parsePathname } from '@/utils';
 
-import { I, Common } from 'components';
+import { I, Common } from '@/components';
 
 import CollapseMenu from './LandingPageCollapseMenu';
 import DropDownProfileMenu from './LandingPageDropDownProfileMenu';

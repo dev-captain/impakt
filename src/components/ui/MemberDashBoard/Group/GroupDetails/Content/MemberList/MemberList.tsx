@@ -7,7 +7,7 @@ import {
   // useClipboard,
   // useToast,
 } from '@chakra-ui/react';
-// import { I } from 'components';
+// import { I } from '@/components';
 import * as React from 'react';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';

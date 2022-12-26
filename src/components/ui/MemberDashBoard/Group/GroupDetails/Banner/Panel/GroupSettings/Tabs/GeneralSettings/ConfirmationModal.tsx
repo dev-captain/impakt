@@ -60,7 +60,7 @@ const ConformationModal: React.FC<GroupSettingModalProps> = ({
                 <Button
                   display="flex"
                   justifyContent="center"
-                  width="161px"
+                  width="min-content"
                   h="60px"
                   borderRadius="8px"
                   type="submit"

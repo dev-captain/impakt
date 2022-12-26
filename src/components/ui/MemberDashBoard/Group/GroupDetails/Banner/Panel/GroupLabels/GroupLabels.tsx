@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { isMobile } from 'react-device-detect';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { IconButton, useDisclosure } from '@chakra-ui/react';
 import GroupLabelWrapper from './GroupLabelWrapper';
 import {
@@ -8,7 +8,7 @@ import {
   usePersistedChallengeStore,
   usePersistedGroupStore,
 } from '../../../../../../../../lib/zustand';
-import ChallengeModal from '../../../Modal/ChallengeModal';
+import ChallengeModal from '../../../Modal/ChallengeModal/ChallengeModal';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
 import { normalizeExerciseNames } from '../../../../../../../../utils';
@@ -201,7 +201,7 @@ const GroupLabels: React.FC = () => {
               // eslint-disable-next-line no-nested-ternary
               deepLinkToPlay: isMobile
                 ? `impakt://challenge?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}`
-                : process.env.REACT_APP_NODE_ENV === 'production'
+                : import.meta.env.VITE_NODE_ENV === 'production'
                 ? `https://fitness.impakt.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`
                 : `https://fitness.impakt-dev.com/?challengeId=${groupPinnedChallenge?.Challenge?.id}&groupId=${activeGroup?.id}&next=${window.location.origin}/d/g/${activeGroup?.id}`,
               exercices: normalizeExerciseNames(

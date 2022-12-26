@@ -1,5 +1,5 @@
 import { Box, HStack, VStack, Link, Text, Tooltip } from '@chakra-ui/react';
-import MemberDashboardCard from 'components/ui/MemberDashBoard/MemberDashBoardCard';
+import MemberDashboardCard from '@/components/ui/MemberDashBoard/MemberDashBoardCard';
 import * as React from 'react';
 
 interface InfoSectionPropsI {

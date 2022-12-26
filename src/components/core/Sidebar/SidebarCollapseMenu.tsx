@@ -1,5 +1,5 @@
 import { Box, Button, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import { useLocation } from 'react-router-dom';
 import routes from '../../../data/routes';
 import SidebarLinks from './SidebarLinks';

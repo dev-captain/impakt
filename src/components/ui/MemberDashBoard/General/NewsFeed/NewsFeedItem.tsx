@@ -1,6 +1,6 @@
 import { HStack, Box, Text, StackProps } from '@chakra-ui/react';
 import * as React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 
 const NewsFeedItem: React.FC<StackProps & { title: string; href?: string; order: number }> = ({
   href,

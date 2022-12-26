@@ -1,4 +1,4 @@
-import Images from 'assets/images';
+import Images from '@/assets/images';
 import { Day, EventInput } from 'dayspan';
 
 export const RoadMapData: {

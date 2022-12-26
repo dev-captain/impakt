@@ -8,7 +8,7 @@ import VerificationLoading from './component/VerificationLoading';
 
 type VerificationStatus = 'Success' | 'Error' | 'Pending';
 
-const apiBaseUrl = process.env.REACT_APP_API;
+const apiBaseUrl = import.meta.env.VITE_API;
 
 const Verify = () => {
   const [searchParams] = useSearchParams();

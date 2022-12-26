@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import { useColorModeValue } from '@chakra-ui/react';
 import dayjs from 'dayjs';
-import { KnowledgeBaseEndpoints } from 'helpers/constants';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { KnowledgeBaseEndpoints } from '../helpers/constants';
 
 function useQuery() {
   const { search } = useLocation();

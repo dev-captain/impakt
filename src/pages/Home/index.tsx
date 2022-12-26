@@ -1,6 +1,6 @@
 import { Box, Container } from '@chakra-ui/react';
-// import { S, I } from 'components';
-// import { useAppSelector } from 'hooks';
+// import { S, I } from '@/components';
+// import { useAppSelector } from '@/hooks';
 
 const HomePage = () => {
   // const isAnimated = useAppSelector((state) => state.stateReducer.heroVideo.isAnimated);

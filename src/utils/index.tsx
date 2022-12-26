@@ -48,9 +48,7 @@ export function sleep(ms: number) {
 export const getImageFromS3AsUrl = (currentCoverImageSource: string) => {
   const sourceBaseUrl =
     // eslint-disable-next-line no-constant-condition
-    process.env.NODE_ENV === 'development' || 'test'
-      ? 'https://impakt-upload-file-data-dev.s3.amazonaws.com/'
-      : '';
+    import.meta.env.DEV ? 'https://impakt-upload-file-data-dev.s3.amazonaws.com/' : '';
   const imageUrl = `${sourceBaseUrl}${currentCoverImageSource}`;
 
   return imageUrl;
@@ -310,5 +308,5 @@ export const parseDaytime = (time: any) => {
   return 1000 * 60 * (hours * 60 + minutes);
 };
 
-export const isProduction = process.env.REACT_APP_VERCEL_ENV === 'production';
-export const isPreview = process.env.REACT_APP_VERCEL_ENV === 'preview';
+export const isProduction = import.meta.env.VITE_VERCEL_ENV === 'production';
+export const isPreview = import.meta.env.VITE_VERCEL_ENV === 'preview';

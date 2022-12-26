@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { Common, I } from 'components';
-import { InputGroupPropsI } from 'components/common/InputGroup';
+import { Common, I } from '@/components';
+import { InputGroupPropsI } from '@/components/common/InputGroup';
 // import * as React from 'react';
 import GroupCardWrapperHeader from '../../GroupCardHeader';
 import ExploreGroupCardPrivatePublicToggleButton from './ExploreGroupCardPrivatePublicToggleButton';

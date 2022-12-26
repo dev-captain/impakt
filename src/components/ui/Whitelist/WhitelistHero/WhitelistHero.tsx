@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { C } from 'components';
+import { C } from '@/components';
 import { VStack, Image, Text, Box, HStack } from '@chakra-ui/react';
 import Images from '../../../../assets/images';
 import CounterItem from '../CounterItem';

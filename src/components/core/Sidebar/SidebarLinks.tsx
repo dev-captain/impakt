@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SidebarMenuItem from './SidebarMenuItem';
 import routes from '../../../data/routes';

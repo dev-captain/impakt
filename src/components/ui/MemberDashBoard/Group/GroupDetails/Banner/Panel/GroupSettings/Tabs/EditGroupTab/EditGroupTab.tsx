@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 
-import { Forms } from 'components';
+import { Forms } from '@/components';
 
 const EditGroupTab: React.FC = () => {
   return (

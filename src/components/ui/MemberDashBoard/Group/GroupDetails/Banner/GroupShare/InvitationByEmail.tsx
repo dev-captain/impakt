@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl } from '@chakra-ui/react';
 
-import { Common } from 'components';
+import { Common } from '@/components';
 import { usePersistedGroupStore, usePersistedAuthStore } from '../../../../../../../lib/zustand';
 import { InputGroupPropsI } from '../../../../../../common/InputGroup';
 import groupInviteYupScheme from '../../../../../../../lib/yup/schemas/groupInviteYupScheme';
