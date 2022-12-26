@@ -17,6 +17,7 @@ const WelcomeModal: React.FC = () => {
   const { isWhitelistedCollection } = usePersistedAuthStore();
   const memberName = member?.username.substring(0, member?.username.indexOf('#'));
   const memberNumber = member?.username?.substring(member?.username.indexOf('#'));
+
   return (
     <MemberDashboardCard flexDir="column" alignItems="start" rowGap={{ base: '18px', lg: '32px' }}>
       <Box
@@ -142,7 +143,14 @@ const WelcomeModal: React.FC = () => {
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text Text color="fg-1" textAlign="center" textStyle="bold5">
-              {activeDays}
+              <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={activeDays}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
             </Text>
             <Text color="fg1" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Active days
