@@ -17,7 +17,6 @@ const WelcomeModal: React.FC = () => {
   const { isWhitelistedCollection } = usePersistedAuthStore();
   const memberName = member?.username.substring(0, member?.username.indexOf('#'));
   const memberNumber = member?.username?.substring(member?.username.indexOf('#'));
-
   return (
     <MemberDashboardCard flexDir="column" alignItems="start" rowGap={{ base: '18px', lg: '32px' }}>
       <Box
@@ -68,7 +67,14 @@ const WelcomeModal: React.FC = () => {
         >
           <Box color="darkOrange" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textAlign="center" textStyle="bold5">
-              {koinBalanceScore ?? 0}
+              <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={koinBalanceScore ?? 0}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
             </Text>
             <Text textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Koin Balance
