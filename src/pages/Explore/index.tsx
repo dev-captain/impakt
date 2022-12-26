@@ -7,36 +7,35 @@ import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-cli
 import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
 import { isProduction, renderToast } from '../../utils';
 import { Common, I } from '../../components';
+import { useGuestV1ControllerCreateGuest } from '../../lib/impakt-dev-api-client/react-query/guest/guest';
+import Images from '../../assets/images';
 
 const ExploreGroupPage: React.FC = () => {
   const { member } = usePersistedAuthStore();
+  const groupsStore = usePersistedGroupStore();
+
+  const createGuest = useGuestV1ControllerCreateGuest();
   const navigate = useNavigate();
 
   React.useEffect(() => {
     if (member) {
       navigate('/d/g');
+    } else {
+      const createGuestAsync = async () => {
+        await createGuest
+          .mutateAsync({ data: { screenName: 'explore-group-guest' } })
+          .then(async () => fetchExploreGroups.refetch());
+      };
+      createGuestAsync();
     }
   }, []);
-
-  return (
-    <VStack align="flex-start" justify="flex-start" minH="100vh">
-      <VStack maxW="1200px" w="full" align="center" mt="48px" marginLeft="auto" marginRight="auto">
-        <Outlet />
-      </VStack>
-    </VStack>
-  );
-};
-
-export const MainExplore = () => {
-  const { member } = usePersistedAuthStore();
-  const groupsStore = usePersistedGroupStore();
 
   const fetchExploreGroups = useGroupsControllerV1ExploreGroups(
     { includeRequests: true, deleted: false },
     {
       query: {
         ...getDefaultQueryOptions(),
-        enabled: !member,
+        enabled: false,
         onSuccess: (exploreG) => {
           const sortByAlphabetExploreGroups = exploreG.sort((a, b) => {
             if (a.groupName.toUpperCase() < b.groupName.toUpperCase()) {
@@ -52,8 +51,18 @@ export const MainExplore = () => {
         },
       },
     },
-  ); // TODO update zustand explore groups
+  );
 
+  return (
+    <VStack align="flex-start" justify="flex-start" minH="100vh">
+      <VStack maxW="1200px" w="full" align="center" mt="48px" marginLeft="auto" marginRight="auto">
+        <Outlet />
+      </VStack>
+    </VStack>
+  );
+};
+
+export const MainExplore = () => {
   return (
     <VStack p="1em" rowGap="80px" w="full" align="flex-start">
       <Box
@@ -67,9 +76,13 @@ export const MainExplore = () => {
         w="full"
         bgColor="#22363F"
         position="relative"
+        bgImage={Images.Common.communityBanner}
+        bgPos="0px 0px"
+        bgSize="cover"
+        bgRepeat="no-repeat"
       >
         <VStack spacing="0" rowGap="2em">
-          <Box textAlign="center">
+          <Box bg={{ base: 'blackAlpha.700', md: 'none' }} borderRadius="1em" textAlign="center">
             <Text textStyle="TitleBold48" color="white" fontWeight="500" letterSpacing="-1.5px">
               Join our community
             </Text>
@@ -83,7 +96,9 @@ export const MainExplore = () => {
               h="56px"
               variant="orange"
             >
-              <Text>View</Text>
+              <Text textStyle="semibold20" lineHeight="32px">
+                View
+              </Text>
             </Common.ImpaktButton>
           </Box>
         </VStack>
@@ -97,9 +112,7 @@ export const MainExplore = () => {
         </Box>
       </Box>
       <Box w="full">
-        <Skeleton isLoaded={!fetchExploreGroups.isLoading}>
-          <ExploreGroup isGuest />
-        </Skeleton>
+        <ExploreGroup isGuest />
       </Box>
     </VStack>
   );
