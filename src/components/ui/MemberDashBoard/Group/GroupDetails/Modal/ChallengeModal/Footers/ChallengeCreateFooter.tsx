@@ -1,6 +1,6 @@
 import React from 'react';
 import { HStack, Box, Text } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 
 interface ChallengeCreateFooterPropsI {}
 export const ChallengeCreateFooter: React.FC<ChallengeCreateFooterPropsI> = () => {

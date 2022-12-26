@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import ChallengesCard from '../../ChallengeModalTabs/ChallengesCard/ChallengesCard';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import NoItemCard from '../../ChallengeModalTabs/NoChallengeCard/NoItemCard';
