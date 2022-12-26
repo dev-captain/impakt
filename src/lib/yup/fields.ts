@@ -51,13 +51,9 @@ const file = yup
 const eventTitle = yup
   .string()
   .required('Event title is required')
-  .max(50, `You can't use more than 50 characters.`)
-  .required('Event description is required');
+  .max(50, `You can't use more than 50 characters.`);
 
-const eventDescription = yup
-  .string()
-  .max(50, `You can't use more than 50 characters.`)
-  .required('Event description is required');
+const eventDescription = yup.string().max(50, `You can't use more than 50 characters.`);
 
 const eventTime = yup.string().required('Event time is required');
 const eventEndTime = yup.number().required('Duration time is required');
