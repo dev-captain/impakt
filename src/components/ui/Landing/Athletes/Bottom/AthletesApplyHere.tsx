@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,12 +10,12 @@ const AthletesApplyHere: React.FC = () => {
     <Box textAlign="center">
       <Text
         fontSize={{ md: '32px', base: '26px' }}
-        fontWeight="500"
+        fontWeight="700"
         lineHeight="120%"
         mb="40px"
         color="#1C1C28"
       >
-        Got what it takes to be an ICON?
+        BE AN ICON
       </Text>
       <Common.ImpaktButton
         variant="black"

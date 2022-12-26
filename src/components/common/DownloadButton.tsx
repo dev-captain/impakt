@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Button, color, HStack, Text, VStack } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import './style.css';
 
 const DownloadButton = ({

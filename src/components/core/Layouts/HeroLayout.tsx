@@ -2,7 +2,7 @@
 import React from 'react';
 import { Box, Spacer, useColorModeValue, VStack } from '@chakra-ui/react';
 // import { useLocation } from 'react-router-dom';
-import { C } from 'components';
+import { C } from '@/components';
 
 import Footer from '../Footer/FooterV1';
 import Navbar from '../Navbar';

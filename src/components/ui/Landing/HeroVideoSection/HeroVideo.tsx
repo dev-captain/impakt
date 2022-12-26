@@ -1,21 +1,16 @@
 import { Box } from '@chakra-ui/react';
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 
 import { Videos } from '../../../../data';
 import SoundsButton from './SoundsButton';
 import HeroVideoText from './HeroVideoText';
-import HeroVideoEnterButton from './HeroVideoEnterButton';
+// import HeroVideoEnterButton from './HeroVideoEnterButton';
 
 const HeroVideo: React.FC = () => {
+  const [isVideoEnded, setIsVideoEnded] = React.useState(false);
   const videoBoxRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<null | (HTMLVideoElement & HTMLDivElement)>(null);
   const [sound, setSound] = useState(true);
-  const [opacityText, setOpacityText] = useState(1);
-
-  const play = () => {
-    setOpacityText(0);
-    videoRef?.current?.play();
-  };
 
   const handleMute = () => {
     setSound(!sound);
@@ -25,14 +20,9 @@ const HeroVideo: React.FC = () => {
 
   const endVideo = () => {
     if (!videoBoxRef.current) return;
+    setIsVideoEnded(true);
     videoBoxRef.current.style.maxHeight = '0';
   };
-  useEffect(() => {
-    if (videoRef.current) {
-      // pollyfill fix for ios require auto play true with playsInline but we don't want to play auto : hacky solution
-      videoRef.current.pause();
-    }
-  }, []);
 
   return (
     <Box
@@ -56,6 +46,7 @@ const HeroVideo: React.FC = () => {
         autoPlay
         onEnded={() => endVideo()}
         playsInline
+        muted
       >
         <Box as="source" src={Videos.newVideo} type="video/mp4" />
       </Box>
@@ -69,13 +60,18 @@ const HeroVideo: React.FC = () => {
         w="full"
         transform="translate(-50%,-50%)"
       >
-        {opacityText === 1 && (
+        {!isVideoEnded && (
           <>
             <HeroVideoText />
-            <HeroVideoEnterButton onClick={play} />
+            <SoundsButton
+              variant="transparent"
+              _focus={{}}
+              _hover={{}}
+              onClick={handleMute}
+              isOn={!sound}
+            />
           </>
         )}
-        <SoundsButton onClick={handleMute} isOn={sound} />
       </Box>
     </Box>
   );

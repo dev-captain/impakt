@@ -6,7 +6,6 @@ interface GroupLabelWrapperPropsI {
   items: {
     leftIcon: any;
     visible: boolean;
-    labelTitle: string;
     labelDescription: string;
     rightIcon: any;
     onClick: () => void;
@@ -16,14 +15,14 @@ interface GroupLabelWrapperPropsI {
 const GroupLabelWrapper: React.FC<GroupLabelWrapperPropsI> = ({ items }) => {
   return (
     <>
-      {items.map(({ onClick, leftIcon, rightIcon, visible, labelDescription, labelTitle }) =>
+      {items.map(({ onClick, leftIcon, rightIcon, visible, labelDescription }) =>
         visible ? (
           <GroupLabelItem
-            key={labelTitle}
+            key={labelDescription}
             leftIcon={leftIcon}
             rightIcon={rightIcon}
             labelDescription={labelDescription}
-            labelTitle={labelTitle}
+            // labelTitle={labelTitle}
             onClick={onClick}
           />
         ) : null,

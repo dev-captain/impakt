@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
-import { I, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
+import Keys from '@/i18n/translations/en';
+import { I, Common } from '@/components';
 import routes from '../../../data/routes';
 
 interface ImpaktFooterV2PropsI {
@@ -18,14 +17,13 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
   children,
 }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(`default`).i18n;
   const bgColor = isWhiteMode ? 'a5' : 'dark-2';
 
   return (
     <VStack
       zIndex="999999 !important"
       py="80px"
-      px="48px"
+      px={{ base: '24px', md: '48px' }}
       borderTop={isWhiteMode ? '1px solid #D3E2F0' : ''}
       bg={bgColor}
       as="footer"
@@ -37,9 +35,17 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
           rowGap={{ base: '32px', md: '24px' }}
           display="flex"
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
-          justify={{ base: 'center', lg: wFull ? 'flex-start' : 'space-between' }}
+          justify={{
+            base: 'center',
+            lg: wFull ? 'flex-start' : 'space-between',
+          }}
         >
-          <HStack columnGap="2em" display="flex">
+          <HStack
+            columnGap="2em"
+            display="flex"
+            justifyContent="flex-start"
+            width={{ base: '100%', md: 'auto' }}
+          >
             <I.ImpaktIcon variant="lg" minW="111px" w="111px" whiteMode={!isWhiteMode} />
             <Box onClick={() => navigate(routes.download)}>
               <Common.ImpaktButton variant={isWhiteMode ? 'orange' : 'primary'}>
@@ -49,7 +55,7 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
           </HStack>
 
           <HStack
-            justifyContent={{ base: 'center', md: 'flex-end' }}
+            justifyContent={{ base: 'space-between', md: 'flex-start' }}
             mb={{ base: '32px !important', md: '0px !important ' }}
             spacing="8px"
             pl={{ base: '0px', md: '64px', lg: wFull ? '50px' : '64px' }}
@@ -64,7 +70,7 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
         <HStack
           spacing="2em"
           mt="0 !important"
-          justifyContent={{ base: 'center', md: 'flex-start' }}
+          justifyContent={{ base: 'space-between', md: 'flex-start' }}
           alignItems={{ base: 'center', md: 'flex-start' }}
           w="full"
         >
@@ -72,16 +78,16 @@ const ImpaktFooterV2: React.FC<ImpaktFooterV2PropsI> = ({
         </HStack>
         <HStack
           display={{ base: 'block', md: 'flex' }}
-          textAlign={{ base: 'center', md: 'start' }}
+          textAlign={{ base: 'start', md: 'start' }}
           w="full"
           justifyContent={{ base: 'center', md: 'flex-start' }}
           flexDir="row"
         >
           <Text color={isWhiteMode ? 'fg1' : 'rgba(255, 255, 255, 0.4)'} textStyle="regular3">
-            {t(Keys.footer.madeBy)}
+            {Keys.footer.madeBy}
           </Text>
           <Text color={isWhiteMode ? 'fg1' : 'rgba(255, 255, 255, 0.4)'} textStyle="regular3">
-            {t(Keys.footer.allRightReserved)}
+            {Keys.footer.allRightReserved}
           </Text>
         </HStack>
       </VStack>

@@ -6,7 +6,12 @@ import BannerShareButton from '../BannerShareButton';
 
 const BannerPanelRight: React.FC = () => {
   return (
-    <HStack marginTop={{ md: '0', base: '20px' }} display="flex" spacing="1em">
+    <HStack
+      marginTop={{ md: '0', base: '20px' }}
+      display="flex"
+      spacing="1em"
+      width={{ base: '100%', md: 'auto' }}
+    >
       <BannerShareButton />
       <BannerSettingsMenu />
       {/* <Button

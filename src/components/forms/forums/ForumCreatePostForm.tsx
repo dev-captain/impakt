@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { Box, Text, VStack } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AddIcon } from '@chakra-ui/icons';
 import createPostYupScheme from '../../../lib/yup/schemas/createPostYupScheme';

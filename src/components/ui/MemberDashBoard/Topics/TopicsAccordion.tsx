@@ -8,7 +8,7 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import * as React from 'react';
 
 interface TopicsAccordionProps {

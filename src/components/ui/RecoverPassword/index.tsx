@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export { default as RecoverPassword } from 'components/ui/RecoverPassword/RecoverPassword';
+export { default as RecoverPassword } from '@/components/ui/RecoverPassword/RecoverPassword';

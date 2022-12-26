@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { Common } from 'components';
+import { Common } from '@/components';
 import PermissionCard from './PermissionCard';
 import RoleCard from './RoleCard';
 import { useGroupsControllerV1PatchGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';

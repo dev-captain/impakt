@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, HStack, useDisclosure, VStack } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
-import { C } from 'components';
+import { C } from '@/components';
 import SidebarCollapseMenu from '../Sidebar/SidebarCollapseMenu';
 import SidebarNavigationMenu from '../Sidebar/SidebarNavigationMenu';
 import SidebarMenu from '../Sidebar/SidebarLinks';

@@ -1,8 +1,9 @@
 import { useColorModeValue, VStack } from '@chakra-ui/react';
-import { C, S } from 'components';
 import React from 'react';
-import Images from 'assets/images';
-import { useLogout } from 'hooks';
+
+import { C, S } from '@/components';
+import Images from '@/assets/images';
+import { useLogout } from '@/hooks';
 
 import { usePersistedAuthStore } from '../../lib/zustand';
 

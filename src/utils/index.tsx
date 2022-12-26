@@ -48,9 +48,7 @@ export function sleep(ms: number) {
 export const getImageFromS3AsUrl = (currentCoverImageSource: string) => {
   const sourceBaseUrl =
     // eslint-disable-next-line no-constant-condition
-    process.env.NODE_ENV === 'development' || 'test'
-      ? 'https://impakt-upload-file-data-dev.s3.amazonaws.com/'
-      : '';
+    import.meta.env.DEV ? 'https://impakt-upload-file-data-dev.s3.amazonaws.com/' : '';
   const imageUrl = `${sourceBaseUrl}${currentCoverImageSource}`;
 
   return imageUrl;
@@ -169,12 +167,12 @@ export const truncateString = (str: string, max: number) => {
   return str;
 };
 export const getTimeDifference = (validFrom: string, validUntil: string) => {
-  if (validFrom.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
-  if (validUntil.length === 0) return { d: '0', h: '0', m: '0', s: '0' };
+  if (validFrom.length === 0) return { d: '00', h: '00', m: '00', s: '00' };
+  if (validUntil.length === 0) return { d: '00', h: '00', m: '00', s: '00' };
 
   const isValidDate = Day.fromString(validFrom).time < Day.now().time;
 
-  if (!isValidDate) return { d: '0', h: '0', m: '0', s: '0' };
+  if (!isValidDate) return { d: '00', h: '00', m: '00', s: '00' };
 
   return compareDateWithNow(validUntil);
 };
@@ -234,13 +232,43 @@ export const convertToPascalCase = (label: string) => {
 };
 
 const exerciseNameCorrection = (exerciseName: string) => {
-  if (exerciseName === 'Squat') return 'Squats';
-  if (exerciseName === 'Side Lunge') return 'Side Lunges';
-  if (exerciseName === 'High Knee') return 'High Knees';
-  if (exerciseName === 'No Action') return 'Rest';
-  if (exerciseName === 'Glute Bridge') return 'Glute Bridges';
+  const exercises = {
+    'No Action': 'Rest',
+    'Push Up': 'Push Ups',
+    'KneePush Up': 'Knee Push Ups',
+    'Sit Up': 'Sit Ups',
+    Squat: 'Squats',
+    'Squat Hold': 'Squat Hold',
+    'Elbow Plank': 'Elbow Plank',
+    'Elbow PlankHold': 'Elbow Plank Hold',
+    'Leg Raise': 'Leg Raises',
+    'Glute Bridge': 'Glute Bridges',
+    'Jumping Jack': 'Jumping Jacks',
+    'High Knee': 'High Knees',
+    Stretch: 'Stretch',
+    'Stretch Hold': 'Stretch Hold',
+    'Forward Lunge': 'Forward Lunges',
+    Burpee: 'Burpees',
+    'Side Lunge': 'Side Lunges',
+    'Glute Bridge Hold': 'Glute Bridge Holds',
+    'Walk Out': 'Walk Outs',
+    'Feet Tap Left': 'Left Foot Taps',
+    'Feet Tap Right': 'Right Foot Taps',
+    'Cross Feet Tap Front': 'Cross Foot Taps',
+    'Cross Feet Tap Back': 'Back Cross Foot Taps',
+    'Cross Punch': 'Cross Punches',
+    'Standing CrunchKnee': 'Standing Knee Crunches',
+    'Standing CrunchLeg': 'Standing Leg Crunches',
+    'Standing Kick': 'Standing Kicks',
+    'Bicycle Crunch': 'Bicycle Crunches',
+    'Kick Back': 'Kickbacks',
+    'Mountain Climber': 'Mountain Climbers',
+    Windmill: 'Windmills',
+    'Plank UpDown': 'Up Down Planks',
+  };
+  const convertedExerciseName = exercises[exerciseName] ?? exerciseName;
 
-  return exerciseName;
+  return convertedExerciseName;
 };
 
 export const normalizeExerciseNames = (routines: GetTimelineBlockRes[]) => {
@@ -278,5 +306,5 @@ export const parseDaytime = (time: any) => {
   return 1000 * 60 * (hours * 60 + minutes);
 };
 
-export const isProduction = process.env.REACT_APP_VERCEL_ENV === 'production';
-export const isPreview = process.env.REACT_APP_VERCEL_ENV === 'preview';
+export const isProduction = import.meta.env.VITE_VERCEL_ENV === 'production';
+export const isPreview = import.meta.env.VITE_VERCEL_ENV === 'preview';

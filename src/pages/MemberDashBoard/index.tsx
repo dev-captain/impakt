@@ -1,5 +1,5 @@
 import React from 'react';
-import { C } from 'components';
+import { C } from '@/components';
 import { useFetchMemberDashboard } from '../../hooks/useFetchMemberDashboard';
 
 const MemberDashboard: React.FC = () => {

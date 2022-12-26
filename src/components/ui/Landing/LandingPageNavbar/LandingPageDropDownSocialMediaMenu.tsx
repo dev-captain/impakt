@@ -2,8 +2,8 @@ import React from 'react';
 import { Menu, MenuButton, MenuItem, useDisclosure, MenuList, HStack, Box } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 // import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
-import { I } from 'components';
-import { Socials } from 'data';
+import { I } from '@/components';
+import { Socials } from '@/data';
 
 type SocialIconProps = {
   titleColor?: string;

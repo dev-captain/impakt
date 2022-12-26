@@ -107,12 +107,13 @@ export const useFetchGroupDetails = () => {
 
         setIsGroupDetailsLoading(false);
       },
-      onError: (err) => {
-        if (err.response?.status === 404 || err.response?.status === 400) {
-          setIsError('404 GROUP NOT FOUND. PLEASE MAKE SURE THE GROUP EXISTS');
-        } else {
-          setIsError('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
-        }
+      onError: () => {
+        // if (err.response?.status === 404 || err.response?.status === 400) {
+        //   setIsError("Oops! We couldn't find what you are looking for.");
+        // } else {
+        //   setIsError('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
+        // }
+        setIsError("Oops! We couldn't find what you are looking for.");
         setIsGroupDetailsLoading(false);
       },
     },

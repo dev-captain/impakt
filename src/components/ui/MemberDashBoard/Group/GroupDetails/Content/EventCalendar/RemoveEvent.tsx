@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { DeleteIcon, ChevronLeftIcon, CloseIcon } from '@chakra-ui/icons';
-import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { Common } from 'components';
+import { useEventCalendarContext } from '@/context/EventCalendarContext';
+import { Common } from '@/components';
 import { Time } from 'dayspan';
 import { useCalendarEventControllerDeleteCalendarEvent } from '../../../../../../../lib/impakt-dev-api-client/react-query/calendar/calendar';
 

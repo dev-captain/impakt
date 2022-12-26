@@ -1,7 +1,7 @@
 import { Box, HStack } from '@chakra-ui/react';
-import { Socials } from 'data';
+import { Socials } from '@/data';
 import { memo } from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 
 // const { Discord, Twitter, TwitterLight, Tiktok, DiscordLight, Youtube, YoutubeLight } =
 //   Images.Common;

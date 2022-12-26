@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import React, { memo } from 'react';
 
 type Props = {

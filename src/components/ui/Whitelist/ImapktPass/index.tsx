@@ -1,6 +1,6 @@
-import { C, Common, I } from 'components';
+import { C, Common, I } from '@/components';
 import { VStack, Box, Text, useColorModeValue, HStack } from '@chakra-ui/react';
-import Images from 'assets/images';
+import Images from '@/assets/images';
 import { useNavigate } from 'react-router-dom';
 import { Socials } from '../../../../data';
 import routes from '../../../../data/routes';

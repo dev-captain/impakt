@@ -1,6 +1,6 @@
 import { useColorModeValue, VStack } from '@chakra-ui/react';
-import { C, S } from 'components';
-import Images from 'assets/images';
+import { C, S } from '@/components';
+import Images from '@/assets/images';
 
 const RecoveryPassword = () => {
   const bgImage = useColorModeValue(Images.backgrounds.gradientBg, Images.backgrounds.light);

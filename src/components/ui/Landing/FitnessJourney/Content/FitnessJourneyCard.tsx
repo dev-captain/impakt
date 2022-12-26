@@ -1,16 +1,26 @@
 import * as React from 'react';
-import { Text, Box, Image } from '@chakra-ui/react';
+import { Text, Box } from '@chakra-ui/react';
 
 interface FitnessJourneyCardProps {
-  img: string;
+  video: string;
   title: string;
   description: string;
+  link: string;
 }
 
-const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ img, title, description }) => {
+const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
+  video,
+  title,
+  link,
+  description,
+}) => {
   return (
     <Box
-      width={{ md: 'auto', base: '100%' }}
+      as="a"
+      target="_blank"
+      href={link}
+      title="vSports Fitness World"
+      w="full"
       display="flex"
       backgroundColor="#fff"
       borderRadius="14px"
@@ -18,14 +28,26 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ img, title, des
       mt={{ md: '0', base: '20px' }}
       boxShadow="0px 8px 15px -4px rgba(0, 0, 0, 0.8)"
       backdropFilter="blur(40px)"
+      p="1em"
     >
-      <Image
-        src={img}
-        objectFit="cover"
-        zIndex="0"
-        padding={{ base: '12px', md: '28px' }}
-        pb="21px"
-      />
+      <Box
+        as="video"
+        objectFit="fill"
+        // ref={videoRef}
+        top="0"
+        left="0"
+        w="100%"
+        height={{ base: '200px', md: '15.625vw' }}
+        borderRadius="20px"
+        autoPlay
+        loop
+        muted
+        playsInline
+        boxShadow="dark"
+        src={video}
+      >
+        <source src={video} type="video/mp4" />
+      </Box>
       <Box padding={{ lgx: '16px', base: '12px' }}>
         <Box>
           <Text
@@ -37,7 +59,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({ img, title, des
           >
             {title}
           </Text>
-          <Text color="#1C1C28" maxWidth="280px">
+          <Text color="#1C1C28" maxWidth="300">
             {description}
           </Text>
         </Box>

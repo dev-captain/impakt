@@ -1,4 +1,4 @@
-import Images from 'assets/images';
+import Images from '@/assets/images';
 import { Day, EventInput } from 'dayspan';
 
 export const RoadMapData: {
@@ -82,7 +82,7 @@ export const Socials = {
   discord: 'https://discord.gg/eVQJ8XRa9S',
   tiktok: 'http://www.tiktok.com/@impakt.vsports',
   insta: 'https://www.instagram.com/impakt.vsports/',
-  linkedin: 'https://www.linkedin.com/company/impaktlife/',
+  linkedin: 'https://linkedin.com/company/impakt-vsports',
 };
 
 export const Categories = [
@@ -581,7 +581,7 @@ export const ChallengeTab: ChallengeTabs[] = [
 export const GroupSettingsMemberTabs = ['General'];
 
 export const GroupSettingTab = [
-  'Edit group',
+  // 'Edit group',
   'Permissions',
   'General',
   // 'Requests',
@@ -617,24 +617,6 @@ export const GroupDetails = [
 
 export const deepLinkToApp = (groupId?: number, eventId?: number) =>
   `impakt://join-event?groupId=${groupId}&eventId=${eventId}`;
-
-export const journeyData = [
-  {
-    img: Images.Journey.Journey,
-    title: 'We need variety',
-    description: 'Choose from 40+ exercises. More added constantly.',
-  },
-  {
-    img: Images.Journey.Journey1,
-    title: 'Starting at the base',
-    description: 'Routines customized to our starting fitness level.',
-  },
-  {
-    img: Images.Journey.Journey2,
-    title: 'Challenging ourselves & others',
-    description: 'Complete Impakt challenges and compete with others.',
-  },
-];
 
 export const AthletesData = [
   {

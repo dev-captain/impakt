@@ -1,15 +1,12 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery, Image } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
-import { C, I } from 'components';
-import Images from 'assets/images';
+import Keys from '@/i18n/translations/en';
+import { C, I } from '@/components';
+import Images from '@/assets/images';
 
 const Privacy: React.FC = () => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
-
-  const { t } = useTranslation(`default`).i18n;
 
   return (
     <C.HeroLayout
@@ -46,7 +43,7 @@ const Privacy: React.FC = () => {
                     lineHeight="100%"
                     textAlign={{ md: 'start', base: 'center' }}
                   >
-                    {t(Keys.impaktGamesHero.privacyTitle)}
+                    {Keys.impaktGamesHero.privacyTitle}
                   </Text>
                   <Text
                     color="#1C1C28"
@@ -56,7 +53,7 @@ const Privacy: React.FC = () => {
                     lineHeight="100%"
                     textAlign={{ md: 'start', base: 'center' }}
                   >
-                    {t(Keys.impaktGamesHero.privacyTitle1)}
+                    {Keys.impaktGamesHero.privacyTitle1}
                   </Text>
                   <Text
                     color="#1C1C28"
@@ -66,7 +63,7 @@ const Privacy: React.FC = () => {
                     lineHeight="100%"
                     textAlign={{ md: 'start', base: 'center' }}
                   >
-                    {t(Keys.impaktGamesHero.privacyTitle2)}
+                    {Keys.impaktGamesHero.privacyTitle2}
                   </Text>
                   <Box
                     height="1px"
@@ -81,7 +78,7 @@ const Privacy: React.FC = () => {
                     textAlign={{ md: 'start', base: 'center' }}
                     margin={{ md: 'initial', base: 'auto' }}
                   >
-                    {t(Keys.impaktGamesHero.privacyDescription)}
+                    {Keys.impaktGamesHero.privacyDescription}
                   </Text>
                 </Box>
               </Box>
