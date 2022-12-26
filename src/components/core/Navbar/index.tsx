@@ -104,7 +104,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   zIndex="99"
                 >
                   <NavBarLink />
-                  <Box textColor="red">
+                  <Box>
                     <DropDownSocialMediaMenu
                       titleColor="rgba(255,255,255,0.5)"
                       bgColor="rgba(28, 28, 40)"
