@@ -19,7 +19,11 @@ const ExploreGroupPage: React.FC = () => {
 
   React.useEffect(() => {
     if (member) {
-      navigate('/d/g');
+      if (isProduction) {
+        navigate('/d/g/12');
+      } else {
+        window.location.replace('https://community.impakt.com/');
+      }
     } else {
       const createGuestAsync = async () => {
         await createGuest
