@@ -1,7 +1,7 @@
 import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
-import { useForm } from 'hooks';
+import { Common, I } from '@/components';
+import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { InputGroupPropsI } from '../../common/InputGroup';

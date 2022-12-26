@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Text, Image } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { Common, I } from 'components';
-import Images from 'assets/images';
-import routes from 'data/routes';
+import { Common, I } from '@/components';
+import Images from '@/assets/images';
+import routes from '@/data/routes';
 // import { getDefaultQueryOptions } from '../../../../../lib/impakt-dev-api-client/utils';
 
 const GroupError: React.FC<{ isError: string }> = (props) => {

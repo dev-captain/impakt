@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { useEventCalendarContext } from '@/context/EventCalendarContext';
 import ShowEvents from './ShowEvents';
 import ChallengeModal from '../../Modal/ChallengeModal/ChallengeModal';
 import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';

@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/layout';
-import { C, S } from 'components';
+import { C, S } from '@/components';
 
 const TermsOfUse = () => {
   return (

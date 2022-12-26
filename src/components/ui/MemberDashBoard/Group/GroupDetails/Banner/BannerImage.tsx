@@ -1,5 +1,5 @@
 import { Box, Image, Text, useDisclosure } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { LockIcon } from '@chakra-ui/icons';
 import * as React from 'react';
 import Images from '../../../../../../assets/images';

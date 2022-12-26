@@ -1,6 +1,6 @@
 import { HStack, Text, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { compareDateWithNow } from '../../../../utils';
 import PromoBarDayItem from './PromoBarDayItem';
 import WaitlistModal from '../../Download/DownloadPlatform/WaitlistModal';
@@ -10,7 +10,7 @@ export const PromoBarCounter: React.FC<PropsI> = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const { d, h, m, s } = compareDateWithNow(
-    new Date(process.env.REACT_APP_PROMO_DATE ?? '1990').toLocaleString('en-US', {
+    new Date(import.meta.env.VITE_PROMO_DATE ?? '1990').toLocaleString('en-US', {
       timeZone: 'America/Los_Angeles',
     }),
   );

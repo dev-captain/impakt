@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { HStack, Text, useMediaQuery, VStack } from '@chakra-ui/react';
-import { C, Common } from 'components';
-import Images from 'assets/images';
+import { C, Common } from '@/components';
+import Images from '@/assets/images';
 
 const NFTCommonQuestion: React.FC = () => {
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMediaQuery, VStack } from '@chakra-ui/react';
-import { C } from 'components';
+import { C } from '@/components';
 import LandingPageNavbar from '../LandingPageNavbar';
 
 const MyBodyLayout: React.FC = ({ children }) => {

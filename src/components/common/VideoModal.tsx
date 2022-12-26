@@ -9,8 +9,8 @@ import {
   Circle,
   GridItem,
 } from '@chakra-ui/react';
-import { I, Common } from 'components';
-import useModalStore from 'hooks/store/useModalStore';
+import { I, Common } from '@/components';
+import useModalStore from '@/hooks/store/useModalStore';
 
 function VideoModal() {
   const { modal, show, onClose } = useModalStore((state) => state);
@@ -65,9 +65,6 @@ function VideoModal() {
                     height: '100%',
                     width: '100%',
                   }}
-                  // @ts-ignore
-                  // eslint-disable-next-line react/jsx-no-duplicate-props
-                  allow="autoplay"
                 />
               </VStack>
             )}

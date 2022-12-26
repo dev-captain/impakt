@@ -1,7 +1,7 @@
 import { useColorModeValue, VStack, Spinner } from '@chakra-ui/react';
-import { S, C } from 'components';
-import Images from 'assets/images';
 import { useEffect } from 'react';
+import Images from '@/assets/images';
+import { S, C } from '@/components';
 
 import { parseUrlQueryParamsToKeyValuePairs } from '../../utils';
 import { usePersistedAuthStore } from '../../lib/zustand';

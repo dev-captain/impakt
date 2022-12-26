@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDisclosure, LayoutProps } from '@chakra-ui/react';
-// import { useAppDispatch, useAppSelector } from 'hooks';
+// import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ForumDetailModal from './ForumsDetail/ForumDetailModal';

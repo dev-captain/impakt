@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 import { BoxProps } from '@chakra-ui/react';
 import MemberDashboardCard from '../../../MemberDashBoardCard';
 

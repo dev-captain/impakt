@@ -1,8 +1,8 @@
 import { Text, VStack } from '@chakra-ui/react';
-import { C } from 'components';
-import seoData from 'data/seoData';
 import { useNavigate, useParams } from 'react-router-dom';
-import { layoutPadding } from 'theme';
+import seoData from '@/data/seoData';
+import { layoutPadding } from '@/theme';
+import { C } from '@/components';
 
 const { title, meta } = seoData.blog;
 

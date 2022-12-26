@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
 import { Box, VStack, HStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import NewsFeedItem from './NewsFeedItem';
 import routes from '../../../../../data/routes';

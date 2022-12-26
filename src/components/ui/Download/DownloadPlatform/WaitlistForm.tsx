@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { Box, Text, VStack } from '@chakra-ui/react';
@@ -12,18 +12,18 @@ import { renderToast } from '../../../../utils';
 const sendMailAsContact = async (email: string, type: 'mobile' | 'invest') => {
   const getIds = () => {
     if (type === 'mobile') {
-      return [process.env.REACT_APP_MOBILE_WAITLIST_ID];
+      return [import.meta.env.VITE_MOBILE_WAITLIST_ID];
     }
 
     if (type === 'invest') {
-      return [process.env.REACT_APP_INVEST_WAITLIST_ID];
+      return [import.meta.env.VITE_INVEST_WAITLIST_ID];
     }
 
     return [];
   };
 
   const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/api/v1/mail/mailing-list/add-contact`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/v1/mail/mailing-list/add-contact`,
     {
       email,
       mailingListIds: getIds(),

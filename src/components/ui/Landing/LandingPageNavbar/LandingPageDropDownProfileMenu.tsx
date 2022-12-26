@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { I } from 'components';
+import { I } from '@/components';
 
 import { usePersistedAuthStore } from '../../../../lib/zustand';
 import { useLogout } from '../../../../hooks/useLogout';

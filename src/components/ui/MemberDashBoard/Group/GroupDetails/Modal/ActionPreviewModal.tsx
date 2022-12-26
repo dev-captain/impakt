@@ -13,7 +13,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import React from 'react';
-import { usePascalCase } from 'hooks';
+import { usePascalCase } from '@/hooks';
 import { isAndroid } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 import { DeleteIcon } from '@chakra-ui/icons';

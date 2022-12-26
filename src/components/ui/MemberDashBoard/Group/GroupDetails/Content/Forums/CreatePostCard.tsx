@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Text, SkeletonCircle, HStack, Skeleton, VStack } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 
 import { usePersistedAuthStore } from '../../../../../../../lib/zustand';
 
