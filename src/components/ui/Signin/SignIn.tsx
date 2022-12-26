@@ -1,6 +1,6 @@
 import { VStack, Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 
 import SignInBox from './SignInBox';
 

@@ -4,7 +4,7 @@ import Card from '../Card';
 import Keys from '@/i18n/translations/en';
 
 const ImpaktTeamOfficalPartnership: React.FC = () => {
-  const officalPartners = [Keys.officalPartners.data];
+  const officalPartners = Keys.officalPartners.data;
 
   return (
     <VStack
@@ -38,11 +38,11 @@ const ImpaktTeamOfficalPartnership: React.FC = () => {
           columnGap="50px"
           margin="40px 0"
         >
-          {officalPartners.map((d: any) => (
+          {officalPartners.map((d) => (
             <GridItem
               marginLeft="0 !important"
               margin="20px 0 !important"
-              key={d.name}
+              key={d.fname}
               w="full"
               maxW="275px"
               maxH="560px"

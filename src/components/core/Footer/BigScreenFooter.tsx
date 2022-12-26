@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { VStack, Text, SimpleGrid, GridItem, HStack, Box, Link } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import { I } from '@/components';
 import NavBarSocialIcons from '../../common/SocialIcons';
 

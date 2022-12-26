@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../data/routes';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import { Common, I } from '@/components';
 
 const StartEarningCryptoNowInfoCard: FC = () => {

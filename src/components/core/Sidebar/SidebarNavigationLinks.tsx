@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { isProduction, parsePathname } from '@/utils';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import { Common } from '@/components';
 import routes from '../../../data/routes';
 

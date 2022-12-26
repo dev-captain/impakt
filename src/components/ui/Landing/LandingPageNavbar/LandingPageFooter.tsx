@@ -2,7 +2,7 @@
 import { memo } from 'react';
 import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import LandingPageNavbarLinks from './LandingPageNavbarLinks';
 import routes from '../../../../data/routes';

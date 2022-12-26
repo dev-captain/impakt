@@ -1,7 +1,7 @@
 import { Box, HStack, Text, useColorModeValue, useMediaQuery, VStack } from '@chakra-ui/react';
 import { C } from '@/components';
 import { RoadmapInfo } from '@/data';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import Progress from './Progress';
 import RoadMapBackground from './RoadmapBackground';
 import RoadmapItem from './RoadmapItem';

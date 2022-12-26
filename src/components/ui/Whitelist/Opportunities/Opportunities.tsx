@@ -1,5 +1,5 @@
 import { memo } from 'react';
-// import Keys from '@/i18n/types';
+// import Keys from '@/i18n/translations/en';
 import { VStack, HStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import Images from '@/assets/images';
 

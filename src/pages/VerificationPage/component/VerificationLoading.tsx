@@ -1,6 +1,6 @@
 import React from 'react';
 import { useColorModeValue, VStack, Text, Spinner, useBreakpointValue } from '@chakra-ui/react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import Images from '@/assets/images';
 
 import { C } from '@/components';

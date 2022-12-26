@@ -12,7 +12,7 @@ import Images from '@/assets/images';
 import { layoutPadding } from '@/theme';
 import useModalStore from '@/hooks/store/useModalStore';
 import colors from '@/theme/colors';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import { C } from '@/components';
 
 import MotionCard from './MotionCard';

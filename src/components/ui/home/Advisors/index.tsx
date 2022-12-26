@@ -8,7 +8,7 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { C } from '@/components';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import InvestorCard from '../Founders/InvestorCard';
 import Images from '../../../../assets/images';
 

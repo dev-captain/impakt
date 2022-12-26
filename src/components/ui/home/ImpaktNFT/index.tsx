@@ -3,7 +3,7 @@ import { memo } from 'react';
 import AOS from 'aos';
 import { VStack, HStack, useColorModeValue, Box, Text, Image } from '@chakra-ui/react';
 import { I, C, Common } from '@/components';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import Images from '@/assets/images';
 
 import '../../../../theme/styles.css';

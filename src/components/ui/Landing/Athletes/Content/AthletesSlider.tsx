@@ -1,18 +1,18 @@
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { GridItem, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import Slider, { Settings } from 'react-slick';
-import TeamCard from './TeamCard';
 import Keys from '@/i18n/translations/en';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import TeamCard from './TeamCard';
 
 const AthletesSlider: React.FC = () => {
-  const Team = [Keys.athletes];
+  const Team = Keys.athletes.team;
 
   return (
     <Slider {...settings}>
-      {Team.map((advisor: any) => {
+      {Team.map((advisor) => {
         return (
           <GridItem
             key={advisor.name}

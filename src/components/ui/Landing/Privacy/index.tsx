@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery, Image } from '@chakra-ui/react';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import { C, I } from '@/components';
 import Images from '@/assets/images';
 

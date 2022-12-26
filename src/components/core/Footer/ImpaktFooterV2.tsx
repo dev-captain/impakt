@@ -2,7 +2,7 @@
 import React from 'react';
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import { I, Common } from '@/components';
 import routes from '../../../data/routes';
 

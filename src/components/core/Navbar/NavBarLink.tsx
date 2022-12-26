@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Common } from '@/components';
 import { isProduction } from '../../../utils';
 import routes from '../../../data/routes';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 
 const NavbarLink = () => {
   const path = useLocation();

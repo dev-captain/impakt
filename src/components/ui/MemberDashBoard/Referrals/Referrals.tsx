@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import { I } from '@/components';
 import InfoSection from '@/components/common/InfoSection';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';

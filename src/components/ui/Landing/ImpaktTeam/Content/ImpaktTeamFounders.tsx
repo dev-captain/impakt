@@ -4,7 +4,7 @@ import Card from '../Card';
 import Keys from '@/i18n/translations/en';
 
 const ImpaktTeamFounders: React.FC = () => {
-  const leadership = [Keys.leadershipData.data];
+  const leadership = Keys.leadershipData.data;
 
   return (
     <VStack
@@ -38,10 +38,10 @@ const ImpaktTeamFounders: React.FC = () => {
           columnGap="50px"
           margin="40px 0"
         >
-          {leadership.map((d: any) => (
+          {leadership.map((d) => (
             <GridItem
               marginLeft="0 !important"
-              key={d.name}
+              key={d.fname}
               w="full"
               maxW="275px"
               margin="20px 0 !important"

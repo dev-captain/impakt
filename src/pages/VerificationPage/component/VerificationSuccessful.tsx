@@ -1,7 +1,7 @@
 import React from 'react';
 import { useColorModeValue, VStack, Text, useBreakpointValue, Image } from '@chakra-ui/react';
 import { C } from '@/components';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import Images from '@/assets/images';
 
 import Gradients from './Gradient';

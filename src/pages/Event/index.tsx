@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 
 import { S, C } from '@/components';
 import useEventStore from '@/hooks/store/useEventStore';

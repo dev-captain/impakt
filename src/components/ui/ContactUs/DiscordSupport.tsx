@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import { Box, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { C } from '@/components';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import { Videos } from '../../../data';
 
 const DiscordSupport = () => {

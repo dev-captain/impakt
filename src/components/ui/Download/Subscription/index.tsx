@@ -2,7 +2,7 @@ import { useColorModeValue, VStack, Text, useBreakpointValue } from '@chakra-ui/
 import React, { useState } from 'react';
 import { C, Common } from '@/components';
 import { validateEmail } from '@/utils';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import Gradients from './Gradient';
 
 const SubscriptionForm = () => {

@@ -1,5 +1,5 @@
 import { Box, HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 
 import Images from '@/assets/images';
 import { C } from '@/components';

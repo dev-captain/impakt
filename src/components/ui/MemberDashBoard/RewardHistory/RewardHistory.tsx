@@ -1,6 +1,6 @@
 import { Box, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import { I } from '@/components';
 import InfoSection from '@/components/common/InfoSection';
 

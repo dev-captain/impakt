@@ -12,7 +12,7 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 
 const Exercises: React.FC = () => {
   return (

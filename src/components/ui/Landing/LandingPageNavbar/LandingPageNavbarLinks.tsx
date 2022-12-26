@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 import { HStack, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from '@/utils';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import NavbarLinkItem from './LandingPageNavbarLinkItem';
 
 type Props = {

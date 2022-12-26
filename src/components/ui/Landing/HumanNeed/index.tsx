@@ -1,6 +1,6 @@
 import { Text, VStack, useColorModeValue, Box } from '@chakra-ui/react';
 import { C, Common } from '@/components';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import Images from '@/assets/images';
 
 const HumanNeed = () => {

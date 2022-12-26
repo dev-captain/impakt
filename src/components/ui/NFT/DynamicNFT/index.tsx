@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 
 import Images from '@/assets/images';
 import { C, Common, I } from '@/components';

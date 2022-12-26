@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// import keys from '@/i18n/types';
+// import keys from '@/i18n/translations/en';
 
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import { I, Common } from '@/components';

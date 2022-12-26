@@ -2,7 +2,7 @@ import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import Images from '@/assets/images';
 import { I, C } from '@/components';
 import useModalStore from '@/hooks/store/useModalStore';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import { layoutPadding } from '@/theme';
 
 const BurnToEarnHero = () => {

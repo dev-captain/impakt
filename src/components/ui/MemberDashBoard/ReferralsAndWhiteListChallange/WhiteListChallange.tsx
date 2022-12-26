@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { VStack, Box, Text, UnorderedList, ListItem } from '@chakra-ui/react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 
 const WhitelistChallenge: React.FC = () => {
   return (

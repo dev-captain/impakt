@@ -16,7 +16,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Images from '@/assets/images';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import { I, C, Common } from '@/components';
 // import useModalStore from '@/hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';

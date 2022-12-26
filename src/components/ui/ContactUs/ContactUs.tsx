@@ -1,6 +1,6 @@
 import { VStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import * as React from 'react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 
 import { C } from '@/components';
 import ContactUsBox from './ContactUsBox';

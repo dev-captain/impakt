@@ -1,6 +1,6 @@
 import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery } from '@chakra-ui/react';
-import Keys from '@/i18n/types';
+import Keys from '@/i18n/translations/en';
 import { I, C, Common } from '@/components';
 
 import StartEarningCryptoNowInfoCard from '../StartEarningCryptoNowInfoCard';

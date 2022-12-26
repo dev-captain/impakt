@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { VStack, Box, Text } from '@chakra-ui/react';
-import keys from '@/i18n/types';
+import keys from '@/i18n/translations/en';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import { usePersistedAuthStore } from '../../../../lib/zustand';
 
