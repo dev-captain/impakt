@@ -29,3 +29,4 @@ export { default as CollapseMenu } from './CollapseMenu';
 export { default as SocialIcons } from './SocialIcons';
 export { default as Toggle } from './Toggle';
 export { default as CountDownTimer } from './CountDownTimer/CountDownTimer';
+export { default as InputLabel } from './InputLabel';
