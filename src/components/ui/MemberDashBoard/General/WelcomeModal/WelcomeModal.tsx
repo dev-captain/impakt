@@ -68,7 +68,14 @@ const WelcomeModal: React.FC = () => {
         >
           <Box color="darkOrange" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textAlign="center" textStyle="bold5">
-              {koinBalanceScore ?? 0}
+              <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={koinBalanceScore ?? 0}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
             </Text>
             <Text textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Koin Balance
@@ -136,7 +143,14 @@ const WelcomeModal: React.FC = () => {
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text Text color="fg-1" textAlign="center" textStyle="bold5">
-              {activeDays}
+              <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={activeDays}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
             </Text>
             <Text color="fg1" textAlign="center" mt="2px" textStyle="regular3" fontWeight={500}>
               Active days

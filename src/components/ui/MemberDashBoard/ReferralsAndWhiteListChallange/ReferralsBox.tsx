@@ -11,6 +11,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import NumberFormat from 'react-number-format';
 import * as React from 'react';
 import ReferralCopyClipboard from '../ReferralCopyClipBoard';
 import MemberDashboardCard from '../MemberDashBoardCard';
@@ -86,7 +87,14 @@ const ReferralsBox: React.FC = () => {
         >
           <Box color="darkOrange" mt="0 !important" id="whitelist-challange-description-box-2">
             <Text textStyle="bold5" textAlign="center">
-              {koinRewardedByReferrals || '0'}
+              <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={koinRewardedByReferrals || 0}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
             </Text>
             <Text textAlign="center" mt="6px" textStyle="regular3">
               Koins earned
@@ -104,7 +112,14 @@ const ReferralsBox: React.FC = () => {
           >
             <Box mt="0 !important" id="whitelist-challange-description-box-2">
               <Text textStyle="bold5" textAlign="center">
-                {godlRewardedByReferrals}
+                <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={godlRewardedByReferrals}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
               </Text>
               <Text
                 color="rgba(255, 255, 255, 0.4)"
@@ -127,7 +142,14 @@ const ReferralsBox: React.FC = () => {
         >
           <Box mt="0 !important" id="whitelist-challange-description-box-2">
             <Text color="#29323B" textAlign="center" textStyle="bold5">
-              {referralsRegisteredNumber ?? 0}
+              <NumberFormat
+                thousandsGroupStyle="thousand"
+                value={referralsRegisteredNumber ?? 0}
+                decimalSeparator="."
+                displayType="text"
+                thousandSeparator
+                allowNegative
+              />
             </Text>
             <Text color="#728BA3" textAlign="center" mt="6px" textStyle="regular3">
               registered <br />
