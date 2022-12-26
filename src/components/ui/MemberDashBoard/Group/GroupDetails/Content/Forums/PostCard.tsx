@@ -162,7 +162,7 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
   return (
     <>
       <Box
-        id={id.toString()}
+        id={id?.toString()}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
