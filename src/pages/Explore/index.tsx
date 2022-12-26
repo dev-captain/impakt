@@ -24,18 +24,29 @@ const ExploreGroupPage: React.FC = () => {
       const createGuestAsync = async () => {
         await createGuest
           .mutateAsync({ data: { screenName: 'explore-group-guest' } })
-          .then(async () => fetchExploreGroups.refetch());
+          .then(async () => groupsStore.setRole('Guest'));
       };
       createGuestAsync();
     }
   }, []);
 
+  return (
+    <VStack align="flex-start" justify="flex-start" minH="100vh">
+      <VStack maxW="1200px" w="full" align="center" mt="48px" marginLeft="auto" marginRight="auto">
+        <Outlet />
+      </VStack>
+    </VStack>
+  );
+};
+
+export const MainExplore = () => {
+  const groupsStore = usePersistedGroupStore();
   const fetchExploreGroups = useGroupsControllerV1ExploreGroups(
     { includeRequests: true, deleted: false },
     {
       query: {
         ...getDefaultQueryOptions(),
-        enabled: false,
+        enabled: groupsStore.role === 'Guest',
         onSuccess: (exploreG) => {
           const sortByAlphabetExploreGroups = exploreG.sort((a, b) => {
             if (a.groupName.toUpperCase() < b.groupName.toUpperCase()) {
@@ -53,16 +64,6 @@ const ExploreGroupPage: React.FC = () => {
     },
   );
 
-  return (
-    <VStack align="flex-start" justify="flex-start" minH="100vh">
-      <VStack maxW="1200px" w="full" align="center" mt="48px" marginLeft="auto" marginRight="auto">
-        <Outlet />
-      </VStack>
-    </VStack>
-  );
-};
-
-export const MainExplore = () => {
   return (
     <VStack p="1em" rowGap="80px" w="full" align="flex-start">
       <Box
@@ -111,9 +112,10 @@ export const MainExplore = () => {
           <I.VSportByImpaktIcon isWhite />
         </Box>
       </Box>
-      <Box w="full">
+
+      <Skeleton isLoaded={!fetchExploreGroups.isLoading} w="full">
         <ExploreGroup isGuest />
-      </Box>
+      </Skeleton>
     </VStack>
   );
 };
@@ -130,7 +132,13 @@ export const GuestExplore: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <Box w="full" p={{ base: '1em', md: 'none' }}>
+    <Box
+      w="full"
+      alignItems="center"
+      display="flex"
+      justifyContent="center"
+      p={{ base: '1em', md: 'none' }}
+    >
       {children}
     </Box>
   );
