@@ -1,7 +1,7 @@
 import React from 'react';
 import { HStack, Box } from '@chakra-ui/react';
-import { EventCalendarContextProvider } from 'context/EventCalendarContext';
-import { usePersistedGroupStore } from 'lib/zustand';
+import { usePersistedGroupStore } from '@/lib/zustand';
+import { EventCalendarContextProvider } from '@/context/EventCalendarContext';
 import Forums from './Forums/Forums';
 import MemberList from './MemberList/MemberList';
 import EventCalendar from './EventCalendar/EventCalendar';

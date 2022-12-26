@@ -1,6 +1,6 @@
 import { Container } from '@chakra-ui/layout';
 import { Box } from '@chakra-ui/react';
-import { C, S } from 'components';
+import { C, S } from '@/components';
 
 const DownloadSCreen = () => {
   return (

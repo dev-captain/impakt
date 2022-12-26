@@ -1,14 +1,12 @@
 import React from 'react';
 import { VStack, HStack, Box, Text, useMediaQuery } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
-import { I, C, Common } from 'components';
+import Keys from '@/i18n/translations/en';
+import { I, C, Common } from '@/components';
 
 import StartEarningCryptoNowInfoCard from '../StartEarningCryptoNowInfoCard';
 
 const YourBody: React.FC = ({ children }) => {
   const [isSmall] = useMediaQuery('(max-width: 1280px)');
-  const { t } = useTranslation(`default`).i18n;
 
   return (
     <C.HeroLayout
@@ -51,7 +49,7 @@ const YourBody: React.FC = ({ children }) => {
                 <Common.InfoCard LeftLogo={<I.RichIcon2 />}>
                   <VStack alignItems="flex-start" color="white">
                     <Text color="rgba(255, 255, 255, 0.75)" textStyle="semiBold5">
-                      {t(Keys.computerVision.aiDescription)}
+                      {Keys.computerVision.aiDescription}
                     </Text>
                   </VStack>
                 </Common.InfoCard>
@@ -64,7 +62,7 @@ const YourBody: React.FC = ({ children }) => {
                 w="full"
               >
                 <Text textStyle="semiBold5" letterSpacing="2px" color="#F04153">
-                  {t(Keys.computerVision.computerVision)}
+                  {Keys.computerVision.computerVision}
                 </Text>
               </Box>
 
@@ -76,7 +74,7 @@ const YourBody: React.FC = ({ children }) => {
                 w="full"
               >
                 <Text textStyle="TitleBold64" letterSpacing="-2.5px" color="#fff">
-                  {t(Keys.computerVision.description)}
+                  {Keys.computerVision.description}
                 </Text>
                 <Text
                   textStyle="TitleBold64"
@@ -84,7 +82,7 @@ const YourBody: React.FC = ({ children }) => {
                   letterSpacing="-2.5px"
                   color="#fff"
                 >
-                  {t(Keys.computerVision.description1)}
+                  {Keys.computerVision.description1}
                 </Text>
               </Box>
 
@@ -99,7 +97,7 @@ const YourBody: React.FC = ({ children }) => {
                   textStyle={{ base: 'semiBold5', lg: 'regular20' }}
                   color="rgba(255, 255, 255, 0.75);"
                 >
-                  {t(Keys.computerVision.cameraCard)}
+                  {Keys.computerVision.cameraCard}
                 </Text>
               </Box>
 

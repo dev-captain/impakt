@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Text, Tooltip } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import PublicPrivateGroupHelperText from '../../../../../../PublicPrivateGroupHelperText';
-// import { Common } from 'components';
+// import { Common } from '@/components';
 
 interface ChallengesCardProps {
   title: string;

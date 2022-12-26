@@ -1,5 +1,5 @@
 import React from 'react';
-import { Common, Forms } from 'components';
+import { Common, Forms } from '@/components';
 import { Text } from '@chakra-ui/react';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import RoutineCard from '../../ChallengeModalTabs/RoutineCard/RoutineCard';

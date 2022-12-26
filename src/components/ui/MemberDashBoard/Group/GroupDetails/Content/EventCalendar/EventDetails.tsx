@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
-import { useEventCalendarContext } from 'context/EventCalendarContext';
-import { I } from 'components';
+import { useEventCalendarContext } from '@/context/EventCalendarContext';
+import { I } from '@/components';
 
 import { deepLinkToApp } from '../../../../../../../data';
 import {

@@ -1,10 +1,10 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import { Avatar, AvatarGroup, Box, Img, Input, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 
 import React, { useEffect } from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { useParams } from 'react-router-dom';
 
 import Images from '../../../assets/images';

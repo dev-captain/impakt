@@ -1,17 +1,15 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { memo } from 'react';
 import { VStack, HStack, Box, Text, GridItem, SimpleGrid } from '@chakra-ui/react';
-import { I, C, Common } from 'components';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
+import Keys from '@/i18n/translations/en';
 import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import LandingPageNavbarLinks from './LandingPageNavbarLinks';
 import routes from '../../../../data/routes';
+import { I, C, Common } from '@/components';
 
 const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(`default`).i18n;
   // const [email, setEmail] = useState('');
   // const { sendData, loading } = useNewsletter();
   // const handleEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -218,10 +216,10 @@ const ImpaktFooter = ({ wFull = false }: { wFull?: boolean }) => {
               paddingLeft={{ base: '0', lg: wFull ? '48px' : '0' }}
             >
               <Text color="#747474" textStyle="regular3">
-                {t(Keys.footer.madeBy)}
+                {Keys.footer.madeBy}
               </Text>
               <Text color="#747474" textStyle="regular3">
-                {t(Keys.footer.allRightReserved)}
+                {Keys.footer.allRightReserved}
               </Text>
             </HStack>
           </VStack>

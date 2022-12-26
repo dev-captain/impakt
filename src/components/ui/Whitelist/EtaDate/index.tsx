@@ -1,5 +1,5 @@
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
-import { C } from 'components';
+import { C } from '@/components';
 import { Day, Month } from 'dayspan';
 import CounterItem from '../CounterItem';
 

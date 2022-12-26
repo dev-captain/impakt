@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { Day } from 'dayspan';
-import { Common } from 'components';
-import { useEventCalendarContext } from 'context/EventCalendarContext';
+import { Common } from '@/components';
+import { useEventCalendarContext } from '@/context/EventCalendarContext';
 import { useNavigate } from 'react-router-dom';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 

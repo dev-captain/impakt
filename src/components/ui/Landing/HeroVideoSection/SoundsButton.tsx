@@ -1,5 +1,5 @@
 import { ButtonProps } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { FC } from 'react';
 import { ImpaktButtonProps } from '../../../common/ImpaktButton';
 

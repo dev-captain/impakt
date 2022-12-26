@@ -1,8 +1,8 @@
 import { Spinner, Text, VStack } from '@chakra-ui/react';
-import { C, Common } from 'components';
 import { Widget } from '@typeform/embed-react';
-import useOnboardingCode from 'hooks/useOnboardingCode';
-import { layoutPadding } from 'theme';
+import useOnboardingCode from '@/hooks/useOnboardingCode';
+import { layoutPadding } from '@/theme';
+import { C, Common } from '@/components';
 
 import Container from './component/Container';
 

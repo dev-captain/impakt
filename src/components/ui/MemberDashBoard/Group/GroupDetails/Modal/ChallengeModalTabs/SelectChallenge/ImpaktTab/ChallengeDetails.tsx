@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
-import { Common, I } from 'components';
-// import { Common, I } from 'components';
+import { Common, I } from '@/components';
+// import { Common, I } from '@/components';
 import React from 'react';
 
 interface ChallengesDetailsProps {

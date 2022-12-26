@@ -24,7 +24,7 @@ import { Observable } from '@impakt-dev/api-client/dist/rxjsStub';
 import axios from '../axios/api';
 import theme, { toastDarkLayout } from '../../theme';
 
-const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
+const API_SERVER_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 
 const toast = createStandaloneToast({ theme });
 

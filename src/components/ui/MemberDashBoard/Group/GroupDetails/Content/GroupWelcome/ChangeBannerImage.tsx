@@ -1,6 +1,6 @@
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import * as React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import BannerImageChangeModal from './BannerImageChangeModal';
 

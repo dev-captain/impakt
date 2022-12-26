@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, useDisclosure } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import ChangeGroupTitleModal from './ChangeGroupTitleModal';
 

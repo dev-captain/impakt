@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, HStack, StackProps } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import { GetTimelineBlockResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getTimelineBlockResType';
 import { GetTimelineBlockAttributeResType } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types';
 import { convertSSToMMSS, padTo2Digits } from '../../../../../../../../utils';

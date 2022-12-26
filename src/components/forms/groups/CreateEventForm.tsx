@@ -1,8 +1,8 @@
 import { Box, Text, Select, VStack, HStack, Input } from '@chakra-ui/react';
 import { Day } from 'dayspan';
 import * as React from 'react';
-import { useForm } from 'hooks';
-import { Common, I } from 'components';
+import { useForm } from '@/hooks';
+import { Common, I } from '@/components';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';

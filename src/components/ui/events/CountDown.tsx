@@ -1,7 +1,7 @@
 import { GridItem, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react';
-import useCountdown from 'hooks/useCountdown';
-import { layoutPadding } from 'theme';
-import { S, Common } from 'components';
+import useCountdown from '@/hooks/useCountdown';
+import { layoutPadding } from '@/theme';
+import { S, Common } from '@/components';
 
 const CountDown = ({
   date,

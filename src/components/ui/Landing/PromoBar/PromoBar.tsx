@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, Text } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 import { PromoBarCounter } from './PromoBarCounter';
 
 const PromoBar: React.FC = () => {

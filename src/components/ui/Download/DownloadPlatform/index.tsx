@@ -15,18 +15,16 @@ import {
   useDisclosure,
   Text,
 } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import { I, C, Common } from 'components';
-// import useModalStore from 'hooks/store/useModalStore';
+import Images from '@/assets/images';
+import keys from '@/i18n/translations/en';
+import { I, C, Common } from '@/components';
+// import useModalStore from '@/hooks/store/useModalStore';
 import DownloadTitleItem from './DownloadTitleItem';
 import WaitlistModal from './WaitlistModal';
 // import Gradient from './Gradient';
 
 const DownloadPlatform = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { t } = useTranslation(`default`).i18n;
   const text = useColorModeValue('glass.100', 'glass.700');
   const bgImage = useColorModeValue(
     Images.backgrounds.downloadAppBg,
@@ -66,7 +64,7 @@ const DownloadPlatform = () => {
                   }}
                   background="linear-gradient(0deg, rgba(212, 35, 89, 0.35) 14.58%, rgba(212, 35, 89, 0) 45.1%), #FFFFFF"
                 >
-                  <DownloadTitleItem title={t(keys.downloadPlateform.download)} />
+                  <DownloadTitleItem title={keys.downloadPlateform.download} />
                 </Box>
                 <Image src={Images.Common.Vsport} w={{ base: '120px', md: '300px', lg: '400px' }} />
               </VStack>

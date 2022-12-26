@@ -1,8 +1,8 @@
 import { VStack, FormLabel, HStack, Button, Input, Box, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as React from 'react';
-import { Common } from 'components';
-import { useForm } from 'hooks';
+import { Common } from '@/components';
+import { useForm } from '@/hooks';
 import { Day } from 'dayspan';
 import { InputErrorMessage } from '../../common';
 import createChallengeYupScheme from '../../../lib/yup/schemas/createChallengeYupScheme';

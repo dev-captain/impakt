@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../../../data/routes';
 

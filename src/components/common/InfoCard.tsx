@@ -1,5 +1,5 @@
 import { Box, Flex, HStack, Tooltip, forwardRef, BoxProps } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 
 interface InfoCardPropsI {
   LeftLogo?: any;

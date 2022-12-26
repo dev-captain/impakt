@@ -1,17 +1,14 @@
 import * as React from 'react';
 
-// import { useTranslation } from 'react-i18next';
-// import keys from 'i18n/types';
+// import keys from '@/i18n/translations/en';
 
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
-import { I, Common } from 'components';
+import { I, Common } from '@/components';
 import Images from '../../../../assets/images';
 import WalletAddressModal from '../WalletAddressModal/WalletAddressModal';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 const WhiteList: React.FC = () => {
-  // const { t } = useTranslation().i18n;
   const { onClose, isOpen, onOpen } = useDisclosure();
 
   // const { isWhitelistedCollection } = usePersistedAuthStore();
@@ -127,7 +124,7 @@ const WhiteList: React.FC = () => {
         <Box mt="12px">
           <Common.ImpaktButton
             as="a"
-            href={`${process.env.REACT_APP_API_BASE_URL}/api/v1/iam/auth/twitter`}
+            href={`${import.meta.env.VITE_API_BASE_URL}/api/v1/iam/auth/twitter`}
             leftIcon={
               <Box marginRight="8px">
                 <I.TwitterIcon />

@@ -11,7 +11,6 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
 
 export type dataProps = {
   height: string;
@@ -99,7 +98,6 @@ const RoadmapItem = ({
   data: dataProps;
   type?: 'horizontal' | 'vertical';
 }) => {
-  const { t } = useTranslation().i18n;
   const { height, title, isCompleted, items, lineHeight, pinLineHeight } = data;
 
   if (type === 'vertical') {
@@ -121,7 +119,7 @@ const RoadmapItem = ({
                 <ListItem textStyle="regular3" key={item.title}>
                   <HStack spacing="8px" align="flex-start">
                     <Text maxW="200px" textStyle="semiBold3" w="full">
-                      {t(`ourRoadmap.${item.title}`)}
+                      {`ourRoadmap.${item.title}`}
                     </Text>
                   </HStack>
                 </ListItem>
@@ -144,7 +142,7 @@ const RoadmapItem = ({
               <ListItem textStyle="regular3" key={item.title}>
                 <HStack position="relative" spacing="8px" align="flex-start">
                   <Text display="inline-block" textStyle="semiBold3">
-                    {t(`ourRoadmap.${item.title}`)}
+                    {`ourRoadmap.${item.title}`}
 
                     {item.isDone && (
                       <Image

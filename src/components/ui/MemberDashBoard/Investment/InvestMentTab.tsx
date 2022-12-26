@@ -12,7 +12,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-import { Common } from 'components';
+import { Common } from '@/components';
 import PhaseHeadlineText from './PhaseHeadlineText';
 import PhaseDescriptionText from './PhaseDescriptionText';
 import RedLabelTag from '../RedLabelTag';

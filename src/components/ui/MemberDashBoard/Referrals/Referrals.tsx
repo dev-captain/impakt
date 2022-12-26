@@ -1,21 +1,18 @@
 import * as React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import { I } from 'components';
-import InfoSection from 'components/common/InfoSection';
+import keys from '@/i18n/translations/en';
+import { I } from '@/components';
+import InfoSection from '@/components/common/InfoSection';
 import MemberDashboardSectionHeadlineText from '../MemberDashboardSectionHeadlineText';
 import ReferralsBox from '../ReferralsAndWhiteListChallange/ReferralsBox';
 
 const Referrals: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
   return (
     <Box w="full" as="section" id="general-section">
       <MemberDashboardSectionHeadlineText title="Referrals" />
       <InfoSection
         tooltipLink="https://knowledgebase.impakt.com/referral-rewards?category=all-resources"
-        tooltipText={t(keys.memberDashboard.referrals.description)}
+        tooltipText={keys.memberDashboard.referrals.description}
         tooltipIcon={<I.InfoIcon color="#B0C3D6" width="20px" height="20px" />}
       />
       <HStack

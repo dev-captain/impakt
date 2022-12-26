@@ -1,6 +1,6 @@
 import { VStack, Text, Box } from '@chakra-ui/react';
 import React from 'react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../../../../../../data/routes';
 import { GetRoutineRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';

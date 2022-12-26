@@ -1,15 +1,15 @@
 import { Box, FormControl, useToast, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSearchParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import changePasswordFormYupScheme from '../../../lib/yup/schemas/changePasswordYupScheme';
 
-const apiBaseUrl = process.env.REACT_APP_API;
+const apiBaseUrl = import.meta.env.VITE_API;
 
 const ChangePasswordForm: React.FC = () => {
   const [isShowPassword, setIsShowPassword] = React.useState(false);

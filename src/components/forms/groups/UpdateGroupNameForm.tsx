@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl } from '@chakra-ui/react';
 
-import { Common } from 'components';
+import { Common } from '@/components';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
 import { useGroupsControllerV1PatchGroup } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';

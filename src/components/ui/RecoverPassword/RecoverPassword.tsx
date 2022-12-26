@@ -1,13 +1,10 @@
 import { VStack, Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
+import keys from '@/i18n/translations/en';
 
 import SignInBox from './RecoverPasswordBox';
 
 const RecoverPassword: React.FC = () => {
-  const { t } = useTranslation().i18n;
-
   return (
     <VStack w="full">
       <VStack w="full">
@@ -30,7 +27,7 @@ const RecoverPassword: React.FC = () => {
             lineHeight="100%"
             fontSize={{ base: '32px', md: '48px', lg: '64px' }}
           >
-            {t(keys.password.recovery)}
+            {keys.password.recovery}
           </Text>
         </Box>
       </VStack>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Common } from 'components';
 import { Text } from '@chakra-ui/react';
+import { Common } from '@/components';
 import { GetRoutineRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getRoutineRes';
 import { CreateChallengeForm } from '../../../../../../../forms/groups/CreateChallengeForm';
 import RoutineCard from '../../ChallengeModalTabs/RoutineCard/RoutineCard';

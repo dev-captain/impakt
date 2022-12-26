@@ -1,6 +1,6 @@
 import React from 'react';
 import { HStack, Box, Text } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { createEventFormName } from '../../../../../../../forms/groups/CreateEventForm';
 import { createChallengeFormName } from '../../../../../../../forms/groups/CreateChallengeForm';
 

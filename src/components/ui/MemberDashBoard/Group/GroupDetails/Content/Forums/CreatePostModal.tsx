@@ -8,7 +8,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { Forms } from 'components';
+import { Forms } from '@/components';
 
 interface CreatePostModalPropsI {
   isOpen: boolean;

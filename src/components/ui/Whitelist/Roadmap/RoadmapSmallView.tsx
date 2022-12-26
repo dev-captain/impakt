@@ -1,5 +1,5 @@
 import { HStack, VStack } from '@chakra-ui/react';
-import { RoadmapInfo } from 'data';
+import { RoadmapInfo } from '@/data';
 import Progress from './Progress';
 import RoadmapItem from './RoadmapItem';
 

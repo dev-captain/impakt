@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react';
-import { I } from 'components';
+import { I } from '@/components';
 
 const CheckBox = ({
   checked,

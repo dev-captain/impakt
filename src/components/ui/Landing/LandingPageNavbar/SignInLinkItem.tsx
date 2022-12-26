@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { usePersistedAuthStore } from '../../../../lib/zustand';
 
 const SignInButton: React.FC = () => {

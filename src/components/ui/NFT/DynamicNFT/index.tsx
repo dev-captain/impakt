@@ -1,18 +1,16 @@
 import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
-
 import { VStack, HStack, useColorModeValue, Box, Text, useMediaQuery } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { C, Common, I } from 'components';
-import { useParallax } from 'hooks';
+import Keys from '@/i18n/translations/en';
+
+import Images from '@/assets/images';
+import { C, Common, I } from '@/components';
+import { useParallax } from '@/hooks';
 import PlansCarousel from './plansCarousel';
 
 const DynamicNFT = () => {
   // const navigate = useNavigate();
   const bgImage = useColorModeValue(Images.nft.dynamicNftBg, Images.nft.dynamicNftBg);
   const [isLessThanMd] = useMediaQuery('(max-width:992px)');
-  const { t } = useTranslation(`default`).i18n;
   const cardRef = React.useRef<HTMLDivElement>(null);
   const imageBoxRef = React.useRef<HTMLDivElement>(null);
   useParallax(cardRef, [imageBoxRef], { range: 25 });
@@ -64,14 +62,14 @@ const DynamicNFT = () => {
                   marginTop="0 !important"
                   paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
                 >
-                  {t(Keys.DynamicNFT.title)}
+                  {Keys.DynamicNFT.title}
                 </Text>
                 <Text
                   textStyle={{ base: 'semiBold5', md: 'regular18' }}
                   textAlign="left"
                   marginTop="32px"
                   color="rgba(255, 255, 255, 0.85)"
-                  dangerouslySetInnerHTML={{ __html: t(Keys.DynamicNFT.description) }}
+                  dangerouslySetInnerHTML={{ __html: Keys.DynamicNFT.description }}
                 />
               </Box>
               <Box
@@ -92,7 +90,7 @@ const DynamicNFT = () => {
                 >
                   <VStack alignItems="flex-start" color="white">
                     <Text color="#FEC417" textStyle={{ base: 'semiBold5', md: 'bold20' }}>
-                      {t(Keys.DynamicNFT.cardInfo)}
+                      {Keys.DynamicNFT.cardInfo}
                     </Text>
                   </VStack>
                 </Common.InfoCard>

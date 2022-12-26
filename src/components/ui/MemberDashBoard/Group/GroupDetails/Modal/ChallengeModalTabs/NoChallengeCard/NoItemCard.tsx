@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, VStack, Text } from '@chakra-ui/react';
-import { Common } from 'components';
+import { Common } from '@/components';
 
 interface NoItemCardPropsI {
   noItemTitle: string;

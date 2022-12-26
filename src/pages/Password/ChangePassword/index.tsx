@@ -1,7 +1,7 @@
 import { useColorModeValue, VStack } from '@chakra-ui/react';
-import { C, S } from 'components';
+import { C, S } from '@/components';
 import { useEffect } from 'react';
-import Images from 'assets/images';
+import Images from '@/assets/images';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const ChangePassword = () => {
