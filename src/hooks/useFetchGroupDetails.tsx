@@ -27,7 +27,7 @@ import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../lib/imp
 import { getDefaultQueryOptions } from '../lib/impakt-dev-api-client/utils';
 import { GroupsSlice } from '../lib/zustand/stores/groupsStore';
 
-export const useFetchGroupDetails = (isAnonymously: boolean = false) => {
+export const useFetchGroupDetails = () => {
   // console.log('render');
   // global states
   const { member } = usePersistedAuthStore();
@@ -75,9 +75,7 @@ export const useFetchGroupDetails = (isAnonymously: boolean = false) => {
 
         let memberRole: GroupsSlice['role'] = 'None';
 
-        const isMemberOfGroup = !isAnonymously
-          ? await fetchAmIMemberOfGroup.refetch()
-          : { data: false };
+        const isMemberOfGroup = member ? await fetchAmIMemberOfGroup.refetch() : { data: false };
 
         if (isMemberOfGroup.data) {
           const roleRes = await fetchGroupRoleById.refetch();
@@ -97,7 +95,7 @@ export const useFetchGroupDetails = (isAnonymously: boolean = false) => {
         // if group private
         if (data.private) {
           // check if preview
-          if (!data.isPreview && !isAnonymously) {
+          if (!data.isPreview && member) {
             if (memberRole !== 'None') {
               // edge check if user not try to re-join group
               await fetchMembersOfGroup.refetch();
@@ -106,14 +104,14 @@ export const useFetchGroupDetails = (isAnonymously: boolean = false) => {
               await fetchGroupPinnedChallenge.refetch();
             }
           }
-          if (isAnonymously) {
+          if (!member) {
             setIsError("Oops! We couldn't find what you are looking for.");
           } else {
             setActiveGroup({ ...data, isPreview: memberRole === 'None' });
           }
         }
 
-        setRole(isAnonymously ? 'Guest' : memberRole);
+        setRole(!member ? 'Guest' : memberRole);
 
         setIsGroupDetailsLoading(false);
       },

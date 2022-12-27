@@ -8,12 +8,12 @@ const MemberDashboardSectionHeadlineText: React.FC<MemberDashBoardSectionHeadlin
   title,
 }) => {
   return (
-    <Box w="full" display={{ base: 'none', lg: 'block' }}>
+    <Box w="full">
       <Text
         as="h1"
         fontWeight="500"
         lineHeight="100%"
-        fontSize="48px"
+        fontSize={{ base: '36px', md: '48px' }}
         letterSpacing="-1.5px"
         color="fg-1"
       >

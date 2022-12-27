@@ -31,7 +31,7 @@ const ExploreGroup: React.FC<ExploreGroupProps> = ({ isGuest = false }) => {
         setStatus={setStatus}
         setSearchGroup={setSearchGroup}
       />
-      <ExploreGroupCardWrapper isGuest={isGuest} status={status} searchGroup={searchGroup} />
+      <ExploreGroupCardWrapper status={isGuest ? 'Public' : status} searchGroup={searchGroup} />
     </HStack>
   );
 };

@@ -20,11 +20,10 @@ import {
 import { Common, S } from '@/components';
 
 import Authentication from './middlewares/Authentication';
-import ErrorBoundary from './components/common/ErrorBoundary';
-// import GroupDetailMiddleWare from './middlewares/GroupDetailMiddleware';
+
 import GroupInvite from './pages/GroupInvite/index';
 import routes from './data/routes';
-import ExploreGroup, { GuestExplore, MainExplore } from './pages/Explore';
+import ExploreGroup, { MainExplore } from './pages/Explore';
 
 const App = () => {
   return (
@@ -50,17 +49,7 @@ const App = () => {
       <Route path="/recover-password" element={<RecoveryPassword />} />
 
       <Route path="/invite" element={<GroupInvite />} />
-      <Route path="/explore" element={<ExploreGroup />}>
-        <Route path="" element={<MainExplore />} />
-        <Route
-          path=":id"
-          element={
-            <GuestExplore>
-              <S.GroupDetail isAnonymously />
-            </GuestExplore>
-          }
-        />
-      </Route>
+      <Route path="/explore" element={<ExploreGroup />} />
 
       <Route path="/register" element={<SignUp />}>
         <Route path=":id" element={<SignUp />} />
@@ -79,21 +68,32 @@ const App = () => {
           </Common.ScrollToTop>
         }
       />
-
-      <Route
-        path={routes.dashboard}
-        element={
-          <Authentication>
-            <ErrorBoundary>
-              <MemberDashboard />
-            </ErrorBoundary>
-          </Authentication>
-        }
-      >
-        <Route path="" element={<S.General />} />
-        <Route path="r" element={<S.Referrals />} />
+      <Route path={routes.dashboard} element={<MemberDashboard />}>
+        <Route
+          path=""
+          element={
+            <Authentication>
+              <S.General />
+            </Authentication>
+          }
+        />
+        <Route
+          path="r"
+          element={
+            <Authentication>
+              <S.Referrals />
+            </Authentication>
+          }
+        />
         <Route path="g">
-          <Route path="" element={<S.Group />} />
+          <Route
+            path=""
+            element={
+              <Authentication>
+                <S.Group />
+              </Authentication>
+            }
+          />
           {/* <Route path="create-group" element={<S.CreateGroup isStandalone />} /> */}
           <Route path=":id" element={<S.GroupDetail />}>
             <Route path="event/:eventId" />

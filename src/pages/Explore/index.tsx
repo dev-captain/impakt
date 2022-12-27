@@ -1,56 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Skeleton, Text, VStack } from '@chakra-ui/react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { usePersistedAuthStore, usePersistedGroupStore } from '../../lib/zustand';
-import ExploreGroup from '../../components/ui/MemberDashBoard/Group/Groups/ExploreGroupCard/ExploreGroupCard';
-import { useGroupsControllerV1ExploreGroups } from '../../lib/impakt-dev-api-client/react-query/groups/groups';
-import { getDefaultQueryOptions } from '../../lib/impakt-dev-api-client/utils';
-import { isProduction, renderToast } from '../../utils';
-import { Common, I } from '../../components';
-import { useGuestV1ControllerCreateGuest } from '../../lib/impakt-dev-api-client/react-query/guest/guest';
-import Images from '../../assets/images';
+import { usePersistedAuthStore, usePersistedGroupStore } from '@/lib/zustand';
+import ExploreGroup from '@/components/ui/MemberDashBoard/Group/Groups/ExploreGroupCard/ExploreGroupCard';
+import { useGroupsControllerV1ExploreGroups } from '@/lib/impakt-dev-api-client/react-query/groups/groups';
+import { getDefaultQueryOptions } from '@/lib/impakt-dev-api-client/utils';
+import { isProduction } from '@/utils';
+import { C, Common, I } from '@/components';
+import { useGuestV1ControllerCreateGuest } from '@/lib/impakt-dev-api-client/react-query/guest/guest';
+import Images from '@/assets/images';
 
 const ExploreGroupPage: React.FC = () => {
   const { member } = usePersistedAuthStore();
   const groupsStore = usePersistedGroupStore();
 
   const createGuest = useGuestV1ControllerCreateGuest();
-  const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (member) {
-      if (isProduction) {
-        navigate('/d/g/12');
-      } else {
-        window.location.replace('https://community.impakt.com/');
-      }
-    } else {
-      const createGuestAsync = async () => {
-        await createGuest
-          .mutateAsync({ data: { screenName: 'explore-group-guest' } })
-          .then(async () => groupsStore.setRole('Guest'));
-      };
-      createGuestAsync();
-    }
-  }, []);
-
-  return (
-    <VStack align="flex-start" justify="flex-start" minH="100vh">
-      <VStack maxW="1200px" w="full" align="center" mt="48px" marginLeft="auto" marginRight="auto">
-        <Outlet />
-      </VStack>
-    </VStack>
-  );
-};
-
-export const MainExplore = () => {
-  const groupsStore = usePersistedGroupStore();
   const fetchExploreGroups = useGroupsControllerV1ExploreGroups(
     { includeRequests: true, deleted: false },
     {
       query: {
+        enabled: !!member,
         ...getDefaultQueryOptions(),
-        enabled: groupsStore.role === 'Guest',
         onSuccess: (exploreG) => {
           const sortByAlphabetExploreGroups = exploreG.sort((a, b) => {
             if (a.groupName.toUpperCase() < b.groupName.toUpperCase()) {
@@ -67,6 +37,34 @@ export const MainExplore = () => {
       },
     },
   );
+
+  React.useEffect(() => {
+    if (!member) {
+      const createGuestAsync = async () => {
+        createGuest.mutate(
+          { data: { screenName: 'explore-group-guest' } },
+          {
+            onSuccess: async () => {
+              groupsStore.setRole('Guest');
+              await fetchExploreGroups.refetch();
+            },
+          },
+        );
+      };
+      createGuestAsync();
+    }
+  }, [member]);
+
+  return (
+    <C.SidebarLayout isShowNavbar isShowFooter isShowSidebar={!!member}>
+      <MainExplore isLoading={fetchExploreGroups.isLoading} />
+    </C.SidebarLayout>
+  );
+};
+
+export const MainExplore: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
+  const { member } = usePersistedAuthStore();
+  const groupsStore = usePersistedGroupStore();
 
   return (
     <VStack p="1em" rowGap="80px" w="full" align="flex-start">
@@ -117,34 +115,10 @@ export const MainExplore = () => {
         </Box>
       </Box>
 
-      <Skeleton isLoaded={!fetchExploreGroups.isLoading} w="full">
-        <ExploreGroup isGuest />
+      <Skeleton isLoaded={!isLoading} w="full">
+        <ExploreGroup isGuest={groupsStore.role === 'Guest' && !member} />
       </Skeleton>
     </VStack>
-  );
-};
-
-export const GuestExplore: React.FC = ({ children }) => {
-  const guestClickListener = () => {
-    renderToast('warning', 'To see details you must be signed in first', 'white', 1000);
-  };
-
-  useEffect(() => {
-    window.addEventListener('click', guestClickListener);
-
-    return () => window.removeEventListener('click', guestClickListener);
-  }, []);
-
-  return (
-    <Box
-      w="full"
-      alignItems="center"
-      display="flex"
-      justifyContent="center"
-      p={{ base: '1em', md: 'none' }}
-    >
-      {children}
-    </Box>
   );
 };
 

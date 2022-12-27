@@ -11,7 +11,6 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import * as yup from 'yup';
-import { I } from '@/components';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import GroupTextAreaInput from '../../../GroupsTextAreaField';
@@ -27,6 +26,7 @@ import {
 } from '../../../../../../../lib/zustand';
 import { renderToast } from '../../../../../../../utils';
 import ConformationModal from '../../Banner/Panel/GroupSettings/Tabs/GeneralSettings/ConfirmationModal';
+import { I } from '@/components';
 
 interface PostCardPropsI {
   id: number;
@@ -167,7 +167,7 @@ const PostCard: React.FC<PostCardPropsI & Omit<BoxProps, 'id'>> = ({
           e.preventDefault();
           // e.stopPropagation();
 
-          if (onClick && role !== 'Guest') {
+          if (onClick) {
             onClick();
           }
         }}

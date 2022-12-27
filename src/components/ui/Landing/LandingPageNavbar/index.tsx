@@ -93,7 +93,7 @@ const LandingPageNavbar: FC = () => {
               titleActiveColor="white"
               titlePassiveColor="fg"
               textStyle="semiBold6"
-              isNavigate={isProduction}
+              isNavigate
             />
             <Common.NavBarLinkItem
               href="http://vsports.me/"

@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthControllerLogout } from '../lib/impakt-dev-api-client/react-query/auth/auth';
 import {
   usePersistedAuthStore,
@@ -10,6 +11,8 @@ type UseLogoutType = {
   silent?: boolean;
 };
 export const useLogout = (props?: UseLogoutType) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const signOut = useAuthControllerLogout();
   const { setMember } = usePersistedAuthStore();
   const { setClear } = usePersistedGroupStore();
@@ -23,6 +26,9 @@ export const useLogout = (props?: UseLogoutType) => {
       setClearKoin();
       if (!props?.silent) {
         renderToast('success', 'You have successfully logged out!', 'dark');
+      }
+      if (location.pathname !== '/explore') {
+        navigate(`/signin?next=${location.pathname}`);
       }
     });
   };

@@ -39,16 +39,17 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   ];
 
   return (
-    <GroupCardWrapperHeader title={showToggle ? 'Explore' : 'Explore Groups'}>
+    <GroupCardWrapperHeader title="Explore Groups">
       <Box
         display="flex"
         flexDir={{ base: 'column-reverse', sm: 'row' }}
         justifyContent="flex-end"
         alignItems="center"
         w={{ base: '100%' }}
+        flexWrap={{ base: 'wrap', md: 'unset' }}
         // alignItems={{ base: 'flex-end', sm: 'center' }}
       >
-        <Box display="flex" mr={{ base: '0', sm: '20px' }} w={{ base: '282px', sm: 'auto' }}>
+        <Box display="flex" mr={{ base: '0', md: '20px' }} w={{ base: '282px', sm: 'auto' }}>
           <Common.InputItems inputItems={inputItems} />
         </Box>
         {showToggle && (

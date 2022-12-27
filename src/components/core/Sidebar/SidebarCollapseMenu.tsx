@@ -30,17 +30,18 @@ const SidebarCollapseMenu = () => {
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
-          {path.pathname.includes(routes.groups) && (
-            <Box display="flex" alignItems="center">
-              <I.PeopleIcon
-                cursor="pointer"
-                width="26px"
-                height="23px"
-                opacity={path.pathname.includes(routes.groups) ? '1' : '0.5'}
-              />
-              <Text marginLeft="10px">Groups</Text>
-            </Box>
-          )}
+          {path.pathname.includes(routes.groups) ||
+            (path.pathname.includes(routes.explore) && (
+              <Box display="flex" alignItems="center">
+                <I.PeopleIcon
+                  cursor="pointer"
+                  width="26px"
+                  height="23px"
+                  opacity={path.pathname.includes(routes.groups) ? '1' : '0.5'}
+                />
+                <Text marginLeft="10px">Groups</Text>
+              </Box>
+            ))}
           {path.pathname === routes.referrals && (
             <Box display="flex" alignItems="center">
               <I.ReferralsIcon

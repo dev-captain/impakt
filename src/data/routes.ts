@@ -21,6 +21,7 @@ const routes = {
   postDetail: (groupId?: number, postId?: number) => `/d/g/${groupId}/post/${postId}`,
   eventDetail: (groupId?: number, eventId?: number) => `/d/g/${groupId}/eventId/${eventId}`,
   groupDetailGuest: (groupId?: number) => `/explore/${groupId}`,
+  guestRedirect: (groupId?: number) => `${routes.invite}?g=${groupId}&p=false`,
 };
 
 export default routes;
