@@ -8,12 +8,18 @@ import { Common } from '../../../../../../..';
 interface RoutineCardProps {
   routine: GetRoutineRes;
   showLabel?: boolean;
+  labelText?: string;
 }
 
-const RoutineCard: React.FC<RoutineCardProps> = ({ routine, children, showLabel = false }) => {
+const RoutineCard: React.FC<RoutineCardProps> = ({
+  routine,
+  children,
+  showLabel = false,
+  labelText = 'Selected Routine',
+}) => {
   return (
     <Box w="full">
-      {showLabel && <Common.InputLabel label="Selected Routine" whiteMode isSmallLabel />}
+      {showLabel && <Common.InputLabel label={labelText} whiteMode isSmallLabel />}
       <Box
         w="100%"
         padding={{ base: '12px', md: '24px' }}
