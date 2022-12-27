@@ -15,8 +15,8 @@ import {
   truncateString,
 } from '../../../../../../../utils';
 import ActionPreviewModal from '../../Modal/ActionPreviewModal';
-import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
-import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
+// import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
+// import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesControllerGetOne } from '../../../../../../../lib/impakt-dev-api-client/react-query/challenges/challenges';
 import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types';
 import ConformationModal from '../../Banner/Panel/GroupSettings/Tabs/GeneralSettings/ConfirmationModal';
@@ -72,45 +72,45 @@ const EventDetails: React.FC<{
     return 'pending';
   };
 
-  const fetchLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
-    challange?.id ?? 0,
-    {},
-    {
-      query: {
-        enabled: !!challange,
-        retry: 0,
-        refetchOnMount: true,
-        refetchOnWindowFocus: false,
-      },
-    },
-  );
+  // const fetchLeaderboard = useChallengesLeaderboardControllerV1Usersleaderboard(
+  //   challange?.id ?? 0,
+  //   {},
+  //   {
+  //     query: {
+  //       enabled: !!challange,
+  //       retry: 0,
+  //       refetchOnMount: true,
+  //       refetchOnWindowFocus: false,
+  //     },
+  //   },
+  // );
 
-  const fetchBestScore = useChallengeStatsControllerGetUserBestScore(
-    challange?.id ?? 0,
-    member?.id ?? 0,
-    {
-      query: {
-        enabled: !!challange,
-        retry: 0,
-        refetchOnMount: true,
-        refetchOnWindowFocus: false,
-      },
-    },
-  );
+  // const fetchBestScore = useChallengeStatsControllerGetUserBestScore(
+  //   challange?.id ?? 0,
+  //   member?.id ?? 0,
+  //   {
+  //     query: {
+  //       enabled: !!challange,
+  //       retry: 0,
+  //       refetchOnMount: true,
+  //       refetchOnWindowFocus: false,
+  //     },
+  //   },
+  // );
 
-  const sortLeaderboardByScore = fetchLeaderboard.data?.usersPassed.sort(
-    (a, b) => b.userScore - a.userScore,
-  );
+  // const sortLeaderboardByScore = fetchLeaderboard.data?.usersPassed.sort(
+  //   (a, b) => b.userScore - a.userScore,
+  // );
 
-  const memberRankIndex = sortLeaderboardByScore?.findIndex(({ id }) => id === member?.id);
-  const memberRank = memberRankIndex;
-  const bestScoreOfUser = fetchBestScore.data;
-  const myBestScore =
-    bestScoreOfUser && Object.keys(bestScoreOfUser).length > 0
-      ? bestScoreOfUser.userScore?.toString() ?? '-'
-      : '-';
+  // const memberRankIndex = sortLeaderboardByScore?.findIndex(({ id }) => id === member?.id);
+  // const memberRank = memberRankIndex;
+  // const bestScoreOfUser = fetchBestScore.data;
+  // const myBestScore =
+  //   bestScoreOfUser && Object.keys(bestScoreOfUser).length > 0
+  //     ? bestScoreOfUser.userScore?.toString() ?? '-'
+  //     : '-';
 
-  const myRank = memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-';
+  // const myRank = memberRank !== undefined && memberRank !== -1 ? `#${memberRank + 1}` : '-';
 
   const removeHandle = async () => {
     if (!eventObj) return;
@@ -131,7 +131,7 @@ const EventDetails: React.FC<{
         key="event-preview-modal"
         actionPreview={{
           exercices: normalizeExerciseNames(challange?.Routine?.TimelineBlocks ?? []),
-          leaderboard: sortLeaderboardByScore ?? [],
+          leaderboard: [],
           playedMins: challange?.Routine.estimatedTime
             ? // eslint-disable-next-line no-unsafe-optional-chaining
               Math.ceil(challange?.Routine.estimatedTime! / 60)
@@ -143,7 +143,6 @@ const EventDetails: React.FC<{
           isEdit: JSON.parse(eventObj.data).creatorId === member?.id,
           deepLinkToPlay: deepLink,
           modalStatus: getStatus(),
-          myRank,
           editButtonClick: () => {
             if (challange) {
               setActiveChallenge(challange);
@@ -154,8 +153,6 @@ const EventDetails: React.FC<{
           deleteButtonClick: () => {
             deleteConfirmationModal.onOpen();
           },
-          myBestScore,
-          isPlayedByMember: myRank !== '-',
         }}
         open={isOpen}
         close={() => {
