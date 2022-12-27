@@ -143,7 +143,6 @@ const EventDetails: React.FC<{
           isEdit: JSON.parse(eventObj.data).creatorId === member?.id,
           deepLinkToPlay: deepLink,
           modalStatus: getStatus(),
-          myRank,
           editButtonClick: () => {
             if (challange) {
               setActiveChallenge(challange);
@@ -154,7 +153,6 @@ const EventDetails: React.FC<{
           deleteButtonClick: () => {
             deleteConfirmationModal.onOpen();
           },
-          myBestScore,
           isPlayedByMember: myRank !== '-',
         }}
         open={isOpen}
