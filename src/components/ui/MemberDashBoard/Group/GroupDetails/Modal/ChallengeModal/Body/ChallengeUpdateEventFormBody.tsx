@@ -24,7 +24,11 @@ export const ChallengeUpdateEventFormBody: React.FC<ChallengeUpdateEventFormBody
       challengeName={previewChallenge.name}
       challengeId={previewChallenge.id}
     >
-      <RoutineCard showLabel routine={previewChallenge.Routine}>
+      <RoutineCard
+        labelText="Selected Challenge"
+        showLabel
+        routine={{ ...previewChallenge.Routine, name: previewChallenge.name }}
+      >
         <Common.ImpaktButton
           onClick={previewOnClick}
           variant="white-50"

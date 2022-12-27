@@ -1,6 +1,6 @@
 import React from 'react';
-import { Common, Forms } from '@/components';
 import { Text } from '@chakra-ui/react';
+import { Common, Forms } from '@/components';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import RoutineCard from '../../ChallengeModalTabs/RoutineCard/RoutineCard';
 
@@ -18,7 +18,11 @@ export const ChallengeCreateEventFormBody: React.FC<ChallengeCreateEventFormBody
 
   return (
     <Forms.CreateEventForm challengeId={previewChallenge.id}>
-      <RoutineCard showLabel routine={previewChallenge.Routine}>
+      <RoutineCard
+        labelText="Selected Challenge"
+        showLabel
+        routine={{ ...previewChallenge.Routine, name: previewChallenge.name }}
+      >
         <Common.ImpaktButton
           onClick={previewOnClick}
           variant="white-50"
