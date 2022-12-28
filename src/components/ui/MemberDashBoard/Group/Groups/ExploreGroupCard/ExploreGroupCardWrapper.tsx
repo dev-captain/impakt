@@ -33,7 +33,6 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
           key={g.id}
           cursor="pointer"
           marginStart="0 !important"
-          w="282px"
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
