@@ -36,7 +36,7 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            navigate(routes.groupDetail(g.id));
+            navigate(routes.groupDetail(g.id), { state: { fromExplore: true } });
           }}
           position="relative"
         >
