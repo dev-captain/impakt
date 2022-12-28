@@ -8,7 +8,7 @@ import {
   usePersistedChallengeStore,
   usePersistedGroupStore,
 } from '../../../../../../../../lib/zustand';
-import ChallengeModal from '../../../Modal/ChallengeModal';
+import ChallengeModal from '../../../Modal/ChallengeModal/ChallengeModal';
 import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
 import { normalizeExerciseNames } from '../../../../../../../../utils';

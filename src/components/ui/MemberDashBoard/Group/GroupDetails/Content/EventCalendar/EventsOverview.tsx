@@ -1,13 +1,17 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { useEventCalendarContext } from '@/context/EventCalendarContext';
 import ShowEvents from './ShowEvents';
+import ChallengeModal from '../../Modal/ChallengeModal/ChallengeModal';
+import { GetChallengeRes } from '../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
 import EventDetails from './EventDetails';
-import RemoveEvent from './RemoveEvent';
-import EventModify from './EventModify';
+// import EventModify from './EventModify';
 
 const EventsOverview: React.FC = () => {
-  const { getCurrentOverviewScreen } = useEventCalendarContext();
+  const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes>();
+  const { getCurrentOverviewScreen, goToOverViewScreen } = useEventCalendarContext();
   const screen = getCurrentOverviewScreen();
 
   return (
@@ -24,10 +28,24 @@ const EventsOverview: React.FC = () => {
       >
         {screen === 'empty' && null}
         {screen === 'first' && <ShowEvents />}
-        {screen === 'create' && <EventModify title="Create event" type="create" />}
-        {screen === 'update' && <EventModify title="Update event" type="update" />}
-        {screen === 'event' && <EventDetails />}
-        {screen === 'remove' && <RemoveEvent />}
+        {screen === 'create' && (
+          <ChallengeModal
+            initScreen="select-challenge-event"
+            close={() => goToOverViewScreen('first')}
+            open
+          />
+        )}
+
+        {screen === 'update' && (
+          <ChallengeModal
+            activeChallenge={activeChallenge}
+            initScreen="update-challenge-event-form"
+            close={() => goToOverViewScreen('event')}
+            open
+          />
+        )}
+        {/* {screen === 'update' && <EventModify title="Update event" type="update" />} */}
+        {screen === 'event' && <EventDetails setActiveChallenge={setActiveChallenge} />}
       </Box>
     </Box>
   );
