@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import * as React from 'react';
 import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from '@/components';
@@ -10,8 +11,10 @@ import { renderToast } from '../../../../../../../utils';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import { exploreGroupToMyGroupsTransformation } from '../../../../../../../lib/impakt-dev-api-client/utils';
 import { useGroupsRequestControllerV1SendRequestToJoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-request/groups-request';
+import routes from '../../../../../../../data/routes';
 
 const BannerSettingsMenu: React.FC = () => {
+  const navigate = useNavigate();
   const joinGroup = useGroupsMemberControllerV1JoinGroup();
   const sendGroupRequestToJoin = useGroupsRequestControllerV1SendRequestToJoinGroup();
   const { member } = usePersistedAuthStore();
@@ -103,7 +106,8 @@ const BannerSettingsMenu: React.FC = () => {
 
   if (!activeGroup) return null;
 
-  const isRoleNotDefined = !role || role === 'None';
+  const isRoleNotDefined = !role || role === 'None' || role === 'Guest';
+  const isGuest = role === 'Guest';
   const request = exploreGroups.find((group) => group.id === activeGroup.id)?.Request;
 
   return (
@@ -134,7 +138,9 @@ const BannerSettingsMenu: React.FC = () => {
               color: '#fff',
             }}
             onClick={
-              activeGroup.private
+              isGuest
+                ? () => navigate(`${routes.invite}?g=${activeGroup.id}&p=false`)
+                : activeGroup.private
                 ? request?.status === 'Pending'
                   ? () => null
                   : handleSendRequestToJoin

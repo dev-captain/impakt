@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { I } from '@/components';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { I } from '@/components';
 import SidebarMenuItem from './SidebarMenuItem';
 import routes from '../../../data/routes';
 
@@ -36,10 +36,10 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
         hide={isHide}
         href={routes.groups}
         title="Groups"
-        isActive={path.pathname.includes(routes.groups)}
+        isActive={path.pathname.includes(routes.groups) || path.pathname.includes(routes.explore)}
       >
         <I.PeopleIcon
-          isActive={path.pathname.includes(routes.groups)}
+          isActive={path.pathname.includes(routes.groups) || path.pathname.includes(routes.explore)}
           cursor="pointer"
           width="32px"
           height="32px"

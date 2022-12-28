@@ -18,6 +18,7 @@ const GroupCardWrapperHeader: React.FC<GroupCardWrapperHeaderPropsI> = ({
       w="full"
       gap={{ lgx: '48px', base: '44px' }}
       justifyContent={{ base: 'flex-end', lg: justify }}
+      flexWrap={{ base: 'wrap', md: 'unset' }}
       alignItems="center"
       // borderBottom="2px solid #E0E0E0"
     >

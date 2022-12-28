@@ -10,11 +10,13 @@ interface ExploreGroupCardWrapperHeaderPropsI {
   status: 'Public' | 'Private';
   setStatus: (status: 'Public' | 'Private') => void;
   setSearchGroup: (string) => void;
+  showToggle: boolean;
 }
 const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   status,
   setStatus,
   setSearchGroup,
+  showToggle,
 }) => {
   const [inputValue, setInput] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -35,22 +37,26 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
       value: inputValue,
     },
   ];
+
   return (
-    <GroupCardWrapperHeader title="Explore">
+    <GroupCardWrapperHeader title="Explore Groups">
       <Box
         display="flex"
         flexDir={{ base: 'column-reverse', sm: 'row' }}
         justifyContent="flex-end"
         alignItems="center"
         w={{ base: '100%' }}
+        flexWrap={{ base: 'wrap', md: 'unset' }}
         // alignItems={{ base: 'flex-end', sm: 'center' }}
       >
-        <Box display="flex" mr={{ base: '0', sm: '20px' }} w={{ base: '282px', sm: 'auto' }}>
+        <Box display="flex" mr={{ base: '0', md: '20px' }} w={{ base: '282px', sm: 'auto' }}>
           <Common.InputItems inputItems={inputItems} />
         </Box>
-        <Box m="20px 0 !important">
-          <ExploreGroupCardPrivatePublicToggleButton status={status} setStatus={setStatus} />
-        </Box>
+        {showToggle && (
+          <Box m="20px 0 !important">
+            <ExploreGroupCardPrivatePublicToggleButton status={status} setStatus={setStatus} />
+          </Box>
+        )}
       </Box>
     </GroupCardWrapperHeader>
   );

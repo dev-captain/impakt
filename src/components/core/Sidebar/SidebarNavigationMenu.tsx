@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { Common, I } from '@/components';
 
-import { usePersistedGroupStore } from '../../../lib/zustand';
+import { usePersistedAuthStore, usePersistedGroupStore } from '../../../lib/zustand';
 import SidebarNavigationLinks from './SidebarNavigationLinks';
 import SideBarNavigationDropDownMenu from './SideBarNavigationDropDownMenu';
+import SignInButton from '../../ui/Landing/LandingPageNavbar/SignInLinkItem';
 
 interface SidebarNavigationMenuProps {
   position?: PositionProps['position'];
@@ -21,6 +22,7 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({
   notificationDrawerClose,
   notificationDrawerOpen,
 }) => {
+  const { member } = usePersistedAuthStore();
   const navigate = useNavigate();
   const notifies = usePersistedGroupStore().groupRequests.filter(
     (requestD) => requestD.status === 'Pending',
@@ -75,33 +77,39 @@ const SidebarNavigationMenu: FC<SidebarNavigationMenuProps> = ({
                   <SidebarNavigationLinks />
                 </HStack>
               </Box>
+              {member && (
+                <HStack
+                  columnGap="2em"
+                  spacing="0px !important"
+                  justifyContent="center"
+                  h={{ base: '40px', md: '100px' }}
+                >
+                  {notifies > 0 ? (
+                    <Box
+                      onClick={
+                        notificationDrawerIsOpen ? notificationDrawerClose : notificationDrawerOpen
+                      }
+                    >
+                      <I.NotificationIcon isActive color="fg1" cursor="pointer" />
+                    </Box>
+                  ) : (
+                    <Box
+                      onClick={
+                        notificationDrawerIsOpen ? notificationDrawerClose : notificationDrawerOpen
+                      }
+                    >
+                      <I.NotifyIcon color="fg1" cursor="pointer" />
+                    </Box>
+                  )}
 
-              <HStack
-                columnGap="2em"
-                spacing="0px !important"
-                justifyContent="center"
-                h={{ base: '40px', md: '100px' }}
-              >
-                {notifies > 0 ? (
-                  <Box
-                    onClick={
-                      notificationDrawerIsOpen ? notificationDrawerClose : notificationDrawerOpen
-                    }
-                  >
-                    <I.NotificationIcon isActive color="fg1" cursor="pointer" />
-                  </Box>
-                ) : (
-                  <Box
-                    onClick={
-                      notificationDrawerIsOpen ? notificationDrawerClose : notificationDrawerOpen
-                    }
-                  >
-                    <I.NotifyIcon color="fg1" cursor="pointer" />
-                  </Box>
-                )}
-
-                <SideBarNavigationDropDownMenu />
-              </HStack>
+                  <SideBarNavigationDropDownMenu />
+                </HStack>
+              )}
+              {!member && (
+                <Box>
+                  <SignInButton />
+                </Box>
+              )}
             </HStack>
           </HStack>
         </HStack>

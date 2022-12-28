@@ -108,6 +108,7 @@ import PrivacyImg3Image from './PrivacyImg3.png';
 import HomeImageImage from './HomeImage.png';
 import hakimImage from './Hakim.png';
 import wistonImage from './wiston.png';
+import communityBannerImage from './community-banner.jpg';
 
 const Images = {
   star: starImage,
@@ -129,6 +130,7 @@ const Images = {
     Goldaword: goldawordImage,
     Vsport: vsportImage,
     VsportDark: vsportDarkImage,
+    communityBanner: communityBannerImage,
   },
   backgrounds: {
     advisorsSectionBg: advisorsSectionBgImage,

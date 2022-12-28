@@ -1,11 +1,15 @@
-import * as React from 'react';
+import React from 'react';
 import { HStack } from '@chakra-ui/react';
 
 import ExploreGroupCardHeader from './Header/ExploreGroupCardHeader';
 import ExploreGroupCardWrapper from './ExploreGroupCardWrapper';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';
 
-const ExploreGroup: React.FC = () => {
+interface ExploreGroupProps {
+  isGuest?: boolean;
+}
+
+const ExploreGroup: React.FC<ExploreGroupProps> = ({ isGuest = false }) => {
   const { exploreGroups } = usePersistedGroupStore();
 
   const [status, setStatus] = React.useState<'Public' | 'Private'>('Public');
@@ -22,11 +26,12 @@ const ExploreGroup: React.FC = () => {
       flexDir={{ base: 'column', md: 'row' }}
     >
       <ExploreGroupCardHeader
+        showToggle={!isGuest}
         status={status}
         setStatus={setStatus}
         setSearchGroup={setSearchGroup}
       />
-      <ExploreGroupCardWrapper status={status} searchGroup={searchGroup} />
+      <ExploreGroupCardWrapper status={isGuest ? 'Public' : status} searchGroup={searchGroup} />
     </HStack>
   );
 };

@@ -7,16 +7,21 @@ import SidebarNavigationMenu from '../Sidebar/SidebarNavigationMenu';
 import SidebarMenu from '../Sidebar/SidebarLinks';
 import SidebarNavigationLinks from '../Sidebar/SidebarNavigationLinks';
 import NoitificationDrawer from '../../ui/MemberDashBoard/Drawer/NoitificationDrawer';
+import { usePersistedAuthStore } from '../../../lib/zustand';
 
 interface SidebarLayoutProps {
   isShowFooter?: boolean;
   isShowNavbar?: boolean;
+  isShowSidebar?: boolean;
 }
 
 const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   isShowFooter = false,
   isShowNavbar = false,
+  isShowSidebar = false,
+  children,
 }) => {
+  const { member } = usePersistedAuthStore();
   const [isClose, setIsClose] = useState(false);
   const notificationDisclosure = useDisclosure();
 
@@ -33,26 +38,33 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
       )}
 
       {/* Notification Drawer */}
-      <NoitificationDrawer
-        open={notificationDisclosure.isOpen}
-        close={notificationDisclosure.onClose}
-      />
+      {member && (
+        <NoitificationDrawer
+          open={notificationDisclosure.isOpen}
+          close={notificationDisclosure.onClose}
+        />
+      )}
 
       {/* Sub navigation mobile */}
-      <Box
-        w="full"
-        position="fixed"
-        h="90px"
-        top="90px"
-        color="white"
-        zIndex="1"
-        display={{ base: 'initial', lg: ' none' }}
-      >
-        <Box marginX="16px">
-          <SidebarCollapseMenu />
+      {isShowSidebar && (
+        <Box
+          w="full"
+          position="fixed"
+          h="90px"
+          top="90px"
+          color="white"
+          zIndex="1"
+          display={{ base: 'initial', lg: ' none' }}
+        >
+          <Box marginX="16px">
+            <SidebarCollapseMenu />
+          </Box>
         </Box>
-      </Box>
+      )}
       <VStack
+        maxW={!isShowSidebar ? '1200px' : 'unset'}
+        marginLeft={!isShowSidebar ? 'auto' : 'unset'}
+        marginRight={!isShowSidebar ? 'auto' : 'unset'}
         as="main"
         color="#000"
         position="relative"
@@ -69,26 +81,28 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           id="hstack"
         >
           {/* Left Aside Desktop  */}
-          <VStack
-            position="fixed"
-            height="100%"
-            p="10em 0"
-            display={{ base: 'none', lg: 'flex' }}
-            w={{ base: 0, lg: isClose ? '80px' : '16.25vw' }}
-            minW={{ base: 0, lg: isClose ? '80px' : '260px' }}
-            transition="width .4s ease-in, min-width .4s linear"
-            as="aside"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            onMouseOver={() => {
-              setIsClose(false);
-            }}
-            onMouseLeave={() => {
-              setIsClose(true);
-            }}
-          >
-            <SidebarMenu isHide={isClose} />
-          </VStack>
+          {isShowSidebar && (
+            <VStack
+              position="fixed"
+              height="100%"
+              p="10em 0"
+              display={{ base: 'none', lg: 'flex' }}
+              w={{ base: 0, lg: isClose ? '80px' : '16.25vw' }}
+              minW={{ base: 0, lg: isClose ? '80px' : '260px' }}
+              transition="width .4s ease-in, min-width .4s linear"
+              as="aside"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              onMouseOver={() => {
+                setIsClose(false);
+              }}
+              onMouseLeave={() => {
+                setIsClose(true);
+              }}
+            >
+              <SidebarMenu isHide={isClose} />
+            </VStack>
+          )}
 
           {/* Left Aside Desktop  END */}
 
@@ -97,16 +111,20 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             w="full"
             id="content-container"
             m="0 !important"
-            marginLeft={{
-              base: '0',
-              lg: isClose ? '13.958vw !important' : '16.458vw !important',
-            }}
+            marginLeft={
+              isShowSidebar
+                ? {
+                    base: '0',
+                    lg: isClose ? '13.958vw !important' : '16.458vw !important',
+                  }
+                : '0'
+            }
             transition="margin-left .4s ease-in"
             p={{ base: '0 1em', lg: '7em 3em 3em 3em' }}
             marginTop={{ base: '170px !important', lg: '0px !important' }}
             marginBottom="80px !important" // For footer
           >
-            <Outlet />
+            {children}
           </VStack>
           {/*  BODY END HERE */}
         </HStack>

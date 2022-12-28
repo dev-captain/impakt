@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { isProduction, parsePathname } from '@/utils';
+import { parsePathname } from '@/utils';
 import Keys from '@/i18n/translations/en';
 import { Common } from '@/components';
 import routes from '../../../data/routes';
@@ -16,13 +16,13 @@ const SidebarNavigationLinks = () => {
     <>
       <Common.LinkItem
         titlePassiveColor={passiveColor || textColor}
-        href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
+        href={routes.explore}
         title="Social Fitness"
         isActive={path.path === ''}
         color={activeColor || textColor}
         titleActiveColor={activeColor}
         textStyle="semiBold6"
-        isNavigate={isProduction}
+        isNavigate
       />
       <Common.LinkItem
         titleActiveColor={activeColor}
