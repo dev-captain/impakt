@@ -49,23 +49,6 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
 
       <SidebarMenuItem
         onClick={() => {
-          navigate(routes.referrals);
-        }}
-        hide={isHide}
-        href={routes.referrals}
-        title="Referrals"
-        isActive={path.pathname === routes.referrals}
-      >
-        <I.ReferralsIcon
-          isActive={path.pathname === routes.referrals}
-          cursor="pointer"
-          width="32px"
-          height="32px"
-        />
-      </SidebarMenuItem>
-
-      <SidebarMenuItem
-        onClick={() => {
           navigate(routes.explore);
         }}
         hide={isHide}
@@ -76,6 +59,23 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
         <I.SearchIcon
           color="#91A8BD"
           isActive={path.pathname === routes.explore}
+          cursor="pointer"
+          width="32px"
+          height="32px"
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem
+        onClick={() => {
+          navigate(routes.referrals);
+        }}
+        hide={isHide}
+        href={routes.referrals}
+        title="Referrals"
+        isActive={path.pathname === routes.referrals}
+      >
+        <I.ReferralsIcon
+          isActive={path.pathname === routes.referrals}
           cursor="pointer"
           width="32px"
           height="32px"
