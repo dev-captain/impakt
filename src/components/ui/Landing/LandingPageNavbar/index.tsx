@@ -13,20 +13,35 @@ import {
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { isProduction, parsePathname } from '@/utils';
-
+import { useState, useRef } from 'react';
 import { I, Common } from '@/components';
-
+import classNames from 'classnames';
+import './stickyStyle.css';
 import CollapseMenu from './LandingPageCollapseMenu';
 import DropDownProfileMenu from './LandingPageDropDownProfileMenu';
 import DropDownSocialMediaMenu from './LandingPageDropDownSocialMediaMenu';
 import SignInLinkItem from './SignInLinkItem';
-// import NavBarLink from './NavBarLink';
-// import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import routes from '../../../../data/routes';
+import SideBarNavigationDropDownMenu from '../../../core/Sidebar/SideBarNavigationDropDownMenu';
 
 // const { dark, light } = Images;
 
 const LandingPageNavbar: FC = () => {
+  const stickyRef = useRef();
+  const [sticky, setSticky] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!stickyRef.current) {
+        return;
+      }
+      const shouldBeSticky =
+        window.scrollY > stickyRef.current.getBoundingClientRect().top &&
+        stickyRef.current.getBoundingClientRect().top <= 0;
+      setSticky(shouldBeSticky);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [setSticky, stickyRef]);
   const navigate = useNavigate();
   const location = useLocation();
   const path = parsePathname(location.pathname);
@@ -56,6 +71,8 @@ const LandingPageNavbar: FC = () => {
       display={isLessThan1280 ? 'auto' : 'flex'}
       justifyContent="center"
       background="#fff"
+      className={classNames({ sticky })}
+      ref={stickyRef}
     >
       <Flex
         w="full"
@@ -132,6 +149,7 @@ const LandingPageNavbar: FC = () => {
                   gap="8px"
                   marginLeft="0 !important"
                   flexWrap={{ base: 'wrap', lg: 'nowrap' }}
+                  alignItems="center"
                 >
                   <Box onClick={() => navigate(routes.download)}>
                     <Common.ImpaktButton
@@ -148,7 +166,11 @@ const LandingPageNavbar: FC = () => {
                     <SignInLinkItem />
                   </Box>
                   <Box position="relative" display="flex">
-                    <DropDownProfileMenu />
+                    <SideBarNavigationDropDownMenu
+                      showMemberName={false}
+                      padding="0 5px 5px 5px"
+                      offset={[30, 5]}
+                    />
                   </Box>
                 </Box>
               </HStack>
