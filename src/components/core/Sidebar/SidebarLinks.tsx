@@ -5,8 +5,19 @@ import SidebarMenuItem from './SidebarMenuItem';
 import routes from '../../../data/routes';
 
 const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
-  const path = useLocation();
+  const location = useLocation();
+  const locationState = location.state as { fromExplore: boolean } | undefined;
+
   const navigate = useNavigate();
+
+  const isExplorePage =
+    location.pathname === routes.explore ||
+    (locationState?.fromExplore && location.pathname.includes(routes.groups));
+
+  const isMyGroup =
+    location.pathname !== routes.explore &&
+    !locationState?.fromExplore &&
+    location.pathname.includes(routes.groups);
 
   return (
     <>
@@ -17,11 +28,11 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
         hide={isHide}
         href=""
         title="General"
-        isActive={path.pathname === routes.dashboard}
+        isActive={location.pathname === routes.dashboard}
       >
         <I.DashboardIcon
           key="1"
-          isActive={path.pathname === routes.dashboard}
+          isActive={location.pathname === routes.dashboard}
           cursor="pointer"
           width="32px"
           height="32px"
@@ -35,15 +46,34 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
         }}
         hide={isHide}
         href={routes.groups}
-        title="Groups"
-        isActive={path.pathname.includes(routes.groups) || path.pathname.includes(routes.explore)}
+        title="My Groups"
+        // eslint-disable-next-line no-return-await
+        isActive={isMyGroup}
       >
         <I.PeopleIcon
-          isActive={path.pathname.includes(routes.groups) || path.pathname.includes(routes.explore)}
+          isActive={isMyGroup}
           cursor="pointer"
           width="32px"
           height="32px"
-          color={!path.pathname.includes(routes.groups) ? 'fg2' : ''}
+          color="#91A8BD"
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem
+        onClick={() => {
+          navigate(routes.explore);
+        }}
+        hide={isHide}
+        href={routes.explore}
+        title="Explore"
+        isActive={isExplorePage}
+      >
+        <I.SearchIcon
+          color="#91A8BD"
+          isActive={isExplorePage}
+          cursor="pointer"
+          width="32px"
+          height="32px"
         />
       </SidebarMenuItem>
 
@@ -54,10 +84,10 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
         hide={isHide}
         href={routes.referrals}
         title="Referrals"
-        isActive={path.pathname === routes.referrals}
+        isActive={location.pathname === routes.referrals}
       >
         <I.ReferralsIcon
-          isActive={path.pathname === routes.referrals}
+          isActive={location.pathname === routes.referrals}
           cursor="pointer"
           width="32px"
           height="32px"
