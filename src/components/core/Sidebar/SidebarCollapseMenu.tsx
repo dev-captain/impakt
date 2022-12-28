@@ -30,18 +30,17 @@ const SidebarCollapseMenu = () => {
               <Text marginLeft="10px">General</Text>
             </Box>
           )}
-          {path.pathname.includes(routes.groups) ||
-            (path.pathname.includes(routes.explore) && (
-              <Box display="flex" alignItems="center">
-                <I.PeopleIcon
-                  cursor="pointer"
-                  width="26px"
-                  height="23px"
-                  opacity={path.pathname.includes(routes.groups) ? '1' : '0.5'}
-                />
-                <Text marginLeft="10px">Groups</Text>
-              </Box>
-            ))}
+          {path.pathname.includes(routes.groups) && (
+            <Box display="flex" alignItems="center">
+              <I.PeopleIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname.includes(routes.groups) ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">Groups</Text>
+            </Box>
+          )}
           {path.pathname === routes.referrals && (
             <Box display="flex" alignItems="center">
               <I.ReferralsIcon
@@ -51,6 +50,18 @@ const SidebarCollapseMenu = () => {
                 opacity={path.pathname === routes.referrals ? '1' : '0.5'}
               />
               <Text marginLeft="10px">Referrals</Text>
+            </Box>
+          )}
+
+          {path.pathname === routes.explore && (
+            <Box display="flex" alignItems="center">
+              <I.SearchIcon
+                cursor="pointer"
+                width="26px"
+                height="23px"
+                opacity={path.pathname === routes.explore ? '1' : '0.5'}
+              />
+              <Text marginLeft="10px">Explore</Text>
             </Box>
           )}
         </MenuButton>

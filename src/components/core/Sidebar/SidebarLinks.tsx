@@ -36,10 +36,10 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
         hide={isHide}
         href={routes.groups}
         title="Groups"
-        isActive={path.pathname.includes(routes.groups) || path.pathname.includes(routes.explore)}
+        isActive={path.pathname.includes(routes.groups)}
       >
         <I.PeopleIcon
-          isActive={path.pathname.includes(routes.groups) || path.pathname.includes(routes.explore)}
+          isActive={path.pathname.includes(routes.groups)}
           cursor="pointer"
           width="32px"
           height="32px"
@@ -58,6 +58,24 @@ const SidebarLinks: React.FC<{ isHide: boolean }> = ({ isHide }) => {
       >
         <I.ReferralsIcon
           isActive={path.pathname === routes.referrals}
+          cursor="pointer"
+          width="32px"
+          height="32px"
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem
+        onClick={() => {
+          navigate(routes.explore);
+        }}
+        hide={isHide}
+        href={routes.explore}
+        title="Explore"
+        isActive={path.pathname === routes.explore}
+      >
+        <I.SearchIcon
+          color="#91A8BD"
+          isActive={path.pathname === routes.explore}
           cursor="pointer"
           width="32px"
           height="32px"

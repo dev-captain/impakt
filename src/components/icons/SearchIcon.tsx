@@ -1,7 +1,38 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 import React from 'react';
 
-const SearchIcon: React.FC<IconProps> = (props) => {
+const SearchIcon: React.FC<IconProps & { isActive?: boolean }> = (props) => {
+  if (props.isActive) {
+    return (
+      <Icon
+        width="32px"
+        height="32px"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <path
+          d="M12.6667 4C14.9652 4 17.1696 4.91309 18.7949 6.53841C20.4202 8.16372 21.3333 10.3681 21.3333 12.6667C21.3333 14.8133 20.5467 16.7867 19.2533 18.3067L19.6133 18.6667H20.6667L27.3333 25.3333L25.3333 27.3333L18.6667 20.6667V19.6133L18.3067 19.2533C16.7341 20.5957 14.7343 21.3332 12.6667 21.3333C10.3681 21.3333 8.16372 20.4202 6.53841 18.7949C4.91309 17.1696 4 14.9652 4 12.6667C4 10.3681 4.91309 8.16372 6.53841 6.53841C8.16372 4.91309 10.3681 4 12.6667 4V4ZM12.6667 6.66667C9.33333 6.66667 6.66667 9.33333 6.66667 12.6667C6.66667 16 9.33333 18.6667 12.6667 18.6667C16 18.6667 18.6667 16 18.6667 12.6667C18.6667 9.33333 16 6.66667 12.6667 6.66667Z"
+          fill="url(#paint0_linear_9817_35416)"
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear_9817_35416"
+            x1="4"
+            y1="15.6667"
+            x2="27.3333"
+            y2="15.6667"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#F04153" />
+            <stop offset="1" stopColor="#F27961" />
+          </linearGradient>
+        </defs>
+      </Icon>
+    );
+  }
+
   return (
     <Icon
       width="32px"
