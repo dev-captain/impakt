@@ -2,7 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 export const useNextParamRouter = (fallBackLink?: string) => {
   const navigate = useNavigate();
-  const isThereNextParam = useLocation().search.includes('next=');
+  const location = useLocation();
+
+  const isThereNextParam = location.search.includes('next=');
   const navigateToLink = isThereNextParam ? useLocation().search.split('next=')[1] : fallBackLink;
 
   const navigateToNextParam = () => {
@@ -10,7 +12,7 @@ export const useNextParamRouter = (fallBackLink?: string) => {
       if (isForOtherImpaktProduct(navigateToLink)) {
         window.location.replace(navigateToLink.substring(1));
       } else {
-        navigate(navigateToLink);
+        navigate(navigateToLink, { state: location.state });
       }
     }
   };

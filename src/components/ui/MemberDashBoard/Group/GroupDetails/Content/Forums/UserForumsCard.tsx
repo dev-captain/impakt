@@ -7,6 +7,7 @@ import ForumDetailModal from './ForumsDetail/ForumDetailModal';
 import PostCard from './PostCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import routes from '../../../../../../../data/routes';
+import { renderToast } from '../../../../../../../utils';
 
 interface UserForumsPropsI {
   id: number;
@@ -26,6 +27,8 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
   const postParam = useParams();
   // const dispatch = useAppDispatch();
   const isStandalone = postParam.postId ? parseInt(postParam.postId, 10) === props.id : false;
+  const isGuest = group.role === 'Guest';
+
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -42,6 +45,18 @@ const UserForumsCard: React.FC<UserForumsPropsI> = (props) => {
   // };
 
   const navigateToPost = () => {
+    if (isGuest) {
+      navigate(
+        `/register/?next=${routes.groupDetail(group.activeGroup?.id ?? 12)}/post/${props.id}`,
+        {
+          state: { wasGuest: isGuest },
+        },
+      );
+
+      renderToast('warning', 'You must be logged in to see post details.', 'dark', 2200);
+
+      return;
+    }
     navigate(`post/${props.id}`);
   };
 

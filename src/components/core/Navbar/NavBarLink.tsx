@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Common } from '@/components';
-import { isProduction } from '../../../utils';
 import routes from '../../../data/routes';
 import Keys from '@/i18n/translations/en';
 
@@ -14,12 +13,12 @@ const NavbarLink = () => {
   return (
     <>
       <Common.NavBarLinkItem
-        href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
+        href={routes.explore}
         title="Social Fitness"
         isActive={path.pathname === ''}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
-        isNavigate={isProduction}
+        isNavigate
       />
       <Common.NavBarLinkItem
         title="vSports"

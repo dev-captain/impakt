@@ -13,7 +13,7 @@ const CreateGroupButton = () => {
         h="56px"
         maxH="56px"
         borderRadius="12px"
-        variant="orange"
+        variant="orange-black"
         padding="12px 24px"
         leftIcon={<AddIcon />}
         onClick={onOpen}

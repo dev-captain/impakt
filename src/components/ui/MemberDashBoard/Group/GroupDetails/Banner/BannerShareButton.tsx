@@ -10,7 +10,7 @@ const BannerShareButton: React.FC = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const isRoleDefined = role !== 'None';
+  const isRoleDefined = role !== 'None' && role !== 'Guest';
 
   return (
     <>
