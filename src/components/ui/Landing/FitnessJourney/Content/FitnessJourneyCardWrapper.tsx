@@ -44,8 +44,8 @@ const journeyData = [
   },
   {
     link: isMobile
-      ? 'impakt://challenge?challengeId=1809'
-      : 'https://fitness.impakt.com/?challengeId=1809&next=https://impakt.com',
+      ? 'impakt://challenge?challengeId=1811'
+      : 'https://fitness.impakt.com/?challengeId=1811&next=https://impakt.com',
     video: 'https://impakt-static-files.s3.amazonaws.com/landing-page/not+busy.mp4',
     title: 'Not Too Busy for Lazy Fitness',
     description: 'Grab your phone, smack it to your face and start your magical transformation',
