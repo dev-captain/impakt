@@ -36,8 +36,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
         // ref={videoRef}
         top="0"
         left="0"
-        w="100%"
-        height={{ base: '200px', md: '17.5vw' }}
+        height="auto"
         borderRadius="20px"
         autoPlay
         loop
