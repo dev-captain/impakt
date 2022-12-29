@@ -36,8 +36,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
         // ref={videoRef}
         top="0"
         left="0"
-        w="100%"
-        height={{ base: '200px', md: '15.625vw' }}
+        height="auto"
         borderRadius="20px"
         autoPlay
         loop
@@ -48,7 +47,7 @@ const FitnessJourneyCard: React.FC<FitnessJourneyCardProps> = ({
       >
         <source src={video} type="video/mp4" />
       </Box>
-      <Box padding={{ lgx: '16px', base: '12px' }}>
+      <Box padding={{ lgx: '16px', base: '12px' }} pt={{ lgx: '25px', base: '25px' }}>
         <Box>
           <Text
             as="h1"
