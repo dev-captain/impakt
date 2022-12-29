@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Box,
   Text,
@@ -7,10 +8,9 @@ import {
   Input,
   InputRightElement,
 } from '@chakra-ui/react';
-import { I } from 'components';
-import { usePersistedGroupStore } from 'lib/zustand';
-import * as React from 'react';
-import { useConversationContext } from 'context/ConversationContext';
+import { I } from '@/components';
+import { usePersistedGroupStore } from '@/lib/zustand';
+import { useConversationContext } from '@/context/ConversationContext';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import GroupChatCard from './GroupChatCard';
 

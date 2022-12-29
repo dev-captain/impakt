@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, HStack, Box } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { EventCalendarContextProvider } from '@/context/EventCalendarContext';
-import { ConversationContextProvider } from 'context/ConversationContext';
+import { ConversationContextProvider } from '@/context/ConversationContext';
 import Forums from './Forums/Forums';
 import MemberList from './MemberList/MemberList';
 import EventCalendar from './EventCalendar/EventCalendar';
@@ -24,6 +24,7 @@ const Content: React.FC = () => {
     localStorage.setItem('showTip', 'false');
     setShow('false');
   };
+
   return (
     <HStack
       marginStart="0 !important"

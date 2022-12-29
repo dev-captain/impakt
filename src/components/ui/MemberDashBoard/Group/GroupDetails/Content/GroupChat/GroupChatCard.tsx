@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Image, Text } from '@chakra-ui/react';
 // import { I } from 'components';
-import Images from 'assets/images';
+import Images from '@/assets/images';
 
 interface UserForumsPropsI {
   name: string;
