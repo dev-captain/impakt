@@ -103,7 +103,14 @@ export const MainExplore: React.FC<{ isLoading: boolean }> = ({ isLoading }) => 
               onClick={(e) => {
                 if (isProduction) {
                   e.preventDefault();
-                  navigate('/d/g/12');
+                  const isAlreadyMember = groupsStore.myGroups.filter(
+                    ({ groupId }) => groupId === 12,
+                  );
+                  if (isAlreadyMember.length > 0) {
+                    navigate('/d/g/12');
+                  } else {
+                    navigate('/d/g/12', { state: { fromExplore: true } });
+                  }
                 }
               }}
             >
