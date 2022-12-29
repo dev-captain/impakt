@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { usePersistedAuthStore, usePersistedGroupStore } from '@/lib/zustand';
 import ExploreGroup from '@/components/ui/MemberDashBoard/Group/Groups/ExploreGroupCard/ExploreGroupCard';
 import { useGroupsControllerV1ExploreGroups } from '@/lib/impakt-dev-api-client/react-query/groups/groups';
@@ -63,6 +64,7 @@ const ExploreGroupPage: React.FC = () => {
 };
 
 export const MainExplore: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
+  const navigate = useNavigate();
   const { member } = usePersistedAuthStore();
   const groupsStore = usePersistedGroupStore();
 
@@ -98,6 +100,12 @@ export const MainExplore: React.FC<{ isLoading: boolean }> = ({ isLoading }) => 
               p="12px 48px"
               h="56px"
               variant="orange"
+              onClick={(e) => {
+                if (isProduction) {
+                  e.preventDefault();
+                  navigate('/d/g/12');
+                }
+              }}
             >
               <Text textStyle="semibold20" lineHeight="32px">
                 View
