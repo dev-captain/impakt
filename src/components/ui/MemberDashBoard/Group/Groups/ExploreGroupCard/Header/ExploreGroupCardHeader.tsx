@@ -49,7 +49,11 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
         flexWrap={{ base: 'wrap', md: 'unset' }}
         // alignItems={{ base: 'flex-end', sm: 'center' }}
       >
-        <Box display="flex" mr={{ base: '0', md: '20px' }} w={{ base: '282px', sm: 'auto' }}>
+        <Box
+          display="flex"
+          mr={{ base: '0', md: showToggle ? '20px' : '0' }}
+          w={{ base: '282px', sm: 'auto' }}
+        >
           <Common.InputItems inputItems={inputItems} />
         </Box>
         {showToggle && (
