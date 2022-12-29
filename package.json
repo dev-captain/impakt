@@ -104,7 +104,6 @@
     "serve": "vite preview",
     "test": "vite test",
     "eject": "vite eject",
-    "lint:watch": "esw src -w --ext ts,tsx,jsx,js --color",
     "lint": "eslint  \"./src/**/*.{ts,tsx,jsx,js}\"",
     "lint:fix": "yarn eslint  \"./src/**/*.{ts,tsx,jsx,js}\" --fix ",
     "validate": "yarn prettier --check \"./src/**/*.{ts,tsx,js,jsx}\" && yarn lint",
@@ -115,9 +114,8 @@
   },
   "lint-staged": {
     "./src/**/*.{ts,tsx,js,jsx}": [
-      "yarn format",
-      "yarn lint:fix",
-      "yarn validate"
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "eslintConfig": {
