@@ -23,6 +23,7 @@ import SignInLinkItem from './SignInLinkItem';
 // import NavBarLink from './NavBarLink';
 // import NavBarSocialIcons from './LandingPageNavbarSocialIcons';
 import routes from '../../../../data/routes';
+import SideBarNavigationDropDownMenu from '../../../core/Sidebar/SideBarNavigationDropDownMenu';
 
 // const { dark, light } = Images;
 
@@ -148,7 +149,11 @@ const LandingPageNavbar: FC = () => {
                     <SignInLinkItem />
                   </Box>
                   <Box position="relative" display="flex">
-                    <DropDownProfileMenu />
+                    <SideBarNavigationDropDownMenu
+                      showMemberName={false}
+                      padding="0 5px 5px 5px"
+                      offset={[30, 5]}
+                    />
                   </Box>
                 </Box>
               </HStack>
