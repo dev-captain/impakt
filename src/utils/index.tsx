@@ -308,5 +308,7 @@ export const parseDaytime = (time: any) => {
   return 1000 * 60 * (hours * 60 + minutes);
 };
 
-export const isProduction = import.meta.env.VITE_VERCEL_ENV === 'production';
+export const isProduction =
+  import.meta.env.VITE_VERCEL_ENV === 'production' ||
+  import.meta.env.VITE_VERCEL_GIT_COMMIT_REF === 'beta';
 export const isPreview = import.meta.env.VITE_VERCEL_ENV === 'preview';
