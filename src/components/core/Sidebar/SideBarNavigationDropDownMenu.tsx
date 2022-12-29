@@ -43,7 +43,7 @@ const SideBarNavigationDropDownMenu: React.FC<
               <Avatar
                 w={{ base: '30px', md: '40px' }}
                 h={{ base: '30px', md: '40px' }}
-                name={member?.firstName ?? member?.username}
+                name={member.firstName?.replace(' ', '') ?? member.username?.replace(' ', '')}
               />
               {showMemberName && (
                 <Text textStyle={{ base: 'semiBold5', md: 'semiBold6' }} color="fg-1">
