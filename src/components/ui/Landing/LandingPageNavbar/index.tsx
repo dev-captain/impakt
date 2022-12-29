@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import {
   Box,
   Flex,
@@ -12,13 +12,12 @@ import {
   // PositionProps,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { isProduction, parsePathname } from '@/utils';
-import { useState, useRef } from 'react';
-import { I, Common } from '@/components';
 import classNames from 'classnames';
+import { I, Common } from '@/components';
+import { isProduction, parsePathname } from '@/utils';
+
 import './stickyStyle.css';
 import CollapseMenu from './LandingPageCollapseMenu';
-import DropDownProfileMenu from './LandingPageDropDownProfileMenu';
 import DropDownSocialMediaMenu from './LandingPageDropDownSocialMediaMenu';
 import SignInLinkItem from './SignInLinkItem';
 import routes from '../../../../data/routes';
@@ -27,7 +26,7 @@ import SideBarNavigationDropDownMenu from '../../../core/Sidebar/SideBarNavigati
 // const { dark, light } = Images;
 
 const LandingPageNavbar: FC = () => {
-  const stickyRef = useRef();
+  const stickyRef = useRef<HTMLDivElement | null>(null);
   const [sticky, setSticky] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +39,7 @@ const LandingPageNavbar: FC = () => {
       setSticky(shouldBeSticky);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, [setSticky, stickyRef]);
   const navigate = useNavigate();
