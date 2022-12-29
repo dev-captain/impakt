@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import * as React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 
 const rotate = keyframes`
   0%{

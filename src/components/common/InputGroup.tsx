@@ -2,16 +2,14 @@ import {
   InputLeftElement,
   Input,
   InputGroup as ChakraInputGroup,
-  FormLabel,
   Box,
   InputRightElement,
   ResponsiveValue,
-  Link,
 } from '@chakra-ui/react';
-import { Link as ReactRouterLink } from 'react-router-dom';
 
 import * as React from 'react';
 import InputErrorMessage from './InputErrorMessage';
+import InputLabel from './InputLabel';
 
 export interface InputGroupPropsI {
   name: string;
@@ -35,6 +33,7 @@ export interface InputGroupPropsI {
   autoFocus?: boolean | undefined;
   defaultValue?: string | number | readonly string[] | undefined;
   whiteMode?: boolean;
+  isSmallLabel?: boolean;
 }
 
 const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
@@ -57,6 +56,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
       autoFocus,
       defaultValue,
       whiteMode,
+      isSmallLabel,
     },
     ref,
   ) => {
@@ -71,39 +71,13 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
           justifyContent="flex-start"
           alignItems="flex-start"
         >
-          {label && (
-            <FormLabel
-              justifyContent="space-between"
-              display="flex"
-              w="full"
-              color={whiteMode ? 'rgba(78, 96, 112, 1)' : 'rgba(255, 255, 255, 0.85)'}
-              textStyle="semiBold6"
-              lineHeight="120%"
-            >
-              <Box>
-                {label}
-                {label.length > 1 && ':'}
-              </Box>
-              {helpText && helpText.href && (
-                <Link
-                  as={ReactRouterLink}
-                  to={helpText.href ?? '#'}
-                  onClick={helpText.onClick}
-                  tabIndex={-1}
-                  textDecor="none !important"
-                  cursor="pointer"
-                  textColor="impaktRed"
-                >
-                  {helpText.text}
-                </Link>
-              )}
-              {helpText && !helpText.href && (
-                <Box tabIndex={-1} cursor="pointer" onClick={helpText?.onClick} color="impaktRed">
-                  {helpText?.text}
-                </Box>
-              )}
-            </FormLabel>
-          )}
+          <InputLabel
+            helpText={helpText}
+            isSmallLabel={isSmallLabel}
+            whiteMode={whiteMode}
+            label={label}
+          />
+
           <ChakraInputGroup
             _hover={{ color: '#fff' }}
             _focusWithin={{ color: '#fff' }}

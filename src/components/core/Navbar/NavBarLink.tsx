@@ -1,55 +1,40 @@
 import { memo } from 'react';
-import Keys from 'i18n/types';
 import { useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Common } from 'components';
+import { Common } from '@/components';
+import { isProduction } from '../../../utils';
+import routes from '../../../data/routes';
+import Keys from '@/i18n/translations/en';
 
 const NavbarLink = () => {
   const path = useLocation();
-  const { t } = useTranslation().i18n;
 
   const textColor = 'rgba(255,255,255,0.5)';
   const passiveColor = 'white';
 
   return (
     <>
-      <Common.LinkItem
-        href="/"
-        title={t(Keys.navbar.impaktFitness)}
+      <Common.NavBarLinkItem
+        href={isProduction ? '/d/g/12' : 'https://community.impakt.com/'}
+        title="Social Fitness"
         isActive={path.pathname === ''}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
-        isNavigate
+        isNavigate={isProduction}
       />
-      <Common.LinkItem
-        title={t(Keys.navbar.knowledgeBase)}
-        href="https://knowledgebase.impakt.com"
-        isActive={path.pathname === 'knowledge-base'}
+      <Common.NavBarLinkItem
+        title="vSports"
+        href="http://vsports.me/"
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
       />
-      {/* <Common.LinkItem
-        href="/events"
-        passiveColor={passiveColor}
-        title={t(Keys.navbar.events)}
-        isActive={path.pathname === 'events'}
-      /> */}
-      <Common.LinkItem
-        href="/contact"
-        title={t(Keys.navbar.contactUs)}
+      <Common.NavBarLinkItem
+        href={routes.contact}
+        title={Keys.navbar.contactUs}
         isActive={path.pathname === 'contact'}
         titleActiveColor={passiveColor}
         titlePassiveColor={textColor}
         isNavigate
       />
-      {/* (
-      <Common.LinkItem
-        href="/terms-of-use"
-        passiveColor={passiveColor}
-        title={t(Keys.navbar.termsOfUse)}
-        isActive={path.pathname === 'terms-of-use'}
-      />
-      ) */}
     </>
   );
 };

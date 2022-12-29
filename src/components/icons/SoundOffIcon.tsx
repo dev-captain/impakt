@@ -10,13 +10,13 @@ const SoundOffIcon = (props: IconProps) => (
     {...props}
   >
     <path
-      stroke="#fff"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeWidth="3.29"
       d="M36.59 21.25l-10.377-10.5m10.377 0l-10.377 10.5"
     />
     <path
-      stroke="#fff"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="3.29"

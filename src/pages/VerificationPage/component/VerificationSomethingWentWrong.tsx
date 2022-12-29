@@ -1,14 +1,12 @@
 import React from 'react';
 import { useColorModeValue, VStack, Text, useBreakpointValue, Image } from '@chakra-ui/react';
-import { C } from 'components';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import Images from 'assets/images';
+import { C } from '@/components';
+import keys from '@/i18n/translations/en';
+import Images from '@/assets/images';
 
 import Gradients from './Gradient';
 
 const VerificationSomethingWentWrong: React.FC = () => {
-  const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.backgrounds.defaultBg, Images.backgrounds.light);
   const bgColor = useColorModeValue('glass.800', 'glass.300');
   const textColor = useColorModeValue('glass.100', 'glass.700');
@@ -54,7 +52,7 @@ const VerificationSomethingWentWrong: React.FC = () => {
             lineHeight={{ base: '36px', md: '60px' }}
             marginRight={{ base: '0', md: '10px' }}
           >
-            {t(keys.verification.something)}
+            {keys.verification.something}
           </Text>
           <Text
             textStyle={isSmallView ? 'black7' : 'black8'}
@@ -62,7 +60,7 @@ const VerificationSomethingWentWrong: React.FC = () => {
             lineHeight={{ base: '36px', md: '60px' }}
             marginTop="0 !important"
           >
-            {t(keys.verification.wrong)}
+            {keys.verification.wrong}
           </Text>
         </VStack>
         <VStack
@@ -78,7 +76,7 @@ const VerificationSomethingWentWrong: React.FC = () => {
           <Image minW="127px" h="150px" src={Images.wrong} />
 
           <VStack spacing="24px" w="full" borderRadius={16} marginTop="0 !important">
-            <Text {...commonProps}>{t(keys.verification.message)}</Text>
+            <Text {...commonProps}>{keys.verification.message}</Text>
           </VStack>
 
           <Gradients />

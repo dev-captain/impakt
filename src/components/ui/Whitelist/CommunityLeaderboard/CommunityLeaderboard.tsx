@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { C } from 'components';
+import { C } from '@/components';
 import { VStack, Box } from '@chakra-ui/react';
 import CommunityLeaderboardTable from './CommunityLeaderboardTable';
 import CommunityLeaderboardHeadlineText from './CommunityLeaderboardHeadlineText';

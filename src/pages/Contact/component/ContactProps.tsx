@@ -1,5 +1,5 @@
 import { GridItemProps, SimpleGridProps, StackProps } from '@chakra-ui/react';
-import { layoutPadding } from 'theme';
+import { layoutPadding } from '@/theme';
 
 const mVStack: StackProps = {
   w: 'full',

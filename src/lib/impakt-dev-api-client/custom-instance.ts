@@ -25,7 +25,7 @@ export const customInstance = <T>(
   return promise;
 };
 
-const API_SERVER_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '';
+const API_SERVER_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 const authStorePersisted = usePersistedAuthStore;
 
 export const AXIOS_INSTANCE = Axios.create({
@@ -38,16 +38,17 @@ const createAxiosResponseInterceptor = () => {
     (response) => response,
     (error: any) => {
       // Reject promise if usual error
+      if (
+        import.meta.env.VITE_VERCEL_ENV === 'production' ||
+        import.meta.env.VITE_VERCEL_ENV === 'preview'
+      ) {
+        sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
+      }
+
       if (error.response?.status !== 401) {
         return Promise.reject(error);
       }
 
-      if (
-        process.env.REACT_APP_VERCEL_ENV === 'production' ||
-        process.env.REACT_APP_VERCEL_ENV === 'preview'
-      ) {
-        sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
-      }
       /*
        * When response code is 401, try to refresh the token.
        * Eject the interceptor so it doesn't loop in case

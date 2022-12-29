@@ -8,22 +8,26 @@ import {
   MenuList,
   MenuButton,
   VStack,
+  MenuButtonProps,
 } from '@chakra-ui/react';
-import { I } from 'components';
-import { useLogout } from 'hooks';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import { I } from '@/components';
+import { useLogout } from '@/hooks';
 import { usePersistedAuthStore } from '../../../lib/zustand';
+import routes from '../../../data/routes';
 
 interface SideBarNavigationDropDownMenuPropsI {
   offset?: [x: number, y: number];
+  showMemberName?: boolean;
 }
 
-const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuPropsI> = ({
-  offset,
-}) => {
+const SideBarNavigationDropDownMenu: React.FC<
+  SideBarNavigationDropDownMenuPropsI & MenuButtonProps
+> = ({ offset, showMemberName = true, ...props }) => {
   const { member } = usePersistedAuthStore();
   const logout = useLogout();
 
-  return (
+  return member ? (
     <Menu autoSelect={false} offset={offset ?? [0, 10]}>
       {({ isOpen }) => (
         <>
@@ -33,6 +37,7 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
             bg={isOpen ? 'white' : ''}
             borderRadius="12px"
             p="12px"
+            {...props}
           >
             <HStack spacing="12px">
               <Avatar
@@ -40,9 +45,11 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
                 h={{ base: '30px', md: '40px' }}
                 name={member?.firstName ?? member?.username}
               />
-              <Text textStyle={{ base: 'semiBold5', md: 'semiBold6' }} color="fg-1">
-                {member?.firstName ?? member?.username}
-              </Text>
+              {showMemberName && (
+                <Text textStyle={{ base: 'semiBold5', md: 'semiBold6' }} color="fg-1">
+                  {member?.firstName ?? member?.username}
+                </Text>
+              )}
               <I.DropIcon
                 transform={isOpen ? 'matrix(1, 0, 0, -1, 0, 0);' : ''}
                 transition="transform 0.1s linear"
@@ -53,6 +60,25 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
           </MenuButton>
           <MenuList bg="transparent" border="0" boxShadow="unset">
             <VStack borderRadius="12px" p="8px 0" boxShadow="lightM" bg="white" maxW="196px">
+              <MenuItem
+                as={ReactRouterLink}
+                to={routes.dashboard}
+                color="fg"
+                _hover={{ bg: ' a5', color: 'fg-1' }}
+              >
+                <HStack
+                  columnGap="23px"
+                  px="5px"
+                  w="full"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                >
+                  <I.DashboardIcon width="24px" height="24px" />
+                  <Text ml="0 !important" textStyle="semiBold6">
+                    Dashboard
+                  </Text>
+                </HStack>
+              </MenuItem>
               <MenuItem
                 onClick={async () => {
                   await logout();
@@ -77,6 +103,6 @@ const SideBarNavigationDropDownMenu: React.FC<SideBarNavigationDropDownMenuProps
         </>
       )}
     </Menu>
-  );
+  ) : null;
 };
 export default SideBarNavigationDropDownMenu;

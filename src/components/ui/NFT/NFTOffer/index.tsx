@@ -1,10 +1,9 @@
 import { memo } from 'react';
-// import { useTranslation } from 'react-i18next';
-// import Keys from 'i18n/types';
+// import Keys from '@/i18n/translations/en';
 
 import { VStack, HStack, useColorModeValue, Box, Text, Image } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { C } from 'components';
+import Images from '@/assets/images';
+import { C } from '@/components';
 import OfferCard from './offerCard';
 
 const NFTOffer = () => {

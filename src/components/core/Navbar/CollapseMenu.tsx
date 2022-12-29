@@ -1,10 +1,9 @@
 import { VStack, Collapse, HStack, Box, Link, Button } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { parsePathname } from 'utils';
-import Keys from 'i18n/types';
-import { Socials } from 'data';
-import { I } from 'components';
+import { parsePathname } from '@/utils';
+import Keys from '@/i18n/translations/en';
+import { Socials } from '@/data';
+import { I } from '@/components';
 
 import NavbarLinkItem from '../../common/LinkItem';
 import SignInLinkItem from './SignInLinkItem';
@@ -23,7 +22,6 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
   const { member } = usePersistedAuthStore();
   const location = useLocation();
   const path = parsePathname(location.pathname);
-  const { t } = useTranslation().i18n;
 
   return (
     <Collapse in={isOpen} animateOpacity>
@@ -38,17 +36,14 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
       >
         <NavbarLinkItem href={routes.groups} isNavigate title="Groups" />
         {member && (
-          <NavbarLinkItem href={routes.dashboard} isNavigate title={t(Keys.navbar.dashboard)} />
+          <NavbarLinkItem href={routes.dashboard} isNavigate title={Keys.navbar.dashboard} />
         )}
-        <NavbarLinkItem href="/" isNavigate title={t(Keys.navbar.impaktFitness)} />
-        <NavbarLinkItem
-          title={t(Keys.navbar.knowledgeBase)}
-          href="https://knowledgebase.impakt.com"
-        />
-        <NavbarLinkItem href="/events" isNavigate title={t(Keys.navbar.events)} />
+        <NavbarLinkItem href="/" isNavigate title={Keys.navbar.impaktFitness} />
+        <NavbarLinkItem title={Keys.navbar.knowledgeBase} href="https://knowledgebase.impakt.com" />
+        <NavbarLinkItem href="/events" isNavigate title={Keys.navbar.events} />
         <NavbarLinkItem
           isNavigate
-          title={t(Keys.navbar.contactUs)}
+          title={Keys.navbar.contactUs}
           isActive={path.path === 'contact'}
         />
 
@@ -60,7 +55,7 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
                 onClose();
               });
             }}
-            title={t(Keys.navbar.signOut)}
+            title={Keys.navbar.signOut}
           />
         )}
 
@@ -74,9 +69,11 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
           marginTop="20px !important"
         >
           <HStack
-            pl={{ base: 0, md: '64px' }}
+            pl={{ base: 0, md: '0' }}
+            w="auto"
+            justifyContent="center"
             spacing={{ base: '6px', md: '32px' }}
-            justify={{ base: 'center', md: 'flex-end' }}
+            // justify={{ base: 'center', md: 'flex-end' }}
             display={['flex', 'flex', 'flex', isLessThan1040 ? 'flex' : 'none', 'none']}
           >
             <Box
@@ -151,7 +148,7 @@ const CollapseMenu = ({ isOpen, onClose, isLessThan1040 }: Props) => {
           <Box w="full" display="flex" mt="2" ml="0 !important">
             <Link w="full" href={routes.download} _hover={{ textDecoration: 'none' }}>
               <Button marginTop="8px" width="100%" colorScheme="red">
-                {t(Keys.navbar.download)}
+                {Keys.navbar.download}
               </Button>
             </Link>
           </Box>

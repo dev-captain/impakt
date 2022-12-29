@@ -1,11 +1,9 @@
 import { VStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import * as React from 'react';
-import keys from 'i18n/types';
-import { useTranslation } from 'react-i18next';
+import keys from '@/i18n/translations/en';
 import LandingLine from '../../LandingLine';
 
 const ImpaktTeamHeader: React.FC = () => {
-  const { t } = useTranslation().i18n;
   const textColor = useColorModeValue('glass.100', 'glass.700');
 
   return (
@@ -33,20 +31,20 @@ const ImpaktTeamHeader: React.FC = () => {
                 fontWeight="700"
                 lineHeight="inherit"
               >
-                {t(keys.impaktGamesHero.impaktTeamTitle)}
+                {keys.impaktGamesHero.impaktTeamTitle}
               </Text>
               <LandingLine dir="h" />
               <Text
                 color="#1C1C28"
-                fontSize="18px"
+                fontSize="26px"
                 lineHeight="inherit"
-                fontWeight="500"
+                fontWeight="700"
                 textStyle="TitleBold48"
                 maxWidth="519px"
                 margin="auto"
-                mb="37px"
+                mb="15px"
               >
-                {t(keys.impaktGamesHero.impaktTeamDescription)}
+                The industry experts defining vSports.
               </Text>
             </Box>
           </VStack>

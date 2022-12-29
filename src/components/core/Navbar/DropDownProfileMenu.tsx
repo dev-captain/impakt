@@ -7,10 +7,11 @@ import {
   HStack,
   MenuDivider,
   useMediaQuery,
+  Avatar,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { I } from 'components';
+import { I } from '@/components';
 
 import { usePersistedAuthStore } from '../../../lib/zustand';
 import { useLogout } from '../../../hooks/useLogout';
@@ -26,7 +27,12 @@ const DropDownProfileMenu: React.FC = () => {
     <Menu placement="bottom" boundary="scrollParent" autoSelect={false}>
       <MenuButton>
         <HStack>
-          <I.DefaultImpaktProfileIcon width="40px" height="40px" />
+          {/* <I.DefaultImpaktProfileIcon width="40px" height="40px" /> */}
+          <Avatar
+            w={{ base: '30px', md: '40px' }}
+            h={{ base: '30px', md: '40px' }}
+            name={member?.firstName ?? member?.username}
+          />
         </HStack>
       </MenuButton>
       <MenuList

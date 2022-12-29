@@ -1,4 +1,3 @@
-import theme from 'theme';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -10,6 +9,7 @@ import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
 import { BrowserTracing } from '@sentry/tracing';
 import * as Sentry from '@sentry/react';
+import theme from '@/theme';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -19,8 +19,8 @@ const queryClient = new QueryClient();
 
 const initSentry = () => {
   if (
-    process.env.REACT_APP_VERCEL_ENV === 'production' ||
-    process.env.REACT_APP_VERCEL_ENV === 'preview'
+    import.meta.env.VITE_VERCEL_ENV === 'production' ||
+    import.meta.env.VITE_VERCEL_ENV === 'preview'
   ) {
     Sentry.init({
       dsn: 'https://482e35ccc1c3471b86af0c359112f6ad@o522080.ingest.sentry.io/4504274587549696',
@@ -33,10 +33,7 @@ const initSentry = () => {
 };
 
 const initLogRocket = () => {
-  if (
-    process.env.REACT_APP_VERCEL_ENV === 'production' ||
-    process.env.REACT_APP_VERCEL_ENV === 'preview'
-  ) {
+  if (import.meta.env.VITE_VERCEL_ENV === 'production') {
     LogRocket.init('qmt5ka/impakt');
     setupLogRocketReact(LogRocket);
   }

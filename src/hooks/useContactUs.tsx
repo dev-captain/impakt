@@ -11,7 +11,7 @@ interface ContactUs {
 }
 
 const freshDeskAwsApiGateWayAxiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_TICKET_API_GATEWAY_BASE_URI,
+  baseURL: import.meta.env.VITE_TICKET_API_GATEWAY_BASE_URI,
 });
 
 const useContactUs = () => {

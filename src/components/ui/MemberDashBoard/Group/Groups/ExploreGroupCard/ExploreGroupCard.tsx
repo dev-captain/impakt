@@ -9,6 +9,7 @@ const ExploreGroup: React.FC = () => {
   const { exploreGroups } = usePersistedGroupStore();
 
   const [status, setStatus] = React.useState<'Public' | 'Private'>('Public');
+  const [searchGroup, setSearchGroup] = React.useState<string | string>('');
   if (exploreGroups.length === 0) return null;
 
   return (
@@ -20,8 +21,12 @@ const ExploreGroup: React.FC = () => {
       flexWrap={{ sm: 'wrap' }}
       flexDir={{ base: 'column', md: 'row' }}
     >
-      <ExploreGroupCardHeader status={status} setStatus={setStatus} />
-      <ExploreGroupCardWrapper status={status} />
+      <ExploreGroupCardHeader
+        status={status}
+        setStatus={setStatus}
+        setSearchGroup={setSearchGroup}
+      />
+      <ExploreGroupCardWrapper status={status} searchGroup={searchGroup} />
     </HStack>
   );
 };

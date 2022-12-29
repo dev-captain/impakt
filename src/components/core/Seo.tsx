@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import seoData from 'data/seoData';
+import seoData from '@/data/seoData';
 
 type Props = {
   lang?: string;

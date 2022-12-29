@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/react';
-import { S } from 'components';
+import { S } from '@/components';
 
 const LandingPage = () => {
   // const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
@@ -16,6 +16,7 @@ const LandingPage = () => {
       <S.Landing.ImpaktTeam />
       <S.Landing.BecomePart />
       <S.Landing.LandingPageFooter />
+      <S.Landing.PromoBar />
     </Container>
   );
 };

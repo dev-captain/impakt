@@ -1,10 +1,10 @@
 import { Box, Flex, FormControl, VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import signUpYupScheme from '../../../lib/yup/schemas/signUpYupScheme';

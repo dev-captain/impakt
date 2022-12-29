@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 
 import GroupSocialModal from './Panel/GroupSettings/GroupSocialModal';
 import { usePersistedGroupStore } from '../../../../../../lib/zustand';

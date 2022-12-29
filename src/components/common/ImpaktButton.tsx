@@ -14,7 +14,7 @@ type ImpaktButtonVariantType =
   | 'orange-black'
   | 'delete';
 
-interface ImpaktButtonProps {
+export interface ImpaktButtonProps {
   size?: 'sm' | 'lg';
   as?: As<any>;
   variant?: ImpaktButtonVariantType;

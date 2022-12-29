@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Common } from 'components';
+import { Common } from '@/components';
 import { Box } from '@chakra-ui/react';
 
 import { InputGroupPropsI } from './InputGroup';

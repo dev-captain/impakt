@@ -1,8 +1,8 @@
 import { Box, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Common } from 'components';
-
+import { Common } from '@/components';
+import { useSearchString } from '@/hooks';
 import Images from '../../../../../../assets/images';
 import GroupsCard from '../GroupsCard';
 
@@ -11,16 +11,19 @@ import routes from '../../../../../../data/routes';
 
 interface ExploreGroupCardWrapperPropsI {
   status: 'Private' | 'Public';
+  searchGroup: string;
 }
-const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({ status }) => {
+const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
+  status,
+  searchGroup,
+}) => {
   const isPrivate = status === 'Private';
   const navigate = useNavigate();
-
   const { exploreGroups } = usePersistedGroupStore();
-
+  const { checkString } = useSearchString();
   const exploreGroup = exploreGroups.filter(
     // eslint-disable-next-line no-underscore-dangle
-    (d) => d.private === isPrivate,
+    (d) => d.private === isPrivate && checkString(d.groupName.toLowerCase(), searchGroup),
   );
 
   return (

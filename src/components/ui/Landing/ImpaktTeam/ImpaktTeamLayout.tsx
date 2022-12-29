@@ -13,7 +13,7 @@ const ImpaktTeamLayout: React.FC = ({ children }) => {
         xl: '100px',
         '2xl': '0px',
       }}
-      minH="70vh"
+      minH="auto"
     >
       {children}
     </C.HeroLayout>

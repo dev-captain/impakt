@@ -9,20 +9,17 @@ import {
   GridItem,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-import keys from 'i18n/types';
-import Images from 'assets/images';
-import { C, Common, I } from 'components';
+import Images from '@/assets/images';
+import { C, Common, I } from '@/components';
 import GenesisCard from './GenesisCard';
+import keys from '@/i18n/translations/en';
 
 const NFTGenesis = () => {
   const [isLessThanMd] = useMediaQuery('(max-width:992px)');
-  const { t } = useTranslation().i18n;
   const bgImage = useColorModeValue(Images.nft.nft_genesis_bg, Images.nft.nft_genesis_bg);
   const bgImageMobile = Images.nft.nft_genesis_mobile_bg;
   const [isLessThan1040] = useMediaQuery('(max-width: 1080px)');
-  let Genesis = useState<object[]>();
-  Genesis = t('NFTGenesis.Genesis', { returnObjects: true });
+  const Genesis = [keys.NFTGenesis.Genesis];
 
   return (
     <C.HeroLayout
@@ -73,14 +70,14 @@ const NFTGenesis = () => {
                     letterSpacing="-1.5px"
                     paddingTop={{ base: '0px', sm: '0px', md: '0px' }}
                   >
-                    {t(keys.NFTGenesis.Title)}
+                    {keys.NFTGenesis.Title}
                   </Text>
                   <Text
                     textStyle={{ base: 'semiBold5', md: 'regular18' }}
                     marginTop="32px"
                     color="rgba(255, 255, 255, 0.85)"
                   >
-                    {t(keys.NFTGenesis.description)}
+                    {keys.NFTGenesis.description}
                   </Text>
                 </Box>
               </Box>
@@ -107,7 +104,7 @@ const NFTGenesis = () => {
                       textStyle={{ base: 'semiBold5', md: 'regular18' }}
                       color="rgba(255, 255, 255, 0.75);"
                     >
-                      {t(keys.NFTGenesis.infoDescription)}
+                      {keys.NFTGenesis.infoDescription}
                     </Text>
                   </VStack>
                 </Common.InfoCard>

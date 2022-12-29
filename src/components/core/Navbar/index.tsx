@@ -9,12 +9,12 @@ import {
   PositionProps,
 } from '@chakra-ui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { parsePathname } from 'utils';
-import { useTranslation } from 'react-i18next';
-import Keys from 'i18n/types';
+import { parsePathname } from '@/utils';
+import Keys from '@/i18n/translations/en';
 
-import { I, Common } from 'components';
+import { I, Common } from '@/components';
 
+import DropDownSocialMediaMenu from '@/components/ui/Landing/LandingPageNavbar/LandingPageDropDownSocialMediaMenu';
 import CollapseMenu from './CollapseMenu';
 import CollapseMenuController from './CollapseMenuController';
 import DropDownProfileMenu from './DropDownProfileMenu';
@@ -31,7 +31,6 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation(`default`).i18n;
   const path = parsePathname(location.pathname);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isLessThan1280] = useMediaQuery('(max-width: 1280px)');
@@ -103,6 +102,13 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   zIndex="99"
                 >
                   <NavBarLink />
+                  <Box textColor="red">
+                    <DropDownSocialMediaMenu
+                      titleColor="rgba(255,255,255,0.5)"
+                      bgColor="rgba(28, 28, 40)"
+                      iconColor="white"
+                    />
+                  </Box>
                 </HStack>
               </Box>
 
@@ -112,7 +118,6 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                   spacing="8px"
                   pl={{ base: isVersion2 ? '0px' : '64px' }}
                 >
-                  <Common.SocialIcons />
                   <Box position="relative" display="flex">
                     <DropDownProfileMenu />
                   </Box>
@@ -130,7 +135,7 @@ const Navbar: FC<NavbarProps> = ({ position = 'fixed', isVersion2 = false }) => 
                       navigate(routes.download);
                     }}
                   >
-                    {t(Keys.navbar.download)}
+                    {Keys.navbar.download}
                   </Common.ImpaktButton>
                 </HStack>
               )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, AvatarGroup, Box } from '@chakra-ui/react';
 
-// import { Common, I } from 'components';
+// import { Common, I } from '@/components';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 
 export const BannerHeaderRight: React.FC = () => {

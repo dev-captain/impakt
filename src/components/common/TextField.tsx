@@ -1,5 +1,5 @@
 import React from 'react';
-import { I } from 'components';
+import { I } from '@/components';
 import { Box, Input, Text } from '@chakra-ui/react';
 
 type FieldProps = {

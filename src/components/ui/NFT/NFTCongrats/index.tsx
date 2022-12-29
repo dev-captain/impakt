@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Text, useMediaQuery, VStack } from '@chakra-ui/react';
-import { C, Common } from 'components';
+import { C, Common } from '@/components';
 import routes from '../../../../data/routes';
 
 const NFTCongrats: React.FC = () => {

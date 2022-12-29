@@ -5,14 +5,12 @@ const MyBodyHeadlineText: React.FC = () => {
   return (
     <Text
       color="#1C1C28"
-      fontSize={{ base: '30px', md: '80px' }}
+      fontSize={{ base: '30px', md: '40px' }}
       letterSpacing="-2px"
       fontWeight="700"
       lineHeight="100%"
     >
-      My body.
-      <br />
-      My controller.
+      Enter a virtual world of virtual sports.
     </Text>
   );
 };

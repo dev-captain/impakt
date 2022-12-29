@@ -3,7 +3,7 @@ import { Icon, IconProps } from '@chakra-ui/react';
 const FrameIcon = (props: IconProps) => (
   <Icon
     xmlns="http://www.w3.org/2000/svg"
-    width="30"
+    // width="16"
     height="24"
     fill="none"
     viewBox="0 0 30 24"

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Menu, MenuButton, useDisclosure } from '@chakra-ui/react';
 // import { useNavigate } from 'react-router-dom';
 
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 import GroupSettingModal from './GroupSettings/GroupSettingModal';
 import { useGroupsMemberControllerV1JoinGroup } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { renderToast } from '../../../../../../../utils';
@@ -90,7 +90,7 @@ const BannerSettingsMenu: React.FC = () => {
             (group) => group.id === activeGroup.id,
           );
           if (indexOfExploreGroup !== -1) {
-            shallowExploreGroups[indexOfExploreGroup].Request = d;
+            shallowExploreGroups[indexOfExploreGroup].Request = { ...d, status: 'Pending' };
             setExploreGroups(shallowExploreGroups);
           }
         },
@@ -104,6 +104,7 @@ const BannerSettingsMenu: React.FC = () => {
   if (!activeGroup) return null;
 
   const isRoleNotDefined = !role || role === 'None';
+  const request = exploreGroups.find((group) => group.id === activeGroup.id)?.Request;
 
   return (
     <>
@@ -113,7 +114,7 @@ const BannerSettingsMenu: React.FC = () => {
             variant="white-50"
             as={MenuButton}
             borderRadius="8px"
-            justifyConten="center"
+            justifyContent="center"
             alignItems="center"
             p="12px"
             h="56px"
@@ -126,14 +127,15 @@ const BannerSettingsMenu: React.FC = () => {
         )}
         {isRoleNotDefined && (
           <Common.ImpaktButton
-            variant="black"
+            // variant="black"
+            bg="orangeGradient"
             hover={{
               backgroundColor: '#fff',
               color: '#fff',
             }}
             onClick={
               activeGroup.private
-                ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
+                ? request?.status === 'Pending'
                   ? () => null
                   : handleSendRequestToJoin
                 : jointoGroup
@@ -142,11 +144,11 @@ const BannerSettingsMenu: React.FC = () => {
             isLoading={joinGroup.isLoading}
             borderRadius="8px"
             fontWeight="600"
-            justifyContent="space-around"
+            justifyContent="center"
             fontSize="16px"
             leftIcon={
               activeGroup.private ? (
-                exploreGroups.find((group) => group.id === activeGroup.id)?.Request ? undefined : (
+                request?.status === 'Pending' ? undefined : (
                   <I.UnionIcon />
                 )
               ) : (
@@ -155,7 +157,7 @@ const BannerSettingsMenu: React.FC = () => {
             }
           >
             {activeGroup.private
-              ? exploreGroups.find((group) => group.id === activeGroup.id)?.Request
+              ? request?.status === 'Pending'
                 ? 'Pending'
                 : 'Request to join'
               : 'Join'}

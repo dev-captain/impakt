@@ -1,10 +1,10 @@
 import { Box, Text, Button, useDisclosure } from '@chakra-ui/react';
-// import { I } from 'components';
+// import { I } from '@/components';
 import * as React from 'react';
 import { AddIcon } from '@chakra-ui/icons';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
-// import Images from 'assets/images';
+// import Images from '@/assets/images';
 import UserForumsCard from './UserForumsCard';
 import CreatePostCard from './CreatePostCard';
 import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
@@ -30,11 +30,7 @@ const Forums: React.FC = () => {
 
   return (
     <>
-      <Box
-        marginStart="0 !important"
-        width={{ base: '100%', md: '40%', lgx: '50%' }}
-        display="flex"
-      >
+      <Box marginStart="0 !important" width={{ base: '100%' }} display="flex">
         <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto">
           <Box w="full">
             <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
@@ -63,24 +59,26 @@ const Forums: React.FC = () => {
                 </Button>
               </Box>
             </Box>
-            {posts.length === 0 && <CreatePostCard onClick={onOpen} />}
-            {posts.length > 0 &&
-              posts.map(
-                ({ id, Creator, content, createdAt, Comment }) =>
-                  Comment.length && (
-                    <UserForumsCard
-                      key={id}
-                      id={id}
-                      message={Comment[0]?.content}
-                      messageCreatorName={Comment[0]?.Creator.username}
-                      messageCreatedAt={getCreatedBefore(Comment[0]?.createdAt ?? '08-08-2000')}
-                      replyCount={Comment.length - 1}
-                      postCreatedAt={getCreatedBefore(createdAt)}
-                      postTitle={content}
-                      postCreatorName={Creator?.username}
-                    />
-                  ),
-              )}
+            <Box style={{ overflowY: 'scroll', maxHeight: '428px' }}>
+              {posts.length === 0 && <CreatePostCard onClick={onOpen} />}
+              {posts.length > 0 &&
+                posts.map(
+                  ({ id, Creator, content, createdAt, Comment }) =>
+                    Comment.length && (
+                      <UserForumsCard
+                        key={id}
+                        id={id}
+                        message={Comment[0]?.content}
+                        messageCreatorName={Comment[0]?.Creator.username}
+                        messageCreatedAt={getCreatedBefore(Comment[0]?.createdAt ?? '08-08-2000')}
+                        replyCount={Comment.length - 1}
+                        postCreatedAt={getCreatedBefore(createdAt)}
+                        postTitle={content}
+                        postCreatorName={Creator?.username}
+                      />
+                    ),
+                )}
+            </Box>
           </Box>
         </MemberDashboardCard>
       </Box>

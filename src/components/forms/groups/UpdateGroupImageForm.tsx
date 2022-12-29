@@ -1,16 +1,19 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import { Avatar, AvatarGroup, Box, Img, Input, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Common, I } from 'components';
+import { Common, I } from '@/components';
 
 import React, { useEffect } from 'react';
-import { useForm } from 'hooks';
+import { useForm } from '@/hooks';
 import { useParams } from 'react-router-dom';
 
 import Images from '../../../assets/images';
 import uploadImageScheme from '../../../lib/yup/schemas/uploadImageScheme';
 import { ALLOW_IMAGE_FILE } from '../../../lib/yup/fields';
-import { useGroupsControllerV1PatchGroupCoverImage } from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import {
+  useGroupsControllerV1FindOne,
+  useGroupsControllerV1PatchGroupCoverImage,
+} from '../../../lib/impakt-dev-api-client/react-query/groups/groups';
 import { usePersistedGroupStore } from '../../../lib/zustand';
 import { renderToast } from '../../../utils';
 
@@ -18,6 +21,9 @@ const UpdateGroupImageForm: React.FC = () => {
   const updateGroupCoverImage = useGroupsControllerV1PatchGroupCoverImage();
   const groupParam = useParams();
   const { activeGroup, setActiveGroup, myGroups, setMyGroups } = usePersistedGroupStore();
+  const fetchActiveGroup = useGroupsControllerV1FindOne(activeGroup?.id!, {
+    query: { enabled: false },
+  });
   const groupMembers = usePersistedGroupStore().membersOfGroup?.Members.filter(
     (members) => members.role !== 'None',
   );
@@ -80,16 +86,20 @@ const UpdateGroupImageForm: React.FC = () => {
     updateGroupCoverImage.mutate(
       { data: { file: formData.get('file') as any }, groupId: activeGroup.id },
       {
-        onSuccess: (newImage) => {
+        onSuccess: async () => {
           renderToast('success', 'Group cover image updated successfully.');
-          setActiveGroup({ ...activeGroup, CurrentCoverImage: newImage.ImageKey });
-          const shallowOfMyGroups = [...myGroups];
-          const indexOfGroup = shallowOfMyGroups.findIndex(
-            (group) => group.groupId === activeGroup.id,
-          );
-          if (indexOfGroup !== -1) {
-            shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage = newImage.ImageKey;
-            setMyGroups(shallowOfMyGroups);
+          const activeGroupRefetch = await fetchActiveGroup.refetch();
+          if (activeGroupRefetch.data) {
+            setActiveGroup(activeGroupRefetch.data);
+            const shallowOfMyGroups = [...myGroups];
+            const indexOfGroup = shallowOfMyGroups.findIndex(
+              (group) => group.groupId === activeGroup.id,
+            );
+            if (indexOfGroup !== -1) {
+              shallowOfMyGroups[indexOfGroup].Group.CurrentCoverImage =
+                activeGroupRefetch.data?.CurrentCoverImage;
+              setMyGroups(shallowOfMyGroups);
+            }
           }
 
           reset({ file: null });

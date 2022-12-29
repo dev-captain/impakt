@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useNormalizeError } from 'hooks';
 import { useToast } from '@chakra-ui/react';
+import { useNormalizeError } from '@/hooks';
 import routes from '../../data/routes';
 
 const ErrorBoundary: React.FC<any> = ({ children }) => {

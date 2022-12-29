@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { VStack, HStack, useColorModeValue, Box, Text } from '@chakra-ui/react';
-import Images from 'assets/images';
-import { C } from 'components';
-import OfferCard from 'components/ui/NFT/NFTOffer/offerCard';
+import Images from '@/assets/images';
+import { C } from '@/components';
+import OfferCard from '@/components/ui/NFT/NFTOffer/offerCard';
 
 const PassNft = () => {
   const bgImage = useColorModeValue(Images.whitelist.nftpass, Images.whitelist.nftpass);
