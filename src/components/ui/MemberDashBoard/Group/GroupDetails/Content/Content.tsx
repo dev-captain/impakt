@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, HStack } from '@chakra-ui/react';
+import { HStack, VStack } from '@chakra-ui/react';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { EventCalendarContextProvider } from '@/context/EventCalendarContext';
 import { ConversationContextProvider } from '@/context/ConversationContext';
@@ -42,17 +42,17 @@ const Content: React.FC = () => {
       <EventCalendarContextProvider>
         <EventCalendar />
       </EventCalendarContextProvider>
-      <Box display="flex" flexDir="column" w="full" alignItems="center">
+      <VStack width="100%" rowGap={{ base: '16px', md: '24px' }}>
         {(!localStorage.getItem('showTip') || !show) && role === 'Creator' && (
           <GroupWelcome hideGroupWelcome={hide} />
         )}
-        <Box width="100%">
+        {role !== 'None' && role !== null && (
           <ConversationContextProvider>
             <GroupChat />
           </ConversationContextProvider>
-          <Forums />
-        </Box>
-      </Box>
+        )}
+        <Forums />
+      </VStack>
       <MemberList />
     </HStack>
   );

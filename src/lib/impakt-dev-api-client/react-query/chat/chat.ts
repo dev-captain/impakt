@@ -15,9 +15,12 @@ import type {
 } from '@tanstack/react-query';
 import type {
   ConversationCreateV1Dto,
+  MessagesV1Dto,
   MessageControllerV1GetMessagesParams,
+  MessageV1Dto,
   CreateMessageV1Dto,
   UpdateMessageV1Dto,
+  DeleteMessageVDto,
 } from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
@@ -182,7 +185,7 @@ export const messageControllerV1GetMessages = (
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
-  return customInstance<void>(
+  return customInstance<MessagesV1Dto>(
     { url: `/api/v1/chat/conversations/${conversationId}/messages`, method: 'get', params, signal },
     options,
   );
@@ -238,7 +241,7 @@ export const messageControllerV1CreateMessage = (
   createMessageV1Dto: CreateMessageV1Dto,
   options?: SecondParameter<typeof customInstance>,
 ) => {
-  return customInstance<void>(
+  return customInstance<MessageV1Dto>(
     {
       url: `/api/v1/chat/conversations/${conversationId}/messages`,
       method: 'post',
@@ -291,7 +294,7 @@ export const messageControllerV1UpdateMessage = (
   updateMessageV1Dto: UpdateMessageV1Dto,
   options?: SecondParameter<typeof customInstance>,
 ) => {
-  return customInstance<void>(
+  return customInstance<MessageV1Dto>(
     {
       url: `/api/v1/chat/conversations/${conversationId}/messages/${messageId}`,
       method: 'put',
@@ -343,7 +346,7 @@ export const messageControllerV1DeleteMessage = (
   messageId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
-  return customInstance<void>(
+  return customInstance<DeleteMessageVDto>(
     { url: `/api/v1/chat/conversations/${conversationId}/messages/${messageId}`, method: 'delete' },
     options,
   );

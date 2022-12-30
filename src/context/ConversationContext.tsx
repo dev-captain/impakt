@@ -1,19 +1,17 @@
 import React from 'react';
 import * as SocketIOClient from 'socket.io-client';
+import { useMessageControllerV1GetMessages } from '../lib/impakt-dev-api-client/react-query/chat/chat';
+import { MessageV1Dto } from '../lib/impakt-dev-api-client/react-query/types/messageV1Dto';
+import { userControllerGetUser } from '../lib/impakt-dev-api-client/react-query/users/users';
+import { usePersistedGroupStore } from '../lib/zustand';
 
 const API_SERVER_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
-interface Message {
-  id: number;
-  createdAt: string;
-  userId: number;
-  text: string;
-}
-
 interface ConversationContext {
   setConversationId: React.Dispatch<React.SetStateAction<number | null>>;
-  messages: Message[];
+  messages: MessageType[];
   sendMessage: (data: string) => void;
+  isMessagesLoading: boolean;
 }
 
 const ConversationContext = React.createContext<ConversationContext | null>(null);
@@ -29,31 +27,83 @@ export function useConversationContext() {
   return context;
 }
 
+type MessageType = MessageV1Dto & { username?: string };
+
 export const ConversationContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { membersOfGroup, role } = usePersistedGroupStore();
   const [conversationId, setConversationId] = React.useState<number | null>(null);
-  const [messages, setMessages] = React.useState<Message[]>([]);
   const socketRef = React.useRef<SocketIOClient.Socket>();
+  const [messages, setMessages] = React.useState<MessageType[]>([]);
+  const groupMessages = useMessageControllerV1GetMessages(
+    conversationId!,
+    {},
+    {
+      query: {
+        enabled: conversationId !== null && role !== 'None',
+        onSuccess: async (data) => {
+          const matchedMessage = await matchMessagesandUser(data.messages);
 
+          setMessages(matchedMessage);
+        },
+      },
+    },
+  );
+
+  const matchMessagesandUser = async (currentMessages: MessageV1Dto[]) => {
+    const matchedMessages: MessageType[] = [];
+    for (let index = 0; index < currentMessages.length; index += 1) {
+      matchMessage(currentMessages[index]).then((data) => {
+        matchedMessages[index] = data;
+      });
+    }
+
+    return matchedMessages;
+  };
+
+  const matchMessage = async (message: MessageV1Dto) => {
+    let matchedMessage: MessageType;
+    const member = membersOfGroup?.Members.filter(({ User }) => User.id === message.userId);
+    if (member?.length) {
+      const getMember = member.find(({ User }) => User.id === message.userId);
+      matchedMessage = {
+        ...message,
+        username: getMember?.User.firstName ?? getMember?.User.username,
+      };
+    } else {
+      const user = await userControllerGetUser(message.userId);
+
+      matchedMessage = {
+        ...message,
+        username: user.firstName ?? user?.username,
+      };
+    }
+
+    return matchedMessage;
+  };
   /**
    * Connect to the socket server
    * Disconnect from the socket server
    */
   React.useEffect(() => {
-    socketRef.current = SocketIOClient.io(API_SERVER_URL, { withCredentials: true });
+    if (role !== 'None') {
+      socketRef.current = SocketIOClient.io(API_SERVER_URL, { withCredentials: true });
 
-    socketRef.current.on('new-message', (data: string) => {
-      setMessages((prev) => [...prev, JSON.parse(data) as Message]);
+      socketRef.current.on('new-message', async (data: string) => {
+        const parsedMessage = JSON.parse(data) as MessageV1Dto;
+        const matchMessageUser = await matchMessage(parsedMessage);
+        setMessages((prev) => [...prev, matchMessageUser]);
 
-      return true;
-    });
-    // TODO: pre-load previous messages
+        return true;
+      });
+      // TODO: pre-load previous messages
+    }
 
     return () => {
       socketRef.current?.disconnect();
     };
-  }, []);
+  }, [role]);
 
   /**
    * Join the conversation
@@ -61,10 +111,10 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
    * Add new messages to the state when received
    */
   React.useEffect(() => {
-    if (conversationId) {
+    if (conversationId && role !== 'None') {
       socketRef.current?.emit('join-conversation', conversationId);
     }
-  }, [conversationId]);
+  }, [conversationId, role]);
 
   /**
    * Send a message to the server
@@ -80,6 +130,7 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
         setConversationId,
         messages,
         sendMessage,
+        isMessagesLoading: groupMessages.isLoading,
       }}
     >
       {children}

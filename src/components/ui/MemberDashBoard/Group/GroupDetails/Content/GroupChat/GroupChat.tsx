@@ -7,22 +7,26 @@ import {
   InputLeftElement,
   Input,
   InputRightElement,
+  Skeleton,
 } from '@chakra-ui/react';
 import { I } from '@/components';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { useConversationContext } from '@/context/ConversationContext';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import GroupChatCard from './GroupChatCard';
+import { getCreatedBefore } from '../../../../../../../utils';
 
 const GroupChat: React.FC = () => {
+  const [stopAutoScrollToBottom, setStopAutoScrollToBottom] = React.useState(false);
+  const chatBoxRef = React.useRef<HTMLDivElement>(null);
   const { activeGroup } = usePersistedGroupStore();
-  const { messages, sendMessage, setConversationId } = useConversationContext();
+  const { messages, sendMessage, setConversationId, isMessagesLoading } = useConversationContext();
   const [inputValue, setInputValue] = React.useState<string | undefined>();
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) =>
     setInputValue(event.target.value);
 
-  const handleMessageSend: React.MouseEventHandler<HTMLDivElement> = () => {
+  const handleMessageSend = () => {
     if (inputValue && inputValue.length > 0) {
       sendMessage(inputValue);
       setInputValue('');
@@ -38,9 +42,30 @@ const GroupChat: React.FC = () => {
     }
   }, [activeGroup?.conversationId]);
 
+  React.useEffect(() => {
+    if (!stopAutoScrollToBottom) {
+      chatBoxRef.current?.scroll({ top: chatBoxRef.current?.scrollHeight, behavior: 'smooth' });
+    }
+  }, [messages, stopAutoScrollToBottom]);
+
+  const chatBoxOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    if (e.currentTarget.scrollTop + e.currentTarget.clientHeight < e.currentTarget.scrollHeight) {
+      if (stopAutoScrollToBottom === false) {
+        setStopAutoScrollToBottom(true);
+      }
+    } else if (
+      e.currentTarget.scrollTop + e.currentTarget.clientHeight ===
+      e.currentTarget.scrollHeight
+    ) {
+      if (stopAutoScrollToBottom === true) {
+        setStopAutoScrollToBottom(false);
+      }
+    }
+  };
+
   return (
     <Box marginStart="0 !important" width={{ base: '100%', md: '100%', lgx: '100%' }}>
-      <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto" marginTop="26px">
+      <MemberDashboardCard p={{ base: '16px', md: '24px' }} marginLeft="auto">
         <Box w="full">
           <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
             <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
@@ -57,8 +82,11 @@ const GroupChat: React.FC = () => {
             </Box>
           </Box>
           <Box
+            ref={chatBoxRef}
+            onScroll={chatBoxOnScroll}
             maxHeight="350px"
             overflowY="auto"
+            overflowX="hidden"
             css={{
               '&::-webkit-scrollbar': {
                 width: '4px',
@@ -73,13 +101,21 @@ const GroupChat: React.FC = () => {
                 borderRadius: '24px',
               },
             }}
+            wordBreak="break-all"
           >
+            {isMessagesLoading && (
+              <Skeleton>
+                <GroupChatCard name="" msg="" time="" />
+                <GroupChatCard name="" msg="" time="" />
+                <GroupChatCard name="" msg="" time="" />
+              </Skeleton>
+            )}
             {messages.map((msg) => (
               <GroupChatCard
                 key={msg.id}
-                name={String(msg.userId)}
+                name={msg.username}
                 msg={msg.text}
-                time={msg.createdAt}
+                time={getCreatedBefore(msg.createdAt)}
               />
             ))}
           </Box>
@@ -105,6 +141,11 @@ const GroupChat: React.FC = () => {
                 padding="16px 35px"
                 value={inputValue}
                 onChange={handleInputChange}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleMessageSend();
+                  }
+                }}
               />
               <InputRightElement
                 height="50px"

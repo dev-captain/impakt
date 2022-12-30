@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { Box, Image, Text } from '@chakra-ui/react';
-// import { I } from 'components';
-import Images from '@/assets/images';
+import { Box, Avatar, Text } from '@chakra-ui/react';
 
 interface UserForumsPropsI {
-  name: string;
+  name?: string;
   msg: string;
   time: string;
 }
@@ -12,7 +10,7 @@ const GroupChatCard: React.FC<UserForumsPropsI> = ({ name, msg, time }) => {
   return (
     <Box borderRadius="12px" marginTop="16px">
       <Box display="flex" gap="12px" flexWrap={{ base: 'wrap', md: 'unset' }}>
-        <Image src={Images.group.ellipse} height="40px" width="40px" />
+        <Avatar w={{ base: '30px', md: '40px' }} h={{ base: '30px', md: '40px' }} name={name} />
         <Box>
           <Box>
             <Text display="flex" color="#29323B" gap="8px" fontWeight="600" alignItems="center">
