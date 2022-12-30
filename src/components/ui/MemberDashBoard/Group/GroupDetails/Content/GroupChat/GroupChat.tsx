@@ -1,37 +1,28 @@
 import * as React from 'react';
-import {
-  Box,
-  Text,
-  Button,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  InputRightElement,
-  Skeleton,
-} from '@chakra-ui/react';
-import { I } from '@/components';
+import { useCallback } from 'react';
+import { Box, Text, Button, Skeleton, HStack } from '@chakra-ui/react';
+import { Forms, I } from '@/components';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { useConversationContext } from '@/context/ConversationContext';
+import { getCreatedBefore } from '@/utils';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import GroupChatCard from './GroupChatCard';
-import { getCreatedBefore } from '../../../../../../../utils';
+import EmojiPickerPopover from './EmojiPickerPopover';
 
 const GroupChat: React.FC = () => {
   const [stopAutoScrollToBottom, setStopAutoScrollToBottom] = React.useState(false);
   const chatBoxRef = React.useRef<HTMLDivElement>(null);
+  const chatInputRef = React.useRef<HTMLInputElement>(null);
   const { activeGroup } = usePersistedGroupStore();
   const { messages, sendMessage, setConversationId, isMessagesLoading } = useConversationContext();
-  const [inputValue, setInputValue] = React.useState<string | undefined>();
+  const [inputValue, setInputValue] = React.useState<string>('');
 
-  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) =>
-    setInputValue(event.target.value);
-
-  const handleMessageSend = () => {
+  const handleMessageSend = useCallback(() => {
     if (inputValue && inputValue.length > 0) {
       sendMessage(inputValue);
       setInputValue('');
     }
-  };
+  }, [inputValue]);
 
   /**
    * Set the conversation id when the component mounts
@@ -106,8 +97,6 @@ const GroupChat: React.FC = () => {
             {isMessagesLoading && (
               <Skeleton>
                 <GroupChatCard name="" msg="" time="" />
-                <GroupChatCard name="" msg="" time="" />
-                <GroupChatCard name="" msg="" time="" />
               </Skeleton>
             )}
             {messages.map((msg) => (
@@ -121,39 +110,15 @@ const GroupChat: React.FC = () => {
           </Box>
           <Box marginTop="16px">
             {/* <Common.InputItems inputItems={inputItems} /> */}
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-                // eslint-disable-next-line react/no-children-prop
-                children={<I.EmojiIcon color="#B0C3D6" width="20px" height="20px" />}
-                height="50px"
-              />
-              <Input
-                border="0"
-                borderRadius="10px"
-                placeholder="Message in group"
-                background="#F4F7F9"
-                fontSize="16px"
-                height="50px"
-                _focus={{ outline: '0' }}
-                padding="16px 35px"
+            <HStack>
+              <EmojiPickerPopover inputRef={chatInputRef} setValue={setInputValue} />
+              <Forms.GroupChatForm
+                ref={chatInputRef}
+                setValue={setInputValue}
                 value={inputValue}
-                onChange={handleInputChange}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    handleMessageSend();
-                  }
-                }}
+                handleMessageSend={handleMessageSend}
               />
-              <InputRightElement
-                height="50px"
-                // eslint-disable-next-line react/no-children-prop
-                children={<I.SendIcon color="#5C7FFF" width="25px" height="25px" />}
-                onClick={handleMessageSend}
-              />
-            </InputGroup>
+            </HStack>
           </Box>
         </Box>
       </MemberDashboardCard>

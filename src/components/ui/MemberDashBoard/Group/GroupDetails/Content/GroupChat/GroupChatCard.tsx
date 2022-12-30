@@ -28,4 +28,4 @@ const GroupChatCard: React.FC<UserForumsPropsI> = ({ name, msg, time }) => {
     </Box>
   );
 };
-export default GroupChatCard;
+export default React.memo(GroupChatCard);
