@@ -12,4 +12,6 @@ export type LeaderboardControllerV1GetLeaderboardParams = {
   player?: LeaderboardControllerV1GetLeaderboardPlayer;
   playerId?: number | null;
   eventId?: number | null;
+  fromDate?: string | null;
+  gameModeDefinitionId?: string | null;
 };

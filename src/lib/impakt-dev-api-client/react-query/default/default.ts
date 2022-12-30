@@ -18,6 +18,15 @@ import type {
   ChallengeBestScoreStatsRes,
   RoutineBestScoreStatsRes,
   RewardHistoryControllerV1GetRewardHistoryParams,
+  GameDefinitionsResV1,
+  HttpExceptionSchema,
+  GameDefinitionControllerV1GetGameDefinitionsParams,
+  GameDefinitionResV1,
+  GameDefinitionControllerV1GetGameDefinitionParams,
+  GetGameModeDefinitionsDtoV1,
+  GameModeDefinitionControllerV1GetGameModeDefinitionsParams,
+  GetGameModeDefinitionDtoV1,
+  CreateGameModeDefinitionDtoV1,
 } from '../types';
 import { customInstance } from '../../custom-instance';
 import type { ErrorType } from '../../custom-instance';
@@ -622,6 +631,474 @@ export const useRewardHistoryControllerV1DeleteRewardHistoryItem = <
     Awaited<ReturnType<typeof rewardHistoryControllerV1DeleteRewardHistoryItem>>,
     TError,
     { rewardeeType: string; rewardeeId: number; id: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const gameDefinitionControllerV1GetGameDefinitions = (
+  params: GameDefinitionControllerV1GetGameDefinitionsParams,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<GameDefinitionsResV1>(
+    { url: `/api/v1/games-config/game-defintion`, method: 'get', params, signal },
+    options,
+  );
+};
+
+export const getGameDefinitionControllerV1GetGameDefinitionsQueryKey = (
+  params: GameDefinitionControllerV1GetGameDefinitionsParams,
+) => [`/api/v1/games-config/game-defintion`, ...(params ? [params] : [])];
+
+export type GameDefinitionControllerV1GetGameDefinitionsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinitions>>
+>;
+export type GameDefinitionControllerV1GetGameDefinitionsQueryError = ErrorType<HttpExceptionSchema>;
+
+export const useGameDefinitionControllerV1GetGameDefinitions = <
+  TData = Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinitions>>,
+  TError = ErrorType<HttpExceptionSchema>,
+>(
+  params: GameDefinitionControllerV1GetGameDefinitionsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinitions>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGameDefinitionControllerV1GetGameDefinitionsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinitions>>
+  > = ({ signal }) => gameDefinitionControllerV1GetGameDefinitions(params, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinitions>>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
+export const gameDefinitionControllerV1CreateGameDefinition = (
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<GameDefinitionResV1>(
+    { url: `/api/v1/games-config/game-defintion`, method: 'post' },
+    options,
+  );
+};
+
+export type GameDefinitionControllerV1CreateGameDefinitionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof gameDefinitionControllerV1CreateGameDefinition>>
+>;
+
+export type GameDefinitionControllerV1CreateGameDefinitionMutationError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useGameDefinitionControllerV1CreateGameDefinition = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TVariables = void,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1CreateGameDefinition>>,
+    TError,
+    TVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1CreateGameDefinition>>,
+    TVariables
+  > = () => {
+    return gameDefinitionControllerV1CreateGameDefinition(requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1CreateGameDefinition>>,
+    TError,
+    TVariables,
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const gameDefinitionControllerV1GetGameDefinition = (
+  id: string,
+  params: GameDefinitionControllerV1GetGameDefinitionParams,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<GameDefinitionResV1>(
+    { url: `/api/v1/games-config/game-defintion/${id}`, method: 'get', params, signal },
+    options,
+  );
+};
+
+export const getGameDefinitionControllerV1GetGameDefinitionQueryKey = (
+  id: string,
+  params: GameDefinitionControllerV1GetGameDefinitionParams,
+) => [`/api/v1/games-config/game-defintion/${id}`, ...(params ? [params] : [])];
+
+export type GameDefinitionControllerV1GetGameDefinitionQueryResult = NonNullable<
+  Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinition>>
+>;
+export type GameDefinitionControllerV1GetGameDefinitionQueryError = ErrorType<HttpExceptionSchema>;
+
+export const useGameDefinitionControllerV1GetGameDefinition = <
+  TData = Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinition>>,
+  TError = ErrorType<HttpExceptionSchema>,
+>(
+  id: string,
+  params: GameDefinitionControllerV1GetGameDefinitionParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinition>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGameDefinitionControllerV1GetGameDefinitionQueryKey(id, params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinition>>
+  > = ({ signal }) =>
+    gameDefinitionControllerV1GetGameDefinition(id, params, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1GetGameDefinition>>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!id, ...queryOptions }) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
+export const gameDefinitionControllerV1UpdateGameDefinition = (
+  id: string,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<GameDefinitionResV1>(
+    { url: `/api/v1/games-config/game-defintion/${id}`, method: 'patch' },
+    options,
+  );
+};
+
+export type GameDefinitionControllerV1UpdateGameDefinitionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof gameDefinitionControllerV1UpdateGameDefinition>>
+>;
+
+export type GameDefinitionControllerV1UpdateGameDefinitionMutationError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useGameDefinitionControllerV1UpdateGameDefinition = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1UpdateGameDefinition>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1UpdateGameDefinition>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return gameDefinitionControllerV1UpdateGameDefinition(id, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof gameDefinitionControllerV1UpdateGameDefinition>>,
+    TError,
+    { id: string },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const gameModeDefinitionControllerV1GetGameModeDefinitions = (
+  params?: GameModeDefinitionControllerV1GetGameModeDefinitionsParams,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<GetGameModeDefinitionsDtoV1>(
+    { url: `/api/v1/games-config/game-mode-definitions`, method: 'get', params, signal },
+    options,
+  );
+};
+
+export const getGameModeDefinitionControllerV1GetGameModeDefinitionsQueryKey = (
+  params?: GameModeDefinitionControllerV1GetGameModeDefinitionsParams,
+) => [`/api/v1/games-config/game-mode-definitions`, ...(params ? [params] : [])];
+
+export type GameModeDefinitionControllerV1GetGameModeDefinitionsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinitions>>
+>;
+export type GameModeDefinitionControllerV1GetGameModeDefinitionsQueryError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useGameModeDefinitionControllerV1GetGameModeDefinitions = <
+  TData = Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinitions>>,
+  TError = ErrorType<HttpExceptionSchema>,
+>(
+  params?: GameModeDefinitionControllerV1GetGameModeDefinitionsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinitions>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getGameModeDefinitionControllerV1GetGameModeDefinitionsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinitions>>
+  > = ({ signal }) =>
+    gameModeDefinitionControllerV1GetGameModeDefinitions(params, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinitions>>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
+export const gameModeDefinitionControllerV1CreateGameModeDefinition = (
+  createGameModeDefinitionDtoV1: CreateGameModeDefinitionDtoV1,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<GetGameModeDefinitionDtoV1>(
+    {
+      url: `/api/v1/games-config/game-mode-definitions`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: createGameModeDefinitionDtoV1,
+    },
+    options,
+  );
+};
+
+export type GameModeDefinitionControllerV1CreateGameModeDefinitionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof gameModeDefinitionControllerV1CreateGameModeDefinition>>
+>;
+export type GameModeDefinitionControllerV1CreateGameModeDefinitionMutationBody =
+  CreateGameModeDefinitionDtoV1;
+export type GameModeDefinitionControllerV1CreateGameModeDefinitionMutationError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useGameModeDefinitionControllerV1CreateGameModeDefinition = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1CreateGameModeDefinition>>,
+    TError,
+    { data: CreateGameModeDefinitionDtoV1 },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1CreateGameModeDefinition>>,
+    { data: CreateGameModeDefinitionDtoV1 }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return gameModeDefinitionControllerV1CreateGameModeDefinition(data, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1CreateGameModeDefinition>>,
+    TError,
+    { data: CreateGameModeDefinitionDtoV1 },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const gameModeDefinitionControllerV1GetGameModeDefinition = (
+  id: string,
+  options?: SecondParameter<typeof customInstance>,
+  signal?: AbortSignal,
+) => {
+  return customInstance<GetGameModeDefinitionDtoV1>(
+    { url: `/api/v1/games-config/game-mode-definitions/${id}`, method: 'get', signal },
+    options,
+  );
+};
+
+export const getGameModeDefinitionControllerV1GetGameModeDefinitionQueryKey = (id: string) => [
+  `/api/v1/games-config/game-mode-definitions/${id}`,
+];
+
+export type GameModeDefinitionControllerV1GetGameModeDefinitionQueryResult = NonNullable<
+  Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinition>>
+>;
+export type GameModeDefinitionControllerV1GetGameModeDefinitionQueryError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useGameModeDefinitionControllerV1GetGameModeDefinition = <
+  TData = Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinition>>,
+  TError = ErrorType<HttpExceptionSchema>,
+>(
+  id: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinition>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGameModeDefinitionControllerV1GetGameModeDefinitionQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinition>>
+  > = ({ signal }) =>
+    gameModeDefinitionControllerV1GetGameModeDefinition(id, requestOptions, signal);
+
+  const query = useQuery<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1GetGameModeDefinition>>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!id, ...queryOptions }) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryKey;
+
+  return query;
+};
+
+export const gameModeDefinitionControllerV1UpdateGameModeDefinition = (
+  id: string,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<GetGameModeDefinitionDtoV1>(
+    { url: `/api/v1/games-config/game-mode-definitions/${id}`, method: 'patch' },
+    options,
+  );
+};
+
+export type GameModeDefinitionControllerV1UpdateGameModeDefinitionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof gameModeDefinitionControllerV1UpdateGameModeDefinition>>
+>;
+
+export type GameModeDefinitionControllerV1UpdateGameModeDefinitionMutationError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useGameModeDefinitionControllerV1UpdateGameModeDefinition = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1UpdateGameModeDefinition>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1UpdateGameModeDefinition>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return gameModeDefinitionControllerV1UpdateGameModeDefinition(id, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1UpdateGameModeDefinition>>,
+    TError,
+    { id: string },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+export const gameModeDefinitionControllerV1DeleteGameModeDefinition = (
+  id: string,
+  options?: SecondParameter<typeof customInstance>,
+) => {
+  return customInstance<void>(
+    { url: `/api/v1/games-config/game-mode-definitions/${id}`, method: 'delete' },
+    options,
+  );
+};
+
+export type GameModeDefinitionControllerV1DeleteGameModeDefinitionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof gameModeDefinitionControllerV1DeleteGameModeDefinition>>
+>;
+
+export type GameModeDefinitionControllerV1DeleteGameModeDefinitionMutationError =
+  ErrorType<HttpExceptionSchema>;
+
+export const useGameModeDefinitionControllerV1DeleteGameModeDefinition = <
+  TError = ErrorType<HttpExceptionSchema>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1DeleteGameModeDefinition>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1DeleteGameModeDefinition>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return gameModeDefinitionControllerV1DeleteGameModeDefinition(id, requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof gameModeDefinitionControllerV1DeleteGameModeDefinition>>,
+    TError,
+    { id: string },
     TContext
   >(mutationFn, mutationOptions);
 };

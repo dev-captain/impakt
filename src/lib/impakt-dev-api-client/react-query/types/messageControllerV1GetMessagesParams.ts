@@ -5,7 +5,4 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface PostGroupsReq {
-  groupName: string;
-  _private?: boolean | null;
-}
+export type MessageControllerV1GetMessagesParams = { take?: number | null; skip?: number | null };

@@ -24,4 +24,6 @@ export interface GetUserRes {
   DiscourseRedirectUrl: string | null;
   emailVerified: boolean;
   calendarId: number;
+  /** List of mailing list Id(s), a user is subscribed to */
+  mailingListIds: string[];
 }

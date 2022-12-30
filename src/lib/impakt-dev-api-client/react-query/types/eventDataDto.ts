@@ -11,6 +11,7 @@ export interface EventDataDto {
   /** The description of the event */
   description: string;
   creatorId: number;
+  /** The id of the challenge to be associated */
   assocId?: number | null;
   /** The id of the challenge to be associated */
   challengeId?: number | null;
