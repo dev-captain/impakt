@@ -17,7 +17,7 @@ const EmojiPicker = React.lazy(() => import('emoji-picker-react'));
 
 const EmojiPickerPopover: React.FC<EmojiPickerPopoverPropsI> = ({ setValue, inputRef }) => {
   return (
-    <Popover autoFocus={false} offset={[-250, 0]} placement="right">
+    <Popover autoFocus={false} closeOnBlur closeOnEsc offset={[-250, 0]} placement="right">
       {({ onClose }) => (
         <>
           <PopoverTrigger>
