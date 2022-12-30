@@ -103,6 +103,7 @@ export { default as HoldExerciseIcon } from './HoldExerciseIcon';
 export { default as WinnerIcon } from './WinnerIcon';
 export { default as RankIcon } from './RankIcon';
 export { default as SpeedExerciseIcon } from './SpeedExerciseIcon';
+export { default as EmojiIcon } from './EmojiIcon';
 export { default as LockIcon } from './LockIcon';
 export { default as TiktokBigIcon } from './TiktokBigIcon';
 export { default as InstagramBigIcon } from './InstagramBigIcon';

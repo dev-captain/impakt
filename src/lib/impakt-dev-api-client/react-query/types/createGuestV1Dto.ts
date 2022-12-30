@@ -8,4 +8,6 @@
 export interface CreateGuestV1Dto {
   /** Guest name */
   screenName: string;
+  /** Guest email */
+  email?: string | null;
 }

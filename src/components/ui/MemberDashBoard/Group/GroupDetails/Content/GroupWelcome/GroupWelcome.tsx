@@ -9,7 +9,7 @@ interface BannerProps {
 }
 const GroupWelcome: React.FC<BannerProps> = ({ hideGroupWelcome }) => {
   return (
-    <Box w="100%" mb="20px">
+    <Box w="100%">
       <Box
         backgroundColor="#fff"
         borderRadius="24px"

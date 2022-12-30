@@ -615,6 +615,39 @@ export const GroupDetails = [
   },
 ];
 
+export const DummyChatData = [
+  {
+    name: 'KittenSpy',
+    time: 'Today at 9:19 AM',
+    msg: 'wanna start a challenge?',
+  },
+  {
+    name: 'Allen47',
+    time: 'Today at 9:19 AM',
+    msg: 'btw we can hang out after this one',
+  },
+  {
+    name: 'KittenSpy',
+    time: 'Today at 9:21 AM',
+    msg: 'wait have you seen the new dance challenge?',
+  },
+  {
+    name: 'Allen47',
+    time: 'Today at 9:23 AM',
+    msg: 'yeah',
+  },
+  {
+    name: 'KittenSpy',
+    time: 'Today at 9:21 AM',
+    msg: 'we shall see who is the top1 now',
+  },
+  {
+    name: 'KittenSpy',
+    time: 'Today at 9:20 AM',
+    msg: 'wanna start a challenge?',
+  },
+];
+
 export const deepLinkToApp = (groupId?: number, eventId?: number) =>
   `impakt://join-event?groupId=${groupId}&eventId=${eventId}`;
 

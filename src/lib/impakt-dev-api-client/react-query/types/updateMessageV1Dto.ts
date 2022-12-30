@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface PostGroupsReq {
-  groupName: string;
-  _private?: boolean | null;
+export interface UpdateMessageV1Dto {
+  text: string;
 }

@@ -5,4 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type ChallengesLeaderboardControllerV1UsersleaderboardParams = { eventId?: number | null };
+export type ChallengesLeaderboardControllerV1UsersleaderboardParams = {
+  eventId?: number | null;
+  fromDate?: string | null;
+};

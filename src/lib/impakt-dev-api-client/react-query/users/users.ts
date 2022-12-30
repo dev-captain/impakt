@@ -274,16 +274,19 @@ export const useUserControllerPatchOne = <
   >(mutationFn, mutationOptions);
 };
 export const userControllerGetUserInfo = (
+  id: number,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetUserRes>(
-    { url: `/api/v1/iam/user/user-info`, method: 'get', signal },
+    { url: `/api/v1/iam/user/user-info/${id}`, method: 'get', signal },
     options,
   );
 };
 
-export const getUserControllerGetUserInfoQueryKey = () => [`/api/v1/iam/user/user-info`];
+export const getUserControllerGetUserInfoQueryKey = (id: number) => [
+  `/api/v1/iam/user/user-info/${id}`,
+];
 
 export type UserControllerGetUserInfoQueryResult = NonNullable<
   Awaited<ReturnType<typeof userControllerGetUserInfo>>
@@ -293,22 +296,25 @@ export type UserControllerGetUserInfoQueryError = ErrorType<HttpExceptionSchema>
 export const useUserControllerGetUserInfo = <
   TData = Awaited<ReturnType<typeof userControllerGetUserInfo>>,
   TError = ErrorType<HttpExceptionSchema>,
->(options?: {
-  query?: UseQueryOptions<Awaited<ReturnType<typeof userControllerGetUserInfo>>, TError, TData>;
-  request?: SecondParameter<typeof customInstance>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+>(
+  id: number,
+  options?: {
+    query?: UseQueryOptions<Awaited<ReturnType<typeof userControllerGetUserInfo>>, TError, TData>;
+    request?: SecondParameter<typeof customInstance>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getUserControllerGetUserInfoQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getUserControllerGetUserInfoQueryKey(id);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof userControllerGetUserInfo>>> = ({
     signal,
-  }) => userControllerGetUserInfo(requestOptions, signal);
+  }) => userControllerGetUserInfo(id, requestOptions, signal);
 
   const query = useQuery<Awaited<ReturnType<typeof userControllerGetUserInfo>>, TError, TData>(
     queryKey,
     queryFn,
-    queryOptions,
+    { enabled: !!id, ...queryOptions },
   ) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;

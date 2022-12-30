@@ -20,4 +20,6 @@ export interface PostUserReq {
   communities?: number[] | null;
   /** minigameBonus flag when true, we reward 5000 KOIN otherwise we reward nothing */
   minigameBonus?: boolean | null;
+  /** Mailing list Ids user wants to subscribe to */
+  mailingListIds?: string[] | null;
 }

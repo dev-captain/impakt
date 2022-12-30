@@ -15,4 +15,6 @@ export interface LeaderboardCreateDtoV1 {
   eventId?: number | null;
   /** The score */
   score: number;
+  /** The game ID */
+  gameDefinitionId?: string | null;
 }
