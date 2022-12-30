@@ -91,7 +91,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^7.0.4",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.5.1",
     "typescript": "4.5.4",
     "vite": "^4.0.3",
@@ -104,25 +105,18 @@
     "serve": "vite preview",
     "test": "vite test",
     "eject": "vite eject",
-    "lint:watch": "esw src -w --ext ts,tsx,jsx,js --color",
     "lint": "eslint  \"./src/**/*.{ts,tsx,jsx,js}\"",
     "lint:fix": "yarn eslint  \"./src/**/*.{ts,tsx,jsx,js}\" --fix ",
     "validate": "yarn prettier --check \"./src/**/*.{ts,tsx,js,jsx}\" && yarn lint",
     "format": "prettier --write \"./src/**/*.{ts,tsx,js,jsx}\"",
     "format:test": "prettier --write \"./src/**/*.spec.{ts,tsx,js,jsx}\"",
-    "generate-client": "orval && yarn eslint  \"./src/lib/impakt-dev-api-client/**/*.{ts,tsx,jsx,js}\" --fix  "
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+    "generate-client": "orval && yarn eslint  \"./src/lib/impakt-dev-api-client/**/*.{ts,tsx,jsx,js}\" --fix  ",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "./src/**/*.{ts,tsx,js,jsx}": [
-      "yarn format",
-      "yarn lint:fix",
-      "yarn validate"
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "eslintConfig": {
