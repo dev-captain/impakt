@@ -1,6 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import * as SocketIOClient from 'socket.io-client';
-import { useMessageControllerV1GetMessages } from '../lib/impakt-dev-api-client/react-query/chat/chat';
+import { messageControllerV1GetMessages } from '../lib/impakt-dev-api-client/react-query/chat/chat';
 import { MessageV1Dto } from '../lib/impakt-dev-api-client/react-query/types/messageV1Dto';
 import { userControllerGetUser } from '../lib/impakt-dev-api-client/react-query/users/users';
 import { usePersistedGroupStore } from '../lib/zustand';
@@ -12,6 +13,7 @@ interface ConversationContext {
   messages: MessageType[];
   sendMessage: (data: string) => void;
   isMessagesLoading: boolean;
+  fetchOlderMessages: () => boolean;
 }
 
 const ConversationContext = React.createContext<ConversationContext | null>(null);
@@ -32,24 +34,34 @@ type MessageType = MessageV1Dto & { username?: string };
 export const ConversationContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [take] = React.useState(20);
+  const [skip, setSkip] = React.useState(0);
+  const [cursorId, setCursorId] = React.useState<number>();
   const { membersOfGroup, role } = usePersistedGroupStore();
   const [conversationId, setConversationId] = React.useState<number | null>(null);
   const socketRef = React.useRef<SocketIOClient.Socket>();
   const [messages, setMessages] = React.useState<MessageType[]>([]);
-  const groupMessages = useMessageControllerV1GetMessages(
-    conversationId!,
-    {},
-    {
-      query: {
-        enabled: conversationId !== null && role !== 'None',
-        onSuccess: async (data) => {
-          const matchedMessage = await matchMessagesandUser(data.messages);
 
-          setMessages(matchedMessage);
-        },
+  const fetchMessages = async () => {
+    const data = await messageControllerV1GetMessages(conversationId!, { skip, take, cursorId });
+    const message = await matchMessagesandUser(data.messages);
+
+    return { message, count: data.count };
+  };
+
+  const useGroupMessageQuery = () =>
+    useQuery({
+      queryKey: ['messages', cursorId],
+      queryFn: fetchMessages,
+      keepPreviousData: true,
+      enabled: conversationId !== null && role !== 'None',
+      refetchOnWindowFocus: false,
+      staleTime: 0,
+      onSuccess: (data) => {
+        setMessages([...messages, ...data.message]);
       },
-    },
-  );
+    });
+  const groupMessages = useGroupMessageQuery();
 
   const matchMessagesandUser = async (currentMessages: MessageV1Dto[]) => {
     const matchedMessages: MessageType[] = [];
@@ -82,6 +94,16 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
 
     return matchedMessage;
   };
+  const fetchOlderMessages = () => {
+    if (groupMessages.data?.message && groupMessages.data.message.length > 0) {
+      setSkip(1);
+      setCursorId(groupMessages.data.message[groupMessages.data.message.length - 1].id);
+
+      return true;
+    }
+
+    return false;
+  };
   /**
    * Connect to the socket server
    * Disconnect from the socket server
@@ -93,7 +115,7 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
       socketRef.current.on('new-message', async (data: string) => {
         const parsedMessage = JSON.parse(data) as MessageV1Dto;
         const matchMessageUser = await matchMessage(parsedMessage);
-        setMessages((prev) => [...prev, matchMessageUser]);
+        setMessages((prev) => [matchMessageUser, ...prev]);
 
         return true;
       });
@@ -130,7 +152,8 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
         setConversationId,
         messages,
         sendMessage,
-        isMessagesLoading: groupMessages.isLoading,
+        isMessagesLoading: groupMessages.isLoading || groupMessages.isRefetching,
+        fetchOlderMessages,
       }}
     >
       {children}

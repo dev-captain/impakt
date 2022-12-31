@@ -14,7 +14,8 @@ const GroupChat: React.FC = () => {
   const chatBoxRef = React.useRef<HTMLDivElement>(null);
   const chatInputRef = React.useRef<HTMLInputElement>(null);
   const { activeGroup } = usePersistedGroupStore();
-  const { messages, sendMessage, setConversationId, isMessagesLoading } = useConversationContext();
+  const { messages, sendMessage, setConversationId, isMessagesLoading, fetchOlderMessages } =
+    useConversationContext();
   const [inputValue, setInputValue] = React.useState<string>('');
 
   const handleMessageSend = useCallback(() => {
@@ -35,11 +36,19 @@ const GroupChat: React.FC = () => {
 
   React.useEffect(() => {
     if (!stopAutoScrollToBottom) {
-      chatBoxRef.current?.scroll({ top: chatBoxRef.current?.scrollHeight, behavior: 'smooth' });
+      if (chatBoxRef.current) {
+        chatBoxRef.current.scrollTop = chatBoxRef.current?.scrollHeight;
+      }
     }
   }, [messages, stopAutoScrollToBottom]);
 
   const chatBoxOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    if (e.currentTarget.scrollTop === 0) {
+      const isFetchedOlderMessage = fetchOlderMessages();
+      if (chatBoxRef.current && isFetchedOlderMessage) {
+        chatBoxRef.current.scrollTop = 50;
+      }
+    }
     if (e.currentTarget.scrollTop + e.currentTarget.clientHeight < e.currentTarget.scrollHeight) {
       if (stopAutoScrollToBottom === false) {
         setStopAutoScrollToBottom(true);
@@ -95,11 +104,11 @@ const GroupChat: React.FC = () => {
             wordBreak="break-all"
           >
             {isMessagesLoading && (
-              <Skeleton>
+              <Skeleton h="100px">
                 <GroupChatCard name="" msg="" time="" />
               </Skeleton>
             )}
-            {messages.map((msg) => (
+            {[...messages].reverse().map((msg) => (
               <GroupChatCard
                 key={msg.id}
                 name={msg.username}
