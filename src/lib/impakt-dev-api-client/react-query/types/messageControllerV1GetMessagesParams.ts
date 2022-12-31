@@ -5,4 +5,8 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type MessageControllerV1GetMessagesParams = { take?: number | null; skip?: number | null };
+export type MessageControllerV1GetMessagesParams = {
+  take?: number | null;
+  skip?: number | null;
+  cursorId?: number | null;
+};
