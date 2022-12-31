@@ -33,11 +33,10 @@ const ExploreGroupCardWrapper: React.FC<ExploreGroupCardWrapperPropsI> = ({
           key={g.id}
           cursor="pointer"
           marginStart="0 !important"
-          w="282px"
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            navigate(routes.groupDetail(g.id));
+            navigate(routes.groupDetail(g.id), { state: { fromExplore: true } });
           }}
           position="relative"
         >

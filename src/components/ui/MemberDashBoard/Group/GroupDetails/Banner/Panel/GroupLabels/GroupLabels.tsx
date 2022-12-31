@@ -1,24 +1,28 @@
 import * as React from 'react';
 import { isMobile } from 'react-device-detect';
-import { Common, I } from '@/components';
+import { useNavigate } from 'react-router-dom';
 import { IconButton, useDisclosure } from '@chakra-ui/react';
+
+import { Common, I } from '@/components';
 import GroupLabelWrapper from './GroupLabelWrapper';
 import {
   usePersistedAuthStore,
   usePersistedChallengeStore,
   usePersistedGroupStore,
-} from '../../../../../../../../lib/zustand';
+} from '@/lib/zustand';
 import ChallengeModal from '../../../Modal/ChallengeModal/ChallengeModal';
-import { GetChallengeRes } from '../../../../../../../../lib/impakt-dev-api-client/react-query/types/getChallengeRes';
-import { useFavoriteControllerV1CreateOne } from '../../../../../../../../lib/impakt-dev-api-client/react-query/favorites/favorites';
-import { normalizeExerciseNames } from '../../../../../../../../utils';
+import { GetChallengeRes } from '@/lib/impakt-dev-api-client/react-query/types/getChallengeRes';
+import { useFavoriteControllerV1CreateOne } from '@/lib/impakt-dev-api-client/react-query/favorites/favorites';
+import { normalizeExerciseNames, renderToast } from '@/utils';
 import { useChallengeStatsControllerGetUserBestScore } from '../../../../../../../../lib/impakt-dev-api-client/react-query/default/default';
 import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../../../../../../../../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
+import routes from '../../../../../../../../data/routes';
 
 const ActionPreviewModal = React.lazy(() => import('../../../Modal/ActionPreviewModal'));
 
 const GroupLabels: React.FC = () => {
   const { activeGroup } = usePersistedGroupStore();
+  const navigate = useNavigate();
   const {
     groupPinnedChallenge,
     setBestScoreOfUser,
@@ -75,6 +79,8 @@ const GroupLabels: React.FC = () => {
   const { role } = usePersistedGroupStore();
   const isCreator = role === 'Creator';
   const isModerator = role === 'Moderator';
+  const isGuest = role === 'Guest';
+
   const groupStatisticLabelItems = [
     // {
     //   Icon: () => <I.CalenderIcon color="#5C7FFF" />,
@@ -134,6 +140,15 @@ const GroupLabels: React.FC = () => {
           </Common.ImpaktButton>
         ) : null,
       onClick: () => {
+        if (isGuest) {
+          renderToast(
+            'warning',
+            'You have to be member of the group to see pinned challenge.',
+            'dark',
+            2200,
+          );
+          navigate(routes.guestRedirect(activeGroup?.id));
+        }
         if (groupPinnedChallenge?.Challenge) {
           challengePreviewModalDisclosure.onOpen();
         }
@@ -183,7 +198,7 @@ const GroupLabels: React.FC = () => {
         close={challengeModalDisclosure.onClose}
         open={challengeModalDisclosure.isOpen}
       />
-      {challengePreviewModalDisclosure.isOpen && (
+      {challengePreviewModalDisclosure.isOpen && !isGuest && (
         <React.Suspense fallback={<div>Yükleniyor...</div>}>
           <ActionPreviewModal
             key="pinned-challenge-modal"

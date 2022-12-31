@@ -2,6 +2,7 @@ import { Box, Text, Button, useDisclosure } from '@chakra-ui/react';
 // import { I } from '@/components';
 import * as React from 'react';
 import { AddIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
 
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 // import Images from '@/assets/images';
@@ -11,11 +12,13 @@ import { usePersistedForumStore, usePersistedGroupStore } from '../../../../../.
 import CreatePostModal from './CreatePostModal';
 import { getCreatedBefore, renderToast } from '../../../../../../../utils';
 import AccessDeniedBox from '../AccessDeniedBox';
+import routes from '../../../../../../../data/routes';
 
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { posts } = usePersistedForumStore();
   const { activeGroup, role } = usePersistedGroupStore();
+  const navigate = useNavigate();
 
   if (activeGroup?.isPreview && activeGroup.private)
     return (
@@ -26,7 +29,7 @@ const Forums: React.FC = () => {
       />
     );
 
-  const isRoleDefined = role && role !== 'None';
+  const isRoleDefined = role && role !== 'None' && role !== 'Guest';
 
   return (
     <>
@@ -50,8 +53,11 @@ const Forums: React.FC = () => {
                       : () => {
                           renderToast(
                             'warning',
-                            'You have to be a member of the group to create a topic',
+                            'You have to be member of the group to create a topic.',
+                            'dark',
+                            2200,
                           );
+                          navigate(routes.guestRedirect(activeGroup?.id));
                         }
                   }
                 >

@@ -13,12 +13,15 @@ const routes = {
   nft: '/nft',
   whitelist: '/whitelist',
   termsOfUse: '/terms-of-use',
+  explore: '/explore',
   dashboard: '/d',
   groups: '/d/g',
   referrals: '/d/r',
   groupDetail: (groupId?: number) => `/d/g/${groupId}`,
   postDetail: (groupId?: number, postId?: number) => `/d/g/${groupId}/post/${postId}`,
   eventDetail: (groupId?: number, eventId?: number) => `/d/g/${groupId}/eventId/${eventId}`,
+  groupDetailGuest: (groupId?: number) => `/explore/${groupId}`,
+  guestRedirect: (groupId?: number) => `${routes.invite}?g=${groupId}&p=false`,
 };
 
 export default routes;

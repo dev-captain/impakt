@@ -1,11 +1,17 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, HStack, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
+import routes from '../../../../../../../data/routes';
+import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import { renderToast } from '../../../../../../../utils';
 import DayComponent from './Day';
 import DayNames from './DayNames';
 
 const CalendarDays: React.FC = () => {
+  const navigate = useNavigate();
+  const { activeGroup, role } = usePersistedGroupStore();
   const {
     getCurrentMonthLabel,
     getCurrentYear,
@@ -16,6 +22,8 @@ const CalendarDays: React.FC = () => {
     setSelectedDay,
     goToOverViewScreen,
   } = useEventCalendarContext();
+
+  const isGuest = role === 'Guest';
 
   return (
     <>
@@ -88,7 +96,18 @@ const CalendarDays: React.FC = () => {
               dayNumber={day.dayOfMonth}
               dote={day.events.length <= 3 ? '.'.repeat(day.events.length) : '...'}
               selectDay={
-                !day.currentMonth
+                // eslint-disable-next-line no-nested-ternary
+                isGuest
+                  ? () => {
+                      renderToast(
+                        'warning',
+                        'You have to be member of the group to see calendar event.',
+                        'dark',
+                        2200,
+                      );
+                      navigate(routes.guestRedirect(activeGroup?.id));
+                    }
+                  : !day.currentMonth
                   ? () => {
                       if (day.month > getDaysOfCurrentMonth()[15].month) {
                         moveToNextMonth();

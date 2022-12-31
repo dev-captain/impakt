@@ -22,7 +22,7 @@ const GroupInvite = () => {
   const jointoGroup = async () => {
     // eslint-disable-next-line no-unused-expressions
     if (!member) {
-      navigate(`/register/${referralId}?next=${location.pathname + location.search}`);
+      navigate(`/register/${referralId ?? ''}?next=${location.pathname + location.search}`);
     }
     if (member) {
       if (isPrivate) {
@@ -70,11 +70,11 @@ const GroupInvite = () => {
                 });
               }
 
-              navigate(routes.groupDetail(groupId));
+              navigate(`${routes.groupDetail(groupId)}`, { state: { wasGuest: true } });
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
-              navigate(routes.groupDetail(groupId));
+              navigate(`${routes.groupDetail(groupId)}`, { state: { wasGuest: true } });
             },
           },
         );

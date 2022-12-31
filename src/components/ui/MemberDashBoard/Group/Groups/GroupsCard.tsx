@@ -22,7 +22,6 @@ const GroupsCard: React.FC<GroupsCardPropsI> = ({
 }) => {
   return (
     <MemberDashboardCard
-      maxH="282px"
       _hover={{ boxShadow: '0px 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
       p="0 !important"
       borderRadius="16px"

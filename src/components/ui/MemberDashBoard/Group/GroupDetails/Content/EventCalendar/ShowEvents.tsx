@@ -2,15 +2,20 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { Day } from 'dayspan';
+import { useNavigate } from 'react-router-dom';
 import { Common } from '@/components';
 import { useEventCalendarContext } from '@/context/EventCalendarContext';
-import { useNavigate } from 'react-router-dom';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
+import routes from '../../../../../../../data/routes';
+import { renderToast } from '../../../../../../../utils';
 
 const ShowEvents: React.FC = () => {
   const navigate = useNavigate();
+  const { activeGroup } = usePersistedGroupStore();
   const isAdmin =
     usePersistedGroupStore().role === 'Creator' || usePersistedGroupStore().role === 'Moderator';
+  const isGuest = usePersistedGroupStore().role === 'Guest';
+
   const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
     useEventCalendarContext();
   const selectedDay = getSelectedDay();
@@ -58,7 +63,22 @@ const ShowEvents: React.FC = () => {
                     onClick={() => {
                       goToOverViewScreen('event');
                       setActiveEventId(eventObj.event.id);
-                      navigate(`event/${eventObj.event.id}`);
+                      navigate(
+                        isGuest
+                          ? `/register/?next=${routes.groupDetail(activeGroup?.id ?? 12)}/event/${
+                              eventObj.event.id
+                            }`
+                          : `event/${eventObj.event.id}`,
+                        { state: { wasGuest: isGuest } },
+                      );
+                      if (isGuest) {
+                        renderToast(
+                          'warning',
+                          'You must be logged in to see calendar event details.',
+                          'dark',
+                          2200,
+                        );
+                      }
                     }}
                   >
                     <Text textStyle="normal14">

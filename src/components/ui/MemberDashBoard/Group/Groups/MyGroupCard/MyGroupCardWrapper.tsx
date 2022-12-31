@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { Common } from '@/components';
 import { useNavigate } from 'react-router-dom';
-import Images from '../../../../../../assets/images';
+
+import { Common } from '@/components';
+import Images from '@/assets/images';
+import { usePersistedGroupStore } from '@/lib/zustand';
+import routes from '@/data/routes';
+
 import GroupsCard from '../GroupsCard';
-import { usePersistedGroupStore } from '../../../../../../lib/zustand';
-import routes from '../../../../../../data/routes';
 
 const MyGroupCardHeader: React.FC = () => {
   const { myGroups } = usePersistedGroupStore();
@@ -13,7 +15,7 @@ const MyGroupCardHeader: React.FC = () => {
 
   return (
     <>
-      {myGroups.map((m) => (
+      {myGroups.map((m, index) => (
         <Box
           key={`group-${m.groupId}`}
           cursor="pointer"
@@ -22,7 +24,6 @@ const MyGroupCardHeader: React.FC = () => {
             e.preventDefault();
             navigate(routes.groupDetail(m.groupId));
           }}
-          w="282px"
         >
           <Box position="relative">
             <GroupsCard

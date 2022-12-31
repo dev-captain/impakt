@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { deepLinkToApp } from '../data';
 import { useCalendarControllerGetCalendar } from '../lib/impakt-dev-api-client/react-query/calendar/calendar';
 import { challengesControllerGetMany } from '../lib/impakt-dev-api-client/react-query/challenges/challenges';
@@ -39,11 +39,15 @@ export const useFetchGroupDetails = () => {
 
   // params checks
   const groupParam = useParams();
+  const location = useLocation();
+  const wasGuest = location.state as { wasGuest: boolean } | undefined;
+
   const isJoin =
     groupParam.id &&
     groupParam.eventId &&
     groupParam.eventId !== 'join' &&
     useLocation().pathname.includes('join');
+
   const isNewGroup = parseInt(groupParam.id ?? '-asd', 10) !== activeGroup?.id;
 
   // local states
@@ -58,7 +62,7 @@ export const useFetchGroupDetails = () => {
     query: {
       ...getDefaultQueryOptions(),
       refetchOnWindowFocus: true,
-      staleTime: isNewGroup ? 0 : 120000,
+      staleTime: isNewGroup || wasGuest ? 0 : 120000,
       refetchInterval: 300000,
       onSuccess: async (data) => {
         if (isJoin && groupParam.eventId) {
@@ -69,9 +73,9 @@ export const useFetchGroupDetails = () => {
           return;
         }
 
-        const isMemberOfGroup = await fetchAmIMemberOfGroup.refetch();
-
         let memberRole: GroupsSlice['role'] = 'None';
+
+        const isMemberOfGroup = member ? await fetchAmIMemberOfGroup.refetch() : { data: false };
 
         if (isMemberOfGroup.data) {
           const roleRes = await fetchGroupRoleById.refetch();
@@ -91,7 +95,7 @@ export const useFetchGroupDetails = () => {
         // if group private
         if (data.private) {
           // check if preview
-          if (!data.isPreview) {
+          if (!data.isPreview && member) {
             if (memberRole !== 'None') {
               // edge check if user not try to re-join group
               await fetchMembersOfGroup.refetch();
@@ -100,10 +104,14 @@ export const useFetchGroupDetails = () => {
               await fetchGroupPinnedChallenge.refetch();
             }
           }
-          setActiveGroup({ ...data, isPreview: memberRole === 'None' });
+          if (!member) {
+            setIsError("Oops! We couldn't find what you are looking for.");
+          } else {
+            setActiveGroup({ ...data, isPreview: memberRole === 'None' });
+          }
         }
 
-        setRole(memberRole);
+        setRole(!member ? 'Guest' : memberRole);
 
         setIsGroupDetailsLoading(false);
       },
@@ -242,7 +250,7 @@ export const useFetchGroupDetails = () => {
   );
 
   React.useEffect(() => {
-    if (isNewGroup) {
+    if (isNewGroup || wasGuest) {
       setActiveGroup(null);
     }
   }, []);

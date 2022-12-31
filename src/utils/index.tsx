@@ -96,7 +96,9 @@ let previousToastId: ToastId | undefined = '';
 export function renderToast(
   type: 'error' | 'success' | 'warning',
   description: string,
+  // eslint-disable-next-line default-param-last
   whiteOrDarkMode: 'white' | 'dark' | undefined = 'white',
+  duration?: number,
 ) {
   if (whiteOrDarkMode === 'white' && previousMode === 'dark' && previousToastId) {
     toast.close(previousToastId);
@@ -121,7 +123,7 @@ export function renderToast(
     title: toastTitle,
     description,
     isClosable: true,
-    duration: 8000,
+    duration: duration ?? 8000,
     status: type,
     position: 'top-right',
     variant: 'glass',
@@ -306,5 +308,7 @@ export const parseDaytime = (time: any) => {
   return 1000 * 60 * (hours * 60 + minutes);
 };
 
-export const isProduction = import.meta.env.VITE_VERCEL_ENV === 'production';
+export const isProduction =
+  import.meta.env.VITE_VERCEL_ENV === 'production' ||
+  import.meta.env.VITE_VERCEL_GIT_COMMIT_REF === 'beta';
 export const isPreview = import.meta.env.VITE_VERCEL_ENV === 'preview';
