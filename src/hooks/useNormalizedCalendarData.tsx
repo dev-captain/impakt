@@ -22,7 +22,7 @@ const useNormalizedCalendarData = () => {
       const data = normalizeCalendarDataMap(calendar);
       setNormalizedCalendarData(data);
     }
-  }, [calendar]);
+  }, []);
 
   return normalizedCalendarData;
 };

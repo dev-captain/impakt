@@ -10,27 +10,26 @@ import routes from '../../../../../../../data/routes';
 import { renderToast } from '../../../../../../../utils';
 
 const ShowEvents: React.FC = () => {
+  const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
+    useEventCalendarContext();
   const navigate = useNavigate();
   const { activeGroup } = usePersistedGroupStore();
   const isAdmin =
     usePersistedGroupStore().role === 'Creator' || usePersistedGroupStore().role === 'Moderator';
   const isGuest = usePersistedGroupStore().role === 'Guest';
-
-  const { goToOverViewScreen, getSelectedDayEvents, getSelectedDay, setActiveEventId } =
-    useEventCalendarContext();
   const selectedDay = getSelectedDay();
   const selectedDayEvents = getSelectedDayEvents();
+
+  const isToday = Day.now().compare(selectedDay ?? Day.now(), 'day') === 0;
+
   if (!selectedDay) return null;
-  const isToday = Day.now().compare(selectedDay ?? new Date(), 'day') === 0;
 
   return (
     <>
       <Box>
         <Box w="full" justifyContent="space-between" display="flex" mb="16px">
           <Text color="fg-1" fontStyle="semiBold6">
-            {Day.build(selectedDay.year, selectedDay.month, selectedDay.dayOfMonth).format(
-              'dddd, MMMM D',
-            )}
+            {selectedDay?.format('dddd, MMMM D')}
           </Text>
           {isToday && (
             <Text color="#F27961" fontStyle="semiBold6">
@@ -82,8 +81,8 @@ const ShowEvents: React.FC = () => {
                     }}
                   >
                     <Text textStyle="normal14">
-                      {eventObj.event.schedule?.times[0].format('h:mma ')}-{' '}
-                      {eventObj.event.schedule?.times[1].format('h:mma ')}
+                      {eventObj.event.schedule?.times[0]?.format('h:mma ')}-{' '}
+                      {eventObj.event.schedule?.times[1]?.format('h:mma ')}
                     </Text>
 
                     <Text mt="8px" textStyle="semiBold12">

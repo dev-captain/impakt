@@ -1,34 +1,35 @@
 import React from 'react';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
-import { deepLinkToApp } from '../data';
-import { useCalendarControllerGetCalendar } from '../lib/impakt-dev-api-client/react-query/calendar/calendar';
-import { challengesControllerGetMany } from '../lib/impakt-dev-api-client/react-query/challenges/challenges';
-import {
-  useGroupsMemberControllerV1AmIMemberOfGroup,
-  useGroupsMemberControllerV1AmIRoleOnGroup,
-} from '../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
-import { GetMembersOfGroupRes } from '../lib/impakt-dev-api-client/react-query/types';
-import {
-  useGroupsControllerV1FindOne,
-  useGroupsControllerV1FindGroupMembers,
-  useGroupsControllerV1GetGroupPinnedChallenges,
-} from '../lib/impakt-dev-api-client/react-query/groups/groups';
-import { usePostControllerV1GetMany } from '../lib/impakt-dev-api-client/react-query/posts/posts';
-import { routinesControllerGetRoutines } from '../lib/impakt-dev-api-client/react-query/routines/routines';
+import { useLocation, useParams } from 'react-router-dom';
+import { deepLinkToApp } from '@/data';
+// import zuzstand lib requirement
 import {
   usePersistedAuthStore,
   usePersistedCalendarStore,
   usePersistedChallengeStore,
   usePersistedForumStore,
   usePersistedGroupStore,
-} from '../lib/zustand';
-import { useChallengeStatsControllerGetUserBestScore } from '../lib/impakt-dev-api-client/react-query/default/default';
-import { useChallengesLeaderboardControllerV1Usersleaderboard } from '../lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
-import { getDefaultQueryOptions } from '../lib/impakt-dev-api-client/utils';
-import { GroupsSlice } from '../lib/zustand/stores/groupsStore';
+} from '@/lib/zustand';
+// import react query lib requirement
+import { useCalendarControllerGetCalendar } from '@/lib/impakt-dev-api-client/react-query/calendar/calendar';
+import { challengesControllerGetMany } from '@/lib/impakt-dev-api-client/react-query/challenges/challenges';
+import {
+  useGroupsMemberControllerV1AmIMemberOfGroup,
+  useGroupsMemberControllerV1AmIRoleOnGroup,
+} from '@/lib/impakt-dev-api-client/react-query/groups-member/groups-member';
+import { GetMembersOfGroupRes } from '@/lib/impakt-dev-api-client/react-query/types';
+import {
+  useGroupsControllerV1FindOne,
+  useGroupsControllerV1FindGroupMembers,
+  useGroupsControllerV1GetGroupPinnedChallenges,
+} from '@/lib/impakt-dev-api-client/react-query/groups/groups';
+import { usePostControllerV1GetMany } from '@/lib/impakt-dev-api-client/react-query/posts/posts';
+import { routinesControllerGetRoutines } from '@/lib/impakt-dev-api-client/react-query/routines/routines';
+import { useChallengeStatsControllerGetUserBestScore } from '@/lib/impakt-dev-api-client/react-query/default/default';
+import { useChallengesLeaderboardControllerV1Usersleaderboard } from '@/lib/impakt-dev-api-client/react-query/leaderboard/leaderboard';
+
+import { normalizeCalendarDataMap } from '@/utils/dayspan';
 
 export const useFetchGroupDetails = () => {
-  // console.log('render');
   // global states
   const { member } = usePersistedAuthStore();
   const { setActiveGroup, activeGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
@@ -39,8 +40,10 @@ export const useFetchGroupDetails = () => {
 
   // params checks
   const groupParam = useParams();
-  const location = useLocation();
-  const wasGuest = location.state as { wasGuest: boolean } | undefined;
+  const groupId = parseInt(groupParam?.id ?? '-1', 10);
+  // const location = useLocation();
+  // const wasGuest = location.state as { wasGuest: boolean } | undefined;
+  const isNewGroup = groupId !== activeGroup?.id;
 
   const isJoin =
     groupParam.id &&
@@ -48,22 +51,54 @@ export const useFetchGroupDetails = () => {
     groupParam.eventId !== 'join' &&
     useLocation().pathname.includes('join');
 
-  const isNewGroup = parseInt(groupParam.id ?? '-asd', 10) !== activeGroup?.id;
-
   // local states
-  const [isGroupDetailsLoading, setIsGroupDetailsLoading] = React.useState(isNewGroup);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [isError, setIsError] = React.useState('');
 
-  // fetching group relateds
+  // reset local active group if re-fetching for new group
+  React.useEffect(() => {
+    if (isNewGroup) {
+      setActiveGroup(null);
+    }
+  }, []);
+
+  // fetching group
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
 
-  const fetchGroupDetail = useGroupsControllerV1FindOne(parseInt(groupParam?.id ?? '-1', 10), {
+  const refetchQuery = {
+    staleTime: isNewGroup ? 0 : 300000,
+    refetchOnWindowFocus: false,
+    retry: 0,
+  };
+
+  // fetching role related
+  const fetchAmIMemberOfGroup = useGroupsMemberControllerV1AmIMemberOfGroup(groupId, {
     query: {
-      ...getDefaultQueryOptions(),
-      refetchOnWindowFocus: true,
-      staleTime: isNewGroup || wasGuest ? 0 : 120000,
-      refetchInterval: 300000,
+      enabled: !!member,
+      ...refetchQuery,
+      retry: 1,
+    },
+  });
+
+  const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup(groupId, {
+    query: {
+      enabled: fetchAmIMemberOfGroup.isSuccess && fetchAmIMemberOfGroup.data,
+      ...refetchQuery,
+      onSuccess: (roleData) => {
+        setRole(roleData.role);
+      },
+      onError: () => {
+        setRole(member ? 'None' : 'Guest');
+      },
+    },
+  });
+
+  // fetching group detail
+  const fetchGroupDetail = useGroupsControllerV1FindOne(groupId, {
+    query: {
+      enabled:
+        fetchAmIMemberOfGroup.fetchStatus === 'idle' && fetchGroupRoleById.fetchStatus === 'idle',
+      ...refetchQuery,
       onSuccess: async (data) => {
         if (isJoin && groupParam.eventId) {
           // if join link just use the deeplink
@@ -72,69 +107,43 @@ export const useFetchGroupDetails = () => {
 
           return;
         }
-
-        let memberRole: GroupsSlice['role'] = 'None';
-
-        const isMemberOfGroup = member ? await fetchAmIMemberOfGroup.refetch() : { data: false };
-
-        if (isMemberOfGroup.data) {
-          const roleRes = await fetchGroupRoleById.refetch();
-
-          memberRole = roleRes.data!.role;
-        }
-
+        const currentRole = fetchGroupRoleById.data?.role ?? 'None';
         // if group public
         if (!data.private) {
-          await fetchMembersOfGroup.refetch();
-          await fetchPosts.refetch();
-          await fetchGroupCalendar.refetch();
-          await fetchGroupPinnedChallenge.refetch();
           setActiveGroup(data);
         }
 
         // if group private
         if (data.private) {
-          // check if preview
-          if (!data.isPreview && member) {
-            if (memberRole !== 'None') {
-              // edge check if user not try to re-join group
-              await fetchMembersOfGroup.refetch();
-              await fetchPosts.refetch();
-              await fetchGroupCalendar.refetch();
-              await fetchGroupPinnedChallenge.refetch();
-            }
-          }
           if (!member) {
             setIsError("Oops! We couldn't find what you are looking for.");
           } else {
-            setActiveGroup({ ...data, isPreview: memberRole === 'None' });
+            setActiveGroup({ ...data, isPreview: currentRole === 'None' });
           }
         }
 
-        setRole(!member ? 'Guest' : memberRole);
-
-        setIsGroupDetailsLoading(false);
+        setRole(!member ? 'Guest' : currentRole ?? 'Guest');
       },
       onError: () => {
-        // if (err.response?.status === 404 || err.response?.status === 400) {
-        //   setIsError("Oops! We couldn't find what you are looking for.");
-        // } else {
-        //   setIsError('PLEASE MAKE SURE YOU HAVE THE CORRECT ACCESS RIGHTS AND THE GROUP EXISTS');
-        // }
         setIsError("Oops! We couldn't find what you are looking for.");
-        setIsGroupDetailsLoading(false);
       },
     },
   });
+  const detailFetchLogic =
+    fetchGroupDetail.isSuccess &&
+    ((fetchGroupDetail.data.private &&
+      !fetchGroupDetail.data.isPreview &&
+      fetchGroupRoleById.data?.role !== 'None' &&
+      !!member) ||
+      !fetchGroupDetail.data.private);
 
   const fetchMembersOfGroup = useGroupsControllerV1FindGroupMembers(
-    parseInt(groupParam?.id ?? '0', 10),
+    fetchGroupDetail.data?.id ?? -1,
     {},
     {
       query: {
-        enabled: false,
-        refetchOnMount: false,
-        retry: 0,
+        enabled: detailFetchLogic,
+        ...refetchQuery,
         onSuccess: async (membersOfGroup) => {
           setMembersOfGroup(membersOfGroup);
 
@@ -144,40 +153,14 @@ export const useFetchGroupDetails = () => {
     },
   );
 
-  const fetchAmIMemberOfGroup = useGroupsMemberControllerV1AmIMemberOfGroup(
-    parseInt(groupParam?.id ?? '0', 10),
-    {
-      query: {
-        enabled: false,
-        refetchOnMount: false,
-        retry: 0,
-      },
-    },
-  );
-
-  const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup(
-    parseInt(groupParam?.id ?? '0', 10),
-    {
-      query: {
-        enabled: false,
-        refetchOnMount: false,
-        retry: 0,
-        onSuccess: (roleData) => {
-          setRole(roleData.role);
-        },
-      },
-    },
-  );
-
   const fetchPosts = usePostControllerV1GetMany(
     'Group',
-    parseInt(groupParam?.id ?? '0', 10),
+    fetchGroupDetail.data?.id ?? -1,
     {},
     {
       query: {
-        enabled: false,
-        retry: 0,
-        refetchOnMount: false,
+        enabled: detailFetchLogic,
+        ...refetchQuery,
         onSuccess: (posts) => {
           setPosts(posts ?? []);
         },
@@ -186,14 +169,14 @@ export const useFetchGroupDetails = () => {
   );
 
   const fetchGroupCalendar = useCalendarControllerGetCalendar(
-    fetchGroupDetail.data?.calendarId ?? 0,
+    fetchGroupDetail.data?.calendarId ?? -1,
     {
       query: {
-        enabled: false,
-        retry: 0,
-        refetchOnMount: false,
+        enabled: detailFetchLogic,
+        ...refetchQuery,
         onSuccess: (calendarData) => {
-          setCalendar(calendarData);
+          const data = normalizeCalendarDataMap(calendarData);
+          setCalendar(data);
         },
         onError: () => {
           setCalendar(null);
@@ -203,30 +186,25 @@ export const useFetchGroupDetails = () => {
   );
 
   const fetchGroupPinnedChallenge = useGroupsControllerV1GetGroupPinnedChallenges(
-    parseInt(groupParam?.id ?? '0', 10),
+    fetchGroupDetail.data?.id ?? -1,
     {
       query: {
-        enabled: false,
-        retry: 0,
-        refetchOnMount: false,
+        enabled: detailFetchLogic,
+        ...refetchQuery,
         onSuccess: async (pinnedChallenge) => {
           setGroupPinnedChallenge(pinnedChallenge);
-          if (pinnedChallenge.Challenge) {
-            await fetchPinnedChallengeLeaderboard.refetch();
-            await fetchPinnedChallengeUserBestScore.refetch();
-          }
         },
       },
     },
   );
+
   const fetchPinnedChallengeUserBestScore = useChallengeStatsControllerGetUserBestScore(
     fetchGroupPinnedChallenge.data?.Challenge?.id ?? 0,
     member?.id ?? 0,
     {
       query: {
-        enabled: false,
-        retry: 0,
-        refetchOnMount: false,
+        enabled: fetchGroupPinnedChallenge.isSuccess && !!fetchGroupPinnedChallenge.data.Challenge,
+        ...refetchQuery,
         onSuccess: (bestScore) => {
           setBestScoreOfUser(bestScore);
         },
@@ -239,9 +217,8 @@ export const useFetchGroupDetails = () => {
     {},
     {
       query: {
-        enabled: false,
-        retry: 0,
-        refetchOnMount: false,
+        enabled: fetchGroupPinnedChallenge.isSuccess && !!fetchGroupPinnedChallenge.data.Challenge,
+        ...refetchQuery,
         onSuccess: (leaderboard) => {
           setChallengeLeaderBoard(leaderboard);
         },
@@ -249,13 +226,20 @@ export const useFetchGroupDetails = () => {
     },
   );
 
-  React.useEffect(() => {
-    if (isNewGroup || wasGuest) {
-      setActiveGroup(null);
-    }
-  }, []);
-
-  return { group: activeGroup, isGroupDetailsLoading, isError };
+  return {
+    group: activeGroup,
+    isGroupDetailsLoading:
+      fetchAmIMemberOfGroup.isFetching ||
+      fetchGroupRoleById.isFetching ||
+      fetchGroupDetail.isFetching ||
+      fetchMembersOfGroup.isFetching ||
+      fetchPosts.isFetching ||
+      fetchGroupCalendar.isFetching ||
+      fetchGroupPinnedChallenge.isFetching ||
+      fetchPinnedChallengeUserBestScore.isFetching ||
+      fetchPinnedChallengeLeaderboard.isFetching,
+    isError,
+  };
 };
 
 // TODO once the backend refactored for this feat it will moved to react query

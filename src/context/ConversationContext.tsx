@@ -51,7 +51,7 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
 
   const useGroupMessageQuery = () =>
     useQuery({
-      queryKey: ['messages', cursorId],
+      queryKey: ['messages', cursorId, role],
       queryFn: fetchMessages,
       keepPreviousData: true,
       enabled: conversationId !== null && role !== 'None',
