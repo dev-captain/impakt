@@ -46,7 +46,7 @@ const Content: React.FC = () => {
         {(!localStorage.getItem('showTip') || !show) && role === 'Creator' && (
           <GroupWelcome hideGroupWelcome={hide} />
         )}
-        {role !== 'None' && role !== null && (
+        {role !== 'None' && role !== 'Guest' && role !== null && (
           <ConversationContextProvider>
             <GroupChat />
           </ConversationContextProvider>
