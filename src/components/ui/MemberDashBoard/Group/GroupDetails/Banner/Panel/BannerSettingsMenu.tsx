@@ -104,11 +104,11 @@ const BannerSettingsMenu: React.FC = () => {
     );
   };
 
-  if (!activeGroup) return null;
-
   const isRoleNotDefined = !role || role === 'None' || role === 'Guest';
   const isGuest = role === 'Guest';
-  const request = exploreGroups.find((group) => group.id === activeGroup.id)?.Request;
+  const request = exploreGroups.find((group) => group.id === activeGroup?.id)?.Request;
+
+  if (!activeGroup) return null;
 
   return (
     <>

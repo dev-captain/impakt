@@ -12,7 +12,7 @@ import EventDetails from './EventDetails';
 const EventsOverview: React.FC = () => {
   const [activeChallenge, setActiveChallenge] = React.useState<GetChallengeRes>();
   const { getCurrentOverviewScreen, goToOverViewScreen } = useEventCalendarContext();
-  const screen = getCurrentOverviewScreen();
+  const screen = getCurrentOverviewScreen;
 
   return (
     <Box w="full">

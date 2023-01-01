@@ -102,6 +102,7 @@
   },
   "scripts": {
     "start": "vite",
+    "start:debug": "vite -d",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "test": "vite test",

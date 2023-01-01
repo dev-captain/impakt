@@ -51,7 +51,7 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
 
   const useGroupMessageQuery = () =>
     useQuery({
-      queryKey: ['messages', cursorId],
+      queryKey: ['messages', cursorId, role],
       queryFn: fetchMessages,
       keepPreviousData: true,
       enabled: conversationId !== null && role !== 'None',
@@ -61,6 +61,7 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
         setMessages([...messages, ...data.message]);
       },
     });
+
   const groupMessages = useGroupMessageQuery();
 
   const matchMessagesandUser = async (currentMessages: MessageV1Dto[]) => {
@@ -138,6 +139,12 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
     }
   }, [conversationId, role]);
 
+  React.useEffect(() => {
+    if (role !== 'None' && role !== 'Guest' && conversationId === null) {
+      socketRef.current?.emit('join-conversation', conversationId);
+    }
+  }, [conversationId, role]);
+
   /**
    * Send a message to the server
    */
@@ -152,7 +159,7 @@ export const ConversationContextProvider: React.FC<{ children: React.ReactNode }
         setConversationId,
         messages,
         sendMessage,
-        isMessagesLoading: groupMessages.isLoading || groupMessages.isRefetching,
+        isMessagesLoading: groupMessages.fetchStatus !== 'idle',
         fetchOlderMessages,
       }}
     >

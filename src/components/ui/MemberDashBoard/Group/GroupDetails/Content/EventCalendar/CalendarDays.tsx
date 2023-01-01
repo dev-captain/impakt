@@ -19,7 +19,7 @@ const CalendarDays: React.FC = () => {
     moveToNextMonth,
     moveToPreviousMonth,
     getStartDayOfCurrentMonth,
-    setSelectedDay,
+    pickSelectedDay,
     goToOverViewScreen,
   } = useEventCalendarContext();
 
@@ -115,9 +115,9 @@ const CalendarDays: React.FC = () => {
                       if (day.month < getDaysOfCurrentMonth()[15].month) {
                         moveToPreviousMonth();
                       }
-                      setSelectedDay(day);
+                      pickSelectedDay(day);
                     }
-                  : () => setSelectedDay(day)
+                  : () => pickSelectedDay(day)
               } // selectedDay
             />
           ))}
