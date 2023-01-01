@@ -8,6 +8,7 @@ import { getCreatedBefore } from '@/utils';
 import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import GroupChatCard from './GroupChatCard';
 import EmojiPickerPopover from './EmojiPickerPopover';
+import { useGroupsControllerV1FindOne } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
 
 const GroupChat: React.FC = () => {
   const [stopAutoScrollToBottom, setStopAutoScrollToBottom] = React.useState(false);
@@ -17,6 +18,9 @@ const GroupChat: React.FC = () => {
   const { messages, sendMessage, setConversationId, isMessagesLoading, fetchOlderMessages } =
     useConversationContext();
   const [inputValue, setInputValue] = React.useState<string>('');
+  const groupFallback = useGroupsControllerV1FindOne(activeGroup?.id ?? -1, {
+    query: { enabled: false },
+  });
 
   const handleMessageSend = useCallback(() => {
     if (inputValue && inputValue.length > 0) {
@@ -31,6 +35,12 @@ const GroupChat: React.FC = () => {
   React.useEffect(() => {
     if (activeGroup?.conversationId) {
       setConversationId(activeGroup?.conversationId);
+    } else {
+      groupFallback.refetch().then((res) => {
+        if (res.data?.conversationId) {
+          setConversationId(res.data?.conversationId);
+        }
+      });
     }
   }, [activeGroup?.conversationId]);
 

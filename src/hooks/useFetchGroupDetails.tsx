@@ -32,7 +32,8 @@ import { normalizeCalendarDataMap } from '@/utils/dayspan';
 export const useFetchGroupDetails = () => {
   // global states
   const { member } = usePersistedAuthStore();
-  const { setActiveGroup, activeGroup, setRole, setMembersOfGroup } = usePersistedGroupStore();
+  const { setActiveGroup, activeGroup, role, setRole, setMembersOfGroup } =
+    usePersistedGroupStore();
   const { setCalendar } = usePersistedCalendarStore();
   const { setGroupPinnedChallenge, setBestScoreOfUser, setChallengeLeaderBoard } =
     usePersistedChallengeStore();
@@ -77,12 +78,17 @@ export const useFetchGroupDetails = () => {
       enabled: !!member,
       ...refetchQuery,
       retry: 1,
+      onSuccess: (data) => {
+        if (!data) {
+          setRole(member ? 'None' : 'Guest');
+        }
+      },
     },
   });
 
   const fetchGroupRoleById = useGroupsMemberControllerV1AmIRoleOnGroup(groupId, {
     query: {
-      enabled: fetchAmIMemberOfGroup.isSuccess && fetchAmIMemberOfGroup.data,
+      enabled: fetchAmIMemberOfGroup.fetchStatus === 'idle' && fetchAmIMemberOfGroup.data === true,
       ...refetchQuery,
       onSuccess: (roleData) => {
         setRole(roleData.role);
@@ -107,22 +113,22 @@ export const useFetchGroupDetails = () => {
 
           return;
         }
-        const currentRole = fetchGroupRoleById.data?.role ?? 'None';
+
         // if group public
         if (!data.private) {
+          if (!member) {
+            setRole('Guest');
+          }
           setActiveGroup(data);
         }
-
         // if group private
         if (data.private) {
           if (!member) {
             setIsError("Oops! We couldn't find what you are looking for.");
           } else {
-            setActiveGroup({ ...data, isPreview: currentRole === 'None' });
+            setActiveGroup({ ...data, isPreview: role === 'None' });
           }
         }
-
-        setRole(!member ? 'Guest' : currentRole ?? 'Guest');
       },
       onError: () => {
         setIsError("Oops! We couldn't find what you are looking for.");
