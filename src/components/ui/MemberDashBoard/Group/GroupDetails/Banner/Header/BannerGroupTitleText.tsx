@@ -12,8 +12,7 @@ const BannerGroupTitleText: React.FC = () => {
   return (
     <Text
       textStyle="semiBold32"
-      fontSize={{ base: '20px', md: '30px', lgx: '44px' }}
-      color="29323B"
+      color="fg-1"
       letterSpacing="-0.01em"
       display="flex"
       alignItems="center"
