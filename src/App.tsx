@@ -23,7 +23,7 @@ import Authentication from './middlewares/Authentication';
 
 import GroupInvite from './pages/GroupInvite/index';
 import routes from './data/routes';
-import ExploreGroup, { MainExplore } from './pages/Explore';
+import ExploreGroup from './pages/Explore';
 
 const App = () => {
   return (
@@ -68,32 +68,18 @@ const App = () => {
           </Common.ScrollToTop>
         }
       />
-      <Route path={routes.dashboard} element={<MemberDashboard />}>
-        <Route
-          path=""
-          element={
-            <Authentication>
-              <S.General />
-            </Authentication>
-          }
-        />
-        <Route
-          path="r"
-          element={
-            <Authentication>
-              <S.Referrals />
-            </Authentication>
-          }
-        />
+      <Route
+        path={routes.dashboard}
+        element={
+          <Authentication>
+            <MemberDashboard />
+          </Authentication>
+        }
+      >
+        <Route path="" element={<S.General />} />
+        <Route path="r" element={<S.Referrals />} />
         <Route path="g">
-          <Route
-            path=""
-            element={
-              <Authentication>
-                <S.Group />
-              </Authentication>
-            }
-          />
+          <Route path="" element={<S.Group />} />
           {/* <Route path="create-group" element={<S.CreateGroup isStandalone />} /> */}
           <Route path=":id" element={<S.GroupDetail />}>
             <Route path="event/:eventId" />
