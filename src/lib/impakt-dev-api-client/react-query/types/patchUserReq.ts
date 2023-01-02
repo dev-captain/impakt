@@ -21,4 +21,6 @@ export interface PatchUserReq {
   communities?: number[] | null;
   /** Mark a community as primary by id, ID must exist in communities */
   primaryCommunityId?: number | null;
+  /** Mailing list Ids user wants to subscribe to */
+  mailingListIds?: string[] | null;
 }

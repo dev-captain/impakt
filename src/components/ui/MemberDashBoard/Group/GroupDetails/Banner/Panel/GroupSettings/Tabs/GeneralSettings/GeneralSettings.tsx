@@ -1,11 +1,14 @@
 import React from 'react';
 import { Box, useDisclosure, Text } from '@chakra-ui/react';
-import { Common, I } from '@/components';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
+import { Common, I } from '@/components';
 
 import ConfirmationModal from './ConfirmationModal';
-import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
+import {
+  usePersistedAuthStore,
+  usePersistedGroupStore,
+} from '../../../../../../../../../../lib/zustand';
 import { renderToast } from '../../../../../../../../../../utils';
 import { useGroupsMemberControllerV1LeaveGroup } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups-member/groups-member';
 import { useGroupsControllerV1Remove } from '../../../../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
@@ -16,7 +19,10 @@ const GeneralSettings: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const deleteGroup = useGroupsControllerV1Remove();
   const leaveGroup = useGroupsMemberControllerV1LeaveGroup();
-  const { activeGroup, myGroups, setMyGroups, setRole } = usePersistedGroupStore();
+  const { activeGroup, myGroups, setMyGroups, setRole, setMembersOfGroup, membersOfGroup } =
+    usePersistedGroupStore();
+  const { member } = usePersistedAuthStore();
+
   const navigate = useNavigate();
   const members = usePersistedGroupStore().membersOfGroup?.Members?.filter(
     (m) => m.role !== 'None',
@@ -56,10 +62,20 @@ const GeneralSettings: React.FC = () => {
             );
             setRole('None');
             setMyGroups(distractFromMyGroup);
-            navigate(routes.groups);
+
+            if (membersOfGroup) {
+              const distractFromMemberList = membersOfGroup.Members.filter(
+                (memberList) => memberList.User.id !== member?.id,
+              );
+
+              setMembersOfGroup({ ...membersOfGroup, Members: distractFromMemberList });
+            }
           },
           onError: (err) => {
             renderToast('error', err.response?.data.message ?? 'Something went wrong');
+          },
+          onSettled: () => {
+            navigate(routes.groups);
           },
         },
       );

@@ -4,3 +4,4 @@ export { default as UpdateGroupImageForm } from '@/components/forms/groups/Updat
 export { default as UpdateGroupNameForm } from '@/components/forms/groups/UpdateGroupNameForm';
 export { default as CreateEventForm } from '@/components/forms/groups/CreateEventForm';
 export { default as UpdateEventForm } from '@/components/forms/groups/UpdateEventForm';
+export { default as GroupChatForm } from '@/components/forms/groups/GroupChatForm';

@@ -1,11 +1,12 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEventCalendarContext } from '../../../../../../../context/EventCalendarContext';
 import routes from '../../../../../../../data/routes';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import { renderToast } from '../../../../../../../utils';
+import MemberDashboardHeadlineText from '../../../../MemberDashBoardHeadlineText';
 import DayComponent from './Day';
 import DayNames from './DayNames';
 
@@ -19,7 +20,7 @@ const CalendarDays: React.FC = () => {
     moveToNextMonth,
     moveToPreviousMonth,
     getStartDayOfCurrentMonth,
-    setSelectedDay,
+    pickSelectedDay,
     goToOverViewScreen,
   } = useEventCalendarContext();
 
@@ -53,9 +54,9 @@ const CalendarDays: React.FC = () => {
             }}
           />
           <Box>
-            <Text color="fg-1" textStyle="semiBold6">
+            <MemberDashboardHeadlineText>
               {[getCurrentMonthLabel(), getCurrentYear()].join(' ')}
-            </Text>
+            </MemberDashboardHeadlineText>
           </Box>
           <ChevronRightIcon
             fontSize="30px"
@@ -115,9 +116,9 @@ const CalendarDays: React.FC = () => {
                       if (day.month < getDaysOfCurrentMonth()[15].month) {
                         moveToPreviousMonth();
                       }
-                      setSelectedDay(day);
+                      pickSelectedDay(day);
                     }
-                  : () => setSelectedDay(day)
+                  : () => pickSelectedDay(day)
               } // selectedDay
             />
           ))}

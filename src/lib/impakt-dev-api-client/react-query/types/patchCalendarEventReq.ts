@@ -12,6 +12,6 @@ export interface PatchCalendarEventReq {
   /** The description of the event */
   description: string;
   assocId?: number;
-  challengeId?: number;
+  challengeId: number;
   reschedule?: EventRescheduleReq;
 }

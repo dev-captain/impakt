@@ -16,4 +16,6 @@ export const UploadControllerUploadFileReference = {
   GroupCoverImage: 'GroupCoverImage',
   GroupThumbnail: 'GroupThumbnail',
   GroupProfile: 'GroupProfile',
+  RoutineSessionVideo: 'RoutineSessionVideo',
+  LeaderboardEntryVideo: 'LeaderboardEntryVideo',
 } as const;

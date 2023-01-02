@@ -1,9 +1,30 @@
+import { CalendarDtoV1TypeEnum } from '@impakt-dev/api-client';
+import { Schedule, ScheduleInput } from 'dayspan';
 import { StateCreator } from 'zustand';
-import { CalendarDtoV1 } from '../../impakt-dev-api-client/react-query/types';
 
 export interface CalendarStore {
-  calendar: CalendarDtoV1 | null;
-  setCalendar: (calendar: CalendarDtoV1 | null) => void;
+  calendar: {
+    events: {
+      id?: any;
+      data?: string | undefined;
+      schedule: Schedule<any> | ScheduleInput<any>;
+      visible: boolean;
+    }[];
+    id: number;
+    type: CalendarDtoV1TypeEnum;
+  } | null;
+  setCalendar: (
+    calendar: {
+      events: {
+        id?: any;
+        data?: string | undefined;
+        schedule: Schedule<any> | ScheduleInput<any>;
+        visible: boolean;
+      }[];
+      id: number;
+      type: CalendarDtoV1TypeEnum;
+    } | null,
+  ) => void;
 }
 
 export const calendarStore: StateCreator<CalendarStore> = (set) => ({

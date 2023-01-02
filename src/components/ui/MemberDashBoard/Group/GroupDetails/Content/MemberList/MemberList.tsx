@@ -14,6 +14,7 @@ import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import { usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import AccessDeniedBox from '../AccessDeniedBox';
 import { GetMembersOfGroupResGroupRole } from '../../../../../../../lib/impakt-dev-api-client/react-query/types';
+import MemberDashboardHeadlineText from '../../../../MemberDashBoardHeadlineText';
 
 const rolesOrders: GetMembersOfGroupResGroupRole[] = [
   'Creator',
@@ -49,9 +50,7 @@ const MemberList: React.FC = () => {
       <Box w="full">
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Box display="flex" alignItems="center">
-            <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
-              Members
-            </Text>
+            <MemberDashboardHeadlineText>Members</MemberDashboardHeadlineText>
             {/* <I.SettingIcon color="#B0C3D6" width="20px" /> */}
           </Box>
           {/* <Button
@@ -237,10 +236,8 @@ const MemberList: React.FC = () => {
                       height="32px"
                     />
                     <Text
-                      color="#4E6070"
-                      fontSize={{ lgx: '18px', md: '14px' }}
-                      lineHeight="100%"
-                      fontWeight="500"
+                      color="fg"
+                      textStyle="semiBold165"
                       marginLeft="16px"
                       whiteSpace="nowrap"
                       overflow="hidden"
@@ -250,12 +247,7 @@ const MemberList: React.FC = () => {
                     </Text>
                   </HStack>
                   <HStack justifyContent="flex-end" w="full">
-                    <Text
-                      color="#4E6070"
-                      fontSize={{ lgx: '18px', md: '14px' }}
-                      lineHeight="100%"
-                      fontWeight="500"
-                    >
+                    <Text color="fg2" textStyle="semiBold165">
                       {role}
                     </Text>
                   </HStack>

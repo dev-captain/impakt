@@ -123,6 +123,7 @@ export const usePersistedCalendarStore = create<CalendarStore>()(
       serialize: (state) => JSON.stringify(state),
       deserialize: (str) => JSON.parse(str),
       getStorage: () => localStorage,
+      partialize: (state) => ({ ...state, calendar: null }),
     },
   ),
 );

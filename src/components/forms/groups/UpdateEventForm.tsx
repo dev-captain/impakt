@@ -37,8 +37,6 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
 
   const { activeGroup } = usePersistedGroupStore();
 
-  if (!getSelectedDayEvent()) return null;
-
   const challange = usePersistedChallengeStore().availableGroupChallenges.find(
     (d) => d.id === JSON.parse(getSelectedDayEvent()!.event?.data).challengeId,
   );
@@ -130,6 +128,8 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
       defaultValue: JSON.parse(getSelectedDayEvent()!.event.data).title,
     },
   ];
+
+  if (!getSelectedDayEvent()) return null;
 
   return (
     <VStack

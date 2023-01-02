@@ -113,13 +113,13 @@ const ReferralsBox: React.FC = () => {
             <Box mt="0 !important" id="whitelist-challange-description-box-2">
               <Text textStyle="bold5" textAlign="center">
                 <NumberFormat
-                thousandsGroupStyle="thousand"
-                value={godlRewardedByReferrals}
-                decimalSeparator="."
-                displayType="text"
-                thousandSeparator
-                allowNegative
-              />
+                  thousandsGroupStyle="thousand"
+                  value={godlRewardedByReferrals}
+                  decimalSeparator="."
+                  displayType="text"
+                  thousandSeparator
+                  allowNegative
+                />
               </Text>
               <Text
                 color="rgba(255, 255, 255, 0.4)"

@@ -1,11 +1,13 @@
 import React from 'react';
-import { HStack, Box } from '@chakra-ui/react';
+import { HStack, VStack } from '@chakra-ui/react';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { EventCalendarContextProvider } from '@/context/EventCalendarContext';
+import { ConversationContextProvider } from '@/context/ConversationContext';
 import Forums from './Forums/Forums';
 import MemberList from './MemberList/MemberList';
 import EventCalendar from './EventCalendar/EventCalendar';
 import GroupWelcome from './GroupWelcome/GroupWelcome';
+import GroupChat from './GroupChat/GroupChat';
 // import EventCalendar from './Calendar/EventCalendar';
 
 const Content: React.FC = () => {
@@ -22,6 +24,7 @@ const Content: React.FC = () => {
     localStorage.setItem('showTip', 'false');
     setShow('false');
   };
+
   return (
     <HStack
       marginStart="0 !important"
@@ -39,12 +42,17 @@ const Content: React.FC = () => {
       <EventCalendarContextProvider>
         <EventCalendar />
       </EventCalendarContextProvider>
-      <Box display="flex" flexDir="column" w="full" alignItems="center">
+      <VStack width="100%" rowGap={{ base: '16px', md: '24px' }}>
         {(!localStorage.getItem('showTip') || !show) && role === 'Creator' && (
           <GroupWelcome hideGroupWelcome={hide} />
         )}
+        {role !== 'None' && role !== 'Guest' && role !== null && (
+          <ConversationContextProvider>
+            <GroupChat />
+          </ConversationContextProvider>
+        )}
         <Forums />
-      </Box>
+      </VStack>
       <MemberList />
     </HStack>
   );
