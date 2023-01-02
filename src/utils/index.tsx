@@ -312,3 +312,12 @@ export const isProduction =
   import.meta.env.VITE_VERCEL_ENV === 'production' ||
   import.meta.env.VITE_VERCEL_GIT_COMMIT_REF === 'beta';
 export const isPreview = import.meta.env.VITE_VERCEL_ENV === 'preview';
+export const isStage = import.meta.env.VITE_VERCEL_GIT_COMMIT_REF === 'staging';
+
+export const getCurrentEnv = () => {
+  if (isStage) return 'stage';
+  if (isProduction) return 'production';
+  if (isPreview) return 'preview';
+
+  return 'development';
+};

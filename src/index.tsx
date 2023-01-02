@@ -14,17 +14,16 @@ import theme from '@/theme';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { PusherContextProvider } from './context/PusherContext';
+import { getCurrentEnv, isPreview, isProduction, isStage } from './utils';
 
 const queryClient = new QueryClient();
 
 const initSentry = () => {
-  if (
-    import.meta.env.VITE_VERCEL_ENV === 'production' ||
-    import.meta.env.VITE_VERCEL_ENV === 'preview'
-  ) {
+  if (isProduction || isStage || isPreview) {
     Sentry.init({
       dsn: 'https://482e35ccc1c3471b86af0c359112f6ad@o522080.ingest.sentry.io/4504274587549696',
       integrations: [new BrowserTracing()],
+      environment: getCurrentEnv(),
       // We recommend adjusting this value in production, or using tracesSampler
       // for finer control
       tracesSampleRate: 1.0,
