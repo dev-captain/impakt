@@ -42,7 +42,9 @@ const createAxiosResponseInterceptor = () => {
         import.meta.env.VITE_VERCEL_ENV === 'production' ||
         import.meta.env.VITE_VERCEL_ENV === 'preview'
       ) {
-        sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
+        if (error.response?.status !== 400) {
+          sendExceptionToSentry(error, authStorePersisted.getState().member, error.config.data);
+        }
       }
 
       if (error.response?.status !== 401) {
