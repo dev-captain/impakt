@@ -8,10 +8,6 @@ import { usePersistedAuthStore, usePersistedGroupStore } from '../../lib/zustand
 import { renderToast } from '../../utils';
 
 const GroupInvite = () => {
-  const { exploreGroups, setExploreGroups, addToMyGroups } = usePersistedGroupStore();
-
-  const sendGroupRequestToJoin = useGroupsRequestControllerV1SendRequestToJoinGroup();
-  const joinGroup = useGroupsMemberControllerV1JoinGroup();
   const navigate = useNavigate();
   const location = useLocation();
   const { member } = usePersistedAuthStore();
@@ -19,6 +15,12 @@ const GroupInvite = () => {
   const groupId: any = searchParams.get('g');
   const isPrivate = searchParams.get('p') === 'true';
   const referralId = searchParams.get('r');
+
+  const { exploreGroups, setExploreGroups, addToMyGroups } = usePersistedGroupStore();
+
+  const sendGroupRequestToJoin = useGroupsRequestControllerV1SendRequestToJoinGroup();
+  const joinGroup = useGroupsMemberControllerV1JoinGroup();
+
   const jointoGroup = async () => {
     // eslint-disable-next-line no-unused-expressions
     if (!member) {
@@ -74,6 +76,8 @@ const GroupInvite = () => {
             },
             onError: (err) => {
               renderToast('error', err.response?.data.message ?? 'Something went wrong');
+            },
+            onSettled: () => {
               navigate(`${routes.groupDetail(groupId)}`, { state: { wasGuest: true } });
             },
           },

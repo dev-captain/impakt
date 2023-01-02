@@ -42,8 +42,8 @@ export const useFetchGroupDetails = () => {
   // params checks
   const groupParam = useParams();
   const groupId = parseInt(groupParam?.id ?? '-1', 10);
-  // const location = useLocation();
-  // const wasGuest = location.state as { wasGuest: boolean } | undefined;
+  const location = useLocation();
+  const state = location.state as { wasGuest: boolean } | undefined;
   const isNewGroup = groupId !== activeGroup?.id;
 
   const isJoin =
@@ -67,7 +67,7 @@ export const useFetchGroupDetails = () => {
   const { fetchAvailableChallengesForGroup } = useFetchAvailableChallenges();
 
   const refetchQuery = {
-    staleTime: isNewGroup ? 0 : 300000,
+    staleTime: isNewGroup || state?.wasGuest ? 0 : 300000,
     refetchOnWindowFocus: false,
     retry: 0,
   };
@@ -135,6 +135,7 @@ export const useFetchGroupDetails = () => {
       },
     },
   });
+
   const detailFetchLogic =
     fetchGroupDetail.isSuccess &&
     ((fetchGroupDetail.data.private &&
