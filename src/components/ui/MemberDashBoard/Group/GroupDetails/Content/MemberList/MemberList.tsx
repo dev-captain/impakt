@@ -236,10 +236,8 @@ const MemberList: React.FC = () => {
                       height="32px"
                     />
                     <Text
-                      color="#4E6070"
-                      fontSize={{ lgx: '18px', md: '14px' }}
-                      lineHeight="100%"
-                      fontWeight="500"
+                      color="fg"
+                      textStyle="semiBold165"
                       marginLeft="16px"
                       whiteSpace="nowrap"
                       overflow="hidden"
@@ -249,12 +247,7 @@ const MemberList: React.FC = () => {
                     </Text>
                   </HStack>
                   <HStack justifyContent="flex-end" w="full">
-                    <Text
-                      color="#4E6070"
-                      fontSize={{ lgx: '18px', md: '14px' }}
-                      lineHeight="100%"
-                      fontWeight="500"
-                    >
+                    <Text color="fg2" textStyle="semiBold165">
                       {role}
                     </Text>
                   </HStack>
