@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { Box, Text, Button, Skeleton, HStack } from '@chakra-ui/react';
-import { Forms, I } from '@/components';
+import { Box, Text, Skeleton, HStack } from '@chakra-ui/react';
+import { Forms } from '@/components';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { useConversationContext } from '@/context/ConversationContext';
 import { getCreatedBefore } from '@/utils';
@@ -82,13 +82,13 @@ const GroupChat: React.FC = () => {
               <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
                 Group Chat
               </Text>
-              <Button
+              {/* <Button
                 background="transparent"
                 _hover={{ backgroundColor: 'transparent' }}
                 padding="0"
               >
                 <I.FullScreenIcon color="#B0C3D6" width="20px" />
-              </Button>
+              </Button> */}
             </Box>
           </Box>
           <Box
