@@ -62,9 +62,11 @@ const createAxiosResponseInterceptor = () => {
         .then(() => {
           return AXIOS_INSTANCE(error.response?.config);
         })
-        .catch(() => {
-          authStorePersisted.persist.clearStorage();
-          window.location.href = '/signin';
+        .catch((e) => {
+          if (e.response.status === 401) {
+            authStorePersisted.persist.clearStorage();
+            window.location.href = '/signin';
+          }
         })
         .finally(createAxiosResponseInterceptor); // Re-attach the interceptor by running the method
     },
