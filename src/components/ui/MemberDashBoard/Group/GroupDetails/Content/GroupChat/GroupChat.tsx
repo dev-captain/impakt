@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { Box, Skeleton, HStack, VStack } from '@chakra-ui/react';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import { Forms } from '@/components';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { useConversationContext } from '@/context/ConversationContext';
@@ -132,17 +132,15 @@ const GroupChat: React.FC = () => {
           </Box>
           <Box marginTop="16px">
             {/* <Common.InputItems inputItems={inputItems} /> */}
-            <Skeleton isLoaded={!isMessagesLoading} borderRadius="1em" speed={3}>
-              <HStack w="full">
-                <EmojiPickerPopover inputRef={chatInputRef} setValue={setInputValue} />
-                <Forms.GroupChatForm
-                  ref={chatInputRef}
-                  setValue={setInputValue}
-                  value={inputValue}
-                  handleMessageSend={handleMessageSend}
-                />
-              </HStack>
-            </Skeleton>
+            <HStack w="full">
+              <EmojiPickerPopover inputRef={chatInputRef} setValue={setInputValue} />
+              <Forms.GroupChatForm
+                ref={chatInputRef}
+                setValue={setInputValue}
+                value={inputValue}
+                handleMessageSend={handleMessageSend}
+              />
+            </HStack>
           </Box>
         </Box>
       </MemberDashboardCard>
