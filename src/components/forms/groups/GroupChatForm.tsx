@@ -28,7 +28,7 @@ const GroupChatForm = React.forwardRef<HTMLInputElement, GroupChatFormPropsI>(
           fontSize="16px"
           height="50px"
           _focus={{ outline: '0' }}
-          padding="16px 35px"
+          padding="1em"
           value={value}
           onChange={handleInputChange}
           onKeyPress={(e) => {
