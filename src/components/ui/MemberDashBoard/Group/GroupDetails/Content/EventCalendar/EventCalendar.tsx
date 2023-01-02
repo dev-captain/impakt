@@ -18,7 +18,7 @@ const EventCalendar: React.FC = () => {
       display="flex"
       flexWrap="wrap"
       borderRadius="24px"
-      p="1em"
+      p="0.6em 1em 1em 1em"
       bg="white"
       width={{ base: '100%', md: '312px' }}
       minW="312px"

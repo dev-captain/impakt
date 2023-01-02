@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { Box, Text, Skeleton, HStack } from '@chakra-ui/react';
+import { Box, Skeleton, HStack, VStack } from '@chakra-ui/react';
 import { Forms } from '@/components';
 import { usePersistedGroupStore } from '@/lib/zustand';
 import { useConversationContext } from '@/context/ConversationContext';
@@ -9,6 +9,8 @@ import MemberDashboardCard from '../../../../MemberDashBoardCard';
 import GroupChatCard from './GroupChatCard';
 import EmojiPickerPopover from './EmojiPickerPopover';
 import { useGroupsControllerV1FindOne } from '../../../../../../../lib/impakt-dev-api-client/react-query/groups/groups';
+import MemberDashboardHeadlineText from '../../../../MemberDashBoardHeadlineText';
+import ChatLoadingSkeleton from '../ChatLoadingSkeleton';
 
 const GroupChat: React.FC = () => {
   const [stopAutoScrollToBottom, setStopAutoScrollToBottom] = React.useState(false);
@@ -79,9 +81,7 @@ const GroupChat: React.FC = () => {
         <Box w="full">
           <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
             <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
-              <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
-                Group Chat
-              </Text>
+              <MemberDashboardHeadlineText>Group Chat</MemberDashboardHeadlineText>
               {/* <Button
                 background="transparent"
                 _hover={{ backgroundColor: 'transparent' }}
@@ -114,9 +114,12 @@ const GroupChat: React.FC = () => {
             wordBreak="break-all"
           >
             {isMessagesLoading && (
-              <Skeleton h="100px">
-                <GroupChatCard name="" msg="" time="" />
-              </Skeleton>
+              <VStack rowGap="1em" w="full" mt="1em">
+                <ChatLoadingSkeleton isLoading />
+                <ChatLoadingSkeleton isLoading />
+                <ChatLoadingSkeleton isLoading />
+                <ChatLoadingSkeleton isLoading />
+              </VStack>
             )}
             {[...messages].reverse().map((msg) => (
               <GroupChatCard
@@ -129,15 +132,17 @@ const GroupChat: React.FC = () => {
           </Box>
           <Box marginTop="16px">
             {/* <Common.InputItems inputItems={inputItems} /> */}
-            <HStack>
-              <EmojiPickerPopover inputRef={chatInputRef} setValue={setInputValue} />
-              <Forms.GroupChatForm
-                ref={chatInputRef}
-                setValue={setInputValue}
-                value={inputValue}
-                handleMessageSend={handleMessageSend}
-              />
-            </HStack>
+            <Skeleton isLoaded={!isMessagesLoading} borderRadius="1em" speed={3}>
+              <HStack w="full">
+                <EmojiPickerPopover inputRef={chatInputRef} setValue={setInputValue} />
+                <Forms.GroupChatForm
+                  ref={chatInputRef}
+                  setValue={setInputValue}
+                  value={inputValue}
+                  handleMessageSend={handleMessageSend}
+                />
+              </HStack>
+            </Skeleton>
           </Box>
         </Box>
       </MemberDashboardCard>

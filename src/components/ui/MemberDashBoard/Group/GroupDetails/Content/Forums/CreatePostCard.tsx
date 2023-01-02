@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Box, Text, SkeletonCircle, HStack, Skeleton, VStack } from '@chakra-ui/react';
+import { Box, Text, HStack, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 import { I } from '@/components';
 import { usePersistedAuthStore, usePersistedGroupStore } from '../../../../../../../lib/zustand';
 import { renderToast } from '../../../../../../../utils';
 import routes from '../../../../../../../data/routes';
+import ChatLoadingSkeleton from '../ChatLoadingSkeleton';
 
 interface CreatePostCardPropsI {
   onClick: () => void;
@@ -67,42 +68,7 @@ const CreatePostCard: React.FC<CreatePostCardPropsI> = ({ onClick }) => {
                 Create your first post
               </Text>
             </Box>
-            <HStack alignItems="flex-start" justifyContent="flex-start" m="0 !important" w="full">
-              <Box>
-                <SkeletonCircle fadeDuration={3} speed={3} isLoaded={false} />
-              </Box>
-              <VStack w="full" align="flex-start" justifyContent="flex-start">
-                <Box display="flex" w="full">
-                  <Skeleton
-                    fadeDuration={3}
-                    speed={3}
-                    borderRadius="100px"
-                    height="12px"
-                    w="20%"
-                    isLoaded={false}
-                  />
-
-                  <Skeleton
-                    fadeDuration={3}
-                    speed={3}
-                    borderRadius="100px"
-                    height="12px"
-                    ml="4px"
-                    w="40%"
-                    isLoaded={false}
-                  />
-                </Box>
-
-                <Skeleton
-                  fadeDuration={3}
-                  speed={3}
-                  borderRadius="100px"
-                  height="12px"
-                  w="75%"
-                  isLoaded={false}
-                />
-              </VStack>
-            </HStack>
+            <ChatLoadingSkeleton isLoading />
           </VStack>
         </VStack>
       </Box>

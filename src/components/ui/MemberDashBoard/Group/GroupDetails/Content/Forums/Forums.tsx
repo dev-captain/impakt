@@ -1,4 +1,4 @@
-import { Box, Text, Button, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, useDisclosure } from '@chakra-ui/react';
 // import { I } from '@/components';
 import * as React from 'react';
 import { AddIcon } from '@chakra-ui/icons';
@@ -13,6 +13,7 @@ import CreatePostModal from './CreatePostModal';
 import { getCreatedBefore, renderToast } from '../../../../../../../utils';
 import AccessDeniedBox from '../AccessDeniedBox';
 import routes from '../../../../../../../data/routes';
+import MemberDashboardHeadlineText from '../../../../MemberDashBoardHeadlineText';
 
 const Forums: React.FC = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -38,9 +39,7 @@ const Forums: React.FC = () => {
           <Box w="full">
             <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
               <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
-                <Text fontSize="28px" color="#29323B" fontWeight="700" marginRight="14px">
-                  Forums
-                </Text>
+                <MemberDashboardHeadlineText>Forums</MemberDashboardHeadlineText>
                 <Button
                   background="transparent"
                   variant="ghost"
