@@ -115,3 +115,4 @@ export { default as LinkedInBigIcon } from './LinkedInBigIcon';
 export { default as VSportByImpaktIcon } from './VSportByImpaktIcon';
 export { default as SubmittedIcon } from './SubmittedIcon';
 export { default as LaurelIcon } from './LaurelIcon';
+export { default as ProfileIcon } from './ProfileIcon';

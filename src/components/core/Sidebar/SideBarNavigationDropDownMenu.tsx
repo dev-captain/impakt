@@ -27,6 +27,32 @@ const SideBarNavigationDropDownMenu: React.FC<
   const { member } = usePersistedAuthStore();
   const logout = useLogout();
 
+  const menuItems = [
+    {
+      Icon: <I.DashboardIcon width="24px" height="24px" />,
+      title: 'Dashboard',
+      textColor: '',
+      hoverBgColor: '',
+      path: routes.dashboard,
+    },
+    {
+      Icon: <I.ProfileIcon />,
+      title: 'Profile',
+      textColor: '',
+      hoverBgColor: '',
+      path: routes.profile,
+    },
+    {
+      Icon: <I.SignOutIcon color="darkRed" />,
+      onClick: async () => {
+        await logout();
+      },
+      title: 'Sign out',
+      textColor: 'darkRed',
+      hoverBgColor: 'rgba(240, 65, 83, 0.1);',
+    },
+  ];
+
   return member ? (
     <Menu autoSelect={false} offset={offset ?? [0, 10]}>
       {({ isOpen }) => (
@@ -60,44 +86,29 @@ const SideBarNavigationDropDownMenu: React.FC<
           </MenuButton>
           <MenuList bg="transparent" border="0" boxShadow="unset">
             <VStack borderRadius="12px" p="8px 0" boxShadow="lightM" bg="white" maxW="196px">
-              <MenuItem
-                as={ReactRouterLink}
-                to={routes.dashboard}
-                color="fg"
-                _hover={{ bg: ' a5', color: 'fg-1' }}
-              >
-                <HStack
-                  columnGap="23px"
-                  px="5px"
-                  w="full"
-                  alignItems="center"
-                  justifyContent="flex-start"
+              {menuItems.map(({ Icon, hoverBgColor, onClick, textColor, title, path }) => (
+                <MenuItem
+                  key={`menu-item-${title}`}
+                  as={path ? ReactRouterLink : MenuItem}
+                  to={path ?? ''}
+                  onClick={onClick}
+                  color="fg"
+                  _hover={{ bg: hoverBgColor ?? ' a5', color: 'fg-1' }}
                 >
-                  <I.DashboardIcon width="24px" height="24px" />
-                  <Text ml="0 !important" textStyle="semiBold6">
-                    Dashboard
-                  </Text>
-                </HStack>
-              </MenuItem>
-              <MenuItem
-                onClick={async () => {
-                  await logout();
-                }}
-                _hover={{ bg: ' rgba(240, 65, 83, 0.1);' }}
-              >
-                <HStack
-                  columnGap="23px"
-                  px="5px"
-                  w="full"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                >
-                  <I.SignOutIcon color="darkRed" />
-                  <Text ml="0 !important" textStyle="semiBold6" color="darkRed">
-                    Sign out
-                  </Text>
-                </HStack>
-              </MenuItem>
+                  <HStack
+                    columnGap="23px"
+                    px="5px"
+                    w="full"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                  >
+                    {Icon}
+                    <Text ml="0 !important" textStyle="semiBold6" color={textColor}>
+                      {title}
+                    </Text>
+                  </HStack>
+                </MenuItem>
+              ))}
             </VStack>
           </MenuList>
         </>
@@ -105,4 +116,5 @@ const SideBarNavigationDropDownMenu: React.FC<
     </Menu>
   ) : null;
 };
+
 export default SideBarNavigationDropDownMenu;
