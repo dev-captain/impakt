@@ -78,6 +78,7 @@ const App = () => {
       >
         <Route path="" element={<S.General />} />
         <Route path="r" element={<S.Referrals />} />
+        <Route path={routes.profile} element={<S.UserProfile />} />
         <Route path="g">
           <Route path="" element={<S.Group />} />
           {/* <Route path="create-group" element={<S.CreateGroup isStandalone />} /> */}
