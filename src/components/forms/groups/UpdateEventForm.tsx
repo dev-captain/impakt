@@ -118,14 +118,16 @@ const UpdateEventForm: React.FC<UpdateEventFormPropsI> = (props) => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Event  title',
-      onChange,
-      type: 'text',
-      name: 'eventTitle',
+      inputProps: {
+        placeholder: 'Event  title',
+        onChange,
+        type: 'text',
+        name: 'eventTitle',
+        autoFocus: false,
+        defaultValue: JSON.parse(getSelectedDayEvent()!.event.data).title,
+      },
       errorMsg: errors?.eventTitle?.message,
-      autoFocus: false,
       whiteMode: true,
-      defaultValue: JSON.parse(getSelectedDayEvent()!.event.data).title,
     },
   ];
 

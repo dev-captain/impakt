@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useForm } from '@/hooks';
 import { Flex, FormControl, Box, Button, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from '@/hooks';
 import { Common, I } from '@/components';
 import { InputGroupPropsI } from '../../common/InputGroup';
 import createGroupYupScheme from '../../../lib/yup/schemas/createGroupYupScheme';
@@ -59,14 +59,18 @@ const CreateGroupForm: React.FC<{ onClose: (() => void) | undefined }> = ({ onCl
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'My cool fitness group',
-      onChange,
-      type: 'text',
-      name: 'groupName',
-      label: 'Group name',
-      errorMsg: errors?.groupName?.message,
-      autoFocus: true,
+      inputProps: {
+        placeholder: 'My cool fitness group',
+        onChange,
+        type: 'text',
+        name: 'groupName',
+        autoFocus: true,
+      },
+      inputLabelProps: {
+        label: 'Group name',
+      },
       whiteMode: true,
+      errorMsg: errors?.groupName?.message,
     },
   ];
   const toggleInfo = () => {

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl } from '@chakra-ui/react';
+import { useForm } from '@/hooks';
 
 import { Common } from '@/components';
 import { usePersistedGroupStore, usePersistedAuthStore } from '../../../../../../../lib/zustand';
@@ -26,14 +26,18 @@ const InvitationByEmail: React.FC = () => {
   // const groupInviteUrl = `${window.location.origin}/invite?g=${group?.id}&p=${group?.private}`;
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'hello@mail.com',
-      label: 'Invite by email',
-      onChange,
-      type: 'text',
-      name: 'email',
-      value: getValues('email'),
+      inputProps: {
+        placeholder: 'hello@mail.com',
+        onChange,
+        type: 'text',
+        name: 'email',
+        value: getValues('email'),
+        autoFocus: false,
+      },
+      inputLabelProps: {
+        label: 'Invite by email',
+      },
       errorMsg: errors?.email?.message,
-      autoFocus: false,
       whiteMode: true,
     },
   ];

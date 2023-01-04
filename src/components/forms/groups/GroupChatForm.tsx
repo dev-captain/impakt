@@ -1,6 +1,5 @@
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { Input, InputGroup } from '@chakra-ui/react';
 import * as React from 'react';
-import { I } from '../..';
 
 interface GroupChatFormPropsI {
   value: string;
@@ -37,12 +36,12 @@ const GroupChatForm = React.forwardRef<HTMLInputElement, GroupChatFormPropsI>(
             }
           }}
         />
-        <InputRightElement
+        {/* <InputRightElement
           height="50px"
           // eslint-disable-next-line react/no-children-prop
           children={<I.SendIcon color="#5C7FFF" width="25px" height="25px" />}
           onClick={handleMessageSend}
-        />
+        /> */}
       </InputGroup>
     );
   },

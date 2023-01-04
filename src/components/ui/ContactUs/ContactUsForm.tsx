@@ -1,8 +1,8 @@
 import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Common, I } from '@/components';
 import { useForm } from '@/hooks';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
 import contactUsYupScheme from '../../../lib/yup/schemas/contactUsYupScheme';
@@ -42,35 +42,48 @@ const ContactUsForm: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'John',
-      leftIcon: <I.NickNameIcon />,
-      onChange,
-      type: 'text',
-      name: 'memberName',
-      label: 'Your name',
+      inputProps: {
+        onChange,
+        placeholder: 'John',
+        name: 'memberName',
+        type: 'text',
+        value: getValues('memberName'),
+        autoFocus: true,
+      },
+      inputLabelProps: {
+        label: 'Your name',
+      },
+      inputElementProps: {
+        left: { item: <I.NickNameIcon /> },
+      },
       errorMsg: errors?.memberName?.message,
-      value: getValues('memberName'),
-      autoFocus: true,
     },
     {
-      placeholder: 'your@mail.com',
-      leftIcon: <I.Email />,
-      onChange,
-      type: 'email',
-      name: 'email',
-      label: 'Email',
+      inputProps: {
+        placeholder: 'your@mail.com',
+        onChange,
+        type: 'email',
+        name: 'email',
+        value: getValues('email'),
+      },
+      inputElementProps: {
+        left: { item: <I.Email /> },
+      },
+      inputLabelProps: {
+        label: 'Email',
+      },
       errorMsg: errors?.email?.message,
-      value: getValues('email'),
     },
     {
-      placeholder: 'Your Topic',
-      leftIcon: <I.InfoIcon />,
-      onChange,
-      type: 'text',
-      name: 'topic',
-      label: 'Topic',
+      inputProps: {
+        placeholder: 'Your Topic',
+        onChange,
+        type: 'text',
+        name: 'topic',
+        value: getValues('topic'),
+      },
+      inputElementProps: { left: { item: <I.InfoIcon /> } },
       errorMsg: errors?.topic?.message,
-      value: getValues('topic'),
     },
   ];
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Common } from '@/components';
 import { Box } from '@chakra-ui/react';
+import { Common } from '@/components';
 
 import { InputGroupPropsI } from './InputGroup';
 
@@ -20,7 +20,7 @@ const InputItems: React.FC<InputBoxProps> = ({ inputItems }) => {
           rowGap="1em"
           justifyContent="space-between"
           // eslint-disable-next-line react/no-array-index-key
-          key={props.name}
+          key={props.inputProps?.name}
         >
           <Common.InputGroup {...props} />
         </Box>

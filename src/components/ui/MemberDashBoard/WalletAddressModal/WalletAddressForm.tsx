@@ -1,8 +1,8 @@
 import { Box, FormControl, HStack, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Common, I } from '@/components';
 import { useForm } from '@/hooks';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import walletAddressFormYupScheme from '../../../../lib/yup/schemas/walletAddressScheme';
 import { InputGroupPropsI } from '../../../common/InputGroup';
@@ -60,46 +60,62 @@ const WalletAddressForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: '********',
-      leftIcon: <I.Password />,
-      rightIcon: (
-        <Box
-          h="100%"
-          w="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={() => setIsShowPassword(!isShowPassword)}
-        >
-          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
-        </Box>
-      ),
-      onChange,
-      type: isShowPassword ? 'text' : 'password',
-      label: 'Password',
-      name: 'password',
+      inputProps: {
+        placeholder: '********',
+        onChange,
+        type: isShowPassword ? 'text' : 'password',
+        name: 'password',
+        autoFocus: true,
+      },
+      inputElementProps: {
+        left: { item: <I.Password /> },
+        right: {
+          item: (
+            <Box
+              h="100%"
+              w="100%"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
+            </Box>
+          ),
+        },
+      },
+      inputLabelProps: {
+        label: 'Password',
+      },
       errorMsg: errors?.password?.message,
-      autoFocus: true,
     },
     {
-      placeholder: '********',
-      leftIcon: <I.Password />,
-      rightIcon: (
-        <Box
-          h="100%"
-          w="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={() => setIsShowPassword(!isShowPassword)}
-        >
-          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
-        </Box>
-      ),
-      onChange,
-      type: isShowPassword ? 'text' : 'password',
-      label: 'Confirm password',
-      name: 'passwordConfirmation',
+      inputProps: {
+        placeholder: '********',
+        onChange,
+        name: 'passwordConfirmation',
+        type: isShowPassword ? 'text' : 'password',
+      },
+      inputLabelProps: {
+        label: 'Confirm password',
+      },
+      inputElementProps: {
+        left: { item: <I.Password /> },
+        right: {
+          item: (
+            <Box
+              h="100%"
+              w="100%"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
+            </Box>
+          ),
+        },
+      },
       errorMsg: errors?.passwordConfirmation?.message,
     },
   ];
@@ -143,14 +159,16 @@ const WalletAddressForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         >
           {!showPasswordSection && (
             <Common.InputGroup
-              placeholder="Enter wallet address"
-              name="walletAddress"
-              type="text"
-              onChange={onChange}
-              defaultValue={getValues('walletAddress')}
+              inputProps={{
+                placeholder: 'Enter wallet address',
+                name: 'walletAddress',
+                type: 'text',
+                onChange,
+                defaultValue: getValues('walletAddress'),
+                autoFocus: true,
+              }}
+              inputElementProps={{ left: { item: <I.EthIcon /> } }}
               errorMsg={errors.walletAddress?.message}
-              autoFocus
-              leftIcon={<I.EthIcon />}
             />
           )}
           {showPasswordSection && <Common.InputItems inputItems={inputItems} />}

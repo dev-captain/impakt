@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Text, Avatar, Button, useDisclosure } from '@chakra-ui/react';
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
-import { useForm } from '@/hooks';
-import { Common, I } from '@/components';
 import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from '@/hooks';
+import { Common, I } from '@/components';
 import { InputGroupPropsI } from '../../../../../../../../../common/InputGroup';
 import createGroupYupScheme from '../../../../../../../../../../lib/yup/schemas/createGroupYupScheme';
 import { usePersistedGroupStore } from '../../../../../../../../../../lib/zustand';
@@ -99,28 +99,34 @@ const RoleCard: React.FC<ChallengesCardProps> = ({ title }) => {
   };
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Username',
-      onChange,
-      type: 'text',
-      name: 'username',
+      inputContainerProps: {
+        width: '50%',
+      },
+      inputProps: {
+        placeholder: 'Username',
+        onChange,
+        type: 'text',
+        name: 'username',
+        autoFocus: true,
+        value: inputValue,
+      },
+      inputElementProps: {
+        left: { item: <I.SearchIcon color="#29323B" width="20px" height="20px" /> },
+        right: (
+          <I.CloseIcon
+            color="#29323B"
+            width="20px"
+            height="20px"
+            style={{ borderRadius: '50px', backgroundColor: '#91A8BD', fill: '#ffffff' }}
+            onClick={() => {
+              setInput('');
+              setSearchedMembers([]);
+            }}
+          />
+        ),
+      },
       errorMsg: errors?.username?.message,
-      leftIcon: <I.SearchIcon color="#29323B" width="20px" height="20px" />,
-      autoFocus: true,
       whiteMode: true,
-      width: '50%',
-      value: inputValue,
-      rightIcon: (
-        <I.CloseIcon
-          color="#29323B"
-          width="20px"
-          height="20px"
-          style={{ borderRadius: '50px', backgroundColor: '#91A8BD', fill: '#ffffff' }}
-          onClick={() => {
-            setInput('');
-            setSearchedMembers([]);
-          }}
-        />
-      ),
     },
   ];
 

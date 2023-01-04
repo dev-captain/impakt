@@ -2,81 +2,60 @@ import {
   InputLeftElement,
   Input,
   InputGroup as ChakraInputGroup,
-  Box,
   InputRightElement,
-  ResponsiveValue,
+  InputGroupProps,
+  FormLabelProps,
+  InputElementProps,
+  InputProps,
+  VStack,
+  StackProps,
 } from '@chakra-ui/react';
 
 import * as React from 'react';
 import InputErrorMessage from './InputErrorMessage';
-import InputLabel from './InputLabel';
+import InputLabel, { InputLabelPropsI } from './InputLabel';
 
-export interface InputGroupPropsI {
-  name: string;
-  leftIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
-  inputIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
-  rightIcon?: React.ReactElement<any, string | React.JSXElementConstructor<any>> | undefined;
-  placeholder?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  type?: React.HTMLInputTypeAttribute;
-  label?: string;
-  helpText?: {
-    onClick?: () => void;
-    text?: string;
-    href?: string;
+export type InputGroupPropsI = { inputContainerProps?: StackProps } & {
+  inputGroupProps?: InputGroupProps;
+} & {
+  inputLabelProps?: InputLabelPropsI & FormLabelProps;
+} & {
+  inputElementProps?: {
+    left?: InputElementProps & { item?: React.ReactNode };
+    right?: InputElementProps & { item?: React.ReactNode };
   };
+} & { inputProps?: InputProps } & {
   errorMsg?: string;
   children?: React.ReactNode;
-  width?: ResponsiveValue<any>;
-  value?: string | number | readonly string[] | undefined;
-  maxLength?: number;
-  autoFocus?: boolean | undefined;
-  defaultValue?: string | number | readonly string[] | undefined;
   whiteMode?: boolean;
-  isSmallLabel?: boolean;
-}
+  inputIcon?: React.ReactNode;
+};
 
 const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
   (
     {
-      name,
-      leftIcon,
-      rightIcon,
-      inputIcon,
-      placeholder,
-      onChange,
-      type,
-      label,
-      helpText,
       errorMsg,
-      width = 'full',
-      value,
-      children,
-      maxLength,
-      autoFocus,
-      defaultValue,
       whiteMode,
-      isSmallLabel,
+      inputIcon,
+      inputElementProps,
+      inputGroupProps,
+      inputLabelProps,
+      inputProps,
+      inputContainerProps,
+      children,
     },
     ref,
   ) => {
+    const inputRef = ref;
+    const groupProps = inputGroupProps;
+    const labelProps = inputLabelProps;
+    const elementLeftProps = inputElementProps?.left;
+    const elementRightProps = inputElementProps?.right;
+
     return (
       <>
-        <Box
-          width={width}
-          display="flex"
-          flexDir="column"
-          maxH="90px"
-          minH="60px"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-        >
-          <InputLabel
-            helpText={helpText}
-            isSmallLabel={isSmallLabel}
-            whiteMode={whiteMode}
-            label={label}
-          />
+        <VStack w="full" spacing="0.2em" {...inputContainerProps}>
+          <InputLabel {...labelProps} margin="0" />
 
           <ChakraInputGroup
             _hover={{ color: '#fff' }}
@@ -88,8 +67,9 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
             border="none"
             background={whiteMode ? '#EEF4F6' : '#121216'}
             borderRadius="12px"
+            {...groupProps}
           >
-            {leftIcon && (
+            {elementLeftProps && (
               <InputLeftElement
                 pointerEvents="none"
                 minW="60px"
@@ -97,16 +77,14 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
                 color="rgba(255, 255, 255, 0.5)"
                 borderEnd="1px solid rgba(255, 255, 255, 0.1)"
                 marginRight="16px"
+                {...elementLeftProps}
               >
-                {leftIcon}
+                {elementLeftProps.item}
               </InputLeftElement>
             )}
 
             {inputIcon}
             <Input
-              autoFocus={autoFocus}
-              name={name}
-              id={name}
               color={whiteMode ? 'rgba(41, 50, 59, 1)' : '#fff'}
               h="100%"
               border={errorMsg ? '1px solid #BD0F21 !important' : 'none'}
@@ -119,35 +97,31 @@ const InputGroup = React.forwardRef<HTMLInputElement, InputGroupPropsI>(
                   : '2px solid rgba(240, 65, 83, 1)',
               }}
               minH="60px"
-              defaultValue={defaultValue}
-              maxLength={maxLength}
-              type={type}
-              value={value}
-              pl={leftIcon ? '80px' : '2em'}
+              pl={elementLeftProps ? '80px' : '2em'}
               isInvalid={!!errorMsg}
               errorBorderColor="transparent"
               // minWidth={{ base: '100%', md: '503px' }}
               w="full"
-              ref={ref}
-              placeholder={placeholder}
+              ref={inputRef}
               textStyle="regular201"
               borderRadius="12px"
-              onChange={onChange}
               _autofill={{
                 textFillColor: '#c6c6c6',
                 boxShadow: '0 0 0px 1000px #121216 inset',
                 transition: 'background-color 5000s ease-in-out 0s',
               }}
+              {...inputProps}
             />
-            {rightIcon && (
+            {elementRightProps && (
               <InputRightElement cursor="pointer" marginRight="3px" h="full">
-                {rightIcon}
+                {elementRightProps.item}
               </InputRightElement>
             )}
           </ChakraInputGroup>
 
           <InputErrorMessage errorMsg={errorMsg} />
-        </Box>
+        </VStack>
+
         {children}
       </>
     );

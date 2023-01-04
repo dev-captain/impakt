@@ -1,10 +1,10 @@
 import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from '@/components';
 import { LoginReq } from '@impakt-dev/api-client';
 import { useState } from 'react';
-import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from '@/hooks';
+import { Common, I } from '@/components';
 
 import { parseUrlQueryParamsToKeyValuePairs, renderToast } from '../../../utils';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -62,37 +62,49 @@ const SignInForm: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'your@mail.com',
-      leftIcon: <I.Email />,
-      onChange,
-      type: 'email',
-      name: 'email',
-      label: 'Email',
+      inputProps: {
+        placeholder: 'your@mail.com',
+        onChange,
+        type: 'email',
+        name: 'email',
+        autoFocus: true,
+      },
+      inputElementProps: { left: { item: <I.Email /> } },
+      inputLabelProps: {
+        label: 'Email',
+      },
       errorMsg: errors?.email?.message,
-      autoFocus: true,
     },
     {
-      placeholder: '********',
-      leftIcon: <I.Password />,
-      rightIcon: (
-        <Box
-          h="100%"
-          w="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={() => setIsShowPassword(!isShowPassword)}
-        >
-          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
-        </Box>
-      ),
-      onChange,
-      type: isShowPassword ? 'text' : 'password',
-      label: 'Password',
-      name: 'password',
-      helpText: {
-        text: 'Forgot password?',
-        href: '/recover-password',
+      inputProps: {
+        placeholder: '********',
+        onChange,
+        type: isShowPassword ? 'text' : 'password',
+        name: 'password',
+      },
+      inputElementProps: {
+        left: { item: <I.Password /> },
+        right: {
+          item: (
+            <Box
+              h="100%"
+              w="100%"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
+            </Box>
+          ),
+        },
+      },
+      inputLabelProps: {
+        label: 'Password',
+        helpText: {
+          text: 'Forgot password?',
+          href: '/recover-password',
+        },
       },
       errorMsg: errors?.password?.message,
     },
