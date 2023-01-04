@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { Box, Text, VStack } from '@chakra-ui/react';
+import { useForm } from '@/hooks';
 
 import waitlistYupScheme from '../../../../lib/yup/schemas/waitlistYupScheme';
 import { Common } from '../../..';
@@ -67,14 +67,18 @@ const WaitlistForm: React.FC<{
     <VStack as="form" rowGap="12px" onSubmit={handleSubmit(handleOnSubmitWaitlistForm)} w="full">
       <Box w="full">
         <Common.InputGroup
-          label="Enter your email to join the waitlist"
+          inputLabelProps={{
+            label: 'Enter your email to join the waitlist',
+            isSmallLabel: true,
+          }}
+          inputProps={{
+            value: getValues('email'),
+            placeholder: 'hello@mail.com',
+            name: 'email',
+            onChange,
+          }}
           whiteMode
-          value={getValues('email')}
           errorMsg={errors.email?.message}
-          placeholder="hello@mail.com"
-          name="email"
-          onChange={onChange}
-          isSmallLabel
         />
       </Box>
       <Box h="48px" w="full">

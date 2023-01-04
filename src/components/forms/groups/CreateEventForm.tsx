@@ -1,9 +1,9 @@
 import { Box, Text, Select, VStack, HStack, Input } from '@chakra-ui/react';
 import { Day } from 'dayspan';
 import * as React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from '@/hooks';
 import { Common, I } from '@/components';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useEventCalendarContext } from '../../../context/EventCalendarContext';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -93,15 +93,19 @@ const CreateEventForm: React.FC<CreateEventFormPropsI> = (props) => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Add title',
-      onChange,
-      type: 'text',
-      name: 'eventTitle',
+      inputProps: {
+        placeholder: 'Add title',
+        onChange,
+        type: 'text',
+        name: 'eventTitle',
+        autoFocus: false,
+      },
+      inputLabelProps: {
+        label: 'Event Name',
+        isSmallLabel: true,
+      },
       errorMsg: errors?.eventTitle?.message,
-      autoFocus: false,
       whiteMode: true,
-      label: 'Event Name',
-      isSmallLabel: true,
     },
   ];
 

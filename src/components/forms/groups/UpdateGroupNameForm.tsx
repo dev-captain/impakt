@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useForm } from '@/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormControl } from '@chakra-ui/react';
+import { useForm } from '@/hooks';
 
 import { Common } from '@/components';
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -25,15 +25,19 @@ const UpdateGroupNameForm: React.FC = () => {
   };
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Group name',
-      label: 'Group name',
-      onChange,
-      type: 'text',
-      name: 'groupName',
+      inputProps: {
+        placeholder: 'Group name',
+        onChange,
+        type: 'text',
+        name: 'groupName',
+        autoFocus: false,
+        defaultValue: getValues('groupName'),
+      },
+      inputLabelProps: {
+        label: 'Group name',
+      },
       errorMsg: errors?.groupName?.message,
-      autoFocus: false,
       whiteMode: true,
-      defaultValue: getValues('groupName'),
     },
   ];
   const handleUpdateGroupNameChanges = async (data: object) => {

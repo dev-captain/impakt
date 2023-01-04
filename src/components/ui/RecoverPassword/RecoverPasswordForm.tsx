@@ -1,7 +1,7 @@
 import { Box, FormControl, VStack } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from '@/components';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Common, I } from '@/components';
 import { useForm } from '@/hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -38,14 +38,20 @@ const RecoverPasswordForm: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'your@mail.com',
-      leftIcon: <I.Email />,
-      onChange,
-      type: 'email',
-      name: 'email',
-      label: 'Email',
+      inputProps: {
+        placeholder: 'your@mail.com',
+        onChange,
+        type: 'email',
+        name: 'email',
+        autoFocus: true,
+      },
+      inputElementProps: {
+        left: { item: <I.Email /> },
+      },
+      inputLabelProps: {
+        label: 'Email',
+      },
       errorMsg: errors?.email?.message,
-      autoFocus: true,
     },
   ];
 

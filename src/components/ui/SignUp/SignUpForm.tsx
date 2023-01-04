@@ -1,9 +1,9 @@
 import { Box, Flex, FormControl, VStack, Text, useMediaQuery } from '@chakra-ui/react';
 import * as React from 'react';
-import { Common, I } from '@/components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
+import { Common, I } from '@/components';
 import { useForm } from '@/hooks';
 
 import { InputGroupPropsI } from '../../common/InputGroup';
@@ -129,22 +129,39 @@ const SignUpForm: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Member name...',
-      autoFocus: true,
-      leftIcon: <I.NickNameIcon />,
-      onChange,
-      type: 'text',
-      name: 'memberName',
-      label: 'Member name',
-      width: { base: '100%', lg: '75%' },
+      inputContainerProps: { width: '75%' },
+      inputProps: {
+        placeholder: 'Member name...',
+        autoFocus: true,
+        onChange,
+        type: 'text',
+        name: 'memberName',
+      },
+      inputLabelProps: {
+        label: 'Member name',
+      },
+      inputElementProps: {
+        left: {
+          item: <I.NickNameIcon />,
+        },
+      },
       errorMsg: errors?.memberName?.message || errors?.fourDigit?.message,
       children: (
         <Common.InputGroup
-          placeholder="0000"
-          maxLength={4}
-          value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
-          type="text"
-          label={isLessThan1280 ? 'ID' : ' '}
+          inputContainerProps={{ width: '25%', maxHeight: '60px' }}
+          inputProps={{
+            placeholder: '0000',
+            maxLength: 4,
+            value: getValues('fourDigit') ? `${getValues('fourDigit')}` : '',
+            type: 'text',
+            onChange,
+            name: 'fourDigit',
+            maxHeight: '60px',
+          }}
+          inputLabelProps={{
+            label: isLessThan1280 ? 'ID' : ' ',
+            helpText: { text: 'Generate ID', onClick: generateRandomFourDigitNumberString },
+          }}
           inputIcon={
             <Text
               as="span"
@@ -159,64 +176,89 @@ const SignUpForm: React.FC = () => {
               #
             </Text>
           }
-          helpText={{ text: 'Generate ID', onClick: generateRandomFourDigitNumberString }}
-          name="fourDigit"
           // value={getValues('fourDigit') ? `${getValues('fourDigit')}` : ''}
           errorMsg={errors?.fourDigit?.message}
-          width={{ base: '100%', lg: '23%' }}
-          onChange={onChange}
         />
       ),
     },
     {
-      placeholder: 'your@mail.com',
-      leftIcon: <I.Email />,
-      onChange,
-      type: 'email',
-      name: 'email',
-      label: 'Email',
+      inputProps: {
+        placeholder: 'your@mail.com',
+        onChange,
+        type: 'email',
+        name: 'email',
+      },
+      inputElementProps: {
+        left: {
+          item: <I.Email />,
+        },
+      },
+      inputLabelProps: {
+        label: 'Email',
+      },
       errorMsg: errors?.email?.message,
     },
     {
-      placeholder: '********',
-      leftIcon: <I.Password />,
-      rightIcon: (
-        <Box
-          h="100%"
-          w="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={() => setIsShowPassword(!isShowPassword)}
-        >
-          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
-        </Box>
-      ),
-      onChange,
-      type: isShowPassword ? 'text' : 'password',
-      label: 'Password',
-      name: 'password',
+      inputProps: {
+        placeholder: '********',
+        onChange,
+        type: isShowPassword ? 'text' : 'password',
+        name: 'password',
+      },
+      inputElementProps: {
+        left: {
+          item: <I.Password />,
+        },
+        right: {
+          item: (
+            <Box
+              h="100%"
+              w="100%"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
+            </Box>
+          ),
+        },
+      },
+      inputLabelProps: {
+        label: 'Password',
+      },
       errorMsg: errors?.password?.message,
     },
     {
-      placeholder: '********',
-      leftIcon: <I.Password />,
-      rightIcon: (
-        <Box
-          h="100%"
-          w="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={() => setIsShowPassword(!isShowPassword)}
-        >
-          {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
-        </Box>
-      ),
-      onChange,
-      type: isShowPassword ? 'text' : 'password',
-      label: 'Confirm password',
-      name: 'passwordConfirmation',
+      inputProps: {
+        placeholder: '********',
+        onChange,
+        type: isShowPassword ? 'text' : 'password',
+        name: 'passwordConfirmation',
+      },
+      inputElementProps: {
+        left: {
+          item: <I.Password />,
+        },
+        right: {
+          item: (
+            <Box
+              h="100%"
+              w="100%"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <I.EyeOff width="24px" height="24px" /> : <I.Eye />}
+            </Box>
+          ),
+        },
+      },
+      inputLabelProps: {
+        label: 'Confirm password',
+      },
+
       errorMsg: errors?.passwordConfirmation?.message,
     },
   ];

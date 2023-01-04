@@ -16,11 +16,15 @@ const IndividualLeaderboardTable: React.FC = () => {
 
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Search community / player',
-      leftIcon: <I.SearchIcon />,
-      onChange,
-      type: 'search',
-      name: 'searchIndividual',
+      inputProps: {
+        placeholder: 'Search community / player',
+        onChange,
+        type: 'search',
+        name: 'searchIndividual',
+      },
+      inputElementProps: {
+        left: { item: <I.SearchIcon /> },
+      },
     },
   ];
 

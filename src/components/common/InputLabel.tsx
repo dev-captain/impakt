@@ -1,8 +1,8 @@
-import { FormLabel, Box, Link } from '@chakra-ui/react';
+import { FormLabel, Box, Link, FormLabelProps } from '@chakra-ui/react';
 import * as React from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 
-interface InputLabelPropsI {
+export interface InputLabelPropsI {
   whiteMode?: boolean;
   isSmallLabel?: boolean;
   label?: string;
@@ -13,7 +13,13 @@ interface InputLabelPropsI {
   };
 }
 
-const InputLabel: React.FC<InputLabelPropsI> = ({ whiteMode, isSmallLabel, label, helpText }) => {
+const InputLabel: React.FC<InputLabelPropsI & FormLabelProps> = ({
+  whiteMode,
+  isSmallLabel,
+  label,
+  helpText,
+  ...props
+}) => {
   return label ? (
     <FormLabel
       justifyContent="space-between"
@@ -23,6 +29,7 @@ const InputLabel: React.FC<InputLabelPropsI> = ({ whiteMode, isSmallLabel, label
       lineHeight="120%"
       fontSize={isSmallLabel ? '14px' : '16px'}
       fontWeight={isSmallLabel ? '400' : '600'}
+      {...props}
     >
       <Box as="p" textStyle="inherit">
         {label}

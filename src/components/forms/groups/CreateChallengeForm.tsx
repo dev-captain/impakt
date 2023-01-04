@@ -1,9 +1,9 @@
 import { VStack, FormLabel, HStack, Button, Input, Box, Text } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as React from 'react';
+import { Day } from 'dayspan';
 import { Common } from '@/components';
 import { useForm } from '@/hooks';
-import { Day } from 'dayspan';
 import { InputErrorMessage } from '../../common';
 import createChallengeYupScheme from '../../../lib/yup/schemas/createChallengeYupScheme';
 import { usePersistedChallengeStore } from '../../../lib/zustand';
@@ -85,16 +85,18 @@ export const CreateChallengeForm: React.FC<CreateChallengeFormPropsI> = ({
       id={createChallengeFormName}
     >
       <Common.InputGroup
-        onChange={(e) => {
-          challengeCreateForm.setValue('challengeName', e.target.value, {
-            shouldValidate: true,
-          });
+        inputProps={{
+          onChange: (e) => {
+            challengeCreateForm.setValue('challengeName', e.target.value, {
+              shouldValidate: true,
+            });
+          },
+          name: 'challengeName',
+          placeholder: 'Best Challenge',
+          value: challengeCreateForm.getValues('challengeName'),
         }}
+        inputLabelProps={{ label: 'Challenge Name' }}
         errorMsg={challengeCreateForm.errors.challengeName?.message}
-        name="challengeName"
-        label="Challenge Name"
-        placeholder="Best Challenge"
-        value={challengeCreateForm.getValues('challengeName')}
         whiteMode
       />
       <VStack w="full" alignItems="flex-start">

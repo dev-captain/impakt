@@ -26,15 +26,19 @@ const ExploreGroupCardHeader: React.FC<ExploreGroupCardWrapperHeaderPropsI> = ({
   };
   const inputItems: InputGroupPropsI[] = [
     {
-      placeholder: 'Search',
-      onChange,
-      type: 'text',
-      name: 'Groupname',
-      leftIcon: <I.SearchIcon color="#29323B" width="20px" height="20px" />,
-      autoFocus: false,
+      inputProps: {
+        placeholder: 'Search',
+        onChange,
+        type: 'text',
+        name: 'Groupname',
+        autoFocus: false,
+        width: '100%',
+        value: inputValue,
+      },
+      inputElementProps: {
+        left: { item: <I.SearchIcon color="#29323B" width="20px" height="20px" /> },
+      },
       whiteMode: true,
-      width: '100%',
-      value: inputValue,
     },
   ];
 
