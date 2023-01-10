@@ -49,7 +49,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = ({
                 </Box>
                 <Box w={{ base: '30%', md: '30%', lg: '30%', xl: '155px' }} marginLeft='0px !important'>
                 <Text></Text>
-                <Common.ImpaktButton height='48px' marginTop='21px' bgGradient='linear(to-t, rgba(240, 65, 83, 1), rgba(242, 121, 97, 1))'   onClick={ () => {ConfirmNewEmailDisclosure.onOpen()}}><Text color='rgba(255, 255, 255, 1)' fontWeight='600'>Submit</Text></Common.ImpaktButton>
+                <Common.ImpaktButton height='48px' marginTop='21px' bgGradient='linear(to-t, rgba(240, 65, 83, 1), rgba(242, 121, 97, 1))'   onClick={ () => {ConfirmNewEmailDisclosure.onOpen(); close}}><Text color='rgba(255, 255, 255, 1)' fontWeight='600'>Submit</Text></Common.ImpaktButton>
                 </Box>
             </HStack>
         </ModalContent>

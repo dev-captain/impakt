@@ -150,7 +150,6 @@ const UserProfile: React.FC = () => {
                     }}
                   >
                     <Text color="rgba(41, 50, 59, 1)" fontWeight="600">
-                      {' '}
                       Change Email
                     </Text>
                   </Common.ImpaktButton>
@@ -166,16 +165,18 @@ const UserProfile: React.FC = () => {
                 rowGap="16px"
               >
                 <Box w={{ base: '100%', md: '36%', lg: '36%', xl: '155px' }}>
-                  <Common.ImpaktButton height="48px" bg="rgba(238, 244, 246, 1)">
+                  <Common.ImpaktButton 
+                  height="48px" 
+                  bg="rgba(238, 244, 246, 1)"
+                  onClick={() => {
+                    ChangePasswordDisclosure.onOpen();
+                  }}
+                  >
                     <LockIcon
                       marginRight="10px"
                       color="#29323B"
-                      onClick={() => {
-                        ChangePasswordDisclosure.onOpen();
-                      }}
                     ></LockIcon>
                     <Text color="rgba(41, 50, 59, 1)" fontWeight="bold">
-                      {' '}
                       Change Password
                     </Text>
                   </Common.ImpaktButton>
