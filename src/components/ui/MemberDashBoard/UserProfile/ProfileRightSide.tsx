@@ -16,6 +16,7 @@ const UserProfileLeftSide: React.FC = () => {
         maxW={{ base: '100%', md: '588px' }}
         p={{ base: '1.5em', md: '2em' }}
         marginLeft={{ base: '0px !important', md: '8px' }}
+        h="695px"
       >
         <VStack spacing="0" rowGap="24px" w="full" justifyContent="space-between">
           {/* <HStack
