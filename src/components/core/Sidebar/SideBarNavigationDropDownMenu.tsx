@@ -28,16 +28,16 @@ const SideBarNavigationDropDownMenu: React.FC<
   const logout = useLogout();
 
   const menuItems = [
-    {
-      Icon: <I.DashboardIcon width="24px" height="24px" />,
-      title: 'Dashboard',
-      textColor: '',
-      hoverBgColor: '',
-      path: routes.dashboard,
-    },
+    // {
+    //   Icon: <I.DashboardIcon width="24px" height="24px" />,
+    //   title: 'Dashboard',
+    //   textColor: '',
+    //   hoverBgColor: '',
+    //   path: routes.dashboard,
+    // },
     {
       Icon: <I.ProfileIcon />,
-      title: 'Profile',
+      title: 'Edit Profile',
       textColor: '',
       hoverBgColor: '',
       path: routes.profile,
