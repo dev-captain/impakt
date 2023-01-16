@@ -1,25 +1,19 @@
 import React from 'react';
-import { Box, HStack, VStack, Text } from '@chakra-ui/react';
-import { Image } from '@chakra-ui/react';
+import { Box, HStack, VStack, Text, Image } from '@chakra-ui/react';
+
+import { WarningIcon } from '@chakra-ui/icons';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import { usePersistedAuthStore } from '../../../../lib/zustand';
-import {
-  WarningIcon,
-} from '@chakra-ui/icons';
 
 const UserProfileLeftSide: React.FC = () => {
-  const { member } = usePersistedAuthStore();
-
   return (
-    <>
-      <MemberDashboardCard
-        maxW={{ base: '100%', md: '588px' }}
-        p={{ base: '1.5em', md: '2em' }}
-        marginLeft={{ base: '0px !important', md: '8px' }}
-        h="695px"
-      >
-        <VStack spacing="0" rowGap="24px" w="full" justifyContent="space-between">
-          {/* <HStack
+    <MemberDashboardCard
+      maxW={{ base: '100%', md: '588px' }}
+      p={{ base: '1.5em', md: '2em' }}
+      marginLeft={{ base: '0px !important', md: '8px' }}
+      h="695px"
+    >
+      <VStack spacing="0" rowGap="24px" w="full" justifyContent="space-between">
+        {/* <HStack
             display="flex"
             gap="16px"
             flexWrap="wrap"
@@ -86,32 +80,31 @@ const UserProfileLeftSide: React.FC = () => {
               </Box>
             </Box>
           </HStack> */}
-          <HStack>
-            <Box>
-              <Image
-                src="../../../../src/assets/images/avatar.png"
-                width="16.25rem"
-                height="inherit"
-                alt="Dan Abramov"
-              />
-            </Box>
-          </HStack>
-          <HStack>
-            <Box
-              backgroundColor="rgba(242, 121, 97, 0.1)"
-              padding="10px"
-              display="inline-flex"
-              borderRadius="5px"
-            >
-              <WarningIcon color="rgba(204, 76, 51, 1)" margin="auto 9px"></WarningIcon>
-              <Text fontSize="14px" color="rgba(204, 76, 51, 1)" fontWeight="400">
-                Soon you'll be able to customize and play as your avatar.
-              </Text>
-            </Box>
-          </HStack>
-        </VStack>
-      </MemberDashboardCard>
-    </>
+        <HStack>
+          <Box>
+            <Image
+              src="../../../../src/assets/images/avatar.png"
+              width="16.25rem"
+              height="inherit"
+              alt="Dan Abramov"
+            />
+          </Box>
+        </HStack>
+        <HStack>
+          <Box
+            backgroundColor="rgba(242, 121, 97, 0.1)"
+            padding="10px"
+            display="inline-flex"
+            borderRadius="5px"
+          >
+            <WarningIcon color="rgba(204, 76, 51, 1)" margin="auto 9px" />
+            <Text fontSize="14px" color="rgba(204, 76, 51, 1)" fontWeight="400">
+              Soon you&apos;ll be able to customize and play as your avatar.
+            </Text>
+          </Box>
+        </HStack>
+      </VStack>
+    </MemberDashboardCard>
   );
 };
 

@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { EmailIcon } from '@chakra-ui/icons';
-import { Box,Text, VStack, Divider, HStack, useDisclosure } from '@chakra-ui/react';
+import { EmailIcon, LockIcon } from '@chakra-ui/icons';
+import { Box, Text, VStack, Divider, HStack, useDisclosure } from '@chakra-ui/react';
 import { useForm } from '@/hooks';
-import { Common, I } from '@/components';
+import { Common } from '@/components';
 import { InputGroupPropsI } from '../../../common/InputGroup';
 import MemberDashboardCard from '../MemberDashBoardCard';
-import {
-  LockIcon,
-} from '@chakra-ui/icons';
+
 import { usePersistedAuthStore } from '../../../../lib/zustand';
 import ChangePasswordModal from './ChangePassword/ChangePasswordModal';
 import ChangeMemberInfoForm from './ChangeMemberInfoForm';
@@ -18,7 +16,7 @@ const ProfileLeftSide: React.FC = () => {
   const ChangeEmailDisclosure = useDisclosure();
   const { member } = usePersistedAuthStore();
   const memberEmail = member?.email;
-  const { handleSubmit, setValue, errors, getValues } = useForm({
+  const { setValue, errors, getValues } = useForm({
     defaultValues: { email: memberEmail },
   });
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -44,93 +42,82 @@ const ProfileLeftSide: React.FC = () => {
       whiteMode: true,
     },
   ];
+
   return (
     <>
-        <MemberDashboardCard
-        p={{ base: '1.5em', md: '2em' }}
-        maxW={{ base: '100%', md: '588px' }}
-        >
+      <MemberDashboardCard p={{ base: '1.5em', md: '2em' }} maxW={{ base: '100%', md: '588px' }}>
         <VStack spacing="0" rowGap="2em" w="full">
-            <ChangeMemberInfoForm />
-            <Divider />
-            <HStack
-                align="center"
-                justify="center"
-                w="full"
-                display="flex"
-                flexWrap="wrap"
-                justifyContent="space-between"
-                >
-                <Box w={{ base: '100%', md: '69%' }}>
-                    <Text>Email:</Text>
-                    <Common.InputItems inputItems={emailInputItems} />
-                </Box>
-                <Box
-                    w={{ base: '100%', md: '30%', lg: '30%' }}
-                    marginLeft="0px !important"
-                >
-                    <Text></Text>
-                    <Common.ImpaktButton
-                    height="48px"
-                    marginTop="21px"
-                    bg="rgba(238, 244, 246, 1)"
-                    onClick={() => {
-                        ChangeEmailDisclosure.onOpen();
-                    }}
-                    >
-                    <Text color="rgba(41, 50, 59, 1)" fontWeight="600">
-                        Change Email
-                    </Text>
-                    </Common.ImpaktButton>
-                </Box>
-            </HStack>
-            <Divider />
-            <HStack
-                align="center"
-                justify="flex-end"
-                w="full"
-                display="flex"
-                flexWrap="wrap"
-                rowGap="16px"
+          <ChangeMemberInfoForm />
+          <Divider />
+          <HStack
+            align="center"
+            justify="center"
+            w="full"
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="space-between"
+          >
+            <Box w={{ base: '100%', md: '69%' }}>
+              <Text>Email:</Text>
+              <Common.InputItems inputItems={emailInputItems} />
+            </Box>
+            <Box w={{ base: '100%', md: '30%', lg: '30%' }} marginLeft="0px !important">
+              <Text />
+              <Common.ImpaktButton
+                height="48px"
+                marginTop="21px"
+                bg="rgba(238, 244, 246, 1)"
+                onClick={() => {
+                  ChangeEmailDisclosure.onOpen();
+                }}
+              >
+                <Text color="rgba(41, 50, 59, 1)" fontWeight="600">
+                  Change Email
+                </Text>
+              </Common.ImpaktButton>
+            </Box>
+          </HStack>
+          <Divider />
+          <HStack
+            align="center"
+            justify="flex-end"
+            w="full"
+            display="flex"
+            flexWrap="wrap"
+            rowGap="16px"
+          >
+            <Box w={{ base: '100%', md: '36%' }}>
+              <Common.ImpaktButton
+                height="48px"
+                bg="rgba(238, 244, 246, 1)"
+                onClick={() => {
+                  ChangePasswordDisclosure.onOpen();
+                }}
+              >
+                <LockIcon marginRight="10px" color="#29323B" />
+                <Text color="rgba(41, 50, 59, 1)" fontWeight="bold">
+                  Change Password
+                </Text>
+              </Common.ImpaktButton>
+            </Box>
+            <Box
+              w={{ base: '100%', md: '20%', lg: '20%', xl: '155px' }}
+              marginLeft={{ base: '0px !important', md: '8px !important' }}
             >
-                <Box w={{ base: '100%', md: '36%' }}>
-                    <Common.ImpaktButton 
-                    height="48px" 
-                    bg="rgba(238, 244, 246, 1)"
-                    onClick={() => {
-                    ChangePasswordDisclosure.onOpen();
-                    }}
-                    >
-                    <LockIcon
-                        marginRight="10px"
-                        color="#29323B"
-                    ></LockIcon>
-                    <Text color="rgba(41, 50, 59, 1)" fontWeight="bold">
-                        Change Password
-                    </Text>
-                    </Common.ImpaktButton>
-                </Box>
-                <Box
-                    w={{ base: '100%', md: '20%', lg: '20%', xl: '155px' }}
-                    marginLeft={{ base: '0px !important', md: '8px !important' }}
-                >
-                    <Common.ImpaktButton height="48px" bg="rgba(240, 65, 83, 0.1)">
-                    <Text color="rgba(189, 15, 33, 1)" fontWeight="bold">
-                        Sign Out
-                    </Text>
-                    </Common.ImpaktButton>
-                </Box>
-            </HStack>
+              <Common.ImpaktButton height="48px" bg="rgba(240, 65, 83, 0.1)">
+                <Text color="rgba(189, 15, 33, 1)" fontWeight="bold">
+                  Sign Out
+                </Text>
+              </Common.ImpaktButton>
+            </Box>
+          </HStack>
         </VStack>
-        </MemberDashboardCard>
-        <ChangePasswordModal
-            open={ChangePasswordDisclosure.isOpen}
-            close={ChangePasswordDisclosure.onClose}
-        />
-        <ChangeEmailModal 
-            open={ChangeEmailDisclosure.isOpen} 
-            close={ChangeEmailDisclosure.onClose} 
-        />
+      </MemberDashboardCard>
+      <ChangePasswordModal
+        open={ChangePasswordDisclosure.isOpen}
+        close={ChangePasswordDisclosure.onClose}
+      />
+      <ChangeEmailModal open={ChangeEmailDisclosure.isOpen} close={ChangeEmailDisclosure.onClose} />
     </>
   );
 };

@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { EmailIcon } from '@chakra-ui/icons';
-import { FormControl,Box,Text, VStack, HStack, useDisclosure } from '@chakra-ui/react';
+import { FormControl, Box, Text, VStack, HStack, useDisclosure } from '@chakra-ui/react';
 import { useForm } from '@/hooks';
 import { Common, I } from '@/components';
-import { usePersistedGroupStore, usePersistedAuthStore } from '../../../../../lib/zustand';
 import { InputGroupPropsI } from '../../../../common/InputGroup';
 import ConfirmNewEmail from './ConfirmNewEmailModal';
 // import changePasswordFormYupScheme from '../../../../../lib/yup/schemas/changePasswordYupScheme';
@@ -18,10 +16,9 @@ const ChangeEmailForm: React.FC = () => {
       shouldDirty: true,
     });
   };
-  const group = usePersistedGroupStore().activeGroup;
   const [isShowPassword, setIsShowPassword] = React.useState(false);
-  const { handleSubmit, setValue, errors, getValues } = useForm({
-    defaultValues: { password: '', passwordConfirmation: '', email: ''},
+  const { setValue, errors, getValues } = useForm({
+    defaultValues: { password: '', passwordConfirmation: '', email: '' },
   });
   const emailInputItems: InputGroupPropsI[] = [
     {
@@ -61,19 +58,19 @@ const ChangeEmailForm: React.FC = () => {
               alignItems="center"
               onClick={() => setIsShowPassword(!isShowPassword)}
             >
-              {isShowPassword ? <I.EyeOff color="#29323B" width="24px" height="24px" /> : <I.Eye color="#29323B"/>}
+              {isShowPassword ? (
+                <I.EyeOff color="#29323B" width="24px" height="24px" />
+              ) : (
+                <I.Eye color="#29323B" />
+              )}
             </Box>
           ),
         },
-      },
-      inputLabelProps: {
-        label: 'Password',
       },
       errorMsg: errors?.password?.message,
       whiteMode: true,
     },
   ];
-  const { member } = usePersistedAuthStore();
   const ConfirmNewEmailDisclosure = useDisclosure();
 
   return (
@@ -86,38 +83,45 @@ const ChangeEmailForm: React.FC = () => {
       autoComplete="off"
       w="full"
     >
-        <VStack justifyContent="center" alignItems="center" w="full" paddingRight="8px">
-          <Text
-            w="100%"
-            fontSize={{ base: 'regular2', md: 'regular3' }}
-            color="#4E6070"
-            fontWeight="500"
+      <VStack justifyContent="center" alignItems="center" w="full" paddingRight="8px">
+        <Text
+          w="100%"
+          fontSize={{ base: 'regular2', md: 'regular3' }}
+          color="#4E6070"
+          fontWeight="500"
+        >
+          New Email:
+        </Text>
+        <Common.InputItems inputItems={emailInputItems} />
+        <Text
+          w="100%"
+          fontSize={{ base: 'regular2', md: 'regular3' }}
+          color="#4E6070"
+          fontWeight="500"
+        >
+          Password:
+        </Text>
+        <Common.InputItems inputItems={passwordInputItems} />
+        <HStack m="0 !important" w="full" justifyContent="end">
+          <Common.ImpaktButton
+            height="48px"
+            marginTop="21px"
+            bgGradient="linear(to-t, rgba(240, 65, 83, 1), rgba(242, 121, 97, 1))"
+            w={{ base: '100%', md: '155px' }}
+            onClick={() => {
+              ConfirmNewEmailDisclosure.onOpen();
+            }}
           >
-            New Email:
-          </Text>
-          <Common.InputItems inputItems={emailInputItems} />
-            <Text
-              w="100%"
-              fontSize={{ base: 'regular2', md: 'regular3' }}
-              color="#4E6070"
-              fontWeight="500"
-            >
-              Password:
+            <Text color="rgba(255, 255, 255, 1)" fontWeight="600">
+              Submit
             </Text>
-          <Common.InputItems inputItems={passwordInputItems} />
-          <HStack m="0 !important" w="full" justifyContent='end'>
-            <Common.ImpaktButton 
-              height='48px' 
-              marginTop='21px' 
-              bgGradient='linear(to-t, rgba(240, 65, 83, 1), rgba(242, 121, 97, 1))'   
-              w={{ base: '100%', md: '155px' }}
-              onClick={ () => {ConfirmNewEmailDisclosure.onOpen(); close}}
-            >
-              <Text color='rgba(255, 255, 255, 1)' fontWeight='600'>Submit</Text>
-            </Common.ImpaktButton>
-          </HStack>
-        </VStack>
-      <ConfirmNewEmail open={ConfirmNewEmailDisclosure.isOpen} close={ConfirmNewEmailDisclosure.onClose} />
+          </Common.ImpaktButton>
+        </HStack>
+      </VStack>
+      <ConfirmNewEmail
+        open={ConfirmNewEmailDisclosure.isOpen}
+        close={ConfirmNewEmailDisclosure.onClose}
+      />
     </FormControl>
   );
 };
